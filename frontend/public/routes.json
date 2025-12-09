@@ -1,0 +1,2272 @@
+{
+  "metadata": {
+    "folderId": "1BC03MH02DFuUL6teeq4jkcT2THRGgzxj",
+    "folderUrl": "https://drive.google.com/drive/folders/1BC03MH02DFuUL6teeq4jkcT2THRGgzxj",
+    "downloadedAt": "2025-12-08T04:15:31.804Z",
+    "totalFiles": 29,
+    "successfulRoutes": 29,
+    "errors": 0,
+    "reparsed": true
+  },
+  "routes": [
+    {
+      "id": "100SYL-A_effective_082625.pdf",
+      "name": "100 (AM)",
+      "filename": "100SYL-A_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "AINSWORTH GT & ST & CAB LOAD ZONE",
+          "time": "8:33 am",
+          "direction": null,
+          "originalLine": "8:33 amAINSWORTH GT & ST & CAB LOAD ZONE100SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW PATTON & VISTA & GEORGIAN & BROADWAY [NW]",
+          "time": "8:35 am",
+          "direction": "NW",
+          "originalLine": "8:35 amSW PATTON@VISTA@GEORGIAN@BROADWAY [NW]100SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW PATTON RD & SW MONTGOMERY DR [NE]",
+          "time": "8:36 am",
+          "direction": "NE",
+          "originalLine": "8:36 amSW PATTON RD @ SW MONTGOMERY DR [NE]100SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW PATTON RD & SW HOMAR AV [N]",
+          "time": "8:36 am",
+          "direction": "N",
+          "originalLine": "8:36 amSW PATTON RD @ SW HOMAR AV [N]100SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW PATTON RD & SW ENGLISH LN [NE]",
+          "time": "8:38 am",
+          "direction": "NE",
+          "originalLine": "8:38 amSW PATTON RD @ SW ENGLISH LN [NE]100SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW PATTON RD & SW PATTON CT [N]",
+          "time": "8:38 am",
+          "direction": "N",
+          "originalLine": "8:38 amSW PATTON RD @ SW PATTON CT [N]100SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW TALBOT RD & SW FAIRMOUNT BLVD [W]",
+          "time": "8:41 am",
+          "direction": "W",
+          "originalLine": "8:41 amSW TALBOT RD @ SW FAIRMOUNT BLVD [W]100SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW FAIRMOUNT BLVD & SW SHERWOOD PL [W]",
+          "time": "8:44 am",
+          "direction": "W",
+          "originalLine": "8:44 amSW FAIRMOUNT BLVD @ SW SHERWOOD PL [W]100SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "SW FAIRMOUNT BLVD & SW MCDONNELL TERR [W]",
+          "time": "8:46 am",
+          "direction": "W",
+          "originalLine": "8:46 amSW FAIRMOUNT BLVD @ SW MCDONNELL TERR [W]100SYL-A(8)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW PATRICK PL & SW BERTHA AV [NE]",
+          "time": "8:47 am",
+          "direction": "NE",
+          "originalLine": "8:47 amSW PATRICK PL @ SW BERTHA AV [NE]100SYL-A(9)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "SW COUNCIL CREST DR & SW BERTHA AV [NE]",
+          "time": "8:48 am",
+          "direction": "NE",
+          "originalLine": "8:48 amSW COUNCIL CREST DR @ SW BERTHA AV [NE]100SYL-A(10)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "SW BEAVERTON AV & SW WAPATO AV [N]",
+          "time": "8:50 am",
+          "direction": "N",
+          "originalLine": "8:50 amSW BEAVERTON AV @ SW WAPATO AV [N]100SYL-A(11)Stop Order #:"
+        },
+        {
+          "id": "stop-13",
+          "address": "3737 SW HUMPHREY BLVD [NE]",
+          "time": "8:54 am",
+          "direction": "NE",
+          "originalLine": "8:54 am3737 SW HUMPHREY BLVD [NE]100SYL-A(12)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:100SYL-A 08/26/25 - S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "100SYL-A_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.565Z",
+      "stopCount": 13
+    },
+    {
+      "id": "100SYL-P_effective_082625.pdf",
+      "name": "100 (PM)",
+      "filename": "100SYL-P_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "3737 SW HUMPHREY BLVD [SW]",
+          "time": "4:19 pm",
+          "direction": "SW",
+          "originalLine": "4:19 pm3737 SW HUMPHREY BLVD [SW]100SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW TALBOT RD & SW FAIRMOUNT BLVD [W]",
+          "time": "4:21 pm",
+          "direction": "W",
+          "originalLine": "4:21 pmSW TALBOT RD @ SW FAIRMOUNT BLVD [W]100SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW FAIRMOUNT BLVD & SW SHERWOOD PL [W]",
+          "time": "4:24 pm",
+          "direction": "W",
+          "originalLine": "4:24 pmSW FAIRMOUNT BLVD @ SW SHERWOOD PL [W]100SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW FAIRMOUNT BLVD & SW MCDONNELL TERR [W]",
+          "time": "4:26 pm",
+          "direction": "W",
+          "originalLine": "4:26 pmSW FAIRMOUNT BLVD @ SW MCDONNELL TERR [W]100SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW PATRICK PL & SW BERTHA AV [NE]",
+          "time": "4:28 pm",
+          "direction": "NE",
+          "originalLine": "4:28 pmSW PATRICK PL @ SW BERTHA AV [NE]100SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW COUNCIL CREST DR & SW BERTHA AV [NE]",
+          "time": "4:29 pm",
+          "direction": "NE",
+          "originalLine": "4:29 pmSW COUNCIL CREST DR @ SW BERTHA AV [NE]100SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW BEAVERTON AV & SW WAPATO AV [N]",
+          "time": "4:30 pm",
+          "direction": "N",
+          "originalLine": "4:30 pmSW BEAVERTON AV @ SW WAPATO AV [N]100SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW PATTON RD & SW PATTON CT [S]",
+          "time": "4:34 pm",
+          "direction": "S",
+          "originalLine": "4:34 pmSW PATTON RD @ SW PATTON CT [S]100SYL-P(9)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "SW PATTON RD & SW PATTON LN [W]",
+          "time": "4:35 pm",
+          "direction": "W",
+          "originalLine": "4:35 pmSW PATTON RD @ SW PATTON LN [W]100SYL-P(10)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW PATTON RD & SW HOMAR AV [SE]",
+          "time": "4:36 pm",
+          "direction": "SE",
+          "originalLine": "4:36 pmSW PATTON RD @ SW HOMAR AV [SE]100SYL-P(11)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "SW PATTON RD & SW MONTGOMERY DR [SW]",
+          "time": "4:37 pm",
+          "direction": "SW",
+          "originalLine": "4:37 pmSW PATTON RD @ SW MONTGOMERY DR [SW]100SYL-P(12)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "SW PATTON & VISTA & GEORGIAN & BROADWAY [SE]",
+          "time": "4:38 pm",
+          "direction": "SE",
+          "originalLine": "4:38 pmSW PATTON@VISTA@GEORGIAN@BROADWAY [SE]100SYL-P(13)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:100SYL-P 08/26/25 - S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "100SYL-P_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.579Z",
+      "stopCount": 12
+    },
+    {
+      "id": "101SYL-A_effective_082625.pdf",
+      "name": "101 (AM)",
+      "filename": "101SYL-A_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "SW DICKINSON ST & SW 62ND DR [NE]",
+          "time": "8:25 am",
+          "direction": "NE",
+          "originalLine": "8:25 amSW DICKINSON ST @ SW 62ND DR [NE]101SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW LURADEL ST & SW CAPITOL HWY [SW]",
+          "time": "8:29 am",
+          "direction": "SW",
+          "originalLine": "8:29 amSW LURADEL ST @ SW CAPITOL HWY [SW]101SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW BARBUR BLVD & SW PRIMROSE ST [N]",
+          "time": "8:35 am",
+          "direction": "N",
+          "originalLine": "8:35 amSW BARBUR BLVD @ SW PRIMROSE ST [N]101SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW VERMONT ST & SW 45TH AV(SW COMM CTR) [NE]",
+          "time": "8:43 am",
+          "direction": "NE",
+          "originalLine": "8:43 amSW VERMONT ST @ SW 45TH AV(SW COMM CTR) [NE]101SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "3910 SW BEAVERTON HILLSDALE HWY [SW]",
+          "time": "8:47 am",
+          "direction": "SW",
+          "originalLine": "8:47 am3910 SW BEAVERTON HILLSDALE HWY [SW]101SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "3278/3262 SW BEAVERTON HILLSDALE HWY [S]",
+          "time": "8:48 am",
+          "direction": "S",
+          "originalLine": "8:48 am3278/3262 SW BEAVERTON HILLSDALE HWY [S]101SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "WEST SYLVAN",
+          "time": "9:05 am",
+          "direction": null,
+          "originalLine": "9:05 amWEST SYLVAN101SYL-A(7)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:101SYL-A 08/26/25 - S/R- DLI\nAnchor Name:WEST SYLVAN\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drivers, Dispatchers, Call C",
+      "fileId": "101SYL-A_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.590Z",
+      "stopCount": 7
+    },
+    {
+      "id": "101SYL-P_effective_082625.pdf",
+      "name": "101 (PM)",
+      "filename": "101SYL-P_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "WEST SYLVAN",
+          "time": "3:55 pm",
+          "direction": null,
+          "originalLine": "3:55 pmWEST SYLVAN101SYL-PStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "3910 SW BEAVERTON HILLSDALE HWY [SW]",
+          "time": "4:23 pm",
+          "direction": "SW",
+          "originalLine": "4:23 pm3910 SW BEAVERTON HILLSDALE HWY [SW]101SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "3278/3262 SW BEAVERTON HILLSDALE HWY [S]",
+          "time": "4:24 pm",
+          "direction": "S",
+          "originalLine": "4:24 pm3278/3262 SW BEAVERTON HILLSDALE HWY [S]101SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW VERMONT ST & SW 45TH AV(SW COMM CTR) [NE]",
+          "time": "4:28 pm",
+          "direction": "NE",
+          "originalLine": "4:28 pmSW VERMONT ST @ SW 45TH AV(SW COMM CTR) [NE]101SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW BARBUR BLVD & SW PRIMROSE ST [N]",
+          "time": "4:37 pm",
+          "direction": "N",
+          "originalLine": "4:37 pmSW BARBUR BLVD @ SW PRIMROSE ST [N]101SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW CAPITOL HWY & SW LURADEL ST [NW]",
+          "time": "4:39 pm",
+          "direction": "NW",
+          "originalLine": "4:39 pmSW CAPITOL HWY @ SW LURADEL ST [NW]101SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW 61ST AV & SW DICKINSON ST [SE]",
+          "time": "4:46 pm",
+          "direction": "SE",
+          "originalLine": "4:46 pmSW 61ST AV @ SW DICKINSON ST [SE]101SYL-P(7)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:101SYL-P 08/26/25 - S/R - DLI\nAnchor Name:WEST SYLVAN\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drivers, Dispatchers, Call ",
+      "fileId": "101SYL-P_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.599Z",
+      "stopCount": 7
+    },
+    {
+      "id": "103SYL-A_effective_090325.pdf",
+      "name": "103 (AM)",
+      "filename": "103SYL-A_effective_090325.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "AINSWORTH GT & ST & CAB LOAD ZONE",
+          "time": "8:25 am",
+          "direction": null,
+          "originalLine": "8:25 amAINSWORTH GT & ST & CAB LOAD ZONE103SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "2838 SW SAM JACKSON PARK RD [N]",
+          "time": "8:32 am",
+          "direction": "N",
+          "originalLine": "8:32 am2838 SW SAM JACKSON PARK RD [N]103SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW 11TH AV & SW WHITAKER ST [NW]",
+          "time": "8:36 am",
+          "direction": "NW",
+          "originalLine": "8:36 amSW 11TH AV @ SW WHITAKER ST [NW]103SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW 11TH AV & SW GAINES ST [NW]",
+          "time": "8:37 am",
+          "direction": "NW",
+          "originalLine": "8:37 amSW 11TH AV @ SW GAINES ST [NW]103SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW 6TH AVENUE DR & SW BANCROFT ST [SW]",
+          "time": "8:40 am",
+          "direction": "SW",
+          "originalLine": "8:40 amSW 6TH AVENUE DR @ SW BANCROFT ST [SW]103SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW HAMILTON ST & SW HAMILTON TERR [SW]",
+          "time": "8:43 am",
+          "direction": "SW",
+          "originalLine": "8:43 amSW HAMILTON ST @ SW HAMILTON TERR [SW]103SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW 1ST AV & S GROVER ST [S]",
+          "time": "8:46 am",
+          "direction": "S",
+          "originalLine": "8:46 amSW 1ST AV @ S GROVER ST [S]103SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW 1ST AV & SW MEADE ST [SE]",
+          "time": "8:48 am",
+          "direction": "SE",
+          "originalLine": "8:48 amSW 1ST AV @ SW MEADE ST [SE]103SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "3105 SW Barbur Blvd [W]",
+          "time": "8:51 am",
+          "direction": "W",
+          "originalLine": "8:51 am3105 SW Barbur Blvd [W]103SYL-A(8)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:103SYL-A 09/03/25 -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driver",
+      "fileId": "103SYL-A_effective_090325.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.608Z",
+      "stopCount": 9
+    },
+    {
+      "id": "103SYL-P_effective_090325.pdf",
+      "name": "103 (PM)",
+      "filename": "103SYL-P_effective_090325.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "2838 SW SAM JACKSON PARK RD [N]",
+          "time": "4:23 pm",
+          "direction": "N",
+          "originalLine": "4:23 pm2838 SW SAM JACKSON PARK RD [N]103SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW 11TH AV & SW WHITAKER ST [NW]",
+          "time": "4:28 pm",
+          "direction": "NW",
+          "originalLine": "4:28 pmSW 11TH AV @ SW WHITAKER ST [NW]103SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW 11TH AV & SW GAINES ST [NW]",
+          "time": "4:29 pm",
+          "direction": "NW",
+          "originalLine": "4:29 pmSW 11TH AV @ SW GAINES ST [NW]103SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW 6TH AVENUE DR & SW BANCROFT ST [SW]",
+          "time": "4:32 pm",
+          "direction": "SW",
+          "originalLine": "4:32 pmSW 6TH AVENUE DR @ SW BANCROFT ST [SW]103SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW HAMILTON ST & SW HAMILTON TERR [SW]",
+          "time": "4:35 pm",
+          "direction": "SW",
+          "originalLine": "4:35 pmSW HAMILTON ST @ SW HAMILTON TERR [SW]103SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW 1ST AV & S GROVER ST [S]",
+          "time": "4:38 pm",
+          "direction": "S",
+          "originalLine": "4:38 pmSW 1ST AV @ S GROVER ST [S]103SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW 1ST AV & SW MEADE ST [SE]",
+          "time": "4:39 pm",
+          "direction": "SE",
+          "originalLine": "4:39 pmSW 1ST AV @ SW MEADE ST [SE]103SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "3105 SW Barbur Blvd [W]",
+          "time": "4:42 pm",
+          "direction": "W",
+          "originalLine": "4:42 pm3105 SW Barbur Blvd [W]103SYL-P(9)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:103SYL-P 09/03/25 -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driver",
+      "fileId": "103SYL-P_effective_090325.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.617Z",
+      "stopCount": 8
+    },
+    {
+      "id": "104SYL-A_effective_090325.pdf",
+      "name": "104 (AM)",
+      "filename": "104SYL-A_effective_090325.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "SW HAMILTON ST & SW 47TH AV [SW]",
+          "time": "8:21 am",
+          "direction": "SW",
+          "originalLine": "8:21 amSW HAMILTON ST @ SW 47TH AV [SW]104SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW HAMILTON ST & SW 42ND PL [SW]",
+          "time": "8:23 am",
+          "direction": "SW",
+          "originalLine": "8:23 amSW HAMILTON ST @ SW 42ND PL [SW]104SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW 39TH DR & SW 38TH PL [W]",
+          "time": "8:24 am",
+          "direction": "W",
+          "originalLine": "8:24 amSW 39TH DR @ SW 38TH PL [W]104SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "6651 SW CAPITOL HWY [S]",
+          "time": "8:28 am",
+          "direction": "S",
+          "originalLine": "8:28 am6651 SW CAPITOL HWY [S]104SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW HAMILTON ST & SW SHATTUCK RD [NE]",
+          "time": "8:37 am",
+          "direction": "NE",
+          "originalLine": "8:37 amSW HAMILTON ST @ SW SHATTUCK RD [NE]104SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "4549 SW Shattuck Rd [W]",
+          "time": "8:38 am",
+          "direction": "W",
+          "originalLine": "8:38 am4549 SW Shattuck Rd [W]104SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "4721 SW 53RD AV [E]",
+          "time": "8:38 am",
+          "direction": "E",
+          "originalLine": "8:38 am4721 SW 53RD AV [E]104SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "6446 SW HAMILTON ST [N]",
+          "time": "8:41 am",
+          "direction": "N",
+          "originalLine": "8:41 am6446 SW HAMILTON ST [N]104SYL-A(8)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "4004/4005 SW Scholls Ferry Rd [E]",
+          "time": "8:42 am",
+          "direction": "E",
+          "originalLine": "8:42 am4004/4005 SW Scholls Ferry Rd [E]104SYL-A(9)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW SCHOLLS FERRY RD & SW THOMAS ST [SE]",
+          "time": "8:43 am",
+          "direction": "SE",
+          "originalLine": "8:43 amSW SCHOLLS FERRY RD @ SW THOMAS ST [SE]104SYL-A(10)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "7501 SW CANYON RD [N]",
+          "time": "8:51 am",
+          "direction": "N",
+          "originalLine": "8:51 am7501 SW CANYON RD [N]104SYL-A(11)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "SW CANYON RD & SW LINDEN RD [NW]",
+          "time": "8:51 am",
+          "direction": "NW",
+          "originalLine": "8:51 amSW CANYON RD @ SW LINDEN RD [NW]104SYL-A(12)Stop Order #:"
+        },
+        {
+          "id": "stop-13",
+          "address": "SW CANYON DR & SW 72ND AV [SW]",
+          "time": "8:57 am",
+          "direction": "SW",
+          "originalLine": "8:57 amSW CANYON DR @ SW 72ND AV [SW]104SYL-A(13)Stop Order #:"
+        },
+        {
+          "id": "stop-14",
+          "address": "SW CANYON DR & SW CRESTDALE DR [SE]",
+          "time": "8:58 am",
+          "direction": "SE",
+          "originalLine": "8:58 amSW CANYON DR @ SW CRESTDALE DR [SE]104SYL-A(14)Stop Order #:"
+        },
+        {
+          "id": "stop-15",
+          "address": "SW CANYON DR & SW BUCHAREST CT [S]",
+          "time": "8:59 am",
+          "direction": "S",
+          "originalLine": "8:59 amSW CANYON DR @ SW BUCHAREST CT [S]104SYL-A(15)Stop Order #:"
+        },
+        {
+          "id": "stop-16",
+          "address": "SW CANYON DR & SW SHERIDAN ST [SE]",
+          "time": "9:00 am",
+          "direction": "SE",
+          "originalLine": "9:00 amSW CANYON DR @ SW SHERIDAN ST [SE]104SYL-A(16)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:104SYL-A 09/03/25 -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driver",
+      "fileId": "104SYL-A_effective_090325.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.629Z",
+      "stopCount": 16
+    },
+    {
+      "id": "104SYL-P_effective_090325.pdf",
+      "name": "104 (PM)",
+      "filename": "104SYL-P_effective_090325.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "7501 SW CANYON RD [N]",
+          "time": "4:12 pm",
+          "direction": "N",
+          "originalLine": "4:12 pm7501 SW CANYON RD [N]104SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW CANYON RD & SW LINDEN RD [NW]",
+          "time": "4:13 pm",
+          "direction": "NW",
+          "originalLine": "4:13 pmSW CANYON RD @ SW LINDEN RD [NW]104SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW CANYON DR & SW 72ND AV [SW]",
+          "time": "4:18 pm",
+          "direction": "SW",
+          "originalLine": "4:18 pmSW CANYON DR @ SW 72ND AV [SW]104SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW CANYON DR & SW CRESTDALE DR [SE]",
+          "time": "4:19 pm",
+          "direction": "SE",
+          "originalLine": "4:19 pmSW CANYON DR @ SW CRESTDALE DR [SE]104SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW CANYON DR & SW BUCHAREST CT [S]",
+          "time": "4:21 pm",
+          "direction": "S",
+          "originalLine": "4:21 pmSW CANYON DR @ SW BUCHAREST CT [S]104SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW CANYON DR & SW SHERIDAN ST [SE]",
+          "time": "4:22 pm",
+          "direction": "SE",
+          "originalLine": "4:22 pmSW CANYON DR @ SW SHERIDAN ST [SE]104SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW SCHOLLS FERRY RD & SW SWEETBRIAR CT [NW]",
+          "time": "4:27 pm",
+          "direction": "NW",
+          "originalLine": "4:27 pmSW SCHOLLS FERRY RD @ SW SWEETBRIAR CT [NW]104SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "6446 SW HAMILTON ST [S]",
+          "time": "4:29 pm",
+          "direction": "S",
+          "originalLine": "4:29 pm6446 SW HAMILTON ST [S]104SYL-P(9)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "4721 SW 53RD AV [W]",
+          "time": "4:32 pm",
+          "direction": "W",
+          "originalLine": "4:32 pm4721 SW 53RD AV [W]104SYL-P(10)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "4549 SW Shattuck Rd [E]",
+          "time": "4:33 pm",
+          "direction": "E",
+          "originalLine": "4:33 pm4549 SW Shattuck Rd [E]104SYL-P(11)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "SW SHATTUCK RD & SW HAMILTON ST [SE]",
+          "time": "4:33 pm",
+          "direction": "SE",
+          "originalLine": "4:33 pmSW SHATTUCK RD @ SW HAMILTON ST [SE]104SYL-P(12)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "SW HAMILTON ST & SW 47TH AV [SW]",
+          "time": "4:34 pm",
+          "direction": "SW",
+          "originalLine": "4:34 pmSW HAMILTON ST @ SW 47TH AV [SW]104SYL-P(13)Stop Order #:"
+        },
+        {
+          "id": "stop-13",
+          "address": "SW HAMILTON ST & SW 42ND PL [SW]",
+          "time": "4:35 pm",
+          "direction": "SW",
+          "originalLine": "4:35 pmSW HAMILTON ST @ SW 42ND PL [SW]104SYL-P(14)Stop Order #:"
+        },
+        {
+          "id": "stop-14",
+          "address": "SW 39TH DR & SW 38TH PL [W]",
+          "time": "4:37 pm",
+          "direction": "W",
+          "originalLine": "4:37 pmSW 39TH DR @ SW 38TH PL [W]104SYL-P(15)Stop Order #:"
+        },
+        {
+          "id": "stop-15",
+          "address": "6651 SW CAPITOL HWY [S]",
+          "time": "4:41 pm",
+          "direction": "S",
+          "originalLine": "4:41 pm6651 SW CAPITOL HWY [S]104SYL-P(16)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:104SYL-P 09/03/25 -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driver",
+      "fileId": "104SYL-P_effective_090325.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.639Z",
+      "stopCount": 15
+    },
+    {
+      "id": "106SYL-A_effective_090325.pdf",
+      "name": "106 (AM)",
+      "filename": "106SYL-A_effective_090325.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "NW SKYLINE BLVD & NW RAMSEY DR [SE]",
+          "time": "8:26 am",
+          "direction": "SE",
+          "originalLine": "8:26 amNW SKYLINE BLVD @ NW RAMSEY DR [SE]106SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW THOMPSON RD & NW MAPLEVIEW TERR [N]",
+          "time": "8:29 am",
+          "direction": "N",
+          "originalLine": "8:29 amNW THOMPSON RD @ NW MAPLEVIEW TERR [N]106SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW ENGLEMAN ST & NW MILL POND RD [N]",
+          "time": "8:34 am",
+          "direction": "N",
+          "originalLine": "8:34 amNW ENGLEMAN ST @ NW MILL POND RD [N]106SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "NW MILL POND RD & NW BRITTNEY CT [SE]",
+          "time": "8:36 am",
+          "direction": "SE",
+          "originalLine": "8:36 amNW MILL POND RD @ NW BRITTNEY CT [SE]106SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "NW DEVOTO LN & NW RIGGS DR [SE]",
+          "time": "8:40 am",
+          "direction": "SE",
+          "originalLine": "8:40 amNW DEVOTO LN @ NW RIGGS DR [SE]106SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "NW RIGGS DR & NW SKYLINE HEIGHTS DR [SE]",
+          "time": "8:41 am",
+          "direction": "SE",
+          "originalLine": "8:41 amNW RIGGS DR @ NW SKYLINE HEIGHTS DR [SE]106SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "NW SKYLINE BLVD & NW CHAPIN DR [W]",
+          "time": "8:44 am",
+          "direction": "W",
+          "originalLine": "8:44 amNW SKYLINE BLVD @ NW CHAPIN DR [W]106SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "NW SKYLINE BLVD & NW CRESAP LN [NW]",
+          "time": "8:45 am",
+          "direction": "NW",
+          "originalLine": "8:45 amNW SKYLINE BLVD @ NW CRESAP LN [NW]106SYL-A(8)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "NW SKYLINE BLVD & NW HAZELTINE ST [NW]",
+          "time": "8:47 am",
+          "direction": "NW",
+          "originalLine": "8:47 amNW SKYLINE BLVD @ NW HAZELTINE ST [NW]106SYL-A(9)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "NW SKYLINE BLVD & NW HAWKINS BLVD [NW]",
+          "time": "8:48 am",
+          "direction": "NW",
+          "originalLine": "8:48 amNW SKYLINE BLVD @ NW HAWKINS BLVD [NW]106SYL-A(10)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "NW SKYLINE BLVD & NW GREENLEAF RD [SW]",
+          "time": "8:52 am",
+          "direction": "SW",
+          "originalLine": "8:52 amNW SKYLINE BLVD @ NW GREENLEAF RD [SW]106SYL-A(11)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:106SYL-A 09/03/25  -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "106SYL-A_effective_090325.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.649Z",
+      "stopCount": 11
+    },
+    {
+      "id": "106SYL-P_effective_110525.pdf",
+      "name": "106 (PM)",
+      "filename": "106SYL-P_effective_110525.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "NW SKYLINE BLVD & NW RAMSEY DR [SE]",
+          "time": "4:26 pm",
+          "direction": "SE",
+          "originalLine": "4:26 pmNW SKYLINE BLVD @ NW RAMSEY DR [SE]106SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW SKYLINE BLVD & NW THOMPSON RD [SE]",
+          "time": "4:27 pm",
+          "direction": "SE",
+          "originalLine": "4:27 pmNW SKYLINE BLVD @ NW THOMPSON RD [SE]106SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW THOMPSON RD & NW MAPLEVIEW TERR [N]",
+          "time": "4:29 pm",
+          "direction": "N",
+          "originalLine": "4:29 pmNW THOMPSON RD @ NW MAPLEVIEW TERR [N]106SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "NW MILL POND RD & NW BRITTNEY CT [SE]",
+          "time": "4:37 pm",
+          "direction": "SE",
+          "originalLine": "4:37 pmNW MILL POND RD @ NW BRITTNEY CT [SE]106SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "NW DEVOTO LN & NW RIGGS DR [SE]",
+          "time": "4:40 pm",
+          "direction": "SE",
+          "originalLine": "4:40 pmNW DEVOTO LN @ NW RIGGS DR [SE]106SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "NW RIGGS DR & NW SKYLINE HEIGHTS DR [SE]",
+          "time": "4:42 pm",
+          "direction": "SE",
+          "originalLine": "4:42 pmNW RIGGS DR @ NW SKYLINE HEIGHTS DR [SE]106SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "NW SKYLINE BLVD & NW CHAPIN DR [W]",
+          "time": "4:44 pm",
+          "direction": "W",
+          "originalLine": "4:44 pmNW SKYLINE BLVD @ NW CHAPIN DR [W]106SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "NW SKYLINE BLVD & NW HAZELTINE ST [NW]",
+          "time": "4:47 pm",
+          "direction": "NW",
+          "originalLine": "4:47 pmNW SKYLINE BLVD @ NW HAZELTINE ST [NW]106SYL-P(9)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "NW SKYLINE BLVD & NW HAWKINS BLVD [NW]",
+          "time": "4:48 pm",
+          "direction": "NW",
+          "originalLine": "4:48 pmNW SKYLINE BLVD @ NW HAWKINS BLVD [NW]106SYL-P(10)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:106SYL-P 11/05/25  -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "106SYL-P_effective_110525.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.658Z",
+      "stopCount": 9
+    },
+    {
+      "id": "111SYL-A_effective_082625.pdf",
+      "name": "111 (AM)",
+      "filename": "111SYL-A_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "AINSWORTH GT & ST & CAB LOAD ZONE",
+          "time": "8:27 am",
+          "direction": null,
+          "originalLine": "8:27 amAINSWORTH GT & ST & CAB LOAD ZONE111SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW WESTOVER RD & NW CORNELL RD [NE]",
+          "time": "8:36 am",
+          "direction": "NE",
+          "originalLine": "8:36 amNW WESTOVER RD @ NW CORNELL RD [NE]111SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW CORNELL RD & NW SUMMIT CT [SW]",
+          "time": "8:38 am",
+          "direction": "SW",
+          "originalLine": "8:38 amNW CORNELL RD @ NW SUMMIT CT [SW]111SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW FAIRVIEW BLVD & SW RUTLAND TERR [NE]",
+          "time": "8:45 am",
+          "direction": "NE",
+          "originalLine": "8:45 amSW FAIRVIEW BLVD @ SW RUTLAND TERR [NE]111SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW FAIRVIEW BLVD & SW CASCADE DR [E]",
+          "time": "8:46 am",
+          "direction": "E",
+          "originalLine": "8:46 amSW FAIRVIEW BLVD @ SW CASCADE DR [E]111SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "2850 SW FAIRVIEW BLVD [E]",
+          "time": "8:47 am",
+          "direction": "E",
+          "originalLine": "8:47 am2850 SW FAIRVIEW BLVD [E]111SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW FAIRVIEW BLVD & SW LAFAYETTE PL [N]",
+          "time": "8:49 am",
+          "direction": "N",
+          "originalLine": "8:49 amSW FAIRVIEW BLVD @ SW LAFAYETTE PL [N]111SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW FAIRVIEW BLVD & SW CANTERBURY LN [NW]",
+          "time": "8:49 am",
+          "direction": "NW",
+          "originalLine": "8:49 amSW FAIRVIEW BLVD @ SW CANTERBURY LN [NW]111SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "SW FAIRVIEW BLVD & SW HIGHLAND RD [E]",
+          "time": "8:52 am",
+          "direction": "E",
+          "originalLine": "8:52 amSW FAIRVIEW BLVD @ SW HIGHLAND RD [E]111SYL-A(8)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW FAIRVIEW BLVD & SW FAIRHAVEN DR [E]",
+          "time": "8:53 am",
+          "direction": "E",
+          "originalLine": "8:53 amSW FAIRVIEW BLVD @ SW FAIRHAVEN DR [E]111SYL-A(9)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "4541 SW FAIRHAVEN DR [NW]",
+          "time": "8:54 am",
+          "direction": "NW",
+          "originalLine": "8:54 am4541 SW FAIRHAVEN DR [NW]111SYL-A(10)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "SW FAIRHAVEN DR & SW UPLAND DR [NW]",
+          "time": "8:55 am",
+          "direction": "NW",
+          "originalLine": "8:55 amSW FAIRHAVEN DR @ SW UPLAND DR [NW]111SYL-A(11)Stop Order #:"
+        },
+        {
+          "id": "stop-13",
+          "address": "4810 SW FAIRHAVEN DR [NW]",
+          "time": "8:56 am",
+          "direction": "NW",
+          "originalLine": "8:56 am4810 SW FAIRHAVEN DR [NW]111SYL-A(12)Stop Order #:"
+        },
+        {
+          "id": "stop-14",
+          "address": "SW SKYLINE BLVD & SW BURTON DR [NW]",
+          "time": "8:58 am",
+          "direction": "NW",
+          "originalLine": "8:58 amSW SKYLINE BLVD @ SW BURTON DR [NW]111SYL-A(13)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:111SYL-A 08/26/25  - S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driv",
+      "fileId": "111SYL-A_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.666Z",
+      "stopCount": 14
+    },
+    {
+      "id": "111SYL-P_effective_082625.pdf",
+      "name": "111 (PM)",
+      "filename": "111SYL-P_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "SW SKYLINE BLVD & SW BURTON DR [E]",
+          "time": "4:16 pm",
+          "direction": "E",
+          "originalLine": "4:16 pmSW SKYLINE BLVD @ SW BURTON DR [E]111SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "4810 SW FAIRHAVEN DR [SE]",
+          "time": "4:17 pm",
+          "direction": "SE",
+          "originalLine": "4:17 pm4810 SW FAIRHAVEN DR [SE]111SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW FAIRHAVEN DR & SW UPLAND DR [S]",
+          "time": "4:19 pm",
+          "direction": "S",
+          "originalLine": "4:19 pmSW FAIRHAVEN DR @ SW UPLAND DR [S]111SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "4541 SW FAIRHAVEN DR [SE]",
+          "time": "4:19 pm",
+          "direction": "SE",
+          "originalLine": "4:19 pm4541 SW FAIRHAVEN DR [SE]111SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW FAIRHAVEN DR & SW FAIRVIEW BLVD [SW]",
+          "time": "4:21 pm",
+          "direction": "SW",
+          "originalLine": "4:21 pmSW FAIRHAVEN DR @ SW FAIRVIEW BLVD [SW]111SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW FAIRVIEW BLVD & SW HIGHLAND RD [NW]",
+          "time": "4:21 pm",
+          "direction": "NW",
+          "originalLine": "4:21 pmSW FAIRVIEW BLVD @ SW HIGHLAND RD [NW]111SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW FAIRVIEW BLVD & SW CANTERBURY LN [S]",
+          "time": "4:24 pm",
+          "direction": "S",
+          "originalLine": "4:24 pmSW FAIRVIEW BLVD @ SW CANTERBURY LN [S]111SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW FAIRVIEW BLVD & SW LAFAYETTE PL [SE]",
+          "time": "4:25 pm",
+          "direction": "SE",
+          "originalLine": "4:25 pmSW FAIRVIEW BLVD @ SW LAFAYETTE PL [SE]111SYL-P(9)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "2850 SW FAIRVIEW BLVD [W]",
+          "time": "4:27 pm",
+          "direction": "W",
+          "originalLine": "4:27 pm2850 SW FAIRVIEW BLVD [W]111SYL-P(10)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW FAIRVIEW BLVD & SW CASCADE DR [NW]",
+          "time": "4:28 pm",
+          "direction": "NW",
+          "originalLine": "4:28 pmSW FAIRVIEW BLVD @ SW CASCADE DR [NW]111SYL-P(11)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "SW FAIRVIEW BLVD & SW RUTLAND TERR [SE]",
+          "time": "4:29 pm",
+          "direction": "SE",
+          "originalLine": "4:29 pmSW FAIRVIEW BLVD @ SW RUTLAND TERR [SE]111SYL-P(12)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "NW CORNELL RD & NW SUMMIT CT [NE]",
+          "time": "4:36 pm",
+          "direction": "NE",
+          "originalLine": "4:36 pmNW CORNELL RD @ NW SUMMIT CT [NE]111SYL-P(13)Stop Order #:"
+        },
+        {
+          "id": "stop-13",
+          "address": "NW CORNELL RD & NW WESTOVER RD [NW]",
+          "time": "4:38 pm",
+          "direction": "NW",
+          "originalLine": "4:38 pmNW CORNELL RD @ NW WESTOVER RD [NW]111SYL-P(14)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:111SYL-P 08/26/25  -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "111SYL-P_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.675Z",
+      "stopCount": 13
+    },
+    {
+      "id": "112SYL-A_effective_082625.pdf",
+      "name": "112 (AM)",
+      "filename": "112SYL-A_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "NW PETTYGROVE ST & NW 26TH AV [N]",
+          "time": "8:32 am",
+          "direction": "N",
+          "originalLine": "8:32 amNW PETTYGROVE ST @ NW 26TH AV [N]112SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW 26TH AV & NW THURMAN ST [SE]",
+          "time": "8:36 am",
+          "direction": "SE",
+          "originalLine": "8:36 amNW 26TH AV @ NW THURMAN ST [SE]112SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW PETTYGROVE ST & NW 20TH AV [SW]",
+          "time": "8:40 am",
+          "direction": "SW",
+          "originalLine": "8:40 amNW PETTYGROVE ST @ NW 20TH AV [SW]112SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW BROADWAY DR & SW GRANT ST [N]",
+          "time": "8:46 am",
+          "direction": "N",
+          "originalLine": "8:46 amSW BROADWAY DR @ SW GRANT ST [N]112SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "835 SW BROADWAY DR [N]",
+          "time": "8:47 am",
+          "direction": "N",
+          "originalLine": "8:47 am835 SW BROADWAY DR [N]112SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW BROADWAY DR & SW DAVENPORT ST [NE]",
+          "time": "8:49 am",
+          "direction": "NE",
+          "originalLine": "8:49 amSW BROADWAY DR @ SW DAVENPORT ST [NE]112SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "1818 SW BROADWAY DR [N]",
+          "time": "8:50 am",
+          "direction": "N",
+          "originalLine": "8:50 am1818 SW BROADWAY DR [N]112SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW BROADWAY & SHERWOOD DR [NW]",
+          "time": "8:51 am",
+          "direction": "NW",
+          "originalLine": "8:51 amSW BROADWAY @ SHERWOOD DR [NW]112SYL-A(8)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "SW BROADWAY DR & SW ARDEN RD [N]",
+          "time": "8:51 am",
+          "direction": "N",
+          "originalLine": "8:51 amSW BROADWAY DR @ SW ARDEN RD [N]112SYL-A(9)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:112SYL-A 08/26/25 - S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "112SYL-A_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.683Z",
+      "stopCount": 9
+    },
+    {
+      "id": "112SYL-P_effective_082625.pdf",
+      "name": "112 (PM)",
+      "filename": "112SYL-P_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "SW BROADWAY DR & SW ARDEN RD [SW]",
+          "time": "4:22 pm",
+          "direction": "SW",
+          "originalLine": "4:22 pmSW BROADWAY DR @ SW ARDEN RD [SW]112SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW BROADWAY & SHERWOOD DR [SW]",
+          "time": "4:22 pm",
+          "direction": "SW",
+          "originalLine": "4:22 pmSW BROADWAY @ SHERWOOD DR [SW]112SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "1818 SW BROADWAY DR [S]",
+          "time": "4:24 pm",
+          "direction": "S",
+          "originalLine": "4:24 pm1818 SW BROADWAY DR [S]112SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW BROADWAY DR & SW DAVENPORT CT [SW]",
+          "time": "4:24 pm",
+          "direction": "SW",
+          "originalLine": "4:24 pmSW BROADWAY DR @ SW DAVENPORT CT [SW]112SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "835 SW BROADWAY DR [S]",
+          "time": "4:26 pm",
+          "direction": "S",
+          "originalLine": "4:26 pm835 SW BROADWAY DR [S]112SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW BROADWAY DR & SW GRANT ST [SE]",
+          "time": "4:28 pm",
+          "direction": "SE",
+          "originalLine": "4:28 pmSW BROADWAY DR @ SW GRANT ST [SE]112SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "NW 20TH AV & NW PETTYGROVE ST [SE]",
+          "time": "4:36 pm",
+          "direction": "SE",
+          "originalLine": "4:36 pmNW 20TH AV @ NW PETTYGROVE ST [SE]112SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "NW THURMAN ST & NW 26TH AV [NE]",
+          "time": "4:40 pm",
+          "direction": "NE",
+          "originalLine": "4:40 pmNW THURMAN ST @ NW 26TH AV [NE]112SYL-P(9)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "NW PETTYGROVE ST & NW 26TH AV [N]",
+          "time": "4:43 pm",
+          "direction": "N",
+          "originalLine": "4:43 pmNW PETTYGROVE ST @ NW 26TH AV [N]112SYL-P(10)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:112SYL-P 08/26/25 -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driver",
+      "fileId": "112SYL-P_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.691Z",
+      "stopCount": 9
+    },
+    {
+      "id": "113SYL-A_effective_092425.pdf",
+      "name": "113 (AM)",
+      "filename": "113SYL-A_effective_092425.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "NW Naito Parkway & 9th [NE]",
+          "time": "8:38 am",
+          "direction": "NE",
+          "originalLine": "8:38 amNW Naito Parkway & 9th [NE]113SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW RIVERSCAPE ST & NW 17TH AV [W]",
+          "time": "8:40 am",
+          "direction": "W",
+          "originalLine": "8:40 amNW RIVERSCAPE ST @ NW 17TH AV [W]113SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "1550 NW NAITO PKWY [SW]",
+          "time": "8:41 am",
+          "direction": "SW",
+          "originalLine": "8:41 am1550 NW NAITO PKWY [SW]113SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "NW 13TH AV & NW QUIMBY ST [SE]",
+          "time": "8:44 am",
+          "direction": "SE",
+          "originalLine": "8:44 amNW 13TH AV @ NW QUIMBY ST [SE]113SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "NW RALEIGH ST & NW 14TH AV [NE]",
+          "time": "8:45 am",
+          "direction": "NE",
+          "originalLine": "8:45 amNW RALEIGH ST @ NW 14TH AV [NE]113SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "1150 NW 9TH AV [W]",
+          "time": "8:48 am",
+          "direction": "W",
+          "originalLine": "8:48 am1150 NW 9TH AV [W]113SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "NW GLISAN ST & NW 13TH AV [NE]",
+          "time": "8:51 am",
+          "direction": "NE",
+          "originalLine": "8:51 amNW GLISAN ST @ NW 13TH AV [NE]113SYL-A(6)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:113SYL-A 09/24/25 -NS/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "113SYL-A_effective_092425.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.699Z",
+      "stopCount": 7
+    },
+    {
+      "id": "113SYL-P_effective_092425.pdf",
+      "name": "113 (PM)",
+      "filename": "113SYL-P_effective_092425.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "NW 14TH AV & NW RALEIGH ST [SE]",
+          "time": "4:27 pm",
+          "direction": "SE",
+          "originalLine": "4:27 pmNW 14TH AV @ NW RALEIGH ST [SE]113SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW 13TH AV & NW QUIMBY ST [NW]",
+          "time": "4:28 pm",
+          "direction": "NW",
+          "originalLine": "4:28 pmNW 13TH AV @ NW QUIMBY ST [NW]113SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "1150 NW 9TH AV [W]",
+          "time": "4:30 pm",
+          "direction": "W",
+          "originalLine": "4:30 pm1150 NW 9TH AV [W]113SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "NW GLISAN ST & NW 13TH AV [NE]",
+          "time": "4:33 pm",
+          "direction": "NE",
+          "originalLine": "4:33 pmNW GLISAN ST @ NW 13TH AV [NE]113SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "1550 NW NAITO PKWY [NE]",
+          "time": "4:43 pm",
+          "direction": "NE",
+          "originalLine": "4:43 pm1550 NW NAITO PKWY [NE]113SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "NW 17TH AV & NW RIVERSCAPE ST [S]",
+          "time": "4:44 pm",
+          "direction": "S",
+          "originalLine": "4:44 pmNW 17TH AV @ NW RIVERSCAPE ST [S]113SYL-P(7)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:113SYL-P 09/24/25 -NS/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "113SYL-P_effective_092425.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.706Z",
+      "stopCount": 6
+    },
+    {
+      "id": "115SYL-A_effective_092425.pdf",
+      "name": "115 (AM)",
+      "filename": "115SYL-A_effective_092425.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "SW DOSCH RD No Intersection [NE]",
+          "time": "8:29 am",
+          "direction": "NE",
+          "originalLine": "8:29 amSW DOSCH RD No Intersection [NE]115SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW PATTON RD & SW HILLSIDE DR [NW]",
+          "time": "8:30 am",
+          "direction": "NW",
+          "originalLine": "8:30 amSW PATTON RD @ SW HILLSIDE DR [NW]115SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "4703 SW PATTON RD [N]",
+          "time": "8:31 am",
+          "direction": "N",
+          "originalLine": "8:31 am4703 SW PATTON RD [N]115SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW PATTON RD & SW 55TH DR [N]",
+          "time": "8:33 am",
+          "direction": "N",
+          "originalLine": "8:33 amSW PATTON RD @ SW 55TH DR [N]115SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW PATTON RD & SW 58TH DR [N]",
+          "time": "8:34 am",
+          "direction": "N",
+          "originalLine": "8:34 amSW PATTON RD @ SW 58TH DR [N]115SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "3825 SW Scholls Ferry Rd [NW]",
+          "time": "8:35 am",
+          "direction": "NW",
+          "originalLine": "8:35 am3825 SW Scholls Ferry Rd [NW]115SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "5233 SW HEWETT BLVD [SE]",
+          "time": "8:44 am",
+          "direction": "SE",
+          "originalLine": "8:44 am5233 SW HEWETT BLVD [SE]115SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW HEWETT BLVD & SW 50TH AV [SW]",
+          "time": "8:45 am",
+          "direction": "SW",
+          "originalLine": "8:45 amSW HEWETT BLVD @ SW 50TH AV [SW]115SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "SW HEWETT BLVD & SW ORMANDY WY [W]",
+          "time": "8:45 am",
+          "direction": "W",
+          "originalLine": "8:45 amSW HEWETT BLVD @ SW ORMANDY WY [W]115SYL-A(8)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW PATTON RD & SW 36TH AV [SW]",
+          "time": "8:48 am",
+          "direction": "SW",
+          "originalLine": "8:48 amSW PATTON RD @ SW 36TH AV [SW]115SYL-A(9)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "2831 SW LABBE AV [E]",
+          "time": "8:50 am",
+          "direction": "E",
+          "originalLine": "8:50 am2831 SW LABBE AV [E]115SYL-A(10)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "SW GREENLEAF DR & SW GREENHILLS WY [SW]",
+          "time": "8:52 am",
+          "direction": "SW",
+          "originalLine": "8:52 amSW GREENLEAF DR @ SW GREENHILLS WY [SW]115SYL-A(11)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:115SYL-A 09/24/25  -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "115SYL-A_effective_092425.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.714Z",
+      "stopCount": 12
+    },
+    {
+      "id": "115SYL-A_effective_120325.pdf",
+      "name": "115 (AM)",
+      "filename": "115SYL-A_effective_120325.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "SW DOSCH RD No Intersection [NE]",
+          "time": "8:29 am",
+          "direction": "NE",
+          "originalLine": "8:29 amSW DOSCH RD No Intersection [NE]115SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW PATTON RD & SW HILLSIDE DR [NW]",
+          "time": "8:30 am",
+          "direction": "NW",
+          "originalLine": "8:30 amSW PATTON RD @ SW HILLSIDE DR [NW]115SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "4703 SW PATTON RD [N]",
+          "time": "8:31 am",
+          "direction": "N",
+          "originalLine": "8:31 am4703 SW PATTON RD [N]115SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW PATTON RD & SW 55TH AV [NE]",
+          "time": "8:33 am",
+          "direction": "NE",
+          "originalLine": "8:33 amSW PATTON RD @ SW 55TH AV [NE]115SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW PATTON RD & SW 58TH DR [N]",
+          "time": "8:34 am",
+          "direction": "N",
+          "originalLine": "8:34 amSW PATTON RD @ SW 58TH DR [N]115SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "3825 SW Scholls Ferry Rd [NW]",
+          "time": "8:35 am",
+          "direction": "NW",
+          "originalLine": "8:35 am3825 SW Scholls Ferry Rd [NW]115SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "5233 SW HEWETT BLVD [SE]",
+          "time": "8:44 am",
+          "direction": "SE",
+          "originalLine": "8:44 am5233 SW HEWETT BLVD [SE]115SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW HEWETT BLVD & SW 50TH AV [SW]",
+          "time": "8:45 am",
+          "direction": "SW",
+          "originalLine": "8:45 amSW HEWETT BLVD @ SW 50TH AV [SW]115SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "SW HEWETT BLVD & SW ORMANDY WY [W]",
+          "time": "8:45 am",
+          "direction": "W",
+          "originalLine": "8:45 amSW HEWETT BLVD @ SW ORMANDY WY [W]115SYL-A(8)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW PATTON RD & SW 36TH AV [SW]",
+          "time": "8:48 am",
+          "direction": "SW",
+          "originalLine": "8:48 amSW PATTON RD @ SW 36TH AV [SW]115SYL-A(9)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "2936 SW LABBE AV [S]",
+          "time": "8:50 am",
+          "direction": "S",
+          "originalLine": "8:50 am2936 SW LABBE AV [S]115SYL-A(10)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "SW GREENLEAF DR & SW GREENHILLS WY [SW]",
+          "time": "8:52 am",
+          "direction": "SW",
+          "originalLine": "8:52 amSW GREENLEAF DR @ SW GREENHILLS WY [SW]115SYL-A(11)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:115SYL-A 12/03/25  -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "115SYL-A_effective_120325.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.722Z",
+      "stopCount": 12
+    },
+    {
+      "id": "115SYL-P_effective_092425.pdf",
+      "name": "115 (PM)",
+      "filename": "115SYL-P_effective_092425.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "3825 SW Scholls Ferry Rd [NW]",
+          "time": "4:17 pm",
+          "direction": "NW",
+          "originalLine": "4:17 pm3825 SW Scholls Ferry Rd [NW]115SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW SCHOLLS FERRY RD & SW THOMAS ST [SE]",
+          "time": "4:20 pm",
+          "direction": "SE",
+          "originalLine": "4:20 pmSW SCHOLLS FERRY RD @ SW THOMAS ST [SE]115SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW PATTON RD & SW 60TH PL [SW]",
+          "time": "4:21 pm",
+          "direction": "SW",
+          "originalLine": "4:21 pmSW PATTON RD @ SW 60TH PL [SW]115SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW PATTON RD & SW 58TH DR [SW]",
+          "time": "4:22 pm",
+          "direction": "SW",
+          "originalLine": "4:22 pmSW PATTON RD @ SW 58TH DR [SW]115SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW PATTON RD & SW 55TH DR [SW]",
+          "time": "4:23 pm",
+          "direction": "SW",
+          "originalLine": "4:23 pmSW PATTON RD @ SW 55TH DR [SW]115SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "4703 SW PATTON RD [S]",
+          "time": "4:24 pm",
+          "direction": "S",
+          "originalLine": "4:24 pm4703 SW PATTON RD [S]115SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW PATTON RD & SW HILLSIDE DR [SE]",
+          "time": "4:26 pm",
+          "direction": "SE",
+          "originalLine": "4:26 pmSW PATTON RD @ SW HILLSIDE DR [SE]115SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW PATTON RD & SW 36TH AV [SW]",
+          "time": "4:27 pm",
+          "direction": "SW",
+          "originalLine": "4:27 pmSW PATTON RD @ SW 36TH AV [SW]115SYL-P(9)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "2831 SW LABBE AV [E]",
+          "time": "4:29 pm",
+          "direction": "E",
+          "originalLine": "4:29 pm2831 SW LABBE AV [E]115SYL-P(10)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW GREENLEAF DR & SW GREENHILLS WY [SW]",
+          "time": "4:32 pm",
+          "direction": "SW",
+          "originalLine": "4:32 pmSW GREENLEAF DR @ SW GREENHILLS WY [SW]115SYL-P(11)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "SW HEWETT BLVD & SW ORMANDY WY [E]",
+          "time": "4:35 pm",
+          "direction": "E",
+          "originalLine": "4:35 pmSW HEWETT BLVD @ SW ORMANDY WY [E]115SYL-P(12)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "SW HEWETT BLVD & SW 50TH AV [N]",
+          "time": "4:37 pm",
+          "direction": "N",
+          "originalLine": "4:37 pmSW HEWETT BLVD @ SW 50TH AV [N]115SYL-P(13)Stop Order #:"
+        },
+        {
+          "id": "stop-13",
+          "address": "5233 SW HEWETT BLVD [N]",
+          "time": "4:37 pm",
+          "direction": "N",
+          "originalLine": "4:37 pm5233 SW HEWETT BLVD [N]115SYL-P(14)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:115SYL-P 09/24/25 -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driver",
+      "fileId": "115SYL-P_effective_092425.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.730Z",
+      "stopCount": 13
+    },
+    {
+      "id": "115SYL-P_effective_120325.pdf",
+      "name": "115 (PM)",
+      "filename": "115SYL-P_effective_120325.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "3825 SW Scholls Ferry Rd [NW]",
+          "time": "4:17 pm",
+          "direction": "NW",
+          "originalLine": "4:17 pm3825 SW Scholls Ferry Rd [NW]115SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW SCHOLLS FERRY RD & SW THOMAS ST [SE]",
+          "time": "4:20 pm",
+          "direction": "SE",
+          "originalLine": "4:20 pmSW SCHOLLS FERRY RD @ SW THOMAS ST [SE]115SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW PATTON RD & SW 58TH DR [SW]",
+          "time": "4:22 pm",
+          "direction": "SW",
+          "originalLine": "4:22 pmSW PATTON RD @ SW 58TH DR [SW]115SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW PATTON RD & SW 55TH AV [S]",
+          "time": "4:23 pm",
+          "direction": "S",
+          "originalLine": "4:23 pmSW PATTON RD @ SW 55TH AV [S]115SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "4703 SW PATTON RD [S]",
+          "time": "4:24 pm",
+          "direction": "S",
+          "originalLine": "4:24 pm4703 SW PATTON RD [S]115SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW PATTON RD & SW HILLSIDE DR [SE]",
+          "time": "4:26 pm",
+          "direction": "SE",
+          "originalLine": "4:26 pmSW PATTON RD @ SW HILLSIDE DR [SE]115SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW PATTON RD & SW 36TH AV [SW]",
+          "time": "4:27 pm",
+          "direction": "SW",
+          "originalLine": "4:27 pmSW PATTON RD @ SW 36TH AV [SW]115SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "2936 SW LABBE AV [S]",
+          "time": "4:29 pm",
+          "direction": "S",
+          "originalLine": "4:29 pm2936 SW LABBE AV [S]115SYL-P(9)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "SW GREENLEAF DR & SW GREENHILLS WY [SW]",
+          "time": "4:31 pm",
+          "direction": "SW",
+          "originalLine": "4:31 pmSW GREENLEAF DR @ SW GREENHILLS WY [SW]115SYL-P(10)Stop Order #:"
+        },
+        {
+          "id": "stop-10",
+          "address": "SW HEWETT BLVD & SW ORMANDY WY [E]",
+          "time": "4:35 pm",
+          "direction": "E",
+          "originalLine": "4:35 pmSW HEWETT BLVD @ SW ORMANDY WY [E]115SYL-P(11)Stop Order #:"
+        },
+        {
+          "id": "stop-11",
+          "address": "SW HEWETT BLVD & SW 50TH AV [N]",
+          "time": "4:36 pm",
+          "direction": "N",
+          "originalLine": "4:36 pmSW HEWETT BLVD @ SW 50TH AV [N]115SYL-P(12)Stop Order #:"
+        },
+        {
+          "id": "stop-12",
+          "address": "5233 SW HEWETT BLVD [N]",
+          "time": "4:37 pm",
+          "direction": "N",
+          "originalLine": "4:37 pm5233 SW HEWETT BLVD [N]115SYL-P(13)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:115SYL-P 12/03/25 -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driver",
+      "fileId": "115SYL-P_effective_120325.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.738Z",
+      "stopCount": 12
+    },
+    {
+      "id": "116SYL-A_effective_092425.pdf",
+      "name": "116 (AM)",
+      "filename": "116SYL-A_effective_092425.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "SW HUMPHREY BLVD & SW HUMPHREY PARK RD [E]",
+          "time": "8:31 am",
+          "direction": "E",
+          "originalLine": "8:31 amSW HUMPHREY BLVD @ SW HUMPHREY PARK RD [E]116SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "5375 SW Humphrey Blvd [NE]",
+          "time": "8:33 am",
+          "direction": "NE",
+          "originalLine": "8:33 am5375 SW Humphrey Blvd [NE]116SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW SCHOLLS FERRY RD & SW SWEETBRIAR CT [NW]",
+          "time": "8:36 am",
+          "direction": "NW",
+          "originalLine": "8:36 amSW SCHOLLS FERRY RD @ SW SWEETBRIAR CT [NW]116SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "4616 SW FAIRVIEW BLVD [S]",
+          "time": "8:44 am",
+          "direction": "S",
+          "originalLine": "8:44 am4616 SW FAIRVIEW BLVD [S]116SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "ODYSSEY SCHOOL",
+          "time": "8:51 am",
+          "direction": null,
+          "originalLine": "8:51 amODYSSEY SCHOOL116SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW CANYON CT & SW 61ST DR [NE]",
+          "time": "8:52 am",
+          "direction": "NE",
+          "originalLine": "8:52 amSW CANYON CT @ SW 61ST DR [NE]116SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW 61ST DR & SW TAYLOR ST [SE]",
+          "time": "8:54 am",
+          "direction": "SE",
+          "originalLine": "8:54 amSW 61ST DR @ SW TAYLOR ST [SE]116SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW SALMON ST & SW 58TH AV [NW]",
+          "time": "8:57 am",
+          "direction": "NW",
+          "originalLine": "8:57 amSW SALMON ST @ SW 58TH AV [NW]116SYL-A(8)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:116SYL-A 09/24/25 - S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "116SYL-A_effective_092425.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.745Z",
+      "stopCount": 8
+    },
+    {
+      "id": "116SYL-P_effective_092425.pdf",
+      "name": "116 (PM)",
+      "filename": "116SYL-P_effective_092425.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "ODYSSEY SCHOOL",
+          "time": "4:15 pm",
+          "direction": null,
+          "originalLine": "4:15 pmODYSSEY SCHOOL116SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW CANYON CT & SW 61ST DR [NE]",
+          "time": "4:16 pm",
+          "direction": "NE",
+          "originalLine": "4:16 pmSW CANYON CT @ SW 61ST DR [NE]116SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW 61ST DR & SW TAYLOR ST [SE]",
+          "time": "4:18 pm",
+          "direction": "SE",
+          "originalLine": "4:18 pmSW 61ST DR @ SW TAYLOR ST [SE]116SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW SALMON ST & SW 58TH AV [NW]",
+          "time": "4:21 pm",
+          "direction": "NW",
+          "originalLine": "4:21 pmSW SALMON ST @ SW 58TH AV [NW]116SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "4616 SW FAIRVIEW BLVD [S]",
+          "time": "4:25 pm",
+          "direction": "S",
+          "originalLine": "4:25 pm4616 SW FAIRVIEW BLVD [S]116SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW HIGHLAND RD & SW BARROW LN [SW]",
+          "time": "4:28 pm",
+          "direction": "SW",
+          "originalLine": "4:28 pmSW HIGHLAND RD @ SW BARROW LN [SW]116SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "5375 SW Humphrey Blvd [SW]",
+          "time": "4:33 pm",
+          "direction": "SW",
+          "originalLine": "4:33 pm5375 SW Humphrey Blvd [SW]116SYL-P(8)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW HUMPHREY BLVD & SW HUMPHREY PARK RD [SW]",
+          "time": "4:34 pm",
+          "direction": "SW",
+          "originalLine": "4:34 pmSW HUMPHREY BLVD @ SW HUMPHREY PARK RD [SW]116SYL-P(9)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:116SYL-P 09/24/25  -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "116SYL-P_effective_092425.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.753Z",
+      "stopCount": 8
+    },
+    {
+      "id": "120SYL-A_effective_082625.pdf",
+      "name": "120 (AM)",
+      "filename": "120SYL-A_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "8130 NW Thompson Rd [N]",
+          "time": "8:40 am",
+          "direction": "N",
+          "originalLine": "8:40 am8130 NW Thompson Rd [N]120SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW PINNACLE DR & NW BIRKENDENE ST [NW]",
+          "time": "8:41 am",
+          "direction": "NW",
+          "originalLine": "8:41 amNW PINNACLE DR @ NW BIRKENDENE ST [NW]120SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW PINNACLE DR & NW CRESTVIEW WY [N]",
+          "time": "8:43 am",
+          "direction": "N",
+          "originalLine": "8:43 amNW PINNACLE DR @ NW CRESTVIEW WY [N]120SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "NW PINNACLE DR & NW BARTHOLOMEW DR [NW]",
+          "time": "8:45 am",
+          "direction": "NW",
+          "originalLine": "8:45 amNW PINNACLE DR @ NW BARTHOLOMEW DR [NW]120SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "NW BARTHOLOMEW DR & NW BIRKENDENE ST [NE]",
+          "time": "8:46 am",
+          "direction": "NE",
+          "originalLine": "8:46 amNW BARTHOLOMEW DR @ NW BIRKENDENE ST [NE]120SYL-A(5)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:120SYL-A 08/26/25 --S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "120SYL-A_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.760Z",
+      "stopCount": 5
+    },
+    {
+      "id": "120SYL-P_effective_082625.pdf",
+      "name": "120 (PM)",
+      "filename": "120SYL-P_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "NW BARTHOLOMEW DR & NW BIRKENDENE ST [S]",
+          "time": "4:27 pm",
+          "direction": "S",
+          "originalLine": "4:27 pmNW BARTHOLOMEW DR @ NW BIRKENDENE ST [S]120SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW BARTHOLOMEW DR & NW PINNACLE DR [SW]",
+          "time": "4:29 pm",
+          "direction": "SW",
+          "originalLine": "4:29 pmNW BARTHOLOMEW DR @ NW PINNACLE DR [SW]120SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW PINNACLE DR & NW CRESTVIEW WY [SW]",
+          "time": "4:30 pm",
+          "direction": "SW",
+          "originalLine": "4:30 pmNW PINNACLE DR @ NW CRESTVIEW WY [SW]120SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "NW PINNACLE DR & NW BIRKENDENE ST [E]",
+          "time": "4:32 pm",
+          "direction": "E",
+          "originalLine": "4:32 pmNW PINNACLE DR @ NW BIRKENDENE ST [E]120SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "8130 NW Thompson Rd [S]",
+          "time": "4:34 pm",
+          "direction": "S",
+          "originalLine": "4:34 pm8130 NW Thompson Rd [S]120SYL-P(6)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:120SYL-P 08/26/25  -S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drive",
+      "fileId": "120SYL-P_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.768Z",
+      "stopCount": 5
+    },
+    {
+      "id": "121SYL-A_effective_092425.pdf",
+      "name": "121 (AM)",
+      "filename": "121SYL-A_effective_092425.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+          "time": "8:26 am",
+          "direction": null,
+          "originalLine": "8:26 amCHAPMAN GT & ST & CAB LOADING ON NW RALEIGH121SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "783 NW NAITO PKWY [SW]",
+          "time": "8:34 am",
+          "direction": "SW",
+          "originalLine": "8:34 am783 NW NAITO PKWY [SW]121SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW NAITO PKWY & NW IRONSIDE TERR [W]",
+          "time": "8:35 am",
+          "direction": "W",
+          "originalLine": "8:35 amNW NAITO PKWY @ NW IRONSIDE TERR [W]121SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "NW NAITO PKWY & NW DAVIS ST [NW]",
+          "time": "8:36 am",
+          "direction": "NW",
+          "originalLine": "8:36 amNW NAITO PKWY @ NW DAVIS ST [NW]121SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "NW 20TH AV & NW KEARNEY ST [NW]",
+          "time": "8:45 am",
+          "direction": "NW",
+          "originalLine": "8:45 amNW 20TH AV @ NW KEARNEY ST [NW]121SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW 15TH AV & SW ALDER ST [NW]",
+          "time": "8:49 am",
+          "direction": "NW",
+          "originalLine": "8:49 amSW 15TH AV @ SW ALDER ST [NW]121SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW SALMON ST & SW 16TH AV [E]",
+          "time": "8:52 am",
+          "direction": "E",
+          "originalLine": "8:52 amSW SALMON ST @ SW 16TH AV [E]121SYL-A(6)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:121SYL-A 09/24/25\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drivers, Di",
+      "fileId": "121SYL-A_effective_092425.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.775Z",
+      "stopCount": 7
+    },
+    {
+      "id": "121SYL-P_effective_092425.pdf",
+      "name": "121 (PM)",
+      "filename": "121SYL-P_effective_092425.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "SW SALMON ST & SW 16TH AV [SW]",
+          "time": "4:23 pm",
+          "direction": "SW",
+          "originalLine": "4:23 pmSW SALMON ST @ SW 16TH AV [SW]121SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW ALDER ST & SW 15TH AV [W]",
+          "time": "4:26 pm",
+          "direction": "W",
+          "originalLine": "4:26 pmSW ALDER ST @ SW 15TH AV [W]121SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW 20TH AV & NW KEARNEY ST [SE]",
+          "time": "4:31 pm",
+          "direction": "SE",
+          "originalLine": "4:31 pmNW 20TH AV @ NW KEARNEY ST [SE]121SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "783 NW NAITO PKWY [SW]",
+          "time": "4:36 pm",
+          "direction": "SW",
+          "originalLine": "4:36 pm783 NW NAITO PKWY [SW]121SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "NW NAITO PKWY & NW IRONSIDE TERR [W]",
+          "time": "4:37 pm",
+          "direction": "W",
+          "originalLine": "4:37 pmNW NAITO PKWY @ NW IRONSIDE TERR [W]121SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "NW NAITO PKWY & NW DAVIS ST [NW]",
+          "time": "4:38 pm",
+          "direction": "NW",
+          "originalLine": "4:38 pmNW NAITO PKWY @ NW DAVIS ST [NW]121SYL-P(7)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:121SYL-P 09/24/25\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drivers, Di",
+      "fileId": "121SYL-P_effective_092425.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.782Z",
+      "stopCount": 6
+    },
+    {
+      "id": "122SYL-A_effective_082625.pdf",
+      "name": "122 (AM)",
+      "filename": "122SYL-A_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "CAPITOL HILL GT-ST-CAB LOAD ZONE ON SPRG GDN",
+          "time": "8:27 am",
+          "direction": null,
+          "originalLine": "8:27 amCAPITOL HILL GT-ST-CAB LOAD ZONE ON SPRG GDN122SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "S RIVER PKWY & S RIVER DR [S]",
+          "time": "8:35 am",
+          "direction": "S",
+          "originalLine": "8:35 amS RIVER PKWY @ S RIVER DR [S]122SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "S RIVER DR & S RIVER PKWY [NW]",
+          "time": "8:37 am",
+          "direction": "NW",
+          "originalLine": "8:37 amS RIVER DR @ S RIVER PKWY [NW]122SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW HARRISON ST & SW 1ST AV [NE]",
+          "time": "8:39 am",
+          "direction": "NE",
+          "originalLine": "8:39 amSW HARRISON ST @ SW 1ST AV [NE]122SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW HARRISON ST & SW 4TH AV [NE]",
+          "time": "8:40 am",
+          "direction": "NE",
+          "originalLine": "8:40 amSW HARRISON ST @ SW 4TH AV [NE]122SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW CLAY ST & SW PARK AV [NE]",
+          "time": "8:42 am",
+          "direction": "NE",
+          "originalLine": "8:42 amSW CLAY ST @ SW PARK AV [NE]122SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "SW CLAY ST & SW 12TH AV [NE]",
+          "time": "8:43 am",
+          "direction": "NE",
+          "originalLine": "8:43 amSW CLAY ST @ SW 12TH AV [NE]122SYL-A(6)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "SW 12TH AV & SW JEFFERSON ST [S]",
+          "time": "8:45 am",
+          "direction": "S",
+          "originalLine": "8:45 amSW 12TH AV @ SW JEFFERSON ST [S]122SYL-A(7)Stop Order #:"
+        },
+        {
+          "id": "stop-9",
+          "address": "WEST SYLVAN",
+          "time": "9:05 am",
+          "direction": null,
+          "originalLine": "9:05 amWEST SYLVAN122SYL-A(8)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:122SYL-A 08/26/25\nAnchor Name:WEST SYLVAN\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drivers, Dispatchers, Call Center.\nTo:\n",
+      "fileId": "122SYL-A_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.789Z",
+      "stopCount": 9
+    },
+    {
+      "id": "122SYL-P_effective_082625.pdf",
+      "name": "122 (PM)",
+      "filename": "122SYL-P_effective_082625.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "WEST SYLVAN",
+          "time": "3:55 pm",
+          "direction": null,
+          "originalLine": "3:55 pmWEST SYLVAN122SYL-PStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "SW 12TH AV & SW CLAY ST [S]",
+          "time": "4:21 pm",
+          "direction": "S",
+          "originalLine": "4:21 pmSW 12TH AV @ SW CLAY ST [S]122SYL-P(2)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "SW 12TH AV & SW JEFFERSON ST [S]",
+          "time": "4:22 pm",
+          "direction": "S",
+          "originalLine": "4:22 pmSW 12TH AV @ SW JEFFERSON ST [S]122SYL-P(3)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "SW PARK AV & SW CLAY ST [N]",
+          "time": "4:26 pm",
+          "direction": "N",
+          "originalLine": "4:26 pmSW PARK AV @ SW CLAY ST [N]122SYL-P(4)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "SW HARRISON ST & SW 4TH AV [SW]",
+          "time": "4:28 pm",
+          "direction": "SW",
+          "originalLine": "4:28 pmSW HARRISON ST @ SW 4TH AV [SW]122SYL-P(5)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "SW HARRISON ST & SW 1ST AV [SW]",
+          "time": "4:29 pm",
+          "direction": "SW",
+          "originalLine": "4:29 pmSW HARRISON ST @ SW 1ST AV [SW]122SYL-P(6)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "S RIVER PKWY & S RIVER DR [S]",
+          "time": "4:31 pm",
+          "direction": "S",
+          "originalLine": "4:31 pmS RIVER PKWY @ S RIVER DR [S]122SYL-P(7)Stop Order #:"
+        },
+        {
+          "id": "stop-8",
+          "address": "S RIVER DR & S RIVER PKWY [NW]",
+          "time": "4:33 pm",
+          "direction": "NW",
+          "originalLine": "4:33 pmS RIVER DR @ S RIVER PKWY [NW]122SYL-P(8)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:122SYL-P 08/26/25\nAnchor Name:WEST SYLVAN\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Drivers, Dispatchers, Call Center.\nTo:\n",
+      "fileId": "122SYL-P_effective_082625.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.797Z",
+      "stopCount": 8
+    },
+    {
+      "id": "124SYL-A_effective_100825.pdf",
+      "name": "124 (AM)",
+      "filename": "124SYL-A_effective_100825.pdf",
+      "stops": [
+        {
+          "id": "stop-1",
+          "address": "CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+          "time": "8:33 am",
+          "direction": null,
+          "originalLine": "8:33 amCHAPMAN GT & ST & CAB LOADING ON NW RALEIGH124SYL-AStop Order #:"
+        },
+        {
+          "id": "stop-2",
+          "address": "NW 23RD AV & NW JOHNSON ST [NW]",
+          "time": "8:36 am",
+          "direction": "NW",
+          "originalLine": "8:36 amNW 23RD AV @ NW JOHNSON ST [NW]124SYL-A(1)Stop Order #:"
+        },
+        {
+          "id": "stop-3",
+          "address": "NW CUMBERLAND RD & NW LURAY TERR [NW]",
+          "time": "8:41 am",
+          "direction": "NW",
+          "originalLine": "8:41 amNW CUMBERLAND RD @ NW LURAY TERR [NW]124SYL-A(2)Stop Order #:"
+        },
+        {
+          "id": "stop-4",
+          "address": "NW MACLEAY BLVD & NW BEUHLA VISTA TERR [NW]",
+          "time": "8:46 am",
+          "direction": "NW",
+          "originalLine": "8:46 amNW MACLEAY BLVD @ NW BEUHLA VISTA TERR [NW]124SYL-A(3)Stop Order #:"
+        },
+        {
+          "id": "stop-5",
+          "address": "NW BEUHLA VISTA TERR & NW HERMOSA BLVD [NE]",
+          "time": "8:47 am",
+          "direction": "NE",
+          "originalLine": "8:47 amNW BEUHLA VISTA TERR @ NW HERMOSA BLVD [NE]124SYL-A(4)Stop Order #:"
+        },
+        {
+          "id": "stop-6",
+          "address": "NW HERMOSA BLVD & NW VERDE VISTA TERR [W]",
+          "time": "8:49 am",
+          "direction": "W",
+          "originalLine": "8:49 amNW HERMOSA BLVD @ NW VERDE VISTA TERR [W]124SYL-A(5)Stop Order #:"
+        },
+        {
+          "id": "stop-7",
+          "address": "NW SEBLAR DR & NW SEBLAR TERR [NW]",
+          "time": "8:53 am",
+          "direction": "NW",
+          "originalLine": "8:53 amNW SEBLAR DR @ NW SEBLAR TERR [NW]124SYL-A(6)Stop Order #:"
+        }
+      ],
+      "rawText": "\n\nRoute:124SYL-A 10/08/25- S/R\nAnchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY\nNote:The date shown with the Route number is the date the change will start.\n[ _ ] Bus Stops are being Added or Moved.\n[ _ ] Bus Stops are being Deleted. [ _ ] Bus Schedule or Stop Times are Changing.\n[ _ ] Bus Number or Route Number is Changing.\nBus Schedule Change Notice.\nDriver to distribute each weekday,AM and PM until implemention date shown. Updates on www.pps.net/bus.\nFamilies, School Administrators, Driver",
+      "fileId": "124SYL-A_effective_100825.pdf",
+      "downloadedAt": "2025-12-08T04:15:31.804Z",
+      "stopCount": 7
+    }
+  ],
+  "errors": []
+}

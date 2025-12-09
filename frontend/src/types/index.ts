@@ -1,0 +1,58 @@
+export interface Stop {
+  id: string;
+  address: string;
+  coordinates?: [number, number]; // [lng, lat]
+  geocodeError?: string;
+  originalLine?: string;
+  time?: string;
+  direction?: string | null;
+  isSchoolStop?: boolean; // True for school loading zone stops
+  skipGeocoding?: boolean; // True for stops that should not be geocoded or displayed (e.g., CAB LOAD ZONE)
+  schoolName?: string; // School name for school stops (displayed instead of address)
+}
+
+export interface Route {
+  id: string;
+  name: string; // Route number only, e.g., "100"
+  direction?: 'Morning' | 'Afternoon' | null; // "Morning" or "Afternoon"
+  filename?: string;
+  stops: Stop[];
+  color: string;
+  isSelected: boolean;
+  geocodingProgress?: {
+    total: number;
+    geocoded: number;
+    isGeocoding: boolean;
+  };
+}
+
+export interface HomeAddress {
+  address: string;
+  coordinates: [number, number];
+}
+
+export interface School {
+  id: string;
+  name: string;
+  address?: string; // Physical address of the school
+  coordinates?: [number, number]; // [lng, lat] geocoded coordinates
+  schoolPageLink: string | null; // Link to school's page on PPS website
+  driveLink: string | null; // Link to Google Drive folder with PDFs
+  createdAt: string;
+  updatedAt?: string;
+  schoolTypes?: ('Elementary School' | 'Middle School' | 'High School')[]; // Array to support hybrid schools
+  routeCount?: number; // Number of routes available for this school
+}
+
+export interface AppState {
+  driveLink?: string;
+  lastFetchTime?: Date;
+  routes: Route[];
+  homeAddress?: HomeAddress;
+  isLoading: boolean;
+  error?: string;
+  selectedSchoolId: string | null;
+  schools: School[];
+}
+
+

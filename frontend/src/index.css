@@ -1,0 +1,86 @@
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-tertiary: #666666;
+  --border-color: #dddddd;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
+  --shadow-large: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-tertiary: #b0b0b0;
+  --border-color: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+  --shadow-large: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Leaflet map styles */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Style for numbered markers */
+.leaflet-marker-icon.numbered-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Ensure draggable markers show pointer cursor when hovering */
+.leaflet-marker-draggable {
+  cursor: pointer !important;
+}
+
+/* Show closed hand cursor when actively dragging */
+.leaflet-marker-draggable:active,
+.leaflet-marker-dragging {
+  cursor: grabbing !important;
+}
+
+/* Also apply grabbing cursor to the marker content when dragging */
+.leaflet-marker-dragging .numbered-marker-pill {
+  cursor: grabbing !important;
+}
+
+/* Hide zoom controls in top-left position */
+.leaflet-top.leaflet-left .leaflet-control-zoom {
+  display: none !important;
+}
+
+
