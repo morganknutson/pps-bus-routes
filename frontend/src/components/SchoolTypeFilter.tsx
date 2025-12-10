@@ -11,8 +11,8 @@ interface SchoolTypeFilterProps {
 
 export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
   return (
-    <div style={{ padding: '1rem', backgroundColor: 'var(--bg-secondary)' }}>
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+    <div style={{ padding: '1rem 2rem', backgroundColor: 'var(--bg-secondary)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '12px' }}>
           <input
             type="checkbox"

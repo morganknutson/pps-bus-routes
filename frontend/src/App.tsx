@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { RouteList } from './components/RouteList';
 import { MapView } from './components/MapView';
 import { AddressInput } from './components/AddressInput';
+import { AddressLookup } from './components/AddressLookup';
 import { SchoolList } from './components/SchoolList';
 import { TabBar } from './components/TabBar';
 import { Header } from './components/Header';
@@ -13,6 +14,8 @@ import { DarkModeTileLayer } from './components/DarkModeTileLayer';
 import { useStore } from './store/useStore';
 import { DataManagement } from './pages/DataManagement';
 import { SchoolsList } from './pages/SchoolsList';
+import { NeighborhoodExplorer } from './pages/NeighborhoodExplorer';
+import { TechPage } from './pages/TechPage';
 import { School } from './types';
 import { loadLocalRoutes } from './services/localRoutes';
 import { getSchoolTypes, getSchoolColor, createSchoolIcon } from './utils/schoolUtils';
@@ -561,7 +564,14 @@ function AdminApp() {
 
         {/* Map */}
         <div style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
-          {activeTab === 'routes' && <AddressInput />}
+          {activeTab === 'routes' && (
+            <AddressLookup 
+              onAddressSelect={(_address, _coordinates) => {
+                // Address is already saved to store by AddressLookup component
+                // This callback is still called but parameters are unused since MapView reads from store
+              }}
+            />
+          )}
           <div style={{ flex: 1, position: 'relative' }}>
             {activeTab === 'schools' ? (
               // Schools map view
@@ -648,7 +658,11 @@ function AdminApp() {
                     <span>Loading routes...</span>
                   </div>
                 )}
-                <MapView editingMode={true} />
+                <MapView 
+                  editingMode={true} 
+                  enableStreetHighlighting={true}
+                  enableStreetPins={true}
+                />
               </>
             )}
 
@@ -836,6 +850,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainApp />} />
         <Route path="/admin" element={<AdminApp />} />
+        <Route path="/neighborhoods" element={<NeighborhoodExplorer />} />
+        <Route path="/tech" element={<TechPage />} />
         {/* Deprecated: Data Management page - kept for backward compatibility but no longer linked */}
         <Route path="/data" element={<DataManagement />} />
         <Route path="/data/schools" element={<SchoolsList />} />

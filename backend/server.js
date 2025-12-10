@@ -7,6 +7,8 @@ import { dataRouter } from './routes/data.js';
 import { schedulerRouter } from './routes/scheduler.js';
 import { schoolsRouter } from './routes/schools.js';
 import { routesRouter } from './routes/routes.js';
+import { streetsRouter } from './routes/streets.js';
+import { neighborhoodsRouter } from './routes/neighborhoods.js';
 
 dotenv.config();
 
@@ -23,6 +25,8 @@ app.use('/api/data', dataRouter);
 app.use('/api/scheduler', schedulerRouter);
 app.use('/api/schools', schoolsRouter);
 app.use('/api/routes', routesRouter);
+app.use('/api/streets', streetsRouter);
+app.use('/api/neighborhoods', neighborhoodsRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

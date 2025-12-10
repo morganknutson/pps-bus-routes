@@ -16,7 +16,7 @@ This is a bus route mapping application for Portland Public Schools (PPS) that:
 - **State Management**: Zustand
 - **Routing**: React Router v7
 - **Maps**: Leaflet + react-leaflet
-- **Icons**: React Icons + Font Awesome
+- **Icons**: Font Awesome only (via CDN, no react-icons or other icon libraries)
 - **Styling**: Inline styles (CSS-in-JS approach) with CSS variables for theming
 
 ### Backend
@@ -84,6 +84,17 @@ This allows for discussion and refinement before committing to code changes.
 - Use `useRef` for DOM references and map instances
 - **Create Reusable Components**: Extract common UI patterns into reusable components
 - **Custom Hooks for Logic**: Extract complex logic into custom hooks for reusability
+- **Icons - Font Awesome Only**: 
+  - **ALWAYS** use Font Awesome for icons - never use react-icons or any other icon library
+  - Use inline icons: `<i className="fas fa-icon-name"></i>` (e.g., `fas fa-graduation-cap`, `fas fa-map-marker-alt`)
+  - For Leaflet markers, use utility functions from `utils/fontAwesomeIcons.ts`:
+    - `createFontAwesomeIcon()` - Creates Font Awesome icon HTML string
+    - `createDefaultMarkerIcon()` - Creates default Leaflet marker icon
+    - `createHomeIcon()` - Creates home marker icon
+    - `createSchoolIconHTML()` - Creates school icon HTML
+  - Font Awesome is loaded via CDN in `index.html` - no additional imports needed
+  - Icon classes use `fas` prefix (Font Awesome Solid style)
+  - **Never import or use react-icons** or any other icon library
 
 ### Styling
 - Use inline styles (object syntax) for component styling
@@ -174,6 +185,7 @@ This allows for discussion and refinement before committing to code changes.
 2. Use `DarkModeTileLayer` for consistent tile rendering
 3. Use `FitSchoolBounds` pattern for auto-zooming
 4. Create custom icons via utility functions in `utils/markerIcons.ts` or `utils/fontAwesomeIcons.ts`
+5. **Always use Font Awesome icons** - see Icons section in React guidelines
 
 ### When Processing Data
 1. PDFs stored in `data/schools/{school-id}/pdfs/`
@@ -255,6 +267,69 @@ class AddressFormatter {
 - Admin route available at `/admin` with editing capabilities
 - **Data Management Page is DEPRECATED**: The `/data` route and `DataManagement.tsx` page are deprecated in favor of the `/admin` route. Do not add new features or make improvements to the data management page. All data management functionality should be implemented in the admin page instead.
 
+## Documentation Maintenance
+
+### Tech Page Auto-Update Rule
+**MANDATORY**: The Tech Page (`frontend/src/pages/TechPage.tsx`) **MUST** be updated whenever functionality or tech stack changes. This is a critical documentation requirement.
+
+#### When to Update Tech Page:
+1. **New Services Added**: 
+   - Add new service to appropriate section (Backend Services or Frontend Services)
+   - Document APIs used, endpoints, data formats, and storage locations
+   - Update the sections array with new subsection
+
+2. **Service Modifications**:
+   - Update existing service documentation when:
+     - APIs or endpoints change
+     - Data formats or structures change
+     - Storage locations change
+     - New methods or functionality added
+     - Rate limiting or behavior changes
+
+3. **Tech Stack Changes**:
+   - Update "Tech Stack" section in `.cursorrules` AND Tech Page when:
+     - New libraries/frameworks added
+     - Major version upgrades
+     - API providers change (e.g., switching geocoding services)
+     - New build tools or dependencies
+
+4. **Functionality Changes**:
+   - Update "Functionality and Interactions" section when:
+     - New workflows added
+     - Existing workflows modified
+     - New features change how the app processes data
+     - User-facing behavior changes significantly
+
+5. **API Endpoint Changes**:
+   - Update frontend/backend service documentation
+   - Update API Service section with new/removed endpoints
+   - Update example data structures if response formats change
+
+6. **Data Structure Changes**:
+   - Update "Complete Data Entry Examples" section
+   - Update service documentation if data formats change
+   - Ensure examples match current implementation
+
+#### How to Update:
+- **Check Tech Page First**: Before making changes, review `TechPage.tsx` to see what needs updating
+- **Update During Implementation**: Update Tech Page as part of the same change, not as a separate task
+- **Verify Accuracy**: After making changes, verify that Tech Page documentation matches actual implementation:
+  - Service classes and their methods
+  - API endpoints and their request/response formats
+  - Data file locations and formats
+  - Technology versions and libraries
+- **Update Examples**: Keep code examples and data examples current and accurate
+- **Update Navigation**: Add new sections to the `sections` array for proper navigation
+
+#### Checklist for Tech Stack/Functionality Changes:
+- [ ] Tech Stack section updated (both `.cursorrules` and Tech Page)
+- [ ] Service documentation updated (if services changed)
+- [ ] API endpoints documented (if endpoints changed)
+- [ ] Data examples updated (if data structures changed)
+- [ ] Navigation sections array updated (if new sections added)
+- [ ] Code examples match actual implementation
+- [ ] File paths and locations are accurate
+
 ## Refactoring Opportunities
 
 ### When to Refactor to OOP
@@ -280,4 +355,5 @@ class AddressFormatter {
 - **Don't Put Business Logic in Routes**: Keep route handlers thin, delegate to service classes
 - **Don't Create One-Off Solutions**: If you need something similar in multiple places, create a reusable abstraction
 - **Don't Work on Data Management Page**: The data management page (`/data` route, `DataManagement.tsx`, and related components like `DataPageHeader.tsx`, `DataRouteList.tsx`) is deprecated. All data management work should be done in the admin page (`/admin` route) instead. Do not add features, fix bugs, or make improvements to the deprecated data management page.
+- **Don't Use Non-Font Awesome Icons**: Never use react-icons, Material Icons, or any other icon library. Always use Font Awesome only.
 

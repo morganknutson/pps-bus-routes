@@ -351,6 +351,12 @@ export function DataManagement() {
 
   // Save updated coordinates
   const saveStopCoordinates = async (routeId: string, stopId: string, coordinates: [number, number]) => {
+    // Validate coordinates format [lng, lat]
+    const { validateLngLat } = await import('../utils/coordinates');
+    if (!validateLngLat(coordinates)) {
+      console.error('[DataManagement] Invalid coordinates format:', coordinates);
+      throw new Error(`Invalid coordinates format. Expected [lng, lat], got ${JSON.stringify(coordinates)}`);
+    }
     setSaving(true);
     try {
       const response = await fetch(`/api/data/routes/${routeId}/stops/${stopId}`, {

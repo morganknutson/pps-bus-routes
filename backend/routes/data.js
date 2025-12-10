@@ -69,8 +69,18 @@ router.put('/routes/:routeId/stops/:stopId', (req, res) => {
     const { routeId, stopId } = req.params;
     const { coordinates, schoolId } = req.body;
 
+    // Validate coordinates format: must be [lng, lat] array with valid numbers
     if (!coordinates || !Array.isArray(coordinates) || coordinates.length !== 2) {
-      return res.status(400).json({ error: 'Invalid coordinates' });
+      return res.status(400).json({ error: 'Invalid coordinates: must be array of length 2' });
+    }
+    
+    const [lng, lat] = coordinates;
+    if (typeof lng !== 'number' || typeof lat !== 'number' || 
+        isNaN(lng) || isNaN(lat) ||
+        lng < -180 || lng > 180 || lat < -90 || lat > 90) {
+      return res.status(400).json({ 
+        error: `Invalid coordinates: expected [lng, lat] with valid ranges (lng: -180 to 180, lat: -90 to 90), got [${lng}, ${lat}]` 
+      });
     }
 
     const PROCESSED_ROUTES_DIR = getProcessedRoutesDir(schoolId);

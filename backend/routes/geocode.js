@@ -1,5 +1,6 @@
 import express from 'express';
 import { geocodingService } from '../services/geocodingService.js';
+import { autocompleteService } from '../services/autocompleteService.js';
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.post('/address', async (req, res) => {
     if (result.success) {
       res.json({
         address,
-        coordinates: result.coordinates, // [lng, lat] for Leaflet
+        coordinates: result.coordinates, // [lng, lat] - GeoJSON format (internal standard)
         displayName: result.displayName,
       });
     } else {
@@ -29,7 +30,7 @@ router.post('/address', async (req, res) => {
   }
 });
 
-// Autocomplete addresses using OpenStreetMap Nominatim
+// Autocomplete addresses using Google Places API (with Nominatim fallback)
 router.get('/autocomplete', async (req, res) => {
   try {
     const { q, city = 'Portland', state = 'OR' } = req.query;
@@ -38,68 +39,10 @@ router.get('/autocomplete', async (req, res) => {
       return res.json({ suggestions: [] });
     }
 
-    // Construct search query
-    const query = `${q}, ${city}, ${state}`;
-    const encodedQuery = encodeURIComponent(query);
-
-    // Use Nominatim API for autocomplete (limit to 5 results)
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?q=${encodedQuery}&format=json&limit=5&addressdetails=1`,
-      {
-        headers: {
-          'User-Agent': 'PPS-Bus-Maps/1.0', // Required by Nominatim
-        },
-      }
-    );
-
-    if (!response.ok) {
-      return res.json({ suggestions: [] });
-    }
-
-    const data = await response.json();
-
-    // Helper function to format a concise address from Nominatim result
-    const formatConciseAddress = (result) => {
-      if (!result.address) {
-        // Fallback to display_name if address details aren't available
-        return result.display_name.split(',')[0].trim();
-      }
-
-      const addr = result.address;
-      const parts = [];
-
-      // Add house number if available
-      if (addr.house_number) {
-        parts.push(addr.house_number);
-      }
-
-      // Add street name (try different possible fields)
-      const streetName = addr.road || addr.street || addr.pedestrian || addr.path || addr.footway || addr.cycleway;
-      if (streetName) {
-        parts.push(streetName);
-      }
-
-      // If we have parts, join them; otherwise fallback to first part of display_name
-      if (parts.length > 0) {
-        return parts.join(' ');
-      }
-
-      // Fallback: take first part of display_name (usually the street address)
-      return result.display_name.split(',')[0].trim();
-    };
-
-    const suggestions = data.map((result) => {
-      const conciseAddress = formatConciseAddress(result);
-      return {
-        displayName: conciseAddress,
-        address: conciseAddress,
-        coordinates: [parseFloat(result.lon), parseFloat(result.lat)], // [lng, lat] for Leaflet
-      };
-    });
-
+    const suggestions = await autocompleteService.autocomplete(q, city, state);
     res.json({ suggestions });
   } catch (error) {
-    console.error('Autocomplete error:', error);
+    console.error('[Geocode] Autocomplete error:', error);
     res.json({ suggestions: [] });
   }
 });

@@ -3,8 +3,8 @@ import { createSchoolIconHTML } from './fontAwesomeIcons';
 
 // Create school icon (simple circle with school symbol, no hover state)
 export function createSchoolIcon(routeColor: string, time?: string): L.DivIcon {
-  const circleSize = 28; // Size of the circle
-  const iconSize = 12; // Size of the school icon inside
+  const circleSize = 22; // Size of the circle
+  const iconSize = 10; // Size of the school icon inside
   
   const anchorX = circleSize / 2;
   const anchorY = circleSize / 2;
@@ -54,14 +54,23 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
   const numberWidth = String(number).length * (isSelected ? 11 : 8);
   
   // Circle size - height matches pill height, width adjusts to number width
-  // Single digits should be circles, multi-digit can be pill-shaped
-  // Calculate padding to ensure single digits become perfect circles (width = height)
-  // Scale minimum padding proportionally with pill height (about 23% of height)
+  // Single digits should be perfect circles (width = height), multi-digit can be pill-shaped
+  const isSingleDigit = String(number).length === 1;
+  const circleHeight = pillHeight; // Circle height matches pill height exactly
+  
+  // Calculate padding (needed for both single and multi-digit for positioning)
   const minPadding = Math.round(pillHeight * 0.23); // ~6px for 26px, ~7px for 32px
   const numberPadding = Math.max(minPadding, (pillHeight - numberWidth) / 2);
-  const circleHeight = pillHeight; // Circle height matches pill height
-  // Ensure circle is at least as wide as it is tall for single digits (perfect circle)
-  const circleWidth = Math.max(pillHeight, numberWidth + numberPadding * 2);
+  
+  let circleWidth: number;
+  if (isSingleDigit) {
+    // For single digits, make a perfect circle: width = height
+    circleWidth = pillHeight;
+  } else {
+    // For multi-digit, calculate width to fit the number with padding
+    // Add small buffer to ensure no gaps
+    circleWidth = numberWidth + numberPadding * 2 + 1;
+  }
   const smallCircleSize = 6; // Final small circle size (slightly smaller)
   
   // Calculate position - position circle so its left edge is at the pill's left edge
@@ -122,6 +131,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           top: 50%;
           transition: left 0.125s ease-out, width 0.125s ease-out, height 0.125s ease-out, background-color 0.125s ease-out, border-radius 0.125s ease-out;
           z-index: 0;
+          /* Inherit opacity from parent to match border and time text color exactly */
         }
         .numbered-marker-wrapper-${classId}:hover .numbered-marker-grey-circle-${classId} {
           left: ${numberCenterX}px;
@@ -179,7 +189,6 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
             font-size: ${timeFontSize};
             font-weight: 600;
             color: ${backgroundColor};
-            opacity: 0.9;
             white-space: nowrap;
             line-height: 1;
           ">${time}</span>` : ''}

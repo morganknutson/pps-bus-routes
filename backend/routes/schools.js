@@ -12,6 +12,7 @@ const SCHOOLS_FILE = path.join(__dirname, '..', '..', 'data', 'schools.json');
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 
 // Helper function to get route count for a school
+// Counts unique routes (morning and afternoon versions of the same route count as 1)
 function getRouteCount(schoolId) {
   try {
     const schoolRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
@@ -19,7 +20,43 @@ function getRouteCount(schoolId) {
       return 0;
     }
     const files = fs.readdirSync(schoolRoutesDir).filter(f => f.endsWith('.json'));
-    return files.length;
+    
+    // Track unique route names (morning and afternoon versions count as 1 route)
+    const uniqueRouteNames = new Set();
+    
+    for (const filename of files) {
+      try {
+        const filePath = path.join(schoolRoutesDir, filename);
+        const content = fs.readFileSync(filePath, 'utf8');
+        const route = JSON.parse(content);
+        
+        // Extract route name, handling both new and old formats
+        let routeName = route.name;
+        let direction = route.direction;
+        
+        // Migrate old format routes (name with (AM)/(PM) -> separate direction)
+        const amMatch = routeName && routeName.match(/^(\d+)\s*\(AM\)$/);
+        const pmMatch = routeName && routeName.match(/^(\d+)\s*\(PM\)$/);
+        
+        if (amMatch && !direction) {
+          routeName = amMatch[1]; // Just the number
+          direction = 'Morning';
+        } else if (pmMatch && !direction) {
+          routeName = pmMatch[1]; // Just the number
+          direction = 'Afternoon';
+        }
+        
+        // Use route name as the unique identifier (ignoring direction)
+        if (routeName) {
+          uniqueRouteNames.add(routeName);
+        }
+      } catch (error) {
+        console.error(`Error reading route file ${filename} for school ${schoolId}:`, error);
+        // Continue processing other files even if one fails
+      }
+    }
+    
+    return uniqueRouteNames.size;
   } catch (error) {
     console.error(`Error counting routes for school ${schoolId}:`, error);
     return 0;

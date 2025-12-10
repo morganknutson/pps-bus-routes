@@ -18,6 +18,8 @@ const pdfParserPath = path.join(backendDir, 'services', 'pdfParser.js');
 const { parseRouteFromPDF } = await import(`file://${pdfParserPath}`);
 const geocodingServicePath = path.join(backendDir, 'services', 'geocodingService.js');
 const { geocodingService } = await import(`file://${geocodingServicePath}`);
+const neighborhoodServicePath = path.join(backendDir, 'services', 'neighborhoodService.js');
+const { neighborhoodService } = await import(`file://${neighborhoodServicePath}`);
 const schoolUtilsPath = path.join(backendDir, 'utils', 'schoolUtils.js');
 const { getSchoolIdFromFilename, getSchoolPdfDir } = await import(`file://${schoolUtilsPath}`);
 
@@ -115,10 +117,24 @@ async function geocodeStops(stops, city = 'Portland', state = 'OR') {
         stopData.geocodeWarning = 'Intersection not found, using approximate location';
       }
       
+      // Get neighborhood from coordinates using reverse geocoding
+      if (stopData.coordinates) {
+        try {
+          const neighborhoodResult = await neighborhoodService.getNeighborhood(stopData.coordinates);
+          if (neighborhoodResult.success && neighborhoodResult.neighborhood) {
+            stopData.neighborhood = neighborhoodResult.neighborhood;
+          }
+        } catch (error) {
+          // Non-critical error - continue without neighborhood
+          console.warn(`    Warning: Failed to get neighborhood: ${error.message}`);
+        }
+      }
+      
       geocodedStops.push(stopData);
       successCount++;
       const approxFlag = result.isApproximate ? ' (approx)' : '';
-      console.log(`✓ [${result.coordinates[0]}, ${result.coordinates[1]}]${approxFlag}`);
+      const neighborhoodFlag = stopData.neighborhood ? ` [${stopData.neighborhood}]` : '';
+      console.log(`✓ [${result.coordinates[0]}, ${result.coordinates[1]}]${approxFlag}${neighborhoodFlag}`);
     } else {
       geocodedStops.push({
         ...stop,
@@ -165,6 +181,9 @@ async function geocodeStops(stops, city = 'Portland', state = 'OR') {
   }
   
   console.log(`\n✅ Geocoding complete: ${successCount} successful, ${failCount} failed`);
+  
+  // Save neighborhood cache after processing
+  neighborhoodService.saveCache();
   
   return geocodedStops;
 }

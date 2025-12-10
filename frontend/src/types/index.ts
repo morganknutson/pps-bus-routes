@@ -55,4 +55,17 @@ export interface AppState {
   schools: School[];
 }
 
+export interface Neighborhood {
+  name: string;
+  count: number;
+  routes: string[];
+  stops: Array<{
+    routeId: string;
+    routeName: string;
+    stopId: string;
+    stopAddress: string;
+    coordinates: [number, number];
+  }>;
+}
+
 

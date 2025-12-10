@@ -11,7 +11,7 @@ interface RouteListProps {
  * Uses the store directly and shows route selection checkboxes
  */
 export function RouteList({ showBothOption = false, onClearSchool }: RouteListProps = {}) {
-  const { routes, toggleRouteSelection, isLoading, error, selectStop, selectedStop, selectedSchoolId, schools, directionFilter, setDirectionFilter, setSelectedSchool } = useStore();
+  const { routes, toggleRouteSelection, isLoading, error, selectStop, selectedStop, clearSelectedStop, selectedSchoolId, schools, directionFilter, setDirectionFilter, setSelectedSchool } = useStore();
 
   const selectedSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
 
@@ -32,7 +32,12 @@ export function RouteList({ showBothOption = false, onClearSchool }: RouteListPr
       }
     },
     onStopClick: (route, stop, stopNumber) => {
-      selectStop(route, stop, stopNumber);
+      // If clicking the same stop that's already selected, deselect it
+      if (selectedStop?.route.id === route.id && selectedStop?.stop.id === stop.id) {
+        clearSelectedStop();
+      } else {
+        selectStop(route, stop, stopNumber);
+      }
     },
     isRouteSelected: (route) => route.isSelected,
     isStopSelected: (route, stop) => {
@@ -99,25 +104,9 @@ export function RouteList({ showBothOption = false, onClearSchool }: RouteListPr
             position: 'relative',
             width: '100%',
             height: '2.5rem',
-            backgroundColor: '#E0E0E0',
+            backgroundColor: '#F0F0F0',
             borderRadius: '6px',
-            cursor: 'pointer',
             overflow: 'hidden',
-          }}
-          onClick={() => {
-            if (showBothOption) {
-              // Cycle through: Morning -> Afternoon -> Both -> Morning
-              if (directionFilter === 'Morning') {
-                setDirectionFilter('Afternoon');
-              } else if (directionFilter === 'Afternoon') {
-                setDirectionFilter('Both');
-              } else {
-                setDirectionFilter('Morning');
-              }
-            } else {
-              // Toggle between Morning and Afternoon
-              setDirectionFilter(directionFilter === 'Morning' ? 'Afternoon' : 'Morning');
-            }
           }}
         >
           {/* Labels positioned on top */}
@@ -131,6 +120,7 @@ export function RouteList({ showBothOption = false, onClearSchool }: RouteListPr
             zIndex: 2,
           }}>
             <div
+              onClick={() => setDirectionFilter('Morning')}
               style={{
                 flex: 1,
                 display: 'flex',
@@ -138,14 +128,15 @@ export function RouteList({ showBothOption = false, onClearSchool }: RouteListPr
                 justifyContent: 'center',
                 fontSize: '12px',
                 fontWeight: '500',
-                color: directionFilter === 'Morning' ? '#01579B' : 'var(--text-secondary)',
+                color: directionFilter === 'Morning' ? '#000000' : 'var(--text-secondary)',
                 transition: 'color 0.2s ease',
-                pointerEvents: 'none',
+                cursor: 'pointer',
               }}
             >
               Morning
             </div>
             <div
+              onClick={() => setDirectionFilter('Afternoon')}
               style={{
                 flex: 1,
                 display: 'flex',
@@ -153,15 +144,16 @@ export function RouteList({ showBothOption = false, onClearSchool }: RouteListPr
                 justifyContent: 'center',
                 fontSize: '12px',
                 fontWeight: '500',
-                color: directionFilter === 'Afternoon' ? '#1B5E20' : 'var(--text-secondary)',
+                color: directionFilter === 'Afternoon' ? '#000000' : 'var(--text-secondary)',
                 transition: 'color 0.2s ease',
-                pointerEvents: 'none',
+                cursor: 'pointer',
               }}
             >
               Afternoon
             </div>
             {showBothOption && (
               <div
+                onClick={() => setDirectionFilter('Both')}
                 style={{
                   flex: 1,
                   display: 'flex',
@@ -169,9 +161,9 @@ export function RouteList({ showBothOption = false, onClearSchool }: RouteListPr
                   justifyContent: 'center',
                   fontSize: '12px',
                   fontWeight: '500',
-                  color: directionFilter === 'Both' ? '#4ECDC4' : 'var(--text-secondary)',
+                  color: directionFilter === 'Both' ? '#000000' : 'var(--text-secondary)',
                   transition: 'color 0.2s ease',
-                  pointerEvents: 'none',
+                  cursor: 'pointer',
                 }}
               >
                 Both

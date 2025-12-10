@@ -1,88 +1,98 @@
 interface TabBarProps {
-  activeTab: 'schools' | 'routes';
-  onTabChange: (tab: 'schools' | 'routes') => void;
+  activeTab: 'schools' | 'routes' | 'neighborhoods';
+  onTabChange: (tab: 'schools' | 'routes' | 'neighborhoods') => void;
 }
 
 export function TabBar({ activeTab, onTabChange }: TabBarProps) {
+  const isSchoolsActive = activeTab === 'schools';
+  const isRoutesActive = activeTab === 'routes' || activeTab === 'neighborhoods';
+
   return (
-    <div style={{
-      display: 'flex',
-      borderBottom: '1px solid var(--border-color)',
-      backgroundColor: 'var(--bg-primary)',
-      padding: 0,
-      transition: 'background-color 0.3s ease, border-color 0.3s ease',
-      width: '100%',
-    }}>
-      <button
-        onClick={() => onTabChange('schools')}
-        style={{
-          flex: 1,
-          padding: '1.25rem 1rem',
-          border: 'none',
-          borderBottom: activeTab === 'schools' ? '2px solid var(--text-primary)' : '2px solid transparent',
-          backgroundColor: 'transparent',
-          color: activeTab === 'schools' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-          fontWeight: activeTab === 'schools' ? '600' : '500',
-          fontSize: '14px',
-          cursor: 'pointer',
-          transition: 'all 0.2s',
-          marginBottom: '-2px',
-        }}
-        onMouseEnter={(e) => {
-          if (activeTab !== 'schools') {
-            e.currentTarget.style.color = 'var(--text-secondary)';
-            e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (activeTab !== 'schools') {
-            e.currentTarget.style.color = 'var(--text-tertiary)';
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }
-        }}
-      >
-        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '2.5rem',
+        backgroundColor: '#F0F0F0',
+        borderRadius: '6px',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Labels positioned on top */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: 'flex',
+        zIndex: 2,
+      }}>
+        <div
+          onClick={() => onTabChange('schools')}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            fontSize: '12px',
+            fontWeight: '500',
+            color: isSchoolsActive ? '#000000' : 'var(--text-secondary)',
+            transition: 'color 0.2s ease',
+            cursor: 'pointer',
+          }}
+        >
           <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
           Schools
-        </span>
-      </button>
-      <button
-        onClick={() => onTabChange('routes')}
+        </div>
+        <div
+          onClick={() => onTabChange(activeTab === 'neighborhoods' ? 'neighborhoods' : 'routes')}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            fontSize: '12px',
+            fontWeight: '500',
+            color: isRoutesActive ? '#000000' : 'var(--text-secondary)',
+            transition: 'color 0.2s ease',
+            cursor: 'pointer',
+          }}
+        >
+          {activeTab === 'neighborhoods' ? (
+            <>
+              <i className="fas fa-map-marker-alt" style={{ fontSize: '12px' }}></i>
+              Neighborhoods
+            </>
+          ) : (
+            <>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 12h18M3 6h18M3 18h18"></path>
+                <circle cx="6" cy="12" r="2"></circle>
+                <circle cx="18" cy="12" r="2"></circle>
+              </svg>
+              Routes
+            </>
+          )}
+        </div>
+      </div>
+      {/* White sliding button beneath labels */}
+      <div
         style={{
-          flex: 1,
-          padding: '1.25rem 1rem',
-          border: 'none',
-          borderBottom: activeTab === 'routes' ? '2px solid var(--text-primary)' : '2px solid transparent',
-          backgroundColor: 'transparent',
-          color: activeTab === 'routes' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-          fontWeight: activeTab === 'routes' ? '600' : '500',
-          fontSize: '14px',
-          cursor: 'pointer',
-          transition: 'all 0.2s',
-          marginBottom: '-2px',
+          position: 'absolute',
+          top: '0.25rem',
+          bottom: '0.25rem',
+          left: isSchoolsActive ? '0.25rem' : 'calc(50% + 0.25rem)',
+          width: 'calc(50% - 0.5rem)',
+          backgroundColor: 'white',
+          borderRadius: '4px',
+          transition: 'left 0.3s ease',
+          zIndex: 1,
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
         }}
-        onMouseEnter={(e) => {
-          if (activeTab !== 'routes') {
-            e.currentTarget.style.color = 'var(--text-secondary)';
-            e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (activeTab !== 'routes') {
-            e.currentTarget.style.color = 'var(--text-tertiary)';
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }
-        }}
-      >
-        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 12h18M3 6h18M3 18h18"></path>
-            <circle cx="6" cy="12" r="2"></circle>
-            <circle cx="18" cy="12" r="2"></circle>
-          </svg>
-          Routes
-        </span>
-      </button>
+      />
     </div>
   );
 }

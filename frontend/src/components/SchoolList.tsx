@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { School } from '../types';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 
@@ -111,23 +111,63 @@ export function SchoolList({ schools, selectedSchoolId, onSelectSchool, enableEd
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Search */}
       <div style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
-        <input
-          type="text"
-          placeholder="Search schools..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            border: '1px solid var(--border-color)',
-            borderRadius: '4px',
-            fontSize: '14px',
-            boxSizing: 'border-box',
-            backgroundColor: 'var(--bg-primary)',
-            color: 'var(--text-primary)',
-            transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
-          }}
-        />
+        <div style={{ position: 'relative' }}>
+          <input
+            type="text"
+            placeholder="Search schools..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              paddingRight: searchTerm ? '2.5rem' : '0.75rem',
+              border: '1px solid var(--border-color)',
+              borderRadius: '4px',
+              fontSize: '14px',
+              boxSizing: 'border-box',
+              backgroundColor: 'var(--bg-primary)',
+              color: 'var(--text-primary)',
+              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, padding-right 0.2s ease',
+            }}
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              style={{
+                position: 'absolute',
+                right: '8px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '20px',
+                height: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '16px',
+                lineHeight: '1',
+                backgroundColor: 'transparent',
+                color: 'var(--text-tertiary)',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                padding: 0,
+                flexShrink: 0,
+                transition: 'background-color 0.2s ease, color 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                e.currentTarget.style.color = 'var(--text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = 'var(--text-tertiary)';
+              }}
+              aria-label="Clear search"
+            >
+              ×
+            </button>
+          )}
+        </div>
       </div>
 
       {/* School list */}

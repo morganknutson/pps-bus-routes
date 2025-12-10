@@ -1,3 +1,5 @@
+import { autocompleteCache } from '../utils/autocompleteCache';
+
 const API_BASE = '/api';
 
 export async function fetchFolderFiles(folderId: string) {
@@ -74,13 +76,36 @@ export async function batchGeocode(addresses: string[], city = 'Portland', state
   }
 }
 
-export async function autocompleteAddress(query: string, city = 'Portland', state = 'OR') {
+export async function autocompleteAddress(
+  query: string, 
+  city = 'Portland', 
+  state = 'OR',
+  signal?: AbortSignal
+) {
+  // Check cache first
+  const cached = autocompleteCache.get(query, city, state);
+  if (cached !== null) {
+    console.log(`[API] Cache hit for autocomplete: "${query}"`);
+    return { suggestions: cached };
+  }
+
   const params = new URLSearchParams({ q: query, city, state });
-  const response = await fetch(`${API_BASE}/geocode/autocomplete?${params}`);
+  const response = await fetch(`${API_BASE}/geocode/autocomplete?${params}`, {
+    signal // Support request cancellation
+  });
+  
   if (!response.ok) {
     throw new Error('Failed to fetch autocomplete suggestions');
   }
-  return response.json();
+  
+  const data = await response.json();
+  
+  // Cache the results
+  if (data.suggestions && data.suggestions.length > 0) {
+    autocompleteCache.set(query, data.suggestions, city, state);
+  }
+  
+  return data;
 }
 
 export async function reverseGeocode(lat: number, lng: number) {
@@ -93,6 +118,53 @@ export async function reverseGeocode(lat: number, lng: number) {
   });
   if (!response.ok) {
     throw new Error('Failed to reverse geocode coordinates');
+  }
+  return response.json();
+}
+
+// Neighborhood API methods
+export async function getNeighborhoodFromCoordinates(coordinates: [number, number]) {
+  const response = await fetch(`${API_BASE}/neighborhoods/from-coordinates`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ coordinates }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to get neighborhood from coordinates');
+  }
+  return response.json();
+}
+
+export async function batchGetNeighborhoods(coordinatesList: [number, number][]) {
+  const response = await fetch(`${API_BASE}/neighborhoods/batch`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ coordinatesList }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to batch get neighborhoods');
+  }
+  return response.json();
+}
+
+export async function getNeighborhoodsFromRoutes(schoolId?: string | null) {
+  const params = schoolId ? `?schoolId=${encodeURIComponent(schoolId)}` : '';
+  const response = await fetch(`${API_BASE}/neighborhoods/from-routes${params}`);
+  if (!response.ok) {
+    throw new Error('Failed to get neighborhoods from routes');
+  }
+  return response.json();
+}
+
+export async function getNeighborhoodsList(schoolId?: string | null) {
+  const params = schoolId ? `?schoolId=${encodeURIComponent(schoolId)}` : '';
+  const response = await fetch(`${API_BASE}/neighborhoods/list${params}`);
+  if (!response.ok) {
+    throw new Error('Failed to get neighborhoods list');
   }
   return response.json();
 }

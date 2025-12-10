@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, Polyline, Marker, ZoomControl } from 'react-leaflet';
+import { MapContainer, Polyline, Marker, Popup, ZoomControl } from 'react-leaflet';
 import L from 'leaflet';
 import { useStore } from '../store/useStore';
 import { fetchRouteForStops } from '../services/routing';
-import { formatStreetName } from '../utils/formatAddress';
-import type { Route, Stop } from '../types';
-import { createHomeIcon } from '../utils/fontAwesomeIcons';
+import { formatStreetName, extractStreetNames, expandAddressForGeocoding } from '../utils/formatAddress';
+import { createHomeIcon, createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { createSchoolIcon, createNumberedIcon } from '../utils/markerIcons';
+import { geocodeAddress } from '../services/api';
+import { toLeafletPosition, validateLngLat, formatCoordinates } from '../utils/coordinates';
 import { DarkModeTileLayer } from './DarkModeTileLayer';
 import 'leaflet/dist/leaflet.css';
 
 const homeIcon = createHomeIcon();
+const defaultMarkerIcon = createDefaultMarkerIcon();
 
 interface RouteGeometry {
   [routeId: string]: [number, number][] | null; // null means still loading
@@ -18,6 +20,8 @@ interface RouteGeometry {
 
 interface MapViewProps {
   editingMode?: boolean;
+  enableStreetHighlighting?: boolean;
+  enableStreetPins?: boolean; // Enable the drop pins feature (admin only)
 }
 
 interface UndoStep {
@@ -26,14 +30,38 @@ interface UndoStep {
   coordinates: [number, number];
 }
 
-export function MapView({ editingMode = false }: MapViewProps) {
-  const { routes, homeAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, updateStopCoordinates, directionFilter } = useStore();
+interface HighlightedStreet {
+  name: string;
+  geometry: [number, number][]; // [lat, lng][]
+  bounds: {
+    north: number;
+    south: number;
+    east: number;
+    west: number;
+  };
+}
+
+interface StreetMarker {
+  streetName: string;
+  coordinates: [number, number]; // [lng, lat]
+}
+
+export function MapView({ editingMode = false, enableStreetHighlighting = false, enableStreetPins = false }: MapViewProps) {
+  const { routes, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, updateStopCoordinates, directionFilter } = useStore();
   const mapRef = useRef<L.Map | null>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
   const [undoHistory, setUndoHistory] = useState<UndoStep[]>([]);
   const routeRecalcTimeoutRef = useRef<{ [routeId: string]: ReturnType<typeof setTimeout> }>({});
   const previousHomeAddressRef = useRef<typeof homeAddress>(undefined);
   const hasZoomedToAddressRef = useRef<boolean>(false);
+  const previousLookupAddressRef = useRef<{ address: string; coordinates: [number, number] } | null>(null);
+  const hasZoomedToLookupAddressRef = useRef<boolean>(false);
+  const lastAddressZoomTimeRef = useRef<number>(0);
+  const [highlightedStreet, setHighlightedStreet] = useState<HighlightedStreet | null>(null);
+  const [loadingStreet, setLoadingStreet] = useState<string | null>(null);
+  const [streetError, setStreetError] = useState<string | null>(null);
+  const [streetMarkers, setStreetMarkers] = useState<StreetMarker[]>([]);
+  const [loadingStreetPins, setLoadingStreetPins] = useState<boolean>(false);
 
   // Get selected routes, filtered by direction
   const selectedRoutes = routes.filter(route => {
@@ -42,15 +70,30 @@ export function MapView({ editingMode = false }: MapViewProps) {
     return route.direction === directionFilter;
   });
 
-  // Zoom to home address only when it's first added
+  // Zoom to home address only when it's first added or coordinates change
   useEffect(() => {
     // Check if address was just added (changed from undefined to a value)
+    // or if coordinates actually changed (not just object reference)
+    const prevCoords = previousHomeAddressRef.current?.coordinates;
+    const currentCoords = homeAddress?.coordinates;
+    const coordinatesChanged = prevCoords && currentCoords && 
+      (prevCoords[0] !== currentCoords[0] || prevCoords[1] !== currentCoords[1]);
     const wasJustAdded = !previousHomeAddressRef.current && homeAddress;
     
-    if (wasJustAdded && mapRef.current && homeAddress && !hasZoomedToAddressRef.current) {
-      const [lng, lat] = homeAddress.coordinates;
-      mapRef.current.setView([lat, lng], 16, { animate: true });
+    // If coordinates changed, reset the zoom flag so we can zoom to the new address
+    if (coordinatesChanged) {
+      hasZoomedToAddressRef.current = false;
+    }
+    
+    if ((wasJustAdded || coordinatesChanged) && mapRef.current && homeAddress && !hasZoomedToAddressRef.current) {
+      if (!validateLngLat(homeAddress.coordinates)) {
+        console.error('[MapView] Invalid home address coordinates:', homeAddress.coordinates);
+        return;
+      }
+      const position = toLeafletPosition(homeAddress.coordinates);
+      mapRef.current.setView(position, 16, { animate: true });
       hasZoomedToAddressRef.current = true;
+      lastAddressZoomTimeRef.current = Date.now();
     }
     
     // Update the ref to track previous value
@@ -61,6 +104,42 @@ export function MapView({ editingMode = false }: MapViewProps) {
       hasZoomedToAddressRef.current = false;
     }
   }, [homeAddress]);
+
+  // Zoom to lookup address only when it actually changes (different coordinates)
+  useEffect(() => {
+    if (lookupAddress && mapRef.current) {
+      if (!validateLngLat(lookupAddress.coordinates)) {
+        console.error('[MapView] Invalid lookup address coordinates:', lookupAddress.coordinates);
+        return;
+      }
+      
+      // Check if coordinates actually changed (compare by value, not object reference)
+      const prevCoords = previousLookupAddressRef.current?.coordinates;
+      const currentCoords = lookupAddress.coordinates;
+      const isNewAddress = !prevCoords || 
+        prevCoords[0] !== currentCoords[0] || 
+        prevCoords[1] !== currentCoords[1];
+      
+      // If it's a new address, reset the zoom flag so we can zoom to it
+      if (isNewAddress) {
+        hasZoomedToLookupAddressRef.current = false;
+      }
+      
+      // Only zoom if it's a new address or we haven't zoomed to this address yet
+      if (isNewAddress && !hasZoomedToLookupAddressRef.current) {
+        const position = toLeafletPosition(lookupAddress.coordinates);
+        mapRef.current.setView(position, 16, { animate: true });
+        hasZoomedToLookupAddressRef.current = true;
+        lastAddressZoomTimeRef.current = Date.now();
+      }
+      
+      previousLookupAddressRef.current = lookupAddress;
+    } else {
+      // Reset zoom flag when lookupAddress is cleared
+      hasZoomedToLookupAddressRef.current = false;
+      previousLookupAddressRef.current = null;
+    }
+  }, [lookupAddress]);
 
   // Function to recalculate route geometry
   const recalculateRouteGeometry = async (routeId: string) => {
@@ -85,8 +164,11 @@ export function MapView({ editingMode = false }: MapViewProps) {
     try {
       // Convert stops to [lng, lat] format for routing service
       const stopCoordinates: [number, number][] = stopsWithCoords.map(stop => {
-        const [lng, lat] = stop.coordinates!;
-        return [lng, lat];
+        if (!validateLngLat(stop.coordinates)) {
+          console.error('[MapView] Invalid stop coordinates:', stop.coordinates);
+          throw new Error(`Invalid coordinates for stop ${stop.id}`);
+        }
+        return stop.coordinates!;
       });
 
       // Fetch route following streets
@@ -100,11 +182,14 @@ export function MapView({ editingMode = false }: MapViewProps) {
       }
     } catch (error) {
       console.error(`[MapView] ❌ Error fetching route for ${route.name}:`, error);
-      // Fallback to straight line
-      const fallbackCoordinates = stopsWithCoords.map(stop => {
-        const [lng, lat] = stop.coordinates!;
-        return [lat, lng] as [number, number];
-      });
+        // Fallback to straight line
+        const fallbackCoordinates = stopsWithCoords.map(stop => {
+          if (!validateLngLat(stop.coordinates)) {
+            console.error('[MapView] Invalid stop coordinates for fallback:', stop.coordinates);
+            throw new Error(`Invalid coordinates for stop ${stop.id}`);
+          }
+          return toLeafletPosition(stop.coordinates!);
+        });
       console.warn(`[MapView] ⚠️  Using straight-line fallback for ${route.name}`);
       setRouteGeometries(prevState => ({ ...prevState, [routeId]: fallbackCoordinates }));
     }
@@ -154,16 +239,26 @@ export function MapView({ editingMode = false }: MapViewProps) {
 
   // Calculate bounds to fit all routes when coordinates are available
   // Only auto-fit if no stop is selected (to allow manual zooming)
+  // Don't auto-fit if we just zoomed to an address (within last 2 seconds)
   useEffect(() => {
+    // Don't fit bounds if we just zoomed to an address (give address zoom priority)
+    const timeSinceAddressZoom = Date.now() - lastAddressZoomTimeRef.current;
+    if (timeSinceAddressZoom < 2000) {
+      return;
+    }
+    
     if (mapRef.current && selectedRoutes.length > 0 && !selectedStop) {
       const allCoordinates: [number, number][] = [];
 
       selectedRoutes.forEach(route => {
         route.stops.forEach(stop => {
           if (stop.coordinates) {
+            if (!validateLngLat(stop.coordinates)) {
+              console.warn('[MapView] Invalid stop coordinates, skipping:', stop.coordinates);
+              return;
+            }
             // Convert [lng, lat] to [lat, lng] for Leaflet
-            const [lng, lat] = stop.coordinates;
-            allCoordinates.push([lat, lng]);
+            allCoordinates.push(toLeafletPosition(stop.coordinates));
           }
         });
       });
@@ -179,8 +274,12 @@ export function MapView({ editingMode = false }: MapViewProps) {
   // Zoom to selected stop when it changes
   useEffect(() => {
     if (mapRef.current && selectedStop && selectedStop.stop.coordinates) {
-      const [lng, lat] = selectedStop.stop.coordinates;
-      mapRef.current.setView([lat, lng], 18, { animate: true });
+      if (!validateLngLat(selectedStop.stop.coordinates)) {
+        console.error('[MapView] Invalid selected stop coordinates:', selectedStop.stop.coordinates);
+        return;
+      }
+      const position = toLeafletPosition(selectedStop.stop.coordinates);
+      mapRef.current.setView(position, 18, { animate: true });
     }
     
     // Clear undo history when a different stop is selected
@@ -195,7 +294,185 @@ export function MapView({ editingMode = false }: MapViewProps) {
       // Clear all history when no stop is selected
       setUndoHistory([]);
     }
+    
+    // Clear highlighted street when stop changes
+    setHighlightedStreet(null);
+    setLoadingStreet(null);
+    setStreetError(null);
+    // Clear street markers when stop changes
+    setStreetMarkers([]);
   }, [selectedStop?.route.id, selectedStop?.stop.id]);
+
+  // Zoom to highlighted street bounds (only if feature is enabled)
+  useEffect(() => {
+    if (enableStreetHighlighting && mapRef.current && highlightedStreet) {
+      const bounds = L.latLngBounds(
+        [highlightedStreet.bounds.south, highlightedStreet.bounds.west],
+        [highlightedStreet.bounds.north, highlightedStreet.bounds.east]
+      );
+      mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
+    }
+  }, [highlightedStreet, enableStreetHighlighting]);
+
+  // Function to create a simple pin icon for street markers
+  const createStreetPinIcon = (color: string = '#FF6B6B'): L.DivIcon => {
+    const iconSize = 20;
+    return L.divIcon({
+      className: 'street-pin-marker',
+      html: `
+        <div style="
+          width: ${iconSize}px;
+          height: ${iconSize}px;
+          border-radius: 50%;
+          background-color: ${color};
+          border: 2px solid white;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        "></div>
+      `,
+      iconSize: [iconSize, iconSize],
+      iconAnchor: [iconSize / 2, iconSize / 2],
+      popupAnchor: [0, -iconSize],
+    });
+  };
+
+  // Function to drop pins for each street in an intersection
+  const handleDropStreetPins = async () => {
+    if (!selectedStop?.stop.address) return;
+    
+    const originalAddress = selectedStop.stop.address;
+    console.log('[MapView] Original address:', originalAddress);
+    
+    const streets = extractStreetNames(originalAddress);
+    console.log('[MapView] Extracted streets:', streets);
+    
+    if (streets.length === 0) return;
+    
+    setLoadingStreetPins(true);
+    const newMarkers: StreetMarker[] = [];
+    
+    try {
+      // Geocode each street
+      for (let i = 0; i < streets.length; i++) {
+        const streetName = streets[i];
+        console.log(`[MapView] Processing street ${i + 1}: "${streetName}"`);
+        
+        const expandedStreet = expandAddressForGeocoding(streetName);
+        console.log(`[MapView] Expanded street: "${expandedStreet}"`);
+        
+        const fullAddress = `${expandedStreet}, Portland, OR`;
+        console.log(`[MapView] Full geocoding query: "${fullAddress}"`);
+        
+        try {
+          const result = await geocodeAddress(fullAddress, 'Portland', 'OR');
+          console.log(`[MapView] Geocoding result for "${streetName}":`, {
+            success: !!result.coordinates,
+            coordinates: result.coordinates,
+            displayName: result.displayName
+          });
+          
+          if (result.coordinates) {
+            // Validate coordinates format
+            if (!validateLngLat(result.coordinates)) {
+              console.error(`[MapView] Invalid coordinates returned for "${streetName}":`, result.coordinates);
+              console.error(`[MapView] Geocoding query was: "${fullAddress}"`);
+              console.error(`[MapView] Result displayName: "${result.displayName}"`);
+              // Continue with other streets even if one has invalid coordinates
+              continue;
+            }
+            
+            console.log(`[MapView] ✅ Valid coordinates for "${streetName}": ${formatCoordinates(result.coordinates)}`);
+            newMarkers.push({
+              streetName: streetName,
+              coordinates: result.coordinates, // [lng, lat] - validated
+            });
+          }
+        } catch (error) {
+          console.error(`[MapView] Failed to geocode street "${streetName}":`, error);
+          // Continue with other streets even if one fails
+        }
+      }
+      
+      setStreetMarkers(newMarkers);
+      
+      // Zoom to fit all markers if we have any
+      if (newMarkers.length > 0 && mapRef.current) {
+        const bounds = L.latLngBounds(
+          newMarkers.map(marker => {
+            if (!validateLngLat(marker.coordinates)) {
+              console.error('[MapView] Invalid marker coordinates:', marker.coordinates);
+              throw new Error(`Invalid coordinates for marker ${marker.streetName}`);
+            }
+            return toLeafletPosition(marker.coordinates);
+          })
+        );
+        mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
+      }
+    } catch (error) {
+      console.error('[MapView] Error dropping street pins:', error);
+    } finally {
+      setLoadingStreetPins(false);
+    }
+  };
+
+  // Function to fetch street geometry (only enabled if enableStreetHighlighting is true)
+  const handleStreetClick = async (streetName: string) => {
+    if (!enableStreetHighlighting) return; // Feature disabled
+    if (loadingStreet) return; // Prevent multiple simultaneous requests
+    if (!selectedStop?.stop.coordinates) {
+      console.warn('[MapView] No stop coordinates available for street highlighting');
+      return;
+    }
+    
+    setLoadingStreet(streetName);
+    setStreetError(null);
+    setHighlightedStreet(null);
+    
+    try {
+      console.log(`[MapView] Fetching geometry for street: ${streetName}`);
+      
+      // Pass stop coordinates so we can find the correct street segment
+      if (!validateLngLat(selectedStop.stop.coordinates)) {
+        console.error('[MapView] Invalid stop coordinates for street geometry:', selectedStop.stop.coordinates);
+        throw new Error('Invalid stop coordinates');
+      }
+      
+      const response = await fetch('/api/streets/geometry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          streetName,
+          city: 'Portland',
+          state: 'OR',
+          stopCoordinates: selectedStop.stop.coordinates, // [lng, lat] format
+        }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to fetch street geometry');
+      }
+      
+      const data = await response.json();
+      
+      if (data.success && data.geometry) {
+        console.log(`[MapView] ✅ Street geometry loaded: ${data.geometry.length} points`);
+        setHighlightedStreet({
+          name: streetName,
+          geometry: data.geometry,
+          bounds: data.bounds,
+        });
+      } else {
+        throw new Error(data.error || 'Street not found');
+      }
+    } catch (error: any) {
+      console.error(`[MapView] ❌ Error fetching street geometry:`, error);
+      setStreetError(error.message || 'Failed to load street');
+    } finally {
+      setLoadingStreet(null);
+    }
+  };
 
   // Default center (Portland, OR)
   const defaultCenter: [number, number] = [45.5152, -122.6784];
@@ -220,6 +497,23 @@ export function MapView({ editingMode = false }: MapViewProps) {
         />
       )}
 
+      {/* Lookup address marker (temporary) */}
+      {lookupAddress && (() => {
+        if (!validateLngLat(lookupAddress.coordinates)) {
+          console.error('[MapView] Invalid lookup address coordinates:', lookupAddress.coordinates);
+          return null;
+        }
+        const position = toLeafletPosition(lookupAddress.coordinates);
+        return (
+          <Marker 
+            position={position} 
+            icon={defaultMarkerIcon}
+          >
+            <Popup>{lookupAddress.address}</Popup>
+          </Marker>
+        );
+      })()}
+
       {/* Route lines and stop dots */}
       {selectedRoutes.map((route) => {
         // Get stops with coordinates in order, excluding skipped stops (e.g., CAB LOAD ZONE)
@@ -235,14 +529,20 @@ export function MapView({ editingMode = false }: MapViewProps) {
         } else if (routeGeometry === null) {
           // Still loading - show straight line as placeholder
           routeCoordinates = stopsWithCoords.map(stop => {
-            const [lng, lat] = stop.coordinates!;
-            return [lat, lng] as [number, number];
+            if (!validateLngLat(stop.coordinates)) {
+              console.error('[MapView] Invalid stop coordinates:', stop.coordinates);
+              throw new Error(`Invalid coordinates for stop ${stop.id}`);
+            }
+            return toLeafletPosition(stop.coordinates!);
           });
         } else {
           // Not loaded yet - show straight line
           routeCoordinates = stopsWithCoords.map(stop => {
-            const [lng, lat] = stop.coordinates!;
-            return [lat, lng] as [number, number];
+            if (!validateLngLat(stop.coordinates)) {
+              console.error('[MapView] Invalid stop coordinates:', stop.coordinates);
+              throw new Error(`Invalid coordinates for stop ${stop.id}`);
+            }
+            return toLeafletPosition(stop.coordinates!);
           });
         }
 
@@ -259,11 +559,14 @@ export function MapView({ editingMode = false }: MapViewProps) {
             )}
 
             {/* Stop markers with numbers */}
-            {stopsWithCoords.map((stop, index) => {
+            {stopsWithCoords.map((stop) => {
               // Convert [lng, lat] to [lat, lng] for Leaflet
-              const [lng, lat] = stop.coordinates!;
-              const position: [number, number] = [lat, lng];
-              const isSelected = selectedStop?.stop.id === stop.id && selectedStop?.route.id === route.id;
+              if (!validateLngLat(stop.coordinates)) {
+                console.error('[MapView] Invalid stop coordinates, skipping marker:', stop.coordinates);
+              return null;
+            }
+            const position = toLeafletPosition(stop.coordinates!);
+            const isSelected = selectedStop?.stop.id === stop.id && selectedStop?.route.id === route.id;
               
               // Determine stop number and icon
               let stopNumber: number;
@@ -303,8 +606,19 @@ export function MapView({ editingMode = false }: MapViewProps) {
                       dragend: async (e) => {
                         const marker = e.target;
                         const latlng = marker.getLatLng();
+                        // Leaflet gives us [lat, lng], convert to internal [lng, lat] format
                         const newCoords: [number, number] = [latlng.lng, latlng.lat];
+                        if (!validateLngLat(newCoords)) {
+                          console.error('[MapView] Invalid new coordinates from drag:', newCoords);
+                          marker.setLatLng(position);
+                          alert('Invalid coordinates. Please try again.');
+                          return;
+                        }
                         const oldCoords: [number, number] = stop.coordinates!;
+                        if (!validateLngLat(oldCoords)) {
+                          console.error('[MapView] Invalid old coordinates:', oldCoords);
+                          return;
+                        }
                         
                         // Add to undo history (keep max 5 steps)
                         setUndoHistory(prev => {
@@ -361,6 +675,36 @@ export function MapView({ editingMode = false }: MapViewProps) {
           </div>
         );
       })}
+
+      {/* Highlighted street polyline - only show if feature is enabled */}
+      {enableStreetHighlighting && highlightedStreet && highlightedStreet.geometry.length > 0 && (
+        <Polyline
+          positions={highlightedStreet.geometry}
+          color="#FFD700"
+          weight={6}
+          opacity={0.4}
+          dashArray="0"
+        />
+      )}
+
+      {/* Street intersection pins */}
+      {streetMarkers.map((marker, index) => {
+        if (!validateLngLat(marker.coordinates)) {
+          console.error('[MapView] Invalid street marker coordinates, skipping:', marker.coordinates);
+          return null;
+        }
+        const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8'];
+        const color = colors[index % colors.length];
+        const position = toLeafletPosition(marker.coordinates);
+        
+        return (
+          <Marker
+            key={`street-${index}-${marker.streetName}`}
+            position={position}
+            icon={createStreetPinIcon(color)}
+          />
+        );
+      })}
       </MapContainer>
 
       {/* Stop info overlay at bottom */}
@@ -409,14 +753,193 @@ export function MapView({ editingMode = false }: MapViewProps) {
                 </div>
               )}
               <div style={{ fontSize: '15px', fontWeight: '500', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
-                {selectedStop.stop.isSchoolStop && selectedStop.stop.schoolName 
-                  ? selectedStop.stop.schoolName 
-                  : formatStreetName(selectedStop.stop.address)}
+                {selectedStop.stop.isSchoolStop && selectedStop.stop.schoolName ? (
+                  selectedStop.stop.schoolName
+                ) : enableStreetHighlighting ? (
+                  <div>
+                    {(() => {
+                      const address = selectedStop.stop.address;
+                      const streets = extractStreetNames(address);
+                      
+                      if (streets.length === 1) {
+                        // Single street - make it clickable
+                        const streetName = streets[0];
+                        const isHighlighted = highlightedStreet?.name === streetName;
+                        const isLoading = loadingStreet === streetName;
+                        
+                        return (
+                          <span
+                            onClick={() => !isLoading && handleStreetClick(streetName)}
+                            style={{
+                              cursor: isLoading ? 'not-allowed' : 'pointer',
+                              textDecoration: isLoading ? 'none' : 'underline',
+                              color: isHighlighted ? '#FFD700' : isLoading ? 'var(--text-tertiary)' : 'var(--text-primary)',
+                              fontWeight: isHighlighted ? 'bold' : 'normal',
+                              opacity: isLoading ? 0.6 : 1,
+                              transition: 'all 0.2s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!isLoading) {
+                                e.currentTarget.style.color = '#4ECDC4';
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!isLoading) {
+                                e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)';
+                              }
+                            }}
+                            title={isLoading ? 'Loading street geometry...' : 'Click to highlight street on map'}
+                          >
+                            {formatStreetName(streetName)}
+                            {isLoading && (
+                              <span style={{ marginLeft: '0.5rem', display: 'inline-block' }}>
+                                <span style={{
+                                  display: 'inline-block',
+                                  width: '12px',
+                                  height: '12px',
+                                  border: '2px solid var(--text-tertiary)',
+                                  borderTopColor: 'transparent',
+                                  borderRadius: '50%',
+                                  animation: 'spin 0.8s linear infinite',
+                                }} />
+                              </span>
+                            )}
+                          </span>
+                        );
+                      } else if (streets.length > 1) {
+                        // Multiple streets - make each clickable
+                        return (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                            {streets.map((streetName, index) => {
+                              const isHighlighted = highlightedStreet?.name === streetName;
+                              const isLoading = loadingStreet === streetName;
+                              
+                              return (
+                                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                  {index > 0 && (
+                                    <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>&</span>
+                                  )}
+                                  {isLoading ? (
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)' }}>
+                                      <span style={{
+                                        display: 'inline-block',
+                                        width: '12px',
+                                        height: '12px',
+                                        border: '2px solid var(--text-tertiary)',
+                                        borderTopColor: 'transparent',
+                                        borderRadius: '50%',
+                                        animation: 'spin 0.8s linear infinite',
+                                      }} />
+                                      <span style={{ fontSize: '14px' }}>Finding street geometry...</span>
+                                    </div>
+                                  ) : (
+                                    <span
+                                      onClick={() => handleStreetClick(streetName)}
+                                      style={{
+                                        cursor: 'pointer',
+                                        textDecoration: 'underline',
+                                        color: isHighlighted ? '#FFD700' : 'var(--text-primary)',
+                                        fontWeight: isHighlighted ? 'bold' : 'normal',
+                                        transition: 'all 0.2s ease',
+                                      }}
+                                      onMouseEnter={(e) => {
+                                        e.currentTarget.style.color = '#4ECDC4';
+                                      }}
+                                      onMouseLeave={(e) => {
+                                        e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)';
+                                      }}
+                                      title="Click to highlight street on map"
+                                    >
+                                      {formatStreetName(streetName)}
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      } else {
+                        // Fallback: just show formatted address
+                        return formatStreetName(address);
+                      }
+                    })()}
+                  </div>
+                ) : (
+                  formatStreetName(selectedStop.stop.address)
+                )}
               </div>
+              {enableStreetHighlighting && streetError && (
+                <div style={{ 
+                  fontSize: '12px', 
+                  color: '#f44336', 
+                  marginTop: '0.25rem',
+                  padding: '0.5rem',
+                  backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                  borderRadius: '4px',
+                }}>
+                  ⚠️ {streetError}
+                </div>
+              )}
               {selectedStop.stop.time && (
                 <div style={{ fontSize: '14px', color: 'var(--text-tertiary)' }}>
                   {selectedStop.stop.time}
                 </div>
+              )}
+              {/* Drop pins button for intersections (admin only) */}
+              {enableStreetPins && !selectedStop.stop.isSchoolStop && extractStreetNames(selectedStop.stop.address).length > 0 && (
+                <button
+                  onClick={handleDropStreetPins}
+                  disabled={loadingStreetPins}
+                  style={{
+                    marginTop: '0.75rem',
+                    width: '100%',
+                    background: loadingStreetPins ? 'var(--text-tertiary)' : '#4ECDC4',
+                    border: 'none',
+                    fontSize: '14px',
+                    cursor: loadingStreetPins ? 'not-allowed' : 'pointer',
+                    color: 'white',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '4px',
+                    fontWeight: '500',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    opacity: loadingStreetPins ? 0.6 : 1,
+                    transition: 'background-color 0.2s ease, opacity 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!loadingStreetPins) {
+                      e.currentTarget.style.backgroundColor = '#3db8a8';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!loadingStreetPins) {
+                      e.currentTarget.style.backgroundColor = '#4ECDC4';
+                    }
+                  }}
+                  title="Drop pins on each street in this intersection"
+                >
+                  {loadingStreetPins ? (
+                    <>
+                      <span style={{
+                        display: 'inline-block',
+                        width: '14px',
+                        height: '14px',
+                        border: '2px solid white',
+                        borderTopColor: 'transparent',
+                        borderRadius: '50%',
+                        animation: 'spin 0.8s linear infinite',
+                      }} />
+                      <span>Dropping pins...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>📍</span>
+                      <span>Drop Pins on Streets</span>
+                    </>
+                  )}
+                </button>
               )}
             </div>
             <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -517,6 +1040,13 @@ export function MapView({ editingMode = false }: MapViewProps) {
           </div>
         </div>
       )}
+      
+      {/* Loading spinner animation */}
+      <style>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { batchGeocode } from '../services/api';
+import { validateLngLat } from '../utils/coordinates';
 
 /**
  * Hook to geocode all stops for all routes
@@ -201,11 +202,16 @@ export function useGeocodeStops() {
               if (stopInfo && result && result.success && result.coordinates) {
                 const coords = result.coordinates;
                 if (Array.isArray(coords) && coords.length === 2) {
-                  updateStopCoordinates(route.id, stopInfo.stopId, coords);
-                  processedStopsRef.current.add(`${route.id}-${stopInfo.stopId}`);
-                  geocodedCount++;
-                  batchGeocoded++;
-                  console.log(`✓ Geocoded: ${stopInfo.address} -> [${coords[0]}, ${coords[1]}]`);
+                  // Validate coordinates before updating
+                  if (validateLngLat(coords)) {
+                    updateStopCoordinates(route.id, stopInfo.stopId, coords);
+                    processedStopsRef.current.add(`${route.id}-${stopInfo.stopId}`);
+                    geocodedCount++;
+                    batchGeocoded++;
+                    console.log(`✓ Geocoded: ${stopInfo.address} -> [${coords[0]}, ${coords[1]}]`);
+                  } else {
+                    console.error('[useGeocodeStops] Invalid coordinates from geocoding:', coords);
+                  }
                 } else {
                   console.warn(`Invalid coordinates for ${stopInfo.address}:`, coords);
                 }

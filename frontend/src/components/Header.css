@@ -52,6 +52,12 @@
   text-decoration: underline;
 }
 
+.nav-link-active {
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 .dark-mode-toggle {
   background: none;
   border: none;

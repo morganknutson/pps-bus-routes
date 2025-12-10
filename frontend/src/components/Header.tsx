@@ -5,7 +5,12 @@ import './Header.css';
 export function Header() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const location = useLocation();
-  const isAdminPage = location.pathname === '/admin';
+  const isAdminPage = location.pathname === '/admin' || 
+                      location.pathname === '/neighborhoods' || 
+                      location.pathname === '/data/schools' ||
+                      location.pathname === '/tech';
+  const isMainAdminPage = location.pathname === '/admin';
+  const isAdminSubPage = isAdminPage && !isMainAdminPage;
 
   return (
     <header className="app-header">
@@ -18,8 +23,27 @@ export function Header() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
           <nav className="header-nav">
-            <a href="#info" className="nav-link">Info</a>
-            <a href="#error" className="nav-link">Found an Error</a>
+            {isAdminPage ? (
+              <>
+                <Link 
+                  to="/neighborhoods" 
+                  className={`nav-link ${location.pathname === '/neighborhoods' ? 'nav-link-active' : ''}`}
+                >
+                  Neighborhoods
+                </Link>
+                <Link 
+                  to="/tech" 
+                  className={`nav-link ${location.pathname === '/tech' ? 'nav-link-active' : ''}`}
+                >
+                  Tech
+                </Link>
+              </>
+            ) : (
+              <>
+                <a href="#info" className="nav-link">Info</a>
+                <a href="#error" className="nav-link">Found an Error</a>
+              </>
+            )}
           </nav>
           <button
             onClick={toggleDarkMode}
@@ -33,7 +57,7 @@ export function Header() {
             ></i>
           </button>
           <Link
-            to={isAdminPage ? "/" : "/admin"}
+            to={isMainAdminPage ? "/" : "/admin"}
             className="admin-link"
             style={{
               fontSize: '12px',
@@ -49,7 +73,7 @@ export function Header() {
               e.currentTarget.style.textDecoration = 'none';
             }}
           >
-            {isAdminPage ? '→ Map' : '→ Admin'}
+            {isMainAdminPage ? '→ Map' : '→ Admin'}
           </Link>
         </div>
       </div>

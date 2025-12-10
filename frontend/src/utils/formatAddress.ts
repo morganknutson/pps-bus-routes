@@ -85,13 +85,17 @@ function formatWord(word: string, index: number, words: string[]): string {
  * - "3737 SW HUMPHREY BLVD" -> "3737 SW Humphrey Blvd."
  * - "SW COUNCIL CREST DR" -> "SW Council Crest Dr."
  * - "AINSWORTH GT & ST & CAB LOAD ZONE" -> "Ainsworth Gt. & St. & Cab Load Zone"
+ * - "SW PATTON RD [NW]" -> "SW Patton Rd." (removes directional indicators in brackets)
  */
 export function formatStreetName(address: string): string {
   if (!address) return address;
   
+  // Remove any direction indicators in brackets at the end (e.g., "[NW]", "[NE]", "[N]")
+  const cleanAddress = address.replace(/\s*\[.*?\]\s*$/, '').trim();
+  
   // Split by common separators but keep them
   // We'll process each part separately
-  const parts = address.split(/(\s+&\s+|\s+AND\s+)/i);
+  const parts = cleanAddress.split(/(\s+&\s+|\s+AND\s+)/i);
   
   return parts.map(part => {
     // If it's a separator (& or AND), keep it as is
@@ -209,5 +213,24 @@ export function expandAddressForGeocoding(address: string): string {
     // Keep the word as-is (might be a number or street name)
     return word;
   }).join(' ');
+}
+
+/**
+ * Extract individual street names from an address that may contain multiple streets
+ * Examples:
+ * - "SW PATTON RD & SW MONTGOMERY DR" -> ["SW PATTON RD", "SW MONTGOMERY DR"]
+ * - "SW COUNCIL CREST DR" -> ["SW COUNCIL CREST DR"]
+ * - "AINSWORTH GT & ST" -> ["AINSWORTH GT", "ST"]
+ */
+export function extractStreetNames(address: string): string[] {
+  if (!address) return [];
+  
+  // Split by "&" or "AND" (case insensitive)
+  const parts = address.split(/\s+&\s+|\s+AND\s+/i);
+  
+  // Clean and filter out empty strings
+  return parts
+    .map(part => part.trim())
+    .filter(part => part.length > 0);
 }
 

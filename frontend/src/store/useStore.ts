@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { AppState, Route, HomeAddress, School, Stop } from '../types';
 import { generateRouteColor, generateRouteColorByName } from '../utils/colorGenerator';
 import { saveRoutesToCache, mergeCachedCoordinates } from '../services/routeCache';
+import { validateLngLat } from '../utils/coordinates';
 
 interface Store extends AppState {
   setDriveLink: (link: string) => void;
@@ -9,6 +10,8 @@ interface Store extends AppState {
   toggleRouteSelection: (routeId: string) => void;
   setHomeAddress: (address: HomeAddress) => void;
   clearHomeAddress: () => void;
+  setLookupAddress: (address: HomeAddress) => void;
+  clearLookupAddress: () => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | undefined) => void;
   updateStopCoordinates: (routeId: string, stopId: string, coordinates: [number, number]) => void;
@@ -22,6 +25,7 @@ interface Store extends AppState {
   currentGeocodingRouteId: string | null;
   selectedStop: { route: Route; stop: Stop; stopNumber: number } | null;
   directionFilter: 'Morning' | 'Afternoon' | 'Both';
+  lookupAddress: HomeAddress | undefined;
 }
 
 export const useStore = create<Store>((set) => ({
@@ -29,6 +33,7 @@ export const useStore = create<Store>((set) => ({
   lastFetchTime: undefined,
   routes: [],
   homeAddress: undefined,
+  lookupAddress: undefined,
   isLoading: false,
   error: undefined,
   selectedSchoolId: null,
@@ -88,11 +93,28 @@ export const useStore = create<Store>((set) => ({
     localStorage.removeItem('homeAddress');
   },
 
+  setLookupAddress: (address) => {
+    set({ lookupAddress: address });
+    // Save to localStorage
+    localStorage.setItem('lookupAddress', JSON.stringify(address));
+  },
+
+  clearLookupAddress: () => {
+    set({ lookupAddress: undefined });
+    localStorage.removeItem('lookupAddress');
+  },
+
   setLoading: (loading) => set({ isLoading: loading }),
 
   setError: (error) => set({ error }),
 
   updateStopCoordinates: (routeId, stopId, coordinates) => {
+    // Validate coordinates format [lng, lat]
+    if (!validateLngLat(coordinates)) {
+      console.error('[useStore] Invalid coordinates format:', coordinates);
+      throw new Error(`Invalid coordinates format. Expected [lng, lat], got ${JSON.stringify(coordinates)}`);
+    }
+    
     set((state) => {
       const updatedRoutes = state.routes.map((route) => {
         if (route.id === routeId) {
@@ -179,6 +201,17 @@ if (typeof window !== 'undefined') {
   const savedSchoolId = localStorage.getItem('selectedSchoolId');
   if (savedSchoolId) {
     useStore.getState().setSelectedSchool(savedSchoolId);
+  }
+
+  // Load lookup address
+  const savedLookupAddress = localStorage.getItem('lookupAddress');
+  if (savedLookupAddress) {
+    try {
+      const address = JSON.parse(savedLookupAddress);
+      useStore.getState().setLookupAddress(address);
+    } catch (e) {
+      console.error('Failed to load saved lookup address:', e);
+    }
   }
 }
 

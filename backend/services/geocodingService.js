@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { expandAddressForGeocoding } from '../utils/formatAddress.js';
+import { neighborhoodService } from './neighborhoodService.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -79,7 +80,7 @@ class GeocodingService {
         
         return {
           success: true,
-          coordinates: [location.lng, location.lat], // [lng, lat] for Leaflet
+          coordinates: [location.lng, location.lat], // [lng, lat] - GeoJSON format (internal standard)
           displayName: result.formatted_address,
           placeId: result.place_id,
           locationType: result.geometry.location_type,
@@ -288,6 +289,19 @@ class GeocodingService {
         if (result.isApproximate) {
           stopData.isApproximate = true;
           stopData.geocodeWarning = result.geocodeWarning || 'Intersection not found, using approximate location';
+        }
+        
+        // Get neighborhood from coordinates using reverse geocoding
+        if (stopData.coordinates && !stop.skipGeocoding) {
+          try {
+            const neighborhoodResult = await neighborhoodService.getNeighborhood(stopData.coordinates);
+            if (neighborhoodResult.success && neighborhoodResult.neighborhood) {
+              stopData.neighborhood = neighborhoodResult.neighborhood;
+            }
+          } catch (error) {
+            console.warn(`[GeocodingService] Failed to get neighborhood for stop "${stop.address}":`, error.message);
+            // Continue without neighborhood - not a critical error
+          }
         }
         
         geocodedStops.push(stopData);

@@ -8,12 +8,16 @@ interface AutocompleteSuggestion {
   coordinates: [number, number];
 }
 
-export function AddressInput() {
+interface AddressLookupProps {
+  onAddressSelect: (address: string, coordinates: [number, number]) => void;
+}
+
+export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { setHomeAddress, homeAddress, clearHomeAddress } = useStore();
+  const { lookupAddress, setLookupAddress, clearLookupAddress } = useStore();
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -54,7 +58,7 @@ export function AddressInput() {
         if (error.name === 'AbortError') {
           return;
         }
-        console.error('[AddressInput] Autocomplete error:', error);
+        console.error('[AddressLookup] Autocomplete error:', error);
         if (!abortController.signal.aborted) {
           setSuggestions([]);
         }
@@ -98,37 +102,53 @@ export function AddressInput() {
         setIsLoading(true);
         const geocodeResult = await geocodeAddress(suggestion.address);
         if (geocodeResult.coordinates) {
-          setHomeAddress({
+          const addressData = {
             address: suggestion.address,
             coordinates: geocodeResult.coordinates,
-          });
+          };
+          setLookupAddress(addressData);
+          onAddressSelect(suggestion.address, geocodeResult.coordinates);
         } else {
-          console.error('[AddressInput] Failed to geocode selected address');
-          setHomeAddress({
+          console.error('[AddressLookup] Failed to geocode selected address');
+          const addressData = {
             address: suggestion.address,
-            coordinates: [0, 0], // Fallback
-          });
+            coordinates: [0, 0] as [number, number], // Fallback
+          };
+          setLookupAddress(addressData);
+          onAddressSelect(suggestion.address, [0, 0]); // Fallback
         }
       } catch (error) {
-        console.error('[AddressInput] Geocoding error:', error);
-        setHomeAddress({
+        console.error('[AddressLookup] Geocoding error:', error);
+        const addressData = {
           address: suggestion.address,
-          coordinates: [0, 0], // Fallback
-        });
+          coordinates: [0, 0] as [number, number], // Fallback
+        };
+        setLookupAddress(addressData);
+        onAddressSelect(suggestion.address, [0, 0]); // Fallback
       } finally {
         setIsLoading(false);
       }
     } else {
-      setHomeAddress({
+      const addressData = {
         address: suggestion.address,
         coordinates: suggestion.coordinates,
-      });
+      };
+      setLookupAddress(addressData);
+      onAddressSelect(suggestion.address, suggestion.coordinates);
     }
     
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
   };
+
+  // Call onAddressSelect when lookupAddress is loaded from store (e.g., from localStorage)
+  // Note: This is now optional since MapView reads directly from store
+  useEffect(() => {
+    if (lookupAddress && onAddressSelect) {
+      onAddressSelect(lookupAddress.address, lookupAddress.coordinates);
+    }
+  }, []); // Only on mount - when component first loads with saved address
 
   return (
     <div style={{ 
@@ -143,16 +163,18 @@ export function AddressInput() {
       boxShadow: '0 4px 12px var(--shadow-large)',
       transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
     }}>
-      {homeAddress ? (
+      {lookupAddress ? (
         <div style={{ 
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
         }}>
-          <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: '12px', flexShrink: 0 }}></i>
-          <div style={{ fontSize: '14px', fontWeight: '500', flex: 1, color: 'var(--text-primary)' }}>{homeAddress.address}</div>
+          <i className="fas fa-map-marker-alt" style={{ color: 'var(--text-primary)', fontSize: '12px', flexShrink: 0 }}></i>
+          <div style={{ fontSize: '14px', fontWeight: '500', flex: 1, color: 'var(--text-primary)' }}>{lookupAddress.address}</div>
           <button
-            onClick={clearHomeAddress}
+            onClick={() => {
+              clearLookupAddress();
+            }}
             style={{
               width: '20px',
               height: '20px',
@@ -189,31 +211,30 @@ export function AddressInput() {
           alignItems: 'center',
           gap: '0.5rem',
         }}>
-          <h3 style={{ margin: 0, fontSize: '0.875rem', flexShrink: 0, color: 'var(--text-primary)' }}>My Address</h3>
           <div style={{ position: 'relative', flex: 1 }}>
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onFocus={() => {
-                if (suggestions.length > 0) {
-                  setShowSuggestions(true);
-                }
-              }}
-              placeholder="Enter your address..."
-              style={{
-                width: '100%',
-                padding: '0.375rem 0.5rem',
-                border: '1px solid var(--border-color)',
-                borderRadius: '4px',
-                fontSize: '14px',
-                boxSizing: 'border-box',
-                backgroundColor: 'var(--bg-primary)',
-                color: 'var(--text-primary)',
-                transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
-              }}
-            />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => {
+              if (suggestions.length > 0) {
+                setShowSuggestions(true);
+              }
+            }}
+            placeholder="Search for an address..."
+            style={{
+              width: '100%',
+              padding: '0.375rem 0.5rem',
+              border: '1px solid var(--border-color)',
+              borderRadius: '4px',
+              fontSize: '14px',
+              boxSizing: 'border-box',
+              backgroundColor: 'var(--bg-primary)',
+              color: 'var(--text-primary)',
+              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+            }}
+          />
           {isLoading && (
             <div
               style={{
@@ -271,10 +292,9 @@ export function AddressInput() {
               ))}
             </div>
           )}
-          </div>
+        </div>
         </div>
       )}
     </div>
   );
 }
-

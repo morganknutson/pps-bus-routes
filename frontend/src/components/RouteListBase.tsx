@@ -107,7 +107,7 @@ function renderStopItem(
         transition: 'background-color 0.15s',
         display: 'flex',
         alignItems: 'center',
-        gap: '0.5rem',
+        gap: '0.75rem',
       }}
       onMouseEnter={(e) => {
         if (isClickable) {
@@ -124,48 +124,29 @@ function renderStopItem(
       {stop.isSchoolStop ? (
         <div style={{ 
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '0.25rem',
+          width: '18px',
+          height: '18px',
+          borderRadius: '50%',
+          backgroundColor: hasError ? '#ff6b6b' : routeColor,
+          color: 'white',
+          fontSize: '14px',
           flexShrink: 0,
         }}>
-          {/* School icon */}
-          <div style={{ 
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '24px',
-            height: '24px',
-            borderRadius: '50%',
-            backgroundColor: hasError ? '#ff6b6b' : routeColor,
-            color: 'white',
-            fontSize: '14px',
-          }}>
-            <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
-          </div>
-          {/* Time below icon */}
-          {stop.time && (
-            <div style={{
-              fontSize: '9px',
-              color: 'var(--text-tertiary)',
-              textAlign: 'center',
-            }}>
-              {stop.time}
-            </div>
-          )}
+          <i className="fas fa-graduation-cap" style={{ fontSize: '9px' }}></i>
         </div>
       ) : (
         <div style={{ 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: '24px',
-          height: '24px',
+          width: '18px',
+          height: '18px',
           borderRadius: '50%',
           backgroundColor: hasError ? '#ff6b6b' : routeColor,
           color: 'white',
-          fontSize: '11px',
+          fontSize: '9px',
           fontWeight: 'bold',
           flexShrink: 0,
         }}>
@@ -176,41 +157,36 @@ function renderStopItem(
       {/* Stop details */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ 
-          fontSize: '13px',
+          fontSize: '12px',
           fontWeight: '500',
-          marginBottom: '0.25rem',
           color: hasError ? '#ff6b6b' : (isClickable ? 'var(--text-secondary)' : 'var(--text-tertiary)'),
         }}>
           {stop.isSchoolStop && stop.schoolName 
             ? stop.schoolName 
             : formatStreetName(stop.address)}
         </div>
-        {stop.time && !stop.isSchoolStop && (
-          <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-            {stop.time}
-          </div>
-        )}
-        {stop.isSchoolStop && (
-          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
-            School Loading Zone
-          </div>
-        )}
         {config.showStopErrors && hasError && (
-          <div style={{ fontSize: '10px', color: '#ff6b6b', fontStyle: 'italic' }}>
+          <div style={{ fontSize: '10px', color: '#ff6b6b', fontStyle: 'italic', marginTop: '0.25rem' }}>
             ✗ {stop.geocodeError || 'No coordinates'}
           </div>
         )}
         {config.showStopErrors && !hasError && !stop.isSchoolStop && (
-          <div style={{ fontSize: '10px', color: '#4caf50' }}>
+          <div style={{ fontSize: '10px', color: '#4caf50', marginTop: '0.25rem' }}>
             ✓ Geocoded
           </div>
         )}
         {!hasCoordinates && !stop.isSchoolStop && !config.showStopErrors && (
-          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
+          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', fontStyle: 'italic', marginTop: '0.25rem' }}>
             No coordinates
           </div>
         )}
       </div>
+      {/* Time on the right */}
+      {stop.time && (
+        <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginRight: '0.5rem', flexShrink: 0 }}>
+          {stop.time}
+        </div>
+      )}
     </div>
   );
 }
@@ -319,6 +295,13 @@ export function RouteListBase({
             config.renderRouteHeader(route)
           ) : (
             <div
+              onClick={() => {
+                toggleRouteExpand(route.id);
+                // Also toggle route selection if route selection is enabled
+                if (config.showRouteSelection && config.onRouteSelectionChange) {
+                  config.onRouteSelectionChange(route.id, !route.isSelected);
+                }
+              }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -326,36 +309,62 @@ export function RouteListBase({
                 padding: '0.75rem',
                 flex: 1,
                 minWidth: 0,
+                cursor: 'pointer',
+                transition: 'background-color 0.15s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
               {config.showRouteSelection && (
-                <input
-                  type="checkbox"
-                  checked={route.isSelected}
-                  onChange={(e) => {
-                    if (config.onRouteSelectionChange) {
-                      config.onRouteSelectionChange(route.id, e.target.checked);
-                    }
+                <label
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    flexShrink: 0,
                   }}
                   onClick={(e) => e.stopPropagation()}
-                  style={{ cursor: 'pointer' }}
-                />
+                >
+                  <input
+                    type="checkbox"
+                    checked={route.isSelected}
+                    onChange={(e) => {
+                      if (config.onRouteSelectionChange) {
+                        config.onRouteSelectionChange(route.id, e.target.checked);
+                      }
+                    }}
+                    style={{ display: 'none' }}
+                  />
+                  <div
+                    style={{
+                      width: '18px',
+                      height: '18px',
+                      borderRadius: '50%',
+                      border: `2px solid ${routeColor}`,
+                      backgroundColor: route.isSelected ? routeColor : 'transparent',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      boxSizing: 'border-box',
+                    }}
+                  >
+                    {route.isSelected && (
+                      <i className="fas fa-check" style={{ fontSize: '9px', color: 'white' }}></i>
+                    )}
+                  </div>
+                </label>
               )}
-              <div
-                style={{
-                  width: '16px',
-                  height: '16px',
-                  backgroundColor: routeColor,
-                  borderRadius: '2px',
-                  flexShrink: 0,
-                }}
-              />
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: '500', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <div style={{ fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                   <span style={{ color: 'var(--text-primary)' }}>{route.name}</span>
                 </div>
-                {config.showGeocodingStats && route.geocodingProgress ? (
-                  <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                {config.showGeocodingStats && route.geocodingProgress && (
+                  <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
                     {route.geocodingProgress.geocoded}/{route.geocodingProgress.total} geocoded
                     {route.geocodingProgress.total - route.geocodingProgress.geocoded > 0 && (
                       <span style={{ color: '#ff6b6b', marginLeft: '0.5rem' }}>
@@ -363,21 +372,25 @@ export function RouteListBase({
                       </span>
                     )}
                   </div>
-                ) : (
-                  <div style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>
-                    {displayStops.length} stops
-                  </div>
                 )}
                 {config.showFilename && route.filename && (
-                  <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
                     {route.filename}
                   </div>
                 )}
               </div>
+              {!config.showGeocodingStats && (
+                <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginRight: '0.5rem', flexShrink: 0 }}>
+                  {displayStops.length} stops
+                </div>
+              )}
             </div>
           )}
           <button
-            onClick={() => toggleRouteExpand(route.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleRouteExpand(route.id);
+            }}
             style={{
               background: 'none',
               border: 'none',

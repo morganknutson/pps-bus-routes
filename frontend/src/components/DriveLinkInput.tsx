@@ -49,11 +49,19 @@ export function DriveLinkInput() {
           try {
             const { results } = await batchGeocode(addresses);
             
+            // Import validation function
+            const { validateLngLat } = await import('../utils/coordinates');
+            
             // Update stops with coordinates
             results.forEach((result: any, index: number) => {
               const stop = route.stops.find(s => s.address === addresses[index]);
               if (stop && result.success && result.coordinates) {
-                updateStopCoordinates(route.id, stop.id, result.coordinates);
+                // Validate coordinates before updating
+                if (validateLngLat(result.coordinates)) {
+                  updateStopCoordinates(route.id, stop.id, result.coordinates);
+                } else {
+                  console.error('[DriveLinkInput] Invalid coordinates from geocoding:', result.coordinates);
+                }
               }
             });
           } catch (error) {
