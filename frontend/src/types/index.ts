@@ -24,6 +24,7 @@ export interface Route {
     geocoded: number;
     isGeocoding: boolean;
   };
+  geometry?: [number, number][]; // Cached route geometry as [lat, lng][] following streets
 }
 
 export interface HomeAddress {

@@ -70,6 +70,7 @@ export async function loadLocalRoutes(schoolId?: string | null): Promise<Route[]
           geocoded: processedRoute.stats?.geocodedStops || stops.filter((s: any) => s.coordinates).length,
           isGeocoding: false,
         },
+        geometry: processedRoute.geometry, // Include cached route geometry if available
       };
     });
     

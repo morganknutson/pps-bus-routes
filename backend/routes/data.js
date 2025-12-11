@@ -136,5 +136,75 @@ router.put('/routes/:routeId/stops/:stopId', (req, res) => {
   }
 });
 
+// Update route geometry (street-following path)
+router.put('/routes/:routeId/geometry', (req, res) => {
+  try {
+    const { routeId } = req.params;
+    const { geometry, schoolId } = req.body;
+
+    // Validate geometry format: must be array of [lat, lng] coordinates
+    if (!geometry || !Array.isArray(geometry) || geometry.length === 0) {
+      return res.status(400).json({ error: 'Invalid geometry: must be non-empty array of coordinates' });
+    }
+    
+    // Validate all coordinates
+    for (let i = 0; i < geometry.length; i++) {
+      const coord = geometry[i];
+      if (!Array.isArray(coord) || coord.length !== 2) {
+        return res.status(400).json({ error: `Invalid coordinate at index ${i}: must be array of length 2` });
+      }
+      const [lat, lng] = coord;
+      if (typeof lat !== 'number' || typeof lng !== 'number' || 
+          isNaN(lat) || isNaN(lng) ||
+          lng < -180 || lng > 180 || lat < -90 || lat > 90) {
+        return res.status(400).json({ 
+          error: `Invalid coordinate at index ${i}: expected [lat, lng] with valid ranges (lat: -90 to 90, lng: -180 to 180), got [${lat}, ${lng}]` 
+        });
+      }
+    }
+
+    const PROCESSED_ROUTES_DIR = getProcessedRoutesDir(schoolId);
+    
+    // Check if directory exists
+    if (!fs.existsSync(PROCESSED_ROUTES_DIR)) {
+      return res.status(404).json({ error: 'School routes directory not found' });
+    }
+
+    // Find the route file
+    const files = fs.readdirSync(PROCESSED_ROUTES_DIR).filter(f => f.endsWith('.json'));
+    let routeFile = null;
+    let routeData = null;
+
+    for (const filename of files) {
+      const filePath = path.join(PROCESSED_ROUTES_DIR, filename);
+      const content = fs.readFileSync(filePath, 'utf8');
+      const data = JSON.parse(content);
+      
+      if (data.id === routeId) {
+        routeFile = filePath;
+        routeData = data;
+        break;
+      }
+    }
+
+    if (!routeFile || !routeData) {
+      return res.status(404).json({ error: 'Route not found' });
+    }
+
+    // Update the route geometry
+    routeData.geometry = geometry;
+    routeData.geometryUpdatedAt = new Date().toISOString();
+
+    // Save back to file
+    fs.writeFileSync(routeFile, JSON.stringify(routeData, null, 2));
+
+    console.log(`[PUT /api/data/routes/${routeId}/geometry] Saved geometry with ${geometry.length} points`);
+    res.json({ success: true, geometry: routeData.geometry });
+  } catch (error) {
+    console.error('Error updating route geometry:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export { router as dataRouter };
 

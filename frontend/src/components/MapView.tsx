@@ -157,9 +157,16 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       return;
     }
 
+    // Check if route already has cached geometry
+    if (route.geometry && route.geometry.length > 0) {
+      console.log(`[MapView] 💾 Using cached geometry for ${route.name}: ${route.geometry.length} points`);
+      setRouteGeometries(prevState => ({ ...prevState, [routeId]: route.geometry! }));
+      return;
+    }
+
     // Mark as loading
     setRouteGeometries(prev => ({ ...prev, [routeId]: null }));
-    console.log(`[MapView] 🗺️  Recalculating route geometry for ${route.name} (${stopsWithCoords.length} stops)`);
+    console.log(`[MapView] 🗺️  Fetching route geometry for ${route.name} (${stopsWithCoords.length} stops)`);
 
     try {
       // Convert stops to [lng, lat] format for routing service
@@ -175,8 +182,31 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       const routeCoordinates = await fetchRouteForStops(stopCoordinates);
       
       if (routeCoordinates && routeCoordinates.length > 0) {
-        console.log(`[MapView] ✅ Route geometry updated for ${route.name}: ${routeCoordinates.length} points`);
+        console.log(`[MapView] ✅ Route geometry fetched for ${route.name}: ${routeCoordinates.length} points`);
         setRouteGeometries(prevState => ({ ...prevState, [routeId]: routeCoordinates }));
+        
+        // Save geometry to backend for future use
+        try {
+          const response = await fetch(`/api/data/routes/${routeId}/geometry`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              geometry: routeCoordinates,
+              schoolId: selectedSchoolId,
+            }),
+          });
+          
+          if (response.ok) {
+            console.log(`[MapView] 💾 Saved geometry to cache for ${route.name}`);
+          } else {
+            console.warn(`[MapView] ⚠️  Failed to save geometry cache for ${route.name}: ${response.status}`);
+          }
+        } catch (saveError) {
+          console.error(`[MapView] ❌ Error saving geometry cache for ${route.name}:`, saveError);
+          // Don't fail the whole operation if saving cache fails
+        }
       } else {
         throw new Error('Route calculation returned empty coordinates');
       }
@@ -204,7 +234,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         return;
       }
 
-      console.log(`[MapView] 🗺️  Fetching route geometry for ${selectedRoutes.length} selected route(s)`);
+      console.log(`[MapView] 🗺️  Loading route geometry for ${selectedRoutes.length} selected route(s)`);
 
       for (const route of selectedRoutes) {
         // Check if already loaded using functional update to avoid stale closure
@@ -221,6 +251,12 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             // Not enough stops for a route
             console.log(`[MapView] Route ${route.name} has insufficient stops (${stopsWithCoords.length}), skipping`);
             return { ...prev, [route.id]: [] };
+          }
+
+          // Check if route has cached geometry from backend
+          if (route.geometry && route.geometry.length > 0) {
+            console.log(`[MapView] 💾 Using cached geometry for ${route.name}`);
+            return { ...prev, [route.id]: route.geometry };
           }
 
           // Mark as loading and fetch route asynchronously

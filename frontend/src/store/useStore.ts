@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { AppState, Route, HomeAddress, School, Stop } from '../types';
-import { generateRouteColor, generateRouteColorByName } from '../utils/colorGenerator';
+import { assignUniqueColors } from '../utils/colorGenerator';
 import { saveRoutesToCache, mergeCachedCoordinates } from '../services/routeCache';
 import { validateLngLat } from '../utils/coordinates';
 
@@ -48,6 +48,9 @@ export const useStore = create<Store>((set) => ({
     // Merge with cached coordinates first
     const routesWithCache = mergeCachedCoordinates(routes);
     
+    // Assign unique colors to all routes, ensuring no color reuse
+    const colorMap = assignUniqueColors(routesWithCache.map(r => ({ id: r.id || '' })));
+    
     // Assign colors and calculate geocoding progress
     const routesWithColors = routesWithCache.map((route, index) => {
       const totalStops = route.stops.length;
@@ -55,9 +58,8 @@ export const useStore = create<Store>((set) => ({
       
       return {
         ...route,
-        // Use route name for consistent coloring across directions (e.g., "100" Morning and "100" Afternoon get same color)
-        // Fall back to index-based coloring if route name is missing
-        color: route.color || generateRouteColorByName(route.name || String(index)),
+        // Use assigned unique color, or fall back to existing color if already set
+        color: route.color || colorMap.get(route.id || '') || '#FF6B6B',
         isSelected: route.isSelected ?? true, // Default to selected
         geocodingProgress: {
           total: totalStops,

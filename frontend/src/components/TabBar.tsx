@@ -12,7 +12,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
       style={{
         position: 'relative',
         width: '100%',
-        height: '2.5rem',
+        padding: '0.75rem 1rem',
         backgroundColor: '#F0F0F0',
         borderRadius: '6px',
         overflow: 'hidden',
@@ -20,12 +20,9 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
     >
       {/* Labels positioned on top */}
       <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+        position: 'relative',
         display: 'flex',
+        height: '2.5rem',
         zIndex: 2,
       }}>
         <div
@@ -82,10 +79,10 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
       <div
         style={{
           position: 'absolute',
-          top: '0.25rem',
-          bottom: '0.25rem',
-          left: isSchoolsActive ? '0.25rem' : 'calc(50% + 0.25rem)',
-          width: 'calc(50% - 0.5rem)',
+          top: 'calc(0.75rem + 0.25rem)',
+          bottom: 'calc(0.75rem + 0.25rem)',
+          left: isSchoolsActive ? 'calc(1rem + 0.25rem)' : 'calc(50% + 0.25rem)',
+          width: 'calc(50% - 1rem - 0.5rem)',
           backgroundColor: 'white',
           borderRadius: '4px',
           transition: 'left 0.3s ease',
