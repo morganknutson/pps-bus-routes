@@ -1,7 +1,9 @@
 import express from 'express';
-import fs from 'fs';
+import fs from 'fs/promises';
+import fsSync from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { invalidateRouteStatsCache } from './schools.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,7 +21,8 @@ function getProcessedRoutesDir(schoolId) {
 }
 
 // Get all processed routes (optionally filtered by school)
-router.get('/routes', (req, res) => {
+router.get('/routes', async (req, res) => {
+  const startTime = Date.now();
   try {
     const { schoolId } = req.query;
     console.log('[GET /api/data/routes] schoolId:', schoolId);
@@ -27,17 +30,20 @@ router.get('/routes', (req, res) => {
     console.log('[GET /api/data/routes] Routes directory:', PROCESSED_ROUTES_DIR);
     
     // Check if directory exists
-    if (!fs.existsSync(PROCESSED_ROUTES_DIR)) {
+    try {
+      await fs.access(PROCESSED_ROUTES_DIR);
+    } catch {
       console.log('[GET /api/data/routes] Directory does not exist, returning empty routes');
       return res.json({ routes: [] });
     }
     
-    const files = fs.readdirSync(PROCESSED_ROUTES_DIR).filter(f => f.endsWith('.json'));
-    console.log('[GET /api/data/routes] Found', files.length, 'route files:', files);
+    const files = (await fs.readdir(PROCESSED_ROUTES_DIR)).filter(f => f.endsWith('.json'));
+    console.log('[GET /api/data/routes] Found', files.length, 'route files');
     
-    const routes = files.map(filename => {
+    // Read all files in parallel for better performance
+    const routePromises = files.map(async (filename) => {
       const filePath = path.join(PROCESSED_ROUTES_DIR, filename);
-      const content = fs.readFileSync(filePath, 'utf8');
+      const content = await fs.readFile(filePath, 'utf8');
       const route = JSON.parse(content);
       
       // Migrate old format routes to new format (name with (AM)/(PM) -> separate direction)
@@ -52,19 +58,34 @@ router.get('/routes', (req, res) => {
         route.direction = 'Afternoon';
       }
       
+      // If direction is still not set, try to extract from filename
+      // Pattern: {ROUTE}{CODE}-{DIRECTION}_effective_{DATE}.json
+      // Example: "238ABE-A_effective_082625.json" -> Morning
+      // Example: "238ABE-P_effective_082625.json" -> Afternoon
+      if (!route.direction) {
+        const filenameMatch = filename.match(/-([AP])_/);
+        if (filenameMatch) {
+          route.direction = filenameMatch[1] === 'A' ? 'Morning' : 'Afternoon';
+        }
+      }
+      
       return route;
     });
 
-    console.log('[GET /api/data/routes] Returning', routes.length, 'routes');
+    const routes = await Promise.all(routePromises);
+    const duration = Date.now() - startTime;
+    console.log(`[GET /api/data/routes] Returning ${routes.length} routes (${duration}ms)`);
     res.json({ routes });
   } catch (error) {
-    console.error('Error loading routes:', error);
+    const duration = Date.now() - startTime;
+    console.error(`[GET /api/data/routes] Error loading routes (${duration}ms):`, error);
     res.status(500).json({ error: error.message });
   }
 });
 
 // Update stop coordinates
-router.put('/routes/:routeId/stops/:stopId', (req, res) => {
+router.put('/routes/:routeId/stops/:stopId', async (req, res) => {
+  const startTime = Date.now();
   try {
     const { routeId, stopId } = req.params;
     const { coordinates, schoolId } = req.body;
@@ -86,18 +107,20 @@ router.put('/routes/:routeId/stops/:stopId', (req, res) => {
     const PROCESSED_ROUTES_DIR = getProcessedRoutesDir(schoolId);
     
     // Check if directory exists
-    if (!fs.existsSync(PROCESSED_ROUTES_DIR)) {
+    try {
+      await fs.access(PROCESSED_ROUTES_DIR);
+    } catch {
       return res.status(404).json({ error: 'School routes directory not found' });
     }
 
     // Find the route file
-    const files = fs.readdirSync(PROCESSED_ROUTES_DIR).filter(f => f.endsWith('.json'));
+    const files = (await fs.readdir(PROCESSED_ROUTES_DIR)).filter(f => f.endsWith('.json'));
     let routeFile = null;
     let routeData = null;
 
     for (const filename of files) {
       const filePath = path.join(PROCESSED_ROUTES_DIR, filename);
-      const content = fs.readFileSync(filePath, 'utf8');
+      const content = await fs.readFile(filePath, 'utf8');
       const data = JSON.parse(content);
       
       if (data.id === routeId) {
@@ -127,17 +150,26 @@ router.put('/routes/:routeId/stops/:stopId', (req, res) => {
     routeData.processedAt = new Date().toISOString();
 
     // Save back to file
-    fs.writeFileSync(routeFile, JSON.stringify(routeData, null, 2));
+    await fs.writeFile(routeFile, JSON.stringify(routeData, null, 2));
 
+    // Invalidate cache for this school's route stats
+    if (schoolId) {
+      invalidateRouteStatsCache(schoolId);
+    }
+
+    const duration = Date.now() - startTime;
+    console.log(`[PUT /api/data/routes/${routeId}/stops/${stopId}] Updated stop (${duration}ms)`);
     res.json({ success: true, stop });
   } catch (error) {
-    console.error('Error updating stop:', error);
+    const duration = Date.now() - startTime;
+    console.error(`[PUT /api/data/routes/${routeId}/stops/${stopId}] Error updating stop (${duration}ms):`, error);
     res.status(500).json({ error: error.message });
   }
 });
 
 // Update route geometry (street-following path)
-router.put('/routes/:routeId/geometry', (req, res) => {
+router.put('/routes/:routeId/geometry', async (req, res) => {
+  const startTime = Date.now();
   try {
     const { routeId } = req.params;
     const { geometry, schoolId } = req.body;
@@ -166,18 +198,20 @@ router.put('/routes/:routeId/geometry', (req, res) => {
     const PROCESSED_ROUTES_DIR = getProcessedRoutesDir(schoolId);
     
     // Check if directory exists
-    if (!fs.existsSync(PROCESSED_ROUTES_DIR)) {
+    try {
+      await fs.access(PROCESSED_ROUTES_DIR);
+    } catch {
       return res.status(404).json({ error: 'School routes directory not found' });
     }
 
     // Find the route file
-    const files = fs.readdirSync(PROCESSED_ROUTES_DIR).filter(f => f.endsWith('.json'));
+    const files = (await fs.readdir(PROCESSED_ROUTES_DIR)).filter(f => f.endsWith('.json'));
     let routeFile = null;
     let routeData = null;
 
     for (const filename of files) {
       const filePath = path.join(PROCESSED_ROUTES_DIR, filename);
-      const content = fs.readFileSync(filePath, 'utf8');
+      const content = await fs.readFile(filePath, 'utf8');
       const data = JSON.parse(content);
       
       if (data.id === routeId) {
@@ -196,12 +230,19 @@ router.put('/routes/:routeId/geometry', (req, res) => {
     routeData.geometryUpdatedAt = new Date().toISOString();
 
     // Save back to file
-    fs.writeFileSync(routeFile, JSON.stringify(routeData, null, 2));
+    await fs.writeFile(routeFile, JSON.stringify(routeData, null, 2));
 
-    console.log(`[PUT /api/data/routes/${routeId}/geometry] Saved geometry with ${geometry.length} points`);
+    // Invalidate cache for this school's route stats
+    if (schoolId) {
+      invalidateRouteStatsCache(schoolId);
+    }
+
+    const duration = Date.now() - startTime;
+    console.log(`[PUT /api/data/routes/${routeId}/geometry] Saved geometry with ${geometry.length} points (${duration}ms)`);
     res.json({ success: true, geometry: routeData.geometry });
   } catch (error) {
-    console.error('Error updating route geometry:', error);
+    const duration = Date.now() - startTime;
+    console.error(`[PUT /api/data/routes/${routeId}/geometry] Error updating route geometry (${duration}ms):`, error);
     res.status(500).json({ error: error.message });
   }
 });

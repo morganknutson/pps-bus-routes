@@ -42,8 +42,8 @@ export function DriveLinkInput() {
       // Geocode all stops in batches
       for (const route of routes) {
         const addresses = route.stops
-          .filter(stop => !stop.coordinates)
-          .map(stop => stop.address);
+          .filter((stop: { coordinates?: [number, number] }) => !stop.coordinates)
+          .map((stop: { address: string }) => stop.address);
 
         if (addresses.length > 0) {
           try {
@@ -54,7 +54,7 @@ export function DriveLinkInput() {
             
             // Update stops with coordinates
             results.forEach((result: any, index: number) => {
-              const stop = route.stops.find(s => s.address === addresses[index]);
+              const stop = route.stops.find((s: { address: string }) => s.address === addresses[index]);
               if (stop && result.success && result.coordinates) {
                 // Validate coordinates before updating
                 if (validateLngLat(result.coordinates)) {

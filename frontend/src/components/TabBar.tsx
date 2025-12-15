@@ -33,14 +33,14 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '0.5rem',
-            fontSize: '12px',
+            fontSize: '14px',
             fontWeight: '500',
             color: isSchoolsActive ? '#000000' : 'var(--text-secondary)',
             transition: 'color 0.2s ease',
             cursor: 'pointer',
           }}
         >
-          <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
+          <i className="fas fa-graduation-cap" style={{ fontSize: '14px' }}></i>
           Schools
         </div>
         <div
@@ -51,7 +51,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '0.5rem',
-            fontSize: '12px',
+            fontSize: '14px',
             fontWeight: '500',
             color: isRoutesActive ? '#000000' : 'var(--text-secondary)',
             transition: 'color 0.2s ease',
@@ -60,12 +60,12 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
         >
           {activeTab === 'neighborhoods' ? (
             <>
-              <i className="fas fa-map-marker-alt" style={{ fontSize: '12px' }}></i>
+              <i className="fas fa-map-marker-alt" style={{ fontSize: '14px' }}></i>
               Neighborhoods
             </>
           ) : (
             <>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 12h18M3 6h18M3 18h18"></path>
                 <circle cx="6" cy="12" r="2"></circle>
                 <circle cx="18" cy="12" r="2"></circle>

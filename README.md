@@ -94,6 +94,11 @@ pps-bus-maps/
 └── ...
 ```
 
+## Documentation
+
+- **[PAGES_INDEX.md](./PAGES_INDEX.md)**: Comprehensive index of all pages in the application, including routes, purposes, features, and components used. **Reference this before making changes to pages to ensure you're working on the correct one.**
+- **[TechPage](./frontend/src/pages/TechPage.tsx)**: In-app technical documentation (accessible at `/tech`)
+
 ## How It Works
 
 1. **PDF Fetching**: Backend uses Google Drive API to list and download PDFs from the folder

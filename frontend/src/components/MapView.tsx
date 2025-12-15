@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, Polyline, Marker, Popup, ZoomControl } from 'react-leaflet';
+import { MapContainer, Polyline, Marker, Popup, ZoomControl, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { useStore } from '../store/useStore';
 import { fetchRouteForStops } from '../services/routing';
@@ -57,6 +57,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const previousLookupAddressRef = useRef<{ address: string; coordinates: [number, number] } | null>(null);
   const hasZoomedToLookupAddressRef = useRef<boolean>(false);
   const lastAddressZoomTimeRef = useRef<number>(0);
+  const hasZoomedToHomeAndStopRef = useRef<boolean>(false);
   const [highlightedStreet, setHighlightedStreet] = useState<HighlightedStreet | null>(null);
   const [loadingStreet, setLoadingStreet] = useState<string | null>(null);
   const [streetError, setStreetError] = useState<string | null>(null);
@@ -67,11 +68,21 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const selectedRoutes = routes.filter(route => {
     if (!route.isSelected) return false;
     if (directionFilter === 'Both') return true;
+    // If route has no direction (null), show it for any filter
+    if (!route.direction) return true;
     return route.direction === directionFilter;
   });
 
   // Zoom to home address only when it's first added or coordinates change
+  // Skip if both homeAddress and selectedStop are present (let the combined zoom handle it)
   useEffect(() => {
+    // If both homeAddress and selectedStop are present, skip individual zoom
+    // The combined zoom effect will handle it
+    if (homeAddress && selectedStop && selectedStop.stop.coordinates) {
+      previousHomeAddressRef.current = homeAddress;
+      return;
+    }
+
     // Check if address was just added (changed from undefined to a value)
     // or if coordinates actually changed (not just object reference)
     const prevCoords = previousHomeAddressRef.current?.coordinates;
@@ -103,7 +114,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     if (!homeAddress) {
       hasZoomedToAddressRef.current = false;
     }
-  }, [homeAddress]);
+  }, [homeAddress, selectedStop]);
 
   // Zoom to lookup address only when it actually changes (different coordinates)
   useEffect(() => {
@@ -140,6 +151,92 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       previousLookupAddressRef.current = null;
     }
   }, [lookupAddress]);
+
+  // Component to zoom to include both home address and closest stop
+  // This component uses useMap() to access the map instance inside MapContainer
+  function FitHomeAndStopBounds() {
+    const map = useMap();
+    const prevStopIdRef = useRef<string | null>(null);
+    const hasZoomedRef = useRef<boolean>(false);
+    const mapReadyRef = useRef<boolean>(false);
+    
+    // Mark map as ready when it's initialized
+    useEffect(() => {
+      if (map && !mapReadyRef.current) {
+        map.whenReady(() => {
+          mapReadyRef.current = true;
+        });
+      }
+    }, [map]);
+    
+    useEffect(() => {
+      if (!map || !mapReadyRef.current) {
+        return;
+      }
+      
+      if (homeAddress && selectedStop && selectedStop.stop.coordinates) {
+        const currentStopId = `${selectedStop.route.id}-${selectedStop.stop.id}`;
+        
+        // Only zoom if this is a new stop or we haven't zoomed yet
+        if (prevStopIdRef.current === currentStopId && hasZoomedRef.current) {
+          console.log('[MapView] Already zoomed to this stop, skipping');
+          return;
+        }
+        
+        // Validate coordinates
+        if (!validateLngLat(homeAddress.coordinates)) {
+          console.error('[MapView] Invalid home address coordinates:', homeAddress.coordinates);
+          return;
+        }
+
+        if (!validateLngLat(selectedStop.stop.coordinates)) {
+          console.error('[MapView] Invalid selected stop coordinates:', selectedStop.stop.coordinates);
+          return;
+        }
+
+        // Create bounds that include both the home address and the closest stop
+        const homePosition = toLeafletPosition(homeAddress.coordinates);
+        const stopPosition = toLeafletPosition(selectedStop.stop.coordinates);
+        
+        console.log('[MapView] 🎯 Fitting bounds to home address and closest stop', {
+          home: homeAddress.address,
+          stop: selectedStop.stop.address,
+          homeCoords: homeAddress.coordinates,
+          stopCoords: selectedStop.stop.coordinates,
+          homePosition,
+          stopPosition,
+        });
+        
+        // Small delay to ensure map is fully rendered
+        const timer = setTimeout(() => {
+          try {
+            const bounds = L.latLngBounds([homePosition, stopPosition]);
+            map.fitBounds(bounds, { padding: [100, 100], animate: true });
+            
+            hasZoomedRef.current = true;
+            hasZoomedToHomeAndStopRef.current = true;
+            lastAddressZoomTimeRef.current = Date.now();
+            prevStopIdRef.current = currentStopId;
+            
+            console.log('[MapView] ✅ Successfully zoomed to include home address and closest stop');
+          } catch (error) {
+            console.error('[MapView] ❌ Error fitting bounds:', error);
+          }
+        }, 150);
+        
+        return () => clearTimeout(timer);
+      } else {
+        // Reset zoom flag if either is cleared
+        if (!homeAddress || !selectedStop) {
+          hasZoomedRef.current = false;
+          hasZoomedToHomeAndStopRef.current = false;
+          prevStopIdRef.current = null;
+        }
+      }
+    }, [map, homeAddress, selectedStop?.route.id, selectedStop?.stop.id]);
+    
+    return null;
+  }
 
   // Function to recalculate route geometry
   const recalculateRouteGeometry = async (routeId: string) => {
@@ -308,7 +405,15 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   }, [selectedRoutes, routes, selectedStop]); // Removed homeAddress from dependencies
 
   // Zoom to selected stop when it changes
+  // Skip if both homeAddress and selectedStop are present (let the combined zoom handle it)
   useEffect(() => {
+    // If both homeAddress and selectedStop are present, skip individual zoom
+    // The combined zoom effect will handle it
+    if (homeAddress && selectedStop && selectedStop.stop.coordinates) {
+      // Don't zoom individually, let the combined zoom effect handle it
+      return;
+    }
+
     if (mapRef.current && selectedStop && selectedStop.stop.coordinates) {
       if (!validateLngLat(selectedStop.stop.coordinates)) {
         console.error('[MapView] Invalid selected stop coordinates:', selectedStop.stop.coordinates);
@@ -337,7 +442,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     setStreetError(null);
     // Clear street markers when stop changes
     setStreetMarkers([]);
-  }, [selectedStop?.route.id, selectedStop?.stop.id]);
+  }, [selectedStop?.route.id, selectedStop?.stop.id, homeAddress]);
 
   // Zoom to highlighted street bounds (only if feature is enabled)
   useEffect(() => {
@@ -524,6 +629,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       >
       <DarkModeTileLayer />
       <ZoomControl position="bottomleft" />
+      <FitHomeAndStopBounds />
 
       {/* Home address marker */}
       {homeAddress && (
@@ -625,12 +731,14 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                   }
                 }
                 stopNumber = regularStopCount + 1; // Number starts at 1
-                icon = createNumberedIcon(stopNumber, route.color, stop.time, isSelected, editingMode);
+                // Create unique ID from route and stop IDs to prevent CSS class collisions
+                const uniqueMarkerId = `${route.id}-${stop.id}`;
+                icon = createNumberedIcon(stopNumber, route.color, stop.time, isSelected, editingMode, uniqueMarkerId);
               }
 
               return (
                 <Marker
-                  key={stop.id}
+                  key={`${route.id}-${stop.id}-${route.color}`}
                   position={position}
                   icon={icon}
                   draggable={editingMode}

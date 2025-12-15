@@ -9,7 +9,8 @@ export function SchoolSelector() {
     setSelectedSchool, 
     setSchools, 
     setRoutes, 
-    setLoading 
+    setLoading,
+    setLoadingProgress
   } = useStore();
 
   // Load schools on mount
@@ -49,15 +50,20 @@ export function SchoolSelector() {
     console.log('[SchoolSelector] Loading routes for school:', selectedSchoolId);
     const loadRoutes = async () => {
       setLoading(true);
+      setLoadingProgress(0);
       try {
-        const routes = await loadLocalRoutes(selectedSchoolId);
+        const routes = await loadLocalRoutes(selectedSchoolId, (progress) => {
+          setLoadingProgress(progress);
+        });
         console.log('[SchoolSelector] Loaded', routes.length, 'routes');
         setRoutes(routes);
+        setLoadingProgress(100);
       } catch (error) {
         console.error('[SchoolSelector] Failed to load routes:', error);
         setRoutes([]); // Set empty array on error
       } finally {
         setLoading(false);
+        setLoadingProgress(null);
       }
     };
 

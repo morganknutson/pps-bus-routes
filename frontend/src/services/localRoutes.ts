@@ -1,12 +1,17 @@
 import { Route } from '../types';
 import { loadRoutesFromCache } from './routeCache';
+import { fetchWithProgress } from '../utils/fetchWithProgress';
 
 /**
  * Load routes from the same API endpoint as the data management page
  * Uses processed routes from /api/data/routes
  * @param schoolId Optional school ID to filter routes
+ * @param onProgress Optional progress callback (0-100)
  */
-export async function loadLocalRoutes(schoolId?: string | null): Promise<Route[]> {
+export async function loadLocalRoutes(
+  schoolId?: string | null,
+  onProgress?: (progress: number) => void
+): Promise<Route[]> {
   // Always load from API to ensure we get the latest processed routes
   // Cache is now managed by the store after routes are loaded
 
@@ -16,7 +21,8 @@ export async function loadLocalRoutes(schoolId?: string | null): Promise<Route[]
       ? `/api/data/routes?schoolId=${encodeURIComponent(schoolId)}`
       : '/api/data/routes';
     console.log('[loadLocalRoutes] Loading routes for schoolId:', schoolId, 'URL:', url);
-    const response = await fetch(url);
+    
+    const response = await fetchWithProgress(url, {}, onProgress);
     if (!response.ok) {
       throw new Error(`Failed to load routes: ${response.status}`);
     }
@@ -55,6 +61,7 @@ export async function loadLocalRoutes(schoolId?: string | null): Promise<Route[]
         isSchoolStop: stop.isSchoolStop || false, // Pass through school stop flag
         skipGeocoding: stop.skipGeocoding || false, // Pass through skip geocoding flag
         schoolName: stop.schoolName, // Pass through school name for school stops
+        neighborhood: stop.neighborhood, // Pass through neighborhood from processed route
       }));
       
       return {
@@ -63,6 +70,7 @@ export async function loadLocalRoutes(schoolId?: string | null): Promise<Route[]
         direction: direction || null,
         filename: processedRoute.filename,
         stops,
+        neighborhoods: processedRoute.neighborhoods || [], // Aggregated neighborhoods from route
         color: '', // Will be assigned by store
         isSelected: true, // Default to selected
         geocodingProgress: {

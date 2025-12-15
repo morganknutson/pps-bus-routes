@@ -8,65 +8,10 @@ const __dirname = path.dirname(__filename);
 
 // Import backend services
 const backendDir = path.join(__dirname, '..', 'backend');
-const require = createRequire(import.meta.url);
-
-// Use require for pdf-parse (CommonJS module)
-const pdfParse = require(path.join(backendDir, 'node_modules', 'pdf-parse'));
-
-// Import ES modules
-const pdfParserPath = path.join(backendDir, 'services', 'pdfParser.js');
-const { parseRouteFromPDF } = await import(`file://${pdfParserPath}`);
-const geocodingServicePath = path.join(backendDir, 'services', 'geocodingService.js');
-const { geocodingService } = await import(`file://${geocodingServicePath}`);
-const neighborhoodServicePath = path.join(backendDir, 'services', 'neighborhoodService.js');
-const { neighborhoodService } = await import(`file://${neighborhoodServicePath}`);
-const schoolUtilsPath = path.join(backendDir, 'utils', 'schoolUtils.js');
-const { getSchoolIdFromFilename, getSchoolPdfDir } = await import(`file://${schoolUtilsPath}`);
+const routeProcessorPath = path.join(backendDir, 'services', 'routeProcessor.js');
+const { processSinglePDF } = await import(`file://${routeProcessorPath}`);
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
-const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
-
-/**
- * Match anchor name to a school by finding school name in the anchor name
- * Returns the school object if found, null otherwise
- */
-function matchSchoolFromAnchorName(anchorName, schools) {
-  if (!anchorName || !schools || schools.length === 0) {
-    return null;
-  }
-  
-  const normalizedAnchor = anchorName.toLowerCase();
-  
-  // Try to find a school whose name appears in the anchor name
-  for (const school of schools) {
-    const schoolName = school.name.toLowerCase();
-    // Check if school name appears in anchor name
-    if (normalizedAnchor.includes(schoolName)) {
-      return school;
-    }
-  }
-  
-  return null;
-}
-
-/**
- * Geocode a single address using GeocodingService
- */
-async function geocodeAddress(address, city = 'Portland', state = 'OR') {
-  return await geocodingService.geocodeAddress(address, city, state);
-}
-
-/**
- * Try multiple geocoding strategies for an intersection address
- */
-async function geocodeIntersection(address, city = 'Portland', state = 'OR') {
-  return await geocodingService.geocodeIntersection(address, city, state);
-}
-
-/**
- * Geocode all stops for a route
- */
-async function geocodeStops(stops, city = 'Portland', state = 'OR') {
   // Filter out stops that should skip geocoding (e.g., CAB LOAD ZONE)
   const stopsToGeocode = stops.filter(stop => !stop.skipGeocoding);
   const skippedStops = stops.filter(stop => stop.skipGeocoding);
@@ -88,6 +33,18 @@ async function geocodeStops(stops, city = 'Portland', state = 'OR') {
         skipGeocoding: true,
       });
       console.log(`  [${i + 1}/${stops.length}] ${stop.address}... ⏭️  Skipped (Loading Zone)`);
+      continue;
+    }
+    
+    // Skip geocoding for school stops that already have coordinates from schools.json
+    // School stops should ALWAYS use address and coordinates from schools.json, never geocoded
+    if (stop.isSchoolStop && stop.coordinates && Array.isArray(stop.coordinates) && stop.coordinates.length === 2) {
+      geocodedStops.push({
+        ...stop,
+        // Keep existing coordinates from schools.json
+        skipGeocoding: false, // Keep false to indicate it has coordinates, just not from geocoding
+      });
+      console.log(`  [${i + 1}/${stops.length}] ${stop.address}... ⏭️  Skipped (School stop with coordinates from schools.json)`);
       continue;
     }
     
@@ -355,24 +312,74 @@ async function processPDF(pdfPath) {
     }
   }
   
-  // Step 5: Create final route object
-  // Calculate stats excluding skipped stops (CAB LOAD ZONE, LOADING ZONE)
-  const stopsForStats = finalStops.filter(s => !s.skipGeocoding);
+  // Step 5: Calculate route geometry (street-following path between stops)
+  console.log('\n🗺️  Calculating route geometry...');
+  let routeGeometry = null;
+  const stopsWithCoords = finalStops.filter(s => s.coordinates && !s.skipGeocoding);
+  
+  if (stopsWithCoords.length >= 2) {
+    try {
+      // Convert coordinates from [lng, lat] to [lat, lng] for directions service
+      const waypoints = stopsWithCoords.map(stop => {
+        const [lng, lat] = stop.coordinates;
+        return [lat, lng]; // Directions service expects [lat, lng]
+      });
+      
+      console.log(`   Calculating route for ${waypoints.length} waypoints...`);
+      const routeResult = await directionsService.getRoute(waypoints);
+      
+      if (routeResult.success && routeResult.coordinates && routeResult.coordinates.length > 0) {
+        routeGeometry = routeResult.coordinates; // Already in [lat, lng] format
+        console.log(`   ✅ Route geometry calculated: ${routeGeometry.length} points via ${routeResult.provider || 'unknown'}`);
+      } else {
+        console.warn(`   ⚠️  Failed to calculate route geometry: ${routeResult.error || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error(`   ❌ Error calculating route geometry:`, error.message);
+      // Continue without geometry - route will still be saved
+    }
+  } else {
+    console.log(`   ⚠️  Insufficient stops with coordinates (${stopsWithCoords.length}) to calculate route geometry`);
+  }
+  
+  // Step 6: Create final route object
+  // Filter out loading zone stops (skipGeocoding: true) - these are not actual bus stops
+  // Loading zones are where buses park at night and should not be included in routes
+  const routeStops = finalStops.filter(s => !s.skipGeocoding);
+  
+  // Calculate stats (all stops in routeStops should be geocoded)
+  const stopsForStats = routeStops;
+  
+  // Aggregate unique neighborhoods from all stops
+  const neighborhoodsSet = new Set();
+  for (const stop of routeStops) {
+    if (stop.neighborhood && typeof stop.neighborhood === 'string' && stop.neighborhood.trim()) {
+      neighborhoodsSet.add(stop.neighborhood.trim());
+    }
+  }
+  const neighborhoods = Array.from(neighborhoodsSet).sort();
+  
+  if (neighborhoods.length > 0) {
+    console.log(`\n📍 Route passes through ${neighborhoods.length} neighborhood(s): ${neighborhoods.join(', ')}`);
+  }
+  
   const finalRoute = {
     id: route.id,
     name: route.name, // Just the number, e.g., "100"
     direction: route.direction, // "Morning" or "Afternoon"
     filename: route.filename,
-    stops: finalStops, // Include all stops in JSON (including skipped ones and school stop)
+    stops: routeStops, // Only include actual bus stops (excludes loading zones)
+    neighborhoods: neighborhoods, // Aggregated unique neighborhoods from all stops
     processedAt: new Date().toISOString(),
     stats: {
       totalStops: stopsForStats.length, // Only count stops that should be geocoded
       geocodedStops: stopsForStats.filter(s => s.coordinates).length,
       failedStops: stopsForStats.filter(s => !s.coordinates).length,
     },
+    geometry: routeGeometry, // Street-following route geometry [lat, lng][]
   };
   
-  // Step 5: Save to JSON file in school-specific directory
+  // Step 7: Save to JSON file in school-specific directory
   const schoolId = getSchoolIdFromFilename(filename);
   if (!schoolId) {
     throw new Error(`Could not determine school from filename: ${filename}`);

@@ -6,10 +6,34 @@
 const API_BASE = 'https://www.googleapis.com/drive/v3';
 
 /**
+ * Get file metadata (including modifiedTime) from Drive API
+ * Returns null if API key is not available or request fails
+ */
+async function getFileMetadataFromAPI(fileId, apiKey) {
+  if (!apiKey) {
+    return null;
+  }
+
+  try {
+    const url = `${API_BASE}/files/${fileId}?fields=id,name,modifiedTime&key=${apiKey}`;
+    const response = await fetch(url);
+    
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    // Silently fail - we'll use fallback
+  }
+  
+  return null;
+}
+
+/**
  * Extract file IDs from a public Google Drive folder page
  * Uses regex to find file IDs in the HTML
+ * Tries to get modifiedTime from API if apiKey is provided
  */
-export async function listFolderFilesFromPage(folderId) {
+export async function listFolderFilesFromPage(folderId, apiKey = null) {
   const folderUrl = `https://drive.google.com/drive/folders/${folderId}`;
   
   const response = await fetch(folderUrl, {
@@ -81,10 +105,19 @@ export async function listFolderFilesFromPage(folderId) {
               }
             }
             
+            // Try to get modifiedTime from API if available
+            let modifiedTime = null;
+            if (apiKey) {
+              const metadata = await getFileMetadataFromAPI(fileId, apiKey);
+              if (metadata && metadata.modifiedTime) {
+                modifiedTime = metadata.modifiedTime;
+              }
+            }
+            
             files.push({
               id: fileId,
               name: name,
-              modifiedTime: new Date().toISOString(),
+              modifiedTime: modifiedTime || new Date().toISOString(), // Fallback to current time if API unavailable
             });
           }
         }
@@ -97,10 +130,24 @@ export async function listFolderFilesFromPage(folderId) {
   }
   
   // Extract files from matches
-  const files = matches.map(match => ({
-    id: match[1],
-    name: match[2],
-    modifiedTime: new Date().toISOString(),
+  const files = await Promise.all(matches.map(async (match) => {
+    const fileId = match[1];
+    const name = match[2];
+    
+    // Try to get modifiedTime from API if available
+    let modifiedTime = null;
+    if (apiKey) {
+      const metadata = await getFileMetadataFromAPI(fileId, apiKey);
+      if (metadata && metadata.modifiedTime) {
+        modifiedTime = metadata.modifiedTime;
+      }
+    }
+    
+    return {
+      id: fileId,
+      name: name,
+      modifiedTime: modifiedTime || new Date().toISOString(), // Fallback to current time if API unavailable
+    };
   }));
   
   return files;
@@ -113,7 +160,7 @@ export async function listFolderFiles(folderId, apiKey = null) {
   if (!apiKey) {
     // Try without API key using page parsing
     console.log('No API key provided, using page parsing for public folder...');
-    return listFolderFilesFromPage(folderId);
+    return listFolderFilesFromPage(folderId, null);
   }
 
   const url = `${API_BASE}/files?q='${folderId}'+in+parents+and+mimeType='application/pdf'&fields=files(id,name,modifiedTime,webContentLink)&orderBy=name&key=${apiKey}`;
@@ -124,7 +171,7 @@ export async function listFolderFiles(folderId, apiKey = null) {
     // If API fails, try page parsing as fallback
     if (response.status === 403 || response.status === 401) {
       console.log('API key failed, trying page parsing...');
-      return listFolderFilesFromPage(folderId);
+      return listFolderFilesFromPage(folderId, apiKey); // Pass apiKey to try fetching metadata
     }
     const error = await response.json();
     throw new Error(error.error?.message || 'Failed to list folder files');
@@ -151,14 +198,44 @@ export async function downloadFile(fileId, apiKey = null) {
       if (metadataResponse.ok) {
         const metadata = await metadataResponse.json();
         if (metadata.webContentLink) {
-          // Use API download URL
+          // Try webContentLink first (often works better than alt=media)
+          try {
+            const webContentResponse = await fetch(metadata.webContentLink, {
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+              },
+              redirect: 'follow',
+            });
+            
+            if (webContentResponse.ok) {
+              const contentType = webContentResponse.headers.get('content-type');
+              if (contentType?.includes('pdf')) {
+                const buffer = Buffer.from(await webContentResponse.arrayBuffer());
+                // Verify PDF magic bytes
+                if (buffer[0] === 0x25 && buffer[1] === 0x50 && buffer[2] === 0x44 && buffer[3] === 0x46) {
+                  return {
+                    buffer,
+                    name: metadata.name || `file_${fileId.substring(0, 8)}.pdf`,
+                  };
+                }
+              }
+            }
+          } catch (e) {
+            // Fall through to API download
+          }
+          
+          // Try API download URL as fallback
           const apiDownloadUrl = `${API_BASE}/files/${fileId}?alt=media&key=${apiKey}`;
           const fileResponse = await fetch(apiDownloadUrl);
           if (fileResponse.ok) {
-            return {
-              buffer: Buffer.from(await fileResponse.arrayBuffer()),
-              name: metadata.name || `file_${fileId.substring(0, 8)}.pdf`,
-            };
+            const buffer = Buffer.from(await fileResponse.arrayBuffer());
+            // Verify PDF magic bytes
+            if (buffer[0] === 0x25 && buffer[1] === 0x50 && buffer[2] === 0x44 && buffer[3] === 0x46) {
+              return {
+                buffer,
+                name: metadata.name || `file_${fileId.substring(0, 8)}.pdf`,
+              };
+            }
           }
         }
       }
@@ -179,10 +256,25 @@ export async function downloadFile(fileId, apiKey = null) {
 
     if (fileResponse.ok) {
       const contentType = fileResponse.headers.get('content-type');
+      const buffer = Buffer.from(await fileResponse.arrayBuffer());
       
-      // Check if we got a PDF
+      // Check if it's a PDF by magic bytes (more reliable than content-type)
+      // Google Drive often returns application/octet-stream instead of application/pdf
+      if (buffer.length >= 4 && buffer[0] === 0x25 && buffer[1] === 0x50 && buffer[2] === 0x44 && buffer[3] === 0x46) {
+        // It's a PDF! Get filename from Content-Disposition or use default
+        const contentDisposition = fileResponse.headers.get('content-disposition');
+        let name = `file_${fileId.substring(0, 8)}.pdf`;
+        if (contentDisposition) {
+          const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+          if (filenameMatch) {
+            name = decodeURIComponent(filenameMatch[1].replace(/['"]/g, ''));
+          }
+        }
+        return { buffer, name };
+      }
+      
+      // If content-type says PDF but magic bytes don't match, still check
       if (contentType?.includes('pdf')) {
-        const buffer = Buffer.from(await fileResponse.arrayBuffer());
         // Verify it's actually a PDF by checking magic bytes
         if (buffer[0] === 0x25 && buffer[1] === 0x50 && buffer[2] === 0x44 && buffer[3] === 0x46) {
           // Try to get filename from Content-Disposition

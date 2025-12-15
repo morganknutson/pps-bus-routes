@@ -1,28 +1,65 @@
-# Download Scripts
+# Scripts Documentation
 
-## Option 1: Via API (Recommended)
+## PDF Fetch Script (Recommended)
 
-This uses the running backend server to fetch and parse routes:
+### `trigger-pdf-fetch.js` - Fetch PDFs from Google Drive
+
+This script uses the job queue system to fetch PDFs from school Drive folders. It works with or without Redis.
+
+**Usage:**
 
 ```bash
-# First, make sure the server is running:
-npm run dev
+# Single school
+node scripts/trigger-pdf-fetch.js <schoolId>
 
-# Then in another terminal:
-node scripts/download-via-api.js
+# All schools with drive links
+node scripts/trigger-pdf-fetch.js --all
+
+# Show help
+node scripts/trigger-pdf-fetch.js --help
 ```
 
-This will save all parsed routes to `data/routes.json`.
+**Examples:**
 
-## Option 2: Direct Download (Requires API Key or Manual File IDs)
+```bash
+# Fetch PDFs for Arleta school
+node scripts/trigger-pdf-fetch.js arleta
 
-The direct download script tries to parse the Drive folder page, but this is less reliable. For best results, use Option 1.
+# Fetch PDFs for all schools
+node scripts/trigger-pdf-fetch.js --all
+```
 
-## Output
+**Features:**
+- Uses job queue system (background processing, retry logic)
+- Automatic cleanup of orphaned PDFs (files removed from Drive)
+- Polling-based status updates (works without Redis)
+- Progress tracking and result summaries
+- Error handling with clear messages
 
-All scripts save data to:
-- `data/routes.json` - Parsed route data in JSON format
-- `data/pdfs/` - Downloaded PDF files (if using direct download)
+**Requirements:**
+- Backend server must be running (default: http://localhost:3001)
+- Schools must have `driveLink` configured in `data/schools.json`
+- Works in development mode (no Redis required)
+
+**Output:**
+- PDFs saved to: `data/schools/{schoolId}/pdfs/`
+- Job status tracked in job history
+- Progress displayed in real-time
+
+---
+
+## Legacy Scripts
+
+### `download-all-school-pdfs.js` (Deprecated)
+
+⚠️ **This script is deprecated.** Use `trigger-pdf-fetch.js` instead.
+
+The new script provides better error handling, orphaned PDF cleanup, and job queue integration.
+
+### `download-via-api.js` (Legacy)
+
+Legacy script for fetching routes via API. The new PDF fetch system supersedes this.
+
 
 
 

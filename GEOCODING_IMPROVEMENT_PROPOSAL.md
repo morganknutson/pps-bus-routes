@@ -343,3 +343,4 @@ class GeocodingService {
 - Do you want to keep Nominatim as a fallback, or fully replace it?
 - Should we implement batch processing optimization immediately, or start simple?
 
+

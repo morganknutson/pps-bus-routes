@@ -9,7 +9,7 @@ import { Route, School, Stop } from '../types';
 interface Section {
   id: string;
   title: string;
-  subsections?: { id: string; title: string }[];
+  subsections?: { id: string; title: string; isHighlighted?: boolean }[];
 }
 
 const sections: Section[] = [
@@ -20,6 +20,7 @@ const sections: Section[] = [
       { id: 'understanding-school-routes', title: '1. Understanding School Routes' },
       { id: 'checking-pdfs-drive', title: '2. Checking PDFs in Drive Links' },
       { id: 'processing-pdfs', title: '3. Processing PDFs' },
+      { id: 'step-by-step-processing-flow', title: '⭐ Step-by-Step Processing Flow', isHighlighted: true },
       { id: 'creating-routes', title: '4. Creating Routes' },
       { id: 'geocoding-stops', title: '5. Geocoding Stops' },
       { id: 'plotting-routes', title: '6. Plotting Routes on Map' },
@@ -34,12 +35,16 @@ const sections: Section[] = [
       { id: 'geocoding-service', title: '1. GeocodingService' },
       { id: 'drive-service', title: '2. DriveService' },
       { id: 'pdf-parser', title: '3. PdfParser' },
-      { id: 'autocomplete-service', title: '4. AutocompleteService' },
-      { id: 'neighborhood-service', title: '5. NeighborhoodService' },
-      { id: 'street-geometry-service', title: '6. StreetGeometryService' },
-      { id: 'places-service', title: '7. PlacesService' },
-      { id: 'directions-service', title: '8. DirectionsService' },
-      { id: 'scheduler-service', title: '9. SchedulerService' },
+      { id: 'route-processor', title: '4. RouteProcessor' },
+      { id: 'autocomplete-service', title: '5. AutocompleteService' },
+      { id: 'neighborhood-service', title: '6. NeighborhoodService' },
+      { id: 'street-geometry-service', title: '7. StreetGeometryService' },
+      { id: 'places-service', title: '8. PlacesService' },
+      { id: 'directions-service', title: '9. DirectionsService' },
+      { id: 'scheduler-service', title: '10. SchedulerService' },
+      { id: 'verification-service', title: '11. VerificationService' },
+      { id: 'google-sites-service', title: '12. GoogleSitesService' },
+      { id: 'job-queue-system', title: '13. Job Queue System' },
     ],
   },
   {
@@ -103,7 +108,6 @@ const exampleStop: Stop = {
   id: 'stop-1',
   address: 'SW Patton Rd & SW Montgomery Dr [NE]',
   coordinates: [-122.6784, 45.5152],
-  displayName: 'SW Patton Rd & SW Montgomery Dr, Portland, OR 97201, USA',
   neighborhood: 'Sylvan-Highlands',
   time: '8:36 am',
   direction: 'NE',
@@ -120,7 +124,6 @@ const exampleRoute: Route = {
       id: 'stop-2',
       address: '3737 SW Humphrey Blvd [NE]',
       coordinates: [-122.6821, 45.5123],
-      displayName: '3737 SW Humphrey Blvd, Portland, OR 97221, USA',
       neighborhood: 'Sylvan-Highlands',
       time: '8:54 am',
       direction: 'NE',
@@ -268,18 +271,20 @@ export function TechPage() {
                           padding: '6px 12px',
                           borderRadius: '4px',
                           cursor: 'pointer',
-                          color: 'var(--text-secondary)',
+                          color: subsection.isHighlighted ? 'var(--text-primary)' : 'var(--text-secondary)',
                           fontSize: '13px',
+                          fontWeight: subsection.isHighlighted ? 'bold' : 'normal',
                           transition: 'all 0.2s ease',
                           marginBottom: '2px',
+                          backgroundColor: subsection.isHighlighted ? 'var(--bg-tertiary)' : 'transparent',
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
                           e.currentTarget.style.color = 'var(--text-primary)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                          e.currentTarget.style.color = 'var(--text-secondary)';
+                          e.currentTarget.style.backgroundColor = subsection.isHighlighted ? 'var(--bg-tertiary)' : 'transparent';
+                          e.currentTarget.style.color = subsection.isHighlighted ? 'var(--text-primary)' : 'var(--text-secondary)';
                         }}
                       >
                         {subsection.title}
@@ -351,6 +356,7 @@ export function TechPage() {
   "coordinates": [-122.6984, 45.5123],  // [lng, lat]
   "schoolPageLink": "https://www.pps.net/westsylvan",
   "driveLink": "https://drive.google.com/drive/folders/...",
+  "createdAt": "2024-01-15T10:00:00.000Z",
   "schoolTypes": ["Middle School"],
   "routeCount": 12
 }`}
@@ -404,32 +410,208 @@ export function TechPage() {
                 3. Processing PDFs
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>
-                Each PDF file is downloaded and parsed to extract route information and stop addresses.
+                PDFs are processed through a unified processor architecture that handles parsing, geocoding, and route creation. The system uses a shared <strong>RouteProcessor</strong> service that is called by three different entry points: CLI script, batch API, and scheduled processor.
               </p>
+              
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
-                <strong style={{ color: 'var(--text-primary)' }}>Process:</strong>
-                <ol style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li>Download PDF file from Google Drive using <strong>DriveService</strong></li>
-                  <li>Save PDF to <code>data/schools/{'{schoolId}'}/pdfs/</code> for archival</li>
-                  <li>Extract text content using <code>pdf-parse</code> library</li>
-                  <li>Use <strong>PdfParser</strong> to parse route information:
+                <strong style={{ color: 'var(--text-primary)' }}>Processor Architecture:</strong>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px', marginBottom: '10px' }}>
+                  All PDF processing uses a shared <strong>RouteProcessor</strong> service to ensure consistent behavior:
+                </p>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>Single Processor</strong> (<code>scripts/process-single-pdf.js</code>) - CLI tool for processing one PDF</li>
+                  <li><strong>Batch Processor</strong> (<code>backend/routes/processPdfs.js</code>) - API endpoint that processes all PDFs for a school (calls single processor in a loop)</li>
+                  <li><strong>Scheduled Processor</strong> (<code>backend/services/schedulerService.js</code>) - Automated daily processing from Google Drive (calls batch processor)</li>
+                </ul>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
+                  <strong>Hierarchy:</strong> Scheduled Processor → Batch Processor → Single Processor → RouteProcessor
+                </p>
+              </div>
+
+              <div id="step-by-step-processing-flow" style={{ 
+                backgroundColor: 'var(--bg-secondary)', 
+                padding: '20px', 
+                borderRadius: '12px', 
+                marginBottom: '20px',
+                border: '2px solid #4ECDC4',
+                boxShadow: '0 4px 12px rgba(78, 205, 196, 0.15)',
+                scrollMarginTop: '80px',
+              }}>
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '10px', 
+                  marginBottom: '15px' 
+                }}>
+                  <span style={{ fontSize: '20px', color: '#4ECDC4' }}>⭐</span>
+                  <strong style={{ color: 'var(--text-primary)', fontSize: '18px' }}>
+                    Step-by-Step Processing Flow
+                  </strong>
+                </div>
+                <div style={{ 
+                  color: 'var(--text-secondary)', 
+                  marginTop: '10px',
+                  lineHeight: '1.8',
+                }}>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-file-pdf" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Parse PDF</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Extract text content using <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>pdf-parse</code> library</li>
+                          <li style={{ marginBottom: '4px' }}>Use <strong>PdfParser</strong> to parse route information:
+                            <ul style={{ marginTop: '6px', paddingLeft: '20px' }}>
+                              <li>Extract route name and direction from filename (e.g., "100SYL-A" → "100", "Morning")</li>
+                              <li>Extract anchor name (school loading zone)</li>
+                              <li>Parse stop addresses from PDF text using regex patterns</li>
+                              <li>Format addresses (expand abbreviations, normalize street names)</li>
+                              <li>Mark loading zone stops with <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>skipGeocoding: true</code></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-school" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Match School</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Load <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>data/schools.json</code></li>
+                          <li style={{ marginBottom: '4px' }}>Match anchor name to school by finding school name in anchor name</li>
+                          <li style={{ marginBottom: '4px' }}>Extract school address and coordinates from matched school</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Geocode Stops</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Use <strong>GeocodingService</strong> to geocode all stops</li>
+                          <li style={{ marginBottom: '4px' }}>Skip stops marked with <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>skipGeocoding: true</code> (loading zones)</li>
+                          <li style={{ marginBottom: '4px' }}>Add neighborhood information via reverse geocoding</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-graduation-cap" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Add School Stop</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Create school stop using exact address and coordinates from <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>schools.json</code></li>
+                          <li style={{ marginBottom: '4px' }}>Add school stop at beginning (Afternoon routes) or end (Morning routes) of route</li>
+                          <li style={{ marginBottom: '4px' }}>Mark with <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>isSchoolStop: true</code></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-filter" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Filter Loading Zones</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Remove all stops with <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>skipGeocoding: true</code> from final route</li>
+                          <li style={{ marginBottom: '4px' }}>Loading zones are not actual bus stops (where buses park at night)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-route" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Calculate Route Geometry</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Use <strong>DirectionsService</strong> to calculate street-following path between stops</li>
+                          <li style={{ marginBottom: '4px' }}>Convert coordinates from <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>[lng, lat]</code> to <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>[lat, lng]</code> for directions API</li>
+                          <li style={{ marginBottom: '4px' }}>Store route geometry as array of <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>[lat, lng]</code> coordinates</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-map" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Aggregate Neighborhoods</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Collect unique neighborhoods from all stops</li>
+                          <li style={{ marginBottom: '4px' }}>Store in route's <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>neighborhoods</code> array</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-cog" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Create Final Route Object</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Calculate statistics (total stops, geocoded stops, failed stops)</li>
+                          <li style={{ marginBottom: '4px' }}>Add <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>processedAt</code> timestamp</li>
+                          <li style={{ marginBottom: '4px' }}>Include all metadata (filename, fileId, modifiedTime if available)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <i className="fas fa-save" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Save to File</strong>
+                        <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
+                          <li style={{ marginBottom: '4px' }}>Save processed route to <code style={{ backgroundColor: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '3px' }}>data/schools/{'{schoolId}'}/processed-routes/{'{filename}'}.json</code></li>
+                          <li style={{ marginBottom: '4px' }}>Overwrites existing file if reprocessing</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Entry Points:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>CLI Script:</strong> <code>node scripts/process-single-pdf.js &lt;path-to-pdf&gt;</code>
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
-                      <li>Extract route name and direction from filename (e.g., "100SYL-A" → "100", "Morning")</li>
-                      <li>Extract anchor name (school loading zone)</li>
-                      <li>Parse stop addresses from PDF text using regex patterns</li>
-                      <li>Format addresses (expand abbreviations, normalize street names)</li>
-                      <li>Filter out loading zones and school stops (handled separately)</li>
+                      <li>Processes a single PDF file from local filesystem</li>
+                      <li>Used for testing and manual processing</li>
                     </ul>
                   </li>
-                  <li>Create initial route object with stops (no coordinates yet)</li>
-                </ol>
+                  <li><strong>Batch API:</strong> <code>POST /api/process-pdfs/process/{'{schoolId}'}</code>
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Processes all PDFs for a school from <code>data/schools/{'{schoolId}'}/pdfs/</code></li>
+                      <li>Used by Verification Page "Process PDFs" and "Reprocess" buttons</li>
+                      <li>Calls single processor for each PDF in sequence</li>
+                    </ul>
+                  </li>
+                  <li><strong>Scheduled Processor:</strong> Automatic daily processing at 2:00 AM
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Downloads PDFs from Google Drive for all schools</li>
+                      <li>Processes each PDF using the shared processor</li>
+                      <li>Enqueued as background jobs via Job Queue System</li>
+                    </ul>
+                  </li>
+                </ul>
               </div>
+
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>Services Involved:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li><strong>DriveService</strong> - Downloads PDF files</li>
+                  <li><strong>RouteProcessor</strong> - Core processing logic (shared by all entry points)</li>
                   <li><strong>PdfParser</strong> - Extracts and parses route data from PDF text</li>
-                  <li><strong>Drive API Route</strong> - <code>POST /api/drive/folder/{'{folderId}'}/parse</code></li>
+                  <li><strong>GeocodingService</strong> - Converts addresses to coordinates</li>
+                  <li><strong>NeighborhoodService</strong> - Gets neighborhood names from coordinates</li>
+                  <li><strong>DirectionsService</strong> - Calculates street-following route geometry</li>
+                  <li><strong>DriveService</strong> - Downloads PDF files (for scheduled processor)</li>
                 </ul>
               </div>
             </div>
@@ -963,9 +1145,86 @@ export function TechPage() {
               </div>
             </div>
 
+            <div id="route-processor" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                4. RouteProcessor
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Core service that processes a single PDF from buffer to final processed route. This is the shared processing logic used by all entry points (CLI script, batch API, and scheduled processor).
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Function:</strong>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px', marginBottom: '10px' }}>
+                  <code>processSinglePDF(pdfBuffer, filename, fileId, options)</code>
+                </p>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>pdfBuffer</strong> - PDF file buffer (Buffer object)</li>
+                  <li><strong>filename</strong> - PDF filename (e.g., "100SYL-A_effective_082625.pdf")</li>
+                  <li><strong>fileId</strong> - Optional file ID (for Drive files)</li>
+                  <li><strong>options</strong> - Processing options:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li><code>logPrefix</code> - Prefix for log messages (e.g., "[Scheduler]")</li>
+                      <li><code>saveToFile</code> - Whether to save the processed route to file (default: false)</li>
+                      <li><code>outputPath</code> - Optional custom output path</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Processing Steps:</strong>
+                <ol style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>Parse PDF</strong> - Uses <strong>PdfParser</strong> to extract route and stops from PDF text</li>
+                  <li><strong>Match School</strong> - Matches anchor name to school in <code>schools.json</code> to get school address/coordinates</li>
+                  <li><strong>Geocode Stops</strong> - Uses <strong>GeocodingService</strong> to convert all stop addresses to coordinates</li>
+                  <li><strong>Add School Stop</strong> - Adds school stop from <code>schools.json</code> at beginning (Afternoon) or end (Morning) of route</li>
+                  <li><strong>Filter Loading Zones</strong> - Removes all stops with <code>skipGeocoding: true</code> (loading zones are not actual bus stops)</li>
+                  <li><strong>Calculate Route Geometry</strong> - Uses <strong>DirectionsService</strong> to calculate street-following path between stops</li>
+                  <li><strong>Aggregate Neighborhoods</strong> - Collects unique neighborhoods from all stops</li>
+                  <li><strong>Create Final Route Object</strong> - Assembles complete route with metadata, stats, and geometry</li>
+                  <li><strong>Save to File</strong> (if <code>saveToFile: true</code>) - Saves to <code>data/schools/{'{schoolId}'}/processed-routes/{'{filename}'}.json</code></li>
+                </ol>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Used By:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>CLI Script</strong> (<code>scripts/process-single-pdf.js</code>) - Processes one PDF from command line</li>
+                  <li><strong>Batch Processor</strong> (<code>backend/routes/processPdfs.js</code>) - Processes all PDFs for a school (calls this function in a loop)</li>
+                  <li><strong>Scheduled Processor</strong> (<code>backend/services/schedulerService.js</code>) - Processes PDFs downloaded from Google Drive</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Key Features:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>Single Source of Truth</strong> - All processing logic in one place ensures consistent behavior</li>
+                  <li><strong>Automatic Loading Zone Filtering</strong> - Removes loading zone stops (marked with <code>skipGeocoding: true</code>) from final route</li>
+                  <li><strong>School Stop Integration</strong> - Automatically adds school stop from <code>schools.json</code> with verified address/coordinates</li>
+                  <li><strong>Route Geometry Calculation</strong> - Calculates street-following path between stops for accurate visualization</li>
+                  <li><strong>Neighborhood Aggregation</strong> - Collects and stores unique neighborhoods the route passes through</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Data Storage:</strong>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
+                  Processed routes are saved to: <code>data/schools/{'{schoolId}'}/processed-routes/{'{filename}'}.json</code>
+                </p>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
+                  The route object includes:
+                </p>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li>Route metadata (id, name, direction, filename)</li>
+                  <li>All stops with coordinates (excluding loading zones)</li>
+                  <li>School stop (if matched from schools.json)</li>
+                  <li>Route geometry (street-following path)</li>
+                  <li>Neighborhoods array</li>
+                  <li>Processing statistics (total stops, geocoded, failed)</li>
+                  <li>Processing timestamp</li>
+                </ul>
+              </div>
+            </div>
+
             <div id="autocomplete-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                4. AutocompleteService
+                5. AutocompleteService
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Provides address autocomplete suggestions for address input fields.
@@ -1025,7 +1284,7 @@ export function TechPage() {
 
             <div id="neighborhood-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                5. NeighborhoodService
+                6. NeighborhoodService
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Performs reverse geocoding to get neighborhood names from coordinates.
@@ -1105,7 +1364,7 @@ export function TechPage() {
 
             <div id="street-geometry-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                6. StreetGeometryService
+                7. StreetGeometryService
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Finds full street geometry by finding endpoints and routing between them.
@@ -1174,7 +1433,7 @@ export function TechPage() {
 
             <div id="places-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                7. PlacesService
+                8. PlacesService
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Searches for schools and places using Google Places API.
@@ -1232,7 +1491,7 @@ export function TechPage() {
 
             <div id="directions-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                8. DirectionsService
+                9. DirectionsService
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Calculates routes between waypoints following actual streets.
@@ -1290,10 +1549,10 @@ export function TechPage() {
 
             <div id="scheduler-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                9. SchedulerService
+                10. SchedulerService
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
-                Automatically checks Google Drive for updated PDFs and processes them.
+                Automatically checks Google Drive for updated PDFs, downloads them, and processes them using the shared <strong>RouteProcessor</strong> service.
               </p>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>APIs Used:</strong>
@@ -1304,10 +1563,29 @@ export function TechPage() {
                       <li>Cron Expression: <code>0 2 * * *</code></li>
                     </ul>
                   </li>
-                  <li><strong>DriveService</strong> (for listing/downloading files)</li>
-                  <li><strong>PdfParser</strong> (for parsing PDFs)</li>
-                  <li><strong>GeocodingService</strong> (for geocoding stops)</li>
+                  <li><strong>PdfSyncJobQueue</strong> (for enqueueing PDF sync jobs)</li>
+                  <li><strong>WorkerService</strong> (processes the enqueued jobs in background)</li>
+                  <li><strong>RouteProcessor</strong> (for processing downloaded PDFs)</li>
                 </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Process:</strong>
+                <ol style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li>Scheduler runs daily at 2:00 AM</li>
+                  <li>Loads all schools with Drive links from <code>data/schools.json</code></li>
+                  <li>Enqueues PDF sync jobs for each school using <strong>PdfSyncJobQueue</strong></li>
+                  <li>Jobs are processed by <strong>WorkerService</strong> in the background</li>
+                  <li>For each downloaded PDF:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Downloads PDF from Google Drive using <strong>DriveService</strong></li>
+                      <li>Saves PDF to <code>data/schools/{'{schoolId}'}/pdfs/</code></li>
+                      <li>Processes PDF using <strong>RouteProcessor.processSinglePDF()</strong></li>
+                      <li>Saves processed route to <code>data/schools/{'{schoolId}'}/processed-routes/</code></li>
+                    </ul>
+                  </li>
+                  <li>Jobs use <code>LOW</code> priority for scheduled checks</li>
+                  <li>Results are stored in <code>data/pdf-sync-status.json</code></li>
+                </ol>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>Data Storage:</strong>
@@ -1333,6 +1611,363 @@ export function TechPage() {
                 </pre>
               </div>
             </div>
+
+            <div id="verification-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                11. VerificationService
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Validates school Google Sites and Drive links to ensure initial data is correct before the scheduler uses it.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Functionality:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>verifyGoogleSitesLink()</strong> - Verifies a Google Sites link for a school:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Checks if the page is accessible (HTTP HEAD request)</li>
+                      <li>Fetches page content to check if school name appears</li>
+                      <li>Looks for Drive links on the page for cross-reference</li>
+                      <li>Returns validation result with errors and warnings</li>
+                    </ul>
+                  </li>
+                  <li><strong>verifyDriveLink()</strong> - Verifies a Google Drive folder link:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Extracts folder ID from various Drive URL formats</li>
+                      <li>Checks if folder is accessible</li>
+                      <li>Lists PDF files in the folder using DriveService</li>
+                      <li>Validates that PDFs are present and accessible</li>
+                      <li>Returns validation result with PDF count</li>
+                    </ul>
+                  </li>
+                  <li><strong>verifySchoolLinks()</strong> - Verifies both Sites and Drive links for a school:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Calls both verification methods</li>
+                      <li>Returns combined result with overall validity</li>
+                      <li>Includes local PDF count and file list</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Data Storage:</strong>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
+                  Verification reports are stored in <code>data/verification-report.json</code>:
+                </p>
+                <pre style={{ 
+                  backgroundColor: '#1e1e1e', 
+                  padding: '15px', 
+                  borderRadius: '4px', 
+                  overflow: 'auto',
+                  color: '#d4d4d4',
+                  fontSize: '13px',
+                  marginTop: '10px'
+                }}>
+{`{
+  "timestamp": "2024-01-20T10:00:00.000Z",
+  "totalSchools": 25,
+  "summary": {
+    "validSitesLinks": 20,
+    "invalidSitesLinks": 3,
+    "missingSitesLinks": 2,
+    "validDriveLinks": 22,
+    "invalidDriveLinks": 2,
+    "missingDriveLinks": 1,
+    "fullyValid": 18,
+    "partiallyValid": 5,
+    "invalid": 2
+  },
+  "schools": [
+    {
+      "schoolId": "west-sylvan",
+      "schoolName": "West Sylvan",
+      "sitesLink": {
+        "valid": true,
+        "accessible": true,
+        "schoolNameFound": true,
+        "errors": [],
+        "warnings": []
+      },
+      "driveLinkResult": {
+        "valid": true,
+        "accessible": true,
+        "hasPdfs": true,
+        "pdfCount": 12,
+        "errors": [],
+        "warnings": []
+      },
+      "overallValid": true,
+      "localPdfCount": 12,
+      "localPdfFiles": ["100SYL-A_effective_082625.pdf", ...]
+    }
+  ]
+}`}
+                </pre>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Rate Limiting:</strong>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
+                  Uses 500ms delay between requests to avoid rate limiting when verifying multiple schools.
+                </p>
+              </div>
+            </div>
+
+            <div id="google-sites-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                12. GoogleSitesService
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Discovers school pages and Drive links by scraping Google Sites pages. Used to automatically find school links when adding new schools.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Functionality:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>findSchoolPageLink()</strong> - Finds Google Sites page for a school:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Tries multiple URL patterns to handle different naming conventions</li>
+                      <li>Base URL: <code>https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules</code></li>
+                      <li>Patterns tried: original ID, ID without "west-" prefix, ID without hyphens, ID with underscores</li>
+                      <li>Returns the first accessible URL found, or null if none found</li>
+                    </ul>
+                  </li>
+                  <li><strong>extractDriveLinks()</strong> - Extracts Google Drive folder links from a Google Sites page:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Scrapes HTML for Drive links in href attributes</li>
+                      <li>Finds embedded Drive folders in iframe src attributes</li>
+                      <li>Extracts Drive URLs from JavaScript/JSON data</li>
+                      <li>Looks for folder IDs in HTML attributes</li>
+                      <li>Normalizes all found URLs to standard format</li>
+                      <li>Returns array of unique Drive folder links</li>
+                    </ul>
+                  </li>
+                  <li><strong>findBestDriveLink()</strong> - Validates and selects the best Drive link:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Prioritizes links that look like folders</li>
+                      <li>Validates accessibility of each link</li>
+                      <li>Returns first valid folder link, or null if none valid</li>
+                    </ul>
+                  </li>
+                  <li><strong>discoverSchoolLinks()</strong> - Discovers both Sites and Drive links for a school:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Finds Google Sites page link</li>
+                      <li>Extracts Drive links from the page</li>
+                      <li>Validates and selects best Drive link</li>
+                      <li>Returns both links or nulls if not found</li>
+                    </ul>
+                  </li>
+                  <li><strong>extractFolderId()</strong> - Extracts folder ID from various Drive URL formats:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Supports: <code>/drive/folders/FOLDER_ID</code>, <code>/open?id=FOLDER_ID</code>, <code>/embeddedfolderview?id=FOLDER_ID</code>, etc.</li>
+                    </ul>
+                  </li>
+                  <li><strong>normalizeDriveUrl()</strong> - Normalizes Drive URLs to standard format</li>
+                  <li><strong>validateFolder()</strong> - Validates that a Drive folder is accessible</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Usage:</strong>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px', marginBottom: '10px' }}>
+                  Used when adding new schools to automatically discover their Google Sites page and Drive folder links. The service scrapes the PPS Google Sites directory to find school pages and extract embedded Drive links.
+                </p>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Rate Limiting:</strong>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
+                  Uses 1 second delay between requests to avoid rate limiting when discovering multiple schools.
+                </p>
+              </div>
+            </div>
+
+            <div id="job-queue-system" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                13. Job Queue System
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Background job processing system for PDF synchronization and other async tasks. Uses BullMQ with Redis (optional) or falls back to in-memory queue for development.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Components:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>BaseJobQueue</strong> - Abstract base class defining job queue interface</li>
+                  <li><strong>JobQueue</strong> - Concrete implementation using BullMQ with Redis or in-memory fallback</li>
+                  <li><strong>PdfSyncJobQueue</strong> - Specialized queue for PDF sync operations</li>
+                  <li><strong>WorkerService</strong> - Worker service that processes jobs from the queue</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Libraries Used:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>BullMQ</strong> (npm package)
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Library: <code>bullmq</code></li>
+                      <li>Purpose: Job queue management with Redis backend</li>
+                      <li>Features: Job prioritization, retries, delayed jobs, job history</li>
+                    </ul>
+                  </li>
+                  <li><strong>ioredis</strong> (npm package)
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Library: <code>ioredis</code></li>
+                      <li>Purpose: Redis client for BullMQ</li>
+                      <li>Optional: Falls back to in-memory queue if Redis not available</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Redis Configuration:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>Environment Variable:</strong> <code>REDIS_URL</code> (optional)</li>
+                  <li><strong>Production Mode:</strong> When <code>REDIS_URL</code> is set, uses Redis for persistent job storage</li>
+                  <li><strong>Development Mode:</strong> When <code>REDIS_URL</code> is not set, uses in-memory queue (jobs lost on restart)</li>
+                  <li><strong>Worker Service:</strong> Automatically detects Redis availability and uses appropriate worker mode</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Job Types:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><code>PDF_SYNC</code> - Download PDFs for a school from Google Drive</li>
+                  <li><code>PDF_PROCESS</code> - Process/parse PDFs for a school</li>
+                  <li><code>DRIVE_CHECK</code> - Check for Drive updates (scheduled)</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Job Statuses:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><code>waiting</code> - Job is queued and waiting to be processed</li>
+                  <li><code>active</code> - Job is currently being processed by a worker</li>
+                  <li><code>completed</code> - Job completed successfully</li>
+                  <li><code>failed</code> - Job failed after all retry attempts</li>
+                  <li><code>delayed</code> - Job is scheduled for future execution</li>
+                  <li><code>paused</code> - Job queue is paused</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Job Priorities:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><code>LOW (1)</code> - Scheduled checks (e.g., daily scheduler)</li>
+                  <li><code>NORMAL (5)</code> - Default priority for user-initiated jobs</li>
+                  <li><code>HIGH (10)</code> - Manual user requests that should be processed quickly</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Worker Service:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>Production Mode (with Redis):</strong>
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Uses BullMQ Worker for background processing</li>
+                      <li>Concurrency: Configurable via <code>WORKER_CONCURRENCY</code> env var (default: 2)</li>
+                      <li>Rate Limiting: Max 1 job per 2 seconds (to avoid Drive API rate limits)</li>
+                      <li>Automatic retries with exponential backoff</li>
+                    </ul>
+                  </li>
+                  <li><strong>Development Mode (without Redis):</strong>
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Uses polling worker that checks queue every 1 second</li>
+                      <li>Processes jobs synchronously</li>
+                      <li>Maintains 2-second minimum interval between jobs (rate limiting)</li>
+                      <li>Jobs are lost on server restart (in-memory queue)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>PDF Sync Job Process:</strong>
+                <ol style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li>Extract folder ID from school's Drive link</li>
+                  <li>Get existing PDFs from local storage</li>
+                  <li>List PDF files from Google Drive folder</li>
+                  <li>Compare modified times to determine which files need downloading</li>
+                  <li>Download new/updated PDFs (with rate limiting)</li>
+                  <li>Update sync status in <code>data/pdf-sync-status.json</code></li>
+                  <li>Return result with download counts and errors</li>
+                </ol>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Configuration:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><code>REDIS_URL</code> - Redis connection URL (optional)</li>
+                  <li><code>WORKER_CONCURRENCY</code> - Number of concurrent workers (default: 2)</li>
+                  <li><code>JOB_RETRY_ATTEMPTS</code> - Number of retry attempts (default: 3)</li>
+                  <li><code>JOB_RETRY_DELAY</code> - Retry delay in ms (default: 5000)</li>
+                  <li><code>JOB_HISTORY_RETENTION_DAYS</code> - Days to keep completed jobs (default: 30)</li>
+                  <li><code>JOB_FAILED_RETENTION_DAYS</code> - Days to keep failed jobs (default: 7)</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Data Storage:</strong>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
+                  Job data is stored in Redis (if available) or in-memory. Sync status is persisted to:
+                </p>
+                <pre style={{ 
+                  backgroundColor: '#1e1e1e', 
+                  padding: '15px', 
+                  borderRadius: '4px', 
+                  overflow: 'auto',
+                  color: '#d4d4d4',
+                  fontSize: '13px',
+                  marginTop: '10px'
+                }}>
+{`// data/pdf-sync-status.json
+{
+  "west-sylvan": {
+    "lastModifiedPdf": "2024-01-20T10:00:00.000Z",
+    "lastChecked": "2024-01-20T10:05:00.000Z"
+  },
+  "lincoln": {
+    "lastModifiedPdf": "2024-01-19T15:30:00.000Z",
+    "lastChecked": "2024-01-20T10:05:00.000Z"
+  }
+}`}
+                </pre>
+              </div>
+              <ExpandableExample title="Example: Job Status Response">
+                <pre style={{ 
+                  backgroundColor: '#1e1e1e', 
+                  padding: '15px', 
+                  borderRadius: '4px', 
+                  overflow: 'auto',
+                  color: '#d4d4d4',
+                  fontSize: '13px',
+                  marginBottom: '15px'
+                }}>
+{`// GET /api/jobs/{jobId} response:
+{
+  "id": "123",
+  "name": "pdf-sync",
+  "data": {
+    "schoolId": "west-sylvan"
+  },
+  "status": "completed",
+  "progress": 100,
+  "result": {
+    "schoolId": "west-sylvan",
+    "downloaded": 3,
+    "skipped": 5,
+    "errors": [],
+    "totalInDrive": 8,
+    "lastModifiedPdf": "2024-01-20T10:00:00.000Z",
+    "lastChecked": "2024-01-20T10:05:00.000Z"
+  },
+  "error": null,
+  "createdAt": "2024-01-20T10:00:00.000Z",
+  "processedAt": "2024-01-20T10:01:00.000Z",
+  "finishedAt": "2024-01-20T10:05:00.000Z",
+  "attemptsMade": 1,
+  "attemptsTotal": 3
+}
+
+// GET /api/jobs/stats response:
+{
+  "waiting": 2,
+  "active": 1,
+  "completed": 45,
+  "failed": 1,
+  "delayed": 0,
+  "total": 49,
+  "isRedisAvailable": true
+}`}
+                </pre>
+              </ExpandableExample>
+            </div>
           </section>
 
           <section id="frontend-services" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
@@ -1351,6 +1986,7 @@ export function TechPage() {
                 <strong style={{ color: 'var(--text-primary)' }}>Endpoints:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li><code>GET /api/drive/folder/{'{folderId}'}</code> - List files in Drive folder</li>
+                  <li><code>GET /api/drive/file/{'{fileId}'}</code> - Download specific file from Drive</li>
                   <li><code>POST /api/drive/folder/{'{folderId}'}/parse</code> - Parse folder and process PDFs</li>
                   <li><code>POST /api/geocode/address</code> - Geocode single address</li>
                   <li><code>POST /api/geocode/batch</code> - Batch geocode addresses</li>
@@ -1361,7 +1997,39 @@ export function TechPage() {
                   <li><code>GET /api/neighborhoods/from-routes</code> - Get neighborhoods from routes</li>
                   <li><code>GET /api/neighborhoods/list</code> - Get neighborhoods list</li>
                   <li><code>GET /api/data/routes</code> - Get processed routes</li>
+                  <li><code>PUT /api/data/routes/{'{routeId}'}/stops/{'{stopId}'}</code> - Update stop data</li>
+                  <li><code>PUT /api/data/routes/{'{routeId}'}/geometry</code> - Update route geometry</li>
                   <li><code>GET /api/schools</code> - Get schools list</li>
+                  <li><code>GET /api/schools/{'{schoolId}'}</code> - Get specific school</li>
+                  <li><code>POST /api/schools</code> - Create new school</li>
+                  <li><code>PUT /api/schools/{'{schoolId}'}</code> - Update school</li>
+                  <li><code>POST /api/schools/{'{schoolId}'}/update-address</code> - Update school address</li>
+                  <li><code>POST /api/schools/batch-update-addresses</code> - Batch update school addresses</li>
+                  <li><code>DELETE /api/schools/{'{schoolId}'}</code> - Delete school</li>
+                  <li><code>POST /api/routes/calculate</code> - Calculate route between waypoints</li>
+                  <li><code>GET /api/routes/diagnostics</code> - Get route diagnostics</li>
+                  <li><code>POST /api/routes/reset-stats</code> - Reset route statistics</li>
+                  <li><code>POST /api/streets/geometry</code> - Get street geometry</li>
+                  <li><code>GET /api/scheduler/status</code> - Get scheduler status</li>
+                  <li><code>POST /api/scheduler/toggle</code> - Toggle scheduler on/off</li>
+                  <li><code>POST /api/scheduler/run-now</code> - Trigger scheduler manually</li>
+                  <li><code>GET /api/verification/report</code> - Get verification report</li>
+                  <li><code>POST /api/verification/verify/{'{schoolId}'}</code> - Verify specific school</li>
+                  <li><code>POST /api/verification/verify-all</code> - Verify all schools</li>
+                  <li><code>GET /api/pdf-status/status</code> - Get PDF status report</li>
+                  <li><code>POST /api/pdf-sync/fetch/{'{schoolId}'}</code> - Fetch PDFs for a school</li>
+                  <li><code>GET /api/pdf-sync/status/{'{schoolId}'}</code> - Get sync status for a school</li>
+                  <li><code>GET /api/pdf-sync/status</code> - Get sync status for all schools</li>
+                  <li><code>GET /api/process-pdfs/status</code> - Get processing status for all schools</li>
+                  <li><code>POST /api/process-pdfs/process/{'{schoolId}'}</code> - Process all PDFs for a school</li>
+                  <li><code>POST /api/jobs/enqueue</code> - Enqueue a new job</li>
+                  <li><code>GET /api/jobs</code> - List jobs (with optional filters: jobType, status, limit)</li>
+                  <li><code>GET /api/jobs/{'{jobId}'}</code> - Get job status by ID</li>
+                  <li><code>POST /api/jobs/{'{jobId}'}/cancel</code> - Cancel a job</li>
+                  <li><code>POST /api/jobs/{'{jobId}'}/retry</code> - Retry a failed job</li>
+                  <li><code>GET /api/jobs/stats</code> - Get job queue statistics</li>
+                  <li><code>GET /api/jobs/school/{'{schoolId}'}</code> - Get jobs for a specific school</li>
+                  <li><code>GET /api/health</code> - Health check endpoint</li>
                 </ul>
               </div>
             </div>
@@ -1535,6 +2203,16 @@ export function TechPage() {
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
                 Processed Route Example
               </h3>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Note:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><code>geometry</code> - Street-following route path as array of <code>[lat, lng]</code> coordinates (for Leaflet). Optional, calculated when route is processed.</li>
+                  <li><code>fileId</code> - Google Drive file ID of the source PDF</li>
+                  <li><code>modifiedTime</code> - Last modified time of the PDF file in Google Drive</li>
+                  <li><code>isSchoolStop</code> - Indicates if stop is the school loading zone (added automatically from schools.json)</li>
+                  <li><code>schoolName</code> - Name of school (only present on school stops)</li>
+                </ul>
+              </div>
               <pre style={{ 
                 backgroundColor: '#1e1e1e', 
                 padding: '15px', 
@@ -1548,6 +2226,8 @@ export function TechPage() {
   "name": "100",
   "direction": "Morning",
   "filename": "100SYL-A_effective_082625.pdf",
+  "fileId": "1a2b3c4d5e6f7g8h9i0j",
+  "modifiedTime": "2024-01-20T08:00:00.000Z",
   "stops": [
     {
       "id": "stop-1",
@@ -1576,6 +2256,18 @@ export function TechPage() {
       "originalLine": "8:54 am3737 SW HUMPHREY BLVD [NE]100SYL-A(12)Stop Order #:",
       "isSchoolStop": false,
       "skipGeocoding": false
+    },
+    {
+      "id": "stop-0",
+      "address": "1301 SW 25th Ave, Portland, OR 97201",
+      "coordinates": [-122.6984, 45.5123],
+      "displayName": "1301 SW 25th Ave, Portland, OR 97201",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY",
+      "isSchoolStop": true,
+      "schoolName": "West Sylvan",
+      "skipGeocoding": false
     }
   ],
   "anchorName": "WEST SYLVAN GT LOADING ZONE IN DRIVEWAY",
@@ -1585,7 +2277,13 @@ export function TechPage() {
     "totalStops": 15,
     "geocodedStops": 14,
     "failedStops": 1
-  }
+  },
+  "geometry": [
+    [45.5152, -122.6784],
+    [45.5153, -122.6785],
+    [45.5154, -122.6786]
+  ],
+  "geometryUpdatedAt": "2024-01-20T10:35:00.000Z"
 }`}
               </pre>
             </div>
@@ -1669,6 +2367,10 @@ export function TechPage() {
 {`data/
 ├── schools.json                    # All schools metadata
 ├── scheduler-state.json            # Scheduler status
+├── verification-report.json        # School link verification report
+├── pdf-status.json                 # PDF status report
+├── pdf-sync-status.json            # PDF sync status for all schools
+├── jobs/                            # Job queue data (Redis or in-memory)
 ├── cache/
 │   └── neighborhood-cache.json     # Cached neighborhood lookups
 └── schools/

@@ -9,9 +9,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import { listFolderFiles, downloadFile } from './driveService.js';
-import { parseRouteFromPDF } from './pdfParser.js';
-import { geocodingService } from './geocodingService.js';
 import { getSchoolIdFromFilename, getSchoolPdfDir } from '../utils/schoolUtils.js';
+import { pdfSyncJobQueue } from './jobQueue/index.js';
+import { JOB_PRIORITY } from './jobQueue/jobTypes.js';
+import { processSinglePDF } from './routeProcessor.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,9 +21,7 @@ const require = createRequire(import.meta.url);
 // Paths
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 const SCHEDULER_STATE_FILE = path.join(DATA_DIR, 'scheduler-state.json');
-
-// Use require for pdf-parse (CommonJS module)
-const pdfParse = require(path.join(__dirname, '..', 'node_modules', 'pdf-parse'));
+const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
 
 const FOLDER_ID = '1BC03MH02DFuUL6teeq4jkcT2THRGgzxj';
 
@@ -63,13 +62,6 @@ function saveState() {
   }
 }
 
-/**
- * Geocode all stops for a route
- * Uses GeocodingService which handles Google Maps API with Nominatim fallback
- */
-async function geocodeStops(stops, city = 'Portland', state = 'OR') {
-  return await geocodingService.geocodeStops(stops, city, state);
-}
 
 /**
  * Check if a file needs to be updated by comparing with existing processed route
@@ -115,36 +107,18 @@ async function processPDFFile(driveFile, apiKey) {
     const pdfPath = path.join(pdfsDir, name);
     fs.writeFileSync(pdfPath, buffer);
     
-    // Parse PDF
-    const pdfData = await pdfParse(buffer);
-    const route = parseRouteFromPDF(pdfData.text, driveFile.id, name);
+    // Process PDF using shared processor
+    const finalRoute = await processSinglePDF(buffer, name, driveFile.id, {
+      logPrefix: '[Scheduler]',
+      saveToFile: true,
+    });
     
-    if (!route || route.stops.length === 0) {
-      return { success: false, error: 'No stops found in PDF' };
-    }
+    // Add Drive-specific metadata
+    finalRoute.fileId = driveFile.id;
+    finalRoute.modifiedTime = driveFile.modifiedTime || null;
     
-    // Geocode stops
-    const geocodedStops = await geocodeStops(route.stops);
-    
-    // Create final route object
-    const finalRoute = {
-      id: route.id,
-      name: route.name,
-      filename: route.filename,
-      stops: geocodedStops,
-      processedAt: new Date().toISOString(),
-      stats: {
-        totalStops: geocodedStops.length,
-        geocodedStops: geocodedStops.filter(s => s.coordinates).length,
-        failedStops: geocodedStops.filter(s => !s.coordinates).length,
-      },
-    };
-    
-    // Save to school-specific processed-routes directory
+    // Re-save with updated metadata
     const processedRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
-    if (!fs.existsSync(processedRoutesDir)) {
-      fs.mkdirSync(processedRoutesDir, { recursive: true });
-    }
     const outputFilename = name.replace('.pdf', '.json');
     const outputPath = path.join(processedRoutesDir, outputFilename);
     fs.writeFileSync(outputPath, JSON.stringify(finalRoute, null, 2));
@@ -156,7 +130,7 @@ async function processPDFFile(driveFile, apiKey) {
 }
 
 /**
- * Run the check: compare Drive files with existing processed routes
+ * Run the check: enqueue PDF sync jobs for all schools with Drive links
  */
 async function runCheck() {
   console.log('[Scheduler] Starting daily check at', new Date().toISOString());
@@ -167,82 +141,32 @@ async function runCheck() {
   saveState();
   
   try {
-    const apiKey = process.env.GOOGLE_API_KEY || null;
+    // Load schools
+    const schools = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
     
-    // List files from Drive
-    const driveFiles = await listFolderFiles(FOLDER_ID, apiKey);
-    console.log(`[Scheduler] Found ${driveFiles.length} files in Drive`);
+    // Get all schools with Drive links
+    const schoolsWithDriveLinks = schools.filter(s => s.driveLink);
+    console.log(`[Scheduler] Found ${schoolsWithDriveLinks.length} schools with Drive links`);
     
-    // Load existing processed routes from all school directories
-    const existingRoutes = {};
-    const schoolsDir = path.join(DATA_DIR, 'schools');
-    if (fs.existsSync(schoolsDir)) {
-      const schoolDirs = fs.readdirSync(schoolsDir, { withFileTypes: true })
-        .filter(dirent => dirent.isDirectory())
-        .map(dirent => dirent.name);
-      
-      for (const schoolId of schoolDirs) {
-        const processedRoutesDir = path.join(schoolsDir, schoolId, 'processed-routes');
-        if (fs.existsSync(processedRoutesDir)) {
-          const files = fs.readdirSync(processedRoutesDir).filter(f => f.endsWith('.json'));
-          for (const filename of files) {
-            try {
-              const filePath = path.join(processedRoutesDir, filename);
-              const content = fs.readFileSync(filePath, 'utf8');
-              const route = JSON.parse(content);
-              existingRoutes[route.filename] = route;
-            } catch (error) {
-              console.error(`[Scheduler] Error loading route ${filename}:`, error);
-            }
-          }
-        }
-      }
-    }
-    
-    // Check each file
-    const results = {
-      new: [],
-      updated: [],
-      unchanged: [],
-      errors: [],
-    };
-    
-    for (const driveFile of driveFiles) {
-      const existingRoute = existingRoutes[driveFile.name];
-      const shouldUpdate = fileNeedsUpdate(driveFile, existingRoute);
-      
-      if (shouldUpdate) {
-        console.log(`[Scheduler] Processing ${driveFile.name}...`);
-        const result = await processPDFFile(driveFile, apiKey);
-        
-        if (result.success) {
-          if (existingRoute) {
-            results.updated.push(driveFile.name);
-          } else {
-            results.new.push(driveFile.name);
-          }
-        } else {
-          results.errors.push({ file: driveFile.name, error: result.error });
-        }
-      } else {
-        results.unchanged.push(driveFile.name);
-      }
-    }
+    // Enqueue PDF sync jobs for all schools (with low priority for scheduled checks)
+    const schoolIds = schoolsWithDriveLinks.map(s => s.id);
+    const jobIds = await pdfSyncJobQueue.enqueueBulkSyncJobs(schoolIds, {
+      priority: JOB_PRIORITY.LOW,
+      attempts: 2, // Fewer retries for scheduled jobs
+    });
     
     schedulerState.lastRunStatus = 'success';
     schedulerState.lastRunError = null;
     
-    console.log(`[Scheduler] Check complete:`);
-    console.log(`  New: ${results.new.length}`);
-    console.log(`  Updated: ${results.updated.length}`);
-    console.log(`  Unchanged: ${results.unchanged.length}`);
-    console.log(`  Errors: ${results.errors.length}`);
+    console.log(`[Scheduler] Enqueued ${jobIds.length} PDF sync jobs`);
     
     saveState();
     
     return {
       success: true,
-      results,
+      jobsEnqueued: jobIds.length,
+      schoolIds: schoolIds,
+      jobIds: jobIds,
     };
   } catch (error) {
     console.error('[Scheduler] Error during check:', error);

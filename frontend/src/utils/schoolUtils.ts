@@ -2,9 +2,17 @@ import L from 'leaflet';
 import { createSchoolIconHTML } from './fontAwesomeIcons';
 
 // Infer school type(s) from name - returns array to support hybrid schools
-export function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School')[] {
+export function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
   const name = schoolName.toLowerCase();
-  const types: ('Elementary School' | 'Middle School' | 'High School')[] = [];
+  const types: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] = [];
+  
+  // Hybrid schools - schools that serve multiple grade levels
+  // Check these FIRST before other type checks
+  const hybridSchools = ['access'];
+  
+  if (hybridSchools.some(key => name.includes(key))) {
+    return ['Hybrid'];
+  }
   
   // Check for explicit type in name
   if (name.includes('elementary')) types.push('Elementary School');
@@ -29,22 +37,6 @@ export function getSchoolTypes(schoolName: string): ('Elementary School' | 'Midd
     types.push('Middle School');
   }
   
-  // Hybrid schools - schools that serve multiple grade levels
-  const hybridSchools: Record<string, ('Elementary School' | 'Middle School' | 'High School')[]> = {
-    'access': ['Elementary School', 'Middle School'],
-  };
-  
-  for (const [key, hybridTypes] of Object.entries(hybridSchools)) {
-    if (name.includes(key)) {
-      // Add all hybrid types if not already present
-      hybridTypes.forEach(type => {
-        if (!types.includes(type)) {
-          types.push(type);
-        }
-      });
-    }
-  }
-  
   // Default to elementary if no types found
   if (types.length === 0) {
     types.push('Elementary School');
@@ -53,7 +45,10 @@ export function getSchoolTypes(schoolName: string): ('Elementary School' | 'Midd
   return types;
 }
 
-export function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'High School')[]): string {
+export function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[]): string {
+  if (schoolTypes.includes('Hybrid')) {
+    return '#9C27B0'; // Purple for hybrid schools
+  }
   if (schoolTypes.length === 1) {
     switch (schoolTypes[0]) {
       case 'Elementary School':
@@ -66,7 +61,7 @@ export function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle Schoo
         return '#4ECDC4'; // Default teal
     }
   }
-  return '#9C27B0'; // Purple for hybrid schools
+  return '#4ECDC4'; // Default teal
 }
 
 export function createSchoolIcon(color: string): L.DivIcon {

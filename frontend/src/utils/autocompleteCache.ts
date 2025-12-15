@@ -110,3 +110,4 @@ class AutocompleteCache {
 // Export singleton instance
 export const autocompleteCache = new AutocompleteCache();
 export { AutocompleteCache };
+

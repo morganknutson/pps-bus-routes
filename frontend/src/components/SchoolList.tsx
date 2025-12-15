@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { School } from '../types';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 
 // Infer school type(s) from name - returns array to support hybrid schools
-function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School')[] {
+function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
   const name = schoolName.toLowerCase();
+  
+  // Hybrid schools - schools that serve multiple grade levels
+  // Check these FIRST before other type checks
+  const hybridSchools = ['access'];
+  
+  if (hybridSchools.some(key => name.includes(key))) {
+    return ['Hybrid'];
+  }
   
   // Check for explicit type in name
   const hasElementary = name.includes('elementary');
@@ -28,7 +36,7 @@ function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle Scho
   // Default to elementary if no match
   const isElementary = hasElementary || (!isMiddleSchool && !isHighSchool);
   
-  const types: ('Elementary School' | 'Middle School' | 'High School')[] = [];
+  const types: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] = [];
   if (isElementary) types.push('Elementary School');
   if (isMiddleSchool) types.push('Middle School');
   if (isHighSchool) types.push('High School');
@@ -37,7 +45,10 @@ function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle Scho
 }
 
 // Get color for school type(s)
-function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'High School')[]): string {
+function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[]): string {
+  if (schoolTypes.includes('Hybrid')) {
+    return '#9C27B0'; // Purple for hybrid schools
+  }
   if (schoolTypes.length === 1) {
     switch (schoolTypes[0]) {
       case 'Elementary School':
@@ -51,17 +62,6 @@ function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'H
     }
   }
   
-  // For hybrid schools
-  if (schoolTypes.includes('Elementary School') && schoolTypes.includes('Middle School')) {
-    return '#2E7D32'; // Darker green-blue
-  }
-  if (schoolTypes.includes('Middle School') && schoolTypes.includes('High School')) {
-    return '#FF6F00'; // Darker orange
-  }
-  if (schoolTypes.includes('Elementary School') && schoolTypes.includes('High School')) {
-    return '#9C27B0'; // Purple
-  }
-  
   return '#4ECDC4'; // Default teal
 }
 
@@ -71,15 +71,36 @@ interface SchoolListProps {
   onSelectSchool: (schoolId: string | null) => void;
   enableEditing?: boolean;
   onUpdateSchool?: (schoolId: string, updates: { schoolPageLink?: string | null; driveLink?: string | null }) => void;
+  searchTerm?: string;
+  onSearchChange?: (term: string) => void;
+  schoolTypeFilters?: SchoolTypeFilters;
+  onFiltersChange?: (filters: SchoolTypeFilters) => void;
 }
 
-export function SchoolList({ schools, selectedSchoolId, onSelectSchool, enableEditing = false, onUpdateSchool }: SchoolListProps) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
+export function SchoolList({ 
+  schools, 
+  selectedSchoolId, 
+  onSelectSchool, 
+  enableEditing = false, 
+  onUpdateSchool,
+  searchTerm: externalSearchTerm,
+  onSearchChange: externalOnSearchChange,
+  schoolTypeFilters: externalFilters,
+  onFiltersChange: externalOnFiltersChange,
+}: SchoolListProps) {
+  const [internalSearchTerm, setInternalSearchTerm] = useState('');
+  const [internalFilters, setInternalFilters] = useState<SchoolTypeFilters>({
     elementary: true,
     middle: true,
     high: true,
+    hybrid: true,
   });
+  
+  // Use external state if provided, otherwise use internal state
+  const searchTerm = externalSearchTerm !== undefined ? externalSearchTerm : internalSearchTerm;
+  const setSearchTerm = externalOnSearchChange || setInternalSearchTerm;
+  const schoolTypeFilters = externalFilters !== undefined ? externalFilters : internalFilters;
+  const setSchoolTypeFilters = externalOnFiltersChange || setInternalFilters;
   const [editingSchoolId, setEditingSchoolId] = useState<string | null>(null);
   const [editingPageLink, setEditingPageLink] = useState('');
   const [editingDriveLink, setEditingDriveLink] = useState('');
@@ -94,15 +115,53 @@ export function SchoolList({ schools, selectedSchoolId, onSelectSchool, enableEd
     
     // School type filter
     const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
+    const isHybrid = schoolTypes.includes('Hybrid');
+    
+    // Debug logging for ACCESS
+    if (school.name === 'ACCESS') {
+      console.log('[SchoolList] ACCESS school:', {
+        name: school.name,
+        schoolTypes: school.schoolTypes,
+        inferredTypes: getSchoolTypes(school.name),
+        finalTypes: schoolTypes,
+        isHybrid,
+        hybridFilter: schoolTypeFilters.hybrid,
+        filters: schoolTypeFilters
+      });
+    }
+    
+    // If it's a hybrid school, check hybrid filter
+    if (isHybrid) {
+      if (schoolTypeFilters.hybrid) {
+        return true; // Show hybrid schools if hybrid filter is enabled
+      }
+      // If hybrid filter is disabled, don't show hybrid schools
+      if (school.name === 'ACCESS') {
+        console.log('[SchoolList] Filtering out ACCESS - hybrid filter disabled');
+      }
+      return false;
+    }
+    
+    // For non-hybrid schools, check individual type filters
     const matchesFilter = 
       (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
       (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
       (schoolTypes.includes('High School') && schoolTypeFilters.high);
     
-    if (!matchesFilter) return false;
-    
-    return true;
+    return matchesFilter;
   });
+
+  // Debug: Log filtered schools count
+  useEffect(() => {
+    console.log('[SchoolList] Filtered schools count:', filteredSchools.length);
+    const accessSchool = filteredSchools.find(s => s.name === 'ACCESS');
+    if (accessSchool) {
+      const schoolTypes = accessSchool.schoolTypes || getSchoolTypes(accessSchool.name);
+      console.log('[SchoolList] ACCESS in filtered list - types:', schoolTypes, 'isHybrid:', schoolTypes.includes('Hybrid'));
+    } else {
+      console.log('[SchoolList] ACCESS NOT in filtered list');
+    }
+  }, [filteredSchools]);
 
   const schoolsWithCoords = filteredSchools.filter(s => s.coordinates && s.coordinates.length === 2);
   const schoolsWithoutCoords = filteredSchools.filter(s => !s.coordinates || s.coordinates.length !== 2);

@@ -1,5 +1,6 @@
 import express from 'express';
-import fs from 'fs';
+import fs from 'fs/promises';
+import fsSync from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { searchSchool, getSchoolTypes } from '../services/placesService.js';
@@ -11,23 +12,65 @@ const router = express.Router();
 const SCHOOLS_FILE = path.join(__dirname, '..', '..', 'data', 'schools.json');
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 
-// Helper function to get route count for a school
+// Simple in-memory cache for route counts and update times
+// Cache expires after 5 minutes
+const routeStatsCache = new Map();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+function getCachedStats(schoolId) {
+  const cached = routeStatsCache.get(schoolId);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+  return null;
+}
+
+function setCachedStats(schoolId, data) {
+  routeStatsCache.set(schoolId, {
+    data,
+    timestamp: Date.now(),
+  });
+}
+
+function invalidateRouteStatsCache(schoolId) {
+  routeStatsCache.delete(schoolId);
+}
+
+// Export function to allow other modules to invalidate cache
+export { invalidateRouteStatsCache };
+
+// Helper function to get route count and update time for a school (optimized)
 // Counts unique routes (morning and afternoon versions of the same route count as 1)
-function getRouteCount(schoolId) {
+// Returns both count and latest update time in one pass
+async function getRouteStats(schoolId) {
+  // Check cache first
+  const cached = getCachedStats(schoolId);
+  if (cached) {
+    return cached;
+  }
+
   try {
     const schoolRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
-    if (!fs.existsSync(schoolRoutesDir)) {
-      return 0;
+    
+    try {
+      await fs.access(schoolRoutesDir);
+    } catch {
+      const stats = { routeCount: 0, routesUpdatedAt: null };
+      setCachedStats(schoolId, stats);
+      return stats;
     }
-    const files = fs.readdirSync(schoolRoutesDir).filter(f => f.endsWith('.json'));
+
+    const files = (await fs.readdir(schoolRoutesDir)).filter(f => f.endsWith('.json'));
     
     // Track unique route names (morning and afternoon versions count as 1 route)
     const uniqueRouteNames = new Set();
+    let latestTime = null;
     
-    for (const filename of files) {
+    // Read all files in parallel for better performance
+    const routePromises = files.map(async (filename) => {
       try {
         const filePath = path.join(schoolRoutesDir, filename);
-        const content = fs.readFileSync(filePath, 'utf8');
+        const content = await fs.readFile(filePath, 'utf8');
         const route = JSON.parse(content);
         
         // Extract route name, handling both new and old formats
@@ -50,25 +93,51 @@ function getRouteCount(schoolId) {
         if (routeName) {
           uniqueRouteNames.add(routeName);
         }
+        
+        // Check modifiedTime first (from Drive), then fall back to processedAt
+        const timeToCheck = route.modifiedTime || route.processedAt;
+        if (timeToCheck) {
+          const time = new Date(timeToCheck);
+          if (!latestTime || time > latestTime) {
+            latestTime = time;
+          }
+        }
+        
+        return { routeName, time: timeToCheck ? new Date(timeToCheck) : null };
       } catch (error) {
         console.error(`Error reading route file ${filename} for school ${schoolId}:`, error);
-        // Continue processing other files even if one fails
+        return null;
       }
-    }
+    });
+
+    await Promise.all(routePromises);
     
-    return uniqueRouteNames.size;
+    const stats = {
+      routeCount: uniqueRouteNames.size,
+      routesUpdatedAt: latestTime ? latestTime.toISOString() : null,
+    };
+    
+    // Cache the result
+    setCachedStats(schoolId, stats);
+    return stats;
   } catch (error) {
-    console.error(`Error counting routes for school ${schoolId}:`, error);
-    return 0;
+    console.error(`Error getting route stats for school ${schoolId}:`, error);
+    const stats = { routeCount: 0, routesUpdatedAt: null };
+    setCachedStats(schoolId, stats);
+    return stats;
   }
 }
 
 /**
  * Get all schools
  */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  const startTime = Date.now();
   try {
-    if (!fs.existsSync(SCHOOLS_FILE)) {
+    // Check if file exists
+    try {
+      await fs.access(SCHOOLS_FILE);
+    } catch {
       // Create default schools file if it doesn't exist
       const defaultSchools = [
         {
@@ -79,16 +148,20 @@ router.get('/', (req, res) => {
           createdAt: new Date().toISOString(),
         },
       ];
-      fs.writeFileSync(SCHOOLS_FILE, JSON.stringify(defaultSchools, null, 2));
+      await fs.writeFile(SCHOOLS_FILE, JSON.stringify(defaultSchools, null, 2));
       // Add route counts to default schools
+      const stats = await getRouteStats(defaultSchools[0].id);
       const schoolsWithCounts = defaultSchools.map(school => ({
         ...school,
-        routeCount: getRouteCount(school.id),
+        routeCount: stats.routeCount,
+        routesUpdatedAt: stats.routesUpdatedAt,
       }));
+      const duration = Date.now() - startTime;
+      console.log(`[GET /api/schools] Returning ${schoolsWithCounts.length} schools (${duration}ms)`);
       return res.json({ schools: schoolsWithCounts });
     }
 
-    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
     
     // Ensure schools is an array
@@ -97,15 +170,28 @@ router.get('/', (req, res) => {
       return res.status(500).json({ error: 'Invalid schools data format' });
     }
     
-    // Add route counts to each school
-    const schoolsWithCounts = schools.map(school => ({
-      ...school,
-      routeCount: getRouteCount(school.id),
-    }));
+    // Get route stats for all schools in parallel
+    const statsPromises = schools.map(school => getRouteStats(school.id));
+    const statsArray = await Promise.all(statsPromises);
     
+    // Add route counts and latest update times to each school
+    // Exclude placesData and placeId from frontend response (keep in backend data only)
+    const schoolsWithCounts = schools.map((school, index) => {
+      const { placesData, placeId, ...schoolData } = school;
+      const stats = statsArray[index];
+      return {
+        ...schoolData,
+        routeCount: stats.routeCount,
+        routesUpdatedAt: stats.routesUpdatedAt,
+      };
+    });
+    
+    const duration = Date.now() - startTime;
+    console.log(`[GET /api/schools] Returning ${schoolsWithCounts.length} schools (${duration}ms)`);
     res.json({ schools: schoolsWithCounts });
   } catch (error) {
-    console.error('Error loading schools:', error);
+    const duration = Date.now() - startTime;
+    console.error(`[GET /api/schools] Error loading schools (${duration}ms):`, error);
     console.error('Error stack:', error.stack);
     console.error('Schools file path:', SCHOOLS_FILE);
     res.status(500).json({ error: error.message, details: error.stack });
@@ -115,10 +201,11 @@ router.get('/', (req, res) => {
 /**
  * Get a specific school
  */
-router.get('/:schoolId', (req, res) => {
+router.get('/:schoolId', async (req, res) => {
+  const startTime = Date.now();
   try {
     const { schoolId } = req.params;
-    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
     const school = schools.find((s) => s.id === schoolId);
 
@@ -126,15 +213,22 @@ router.get('/:schoolId', (req, res) => {
       return res.status(404).json({ error: 'School not found' });
     }
 
-    // Add route count to the school
+    // Get route stats
+    const stats = await getRouteStats(schoolId);
+
+    // Add route count and latest update time to the school
     const schoolWithCount = {
       ...school,
-      routeCount: getRouteCount(schoolId),
+      routeCount: stats.routeCount,
+      routesUpdatedAt: stats.routesUpdatedAt,
     };
 
+    const duration = Date.now() - startTime;
+    console.log(`[GET /api/schools/${schoolId}] Returning school (${duration}ms)`);
     res.json({ school: schoolWithCount });
   } catch (error) {
-    console.error('Error loading school:', error);
+    const duration = Date.now() - startTime;
+    console.error(`[GET /api/schools/${schoolId}] Error loading school (${duration}ms):`, error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -142,7 +236,7 @@ router.get('/:schoolId', (req, res) => {
 /**
  * Create a new school
  */
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, schoolPageLink, driveLink } = req.body;
 
@@ -150,7 +244,7 @@ router.post('/', (req, res) => {
       return res.status(400).json({ error: 'School name is required' });
     }
 
-    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
 
     // Generate ID from name
@@ -173,13 +267,18 @@ router.post('/', (req, res) => {
     };
 
     schools.push(newSchool);
-    fs.writeFileSync(SCHOOLS_FILE, JSON.stringify(schools, null, 2));
+    await fs.writeFile(SCHOOLS_FILE, JSON.stringify(schools, null, 2));
 
     // Create school directory for processed routes
     const schoolDir = path.join(DATA_DIR, 'schools', id, 'processed-routes');
-    if (!fs.existsSync(schoolDir)) {
-      fs.mkdirSync(schoolDir, { recursive: true });
+    try {
+      await fs.access(schoolDir);
+    } catch {
+      await fs.mkdir(schoolDir, { recursive: true });
     }
+
+    // Invalidate cache for this school
+    routeStatsCache.delete(id);
 
     res.json({ school: newSchool });
   } catch (error) {
@@ -191,12 +290,12 @@ router.post('/', (req, res) => {
 /**
  * Update a school (including school page link and drive link)
  */
-router.put('/:schoolId', (req, res) => {
+router.put('/:schoolId', async (req, res) => {
   try {
     const { schoolId } = req.params;
     const { name, schoolPageLink, driveLink, address, coordinates } = req.body;
 
-    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
     const schoolIndex = schools.findIndex((s) => s.id === schoolId);
 
@@ -215,7 +314,7 @@ router.put('/:schoolId', (req, res) => {
     };
 
     schools[schoolIndex] = updatedSchool;
-    fs.writeFileSync(SCHOOLS_FILE, JSON.stringify(schools, null, 2));
+    await fs.writeFile(SCHOOLS_FILE, JSON.stringify(schools, null, 2));
 
     res.json({ school: updatedSchool });
   } catch (error) {
@@ -230,7 +329,7 @@ router.put('/:schoolId', (req, res) => {
 router.post('/:schoolId/update-address', async (req, res) => {
   try {
     const { schoolId } = req.params;
-    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
     const schoolIndex = schools.findIndex((s) => s.id === schoolId);
 
@@ -266,7 +365,7 @@ router.post('/:schoolId/update-address', async (req, res) => {
     };
 
     schools[schoolIndex] = updatedSchool;
-    fs.writeFileSync(SCHOOLS_FILE, JSON.stringify(schools, null, 2));
+    await fs.writeFile(SCHOOLS_FILE, JSON.stringify(schools, null, 2));
 
     console.log(`[Places API] Updated ${school.name}: ${place.address}`);
 
@@ -289,7 +388,7 @@ router.post('/:schoolId/update-address', async (req, res) => {
  */
 router.post('/batch-update-addresses', async (req, res) => {
   try {
-    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
     
     const results = [];
@@ -360,7 +459,7 @@ router.post('/batch-update-addresses', async (req, res) => {
     }
 
     // Save updated schools
-    fs.writeFileSync(SCHOOLS_FILE, JSON.stringify(updatedSchools, null, 2));
+    await fs.writeFile(SCHOOLS_FILE, JSON.stringify(updatedSchools, null, 2));
 
     const successCount = results.filter(r => r.success).length;
     const failureCount = results.filter(r => !r.success).length;
@@ -382,11 +481,11 @@ router.post('/batch-update-addresses', async (req, res) => {
 /**
  * Delete a school
  */
-router.delete('/:schoolId', (req, res) => {
+router.delete('/:schoolId', async (req, res) => {
   try {
     const { schoolId } = req.params;
 
-    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
     const filteredSchools = schools.filter((s) => s.id !== schoolId);
 
@@ -394,7 +493,10 @@ router.delete('/:schoolId', (req, res) => {
       return res.status(404).json({ error: 'School not found' });
     }
 
-    fs.writeFileSync(SCHOOLS_FILE, JSON.stringify(filteredSchools, null, 2));
+    await fs.writeFile(SCHOOLS_FILE, JSON.stringify(filteredSchools, null, 2));
+
+    // Invalidate cache for this school
+    routeStatsCache.delete(schoolId);
 
     res.json({ success: true });
   } catch (error) {

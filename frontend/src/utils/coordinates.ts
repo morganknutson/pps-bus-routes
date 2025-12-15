@@ -82,3 +82,4 @@ export function formatCoordinates(coords: CoordinateLngLat | CoordinateLatLng, f
     return `[${first.toFixed(6)}, ${second.toFixed(6)}] (lat, lng)`;
   }
 }
+

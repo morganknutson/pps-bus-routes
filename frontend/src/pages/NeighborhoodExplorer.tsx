@@ -9,10 +9,18 @@ import { useStore } from '../store/useStore';
 import { loadLocalRoutes } from '../services/localRoutes';
 import { getNeighborhoodsFromRoutes } from '../services/api';
 import { Neighborhood } from '../types';
+import { ProgressBar } from '../components/ProgressBar';
 
 export function NeighborhoodExplorer() {
-  const { selectedSchoolId, setSelectedSchool, schools, setSchools, routes, setRoutes, setLoading: setStoreLoading, isLoading, toggleRouteSelection } = useStore();
+  const { selectedSchoolId, setSelectedSchool, schools, setSchools, routes, setRoutes, setLoading: setStoreLoading, setLoadingProgress, isLoading, loadingProgress, toggleRouteSelection } = useStore();
   const [activeTab, setActiveTab] = useState<'schools' | 'neighborhoods'>('neighborhoods');
+  
+  // Wrapper to handle TabBar's expected type signature
+  const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
+    if (tab === 'schools' || tab === 'neighborhoods') {
+      setActiveTab(tab === 'neighborhoods' ? 'neighborhoods' : 'schools');
+    }
+  };
   const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
   const [loadingNeighborhoods, setLoadingNeighborhoods] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -79,15 +87,20 @@ export function NeighborhoodExplorer() {
     console.log('[NeighborhoodExplorer] Loading routes for school:', selectedSchoolId);
     const loadRoutes = async () => {
       setStoreLoading(true);
+      setLoadingProgress(0);
       try {
-        const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
+        const loadedRoutes = await loadLocalRoutes(selectedSchoolId, (progress) => {
+          setLoadingProgress(progress);
+        });
         console.log('[NeighborhoodExplorer] Loaded', loadedRoutes.length, 'routes');
         setRoutes(loadedRoutes);
+        setLoadingProgress(100);
       } catch (error) {
         console.error('[NeighborhoodExplorer] Failed to load routes:', error);
         setRoutes([]);
       } finally {
         setStoreLoading(false);
+        setLoadingProgress(null);
       }
     };
 
@@ -129,7 +142,7 @@ export function NeighborhoodExplorer() {
         {/* Sidebar */}
         <Sidebar
           header={null}
-          tabs={<TabBar activeTab={activeTab} onTabChange={setActiveTab} />}
+          tabs={<TabBar activeTab={activeTab} onTabChange={handleTabChange} />}
         >
           {activeTab === 'schools' ? (
             <SchoolList
@@ -191,11 +204,12 @@ export function NeighborhoodExplorer() {
                 {loadingNeighborhoods ? (
                   <div style={{
                     padding: '2rem',
-                    textAlign: 'center',
-                    color: 'var(--text-tertiary)',
-                    fontSize: '14px',
+                    display: 'flex',
+                    justifyContent: 'center',
                   }}>
-                    Loading neighborhoods...
+                    <div style={{ width: '300px' }}>
+                      <ProgressBar label="Loading neighborhoods..." height={8} />
+                    </div>
                   </div>
                 ) : filteredNeighborhoods.length === 0 ? (
                   <div style={{
@@ -451,22 +465,15 @@ export function NeighborhoodExplorer() {
                       color: 'var(--text-primary)',
                       borderRadius: '8px',
                       boxShadow: '0 2px 8px var(--shadow-large)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
+                      width: '200px',
                     }}
                   >
-                    <div
-                      style={{
-                        width: '16px',
-                        height: '16px',
-                        border: '2px solid #4ECDC4',
-                        borderTopColor: 'transparent',
-                        borderRadius: '50%',
-                        animation: 'spin 1s linear infinite',
-                      }}
+                    <ProgressBar 
+                      label="Loading routes..." 
+                      height={8}
+                      progress={loadingProgress ?? undefined}
+                      showPercentage={loadingProgress !== null}
                     />
-                    <span>Loading routes...</span>
                   </div>
                 )}
                 <MapView />
@@ -484,3 +491,4 @@ export function NeighborhoodExplorer() {
     </div>
   );
 }
+

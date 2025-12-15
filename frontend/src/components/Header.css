@@ -7,6 +7,11 @@
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+.app-header.sticky-header {
+  position: sticky;
+  top: 0;
+}
+
 .header-content {
   display: flex;
   justify-content: space-between;
@@ -82,5 +87,85 @@
 .admin-link {
   color: var(--text-primary);
   transition: color 0.3s ease;
+}
+
+/* Sidebar menu */
+.sidebar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  background-color: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  box-shadow: 2px 0 8px var(--shadow-large);
+  z-index: 999;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-menu.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sidebar-content {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+  display: block;
+  transition: background-color 0.2s ease, color 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav-link:hover {
+  background-color: var(--bg-secondary);
+  text-decoration: none;
+}
+
+.sidebar-nav-link-active {
+  color: var(--text-secondary);
+  font-weight: 600;
+  background-color: var(--bg-secondary);
+  border-left-color: var(--text-secondary);
+}
+
+/* Content shifting when menu is open - push content to the right */
+body.menu-open > #root {
+  margin-left: 280px;
+  transition: margin-left 0.3s ease;
+  width: calc(100vw - 280px);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1001;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+  isolation: isolate; /* Create new stacking context */
+}
+
+/* Ensure header also shifts and appears above sidebar */
+body.menu-open .app-header {
+  position: relative;
+  z-index: 1002;
 }
 

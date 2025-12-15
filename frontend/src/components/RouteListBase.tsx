@@ -1,6 +1,7 @@
 import { useState, ReactNode } from 'react';
 import { formatStreetName } from '../utils/formatAddress';
 import type { Route, Stop } from '../types';
+import { ProgressBar } from './ProgressBar';
 
 /**
  * Configuration for route list display options
@@ -206,21 +207,8 @@ export function RouteListBase({
 
   if (loading && routes.length === 0) {
     return (
-      <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-tertiary)' }}>
-        <div style={{ marginBottom: '0.5rem' }}>
-          <div
-            style={{
-              width: '24px',
-              height: '24px',
-              border: '3px solid #4ECDC4',
-              borderTopColor: 'transparent',
-              borderRadius: '50%',
-              animation: 'spin 1s linear infinite',
-              margin: '0 auto',
-            }}
-          />
-        </div>
-        <p>Loading routes...</p>
+      <div style={{ padding: '2rem', maxWidth: '300px', margin: '0 auto' }}>
+        <ProgressBar label="Loading routes..." height={8} />
       </div>
     );
   }
@@ -240,7 +228,11 @@ export function RouteListBase({
 
   // Filter routes by direction if specified
   const filteredRoutes = config.directionFilter && config.directionFilter !== 'Both'
-    ? routes.filter(route => route.direction === config.directionFilter)
+    ? routes.filter(route => {
+        // If route has no direction (null), show it for any filter
+        if (!route.direction) return true;
+        return route.direction === config.directionFilter;
+      })
     : routes;
 
   // Group routes by direction (but only show the selected direction if filter is set)
@@ -296,8 +288,7 @@ export function RouteListBase({
           ) : (
             <div
               onClick={() => {
-                toggleRouteExpand(route.id);
-                // Also toggle route selection if route selection is enabled
+                // Only toggle route selection, not expand/collapse
                 if (config.showRouteSelection && config.onRouteSelectionChange) {
                   config.onRouteSelectionChange(route.id, !route.isSelected);
                 }
@@ -309,11 +300,13 @@ export function RouteListBase({
                 padding: '0.75rem',
                 flex: 1,
                 minWidth: 0,
-                cursor: 'pointer',
+                cursor: config.showRouteSelection ? 'pointer' : 'default',
                 transition: 'background-color 0.15s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                if (config.showRouteSelection) {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'transparent';
@@ -422,8 +415,6 @@ export function RouteListBase({
           <div style={{ 
             borderTop: '1px solid var(--border-color)',
             backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
-            maxHeight: '400px',
-            overflowY: 'auto',
             transition: 'background-color 0.3s ease, border-color 0.3s ease',
           }}>
             {displayStops.map((stop, index) => 

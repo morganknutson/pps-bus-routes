@@ -251,37 +251,76 @@ class NeighborhoodService {
 
   /**
    * Get all neighborhoods from routes (for a school or all routes)
+   * Uses stored neighborhoods from stops when available, otherwise computes via reverse geocoding
    */
   async getNeighborhoodsFromRoutes(routes) {
     const allCoordinates = [];
     const coordinateToRouteMap = new Map();
+    const storedNeighborhoods = new Map(); // Map<coordKey, {neighborhood, routeInfo}>
     
-    // Collect all coordinates from routes
+    // First pass: collect coordinates and check for stored neighborhoods
     for (const route of routes) {
       if (route.stops && Array.isArray(route.stops)) {
         for (const stop of route.stops) {
           if (stop.coordinates && Array.isArray(stop.coordinates) && stop.coordinates.length === 2) {
             const coordKey = `${stop.coordinates[0]},${stop.coordinates[1]}`;
-            if (!coordinateToRouteMap.has(coordKey)) {
-              allCoordinates.push(stop.coordinates);
-              coordinateToRouteMap.set(coordKey, {
-                routeId: route.id,
-                routeName: route.name,
-                stopId: stop.id,
-                stopAddress: stop.address,
+            const routeInfo = {
+              routeId: route.id,
+              routeName: route.name,
+              stopId: stop.id,
+              stopAddress: stop.address,
+            };
+            
+            // If stop already has neighborhood stored, use it
+            if (stop.neighborhood) {
+              storedNeighborhoods.set(coordKey, {
+                neighborhood: stop.neighborhood,
+                routeInfo,
               });
+            } else if (!coordinateToRouteMap.has(coordKey)) {
+              // Only add to coordinates list if we need to geocode it
+              allCoordinates.push(stop.coordinates);
+              coordinateToRouteMap.set(coordKey, routeInfo);
             }
           }
         }
       }
     }
     
-    // Get neighborhoods for all unique coordinates
+    // Get neighborhoods for coordinates that don't have stored neighborhoods
     const neighborhoodResults = await this.getNeighborhoods(allCoordinates);
     
     // Build result structure
     const neighborhoods = new Map(); // Map<neighborhood, {count, routes: Set, stops: []}>
     
+    // Process stored neighborhoods first
+    for (const [coordKey, data] of storedNeighborhoods.entries()) {
+      const { neighborhood, routeInfo } = data;
+      
+      if (neighborhood) {
+        if (!neighborhoods.has(neighborhood)) {
+          neighborhoods.set(neighborhood, {
+            name: neighborhood,
+            count: 0,
+            routes: new Set(),
+            stops: [],
+          });
+        }
+        
+        const neighborhoodData = neighborhoods.get(neighborhood);
+        neighborhoodData.count++;
+        neighborhoodData.routes.add(routeInfo.routeName);
+        neighborhoodData.stops.push({
+          routeId: routeInfo.routeId,
+          routeName: routeInfo.routeName,
+          stopId: routeInfo.stopId,
+          stopAddress: routeInfo.stopAddress,
+          coordinates: [parseFloat(coordKey.split(',')[0]), parseFloat(coordKey.split(',')[1])],
+        });
+      }
+    }
+    
+    // Process geocoded neighborhoods
     for (let i = 0; i < neighborhoodResults.length; i++) {
       const result = neighborhoodResults[i];
       const coordKey = `${result.coordinates[0]},${result.coordinates[1]}`;

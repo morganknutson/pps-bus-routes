@@ -13,6 +13,7 @@ export function AddressInput() {
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const { setHomeAddress, homeAddress, clearHomeAddress } = useStore();
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
@@ -74,6 +75,11 @@ export function AddressInput() {
     };
   }, [query]);
 
+  // Reset highlighted index when suggestions change
+  useEffect(() => {
+    setHighlightedIndex(-1);
+  }, [suggestions]);
+
   // Close suggestions when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -128,6 +134,32 @@ export function AddressInput() {
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
+    setHighlightedIndex(-1);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showSuggestions || suggestions.length === 0) {
+      return;
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setHighlightedIndex(prev => 
+        prev < suggestions.length - 1 ? prev + 1 : prev
+      );
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setHighlightedIndex(prev => (prev > 0 ? prev - 1 : -1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
+        handleSelectSuggestion(suggestions[highlightedIndex]);
+      }
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setShowSuggestions(false);
+      setHighlightedIndex(-1);
+    }
   };
 
   return (
@@ -189,13 +221,26 @@ export function AddressInput() {
           alignItems: 'center',
           gap: '0.5rem',
         }}>
-          <h3 style={{ margin: 0, fontSize: '0.875rem', flexShrink: 0, color: 'var(--text-primary)' }}>My Address</h3>
           <div style={{ position: 'relative', flex: 1 }}>
+            <i 
+              className="fas fa-house" 
+              style={{ 
+                position: 'absolute',
+                left: '12px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                fontSize: '11px',
+                color: 'var(--text-tertiary)',
+                pointerEvents: 'none',
+                zIndex: 1,
+              }}
+            ></i>
             <input
               ref={inputRef}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
               onFocus={() => {
                 if (suggestions.length > 0) {
                   setShowSuggestions(true);
@@ -204,7 +249,7 @@ export function AddressInput() {
               placeholder="Enter your address..."
               style={{
                 width: '100%',
-                padding: '0.375rem 0.5rem',
+                padding: '0.375rem 0.5rem 0.375rem 2.25rem',
                 border: '1px solid var(--border-color)',
                 borderRadius: '4px',
                 fontSize: '14px',
@@ -251,19 +296,15 @@ export function AddressInput() {
                 <div
                   key={index}
                   onClick={() => handleSelectSuggestion(suggestion)}
+                  onMouseEnter={() => setHighlightedIndex(index)}
                   style={{
                     padding: '0.75rem',
                     cursor: 'pointer',
                     borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
                     fontSize: '14px',
                     color: 'var(--text-primary)',
+                    backgroundColor: highlightedIndex === index ? 'rgba(78, 205, 196, 0.2)' : 'var(--bg-primary)',
                     transition: 'background-color 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
                   }}
                 >
                   {suggestion.displayName}

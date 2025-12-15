@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { School } from '../types';
 import { DataPageHeader } from '../components/DataPageHeader';
@@ -8,42 +8,76 @@ import { SchoolTypeFilter, SchoolTypeFilters } from '../components/SchoolTypeFil
 import { getSchoolTypes, getSchoolColor, createSchoolIcon } from '../utils/schoolUtils';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
+import { useMarkers, MarkerData } from '../hooks/useMarkers';
+import { ProgressBar } from '../components/ProgressBar';
 import 'leaflet/dist/leaflet.css';
 
 // Set default marker icon to use Font Awesome
 const defaultIcon = createDefaultMarkerIcon();
 L.Marker.prototype.options.icon = defaultIcon;
 
-// Get color for a single school type (legacy support)
-function getSchoolColorSingle(schoolType: 'Elementary School' | 'Middle School' | 'High School'): string {
-  return getSchoolColor([schoolType]);
-}
 
-// Legacy function for backward compatibility - returns first type
-function getSchoolType(schoolName: string): 'Elementary School' | 'Middle School' | 'High School' {
-  const types = getSchoolTypes(schoolName);
-  return types[0];
-}
-
-// Component to fit map bounds to show all schools (only on initial load)
-function FitBounds({ schools }: { schools: School[] }) {
+// Component to fit map bounds to show filtered schools
+function FitBounds({ schools, selectedSchool }: { schools: School[]; selectedSchool: School | null }) {
   const map = useMap();
-  const hasFitted = useRef(false);
   
   useEffect(() => {
-    if (!hasFitted.current) {
-      const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
-      if (schoolsWithCoords.length > 0) {
-        const bounds = L.latLngBounds(
-          schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
-        );
-        map.fitBounds(bounds, { padding: [50, 50] });
-        hasFitted.current = true;
-      }
+    // Don't update bounds if a school is selected (let the zoom effect handle it)
+    if (selectedSchool) {
+      return;
     }
-  }, [map, schools]);
+    
+    const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
+    if (schoolsWithCoords.length > 0) {
+      const bounds = L.latLngBounds(
+        schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
+      );
+      map.fitBounds(bounds, { padding: [50, 50], animate: true });
+    }
+  }, [map, schools, selectedSchool]);
   
   return null;
+}
+
+// Component that uses the useMarkers hook to manage school markers
+function SchoolMarkersManager({ 
+  schools, 
+  onSchoolClick 
+}: { 
+  schools: School[]; 
+  onSchoolClick: (school: School) => void;
+}) {
+  // Memoize the click handler to avoid recreating markers unnecessarily
+  const handleSchoolClick = useCallback((school: School) => {
+    onSchoolClick(school);
+  }, [onSchoolClick]);
+
+  // Convert schools to marker data format
+  // Use stable keys based on school IDs and positions
+  const markerData: MarkerData[] = useMemo(() => {
+    console.log('[SchoolMarkersManager] Recalculating markerData for', schools.length, 'schools');
+    const data = schools
+      .filter(s => s.coordinates && s.coordinates.length === 2)
+      .map(school => {
+        const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
+        const schoolColor = getSchoolColor(schoolTypes);
+        return {
+          id: school.id,
+          position: [school.coordinates![1], school.coordinates![0]] as [number, number], // [lat, lng]
+          icon: createSchoolIcon(schoolColor),
+          onClick: () => handleSchoolClick(school),
+        };
+      });
+    console.log('[SchoolMarkersManager] Marker IDs:', data.map(m => m.id));
+    return data;
+  }, [schools, handleSchoolClick]);
+
+  // Use the reusable hook to manage markers
+  // This hook manually adds/removes markers from the Leaflet map instance
+  // ensuring reliable marker management when the array changes
+  useMarkers(markerData, { debug: true }); // ENABLE DEBUG
+
+  return null; // This component doesn't render anything
 }
 
 interface SchedulerStatus {
@@ -65,6 +99,7 @@ export function SchoolsList() {
     elementary: true,
     middle: true,
     high: true,
+    hybrid: true,
   });
   const [updatingAddress, setUpdatingAddress] = useState(false);
   
@@ -139,29 +174,60 @@ export function SchoolsList() {
     }
   };
 
-  const filteredSchools = schools.filter(school => {
-    // Search filter
-    const matchesSearch = 
-      school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    if (!matchesSearch) return false;
-    
-    // School type filter - check if school matches any of the selected filters
-    const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-    const matchesFilter = 
-      (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
-      (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
-      (schoolTypes.includes('High School') && schoolTypeFilters.high);
-    
-    if (!matchesFilter) return false;
-    
-    return true;
-  });
+  // Memoize filtered schools to avoid unnecessary recalculations
+  const filteredSchools = useMemo(() => {
+    console.log('[SchoolsList] Filtering schools with filters:', schoolTypeFilters);
+    const filtered = schools.filter(school => {
+      // Search filter
+      const matchesSearch = 
+        school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+      if (!matchesSearch) return false;
+      
+      // School type filter
+      const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
+      const isHybrid = schoolTypes.includes('Hybrid');
+      
+      // If it's a hybrid school, check hybrid filter
+      if (isHybrid) {
+        if (schoolTypeFilters.hybrid) {
+          return true; // Show hybrid schools if hybrid filter is enabled
+        }
+        // If hybrid filter is disabled, don't show hybrid schools
+        console.log(`[SchoolsList] Filtering out hybrid school ${school.name} - hybrid filter disabled`);
+        return false;
+      }
+      
+      // For non-hybrid schools, check individual type filters
+      const matchesFilter = 
+        (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
+        (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
+        (schoolTypes.includes('High School') && schoolTypeFilters.high);
+      
+      if (!matchesFilter) {
+        console.log(`[SchoolsList] Filtering out ${school.name} - types: ${schoolTypes.join(', ')}, filters:`, schoolTypeFilters);
+      }
+      
+      return matchesFilter;
+    });
+    console.log('[SchoolsList] Filtered schools count:', filtered.length, 'out of', schools.length);
+    return filtered;
+  }, [schools, searchTerm, schoolTypeFilters.elementary, schoolTypeFilters.middle, schoolTypeFilters.high, schoolTypeFilters.hybrid]);
 
   const allSchoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
-  const schoolsWithCoords = filteredSchools.filter(s => s.coordinates && s.coordinates.length === 2);
+  const schoolsWithCoords = useMemo(() => {
+    const filtered = filteredSchools.filter(s => s.coordinates && s.coordinates.length === 2);
+    console.log('[SchoolsList] Schools with coords after filtering:', filtered.length);
+    return filtered;
+  }, [filteredSchools]);
   const schoolsWithoutCoords = filteredSchools.filter(s => !s.coordinates || s.coordinates.length !== 2);
+
+  // Debug: Log when schoolsWithCoords changes
+  useEffect(() => {
+    console.log('[SchoolsList] schoolsWithCoords changed:', schoolsWithCoords.length, 'schools');
+    console.log('[SchoolsList] School IDs:', schoolsWithCoords.map(s => s.id));
+  }, [schoolsWithCoords]);
 
   // Zoom to selected school when it changes
   useEffect(() => {
@@ -187,20 +253,9 @@ export function SchoolsList() {
         flexDirection: 'column',
         gap: '1rem'
       }}>
-        <div style={{
-          width: '40px',
-          height: '40px',
-          border: '4px solid #4ECDC4',
-          borderTopColor: 'transparent',
-          borderRadius: '50%',
-          animation: 'spin 1s linear infinite',
-        }} />
-        <p>Loading schools...</p>
-        <style>{`
-          @keyframes spin {
-            to { transform: rotate(360deg); }
-          }
-        `}</style>
+        <div style={{ width: '300px' }}>
+          <ProgressBar label="Loading schools..." height={8} />
+        </div>
       </div>
     );
   }
@@ -270,7 +325,13 @@ export function SchoolsList() {
           {/* School Type Filters */}
           <SchoolTypeFilter 
             filters={schoolTypeFilters}
-            onChange={setSchoolTypeFilters}
+            onChange={(newFilters) => {
+              console.log('[SchoolsList] Filter onChange called with:', newFilters);
+              console.log('[SchoolsList] Current filters:', schoolTypeFilters);
+              console.log('[SchoolsList] Calling setSchoolTypeFilters...');
+              setSchoolTypeFilters(newFilters);
+              console.log('[SchoolsList] setSchoolTypeFilters called');
+            }}
           />
 
           {/* Search */}
@@ -435,21 +496,8 @@ export function SchoolsList() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
               />
-              <FitBounds schools={schoolsWithCoords} />
-              {schoolsWithCoords.map((school) => {
-                const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-                const schoolColor = getSchoolColor(schoolTypes);
-                return (
-                  <Marker
-                    key={school.id}
-                    position={[school.coordinates![1], school.coordinates![0]]}
-                    icon={createSchoolIcon(schoolColor)}
-                    eventHandlers={{
-                      click: () => setSelectedSchool(school),
-                    }}
-                  />
-                );
-              })}
+              <FitBounds schools={schoolsWithCoords} selectedSchool={selectedSchool} />
+              <SchoolMarkersManager schools={schoolsWithCoords} onSchoolClick={setSelectedSchool} />
             </MapContainer>
           ) : (
             <div style={{
@@ -698,4 +746,3 @@ export function SchoolsList() {
     </div>
   );
 }
-

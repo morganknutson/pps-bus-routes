@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { expandAddressForGeocoding } from '../utils/formatAddress.js';
 import { neighborhoodService } from './neighborhoodService.js';
+import { streetGeometryService } from './streetGeometryService.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -84,6 +85,7 @@ class GeocodingService {
           displayName: result.formatted_address,
           placeId: result.place_id,
           locationType: result.geometry.location_type,
+          addressComponents: result.address_components || [],
         };
       } else if (data.status === 'ZERO_RESULTS') {
         return {
@@ -234,6 +236,7 @@ class GeocodingService {
         success: true,
         coordinates: [midLon, midLat],
         displayName: `Approximate intersection of ${street1} and ${street2}`,
+        placeId: null, // No placeId for approximate intersections
         isApproximate: true,
         geocodeWarning: 'Intersection not found, using approximate location',
       };
@@ -259,6 +262,102 @@ class GeocodingService {
   }
 
   /**
+   * Check if geocoded result represents a house address (not an intersection or street)
+   * @param result Geocoding result with locationType and addressComponents
+   * @returns true if this is a house address
+   */
+  isHouseAddress(result) {
+    // Check if location type indicates a precise house location
+    if (result.locationType === 'ROOFTOP') {
+      console.log(`[GeocodingService] Detected house address: locationType=ROOFTOP`);
+      return true;
+    }
+    
+    // Check if address components include a street number (indicates specific house)
+    if (result.addressComponents && Array.isArray(result.addressComponents)) {
+      const hasStreetNumber = result.addressComponents.some(
+        component => component.types && component.types.includes('street_number')
+      );
+      if (hasStreetNumber) {
+        console.log(`[GeocodingService] Detected house address: has street_number in addressComponents`);
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
+  /**
+   * Snap house address coordinates to the nearest point on the street
+   * Uses Google Roads API to move the pin from the house to the street in front of it
+   * @param coordinates [lng, lat] coordinates of the house
+   * @returns Promise with snapped coordinates [lng, lat] or original coordinates if snapping fails
+   */
+  async snapHouseAddressToStreet(coordinates) {
+    if (!this.useGoogle || !streetGeometryService.apiKey) {
+      // Can't snap without Google API
+      return coordinates;
+    }
+    
+    try {
+      // Convert [lng, lat] to {lat, lng} format for Roads API
+      const [lng, lat] = coordinates;
+      const point = { lat, lng };
+      
+      // Snap to roads (expects array of {lat, lng} objects)
+      const snappedPoints = await streetGeometryService.snapToRoads([point]);
+      
+      if (snappedPoints && snappedPoints.length > 0) {
+        const snapped = snappedPoints[0];
+        // Convert back to [lng, lat] format
+        const snappedCoords = [snapped.location.longitude, snapped.location.latitude];
+        
+        // Calculate distance moved (in meters, approximate)
+        const distanceMoved = this.calculateDistance(coordinates, snappedCoords);
+        
+        // Only use snapped coordinates if movement is reasonable (< 50 meters)
+        // This prevents snapping to a completely different street
+        if (distanceMoved < 50) {
+          console.log(`[GeocodingService] Snapped house address to street (moved ${distanceMoved.toFixed(1)}m)`);
+          return snappedCoords;
+        } else {
+          console.warn(`[GeocodingService] Snapping moved point too far (${distanceMoved.toFixed(1)}m), keeping original coordinates`);
+          return coordinates;
+        }
+      }
+      
+      // If snapping failed, return original coordinates
+      return coordinates;
+    } catch (error) {
+      console.warn(`[GeocodingService] Failed to snap house address to street: ${error.message}`);
+      // Return original coordinates on error
+      return coordinates;
+    }
+  }
+
+  /**
+   * Calculate approximate distance between two coordinates in meters
+   * Uses Haversine formula for great-circle distance
+   * @param coord1 [lng, lat]
+   * @param coord2 [lng, lat]
+   * @returns distance in meters
+   */
+  calculateDistance(coord1, coord2) {
+    const [lng1, lat1] = coord1;
+    const [lng2, lat2] = coord2;
+    
+    const R = 6371000; // Earth radius in meters
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  /**
    * Geocode all stops for a route
    */
   async geocodeStops(stops, city = 'Portland', state = 'OR') {
@@ -266,6 +365,28 @@ class GeocodingService {
     
     for (let i = 0; i < stops.length; i++) {
       const stop = stops[i];
+      
+      // Skip geocoding for stops marked to skip (e.g., LOADING ZONE, CAB LOAD ZONE)
+      if (stop.skipGeocoding) {
+        geocodedStops.push({
+          ...stop,
+          coordinates: null,
+          skipGeocoding: true,
+        });
+        continue;
+      }
+      
+      // Skip geocoding for school stops that already have coordinates from schools.json
+      // School stops should ALWAYS use address and coordinates from schools.json, never geocoded
+      if (stop.isSchoolStop && stop.coordinates && Array.isArray(stop.coordinates) && stop.coordinates.length === 2) {
+        geocodedStops.push({
+          ...stop,
+          // Keep existing coordinates from schools.json
+          skipGeocoding: false, // Keep false to indicate it has coordinates, just not from geocoding
+        });
+        continue;
+      }
+      
       let address = stop.address;
       
       // Check if this is an intersection
@@ -279,10 +400,27 @@ class GeocodingService {
       }
       
       if (result.success) {
+        let finalCoordinates = result.coordinates;
+        
+        // If this is a house address (not an intersection), snap it to the street
+        // Intersections should stay as-is since they're already on the street
+        if (!isIntersection && this.isHouseAddress(result)) {
+          console.log(`[GeocodingService] Attempting to snap house address "${stop.address}" to street`);
+          finalCoordinates = await this.snapHouseAddressToStreet(result.coordinates);
+          if (finalCoordinates !== result.coordinates) {
+            console.log(`[GeocodingService] Successfully snapped "${stop.address}" from [${result.coordinates[0]}, ${result.coordinates[1]}] to [${finalCoordinates[0]}, ${finalCoordinates[1]}]`);
+          } else {
+            console.log(`[GeocodingService] Snapping failed or skipped for "${stop.address}", keeping original coordinates`);
+          }
+        } else if (!isIntersection) {
+          console.log(`[GeocodingService] Not snapping "${stop.address}": isHouseAddress=${this.isHouseAddress(result)}, locationType=${result.locationType}, hasAddressComponents=${!!result.addressComponents}`);
+        }
+        
         const stopData = {
           ...stop,
-          coordinates: result.coordinates,
+          coordinates: finalCoordinates,
           displayName: result.displayName,
+          placeId: result.placeId || null, // Save placeId for future lookups
         };
         
         // Add flag if this is an approximate location

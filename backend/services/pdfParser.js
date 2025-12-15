@@ -6,16 +6,19 @@ import { formatStreetName } from '../utils/formatAddress.js';
 /**
  * Extract route name and direction from filename
  * Example: "100SYL-A_effective_082625.pdf" -> { name: "100", direction: "Morning" }
+ * Supports any school code (not just SYL)
  */
 function extractRouteInfoFromFilename(filename) {
   if (!filename) {
     return { name: 'Unknown Route', direction: null };
   }
   
-  const match = filename.match(/(\d+)SYL-([AP])_/);
+  // Pattern: {ROUTE}{CODE}-{DIRECTION}_effective_{DATE}.pdf
+  // Example: "100SYL-A_effective_082625.pdf" or "238ABE-A_effective_082625.pdf"
+  const match = filename.match(/(\d+)([A-Z]{2,})-([AP])_/);
   if (match) {
     const routeNum = match[1];
-    const direction = match[2] === 'A' ? 'Morning' : 'Afternoon';
+    const direction = match[3] === 'A' ? 'Morning' : 'Afternoon';
     return { name: routeNum, direction };
   }
   
@@ -57,7 +60,8 @@ function parseStops(text, anchorName = null) {
   
   // Pattern to match stop lines: time + address + optional direction + route info
   // Format: "8:33 amADDRESS[DIRECTION]ROUTE(ORDER)Stop Order #:"
-  const stopPattern = /^(\d{1,2}:\d{2}\s*(?:am|pm))(.+?)(?:\[([NWES]+)\])?(?:\d+SYL-[AP](?:\(\d+\))?)?(?:Stop Order #:)?$/i;
+  // Supports any school code (not just SYL)
+  const stopPattern = /^(\d{1,2}:\d{2}\s*(?:am|pm))(.+?)(?:\[([NWES]+)\])?(?:\d+[A-Z]{2,}-[AP](?:\(\d+\))?)?(?:Stop Order #:)?$/i;
   
   for (const line of lines) {
     // Skip header lines
@@ -85,8 +89,9 @@ function parseStops(text, anchorName = null) {
       
       // Clean up the address
       // Remove route numbers and stop order info that might be at the end
+      // Supports any school code (not just SYL)
       address = address
-        .replace(/\d+SYL-[AP](?:\(\d+\))?/gi, '') // Remove route numbers like "100SYL-A(1)"
+        .replace(/\d+[A-Z]{2,}-[AP](?:\(\d+\))?/gi, '') // Remove route numbers like "100SYL-A(1)" or "238ABE-A(1)"
         .replace(/Stop Order #:.*$/i, '') // Remove "Stop Order #:" and anything after
         .replace(/\s+/g, ' ') // Normalize whitespace
         .trim();

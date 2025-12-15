@@ -337,3 +337,4 @@ class AutocompleteService {
 // Export singleton instance
 export const autocompleteService = new AutocompleteService();
 export { AutocompleteService };
+

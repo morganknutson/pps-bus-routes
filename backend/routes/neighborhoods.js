@@ -265,3 +265,4 @@ router.get('/list', async (req, res) => {
 });
 
 export { router as neighborhoodsRouter };
+

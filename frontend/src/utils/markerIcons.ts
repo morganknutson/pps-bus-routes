@@ -36,7 +36,7 @@ export function createSchoolIcon(routeColor: string, time?: string): L.DivIcon {
 }
 
 // Create numbered marker icons with time
-export function createNumberedIcon(number: number, routeColor: string, time?: string, isSelected?: boolean, editingMode?: boolean): L.DivIcon {
+export function createNumberedIcon(number: number, routeColor: string, time?: string, isSelected?: boolean, editingMode?: boolean, uniqueId?: string): L.DivIcon {
   const hasTime = time && time.trim().length > 0;
   const pillHeight = isSelected ? 32 : 26;
   const fontSize = isSelected ? '13px' : '11px';
@@ -53,10 +53,11 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
   // Use better estimate for selected state to account for larger font size
   const numberWidth = String(number).length * (isSelected ? 11 : 8);
   
-  // Circle size - height matches pill height, width adjusts to number width
+  // Circle size - height matches pill inner content area (pill height minus border)
   // Single digits should be perfect circles (width = height), multi-digit can be pill-shaped
   const isSingleDigit = String(number).length === 1;
-  const circleHeight = pillHeight; // Circle height matches pill height exactly
+  const borderWidth = 2; // Pill has 2px border on all sides
+  const circleHeight = pillHeight - (borderWidth * 2); // Circle height matches pill inner content area (subtract top + bottom border)
   
   // Calculate padding (needed for both single and multi-digit for positioning)
   const minPadding = Math.round(pillHeight * 0.23); // ~6px for 26px, ~7px for 32px
@@ -65,7 +66,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
   let circleWidth: number;
   if (isSingleDigit) {
     // For single digits, make a perfect circle: width = height
-    circleWidth = pillHeight;
+    circleWidth = circleHeight;
   } else {
     // For multi-digit, calculate width to fit the number with padding
     // Add small buffer to ensure no gaps
@@ -94,9 +95,11 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
   const anchorX = numberCenterX;
   const anchorY = pillHeight / 2; // Anchor at vertical center of pill where number is
   
-  // Use simple class names like the original working version
-  // Each marker instance gets its own unique number, so conflicts are unlikely
-  const classId = number;
+  // Generate unique class ID to prevent CSS collisions between markers from different routes
+  // Use uniqueId if provided (should be routeId-stopId), otherwise fall back to number
+  // Sanitize to ensure valid CSS class name (replace non-alphanumeric with hyphens)
+  const baseId = uniqueId || `stop-${number}`;
+  const classId = baseId.replace(/[^a-zA-Z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
   
   return L.divIcon({
     className: 'numbered-marker',

@@ -9,6 +9,7 @@ export interface Stop {
   isSchoolStop?: boolean; // True for school loading zone stops
   skipGeocoding?: boolean; // True for stops that should not be geocoded or displayed (e.g., CAB LOAD ZONE)
   schoolName?: string; // School name for school stops (displayed instead of address)
+  neighborhood?: string; // Neighborhood name from reverse geocoding
 }
 
 export interface Route {
@@ -17,6 +18,7 @@ export interface Route {
   direction?: 'Morning' | 'Afternoon' | null; // "Morning" or "Afternoon"
   filename?: string;
   stops: Stop[];
+  neighborhoods?: string[]; // Aggregated unique neighborhoods from all stops
   color: string;
   isSelected: boolean;
   geocodingProgress?: {
@@ -41,8 +43,9 @@ export interface School {
   driveLink: string | null; // Link to Google Drive folder with PDFs
   createdAt: string;
   updatedAt?: string;
-  schoolTypes?: ('Elementary School' | 'Middle School' | 'High School')[]; // Array to support hybrid schools
+  schoolTypes?: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[]; // Array to support hybrid schools
   routeCount?: number; // Number of routes available for this school
+  routesUpdatedAt?: string | null; // Latest modifiedTime from all routes for this school
 }
 
 export interface AppState {
@@ -51,6 +54,7 @@ export interface AppState {
   routes: Route[];
   homeAddress?: HomeAddress;
   isLoading: boolean;
+  loadingProgress: number | null; // 0-100 or null for indeterminate
   error?: string;
   selectedSchoolId: string | null;
   schools: School[];

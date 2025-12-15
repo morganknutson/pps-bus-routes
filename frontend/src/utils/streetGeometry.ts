@@ -221,11 +221,11 @@ function connectWaySegments(ways: WayElement[]): [number, number][][] {
 
       if (endNode === nextStartNode) {
         // Connect normally
-        sequence.push(...nextWay.geometry.map(p => [p.lat, p.lon]));
+        sequence.push(...nextWay.geometry.map(p => [p.lat, p.lon] as [number, number]));
         endNode = nextEndNode;
       } else if (endNode === nextEndNode) {
         // Reverse the next way
-        sequence.push(...nextWay.geometry.slice().reverse().map(p => [p.lat, p.lon]));
+        sequence.push(...nextWay.geometry.slice().reverse().map(p => [p.lat, p.lon] as [number, number]));
         endNode = nextStartNode;
       } else {
         break;
@@ -250,11 +250,11 @@ function connectWaySegments(ways: WayElement[]): [number, number][][] {
 
       if (startNode === prevEndNode) {
         // Connect normally (prepend)
-        sequence.unshift(...prevWay.geometry.map(p => [p.lat, p.lon]));
+        sequence.unshift(...prevWay.geometry.map(p => [p.lat, p.lon] as [number, number]));
         startNode = prevStartNode;
       } else if (startNode === prevStartNode) {
         // Reverse and prepend
-        sequence.unshift(...prevWay.geometry.slice().reverse().map(p => [p.lat, p.lon]));
+        sequence.unshift(...prevWay.geometry.slice().reverse().map(p => [p.lat, p.lon] as [number, number]));
         startNode = prevEndNode;
       } else {
         break;
@@ -342,11 +342,13 @@ export async function fetchStreetGeometry(
     // Filter to only ways with geometry and validate names
     const ways: WayElement[] = [];
     for (const element of data.elements) {
-      if (element.type === 'way' && element.geometry && element.geometry.length > 0) {
+      if (element.type === 'way') {
         const way = element as WayElement;
-        // Validate that the name matches (allows some flexibility)
-        if (way.tags?.name && matchesStreetName(way.tags.name, inputStreet)) {
-          ways.push(way);
+        if (way.geometry && way.geometry.length > 0) {
+          // Validate that the name matches (allows some flexibility)
+          if (way.tags?.name && matchesStreetName(way.tags.name, inputStreet)) {
+            ways.push(way);
+          }
         }
       }
     }

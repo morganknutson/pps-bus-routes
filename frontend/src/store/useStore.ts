@@ -3,6 +3,7 @@ import { AppState, Route, HomeAddress, School, Stop } from '../types';
 import { assignUniqueColors } from '../utils/colorGenerator';
 import { saveRoutesToCache, mergeCachedCoordinates } from '../services/routeCache';
 import { validateLngLat } from '../utils/coordinates';
+import { findClosestStopInDirection } from '../utils/findClosestStopInDirection';
 
 interface Store extends AppState {
   setDriveLink: (link: string) => void;
@@ -13,6 +14,7 @@ interface Store extends AppState {
   setLookupAddress: (address: HomeAddress) => void;
   clearLookupAddress: () => void;
   setLoading: (loading: boolean) => void;
+  setLoadingProgress: (progress: number | null) => void; // 0-100 or null for indeterminate
   setError: (error: string | undefined) => void;
   updateStopCoordinates: (routeId: string, stopId: string, coordinates: [number, number]) => void;
   updateRouteGeocodingProgress: (routeId: string, progress: { total: number; geocoded: number; isGeocoding: boolean }) => void;
@@ -35,6 +37,7 @@ export const useStore = create<Store>((set) => ({
   homeAddress: undefined,
   lookupAddress: undefined,
   isLoading: false,
+  loadingProgress: null as number | null, // 0-100 or null for indeterminate
   error: undefined,
   selectedSchoolId: null,
   schools: [],
@@ -52,14 +55,15 @@ export const useStore = create<Store>((set) => ({
     const colorMap = assignUniqueColors(routesWithCache.map(r => ({ id: r.id || '' })));
     
     // Assign colors and calculate geocoding progress
-    const routesWithColors = routesWithCache.map((route, index) => {
+    const routesWithColors = routesWithCache.map((route) => {
       const totalStops = route.stops.length;
       const geocodedStops = route.stops.filter(s => s.coordinates).length;
       
       return {
         ...route,
-        // Use assigned unique color, or fall back to existing color if already set
-        color: route.color || colorMap.get(route.id || '') || '#FF6B6B',
+        // Preserve existing color if it's already set, otherwise assign a new one
+        // This prevents color changes when routes are reloaded
+        color: route.color && route.color !== '' ? route.color : (colorMap.get(route.id || '') || '#FF6B6B'),
         isSelected: route.isSelected ?? true, // Default to selected
         geocodingProgress: {
           total: totalStops,
@@ -106,7 +110,9 @@ export const useStore = create<Store>((set) => ({
     localStorage.removeItem('lookupAddress');
   },
 
-  setLoading: (loading) => set({ isLoading: loading }),
+  setLoading: (loading) => set({ isLoading: loading, loadingProgress: loading ? null : null }),
+
+  setLoadingProgress: (progress) => set({ loadingProgress: progress, isLoading: progress !== null && progress < 100 }),
 
   setError: (error) => set({ error }),
 
@@ -183,7 +189,53 @@ export const useStore = create<Store>((set) => ({
 
   clearSelectedStop: () => set({ selectedStop: null }),
 
-  setDirectionFilter: (direction) => set({ directionFilter: direction }),
+  setDirectionFilter: (direction) => {
+    set((state) => {
+      // If switching to a specific direction (Morning or Afternoon) and there's a selected stop,
+      // check if we need to auto-select the closest stop in the new direction
+      if (state.selectedStop && direction !== 'Both') {
+        const currentStopDirection = state.selectedStop.route.direction;
+        
+        // Auto-select closest stop if:
+        // 1. Switching between Morning and Afternoon (not from/to Both)
+        // 2. Switching from Both to a specific direction and current stop is not in that direction
+        const shouldAutoSelect = 
+          (state.directionFilter !== 'Both' && direction !== state.directionFilter) ||
+          (state.directionFilter === 'Both' && currentStopDirection !== direction);
+        
+        if (shouldAutoSelect) {
+          const closestStop = findClosestStopInDirection(
+            state.selectedStop,
+            direction,
+            state.routes
+          );
+          
+          if (closestStop) {
+            console.log(`[useStore] Auto-selecting closest ${direction} stop:`, {
+              route: closestStop.route.name,
+              stop: closestStop.stop.address,
+              distance: `${(closestStop.distance * 1000).toFixed(0)}m`,
+            });
+            return {
+              directionFilter: direction,
+              selectedStop: { route: closestStop.route, stop: closestStop.stop, stopNumber: closestStop.stopNumber },
+            };
+          } else {
+            // No stops found in the new direction, clear selection
+            console.log(`[useStore] No ${direction} stops found, clearing selection`);
+            return {
+              directionFilter: direction,
+              selectedStop: null,
+            };
+          }
+        }
+      }
+      
+      // If switching to "Both", keep the current selection (if any)
+      // Otherwise, just update the direction filter
+      return { directionFilter: direction };
+    });
+  },
 }));
 
 // Load saved state from localStorage on init
