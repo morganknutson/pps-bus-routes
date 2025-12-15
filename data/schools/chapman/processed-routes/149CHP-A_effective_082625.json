@@ -1,0 +1,48 @@
+{
+  "id": "149CHP-A_effective_082625.pdf",
+  "name": "149",
+  "direction": "Morning",
+  "filename": "149CHP-A_effective_082625.pdf",
+  "fileId": "149CHP-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NW 14th Ave. & NW Quimby St. [SE]",
+      "time": "7:42 am",
+      "direction": "SE",
+      "originalLine": "7:42 amNW 14TH AV @ NW QUIMBY ST [SE]149CHP-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6855743,
+        45.5336051
+      ],
+      "displayName": "NW Quimby St & NW 14th Ave, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70535129999999,
+        45.533232500000004
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    }
+  ],
+  "processedAt": "2025-12-11T22:32:55.762Z",
+  "stats": {
+    "totalStops": 2,
+    "geocodedStops": 2,
+    "failedStops": 0
+  },
+  "neighborhoods": [
+    "Northwest Portland"
+  ]
+}

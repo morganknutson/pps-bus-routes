@@ -1,0 +1,28 @@
+{
+  "note": "Found 40 PDF file IDs from the Google Drive folder. These can be used with a Google Drive API key for reliable downloads.",
+  "folderId": "1BC03MH02DFuUL6teeq4jkcT2THRGgzxj",
+  "files": [
+    {
+      "id": "1SOC3p-L1Lqx3ITBu8YTvVwpeIUtqvW42",
+      "name": "100SYL-A_effective_082625.pdf"
+    },
+    {
+      "id": "1hVOh_ZUYOYP0eKDe5TMo-MMJff8Lc51P",
+      "name": "100SYL-P_effective_082625.pdf"
+    },
+    {
+      "id": "1RFHcOhLsVXQhxGP2duIl3ttkCNmStGnM",
+      "name": "101SYL-A_effective_082625.pdf"
+    },
+    {
+      "id": "1onBR_PX1h4To2bBUjgA6FxRuDoc7ErcB",
+      "name": "101SYL-P_effective_082625.pdf"
+    }
+  ],
+  "status": "File IDs extracted successfully, but direct downloads without API key are failing due to Google Drive's virus scanning protection."
+}
+
+
+
+
+

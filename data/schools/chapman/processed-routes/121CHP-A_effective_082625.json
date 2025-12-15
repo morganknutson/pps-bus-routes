@@ -1,0 +1,147 @@
+{
+  "id": "121CHP-A_effective_082625.pdf",
+  "name": "121",
+  "direction": "Morning",
+  "filename": "121CHP-A_effective_082625.pdf",
+  "fileId": "121CHP-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NW 17th Ave. & NW Riverscape St. [S]",
+      "time": "7:25 am",
+      "direction": "S",
+      "originalLine": "7:25 amNW 17TH AV @ NW RIVERSCAPE ST [S]121CHP-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.688221,
+        45.5383044
+      ],
+      "displayName": "NW 17th Ave & NW Riverscape St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "1550 NW Naito Pkwy. [SW]",
+      "time": "7:27 am",
+      "direction": "SW",
+      "originalLine": "7:27 am1550 NW NAITO PKWY [SW]121CHP-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6825437,
+        45.5351236
+      ],
+      "displayName": "Parking lot, 1550 NW Naito Pkwy, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "941 NW Naito Pkwy. [SW]",
+      "time": "7:28 am",
+      "direction": "SW",
+      "originalLine": "7:28 am941 NW NAITO PKWY [SW]121CHP-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6753336,
+        45.52959
+      ],
+      "displayName": "941 NW Naito Pkwy, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "783 NW Naito Pkwy. [SW]",
+      "time": "7:30 am",
+      "direction": "SW",
+      "originalLine": "7:30 am783 NW NAITO PKWY [SW]121CHP-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6740184,
+        45.528495
+      ],
+      "displayName": "783 NW Naito Pkwy, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "NW Naito Pkwy. & NW Davis St. [NW]",
+      "time": "7:32 am",
+      "direction": "NW",
+      "originalLine": "7:32 amNW NAITO PKWY @ NW DAVIS ST [NW]121CHP-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.67028,
+        45.52460749999999
+      ],
+      "displayName": "NW Davis St & NW Naito Pkwy, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "NW Flanders St. & NW 4th Ave. [NE]",
+      "time": "7:34 am",
+      "direction": "NE",
+      "originalLine": "7:34 amNW FLANDERS ST @ NW 4TH AV [NE]121CHP-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.674514,
+        45.525956
+      ],
+      "displayName": "NW 4th Ave & NW Flanders St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "NW 11th Ave. & NW Flanders St. (wee Village Dc) [NW]",
+      "time": "7:37 am",
+      "direction": "NW",
+      "originalLine": "7:37 amNW 11TH AV @ NW FLANDERS ST (WEE VILLAGE DC) [NW]121CHP-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -77.0368707,
+        38.9071923
+      ],
+      "displayName": "Washington, DC, USA",
+      "neighborhood": "Northwest Washington"
+    },
+    {
+      "id": "stop-8",
+      "address": "NW 10th Ave. & NW Marshall St. [SE]",
+      "time": "7:41 am",
+      "direction": "SE",
+      "originalLine": "7:41 amNW 10TH AV @ NW MARSHALL ST [SE]121CHP-A(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6814015,
+        45.5308255
+      ],
+      "displayName": "NW 10th Ave & NW Marshall St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70535129999999,
+        45.533232500000004
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    }
+  ],
+  "processedAt": "2025-12-11T22:32:38.896Z",
+  "stats": {
+    "totalStops": 9,
+    "geocodedStops": 9,
+    "failedStops": 0
+  },
+  "neighborhoods": [
+    "Northwest Portland",
+    "Northwest Washington"
+  ]
+}

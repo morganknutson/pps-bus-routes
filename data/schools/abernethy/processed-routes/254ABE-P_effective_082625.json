@@ -1,0 +1,156 @@
+{
+  "id": "254ABE-P_effective_082625.pdf",
+  "name": "254",
+  "direction": "Afternoon",
+  "filename": "254ABE-P_effective_082625.pdf",
+  "fileId": "254ABE-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2421 SE Orange Ave, Portland, OR 97214, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ABERNETHY GT & ST & CAB LOAD ZONE ON ELLIOTT",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6516263,
+        45.5058868
+      ],
+      "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
+      "schoolName": "Abernethy"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE 35th Pl. & SE Harrison St. [NW]",
+      "time": "2:41 pm",
+      "direction": "NW",
+      "originalLine": "2:41 pmSE 35TH PL @ SE HARRISON ST [NW]254ABE-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6276343,
+        45.5087918
+      ],
+      "displayName": "SE Harrison St & SE 35th Pl, Portland, OR 97214, USA",
+      "placeId": "EjRTRSBIYXJyaXNvbiBTdCAmIFNFIDM1dGggUGwsIFBvcnRsYW5kLCBPUiA5NzIxNCwgVVNBImYiZAoUChIJCxyb8I6glVQRqD6MPpM9AS8SFAoSCQscm_COoJVUEag-jD6TPQEvGhQKEgk9PUQcsqGVVBGEE9mwHz5piBoUChIJRTebmH2glVQRZ0mky5Z9J24iCg0uFyAbFQmC6LY",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-2",
+      "address": "1765 SE 32nd Pl. (edwards School) [E]",
+      "time": "2:43 pm",
+      "direction": "E",
+      "originalLine": "2:43 pm1765 SE 32ND PL (EDWARDS SCHOOL) [E]254ABE-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6319731,
+        45.5101305
+      ],
+      "displayName": "1765 SE 32nd Pl, Portland, OR 97214, USA",
+      "placeId": "EigxNzY1IFNFIDMybmQgUGwsIFBvcnRsYW5kLCBPUiA5NzIxNCwgVVNBIjESLwoUChIJ7bmQ0I-glVQRNCy9BVQ8vIQQ5Q0qFAoSCYXnMNePoJVUEf9pvi4KQsfD",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-3",
+      "address": "Hosford Gt. & St. Loading ZONE On Grant",
+      "time": "2:48 pm",
+      "direction": null,
+      "originalLine": "2:48 pmHOSFORD GT & ST LOADING ZONE ON GRANT254ABE-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-12T22:33:41.858Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50561,
+      -122.65115
+    ],
+    [
+      45.50485,
+      -122.65203
+    ],
+    [
+      45.50485,
+      -122.65139
+    ],
+    [
+      45.50484,
+      -122.64945
+    ],
+    [
+      45.50483,
+      -122.64584
+    ],
+    [
+      45.50482,
+      -122.64257
+    ],
+    [
+      45.50482,
+      -122.63968
+    ],
+    [
+      45.50483,
+      -122.63955
+    ],
+    [
+      45.50482,
+      -122.63892
+    ],
+    [
+      45.5048,
+      -122.63669
+    ],
+    [
+      45.50482,
+      -122.63542
+    ],
+    [
+      45.5048,
+      -122.63201
+    ],
+    [
+      45.50479,
+      -122.62761
+    ],
+    [
+      45.50879,
+      -122.62763
+    ],
+    [
+      45.50883,
+      -122.63161
+    ],
+    [
+      45.50971,
+      -122.63161
+    ],
+    [
+      45.5108,
+      -122.63161
+    ],
+    [
+      45.5108,
+      -122.63212
+    ],
+    [
+      45.5108,
+      -122.63275
+    ],
+    [
+      45.51033,
+      -122.63275
+    ],
+    [
+      45.5103,
+      -122.63213
+    ]
+  ]
+}

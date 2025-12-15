@@ -1,0 +1,398 @@
+{
+  "id": "246BUC-P_effective_082625.pdf",
+  "name": "246",
+  "direction": "Afternoon",
+  "filename": "246BUC-P_effective_082625.pdf",
+  "fileId": "246BUC-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "320 SE 16th Ave, Portland, OR 97214, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BUCKMAN GT LOADING ZONE ON PINE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6491015,
+        45.5204329
+      ],
+      "displayName": "320 SE 16th Ave, Portland, OR 97214, USA",
+      "schoolName": "Buckman"
+    },
+    {
+      "id": "stop-1",
+      "address": "NE 30th Ave. & NE Oregon St. [NW]",
+      "time": "2:39 pm",
+      "direction": "NW",
+      "originalLine": "2:39 pmNE 30TH AV @ NE OREGON ST [NW]246BUC-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6345011,
+        45.5286117
+      ],
+      "displayName": "NE Oregon St & NE 30th Ave, Portland, OR 97232, USA",
+      "placeId": "EjNORSBPcmVnb24gU3QgJiBORSAzMHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjMyLCBVU0EiZiJkChQKEgnNOAxbxqCVVBEFGYxxZsEu3BIUChIJzTgMW8aglVQRBRmMcWbBLtwaFAoSCQX0GAwNoZVUEXLe3O8Yc1OMGhQKEgl9lph5zqCVVBGqe1v-nCDWICIKDWUdIxsVzXXntg",
+      "neighborhood": "Kerns"
+    },
+    {
+      "id": "stop-2",
+      "address": "1557 NE Weidler St. [S]",
+      "time": "2:46 pm",
+      "direction": "S",
+      "originalLine": "2:46 pm1557 NE WEIDLER ST [S]246BUC-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.649759,
+        45.53454
+      ],
+      "displayName": "1557 NE Weidler St, Portland, OR 97232, USA",
+      "placeId": "EisxNTU3IE5FIFdlaWRsZXIgU3QsIFBvcnRsYW5kLCBPUiA5NzIzMiwgVVNBIjESLwoUChIJ941_bbWglVQRB56-uIbdusoQlQwqFAoSCTMEIsnLoJVUEWEKqpyCwVZu",
+      "neighborhood": "Sullivan's Gulch"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 3rd Ave. & NE Wasco St. [NW]",
+      "time": "2:51 pm",
+      "direction": "NW",
+      "originalLine": "2:51 pmNE 3RD AV @ NE WASCO ST [NW]246BUC-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6626957,
+        45.5322246
+      ],
+      "displayName": "NE Wasco St & NE 3rd Ave, Portland, OR 97232, USA",
+      "placeId": "EjFORSBXYXNjbyBTdCAmIE5FIDNyZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIzMiwgVVNBImYiZAoUChIJPfY3U02nlVQRo9ZIh3c60icSFAoSCT32N1NNp5VUEaPWSId3OtInGhQKEglnd86fbaGVVBFJBFvo7PKS_BoUChIJuyjKpq2glVQRUlSuqKV1M9giCg2GqiMbFXMo47Y",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE 6th Ave. & NE Pacific St. [SE]",
+      "time": "2:53 pm",
+      "direction": "SE",
+      "originalLine": "2:53 pmNE 6TH AV @ NE PACIFIC ST [SE]246BUC-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6596615,
+        45.5293184
+      ],
+      "displayName": "Northeast Pacific Street & NE 6th Ave, Portland, OR 97232, USA",
+      "placeId": "Ej5Ob3J0aGVhc3QgUGFjaWZpYyBTdHJlZXQgJiBORSA2dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMzIsIFVTQSJmImQKFAoSCc9dnoqtoJVUERvwSM43C8k8EhQKEgnPXZ6KraCVVBEb8EjONwvJPBoUChIJvYPm73KhlVQRtCJobLjA3CIaFAoSCes7Y-5Lp5VUESTxqC1l54rpIgoNADkjGxX5nuO2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "Hosford Gt. & St. Loading ZONE On Grant",
+      "time": "3:04 pm",
+      "direction": null,
+      "originalLine": "3:04 pmHOSFORD GT & ST LOADING ZONE ON GRANT246BUC-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-12T22:36:26.939Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.52044,
+      -122.64959
+    ],
+    [
+      45.52312,
+      -122.64957
+    ],
+    [
+      45.52362,
+      -122.64956
+    ],
+    [
+      45.52443,
+      -122.64958
+    ],
+    [
+      45.52471,
+      -122.6488
+    ],
+    [
+      45.52592,
+      -122.64549
+    ],
+    [
+      45.5263,
+      -122.64445
+    ],
+    [
+      45.52693,
+      -122.64291
+    ],
+    [
+      45.52811,
+      -122.6399
+    ],
+    [
+      45.52835,
+      -122.63925
+    ],
+    [
+      45.52867,
+      -122.63851
+    ],
+    [
+      45.52888,
+      -122.63795
+    ],
+    [
+      45.52923,
+      -122.63702
+    ],
+    [
+      45.52954,
+      -122.63622
+    ],
+    [
+      45.53016,
+      -122.63461
+    ],
+    [
+      45.53004,
+      -122.63446
+    ],
+    [
+      45.5299,
+      -122.63447
+    ],
+    [
+      45.52932,
+      -122.63449
+    ],
+    [
+      45.52874,
+      -122.6345
+    ],
+    [
+      45.52861,
+      -122.6345
+    ],
+    [
+      45.52861,
+      -122.63483
+    ],
+    [
+      45.52862,
+      -122.63591
+    ],
+    [
+      45.52863,
+      -122.63718
+    ],
+    [
+      45.52917,
+      -122.63717
+    ],
+    [
+      45.53036,
+      -122.63714
+    ],
+    [
+      45.53081,
+      -122.63713
+    ],
+    [
+      45.53187,
+      -122.63711
+    ],
+    [
+      45.53305,
+      -122.6371
+    ],
+    [
+      45.53352,
+      -122.63708
+    ],
+    [
+      45.53371,
+      -122.63708
+    ],
+    [
+      45.53373,
+      -122.63705
+    ],
+    [
+      45.53375,
+      -122.63702
+    ],
+    [
+      45.53375,
+      -122.63697
+    ],
+    [
+      45.53379,
+      -122.63678
+    ],
+    [
+      45.5338,
+      -122.63676
+    ],
+    [
+      45.534,
+      -122.63672
+    ],
+    [
+      45.53441,
+      -122.63672
+    ],
+    [
+      45.53466,
+      -122.63672
+    ],
+    [
+      45.53503,
+      -122.63672
+    ],
+    [
+      45.53516,
+      -122.63672
+    ],
+    [
+      45.53516,
+      -122.63736
+    ],
+    [
+      45.53516,
+      -122.63765
+    ],
+    [
+      45.53516,
+      -122.63816
+    ],
+    [
+      45.53517,
+      -122.64013
+    ],
+    [
+      45.53515,
+      -122.64074
+    ],
+    [
+      45.53502,
+      -122.64191
+    ],
+    [
+      45.53502,
+      -122.64354
+    ],
+    [
+      45.53503,
+      -122.64846
+    ],
+    [
+      45.53503,
+      -122.64965
+    ],
+    [
+      45.53503,
+      -122.65049
+    ],
+    [
+      45.53471,
+      -122.6505
+    ],
+    [
+      45.53471,
+      -122.64976
+    ],
+    [
+      45.53471,
+      -122.64949
+    ],
+    [
+      45.53491,
+      -122.64949
+    ],
+    [
+      45.53503,
+      -122.64949
+    ],
+    [
+      45.53503,
+      -122.64965
+    ],
+    [
+      45.53504,
+      -122.65111
+    ],
+    [
+      45.53505,
+      -122.65253
+    ],
+    [
+      45.53506,
+      -122.65464
+    ],
+    [
+      45.53507,
+      -122.65659
+    ],
+    [
+      45.53509,
+      -122.66065
+    ],
+    [
+      45.53509,
+      -122.66166
+    ],
+    [
+      45.53451,
+      -122.66167
+    ],
+    [
+      45.53389,
+      -122.66167
+    ],
+    [
+      45.53235,
+      -122.66168
+    ],
+    [
+      45.53222,
+      -122.66168
+    ],
+    [
+      45.53222,
+      -122.6627
+    ],
+    [
+      45.53222,
+      -122.66168
+    ],
+    [
+      45.53209,
+      -122.66168
+    ],
+    [
+      45.53127,
+      -122.66169
+    ],
+    [
+      45.53057,
+      -122.6617
+    ],
+    [
+      45.52935,
+      -122.66171
+    ],
+    [
+      45.52932,
+      -122.66002
+    ],
+    [
+      45.52932,
+      -122.65966
+    ]
+  ]
+}

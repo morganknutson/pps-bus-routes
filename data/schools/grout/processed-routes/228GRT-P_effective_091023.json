@@ -1,0 +1,372 @@
+{
+  "id": "228GRT-P_effective_091023.pdf",
+  "name": "228",
+  "direction": "Afternoon",
+  "filename": "228GRT-P_effective_091023.pdf",
+  "fileId": "228GRT-P_effective_091023.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "3119 SE Holgate Blvd, Portland, OR 97202, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:GROUT GT & ST & CAB LOADING ZONE ON 32ND",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6332002,
+        45.4910818
+      ],
+      "displayName": "3119 SE Holgate Blvd, Portland, OR 97202, USA",
+      "schoolName": "Grout"
+    },
+    {
+      "id": "stop-1",
+      "address": "4617 SE Milwaukie Ave. [E]",
+      "time": "2:38 pm",
+      "direction": "E",
+      "originalLine": "2:38 pm4617 SE MILWAUKIE AV [E]228GRT-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6511707,
+        45.4894153
+      ],
+      "displayName": "4617 SE Milwaukie Ave, Portland, OR 97202, USA",
+      "placeId": "ChIJjQbzOIkKlVQRPwhWgsoiwbk",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-2",
+      "address": "1106 SE Cora St. [N]",
+      "time": "2:39 pm",
+      "direction": "N",
+      "originalLine": "2:39 pm1106 SE CORA ST [N]228GRT-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6540058,
+        45.49196360000001
+      ],
+      "displayName": "1106 SE Cora St, Portland, OR 97202, USA",
+      "placeId": "ChIJ_4wsxIkKlVQRyID7R9G1YZk",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-3",
+      "address": "3776 SE 8th Ave. [E]",
+      "time": "2:42 pm",
+      "direction": "E",
+      "originalLine": "2:42 pm3776 SE 8TH AV [E]228GRT-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6574328,
+        45.4952619
+      ],
+      "displayName": "3776 SE 8th Ave, Portland, OR 97202, USA",
+      "placeId": "ChIJ78fTpWMKlVQRBAsqKjdfYx0",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Rhone St. & SE 11th Ave. [SW]",
+      "time": "2:44 pm",
+      "direction": "SW",
+      "originalLine": "2:44 pmSE RHONE ST @ SE 11TH AV [SW]228GRT-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6547696,
+        45.4963854
+      ],
+      "displayName": "SE Rhone St & SE 11th Ave, Portland, OR 97202, USA",
+      "placeId": "EjJTRSBSaG9uZSBTdCAmIFNFIDExdGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCe9pbzdjCpVUEbQZWMJlKahFEhQKEgnvaW83YwqVVBG0GVjCZSmoRRoUChIJN-flvUeglVQRFUyS6M53xOMaFAoSCY9txvR2CpVUEZSOhsIeBV-7IgoNjjIeGxUQXuS2",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE 8th Ave. & SE Franklin St. [SE]",
+      "time": "2:46 pm",
+      "direction": "SE",
+      "originalLine": "2:46 pmSE 8TH AV @ SE FRANKLIN ST [SE]228GRT-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6578288,
+        45.4996994
+      ],
+      "displayName": "SE Franklin St & SE 8th Ave, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBGcmFua2xpbiBTdCAmIFNFIDh0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJ478i1XoKlVQRrd9M91HaK1oSFAoSCeO_ItV6CpVUEa3fTPdR2itaGhQKEgnnVhXoZ6CVVBG_ypAkAkx3vhoUChIJ4VdWP3QKlVQRchCWNa2S5XIiCg0CtB4bFZDm47Y",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE 14th Ave. & SE Lafayette St. [NW]",
+      "time": "2:49 pm",
+      "direction": "NW",
+      "originalLine": "2:49 pmSE 14TH AV @ SE LAFAYETTE ST [NW]228GRT-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6513542,
+        45.4967756
+      ],
+      "displayName": "SE Lafayette St & SE 14th Ave, Portland, OR 97202, USA",
+      "placeId": "EjZTRSBMYWZheWV0dGUgU3QgJiBTRSAxNHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiZiJkChQKEgljVhvkfAqVVBE5LCqOJx8NvBIUChIJY1Yb5HwKlVQROSwqjicfDbwaFAoSCW31XpploJVUETZZUrRgBC0LGhQKEgk9ePMAiQqVVBGvCSXthJ9YtSIKDcxBHhsVeuPktg",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-7",
+      "address": "Kellogg Gt. Loading ZONE",
+      "time": "3:01 pm",
+      "direction": null,
+      "originalLine": "3:01 pmKELLOGG GT LOADING ZONE228GRT-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-12T22:36:13.998Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.49108,
+      -122.63369
+    ],
+    [
+      45.4906,
+      -122.63369
+    ],
+    [
+      45.49057,
+      -122.63384
+    ],
+    [
+      45.49046,
+      -122.63414
+    ],
+    [
+      45.49038,
+      -122.63434
+    ],
+    [
+      45.49034,
+      -122.63455
+    ],
+    [
+      45.49032,
+      -122.63615
+    ],
+    [
+      45.49031,
+      -122.63761
+    ],
+    [
+      45.4903,
+      -122.64007
+    ],
+    [
+      45.49031,
+      -122.64295
+    ],
+    [
+      45.49033,
+      -122.64628
+    ],
+    [
+      45.49034,
+      -122.65099
+    ],
+    [
+      45.49034,
+      -122.65117
+    ],
+    [
+      45.48962,
+      -122.65099
+    ],
+    [
+      45.48948,
+      -122.65096
+    ],
+    [
+      45.48946,
+      -122.65106
+    ],
+    [
+      45.48946,
+      -122.65109
+    ],
+    [
+      45.48948,
+      -122.65113
+    ],
+    [
+      45.48946,
+      -122.65109
+    ],
+    [
+      45.48946,
+      -122.65106
+    ],
+    [
+      45.48948,
+      -122.65096
+    ],
+    [
+      45.48962,
+      -122.65099
+    ],
+    [
+      45.49034,
+      -122.65117
+    ],
+    [
+      45.49059,
+      -122.65126
+    ],
+    [
+      45.49086,
+      -122.65139
+    ],
+    [
+      45.49202,
+      -122.65192
+    ],
+    [
+      45.49213,
+      -122.65197
+    ],
+    [
+      45.49214,
+      -122.6532
+    ],
+    [
+      45.49214,
+      -122.65422
+    ],
+    [
+      45.49196,
+      -122.65422
+    ],
+    [
+      45.49304,
+      -122.65421
+    ],
+    [
+      45.49401,
+      -122.65422
+    ],
+    [
+      45.49499,
+      -122.65451
+    ],
+    [
+      45.49499,
+      -122.65563
+    ],
+    [
+      45.49502,
+      -122.65758
+    ],
+    [
+      45.49534,
+      -122.6577
+    ],
+    [
+      45.49593,
+      -122.65787
+    ],
+    [
+      45.4964,
+      -122.65786
+    ],
+    [
+      45.4964,
+      -122.6576
+    ],
+    [
+      45.4964,
+      -122.65758
+    ],
+    [
+      45.49639,
+      -122.65693
+    ],
+    [
+      45.49639,
+      -122.65477
+    ],
+    [
+      45.49639,
+      -122.65554
+    ],
+    [
+      45.49639,
+      -122.65589
+    ],
+    [
+      45.49688,
+      -122.65589
+    ],
+    [
+      45.4974,
+      -122.65582
+    ],
+    [
+      45.49761,
+      -122.65582
+    ],
+    [
+      45.49851,
+      -122.65581
+    ],
+    [
+      45.49969,
+      -122.6558
+    ],
+    [
+      45.49969,
+      -122.65757
+    ],
+    [
+      45.4997,
+      -122.65783
+    ],
+    [
+      45.49969,
+      -122.65757
+    ],
+    [
+      45.49969,
+      -122.65656
+    ],
+    [
+      45.49969,
+      -122.65423
+    ],
+    [
+      45.4989,
+      -122.65422
+    ],
+    [
+      45.49865,
+      -122.65418
+    ],
+    [
+      45.49823,
+      -122.65406
+    ],
+    [
+      45.49783,
+      -122.65394
+    ],
+    [
+      45.4968,
+      -122.65365
+    ],
+    [
+      45.49678,
+      -122.65135
+    ]
+  ]
+}

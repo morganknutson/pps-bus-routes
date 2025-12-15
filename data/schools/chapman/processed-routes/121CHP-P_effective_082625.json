@@ -1,0 +1,156 @@
+{
+  "id": "121CHP-P_effective_082625.pdf",
+  "name": "121",
+  "direction": "Afternoon",
+  "filename": "121CHP-P_effective_082625.pdf",
+  "fileId": "121CHP-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70535129999999,
+        45.533232500000004
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    },
+    {
+      "id": "stop-1",
+      "address": "NW 17th Ave. & NW Riverscape St. [S]",
+      "time": "2:39 pm",
+      "direction": "S",
+      "originalLine": "2:39 pmNW 17TH AV @ NW RIVERSCAPE ST [S]121CHP-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.688221,
+        45.5383044
+      ],
+      "displayName": "NW 17th Ave & NW Riverscape St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "1550 NW Naito Pkwy. [SW]",
+      "time": "2:41 pm",
+      "direction": "SW",
+      "originalLine": "2:41 pm1550 NW NAITO PKWY [SW]121CHP-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6825437,
+        45.5351236
+      ],
+      "displayName": "Parking lot, 1550 NW Naito Pkwy, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "941 NW Naito Pkwy. [SW]",
+      "time": "2:42 pm",
+      "direction": "SW",
+      "originalLine": "2:42 pm941 NW NAITO PKWY [SW]121CHP-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6753336,
+        45.52959
+      ],
+      "displayName": "941 NW Naito Pkwy, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "783 NW Naito Pkwy. [SW]",
+      "time": "2:44 pm",
+      "direction": "SW",
+      "originalLine": "2:44 pm783 NW NAITO PKWY [SW]121CHP-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6740184,
+        45.528495
+      ],
+      "displayName": "783 NW Naito Pkwy, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "NW Naito Pkwy. & NW Davis St. [NW]",
+      "time": "2:46 pm",
+      "direction": "NW",
+      "originalLine": "2:46 pmNW NAITO PKWY @ NW DAVIS ST [NW]121CHP-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.67028,
+        45.52460749999999
+      ],
+      "displayName": "NW Davis St & NW Naito Pkwy, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "NW 4th Ave. & NW Flanders St. [SE]",
+      "time": "2:48 pm",
+      "direction": "SE",
+      "originalLine": "2:48 pmNW 4TH AV @ NW FLANDERS ST [SE]121CHP-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.674514,
+        45.525956
+      ],
+      "displayName": "NW 4th Ave & NW Flanders St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "NW 11th Ave. & NW Flanders St. (wee Village Dc) [NW]",
+      "time": "2:51 pm",
+      "direction": "NW",
+      "originalLine": "2:51 pmNW 11TH AV @ NW FLANDERS ST (WEE VILLAGE DC) [NW]121CHP-P(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -77.0368707,
+        38.9071923
+      ],
+      "displayName": "Washington, DC, USA",
+      "neighborhood": "Northwest Washington"
+    },
+    {
+      "id": "stop-8",
+      "address": "NW 10th Ave. & NW Marshall St. [SE]",
+      "time": "2:54 pm",
+      "direction": "SE",
+      "originalLine": "2:54 pmNW 10TH AV @ NW MARSHALL ST [SE]121CHP-P(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6814015,
+        45.5308255
+      ],
+      "displayName": "NW 10th Ave & NW Marshall St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-9",
+      "address": "WEST Sylvan Gt. Loading ZONE In Driveway",
+      "time": "3:09 pm",
+      "direction": null,
+      "originalLine": "3:09 pmWEST SYLVAN GT LOADING ZONE IN DRIVEWAY121CHP-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-11T22:32:41.319Z",
+  "stats": {
+    "totalStops": 9,
+    "geocodedStops": 9,
+    "failedStops": 0
+  },
+  "neighborhoods": [
+    "Northwest Portland",
+    "Northwest Washington"
+  ]
+}

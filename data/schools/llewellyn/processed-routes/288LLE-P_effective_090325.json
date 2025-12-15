@@ -1,0 +1,437 @@
+{
+  "id": "288LLE-P_effective_090325.pdf",
+  "name": "288",
+  "direction": "Afternoon",
+  "filename": "288LLE-P_effective_090325.pdf",
+  "fileId": "288LLE-P_effective_090325.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "6301 SE 14th Ave, Portland, OR 97202, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:LLEWELLYN GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6521794,
+        45.4771721
+      ],
+      "displayName": "6301 SE 14th Ave, Portland, OR 97202, USA",
+      "schoolName": "Llewellyn"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE 6th Ave. & SE Spokane St. [NW]",
+      "time": "2:40 pm",
+      "direction": "NW",
+      "originalLine": "2:40 pmSE 6TH AV @ SE SPOKANE ST [NW]288LLE-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6600392,
+        45.4650441
+      ],
+      "displayName": "SE Spokane St & SE 6th Ave, Portland, OR 97202, USA",
+      "placeId": "EjNTRSBTcG9rYW5lIFN0ICYgU0UgNnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiZiJkChQKEgmLef-x3gqVVBG8G74pioElXBIUChIJi3n_sd4KlVQRvBu-KYqBJVwaFAoSCZdnmBnbCpVUEYPDKSqCHgjkGhQKEgmz_4BJ2QqVVBGdlsy0twRKQSIKDUlqGRsVOJDjtg",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Spokane St. & SE 9th Ave. [SW]",
+      "time": "2:41 pm",
+      "direction": "SW",
+      "originalLine": "2:41 pmSE SPOKANE ST @ SE 9TH AV [SW]288LLE-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6569887,
+        45.4650454
+      ],
+      "displayName": "SE Spokane St & SE 9th Ave, Portland, OR 97202, USA",
+      "placeId": "EjNTRSBTcG9rYW5lIFN0ICYgU0UgOXRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiZiJkChQKEgnXlHby2wqVVBHtC_8kIilELBIUChIJ15R28tsKlVQR7Qv_JCIpRCwaFAoSCZdnmBnbCpVUEYPDKSqCHgjkGhQKEgnPh0_c2wqVVBFB3V1e2-lk8CIKDVZqGRsVYQfktg",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 16th Ave. & SE Spokane St. [SE]",
+      "time": "2:44 pm",
+      "direction": "SE",
+      "originalLine": "2:44 pmSE 16TH AV @ SE SPOKANE ST [SE]288LLE-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6490302,
+        45.4650365
+      ],
+      "displayName": "SE Spokane St & SE 16th Ave, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBTcG9rYW5lIFN0ICYgU0UgMTZ0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJt3dHLsUKlVQR8pDvhEZFyFUSFAoSCbd3Ry7FCpVUEfKQ74RGRchVGhQKEgmXZ5gZ2wqVVBGDwykqgh4I5BoUChIJg_jG7ogKlVQRUpmIi9ocIDEiCg39aRkbFUI-5bY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 19th Ave. & SE Nehalem St. [SE]",
+      "time": "2:45 pm",
+      "direction": "SE",
+      "originalLine": "2:45 pmSE 19TH AV @ SE NEHALEM ST [SE]288LLE-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6450692,
+        45.46575
+      ],
+      "displayName": "SE 19th Ave & SE Nehalem St, Portland, OR 97202, USA",
+      "placeId": "EjRTRSAxOXRoIEF2ZSAmIFNFIE5laGFsZW0gU3QsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJ3T4ro8UKlVQRfzVZ_jYeRU8SFAoSCd0-K6PFCpVUEX81Wf42HkVPGhQKEgnRY2EDhgqVVBGeAzvPCUZ1bhoUChIJFYEGobYKlVQRwwWjfB6bPHkiCg3chRkbFfzY5bY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "4617 SE Milwaukie Ave. [E]",
+      "time": "2:51 pm",
+      "direction": "E",
+      "originalLine": "2:51 pm4617 SE MILWAUKIE AV [E]288LLE-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6511707,
+        45.4894153
+      ],
+      "displayName": "4617 SE Milwaukie Ave, Portland, OR 97202, USA",
+      "placeId": "ChIJjQbzOIkKlVQRPwhWgsoiwbk",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-6",
+      "address": "Sellwood Gt. Loading ZONE",
+      "time": "2:59 pm",
+      "direction": null,
+      "originalLine": "2:59 pmSELLWOOD GT LOADING ZONE288LLE-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-12T22:36:06.067Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.47718,
+      -122.65177
+    ],
+    [
+      45.47582,
+      -122.65178
+    ],
+    [
+      45.47504,
+      -122.65177
+    ],
+    [
+      45.47394,
+      -122.65175
+    ],
+    [
+      45.47368,
+      -122.65174
+    ],
+    [
+      45.47368,
+      -122.65179
+    ],
+    [
+      45.47368,
+      -122.65184
+    ],
+    [
+      45.47366,
+      -122.65192
+    ],
+    [
+      45.47363,
+      -122.65205
+    ],
+    [
+      45.47359,
+      -122.65216
+    ],
+    [
+      45.47349,
+      -122.65231
+    ],
+    [
+      45.47339,
+      -122.65241
+    ],
+    [
+      45.47328,
+      -122.65247
+    ],
+    [
+      45.47194,
+      -122.65297
+    ],
+    [
+      45.4715,
+      -122.65301
+    ],
+    [
+      45.47147,
+      -122.65326
+    ],
+    [
+      45.47148,
+      -122.65354
+    ],
+    [
+      45.47142,
+      -122.65376
+    ],
+    [
+      45.47119,
+      -122.65411
+    ],
+    [
+      45.47107,
+      -122.6543
+    ],
+    [
+      45.47075,
+      -122.65499
+    ],
+    [
+      45.47055,
+      -122.65546
+    ],
+    [
+      45.4705,
+      -122.65561
+    ],
+    [
+      45.47035,
+      -122.65647
+    ],
+    [
+      45.46996,
+      -122.65876
+    ],
+    [
+      45.46989,
+      -122.65896
+    ],
+    [
+      45.46953,
+      -122.65898
+    ],
+    [
+      45.46932,
+      -122.659
+    ],
+    [
+      45.46719,
+      -122.659
+    ],
+    [
+      45.46576,
+      -122.65902
+    ],
+    [
+      45.46504,
+      -122.65902
+    ],
+    [
+      45.46504,
+      -122.66004
+    ],
+    [
+      45.46504,
+      -122.65872
+    ],
+    [
+      45.46505,
+      -122.65699
+    ],
+    [
+      45.46432,
+      -122.657
+    ],
+    [
+      45.46433,
+      -122.65642
+    ],
+    [
+      45.46433,
+      -122.65396
+    ],
+    [
+      45.46432,
+      -122.65129
+    ],
+    [
+      45.46432,
+      -122.64903
+    ],
+    [
+      45.46504,
+      -122.64903
+    ],
+    [
+      45.46504,
+      -122.64774
+    ],
+    [
+      45.46504,
+      -122.64707
+    ],
+    [
+      45.46553,
+      -122.64708
+    ],
+    [
+      45.4656,
+      -122.64711
+    ],
+    [
+      45.46563,
+      -122.64712
+    ],
+    [
+      45.46568,
+      -122.64708
+    ],
+    [
+      45.46575,
+      -122.64701
+    ],
+    [
+      45.46575,
+      -122.64561
+    ],
+    [
+      45.46575,
+      -122.64507
+    ],
+    [
+      45.46575,
+      -122.64561
+    ],
+    [
+      45.46575,
+      -122.64701
+    ],
+    [
+      45.46579,
+      -122.64703
+    ],
+    [
+      45.46583,
+      -122.64705
+    ],
+    [
+      45.46646,
+      -122.64705
+    ],
+    [
+      45.46768,
+      -122.64705
+    ],
+    [
+      45.4683,
+      -122.64708
+    ],
+    [
+      45.47065,
+      -122.64737
+    ],
+    [
+      45.47347,
+      -122.64771
+    ],
+    [
+      45.47522,
+      -122.64792
+    ],
+    [
+      45.47815,
+      -122.64827
+    ],
+    [
+      45.47905,
+      -122.64838
+    ],
+    [
+      45.47905,
+      -122.64862
+    ],
+    [
+      45.47905,
+      -122.6494
+    ],
+    [
+      45.47933,
+      -122.64943
+    ],
+    [
+      45.48086,
+      -122.64959
+    ],
+    [
+      45.48168,
+      -122.64967
+    ],
+    [
+      45.48238,
+      -122.64966
+    ],
+    [
+      45.48392,
+      -122.64962
+    ],
+    [
+      45.48526,
+      -122.6496
+    ],
+    [
+      45.48536,
+      -122.64961
+    ],
+    [
+      45.48554,
+      -122.64966
+    ],
+    [
+      45.48581,
+      -122.64979
+    ],
+    [
+      45.48669,
+      -122.65016
+    ],
+    [
+      45.48716,
+      -122.6503
+    ],
+    [
+      45.48795,
+      -122.65056
+    ],
+    [
+      45.48838,
+      -122.65068
+    ],
+    [
+      45.48887,
+      -122.6508
+    ],
+    [
+      45.48948,
+      -122.65096
+    ],
+    [
+      45.48946,
+      -122.65107
+    ],
+    [
+      45.48948,
+      -122.65113
+    ]
+  ]
+}

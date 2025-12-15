@@ -1,0 +1,191 @@
+{
+  "id": "226ALA-P_effective_082625.pdf",
+  "name": "226",
+  "direction": "Afternoon",
+  "filename": "226ALA-P_effective_082625.pdf",
+  "fileId": "226ALA-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2732 NE Fremont St, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ALAMEDA GT LOADING ZONE ON 27TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6376923,
+        45.547482
+      ],
+      "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
+      "schoolName": "Alameda"
+    },
+    {
+      "id": "stop-1",
+      "address": "NE 54th Ave. & NE Stanton St. [SE]",
+      "time": "2:41 pm",
+      "direction": "SE",
+      "originalLine": "2:41 pmNE 54TH AV @ NE STANTON ST [SE]226ALA-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.607649,
+        45.5437213
+      ],
+      "displayName": "NE Stanton St & NE 54th Ave, Portland, OR 97213, USA",
+      "placeId": "EjRORSBTdGFudG9uIFN0ICYgTkUgNTR0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJ0x0kEy6hlVQRx-Tq1tqVRqwSFAoSCdMdJBMuoZVUEcfk6tbalUasGhQKEglx4tFH1aCVVBFoxn0BZrn8ExoUChIJs38-5jKhlVQRWMbFnSRdR2oiCg2dayUbFbaO67Y",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE 56th Ave. & NE Klickitat St. [SE]",
+      "time": "2:43 pm",
+      "direction": "SE",
+      "originalLine": "2:43 pmNE 56TH AV @ NE KLICKITAT ST [SE]226ALA-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6055952,
+        45.5469224
+      ],
+      "displayName": "NE Klickitat St & NE 56th Ave, Portland, OR 97213, USA",
+      "placeId": "EjZORSBLbGlja2l0YXQgU3QgJiBORSA1NnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgkV-hxMMqGVVBEwQqwv9ch9qBIUChIJFfocTDKhlVQRMEKsL_XIfagaFAoSCSEaf7s2oZVUETkgzF9kfcIcGhQKEglt7Im7L6GVVBHx2YeGjxmT0iIKDajoJRsV8N7rtg",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-3",
+      "address": "Mt Tabor Gt. & St. & CAB Loading ZONE",
+      "time": "2:54 pm",
+      "direction": null,
+      "originalLine": "2:54 pmMT TABOR GT & ST & CAB LOADING ZONE226ALA-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-12T21:41:42.882Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54747,
+      -122.63792
+    ],
+    [
+      45.54734,
+      -122.6379
+    ],
+    [
+      45.54731,
+      -122.63766
+    ],
+    [
+      45.54728,
+      -122.63764
+    ],
+    [
+      45.54728,
+      -122.63717
+    ],
+    [
+      45.54724,
+      -122.63691
+    ],
+    [
+      45.54724,
+      -122.63681
+    ],
+    [
+      45.54734,
+      -122.63678
+    ],
+    [
+      45.54788,
+      -122.63679
+    ],
+    [
+      45.54824,
+      -122.6368
+    ],
+    [
+      45.54824,
+      -122.63605
+    ],
+    [
+      45.54825,
+      -122.6357
+    ],
+    [
+      45.54825,
+      -122.63484
+    ],
+    [
+      45.54825,
+      -122.63376
+    ],
+    [
+      45.54826,
+      -122.63213
+    ],
+    [
+      45.54828,
+      -122.63008
+    ],
+    [
+      45.5483,
+      -122.62498
+    ],
+    [
+      45.5483,
+      -122.61889
+    ],
+    [
+      45.54828,
+      -122.61269
+    ],
+    [
+      45.54828,
+      -122.60994
+    ],
+    [
+      45.54827,
+      -122.60863
+    ],
+    [
+      45.54826,
+      -122.60759
+    ],
+    [
+      45.54693,
+      -122.60763
+    ],
+    [
+      45.54372,
+      -122.60765
+    ],
+    [
+      45.54372,
+      -122.60663
+    ],
+    [
+      45.54485,
+      -122.60663
+    ],
+    [
+      45.54557,
+      -122.60662
+    ],
+    [
+      45.54693,
+      -122.60661
+    ],
+    [
+      45.54692,
+      -122.6056
+    ]
+  ],
+  "neighborhoods": [
+    "Rose City Park"
+  ]
+}

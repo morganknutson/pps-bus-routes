@@ -1,0 +1,170 @@
+{
+  "id": "226ALA-A_effective_082625.pdf",
+  "name": "226",
+  "direction": "Morning",
+  "filename": "226ALA-A_effective_082625.pdf",
+  "fileId": "226ALA-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NE Klickitat St. & NE 56th Ave. [NE]",
+      "time": "7:37 am",
+      "direction": "NE",
+      "originalLine": "7:37 amNE KLICKITAT ST @ NE 56TH AV [NE]226ALA-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6055952,
+        45.5469224
+      ],
+      "displayName": "NE Klickitat St & NE 56th Ave, Portland, OR 97213, USA",
+      "placeId": "EjZORSBLbGlja2l0YXQgU3QgJiBORSA1NnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgkV-hxMMqGVVBEwQqwv9ch9qBIUChIJFfocTDKhlVQRMEKsL_XIfagaFAoSCSEaf7s2oZVUETkgzF9kfcIcGhQKEglt7Im7L6GVVBHx2YeGjxmT0iIKDajoJRsV8N7rtg",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE Stanton St. & NE 54th Ave. [NE]",
+      "time": "7:38 am",
+      "direction": "NE",
+      "originalLine": "7:38 amNE STANTON ST @ NE 54TH AV [NE]226ALA-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.607649,
+        45.5437213
+      ],
+      "displayName": "NE Stanton St & NE 54th Ave, Portland, OR 97213, USA",
+      "placeId": "EjRORSBTdGFudG9uIFN0ICYgTkUgNTR0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJ0x0kEy6hlVQRx-Tq1tqVRqwSFAoSCdMdJBMuoZVUEcfk6tbalUasGhQKEglx4tFH1aCVVBFoxn0BZrn8ExoUChIJs38-5jKhlVQRWMbFnSRdR2oiCg2dayUbFbaO67Y",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-0",
+      "address": "2732 NE Fremont St, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ALAMEDA GT LOADING ZONE ON 27TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6376923,
+        45.547482
+      ],
+      "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
+      "schoolName": "Alameda"
+    }
+  ],
+  "processedAt": "2025-12-12T21:41:41.482Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54692,
+      -122.6056
+    ],
+    [
+      45.54693,
+      -122.60763
+    ],
+    [
+      45.54372,
+      -122.60765
+    ],
+    [
+      45.54693,
+      -122.60763
+    ],
+    [
+      45.54826,
+      -122.60759
+    ],
+    [
+      45.54827,
+      -122.60863
+    ],
+    [
+      45.54828,
+      -122.60965
+    ],
+    [
+      45.54828,
+      -122.60994
+    ],
+    [
+      45.54827,
+      -122.61129
+    ],
+    [
+      45.54829,
+      -122.61472
+    ],
+    [
+      45.5483,
+      -122.61748
+    ],
+    [
+      45.5483,
+      -122.62333
+    ],
+    [
+      45.54828,
+      -122.62915
+    ],
+    [
+      45.54826,
+      -122.63137
+    ],
+    [
+      45.54825,
+      -122.63484
+    ],
+    [
+      45.54824,
+      -122.63605
+    ],
+    [
+      45.54824,
+      -122.6368
+    ],
+    [
+      45.54788,
+      -122.63679
+    ],
+    [
+      45.54734,
+      -122.63678
+    ],
+    [
+      45.54724,
+      -122.63681
+    ],
+    [
+      45.54724,
+      -122.63691
+    ],
+    [
+      45.54728,
+      -122.63717
+    ],
+    [
+      45.54728,
+      -122.63764
+    ],
+    [
+      45.54731,
+      -122.63766
+    ],
+    [
+      45.54734,
+      -122.6379
+    ],
+    [
+      45.54747,
+      -122.63792
+    ]
+  ],
+  "neighborhoods": [
+    "Rose City Park"
+  ]
+}

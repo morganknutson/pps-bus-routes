@@ -19,5 +19,5 @@ logs/
 # OS
 Thumbs.db
 
-# Data files (PDFs and parsed routes)
-data/
+# Data files are now included in repository
+# Only exclude logs (can be large and regenerated)

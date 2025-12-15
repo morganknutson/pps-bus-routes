@@ -1,0 +1,259 @@
+{
+  "id": "292BEL-A_effective_082625.pdf",
+  "name": "292",
+  "direction": "Morning",
+  "filename": "292BEL-A_effective_082625.pdf",
+  "fileId": "292BEL-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NE Alberta St. & NE Cleveland Ave. [N]",
+      "time": "7:34 am",
+      "direction": "N",
+      "originalLine": "7:34 amNE ALBERTA ST @ NE CLEVELAND AV [N]292BEL-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6658905,
+        45.5591173
+      ],
+      "displayName": "NE Cleveland Ave & NE Alberta St, Portland, OR 97217, USA",
+      "placeId": "EjlORSBDbGV2ZWxhbmQgQXZlICYgTkUgQWxiZXJ0YSBTdCwgUG9ydGxhbmQsIE9SIDk3MjE3LCBVU0EiZiJkChQKEglVd43hEKeVVBF35phYNwo8ORIUChIJVXeN4RCnlVQRd-aYWDcKPDkaFAoSCWHF-KI_p5VUEcfXCsfKAE6_GhQKEglnDSYNH6eVVBG2JfSjXeBAjSIKDQXFJxsVp6vitg",
+      "neighborhood": "Humboldt"
+    },
+    {
+      "id": "stop-2",
+      "address": "2414 NE Rodney Ave. [W]",
+      "time": "7:42 am",
+      "direction": "W",
+      "originalLine": "7:42 am2414 NE RODNEY AV [W]292BEL-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6639379,
+        45.5402853
+      ],
+      "displayName": "2414 NE Rodney Ave, Portland, OR 97212, USA",
+      "placeId": "ChIJHUmU0UinlVQRGqIJ4lg6izE",
+      "neighborhood": "Eliot"
+    },
+    {
+      "id": "stop-0",
+      "address": "620 N Fremont St, Portland, OR 97227, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BOISE-ELIOT ST LOADING ZONE ON BORTHWICK",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6729801,
+        45.54754459999999
+      ],
+      "displayName": "620 N Fremont St, Portland, OR 97227, USA",
+      "schoolName": "Boise-Eliot"
+    }
+  ],
+  "processedAt": "2025-12-12T23:34:31.386Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.55912,
+      -122.66589
+    ],
+    [
+      45.55913,
+      -122.6632
+    ],
+    [
+      45.55914,
+      -122.66213
+    ],
+    [
+      45.55914,
+      -122.66158
+    ],
+    [
+      45.55824,
+      -122.66159
+    ],
+    [
+      45.55768,
+      -122.6616
+    ],
+    [
+      45.5567,
+      -122.66162
+    ],
+    [
+      45.5562,
+      -122.66163
+    ],
+    [
+      45.55612,
+      -122.66156
+    ],
+    [
+      45.55585,
+      -122.66155
+    ],
+    [
+      45.55553,
+      -122.66154
+    ],
+    [
+      45.5555,
+      -122.6616
+    ],
+    [
+      45.5546,
+      -122.66162
+    ],
+    [
+      45.5534,
+      -122.66163
+    ],
+    [
+      45.55243,
+      -122.66163
+    ],
+    [
+      45.55106,
+      -122.66163
+    ],
+    [
+      45.54919,
+      -122.66165
+    ],
+    [
+      45.5458,
+      -122.66169
+    ],
+    [
+      45.54526,
+      -122.66169
+    ],
+    [
+      45.54466,
+      -122.6617
+    ],
+    [
+      45.54382,
+      -122.66166
+    ],
+    [
+      45.54241,
+      -122.66167
+    ],
+    [
+      45.54092,
+      -122.66167
+    ],
+    [
+      45.54092,
+      -122.66299
+    ],
+    [
+      45.54093,
+      -122.66416
+    ],
+    [
+      45.54029,
+      -122.66417
+    ],
+    [
+      45.54093,
+      -122.66416
+    ],
+    [
+      45.54093,
+      -122.66567
+    ],
+    [
+      45.54095,
+      -122.66598
+    ],
+    [
+      45.54103,
+      -122.66669
+    ],
+    [
+      45.54159,
+      -122.66669
+    ],
+    [
+      45.54234,
+      -122.66668
+    ],
+    [
+      45.54242,
+      -122.66672
+    ],
+    [
+      45.54309,
+      -122.66672
+    ],
+    [
+      45.54317,
+      -122.66668
+    ],
+    [
+      45.5438,
+      -122.66669
+    ],
+    [
+      45.5442,
+      -122.66668
+    ],
+    [
+      45.54536,
+      -122.66669
+    ],
+    [
+      45.54628,
+      -122.66669
+    ],
+    [
+      45.54793,
+      -122.6667
+    ],
+    [
+      45.54827,
+      -122.66669
+    ],
+    [
+      45.54827,
+      -122.66728
+    ],
+    [
+      45.54827,
+      -122.66857
+    ],
+    [
+      45.54827,
+      -122.67043
+    ],
+    [
+      45.54826,
+      -122.67204
+    ],
+    [
+      45.54764,
+      -122.67203
+    ],
+    [
+      45.5476,
+      -122.67203
+    ],
+    [
+      45.5476,
+      -122.67242
+    ],
+    [
+      45.54759,
+      -122.6729
+    ]
+  ]
+}

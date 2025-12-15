@@ -1,0 +1,76 @@
+{
+  "id": "149CHP-P_effective_102225.pdf",
+  "name": "149",
+  "direction": "Afternoon",
+  "filename": "149CHP-P_effective_102225.pdf",
+  "fileId": "149CHP-P_effective_102225.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70535129999999,
+        45.533232500000004
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    },
+    {
+      "id": "stop-1",
+      "address": "NW Quimby St. & NW 14th Ave. [SW]",
+      "time": "2:40 pm",
+      "direction": "SW",
+      "originalLine": "2:40 pmNW QUIMBY ST @ NW 14TH AV [SW]149CHP-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6855743,
+        45.5336051
+      ],
+      "displayName": "NW Quimby St & NW 14th Ave, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "1849 SW Salmon St. (mac) [N]",
+      "time": "2:46 pm",
+      "direction": "N",
+      "originalLine": "2:46 pm1849 SW SALMON ST (MAC) [N]149CHP-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6924244,
+        45.5204297
+      ],
+      "displayName": "1849 SW Salmon St, Portland, OR 97205, USA",
+      "neighborhood": "Goose Hollow"
+    },
+    {
+      "id": "stop-3",
+      "address": "WEST Sylvan",
+      "time": "2:57 pm",
+      "direction": null,
+      "originalLine": "2:57 pmWEST SYLVAN149CHP-PStop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7621042,
+        45.5040646
+      ],
+      "displayName": "8111 SW West Slope Dr, Portland, OR 97225, USA"
+    }
+  ],
+  "processedAt": "2025-12-11T22:32:57.633Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "neighborhoods": [
+    "Goose Hollow",
+    "Northwest Portland"
+  ]
+}

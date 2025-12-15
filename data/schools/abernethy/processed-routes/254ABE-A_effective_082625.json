@@ -1,0 +1,195 @@
+{
+  "id": "254ABE-A_effective_082625.pdf",
+  "name": "254",
+  "direction": "Morning",
+  "filename": "254ABE-A_effective_082625.pdf",
+  "fileId": "254ABE-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE Harrison St. & SE 35th Pl. [NE]",
+      "time": "7:37 am",
+      "direction": "NE",
+      "originalLine": "7:37 amSE HARRISON ST @ SE 35TH PL [NE]254ABE-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6276343,
+        45.5087918
+      ],
+      "displayName": "SE Harrison St & SE 35th Pl, Portland, OR 97214, USA",
+      "placeId": "EjRTRSBIYXJyaXNvbiBTdCAmIFNFIDM1dGggUGwsIFBvcnRsYW5kLCBPUiA5NzIxNCwgVVNBImYiZAoUChIJCxyb8I6glVQRqD6MPpM9AS8SFAoSCQscm_COoJVUEag-jD6TPQEvGhQKEgk9PUQcsqGVVBGEE9mwHz5piBoUChIJRTebmH2glVQRZ0mky5Z9J24iCg0uFyAbFQmC6LY",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-2",
+      "address": "1765 SE 32nd Pl. (edwards School) [W]",
+      "time": "7:42 am",
+      "direction": "W",
+      "originalLine": "7:42 am1765 SE 32ND PL (EDWARDS SCHOOL) [W]254ABE-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6319731,
+        45.5101305
+      ],
+      "displayName": "1765 SE 32nd Pl, Portland, OR 97214, USA",
+      "placeId": "EigxNzY1IFNFIDMybmQgUGwsIFBvcnRsYW5kLCBPUiA5NzIxNCwgVVNBIjESLwoUChIJ7bmQ0I-glVQRNCy9BVQ8vIQQ5Q0qFAoSCYXnMNePoJVUEf9pvi4KQsfD",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-0",
+      "address": "2421 SE Orange Ave, Portland, OR 97214, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ABERNETHY GT & ST & CAB LOAD ZONE ON ELLIOTT",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6516263,
+        45.5058868
+      ],
+      "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
+      "schoolName": "Abernethy"
+    }
+  ],
+  "processedAt": "2025-12-12T22:33:40.195Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50879,
+      -122.62763
+    ],
+    [
+      45.50883,
+      -122.63161
+    ],
+    [
+      45.50971,
+      -122.63161
+    ],
+    [
+      45.5108,
+      -122.63161
+    ],
+    [
+      45.5108,
+      -122.63212
+    ],
+    [
+      45.5108,
+      -122.63275
+    ],
+    [
+      45.51033,
+      -122.63275
+    ],
+    [
+      45.5103,
+      -122.63213
+    ],
+    [
+      45.51033,
+      -122.63275
+    ],
+    [
+      45.5108,
+      -122.63275
+    ],
+    [
+      45.51079,
+      -122.63377
+    ],
+    [
+      45.5108,
+      -122.63477
+    ],
+    [
+      45.51049,
+      -122.63477
+    ],
+    [
+      45.50971,
+      -122.63476
+    ],
+    [
+      45.50846,
+      -122.63475
+    ],
+    [
+      45.5084,
+      -122.63471
+    ],
+    [
+      45.50822,
+      -122.63475
+    ],
+    [
+      45.50808,
+      -122.63476
+    ],
+    [
+      45.50772,
+      -122.63475
+    ],
+    [
+      45.50628,
+      -122.63473
+    ],
+    [
+      45.50482,
+      -122.63474
+    ],
+    [
+      45.5048,
+      -122.63662
+    ],
+    [
+      45.50482,
+      -122.63866
+    ],
+    [
+      45.50483,
+      -122.6392
+    ],
+    [
+      45.50482,
+      -122.63967
+    ],
+    [
+      45.50482,
+      -122.64227
+    ],
+    [
+      45.50483,
+      -122.64462
+    ],
+    [
+      45.50484,
+      -122.64654
+    ],
+    [
+      45.50485,
+      -122.65127
+    ],
+    [
+      45.50485,
+      -122.65171
+    ],
+    [
+      45.50485,
+      -122.65203
+    ],
+    [
+      45.50534,
+      -122.65147
+    ],
+    [
+      45.50561,
+      -122.65115
+    ]
+  ]
+}

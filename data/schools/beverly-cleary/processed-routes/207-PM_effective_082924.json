@@ -1,0 +1,281 @@
+{
+  "id": "207-PM_effective_082924.pdf",
+  "name": "Route 207",
+  "direction": null,
+  "filename": "207-PM_effective_082924.pdf",
+  "fileId": "207-PM_effective_082924.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NE Broadway St. & NE 47th Ave. [SW]",
+      "time": "3:47 pm",
+      "direction": "SW",
+      "originalLine": "3:47 pmNE BROADWAY ST @ NE 47TH AV [SW]207BVC-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6150055,
+        45.5351322
+      ],
+      "displayName": "NE 47th Ave & NE Broadway, Portland, OR 97213, USA",
+      "placeId": "EjJORSA0N3RoIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCddWiELYoJVUEfURgnfvoBuuEhQKEgnXVohC2KCVVBH1EYJ376AbrhoUChIJlYf2F8-mlVQR4yPm93KCk9waFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoNGhwkGxVZb-q2",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE Broadway St. & NE 52nd Ave. [SW]",
+      "time": "3:48 pm",
+      "direction": "SW",
+      "originalLine": "3:48 pmNE BROADWAY ST @ NE 52ND AVE [SW]207BVC-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6099323,
+        45.53512629999999
+      ],
+      "displayName": "NE 52nd Ave & NE Broadway, Portland, OR 97213, USA",
+      "placeId": "EjJORSA1Mm5kIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCScqNRInoZVUEWlgVeT9be0EEhQKEgknKjUSJ6GVVBFpYFXk_W3tBBoUChIJTxlrgi2hlVQRhcG_w2FplB0aFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoN3xskGxWFNeu2",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Thompson St. & NE 57th Ave. [SW]",
+      "time": "3:52 pm",
+      "direction": "SW",
+      "originalLine": "3:52 pmNE THOMPSON ST @ NE 57TH AV [SW]207BVC-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6046536,
+        45.5388162
+      ],
+      "displayName": "NE Thompson St & NE 57th Ave, Portland, OR 97213, USA",
+      "placeId": "EjVORSBUaG9tcHNvbiBTdCAmIE5FIDU3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCbPD-6IloZVUEZ0h2N6B6sheEhQKEgmzw_uiJaGVVBGdIdjegerIXhoUChIJDU_Ma0ChlVQR1SobJa-UvwIaFAoSCYsW3a4zoZVUET530DRTV0s0IgoNAqwkGxW4A-y2",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE 46th Ave. & NE Brazee St. [NE]",
+      "time": "3:55 pm",
+      "direction": "NE",
+      "originalLine": "3:55 pmNE 46TH AV & NE BRAZEE ST [NE]207BVC-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6159807,
+        45.5405776
+      ],
+      "displayName": "NE 46th Ave & NE Brazee St, Portland, OR 97213, USA",
+      "placeId": "EjNORSA0NnRoIEF2ZSAmIE5FIEJyYXplZSBTdCwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgkJmYOiKaGVVBGQdLDmlEp41xIUChIJCZmDoimhlVQRkHSw5pRKeNcaFAoSCcHKThLOppVUEfqGLo7HTWtdGhQKEgnpiWNZP6GVVBFb_Gss4JkxaSIKDdDwJBsVQUnqtg",
+      "neighborhood": "Grant Park"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE 42nd Ave. & NE Stanton St. [SE]",
+      "time": "3:56 pm",
+      "direction": "SE",
+      "originalLine": "3:56 pmNE 42ND AV @ NE STANTON ST [SE]207BVC-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6199345,
+        45.5428272
+      ],
+      "displayName": "NE Stanton St & NE 42nd Ave, Portland, OR 97212, USA",
+      "placeId": "EjRORSBTdGFudG9uIFN0ICYgTkUgNDJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMiwgVVNBImYiZAoUChIJVRBNXCqhlVQRq1nsT2M7lPwSFAoSCVUQTVwqoZVUEatZ7E9jO5T8GhQKEglx4tFH1aCVVBFoxn0BZrn8ExoUChIJrYuG59GmlVQR6F99irSkXrUiCg2wSCUbFc-u6bY",
+      "neighborhood": "Northeast Portland"
+    }
+  ],
+  "processedAt": "2025-12-12T23:36:06.742Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.53513,
+      -122.61501
+    ],
+    [
+      45.53513,
+      -122.60891
+    ],
+    [
+      45.53513,
+      -122.60532
+    ],
+    [
+      45.53511,
+      -122.60485
+    ],
+    [
+      45.5351,
+      -122.60471
+    ],
+    [
+      45.53768,
+      -122.60468
+    ],
+    [
+      45.53903,
+      -122.60465
+    ],
+    [
+      45.54065,
+      -122.60461
+    ],
+    [
+      45.54193,
+      -122.6046
+    ],
+    [
+      45.54224,
+      -122.60457
+    ],
+    [
+      45.54239,
+      -122.60504
+    ],
+    [
+      45.54251,
+      -122.60525
+    ],
+    [
+      45.54272,
+      -122.60555
+    ],
+    [
+      45.54275,
+      -122.60563
+    ],
+    [
+      45.54278,
+      -122.60584
+    ],
+    [
+      45.54279,
+      -122.60606
+    ],
+    [
+      45.54276,
+      -122.60623
+    ],
+    [
+      45.5426,
+      -122.60664
+    ],
+    [
+      45.54229,
+      -122.6075
+    ],
+    [
+      45.54221,
+      -122.60778
+    ],
+    [
+      45.54204,
+      -122.60915
+    ],
+    [
+      45.5419,
+      -122.61048
+    ],
+    [
+      45.54193,
+      -122.61096
+    ],
+    [
+      45.54178,
+      -122.61113
+    ],
+    [
+      45.54175,
+      -122.6112
+    ],
+    [
+      45.54173,
+      -122.61132
+    ],
+    [
+      45.54163,
+      -122.6116
+    ],
+    [
+      45.5416,
+      -122.61184
+    ],
+    [
+      45.5416,
+      -122.61194
+    ],
+    [
+      45.54171,
+      -122.61241
+    ],
+    [
+      45.54173,
+      -122.61297
+    ],
+    [
+      45.54174,
+      -122.61345
+    ],
+    [
+      45.54167,
+      -122.6136
+    ],
+    [
+      45.54163,
+      -122.61372
+    ],
+    [
+      45.54159,
+      -122.61398
+    ],
+    [
+      45.54159,
+      -122.61474
+    ],
+    [
+      45.54161,
+      -122.6151
+    ],
+    [
+      45.54148,
+      -122.61598
+    ],
+    [
+      45.54094,
+      -122.61598
+    ],
+    [
+      45.54058,
+      -122.61598
+    ],
+    [
+      45.54058,
+      -122.61792
+    ],
+    [
+      45.54058,
+      -122.61892
+    ],
+    [
+      45.54058,
+      -122.61994
+    ],
+    [
+      45.54111,
+      -122.61994
+    ],
+    [
+      45.54212,
+      -122.61994
+    ],
+    [
+      45.54275,
+      -122.61994
+    ],
+    [
+      45.54283,
+      -122.61993
+    ]
+  ]
+}

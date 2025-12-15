@@ -1,0 +1,938 @@
+[
+  {
+    "id": "abernethy",
+    "name": "Abernethy",
+    "driveLink": "https://drive.google.com/drive/folders/1vlOsEIniONTUG3vHRLRsqfzyINHscKt3",
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/abernethy",
+    "address": "2421 SE Orange Ave, Portland, OR 97214, USA",
+    "coordinates": [
+      -122.6514519,
+      45.505600199999996
+    ],
+    "updatedAt": "2025-12-11T17:11:20.502Z"
+  },
+  {
+    "id": "access",
+    "name": "ACCESS",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "6318 S Corbett Ave, Portland, OR 97239, USA",
+    "coordinates": [
+      -122.6757448,
+      45.4783635
+    ],
+    "updatedAt": "2025-12-09T04:55:18.363Z"
+  },
+  {
+    "id": "ainsworth",
+    "name": "Ainsworth",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2425 SW Vista Ave, Portland, OR 97201, USA",
+    "coordinates": [
+      -122.6996213,
+      45.5097914
+    ],
+    "updatedAt": "2025-12-09T04:44:49.418Z"
+  },
+  {
+    "id": "alameda",
+    "name": "Alameda",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2732 NE Fremont St, Portland, OR 97212, USA",
+    "coordinates": [
+      -122.6376166,
+      45.547834699999996
+    ],
+    "updatedAt": "2025-12-09T04:44:50.620Z"
+  },
+  {
+    "id": "arleta",
+    "name": "Arleta",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5109 SE 66th Ave, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.5963335,
+      45.485976
+    ],
+    "updatedAt": "2025-12-09T04:44:51.813Z"
+  },
+  {
+    "id": "astor",
+    "name": "Astor",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5601 N Yale St, Portland, OR 97203, USA",
+    "coordinates": [
+      -122.7293938,
+      45.578235299999996
+    ],
+    "updatedAt": "2025-12-09T04:55:10.132Z"
+  },
+  {
+    "id": "atkinson",
+    "name": "Atkinson",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5800 SE Division St, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.6044839,
+      45.5049798
+    ],
+    "updatedAt": "2025-12-09T04:44:54.225Z"
+  },
+  {
+    "id": "beach",
+    "name": "Beach",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "1710 N Humboldt St, Portland, OR 97217, USA",
+    "coordinates": [
+      -122.6855475,
+      45.5578363
+    ],
+    "updatedAt": "2025-12-09T04:44:55.492Z"
+  },
+  {
+    "id": "beaumont",
+    "name": "Beaumont",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "4043 NE Fremont St, Portland, OR 97212, USA",
+    "coordinates": [
+      -122.620675,
+      45.548821
+    ],
+    "updatedAt": "2025-12-09T04:44:56.695Z"
+  },
+  {
+    "id": "benson",
+    "name": "Benson",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "546 NE 12th Ave, Portland, OR 97232, USA",
+    "coordinates": [
+      -122.65289299999999,
+      45.527292900000006
+    ],
+    "updatedAt": "2025-12-09T04:44:57.943Z"
+  },
+  {
+    "id": "beverly-cleary",
+    "name": "Beverly Cleary",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "1915 NE 33rd Ave, Portland, OR 97212, USA",
+    "coordinates": [
+      -122.631022,
+      45.5368569
+    ],
+    "updatedAt": "2025-12-09T04:44:59.141Z"
+  },
+  {
+    "id": "boise-eliot",
+    "name": "Boise-Eliot",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "620 N Fremont St, Portland, OR 97227, USA",
+    "coordinates": [
+      -122.67275380000001,
+      45.5481025
+    ],
+    "updatedAt": "2025-12-09T04:45:00.348Z"
+  },
+  {
+    "id": "bridger",
+    "name": "Bridger",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7910 SE Market St #3656, Portland, OR 97215, USA",
+    "coordinates": [
+      -122.58207089999998,
+      45.5106758
+    ],
+    "updatedAt": "2025-12-09T04:45:01.540Z"
+  },
+  {
+    "id": "bridlemile",
+    "name": "Bridlemile",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "4300 SW 47th Dr, Portland, OR 97221, USA",
+    "coordinates": [
+      -122.7242933,
+      45.49172
+    ],
+    "updatedAt": "2025-12-09T04:45:02.758Z"
+  },
+  {
+    "id": "buckman",
+    "name": "Buckman",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "320 SE 16th Ave, Portland, OR 97214, USA",
+    "coordinates": [
+      -122.64919820000001,
+      45.5204434
+    ],
+    "updatedAt": "2025-12-09T04:45:03.959Z"
+  },
+  {
+    "id": "capitol",
+    "name": "Capitol",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "8401 SW 17th Ave, Portland, OR 97219, USA",
+    "coordinates": [
+      -122.69541520000001,
+      45.4640913
+    ],
+    "updatedAt": "2025-12-09T04:45:05.172Z"
+  },
+  {
+    "id": "cesar-chavez",
+    "name": "Cesar Chavez",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5103 N Willis Blvd, Portland, OR 97203, USA",
+    "coordinates": [
+      -122.71945459999999,
+      45.5841968
+    ],
+    "updatedAt": "2025-12-09T04:45:06.386Z"
+  },
+  {
+    "id": "chapman",
+    "name": "Chapman",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+    "coordinates": [
+      -122.70535129999999,
+      45.533232500000004
+    ],
+    "updatedAt": "2025-12-09T04:45:07.621Z"
+  },
+  {
+    "id": "chief-joseph",
+    "name": "Chief Joseph",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2409 N Saratoga St, Portland, OR 97217, USA",
+    "coordinates": [
+      -122.69186189999999,
+      45.572794699999996
+    ],
+    "updatedAt": "2025-12-09T04:54:46.601Z"
+  },
+  {
+    "id": "clark",
+    "name": "Clark",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "1231 SE 92nd Ave, Portland, OR 97216, USA",
+    "coordinates": [
+      -122.56961159999999,
+      45.513621
+    ],
+    "updatedAt": "2025-12-09T04:54:40.265Z"
+  },
+  {
+    "id": "creston",
+    "name": "Creston",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "4701 SE Bush St, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.6137951,
+      45.495449
+    ],
+    "updatedAt": "2025-12-09T04:45:11.322Z"
+  },
+  {
+    "id": "davinci",
+    "name": "DaVinci",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2508 NE Everett St, Portland, OR 97232, USA",
+    "coordinates": [
+      -122.64015269999997,
+      45.52458540000001
+    ],
+    "updatedAt": "2025-12-09T04:45:12.520Z"
+  },
+  {
+    "id": "duniway",
+    "name": "Duniway",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7700 SE Reed College Pl #5, Portland, OR 97202, USA",
+    "coordinates": [
+      -122.62899319999998,
+      45.4685882
+    ],
+    "updatedAt": "2025-12-09T04:45:13.727Z"
+  },
+  {
+    "id": "faubion",
+    "name": "Faubion",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2930 NE Dekum St, Portland, OR 97211, USA",
+    "coordinates": [
+      -122.63511869999999,
+      45.5708451
+    ],
+    "updatedAt": "2025-12-09T04:51:37.743Z"
+  },
+  {
+    "id": "forest-park",
+    "name": "Forest Park",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "9935 NW Durrett St, Portland, OR 97229, USA",
+    "coordinates": [
+      -122.77736060000001,
+      45.5425002
+    ],
+    "updatedAt": "2025-12-09T04:45:16.181Z"
+  },
+  {
+    "id": "franklin",
+    "name": "Franklin",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5405 SE Woodward St, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.6068499,
+      45.5022707
+    ],
+    "updatedAt": "2025-12-09T04:54:28.184Z"
+  },
+  {
+    "id": "george",
+    "name": "George",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "10000 N Burr Ave, Portland, OR 97203, USA",
+    "coordinates": [
+      -122.7369498,
+      45.5963675
+    ],
+    "updatedAt": "2025-12-09T04:54:24.500Z"
+  },
+  {
+    "id": "glencoe",
+    "name": "Glencoe",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "825 SE 51st Ave, Portland, OR 97215, USA",
+    "coordinates": [
+      -122.6114707,
+      45.5172062
+    ],
+    "updatedAt": "2025-12-09T04:45:19.854Z"
+  },
+  {
+    "id": "gray",
+    "name": "Gray",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5505 SW 23rd Ave, Portland, OR 97239, USA",
+    "coordinates": [
+      -122.70104719999999,
+      45.4824644
+    ],
+    "updatedAt": "2025-12-09T04:45:21.066Z"
+  },
+  {
+    "id": "grout",
+    "name": "Grout",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "3119 SE Holgate Blvd, Portland, OR 97202, USA",
+    "coordinates": [
+      -122.6330382,
+      45.4907665
+    ],
+    "updatedAt": "2025-12-09T04:54:16.943Z"
+  },
+  {
+    "id": "harrison-park",
+    "name": "Harrison Park",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2225 SE 87th Ave, Portland, OR 97216, USA",
+    "coordinates": [
+      -122.5745226,
+      45.506741999999996
+    ],
+    "updatedAt": "2025-12-09T04:54:12.440Z"
+  },
+  {
+    "id": "hayhurst",
+    "name": "Hayhurst",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5037 SW Iowa St, Portland, OR 97221, USA",
+    "coordinates": [
+      -122.72940709999999,
+      45.48013520000001
+    ],
+    "updatedAt": "2025-12-09T04:45:24.638Z"
+  },
+  {
+    "id": "hosford",
+    "name": "Hosford",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2303 SE 28th Pl, Portland, OR 97214, USA",
+    "coordinates": [
+      -122.63729029999999,
+      45.5062311
+    ],
+    "updatedAt": "2025-12-09T04:54:07.200Z"
+  },
+  {
+    "id": "irvington",
+    "name": "Irvington",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "1320 NE Brazee St, Portland, OR 97212, USA",
+    "coordinates": [
+      -122.651928,
+      45.540138999999996
+    ],
+    "updatedAt": "2025-12-09T04:45:27.066Z"
+  },
+  {
+    "id": "jackson",
+    "name": "Jackson",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "10625 SW 35th Ave, Portland, OR 97219, USA",
+    "coordinates": [
+      -122.7144401,
+      45.448603399999996
+    ],
+    "updatedAt": "2025-12-09T04:47:00.000Z"
+  },
+  {
+    "id": "james-john",
+    "name": "James John",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7439 N Charleston Ave, Portland, OR 97203, USA",
+    "coordinates": [
+      -122.75232809999999,
+      45.5903832
+    ],
+    "updatedAt": "2025-12-09T04:54:02.003Z"
+  },
+  {
+    "id": "kelly",
+    "name": "Kelly",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "9030 SE Cooper St, Portland, OR 97266, USA",
+    "coordinates": [
+      -122.5701944,
+      45.473075099999996
+    ],
+    "updatedAt": "2025-12-09T04:45:30.813Z"
+  },
+  {
+    "id": "kellogg",
+    "name": "Kellogg",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.59172249999999,
+      45.498713599999995
+    ],
+    "updatedAt": "2025-12-09T04:45:32.009Z"
+  },
+  {
+    "id": "lane",
+    "name": "Lane",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7200 SE 60th Ave, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.6019562,
+      45.4713815
+    ],
+    "updatedAt": "2025-12-09T04:45:33.252Z"
+  },
+  {
+    "id": "lee",
+    "name": "Lee",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2222 NE 92nd Ave, Portland, OR 97220, USA",
+    "coordinates": [
+      -122.5674001,
+      45.537764499999994
+    ],
+    "updatedAt": "2025-12-09T04:45:34.505Z"
+  },
+  {
+    "id": "lent",
+    "name": "Lent",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5105 SE 97th Ave, Portland, OR 97266, USA",
+    "coordinates": [
+      -122.5640241,
+      45.4853518
+    ],
+    "updatedAt": "2025-12-09T04:45:35.764Z"
+  },
+  {
+    "id": "leodis-v-mcdaniel",
+    "name": "Leodis V. McDaniel",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2735 NE 82nd Ave, Portland, OR 97220, USA",
+    "coordinates": [
+      -122.57975520000001,
+      45.5421748
+    ],
+    "updatedAt": "2025-12-09T04:45:36.963Z"
+  },
+  {
+    "id": "lewis",
+    "name": "Lewis",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "4401 SE Evergreen St #121, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.6172191,
+      45.4735039
+    ],
+    "updatedAt": "2025-12-09T04:45:38.197Z"
+  },
+  {
+    "id": "lincoln",
+    "name": "Lincoln",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "1750 SW Salmon St, Portland, OR 97205, USA",
+    "coordinates": [
+      -122.6911184,
+      45.5196845
+    ],
+    "updatedAt": "2025-12-09T04:45:39.476Z"
+  },
+  {
+    "id": "llewellyn",
+    "name": "Llewellyn",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "6301 SE 14th Ave, Portland, OR 97202, USA",
+    "coordinates": [
+      -122.6521811,
+      45.477178599999995
+    ],
+    "updatedAt": "2025-12-09T04:45:40.709Z"
+  },
+  {
+    "id": "dr-martin-luther-king",
+    "name": "Dr Martin Luther King",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "4906 NE 6th Ave, Portland, OR 97211, USA",
+    "coordinates": [
+      -122.65933399999999,
+      45.558308
+    ],
+    "updatedAt": "2025-12-09T04:45:41.976Z"
+  },
+  {
+    "id": "maplewood",
+    "name": "Maplewood",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7452 SW 52nd Ave, Portland, OR 97219, USA",
+    "coordinates": [
+      -122.7299477,
+      45.470816299999996
+    ],
+    "updatedAt": "2025-12-09T04:45:43.226Z"
+  },
+  {
+    "id": "markham",
+    "name": "Markham",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "10531 SW Capitol Hwy, Portland, OR 97219, USA",
+    "coordinates": [
+      -122.72454040000001,
+      45.4494956
+    ],
+    "updatedAt": "2025-12-09T04:53:41.189Z"
+  },
+  {
+    "id": "marysville",
+    "name": "Marysville",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7733 SE Raymond St, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.5833827,
+      45.4872765
+    ],
+    "updatedAt": "2025-12-09T04:45:45.726Z"
+  },
+  {
+    "id": "mt-tabor",
+    "name": "Mt Tabor",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5800 SE Ash St, Portland, OR 97215, USA",
+    "coordinates": [
+      -122.6043255,
+      45.521424800000005
+    ],
+    "updatedAt": "2025-12-09T04:45:47.013Z"
+  },
+  {
+    "id": "ockley-green",
+    "name": "Ockley Green",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "6031 N Montana Ave, Portland, OR 97217, USA",
+    "coordinates": [
+      -122.6806038,
+      45.567126599999995
+    ],
+    "updatedAt": "2025-12-09T04:45:48.244Z"
+  },
+  {
+    "id": "peninsula",
+    "name": "Peninsula",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "8125 N Emerald Ave, Portland, OR 97217, USA",
+    "coordinates": [
+      -122.7006441,
+      45.5819712
+    ],
+    "updatedAt": "2025-12-09T04:45:49.485Z"
+  },
+  {
+    "id": "richmond",
+    "name": "Richmond",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2276 SE 41st Ave, Portland, OR 97214, USA",
+    "coordinates": [
+      -122.6198558,
+      45.5065526
+    ],
+    "updatedAt": "2025-12-09T04:45:50.732Z"
+  },
+  {
+    "id": "rieke",
+    "name": "Rieke",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "1405 SW Vermont St, Portland, OR 97219, USA",
+    "coordinates": [
+      -122.69514629999999,
+      45.476475199999996
+    ],
+    "updatedAt": "2025-12-09T04:45:51.958Z"
+  },
+  {
+    "id": "rigler",
+    "name": "Rigler",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5401 NE Prescott St, Portland, OR 97218, USA",
+    "coordinates": [
+      -122.60775819999999,
+      45.5559832
+    ],
+    "updatedAt": "2025-12-09T04:45:53.184Z"
+  },
+  {
+    "id": "rosa-parks",
+    "name": "Rosa Parks",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "8960 N Woolsey Ave, Portland, OR 97203, USA",
+    "coordinates": [
+      -122.7129162,
+      45.5879512
+    ],
+    "updatedAt": "2025-12-09T04:45:54.450Z"
+  },
+  {
+    "id": "rose-city-park",
+    "name": "Rose City Park",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2334 NE 57th Ave, Portland, OR 97213, USA",
+    "coordinates": [
+      -122.6042022,
+      45.5393902
+    ],
+    "updatedAt": "2025-12-09T04:45:55.750Z"
+  },
+  {
+    "id": "roseway-heights",
+    "name": "Roseway Heights",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+    "coordinates": [
+      -122.58744619999999,
+      45.54412560000001
+    ],
+    "updatedAt": "2025-12-09T04:45:56.976Z"
+  },
+  {
+    "id": "sabin",
+    "name": "Sabin",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "4013 NE 18th Ave, Portland, OR 97212, USA",
+    "coordinates": [
+      -122.6478363,
+      45.5521913
+    ],
+    "updatedAt": "2025-12-09T04:45:58.210Z"
+  },
+  {
+    "id": "scott",
+    "name": "Scott",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "6700 NE Prescott St, Portland, OR 97218, USA",
+    "coordinates": [
+      -122.59426500000001,
+      45.5550394
+    ],
+    "updatedAt": "2025-12-09T04:45:59.523Z"
+  },
+  {
+    "id": "sellwood",
+    "name": "Sellwood",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "8300 SE 15th Ave, Portland, OR 97202, USA",
+    "coordinates": [
+      -122.65051229999999,
+      45.462609799999996
+    ],
+    "updatedAt": "2025-12-09T04:46:00.765Z"
+  },
+  {
+    "id": "sitton",
+    "name": "Sitton",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "9930 N Smith St, Portland, OR 97203, USA",
+    "coordinates": [
+      -122.7580178,
+      45.600135099999996
+    ],
+    "updatedAt": "2025-12-09T04:46:01.990Z"
+  },
+  {
+    "id": "skyline",
+    "name": "Skyline",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "11536 NW Skyline Blvd, Portland, OR 97231, USA",
+    "coordinates": [
+      -122.8564573,
+      45.607536599999996
+    ],
+    "updatedAt": "2025-12-09T04:46:03.243Z"
+  },
+  {
+    "id": "stephenson",
+    "name": "Stephenson",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2627 SW Stephenson St, Portland, OR 97219, USA",
+    "coordinates": [
+      -122.70396129999999,
+      45.440868699999996
+    ],
+    "updatedAt": "2025-12-09T04:46:04.494Z"
+  },
+  {
+    "id": "tubman",
+    "name": "Tubman",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2231 N Flint Ave, Portland, OR 97227, USA",
+    "coordinates": [
+      -122.66898359999999,
+      45.539200199999996
+    ],
+    "updatedAt": "2025-12-09T04:46:05.719Z"
+  },
+  {
+    "id": "vernon",
+    "name": "Vernon",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+    "coordinates": [
+      -122.6437449,
+      45.562499599999995
+    ],
+    "updatedAt": "2025-12-09T04:46:06.953Z"
+  },
+  {
+    "id": "vestal",
+    "name": "Vestal",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "161 NE 82nd Ave, Portland, OR 97220, USA",
+    "coordinates": [
+      -122.579555,
+      45.5244035
+    ],
+    "updatedAt": "2025-12-09T04:46:08.178Z"
+  },
+  {
+    "id": "west-sylvan",
+    "name": "West Sylvan",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "8111 SW West Slope Dr, Portland, OR 97225, USA",
+    "coordinates": [
+      -122.7621042,
+      45.5040646
+    ],
+    "updatedAt": "2025-12-09T04:52:10.193Z"
+  },
+  {
+    "id": "whitman",
+    "name": "Whitman",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7326 SE Flavel St, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.58746130000002,
+      45.468500899999995
+    ],
+    "updatedAt": "2025-12-09T04:50:43.315Z"
+  },
+  {
+    "id": "woodlawn",
+    "name": "Woodlawn",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7200 NE 11th Ave, Portland, OR 97211, USA",
+    "coordinates": [
+      -122.653088,
+      45.5749096
+    ],
+    "updatedAt": "2025-12-09T04:50:53.458Z"
+  },
+  {
+    "id": "woodmere",
+    "name": "Woodmere",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "7900 SE Duke St, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.5822678,
+      45.4750784
+    ],
+    "updatedAt": "2025-12-09T04:46:13.143Z"
+  },
+  {
+    "id": "woodstock",
+    "name": "Woodstock",
+    "driveLink": null,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": null,
+    "address": "5601 SE 50th Ave, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.6115906,
+      45.4820466
+    ],
+    "updatedAt": "2025-12-09T04:46:14.371Z"
+  }
+]

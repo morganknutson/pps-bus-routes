@@ -1,0 +1,162 @@
+{
+  "id": "125CHP-A_effective_102225.pdf",
+  "name": "125",
+  "direction": "Morning",
+  "filename": "125CHP-A_effective_102225.pdf",
+  "fileId": "125CHP-A_effective_102225.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SW Morrison St. & SW 10th Ave. [NE]",
+      "time": "7:16 am",
+      "direction": "NE",
+      "originalLine": "7:16 amSW MORRISON ST @ SW 10TH AV [NE]125CHP-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6820812,
+        45.52003089999999
+      ],
+      "displayName": "SW 10th Ave & SW Morrison St, Portland, OR 97205, USA",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "SW 17th Ave. & SW Columbia St. [SE]",
+      "time": "7:20 am",
+      "direction": "SE",
+      "originalLine": "7:20 amSW 17TH AV @ SW COLUMBIA ST [SE]125CHP-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6916813,
+        45.5172375
+      ],
+      "displayName": "SW Columbia St & SW 17th Ave, Portland, OR 97201, USA",
+      "neighborhood": "Goose Hollow"
+    },
+    {
+      "id": "stop-3",
+      "address": "SW Salmon St. & SW 21st Ave. [NE]",
+      "time": "7:23 am",
+      "direction": "NE",
+      "originalLine": "7:23 amSW SALMON ST @ SW 21ST AV [NE]125CHP-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6942328,
+        45.5207588
+      ],
+      "displayName": "SW 21st Ave & SW Salmon St, Portland, OR 97205, USA",
+      "neighborhood": "Goose Hollow"
+    },
+    {
+      "id": "stop-4",
+      "address": "SW Alder St. & SW 17th Ave. [W]",
+      "time": "7:25 am",
+      "direction": "W",
+      "originalLine": "7:25 amSW ALDER ST @ SW 17TH AV [W]125CHP-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6887992,
+        45.5225652
+      ],
+      "displayName": "SW Alder St & SW 17th Ave, Portland, OR 97209, USA",
+      "neighborhood": "Goose Hollow"
+    },
+    {
+      "id": "stop-5",
+      "address": "1972 NW Flanders St. [S]",
+      "time": "7:28 am",
+      "direction": "S",
+      "originalLine": "7:28 am1972 NW FLANDERS ST [S]125CHP-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6918476,
+        45.5261163
+      ],
+      "displayName": "1972 NW Flanders St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "NW 18th Ave. & NW Glisan St. [SE]",
+      "time": "7:30 am",
+      "direction": "SE",
+      "originalLine": "7:30 amNW 18TH AV @ NW GLISAN ST [SE]125CHP-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6893709,
+        45.5263952
+      ],
+      "displayName": "NW Glisan St & NW 18th Ave, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "2033 NW Glisan St. [N]",
+      "time": "7:31 am",
+      "direction": "N",
+      "originalLine": "7:31 am2033 NW GLISAN ST [N]125CHP-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6932158,
+        45.5265202
+      ],
+      "displayName": "2033 NW Glisan St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-8",
+      "address": "NW 17th Ave. & NW Lovejoy St. [SE]",
+      "time": "7:34 am",
+      "direction": "SE",
+      "originalLine": "7:34 amNW 17TH AV @ NW LOVEJOY ST [SE]125CHP-A(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6884841,
+        45.5299905
+      ],
+      "displayName": "NW 17th Ave & NW Lovejoy St, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-9",
+      "address": "NW 13th Ave. & NW Quimby St. [NW]",
+      "time": "7:37 am",
+      "direction": "NW",
+      "originalLine": "7:37 amNW 13TH AV @ NW QUIMBY ST [NW]125CHP-A(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6845642,
+        45.5336211
+      ],
+      "displayName": "NW Quimby St & NW 13th Ave, Portland, OR 97209, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70535129999999,
+        45.533232500000004
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    }
+  ],
+  "processedAt": "2025-12-11T22:32:51.926Z",
+  "stats": {
+    "totalStops": 10,
+    "geocodedStops": 10,
+    "failedStops": 0
+  },
+  "neighborhoods": [
+    "Goose Hollow",
+    "Northwest Portland",
+    "Southwest Portland"
+  ]
+}

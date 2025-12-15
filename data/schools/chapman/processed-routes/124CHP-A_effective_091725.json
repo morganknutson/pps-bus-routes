@@ -1,0 +1,147 @@
+{
+  "id": "124CHP-A_effective_091725.pdf",
+  "name": "124",
+  "direction": "Morning",
+  "filename": "124CHP-A_effective_091725.pdf",
+  "fileId": "124CHP-A_effective_091725.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SW Pk. Ave. & SW Clay St. [N]",
+      "time": "7:13 am",
+      "direction": "N",
+      "originalLine": "7:13 amSW PARK AV @ SW CLAY ST [N]124CHP-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6834919,
+        45.5142851
+      ],
+      "displayName": "SW Park Ave & SW Clay St, Portland, OR 97201, USA",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "W Burnside Rd. & NW 48th Ave. [NE]",
+      "time": "7:23 am",
+      "direction": "NE",
+      "originalLine": "7:23 amW BURNSIDE RD @ NW 48TH AV [NE]124CHP-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7275303,
+        45.5197865
+      ],
+      "displayName": "NW 48th Ave & W Burnside Rd, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "110 NW Hermosa Blvd. [E]",
+      "time": "7:27 am",
+      "direction": "E",
+      "originalLine": "7:27 am110 NW HERMOSA BLVD [E]124CHP-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7123876,
+        45.5234775
+      ],
+      "displayName": "110 NW Hermosa Blvd, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "374 NW Macleay Blvd. [N]",
+      "time": "7:31 am",
+      "direction": "N",
+      "originalLine": "7:31 am374 NW MACLEAY BLVD [N]124CHP-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7063518,
+        45.5264375
+      ],
+      "displayName": "374 NW MacLeay Blvd, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "NW Macleay Blvd. & NW Hermosa Blvd. [NE]",
+      "time": "7:32 am",
+      "direction": "NE",
+      "originalLine": "7:32 amNW MACLEAY BLVD @ NW HERMOSA BLVD [NE]124CHP-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.711365,
+        45.52677569999999
+      ],
+      "displayName": "NW MacLeay Blvd & NW Hermosa Blvd, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "NW Cumberland Rd. & NW Ariel Terr. [W]",
+      "time": "7:34 am",
+      "direction": "W",
+      "originalLine": "7:34 amNW CUMBERLAND RD @ NW ARIEL TERR [W]124CHP-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7109062,
+        45.5292105
+      ],
+      "displayName": "NW Cumberland Rd & NW Ariel Terrace, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "NW Thurman St. & NW 32nd Ave. [NE]",
+      "time": "7:43 am",
+      "direction": "NE",
+      "originalLine": "7:43 amNW THURMAN ST @ NW 32ND AV [NE]124CHP-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7147048,
+        45.5359063
+      ],
+      "displayName": "NW 32nd Ave & NW Thurman St, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-8",
+      "address": "NW Thurman St. & NW Gordon St. [NE]",
+      "time": "7:45 am",
+      "direction": "NE",
+      "originalLine": "7:45 amNW THURMAN ST @ NW GORDON ST [NE]124CHP-A(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7196921,
+        45.5385251
+      ],
+      "displayName": "NW Gordon St & NW Thurman St, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70535129999999,
+        45.533232500000004
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    }
+  ],
+  "processedAt": "2025-12-11T22:32:45.273Z",
+  "stats": {
+    "totalStops": 9,
+    "geocodedStops": 9,
+    "failedStops": 0
+  },
+  "neighborhoods": [
+    "Northwest Portland",
+    "Southwest Portland"
+  ]
+}

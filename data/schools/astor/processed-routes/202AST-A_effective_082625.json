@@ -1,0 +1,214 @@
+{
+  "id": "202AST-A_effective_082625.pdf",
+  "name": "202",
+  "direction": "Morning",
+  "filename": "202AST-A_effective_082625.pdf",
+  "fileId": "202AST-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "Chief Joseph Gt. & St. & CAB Loading ZONE",
+      "time": "8:20 am",
+      "direction": null,
+      "originalLine": "8:20 amCHIEF JOSEPH GT & ST & CAB LOADING ZONE202AST-AStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    },
+    {
+      "id": "stop-2",
+      "address": "N Lombard St. & N Hurst Ave. [NE]",
+      "time": "8:24 am",
+      "direction": "NE",
+      "originalLine": "8:24 amN LOMBARD ST @ N HURST AV [NE]202AST-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7090189,
+        45.57717
+      ],
+      "displayName": "N Hurst Ave & N Lombard St, Portland, OR 97203, USA",
+      "placeId": "EjNOIEh1cnN0IEF2ZSAmIE4gTG9tYmFyZCBTdCwgUG9ydGxhbmQsIE9SIDk3MjAzLCBVU0EiZiJkChQKEgl_sbtElKeVVBGI144-naC2AhIUChIJf7G7RJSnlVQRiNeOPp2gtgIaFAoSCV2ml_3ap5VUEdla0G6NB_J5GhQKEglR9eKi3qeVVBFm1FbUbFgIqCIKDTSGKhsV8xbctg",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "N Wayland Ave. & N Willamette Blvd. [NW]",
+      "time": "8:25 am",
+      "direction": "NW",
+      "originalLine": "8:25 amN WAYLAND AV @ N WILLAMETTE BLVD [NW]202AST-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7110902,
+        45.5752257
+      ],
+      "displayName": "N Wayland Ave & N Willamette Blvd, Portland, OR 97203, USA",
+      "placeId": "EjpOIFdheWxhbmQgQXZlICYgTiBXaWxsYW1ldHRlIEJsdmQsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBImYiZAoUChIJpz_65ZOnlVQR9crItE6QaK0SFAoSCac_-uWTp5VUEfXKyLROkGitGhQKEgnV8tTp6qeVVBGoJD-6B5vFuRoUChIJE7Rr8e2nlVQR2mBnTLG4PFkiCg1BOiobFQrG27Y",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "N Kilpatrick St. & N Foss Ave. [NE]",
+      "time": "8:29 am",
+      "direction": "NE",
+      "originalLine": "8:29 amN KILPATRICK ST @ N FOSS AV [NE]202AST-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.710249,
+        45.5823314
+      ],
+      "displayName": "N Kilpatrick St & N Foss Ave, Portland, OR 97203, USA",
+      "placeId": "EjVOIEtpbHBhdHJpY2sgU3QgJiBOIEZvc3MgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDMsIFVTQSJmImQKFAoSCZFrQYTqp5VUEbnRbBO7wFaMEhQKEgmRa0GE6qeVVBG50WwTu8BWjBoUChIJSRORVLinlVQRZQ1DYI3LFf4aFAoSCYGStbjqp5VUEfDVZOXOFJbEIgoN0k8rGxXm5tu2",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "N Kilpatrick St. & N Dwight Ave. [NE]",
+      "time": "8:30 am",
+      "direction": "NE",
+      "originalLine": "8:30 amN KILPATRICK ST @ N DWIGHT AV [NE]202AST-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7145491,
+        45.5823511
+      ],
+      "displayName": "N Kilpatrick St & N Dwight Ave, Portland, OR 97203, USA",
+      "placeId": "EjdOIEtpbHBhdHJpY2sgU3QgJiBOIER3aWdodCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBImYiZAoUChIJSZX2s-unlVQRm7Xi4aUUc1sSFAoSCUmV9rPrp5VUEZu14uGlFHNbGhQKEglJE5FUuKeVVBFlDUNgjcsV_hoUChIJ7RSBjumnlVQRa28qYFLDh9siCg2XUCsbFe0-27Y",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "5601 N Yale St, Portland, OR 97203, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ASTOR GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.729655,
+        45.5786714
+      ],
+      "displayName": "5601 N Yale St, Portland, OR 97203, USA",
+      "schoolName": "Astor"
+    }
+  ],
+  "processedAt": "2025-12-12T22:30:22.590Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.57717,
+      -122.70902
+    ],
+    [
+      45.57707,
+      -122.70904
+    ],
+    [
+      45.57523,
+      -122.70904
+    ],
+    [
+      45.57512,
+      -122.70902
+    ],
+    [
+      45.57518,
+      -122.71002
+    ],
+    [
+      45.57523,
+      -122.71109
+    ],
+    [
+      45.57518,
+      -122.71002
+    ],
+    [
+      45.57512,
+      -122.70902
+    ],
+    [
+      45.57505,
+      -122.70851
+    ],
+    [
+      45.57497,
+      -122.70797
+    ],
+    [
+      45.57549,
+      -122.70797
+    ],
+    [
+      45.57714,
+      -122.70797
+    ],
+    [
+      45.57958,
+      -122.70796
+    ],
+    [
+      45.58232,
+      -122.70792
+    ],
+    [
+      45.58234,
+      -122.7121
+    ],
+    [
+      45.58235,
+      -122.71455
+    ],
+    [
+      45.58405,
+      -122.71454
+    ],
+    [
+      45.58408,
+      -122.71537
+    ],
+    [
+      45.58407,
+      -122.71855
+    ],
+    [
+      45.58405,
+      -122.72061
+    ],
+    [
+      45.58403,
+      -122.72149
+    ],
+    [
+      45.58444,
+      -122.72261
+    ],
+    [
+      45.58301,
+      -122.72367
+    ],
+    [
+      45.58217,
+      -122.7243
+    ],
+    [
+      45.57748,
+      -122.7278
+    ],
+    [
+      45.57804,
+      -122.72931
+    ],
+    [
+      45.57846,
+      -122.73046
+    ],
+    [
+      45.57882,
+      -122.73021
+    ]
+  ]
+}

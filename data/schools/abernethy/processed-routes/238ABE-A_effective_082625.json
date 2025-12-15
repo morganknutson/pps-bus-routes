@@ -1,0 +1,171 @@
+{
+  "id": "238ABE-A_effective_082625.pdf",
+  "name": "238",
+  "direction": "Morning",
+  "filename": "238ABE-A_effective_082625.pdf",
+  "fileId": "238ABE-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE Grant St. & SE 37th Ave. [NE]",
+      "time": "7:33 am",
+      "direction": "NE",
+      "originalLine": "7:33 amSE GRANT ST @ SE 37TH AV [NE]238ABE-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6257363,
+        45.5073579
+      ],
+      "displayName": "SE 37th Ave & SE Grant St, Portland, OR 97214, USA",
+      "placeId": "EjJTRSAzN3RoIEF2ZSAmIFNFIEdyYW50IFN0LCBQb3J0bGFuZCwgT1IgOTcyMTQsIFVTQSJmImQKFAoSCfEscc2OoJVUEduDc3BMQtQREhQKEgnxLHHNjqCVVBHbg3NwTELUERoUChIJixPbCqMKlVQRo1jDIDE3DrEaFAoSCfkw6ySxoZVUEaypJEwEJ2jPIgoNK98fGxUtzOi2",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 35th Ave. & SE Woodward St. [NW]",
+      "time": "7:38 am",
+      "direction": "NW",
+      "originalLine": "7:38 amSE 35TH AV @ SE WOODWARD ST [NW]238ABE-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.628596,
+        45.5019473
+      ],
+      "displayName": "SE Woodward St & SE 35th Ave, Portland, OR 97202, USA",
+      "placeId": "EjVTRSBXb29kd2FyZCBTdCAmIFNFIDM1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCRPvcpyHoJVUEUI0kmHW6aliEhQKEgkT73Kch6CVVBFCNJJh1umpYhoUChIJm0VU8kuglVQRgnj1DEPOIoAaFAoSCYPmn-CiCpVUEa98JiRIWSJvIgoN0QsfGxV4XOi2",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-0",
+      "address": "2421 SE Orange Ave, Portland, OR 97214, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ABERNETHY GT & ST & CAB LOAD ZONE ON ELLIOTT",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6516263,
+        45.5058868
+      ],
+      "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
+      "schoolName": "Abernethy"
+    }
+  ],
+  "processedAt": "2025-12-12T22:33:30.164Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50736,
+      -122.62574
+    ],
+    [
+      45.50736,
+      -122.62762
+    ],
+    [
+      45.50661,
+      -122.62762
+    ],
+    [
+      45.50479,
+      -122.62761
+    ],
+    [
+      45.50479,
+      -122.62859
+    ],
+    [
+      45.50462,
+      -122.6286
+    ],
+    [
+      45.5034,
+      -122.6286
+    ],
+    [
+      45.50195,
+      -122.6286
+    ],
+    [
+      45.5034,
+      -122.6286
+    ],
+    [
+      45.50462,
+      -122.6286
+    ],
+    [
+      45.50479,
+      -122.62859
+    ],
+    [
+      45.50479,
+      -122.62958
+    ],
+    [
+      45.50479,
+      -122.63023
+    ],
+    [
+      45.50479,
+      -122.63115
+    ],
+    [
+      45.5048,
+      -122.63266
+    ],
+    [
+      45.50481,
+      -122.63458
+    ],
+    [
+      45.50481,
+      -122.63588
+    ],
+    [
+      45.5048,
+      -122.63669
+    ],
+    [
+      45.50481,
+      -122.63846
+    ],
+    [
+      45.50483,
+      -122.63955
+    ],
+    [
+      45.50482,
+      -122.63968
+    ],
+    [
+      45.50482,
+      -122.64122
+    ],
+    [
+      45.50483,
+      -122.6436
+    ],
+    [
+      45.50483,
+      -122.64522
+    ],
+    [
+      45.50484,
+      -122.64822
+    ],
+    [
+      45.50485,
+      -122.65203
+    ],
+    [
+      45.50561,
+      -122.65115
+    ]
+  ]
+}

@@ -1,0 +1,331 @@
+{
+  "id": "292BEL-P_effective_082625.pdf",
+  "name": "292",
+  "direction": "Afternoon",
+  "filename": "292BEL-P_effective_082625.pdf",
+  "fileId": "292BEL-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "620 N Fremont St, Portland, OR 97227, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BOISE-ELIOT ST LOADING ZONE ON BORTHWICK",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6729801,
+        45.54754459999999
+      ],
+      "displayName": "620 N Fremont St, Portland, OR 97227, USA",
+      "schoolName": "Boise-Eliot"
+    },
+    {
+      "id": "stop-1",
+      "address": "2414 NE Rodney Ave. [E]",
+      "time": "2:41 pm",
+      "direction": "E",
+      "originalLine": "2:41 pm2414 NE RODNEY AV [E]292BEL-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6639379,
+        45.5402853
+      ],
+      "displayName": "2414 NE Rodney Ave, Portland, OR 97212, USA",
+      "placeId": "ChIJHUmU0UinlVQRGqIJ4lg6izE",
+      "neighborhood": "Eliot"
+    },
+    {
+      "id": "stop-2",
+      "address": "5250 NE Martin Luther King Jr Blvd. (blazers)",
+      "time": "2:48 pm",
+      "direction": null,
+      "originalLine": "2:48 pm5250 NE MARTIN LUTHER KING JR BLVD (BLAZERS)292BEL-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6609469,
+        45.5614977
+      ],
+      "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
+      "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
+      "neighborhood": "King"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Alberta St. & NE Cleveland Ave. [N]",
+      "time": "2:50 pm",
+      "direction": "N",
+      "originalLine": "2:50 pmNE ALBERTA ST @ NE CLEVELAND AV [N]292BEL-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6658905,
+        45.5591173
+      ],
+      "displayName": "NE Cleveland Ave & NE Alberta St, Portland, OR 97217, USA",
+      "placeId": "EjlORSBDbGV2ZWxhbmQgQXZlICYgTkUgQWxiZXJ0YSBTdCwgUG9ydGxhbmQsIE9SIDk3MjE3LCBVU0EiZiJkChQKEglVd43hEKeVVBF35phYNwo8ORIUChIJVXeN4RCnlVQRd-aYWDcKPDkaFAoSCWHF-KI_p5VUEcfXCsfKAE6_GhQKEglnDSYNH6eVVBG2JfSjXeBAjSIKDQXFJxsVp6vitg",
+      "neighborhood": "Humboldt"
+    },
+    {
+      "id": "stop-4",
+      "address": "Tubman Gt. & St. & CAB LOAD ZONE",
+      "time": "2:57 pm",
+      "direction": null,
+      "originalLine": "2:57 pmTUBMAN GT & ST & CAB LOAD ZONE292BEL-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-12T23:34:35.263Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54759,
+      -122.6729
+    ],
+    [
+      45.5476,
+      -122.67242
+    ],
+    [
+      45.5476,
+      -122.67203
+    ],
+    [
+      45.5475,
+      -122.67205
+    ],
+    [
+      45.54709,
+      -122.67206
+    ],
+    [
+      45.54713,
+      -122.67085
+    ],
+    [
+      45.54718,
+      -122.67079
+    ],
+    [
+      45.54724,
+      -122.67076
+    ],
+    [
+      45.54826,
+      -122.67073
+    ],
+    [
+      45.54827,
+      -122.66889
+    ],
+    [
+      45.54827,
+      -122.66797
+    ],
+    [
+      45.5475,
+      -122.66797
+    ],
+    [
+      45.54665,
+      -122.66798
+    ],
+    [
+      45.54572,
+      -122.66799
+    ],
+    [
+      45.54488,
+      -122.66801
+    ],
+    [
+      45.54463,
+      -122.66808
+    ],
+    [
+      45.54434,
+      -122.66812
+    ],
+    [
+      45.54378,
+      -122.66814
+    ],
+    [
+      45.54132,
+      -122.66816
+    ],
+    [
+      45.54126,
+      -122.66816
+    ],
+    [
+      45.54105,
+      -122.66802
+    ],
+    [
+      45.54103,
+      -122.66669
+    ],
+    [
+      45.54095,
+      -122.66598
+    ],
+    [
+      45.54093,
+      -122.66567
+    ],
+    [
+      45.54093,
+      -122.66416
+    ],
+    [
+      45.54029,
+      -122.66417
+    ],
+    [
+      45.54093,
+      -122.66416
+    ],
+    [
+      45.54092,
+      -122.66299
+    ],
+    [
+      45.54092,
+      -122.66167
+    ],
+    [
+      45.54091,
+      -122.66157
+    ],
+    [
+      45.54126,
+      -122.66157
+    ],
+    [
+      45.54212,
+      -122.66156
+    ],
+    [
+      45.54297,
+      -122.66155
+    ],
+    [
+      45.54411,
+      -122.66156
+    ],
+    [
+      45.54459,
+      -122.66157
+    ],
+    [
+      45.54569,
+      -122.66156
+    ],
+    [
+      45.54765,
+      -122.66153
+    ],
+    [
+      45.5492,
+      -122.66154
+    ],
+    [
+      45.5507,
+      -122.66153
+    ],
+    [
+      45.55207,
+      -122.6615
+    ],
+    [
+      45.55423,
+      -122.66149
+    ],
+    [
+      45.5555,
+      -122.66149
+    ],
+    [
+      45.55553,
+      -122.66154
+    ],
+    [
+      45.55585,
+      -122.66155
+    ],
+    [
+      45.55612,
+      -122.66156
+    ],
+    [
+      45.5562,
+      -122.6615
+    ],
+    [
+      45.55671,
+      -122.66149
+    ],
+    [
+      45.55767,
+      -122.66147
+    ],
+    [
+      45.55964,
+      -122.66144
+    ],
+    [
+      45.56103,
+      -122.66142
+    ],
+    [
+      45.56116,
+      -122.66142
+    ],
+    [
+      45.56117,
+      -122.66099
+    ],
+    [
+      45.56116,
+      -122.66153
+    ],
+    [
+      45.55987,
+      -122.66156
+    ],
+    [
+      45.55943,
+      -122.66157
+    ],
+    [
+      45.55914,
+      -122.66158
+    ],
+    [
+      45.55914,
+      -122.66213
+    ],
+    [
+      45.55913,
+      -122.66267
+    ],
+    [
+      45.55913,
+      -122.6632
+    ],
+    [
+      45.55912,
+      -122.66461
+    ],
+    [
+      45.55912,
+      -122.66589
+    ]
+  ]
+}

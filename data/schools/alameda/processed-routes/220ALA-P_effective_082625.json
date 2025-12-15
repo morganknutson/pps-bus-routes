@@ -1,0 +1,278 @@
+{
+  "id": "220ALA-P_effective_082625.pdf",
+  "name": "220",
+  "direction": "Afternoon",
+  "filename": "220ALA-P_effective_082625.pdf",
+  "fileId": "220ALA-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2732 NE Fremont St, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ALAMEDA GT LOADING ZONE ON 27TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6376923,
+        45.547482
+      ],
+      "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
+      "schoolName": "Alameda"
+    },
+    {
+      "id": "stop-1",
+      "address": "NE 50th Ave. & NE Klickitat St. [NW]",
+      "time": "2:40 pm",
+      "direction": "NW",
+      "originalLine": "2:40 pmNE 50TH AV @ NE KLICKITAT ST [NW]220ALA-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6116855,
+        45.5469468
+      ],
+      "displayName": "NE Klickitat St & NE 50th Ave, Portland, OR 97213, USA",
+      "placeId": "EjZORSBLbGlja2l0YXQgU3QgJiBORSA1MHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgk55XFrLaGVVBHpnOSyQK-HqhIUChIJOeVxay2hlVQR6ZzkskCvh6oaFAoSCSEaf7s2oZVUETkgzF9kfcIcGhQKEgnh2rmuLaGVVBG-FymCFI0VPyIKDZzpJRsVCfHqtg",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE Klickitat St. & NE 45th Ave. [NE]",
+      "time": "2:42 pm",
+      "direction": "NE",
+      "originalLine": "2:42 pmNE KLICKITAT ST @ NE 45TH AV [NE]220ALA-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6167424,
+        45.5469634
+      ],
+      "displayName": "NE Klickitat St & NE 45th Ave, Portland, OR 97213, USA",
+      "placeId": "EjZORSBLbGlja2l0YXQgU3QgJiBORSA0NXRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEglJ-CZL06aVVBHByklQqP1DQhIUChIJSfgmS9OmlVQRwcpJUKj9Q0IaFAoSCSEaf7s2oZVUETkgzF9kfcIcGhQKEgmHulOwLKGVVBGjmHKCm61XHSIKDULqJRsVgCvqtg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Shaver St. & NE Cesar E Chavez Blvd. [NE]",
+      "time": "2:45 pm",
+      "direction": "NE",
+      "originalLine": "2:45 pmNE SHAVER ST @ NE CESAR E CHAVEZ BLVD [NE]220ALA-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6234417,
+        45.5518192
+      ],
+      "displayName": "NE Shaver St & NE Cesar E Chavez Blvd, Portland, OR 97211, USA",
+      "placeId": "Ej5ORSBTaGF2ZXIgU3QgJiBORSBDZXNhciBFIENoYXZleiBCbHZkLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCYmLpTvRppVUEXLAbSSmiISaEhQKEgmJi6U70aaVVBFywG0kpoiEmhoUChIJbXNx8demlVQRbE1HgB_NUNQaFAoSCRELUxLrppVUEYZ1JE4COHJhIgoN8KcmGxXPJem2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Skidmore St. & NE 37th ( & Bethany Lutheran) [NE]",
+      "time": "2:47 pm",
+      "direction": "NE",
+      "originalLine": "2:47 pmNE SKIDMORE ST @NE 37TH  (@ BETHANY LUTHERAN) [NE]220ALA-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6255518,
+        45.5536885
+      ],
+      "displayName": "NE Skidmore St & NE 37th Ave, Portland, OR 97211, USA",
+      "placeId": "EjVORSBTa2lkbW9yZSBTdCAmIE5FIDM3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCQdiBbzQppVUEdndrdVIoQ3AEhQKEgkHYgW80KaVVBHZ3a3VSKENwBoUChIJAektBVKhlVQRfR36jGtn9D0aFAoSCeO-GhXDppVUEZwWnyG-svtCIgoN9fAmGxVi0-i2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "Tubman Gt. & St. & CAB LOAD ZONE",
+      "time": "2:58 pm",
+      "direction": null,
+      "originalLine": "2:58 pmTUBMAN GT & ST & CAB LOAD ZONE220ALA-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-12T21:41:39.780Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54747,
+      -122.63792
+    ],
+    [
+      45.54734,
+      -122.6379
+    ],
+    [
+      45.54731,
+      -122.63766
+    ],
+    [
+      45.54728,
+      -122.63764
+    ],
+    [
+      45.54728,
+      -122.63717
+    ],
+    [
+      45.54724,
+      -122.63691
+    ],
+    [
+      45.54724,
+      -122.63681
+    ],
+    [
+      45.54734,
+      -122.63678
+    ],
+    [
+      45.54788,
+      -122.63679
+    ],
+    [
+      45.54824,
+      -122.6368
+    ],
+    [
+      45.54824,
+      -122.63605
+    ],
+    [
+      45.54825,
+      -122.6357
+    ],
+    [
+      45.54825,
+      -122.63484
+    ],
+    [
+      45.54825,
+      -122.63376
+    ],
+    [
+      45.54826,
+      -122.63213
+    ],
+    [
+      45.54828,
+      -122.63008
+    ],
+    [
+      45.5483,
+      -122.62498
+    ],
+    [
+      45.5483,
+      -122.61889
+    ],
+    [
+      45.54828,
+      -122.61269
+    ],
+    [
+      45.54827,
+      -122.61185
+    ],
+    [
+      45.54827,
+      -122.61167
+    ],
+    [
+      45.54803,
+      -122.61167
+    ],
+    [
+      45.54695,
+      -122.61169
+    ],
+    [
+      45.54695,
+      -122.6127
+    ],
+    [
+      45.54696,
+      -122.61415
+    ],
+    [
+      45.54697,
+      -122.61777
+    ],
+    [
+      45.54698,
+      -122.62082
+    ],
+    [
+      45.54699,
+      -122.62183
+    ],
+    [
+      45.5483,
+      -122.62182
+    ],
+    [
+      45.5483,
+      -122.6227
+    ],
+    [
+      45.5483,
+      -122.62321
+    ],
+    [
+      45.5493,
+      -122.62321
+    ],
+    [
+      45.54948,
+      -122.62323
+    ],
+    [
+      45.54967,
+      -122.62331
+    ],
+    [
+      45.5498,
+      -122.62339
+    ],
+    [
+      45.54988,
+      -122.62342
+    ],
+    [
+      45.5503,
+      -122.62343
+    ],
+    [
+      45.55182,
+      -122.62344
+    ],
+    [
+      45.55181,
+      -122.62555
+    ],
+    [
+      45.55204,
+      -122.62556
+    ],
+    [
+      45.55279,
+      -122.62556
+    ],
+    [
+      45.55333,
+      -122.62556
+    ],
+    [
+      45.55369,
+      -122.62555
+    ]
+  ],
+  "neighborhoods": [
+    "Northeast Portland",
+    "Rose City Park"
+  ]
+}

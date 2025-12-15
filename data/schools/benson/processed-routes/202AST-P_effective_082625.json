@@ -1,0 +1,252 @@
+{
+  "id": "202AST-P_effective_082625.pdf",
+  "name": "202",
+  "direction": "Afternoon",
+  "filename": "202AST-P_effective_082625.pdf",
+  "fileId": "202AST-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "5601 N Yale St, Portland, OR 97203, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ASTOR GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.729655,
+        45.5786714
+      ],
+      "displayName": "5601 N Yale St, Portland, OR 97203, USA",
+      "schoolName": "Astor"
+    },
+    {
+      "id": "stop-1",
+      "address": "N Kilpatrick St. & N Dwight Ave. [SW]",
+      "time": "3:43 pm",
+      "direction": "SW",
+      "originalLine": "3:43 pmN KILPATRICK ST @ N DWIGHT AV [SW]202AST-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7145491,
+        45.5823511
+      ],
+      "displayName": "N Kilpatrick St & N Dwight Ave, Portland, OR 97203, USA",
+      "placeId": "EjdOIEtpbHBhdHJpY2sgU3QgJiBOIER3aWdodCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBImYiZAoUChIJSZX2s-unlVQRm7Xi4aUUc1sSFAoSCUmV9rPrp5VUEZu14uGlFHNbGhQKEglJE5FUuKeVVBFlDUNgjcsV_hoUChIJ7RSBjumnlVQRa28qYFLDh9siCg2XUCsbFe0-27Y",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "N Kilpatrick St. & N Foss Ave. [SW]",
+      "time": "3:45 pm",
+      "direction": "SW",
+      "originalLine": "3:45 pmN KILPATRICK ST @ N FOSS AV [SW]202AST-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.710249,
+        45.5823314
+      ],
+      "displayName": "N Kilpatrick St & N Foss Ave, Portland, OR 97203, USA",
+      "placeId": "EjVOIEtpbHBhdHJpY2sgU3QgJiBOIEZvc3MgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDMsIFVTQSJmImQKFAoSCZFrQYTqp5VUEbnRbBO7wFaMEhQKEgmRa0GE6qeVVBG50WwTu8BWjBoUChIJSRORVLinlVQRZQ1DYI3LFf4aFAoSCYGStbjqp5VUEfDVZOXOFJbEIgoN0k8rGxXm5tu2",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "N Lombard St. & N Hurst Ave. [NE]",
+      "time": "3:48 pm",
+      "direction": "NE",
+      "originalLine": "3:48 pmN LOMBARD ST @ N HURST AV [NE]202AST-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7090189,
+        45.57717
+      ],
+      "displayName": "N Hurst Ave & N Lombard St, Portland, OR 97203, USA",
+      "placeId": "EjNOIEh1cnN0IEF2ZSAmIE4gTG9tYmFyZCBTdCwgUG9ydGxhbmQsIE9SIDk3MjAzLCBVU0EiZiJkChQKEgl_sbtElKeVVBGI144-naC2AhIUChIJf7G7RJSnlVQRiNeOPp2gtgIaFAoSCV2ml_3ap5VUEdla0G6NB_J5GhQKEglR9eKi3qeVVBFm1FbUbFgIqCIKDTSGKhsV8xbctg",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "N Wayland Ave. & N Willamette Blvd. [NW]",
+      "time": "3:49 pm",
+      "direction": "NW",
+      "originalLine": "3:49 pmN WAYLAND AV @ N WILLAMETTE BLVD [NW]202AST-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7110902,
+        45.5752257
+      ],
+      "displayName": "N Wayland Ave & N Willamette Blvd, Portland, OR 97203, USA",
+      "placeId": "EjpOIFdheWxhbmQgQXZlICYgTiBXaWxsYW1ldHRlIEJsdmQsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBImYiZAoUChIJpz_65ZOnlVQR9crItE6QaK0SFAoSCac_-uWTp5VUEfXKyLROkGitGhQKEgnV8tTp6qeVVBGoJD-6B5vFuRoUChIJE7Rr8e2nlVQR2mBnTLG4PFkiCg1BOiobFQrG27Y",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "4430 N Trenton St(regence B&g Club) [N]",
+      "time": "3:56 pm",
+      "direction": "N",
+      "originalLine": "3:56 pm4430 N TRENTON ST(REGENCE B&G CLUB) [N]202AST-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7130989,
+        45.5883466
+      ],
+      "displayName": "4430 N Trenton St, Portland, OR 97203, USA",
+      "placeId": "ChIJRYXc5MKnlVQRCJoqshJJiMo",
+      "neighborhood": "North Portland"
+    }
+  ],
+  "processedAt": "2025-12-12T22:36:21.193Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.57882,
+      -122.73021
+    ],
+    [
+      45.57846,
+      -122.73046
+    ],
+    [
+      45.57804,
+      -122.72931
+    ],
+    [
+      45.57748,
+      -122.7278
+    ],
+    [
+      45.58032,
+      -122.72567
+    ],
+    [
+      45.58273,
+      -122.72388
+    ],
+    [
+      45.58444,
+      -122.72261
+    ],
+    [
+      45.58403,
+      -122.72149
+    ],
+    [
+      45.58402,
+      -122.72141
+    ],
+    [
+      45.58406,
+      -122.72018
+    ],
+    [
+      45.58407,
+      -122.71855
+    ],
+    [
+      45.58408,
+      -122.71537
+    ],
+    [
+      45.58405,
+      -122.71454
+    ],
+    [
+      45.58235,
+      -122.71455
+    ],
+    [
+      45.58234,
+      -122.71319
+    ],
+    [
+      45.58233,
+      -122.71025
+    ],
+    [
+      45.58232,
+      -122.70792
+    ],
+    [
+      45.57958,
+      -122.70796
+    ],
+    [
+      45.57714,
+      -122.70797
+    ],
+    [
+      45.57718,
+      -122.70896
+    ],
+    [
+      45.57717,
+      -122.70902
+    ],
+    [
+      45.57707,
+      -122.70904
+    ],
+    [
+      45.57523,
+      -122.70904
+    ],
+    [
+      45.57512,
+      -122.70902
+    ],
+    [
+      45.57523,
+      -122.71109
+    ],
+    [
+      45.57528,
+      -122.71236
+    ],
+    [
+      45.5753,
+      -122.71337
+    ],
+    [
+      45.57531,
+      -122.71351
+    ],
+    [
+      45.5755,
+      -122.71351
+    ],
+    [
+      45.57606,
+      -122.71352
+    ],
+    [
+      45.57859,
+      -122.7135
+    ],
+    [
+      45.58081,
+      -122.71349
+    ],
+    [
+      45.58379,
+      -122.71346
+    ],
+    [
+      45.58473,
+      -122.71346
+    ],
+    [
+      45.58699,
+      -122.71344
+    ],
+    [
+      45.58836,
+      -122.71343
+    ]
+  ]
+}

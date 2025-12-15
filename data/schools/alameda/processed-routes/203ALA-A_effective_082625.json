@@ -1,0 +1,251 @@
+{
+  "id": "203ALA-A_effective_082625.pdf",
+  "name": "203",
+  "direction": "Morning",
+  "filename": "203ALA-A_effective_082625.pdf",
+  "fileId": "203ALA-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NE 47th Ave. & NE Skidmore St. [NW]",
+      "time": "7:39 am",
+      "direction": "NW",
+      "originalLine": "7:39 amNE 47TH AV @ NE SKIDMORE ST [NW]203ALA-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6149435,
+        45.5537281
+      ],
+      "displayName": "NE Skidmore St & NE 47th Ave, Portland, OR 97218, USA",
+      "placeId": "EjVORSBTa2lkbW9yZSBTdCAmIE5FIDQ3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTgsIFVTQSJmImQKFAoSCdNjU2_OppVUEbh34pwc4UgkEhQKEgnTY1NvzqaVVBG4d-KcHOFIJBoUChIJAektBVKhlVQRfR36jGtn9D0aFAoSCZWH9hfPppVUEeMj5vdygpPcIgoNgfImGxXFceq2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE 47th Ave. & NE Shaver St. [NW]",
+      "time": "7:40 am",
+      "direction": "NW",
+      "originalLine": "7:40 amNE 47TH AV @ NE SHAVER ST [NW]203ALA-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6149674,
+        45.5518793
+      ],
+      "displayName": "NE Shaver St & NE 47th Ave, Portland, OR 97213, USA",
+      "placeId": "EjNORSBTaGF2ZXIgU3QgJiBORSA0N3RoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgn7eLfxzaaVVBHu5lxzkkdGUxIUChIJ-3i38c2mlVQR7uZcc5JHRlMaFAoSCW1zcfHXppVUEWxNR4AfzVDUGhQKEgmVh_YXz6aVVBHjI-b3coKT3CIKDUmqJhsV1nDqtg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 47th Ave. & NE Beech St. [NW]",
+      "time": "7:41 am",
+      "direction": "NW",
+      "originalLine": "7:41 amNE 47TH AV @ NE BEECH ST [NW]203ALA-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6150139,
+        45.5501109
+      ],
+      "displayName": "NE Beech St & NE 47th Ave, Portland, OR 97213, USA",
+      "placeId": "EjJORSBCZWVjaCBTdCAmIE5FIDQ3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCUdSnGLSppVUEdqsQZBJXyf1EhQKEglHUpxi0qaVVBHarEGQSV8n9RoUChIJ0-IC4E6hlVQRLPfsocP96rsaFAoSCZWH9hfPppVUEeMj5vdygpPcIgoNNWUmGxUFb-q2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Fremont St. & NE 45th Ave. [N]",
+      "time": "7:42 am",
+      "direction": "N",
+      "originalLine": "7:42 amNE FREMONT ST @ NE 45TH AV [N]203ALA-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6171906,
+        45.54829669999999
+      ],
+      "displayName": "NE 45th Ave & NE Fremont St, Portland, OR 97213, USA",
+      "placeId": "EjRORSA0NXRoIEF2ZSAmIE5FIEZyZW1vbnQgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJTyBzF9OmlVQRjktIX_8h8gISFAoSCU8gcxfTppVUEY5LSF__IfICGhQKEgmHulOwLKGVVBGjmHKCm61XHRoUChIJ74qpgU-hlVQRQiF_j2HDor0iCg1XHiYbFf4Z6rY",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE Alameda St. & NE 41st Ave. [NE]",
+      "time": "7:44 am",
+      "direction": "NE",
+      "originalLine": "7:44 amNE ALAMEDA ST @ NE 41ST AV [NE]203ALA-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6208303,
+        45.5454162
+      ],
+      "displayName": "NE 41st Ave & NE Alameda St, Portland, OR 97212, USA",
+      "placeId": "EjRORSA0MXN0IEF2ZSAmIE5FIEFsYW1lZGEgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMiwgVVNBImYiZAoUChIJB3GXKyuhlVQRQ1J9cpz4wC4SFAoSCQdxlysroZVUEUNSfXKc-MAuGhQKEgm3gf7D1KaVVBHA65TpH5jCdRoUChIJeft12iyhlVQRvlcAiRtSZXQiCg3SrSUbFdGL6bY",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "2732 NE Fremont St, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ALAMEDA GT LOADING ZONE ON 27TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6376923,
+        45.547482
+      ],
+      "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
+      "schoolName": "Alameda"
+    }
+  ],
+  "processedAt": "2025-12-12T21:41:34.090Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.55373,
+      -122.61494
+    ],
+    [
+      45.55028,
+      -122.61499
+    ],
+    [
+      45.54976,
+      -122.61504
+    ],
+    [
+      45.54886,
+      -122.61506
+    ],
+    [
+      45.54829,
+      -122.61509
+    ],
+    [
+      45.54829,
+      -122.61562
+    ],
+    [
+      45.5483,
+      -122.61719
+    ],
+    [
+      45.5483,
+      -122.62
+    ],
+    [
+      45.5483,
+      -122.62077
+    ],
+    [
+      45.54774,
+      -122.6208
+    ],
+    [
+      45.5456,
+      -122.62083
+    ],
+    [
+      45.54542,
+      -122.62083
+    ],
+    [
+      45.5456,
+      -122.62083
+    ],
+    [
+      45.54631,
+      -122.62082
+    ],
+    [
+      45.54698,
+      -122.62082
+    ],
+    [
+      45.54699,
+      -122.62183
+    ],
+    [
+      45.5483,
+      -122.62182
+    ],
+    [
+      45.5483,
+      -122.62252
+    ],
+    [
+      45.5483,
+      -122.62283
+    ],
+    [
+      45.5483,
+      -122.62333
+    ],
+    [
+      45.5483,
+      -122.62498
+    ],
+    [
+      45.54828,
+      -122.63008
+    ],
+    [
+      45.54826,
+      -122.63213
+    ],
+    [
+      45.54825,
+      -122.63376
+    ],
+    [
+      45.54824,
+      -122.63605
+    ],
+    [
+      45.54824,
+      -122.6368
+    ],
+    [
+      45.54788,
+      -122.63679
+    ],
+    [
+      45.54734,
+      -122.63678
+    ],
+    [
+      45.54724,
+      -122.63681
+    ],
+    [
+      45.54724,
+      -122.63691
+    ],
+    [
+      45.54728,
+      -122.63717
+    ],
+    [
+      45.54728,
+      -122.63764
+    ],
+    [
+      45.54731,
+      -122.63766
+    ],
+    [
+      45.54734,
+      -122.6379
+    ],
+    [
+      45.54747,
+      -122.63792
+    ]
+  ],
+  "neighborhoods": [
+    "Northeast Portland"
+  ]
+}

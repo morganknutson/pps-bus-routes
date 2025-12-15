@@ -1,0 +1,156 @@
+{
+  "id": "124CHP-P_effective_091725.pdf",
+  "name": "124",
+  "direction": "Afternoon",
+  "filename": "124CHP-P_effective_091725.pdf",
+  "fileId": "124CHP-P_effective_091725.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70535129999999,
+        45.533232500000004
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    },
+    {
+      "id": "stop-1",
+      "address": "NW Thurman St. & NW 32nd Ave. [NE]",
+      "time": "2:38 pm",
+      "direction": "NE",
+      "originalLine": "2:38 pmNW THURMAN ST @ NW 32ND AV [NE]124CHP-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7147048,
+        45.5359063
+      ],
+      "displayName": "NW 32nd Ave & NW Thurman St, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "NW Thurman St. & NW Gordon St. [NE]",
+      "time": "2:40 pm",
+      "direction": "NE",
+      "originalLine": "2:40 pmNW THURMAN ST @ NW GORDON ST [NE]124CHP-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7196921,
+        45.5385251
+      ],
+      "displayName": "NW Gordon St & NW Thurman St, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NW Cumberland Rd. & NW Ariel Terr. [NE]",
+      "time": "2:51 pm",
+      "direction": "NE",
+      "originalLine": "2:51 pmNW CUMBERLAND RD @ NW ARIEL TERR [NE]124CHP-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7109062,
+        45.5292105
+      ],
+      "displayName": "NW Cumberland Rd & NW Ariel Terrace, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "NW Macleay Blvd. & NW Hermosa Blvd. [SW]",
+      "time": "2:53 pm",
+      "direction": "SW",
+      "originalLine": "2:53 pmNW MACLEAY BLVD @ NW HERMOSA BLVD [SW]124CHP-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.711365,
+        45.52677569999999
+      ],
+      "displayName": "NW MacLeay Blvd & NW Hermosa Blvd, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "374 NW Macleay Blvd. [S]",
+      "time": "2:55 pm",
+      "direction": "S",
+      "originalLine": "2:55 pm374 NW MACLEAY BLVD [S]124CHP-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7063518,
+        45.5264375
+      ],
+      "displayName": "374 NW MacLeay Blvd, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "110 NW Hermosa Blvd. [W]",
+      "time": "2:58 pm",
+      "direction": "W",
+      "originalLine": "2:58 pm110 NW HERMOSA BLVD [W]124CHP-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7123876,
+        45.5234775
+      ],
+      "displayName": "110 NW Hermosa Blvd, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "W Burnside Rd. & NW 48th Ave. [NE]",
+      "time": "3:01 pm",
+      "direction": "NE",
+      "originalLine": "3:01 pmW BURNSIDE RD @ NW 48TH AV [NE]124CHP-P(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7275303,
+        45.5197865
+      ],
+      "displayName": "NW 48th Ave & W Burnside Rd, Portland, OR 97210, USA",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-8",
+      "address": "SW Clay St. & SW Pk. Ave. [NE]",
+      "time": "3:12 pm",
+      "direction": "NE",
+      "originalLine": "3:12 pmSW CLAY ST @ SW PARK AV [NE]124CHP-P(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6834919,
+        45.5142851
+      ],
+      "displayName": "SW Park Ave & SW Clay St, Portland, OR 97201, USA",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-9",
+      "address": "WEST Sylvan Gt. Loading ZONE In Driveway",
+      "time": "3:23 pm",
+      "direction": null,
+      "originalLine": "3:23 pmWEST SYLVAN GT LOADING ZONE IN DRIVEWAY124CHP-PStop Order #:",
+      "skipGeocoding": true,
+      "coordinates": null
+    }
+  ],
+  "processedAt": "2025-12-11T22:32:47.481Z",
+  "stats": {
+    "totalStops": 9,
+    "geocodedStops": 9,
+    "failedStops": 0
+  },
+  "neighborhoods": [
+    "Northwest Portland",
+    "Southwest Portland"
+  ]
+}

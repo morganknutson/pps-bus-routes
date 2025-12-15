@@ -1,0 +1,387 @@
+{
+  "id": "269LEW-A_effective_082625.pdf",
+  "name": "269",
+  "direction": "Morning",
+  "filename": "269LEW-A_effective_082625.pdf",
+  "fileId": "269LEW-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE Duke St. & SE 60th Ave. [NE]",
+      "time": "7:38 am",
+      "direction": "NE",
+      "originalLine": "7:38 amSE DUKE ST @ SE 60TH AV [NE]269LEW-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6022597,
+        45.4758236
+      ],
+      "displayName": "SE Duke St & SE 60th Ave, Portland, OR 97206, USA",
+      "placeId": "EjFTRSBEdWtlIFN0ICYgU0UgNjB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJywWoZwaglVQR2vLdBiTu05gSFAoSCcsFqGcGoJVUEdry3QYk7tOYGhQKEglzrKkxiZ-VVBEwY0us41KM8hoUChIJNVlGqg-glVQR6dNMxbBxw8AiCg1cDxsbFTth7LY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 52nd Ave. & SE Henderson St. [NW]",
+      "time": "7:40 am",
+      "direction": "NW",
+      "originalLine": "7:40 amSE 52ND AV @ SE HENDERSON ST [NW]269LEW-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6100334,
+        45.469337
+      ],
+      "displayName": "SE Henderson St & SE 52nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjZTRSBIZW5kZXJzb24gU3QgJiBTRSA1Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgmD8tgJrAqVVBEBpzaNQqt_5BIUChIJg_LYCawKlVQRAac2jUKrf-QaFAoSCZkeCTT3n5VUEa9VQt6T792sGhQKEgmx4E2OC6CVVBGwr-O06bzTNCIKDfoRGhsVkjHrtg",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Flavel Dr. & SE Lexington St. [SW]",
+      "time": "7:41 am",
+      "direction": "SW",
+      "originalLine": "7:41 amSE FLAVEL DR @ SE LEXINGTON ST [SW]269LEW-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6083169,
+        45.4665518
+      ],
+      "displayName": "SE Flavel Dr & SE Lexington St, Portland, OR 97206, USA",
+      "placeId": "EjdTRSBGbGF2ZWwgRHIgJiBTRSBMZXhpbmd0b24gU3QsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJr7fIvqwKlVQRBYGxOKH0VxASFAoSCa-3yL6sCpVUEQWBsTih9FcQGhQKEgnx5zBaUnWVVBH9GMYtgzG1lBoUChIJe1U6cFV1lVQRHwutnjlFAmkiCg0upRkbFZ9067Y",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-4",
+      "address": "5410 SE Harney Dr. [N]",
+      "time": "7:44 am",
+      "direction": "N",
+      "originalLine": "7:44 am5410 SE HARNEY DR [N]269LEW-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6073097,
+        45.4627687
+      ],
+      "displayName": "5410 SE Harney Dr, Portland, OR 97206, USA",
+      "placeId": "ChIJBZVrWlJ1lVQRCoaHi0Rqtew",
+      "neighborhood": "Darlington"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE 45th Ave. & SE Harney St. [E]",
+      "time": "7:45 am",
+      "direction": "E",
+      "originalLine": "7:45 amSE 45TH AV @ SE HARNEY ST [E]269LEW-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6158785,
+        45.4629968
+      ],
+      "displayName": "SE Harney St & SE 45th Ave, Portland, OR 97222, USA",
+      "placeId": "EjNTRSBIYXJuZXkgU3QgJiBTRSA0NXRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjIyLCBVU0EiZiJkChQKEgnpN-rUTHWVVBFgdDjULhrV8hIUChIJ6Tfq1Ex1lVQRYHQ41C4a1fIaFAoSCa9Q1UlWdZVUEZOK2CWOUirDGhQKEgnxrMhxpgqVVBFFQHZCxlPnFyIKDVAaGRsVP03qtg",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE 45th Ave. & SE Nehalem St. [E]",
+      "time": "7:46 am",
+      "direction": "E",
+      "originalLine": "7:46 amSE 45TH AV @ SE NEHALEM ST [E]269LEW-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6159288,
+        45.4657071
+      ],
+      "displayName": "SE 45th Ave & SE Nehalem St, Portland, OR 97206, USA",
+      "placeId": "EjRTRSA0NXRoIEF2ZSAmIFNFIE5laGFsZW0gU3QsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJ19XeibIKlVQRBGu4yx5j30MSFAoSCdfV3omyCpVUEQRruMseY99DGhQKEgnxrMhxpgqVVBFFQHZCxlPnFxoUChIJFYEGobYKlVQRwwWjfB6bPHkiCg0vhBkbFUhL6rY",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-0",
+      "address": "4401 SE Evergreen St #121, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:LEWIS GT & ST LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6176979,
+        45.4738762
+      ],
+      "displayName": "4401 SE Evergreen St #121, Portland, OR 97206, USA",
+      "schoolName": "Lewis"
+    }
+  ],
+  "processedAt": "2025-12-12T22:36:00.558Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.47582,
+      -122.60226
+    ],
+    [
+      45.47582,
+      -122.60593
+    ],
+    [
+      45.47583,
+      -122.60705
+    ],
+    [
+      45.47582,
+      -122.6083
+    ],
+    [
+      45.47583,
+      -122.60876
+    ],
+    [
+      45.47576,
+      -122.60877
+    ],
+    [
+      45.47541,
+      -122.60889
+    ],
+    [
+      45.47481,
+      -122.6091
+    ],
+    [
+      45.47357,
+      -122.60954
+    ],
+    [
+      45.47258,
+      -122.60989
+    ],
+    [
+      45.4724,
+      -122.60993
+    ],
+    [
+      45.47211,
+      -122.60998
+    ],
+    [
+      45.47188,
+      -122.61002
+    ],
+    [
+      45.47116,
+      -122.61002
+    ],
+    [
+      45.46981,
+      -122.61004
+    ],
+    [
+      45.46894,
+      -122.61003
+    ],
+    [
+      45.46837,
+      -122.61002
+    ],
+    [
+      45.46762,
+      -122.61003
+    ],
+    [
+      45.46758,
+      -122.60982
+    ],
+    [
+      45.46746,
+      -122.60963
+    ],
+    [
+      45.46739,
+      -122.60953
+    ],
+    [
+      45.46719,
+      -122.60931
+    ],
+    [
+      45.46701,
+      -122.60913
+    ],
+    [
+      45.46687,
+      -122.60894
+    ],
+    [
+      45.46655,
+      -122.60832
+    ],
+    [
+      45.46687,
+      -122.60894
+    ],
+    [
+      45.46701,
+      -122.60913
+    ],
+    [
+      45.46719,
+      -122.60931
+    ],
+    [
+      45.46739,
+      -122.60953
+    ],
+    [
+      45.46746,
+      -122.60963
+    ],
+    [
+      45.46758,
+      -122.60982
+    ],
+    [
+      45.46762,
+      -122.61003
+    ],
+    [
+      45.46723,
+      -122.61003
+    ],
+    [
+      45.46585,
+      -122.61004
+    ],
+    [
+      45.46497,
+      -122.61004
+    ],
+    [
+      45.46412,
+      -122.61005
+    ],
+    [
+      45.46296,
+      -122.61005
+    ],
+    [
+      45.46295,
+      -122.6097
+    ],
+    [
+      45.46294,
+      -122.60872
+    ],
+    [
+      45.46293,
+      -122.60821
+    ],
+    [
+      45.46293,
+      -122.60731
+    ],
+    [
+      45.46293,
+      -122.60821
+    ],
+    [
+      45.46294,
+      -122.60872
+    ],
+    [
+      45.46294,
+      -122.60899
+    ],
+    [
+      45.46296,
+      -122.61005
+    ],
+    [
+      45.46295,
+      -122.61157
+    ],
+    [
+      45.46295,
+      -122.61268
+    ],
+    [
+      45.46292,
+      -122.61297
+    ],
+    [
+      45.46281,
+      -122.61343
+    ],
+    [
+      45.4626,
+      -122.6142
+    ],
+    [
+      45.46255,
+      -122.61463
+    ],
+    [
+      45.46255,
+      -122.61548
+    ],
+    [
+      45.46254,
+      -122.61588
+    ],
+    [
+      45.463,
+      -122.61588
+    ],
+    [
+      45.46397,
+      -122.61589
+    ],
+    [
+      45.46461,
+      -122.6159
+    ],
+    [
+      45.46639,
+      -122.61595
+    ],
+    [
+      45.46839,
+      -122.616
+    ],
+    [
+      45.46974,
+      -122.61604
+    ],
+    [
+      45.4712,
+      -122.61604
+    ],
+    [
+      45.4728,
+      -122.61603
+    ],
+    [
+      45.47328,
+      -122.61603
+    ],
+    [
+      45.47328,
+      -122.61751
+    ],
+    [
+      45.47327,
+      -122.61828
+    ],
+    [
+      45.4737,
+      -122.61828
+    ],
+    [
+      45.47392,
+      -122.61827
+    ]
+  ]
+}
