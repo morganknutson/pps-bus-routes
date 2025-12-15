@@ -85,3 +85,5 @@ If a server keeps crashing:
 2. Verify environment variables in `backend/.env`
 3. Check port availability: `lsof -i :3001` and `lsof -i :5173`
 
+
+

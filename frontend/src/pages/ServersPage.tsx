@@ -112,7 +112,7 @@ export function ServersPage() {
       try {
         data = await response.json();
       } catch (jsonError) {
-        // If server restarted before sending response, treat as success for backend
+        // If server restarted before sending response, treat as success
         if (processName === 'pps-backend' && !response.ok) {
           console.log(`[ServersPage] Backend restart initiated (server may have restarted before response)`);
           setTimeout(() => {
@@ -144,6 +144,24 @@ export function ServersPage() {
       }
     } catch (error: any) {
       console.error(`[ServersPage] Error restarting ${processName}:`, error);
+      
+      // For frontend restarts, network errors are expected since the frontend
+      // restarts immediately and the connection is lost. Treat as success.
+      if (processName === 'pps-frontend' && 
+          (error.message === 'Failed to fetch' || 
+           error.message.includes('network') ||
+           error.name === 'TypeError')) {
+        console.log(`[ServersPage] Frontend restart initiated (connection lost as expected)`);
+        // Reset the uptime counter since we're restarting
+        frontendStartTime.current = Date.now();
+        setFrontendStatus(prev => ({
+          ...prev,
+          lastChecked: new Date(),
+        }));
+        // Don't show error alert - this is expected behavior
+        return;
+      }
+      
       alert(`Error restarting ${processName}: ${error.message}`);
     } finally {
       setIsRestarting(false);

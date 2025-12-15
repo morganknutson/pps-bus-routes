@@ -11,6 +11,91 @@
   --shadow-large: rgba(0, 0, 0, 0.2);
 }
 
+/* Light theme (default) */
+.theme-light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-tertiary: #666666;
+  --border-color: #dddddd;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
+  --shadow-large: rgba(0, 0, 0, 0.2);
+}
+
+/* Dark theme */
+.theme-dark {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-tertiary: #b0b0b0;
+  --border-color: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+  --shadow-large: rgba(0, 0, 0, 0.5);
+}
+
+/* Blue theme */
+.theme-blue {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #e0e7ff;
+  --text-secondary: #c7d2fe;
+  --text-tertiary: #a5b4fc;
+  --border-color: #475569;
+  --shadow: rgba(37, 99, 235, 0.2);
+  --shadow-hover: rgba(37, 99, 235, 0.3);
+  --shadow-large: rgba(37, 99, 235, 0.4);
+}
+
+/* Green theme */
+.theme-green {
+  --bg-primary: #052e16;
+  --bg-secondary: #14532d;
+  --bg-tertiary: #166534;
+  --text-primary: #dcfce7;
+  --text-secondary: #bbf7d0;
+  --text-tertiary: #86efac;
+  --border-color: #22c55e;
+  --shadow: rgba(22, 163, 74, 0.2);
+  --shadow-hover: rgba(22, 163, 74, 0.3);
+  --shadow-large: rgba(22, 163, 74, 0.4);
+}
+
+/* Purple theme */
+.theme-purple {
+  --bg-primary: #1e1b4b;
+  --bg-secondary: #312e81;
+  --bg-tertiary: #4338ca;
+  --text-primary: #ede9fe;
+  --text-secondary: #ddd6fe;
+  --text-tertiary: #c4b5fd;
+  --border-color: #7c3aed;
+  --shadow: rgba(147, 51, 234, 0.2);
+  --shadow-hover: rgba(147, 51, 234, 0.3);
+  --shadow-large: rgba(147, 51, 234, 0.4);
+}
+
+/* Orange theme */
+.theme-orange {
+  --bg-primary: #431407;
+  --bg-secondary: #7c2d12;
+  --bg-tertiary: #9a3412;
+  --text-primary: #fff7ed;
+  --text-secondary: #ffedd5;
+  --text-tertiary: #fed7aa;
+  --border-color: #ea580c;
+  --shadow: rgba(234, 88, 12, 0.2);
+  --shadow-hover: rgba(234, 88, 12, 0.3);
+  --shadow-large: rgba(234, 88, 12, 0.4);
+}
+
+/* Backward compatibility: dark-mode class */
 .dark-mode {
   --bg-primary: #1a1a1a;
   --bg-secondary: #2d2d2d;

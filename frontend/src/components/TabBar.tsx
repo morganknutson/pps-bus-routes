@@ -40,7 +40,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             cursor: 'pointer',
           }}
         >
-          <i className="fas fa-graduation-cap" style={{ fontSize: '14px' }}></i>
+          <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
           Schools
         </div>
         <div
@@ -56,6 +56,8 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             color: isRoutesActive ? '#000000' : 'var(--text-secondary)',
             transition: 'color 0.2s ease',
             cursor: 'pointer',
+            height: '42px',
+            lineHeight: '1',
           }}
         >
           {activeTab === 'neighborhoods' ? (
@@ -79,9 +81,9 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
       <div
         style={{
           position: 'absolute',
-          top: 'calc(0.75rem + 0.25rem)',
-          bottom: 'calc(0.75rem + 0.25rem)',
-          left: isSchoolsActive ? 'calc(1rem + 0.25rem)' : 'calc(50% + 0.25rem)',
+          top: '13px',
+          height: '41px',
+          left: isSchoolsActive ? 'calc(1rem + 0.25rem)' : '179px',
           width: 'calc(50% - 1rem - 0.5rem)',
           backgroundColor: 'white',
           borderRadius: '4px',

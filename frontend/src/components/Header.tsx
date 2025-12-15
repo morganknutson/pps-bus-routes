@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useDarkMode } from '../hooks/useDarkMode';
+import { useTheme } from '../hooks/useTheme';
+import { ThemePicker } from './ThemePicker';
 import './Header.css';
 
 export function Header() {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { theme, setTheme } = useTheme();
+  const isDarkMode = theme === 'dark';
+  const toggleDarkMode = () => {
+    setTheme(isDarkMode ? 'light' : 'dark');
+  };
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
@@ -186,6 +191,7 @@ export function Header() {
             )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            {isAdminPage && <ThemePicker />}
             <button
               onClick={toggleDarkMode}
               className="dark-mode-toggle"

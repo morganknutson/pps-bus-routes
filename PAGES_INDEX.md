@@ -90,7 +90,7 @@ This document provides a comprehensive index of all pages in the application to 
 ---
 
 ### 4. Neighborhoods (`/neighborhoods`)
-- **File**: `frontend/src/pages/NeighborhoodExplorer.tsx`
+- **File**: `frontend/src/pages/Neighborhoods.tsx`
 - **Purpose**: Explore bus routes by neighborhood boundaries
 - **Key Features**:
   - Display neighborhood boundaries on map

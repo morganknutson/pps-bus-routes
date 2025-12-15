@@ -13,7 +13,7 @@ import { Sidebar } from './components/Sidebar';
 import { DarkModeTileLayer } from './components/DarkModeTileLayer';
 import { useStore } from './store/useStore';
 import { SchoolsList } from './pages/SchoolsList';
-import { NeighborhoodExplorer } from './pages/NeighborhoodExplorer';
+import { Neighborhoods } from './pages/Neighborhoods';
 import { TechPage } from './pages/TechPage';
 import { VerificationPage } from './pages/VerificationPage';
 import { JobsPage } from './pages/JobsPage';
@@ -84,7 +84,6 @@ function SchoolListMapView({
             onSelectSchool(school.id);
           }
         },
-        popup: school.name,
       };
     });
   }, [schoolsWithCoords, selectedSchoolId, onSelectSchool]);
@@ -249,9 +248,8 @@ function ExplorerApp() {
       if (activeTab !== 'routes') {
         setRoutes([]);
       } else if (!selectedSchoolId) {
-        // If in routes tab but no school selected, clear routes and switch to schools tab
+        // If in routes tab but no school selected, clear routes (RouteList will show empty state)
         setRoutes([]);
-        setActiveTab('schools');
       }
       return;
     }
@@ -387,45 +385,20 @@ function ExplorerApp() {
               }}
             />
           ) : (
-            <>
-              {selectedSchoolId ? (
-                <RouteList 
-                  showBothOption={false}
-                  onClearSchool={() => {
-                    setSelectedSchool(null);
-                    setActiveTab('schools');
-                  }}
-                />
-              ) : (
-                <div style={{
-                  padding: '2rem',
-                  textAlign: 'center',
-                  color: 'var(--text-tertiary)',
-                }}>
-                  <p>Please select a school to view routes</p>
-                  <button
-                    onClick={() => setActiveTab('schools')}
-                    style={{
-                      marginTop: '1rem',
-                      padding: '0.5rem 1rem',
-                      backgroundColor: 'var(--bg-primary)',
-                      color: 'var(--text-primary)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Select School
-                  </button>
-                </div>
-              )}
-            </>
+            <RouteList 
+              showBothOption={false}
+              onClearSchool={() => {
+                setSelectedSchool(null);
+                setActiveTab('schools');
+              }}
+              onViewSchools={() => setActiveTab('schools')}
+            />
           )}
         </Sidebar>
 
         {/* Map */}
         <div style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
-          {activeTab === 'routes' && <AddressInput />}
+          <AddressInput />
           <div style={{ flex: 1, position: 'relative' }}>
             {activeTab === 'schools' ? (
               // Schools map view - uses filtered schools
@@ -857,6 +830,7 @@ function AdminApp() {
             <RouteList 
               showBothOption={true}
               onClearSchool={() => setActiveTab('schools')}
+              onViewSchools={() => setActiveTab('schools')}
             />
           )}
         </Sidebar>
@@ -1116,7 +1090,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/bus-route-explorer" element={<ExplorerApp />} />
         <Route path="/admin" element={<AdminApp />} />
-        <Route path="/neighborhoods" element={<NeighborhoodExplorer />} />
+        <Route path="/neighborhoods" element={<Neighborhoods />} />
         <Route path="/tech" element={<TechPage />} />
         <Route path="/verification" element={<VerificationPage />} />
         <Route path="/jobs" element={<JobsPage />} />

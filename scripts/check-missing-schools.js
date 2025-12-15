@@ -53,3 +53,5 @@ console.log(`   Total schools in schools.json: ${schools.length}`);
 console.log(`   Schools with codes: ${schools.length - schoolsWithoutCodes.length}`);
 console.log(`   Schools without codes: ${schoolsWithoutCodes.length}`);
 
+
+

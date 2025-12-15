@@ -25,21 +25,6 @@ This is a bus route mapping application for Portland Public Schools (PPS) that:
 - **Module System**: ES Modules (type: "module")
 - **Key Libraries**: pdf-parse, node-cron, cors, dotenv
 
-## Commands
-
-### `/p` - Propose Solution
-When the user uses the `/p` command prefix, **DO NOT immediately start implementing**. Instead:
-- **Analyze the request** and understand the requirements
-- **Propose a detailed solution** with:
-  - Approach and reasoning
-  - Files that will be affected
-  - Step-by-step implementation plan
-  - Potential challenges and considerations
-- **Wait for user confirmation** before proceeding with implementation
-- **Only begin work** after the user explicitly approves the proposal
-
-This allows for discussion and refinement before committing to code changes.
-
 ## Core Principles
 
 ### Prioritize Reusable Code

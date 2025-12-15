@@ -59,3 +59,5 @@ if (mappedCodes.length > 0 && nullCodes.length === 0) {
   console.log('\n✅ All school codes have mappings!');
 }
 
+
+

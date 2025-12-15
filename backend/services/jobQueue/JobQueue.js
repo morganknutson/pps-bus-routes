@@ -13,38 +13,53 @@ export class JobQueue extends BaseJobQueue {
   constructor(queueName, options = {}) {
     super();
     this.queueName = queueName;
-    this.options = {
-      connection: this.getRedisConnection(),
-      defaultJobOptions: {
-        attempts: options.attempts || 3,
-        backoff: {
-          type: 'exponential',
-          delay: options.retryDelay || 5000,
-        },
-        removeOnComplete: {
-          age: options.historyRetentionDays ? options.historyRetentionDays * 24 * 3600 : 30 * 24 * 3600, // 30 days default
-          count: options.historyRetentionCount || 1000,
-        },
-        removeOnFail: {
-          age: options.failedRetentionDays ? options.failedRetentionDays * 24 * 3600 : 7 * 24 * 3600, // 7 days default
-        },
-      },
-      ...options,
-    };
-
-    this.queue = new Queue(queueName, this.options);
-    this.queueEvents = new QueueEvents(queueName, this.options);
-    this.isRedisAvailable = this.options.connection !== null;
+    this.connection = this.getRedisConnection();
+    this.isRedisAvailable = this.connection !== null;
     
-    // Log Redis status
+    // Only create BullMQ Queue and QueueEvents if Redis is available
+    // BullMQ does NOT support in-memory mode - it always tries to connect to Redis
     if (this.isRedisAvailable) {
+      this.options = {
+        connection: this.connection,
+        defaultJobOptions: {
+          attempts: options.attempts || 3,
+          backoff: {
+            type: 'exponential',
+            delay: options.retryDelay || 5000,
+          },
+          removeOnComplete: {
+            age: options.historyRetentionDays ? options.historyRetentionDays * 24 * 3600 : 30 * 24 * 3600, // 30 days default
+            count: options.historyRetentionCount || 1000,
+          },
+          removeOnFail: {
+            age: options.failedRetentionDays ? options.failedRetentionDays * 24 * 3600 : 7 * 24 * 3600, // 7 days default
+          },
+        },
+        ...options,
+      };
+
+      this.queue = new Queue(queueName, this.options);
+      this.queueEvents = new QueueEvents(queueName, this.options);
       console.log(`[JobQueue] Redis connection available - using production mode`);
+      
+      // Set up event listeners to record job history
+      this.setupEventListeners();
     } else {
-      console.log(`[JobQueue] No Redis connection - using polling mode with persistent history`);
+      // No Redis - don't create Queue/QueueEvents to avoid connection attempts
+      this.queue = null;
+      this.queueEvents = null;
+      this.options = {
+        defaultJobOptions: {
+          attempts: options.attempts || 3,
+          backoff: {
+            type: 'exponential',
+            delay: options.retryDelay || 5000,
+          },
+        },
+        ...options,
+      };
+      console.log(`[JobQueue] No Redis connection - using polling mode with persistent history only`);
     }
-    
-    // Set up event listeners to record job history
-    this.setupEventListeners();
   }
 
   /**
@@ -120,23 +135,39 @@ export class JobQueue extends BaseJobQueue {
   }
 
   /**
-   * Get Redis connection or return null for in-memory fallback
+   * Get Redis connection or return null if Redis is not available
+   * Note: BullMQ does NOT support in-memory mode - it always requires Redis
    */
   getRedisConnection() {
     const redisUrl = process.env.REDIS_URL;
     
     if (!redisUrl) {
-      console.log(`[JobQueue] No REDIS_URL found, using in-memory queue (jobs will be lost on restart)`);
-      return null; // BullMQ will use in-memory queue
+      console.log(`[JobQueue] No REDIS_URL found - job queue will use history-only mode (no Redis)`);
+      return null;
     }
 
     try {
-      return new Redis(redisUrl, {
+      // Create Redis connection with retry disabled to avoid connection spam
+      // Use lazyConnect and disable automatic reconnection to prevent error spam
+      const redis = new Redis(redisUrl, {
         maxRetriesPerRequest: null,
         enableReadyCheck: false,
+        retryStrategy: () => null, // Disable retry - return null to stop retrying
+        lazyConnect: true, // Don't connect immediately - will connect on first use
+        enableOfflineQueue: false, // Don't queue commands when offline
       });
+      
+      // Set up error handler to prevent unhandled errors
+      redis.on('error', (err) => {
+        // Only log if it's not a connection refused (expected when Redis isn't running)
+        if (err.code !== 'ECONNREFUSED') {
+          console.error(`[JobQueue] Redis connection error: ${err.message}`);
+        }
+      });
+      
+      return redis;
     } catch (error) {
-      console.error(`[JobQueue] Failed to connect to Redis: ${error.message}, falling back to in-memory queue`);
+      console.error(`[JobQueue] Failed to create Redis connection: ${error.message}, using history-only mode`);
       return null;
     }
   }
@@ -152,10 +183,26 @@ export class JobQueue extends BaseJobQueue {
       ...options,
     };
 
+    // If Redis is not available, create a job ID and record it in history only
+    if (!this.isRedisAvailable || !this.queue) {
+      const jobId = `job_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      console.log(`[JobQueue] Enqueued job ${jobId} of type ${jobType} (history only, no Redis)`);
+      
+      // Record job creation in history
+      jobHistoryService.recordEvent('created', {
+        id: jobId,
+        name: jobType,
+        data,
+        attempts: jobOptions.attempts,
+      });
+      
+      return jobId;
+    }
+
     const job = await this.queue.add(jobType, data, jobOptions);
     console.log(`[JobQueue] Enqueued job ${job.id} of type ${jobType}`);
     
-    // Record job creation in history (immediate, in case events don't fire for in-memory queue)
+    // Record job creation in history (immediate, in case events don't fire)
     jobHistoryService.recordEvent('created', {
       id: job.id,
       name: jobType,
@@ -271,6 +318,22 @@ export class JobQueue extends BaseJobQueue {
    * Retry a failed job
    */
   async retryJob(jobId) {
+    if (!this.isRedisAvailable || !this.queue) {
+      // Get job from history and re-enqueue
+      const historyJob = jobHistoryService.getJob(jobId);
+      if (!historyJob) {
+        throw new Error(`Job ${jobId} not found`);
+      }
+      if (historyJob.status !== JOB_STATUS.FAILED) {
+        throw new Error(`Job ${jobId} is not in failed state (current: ${historyJob.status})`);
+      }
+      // Re-enqueue using the enqueue method
+      return await this.enqueue(historyJob.name, historyJob.data, {
+        priority: historyJob.priority || 5,
+        attempts: historyJob.attemptsTotal || 3,
+      });
+    }
+
     const job = await this.queue.getJob(jobId);
     if (!job) {
       throw new Error(`Job ${jobId} not found`);
@@ -535,10 +598,14 @@ export class JobQueue extends BaseJobQueue {
    * Close the queue
    */
   async close() {
-    await this.queue.close();
-    await this.queueEvents.close();
-    if (this.options.connection) {
-      await this.options.connection.quit();
+    if (this.queue) {
+      await this.queue.close();
+    }
+    if (this.queueEvents) {
+      await this.queueEvents.close();
+    }
+    if (this.connection) {
+      await this.connection.quit();
     }
   }
 }

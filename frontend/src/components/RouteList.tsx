@@ -4,13 +4,14 @@ import { RouteListBase, RouteListConfig } from './RouteListBase';
 interface RouteListProps {
   showBothOption?: boolean;
   onClearSchool?: () => void;
+  onViewSchools?: () => void;
 }
 
 /**
  * Route list component for the main page
  * Uses the store directly and shows route selection checkboxes
  */
-export function RouteList({ showBothOption = false, onClearSchool }: RouteListProps = {}) {
+export function RouteList({ showBothOption = false, onClearSchool, onViewSchools }: RouteListProps = {}) {
   const { routes, toggleRouteSelection, isLoading, error, selectStop, selectedStop, clearSelectedStop, selectedSchoolId, schools, directionFilter, setDirectionFilter, setSelectedSchool } = useStore();
 
   const selectedSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
@@ -44,6 +45,65 @@ export function RouteList({ showBothOption = false, onClearSchool }: RouteListPr
       return selectedStop?.route.id === route.id && selectedStop?.stop.id === stop.id;
     },
   };
+
+  // Show prompt when no school is selected
+  if (!selectedSchoolId) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        padding: '2rem',
+        textAlign: 'center',
+        color: 'var(--text-secondary)'
+      }}>
+        <i 
+          className="fas fa-graduation-cap" 
+          style={{ 
+            fontSize: '48px',
+            color: 'var(--text-tertiary)',
+            marginBottom: '1rem',
+            opacity: 0.6
+          }}
+        />
+        <p style={{ 
+          fontSize: '16px',
+          fontWeight: '500',
+          margin: 0,
+          marginBottom: '1rem',
+          color: 'var(--text-secondary)'
+        }}>
+          Please select a school to view routes
+        </p>
+        {onViewSchools && (
+          <button
+            onClick={onViewSchools}
+            style={{
+              padding: '0.5rem 1rem',
+              backgroundColor: 'var(--bg-primary)',
+              color: 'var(--text-primary)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: '500',
+              transition: 'background-color 0.2s ease, border-color 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+            }}
+          >
+            View Schools
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>

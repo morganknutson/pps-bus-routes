@@ -43,7 +43,10 @@ export function SchoolSelector() {
   // Load routes when school changes
   useEffect(() => {
     if (!selectedSchoolId) {
-      console.log('[SchoolSelector] No school selected, skipping route load');
+      console.log('[SchoolSelector] No school selected, clearing routes');
+      setRoutes([]); // Clear routes when no school is selected
+      setLoading(false);
+      setLoadingProgress(null);
       return;
     }
 

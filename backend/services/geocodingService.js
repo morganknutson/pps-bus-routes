@@ -43,16 +43,21 @@ class GeocodingService {
 
   /**
    * Format address for geocoding
-   * Expands abbreviations and removes direction brackets
+   * Strips parenthetical content, expands abbreviations, and removes direction brackets
    */
   formatAddressForGeocoding(address) {
-    // First expand abbreviations for better geocoding
-    let expanded = expandAddressForGeocoding(address);
+    // First remove parenthetical content (descriptive notes, not part of address)
+    // e.g., "(wee Village Dc)" should be removed to prevent misinterpretation
+    // This must be done BEFORE expansion to avoid processing parenthetical content
+    let addressWithoutParentheses = address.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
+    
+    // Then expand abbreviations for better geocoding
+    let expanded = expandAddressForGeocoding(addressWithoutParentheses);
     
     // Remove direction brackets and normalize whitespace
     let cleaned = expanded
-      .replace(/\s*\[([NWES]+)\]\s*/g, '')
-      .replace(/\s+/g, ' ')
+      .replace(/\s*\[([NWES]+)\]\s*/g, '') // Remove direction brackets
+      .replace(/\s+/g, ' ') // Normalize whitespace
       .trim();
     return cleaned;
   }
@@ -155,6 +160,7 @@ class GeocodingService {
   /**
    * Geocode a single address
    * Uses Google Maps API only (Nominatim fallback disabled)
+   * Validates coordinates are within Portland bounds and retries without parenthetical content if needed
    */
   async geocodeAddress(address, city = 'Portland', state = 'OR') {
     if (!this.useGoogle) {
@@ -168,6 +174,47 @@ class GeocodingService {
     // Use Google Maps API only - no fallback
     const result = await this.geocodeWithGoogle(address, city, state);
     
+    // Validate coordinates are within Portland bounds
+    if (result.success && result.coordinates) {
+      if (!this.isWithinPortlandBounds(result.coordinates)) {
+        console.warn(`[GeocodingService] Geocoded coordinates [${result.coordinates[0]}, ${result.coordinates[1]}] are outside Portland bounds for address: "${address}"`);
+        console.warn(`[GeocodingService] Display name: "${result.displayName}"`);
+        
+        // Try again without parenthetical content if original address had parentheses
+        if (address.includes('(') && address.includes(')')) {
+          const addressWithoutParentheses = address.replace(/\s*\([^)]*\)\s*/g, '').trim();
+          if (addressWithoutParentheses !== address) {
+            console.warn(`[GeocodingService] Retrying geocoding without parenthetical content: "${addressWithoutParentheses}"`);
+            const retryResult = await this.geocodeWithGoogle(addressWithoutParentheses, city, state);
+            
+            // Only use retry result if it's within bounds
+            if (retryResult.success && retryResult.coordinates && this.isWithinPortlandBounds(retryResult.coordinates)) {
+              console.log(`[GeocodingService] Retry successful - coordinates [${retryResult.coordinates[0]}, ${retryResult.coordinates[1]}] are within Portland bounds`);
+              return {
+                ...retryResult,
+                geocodeWarning: 'Geocoded without parenthetical content due to initial out-of-bounds result',
+              };
+            } else {
+              console.warn(`[GeocodingService] Retry also failed or out of bounds, keeping original result with warning`);
+              return {
+                ...result,
+                geocodeWarning: `Coordinates [${result.coordinates[0]}, ${result.coordinates[1]}] are outside Portland bounds. May be incorrect.`,
+                isApproximate: true,
+              };
+            }
+          }
+        } else {
+          // No parentheses to remove, but coordinates are still out of bounds
+          console.warn(`[GeocodingService] Coordinates are outside Portland bounds and no parenthetical content to remove`);
+          return {
+            ...result,
+            geocodeWarning: `Coordinates [${result.coordinates[0]}, ${result.coordinates[1]}] are outside Portland bounds. May be incorrect.`,
+            isApproximate: true,
+          };
+        }
+      }
+    }
+    
     // TEMPORARILY DISABLED: Nominatim fallback
     // if (!result.success && result.error !== 'Address not found' && ENABLE_NOMINATIM_FALLBACK) {
     //   console.warn(`[GeocodingService] Google failed for "${address}", trying Nominatim fallback`);
@@ -179,13 +226,15 @@ class GeocodingService {
 
   /**
    * Try multiple geocoding strategies for an intersection address
+   * Validates coordinates are within Portland bounds
    */
   async geocodeIntersection(address, city = 'Portland', state = 'OR') {
-    // Extract the two streets
-    const streets = address.split(/\s+&\s+|\s+AND\s+/i).map(s => s.trim()).filter(s => s);
+    // Extract the two streets (after removing parenthetical content for splitting)
+    const addressForSplitting = address.replace(/\s*\([^)]*\)\s*/g, '').trim();
+    const streets = addressForSplitting.split(/\s+&\s+|\s+AND\s+/i).map(s => s.trim()).filter(s => s);
     
     if (streets.length < 2) {
-      // Not an intersection, just try the address as-is
+      // Not an intersection, just try the address as-is (which will handle validation)
       return await this.geocodeAddress(address, city, state);
     }
     
@@ -208,7 +257,15 @@ class GeocodingService {
     for (const format of formats) {
       const result = await this.geocodeAddress(format, city, state);
       if (result.success) {
-        return result;
+        // Only return if coordinates are within Portland bounds
+        // If out of bounds with warning, continue trying other formats
+        if (result.coordinates && this.isWithinPortlandBounds(result.coordinates)) {
+          return result;
+        } else if (result.coordinates && !result.geocodeWarning) {
+          // If coordinates exist but no warning, might be a different issue, still return
+          return result;
+        }
+        // Otherwise, continue to next format (result has warning about out-of-bounds)
       }
       // Small delay between attempts
       if (this.useGoogle) {
@@ -231,10 +288,16 @@ class GeocodingService {
       // Calculate midpoint between the two streets
       const midLon = (result1.coordinates[0] + result2.coordinates[0]) / 2;
       const midLat = (result1.coordinates[1] + result2.coordinates[1]) / 2;
+      const midpoint = [midLon, midLat];
+      
+      // Validate midpoint is within Portland bounds
+      if (!this.isWithinPortlandBounds(midpoint)) {
+        console.warn(`[GeocodingService] Calculated midpoint [${midLon}, ${midLat}] is outside Portland bounds for intersection: "${address}"`);
+      }
       
       return {
         success: true,
-        coordinates: [midLon, midLat],
+        coordinates: midpoint,
         displayName: `Approximate intersection of ${street1} and ${street2}`,
         placeId: null, // No placeId for approximate intersections
         isApproximate: true,
@@ -259,6 +322,35 @@ class GeocodingService {
     }
     
     return { success: false, error: 'Address not found' };
+  }
+
+  /**
+   * Check if coordinates are within reasonable bounds for Portland, Oregon
+   * Portland approximate bounds:
+   * - Latitude: 45.4 to 45.7 (roughly)
+   * - Longitude: -122.8 to -122.4 (roughly)
+   * @param coordinates [lng, lat] coordinates to validate
+   * @returns true if coordinates are within Portland bounds
+   */
+  isWithinPortlandBounds(coordinates) {
+    if (!coordinates || coordinates.length !== 2) {
+      return false;
+    }
+    
+    const [lng, lat] = coordinates;
+    
+    // Portland bounds with reasonable buffer
+    const PORTLAND_LAT_MIN = 45.3;
+    const PORTLAND_LAT_MAX = 45.8;
+    const PORTLAND_LNG_MIN = -123.0;
+    const PORTLAND_LNG_MAX = -122.3;
+    
+    return (
+      lat >= PORTLAND_LAT_MIN &&
+      lat <= PORTLAND_LAT_MAX &&
+      lng >= PORTLAND_LNG_MIN &&
+      lng <= PORTLAND_LNG_MAX
+    );
   }
 
   /**

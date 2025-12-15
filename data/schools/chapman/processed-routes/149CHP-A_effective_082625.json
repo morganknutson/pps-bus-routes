@@ -18,6 +18,7 @@
         45.5336051
       ],
       "displayName": "NW Quimby St & NW 14th Ave, Portland, OR 97209, USA",
+      "placeId": "EjNOVyBRdWltYnkgU3QgJiBOVyAxNHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEgm9RSoT_QmVVBGaM4pYiJkLpxIUChIJvUUqE_0JlVQRmjOKWIiZC6caFAoSCdUuxwzlCZVUEWx8nYg2gAFYGhQKEgm_LLK6_gmVVBEUlLWLyrHQ7yIKDXPgIxsVwarftg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -29,20 +30,74 @@
       "isSchoolStop": true,
       "skipGeocoding": false,
       "coordinates": [
-        -122.70535129999999,
-        45.533232500000004
+        -122.7058526,
+        45.5332347
       ],
       "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
       "schoolName": "Chapman"
     }
   ],
-  "processedAt": "2025-12-11T22:32:55.762Z",
+  "neighborhoods": [
+    "Northwest Portland"
+  ],
+  "processedAt": "2025-12-15T18:54:33.761Z",
   "stats": {
     "totalStops": 2,
     "geocodedStops": 2,
     "failedStops": 0
   },
-  "neighborhoods": [
-    "Northwest Portland"
+  "geometry": [
+    [
+      45.53361,
+      -122.68557
+    ],
+    [
+      45.53432,
+      -122.6856
+    ],
+    [
+      45.5343,
+      -122.68662
+    ],
+    [
+      45.53429,
+      -122.6868
+    ],
+    [
+      45.53429,
+      -122.6869
+    ],
+    [
+      45.53427,
+      -122.68816
+    ],
+    [
+      45.53417,
+      -122.69358
+    ],
+    [
+      45.53406,
+      -122.6995
+    ],
+    [
+      45.53399,
+      -122.70331
+    ],
+    [
+      45.53394,
+      -122.70631
+    ],
+    [
+      45.53393,
+      -122.70678
+    ],
+    [
+      45.53349,
+      -122.70676
+    ],
+    [
+      45.53349,
+      -122.70623
+    ]
   ]
 }
