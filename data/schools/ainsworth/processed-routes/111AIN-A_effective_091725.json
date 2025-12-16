@@ -89,8 +89,8 @@
       "originalLine": "7:38 am2221 SW BROADWAY DR [W]111AIN-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7009108,
-        45.5057407
+        -122.70077884197237,
+        45.505707774562154
       ],
       "displayName": "2221 SW Broadway Dr, Portland, OR 97201, USA",
       "placeId": "ChIJYyMQcjoKlVQRLV4hwrnNGjE",
@@ -104,8 +104,8 @@
       "originalLine": "7:40 am2488 SW SHERWOOD DR [NW]111AIN-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.701099,
-        45.50235199999999
+        -122.70131528377534,
+        45.50242555758448
       ],
       "displayName": "2488 SW Sherwood Dr, Portland, OR 97201, USA",
       "placeId": "ChIJCc1yGjcKlVQRC__IbFf6ZA4",
@@ -146,7 +146,7 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-13T01:14:04.073Z",
+  "processedAt": "2025-12-15T19:51:35.862Z",
   "stats": {
     "totalStops": 9,
     "geocodedStops": 9,

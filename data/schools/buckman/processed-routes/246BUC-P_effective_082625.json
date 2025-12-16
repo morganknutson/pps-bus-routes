@@ -44,8 +44,8 @@
       "originalLine": "2:46 pm1557 NE WEIDLER ST [S]246BUC-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.649759,
-        45.53454
+        -122.6497588989311,
+        45.53470578108499
       ],
       "displayName": "1557 NE Weidler St, Portland, OR 97232, USA",
       "placeId": "EisxNTU3IE5FIFdlaWRsZXIgU3QsIFBvcnRsYW5kLCBPUiA5NzIzMiwgVVNBIjESLwoUChIJ941_bbWglVQRB56-uIbdusoQlQwqFAoSCTMEIsnLoJVUEWEKqpyCwVZu",
@@ -80,18 +80,14 @@
       "displayName": "Northeast Pacific Street & NE 6th Ave, Portland, OR 97232, USA",
       "placeId": "Ej5Ob3J0aGVhc3QgUGFjaWZpYyBTdHJlZXQgJiBORSA2dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMzIsIFVTQSJmImQKFAoSCc9dnoqtoJVUERvwSM43C8k8EhQKEgnPXZ6KraCVVBEb8EjONwvJPBoUChIJvYPm73KhlVQRtCJobLjA3CIaFAoSCes7Y-5Lp5VUESTxqC1l54rpIgoNADkjGxX5nuO2",
       "neighborhood": "Northeast Portland"
-    },
-    {
-      "id": "stop-5",
-      "address": "Hosford Gt. & St. Loading ZONE On Grant",
-      "time": "3:04 pm",
-      "direction": null,
-      "originalLine": "3:04 pmHOSFORD GT & ST LOADING ZONE ON GRANT246BUC-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": null
     }
   ],
-  "processedAt": "2025-12-12T22:36:26.939Z",
+  "neighborhoods": [
+    "Kerns",
+    "Northeast Portland",
+    "Sullivan's Gulch"
+  ],
+  "processedAt": "2025-12-15T19:53:39.066Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
