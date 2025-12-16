@@ -27,6 +27,7 @@ import { handleMapLinkClick } from './utils/mapLinks';
 import { useMarkers, MarkerData } from './hooks/useMarkers';
 import { SchoolTypeFilters } from './components/SchoolTypeFilter';
 import { ProgressBar } from './components/ProgressBar';
+import { AdminPasswordProtection } from './components/AdminPasswordProtection';
 import 'leaflet/dist/leaflet.css';
 
 // Format date for display (e.g., "Dec 10, 2024" or "2 days ago")
@@ -1089,7 +1090,14 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/bus-route-explorer" element={<ExplorerApp />} />
-        <Route path="/admin" element={<AdminApp />} />
+        <Route 
+          path="/admin" 
+          element={
+            <AdminPasswordProtection>
+              <AdminApp />
+            </AdminPasswordProtection>
+          } 
+        />
         <Route path="/neighborhoods" element={<Neighborhoods />} />
         <Route path="/tech" element={<TechPage />} />
         <Route path="/verification" element={<VerificationPage />} />

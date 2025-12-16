@@ -1,20 +1,11 @@
 {
   "id": "207-AM_effective_082924.pdf",
-  "name": "Route 207",
-  "direction": null,
+  "name": "207",
+  "direction": "Morning",
   "filename": "207-AM_effective_082924.pdf",
   "fileId": "207-AM_effective_082924.pdf",
   "modifiedTime": null,
   "stops": [
-    {
-      "id": "stop-1",
-      "address": "Rigler Gt. & St. & CAB Loading ZONE On 55th",
-      "time": "8:08 am",
-      "direction": null,
-      "originalLine": "8:08 amRIGLER GT & ST & CAB LOADING ZONE ON 55TH207BVC-AStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": null
-    },
     {
       "id": "stop-2",
       "address": "NE 57th Ave. & NE Thompson St. [NW]",
@@ -104,12 +95,33 @@
       "displayName": "NE 26th Ave & NE Broadway, Portland, OR 97212, USA",
       "placeId": "EjJORSAyNnRoIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTIsIFVTQSJmImQKFAoSCXlaYw_MoJVUEWlG4eE9pIo0EhQKEgl5WmMPzKCVVBFpRuHhPaSKNBoUChIJnRwz7syglVQRDJ5mlykC59caFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoNWh0kGxWtwOa2",
       "neighborhood": "Sullivan's Gulch"
+    },
+    {
+      "id": "stop-0",
+      "address": "1915 NE 33rd Ave, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:FERNWOOD GT & ST & CAB LOAD ZONE ON HANCOCK",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6314977,
+        45.5369687
+      ],
+      "displayName": "1915 NE 33rd Ave, Portland, OR 97212, USA",
+      "schoolName": "Beverly Cleary"
     }
   ],
-  "processedAt": "2025-12-12T22:36:21.012Z",
+  "neighborhoods": [
+    "Grant Park",
+    "Northeast Portland",
+    "Rose City Park",
+    "Sullivan's Gulch"
+  ],
+  "processedAt": "2025-12-16T11:25:45.009Z",
   "stats": {
-    "totalStops": 6,
-    "geocodedStops": 6,
+    "totalStops": 7,
+    "geocodedStops": 7,
     "failedStops": 0
   },
   "geometry": [
@@ -284,6 +296,46 @@
     [
       45.53516,
       -122.63914
+    ],
+    [
+      45.53516,
+      -122.63816
+    ],
+    [
+      45.5357,
+      -122.63816
+    ],
+    [
+      45.53644,
+      -122.63816
+    ],
+    [
+      45.53645,
+      -122.63501
+    ],
+    [
+      45.53645,
+      -122.63326
+    ],
+    [
+      45.53645,
+      -122.63202
+    ],
+    [
+      45.53675,
+      -122.63202
+    ],
+    [
+      45.53689,
+      -122.632
+    ],
+    [
+      45.5369,
+      -122.63191
+    ],
+    [
+      45.5369,
+      -122.63172
     ]
   ]
 }

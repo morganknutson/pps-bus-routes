@@ -91,6 +91,7 @@ function extractSchoolCoordinates(matchedSchool) {
  * @param {string} options.logPrefix - Prefix for log messages (e.g., "[Scheduler]")
  * @param {boolean} options.saveToFile - Whether to save the processed route to file (default: false)
  * @param {string} options.outputPath - Optional custom output path (if saveToFile is true)
+ * @param {string} options.schoolId - Optional school ID (if filename doesn't match pattern)
  * @returns {Promise<object>} Processed route object
  */
 export async function processSinglePDF(pdfBuffer, filename, fileId = null, options = {}) {
@@ -98,6 +99,7 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
     logPrefix = '[RouteProcessor]',
     saveToFile = false,
     outputPath = null,
+    schoolId = null,
   } = options;
 
   // Step 1: Parse PDF
@@ -109,21 +111,53 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
   }
 
   // Step 2: Load schools.json and match to school
+  console.log(`${logPrefix} 🔍 Looking for school match. Anchor name: ${route.anchorName || 'NONE'}, schoolId from options: ${options.schoolId || 'NONE'}`);
   let matchedSchool = null;
-  if (route.anchorName && fs.existsSync(SCHOOLS_FILE)) {
+  if (fs.existsSync(SCHOOLS_FILE)) {
     try {
       const schoolsContent = fs.readFileSync(SCHOOLS_FILE, 'utf8');
       const schools = JSON.parse(schoolsContent);
-      matchedSchool = matchSchoolFromAnchorName(route.anchorName, schools);
-      if (matchedSchool) {
-        console.log(`${logPrefix} Matched to school: ${matchedSchool.name} (ID: ${matchedSchool.id})`);
-        if (!matchedSchool.address || !matchedSchool.coordinates) {
-          console.log(`${logPrefix} ⚠️  School missing address/coordinates - school stop will not be added`);
+      console.log(`${logPrefix} Loaded ${schools.length} schools from schools.json`);
+      
+      // First try to match by anchor name
+      if (route.anchorName) {
+        console.log(`${logPrefix} Trying to match by anchor name: "${route.anchorName}"`);
+        matchedSchool = matchSchoolFromAnchorName(route.anchorName, schools);
+        if (matchedSchool) {
+          console.log(`${logPrefix} ✅ Matched to school via anchor name: ${matchedSchool.name} (ID: ${matchedSchool.id})`);
+        } else {
+          console.log(`${logPrefix} ❌ No match found for anchor name: "${route.anchorName}"`);
         }
+      } else {
+        console.log(`${logPrefix} No anchor name available`);
+      }
+      
+      // Fallback: if schoolId is provided and no match found, use it directly
+      if (!matchedSchool && options.schoolId) {
+        console.log(`${logPrefix} No anchor name match found, trying schoolId: "${options.schoolId}"`);
+        matchedSchool = schools.find(s => s.id === options.schoolId);
+        if (matchedSchool) {
+          console.log(`${logPrefix} ✅ Matched to school via schoolId: ${matchedSchool.name} (ID: ${matchedSchool.id})`);
+          console.log(`${logPrefix} School address: ${matchedSchool.address || 'MISSING'}`);
+          console.log(`${logPrefix} School coordinates: ${matchedSchool.coordinates ? 'PRESENT' : 'MISSING'}`);
+        } else {
+          console.log(`${logPrefix} ❌ School not found with schoolId: "${options.schoolId}"`);
+          console.log(`${logPrefix} Available school IDs (first 5): ${schools.slice(0, 5).map(s => s.id).join(', ')}`);
+        }
+      } else if (!options.schoolId) {
+        console.log(`${logPrefix} ⚠️  No schoolId provided in options`);
+      }
+      
+      if (matchedSchool && (!matchedSchool.address || !matchedSchool.coordinates)) {
+        console.log(`${logPrefix} ⚠️  School missing address/coordinates - school stop will not be added`);
+      } else if (matchedSchool) {
+        console.log(`${logPrefix} ✅ School has address and coordinates - will add school stop`);
       }
     } catch (error) {
       console.error(`${logPrefix} Error loading schools.json:`, error);
     }
+  } else {
+    console.log(`${logPrefix} ⚠️  SCHOOLS_FILE does not exist: ${SCHOOLS_FILE}`);
   }
 
   // Step 3: Geocode stops
@@ -234,12 +268,13 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
 
   // Step 9: Save to file if requested
   if (saveToFile) {
-    const schoolId = getSchoolIdFromFilename(filename);
-    if (!schoolId) {
-      throw new Error(`Could not determine school from filename: ${filename}`);
+    // Use provided schoolId or try to extract from filename
+    const finalSchoolId = schoolId || getSchoolIdFromFilename(filename);
+    if (!finalSchoolId) {
+      throw new Error(`Could not determine school from filename: ${filename}. Please provide schoolId option.`);
     }
 
-    const processedRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
+    const processedRoutesDir = path.join(DATA_DIR, 'schools', finalSchoolId, 'processed-routes');
     if (!fs.existsSync(processedRoutesDir)) {
       fs.mkdirSync(processedRoutesDir, { recursive: true });
     }
@@ -251,6 +286,7 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
 
   return finalRoute;
 }
+
 
 
 

@@ -4,11 +4,12 @@
 import { formatStreetName } from '../utils/formatAddress.js';
 
 /**
- * Extract route name and direction from filename
+ * Extract route name and direction from filename or PDF text
  * Example: "100SYL-A_effective_082625.pdf" -> { name: "100", direction: "Morning" }
+ * Also tries to extract from PDF text if filename doesn't match pattern
  * Supports any school code (not just SYL)
  */
-function extractRouteInfoFromFilename(filename) {
+function extractRouteInfoFromFilename(filename, text = null) {
   if (!filename) {
     return { name: 'Unknown Route', direction: null };
   }
@@ -22,7 +23,19 @@ function extractRouteInfoFromFilename(filename) {
     return { name: routeNum, direction };
   }
   
-  // Fallback: try to extract any number
+  // If filename doesn't match, try to extract from PDF text
+  // Look for patterns like "Route: 207BVC-A" or "207BVC-A" in the text
+  if (text) {
+    // Try to find route pattern in text: number + school code + direction
+    const textMatch = text.match(/(?:route[:\s]*)?(\d+)([A-Z]{2,})-([AP])/i);
+    if (textMatch) {
+      const routeNum = textMatch[1];
+      const direction = textMatch[3].toUpperCase() === 'A' ? 'Morning' : 'Afternoon';
+      return { name: routeNum, direction };
+    }
+  }
+  
+  // Fallback: try to extract any number from filename
   const numMatch = filename.match(/(\d+)/);
   return {
     name: numMatch ? `Route ${numMatch[1]}` : 'Unknown Route',
@@ -169,7 +182,7 @@ function parseStops(text, anchorName = null) {
  * The anchor name is returned for matching routes to schools
  */
 export function parseRouteFromPDF(text, fileId, filename = '') {
-  const routeInfo = extractRouteInfoFromFilename(filename);
+  const routeInfo = extractRouteInfoFromFilename(filename, text); // Pass text to extract route from PDF content
   const anchorName = extractAnchorName(text);
   const stops = parseStops(text, anchorName); // Pass anchor name to filter it out from regular stops
   
@@ -183,5 +196,6 @@ export function parseRouteFromPDF(text, fileId, filename = '') {
     rawText: text.substring(0, 500), // First 500 chars for debugging
   };
 }
+
 
 

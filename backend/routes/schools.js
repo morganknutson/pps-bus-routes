@@ -39,6 +39,29 @@ function invalidateRouteStatsCache(schoolId) {
 // Export function to allow other modules to invalidate cache
 export { invalidateRouteStatsCache };
 
+// Helper function to check if a school has PDFs downloaded
+async function hasPdfs(schoolId) {
+  try {
+    const schoolPdfsDir = path.join(DATA_DIR, 'schools', schoolId, 'pdfs');
+    
+    // Check if directory exists
+    try {
+      await fs.access(schoolPdfsDir);
+    } catch {
+      return false; // Directory doesn't exist
+    }
+
+    // Check if directory has any PDF files
+    const files = await fs.readdir(schoolPdfsDir);
+    const pdfFiles = files.filter(f => f.toLowerCase().endsWith('.pdf'));
+    
+    return pdfFiles.length > 0;
+  } catch (error) {
+    console.error(`Error checking PDFs for school ${schoolId}:`, error);
+    return false;
+  }
+}
+
 // Helper function to get route count and update time for a school (optimized)
 // Counts unique routes (morning and afternoon versions of the same route count as 1)
 // Returns both count and latest update time in one pass
@@ -149,6 +172,15 @@ router.get('/', async (req, res) => {
         },
       ];
       await fs.writeFile(SCHOOLS_FILE, JSON.stringify(defaultSchools, null, 2));
+      
+      // Check if default school has PDFs
+      const hasPdf = await hasPdfs(defaultSchools[0].id);
+      if (!hasPdf) {
+        const duration = Date.now() - startTime;
+        console.log(`[GET /api/schools] No PDFs found for default school (${duration}ms)`);
+        return res.json({ schools: [] });
+      }
+      
       // Add route counts to default schools
       const stats = await getRouteStats(defaultSchools[0].id);
       const schoolsWithCounts = defaultSchools.map(school => ({
@@ -170,13 +202,19 @@ router.get('/', async (req, res) => {
       return res.status(500).json({ error: 'Invalid schools data format' });
     }
     
-    // Get route stats for all schools in parallel
-    const statsPromises = schools.map(school => getRouteStats(school.id));
+    // Check which schools have PDFs downloaded
+    const pdfChecks = await Promise.all(schools.map(school => hasPdfs(school.id)));
+    
+    // Filter to only include schools with PDFs
+    const schoolsWithPdfs = schools.filter((school, index) => pdfChecks[index]);
+    
+    // Get route stats for all schools with PDFs in parallel
+    const statsPromises = schoolsWithPdfs.map(school => getRouteStats(school.id));
     const statsArray = await Promise.all(statsPromises);
     
     // Add route counts and latest update times to each school
     // Exclude placesData and placeId from frontend response (keep in backend data only)
-    const schoolsWithCounts = schools.map((school, index) => {
+    const schoolsWithCounts = schoolsWithPdfs.map((school, index) => {
       const { placesData, placeId, ...schoolData } = school;
       const stats = statsArray[index];
       return {
@@ -187,7 +225,7 @@ router.get('/', async (req, res) => {
     });
     
     const duration = Date.now() - startTime;
-    console.log(`[GET /api/schools] Returning ${schoolsWithCounts.length} schools (${duration}ms)`);
+    console.log(`[GET /api/schools] Returning ${schoolsWithCounts.length} schools with PDFs (${duration}ms, filtered from ${schools.length} total)`);
     res.json({ schools: schoolsWithCounts });
   } catch (error) {
     const duration = Date.now() - startTime;

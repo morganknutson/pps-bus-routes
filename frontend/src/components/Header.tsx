@@ -1,9 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ThemePicker } from './ThemePicker';
 import './Header.css';
 
 export function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   
   const isHomePage = location.pathname === '/';
   const isAdminPage = location.pathname === '/admin' || 
@@ -12,6 +13,13 @@ export function Header() {
                       location.pathname === '/verification' ||
                       location.pathname === '/jobs' ||
                       location.pathname === '/servers';
+  const isAdminRoute = location.pathname === '/admin';
+  const isExplorerPage = location.pathname === '/bus-route-explorer';
+  
+  const handleLogout = () => {
+    sessionStorage.removeItem('adminAuthenticated');
+    navigate('/');
+  };
   
   // Don't show header on home page
   if (isHomePage) {
@@ -34,7 +42,12 @@ export function Header() {
                 <span className="logo-text">Admin</span>
               </Link>
             ) : (
-              <span className="logo-text">Portland Public School Bus Routes</span>
+              <span 
+                className="logo-text"
+                style={isExplorerPage ? { color: 'white' } : {}}
+              >
+                Portland Public School Bus Routes
+              </span>
             )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
@@ -59,6 +72,35 @@ export function Header() {
               >
                 → Explorer
               </Link>
+            )}
+            {isAdminRoute && (
+              <button
+                onClick={handleLogout}
+                style={{
+                  fontSize: '12px',
+                  color: 'var(--text-primary)',
+                  backgroundColor: 'transparent',
+                  border: '1px solid var(--text-tertiary)',
+                  borderRadius: '6px',
+                  padding: '0.5rem 1rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--text-secondary)';
+                  e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--text-tertiary)';
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }}
+              >
+                <i className="fas fa-sign-out-alt" />
+                Logout
+              </button>
             )}
           </div>
         </div>

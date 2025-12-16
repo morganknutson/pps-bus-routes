@@ -3,7 +3,6 @@ import { AppState, Route, HomeAddress, School, Stop } from '../types';
 import { assignUniqueColors } from '../utils/colorGenerator';
 import { saveRoutesToCache, mergeCachedCoordinates } from '../services/routeCache';
 import { validateLngLat } from '../utils/coordinates';
-import { findClosestStopInDirection } from '../utils/findClosestStopInDirection';
 
 interface Store extends AppState {
   setDriveLink: (link: string) => void;
@@ -24,10 +23,13 @@ interface Store extends AppState {
   selectStop: (route: Route, stop: Stop, stopNumber: number) => void;
   clearSelectedStop: () => void;
   setDirectionFilter: (direction: 'Morning' | 'Afternoon' | 'Both') => void;
+  triggerZoomToHomeAddress: () => void;
+  clearZoomToHomeAddress: () => void;
   currentGeocodingRouteId: string | null;
   selectedStop: { route: Route; stop: Stop; stopNumber: number } | null;
   directionFilter: 'Morning' | 'Afternoon' | 'Both';
   lookupAddress: HomeAddress | undefined;
+  shouldZoomToHomeAddress: boolean;
 }
 
 export const useStore = create<Store>((set) => ({
@@ -44,6 +46,7 @@ export const useStore = create<Store>((set) => ({
   currentGeocodingRouteId: null,
   selectedStop: null,
   directionFilter: 'Morning',
+  shouldZoomToHomeAddress: false,
 
   setDriveLink: (link) => set({ driveLink: link }),
 
@@ -191,51 +194,22 @@ export const useStore = create<Store>((set) => ({
 
   setDirectionFilter: (direction) => {
     set((state) => {
-      // If switching to a specific direction (Morning or Afternoon) and there's a selected stop,
-      // check if we need to auto-select the closest stop in the new direction
-      if (state.selectedStop && direction !== 'Both') {
-        const currentStopDirection = state.selectedStop.route.direction;
-        
-        // Auto-select closest stop if:
-        // 1. Switching between Morning and Afternoon (not from/to Both)
-        // 2. Switching from Both to a specific direction and current stop is not in that direction
-        const shouldAutoSelect = 
-          (state.directionFilter !== 'Both' && direction !== state.directionFilter) ||
-          (state.directionFilter === 'Both' && currentStopDirection !== direction);
-        
-        if (shouldAutoSelect) {
-          const closestStop = findClosestStopInDirection(
-            state.selectedStop,
-            direction,
-            state.routes
-          );
-          
-          if (closestStop) {
-            console.log(`[useStore] Auto-selecting closest ${direction} stop:`, {
-              route: closestStop.route.name,
-              stop: closestStop.stop.address,
-              distance: `${(closestStop.distance * 1000).toFixed(0)}m`,
-            });
-            return {
-              directionFilter: direction,
-              selectedStop: { route: closestStop.route, stop: closestStop.stop, stopNumber: closestStop.stopNumber },
-            };
-          } else {
-            // No stops found in the new direction, clear selection
-            console.log(`[useStore] No ${direction} stops found, clearing selection`);
-            return {
-              directionFilter: direction,
-              selectedStop: null,
-            };
-          }
-        }
+      // Reset stop selection when direction filter changes
+      if (state.directionFilter !== direction && state.selectedStop) {
+        console.log(`[useStore] Direction filter changed from ${state.directionFilter} to ${direction}, clearing stop selection`);
+        return {
+          directionFilter: direction,
+          selectedStop: null,
+        };
       }
       
-      // If switching to "Both", keep the current selection (if any)
-      // Otherwise, just update the direction filter
+      // Just update the direction filter if it's the same or no stop is selected
       return { directionFilter: direction };
     });
   },
+
+  triggerZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: true }),
+  clearZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: false }),
 }));
 
 // Load saved state from localStorage on init

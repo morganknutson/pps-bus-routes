@@ -47,7 +47,7 @@ interface StreetMarker {
 }
 
 export function MapView({ editingMode = false, enableStreetHighlighting = false, enableStreetPins = false }: MapViewProps) {
-  const { routes, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, updateStopCoordinates, directionFilter } = useStore();
+  const { routes, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, updateStopCoordinates, directionFilter, shouldZoomToHomeAddress, clearZoomToHomeAddress } = useStore();
   const mapRef = useRef<L.Map | null>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
   const [undoHistory, setUndoHistory] = useState<UndoStep[]>([]);
@@ -57,7 +57,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const previousLookupAddressRef = useRef<{ address: string; coordinates: [number, number] } | null>(null);
   const hasZoomedToLookupAddressRef = useRef<boolean>(false);
   const lastAddressZoomTimeRef = useRef<number>(0);
-  const hasZoomedToHomeAndStopRef = useRef<boolean>(false);
+  const hasZoomedToStopRef = useRef<boolean>(false);
   const [highlightedStreet, setHighlightedStreet] = useState<HighlightedStreet | null>(null);
   const [loadingStreet, setLoadingStreet] = useState<string | null>(null);
   const [streetError, setStreetError] = useState<string | null>(null);
@@ -74,15 +74,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   });
 
   // Zoom to home address only when it's first added or coordinates change
-  // Skip if both homeAddress and selectedStop are present (let the combined zoom handle it)
   useEffect(() => {
-    // If both homeAddress and selectedStop are present, skip individual zoom
-    // The combined zoom effect will handle it
-    if (homeAddress && selectedStop && selectedStop.stop.coordinates) {
-      previousHomeAddressRef.current = homeAddress;
-      return;
-    }
-
     // Check if address was just added (changed from undefined to a value)
     // or if coordinates actually changed (not just object reference)
     const prevCoords = previousHomeAddressRef.current?.coordinates;
@@ -152,7 +144,36 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     }
   }, [lookupAddress]);
 
-  // Component to zoom to include both home address and closest stop
+  // Zoom to home address when triggered from address bar
+  useEffect(() => {
+    if (!shouldZoomToHomeAddress || !homeAddress) return;
+    
+    if (mapRef.current && validateLngLat(homeAddress.coordinates)) {
+      // Use requestAnimationFrame to ensure map is ready
+      const frameId = requestAnimationFrame(() => {
+        try {
+          if (mapRef.current && homeAddress) {
+            const position = toLeafletPosition(homeAddress.coordinates);
+            mapRef.current.setView(position, 16, { animate: true });
+            if (clearZoomToHomeAddress) {
+              clearZoomToHomeAddress();
+            }
+            console.log('[MapView] 🏠 Zoomed to home address from address bar:', homeAddress.address);
+          }
+        } catch (error) {
+          console.error('[MapView] ❌ Error zooming to home address:', error);
+          if (clearZoomToHomeAddress) {
+            clearZoomToHomeAddress();
+          }
+        }
+      });
+      
+      return () => cancelAnimationFrame(frameId);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldZoomToHomeAddress, homeAddress]);
+
+  // Component to zoom to selected stop
   // This component uses useMap() to access the map instance inside MapContainer
   function FitHomeAndStopBounds() {
     const map = useMap();
@@ -174,18 +195,12 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         return;
       }
       
-      if (homeAddress && selectedStop && selectedStop.stop.coordinates) {
+      if (selectedStop && selectedStop.stop.coordinates) {
         const currentStopId = `${selectedStop.route.id}-${selectedStop.stop.id}`;
         
         // Only zoom if this is a new stop or we haven't zoomed yet
         if (prevStopIdRef.current === currentStopId && hasZoomedRef.current) {
           console.log('[MapView] Already zoomed to this stop, skipping');
-          return;
-        }
-        
-        // Validate coordinates
-        if (!validateLngLat(homeAddress.coordinates)) {
-          console.error('[MapView] Invalid home address coordinates:', homeAddress.coordinates);
           return;
         }
 
@@ -194,46 +209,41 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           return;
         }
 
-        // Create bounds that include both the home address and the closest stop
-        const homePosition = toLeafletPosition(homeAddress.coordinates);
+        // Zoom to just the stop, not including home address
         const stopPosition = toLeafletPosition(selectedStop.stop.coordinates);
         
-        console.log('[MapView] 🎯 Fitting bounds to home address and closest stop', {
-          home: homeAddress.address,
+        console.log('[MapView] 🎯 Zooming to selected stop', {
           stop: selectedStop.stop.address,
-          homeCoords: homeAddress.coordinates,
           stopCoords: selectedStop.stop.coordinates,
-          homePosition,
           stopPosition,
         });
         
         // Small delay to ensure map is fully rendered
         const timer = setTimeout(() => {
           try {
-            const bounds = L.latLngBounds([homePosition, stopPosition]);
-            map.fitBounds(bounds, { padding: [100, 100], animate: true });
+            map.setView(stopPosition, 16, { animate: true });
             
             hasZoomedRef.current = true;
-            hasZoomedToHomeAndStopRef.current = true;
+            hasZoomedToStopRef.current = true;
             lastAddressZoomTimeRef.current = Date.now();
             prevStopIdRef.current = currentStopId;
             
-            console.log('[MapView] ✅ Successfully zoomed to include home address and closest stop');
+            console.log('[MapView] ✅ Successfully zoomed to selected stop');
           } catch (error) {
-            console.error('[MapView] ❌ Error fitting bounds:', error);
+            console.error('[MapView] ❌ Error zooming to stop:', error);
           }
         }, 150);
         
         return () => clearTimeout(timer);
       } else {
-        // Reset zoom flag if either is cleared
-        if (!homeAddress || !selectedStop) {
+        // Reset zoom flag if stop is cleared
+        if (!selectedStop) {
           hasZoomedRef.current = false;
-          hasZoomedToHomeAndStopRef.current = false;
+          hasZoomedToStopRef.current = false;
           prevStopIdRef.current = null;
         }
       }
-    }, [map, homeAddress, selectedStop?.route.id, selectedStop?.stop.id]);
+    }, [map, selectedStop?.route.id, selectedStop?.stop.id]);
     
     return null;
   }
@@ -873,24 +883,19 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             <div>
               <div style={{ fontWeight: 'bold', fontSize: '16px', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                 <span style={{ color: 'var(--text-primary)' }}>{selectedStop.route.name}</span>
-                {selectedStop.route.direction && (
+                {selectedStop.stopNumber > 0 && (
                   <span style={{ 
                     fontSize: '12px', 
                     padding: '3px 10px',
                     borderRadius: '12px',
                     fontWeight: '500',
-                    backgroundColor: selectedStop.route.direction === 'Morning' ? '#B3E5FC' : '#C8E6C9',
-                    color: selectedStop.route.direction === 'Morning' ? '#01579B' : '#1B5E20',
+                    backgroundColor: selectedStop.route.color,
+                    color: '#FFFFFF',
                   }}>
-                    {selectedStop.route.direction}
+                    Stop {selectedStop.stopNumber}
                   </span>
                 )}
               </div>
-              {selectedStop.stopNumber > 0 && (
-                <div style={{ fontSize: '14px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                  Stop {selectedStop.stopNumber}
-                </div>
-              )}
               {selectedStop.stop.isSchoolStop && (
                 <div style={{ fontSize: '14px', color: 'var(--text-tertiary)', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                   <span>🏫</span> School Loading Zone

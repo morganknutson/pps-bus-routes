@@ -178,6 +178,11 @@ export function SchoolsList() {
   const filteredSchools = useMemo(() => {
     console.log('[SchoolsList] Filtering schools with filters:', schoolTypeFilters);
     const filtered = schools.filter(school => {
+      // Filter out ACCESS school
+      if (school.name === 'ACCESS') {
+        return false;
+      }
+      
       // Search filter
       const matchesSearch = 
         school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

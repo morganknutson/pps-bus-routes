@@ -1,0 +1,422 @@
+{
+  "id": "238TAB-A_effective_091725.pdf",
+  "name": "238",
+  "direction": "Morning",
+  "filename": "238TAB-A_effective_091725.pdf",
+  "fileId": "238TAB-A_effective_091725.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "SE Yukon St. & SE Milwaukie Ave. [NE]",
+      "time": "8:35 am",
+      "direction": "NE",
+      "originalLine": "8:35 amSE YUKON ST @ SE MILWAUKIE AV [NE]238TAB-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6494272,
+        45.4793294
+      ],
+      "displayName": "SE Yukon St & SE Milwaukie Ave, Portland, OR 97202, USA",
+      "placeId": "EjdTRSBZdWtvbiBTdCAmIFNFIE1pbHdhdWtpZSBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJhcULTpMKlVQRldzaB_jIz5cSFAoSCYXFC06TCpVUEZXc2gf4yM-XGhQKEgmJ8g5fkwqVVBH-paT93fM2gxoUChIJK89ouY0KlVQRFzlEM3xyQ3IiCg1OmBsbFcAu5bY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Division St. & SE 28th Pl. [SW]",
+      "time": "8:51 am",
+      "direction": "SW",
+      "originalLine": "8:51 amSE DIVISION ST @ SE 28TH PL [SW]238TAB-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6366859,
+        45.504798
+      ],
+      "displayName": "SE Division St & SE 28th Pl, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBEaXZpc2lvbiBTdCAmIFNFIDI4dGggUGwsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJ6VNsDISglVQRsFSdVrlZtOkSFAoSCelTbAyEoJVUEbBUnVa5WbTpGhQKEgkXelFEsaGVVBEiXNhZ-CS68BoUChIJf_S243-glVQR-4xD7ikrzSIiCg0sex8bFXUg57Y",
+      "neighborhood": "Hosford-Abernethy"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Division St. & SE 34th Ave. [SW]",
+      "time": "8:53 am",
+      "direction": "SW",
+      "originalLine": "8:53 amSE DIVISION ST @ SE 34TH AV [SW]238TAB-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6295843,
+        45.504791
+      ],
+      "displayName": "SE Division St & SE 34th Ave, Portland, OR 97202, USA",
+      "placeId": "EjVTRSBEaXZpc2lvbiBTdCAmIFNFIDM0dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCbvRsReGoJVUEaNWu5sCzazgEhQKEgm70bEXhqCVVBGjVrubAs2s4BoUChIJF3pRRLGhlVQRIlzYWfgkuvAaFAoSCYV-WdeiCpVUESGKPiN_NPAcIgoN5nofGxXdNei2",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-5",
+      "address": "2271 SE 41st Ave. (richmond School) [E]",
+      "time": "8:56 am",
+      "direction": "E",
+      "originalLine": "8:56 am2271 SE 41ST AV (RICHMOND SCHOOL) [E]238TAB-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.62036553461002,
+        45.50649091398561
+      ],
+      "displayName": "2271 SE 41st Ave, Portland, OR 97214, USA",
+      "placeId": "EikyMjcxIFNFIDQxc3QgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTQsIFVTQSIxEi8KFAoSCefaQtKLoJVUEQZpPtE5qR03EN8RKhQKEglX2-CGdqCVVBG0QxiSKvutAQ",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE Cesar E Chavez Blvd. & SE Morrison St. [E]",
+      "time": "9:00 am",
+      "direction": "E",
+      "originalLine": "9:00 amSE CESAR E CHAVEZ BLVD @ SE MORRISON ST [E]238TAB-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6230001,
+        45.5171481
+      ],
+      "displayName": "César E. Chávez Blvd & SE Morrison St, Portland, OR 97214, USA",
+      "placeId": "EkBDw6lzYXIgRS4gQ2jDoXZleiBCbHZkICYgU0UgTW9ycmlzb24gU3QsIFBvcnRsYW5kLCBPUiA5NzIxNCwgVVNBImYiZAoUChIJxd2I7OyglVQREqVBRclMoAQSFAoSCcXdiOzsoJVUERKlQUXJTKAEGhQKEglzL03u6aCVVBEURYDqbzIoERoUChIJL5AE4KmhlVQRCtH21GG6w-ciCg2ZXSEbFQ836bY",
+      "neighborhood": "Sunnyside"
+    },
+    {
+      "id": "stop-0",
+      "address": "5800 SE Ash St, Portland, OR 97215, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:MT TABOR GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6040112,
+        45.5210407
+      ],
+      "displayName": "5800 SE Ash St, Portland, OR 97215, USA",
+      "schoolName": "Mt Tabor"
+    }
+  ],
+  "neighborhoods": [
+    "Hosford-Abernethy",
+    "Richmond",
+    "Southeast Portland",
+    "Sunnyside"
+  ],
+  "processedAt": "2025-12-16T11:16:38.112Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.47933,
+      -122.64943
+    ],
+    [
+      45.48168,
+      -122.64967
+    ],
+    [
+      45.4831,
+      -122.64963
+    ],
+    [
+      45.48521,
+      -122.6496
+    ],
+    [
+      45.48531,
+      -122.6496
+    ],
+    [
+      45.48554,
+      -122.64966
+    ],
+    [
+      45.48581,
+      -122.64979
+    ],
+    [
+      45.48669,
+      -122.65016
+    ],
+    [
+      45.48795,
+      -122.65056
+    ],
+    [
+      45.48871,
+      -122.65076
+    ],
+    [
+      45.48948,
+      -122.65096
+    ],
+    [
+      45.49034,
+      -122.65117
+    ],
+    [
+      45.49034,
+      -122.6509
+    ],
+    [
+      45.49033,
+      -122.64951
+    ],
+    [
+      45.49033,
+      -122.64777
+    ],
+    [
+      45.49032,
+      -122.64481
+    ],
+    [
+      45.49031,
+      -122.64225
+    ],
+    [
+      45.49031,
+      -122.64086
+    ],
+    [
+      45.4903,
+      -122.63958
+    ],
+    [
+      45.49209,
+      -122.63959
+    ],
+    [
+      45.4948,
+      -122.63962
+    ],
+    [
+      45.49753,
+      -122.63963
+    ],
+    [
+      45.49829,
+      -122.63963
+    ],
+    [
+      45.49899,
+      -122.63965
+    ],
+    [
+      45.49999,
+      -122.63966
+    ],
+    [
+      45.50267,
+      -122.63966
+    ],
+    [
+      45.50409,
+      -122.63968
+    ],
+    [
+      45.50482,
+      -122.63967
+    ],
+    [
+      45.50483,
+      -122.6392
+    ],
+    [
+      45.5048,
+      -122.63763
+    ],
+    [
+      45.50482,
+      -122.63562
+    ],
+    [
+      45.50481,
+      -122.63369
+    ],
+    [
+      45.50479,
+      -122.63054
+    ],
+    [
+      45.50479,
+      -122.62626
+    ],
+    [
+      45.50478,
+      -122.62428
+    ],
+    [
+      45.50479,
+      -122.62314
+    ],
+    [
+      45.50479,
+      -122.62095
+    ],
+    [
+      45.50479,
+      -122.62043
+    ],
+    [
+      45.50479,
+      -122.62032
+    ],
+    [
+      45.50507,
+      -122.62032
+    ],
+    [
+      45.50549,
+      -122.62034
+    ],
+    [
+      45.50623,
+      -122.62036
+    ],
+    [
+      45.50686,
+      -122.62037
+    ],
+    [
+      45.50719,
+      -122.62038
+    ],
+    [
+      45.50755,
+      -122.62039
+    ],
+    [
+      45.50755,
+      -122.62273
+    ],
+    [
+      45.50806,
+      -122.62275
+    ],
+    [
+      45.50879,
+      -122.62277
+    ],
+    [
+      45.51054,
+      -122.62282
+    ],
+    [
+      45.51221,
+      -122.62286
+    ],
+    [
+      45.51265,
+      -122.62291
+    ],
+    [
+      45.513,
+      -122.62294
+    ],
+    [
+      45.51324,
+      -122.62295
+    ],
+    [
+      45.5143,
+      -122.62295
+    ],
+    [
+      45.51592,
+      -122.62296
+    ],
+    [
+      45.51701,
+      -122.62299
+    ],
+    [
+      45.51882,
+      -122.62305
+    ],
+    [
+      45.51913,
+      -122.62306
+    ],
+    [
+      45.51931,
+      -122.62307
+    ],
+    [
+      45.51931,
+      -122.62247
+    ],
+    [
+      45.51931,
+      -122.62178
+    ],
+    [
+      45.51929,
+      -122.62005
+    ],
+    [
+      45.51928,
+      -122.61782
+    ],
+    [
+      45.51928,
+      -122.61503
+    ],
+    [
+      45.51928,
+      -122.61257
+    ],
+    [
+      45.51929,
+      -122.60995
+    ],
+    [
+      45.51927,
+      -122.60665
+    ],
+    [
+      45.51927,
+      -122.60574
+    ],
+    [
+      45.51927,
+      -122.60559
+    ],
+    [
+      45.51927,
+      -122.60499
+    ],
+    [
+      45.51942,
+      -122.60499
+    ],
+    [
+      45.51981,
+      -122.60499
+    ],
+    [
+      45.5203,
+      -122.60499
+    ],
+    [
+      45.52097,
+      -122.60499
+    ],
+    [
+      45.52097,
+      -122.60476
+    ],
+    [
+      45.52101,
+      -122.60469
+    ],
+    [
+      45.52106,
+      -122.60467
+    ]
+  ]
+}

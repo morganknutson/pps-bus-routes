@@ -14,7 +14,7 @@ export function AddressInput() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
-  const { setHomeAddress, homeAddress, clearHomeAddress } = useStore();
+  const { setHomeAddress, homeAddress, clearHomeAddress, triggerZoomToHomeAddress } = useStore();
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -182,7 +182,31 @@ export function AddressInput() {
           gap: '0.5rem',
         }}>
           <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: '12px', flexShrink: 0 }}></i>
-          <div style={{ fontSize: '14px', fontWeight: '500', flex: 1, color: 'var(--text-primary)' }}>{homeAddress.address}</div>
+          <div 
+            onClick={() => {
+              console.log('[AddressInput] Clicked address to zoom:', homeAddress.address);
+              triggerZoomToHomeAddress();
+            }}
+            style={{ 
+              fontSize: '14px', 
+              fontWeight: '500', 
+              flex: 1, 
+              color: 'var(--text-primary)',
+              cursor: 'pointer',
+              textDecoration: 'underline',
+              textDecorationColor: 'transparent',
+              transition: 'text-decoration-color 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.textDecorationColor = 'var(--text-primary)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.textDecorationColor = 'transparent';
+            }}
+            title="Click to zoom to address on map"
+          >
+            {homeAddress.address}
+          </div>
           <button
             onClick={clearHomeAddress}
             style={{
@@ -250,7 +274,7 @@ export function AddressInput() {
               style={{
                 width: '100%',
                 padding: '0.375rem 0.5rem 0.375rem 2.25rem',
-                border: '1px solid var(--border-color)',
+                border: 'none',
                 borderRadius: '4px',
                 fontSize: '14px',
                 boxSizing: 'border-box',

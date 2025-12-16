@@ -77,6 +77,9 @@ const SCHOOL_CODE_TO_ID = {
   
   // S
   'SYL': 'west-sylvan',
+  
+  // T
+  'TAB': 'mt-tabor',
 };
 
 /**

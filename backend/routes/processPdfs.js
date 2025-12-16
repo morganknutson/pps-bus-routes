@@ -46,6 +46,7 @@ async function processBatchPDFs(schoolId, pdfFiles, pdfDir) {
       const finalRoute = await processSinglePDF(pdfBuffer, pdfFile, pdfFile, {
         logPrefix: '[ProcessPdfs]',
         saveToFile: true,
+        schoolId: schoolId, // Pass schoolId explicitly since we already know it
       });
 
       processed.push({

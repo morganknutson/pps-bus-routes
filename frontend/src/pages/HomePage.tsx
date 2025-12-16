@@ -380,7 +380,7 @@ export function HomePage() {
       justifyContent: 'center',
       minHeight: '100vh',
       padding: '2rem',
-      backgroundColor: 'var(--bg-primary)',
+      backgroundColor: '#133A60',
     }}>
       <div style={{
         width: '100%',
@@ -402,15 +402,6 @@ export function HomePage() {
 
         {/* Address Input */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{
-            display: 'block',
-            fontSize: '14px',
-            fontWeight: '500',
-            color: 'var(--text-secondary)',
-            marginBottom: '0.5rem',
-          }}>
-            Your Address
-          </label>
           {selectedAddress ? (
             <div style={{
               display: 'flex',
@@ -525,15 +516,6 @@ export function HomePage() {
 
         {/* School Input */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{
-            display: 'block',
-            fontSize: '14px',
-            fontWeight: '500',
-            color: 'var(--text-secondary)',
-            marginBottom: '0.5rem',
-          }}>
-            Your School
-          </label>
           {selectedSchoolLocal ? (
             <div style={{
               display: 'flex',
@@ -743,7 +725,7 @@ export function HomePage() {
         <Link
           to="/bus-route-explorer"
           style={{
-            color: 'var(--text-secondary)',
+            color: 'white',
             fontSize: '14px',
             textDecoration: 'none',
             display: 'inline-flex',
@@ -752,10 +734,10 @@ export function HomePage() {
             transition: 'color 0.2s ease',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--text-primary)';
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'var(--text-secondary)';
+            e.currentTarget.style.color = 'white';
           }}
         >
           <i className="fas fa-map" style={{ fontSize: '12px' }}></i>
