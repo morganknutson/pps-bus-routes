@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { driveRouter } from './routes/drive.js';
 import { geocodeRouter } from './routes/geocode.js';
 import { dataRouter } from './routes/data.js';
@@ -20,13 +22,28 @@ import { workerService } from './services/jobQueue/index.js';
 
 dotenv.config();
 
+// Get __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Track server start time for uptime calculation
 const serverStartTime = Date.now();
 
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? false : 'http://localhost:3000'),
+  credentials: true,
+};
+
+// In production without FRONTEND_URL, allow all origins (since frontend is served from same domain)
+if (process.env.NODE_ENV === 'production' && !process.env.FRONTEND_URL) {
+  corsOptions.origin = true;
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
@@ -74,20 +91,35 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Root route - helpful message
-app.get('/', (req, res) => {
-  res.json({ 
-    message: 'PPS Bus Maps API Server',
-    status: 'running',
-    frontend: 'http://localhost:3000',
-    endpoints: {
-      health: '/api/health',
-      drive: '/api/drive',
-      geocode: '/api/geocode',
-      routes: '/api/routes'
+// Serve static files from frontend/dist in production
+if (process.env.NODE_ENV === 'production') {
+  const frontendPath = path.join(__dirname, '../frontend/dist');
+  app.use(express.static(frontendPath));
+  
+  // Serve index.html for all non-API routes (SPA routing)
+  app.get('*', (req, res) => {
+    // Don't serve index.html for API routes
+    if (req.path.startsWith('/api')) {
+      return res.status(404).json({ error: 'API endpoint not found' });
     }
+    res.sendFile(path.join(frontendPath, 'index.html'));
   });
-});
+} else {
+  // Development: helpful message
+  app.get('/', (req, res) => {
+    res.json({ 
+      message: 'PPS Bus Maps API Server',
+      status: 'running',
+      frontend: 'http://localhost:3000',
+      endpoints: {
+        health: '/api/health',
+        drive: '/api/drive',
+        geocode: '/api/geocode',
+        routes: '/api/routes'
+      }
+    });
+  });
+}
 
 // Start worker service
 workerService.start();

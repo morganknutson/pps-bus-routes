@@ -94,6 +94,19 @@ pps-bus-maps/
 └── ...
 ```
 
+## Deployment
+
+Ready to deploy? Check out these guides:
+
+- **[QUICK_DEPLOY.md](./QUICK_DEPLOY.md)**: Quick 5-minute guide to deploy on Railway (easiest option)
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)**: Comprehensive deployment guide with multiple options (Railway, Render, VPS)
+
+The app is production-ready and can be deployed to:
+- **Railway** (recommended for beginners) - Free tier available
+- **Render** - Free tier available
+- **Vercel + Railway/Render** - Separate frontend/backend
+- **VPS** (DigitalOcean, Linode, etc.) - Full control
+
 ## Documentation
 
 - **[PAGES_INDEX.md](./PAGES_INDEX.md)**: Comprehensive index of all pages in the application, including routes, purposes, features, and components used. **Reference this before making changes to pages to ensure you're working on the correct one.**
