@@ -106,6 +106,11 @@ export function SchoolList({
   const [editingDriveLink, setEditingDriveLink] = useState('');
 
   const filteredSchools = schools.filter(school => {
+    // Filter out ACCESS school
+    if (school.name === 'ACCESS') {
+      return false;
+    }
+    
     // Search filter
     const matchesSearch = 
       school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

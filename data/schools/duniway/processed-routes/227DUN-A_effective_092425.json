@@ -1,0 +1,602 @@
+{
+  "id": "227DUN-A_effective_092425.pdf",
+  "name": "227",
+  "direction": "Morning",
+  "filename": "227DUN-A_effective_092425.pdf",
+  "fileId": "227DUN-A_effective_092425.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "4617 SE Milwaukie Ave. [W]",
+      "time": "7:10 am",
+      "direction": "W",
+      "originalLine": "7:10 am4617 SE MILWAUKIE AV [W]227DUN-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6511291845784,
+        45.48947660644225
+      ],
+      "displayName": "4617 SE Milwaukie Ave, Portland, OR 97202, USA",
+      "placeId": "ChIJjQbzOIkKlVQRPwhWgsoiwbk",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-2",
+      "address": "1436 SE Spokane St(sellwood Ch-stop On 15th) [NW]",
+      "time": "7:16 am",
+      "direction": "NW",
+      "originalLine": "7:16 am1436 SE SPOKANE ST(SELLWOOD CH-STOP ON 15TH) [NW]227DUN-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.65102869073043,
+        45.46484460865289
+      ],
+      "displayName": "1436 SE Spokane St, Portland, OR 97202, USA",
+      "placeId": "ChIJ32hJ39oKlVQRSrkrFHlN9fM",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE St. Andrews Dr. & SE Manchester Pl. [NW]",
+      "time": "7:20 am",
+      "direction": "NW",
+      "originalLine": "7:20 amSE ST ANDREWS DR @ SE MANCHESTER PL [NW]227DUN-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6476168,
+        45.4568559
+      ],
+      "displayName": "SE Manchester Pl & SE St Andrews Dr, Portland, OR 97202, USA",
+      "placeId": "EjxTRSBNYW5jaGVzdGVyIFBsICYgU0UgU3QgQW5kcmV3cyBEciwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiZiJkChQKEgnVe9KM0wqVVBGK0WpAQn5cDhIUChIJ1XvSjNMKlVQRitFqQEJ-XA4aFAoSCUuB5RDUCpVUEYgLy8KvjFPNGhQKEgnjdWoF1AqVVBH2LjOQGne26iIKDW8qGBsVeHXltg",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Clatsop St. & SE 16th Ave. [SW]",
+      "time": "7:23 am",
+      "direction": "SW",
+      "originalLine": "7:23 amSE CLATSOP ST @ SE 16TH AV [SW]227DUN-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6490399,
+        45.4607615
+      ],
+      "displayName": "SE Clatsop St & SE 16th Ave, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBDbGF0c29wIFN0ICYgU0UgMTZ0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJFeLn-NAKlVQRwKKATXljamESFAoSCRXi5_jQCpVUEcCigE15Y2phGhQKEgn3Of5V0AqVVBFgmwmM2hDM1hoUChIJg_jG7ogKlVQRUpmIi9ocIDEiCg3_whgbFeE95bY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE Clatsop St. & SE 19th Ave. [SW]",
+      "time": "7:24 am",
+      "direction": "SW",
+      "originalLine": "7:24 amSE CLATSOP ST @ SE 19TH AV [SW]227DUN-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6450731,
+        45.4607608
+      ],
+      "displayName": "SE Clatsop St & SE 19th Ave, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBDbGF0c29wIFN0ICYgU0UgMTl0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJdRe629EKlVQRDGOlbepw7uMSFAoSCXUXutvRCpVUEQxjpW3qcO7jGhQKEgn3Of5V0AqVVBFgmwmM2hDM1hoUChIJ0WNhA4YKlVQRngM7zwlGdW4iCg34whgbFdXY5bY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE 21st Ave. & SE Umatilla St. [SE]",
+      "time": "7:26 am",
+      "direction": "SE",
+      "originalLine": "7:26 amSE 21ST AV @ SE UMATILLA ST [SE]227DUN-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6430893,
+        45.4628936
+      ],
+      "displayName": "SE Umatilla St & SE 21st Ave, Portland, OR 97202, USA",
+      "placeId": "EjVTRSBVbWF0aWxsYSBTdCAmIFNFIDIxc3QgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCZ8tU6_PCpVUEQucC73J_PiSEhQKEgmfLVOvzwqVVBELnAu9yfz4khoUChIJ1dBJU7QKlVQRNO_bNm_FUdQaFAoSCS2vPJK_CpVUEf_gv6Hll4DDIgoNSBYZGxVTJua2",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "SE 19th Ave. & SE Tenino St. [SE]",
+      "time": "7:27 am",
+      "direction": "SE",
+      "originalLine": "7:27 amSE 19TH AV @ SE TENINO ST [SE]227DUN-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6450709,
+        45.4636105
+      ],
+      "displayName": "SE 19th Ave & SE Tenino St, Portland, OR 97202, USA",
+      "placeId": "EjNTRSAxOXRoIEF2ZSAmIFNFIFRlbmlubyBTdCwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiZiJkChQKEgnd4wKOzwqVVBGeiNryUcQbGBIUChIJ3eMCjs8KlVQRnoja8lHEGxgaFAoSCdFjYQOGCpVUEZ4DO88JRnVuGhQKEglthzbbsgqVVBFuMQtv0wDFRSIKDUkyGRsV69jltg",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "7700 SE Reed College Pl #5, Portland, OR 97202, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:DUNIWAY GT-ST-CAB LOAD ZONE ON REX",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6286055,
+        45.4685636
+      ],
+      "displayName": "7700 SE Reed College Pl #5, Portland, OR 97202, USA",
+      "schoolName": "Duniway"
+    }
+  ],
+  "neighborhoods": [
+    "Brooklyn",
+    "Southeast Portland"
+  ],
+  "processedAt": "2025-12-16T09:55:20.106Z",
+  "stats": {
+    "totalStops": 8,
+    "geocodedStops": 8,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.48948,
+      -122.65113
+    ],
+    [
+      45.48946,
+      -122.65107
+    ],
+    [
+      45.48948,
+      -122.65096
+    ],
+    [
+      45.48871,
+      -122.65076
+    ],
+    [
+      45.48795,
+      -122.65056
+    ],
+    [
+      45.48669,
+      -122.65016
+    ],
+    [
+      45.48581,
+      -122.64979
+    ],
+    [
+      45.48554,
+      -122.64966
+    ],
+    [
+      45.48531,
+      -122.6496
+    ],
+    [
+      45.48466,
+      -122.64961
+    ],
+    [
+      45.4831,
+      -122.64963
+    ],
+    [
+      45.48168,
+      -122.64967
+    ],
+    [
+      45.47933,
+      -122.64943
+    ],
+    [
+      45.47733,
+      -122.64919
+    ],
+    [
+      45.4759,
+      -122.64902
+    ],
+    [
+      45.47392,
+      -122.64879
+    ],
+    [
+      45.46944,
+      -122.64823
+    ],
+    [
+      45.46765,
+      -122.648
+    ],
+    [
+      45.46706,
+      -122.64793
+    ],
+    [
+      45.46646,
+      -122.64784
+    ],
+    [
+      45.46647,
+      -122.64904
+    ],
+    [
+      45.46646,
+      -122.65102
+    ],
+    [
+      45.46575,
+      -122.65102
+    ],
+    [
+      45.46432,
+      -122.65103
+    ],
+    [
+      45.46432,
+      -122.64805
+    ],
+    [
+      45.46433,
+      -122.64706
+    ],
+    [
+      45.46387,
+      -122.64706
+    ],
+    [
+      45.46261,
+      -122.64705
+    ],
+    [
+      45.46108,
+      -122.64705
+    ],
+    [
+      45.45934,
+      -122.64705
+    ],
+    [
+      45.45887,
+      -122.64703
+    ],
+    [
+      45.45879,
+      -122.64701
+    ],
+    [
+      45.4586,
+      -122.64694
+    ],
+    [
+      45.45853,
+      -122.64691
+    ],
+    [
+      45.45849,
+      -122.64702
+    ],
+    [
+      45.45839,
+      -122.64714
+    ],
+    [
+      45.45799,
+      -122.64769
+    ],
+    [
+      45.45786,
+      -122.64772
+    ],
+    [
+      45.45778,
+      -122.64775
+    ],
+    [
+      45.45759,
+      -122.64774
+    ],
+    [
+      45.45725,
+      -122.64769
+    ],
+    [
+      45.45686,
+      -122.64762
+    ],
+    [
+      45.45725,
+      -122.64769
+    ],
+    [
+      45.45759,
+      -122.64774
+    ],
+    [
+      45.45778,
+      -122.64775
+    ],
+    [
+      45.45786,
+      -122.64772
+    ],
+    [
+      45.45799,
+      -122.64769
+    ],
+    [
+      45.45839,
+      -122.64714
+    ],
+    [
+      45.45849,
+      -122.64702
+    ],
+    [
+      45.45853,
+      -122.64691
+    ],
+    [
+      45.4586,
+      -122.64694
+    ],
+    [
+      45.45871,
+      -122.64699
+    ],
+    [
+      45.45887,
+      -122.64703
+    ],
+    [
+      45.46004,
+      -122.64706
+    ],
+    [
+      45.46076,
+      -122.64705
+    ],
+    [
+      45.46076,
+      -122.64742
+    ],
+    [
+      45.46076,
+      -122.6482
+    ],
+    [
+      45.46076,
+      -122.64904
+    ],
+    [
+      45.46076,
+      -122.6482
+    ],
+    [
+      45.46076,
+      -122.64658
+    ],
+    [
+      45.46076,
+      -122.64507
+    ],
+    [
+      45.46111,
+      -122.64507
+    ],
+    [
+      45.46178,
+      -122.64507
+    ],
+    [
+      45.4629,
+      -122.64507
+    ],
+    [
+      45.46289,
+      -122.6435
+    ],
+    [
+      45.46289,
+      -122.64309
+    ],
+    [
+      45.46289,
+      -122.6435
+    ],
+    [
+      45.4629,
+      -122.64507
+    ],
+    [
+      45.46406,
+      -122.64507
+    ],
+    [
+      45.46575,
+      -122.64507
+    ],
+    [
+      45.4683,
+      -122.64508
+    ],
+    [
+      45.4703,
+      -122.64533
+    ],
+    [
+      45.4739,
+      -122.64576
+    ],
+    [
+      45.47407,
+      -122.64304
+    ],
+    [
+      45.47421,
+      -122.64068
+    ],
+    [
+      45.47427,
+      -122.63968
+    ],
+    [
+      45.47436,
+      -122.63789
+    ],
+    [
+      45.47437,
+      -122.63742
+    ],
+    [
+      45.47437,
+      -122.63645
+    ],
+    [
+      45.47427,
+      -122.63647
+    ],
+    [
+      45.47399,
+      -122.63647
+    ],
+    [
+      45.47391,
+      -122.63644
+    ],
+    [
+      45.47381,
+      -122.63638
+    ],
+    [
+      45.47367,
+      -122.63624
+    ],
+    [
+      45.47344,
+      -122.63603
+    ],
+    [
+      45.47322,
+      -122.63591
+    ],
+    [
+      45.47304,
+      -122.63583
+    ],
+    [
+      45.47284,
+      -122.63579
+    ],
+    [
+      45.4725,
+      -122.63577
+    ],
+    [
+      45.47217,
+      -122.63572
+    ],
+    [
+      45.47196,
+      -122.63564
+    ],
+    [
+      45.47159,
+      -122.63555
+    ],
+    [
+      45.47125,
+      -122.6355
+    ],
+    [
+      45.47019,
+      -122.63551
+    ],
+    [
+      45.47017,
+      -122.63526
+    ],
+    [
+      45.47016,
+      -122.63508
+    ],
+    [
+      45.4701,
+      -122.63464
+    ],
+    [
+      45.46999,
+      -122.63422
+    ],
+    [
+      45.46992,
+      -122.63403
+    ],
+    [
+      45.46969,
+      -122.63332
+    ],
+    [
+      45.46956,
+      -122.63268
+    ],
+    [
+      45.46951,
+      -122.63216
+    ],
+    [
+      45.46947,
+      -122.63114
+    ],
+    [
+      45.46945,
+      -122.63105
+    ],
+    [
+      45.46926,
+      -122.63072
+    ],
+    [
+      45.46924,
+      -122.63065
+    ],
+    [
+      45.46921,
+      -122.6304
+    ],
+    [
+      45.46921,
+      -122.6302
+    ],
+    [
+      45.46925,
+      -122.62996
+    ],
+    [
+      45.46933,
+      -122.62943
+    ],
+    [
+      45.46931,
+      -122.629
+    ],
+    [
+      45.4693,
+      -122.62886
+    ],
+    [
+      45.4693,
+      -122.62883
+    ],
+    [
+      45.46918,
+      -122.62887
+    ],
+    [
+      45.46888,
+      -122.62887
+    ]
+  ]
+}

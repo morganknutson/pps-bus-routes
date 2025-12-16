@@ -1,0 +1,358 @@
+{
+  "id": "208GRG-A_effective_082625.pdf",
+  "name": "208",
+  "direction": "Morning",
+  "filename": "208GRG-A_effective_082625.pdf",
+  "fileId": "208GRG-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "N Crawford St. & N Salem Ave. [E]",
+      "time": "8:53 am",
+      "direction": "E",
+      "originalLine": "8:53 amN CRAWFORD ST @ N SALEM AV [E]208GRG-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7585058,
+        45.58628
+      ],
+      "displayName": "N Crawford St & N Salem Ave, Portland, OR 97203, USA",
+      "placeId": "EjROIENyYXdmb3JkIFN0ICYgTiBTYWxlbSBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBImYiZAoUChIJpwQ-Gv4HlVQRpjIiexeVGJsSFAoSCacEPhr-B5VUEaYyInsXlRibGhQKEgkRYgnH_weVVBFQF4isSqe50BoUChIJTa6xIv4HlVQRTCg1ZK74WXkiCg0Q6isbFd6J1LY",
+      "neighborhood": "Cathedral Park"
+    },
+    {
+      "id": "stop-3",
+      "address": "N Lombard St. & N Reno Ave. [E]",
+      "time": "8:56 am",
+      "direction": "E",
+      "originalLine": "8:56 amN LOMBARD ST @ N RENO AVE [E]208GRG-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.761327,
+        45.5980934
+      ],
+      "displayName": "N Lombard St & N Reno Ave, Portland, OR 97203, USA",
+      "placeId": "EjJOIExvbWJhcmQgU3QgJiBOIFJlbm8gQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDMsIFVTQSJmImQKFAoSCblzpVUcqJVUERZhqTYZ9ruXEhQKEgm5c6VVHKiVVBEWYak2Gfa7lxoUChIJUfXiot6nlVQRZtRW1GxYCKgaFAoSCf9iAFccqJVUEfBtAcqDz32vIgoNhrctGxWqG9S2",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "N Central St. & N Bruce Ave. [E]",
+      "time": "8:57 am",
+      "direction": "E",
+      "originalLine": "8:57 amN CENTRAL ST @ N BRUCE AV [E]208GRG-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7611851,
+        45.6019898
+      ],
+      "displayName": "N Central St & N Bruce Ave, Portland, OR 97203, USA",
+      "placeId": "EjNOIENlbnRyYWwgU3QgJiBOIEJydWNlIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjAzLCBVU0EiZiJkChQKEgk1w9c3GaiVVBGvKjzhqvt-ExIUChIJNcPXNxmolVQRryo84ar7fhMaFAoSCfWhzdIFqJVUEY-MOIuNu8P1GhQKEgkjbUs_GaiVVBH7XWmbFpkK2CIKDbpPLhsVNSHUtg",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "10000 N Burr Ave, Portland, OR 97203, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:GEORGE GT & ST & CAB LOADING ZONE IN DRIVEWAY",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7364726,
+        45.5960566
+      ],
+      "displayName": "10000 N Burr Ave, Portland, OR 97203, USA",
+      "schoolName": "George"
+    }
+  ],
+  "neighborhoods": [
+    "Cathedral Park",
+    "North Portland"
+  ],
+  "processedAt": "2025-12-16T09:56:00.484Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.58628,
+      -122.75851
+    ],
+    [
+      45.58689,
+      -122.75723
+    ],
+    [
+      45.58695,
+      -122.75711
+    ],
+    [
+      45.58695,
+      -122.75704
+    ],
+    [
+      45.58696,
+      -122.75697
+    ],
+    [
+      45.58696,
+      -122.7569
+    ],
+    [
+      45.58709,
+      -122.75682
+    ],
+    [
+      45.58755,
+      -122.75651
+    ],
+    [
+      45.58776,
+      -122.75636
+    ],
+    [
+      45.58783,
+      -122.75632
+    ],
+    [
+      45.58794,
+      -122.75643
+    ],
+    [
+      45.58811,
+      -122.75658
+    ],
+    [
+      45.58872,
+      -122.75717
+    ],
+    [
+      45.58994,
+      -122.75836
+    ],
+    [
+      45.59114,
+      -122.75584
+    ],
+    [
+      45.59486,
+      -122.75945
+    ],
+    [
+      45.59615,
+      -122.76069
+    ],
+    [
+      45.59648,
+      -122.76058
+    ],
+    [
+      45.59661,
+      -122.76052
+    ],
+    [
+      45.59668,
+      -122.76051
+    ],
+    [
+      45.59677,
+      -122.76052
+    ],
+    [
+      45.59809,
+      -122.76133
+    ],
+    [
+      45.60002,
+      -122.76251
+    ],
+    [
+      45.60119,
+      -122.76322
+    ],
+    [
+      45.60158,
+      -122.76216
+    ],
+    [
+      45.60181,
+      -122.76163
+    ],
+    [
+      45.60199,
+      -122.76119
+    ],
+    [
+      45.60181,
+      -122.76163
+    ],
+    [
+      45.60171,
+      -122.76185
+    ],
+    [
+      45.60158,
+      -122.76216
+    ],
+    [
+      45.60119,
+      -122.76322
+    ],
+    [
+      45.59885,
+      -122.7618
+    ],
+    [
+      45.59743,
+      -122.76092
+    ],
+    [
+      45.59677,
+      -122.76052
+    ],
+    [
+      45.59668,
+      -122.76051
+    ],
+    [
+      45.59661,
+      -122.76052
+    ],
+    [
+      45.59648,
+      -122.76058
+    ],
+    [
+      45.59615,
+      -122.76069
+    ],
+    [
+      45.59486,
+      -122.75945
+    ],
+    [
+      45.59417,
+      -122.75878
+    ],
+    [
+      45.59337,
+      -122.758
+    ],
+    [
+      45.59302,
+      -122.75767
+    ],
+    [
+      45.59294,
+      -122.75759
+    ],
+    [
+      45.59312,
+      -122.75726
+    ],
+    [
+      45.59336,
+      -122.75678
+    ],
+    [
+      45.59361,
+      -122.75623
+    ],
+    [
+      45.59493,
+      -122.75352
+    ],
+    [
+      45.59497,
+      -122.75353
+    ],
+    [
+      45.59542,
+      -122.75259
+    ],
+    [
+      45.59639,
+      -122.75057
+    ],
+    [
+      45.59653,
+      -122.75027
+    ],
+    [
+      45.59662,
+      -122.74999
+    ],
+    [
+      45.59667,
+      -122.74975
+    ],
+    [
+      45.59672,
+      -122.74942
+    ],
+    [
+      45.59672,
+      -122.74912
+    ],
+    [
+      45.59671,
+      -122.74886
+    ],
+    [
+      45.59664,
+      -122.74846
+    ],
+    [
+      45.59652,
+      -122.74794
+    ],
+    [
+      45.59592,
+      -122.74553
+    ],
+    [
+      45.59534,
+      -122.74314
+    ],
+    [
+      45.59409,
+      -122.73784
+    ],
+    [
+      45.59399,
+      -122.73736
+    ],
+    [
+      45.59423,
+      -122.73724
+    ],
+    [
+      45.59457,
+      -122.73707
+    ],
+    [
+      45.59523,
+      -122.73676
+    ],
+    [
+      45.59528,
+      -122.73676
+    ],
+    [
+      45.59531,
+      -122.73677
+    ],
+    [
+      45.59535,
+      -122.73688
+    ],
+    [
+      45.59575,
+      -122.73664
+    ]
+  ]
+}

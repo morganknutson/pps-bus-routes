@@ -1,0 +1,257 @@
+{
+  "id": "243GLE-P_effective_082625.pdf",
+  "name": "243",
+  "direction": "Afternoon",
+  "filename": "243GLE-P_effective_082625.pdf",
+  "fileId": "243GLE-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "825 SE 51st Ave, Portland, OR 97215, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:GLENCOE GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6118471,
+        45.517248
+      ],
+      "displayName": "825 SE 51st Ave, Portland, OR 97215, USA",
+      "schoolName": "Glencoe"
+    },
+    {
+      "id": "stop-1",
+      "address": "1001 SE 60th Ave. [E]",
+      "time": "2:37 pm",
+      "direction": "E",
+      "originalLine": "2:37 pm1001 SE 60TH AV [E]243GLE-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60266499999999,
+        45.51579220000001
+      ],
+      "displayName": "1001 SE 60th Ave, Portland, OR 97215, USA",
+      "placeId": "ChIJ3wicN_qglVQR-e3rS8JqYsA",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 60th Ave. & SE Ash St. [E]",
+      "time": "2:40 pm",
+      "direction": "E",
+      "originalLine": "2:40 pmSE 60TH AV @ SE ASH ST [E]243GLE-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6023555,
+        45.5216347
+      ],
+      "displayName": "SE 60th Ave & SE Ash St, Portland, OR 97215, USA",
+      "placeId": "EjBTRSA2MHRoIEF2ZSAmIFNFIEFzaCBTdCwgUG9ydGxhbmQsIE9SIDk3MjE1LCBVU0EiZiJkChQKEgnXYJls46CVVBFpiYHsXcMmFRIUChIJ12CZbOOglVQRaYmB7F3DJhUaFAoSCTVZRqoPoJVUEenTTMWwccPAGhQKEglLpStb_aCVVBGBl19RIKL0yiIKDdsMIhsVfV3stg",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "651 NE 60th Ave. [E]",
+      "time": "2:43 pm",
+      "direction": "E",
+      "originalLine": "2:43 pm651 NE 60th Ave. [E]243GLE-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60228819614396,
+        45.52723669997307
+      ],
+      "displayName": "651 NE 60th Ave, Portland, OR 97213, USA",
+      "placeId": "Eig2NTEgTkUgNjB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBIjESLwoUChIJN8k8LB6hlVQRnv7iIkpnoA4QiwUqFAoSCT0EGmgxoZVUEeXiW2Q3-gBO",
+      "neighborhood": "North Tabor"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Oregon St. & NE 63rd Ave. [SW]",
+      "time": "2:44 pm",
+      "direction": "SW",
+      "originalLine": "2:44 pmNE OREGON ST @ NE 63RD AV [SW]243GLE-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5986637,
+        45.5283031
+      ],
+      "displayName": "NE 63rd Ave & NE Oregon St, Portland, OR 97213, USA",
+      "placeId": "EjNORSA2M3JkIEF2ZSAmIE5FIE9yZWdvbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgk1677wHqGVVBGjcdxTVDskoRIUChIJNeu-8B6hlVQRo3HcU1Q7JKEaFAoSCas3KzI0oZVUEQC47v-pqSc-GhQKEgkF9BgMDaGVVBFy3tzvGHNTjCIKDVcRIxsVs-3stg",
+      "neighborhood": "North Tabor"
+    }
+  ],
+  "neighborhoods": [
+    "North Tabor",
+    "Southeast Portland"
+  ],
+  "processedAt": "2025-12-16T09:56:22.437Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.51714,
+      -122.61258
+    ],
+    [
+      45.51656,
+      -122.61258
+    ],
+    [
+      45.51656,
+      -122.6115
+    ],
+    [
+      45.51656,
+      -122.6096
+    ],
+    [
+      45.51656,
+      -122.60741
+    ],
+    [
+      45.51657,
+      -122.60707
+    ],
+    [
+      45.5167,
+      -122.60659
+    ],
+    [
+      45.51673,
+      -122.60646
+    ],
+    [
+      45.51674,
+      -122.60623
+    ],
+    [
+      45.51676,
+      -122.60272
+    ],
+    [
+      45.51676,
+      -122.60202
+    ],
+    [
+      45.51659,
+      -122.60201
+    ],
+    [
+      45.51641,
+      -122.60201
+    ],
+    [
+      45.51611,
+      -122.602
+    ],
+    [
+      45.51613,
+      -122.60243
+    ],
+    [
+      45.51612,
+      -122.60271
+    ],
+    [
+      45.51579,
+      -122.60266
+    ],
+    [
+      45.51612,
+      -122.60271
+    ],
+    [
+      45.51613,
+      -122.60243
+    ],
+    [
+      45.51611,
+      -122.602
+    ],
+    [
+      45.51641,
+      -122.60201
+    ],
+    [
+      45.51659,
+      -122.60201
+    ],
+    [
+      45.51706,
+      -122.60203
+    ],
+    [
+      45.51751,
+      -122.60204
+    ],
+    [
+      45.51927,
+      -122.6021
+    ],
+    [
+      45.51927,
+      -122.60238
+    ],
+    [
+      45.51937,
+      -122.60238
+    ],
+    [
+      45.51942,
+      -122.60238
+    ],
+    [
+      45.51976,
+      -122.60238
+    ],
+    [
+      45.52059,
+      -122.60237
+    ],
+    [
+      45.52211,
+      -122.60235
+    ],
+    [
+      45.52338,
+      -122.60234
+    ],
+    [
+      45.52404,
+      -122.60232
+    ],
+    [
+      45.52649,
+      -122.60228
+    ],
+    [
+      45.52684,
+      -122.60229
+    ],
+    [
+      45.52723,
+      -122.60229
+    ],
+    [
+      45.5272,
+      -122.5997
+    ],
+    [
+      45.5272,
+      -122.59869
+    ],
+    [
+      45.52758,
+      -122.59868
+    ],
+    [
+      45.5283,
+      -122.59866
+    ]
+  ]
+}

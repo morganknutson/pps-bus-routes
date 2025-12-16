@@ -1,0 +1,211 @@
+{
+  "id": "294FAU-P_effective_082625.pdf",
+  "name": "294",
+  "direction": "Afternoon",
+  "filename": "294FAU-P_effective_082625.pdf",
+  "fileId": "294FAU-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2930 NE Dekum St, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:FAUBION GT & ST LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6343091,
+        45.570994
+      ],
+      "displayName": "2930 NE Dekum St, Portland, OR 97211, USA",
+      "schoolName": "Faubion"
+    },
+    {
+      "id": "stop-1",
+      "address": "Vernon School (2044 NE Killingsworth St) [N]",
+      "time": "3:44 pm",
+      "direction": "N",
+      "originalLine": "3:44 pmVERNON SCHOOL (2044 NE KILLINGSWORTH ST) [N]294FAU-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.64374319646474,
+        45.56269209941689
+      ],
+      "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "placeId": "ChIJww96suGmlVQRCl-EGDqJIb4",
+      "neighborhood": "Vernon"
+    },
+    {
+      "id": "stop-2",
+      "address": "5250 NE Martin Luther King Jr Blvd. (blazers)",
+      "time": "3:48 pm",
+      "direction": null,
+      "originalLine": "3:48 pm5250 NE MARTIN LUTHER KING JR BLVD (BLAZERS)294FAU-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.66094549262074,
+        45.56181809547804
+      ],
+      "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
+      "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
+      "neighborhood": "King"
+    }
+  ],
+  "neighborhoods": [
+    "King",
+    "Vernon"
+  ],
+  "processedAt": "2025-12-16T09:56:23.621Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.571,
+      -122.6345
+    ],
+    [
+      45.57097,
+      -122.63469
+    ],
+    [
+      45.57089,
+      -122.63472
+    ],
+    [
+      45.57089,
+      -122.63485
+    ],
+    [
+      45.57099,
+      -122.63512
+    ],
+    [
+      45.57099,
+      -122.63522
+    ],
+    [
+      45.57103,
+      -122.63531
+    ],
+    [
+      45.57109,
+      -122.63535
+    ],
+    [
+      45.57114,
+      -122.63535
+    ],
+    [
+      45.57161,
+      -122.63536
+    ],
+    [
+      45.57189,
+      -122.63534
+    ],
+    [
+      45.57189,
+      -122.63629
+    ],
+    [
+      45.57188,
+      -122.63923
+    ],
+    [
+      45.57106,
+      -122.63922
+    ],
+    [
+      45.57021,
+      -122.63923
+    ],
+    [
+      45.56786,
+      -122.63922
+    ],
+    [
+      45.56629,
+      -122.63923
+    ],
+    [
+      45.56447,
+      -122.63923
+    ],
+    [
+      45.56379,
+      -122.63923
+    ],
+    [
+      45.56343,
+      -122.63923
+    ],
+    [
+      45.5627,
+      -122.63924
+    ],
+    [
+      45.56271,
+      -122.63942
+    ],
+    [
+      45.5627,
+      -122.63991
+    ],
+    [
+      45.56271,
+      -122.64041
+    ],
+    [
+      45.5627,
+      -122.64188
+    ],
+    [
+      45.56269,
+      -122.64296
+    ],
+    [
+      45.5627,
+      -122.64483
+    ],
+    [
+      45.56272,
+      -122.64794
+    ],
+    [
+      45.56273,
+      -122.6497
+    ],
+    [
+      45.56275,
+      -122.65513
+    ],
+    [
+      45.56274,
+      -122.65794
+    ],
+    [
+      45.5623,
+      -122.65794
+    ],
+    [
+      45.56181,
+      -122.65798
+    ],
+    [
+      45.56181,
+      -122.65912
+    ],
+    [
+      45.56182,
+      -122.65991
+    ],
+    [
+      45.56182,
+      -122.66095
+    ]
+  ]
+}

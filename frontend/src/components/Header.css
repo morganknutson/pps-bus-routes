@@ -32,7 +32,7 @@
 }
 
 .logo-text {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-secondary);
   transition: color 0.3s ease;

@@ -153,43 +153,6 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
           </div>
           <span>High</span>
         </label>
-        <label 
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '12px', userSelect: 'none' }}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('[SchoolTypeFilter] Hybrid clicked');
-            onChange({ ...filters, hybrid: !filters.hybrid });
-          }}
-        >
-          <input
-            type="checkbox"
-            checked={filters.hybrid}
-            onChange={(e) => {
-              console.log('[SchoolTypeFilter] Input onChange triggered for hybrid:', e.target.checked);
-              onChange({ ...filters, hybrid: e.target.checked });
-            }}
-            style={{ display: 'none' }}
-          />
-          <div
-            style={{
-              width: '16px',
-              height: '16px',
-              borderRadius: '50%',
-              border: '2px solid #9C27B0',
-              backgroundColor: filters.hybrid ? '#9C27B0' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            {filters.hybrid && (
-              <i className="fas fa-check" style={{ fontSize: '10px', color: 'white' }}></i>
-            )}
-          </div>
-          <span>Hybrid</span>
-        </label>
       </div>
     </div>
   );

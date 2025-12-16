@@ -1,0 +1,289 @@
+{
+  "id": "212CLK-A_effective_082625.pdf",
+  "name": "212",
+  "direction": "Morning",
+  "filename": "212CLK-A_effective_082625.pdf",
+  "fileId": "212CLK-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE 89th Ave. & SE Brooklyn St. [E]",
+      "time": "7:35 am",
+      "direction": "E",
+      "originalLine": "7:35 amSE 89TH AV @ SE BROOKLYN ST [E]212CLK-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5717867,
+        45.5004966
+      ],
+      "displayName": "SE Brooklyn St & SE 89th Ave, Portland, OR 97266, USA",
+      "placeId": "EjVTRSBCcm9va2x5biBTdCAmIFNFIDg5dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCQXUq_xKoJVUESlUsyS8FjK5EhQKEgkF1Kv8SqCVVBEpVLMkvBYyuRoUChIJE0opOLWhlVQRux8DR6Am5AUaFAoSCZ27QNkwoJVUEaI-hJKK8ct4IgoNJtMeGxWVB_G2",
+      "neighborhood": "Powellhurst-Gilbert"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Brooklyn St. & SE 85th Ave. [NE]",
+      "time": "7:37 am",
+      "direction": "NE",
+      "originalLine": "7:37 amSE BROOKLYN ST @ SE 85TH AV [NE]212CLK-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5750231,
+        45.5005087
+      ],
+      "displayName": "SE Brooklyn St & SE 85th Ave, Portland, OR 97266, USA",
+      "placeId": "EjVTRSBCcm9va2x5biBTdCAmIFNFIDg1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCa84FrhLoJVUEQnUokUe3zMbEhQKEgmvOBa4S6CVVBEJ1KJFHt8zGxoUChIJE0opOLWhlVQRux8DR6Am5AUaFAoSCZVYgEo2oJVUEdfID_pQRNEfIgoNn9MeGxUpifC2",
+      "neighborhood": "Powellhurst-Gilbert"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 82nd Ave. & SE Clinton St. [SE]",
+      "time": "7:39 am",
+      "direction": "SE",
+      "originalLine": "7:39 amSE 82ND AV @ SE CLINTON ST [SE]212CLK-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.578701,
+        45.5034302
+      ],
+      "displayName": "SE Clinton St & SE 82nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjRTRSBDbGludG9uIFN0ICYgU0UgODJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJt_u6SUyglVQRwJkudIjcd4ASFAoSCbf7uklMoJVUEcCZLnSI3HeAGhQKEgmdPEzYtaGVVBERz_0MvgqSMhoUChIJY4BZ3fWflVQR9x7FCB8EBhkiCg2-RR8bFX7577Y",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Clinton St. & SE 84th Pl. [SW]",
+      "time": "7:40 am",
+      "direction": "SW",
+      "originalLine": "7:40 amSE CLINTON ST @ SE 84TH PL [SW]212CLK-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5768116,
+        45.5033808
+      ],
+      "displayName": "SE 84th Ave & SE Clinton St, Portland, OR 97266, USA",
+      "placeId": "EjRTRSA4NHRoIEF2ZSAmIFNFIENsaW50b24gU3QsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJaeMcX0yglVQRzouGhAJ31ZQSFAoSCWnjHF9MoJVUEc6LhoQCd9WUGhQKEgm1G3XFN6CVVBH7Hi6cAg-9_xoUChIJnTxM2LWhlVQREc_9DL4KkjIiCg3QQx8bFUxD8LY",
+      "neighborhood": "Powellhurst-Gilbert"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE Mill St. & SE 80th Ave. [NE]",
+      "time": "7:44 am",
+      "direction": "NE",
+      "originalLine": "7:44 amSE MILL ST @ SE 80TH AV [NE]212CLK-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5811731,
+        45.5101226
+      ],
+      "displayName": "SE 80th Ave & SE Mill St, Portland, OR 97215, USA",
+      "placeId": "EjFTRSA4MHRoIEF2ZSAmIFNFIE1pbGwgU3QsIFBvcnRsYW5kLCBPUiA5NzIxNSwgVVNBImYiZAoUChIJ4TwsTFOglVQRf4SZWAy0j4gSFAoSCeE8LExToJVUEX-EmVgMtI-IGhQKEgnlnXDvHqCVVBH2D4oszPeBFRoUChIJURh12q-hlVQR6zNHqAN8TnMiCg0qSyAbFe2Y77Y",
+      "neighborhood": "Montavilla"
+    },
+    {
+      "id": "stop-0",
+      "address": "1231 SE 92nd Ave, Portland, OR 97216, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CLARK EL GT & ST LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5698501,
+        45.5135543
+      ],
+      "displayName": "1231 SE 92nd Ave, Portland, OR 97216, USA",
+      "schoolName": "Clark"
+    }
+  ],
+  "neighborhoods": [
+    "Montavilla",
+    "Powellhurst-Gilbert",
+    "Southeast Portland"
+  ],
+  "processedAt": "2025-12-16T09:55:57.746Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.5005,
+      -122.57179
+    ],
+    [
+      45.50051,
+      -122.57584
+    ],
+    [
+      45.50051,
+      -122.57809
+    ],
+    [
+      45.50051,
+      -122.57872
+    ],
+    [
+      45.50084,
+      -122.57872
+    ],
+    [
+      45.50143,
+      -122.57872
+    ],
+    [
+      45.50218,
+      -122.5787
+    ],
+    [
+      45.50329,
+      -122.5787
+    ],
+    [
+      45.50343,
+      -122.5787
+    ],
+    [
+      45.50342,
+      -122.57856
+    ],
+    [
+      45.50342,
+      -122.57843
+    ],
+    [
+      45.50338,
+      -122.57681
+    ],
+    [
+      45.50342,
+      -122.57843
+    ],
+    [
+      45.50342,
+      -122.57856
+    ],
+    [
+      45.50343,
+      -122.5787
+    ],
+    [
+      45.50367,
+      -122.5787
+    ],
+    [
+      45.50403,
+      -122.5787
+    ],
+    [
+      45.5045,
+      -122.57869
+    ],
+    [
+      45.50532,
+      -122.57869
+    ],
+    [
+      45.5058,
+      -122.57869
+    ],
+    [
+      45.50755,
+      -122.57869
+    ],
+    [
+      45.50998,
+      -122.57869
+    ],
+    [
+      45.51009,
+      -122.57868
+    ],
+    [
+      45.51009,
+      -122.5788
+    ],
+    [
+      45.5101,
+      -122.57892
+    ],
+    [
+      45.51013,
+      -122.58091
+    ],
+    [
+      45.51012,
+      -122.58117
+    ],
+    [
+      45.51013,
+      -122.58091
+    ],
+    [
+      45.51012,
+      -122.58055
+    ],
+    [
+      45.51009,
+      -122.5788
+    ],
+    [
+      45.51008,
+      -122.57687
+    ],
+    [
+      45.51007,
+      -122.57213
+    ],
+    [
+      45.51005,
+      -122.5691
+    ],
+    [
+      45.51133,
+      -122.5691
+    ],
+    [
+      45.5116,
+      -122.56912
+    ],
+    [
+      45.51186,
+      -122.56916
+    ],
+    [
+      45.51207,
+      -122.56916
+    ],
+    [
+      45.51277,
+      -122.56916
+    ],
+    [
+      45.51386,
+      -122.56916
+    ],
+    [
+      45.51417,
+      -122.56916
+    ],
+    [
+      45.51416,
+      -122.56936
+    ],
+    [
+      45.51415,
+      -122.56978
+    ],
+    [
+      45.51388,
+      -122.56979
+    ],
+    [
+      45.51385,
+      -122.56975
+    ]
+  ]
+}
