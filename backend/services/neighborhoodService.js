@@ -35,7 +35,7 @@ class NeighborhoodService {
     this.loadCache();
     
     if (!this.useGoogle) {
-      throw new Error('[NeighborhoodService] Google Maps API key is required. Set GOOGLE_MAPS_API_KEY or GOOGLE_API_KEY in backend/.env');
+      console.warn('[NeighborhoodService] No Google Maps API key found. Service will use cached data only. Set GOOGLE_MAPS_API_KEY or GOOGLE_API_KEY in backend/.env for full functionality.');
     } else {
       console.log('[NeighborhoodService] Using Google Maps Reverse Geocoding API');
     }
@@ -192,7 +192,17 @@ class NeighborhoodService {
       };
     }
 
-    // Not in cache, make API call
+    // Not in cache - check if we can use Google API
+    if (!this.useGoogle) {
+      // No API key and not in cache - return failure gracefully
+      return {
+        success: false,
+        error: 'No Google Maps API key configured and coordinates not in cache',
+        neighborhood: null,
+      };
+    }
+
+    // Make API call
     const result = await this.reverseGeocodeWithGoogle(coordinates);
     
     if (result.success && result.neighborhood) {
