@@ -71,7 +71,7 @@ export function SchoolSelector() {
     };
 
     loadRoutes();
-  }, [selectedSchoolId, setRoutes, setLoading]);
+  }, [selectedSchoolId, setRoutes, setLoading, setLoadingProgress]);
 
   return (
     <div style={{ marginBottom: '1rem' }}>

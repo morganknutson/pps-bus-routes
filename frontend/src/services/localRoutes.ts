@@ -22,12 +22,24 @@ export async function loadLocalRoutes(
       : '/api/data/routes';
     console.log('[loadLocalRoutes] Loading routes for schoolId:', schoolId, 'URL:', url);
     
-    const response = await fetchWithProgress(url, {}, onProgress);
-    if (!response.ok) {
-      throw new Error(`Failed to load routes: ${response.status}`);
+    let response: Response;
+    try {
+      response = await fetchWithProgress(url, {}, onProgress);
+    } catch (error) {
+      console.warn('[loadLocalRoutes] fetchWithProgress failed, trying regular fetch:', error);
+      // Fallback to regular fetch if fetchWithProgress fails
+      response = await fetch(url);
     }
     
-    const data = await response.json();
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => 'Unknown error');
+      throw new Error(`Failed to load routes: ${response.status} - ${errorText}`);
+    }
+    
+    const data = await response.json().catch((error) => {
+      console.error('[loadLocalRoutes] Failed to parse JSON:', error);
+      throw new Error(`Failed to parse response: ${error.message}`);
+    });
     console.log('[loadLocalRoutes] Received data:', data);
     const processedRoutes = data.routes || [];
     console.log('[loadLocalRoutes] Found', processedRoutes.length, 'processed routes');
