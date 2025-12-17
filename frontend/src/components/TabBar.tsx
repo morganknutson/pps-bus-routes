@@ -13,7 +13,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
         position: 'relative',
         width: '100%',
         padding: '0.75rem 1rem',
-        backgroundColor: '#F0F0F0',
+        backgroundColor: 'var(--bg-secondary)',
         borderRadius: '6px',
         overflow: 'hidden',
       }}
@@ -35,7 +35,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             gap: '0.5rem',
             fontSize: '14px',
             fontWeight: '500',
-            color: isSchoolsActive ? '#000000' : 'var(--text-secondary)',
+            color: isSchoolsActive ? 'var(--text-primary)' : 'var(--text-secondary)',
             transition: 'color 0.2s ease',
             cursor: 'pointer',
             minHeight: '44px', // Better touch target for mobile
@@ -55,7 +55,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             gap: '0.5rem',
             fontSize: '14px',
             fontWeight: '500',
-            color: isRoutesActive ? '#000000' : 'var(--text-secondary)',
+            color: isRoutesActive ? 'var(--text-primary)' : 'var(--text-secondary)',
             transition: 'color 0.2s ease',
             cursor: 'pointer',
             minHeight: '44px', // Better touch target for mobile
@@ -80,7 +80,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           )}
         </div>
       </div>
-      {/* White sliding button beneath labels */}
+      {/* Sliding button beneath labels - uses theme colors */}
       <div
         style={{
           position: 'absolute',
@@ -88,11 +88,11 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           height: '41px',
           left: isSchoolsActive ? 'calc(1rem + 0.25rem)' : 'calc(50% + 0.25rem)',
           width: 'calc(50% - 1rem - 0.5rem)',
-          backgroundColor: 'white',
+          backgroundColor: 'var(--bg-primary)',
           borderRadius: '4px',
           transition: 'left 0.3s ease',
           zIndex: 1,
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
+          boxShadow: '0 1px 3px var(--shadow-large)',
         }}
       />
     </div>

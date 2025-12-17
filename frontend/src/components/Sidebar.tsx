@@ -119,48 +119,9 @@ export function Sidebar({
           transition: 'left 0.3s ease-out',
           zIndex: 1001,
           boxShadow: shouldShow ? '2px 0 8px rgba(0, 0, 0, 0.15)' : 'none',
+          paddingTop: '74px', // Add padding to account for header height
         }}
       >
-        {/* Close button for mobile */}
-        {onClose && (
-          <div style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            padding: '1rem',
-            borderBottom: '1px solid var(--border-color)',
-            backgroundColor: 'var(--bg-primary)',
-          }}>
-            <button
-              onClick={onClose}
-              style={{
-                background: 'none',
-                border: 'none',
-                fontSize: '24px',
-                cursor: 'pointer',
-                color: 'var(--text-primary)',
-                padding: '0',
-                lineHeight: '1',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '32px',
-                height: '32px',
-                borderRadius: '4px',
-                transition: 'background-color 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-              aria-label="Close menu"
-            >
-              ×
-            </button>
-          </div>
-        )}
-
         {/* Fixed Header Section */}
         {header && (
           <div style={{ 

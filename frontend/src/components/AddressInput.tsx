@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { autocompleteAddress, geocodeAddress } from '../services/api';
+import { useIsMobile } from '../hooks/useMediaQuery';
+import { formatStreetName } from '../utils/formatAddress';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -15,9 +17,20 @@ export function AddressInput() {
   const [isLoading, setIsLoading] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const { setHomeAddress, homeAddress, clearHomeAddress, triggerZoomToHomeAddress } = useStore();
+  const isMobile = useIsMobile();
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+
+  // Extract street name from full address for mobile display
+  const getDisplayAddress = (address: string): string => {
+    if (!address) return address;
+    if (!isMobile) return address;
+    
+    // Extract street part (everything before the first comma)
+    const streetPart = address.split(',')[0].trim();
+    return formatStreetName(streetPart);
+  };
 
   // Debounced autocomplete search with request cancellation
   useEffect(() => {
@@ -205,7 +218,7 @@ export function AddressInput() {
             }}
             title="Click to zoom to address on map"
           >
-            {homeAddress.address}
+            {getDisplayAddress(homeAddress.address)}
           </div>
           <button
             onClick={clearHomeAddress}

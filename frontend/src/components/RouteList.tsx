@@ -108,47 +108,65 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {selectedSchool && (
-        <div style={{
-          padding: '0.75rem 1rem',
-          borderBottom: '1px solid var(--border-color)',
-          backgroundColor: 'var(--bg-secondary)',
-          flexShrink: 0,
-          transition: 'background-color 0.3s ease, border-color 0.3s ease',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-          <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-secondary)' }}>
-            {selectedSchool.name}
+        <div style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
+          <div style={{ position: 'relative' }}>
+            <div
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                paddingRight: '2.5rem',
+                border: '1px solid var(--border-color)',
+                borderRadius: '4px',
+                fontSize: '14px',
+                boxSizing: 'border-box',
+                backgroundColor: 'var(--bg-primary)',
+                color: 'var(--text-primary)',
+                transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+              }}
+            >
+              {selectedSchool.name}
+            </div>
+            <button
+              onClick={() => {
+                setSelectedSchool(null);
+                if (onClearSchool) {
+                  onClearSchool();
+                }
+              }}
+              style={{
+                position: 'absolute',
+                right: '8px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '20px',
+                height: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '16px',
+                lineHeight: '1',
+                backgroundColor: 'transparent',
+                color: 'var(--text-tertiary)',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                padding: 0,
+                flexShrink: 0,
+                transition: 'background-color 0.2s ease, color 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                e.currentTarget.style.color = 'var(--text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = 'var(--text-tertiary)';
+              }}
+              aria-label="Clear school selection"
+            >
+              ×
+            </button>
           </div>
-          <button
-            onClick={() => {
-              setSelectedSchool(null);
-              if (onClearSchool) {
-                onClearSchool();
-              }
-            }}
-            style={{
-              background: 'none',
-              border: 'none',
-              fontSize: '20px',
-              cursor: 'pointer',
-              color: 'var(--text-tertiary)',
-              padding: '0 0.25rem',
-              lineHeight: '1',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--text-primary)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'var(--text-tertiary)';
-            }}
-          >
-            ×
-          </button>
         </div>
       )}
       {/* Direction filter toggle */}
@@ -164,7 +182,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
             position: 'relative',
             width: '100%',
             height: '2.5rem',
-            backgroundColor: '#F0F0F0',
+            backgroundColor: 'var(--bg-secondary)',
             borderRadius: '6px',
             overflow: 'hidden',
           }}
@@ -188,7 +206,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 justifyContent: 'center',
                 fontSize: '12px',
                 fontWeight: '500',
-                color: directionFilter === 'Morning' ? '#000000' : 'var(--text-secondary)',
+                color: directionFilter === 'Morning' ? 'var(--text-primary)' : 'var(--text-secondary)',
                 transition: 'color 0.2s ease',
                 cursor: 'pointer',
               }}
@@ -204,7 +222,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 justifyContent: 'center',
                 fontSize: '12px',
                 fontWeight: '500',
-                color: directionFilter === 'Afternoon' ? '#000000' : 'var(--text-secondary)',
+                color: directionFilter === 'Afternoon' ? 'var(--text-primary)' : 'var(--text-secondary)',
                 transition: 'color 0.2s ease',
                 cursor: 'pointer',
               }}
@@ -221,7 +239,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                   justifyContent: 'center',
                   fontSize: '12px',
                   fontWeight: '500',
-                  color: directionFilter === 'Both' ? '#000000' : 'var(--text-secondary)',
+                  color: directionFilter === 'Both' ? 'var(--text-primary)' : 'var(--text-secondary)',
                   transition: 'color 0.2s ease',
                   cursor: 'pointer',
                 }}
@@ -230,7 +248,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
               </div>
             )}
           </div>
-          {/* White sliding button beneath labels */}
+          {/* Sliding button beneath labels - uses theme colors */}
           <div
             style={{
               position: 'absolute',
@@ -246,11 +264,11 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 ? '0.25rem'
                 : 'calc(50% + 0.25rem)',
               width: showBothOption ? 'calc(33.333% - 0.5rem)' : 'calc(50% - 0.5rem)',
-              backgroundColor: 'white',
+              backgroundColor: 'var(--bg-primary)',
               borderRadius: '4px',
               transition: 'left 0.3s ease',
               zIndex: 1,
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
+              boxShadow: '0 1px 3px var(--shadow-large)',
             }}
           />
         </div>

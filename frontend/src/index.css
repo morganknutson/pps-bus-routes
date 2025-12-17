@@ -139,6 +139,12 @@ body {
   height: 100%;
   width: 100%;
   z-index: 1;
+  background-color: #ffffff;
+}
+
+/* Dark mode: black background to prevent white flash while loading tiles */
+.theme-dark .leaflet-container {
+  background-color: #000000;
 }
 
 /* Style for numbered markers */
@@ -166,6 +172,30 @@ body {
 /* Hide zoom controls in top-left position */
 .leaflet-top.leaflet-left .leaflet-control-zoom {
   display: none !important;
+}
+
+/* Dark mode styles for Leaflet zoom controls */
+.theme-dark .leaflet-control-zoom a {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.theme-dark .leaflet-control-zoom a:hover {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+.theme-dark .leaflet-control-zoom-in,
+.theme-dark .leaflet-control-zoom-out {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.theme-dark .leaflet-control-zoom-in:hover,
+.theme-dark .leaflet-control-zoom-out:hover {
+  background-color: var(--bg-tertiary) !important;
 }
 
 

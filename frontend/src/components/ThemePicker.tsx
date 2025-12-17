@@ -212,15 +212,8 @@ export function ThemePicker({ inline = false }: ThemePickerProps) {
           alignItems: 'center',
           justifyContent: 'center',
           color: 'var(--text-primary)',
-          transition: 'background-color 0.2s ease',
           borderRadius: '4px',
           position: 'relative',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = 'transparent';
         }}
       >
         <i 

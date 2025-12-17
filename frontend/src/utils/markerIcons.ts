@@ -43,7 +43,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
   const timeFontSize = isSelected ? '11px' : '10px';
   // Use route color for both selected and unselected states to maintain consistency
   const backgroundColor = routeColor;
-  const opacity = isSelected ? '1' : '0.6';
+  const opacity = isSelected ? '1' : '1';
   // Normal padding on both sides
   const horizontalPadding = hasTime ? (isSelected ? 10 : 8) : (isSelected ? 8 : 6);
   const gap = 6; // Gap between number and time
@@ -170,7 +170,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           display: flex;
           align-items: center;
           justify-content: flex-start;
-          background-color: rgba(255, 255, 255, 0.8);
+          background-color: rgba(255, 255, 255, 1);
           border: 2px solid ${backgroundColor};
           border-radius: ${pillHeight}px;
           padding: 0 ${horizontalPadding}px 0 0;

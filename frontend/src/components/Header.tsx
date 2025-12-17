@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ThemePicker } from './ThemePicker';
+import { DarkModeToggle } from './DarkModeToggle';
 import './Header.css';
 
 interface HeaderProps {
@@ -56,6 +57,11 @@ export function Header({ rightContent }: HeaderProps = {}) {
             )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            {isExplorerPage && (
+              <div style={{ color: 'white' }}>
+                <DarkModeToggle />
+              </div>
+            )}
             {rightContent}
             {isAdminPage && <ThemePicker />}
             {isAdminPage && (
