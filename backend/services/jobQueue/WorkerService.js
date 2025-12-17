@@ -133,6 +133,13 @@ export class WorkerService {
       try {
         // Get waiting jobs
         const queue = this.pdfSyncQueue.getQueue();
+        
+        // If queue is null (no Redis), skip polling
+        if (!queue) {
+          pollInterval = setTimeout(poll, 1000); // Check again in 1 second
+          return;
+        }
+        
         const waitingJobs = await queue.getWaiting(0, 1);
         
         if (waitingJobs.length > 0) {
