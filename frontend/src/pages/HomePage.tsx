@@ -50,6 +50,18 @@ export function HomePage() {
   const [isFinding, setIsFinding] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Set body background to match home page on mount and cleanup on unmount
+  useEffect(() => {
+    const originalBackground = document.body.style.backgroundColor;
+    document.body.style.backgroundColor = '#133A60';
+    document.documentElement.style.backgroundColor = '#133A60';
+    
+    return () => {
+      document.body.style.backgroundColor = originalBackground;
+      document.documentElement.style.backgroundColor = '';
+    };
+  }, []);
+
   // Load schools on mount
   useEffect(() => {
     const loadSchools = async () => {
@@ -379,8 +391,16 @@ export function HomePage() {
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: '100vh',
+      height: '100vh',
       padding: '2rem',
       backgroundColor: '#133A60',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      width: '100%',
+      overflowY: 'auto',
     }}>
       <div style={{
         width: '100%',
