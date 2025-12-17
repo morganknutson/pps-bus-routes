@@ -129,6 +129,7 @@ function SchoolMarkersManager({ markers }: { markers: MarkerData[] }) {
 function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; selectedSchoolId: string | null }) {
   const map = useMap();
   const prevSelectedSchoolIdRef = useRef<string | null>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
@@ -141,6 +142,17 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
         // Only zoom if this is a new selection
         if (prevSelectedSchoolIdRef.current !== selectedSchoolId) {
           map.setView([lat, lng], 16, { animate: true });
+          
+          // On mobile, shift the map up so the marker is visible above the dialog
+          if (isMobile) {
+            // Use setTimeout to ensure the view change completes before panning
+            setTimeout(() => {
+              // Shift map up by ~200px to account for the dialog at the bottom
+              // The dialog has maxHeight: 70vh, so we shift up to make marker visible
+              map.panBy([0, 200], { animate: true });
+            }, 100);
+          }
+          
           prevSelectedSchoolIdRef.current = selectedSchoolId;
         }
         return;
@@ -160,7 +172,7 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
     } else if (!selectedSchoolId) {
       prevSelectedSchoolIdRef.current = null;
     }
-  }, [map, schools, selectedSchoolId]);
+  }, [map, schools, selectedSchoolId, isMobile]);
   
   return null;
 }
@@ -361,14 +373,59 @@ function ExplorerApp() {
   // Routes should already have coordinates loaded from processed JSON files
   // useGeocodeStops(); // DISABLED - no client-side geocoding needed
 
+  // Custom Hamburger/Close icon component
+  const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => (
+    <div style={{
+      width: '24px',
+      height: '18px',
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+      <span style={{
+        display: 'block',
+        height: '1.5px',
+        width: '100%',
+        backgroundColor: 'white',
+        borderRadius: '2px',
+        transition: 'all 0.3s ease',
+        position: 'absolute',
+        transform: isOpen ? 'rotate(45deg)' : 'translateY(-6px)',
+        transformOrigin: 'center',
+      }} />
+      <span style={{
+        display: 'block',
+        height: '1.5px',
+        width: '100%',
+        backgroundColor: 'white',
+        borderRadius: '2px',
+        transition: 'all 0.3s ease',
+        opacity: isOpen ? 0 : 1,
+        transform: isOpen ? 'scale(0)' : 'none',
+      }} />
+      <span style={{
+        display: 'block',
+        height: '1.5px',
+        width: '100%',
+        backgroundColor: 'white',
+        borderRadius: '2px',
+        transition: 'all 0.3s ease',
+        position: 'absolute',
+        transform: isOpen ? 'rotate(-45deg)' : 'translateY(6px)',
+        transformOrigin: 'center',
+      }} />
+    </div>
+  );
+
   // Hamburger menu button for mobile
   const hamburgerButton = isMobile ? (
     <button
-      onClick={() => setSidebarOpen(true)}
+      onClick={() => setSidebarOpen(!sidebarOpen)}
       style={{
         background: 'none',
         border: 'none',
-        fontSize: '24px',
         cursor: 'pointer',
         color: 'white',
         padding: '0.5rem',
@@ -378,23 +435,20 @@ function ExplorerApp() {
         width: '40px',
         height: '40px',
         borderRadius: '4px',
-        transition: 'background-color 0.2s ease',
       }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = 'transparent';
-      }}
-      aria-label="Open menu"
+      aria-label={sidebarOpen ? "Close menu" : "Open menu"}
     >
-      <i className="fas fa-bars" />
+      <HamburgerIcon isOpen={sidebarOpen} />
     </button>
   ) : null;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw' }}>
-      <Header rightContent={hamburgerButton} />
+      <Header rightContent={
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {hamburgerButton}
+        </div>
+      } />
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Sidebar */}
         <Sidebar
@@ -418,6 +472,10 @@ function ExplorerApp() {
                   const school = schools.find(s => s.id === schoolId);
                   if (school) {
                     setSelectedSchoolForMap(school);
+                  }
+                  // Close sidebar on mobile when a school is selected
+                  if (isMobile) {
+                    setSidebarOpen(false);
                   }
                 } else {
                   // Deselect school
@@ -566,7 +624,7 @@ function ExplorerApp() {
                     }}
                   />
                 )}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                   <div style={{ flex: 1 }}>
                     <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap.name}</h2>
                     {(() => {
@@ -599,18 +657,22 @@ function ExplorerApp() {
                     style={{
                       background: 'none',
                       border: 'none',
-                      fontSize: '20px',
+                      fontSize: '32px',
                       cursor: 'pointer',
                       color: 'var(--text-tertiary)',
                       padding: '0',
                       lineHeight: '1',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginTop: '-2px',
                     }}
                   >
                     ×
                   </button>
                 </div>
                 {selectedSchoolForMap.routeCount !== undefined && (
-                  <div style={{ marginBottom: '0.75rem' }}>
+                  <div style={{ marginBottom: '1.5rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Routes</div>
                     <div 
                       onClick={() => {
@@ -633,7 +695,7 @@ function ExplorerApp() {
                         e.currentTarget.style.textDecoration = 'none';
                       }}
                     >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                         <path d="M3 12h18M3 6h18M3 18h18"></path>
                         <circle cx="6" cy="12" r="2"></circle>
                         <circle cx="18" cy="12" r="2"></circle>
@@ -642,14 +704,14 @@ function ExplorerApp() {
                     </div>
                     {selectedSchoolForMap.routesUpdatedAt && (
                       <div style={{ fontSize: '12px', color: '#666', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <i className="fas fa-clock" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                        <i className="fas fa-clock" style={{ fontSize: '12px', width: '12px', flexShrink: 0 }}></i>
                         <span>Updated {formatDate(selectedSchoolForMap.routesUpdatedAt)}</span>
                       </div>
                     )}
                   </div>
                 )}
                 {selectedSchoolForMap.address && (
-                  <div style={{ marginBottom: isMobile ? '1.5rem' : '0.75rem' }}>
+                  <div style={{ marginBottom: isMobile ? '2rem' : '1.5rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Address</div>
                     <a
                       href="#"
@@ -682,7 +744,7 @@ function ExplorerApp() {
                   <div style={{ 
                     display: 'flex', 
                     gap: '1rem',
-                    marginBottom: isMobile ? '1.5rem' : '0.75rem',
+                    marginBottom: isMobile ? '2rem' : '1.5rem',
                     flexWrap: 'wrap',
                   }}>
                     {selectedSchoolForMap.schoolPageLink && (
@@ -694,6 +756,9 @@ function ExplorerApp() {
                           fontSize: '14px',
                           color: 'var(--text-primary)',
                           textDecoration: 'none',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.textDecoration = 'underline';
@@ -702,7 +767,8 @@ function ExplorerApp() {
                           e.currentTarget.style.textDecoration = 'none';
                         }}
                       >
-                        View School Page →
+                        <i className="fas fa-external-link-alt" style={{ fontSize: '12px', flexShrink: 0 }}></i>
+                        <span>School Page</span>
                       </a>
                     )}
                     {selectedSchoolForMap.driveLink && (
@@ -714,6 +780,9 @@ function ExplorerApp() {
                           fontSize: '14px',
                           color: 'var(--text-primary)',
                           textDecoration: 'none',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.textDecoration = 'underline';
@@ -722,7 +791,8 @@ function ExplorerApp() {
                           e.currentTarget.style.textDecoration = 'none';
                         }}
                       >
-                        View Drive Folder →
+                        <i className="fas fa-folder" style={{ fontSize: '12px', flexShrink: 0 }}></i>
+                        <span>Drive Folder</span>
                       </a>
                     )}
                   </div>
@@ -1090,7 +1160,7 @@ function AdminApp() {
                     opacity: 0.5,
                   }} />
                 )}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                   <div style={{ flex: 1 }}>
                     <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap.name}</h2>
                     {(() => {
@@ -1123,18 +1193,22 @@ function AdminApp() {
                     style={{
                       background: 'none',
                       border: 'none',
-                      fontSize: '20px',
+                      fontSize: '32px',
                       cursor: 'pointer',
                       color: 'var(--text-tertiary)',
                       padding: '0',
                       lineHeight: '1',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginTop: '-2px',
                     }}
                   >
                     ×
                   </button>
                 </div>
                 {selectedSchoolForMap.routeCount !== undefined && (
-                  <div style={{ marginBottom: '0.75rem' }}>
+                  <div style={{ marginBottom: '1.5rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Routes</div>
                     <div 
                       onClick={() => {
@@ -1157,7 +1231,7 @@ function AdminApp() {
                         e.currentTarget.style.textDecoration = 'none';
                       }}
                     >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                         <path d="M3 12h18M3 6h18M3 18h18"></path>
                         <circle cx="6" cy="12" r="2"></circle>
                         <circle cx="18" cy="12" r="2"></circle>
@@ -1166,14 +1240,14 @@ function AdminApp() {
                     </div>
                     {selectedSchoolForMap.routesUpdatedAt && (
                       <div style={{ fontSize: '12px', color: '#666', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <i className="fas fa-clock" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                        <i className="fas fa-clock" style={{ fontSize: '12px', width: '12px', flexShrink: 0 }}></i>
                         <span>Updated {formatDate(selectedSchoolForMap.routesUpdatedAt)}</span>
                       </div>
                     )}
                   </div>
                 )}
                 {selectedSchoolForMap.address && (
-                  <div style={{ marginBottom: '0.75rem' }}>
+                  <div style={{ marginBottom: '1.5rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Address</div>
                     <a
                       href="#"
@@ -1206,7 +1280,7 @@ function AdminApp() {
                   <div style={{ 
                     display: 'flex', 
                     gap: '1rem',
-                    marginBottom: isMobile ? '1.5rem' : '0.75rem',
+                    marginBottom: isMobile ? '2rem' : '1.5rem',
                     flexWrap: 'wrap',
                   }}>
                     {selectedSchoolForMap.schoolPageLink && (
@@ -1218,6 +1292,9 @@ function AdminApp() {
                           fontSize: '14px',
                           color: 'var(--text-primary)',
                           textDecoration: 'none',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.textDecoration = 'underline';
@@ -1226,7 +1303,8 @@ function AdminApp() {
                           e.currentTarget.style.textDecoration = 'none';
                         }}
                       >
-                        View School Page →
+                        <i className="fas fa-external-link-alt" style={{ fontSize: '12px', flexShrink: 0 }}></i>
+                        <span>School Page</span>
                       </a>
                     )}
                     {selectedSchoolForMap.driveLink && (
@@ -1238,6 +1316,9 @@ function AdminApp() {
                           fontSize: '14px',
                           color: 'var(--text-primary)',
                           textDecoration: 'none',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.textDecoration = 'underline';
@@ -1246,7 +1327,8 @@ function AdminApp() {
                           e.currentTarget.style.textDecoration = 'none';
                         }}
                       >
-                        View Drive Folder →
+                        <i className="fas fa-folder" style={{ fontSize: '12px', flexShrink: 0 }}></i>
+                        <span>Drive Folder</span>
                       </a>
                     )}
                   </div>
