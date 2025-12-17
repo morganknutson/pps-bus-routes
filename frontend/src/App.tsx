@@ -28,6 +28,7 @@ import { useMarkers, MarkerData } from './hooks/useMarkers';
 import { SchoolTypeFilters } from './components/SchoolTypeFilter';
 import { ProgressBar } from './components/ProgressBar';
 import { AdminPasswordProtection } from './components/AdminPasswordProtection';
+import { useIsMobile } from './hooks/useMediaQuery';
 import 'leaflet/dist/leaflet.css';
 
 // Format date for display (e.g., "Dec 10, 2024" or "2 days ago")
@@ -166,6 +167,12 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
 
 function ExplorerApp() {
   const { isLoading, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress, routes } = useStore();
+  const isMobile = useIsMobile();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [swipeStartY, setSwipeStartY] = useState<number | null>(null);
+  const [swipeCurrentY, setSwipeCurrentY] = useState<number | null>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  
   // Default to 'schools' tab, but check localStorage for saved preferences on mount
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
     // Check localStorage directly for initial render (before store hydration)
@@ -183,6 +190,7 @@ function ExplorerApp() {
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
     if (tab === 'schools' || tab === 'routes') {
       setActiveTab(tab);
+      // Sidebar stays open on mobile when switching tabs
     }
   };
   const [selectedSchoolForMap, setSelectedSchoolForMap] = useState<School | null>(null);
@@ -353,14 +361,47 @@ function ExplorerApp() {
   // Routes should already have coordinates loaded from processed JSON files
   // useGeocodeStops(); // DISABLED - no client-side geocoding needed
 
+  // Hamburger menu button for mobile
+  const hamburgerButton = isMobile ? (
+    <button
+      onClick={() => setSidebarOpen(true)}
+      style={{
+        background: 'none',
+        border: 'none',
+        fontSize: '24px',
+        cursor: 'pointer',
+        color: 'white',
+        padding: '0.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '40px',
+        height: '40px',
+        borderRadius: '4px',
+        transition: 'background-color 0.2s ease',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = 'transparent';
+      }}
+      aria-label="Open menu"
+    >
+      <i className="fas fa-bars" />
+    </button>
+  ) : null;
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw' }}>
-      <Header />
+      <Header rightContent={hamburgerButton} />
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Sidebar */}
         <Sidebar
           header={null}
           tabs={<TabBar activeTab={activeTab} onTabChange={handleTabChange} />}
+          isOpen={!isMobile || sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
         >
           {activeTab === 'schools' ? (
             <SchoolList
@@ -448,17 +489,83 @@ function ExplorerApp() {
 
             {/* Selected school info dialog (when in schools tab) */}
             {activeTab === 'schools' && selectedSchoolForMap && (
-              <div style={{
-                position: 'absolute',
-                bottom: '1rem',
-                right: '1rem',
-                backgroundColor: 'var(--bg-primary)',
-                padding: '1.5rem',
-                borderRadius: '8px',
-                boxShadow: '0 4px 12px var(--shadow-hover)',
-                maxWidth: '400px',
-                zIndex: 1000,
-              }}>
+              <div 
+                ref={sheetRef}
+                style={{
+                  position: 'absolute',
+                  ...(isMobile ? {
+                    bottom: swipeCurrentY !== null ? Math.min(0, swipeCurrentY - (swipeStartY || 0)) : 0,
+                    left: 0,
+                    right: 0,
+                    maxWidth: '100%',
+                    borderTopLeftRadius: '16px',
+                    borderTopRightRadius: '16px',
+                    borderBottomLeftRadius: 0,
+                    borderBottomRightRadius: 0,
+                    maxHeight: '70vh',
+                    overflowY: swipeStartY === null ? 'auto' : 'hidden',
+                    touchAction: 'pan-y',
+                    transition: swipeStartY === null ? 'bottom 0.3s ease-out' : 'none',
+                  } : {
+                    bottom: '1rem',
+                    right: '1rem',
+                    maxWidth: '400px',
+                    borderRadius: '8px',
+                  }),
+                  backgroundColor: 'var(--bg-primary)',
+                  padding: '1.5rem',
+                  boxShadow: '0 4px 12px var(--shadow-hover)',
+                  zIndex: 1000,
+                  animation: isMobile && swipeStartY === null ? 'slideUp 0.3s ease-out' : undefined,
+                }}
+                onTouchStart={(e) => {
+                  if (!isMobile) return;
+                  const touch = e.touches[0];
+                  setSwipeStartY(touch.clientY);
+                  setSwipeCurrentY(touch.clientY);
+                }}
+                onTouchMove={(e) => {
+                  if (!isMobile || swipeStartY === null) return;
+                  const touch = e.touches[0];
+                  // Only allow downward swipes
+                  if (touch.clientY > swipeStartY) {
+                    setSwipeCurrentY(touch.clientY);
+                  }
+                }}
+                onTouchEnd={() => {
+                  if (!isMobile || swipeStartY === null) return;
+                  const swipeDistance = swipeCurrentY! - swipeStartY;
+                  // If swiped down more than 100px, close the sheet
+                  if (swipeDistance > 100) {
+                    setSelectedSchool(null);
+                    setSelectedSchoolForMap(null);
+                  }
+                  // Reset swipe state
+                  setSwipeStartY(null);
+                  setSwipeCurrentY(null);
+                }}
+              >
+                {/* Drag handle for mobile */}
+                {isMobile && (
+                  <div 
+                    style={{
+                      width: '40px',
+                      height: '4px',
+                      backgroundColor: 'var(--text-tertiary)',
+                      borderRadius: '2px',
+                      margin: '0 auto 1rem',
+                      opacity: 0.5,
+                      cursor: 'grab',
+                      touchAction: 'none',
+                    }}
+                    onTouchStart={(e) => {
+                      e.stopPropagation();
+                      const touch = e.touches[0];
+                      setSwipeStartY(touch.clientY);
+                      setSwipeCurrentY(touch.clientY);
+                    }}
+                  />
+                )}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
                   <div style={{ flex: 1 }}>
                     <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap.name}</h2>
@@ -542,7 +649,7 @@ function ExplorerApp() {
                   </div>
                 )}
                 {selectedSchoolForMap.address && (
-                  <div style={{ marginBottom: '0.75rem' }}>
+                  <div style={{ marginBottom: isMobile ? '1.5rem' : '0.75rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Address</div>
                     <a
                       href="#"
@@ -571,49 +678,85 @@ function ExplorerApp() {
                     </a>
                   </div>
                 )}
-                {selectedSchoolForMap.schoolPageLink && (
-                  <div style={{ marginBottom: '0.75rem' }}>
-                    <a
-                      href={selectedSchoolForMap.schoolPageLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--text-primary)',
-                        textDecoration: 'none',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                      }}
-                    >
-                      View School Page →
-                    </a>
+                {(selectedSchoolForMap.schoolPageLink || selectedSchoolForMap.driveLink) && (
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '1rem',
+                    marginBottom: isMobile ? '1.5rem' : '0.75rem',
+                    flexWrap: 'wrap',
+                  }}>
+                    {selectedSchoolForMap.schoolPageLink && (
+                      <a
+                        href={selectedSchoolForMap.schoolPageLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontSize: '14px',
+                          color: 'var(--text-primary)',
+                          textDecoration: 'none',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.textDecoration = 'underline';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.textDecoration = 'none';
+                        }}
+                      >
+                        View School Page →
+                      </a>
+                    )}
+                    {selectedSchoolForMap.driveLink && (
+                      <a
+                        href={selectedSchoolForMap.driveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontSize: '14px',
+                          color: 'var(--text-primary)',
+                          textDecoration: 'none',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.textDecoration = 'underline';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.textDecoration = 'none';
+                        }}
+                      >
+                        View Drive Folder →
+                      </a>
+                    )}
                   </div>
                 )}
-                {selectedSchoolForMap.driveLink && (
-                  <div>
-                    <a
-                      href={selectedSchoolForMap.driveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--text-primary)',
-                        textDecoration: 'none',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                      }}
-                    >
-                      View Drive Folder →
-                    </a>
-                  </div>
+                {/* Mobile "View Routes" button */}
+                {isMobile && selectedSchoolForMap.routeCount !== undefined && (
+                  <button
+                    onClick={() => {
+                      setSelectedSchool(selectedSchoolForMap.id);
+                      setActiveTab('routes');
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '1rem',
+                      backgroundColor: '#133A60',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '9999px',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      marginTop: '1rem',
+                      transition: 'background-color 0.2s ease',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#0f2d4a';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#133A60';
+                    }}
+                  >
+                    View Routes
+                  </button>
                 )}
               </div>
             )}
@@ -625,6 +768,14 @@ function ExplorerApp() {
         @keyframes spin {
           to { transform: rotate(360deg); }
         }
+        @keyframes slideUp {
+          from {
+            transform: translateY(100%);
+          }
+          to {
+            transform: translateY(0);
+          }
+        }
       `}</style>
     </div>
   );
@@ -632,6 +783,7 @@ function ExplorerApp() {
 
 function AdminApp() {
   const { isLoading, loadingProgress, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress } = useStore();
+  const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>('routes');
   
   // Wrapper to handle TabBar's expected type signature
@@ -904,15 +1056,40 @@ function AdminApp() {
             {activeTab === 'schools' && selectedSchoolForMap && (
               <div style={{
                 position: 'absolute',
-                bottom: '1rem',
-                right: '1rem',
+                ...(isMobile ? {
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  maxWidth: '100%',
+                  borderTopLeftRadius: '16px',
+                  borderTopRightRadius: '16px',
+                  borderBottomLeftRadius: 0,
+                  borderBottomRightRadius: 0,
+                  maxHeight: '70vh',
+                  overflowY: 'auto',
+                } : {
+                  bottom: '1rem',
+                  right: '1rem',
+                  maxWidth: '400px',
+                  borderRadius: '8px',
+                }),
                 backgroundColor: 'var(--bg-primary)',
                 padding: '1.5rem',
-                borderRadius: '8px',
                 boxShadow: '0 4px 12px var(--shadow-hover)',
-                maxWidth: '400px',
                 zIndex: 1000,
+                animation: isMobile ? 'slideUp 0.3s ease-out' : undefined,
               }}>
+                {/* Drag handle for mobile */}
+                {isMobile && (
+                  <div style={{
+                    width: '40px',
+                    height: '4px',
+                    backgroundColor: 'var(--text-tertiary)',
+                    borderRadius: '2px',
+                    margin: '0 auto 1rem',
+                    opacity: 0.5,
+                  }} />
+                )}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
                   <div style={{ flex: 1 }}>
                     <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap.name}</h2>
@@ -1025,49 +1202,85 @@ function AdminApp() {
                     </a>
                   </div>
                 )}
-                {selectedSchoolForMap.schoolPageLink && (
-                  <div style={{ marginBottom: '0.75rem' }}>
-                    <a
-                      href={selectedSchoolForMap.schoolPageLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--text-primary)',
-                        textDecoration: 'none',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                      }}
-                    >
-                      View School Page →
-                    </a>
+                {(selectedSchoolForMap.schoolPageLink || selectedSchoolForMap.driveLink) && (
+                  <div style={{ 
+                    display: 'flex', 
+                    gap: '1rem',
+                    marginBottom: isMobile ? '1.5rem' : '0.75rem',
+                    flexWrap: 'wrap',
+                  }}>
+                    {selectedSchoolForMap.schoolPageLink && (
+                      <a
+                        href={selectedSchoolForMap.schoolPageLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontSize: '14px',
+                          color: 'var(--text-primary)',
+                          textDecoration: 'none',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.textDecoration = 'underline';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.textDecoration = 'none';
+                        }}
+                      >
+                        View School Page →
+                      </a>
+                    )}
+                    {selectedSchoolForMap.driveLink && (
+                      <a
+                        href={selectedSchoolForMap.driveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontSize: '14px',
+                          color: 'var(--text-primary)',
+                          textDecoration: 'none',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.textDecoration = 'underline';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.textDecoration = 'none';
+                        }}
+                      >
+                        View Drive Folder →
+                      </a>
+                    )}
                   </div>
                 )}
-                {selectedSchoolForMap.driveLink && (
-                  <div>
-                    <a
-                      href={selectedSchoolForMap.driveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--text-primary)',
-                        textDecoration: 'none',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                      }}
-                    >
-                      View Drive Folder →
-                    </a>
-                  </div>
+                {/* Mobile "View Routes" button */}
+                {isMobile && selectedSchoolForMap.routeCount !== undefined && (
+                  <button
+                    onClick={() => {
+                      setSelectedSchool(selectedSchoolForMap.id);
+                      setActiveTab('routes');
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '1rem',
+                      backgroundColor: '#133A60',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '9999px',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      marginTop: '1rem',
+                      transition: 'background-color 0.2s ease',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#0f2d4a';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#133A60';
+                    }}
+                  >
+                    View Routes
+                  </button>
                 )}
               </div>
             )}

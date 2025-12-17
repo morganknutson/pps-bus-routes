@@ -9,6 +9,7 @@ import { createSchoolIcon, createNumberedIcon } from '../utils/markerIcons';
 import { geocodeAddress } from '../services/api';
 import { toLeafletPosition, validateLngLat, formatCoordinates } from '../utils/coordinates';
 import { DarkModeTileLayer } from './DarkModeTileLayer';
+import { useIsMobile } from '../hooks/useMediaQuery';
 import 'leaflet/dist/leaflet.css';
 
 const homeIcon = createHomeIcon();
@@ -48,7 +49,11 @@ interface StreetMarker {
 
 export function MapView({ editingMode = false, enableStreetHighlighting = false, enableStreetPins = false }: MapViewProps) {
   const { routes, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, updateStopCoordinates, directionFilter, shouldZoomToHomeAddress, clearZoomToHomeAddress } = useStore();
+  const isMobile = useIsMobile();
   const mapRef = useRef<L.Map | null>(null);
+  const [swipeStartY, setSwipeStartY] = useState<number | null>(null);
+  const [swipeCurrentY, setSwipeCurrentY] = useState<number | null>(null);
+  const stopSheetRef = useRef<HTMLDivElement>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
   const [undoHistory, setUndoHistory] = useState<UndoStep[]>([]);
   const routeRecalcTimeoutRef = useRef<{ [routeId: string]: ReturnType<typeof setTimeout> }>({});
@@ -864,21 +869,85 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       {/* Stop info overlay at bottom */}
       {selectedStop && (
         <div
+          ref={stopSheetRef}
           style={{
             position: 'absolute',
-            bottom: '1rem',
-            right: '1rem',
+            ...(isMobile ? {
+              bottom: swipeCurrentY !== null ? Math.min(0, swipeCurrentY - (swipeStartY || 0)) : 0,
+              left: 0,
+              right: 0,
+              maxWidth: '100%',
+              borderTopLeftRadius: '16px',
+              borderTopRightRadius: '16px',
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
+              maxHeight: '70vh',
+              overflowY: swipeStartY === null ? 'auto' : 'hidden',
+              minWidth: 'auto',
+              touchAction: 'pan-y',
+              transition: swipeStartY === null ? 'bottom 0.3s ease-out' : 'none',
+            } : {
+              bottom: '1rem',
+              right: '1rem',
+              minWidth: '300px',
+              maxWidth: '400px',
+              borderRadius: '8px',
+            }),
             backgroundColor: 'var(--bg-primary)',
             padding: '1rem 1.5rem',
-            borderRadius: '8px',
             boxShadow: '0 4px 12px var(--shadow-hover)',
-            minWidth: '300px',
-            maxWidth: '400px',
             zIndex: 1000,
             border: `2px solid ${selectedStop.route.color}`,
-            transition: 'background-color 0.3s ease',
+            transition: swipeStartY === null ? 'background-color 0.3s ease' : 'none',
+            animation: isMobile && swipeStartY === null ? 'slideUp 0.3s ease-out' : undefined,
+          }}
+          onTouchStart={(e) => {
+            if (!isMobile) return;
+            const touch = e.touches[0];
+            setSwipeStartY(touch.clientY);
+            setSwipeCurrentY(touch.clientY);
+          }}
+          onTouchMove={(e) => {
+            if (!isMobile || swipeStartY === null) return;
+            const touch = e.touches[0];
+            // Only allow downward swipes
+            if (touch.clientY > swipeStartY) {
+              setSwipeCurrentY(touch.clientY);
+            }
+          }}
+          onTouchEnd={() => {
+            if (!isMobile || swipeStartY === null) return;
+            const swipeDistance = swipeCurrentY! - swipeStartY;
+            // If swiped down more than 100px, close the sheet
+            if (swipeDistance > 100) {
+              clearSelectedStop();
+            }
+            // Reset swipe state
+            setSwipeStartY(null);
+            setSwipeCurrentY(null);
           }}
         >
+          {/* Drag handle for mobile */}
+          {isMobile && (
+            <div 
+              style={{
+                width: '40px',
+                height: '4px',
+                backgroundColor: 'var(--text-tertiary)',
+                borderRadius: '2px',
+                margin: '0 auto 0.75rem',
+                opacity: 0.5,
+                cursor: 'grab',
+                touchAction: 'none',
+              }}
+              onTouchStart={(e) => {
+                e.stopPropagation();
+                const touch = e.touches[0];
+                setSwipeStartY(touch.clientY);
+                setSwipeCurrentY(touch.clientY);
+              }}
+            />
+          )}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
             <div>
               <div style={{ fontWeight: 'bold', fontSize: '16px', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -1194,6 +1263,14 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       <style>{`
         @keyframes spin {
           to { transform: rotate(360deg); }
+        }
+        @keyframes slideUp {
+          from {
+            transform: translateY(100%);
+          }
+          to {
+            transform: translateY(0);
+          }
         }
       `}</style>
     </div>

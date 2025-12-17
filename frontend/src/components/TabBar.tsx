@@ -38,6 +38,8 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             color: isSchoolsActive ? '#000000' : 'var(--text-secondary)',
             transition: 'color 0.2s ease',
             cursor: 'pointer',
+            minHeight: '44px', // Better touch target for mobile
+            WebkitTapHighlightColor: 'transparent', // Remove tap highlight on mobile
           }}
         >
           <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
@@ -56,8 +58,9 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             color: isRoutesActive ? '#000000' : 'var(--text-secondary)',
             transition: 'color 0.2s ease',
             cursor: 'pointer',
-            height: '42px',
+            minHeight: '44px', // Better touch target for mobile
             lineHeight: '1',
+            WebkitTapHighlightColor: 'transparent', // Remove tap highlight on mobile
           }}
         >
           {activeTab === 'neighborhoods' ? (
@@ -83,7 +86,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           position: 'absolute',
           top: '13px',
           height: '41px',
-          left: isSchoolsActive ? 'calc(1rem + 0.25rem)' : '179px',
+          left: isSchoolsActive ? 'calc(1rem + 0.25rem)' : 'calc(50% + 0.25rem)',
           width: 'calc(50% - 1rem - 0.5rem)',
           backgroundColor: 'white',
           borderRadius: '4px',

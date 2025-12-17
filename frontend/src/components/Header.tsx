@@ -1,8 +1,13 @@
+import { ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ThemePicker } from './ThemePicker';
 import './Header.css';
 
-export function Header() {
+interface HeaderProps {
+  rightContent?: ReactNode;
+}
+
+export function Header({ rightContent }: HeaderProps = {}) {
   const location = useLocation();
   const navigate = useNavigate();
   
@@ -51,6 +56,7 @@ export function Header() {
             )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            {rightContent}
             {isAdminPage && <ThemePicker />}
             {isAdminPage && (
               <Link
