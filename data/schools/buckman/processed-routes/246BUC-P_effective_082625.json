@@ -19,7 +19,8 @@
         45.5204329
       ],
       "displayName": "320 SE 16th Ave, Portland, OR 97214, USA",
-      "schoolName": "Buckman"
+      "schoolName": "Buckman",
+      "neighborhood": "Southeast Portland"
     },
     {
       "id": "stop-1",
@@ -390,5 +391,11 @@
       45.52932,
       -122.65966
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 4,
+    "errors": 0,
+    "total": 5
+  }
 }

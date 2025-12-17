@@ -1,18 +1,11 @@
 {
-  "id": "route-1765392527036",
+  "id": "113SYL-A_effective_092425.pdf",
   "name": "113",
   "direction": "Morning",
   "filename": "113SYL-A_effective_092425.pdf",
+  "fileId": "113SYL-A_effective_092425.pdf",
+  "modifiedTime": null,
   "stops": [
-    {
-      "id": "stop-1",
-      "address": "Ainsworth Gt. & St. Loading ZONE On Elm",
-      "time": "8:25 am",
-      "direction": null,
-      "originalLine": "8:25 amAINSWORTH GT & ST LOADING ZONE ON ELM113SYL-AStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": null
-    },
     {
       "id": "stop-2",
       "address": "NW Naito Pkwy. & 9th [NE]",
@@ -25,6 +18,7 @@
         45.53280119999999
       ],
       "displayName": "NW 9th Ave & NW Naito Pkwy, Portland, OR 97209, USA",
+      "placeId": "EjNOVyA5dGggQXZlICYgTlcgTmFpdG8gUGt3eSwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEgktDlZsVqeVVBHV4aGMDzY9DRIUChIJLQ5WbFanlVQR1eGhjA82PQ0aFAoSCbUhXJ__CZVUETmkwhyVkKVZGhQKEgl7me7X_wmVVBGo2XDGFxMwqiIKDQzBIxsVzo_gtg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -39,6 +33,7 @@
         45.5383044
       ],
       "displayName": "NW 17th Ave & NW Riverscape St, Portland, OR 97209, USA",
+      "placeId": "EjdOVyAxN3RoIEF2ZSAmIE5XIFJpdmVyc2NhcGUgU3QsIFBvcnRsYW5kLCBPUiA5NzIwOSwgVVNBImYiZAoUChIJuaLWmVinlVQR0yeCQApvucoSFAoSCbmi1plYp5VUEdMngkAKb7nKGhQKEgln4jj1-wmVVBG49hGVfbqK8hoUChIJqZLTmVinlVQRx5iU31-52JkiCg0EmCQbFV5D37Y",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -49,10 +44,11 @@
       "originalLine": "8:41 am1550 NW NAITO PKWY [SW]113SYL-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6825437,
-        45.5351236
+        -122.68246666128246,
+        45.53507827870768
       ],
       "displayName": "Parking lot, 1550 NW Naito Pkwy, Portland, OR 97209, USA",
+      "placeId": "ChIJReadlVenlVQRhh4kC6bxQfg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -67,6 +63,7 @@
         45.5336211
       ],
       "displayName": "NW Quimby St & NW 13th Ave, Portland, OR 97209, USA",
+      "placeId": "EjNOVyBRdWltYnkgU3QgJiBOVyAxM3RoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEglvDGRw_QmVVBEWYkK8YANDGhIUChIJbwxkcP0JlVQRFmJCvGADQxoaFAoSCdUuxwzlCZVUEWx8nYg2gAFYGhQKEgl3R6LE_gmVVBELQRxrfeKfWCIKDRPhIxsVNtLftg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -81,6 +78,7 @@
         45.53432249999999
       ],
       "displayName": "NW Raleigh St & NW 14th Ave, Portland, OR 97209, USA",
+      "placeId": "EjROVyBSYWxlaWdoIFN0ICYgTlcgMTR0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwOSwgVVNBImYiZAoUChIJ01kKQ_0JlVQRGX1BC6vdecMSFAoSCdNZCkP9CZVUERl9QQur3XnDGhQKEgmnV4WL5QmVVBHTL3fiFThF9hoUChIJvyyyuv4JlVQRFJS1i8qx0O8iCg15_CMbFbqp37Y",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -91,10 +89,11 @@
       "originalLine": "8:48 am1150 NW 9TH AV [W]113SYL-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6797782,
-        45.531365
+        -122.67978290532642,
+        45.53157637104589
       ],
       "displayName": "1150 NW 9th Ave, Portland, OR 97209, USA",
+      "placeId": "ChIJVxUp91WnlVQRdZxwTShvUQg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -109,6 +108,7 @@
         45.5265042
       ],
       "displayName": "NW 13th Ave & NW Glisan St, Portland, OR 97209, USA",
+      "placeId": "EjNOVyAxM3RoIEF2ZSAmIE5XIEdsaXNhbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEgmFIpK3-AmVVBGxZqR-bardfxIUChIJhSKSt_gJlVQRsWakfm2q3X8aFAoSCXdHosT-CZVUEQtBHGt94p9YGhQKEgm76CXv-AmVVBGvxv3pYEbBLSIKDRLLIhsV2Nzftg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -120,14 +120,19 @@
       "isSchoolStop": true,
       "skipGeocoding": false,
       "coordinates": [
-        -122.7621042,
-        45.5040646
+        -122.7622985,
+        45.5044894
       ],
       "displayName": "8111 SW West Slope Dr, Portland, OR 97225, USA",
-      "schoolName": "West Sylvan"
+      "schoolName": "West Sylvan",
+      "neighborhood": "Southwest Hills"
     }
   ],
-  "processedAt": "2025-12-10T18:48:49.847Z",
+  "neighborhoods": [
+    "Northwest Portland",
+    "Southwest Hills"
+  ],
+  "processedAt": "2025-12-17T08:53:46.362Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -1131,12 +1136,18 @@
       -122.76157
     ],
     [
-      45.50414,
+      45.50424,
+      -122.76161
+    ],
+    [
+      45.50438,
       -122.76158
     ]
   ],
-  "geometryUpdatedAt": "2025-12-10T18:54:32.707Z",
-  "neighborhoods": [
-    "Northwest Portland"
-  ]
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 7,
+    "errors": 0,
+    "total": 8
+  }
 }

@@ -3,11 +3,13 @@ import { createSchoolIconHTML } from './fontAwesomeIcons';
 
 // Create school icon (simple circle with school symbol, no hover state)
 export function createSchoolIcon(routeColor: string, time?: string): L.DivIcon {
-  const circleSize = 22; // Size of the circle
+  const borderWidth = 2; // White border width
+  const circleSize = 22; // Size of the circle (content area)
   const iconSize = 10; // Size of the school icon inside
+  const totalSize = circleSize + (borderWidth * 2); // Total size including border
   
-  const anchorX = circleSize / 2;
-  const anchorY = circleSize / 2;
+  const anchorX = totalSize / 2;
+  const anchorY = totalSize / 2;
   
   // School icon using Font Awesome
   const schoolIconSVG = createSchoolIconHTML('white', iconSize);
@@ -20,6 +22,8 @@ export function createSchoolIcon(routeColor: string, time?: string): L.DivIcon {
         height: ${circleSize}px;
         border-radius: 50%;
         background-color: ${routeColor};
+        border: ${borderWidth}px solid white;
+        box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -29,9 +33,9 @@ export function createSchoolIcon(routeColor: string, time?: string): L.DivIcon {
         ${schoolIconSVG}
       </div>
     `,
-    iconSize: [circleSize, circleSize],
+    iconSize: [totalSize, totalSize],
     iconAnchor: [anchorX, anchorY],
-    popupAnchor: [0, -circleSize],
+    popupAnchor: [0, -totalSize],
   });
 }
 
@@ -57,7 +61,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
   // Single digits should be perfect circles (width = height), multi-digit can be pill-shaped
   const isSingleDigit = String(number).length === 1;
   const borderWidth = 2; // Pill has 2px border on all sides
-  const circleHeight = pillHeight - (borderWidth * 2); // Circle height matches pill inner content area (subtract top + bottom border)
+  const circleHeight = Math.round(pillHeight - (borderWidth * 2)); // Circle height matches pill inner content area (subtract top + bottom border)
   
   // Calculate padding (needed for both single and multi-digit for positioning)
   const minPadding = Math.round(pillHeight * 0.23); // ~6px for 26px, ~7px for 32px
@@ -66,7 +70,8 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
   let circleWidth: number;
   if (isSingleDigit) {
     // For single digits, make a perfect circle: width = height
-    circleWidth = circleHeight;
+    // Use Math.round to ensure exact pixel values
+    circleWidth = Math.round(circleHeight);
   } else {
     // For multi-digit, calculate width to fit the number with padding
     // Add small buffer to ensure no gaps
@@ -109,6 +114,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           width: ${totalWidth}px;
           height: ${pillHeight}px;
           position: relative;
+          cursor: pointer;
         }
         /* When marker is being dragged, show closed hand cursor */
         .leaflet-marker-dragging .numbered-marker-wrapper-${classId} .numbered-marker-pill-${classId} {
@@ -132,14 +138,15 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           pointer-events: none;
           transform: translate(-50%, -50%);
           top: 50%;
+          box-sizing: border-box;
           transition: left 0.125s ease-out, width 0.125s ease-out, height 0.125s ease-out, background-color 0.125s ease-out, border-radius 0.125s ease-out;
           z-index: 0;
           /* Inherit opacity from parent to match border and time text color exactly */
         }
         .numbered-marker-wrapper-${classId}:hover .numbered-marker-grey-circle-${classId} {
           left: ${numberCenterX}px;
-          width: ${smallCircleSize}px;
-          height: ${smallCircleSize}px;
+          width: ${smallCircleSize}px !important;
+          height: ${smallCircleSize}px !important;
           border-radius: 50%;
           background-color: ${backgroundColor};
         }

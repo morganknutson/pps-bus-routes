@@ -19,7 +19,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     },
     {
       "id": "stop-1",
@@ -149,12 +150,18 @@
       "originalLine": "2:55 pm4530 SW FAIRHAVEN DR [NW]100AIN-P(10)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7237735,
-        45.5152504
+        -122.72390922809355,
+        45.515440631674636
       ],
       "displayName": "4530 SW Fairhaven Dr, Portland, OR 97221, USA",
       "placeId": "ChIJ5R4MKoEJlVQREbWrptOinzM",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7237735,
+        45.5152504
+      ],
+      "snapDistance": 23.649113971538853
     },
     {
       "id": "stop-10",
@@ -164,12 +171,18 @@
       "originalLine": "2:57 pm4901 SW FAIRHAVEN DR [NE]100AIN-P(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7275124,
-        45.5140017
+        -122.7276553327379,
+        45.51386298745768
       ],
       "displayName": "4901 SW Fairhaven Dr, Portland, OR 97221, USA",
       "placeId": "ChIJmyhMTYAJlVQRsxzHtflhemk",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7275124,
+        45.5140017
+      ],
+      "snapDistance": 19.024672673001582
     },
     {
       "id": "stop-11",
@@ -179,12 +192,18 @@
       "originalLine": "2:59 pm1417 SW HIGHLAND PKWY [NW]100AIN-P(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7293174,
-        45.51277049999999
+        -122.7292103946,
+        45.5126530416656
       ],
       "displayName": "1417 SW Highland Pkwy, Portland, OR 97221, USA",
       "placeId": "ChIJcyLgh38JlVQRHh3bkmyaops",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7293174,
+        45.51277049999999
+      ],
+      "snapDistance": 15.495276065616746
     },
     {
       "id": "stop-12",
@@ -194,12 +213,18 @@
       "originalLine": "2:59 pm1510 SW HIGHLAND PKWY [W]100AIN-P(13)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.728933,
-        45.5120865
+        -122.72914567041647,
+        45.51212245932566
       ],
       "displayName": "1510 SW Highland Pkwy, Portland, OR 97221, USA",
       "placeId": "ChIJAbOc838JlVQRQ_v3cJnIe9E",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.728933,
+        45.5120865
+      ],
+      "snapDistance": 17.0470191266285
     },
     {
       "id": "stop-13",
@@ -254,12 +279,18 @@
       "originalLine": "3:07 pm4645 SW FAIRVIEW BLVD [N]100AIN-P(17)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7258606,
-        45.5161009
+        -122.72575549999999,
+        45.515854999999995
       ],
       "displayName": "4645 SW Fairview Blvd, Portland, OR 97221, USA",
       "placeId": "ChIJUav5RoEJlVQRYKU7rMfbb0Q",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7258606,
+        45.5161009
+      ],
+      "snapDistance": 28.54275335498056
     }
   ],
   "neighborhoods": [
@@ -1663,5 +1694,11 @@
       45.51585,
       -122.72576
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 5,
+    "skipped": 11,
+    "errors": 0,
+    "total": 17
+  }
 }

@@ -1,0 +1,129 @@
+{
+  "id": "218VRN-A_effective_082625.pdf",
+  "name": "218",
+  "direction": "Morning",
+  "filename": "218VRN-A_effective_082625.pdf",
+  "fileId": "218VRN-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "NE 42nd Ave. & NE Wygant St. [W]",
+      "time": "8:28 am",
+      "direction": "W",
+      "originalLine": "8:28 amNE 42ND AV @ NE WYGANT ST [W]218VRN-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.620413,
+        45.5574918
+      ],
+      "displayName": "NE Wygant St & NE 42nd Ave, Portland, OR 97211, USA",
+      "placeId": "EjNORSBXeWdhbnQgU3QgJiBORSA0Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEgmxLkBrxaaVVBHyO0uty0ZeWhIUChIJsS5Aa8WmlVQR8jtLrctGXloaFAoSCfVnTCpToZVUEdnZEF9gdMYCGhQKEgmti4bn0aaVVBHoX32KtKRetSIKDYaFJxsVHpzptg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:VERNON GT & ST & CAB LOADING ZONE ON 20TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6438366,
+        45.5623398
+      ],
+      "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "schoolName": "Vernon"
+    }
+  ],
+  "neighborhoods": [
+    "Northeast Portland"
+  ],
+  "processedAt": "2025-12-17T09:11:10.017Z",
+  "stats": {
+    "totalStops": 2,
+    "geocodedStops": 2,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.55749,
+      -122.62041
+    ],
+    [
+      45.56249,
+      -122.62041
+    ],
+    [
+      45.56281,
+      -122.62042
+    ],
+    [
+      45.56281,
+      -122.62065
+    ],
+    [
+      45.56281,
+      -122.62144
+    ],
+    [
+      45.56278,
+      -122.62448
+    ],
+    [
+      45.56273,
+      -122.62966
+    ],
+    [
+      45.56272,
+      -122.63172
+    ],
+    [
+      45.56271,
+      -122.63548
+    ],
+    [
+      45.56271,
+      -122.63942
+    ],
+    [
+      45.5627,
+      -122.64188
+    ],
+    [
+      45.56269,
+      -122.64296
+    ],
+    [
+      45.5627,
+      -122.64464
+    ],
+    [
+      45.5627,
+      -122.64483
+    ],
+    [
+      45.56221,
+      -122.64483
+    ],
+    [
+      45.56211,
+      -122.64483
+    ],
+    [
+      45.56211,
+      -122.6443
+    ],
+    [
+      45.56208,
+      -122.64387
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 1,
+    "errors": 0,
+    "total": 2
+  }
+}

@@ -19,7 +19,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     },
     {
       "id": "stop-1",
@@ -59,12 +60,18 @@
       "originalLine": "2:41 pm3611 SW HUMPHREY BLVD [NE]107AIN-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7142143,
-        45.5032735
+        -122.7141987,
+        45.5030773
       ],
       "displayName": "3611 SW Humphrey Blvd, Portland, OR 97221, USA",
       "placeId": "ChIJ2zzJ6DIKlVQRcwQ4AxS4GLM",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7142143,
+        45.5032735
+      ],
+      "snapDistance": 21.850293386129984
     },
     {
       "id": "stop-4",
@@ -74,12 +81,18 @@
       "originalLine": "2:45 pm2280 SW HUMPHREY PARK RD [NE]107AIN-P(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7240272,
-        45.5072811
+        -122.72434653453062,
+        45.507121852371895
       ],
       "displayName": "2280 SW Humphrey Park Rd, Portland, OR 97221, USA",
       "placeId": "ChIJfz6WoNQLlVQRsSSrDi9cg6Q",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7240272,
+        45.5072811
+      ],
+      "snapDistance": 30.54207317359097
     },
     {
       "id": "stop-5",
@@ -89,12 +102,18 @@
       "originalLine": "2:47 pm4550 SW HUMPHREY BLVD [SW]107AIN-P(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7235257,
-        45.5037634
+        -122.72345190000001,
+        45.50387609999999
       ],
       "displayName": "4550 SW Humphrey Blvd, Portland, OR 97221, USA",
       "placeId": "ChIJsx5xQ9ILlVQRUrILvcV4Rek",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7235257,
+        45.5037634
+      ],
+      "snapDistance": 13.788448983534828
     },
     {
       "id": "stop-6",
@@ -164,12 +183,18 @@
       "originalLine": "2:55 pm3610 SW Greenleaf Dr [S]107AIN-P(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.714585,
-        45.5016708
+        -122.71439875111365,
+        45.50160268569426
       ],
       "displayName": "3610 SW Greenleaf Dr, Portland, OR 97221, USA",
       "placeId": "ChIJdYloMjMKlVQRzJLBJT0NZsw",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.714585,
+        45.5016708
+      ],
+      "snapDistance": 16.372557703750925
     },
     {
       "id": "stop-11",
@@ -1933,5 +1958,11 @@
       45.50093,
       -122.76271
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 4,
+    "skipped": 13,
+    "errors": 0,
+    "total": 18
+  }
 }

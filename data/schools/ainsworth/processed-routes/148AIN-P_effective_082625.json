@@ -19,7 +19,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     },
     {
       "id": "stop-1",
@@ -275,5 +276,11 @@
       45.52004,
       -122.6916
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 1,
+    "errors": 0,
+    "total": 2
+  }
 }

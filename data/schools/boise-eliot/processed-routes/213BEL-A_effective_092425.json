@@ -74,12 +74,18 @@
       "originalLine": "7:41 am5221 N HAIGHT AV [E]213BEL-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.670264,
-        45.5608111
+        -122.6700866308042,
+        45.56080323513
       ],
       "displayName": "5221 N Haight Ave, Portland, OR 97217, USA",
       "placeId": "ChIJu_wa3RGnlVQRrFZtHnThnZw",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.670264,
+        45.5608111
+      ],
+      "snapDistance": 13.836449438972497
     },
     {
       "id": "stop-0",
@@ -94,7 +100,8 @@
         45.54754459999999
       ],
       "displayName": "620 N Fremont St, Portland, OR 97227, USA",
-      "schoolName": "Boise-Eliot"
+      "schoolName": "Boise-Eliot",
+      "neighborhood": "North Portland"
     }
   ],
   "processedAt": "2025-12-12T23:34:19.085Z",
@@ -508,5 +515,11 @@
       45.54759,
       -122.6729
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 1,
+    "skipped": 4,
+    "errors": 0,
+    "total": 6
+  }
 }

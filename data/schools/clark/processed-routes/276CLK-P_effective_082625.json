@@ -19,7 +19,8 @@
         45.5135543
       ],
       "displayName": "1231 SE 92nd Ave, Portland, OR 97216, USA",
-      "schoolName": "Clark"
+      "schoolName": "Clark",
+      "neighborhood": "Montavilla"
     },
     {
       "id": "stop-1",
@@ -1060,5 +1061,11 @@
       45.54377,
       -122.58738
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 10,
+    "errors": 0,
+    "total": 11
+  }
 }

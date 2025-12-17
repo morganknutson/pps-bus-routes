@@ -1,0 +1,387 @@
+{
+  "id": "220TUB-A_effective_121725.pdf",
+  "name": "220",
+  "direction": "Morning",
+  "filename": "220TUB-A_effective_121725.pdf",
+  "fileId": "220TUB-A_effective_121725.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "NE Alameda St. No Intersection [S]",
+      "time": "8:45 am",
+      "direction": "S",
+      "originalLine": "8:45 amNE ALAMEDA ST No Intersection [S]220TUB-AStop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6178138,
+        45.5437623
+      ],
+      "displayName": "NE Alameda St, Portland, OR, USA",
+      "placeId": "ChIJeft12iyhlVQRvlcAiRtSZXQ",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 24th Ave. & NE Skidmore St. [SE]",
+      "time": "8:46 am",
+      "direction": "SE",
+      "originalLine": "8:46 amNE 24TH AV @ NE SKIDMORE ST [SE]220TUB-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6409818,
+        45.5543454
+      ],
+      "displayName": "NE Skidmore St & NE 24th Ave, Portland, OR 97211, USA",
+      "placeId": "EjVORSBTa2lkbW9yZSBTdCAmIE5FIDI0dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCXnccC8np5VUEdjTNOnvlHKQEhQKEgl53HAvJ6eVVBHY0zTp75RykBoUChIJ81jgWSGnlVQRsSTXUZCL8BYaFAoSCd3kLoTMoJVUEU9rwR_D-8XaIgoNngonGxWmeOa2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Prescott St. & NE 22nd Ave. [NE]",
+      "time": "8:49 am",
+      "direction": "NE",
+      "originalLine": "8:49 amNE PRESCOTT ST @ NE 22ND AV [NE]220TUB-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6429284,
+        45.5554332
+      ],
+      "displayName": "NE Prescott St & NE 22nd Ave, Portland, OR 97211, USA",
+      "placeId": "EjVORSBQcmVzY290dCBTdCAmIE5FIDIybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCeOmHN8gp5VUEUM5xEF3hp_sEhQKEgnjphzfIKeVVBFDOcRBd4af7BoUChIJnUhyLiKnlVQR1kV8dGtV940aFAoSCdVql17LoJVUEZE5D6KNsUjfIgoNHDUnGxWcLOa2",
+      "neighborhood": "Sabin"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE Prescott St. & NE 15th Ave. [NE]",
+      "time": "8:51 am",
+      "direction": "NE",
+      "originalLine": "8:51 amNE PRESCOTT ST @ NE 15TH AV [NE]220TUB-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6498862,
+        45.55545559999999
+      ],
+      "displayName": "NE Prescott St & NE 15th Ave, Portland, OR 97211, USA",
+      "placeId": "EjVORSBQcmVzY290dCBTdCAmIE5FIDE1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCTfAbDgip5VUEbHozXyMEtUSEhQKEgk3wGw4IqeVVBGx6M18jBLVEhoUChIJnUhyLiKnlVQR1kV8dGtV940aFAoSCVF4vEcip5VUERn4EaQeHuGGIgoN_DUnGxXSHOW2",
+      "neighborhood": "Sabin"
+    },
+    {
+      "id": "stop-6",
+      "address": "NE Prescott St. & NE 9th Ave. [NE]",
+      "time": "8:52 am",
+      "direction": "NE",
+      "originalLine": "8:52 amNE PRESCOTT ST @ NE 9TH AV [NE]220TUB-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6566516,
+        45.5554905
+      ],
+      "displayName": "NE 9th Ave & NE Prescott St, Portland, OR 97211, USA",
+      "placeId": "EjRORSA5dGggQXZlICYgTkUgUHJlc2NvdHQgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMSwgVVNBImYiZAoUChIJ1V2EARinlVQRQjlii2kByK8SFAoSCdVdhAEYp5VUEUI5YotpAcivGhQKEgmvq7qyS6eVVBFhuTFFPtKGiBoUChIJnUhyLiKnlVQR1kV8dGtV940iCg1ZNycbFYwU5LY",
+      "neighborhood": "King"
+    },
+    {
+      "id": "stop-0",
+      "address": "2231 N Flint Ave, Portland, OR 97227, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:TUBMAN GT & ST & CAB LOAD ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6695743,
+        45.5394497
+      ],
+      "displayName": "2231 N Flint Ave, Portland, OR 97227, USA",
+      "schoolName": "Tubman"
+    }
+  ],
+  "neighborhoods": [
+    "King",
+    "Northeast Portland",
+    "Sabin"
+  ],
+  "processedAt": "2025-12-17T09:10:59.245Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54376,
+      -122.61781
+    ],
+    [
+      45.54697,
+      -122.61777
+    ],
+    [
+      45.54816,
+      -122.61776
+    ],
+    [
+      45.5483,
+      -122.61776
+    ],
+    [
+      45.5483,
+      -122.61838
+    ],
+    [
+      45.5483,
+      -122.61889
+    ],
+    [
+      45.5483,
+      -122.6198
+    ],
+    [
+      45.5483,
+      -122.62136
+    ],
+    [
+      45.5483,
+      -122.62385
+    ],
+    [
+      45.54828,
+      -122.62956
+    ],
+    [
+      45.54827,
+      -122.63061
+    ],
+    [
+      45.54827,
+      -122.63071
+    ],
+    [
+      45.54835,
+      -122.63071
+    ],
+    [
+      45.5485,
+      -122.63071
+    ],
+    [
+      45.54905,
+      -122.6307
+    ],
+    [
+      45.55179,
+      -122.63069
+    ],
+    [
+      45.55522,
+      -122.63069
+    ],
+    [
+      45.55538,
+      -122.63069
+    ],
+    [
+      45.55539,
+      -122.6312
+    ],
+    [
+      45.55539,
+      -122.63226
+    ],
+    [
+      45.5554,
+      -122.63436
+    ],
+    [
+      45.55541,
+      -122.63794
+    ],
+    [
+      45.55542,
+      -122.64068
+    ],
+    [
+      45.55542,
+      -122.64098
+    ],
+    [
+      45.55435,
+      -122.64098
+    ],
+    [
+      45.55542,
+      -122.64098
+    ],
+    [
+      45.55543,
+      -122.64196
+    ],
+    [
+      45.55543,
+      -122.64391
+    ],
+    [
+      45.55544,
+      -122.64585
+    ],
+    [
+      45.55545,
+      -122.64781
+    ],
+    [
+      45.55546,
+      -122.64989
+    ],
+    [
+      45.55548,
+      -122.65372
+    ],
+    [
+      45.55549,
+      -122.65761
+    ],
+    [
+      45.5555,
+      -122.66056
+    ],
+    [
+      45.5555,
+      -122.66149
+    ],
+    [
+      45.5555,
+      -122.6616
+    ],
+    [
+      45.55535,
+      -122.66161
+    ],
+    [
+      45.55415,
+      -122.66162
+    ],
+    [
+      45.55333,
+      -122.66162
+    ],
+    [
+      45.55207,
+      -122.66164
+    ],
+    [
+      45.54974,
+      -122.66165
+    ],
+    [
+      45.54677,
+      -122.66168
+    ],
+    [
+      45.54504,
+      -122.66169
+    ],
+    [
+      45.54459,
+      -122.66171
+    ],
+    [
+      45.54382,
+      -122.66166
+    ],
+    [
+      45.54297,
+      -122.66167
+    ],
+    [
+      45.5427,
+      -122.66168
+    ],
+    [
+      45.54211,
+      -122.66167
+    ],
+    [
+      45.54126,
+      -122.66168
+    ],
+    [
+      45.54092,
+      -122.66167
+    ],
+    [
+      45.54092,
+      -122.66233
+    ],
+    [
+      45.54092,
+      -122.66277
+    ],
+    [
+      45.54093,
+      -122.66328
+    ],
+    [
+      45.54094,
+      -122.6659
+    ],
+    [
+      45.54101,
+      -122.66642
+    ],
+    [
+      45.54104,
+      -122.66733
+    ],
+    [
+      45.54105,
+      -122.66832
+    ],
+    [
+      45.54103,
+      -122.66971
+    ],
+    [
+      45.54103,
+      -122.67074
+    ],
+    [
+      45.54052,
+      -122.67076
+    ],
+    [
+      45.54033,
+      -122.67072
+    ],
+    [
+      45.54018,
+      -122.67062
+    ],
+    [
+      45.54002,
+      -122.67047
+    ],
+    [
+      45.53966,
+      -122.67013
+    ],
+    [
+      45.53961,
+      -122.67007
+    ],
+    [
+      45.5396,
+      -122.66977
+    ],
+    [
+      45.53959,
+      -122.66957
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 5,
+    "errors": 0,
+    "total": 6
+  }
+}

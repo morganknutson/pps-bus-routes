@@ -59,12 +59,18 @@
       "originalLine": "7:09 am10819 SW CAPITOL HWY (HOLLY FARM PARK) [SE]112AIN-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7263095,
-        45.4472764
+        -122.7263404934949,
+        45.447558020050955
       ],
       "displayName": "Holly Farm Park, 10819 SW Capitol Hwy, Portland, OR 97219, USA",
       "placeId": "ChIJ564Ui6EMlVQRriyYuDMODBw",
-      "neighborhood": "West Portland Park"
+      "neighborhood": "West Portland Park",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7263402989317,
+        45.44756204068614
+      ],
+      "snapDistance": 0.4473317999966529
     },
     {
       "id": "stop-5",
@@ -89,12 +95,18 @@
       "originalLine": "7:17 am6965 SW 45TH AV [E]112AIN-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7237787,
-        45.47446799999999
+        -122.72410299999999,
+        45.474345299999996
       ],
       "displayName": "6965 SW 45th Ave, Portland, OR 97219, USA",
       "placeId": "ChIJf4odlp4LlVQRLMwTztHYa9Y",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7237787,
+        45.47446799999999
+      ],
+      "snapDistance": 28.7325985405544
     },
     {
       "id": "stop-7",
@@ -104,12 +116,18 @@
       "originalLine": "7:21 am6651 SW CAPITOL HWY [S]112AIN-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7045785,
-        45.4769714
+        -122.70493429999999,
+        45.476926399999996
       ],
       "displayName": "6651 SW Capitol Hwy, Portland, OR 97219, USA",
       "placeId": "ChIJqRnOiKcLlVQRkj1k-tlJrTQ",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7045785,
+        45.4769714
+      ],
+      "snapDistance": 28.189188474822487
     },
     {
       "id": "stop-8",
@@ -184,7 +202,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     }
   ],
   "neighborhoods": [
@@ -192,7 +211,7 @@
     "Southwest Portland",
     "West Portland Park"
   ],
-  "processedAt": "2025-12-13T01:14:09.936Z",
+  "processedAt": "2025-12-17T09:23:33.793Z",
   "stats": {
     "totalStops": 12,
     "geocodedStops": 12,
@@ -1795,5 +1814,11 @@
       45.51014,
       -122.69937
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 8,
+    "errors": 0,
+    "total": 12
+  }
 }

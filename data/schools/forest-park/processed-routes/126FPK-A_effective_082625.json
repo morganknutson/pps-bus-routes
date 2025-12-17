@@ -199,7 +199,8 @@
         45.5425414
       ],
       "displayName": "9935 NW Durrett St, Portland, OR 97229, USA",
-      "schoolName": "Forest Park"
+      "schoolName": "Forest Park",
+      "neighborhood": "Northwest Portland"
     }
   ],
   "neighborhoods": [
@@ -1537,5 +1538,11 @@
       45.54235,
       -122.77786
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 12,
+    "errors": 0,
+    "total": 13
+  }
 }

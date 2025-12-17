@@ -39,6 +39,24 @@ function invalidateRouteStatsCache(schoolId) {
 // Export function to allow other modules to invalidate cache
 export { invalidateRouteStatsCache };
 
+/**
+ * Extract neighborhood from placesData addressComponents
+ * @param {object} placesData - Google Places API response data
+ * @returns {string|null} - Neighborhood name or null if not found
+ */
+function extractNeighborhood(placesData) {
+  if (!placesData || !placesData.addressComponents || !Array.isArray(placesData.addressComponents)) {
+    return null;
+  }
+  
+  // Find the address component with type "neighborhood"
+  const neighborhoodComponent = placesData.addressComponents.find(component => 
+    component.types && Array.isArray(component.types) && component.types.includes('neighborhood')
+  );
+  
+  return neighborhoodComponent ? neighborhoodComponent.longText : null;
+}
+
 // Helper function to check if a school has PDFs downloaded
 async function hasPdfs(schoolId) {
   try {
@@ -214,11 +232,14 @@ router.get('/', async (req, res) => {
     
     // Add route counts and latest update times to each school
     // Exclude placesData and placeId from frontend response (keep in backend data only)
+    // Extract neighborhood from placesData before excluding it
     const schoolsWithCounts = schoolsWithPdfs.map((school, index) => {
       const { placesData, placeId, ...schoolData } = school;
       const stats = statsArray[index];
+      const neighborhood = extractNeighborhood(placesData);
       return {
         ...schoolData,
+        ...(neighborhood && { neighborhood }),
         routeCount: stats.routeCount,
         routesUpdatedAt: stats.routesUpdatedAt,
       };
@@ -254,9 +275,14 @@ router.get('/:schoolId', async (req, res) => {
     // Get route stats
     const stats = await getRouteStats(schoolId);
 
-    // Add route count and latest update time to the school
+    // Extract neighborhood from placesData and exclude placesData/placeId from response
+    const { placesData, placeId, ...schoolData } = school;
+    const neighborhood = extractNeighborhood(placesData);
+
+    // Add route count, latest update time, and neighborhood to the school
     const schoolWithCount = {
-      ...school,
+      ...schoolData,
+      ...(neighborhood && { neighborhood }),
       routeCount: stats.routeCount,
       routesUpdatedAt: stats.routesUpdatedAt,
     };
@@ -394,21 +420,30 @@ router.post('/:schoolId/update-address', async (req, res) => {
     const schoolTypes = getSchoolTypes(school.name);
     
     // Update school with new address, coordinates, and school types
+    // Note: placesData is not updated here, so we extract neighborhood from existing placesData if available
+    const { placesData, placeId, ...schoolDataWithoutPlaces } = school;
+    const neighborhood = extractNeighborhood(placesData);
+    
     const updatedSchool = {
-      ...school,
+      ...schoolDataWithoutPlaces,
       address: place.address,
       coordinates: place.coordinates,
       schoolTypes: schoolTypes,
+      ...(neighborhood && { neighborhood }),
       updatedAt: new Date().toISOString(),
     };
 
-    schools[schoolIndex] = updatedSchool;
+    schools[schoolIndex] = {
+      ...updatedSchool,
+      placesData: placesData, // Keep placesData in stored data
+      placeId: placeId,
+    };
     await fs.writeFile(SCHOOLS_FILE, JSON.stringify(schools, null, 2));
 
     console.log(`[Places API] Updated ${school.name}: ${place.address}`);
 
     res.json({ 
-      school: updatedSchool,
+      school: updatedSchool, // Exclude placesData/placeId from response
       place: {
         name: place.name,
         address: place.address,

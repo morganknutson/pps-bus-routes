@@ -89,12 +89,18 @@
       "originalLine": "7:21 am5008/5009 SW Barnes Rd [SE]113AIN-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.728585,
-        45.51817560000001
+        -122.72881685559445,
+        45.51830788118959
       ],
       "displayName": "5008 SW Barnes Rd, Portland, OR 97221, USA",
       "placeId": "ChIJ_x3skIMJlVQRJF4tvMKCm_Y",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.728585,
+        45.51817560000001
+      ],
+      "snapDistance": 23.29543384525066
     },
     {
       "id": "stop-7",
@@ -149,12 +155,18 @@
       "originalLine": "7:41 am925 NW HOYT ST [S]113AIN-A(10)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6807601,
-        45.5273602
+        -122.6807557897765,
+        45.52727145443437
       ],
       "displayName": "925 NW Hoyt St, Portland, OR 97209, USA",
       "placeId": "ChIJK-5nc_8JlVQRF4NVVj-1-_A",
-      "neighborhood": "Northwest Portland"
+      "neighborhood": "Northwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6807601,
+        45.5273602
+      ],
+      "snapDistance": 9.873767293028017
     },
     {
       "id": "stop-0",
@@ -169,7 +181,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     }
   ],
   "neighborhoods": [
@@ -1807,5 +1820,11 @@
       45.51014,
       -122.69937
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 2,
+    "skipped": 8,
+    "errors": 0,
+    "total": 11
+  }
 }

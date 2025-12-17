@@ -217,4 +217,17 @@ body {
   background-color: var(--bg-tertiary) !important;
 }
 
+/* Dark mode styles for Leaflet attribution control */
+.theme-dark .leaflet-control-attribution {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-dark .leaflet-control-attribution a {
+  color: var(--text-primary) !important;
+}
+
 

@@ -1,0 +1,522 @@
+{
+  "id": "203OCG-A_effective_091025.pdf",
+  "name": "203",
+  "direction": "Morning",
+  "filename": "203OCG-A_effective_091025.pdf",
+  "fileId": "203OCG-A_effective_091025.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "N Houghton St. & N Drummond Ave. [NE]",
+      "time": "8:43 am",
+      "direction": "NE",
+      "originalLine": "8:43 amN HOUGHTON ST @ N DRUMMOND AV [NE]203OCG-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6994487,
+        45.5870841
+      ],
+      "displayName": "N Drummond Ave & N Houghton St, Portland, OR 97217, USA",
+      "placeId": "EjdOIERydW1tb25kIEF2ZSAmIE4gSG91Z2h0b24gU3QsIFBvcnRsYW5kLCBPUiA5NzIxNywgVVNBImYiZAoUChIJQzb9OManlVQR-PEubqDjUGMSFAoSCUM2_TjGp5VUEfjxLm6g41BjGhQKEgk7bLEuvKeVVBGIsyE-EEN99hoUChIJQ5fbo-inlVQRP_JSpQc5XUMiCg15CSwbFcmM3bY",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "N Endicott Ave. & N Willis Blvd. [NW]",
+      "time": "8:45 am",
+      "direction": "NW",
+      "originalLine": "8:45 amN ENDICOTT AV @ N WILLIS BLVD [NW]203OCG-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7014278,
+        45.5840109
+      ],
+      "displayName": "N Willis Blvd & N Endicott Ave, Portland, OR 97217, USA",
+      "placeId": "EjdOIFdpbGxpcyBCbHZkICYgTiBFbmRpY290dCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxNywgVVNBImYiZAoUChIJn9sdRsenlVQR5IBqLKWzDPESFAoSCZ_bHUbHp5VUEeSAaiylswzxGhQKEgmRG7sQwaeVVBFKRs5hTKhU2RoUChIJY59zX8anlVQRz5w5hfKeps8iCg1tkSsbFXo_3bY",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "N Kilpatrick St. & N Brandon Ave. [SW]",
+      "time": "8:49 am",
+      "direction": "SW",
+      "originalLine": "8:49 amN KILPATRICK ST @ N BRANDON AV [SW]203OCG-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6890525,
+        45.58240130000001
+      ],
+      "displayName": "N Kilpatrick St & N Brandon Ave, Portland, OR 97217, USA",
+      "placeId": "EjhOIEtpbHBhdHJpY2sgU3QgJiBOIEJyYW5kb24gQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTcsIFVTQSJmImQKFAoSCTOFEji3p5VUEWVWpmemiFAIEhQKEgkzhRI4t6eVVBFlVqZnpohQCBoUChIJSRORVLinlVQRZQ1DYI3LFf4aFAoSCSdC9q6wp5VUEcb_338q8a0kIgoNjVIrGxXjIt-2",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "N Columbia Blvd. & N Congress Ave. [SW]",
+      "time": "8:53 am",
+      "direction": "SW",
+      "originalLine": "8:53 amN COLUMBIA BLVD @ N CONGRESS AV [SW]203OCG-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6717238,
+        45.5835997
+      ],
+      "displayName": "N Congress Ave & N Columbia Blvd, Portland, OR 97217, USA",
+      "placeId": "EjlOIENvbmdyZXNzIEF2ZSAmIE4gQ29sdW1iaWEgQmx2ZCwgUG9ydGxhbmQsIE9SIDk3MjE3LCBVU0EiZiJkChQKEgkx_NgTTaaVVBGaxSoagi5NqhIUChIJMfzYE02mlVQRmsUqGoIuTaoaFAoSCX0bAUNNppVUETS1qLVROKp_GhQKEgl1wW1e2KeVVBFlVJTzQ-o5liIKDV2BKxsVysfhtg",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "NE Morgan St. & NE 6th Ave. [SW]",
+      "time": "8:58 am",
+      "direction": "SW",
+      "originalLine": "8:58 amNE MORGAN ST @ NE 6TH AV [SW]203OCG-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6593625,
+        45.57443869999999
+      ],
+      "displayName": "NE 6th Ave & NE Morgan St, Portland, OR 97211, USA",
+      "placeId": "EjJORSA2dGggQXZlICYgTkUgTW9yZ2FuIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCQHQL5r_ppVUEQBzM6Ri1XeaEhQKEgkB0C-a_6aVVBEAczOkYtV3mhoUChIJ6ztj7kunlVQRJPGoLWXniukaFAoSCVdadC35ppVUEb-vL17VwonVIgoNgxsqGxWnquO2",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-0",
+      "address": "6031 N Montana Ave, Portland, OR 97217, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:OCKLEY GREEN GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6806322,
+        45.5669933
+      ],
+      "displayName": "6031 N Montana Ave, Portland, OR 97217, USA",
+      "schoolName": "Ockley Green"
+    }
+  ],
+  "neighborhoods": [
+    "North Portland",
+    "Woodlawn"
+  ],
+  "processedAt": "2025-12-17T09:05:05.367Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.58708,
+      -122.69945
+    ],
+    [
+      45.5871,
+      -122.7014
+    ],
+    [
+      45.58523,
+      -122.70142
+    ],
+    [
+      45.58445,
+      -122.70142
+    ],
+    [
+      45.58415,
+      -122.70143
+    ],
+    [
+      45.58401,
+      -122.70143
+    ],
+    [
+      45.58401,
+      -122.7007
+    ],
+    [
+      45.58401,
+      -122.69991
+    ],
+    [
+      45.58402,
+      -122.69899
+    ],
+    [
+      45.584,
+      -122.69721
+    ],
+    [
+      45.58333,
+      -122.69722
+    ],
+    [
+      45.58313,
+      -122.69722
+    ],
+    [
+      45.58312,
+      -122.69541
+    ],
+    [
+      45.58312,
+      -122.69482
+    ],
+    [
+      45.58311,
+      -122.69328
+    ],
+    [
+      45.5831,
+      -122.69231
+    ],
+    [
+      45.58291,
+      -122.69242
+    ],
+    [
+      45.58275,
+      -122.69246
+    ],
+    [
+      45.58241,
+      -122.69211
+    ],
+    [
+      45.58241,
+      -122.68915
+    ],
+    [
+      45.5824,
+      -122.68905
+    ],
+    [
+      45.58312,
+      -122.68906
+    ],
+    [
+      45.58393,
+      -122.68905
+    ],
+    [
+      45.58454,
+      -122.68906
+    ],
+    [
+      45.58456,
+      -122.68945
+    ],
+    [
+      45.5846,
+      -122.6897
+    ],
+    [
+      45.5847,
+      -122.6901
+    ],
+    [
+      45.5849,
+      -122.69057
+    ],
+    [
+      45.58501,
+      -122.69077
+    ],
+    [
+      45.58526,
+      -122.69107
+    ],
+    [
+      45.58583,
+      -122.6916
+    ],
+    [
+      45.5865,
+      -122.69222
+    ],
+    [
+      45.58666,
+      -122.69225
+    ],
+    [
+      45.58685,
+      -122.69222
+    ],
+    [
+      45.58693,
+      -122.69213
+    ],
+    [
+      45.58681,
+      -122.69158
+    ],
+    [
+      45.58653,
+      -122.69031
+    ],
+    [
+      45.58636,
+      -122.68957
+    ],
+    [
+      45.58578,
+      -122.68692
+    ],
+    [
+      45.58544,
+      -122.68535
+    ],
+    [
+      45.5852,
+      -122.68425
+    ],
+    [
+      45.58508,
+      -122.6838
+    ],
+    [
+      45.58474,
+      -122.68286
+    ],
+    [
+      45.58446,
+      -122.68207
+    ],
+    [
+      45.58429,
+      -122.6816
+    ],
+    [
+      45.58409,
+      -122.68097
+    ],
+    [
+      45.58403,
+      -122.6806
+    ],
+    [
+      45.58402,
+      -122.6804
+    ],
+    [
+      45.58402,
+      -122.68004
+    ],
+    [
+      45.58405,
+      -122.67977
+    ],
+    [
+      45.58408,
+      -122.67957
+    ],
+    [
+      45.5841,
+      -122.67941
+    ],
+    [
+      45.58418,
+      -122.67881
+    ],
+    [
+      45.58425,
+      -122.678
+    ],
+    [
+      45.58425,
+      -122.67763
+    ],
+    [
+      45.58422,
+      -122.67704
+    ],
+    [
+      45.58408,
+      -122.67586
+    ],
+    [
+      45.58395,
+      -122.67482
+    ],
+    [
+      45.58349,
+      -122.67078
+    ],
+    [
+      45.58332,
+      -122.66967
+    ],
+    [
+      45.58313,
+      -122.66866
+    ],
+    [
+      45.58294,
+      -122.66782
+    ],
+    [
+      45.58274,
+      -122.66706
+    ],
+    [
+      45.58238,
+      -122.66576
+    ],
+    [
+      45.58154,
+      -122.66287
+    ],
+    [
+      45.58116,
+      -122.66142
+    ],
+    [
+      45.581,
+      -122.66139
+    ],
+    [
+      45.58098,
+      -122.66137
+    ],
+    [
+      45.58096,
+      -122.66134
+    ],
+    [
+      45.58051,
+      -122.66134
+    ],
+    [
+      45.58029,
+      -122.66136
+    ],
+    [
+      45.57929,
+      -122.66136
+    ],
+    [
+      45.57908,
+      -122.66137
+    ],
+    [
+      45.57849,
+      -122.66137
+    ],
+    [
+      45.57765,
+      -122.66135
+    ],
+    [
+      45.57708,
+      -122.66136
+    ],
+    [
+      45.57649,
+      -122.66137
+    ],
+    [
+      45.57608,
+      -122.66136
+    ],
+    [
+      45.5759,
+      -122.66136
+    ],
+    [
+      45.5758,
+      -122.66142
+    ],
+    [
+      45.57512,
+      -122.66143
+    ],
+    [
+      45.57486,
+      -122.66143
+    ],
+    [
+      45.57444,
+      -122.66144
+    ],
+    [
+      45.57444,
+      -122.66038
+    ],
+    [
+      45.57444,
+      -122.65936
+    ],
+    [
+      45.57444,
+      -122.66038
+    ],
+    [
+      45.57444,
+      -122.66144
+    ],
+    [
+      45.5729,
+      -122.66144
+    ],
+    [
+      45.57016,
+      -122.66144
+    ],
+    [
+      45.56999,
+      -122.66145
+    ],
+    [
+      45.56998,
+      -122.66204
+    ],
+    [
+      45.56998,
+      -122.66239
+    ],
+    [
+      45.56998,
+      -122.66366
+    ],
+    [
+      45.56996,
+      -122.66688
+    ],
+    [
+      45.56994,
+      -122.67072
+    ],
+    [
+      45.56993,
+      -122.67334
+    ],
+    [
+      45.56993,
+      -122.67532
+    ],
+    [
+      45.5699,
+      -122.68012
+    ],
+    [
+      45.56842,
+      -122.68015
+    ],
+    [
+      45.56778,
+      -122.68016
+    ],
+    [
+      45.56699,
+      -122.68017
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 5,
+    "errors": 0,
+    "total": 6
+  }
+}

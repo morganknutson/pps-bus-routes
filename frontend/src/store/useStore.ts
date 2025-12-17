@@ -76,20 +76,47 @@ export const useStore = create<Store>((set) => ({
       };
     });
     
-    set({ routes: routesWithColors });
+    // Update routes and clear selectedStop if there are no routes to show
+    set((state) => {
+      const shouldClearSelectedStop = routesWithColors.length === 0 && state.selectedStop;
+      
+      if (shouldClearSelectedStop) {
+        console.log('[useStore] Routes cleared, clearing selected stop');
+      }
+      
+      return {
+        routes: routesWithColors,
+        selectedStop: shouldClearSelectedStop ? null : state.selectedStop,
+      };
+    });
     
     // Save to cache
     saveRoutesToCache(routesWithColors);
   },
 
   toggleRouteSelection: (routeId) =>
-    set((state) => ({
-      routes: state.routes.map((route) =>
+    set((state) => {
+      const updatedRoutes = state.routes.map((route) =>
         route.id === routeId
           ? { ...route, isSelected: !route.isSelected }
           : route
-      ),
-    })),
+      );
+      
+      let updatedSelectedStop = state.selectedStop;
+      const routeBeingToggled = state.routes.find((route) => route.id === routeId);
+      const isCurrentlySelected = routeBeingToggled?.isSelected;
+      
+      // If the route is currently selected and is being turned off, clear the selected stop for that route
+      if (isCurrentlySelected && state.selectedStop && state.selectedStop.route.id === routeId) {
+        console.log('[useStore] Route deselected, clearing selected stop');
+        updatedSelectedStop = null;
+      }
+      
+      return {
+        routes: updatedRoutes,
+        selectedStop: updatedSelectedStop,
+      };
+    }),
 
   setHomeAddress: (address) => {
     set({ homeAddress: address });
@@ -177,7 +204,19 @@ export const useStore = create<Store>((set) => ({
     set({ currentGeocodingRouteId: routeId }),
 
   setSelectedSchool: (schoolId) => {
-    set({ selectedSchoolId: schoolId });
+    // When the selected school changes, clear any selected stop so the UI can show the new context
+    set((state) => {
+      const hadSelectedStop = !!state.selectedStop;
+      
+      if (hadSelectedStop) {
+        console.log('[useStore] School changed, clearing selected stop');
+      }
+      
+      return {
+        selectedSchoolId: schoolId,
+        selectedStop: hadSelectedStop ? null : state.selectedStop,
+      };
+    });
     // Save to localStorage
     if (schoolId) {
       localStorage.setItem('selectedSchoolId', schoolId);

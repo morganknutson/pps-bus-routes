@@ -1,0 +1,251 @@
+{
+  "id": "241VRN-A_effective_082625.pdf",
+  "name": "241",
+  "direction": "Morning",
+  "filename": "241VRN-A_effective_082625.pdf",
+  "fileId": "241VRN-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "NE Killingsworth St. No Intersection [N]",
+      "time": "8:26 am",
+      "direction": "N",
+      "originalLine": "8:26 amNE KILLINGSWORTH ST No Intersection [N]241VRN-AStop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6085214,
+        45.5627463
+      ],
+      "displayName": "NE Killingsworth St, Portland, OR, USA",
+      "placeId": "ChIJuYIhDrimlVQRTViwfdZflDQ",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 42nd Ave. & NE Emerson St. [NW]",
+      "time": "8:26 am",
+      "direction": "NW",
+      "originalLine": "8:26 amNE 42ND AV @ NE EMERSON ST [NW]241VRN-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6204138,
+        45.5613321
+      ],
+      "displayName": "NE Emerson St & NE 42nd Ave, Portland, OR 97218, USA",
+      "placeId": "EjRORSBFbWVyc29uIFN0ICYgTkUgNDJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBImYiZAoUChIJqXoFCcSmlVQRWmCb7LIo9kwSFAoSCal6BQnEppVUEVpgm-yyKPZMGhQKEglT7kVUsKaVVBHvhgCk_EN7ZxoUChIJrYuG59GmlVQR6F99irSkXrUiCg2JGygbFRac6bY",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Prescott St. & NE Cesar E Chavez Blvd. [NE]",
+      "time": "8:28 am",
+      "direction": "NE",
+      "originalLine": "8:28 amNE PRESCOTT ST @ NE CESAR E CHAVEZ BLVD [NE]241VRN-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6234655,
+        45.5555527
+      ],
+      "displayName": "NE Prescott St & NE Cesar E Chavez Blvd, Portland, OR 97211, USA",
+      "placeId": "EkBORSBQcmVzY290dCBTdCAmIE5FIENlc2FyIEUgQ2hhdmV6IEJsdmQsIFBvcnRsYW5kLCBPUiA5NzIxMSwgVVNBImYiZAoUChIJw8SgntqmlVQREPwQ2wiAzFMSFAoSCcPEoJ7appVUERD8ENsIgMxTGhQKEgn5CEBiTaGVVBETcgNp_vAWKBoUChIJEQtTEuumlVQRhnUkTgI4cmEiCg3HOScbFeEk6bY",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE Prescott St. & NE 34th Ave. [NE]",
+      "time": "8:30 am",
+      "direction": "NE",
+      "originalLine": "8:30 amNE PRESCOTT ST @ NE 34TH AV [NE]241VRN-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6296867,
+        45.5552134
+      ],
+      "displayName": "NE Prescott St & NE 34th Ave, Portland, OR 97211, USA",
+      "placeId": "EjVORSBQcmVzY290dCBTdCAmIE5FIDM0dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCVmz6ojZppVUEfME-q37p64lEhQKEglZs-qI2aaVVBHzBPqt-6euJRoUChIJ-QhAYk2hlVQRE3IDaf7wFigaFAoSCTtmLyfdppVUEYPBcT0UePC8IgoNhiwnGxXdMei2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:VERNON GT & ST & CAB LOADING ZONE ON 20TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6438366,
+        45.5623398
+      ],
+      "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "schoolName": "Vernon"
+    }
+  ],
+  "neighborhoods": [
+    "Cully",
+    "Northeast Portland"
+  ],
+  "processedAt": "2025-12-17T09:11:14.197Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.56275,
+      -122.60852
+    ],
+    [
+      45.56279,
+      -122.61507
+    ],
+    [
+      45.5628,
+      -122.61846
+    ],
+    [
+      45.56281,
+      -122.6198
+    ],
+    [
+      45.56281,
+      -122.62042
+    ],
+    [
+      45.56249,
+      -122.62041
+    ],
+    [
+      45.56198,
+      -122.62041
+    ],
+    [
+      45.56093,
+      -122.62041
+    ],
+    [
+      45.5596,
+      -122.62041
+    ],
+    [
+      45.55636,
+      -122.62042
+    ],
+    [
+      45.55577,
+      -122.62042
+    ],
+    [
+      45.55557,
+      -122.62042
+    ],
+    [
+      45.55557,
+      -122.62061
+    ],
+    [
+      45.55557,
+      -122.62143
+    ],
+    [
+      45.55557,
+      -122.62174
+    ],
+    [
+      45.55556,
+      -122.62293
+    ],
+    [
+      45.55555,
+      -122.6236
+    ],
+    [
+      45.55555,
+      -122.62448
+    ],
+    [
+      45.55554,
+      -122.62526
+    ],
+    [
+      45.55553,
+      -122.62554
+    ],
+    [
+      45.55524,
+      -122.62554
+    ],
+    [
+      45.55521,
+      -122.62558
+    ],
+    [
+      45.5552,
+      -122.62564
+    ],
+    [
+      45.5552,
+      -122.62764
+    ],
+    [
+      45.55522,
+      -122.63069
+    ],
+    [
+      45.55672,
+      -122.63069
+    ],
+    [
+      45.56126,
+      -122.63068
+    ],
+    [
+      45.56272,
+      -122.63067
+    ],
+    [
+      45.56271,
+      -122.63654
+    ],
+    [
+      45.56271,
+      -122.64041
+    ],
+    [
+      45.56269,
+      -122.64296
+    ],
+    [
+      45.5627,
+      -122.64464
+    ],
+    [
+      45.5627,
+      -122.64483
+    ],
+    [
+      45.56221,
+      -122.64483
+    ],
+    [
+      45.56211,
+      -122.64483
+    ],
+    [
+      45.56211,
+      -122.6443
+    ],
+    [
+      45.56208,
+      -122.64387
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 4,
+    "errors": 0,
+    "total": 5
+  }
+}

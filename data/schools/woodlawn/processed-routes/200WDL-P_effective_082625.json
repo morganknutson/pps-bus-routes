@@ -1,0 +1,384 @@
+{
+  "id": "200WDL-P_effective_082625.pdf",
+  "name": "200",
+  "direction": "Afternoon",
+  "filename": "200WDL-P_effective_082625.pdf",
+  "fileId": "200WDL-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "7200 NE 11th Ave, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:WOODLAWN ST & CAB LOADING ZONE ON 12TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6531854,
+        45.5749134
+      ],
+      "displayName": "7200 NE 11th Ave, Portland, OR 97211, USA",
+      "schoolName": "Woodlawn"
+    },
+    {
+      "id": "stop-1",
+      "address": "N Terry St. & N Albina Ave. [NE]",
+      "time": "2:39 pm",
+      "direction": "NE",
+      "originalLine": "2:39 pmN TERRY ST @ N ALBINA AV [NE]200WDL-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6743644,
+        45.58000819999999
+      ],
+      "displayName": "N Albina Ave & N Terry St, Portland, OR 97217, USA",
+      "placeId": "EjJOIEFsYmluYSBBdmUgJiBOIFRlcnJ5IFN0LCBQb3J0bGFuZCwgT1IgOTcyMTcsIFVTQSJmImQKFAoSCYGHTnStp5VUEffJbp0Xv7e-EhQKEgmBh050raeVVBH3yW6dF7-3vhoUChIJpXtacwinlVQRM0MOtMPknF4aFAoSCcUk3Yawp5VUEd9iO0kpPxT1IgoNEvUqGxWkYOG2",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "N Albina Ave. & N Morgan St. [NW]",
+      "time": "2:41 pm",
+      "direction": "NW",
+      "originalLine": "2:41 pmN ALBINA AV @ N MORGAN ST [NW]200WDL-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6748548,
+        45.5744468
+      ],
+      "displayName": "N Albina Ave & N Morgan St, Portland, OR 97217, USA",
+      "placeId": "EjNOIEFsYmluYSBBdmUgJiBOIE1vcmdhbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjE3LCBVU0EiZiJkChQKEgkJuRM-qaeVVBGAIhf22SXQpRIUChIJCbkTPqmnlVQRgCIX9tkl0KUaFAoSCaV7WnMIp5VUETNDDrTD5JxeGhQKEgkZRdl8qaeVVBF4U8eVXUB2CyIKDdQbKhsVfE3htg",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "Faubion School (2930 NE Dekum St) [S]",
+      "time": "2:49 pm",
+      "direction": "S",
+      "originalLine": "2:49 pmFAUBION SCHOOL (2930 NE DEKUM ST) [S]200WDL-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6350494592141,
+        45.57096424247775
+      ],
+      "displayName": "2930 NE Dekum St, Portland, OR 97211, USA",
+      "placeId": "ChIJn1TNok-nlVQRklSrYC2t3Lg",
+      "neighborhood": "Concordia"
+    }
+  ],
+  "neighborhoods": [
+    "Concordia",
+    "North Portland"
+  ],
+  "processedAt": "2025-12-17T09:11:41.764Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.57495,
+      -122.65369
+    ],
+    [
+      45.57592,
+      -122.65368
+    ],
+    [
+      45.57592,
+      -122.65355
+    ],
+    [
+      45.57609,
+      -122.65355
+    ],
+    [
+      45.57615,
+      -122.65355
+    ],
+    [
+      45.57645,
+      -122.65354
+    ],
+    [
+      45.57678,
+      -122.65354
+    ],
+    [
+      45.57696,
+      -122.65354
+    ],
+    [
+      45.577,
+      -122.65374
+    ],
+    [
+      45.57713,
+      -122.65451
+    ],
+    [
+      45.57718,
+      -122.65517
+    ],
+    [
+      45.57721,
+      -122.65568
+    ],
+    [
+      45.57722,
+      -122.65673
+    ],
+    [
+      45.57722,
+      -122.65832
+    ],
+    [
+      45.57722,
+      -122.66071
+    ],
+    [
+      45.57722,
+      -122.66337
+    ],
+    [
+      45.57723,
+      -122.66681
+    ],
+    [
+      45.57722,
+      -122.66877
+    ],
+    [
+      45.57721,
+      -122.67428
+    ],
+    [
+      45.57721,
+      -122.6748
+    ],
+    [
+      45.5774,
+      -122.6748
+    ],
+    [
+      45.57751,
+      -122.67472
+    ],
+    [
+      45.57768,
+      -122.67447
+    ],
+    [
+      45.57782,
+      -122.67438
+    ],
+    [
+      45.57933,
+      -122.67437
+    ],
+    [
+      45.58001,
+      -122.67436
+    ],
+    [
+      45.57933,
+      -122.67437
+    ],
+    [
+      45.57795,
+      -122.67437
+    ],
+    [
+      45.57782,
+      -122.67438
+    ],
+    [
+      45.57774,
+      -122.67442
+    ],
+    [
+      45.57768,
+      -122.67447
+    ],
+    [
+      45.57758,
+      -122.67464
+    ],
+    [
+      45.57751,
+      -122.67472
+    ],
+    [
+      45.5774,
+      -122.6748
+    ],
+    [
+      45.57616,
+      -122.67482
+    ],
+    [
+      45.57534,
+      -122.67483
+    ],
+    [
+      45.57487,
+      -122.67484
+    ],
+    [
+      45.57445,
+      -122.67485
+    ],
+    [
+      45.57487,
+      -122.67484
+    ],
+    [
+      45.57534,
+      -122.67483
+    ],
+    [
+      45.57581,
+      -122.67482
+    ],
+    [
+      45.57693,
+      -122.67481
+    ],
+    [
+      45.57721,
+      -122.6748
+    ],
+    [
+      45.57721,
+      -122.67428
+    ],
+    [
+      45.57721,
+      -122.67176
+    ],
+    [
+      45.57722,
+      -122.66915
+    ],
+    [
+      45.57722,
+      -122.66796
+    ],
+    [
+      45.57721,
+      -122.66221
+    ],
+    [
+      45.57723,
+      -122.66136
+    ],
+    [
+      45.57722,
+      -122.65935
+    ],
+    [
+      45.57721,
+      -122.65568
+    ],
+    [
+      45.57716,
+      -122.6549
+    ],
+    [
+      45.57713,
+      -122.65451
+    ],
+    [
+      45.577,
+      -122.65374
+    ],
+    [
+      45.57669,
+      -122.65211
+    ],
+    [
+      45.57663,
+      -122.65183
+    ],
+    [
+      45.57656,
+      -122.65173
+    ],
+    [
+      45.57655,
+      -122.65167
+    ],
+    [
+      45.57629,
+      -122.65035
+    ],
+    [
+      45.57588,
+      -122.64825
+    ],
+    [
+      45.57416,
+      -122.63948
+    ],
+    [
+      45.57368,
+      -122.63705
+    ],
+    [
+      45.57348,
+      -122.63595
+    ],
+    [
+      45.5734,
+      -122.63597
+    ],
+    [
+      45.57304,
+      -122.63599
+    ],
+    [
+      45.57248,
+      -122.636
+    ],
+    [
+      45.57242,
+      -122.636
+    ],
+    [
+      45.57189,
+      -122.63596
+    ],
+    [
+      45.57189,
+      -122.63534
+    ],
+    [
+      45.57161,
+      -122.63536
+    ],
+    [
+      45.57109,
+      -122.63535
+    ],
+    [
+      45.57101,
+      -122.63528
+    ],
+    [
+      45.57099,
+      -122.63518
+    ],
+    [
+      45.57096,
+      -122.63505
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 3,
+    "errors": 0,
+    "total": 4
+  }
+}

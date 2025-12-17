@@ -19,7 +19,8 @@
         45.5579142
       ],
       "displayName": "1710 N Humboldt St, Portland, OR 97217, USA",
-      "schoolName": "Beach"
+      "schoolName": "Beach",
+      "neighborhood": "Overlook"
     },
     {
       "id": "stop-1",
@@ -967,5 +968,11 @@
       45.61783,
       -122.68944
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 4,
+    "errors": 0,
+    "total": 5
+  }
 }

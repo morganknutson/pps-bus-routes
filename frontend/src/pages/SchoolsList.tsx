@@ -573,6 +573,15 @@ export function SchoolsList() {
               </div>
             </div>
           )}
+          {selectedSchool.neighborhood && (
+            <div style={{ marginBottom: '0.75rem' }}>
+              <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Neighborhood</div>
+              <div style={{ fontSize: '14px', color: '#333', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: '#999' }}></i>
+                <span>{selectedSchool.neighborhood}</span>
+              </div>
+            </div>
+          )}
           {selectedSchool.address && (
             <div style={{ marginBottom: '0.75rem' }}>
               <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

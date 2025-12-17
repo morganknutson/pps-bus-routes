@@ -289,7 +289,8 @@
         45.464172
       ],
       "displayName": "8401 SW 17th Ave, Portland, OR 97219, USA",
-      "schoolName": "Capitol"
+      "schoolName": "Capitol",
+      "neighborhood": "Southwest Portland"
     }
   ],
   "neighborhoods": [
@@ -1666,5 +1667,11 @@
       45.46458,
       -122.69598
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 18,
+    "errors": 0,
+    "total": 19
+  }
 }

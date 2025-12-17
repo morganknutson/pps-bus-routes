@@ -1,0 +1,192 @@
+{
+  "id": "241VRN-P_effective_082625.pdf",
+  "name": "241",
+  "direction": "Afternoon",
+  "filename": "241VRN-P_effective_082625.pdf",
+  "fileId": "241VRN-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:VERNON GT & ST & CAB LOADING ZONE ON 20TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6438366,
+        45.5623398
+      ],
+      "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "schoolName": "Vernon"
+    },
+    {
+      "id": "stop-1",
+      "address": "NE 42nd Ave. & NE Emerson St. [NW]",
+      "time": "3:43 pm",
+      "direction": "NW",
+      "originalLine": "3:43 pmNE 42ND AV @ NE EMERSON ST [NW]241VRN-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6204138,
+        45.5613321
+      ],
+      "displayName": "NE Emerson St & NE 42nd Ave, Portland, OR 97218, USA",
+      "placeId": "EjRORSBFbWVyc29uIFN0ICYgTkUgNDJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBImYiZAoUChIJqXoFCcSmlVQRWmCb7LIo9kwSFAoSCal6BQnEppVUEVpgm-yyKPZMGhQKEglT7kVUsKaVVBHvhgCk_EN7ZxoUChIJrYuG59GmlVQR6F99irSkXrUiCg2JGygbFRac6bY",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE Prescott St. & NE Cesar E Chavez Blvd. [NE]",
+      "time": "3:45 pm",
+      "direction": "NE",
+      "originalLine": "3:45 pmNE PRESCOTT ST @ NE CESAR E CHAVEZ BLVD [NE]241VRN-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6234655,
+        45.5555527
+      ],
+      "displayName": "NE Prescott St & NE Cesar E Chavez Blvd, Portland, OR 97211, USA",
+      "placeId": "EkBORSBQcmVzY290dCBTdCAmIE5FIENlc2FyIEUgQ2hhdmV6IEJsdmQsIFBvcnRsYW5kLCBPUiA5NzIxMSwgVVNBImYiZAoUChIJw8SgntqmlVQREPwQ2wiAzFMSFAoSCcPEoJ7appVUERD8ENsIgMxTGhQKEgn5CEBiTaGVVBETcgNp_vAWKBoUChIJEQtTEuumlVQRhnUkTgI4cmEiCg3HOScbFeEk6bY",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Prescott St. & NE 34th Ave. [NE]",
+      "time": "3:47 pm",
+      "direction": "NE",
+      "originalLine": "3:47 pmNE PRESCOTT ST @ NE 34TH AV [NE]241VRN-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6296867,
+        45.5552134
+      ],
+      "displayName": "NE Prescott St & NE 34th Ave, Portland, OR 97211, USA",
+      "placeId": "EjVORSBQcmVzY290dCBTdCAmIE5FIDM0dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCVmz6ojZppVUEfME-q37p64lEhQKEglZs-qI2aaVVBHzBPqt-6euJRoUChIJ-QhAYk2hlVQRE3IDaf7wFigaFAoSCTtmLyfdppVUEYPBcT0UePC8IgoNhiwnGxXdMei2",
+      "neighborhood": "Northeast Portland"
+    }
+  ],
+  "neighborhoods": [
+    "Cully",
+    "Northeast Portland"
+  ],
+  "processedAt": "2025-12-17T09:11:15.505Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.56208,
+      -122.64387
+    ],
+    [
+      45.56211,
+      -122.64483
+    ],
+    [
+      45.5627,
+      -122.64483
+    ],
+    [
+      45.5627,
+      -122.64286
+    ],
+    [
+      45.5627,
+      -122.6403
+    ],
+    [
+      45.56271,
+      -122.63836
+    ],
+    [
+      45.56271,
+      -122.63634
+    ],
+    [
+      45.56272,
+      -122.63333
+    ],
+    [
+      45.56271,
+      -122.63163
+    ],
+    [
+      45.56272,
+      -122.63035
+    ],
+    [
+      45.56276,
+      -122.62662
+    ],
+    [
+      45.5628,
+      -122.62102
+    ],
+    [
+      45.56281,
+      -122.62042
+    ],
+    [
+      45.56217,
+      -122.62041
+    ],
+    [
+      45.56133,
+      -122.62041
+    ],
+    [
+      45.55889,
+      -122.62041
+    ],
+    [
+      45.5567,
+      -122.62042
+    ],
+    [
+      45.55557,
+      -122.62042
+    ],
+    [
+      45.55556,
+      -122.62245
+    ],
+    [
+      45.55555,
+      -122.62397
+    ],
+    [
+      45.55553,
+      -122.62554
+    ],
+    [
+      45.55524,
+      -122.62554
+    ],
+    [
+      45.55522,
+      -122.62556
+    ],
+    [
+      45.55521,
+      -122.6256
+    ],
+    [
+      45.55521,
+      -122.62663
+    ],
+    [
+      45.55521,
+      -122.62969
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 3,
+    "errors": 0,
+    "total": 4
+  }
+}

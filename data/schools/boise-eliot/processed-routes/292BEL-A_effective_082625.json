@@ -29,12 +29,18 @@
       "originalLine": "7:42 am2414 NE RODNEY AV [W]292BEL-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6639379,
-        45.5402853
+        -122.66416527818198,
+        45.54028646118941
       ],
       "displayName": "2414 NE Rodney Ave, Portland, OR 97212, USA",
       "placeId": "ChIJHUmU0UinlVQRGqIJ4lg6izE",
-      "neighborhood": "Eliot"
+      "neighborhood": "Eliot",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6639379,
+        45.5402853
+      ],
+      "snapDistance": 17.709086107767824
     },
     {
       "id": "stop-0",
@@ -49,7 +55,8 @@
         45.54754459999999
       ],
       "displayName": "620 N Fremont St, Portland, OR 97227, USA",
-      "schoolName": "Boise-Eliot"
+      "schoolName": "Boise-Eliot",
+      "neighborhood": "North Portland"
     }
   ],
   "processedAt": "2025-12-12T23:34:31.386Z",
@@ -255,5 +262,11 @@
       45.54759,
       -122.6729
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 1,
+    "skipped": 1,
+    "errors": 0,
+    "total": 3
+  }
 }

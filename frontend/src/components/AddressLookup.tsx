@@ -230,7 +230,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
               borderImage: 'none',
               borderStyle: 'solid',
               borderWidth: '1px',
-              borderColor: 'rgba(255, 255, 255, 1)',
+              borderColor: 'var(--border-color)',
               borderRadius: '4px',
               fontSize: '14px',
               boxSizing: 'border-box',

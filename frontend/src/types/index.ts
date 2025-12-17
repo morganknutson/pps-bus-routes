@@ -39,6 +39,7 @@ export interface School {
   name: string;
   address?: string; // Physical address of the school
   coordinates?: [number, number]; // [lng, lat] geocoded coordinates
+  neighborhood?: string; // Neighborhood name from placesData
   schoolPageLink: string | null; // Link to school's page on PPS website
   driveLink: string | null; // Link to Google Drive folder with PDFs
   createdAt: string;

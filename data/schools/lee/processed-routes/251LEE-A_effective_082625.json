@@ -1,0 +1,381 @@
+{
+  "id": "251LEE-A_effective_082625.pdf",
+  "name": "251",
+  "direction": "Morning",
+  "filename": "251LEE-A_effective_082625.pdf",
+  "fileId": "251LEE-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NE Tillamook St. & NE 73rd Ave. [SW]",
+      "time": "7:40 am",
+      "direction": "SW",
+      "originalLine": "7:40 amNE TILLAMOOK ST @ NE 73RD AV [SW]251LEE-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5878108,
+        45.5372704
+      ],
+      "displayName": "NE Tillamook St & NE 73rd Ave., Portland, OR 97213, USA",
+      "placeId": "EjdORSBUaWxsYW1vb2sgU3QgJiBORSA3M3JkIEF2ZS4sIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJ4z6oeT6hlVQRxkJR0mqP_f0SFAoSCeM-qHk-oZVUEcZCUdJqj_39GhQKEgnLCZEBQKGVVBHDQE8bGdm0WRoUChIJ1S7UYjihlVQR3GrNsvzj0uYiCg2gbyQbFaSV7rY",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "8340 NE Broadway (broadway Vantage Apt) [S]",
+      "time": "7:43 am",
+      "direction": "S",
+      "originalLine": "7:43 am8340 NE BROADWAY (BROADWAY VANTAGE APT) [S]251LEE-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5770543,
+        45.5348357
+      ],
+      "displayName": "8340 NE Broadway, Portland, OR 97220, USA",
+      "placeId": "ChIJJ4QgxxShlVQRCJwSa01___M",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Broadway St. & NE 84th Ave. [SW]",
+      "time": "7:43 am",
+      "direction": "SW",
+      "originalLine": "7:43 amNE BROADWAY ST @ NE 84TH AV [SW]251LEE-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5764587,
+        45.53498400000001
+      ],
+      "displayName": "NE 84th Ave & NE Broadway, Portland, OR 97220, USA",
+      "placeId": "EjJORSA4NHRoIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMjAsIFVTQSJmImQKFAoSCckEAMsUoZVUEQoYFQGjMFFEEhQKEgnJBADLFKGVVBEKGBUBozBRRBoUChIJ_1Fax0GhlVQRcMrICjvUArMaFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoNUBYkGxUVUfC2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE 88th Ave. & NE Halsey St. [SE]",
+      "time": "7:47 am",
+      "direction": "SE",
+      "originalLine": "7:47 amNE 88TH AV @ NE HALSEY ST [SE]251LEE-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5725754,
+        45.533529
+      ],
+      "displayName": "NE Halsey St & NE 88th Ave, Portland, OR 97220, USA",
+      "placeId": "EjNORSBIYWxzZXkgU3QgJiBORSA4OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjIwLCBVU0EiZiJkChQKEgnh4jW_bKGVVBHtU12dEkZXfhIUChIJ4eI1v2yhlVQR7VNdnRJGV34aFAoSCflaUt-TopVUETM_V1Bq0U__GhQKEglxuQxRQ6GVVBFCCoD7lcEuCiIKDXrdIxsVxujwtg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE Tillamook & NE 90th Av(hancock Park) [S]",
+      "time": "7:49 am",
+      "direction": "S",
+      "originalLine": "7:49 amNE TILLAMOOK & NE 90TH AV(HANCOCK PARK) [S]251LEE-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5702909,
+        45.5371388
+      ],
+      "displayName": "NE Tillamook St & NE 90th Ave, Portland, OR 97220, USA",
+      "placeId": "EjZORSBUaWxsYW1vb2sgU3QgJiBORSA5MHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjIwLCBVU0EiZiJkChQKEglVuDXZa6GVVBFGxCmVlulzhBIUChIJVbg12WuhlVQRRsQplZbpc4QaFAoSCcsJkQFAoZVUEcNATxsZ2bRZGhQKEglNfNbTaaGVVBE2P45ioto1-iIKDXxqJBsVA0Lxtg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "2222 NE 92nd Ave, Portland, OR 97220, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:LEE GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5676595,
+        45.5381887
+      ],
+      "displayName": "2222 NE 92nd Ave, Portland, OR 97220, USA",
+      "schoolName": "Lee"
+    }
+  ],
+  "neighborhoods": [
+    "Northeast Portland"
+  ],
+  "processedAt": "2025-12-17T09:02:39.542Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.53727,
+      -122.58781
+    ],
+    [
+      45.53726,
+      -122.58311
+    ],
+    [
+      45.53725,
+      -122.57994
+    ],
+    [
+      45.53724,
+      -122.57937
+    ],
+    [
+      45.53724,
+      -122.57898
+    ],
+    [
+      45.5368,
+      -122.57898
+    ],
+    [
+      45.53637,
+      -122.57899
+    ],
+    [
+      45.53568,
+      -122.57901
+    ],
+    [
+      45.53501,
+      -122.57903
+    ],
+    [
+      45.535,
+      -122.57874
+    ],
+    [
+      45.535,
+      -122.5782
+    ],
+    [
+      45.53486,
+      -122.57816
+    ],
+    [
+      45.5348,
+      -122.5781
+    ],
+    [
+      45.53457,
+      -122.57746
+    ],
+    [
+      45.53446,
+      -122.57724
+    ],
+    [
+      45.53442,
+      -122.57716
+    ],
+    [
+      45.5344,
+      -122.57703
+    ],
+    [
+      45.53446,
+      -122.57677
+    ],
+    [
+      45.53457,
+      -122.57682
+    ],
+    [
+      45.53465,
+      -122.57689
+    ],
+    [
+      45.53484,
+      -122.57705
+    ],
+    [
+      45.53465,
+      -122.57689
+    ],
+    [
+      45.53457,
+      -122.57682
+    ],
+    [
+      45.53446,
+      -122.57677
+    ],
+    [
+      45.53439,
+      -122.57671
+    ],
+    [
+      45.53434,
+      -122.57659
+    ],
+    [
+      45.53432,
+      -122.57647
+    ],
+    [
+      45.53446,
+      -122.57647
+    ],
+    [
+      45.53462,
+      -122.57647
+    ],
+    [
+      45.5348,
+      -122.57647
+    ],
+    [
+      45.53498,
+      -122.57646
+    ],
+    [
+      45.53497,
+      -122.57542
+    ],
+    [
+      45.53497,
+      -122.57416
+    ],
+    [
+      45.53496,
+      -122.57388
+    ],
+    [
+      45.53472,
+      -122.57329
+    ],
+    [
+      45.53456,
+      -122.57275
+    ],
+    [
+      45.53446,
+      -122.57199
+    ],
+    [
+      45.53441,
+      -122.57121
+    ],
+    [
+      45.53426,
+      -122.57135
+    ],
+    [
+      45.53411,
+      -122.57149
+    ],
+    [
+      45.53395,
+      -122.5716
+    ],
+    [
+      45.53373,
+      -122.57172
+    ],
+    [
+      45.53359,
+      -122.57177
+    ],
+    [
+      45.53352,
+      -122.57181
+    ],
+    [
+      45.53353,
+      -122.57258
+    ],
+    [
+      45.53352,
+      -122.57181
+    ],
+    [
+      45.53359,
+      -122.57177
+    ],
+    [
+      45.53361,
+      -122.57176
+    ],
+    [
+      45.53373,
+      -122.57172
+    ],
+    [
+      45.53387,
+      -122.57165
+    ],
+    [
+      45.53408,
+      -122.57151
+    ],
+    [
+      45.53421,
+      -122.5714
+    ],
+    [
+      45.53441,
+      -122.57121
+    ],
+    [
+      45.53455,
+      -122.5711
+    ],
+    [
+      45.53467,
+      -122.57104
+    ],
+    [
+      45.53504,
+      -122.57089
+    ],
+    [
+      45.53524,
+      -122.57086
+    ],
+    [
+      45.53714,
+      -122.57086
+    ],
+    [
+      45.53714,
+      -122.57029
+    ],
+    [
+      45.53712,
+      -122.56848
+    ],
+    [
+      45.53754,
+      -122.56848
+    ],
+    [
+      45.53824,
+      -122.56846
+    ],
+    [
+      45.53828,
+      -122.56846
+    ],
+    [
+      45.53863,
+      -122.56847
+    ],
+    [
+      45.53863,
+      -122.56766
+    ],
+    [
+      45.53834,
+      -122.56766
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 5,
+    "errors": 0,
+    "total": 6
+  }
+}

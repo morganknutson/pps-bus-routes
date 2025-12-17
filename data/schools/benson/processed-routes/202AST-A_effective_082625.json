@@ -88,7 +88,8 @@
         45.5786714
       ],
       "displayName": "5601 N Yale St, Portland, OR 97203, USA",
-      "schoolName": "Astor"
+      "schoolName": "Astor",
+      "neighborhood": "North Portland"
     }
   ],
   "processedAt": "2025-12-12T22:36:19.091Z",
@@ -210,5 +211,11 @@
       45.57882,
       -122.73021
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 5,
+    "errors": 0,
+    "total": 6
+  }
 }

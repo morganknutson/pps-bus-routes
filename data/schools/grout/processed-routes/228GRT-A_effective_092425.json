@@ -43,12 +43,18 @@
       "originalLine": "7:25 am3776 SE 8TH AV [W]228GRT-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6574328,
-        45.4952619
+        -122.65765755369485,
+        45.49521877787256
       ],
       "displayName": "3776 SE 8th Ave, Portland, OR 97202, USA",
       "placeId": "ChIJ78fTpWMKlVQRBAsqKjdfYx0",
-      "neighborhood": "Brooklyn"
+      "neighborhood": "Brooklyn",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6574328,
+        45.4952619
+      ],
+      "snapDistance": 18.162603908376415
     },
     {
       "id": "stop-4",
@@ -58,12 +64,18 @@
       "originalLine": "7:27 am1106 SE CORA ST [S]228GRT-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6540058,
-        45.49196360000001
+        -122.65422314820019,
+        45.49196405208298
       ],
       "displayName": "1106 SE Cora St, Portland, OR 97202, USA",
       "placeId": "ChIJ_4wsxIkKlVQRyID7R9G1YZk",
-      "neighborhood": "Brooklyn"
+      "neighborhood": "Brooklyn",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6540058,
+        45.49196360000001
+      ],
+      "snapDistance": 16.942079291430435
     },
     {
       "id": "stop-5",
@@ -108,7 +120,8 @@
         45.4910818
       ],
       "displayName": "3119 SE Holgate Blvd, Portland, OR 97202, USA",
-      "schoolName": "Grout"
+      "schoolName": "Grout",
+      "neighborhood": "Creston - Kenilworth"
     }
   ],
   "processedAt": "2025-12-12T22:36:11.776Z",
@@ -1014,5 +1027,11 @@
       45.49108,
       -122.63369
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 2,
+    "skipped": 4,
+    "errors": 0,
+    "total": 7
+  }
 }

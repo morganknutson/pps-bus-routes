@@ -102,68 +102,79 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
     schoolId = null,
   } = options;
 
-  // Step 1: Parse PDF
+  // Step 1: Determine schoolId from folder structure FIRST (source of truth)
+  // This is the PRIMARY way to know which school - from where the PDF is located
+  const schoolIdFromOptions = options.schoolId || getSchoolIdFromFilename(filename);
+  
+  if (!schoolIdFromOptions) {
+    throw new Error(`Could not determine school from folder structure. Filename: ${filename}, schoolId option: ${options.schoolId || 'NOT PROVIDED'}. Please provide schoolId option.`);
+  }
+  
+  console.log(`${logPrefix} 📁 School determined from folder structure: ${schoolIdFromOptions}`);
+
+  // Step 2: Parse PDF
   const pdfData = await pdfParse(pdfBuffer);
   const route = parseRouteFromPDF(pdfData.text, fileId || filename, filename);
 
-  if (!route || route.stops.length === 0) {
-    throw new Error('No stops found in PDF');
+  // Allow processing even if no stops found - we'll save what we can
+  if (!route) {
+    throw new Error('Failed to parse PDF - no route data extracted');
+  }
+  
+  if (route.stops.length === 0) {
+    console.warn(`${logPrefix} ⚠️  No stops found in PDF, but will continue processing and save route`);
   }
 
-  // Step 2: Load schools.json and match to school
-  console.log(`${logPrefix} 🔍 Looking for school match. Anchor name: ${route.anchorName || 'NONE'}, schoolId from options: ${options.schoolId || 'NONE'}`);
+  // Step 3: Load schools.json and match to school (for adding school stop)
+  // PRIMARY: Use schoolId from folder structure (already determined above)
+  // SECONDARY: Try anchor name matching (optional, for validation)
   let matchedSchool = null;
+  
   if (fs.existsSync(SCHOOLS_FILE)) {
     try {
       const schoolsContent = fs.readFileSync(SCHOOLS_FILE, 'utf8');
       const schools = JSON.parse(schoolsContent);
-      console.log(`${logPrefix} Loaded ${schools.length} schools from schools.json`);
       
-      // First try to match by anchor name
-      if (route.anchorName) {
-        console.log(`${logPrefix} Trying to match by anchor name: "${route.anchorName}"`);
-        matchedSchool = matchSchoolFromAnchorName(route.anchorName, schools);
-        if (matchedSchool) {
-          console.log(`${logPrefix} ✅ Matched to school via anchor name: ${matchedSchool.name} (ID: ${matchedSchool.id})`);
+      // PRIMARY: Use schoolId directly (from folder structure)
+      matchedSchool = schools.find(s => s.id === schoolIdFromOptions);
+      
+      if (matchedSchool) {
+        console.log(`${logPrefix} ✅ Found school: ${matchedSchool.name} (ID: ${matchedSchool.id})`);
+        if (matchedSchool.address && matchedSchool.coordinates) {
+          console.log(`${logPrefix} ✅ School has address and coordinates - will add school stop`);
         } else {
-          console.log(`${logPrefix} ❌ No match found for anchor name: "${route.anchorName}"`);
+          console.log(`${logPrefix} ⚠️  School missing address/coordinates - school stop will not be added`);
         }
       } else {
-        console.log(`${logPrefix} No anchor name available`);
+        console.log(`${logPrefix} ⚠️  School not found in schools.json with ID: ${schoolIdFromOptions}`);
+        console.log(`${logPrefix}    Route will be saved but school stop will not be added`);
       }
       
-      // Fallback: if schoolId is provided and no match found, use it directly
-      if (!matchedSchool && options.schoolId) {
-        console.log(`${logPrefix} No anchor name match found, trying schoolId: "${options.schoolId}"`);
-        matchedSchool = schools.find(s => s.id === options.schoolId);
-        if (matchedSchool) {
-          console.log(`${logPrefix} ✅ Matched to school via schoolId: ${matchedSchool.name} (ID: ${matchedSchool.id})`);
-          console.log(`${logPrefix} School address: ${matchedSchool.address || 'MISSING'}`);
-          console.log(`${logPrefix} School coordinates: ${matchedSchool.coordinates ? 'PRESENT' : 'MISSING'}`);
-        } else {
-          console.log(`${logPrefix} ❌ School not found with schoolId: "${options.schoolId}"`);
-          console.log(`${logPrefix} Available school IDs (first 5): ${schools.slice(0, 5).map(s => s.id).join(', ')}`);
+      // OPTIONAL: Try anchor name matching as validation (but don't fail if it doesn't match)
+      if (route.anchorName && matchedSchool) {
+        const anchorMatch = matchSchoolFromAnchorName(route.anchorName, schools);
+        if (anchorMatch && anchorMatch.id !== schoolIdFromOptions) {
+          console.log(`${logPrefix} ⚠️  Anchor name "${route.anchorName}" suggests different school: ${anchorMatch.name}, but using ${schoolIdFromOptions} from folder structure`);
         }
-      } else if (!options.schoolId) {
-        console.log(`${logPrefix} ⚠️  No schoolId provided in options`);
-      }
-      
-      if (matchedSchool && (!matchedSchool.address || !matchedSchool.coordinates)) {
-        console.log(`${logPrefix} ⚠️  School missing address/coordinates - school stop will not be added`);
-      } else if (matchedSchool) {
-        console.log(`${logPrefix} ✅ School has address and coordinates - will add school stop`);
       }
     } catch (error) {
       console.error(`${logPrefix} Error loading schools.json:`, error);
+      console.log(`${logPrefix}    Route will be saved anyway`);
     }
   } else {
     console.log(`${logPrefix} ⚠️  SCHOOLS_FILE does not exist: ${SCHOOLS_FILE}`);
+    console.log(`${logPrefix}    Route will be saved but school stop will not be added`);
   }
 
-  // Step 3: Geocode stops
-  const geocodedStops = await geocodingService.geocodeStops(route.stops, 'Portland', 'OR');
+  // Step 4: Geocode stops (only if we have stops)
+  let geocodedStops = [];
+  if (route.stops.length > 0) {
+    geocodedStops = await geocodingService.geocodeStops(route.stops, 'Portland', 'OR');
+  } else {
+    console.log(`${logPrefix} ⚠️  Skipping geocoding - no stops to geocode`);
+  }
 
-  // Step 4: Add school stop from schools.json if matched
+  // Step 5: Add school stop from schools.json if matched
   let finalStops = geocodedStops;
   if (matchedSchool && matchedSchool.address && matchedSchool.coordinates) {
     const schoolCoordinates = extractSchoolCoordinates(matchedSchool);
@@ -199,11 +210,11 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
     }
   }
 
-  // Step 5: Filter out loading zone stops (skipGeocoding: true) - these are not actual bus stops
+  // Step 6: Filter out loading zone stops (skipGeocoding: true) - these are not actual bus stops
   // Loading zones are where buses park at night and should not be included in routes
   const routeStops = finalStops.filter(s => !s.skipGeocoding);
 
-  // Step 6: Calculate route geometry (street-following path between stops)
+  // Step 7: Calculate route geometry (street-following path between stops)
   let routeGeometry = null;
   const stopsWithCoords = routeStops.filter(s => s.coordinates);
 
@@ -233,7 +244,7 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
     console.log(`${logPrefix} ⚠️  Insufficient stops with coordinates (${stopsWithCoords.length}) to calculate route geometry`);
   }
 
-  // Step 7: Aggregate unique neighborhoods from all stops
+  // Step 8: Aggregate unique neighborhoods from all stops
   const neighborhoodsSet = new Set();
   for (const stop of routeStops) {
     if (stop.neighborhood && typeof stop.neighborhood === 'string' && stop.neighborhood.trim()) {
@@ -246,7 +257,7 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
     console.log(`${logPrefix} 📍 Route passes through ${neighborhoods.length} neighborhood(s): ${neighborhoods.join(', ')}`);
   }
 
-  // Step 8: Create final route object
+  // Step 9: Create final route object
   const stopsForStats = routeStops;
   const finalRoute = {
     id: route.id,
@@ -267,21 +278,37 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
   };
 
   // Step 9: Save to file if requested
+  // ALWAYS save - don't fail if PDF parsing was imperfect
   if (saveToFile) {
-    // Use provided schoolId or try to extract from filename
-    const finalSchoolId = schoolId || getSchoolIdFromFilename(filename);
+    // Use schoolId from options (folder structure) - this is the source of truth
+    const finalSchoolId = schoolIdFromOptions;
+    
     if (!finalSchoolId) {
-      throw new Error(`Could not determine school from filename: ${filename}. Please provide schoolId option.`);
+      throw new Error(`Could not determine school from folder structure. Filename: ${filename}, schoolId option: ${options.schoolId || 'NOT PROVIDED'}`);
     }
 
+    // ALWAYS create the directory - don't fail if it doesn't exist
     const processedRoutesDir = path.join(DATA_DIR, 'schools', finalSchoolId, 'processed-routes');
-    if (!fs.existsSync(processedRoutesDir)) {
-      fs.mkdirSync(processedRoutesDir, { recursive: true });
+    try {
+      if (!fs.existsSync(processedRoutesDir)) {
+        fs.mkdirSync(processedRoutesDir, { recursive: true });
+        console.log(`${logPrefix} 📁 Created processed-routes directory: ${processedRoutesDir}`);
+      }
+    } catch (error) {
+      console.error(`${logPrefix} ❌ Failed to create directory: ${error.message}`);
+      throw new Error(`Failed to create processed-routes directory: ${error.message}`);
     }
 
+    // ALWAYS save the route - even if some data is missing
     const outputFilename = outputPath || path.join(processedRoutesDir, filename.replace('.pdf', '.json'));
-    fs.writeFileSync(outputFilename, JSON.stringify(finalRoute, null, 2));
-    console.log(`${logPrefix} 💾 Saved to: ${outputFilename}`);
+    try {
+      fs.writeFileSync(outputFilename, JSON.stringify(finalRoute, null, 2));
+      console.log(`${logPrefix} 💾 Saved route to: ${outputFilename}`);
+      console.log(`${logPrefix}    Route: ${finalRoute.name}, Stops: ${finalRoute.stops.length}, Geocoded: ${finalRoute.stats.geocodedStops}/${finalRoute.stats.totalStops}`);
+    } catch (error) {
+      console.error(`${logPrefix} ❌ Failed to save route: ${error.message}`);
+      throw new Error(`Failed to save route to ${outputFilename}: ${error.message}`);
+    }
   }
 
   return finalRoute;

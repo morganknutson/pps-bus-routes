@@ -1,0 +1,320 @@
+{
+  "id": "245SLW-P_effective_092425.pdf",
+  "name": "245",
+  "direction": "Afternoon",
+  "filename": "245SLW-P_effective_092425.pdf",
+  "fileId": "245SLW-P_effective_092425.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "8300 SE 15th Ave, Portland, OR 97202, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:SELLWOOD GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6498774,
+        45.4625412
+      ],
+      "displayName": "8300 SE 15th Ave, Portland, OR 97202, USA",
+      "schoolName": "Sellwood"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE 28th Ave. & SE Knapp St. [NW]",
+      "time": "4:16 pm",
+      "direction": "NW",
+      "originalLine": "4:16 pmSE 28TH AV @ SE KNAPP ST [NW]245SLW-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6345032,
+        45.4719617
+      ],
+      "displayName": "SE Knapp St & SE 28th Ave, Portland, OR 97202, USA",
+      "placeId": "EjJTRSBLbmFwcCBTdCAmIFNFIDI4dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCWGJvzu5CpVUEYUQGJjigv4XEhQKEglhib87uQqVVBGFEBiY4oL-FxoUChIJRxVvsPiflVQRROe1BNKhGIQaFAoSCb_rjem9CpVUEZF7HiX0_JWTIgoNgXgaGxW4dee2",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 32nd Ave. & SE Bybee Blvd. [SE]",
+      "time": "4:20 pm",
+      "direction": "SE",
+      "originalLine": "4:20 pmSE 32ND AV @ SE BYBEE BLVD [SE]245SLW-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6303949,
+        45.4734036
+      ],
+      "displayName": "SE Bybee Blvd & SE 32nd Ave, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBCeWJlZSBCbHZkICYgU0UgMzJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJf1uckbsKlVQRONbb_TSs7ZMSFAoSCX9bnJG7CpVUETjW2_00rO2TGhQKEgnZsRPAqAqVVBGoGxW4GQ-xMBoUChIJ942H-rwKlVQR9b4CcZm0da8iCg3UsBobFTMW6LY",
+      "neighborhood": "Southeast Portland"
+    }
+  ],
+  "neighborhoods": [
+    "Southeast Portland"
+  ],
+  "processedAt": "2025-12-17T09:08:56.405Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.46255,
+      -122.65016
+    ],
+    [
+      45.46225,
+      -122.65019
+    ],
+    [
+      45.46221,
+      -122.65025
+    ],
+    [
+      45.46218,
+      -122.65075
+    ],
+    [
+      45.46147,
+      -122.65074
+    ],
+    [
+      45.46147,
+      -122.65052
+    ],
+    [
+      45.46147,
+      -122.64705
+    ],
+    [
+      45.4629,
+      -122.64705
+    ],
+    [
+      45.46406,
+      -122.64705
+    ],
+    [
+      45.46553,
+      -122.64708
+    ],
+    [
+      45.4656,
+      -122.64711
+    ],
+    [
+      45.46563,
+      -122.64712
+    ],
+    [
+      45.46568,
+      -122.64708
+    ],
+    [
+      45.46575,
+      -122.64701
+    ],
+    [
+      45.46579,
+      -122.64703
+    ],
+    [
+      45.46583,
+      -122.64705
+    ],
+    [
+      45.46646,
+      -122.64705
+    ],
+    [
+      45.46768,
+      -122.64705
+    ],
+    [
+      45.4683,
+      -122.64708
+    ],
+    [
+      45.47065,
+      -122.64737
+    ],
+    [
+      45.47347,
+      -122.64771
+    ],
+    [
+      45.47378,
+      -122.64775
+    ],
+    [
+      45.47384,
+      -122.64675
+    ],
+    [
+      45.47399,
+      -122.64425
+    ],
+    [
+      45.47413,
+      -122.64217
+    ],
+    [
+      45.47422,
+      -122.64052
+    ],
+    [
+      45.47429,
+      -122.63924
+    ],
+    [
+      45.47437,
+      -122.63763
+    ],
+    [
+      45.47439,
+      -122.63574
+    ],
+    [
+      45.47425,
+      -122.63561
+    ],
+    [
+      45.47417,
+      -122.6355
+    ],
+    [
+      45.47403,
+      -122.63531
+    ],
+    [
+      45.47391,
+      -122.6352
+    ],
+    [
+      45.47364,
+      -122.63491
+    ],
+    [
+      45.47349,
+      -122.63467
+    ],
+    [
+      45.4734,
+      -122.63451
+    ],
+    [
+      45.47317,
+      -122.63458
+    ],
+    [
+      45.473,
+      -122.63466
+    ],
+    [
+      45.47279,
+      -122.63473
+    ],
+    [
+      45.47257,
+      -122.63473
+    ],
+    [
+      45.47233,
+      -122.63468
+    ],
+    [
+      45.47214,
+      -122.63459
+    ],
+    [
+      45.47196,
+      -122.6345
+    ],
+    [
+      45.47214,
+      -122.63459
+    ],
+    [
+      45.47233,
+      -122.63468
+    ],
+    [
+      45.47257,
+      -122.63473
+    ],
+    [
+      45.47279,
+      -122.63473
+    ],
+    [
+      45.473,
+      -122.63466
+    ],
+    [
+      45.47317,
+      -122.63458
+    ],
+    [
+      45.4734,
+      -122.63451
+    ],
+    [
+      45.47332,
+      -122.63435
+    ],
+    [
+      45.47326,
+      -122.63416
+    ],
+    [
+      45.47323,
+      -122.63399
+    ],
+    [
+      45.47323,
+      -122.63379
+    ],
+    [
+      45.47325,
+      -122.63315
+    ],
+    [
+      45.4732,
+      -122.63284
+    ],
+    [
+      45.47319,
+      -122.63261
+    ],
+    [
+      45.47327,
+      -122.63189
+    ],
+    [
+      45.47325,
+      -122.63119
+    ],
+    [
+      45.47332,
+      -122.63089
+    ],
+    [
+      45.4734,
+      -122.63054
+    ],
+    [
+      45.4734,
+      -122.63039
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 2,
+    "errors": 0,
+    "total": 3
+  }
+}

@@ -1,0 +1,2137 @@
+{
+  "timestamp": "2025-12-17T09:11:44.466Z",
+  "total": 239,
+  "processed": 239,
+  "errors": 0,
+  "bySchool": {
+    "harrison-park": {
+      "processed": 10,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "201HPK-A_effective_091925.pdf",
+          "routeName": "201",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "201HPK-P_effective_091925.pdf",
+          "routeName": "201",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "231HPK-A_effective_100125.pdf",
+          "routeName": "231",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "231HPK-P_effective_100125.pdf",
+          "routeName": "231",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "232HPK-A_effective_100125.pdf",
+          "routeName": "232",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "232HPK-P_effective_100125.pdf",
+          "routeName": "232",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "251HPK-A_effective_091925.pdf",
+          "routeName": "251",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "251HPK-P_effective_091925.pdf",
+          "routeName": "251",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "291HPK-A_effective_091925.pdf",
+          "routeName": "291",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "291HPK-P_effective_091925.pdf",
+          "routeName": "291",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "hayhurst": {
+      "processed": 8,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "106HAY-A_effective_082625.pdf",
+          "routeName": "106",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "106HAY-P_effective_082625.pdf",
+          "routeName": "106",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "108HAY-A_effective_102925.pdf",
+          "routeName": "108",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        },
+        {
+          "file": "108HAY-P_effective_102925.pdf",
+          "routeName": "108",
+          "stops": 16,
+          "geocoded": 16,
+          "totalStops": 16,
+          "failedStops": 0
+        },
+        {
+          "file": "118HAY-A_effective_100825.pdf",
+          "routeName": "118",
+          "stops": 17,
+          "geocoded": 17,
+          "totalStops": 17,
+          "failedStops": 0
+        },
+        {
+          "file": "118HAY-P_effective_100825.pdf",
+          "routeName": "118",
+          "stops": 18,
+          "geocoded": 18,
+          "totalStops": 18,
+          "failedStops": 0
+        },
+        {
+          "file": "120HAY-A_effective_102225.pdf",
+          "routeName": "120",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        },
+        {
+          "file": "120HAY-P_effective_110525.pdf",
+          "routeName": "120",
+          "stops": 16,
+          "geocoded": 16,
+          "totalStops": 16,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "hosford": {
+      "processed": 8,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "221HOS-A_effective_090325.pdf",
+          "routeName": "221",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "221HOS-P_effective_082625.pdf",
+          "routeName": "221",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "246HOS-A_effective_090325.pdf",
+          "routeName": "246",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "246HOS-P_effective_090325.pdf",
+          "routeName": "246",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "248HOS-A_effective_082625.pdf",
+          "routeName": "248",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "248HOS-P_effective_082625.pdf",
+          "routeName": "248",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "254HOS-A_effective_100825.pdf",
+          "routeName": "254",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "254HOS-P_effective_082625.pdf",
+          "routeName": "254",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "jackson": {
+      "processed": 30,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "107JKS-A_effective_111225.pdf",
+          "routeName": "107",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "107JKS-P_effective_100125.pdf",
+          "routeName": "107",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "108JKS-A_effective_102925.pdf",
+          "routeName": "108",
+          "stops": 13,
+          "geocoded": 13,
+          "totalStops": 13,
+          "failedStops": 0
+        },
+        {
+          "file": "108JKS-P_effective_102925.pdf",
+          "routeName": "108",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        },
+        {
+          "file": "110JKS-A_effective_110525.pdf",
+          "routeName": "110",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "110JKS-P_effective_082625.pdf",
+          "routeName": "110",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "114JKS-A_effective_110525.pdf",
+          "routeName": "114",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "114JKS-P_effective_100125.pdf",
+          "routeName": "114",
+          "stops": 13,
+          "geocoded": 13,
+          "totalStops": 13,
+          "failedStops": 0
+        },
+        {
+          "file": "117JKS-A_effective_110525.pdf",
+          "routeName": "117",
+          "stops": 19,
+          "geocoded": 19,
+          "totalStops": 19,
+          "failedStops": 0
+        },
+        {
+          "file": "117JKS-P_effective_082625.pdf",
+          "routeName": "117",
+          "stops": 19,
+          "geocoded": 19,
+          "totalStops": 19,
+          "failedStops": 0
+        },
+        {
+          "file": "237JKS-A_effective_110525.pdf",
+          "routeName": "237",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "237JKS-P_effective_110525.pdf",
+          "routeName": "237",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "244JKS-A_effective_101525.pdf",
+          "routeName": "244",
+          "stops": 20,
+          "geocoded": 20,
+          "totalStops": 20,
+          "failedStops": 0
+        },
+        {
+          "file": "244JKS-P_effective_101525.pdf",
+          "routeName": "244",
+          "stops": 19,
+          "geocoded": 19,
+          "totalStops": 19,
+          "failedStops": 0
+        },
+        {
+          "file": "261JKS-A_effective_082625.pdf",
+          "routeName": "261",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "261JKS-P_effective_082625.pdf",
+          "routeName": "261",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "262JKS-A_effective_082625.pdf",
+          "routeName": "262",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "262JKS-P_effective_082625.pdf",
+          "routeName": "262",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "263JKS-A_effective_082625.pdf",
+          "routeName": "263",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "263JKS-P_effective_082625.pdf",
+          "routeName": "263",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "264JKS-A_effective_100825.pdf",
+          "routeName": "264",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "264JKS-P_effective_100125.pdf",
+          "routeName": "264",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "266JKS-A_effective_091725.pdf",
+          "routeName": "266",
+          "stops": 13,
+          "geocoded": 13,
+          "totalStops": 13,
+          "failedStops": 0
+        },
+        {
+          "file": "266JKS-P_effective_091725.pdf",
+          "routeName": "266",
+          "stops": 13,
+          "geocoded": 13,
+          "totalStops": 13,
+          "failedStops": 0
+        },
+        {
+          "file": "267JKS-A_effective_091725.pdf",
+          "routeName": "267",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "267JKS-P_effective_082625.pdf",
+          "routeName": "267",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        },
+        {
+          "file": "270JKS-A_effective_100125.pdf",
+          "routeName": "270",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        },
+        {
+          "file": "270JKS-P_effective_100125.pdf",
+          "routeName": "270",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        },
+        {
+          "file": "274JKS-A_effective_092425.pdf",
+          "routeName": "274",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "274JKS-P_effective_092425.pdf",
+          "routeName": "274",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "james-john": {
+      "processed": 4,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "205JMJ-A_effective_091725.pdf",
+          "routeName": "205",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "205JMJ-P_effective_082625.pdf",
+          "routeName": "205",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "218JMJ-A_effective_091725.pdf",
+          "routeName": "218",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "218JMJ-P_effective_090325.pdf",
+          "routeName": "218",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "kelly": {
+      "processed": 4,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "253KLY-A_effective_082625.pdf",
+          "routeName": "253",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "253KLY-P_effective_082625.pdf",
+          "routeName": "253",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "256KLY-A_effective_102925.pdf",
+          "routeName": "256",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "256KLY-P_effective_102225.pdf",
+          "routeName": "256",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "kellogg": {
+      "processed": 13,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "212KLG-A_effective_082625.pdf",
+          "routeName": "212",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "212KLG-P_effective_082625.pdf",
+          "routeName": "212",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "224KLG-A_effective_082625.pdf",
+          "routeName": "224",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "224KLG-P_effective_082625.pdf",
+          "routeName": "224",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "227KLG-A_effective_082625.pdf",
+          "routeName": "227",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "227KLG-P_effective_082625.pdf",
+          "routeName": "227",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "228KLG-A_effective_111925.pdf",
+          "routeName": "228",
+          "stops": 13,
+          "geocoded": 13,
+          "totalStops": 13,
+          "failedStops": 0
+        },
+        {
+          "file": "228KLG-P_effective_111925.pdf",
+          "routeName": "228",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "228KLG-P_effective_121725.pdf",
+          "routeName": "228",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "253KLG-A_effective_082625.pdf",
+          "routeName": "253",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "253KLG-P_effective_082625.pdf",
+          "routeName": "253",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "269KLG-A_effective_082625.pdf",
+          "routeName": "269",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "269KLG-P_effective_082625.pdf",
+          "routeName": "269",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "lane": {
+      "processed": 8,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "239LAN-A_effective_082625.pdf",
+          "routeName": "239",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "239LAN-P_effective_082625.pdf",
+          "routeName": "239",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "242LAN-A_effective_091025.pdf",
+          "routeName": "242",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "242LAN-P_effective_091025.pdf",
+          "routeName": "242",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "249LAN-A_effective_082625.pdf",
+          "routeName": "249",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "249LAN-P_effective_082625.pdf",
+          "routeName": "249",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "256LAN-A_effective_092425.pdf",
+          "routeName": "256",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "256LAN-P_effective_100125.pdf",
+          "routeName": "256",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "lee": {
+      "processed": 4,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "251LEE-A_effective_082625.pdf",
+          "routeName": "251",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "251LEE-P_effective_082625.pdf",
+          "routeName": "251",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "259LEE-A_effective_111225.pdf",
+          "routeName": "259",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "259LEE-P_effective_111225.pdf",
+          "routeName": "259",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "lent": {
+      "processed": 6,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "209LNT-A_effective_091025.pdf",
+          "routeName": "209",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "209LNT-P_effective_091025.pdf",
+          "routeName": "209",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "217LNT-A_effective_100825.pdf",
+          "routeName": "217",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "217LNT-P_effective_100825.pdf",
+          "routeName": "217",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "273LNT-A_effective_110525.pdf",
+          "routeName": "273",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        },
+        {
+          "file": "273LNT-P_effective_110525.pdf",
+          "routeName": "273",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "lincoln": {
+      "processed": 18,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "102LNC-A_effective_102925.pdf",
+          "routeName": "102",
+          "stops": 16,
+          "geocoded": 16,
+          "totalStops": 16,
+          "failedStops": 0
+        },
+        {
+          "file": "102LNC-P_effective_102925.pdf",
+          "routeName": "102",
+          "stops": 16,
+          "geocoded": 16,
+          "totalStops": 16,
+          "failedStops": 0
+        },
+        {
+          "file": "123LNC-A_effective_082625.pdf",
+          "routeName": "123",
+          "stops": 31,
+          "geocoded": 31,
+          "totalStops": 31,
+          "failedStops": 0
+        },
+        {
+          "file": "123LNC-A_effective_121725.pdf",
+          "routeName": "123",
+          "stops": 32,
+          "geocoded": 32,
+          "totalStops": 32,
+          "failedStops": 0
+        },
+        {
+          "file": "123LNC-P_effective_090325.pdf",
+          "routeName": "123",
+          "stops": 31,
+          "geocoded": 31,
+          "totalStops": 31,
+          "failedStops": 0
+        },
+        {
+          "file": "123LNC-P_effective_121725.pdf",
+          "routeName": "123",
+          "stops": 32,
+          "geocoded": 32,
+          "totalStops": 32,
+          "failedStops": 0
+        },
+        {
+          "file": "142LNC-A_effective_091725.pdf",
+          "routeName": "142",
+          "stops": 19,
+          "geocoded": 19,
+          "totalStops": 19,
+          "failedStops": 0
+        },
+        {
+          "file": "142LNC-P_effective_091725.pdf",
+          "routeName": "142",
+          "stops": 19,
+          "geocoded": 19,
+          "totalStops": 19,
+          "failedStops": 0
+        },
+        {
+          "file": "143LNC-A_effective_102925.pdf",
+          "routeName": "143",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        },
+        {
+          "file": "143LNC-P_effective_102925.pdf",
+          "routeName": "143",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "145LNC-A_effective_082625.pdf",
+          "routeName": "145",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "145LNC-P_effective_090325.pdf",
+          "routeName": "145",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "146LNC-A_effective_102925.pdf",
+          "routeName": "146",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "146LNC-P_effective_102925.pdf",
+          "routeName": "146",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "147LNC-A_effective_082625.pdf",
+          "routeName": "147",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "147LNC-P_effective_090325.pdf",
+          "routeName": "147",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "148LNC-A_effective_082625.pdf",
+          "routeName": "148",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "148LNC-P_effective_090325.pdf",
+          "routeName": "148",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "maplewood": {
+      "processed": 8,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "129MPL-A_effective_082625.pdf",
+          "routeName": "129",
+          "stops": 18,
+          "geocoded": 18,
+          "totalStops": 18,
+          "failedStops": 0
+        },
+        {
+          "file": "129MPL-P_effective_082625.pdf",
+          "routeName": "129",
+          "stops": 16,
+          "geocoded": 16,
+          "totalStops": 16,
+          "failedStops": 0
+        },
+        {
+          "file": "261MPL-A_effective_082625.pdf",
+          "routeName": "261",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        },
+        {
+          "file": "261MPL-P_effective_082625.pdf",
+          "routeName": "261",
+          "stops": 17,
+          "geocoded": 17,
+          "totalStops": 17,
+          "failedStops": 0
+        },
+        {
+          "file": "266MPL-A_effective_091725.pdf",
+          "routeName": "266",
+          "stops": 18,
+          "geocoded": 18,
+          "totalStops": 18,
+          "failedStops": 0
+        },
+        {
+          "file": "266MPL-P_effective_091725.pdf",
+          "routeName": "266",
+          "stops": 17,
+          "geocoded": 17,
+          "totalStops": 17,
+          "failedStops": 0
+        },
+        {
+          "file": "267MPL-A_effective_082625.pdf",
+          "routeName": "267",
+          "stops": 22,
+          "geocoded": 22,
+          "totalStops": 22,
+          "failedStops": 0
+        },
+        {
+          "file": "267MPL-P_effective_082625.pdf",
+          "routeName": "267",
+          "stops": 21,
+          "geocoded": 21,
+          "totalStops": 21,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "ockley-green": {
+      "processed": 6,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "203OCG-A_effective_091025.pdf",
+          "routeName": "203",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "203OCG-P_effective_091025.pdf",
+          "routeName": "203",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "204OCG-A_effective_090325.pdf",
+          "routeName": "204",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        },
+        {
+          "file": "204OCG-P_effective_100825.pdf",
+          "routeName": "204",
+          "stops": 12,
+          "geocoded": 12,
+          "totalStops": 12,
+          "failedStops": 0
+        },
+        {
+          "file": "205OCG-A_effective_091025.pdf",
+          "routeName": "205",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "205OCG-P_effective_091025.pdf",
+          "routeName": "205",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "peninsula": {
+      "processed": 2,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "215-PEN-A_effective_082625.pdf",
+          "routeName": "215",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "215-PEN-P_effective_082625.pdf",
+          "routeName": "215",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "richmond": {
+      "processed": 8,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "225RCH-A_effective_082625.pdf",
+          "routeName": "225",
+          "stops": 16,
+          "geocoded": 16,
+          "totalStops": 16,
+          "failedStops": 0
+        },
+        {
+          "file": "225RCH-P_effective_082625.pdf",
+          "routeName": "225",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "255RCH-A_effective_120325.pdf",
+          "routeName": "255",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "255RCH-P_effective_120325.pdf",
+          "routeName": "255",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        },
+        {
+          "file": "257RCH-A_effective_100125.pdf",
+          "routeName": "257",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "257RCH-P_effective_091025.pdf",
+          "routeName": "257",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "258RCH-A_effective_082625.pdf",
+          "routeName": "258",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "258RCH-P_effective_110525.pdf",
+          "routeName": "258",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "rieke": {
+      "processed": 6,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "110RIK-A_effective_082625.pdf",
+          "routeName": "110",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "110RIK-P_effective_082625.pdf",
+          "routeName": "110",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "119RIK-A_effective_111925.pdf",
+          "routeName": "119",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "119RIK-P_effective_111925.pdf",
+          "routeName": "119",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        },
+        {
+          "file": "128RIK-A_effective_090325.pdf",
+          "routeName": "128",
+          "stops": 21,
+          "geocoded": 21,
+          "totalStops": 21,
+          "failedStops": 0
+        },
+        {
+          "file": "128RIK-P_effective_090325.pdf",
+          "routeName": "128",
+          "stops": 23,
+          "geocoded": 23,
+          "totalStops": 23,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "rigler": {
+      "processed": 8,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "201RIG-A_effective_082625.pdf",
+          "routeName": "201",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "201RIG-P_effective_082625.pdf",
+          "routeName": "201",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "214RIG-A_effective_082625.pdf",
+          "routeName": "214",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "214RIG-P_effective_082625.pdf",
+          "routeName": "214",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "234RIG-A_effective_102224.pdf",
+          "routeName": "234",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "234RIG-A_effective_121725.pdf",
+          "routeName": "234",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "234RIG-P_effective_102224.pdf",
+          "routeName": "234",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        },
+        {
+          "file": "234RIG-P_effective_121725.pdf",
+          "routeName": "234",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "rosa-parks": {
+      "processed": 8,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "203RSP-AM_effective_063025.pdf",
+          "routeName": "203",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "203RSP-PM_effective_063025.pdf",
+          "routeName": "203",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "206RSP-AM_effective_063025.pdf",
+          "routeName": "206",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "206RSP-PM_effective_063025.pdf",
+          "routeName": "206",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "207RSP-AM_effective_063025.pdf",
+          "routeName": "207",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "207RSP-AM_effective_070225.pdf",
+          "routeName": "207",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "207RSP-PM_effective_063025.pdf",
+          "routeName": "207",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "207RSP-PM_effective_070225.pdf",
+          "routeName": "207",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "rose-city-park": {
+      "processed": 4,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "210RCP-A_effective_101525.pdf",
+          "routeName": "210",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        },
+        {
+          "file": "210RCP-P_effective_102225.pdf",
+          "routeName": "210",
+          "stops": 13,
+          "geocoded": 13,
+          "totalStops": 13,
+          "failedStops": 0
+        },
+        {
+          "file": "216RCP-A_effective_082625.pdf",
+          "routeName": "216",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "216RCP-P_effective_082625.pdf",
+          "routeName": "216",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "roseway-heights": {
+      "processed": 11,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "209RWH-A_effective_100825.pdf",
+          "routeName": "209",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "209RWH-P_effective_100825.pdf",
+          "routeName": "209",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "219RWH-A_effective_101525.pdf",
+          "routeName": "219",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "219RWH-A_effective_121725.pdf",
+          "routeName": "219",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "219RWH-P_effective_101525.pdf",
+          "routeName": "219",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "233RWH-A_effective_082625.pdf",
+          "routeName": "233",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "233RWH-P_effective_082625.pdf",
+          "routeName": "233",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        },
+        {
+          "file": "234RWH-A_effective_082625.pdf",
+          "routeName": "234",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "234RWH-P_effective_100125.pdf",
+          "routeName": "234",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "276RWH-A_effective_091025.pdf",
+          "routeName": "276",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "276RWH-P_effective_091025.pdf",
+          "routeName": "276",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "sabin": {
+      "processed": 5,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "114-AM-SAA-Effective-071122.pdf",
+          "routeName": "114",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "114-PM-SAA-Effective-071122.pdf",
+          "routeName": "114",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "114-PM-SUN-Effective-071122.pdf",
+          "routeName": "Route 114",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "115-AM-SAA-Effective-071122.pdf",
+          "routeName": "115",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "115-PM-SAA-Effective-071122.pdf",
+          "routeName": "115",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "scott": {
+      "processed": 7,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "211SCT-A_effective_082625.pdf",
+          "routeName": "211",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "211SCT-A_effective_121725.pdf",
+          "routeName": "211",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "211SCT-P_effective_082625.pdf",
+          "routeName": "211",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "222SCT-A_effective_082625.pdf",
+          "routeName": "222",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "222SCT-P_effective_082625.pdf",
+          "routeName": "222",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "233SCT-A_effective_082625.pdf",
+          "routeName": "233",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "233SCT-P_effective_082625.pdf",
+          "routeName": "233",
+          "stops": 9,
+          "geocoded": 9,
+          "totalStops": 9,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "sellwood": {
+      "processed": 12,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "210SLW-A_effective_091725.pdf",
+          "routeName": "210",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "210SLW-P_effective_082625.pdf",
+          "routeName": "210",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "236SLW-A_effective_082625.pdf",
+          "routeName": "236",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "236SLW-P_effective_082625.pdf",
+          "routeName": "236",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "245SLW-A_effective_092425.pdf",
+          "routeName": "245",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "245SLW-P_effective_092425.pdf",
+          "routeName": "245",
+          "stops": 3,
+          "geocoded": 3,
+          "totalStops": 3,
+          "failedStops": 0
+        },
+        {
+          "file": "250SLW-A_effective_082625.pdf",
+          "routeName": "250",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "250SLW-P_effective_082625.pdf",
+          "routeName": "250",
+          "stops": 8,
+          "geocoded": 8,
+          "totalStops": 8,
+          "failedStops": 0
+        },
+        {
+          "file": "255SLW-A_effective_082625.pdf",
+          "routeName": "255",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "255SLW-P_effective_082625.pdf",
+          "routeName": "255",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "289SLW-A_effective_102225.pdf",
+          "routeName": "289",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "289SLW-P_effective_102225.pdf",
+          "routeName": "289",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "sitton": {
+      "processed": 4,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "204SIT-A_effective_082625.pdf",
+          "routeName": "204",
+          "stops": 3,
+          "geocoded": 3,
+          "totalStops": 3,
+          "failedStops": 0
+        },
+        {
+          "file": "204SIT-P_effective_082625.pdf",
+          "routeName": "204",
+          "stops": 3,
+          "geocoded": 3,
+          "totalStops": 3,
+          "failedStops": 0
+        },
+        {
+          "file": "230SIT-A_effective_082625.pdf",
+          "routeName": "230",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        },
+        {
+          "file": "230SIT-P_effective_082625.pdf",
+          "routeName": "230",
+          "stops": 7,
+          "geocoded": 7,
+          "totalStops": 7,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "skyline": {
+      "processed": 12,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "136SKY-A_effective_102925.pdf",
+          "routeName": "136",
+          "stops": 16,
+          "geocoded": 16,
+          "totalStops": 16,
+          "failedStops": 0
+        },
+        {
+          "file": "136SKY-P_effective_102925.pdf",
+          "routeName": "136",
+          "stops": 13,
+          "geocoded": 13,
+          "totalStops": 13,
+          "failedStops": 0
+        },
+        {
+          "file": "137SKY-A_effective_101525.pdf",
+          "routeName": "137",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "137SKY-P_effective_101525.pdf",
+          "routeName": "137",
+          "stops": 17,
+          "geocoded": 17,
+          "totalStops": 17,
+          "failedStops": 0
+        },
+        {
+          "file": "138SKY-A_effective_111225.pdf",
+          "routeName": "138",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "138SKY-P_effective_111225.pdf",
+          "routeName": "138",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        },
+        {
+          "file": "139SKY-A_effective_102925.pdf",
+          "routeName": "139",
+          "stops": 26,
+          "geocoded": 26,
+          "totalStops": 26,
+          "failedStops": 0
+        },
+        {
+          "file": "139SKY-P_effective_110525.pdf",
+          "routeName": "139",
+          "stops": 30,
+          "geocoded": 30,
+          "totalStops": 30,
+          "failedStops": 0
+        },
+        {
+          "file": "140SKY-A_effective_102925.pdf",
+          "routeName": "140",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "140SKY-A_effective_121725.pdf",
+          "routeName": "140",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        },
+        {
+          "file": "140SKY-P_effective_102925.pdf",
+          "routeName": "140",
+          "stops": 14,
+          "geocoded": 14,
+          "totalStops": 14,
+          "failedStops": 0
+        },
+        {
+          "file": "140SKY-P_effective_121725.pdf",
+          "routeName": "140",
+          "stops": 15,
+          "geocoded": 15,
+          "totalStops": 15,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "stephenson": {
+      "processed": 6,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "244STP-A_effective_091725.pdf",
+          "routeName": "244",
+          "stops": 18,
+          "geocoded": 18,
+          "totalStops": 18,
+          "failedStops": 0
+        },
+        {
+          "file": "244STP-P_effective_091025.pdf",
+          "routeName": "244",
+          "stops": 19,
+          "geocoded": 19,
+          "totalStops": 19,
+          "failedStops": 0
+        },
+        {
+          "file": "263STP-A_effective_101525.pdf",
+          "routeName": "263",
+          "stops": 18,
+          "geocoded": 18,
+          "totalStops": 18,
+          "failedStops": 0
+        },
+        {
+          "file": "263STP-P_effective_101525.pdf",
+          "routeName": "263",
+          "stops": 18,
+          "geocoded": 18,
+          "totalStops": 18,
+          "failedStops": 0
+        },
+        {
+          "file": "270STP-A_effective_082625.pdf",
+          "routeName": "270",
+          "stops": 24,
+          "geocoded": 24,
+          "totalStops": 24,
+          "failedStops": 0
+        },
+        {
+          "file": "270STP-P_effective_082625.pdf",
+          "routeName": "270",
+          "stops": 23,
+          "geocoded": 23,
+          "totalStops": 23,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "tubman": {
+      "processed": 8,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "206TUB-A_effective_120325.pdf",
+          "routeName": "206",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "206TUB-P_effective_082625.pdf",
+          "routeName": "206",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "220TUB-A_effective_082625.pdf",
+          "routeName": "220",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "220TUB-A_effective_121725.pdf",
+          "routeName": "220",
+          "stops": 6,
+          "geocoded": 6,
+          "totalStops": 6,
+          "failedStops": 0
+        },
+        {
+          "file": "220TUB-P_effective_082625.pdf",
+          "routeName": "220",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "220TUB-P_effective_121725.pdf",
+          "routeName": "220",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "292TUB-A_effective_090325.pdf",
+          "routeName": "292",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "292TUB-P_effective_090325.pdf",
+          "routeName": "292",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "vernon": {
+      "processed": 4,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "218VRN-A_effective_082625.pdf",
+          "routeName": "218",
+          "stops": 2,
+          "geocoded": 2,
+          "totalStops": 2,
+          "failedStops": 0
+        },
+        {
+          "file": "218VRN-P_effective_082625.pdf",
+          "routeName": "218",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "241VRN-A_effective_082625.pdf",
+          "routeName": "241",
+          "stops": 5,
+          "geocoded": 5,
+          "totalStops": 5,
+          "failedStops": 0
+        },
+        {
+          "file": "241VRN-P_effective_082625.pdf",
+          "routeName": "241",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "vestal": {
+      "processed": 2,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "219VES-A_effective_082625.pdf",
+          "routeName": "219",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "219VES-P_effective_082625.pdf",
+          "routeName": "219",
+          "stops": 11,
+          "geocoded": 11,
+          "totalStops": 11,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "whitman": {
+      "processed": 2,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "250WTM-A_effective_092425.pdf",
+          "routeName": "250",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        },
+        {
+          "file": "250WTM-P_effective_102925.pdf",
+          "routeName": "250",
+          "stops": 10,
+          "geocoded": 10,
+          "totalStops": 10,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    },
+    "woodlawn": {
+      "processed": 3,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "200WDL-A_effective_082625.pdf",
+          "routeName": "200",
+          "stops": 3,
+          "geocoded": 3,
+          "totalStops": 3,
+          "failedStops": 0
+        },
+        {
+          "file": "200WDL-P_effective_082625.pdf",
+          "routeName": "200",
+          "stops": 4,
+          "geocoded": 4,
+          "totalStops": 4,
+          "failedStops": 0
+        },
+        {
+          "file": "223WDL-P_effective_082625.pdf",
+          "routeName": "223",
+          "stops": 3,
+          "geocoded": 3,
+          "totalStops": 3,
+          "failedStops": 0
+        }
+      ],
+      "errorDetails": []
+    }
+  }
+}

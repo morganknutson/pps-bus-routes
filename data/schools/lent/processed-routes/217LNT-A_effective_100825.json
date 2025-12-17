@@ -1,0 +1,446 @@
+{
+  "id": "217LNT-A_effective_100825.pdf",
+  "name": "217",
+  "direction": "Morning",
+  "filename": "217LNT-A_effective_100825.pdf",
+  "fileId": "217LNT-A_effective_100825.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "7913 SE 92nd Ave. [W]",
+      "time": "7:26 am",
+      "direction": "W",
+      "originalLine": "7:26 am7913 SE 92ND AVE [W]217LNT-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.56985986401764,
+        45.46583519796806
+      ],
+      "displayName": "7913 SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "ChIJsWy9i-2flVQRfQnH17uu1zI",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Crystal Springs Blvd. & SE 89th Ave. [NE]",
+      "time": "7:28 am",
+      "direction": "NE",
+      "originalLine": "7:28 amSE CRYSTAL SPRINGS BLVD @ SE 89TH AV [NE]217LNT-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5718709,
+        45.46495849999999
+      ],
+      "displayName": "SE Crystal Springs Blvd & SE 89th Ave, Portland, OR 97266, USA",
+      "placeId": "Ej5TRSBDcnlzdGFsIFNwcmluZ3MgQmx2ZCAmIFNFIDg5dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCTGE107un5VUEai_odNCH5NwEhQKEgkxhNdO7p-VVBGov6HTQh-TcBoUChIJ4Uj-3VR1lVQRz6x9WXAb6cwaFAoSCZ27QNkwoJVUEaI-hJKK8ct4IgoN8WYZGxVLBPG2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "7326 SE Flavel St. (whitman School) [N]",
+      "time": "7:33 am",
+      "direction": "N",
+      "originalLine": "7:33 am7326 SE FLAVEL ST (WHITMAN SCHOOL) [N]217LNT-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.58771676539588,
+        45.468658644016806
+      ],
+      "displayName": "7326 SE Flavel St, Portland, OR 97206, USA",
+      "placeId": "ChIJJxhFa_mflVQRI87QPZ05IaI",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Flavel St. & SE 64th Ave. [NE]",
+      "time": "7:35 am",
+      "direction": "NE",
+      "originalLine": "7:35 amSE FLAVEL ST @ SE 64TH AV [NE]217LNT-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5971579,
+        45.4686397
+      ],
+      "displayName": "SE 64th Ave & SE Flavel St, Portland, OR 97206, USA",
+      "placeId": "EjNTRSA2NHRoIEF2ZSAmIFNFIEZsYXZlbCBTdCwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgn1ZpCO_5-VVBHX2rkVFPiRQBIUChIJ9WaQjv-flVQR19q5FRT4kUAaFAoSCU-771ABoJVUEUft-BEmkVkXGhQKEgnDTD_f-J-VVBHtXZBxpaOfGCIKDb32GRsVhSjttg",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE Duke St. & SE 72nd Ave. [SW]",
+      "time": "7:38 am",
+      "direction": "SW",
+      "originalLine": "7:38 amSE DUKE ST @ SE 72ND AV [SW]217LNT-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5893663,
+        45.4758915
+      ],
+      "displayName": "SE Duke St & SE 72nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjFTRSBEdWtlIFN0ICYgU0UgNzJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJkfI8vByglVQRSMK0awtztF8SFAoSCZHyPLwcoJVUEUjCtGsLc7RfGhQKEglzrKkxiZ-VVBEwY0us41KM8hoUChIJGZ_Y9RmglVQRJZSNgvTSOKsiCg0DEhsbFeFY7rY",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE 67th Ave. & SE Holgate Blvd. [SE]",
+      "time": "7:43 am",
+      "direction": "SE",
+      "originalLine": "7:43 amSE 67TH AV @ SE HOLGATE BLVD [SE]217LNT-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.594316,
+        45.4902931
+      ],
+      "displayName": "SE Holgate Blvd & SE 67th Ave, Portland, OR 97206, USA",
+      "placeId": "EjZTRSBIb2xnYXRlIEJsdmQgJiBTRSA2N3RoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEglR9_M5FaCVVBG6UFqqM0x5mhIUChIJUffzORWglVQRulBaqjNMeZoaFAoSCV2BD1Y-oJVUEX7_A3-ak1ZXGhQKEgmp_TKXBKCVVBFkythk473PHSIKDZNEHRsViJfttg",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-0",
+      "address": "5105 SE 97th Ave, Portland, OR 97266, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:LENT GT & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5642721,
+        45.4871264
+      ],
+      "displayName": "5105 SE 97th Ave, Portland, OR 97266, USA",
+      "schoolName": "Lent"
+    }
+  ],
+  "neighborhoods": [
+    "Brentwood-Darlington",
+    "Foster - Powell",
+    "Lents"
+  ],
+  "processedAt": "2025-12-17T09:02:57.453Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.46584,
+      -122.56986
+    ],
+    [
+      45.46587,
+      -122.56982
+    ],
+    [
+      45.46591,
+      -122.56943
+    ],
+    [
+      45.46592,
+      -122.56912
+    ],
+    [
+      45.46592,
+      -122.56864
+    ],
+    [
+      45.46531,
+      -122.56863
+    ],
+    [
+      45.46472,
+      -122.56862
+    ],
+    [
+      45.46474,
+      -122.57019
+    ],
+    [
+      45.46477,
+      -122.57186
+    ],
+    [
+      45.46488,
+      -122.57187
+    ],
+    [
+      45.46496,
+      -122.57187
+    ],
+    [
+      45.46488,
+      -122.57187
+    ],
+    [
+      45.46477,
+      -122.57186
+    ],
+    [
+      45.46389,
+      -122.57187
+    ],
+    [
+      45.46337,
+      -122.57187
+    ],
+    [
+      45.46319,
+      -122.57187
+    ],
+    [
+      45.46322,
+      -122.57287
+    ],
+    [
+      45.46323,
+      -122.57353
+    ],
+    [
+      45.46324,
+      -122.57451
+    ],
+    [
+      45.46328,
+      -122.57705
+    ],
+    [
+      45.4633,
+      -122.57821
+    ],
+    [
+      45.46331,
+      -122.57905
+    ],
+    [
+      45.46359,
+      -122.57905
+    ],
+    [
+      45.46448,
+      -122.57905
+    ],
+    [
+      45.46584,
+      -122.57904
+    ],
+    [
+      45.46758,
+      -122.57905
+    ],
+    [
+      45.46867,
+      -122.57906
+    ],
+    [
+      45.46867,
+      -122.58402
+    ],
+    [
+      45.46866,
+      -122.58683
+    ],
+    [
+      45.46866,
+      -122.5889
+    ],
+    [
+      45.46867,
+      -122.58937
+    ],
+    [
+      45.46866,
+      -122.59034
+    ],
+    [
+      45.46865,
+      -122.59424
+    ],
+    [
+      45.46864,
+      -122.59619
+    ],
+    [
+      45.46864,
+      -122.59716
+    ],
+    [
+      45.46864,
+      -122.59619
+    ],
+    [
+      45.46865,
+      -122.59424
+    ],
+    [
+      45.46866,
+      -122.59034
+    ],
+    [
+      45.46867,
+      -122.58937
+    ],
+    [
+      45.46903,
+      -122.58936
+    ],
+    [
+      45.46926,
+      -122.58936
+    ],
+    [
+      45.47112,
+      -122.58936
+    ],
+    [
+      45.47452,
+      -122.58936
+    ],
+    [
+      45.47589,
+      -122.58937
+    ],
+    [
+      45.47756,
+      -122.58934
+    ],
+    [
+      45.48016,
+      -122.58929
+    ],
+    [
+      45.48183,
+      -122.58927
+    ],
+    [
+      45.48375,
+      -122.58924
+    ],
+    [
+      45.48557,
+      -122.58923
+    ],
+    [
+      45.48639,
+      -122.58921
+    ],
+    [
+      45.48648,
+      -122.58913
+    ],
+    [
+      45.48653,
+      -122.58926
+    ],
+    [
+      45.48676,
+      -122.58983
+    ],
+    [
+      45.48737,
+      -122.59128
+    ],
+    [
+      45.4883,
+      -122.59352
+    ],
+    [
+      45.48865,
+      -122.59435
+    ],
+    [
+      45.48904,
+      -122.59434
+    ],
+    [
+      45.49029,
+      -122.59432
+    ],
+    [
+      45.49027,
+      -122.59311
+    ],
+    [
+      45.49025,
+      -122.59026
+    ],
+    [
+      45.49024,
+      -122.58804
+    ],
+    [
+      45.49025,
+      -122.58637
+    ],
+    [
+      45.49026,
+      -122.58098
+    ],
+    [
+      45.49026,
+      -122.57981
+    ],
+    [
+      45.49024,
+      -122.57821
+    ],
+    [
+      45.49024,
+      -122.57582
+    ],
+    [
+      45.49024,
+      -122.57484
+    ],
+    [
+      45.49016,
+      -122.57408
+    ],
+    [
+      45.49012,
+      -122.57235
+    ],
+    [
+      45.49004,
+      -122.5686
+    ],
+    [
+      45.49003,
+      -122.5681
+    ],
+    [
+      45.49003,
+      -122.56786
+    ],
+    [
+      45.49001,
+      -122.56694
+    ],
+    [
+      45.48998,
+      -122.56601
+    ],
+    [
+      45.48996,
+      -122.56517
+    ],
+    [
+      45.48992,
+      -122.56348
+    ],
+    [
+      45.48801,
+      -122.56348
+    ],
+    [
+      45.48713,
+      -122.56348
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 6,
+    "errors": 0,
+    "total": 7
+  }
+}

@@ -40,26 +40,42 @@ async function processBatchPDFs(schoolId, pdfFiles, pdfDir) {
   for (const pdfFile of pdfFiles) {
     try {
       const pdfPath = path.join(pdfDir, pdfFile);
+      
+      // Verify PDF file exists
+      if (!fs.existsSync(pdfPath)) {
+        errors.push({ file: pdfFile, error: `PDF file not found: ${pdfPath}` });
+        continue;
+      }
+      
       const pdfBuffer = fs.readFileSync(pdfPath);
 
       // Process using shared processor
+      // ALWAYS pass schoolId from folder structure - this is the source of truth
       const finalRoute = await processSinglePDF(pdfBuffer, pdfFile, pdfFile, {
         logPrefix: '[ProcessPdfs]',
         saveToFile: true,
-        schoolId: schoolId, // Pass schoolId explicitly since we already know it
+        schoolId: schoolId, // CRITICAL: Always pass schoolId from folder structure
       });
 
       processed.push({
         file: pdfFile,
-        routeName: finalRoute.name,
-        stops: finalRoute.stops.length,
-        geocoded: finalRoute.stats.geocodedStops,
+        routeName: finalRoute.name || 'Unknown',
+        stops: finalRoute.stops ? finalRoute.stops.length : 0,
+        geocoded: finalRoute.stats ? finalRoute.stats.geocodedStops : 0,
+        totalStops: finalRoute.stats ? finalRoute.stats.totalStops : 0,
+        failedStops: finalRoute.stats ? finalRoute.stats.failedStops : 0,
       });
 
       // Add delay to avoid rate limiting
       await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (error) {
-      errors.push({ file: pdfFile, error: error.message });
+      console.error(`[ProcessPdfs] Error processing ${pdfFile}:`, error.message);
+      errors.push({ 
+        file: pdfFile, 
+        error: error.message,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      });
+      // Continue processing other PDFs even if one fails
     }
   }
 
@@ -134,11 +150,18 @@ router.post('/process/:schoolId', async (req, res) => {
 
     res.json({
       schoolId,
+      schoolName: school.name,
       processed: processed.length,
       errors: errors.length,
-      details: {
-        processed,
-        errors,
+      processedDetails: processed,
+      errorDetails: errors,
+      summary: {
+        totalPdfs: pdfFiles.length,
+        successful: processed.length,
+        failed: errors.length,
+        totalRoutesProcessed: processed.length,
+        totalStopsProcessed: processed.reduce((sum, p) => sum + (p.stops || 0), 0),
+        totalStopsGeocoded: processed.reduce((sum, p) => sum + (p.geocoded || 0), 0),
       },
     });
   } catch (error) {

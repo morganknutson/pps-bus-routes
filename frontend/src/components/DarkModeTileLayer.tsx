@@ -5,37 +5,37 @@ import L from 'leaflet';
 
 // Component that ensures map invalidates size after theme change
 function TileLayerUpdater() {
-  const { theme } = useTheme();
+  const { theme, effectiveTheme } = useTheme();
   const map = useMap();
-  const prevThemeRef = useRef<string>(theme);
+  const prevThemeRef = useRef<string>(effectiveTheme);
   
   useEffect(() => {
-    // Only update if theme actually changed
-    if (prevThemeRef.current === theme) {
+    // Only update if effective theme actually changed
+    if (prevThemeRef.current === effectiveTheme) {
       return;
     }
     
-    console.log('[DarkModeTileLayer] Theme changed from', prevThemeRef.current, 'to', theme);
-    prevThemeRef.current = theme;
+    console.log('[DarkModeTileLayer] Effective theme changed from', prevThemeRef.current, 'to', effectiveTheme, '(theme:', theme, ')');
+    prevThemeRef.current = effectiveTheme;
     
     // Invalidate map size to ensure tiles redraw properly
     // Use a small timeout to allow the new tile layer to mount first
     setTimeout(() => {
       map.invalidateSize();
     }, 100);
-  }, [theme, map]);
+  }, [theme, effectiveTheme, map]);
   
   return null;
 }
 
 export function DarkModeTileLayer() {
-  const { theme } = useTheme();
-  const isDarkMode = theme === 'dark';
+  const { effectiveTheme } = useTheme();
+  const isDarkMode = effectiveTheme === 'dark';
   
   return (
     <>
       <TileLayer
-        key={theme} // Force re-render when theme changes
+        key={effectiveTheme} // Force re-render when effective theme changes
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url={
           isDarkMode

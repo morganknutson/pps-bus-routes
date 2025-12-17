@@ -1,18 +1,11 @@
 {
-  "id": "route-1765264047078",
+  "id": "101SYL-A_effective_082625.pdf",
   "name": "101",
   "direction": "Morning",
   "filename": "101SYL-A_effective_082625.pdf",
+  "fileId": "101SYL-A_effective_082625.pdf",
+  "modifiedTime": null,
   "stops": [
-    {
-      "id": "stop-1",
-      "address": "Markham Gt. Loading ZONE In Driveway",
-      "time": "8:19 am",
-      "direction": null,
-      "originalLine": "8:19 amMARKHAM GT LOADING ZONE IN DRIVEWAY101SYL-AStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": null
-    },
     {
       "id": "stop-2",
       "address": "SW Dickinson St. & SW 62nd Dr. [NE]",
@@ -25,8 +18,7 @@
         45.4476729
       ],
       "displayName": "SW 62nd Pl & SW Dickinson St, Portland, OR 97219, USA",
-      "isApproximate": true,
-      "geocodeWarning": "Intersection not found, using approximate location",
+      "placeId": "EjVTVyA2Mm5kIFBsICYgU1cgRGlja2luc29uIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCX3o0B2XDJVUEfiz1HYMwmm4EhQKEgl96NAdlwyVVBH4s9R2DMJpuBoUChIJ_7rzC4EMlVQRTKjAFUMTBVQaFAoSCXkwVURfC5VUEbE9HjQlrbtgIgoNucMWGxUdRNe2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -41,8 +33,7 @@
         45.4506972
       ],
       "displayName": "SW Capitol Hwy & SW Luradel St, Portland, OR 97219, USA",
-      "isApproximate": true,
-      "geocodeWarning": "Intersection not found, using approximate location",
+      "placeId": "EjdTVyBDYXBpdG9sIEh3eSAmIFNXIEx1cmFkZWwgU3QsIFBvcnRsYW5kLCBPUiA5NzIxOSwgVVNBImYiZAoUChIJ49Os6J8MlVQRCkj3Hv1E-qgSFAoSCePTrOifDJVUEQpI9x79RPqoGhQKEgmTxb_1bguVVBH-y82JmKfqSBoUChIJA7eE4l8LlVQRqELb6lMAIkYiCg3cORcbFSvs2bY",
       "neighborhood": "West Portland Park"
     },
     {
@@ -57,8 +48,7 @@
         45.4593915
       ],
       "displayName": "SW Barbur Blvd & SW Primrose St, Portland, OR 97219, USA",
-      "isApproximate": true,
-      "geocodeWarning": "Intersection not found, using approximate location",
+      "placeId": "EjhTVyBCYXJidXIgQmx2ZCAmIFNXIFByaW1yb3NlIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCaUgNDRpC5VUEWKfzQe-8M47EhQKEgmlIDQ0aQuVVBFin80HvvDOOxoUChIJTal1dQoLlVQRWsSYU-Ui7_caFAoSCXXSdaRrC5VUEYvEx3OeF90qIgoNe40YGxVEJ9y2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -73,8 +63,7 @@
         45.4762321
       ],
       "displayName": "SW 45th Ave & SW Vermont St, Portland, OR 97219, USA",
-      "isApproximate": true,
-      "geocodeWarning": "Intersection not found, using approximate location",
+      "placeId": "EjRTVyA0NXRoIEF2ZSAmIFNXIFZlcm1vbnQgU3QsIFBvcnRsYW5kLCBPUiA5NzIxOSwgVVNBImYiZAoUChIJfWsLKpkLlVQR9gb-EWtEULISFAoSCX1rCyqZC5VUEfYG_hFrRFCyGhQKEglHR-BydwuVVBGsekzIt5hPIBoUChIJ7b44n4kLlVQR1hOe588BZ0QiCg1RHxsbFSnv2bY",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -85,10 +74,11 @@
       "originalLine": "8:47 am3910 SW BEAVERTON HILLSDALE HWY [SW]101SYL-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71705448627473,
-        45.48407840863702
+        -122.71705425099285,
+        45.48407524712945
       ],
       "displayName": "3910 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "ChIJ427nO7sLlVQRg94FFJoz_i8",
       "neighborhood": "Hayhurst"
     },
     {
@@ -99,10 +89,11 @@
       "originalLine": "8:48 am3278/3262 SW BEAVERTON HILLSDALE HWY [S]101SYL-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71056890487672,
-        45.481558591813005
+        -122.71056137230181,
+        45.481560474294206
       ],
       "displayName": "3278 SW Beaverton Hillsdale Hwy, Portland, OR 97239, USA",
+      "placeId": "ChIJ1aGGx6ULlVQRedS-73szXDg",
       "neighborhood": "Hayhurst"
     },
     {
@@ -114,18 +105,25 @@
       "isSchoolStop": true,
       "skipGeocoding": false,
       "coordinates": [
-        -122.7621042,
-        45.5040646
+        -122.7622985,
+        45.5044894
       ],
       "displayName": "8111 SW West Slope Dr, Portland, OR 97225, USA",
-      "schoolName": "West Sylvan"
+      "schoolName": "West Sylvan",
+      "neighborhood": "Southwest Hills"
     }
   ],
-  "processedAt": "2025-12-09T22:02:46.610Z",
+  "neighborhoods": [
+    "Hayhurst",
+    "Southwest Hills",
+    "Southwest Portland",
+    "West Portland Park"
+  ],
+  "processedAt": "2025-12-17T08:53:24.921Z",
   "stats": {
-    "totalStops": 8,
+    "totalStops": 7,
     "geocodedStops": 7,
-    "failedStops": 1
+    "failedStops": 0
   },
   "geometry": [
     [
@@ -670,7 +668,7 @@
     ],
     [
       45.48408,
-      -122.71706
+      -122.71705
     ],
     [
       45.48431,
@@ -726,7 +724,7 @@
     ],
     [
       45.48156,
-      -122.71057
+      -122.71056
     ],
     [
       45.48162,
@@ -1197,10 +1195,10 @@
       -122.76158
     ]
   ],
-  "geometryUpdatedAt": "2025-12-10T18:54:32.684Z",
-  "neighborhoods": [
-    "Hayhurst",
-    "Southwest Portland",
-    "West Portland Park"
-  ]
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 6,
+    "errors": 0,
+    "total": 7
+  }
 }

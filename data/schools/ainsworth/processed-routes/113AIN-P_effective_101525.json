@@ -19,7 +19,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     },
     {
       "id": "stop-1",
@@ -29,12 +30,18 @@
       "originalLine": "2:44 pm925 NW HOYT ST [N]113AIN-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6807601,
-        45.5273602
+        -122.6807557897765,
+        45.52727145443437
       ],
       "displayName": "925 NW Hoyt St, Portland, OR 97209, USA",
       "placeId": "ChIJK-5nc_8JlVQRF4NVVj-1-_A",
-      "neighborhood": "Northwest Portland"
+      "neighborhood": "Northwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6807601,
+        45.5273602
+      ],
+      "snapDistance": 9.873767293028017
     },
     {
       "id": "stop-2",
@@ -209,12 +216,18 @@
       "originalLine": "3:46 pm5008/5009 SW Barnes Rd [SE]113AIN-P(14)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.728585,
-        45.51817560000001
+        -122.72881685559445,
+        45.51830788118959
       ],
       "displayName": "5008 SW Barnes Rd, Portland, OR 97221, USA",
       "placeId": "ChIJ_x3skIMJlVQRJF4tvMKCm_Y",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.728585,
+        45.51817560000001
+      ],
+      "snapDistance": 23.29543384525066
     },
     {
       "id": "stop-14",
@@ -224,12 +237,18 @@
       "originalLine": "3:46 pm4922 SW Barnes Rd [E]113AIN-P(15)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7272495,
-        45.5191501
+        -122.72701011898371,
+        45.51937031772522
       ],
       "displayName": "4922 SW Barnes Rd, Portland, OR 97221, USA",
       "placeId": "ChIJw3TPfIQJlVQRqZof9mAVusc",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7272495,
+        45.5191501
+      ],
+      "snapDistance": 30.780752622667418
     },
     {
       "id": "stop-15",
@@ -1767,5 +1786,11 @@
       45.51905,
       -122.72269
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 12,
+    "errors": 0,
+    "total": 16
+  }
 }

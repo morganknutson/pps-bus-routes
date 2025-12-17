@@ -1,0 +1,665 @@
+{
+  "abernethy": {
+    "schoolId": "abernethy",
+    "schoolName": "Abernethy",
+    "placeId": "ChIJa069o3cKlVQRFWMZ0_zD7hg",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:28.298Z"
+  },
+  "access": {
+    "schoolId": "access",
+    "schoolName": "ACCESS",
+    "placeId": "ChIJHZwZgfsKlVQR8I5LYMSbQIs",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:28.557Z"
+  },
+  "ainsworth": {
+    "schoolId": "ainsworth",
+    "schoolName": "Ainsworth",
+    "placeId": "ChIJBfTLTDsKlVQR68xcJ3RrSVw",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:28.811Z"
+  },
+  "alameda": {
+    "schoolId": "alameda",
+    "schoolName": "Alameda",
+    "placeId": "ChIJ1_jPLSmnlVQR9wiqzPhNGgI",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:29.081Z"
+  },
+  "arleta": {
+    "schoolId": "arleta",
+    "schoolName": "Arleta",
+    "placeId": "ChIJG3rJ8xOglVQRAdzqCRO9tYs",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:29.333Z"
+  },
+  "astor": {
+    "schoolId": "astor",
+    "schoolName": "Astor",
+    "placeId": "ChIJzbsJ3fOnlVQRcXbeBO9Snnc",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:29.593Z"
+  },
+  "atkinson": {
+    "schoolId": "atkinson",
+    "schoolName": "Atkinson",
+    "placeId": "ChIJCdjr8V6glVQRICgZSkWS03I",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:29.853Z"
+  },
+  "beach": {
+    "schoolId": "beach",
+    "schoolName": "Beach",
+    "placeId": "ChIJ3zbaPnKnlVQRi0z01yWFvhc",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:30.107Z"
+  },
+  "beaumont": {
+    "schoolId": "beaumont",
+    "schoolName": "Beaumont",
+    "placeId": "ChIJi7XWddSmlVQRYxwxhYuDp1w",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:30.361Z"
+  },
+  "benson": {
+    "schoolId": "benson",
+    "schoolName": "Benson",
+    "placeId": "ChIJqWVGVLCglVQRsySyu7v6r3c",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:30.630Z"
+  },
+  "beverly-cleary": {
+    "schoolId": "beverly-cleary",
+    "schoolName": "Beverly Cleary",
+    "placeId": "ChIJvWQb9tGglVQRnHS1KbjRHgQ",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:30.875Z"
+  },
+  "boise-eliot": {
+    "schoolId": "boise-eliot",
+    "schoolName": "Boise-Eliot",
+    "placeId": "ChIJiSYRg0GnlVQRicNBlECs7j8",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:31.125Z"
+  },
+  "bridger": {
+    "schoolId": "bridger",
+    "schoolName": "Bridger",
+    "placeId": "ChIJR6_fqVSglVQRntMaJa5xMvc",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:31.373Z"
+  },
+  "bridlemile": {
+    "schoolId": "bridlemile",
+    "schoolName": "Bridlemile",
+    "placeId": "ChIJE4-Zg8cLlVQRUcljQoPw4CA",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:31.618Z"
+  },
+  "buckman": {
+    "schoolId": "buckman",
+    "schoolName": "Buckman",
+    "placeId": "ChIJxQwUUaOglVQR2_XfoYD-vs8",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:31.868Z"
+  },
+  "capitol": {
+    "schoolId": "capitol",
+    "schoolName": "Capitol",
+    "placeId": "ChIJfWop8xMLlVQRQVFDLYlacBc",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:32.131Z"
+  },
+  "cesar-chavez": {
+    "schoolId": "cesar-chavez",
+    "schoolName": "Cesar Chavez",
+    "placeId": "ChIJFSgvI-mnlVQRluNVhqLIOG8",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:32.380Z"
+  },
+  "chapman": {
+    "schoolId": "chapman",
+    "schoolName": "Chapman",
+    "placeId": "ChIJb6et2O4JlVQRLDllfbZiabQ",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:32.630Z"
+  },
+  "chief-joseph": {
+    "schoolId": "chief-joseph",
+    "schoolName": "Chief Joseph",
+    "placeId": "ChIJr2f6CaOnlVQRxcngThDm65I",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:32.880Z"
+  },
+  "clark": {
+    "schoolId": "clark",
+    "schoolName": "Clark",
+    "placeId": "ChIJr7AkPK-hlVQREuBjcKxqYM4",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:33.132Z"
+  },
+  "creston": {
+    "schoolId": "creston",
+    "schoolName": "Creston",
+    "placeId": "ChIJVQCwZ2WglVQRVdd8xCPqgRs",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:33.377Z"
+  },
+  "davinci": {
+    "schoolId": "davinci",
+    "schoolName": "DaVinci",
+    "placeId": "ChIJddOr17iglVQRG37zobrKIGU",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:33.633Z"
+  },
+  "duniway": {
+    "schoolId": "duniway",
+    "schoolName": "Duniway",
+    "placeId": "EjM3NzAwIFNFIFJlZWQgQ29sbGVnZSBQbCAjNSwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiHRobChYKFAoSCdPce0a3CpVUEf2ixINt4eesEgE1",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:33.886Z"
+  },
+  "faubion": {
+    "schoolId": "faubion",
+    "schoolName": "Faubion",
+    "placeId": "ChIJnV3CT-6mlVQRXMn_cUK8-9I",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:34.135Z"
+  },
+  "forest-park": {
+    "schoolId": "forest-park",
+    "schoolName": "Forest Park",
+    "placeId": "ChIJ58hVCPwIlVQRYFttS2zr_SI",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:34.386Z"
+  },
+  "franklin": {
+    "schoolId": "franklin",
+    "schoolName": "Franklin",
+    "placeId": "ChIJX_PIWWeglVQR7WxVc3xLits",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:34.631Z"
+  },
+  "george": {
+    "schoolId": "george",
+    "schoolName": "George",
+    "placeId": "ChIJaRwQ2AuolVQRSTGxy2G9c2I",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:34.876Z"
+  },
+  "glencoe": {
+    "schoolId": "glencoe",
+    "schoolName": "Glencoe",
+    "placeId": "ChIJJ8YF1--glVQRqsoZTnyy7Yw",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:35.125Z"
+  },
+  "gray": {
+    "schoolId": "gray",
+    "schoolName": "Gray",
+    "placeId": "ChIJx4exSakLlVQRaTTX5exbPpY",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:35.368Z"
+  },
+  "grout": {
+    "schoolId": "grout",
+    "schoolName": "Grout",
+    "placeId": "ChIJIXIG_YIKlVQRgEzR4aWZ0IQ",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:35.620Z"
+  },
+  "harrison-park": {
+    "schoolId": "harrison-park",
+    "schoolName": "Harrison Park",
+    "placeId": "ChIJeyCKubKhlVQR8-2dQbdhmFA",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:35.874Z"
+  },
+  "hayhurst": {
+    "schoolId": "hayhurst",
+    "schoolName": "Hayhurst",
+    "placeId": "ChIJ-3QVcpcLlVQRbNEINaBem14",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:36.127Z"
+  },
+  "hosford": {
+    "schoolId": "hosford",
+    "schoolName": "Hosford",
+    "placeId": "ChIJ43xciYSglVQRJ5JQ1M5cU5Q",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:36.375Z"
+  },
+  "irvington": {
+    "schoolId": "irvington",
+    "schoolName": "Irvington",
+    "placeId": "ChIJJ45fxTWnlVQRKJiXVzxldTo",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:36.621Z"
+  },
+  "jackson": {
+    "schoolId": "jackson",
+    "schoolName": "Jackson",
+    "placeId": "ChIJk8bFeF4LlVQRi3CiOg7HvT0",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:36.868Z"
+  },
+  "james-john": {
+    "schoolId": "james-john",
+    "schoolName": "James John",
+    "placeId": "ChIJYco_UwColVQR9MKL1Xnb39E",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:37.118Z"
+  },
+  "kelly": {
+    "schoolId": "kelly",
+    "schoolName": "Kelly",
+    "placeId": "ChIJdzS-o_SflVQRRUixiEUwojU",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:37.379Z"
+  },
+  "kellogg": {
+    "schoolId": "kellogg",
+    "schoolName": "Kellogg",
+    "placeId": "ChIJK5MdbUSglVQRIt5HcgMhzKs",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:37.633Z"
+  },
+  "lane": {
+    "schoolId": "lane",
+    "schoolName": "Lane",
+    "placeId": "ChIJwdIixwCglVQRv89p_8phIa8",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:37.885Z"
+  },
+  "lee": {
+    "schoolId": "lee",
+    "schoolName": "Lee",
+    "placeId": "ChIJE_YaF2mhlVQRxj9A0lSfbVI",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:38.140Z"
+  },
+  "lent": {
+    "schoolId": "lent",
+    "schoolName": "Lent",
+    "placeId": "ChIJa5h6Ii-glVQRCpF3mn-l-ew",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:38.381Z"
+  },
+  "leodis-v-mcdaniel": {
+    "schoolId": "leodis-v-mcdaniel",
+    "schoolName": "Leodis V. McDaniel",
+    "placeId": "ChIJ__C8KUGhlVQRIA6pcGoIaJk",
+    "photos": [
+      {
+        "name": "places/ChIJ__C8KUGhlVQRIA6pcGoIaJk/photos/AZLasHpMwzaEkZYgJ-5bxHtoA1T_EAShl2TeuryRQUvry6uzZH55uQKMuAVnKP8Fg4rw10Jq7nvPEoiS0IdJJKJjgIs3EEx-shxEcSOgZVMchNyMjVHk9fOVls3GmLT2-Fa4rzJBB6KrDs1k3rrPDtMUw6Iz_todycoIeAH4_uTO_OQ5b4u6Jrs_ZC30x9XGba_ZtnCK04_0QkQ1pwQUdj9OYqgT02LPkOK4-E6VJR7rwe8n72NPU8v1ItwWf2FWBYe-pVVaHAIh65E3EQ_GUSmN9kJ7QqkH0ytGZR-udfioDCbMaU77n536OUePfKBwezamRbon1FmDjyWWQTbf7umVLLLkKI-Pn_TKUcb6SAoqjuVxLuBJeMJX_3AV6F8uXWQHezJkxPFtoh6wzuINuROVqZRl4axM3oP7_adIaOQkj4vlStOn",
+        "widthPx": 4032,
+        "heightPx": 3024,
+        "authorAttributions": [
+          {
+            "displayName": "Raquel Laiz",
+            "uri": "https://maps.google.com/maps/contrib/107964288460301539727",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjV8Fy9LxDgyYxQQkN0PdjrnKe_hXLOcWFCz3SKsEnMtpoqfKm2y=s100-p-k-no-mo"
+          }
+        ]
+      },
+      {
+        "name": "places/ChIJ__C8KUGhlVQRIA6pcGoIaJk/photos/AZLasHrjXICwUo0LTKJrd5AVzkShpaX-Pibmt77Bpoo7i7EmXkeiOYOTYbq1mWRl-qGcseJA86R_bxdCFOB02ocEyheOmXgPkNBY4Ht4HkczExkK7n_2oSJCfo_GMhEuj8dxj2cdC4GWjQZV5OmjcsgvP3hb7aVRANX79cyBmqC_JbvkaqWP4z2GXb5r_uenz5crOj9yOH8mzyg7WbY5ddchEe4dGTBCQZB8ylQBrQUX3UKxzSvMxCUdi-M307SDpT7FPLbc2MzdITGHtYHFZOnSR1v48npYGLDruD1EpWZLM0pRSP0llLRA4Meb6jv8m7Os1K51ZU-AQapZWaF9xXCNq6wmDn3WvRPaBb7gEh0BIfQD2jieroWk_nTh4ipFMHLzXI8vR3L0EQEGsekbvxeQoiefnD0VZsH4GDKes2vOLR8",
+        "widthPx": 4032,
+        "heightPx": 3024,
+        "authorAttributions": [
+          {
+            "displayName": "Raquel Laiz",
+            "uri": "https://maps.google.com/maps/contrib/107964288460301539727",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjV8Fy9LxDgyYxQQkN0PdjrnKe_hXLOcWFCz3SKsEnMtpoqfKm2y=s100-p-k-no-mo"
+          }
+        ]
+      }
+    ],
+    "photoCount": 2,
+    "lastUpdated": "2025-12-17T10:25:38.639Z"
+  },
+  "lewis": {
+    "schoolId": "lewis",
+    "schoolName": "Lewis",
+    "placeId": "EjI0NDAxIFNFIEV2ZXJncmVlbiBTdCAjMTIxLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSIfGh0KFgoUChIJW6be7aUKlVQRPRtrU9tlpUsSAzEyMQ",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:38.890Z"
+  },
+  "lincoln": {
+    "schoolId": "lincoln",
+    "schoolName": "Lincoln",
+    "placeId": "ChIJnz4fIRwKlVQRpLrIePp94dg",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:39.146Z"
+  },
+  "llewellyn": {
+    "schoolId": "llewellyn",
+    "schoolName": "Llewellyn",
+    "placeId": "ChIJtS9ug-sKlVQRYLLMaLnFh0I",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:39.404Z"
+  },
+  "dr-martin-luther-king": {
+    "schoolId": "dr-martin-luther-king",
+    "schoolName": "Dr Martin Luther King",
+    "placeId": "ChIJp6pQ2xmnlVQRI7SGhtJYwUo",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:39.655Z"
+  },
+  "maplewood": {
+    "schoolId": "maplewood",
+    "schoolName": "Maplewood",
+    "placeId": "ChIJpSg-04ILlVQRGoZEQo7THXo",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:39.902Z"
+  },
+  "markham": {
+    "schoolId": "markham",
+    "schoolName": "Markham",
+    "placeId": "ChIJXxPHZZ8MlVQRWOgoZtq7WTY",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:40.146Z"
+  },
+  "marysville": {
+    "schoolId": "marysville",
+    "schoolName": "Marysville",
+    "placeId": "ChIJIYuSrj2glVQRQvzA99hIbjU",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:40.407Z"
+  },
+  "mt-tabor": {
+    "schoolId": "mt-tabor",
+    "schoolName": "Mt Tabor",
+    "placeId": "ChIJ6f2PneSglVQRzBs0azfyxo0",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:40.658Z"
+  },
+  "ockley-green": {
+    "schoolId": "ockley-green",
+    "schoolName": "Ockley Green",
+    "placeId": "ChIJERGEHwqnlVQRjvCBCsIzgpk",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:40.905Z"
+  },
+  "peninsula": {
+    "schoolId": "peninsula",
+    "schoolName": "Peninsula",
+    "placeId": "ChIJAZjRSL-nlVQR8xFcC6ibgMI",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:41.161Z"
+  },
+  "richmond": {
+    "schoolId": "richmond",
+    "schoolName": "Richmond",
+    "placeId": "ChIJZ8PazIuglVQRQETneuH8bvQ",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:41.409Z"
+  },
+  "rieke": {
+    "schoolId": "rieke",
+    "schoolName": "Rieke",
+    "placeId": "ChIJze_58gYLlVQRUAuMae25gx8",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:41.661Z"
+  },
+  "rigler": {
+    "schoolId": "rigler",
+    "schoolName": "Rigler",
+    "placeId": "ChIJOaQ_CsmmlVQR2SMT7FOZfdk",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:41.914Z"
+  },
+  "rosa-parks": {
+    "schoolId": "rosa-parks",
+    "schoolName": "Rosa Parks",
+    "placeId": "ChIJhRzu5MKnlVQRVX6jE3zuoMw",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:42.166Z"
+  },
+  "rose-city-park": {
+    "schoolId": "rose-city-park",
+    "schoolName": "Rose City Park",
+    "placeId": "ChIJD9LhciWhlVQRmNUvbQJCDEM",
+    "photos": [
+      {
+        "name": "places/ChIJD9LhciWhlVQRmNUvbQJCDEM/photos/AZLasHqAz0rVGWXXX3fihCXF15Zgz11zsh9SAi6EfKUWZ3jNSzPOAeN-Z9KYEaWRBJWOn93Hwco9nwAfWZ-MOirkXYBcVcpyz1o2IbMndORyq2Z6EzL4TqiVCbdN691gNnW-0C6b0ha8KfzFH_T6Z-7fjpM9CwI6B9Mbg7hYX4a63LBEK2rXOJV_9QHy-GpIkgYupoEJD3e4hGEjY6d-BpWs9KBRI_sRXioKB7EFV2cjuG8chLcGz6jJ9ogM7VGFv8_mkbW4t6ISn79EO1J3oXcKjscadaiF8FLiISvf-kXriOXtP_OsTS6YEt0LSTuy4Ix0thpuemP_YQpybbI1pf8hFilN6QbvO8eUaJrDsuxV5XTs250jgbCY9sixYSzSFW47S-qmYdlfPtDM3vpS58HimTBDtOaPyORQ6xUIZ9D20ybF4Q",
+        "widthPx": 4160,
+        "heightPx": 2340,
+        "authorAttributions": [
+          {
+            "displayName": "Molly",
+            "uri": "https://maps.google.com/maps/contrib/116960501142364399305",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWxr9BooDcqPRCA9q2Nt3YqURP9FFHymTKEcDadzkz-aVMAVMwGIg=s100-p-k-no-mo"
+          }
+        ]
+      },
+      {
+        "name": "places/ChIJD9LhciWhlVQRmNUvbQJCDEM/photos/AZLasHpwo_Qnd3WbOq95vmJgfvkd2qPzLKubTglAm6as_TqqLsAaMu-rGhLvzet3HnCL50bEMwMGDNKJvLZ3NqmCyO6D2cKwJYOaE6KSV210GU0R69L6BipxN2IRcaZZ_bLjU25NSELzUpwnMGjUBeHhhhqus_cb17_hfRF0KREGWNO6IagYsRRlBDNG6P2wt8C6Pv9LKYH9EogAPug2o5u6NEe5JyfD1zBD7fUpRTkN9YrbeOSmbcDV90G1FxQEemNgIt1Mtda1PMjvpKWBvL6YRbKNwnnouuWSUlud3Y-7Qg4fmRm_E5AHmaCx32fPTx539003ePJl2ZSWUvmsNwrDdkuEtx5bnxegRLbeYau1RV1Gpb0UdRaLc5RYsZ7aaWqbZry7UnQhK-BadfHYxfMdUxqK_03o-kA4pfaQlD3Bllc",
+        "widthPx": 2340,
+        "heightPx": 4160,
+        "authorAttributions": [
+          {
+            "displayName": "Molly",
+            "uri": "https://maps.google.com/maps/contrib/116960501142364399305",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWxr9BooDcqPRCA9q2Nt3YqURP9FFHymTKEcDadzkz-aVMAVMwGIg=s100-p-k-no-mo"
+          }
+        ]
+      },
+      {
+        "name": "places/ChIJD9LhciWhlVQRmNUvbQJCDEM/photos/AZLasHqoQFvQETECXmnqWhZAMJGby9JauicpzwpZrvTJSBKhhCEWfXGC91zNP5Gpvx4syIOJzgct2uz1DKNQnCxgy5JQ0v8FkSOgAQkkY7dMyTsdJCFfcTYxIgoduAFWMdV6erY4IkkcebEiLtiWeJ3ZukZP0LwwRk3-mQuJlRjrICC2bClig5IwF6Dowjp4BsbTdfNu9dSasPPgq9VLH3hboui7_OFc6A9KuqI_8UJT0LT19oWhlksXF3nPTn01FP3SlmvVtAjtWnYF44OQXDXp3PKPjxEfxuPbHp2Th8hOEzffzJhoI3D3f7dAPhO9M9Ke14ypB-UuVFvk3sFmTlXqxYEon9uRWslQ1ity1opV0om5gJEa-bft26N7T7TvdlQ04sdFdFCmKNTQZX0NLIb_KQKR8oyEMmlrjnCfYpKl4IE",
+        "widthPx": 4160,
+        "heightPx": 2340,
+        "authorAttributions": [
+          {
+            "displayName": "Molly",
+            "uri": "https://maps.google.com/maps/contrib/116960501142364399305",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWxr9BooDcqPRCA9q2Nt3YqURP9FFHymTKEcDadzkz-aVMAVMwGIg=s100-p-k-no-mo"
+          }
+        ]
+      },
+      {
+        "name": "places/ChIJD9LhciWhlVQRmNUvbQJCDEM/photos/AZLasHopQyJX5T7iEeXtBFbdPx36r4E72Wj8JM1w3drAXL_3MjTq_V2XOT2tUYdizr-IFnlwPB-qgFCLZvQREUodfMb7dDPo5h0gQMFf19HsWkzUqKrIkHRVL-0SPXT7naaK9C3GoWnHM6ZyYzsTH8OtrMoUaNUQ55WDtewqIv4NqEKTs5Ax5utYNIdOGJH468QTH82m82nXw24wzoeqgkvTbgdoGuz_TdRALetc61o_L4ACdbwckfCezCi_eRL4JOZmZzWM5Cy7l5zn1IXN_O0_ZeiQLu1-Hi2MQCFQ2gJ4di8Ctm0VT3ID81iivdsTQRRazFs1JNPa680vYwwmAH-Z8t1SS5UEfCLGGgeGcmy8Vrof-mm_ApLYSzUoNPx0ZO7x9LxHjdD7yhkIecDwqVLaUf6b9X67xoSluByjj89u3Gs",
+        "widthPx": 1960,
+        "heightPx": 4032,
+        "authorAttributions": [
+          {
+            "displayName": "Jim Cowan",
+            "uri": "https://maps.google.com/maps/contrib/117638968387519617500",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXH5OvyJVqmyDF6rzOczXSbehGBGBlOo32tH7TjRIYQKTZcHTc=s100-p-k-no-mo"
+          }
+        ]
+      }
+    ],
+    "photoCount": 4,
+    "lastUpdated": "2025-12-17T10:25:42.421Z"
+  },
+  "roseway-heights": {
+    "schoolId": "roseway-heights",
+    "schoolName": "Roseway Heights",
+    "placeId": "ChIJWQLei0ehlVQR-maswlIein4",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:42.678Z"
+  },
+  "sabin": {
+    "schoolId": "sabin",
+    "schoolName": "Sabin",
+    "placeId": "ChIJrebtfCSnlVQRiQV6HTwV4bQ",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:42.928Z"
+  },
+  "scott": {
+    "schoolId": "scott",
+    "schoolName": "Scott",
+    "placeId": "ChIJIYtrt7SmlVQRkmzgSveNLm4",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:43.174Z"
+  },
+  "sellwood": {
+    "schoolId": "sellwood",
+    "schoolName": "Sellwood",
+    "placeId": "ChIJpU0Yd9AKlVQRMpcZTOvdVA4",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:43.434Z"
+  },
+  "sitton": {
+    "schoolId": "sitton",
+    "schoolName": "Sitton",
+    "placeId": "ChIJs9CIjRuolVQRBaJVyQtfBaA",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:43.690Z"
+  },
+  "skyline": {
+    "schoolId": "skyline",
+    "schoolName": "Skyline",
+    "placeId": "ChIJFTkpJOMGlVQR4m2mq7RkI9s",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:43.937Z"
+  },
+  "stephenson": {
+    "schoolId": "stephenson",
+    "schoolName": "Stephenson",
+    "placeId": "ChIJpZ8Im1YLlVQRlcXENEI5fAs",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:44.186Z"
+  },
+  "tubman": {
+    "schoolId": "tubman",
+    "schoolName": "Tubman",
+    "placeId": "ChIJDwa3vU-nlVQRW4_sOT_yo94",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:44.432Z"
+  },
+  "vernon": {
+    "schoolId": "vernon",
+    "schoolName": "Vernon",
+    "placeId": "ChIJWdREruGmlVQROaPOPKX7JLE",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:44.678Z"
+  },
+  "vestal": {
+    "schoolId": "vestal",
+    "schoolName": "Vestal",
+    "placeId": "ChIJx8hinQ-hlVQRSodBWZcbmvE",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:44.931Z"
+  },
+  "west-sylvan": {
+    "schoolId": "west-sylvan",
+    "schoolName": "West Sylvan",
+    "placeId": "ChIJo5Mdv14JlVQRtsmr9rRIk7A",
+    "photos": [
+      {
+        "name": "places/ChIJo5Mdv14JlVQRtsmr9rRIk7A/photos/AZLasHoTTiC4BDYdj0dU3U0rg-wJsrMW227cuKxuAdHtJqVF_Y3v4A5hhOk-CP_LmKuG2M-yqbcZKDeFLmpWIRR8jbsC9XguB3ZI3vgnr_0P-imO0Hc2-PqDGQbRiMJbN0GFcdsYl0M7YV_ePs7WcEuosS8NTa2RwwJhl_RDrOIU4pnMeo3BKEc9H15KVkvbk3bLNbTqRJzonU-i5nTBCwy2j3HjOMRtOhiHFJPWHhafSTmv23O2iHYaAPSJTK767jT8UX46x01NuJjSHYAzDz3cDLjKU9jKgzrjfPfuGrOPHo2orZKuVqJpRwSAXXc_9dehLpeMfULBR92Wmr_Cxi0YouW4-Uv4R0S6Q8DlZx0SAz7UPib04G9sriwCLXP9hS28mb_B_zNksFUZvpZM19ZtN5TSuiL2pyFOdBiZqP_EGuONZrNy",
+        "widthPx": 3072,
+        "heightPx": 4080,
+        "authorAttributions": [
+          {
+            "displayName": "Rob Salzman",
+            "uri": "https://maps.google.com/maps/contrib/114124942936679476879",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU7flWs2Df3hgKDZKUsDY1_19MjH85HcrYcFcYt3BfsSzAyfwWNNA=s100-p-k-no-mo"
+          }
+        ]
+      }
+    ],
+    "photoCount": 1,
+    "lastUpdated": "2025-12-17T10:25:45.183Z"
+  },
+  "whitman": {
+    "schoolId": "whitman",
+    "schoolName": "Whitman",
+    "placeId": "ChIJJxhFa_mflVQRI87QPZ05IaI",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:45.431Z"
+  },
+  "woodlawn": {
+    "schoolId": "woodlawn",
+    "schoolName": "Woodlawn",
+    "placeId": "ChIJ6XQI2fimlVQRRghQWioYQcA",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:45.679Z"
+  },
+  "woodmere": {
+    "schoolId": "woodmere",
+    "schoolName": "Woodmere",
+    "placeId": "ChIJMagg7B2glVQRqsxxlvNFBxw",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:45.930Z"
+  },
+  "woodstock": {
+    "schoolId": "woodstock",
+    "schoolName": "Woodstock",
+    "placeId": "ChIJo9HbsQuglVQR1_ogKFqaaTQ",
+    "photos": [],
+    "photoCount": 0,
+    "lastUpdated": "2025-12-17T10:25:46.185Z"
+  }
+}

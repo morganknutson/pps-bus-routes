@@ -342,6 +342,8 @@ function getThemePreviewColor(theme: Theme): string {
       return '#ffffff';
     case 'dark':
       return '#1a1a1a';
+    case 'auto':
+      return '#666666';
     case 'blue':
       return '#2563eb';
     case 'green':

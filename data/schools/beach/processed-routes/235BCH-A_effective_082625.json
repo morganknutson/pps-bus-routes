@@ -14,12 +14,18 @@
       "originalLine": "7:26 amVERNON SCHOOL (2044 NE KILLINGSWORTH ST) [N]235BCH-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6437449,
-        45.5624996
+        -122.64374319646474,
+        45.56269209941689
       ],
       "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
       "placeId": "ChIJww96suGmlVQRCl-EGDqJIb4",
-      "neighborhood": "Vernon"
+      "neighborhood": "Vernon",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6437449,
+        45.5624996
+      ],
+      "snapDistance": 21.40536938763483
     },
     {
       "id": "stop-2",
@@ -29,12 +35,18 @@
       "originalLine": "7:32 am4705 NE 7TH AV (KING ELEMENTARY ON NE 7TH AV) [W]235BCH-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6588103,
-        45.5568985
+        -122.65881606597708,
+        45.55703288696268
       ],
       "displayName": "4705 NE 7th Ave, Portland, OR 97211, USA",
       "placeId": "ChIJI8yWgBenlVQRhQMeTKK2umY",
-      "neighborhood": "King"
+      "neighborhood": "King",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6588103,
+        45.5568985
+      ],
+      "snapDistance": 14.94989047075652
     },
     {
       "id": "stop-3",
@@ -94,7 +106,8 @@
         45.5579142
       ],
       "displayName": "1710 N Humboldt St, Portland, OR 97217, USA",
-      "schoolName": "Beach"
+      "schoolName": "Beach",
+      "neighborhood": "Overlook"
     }
   ],
   "processedAt": "2025-12-12T22:33:34.120Z",
@@ -444,5 +457,11 @@
       45.55779,
       -122.68551
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 2,
+    "skipped": 3,
+    "errors": 0,
+    "total": 6
+  }
 }

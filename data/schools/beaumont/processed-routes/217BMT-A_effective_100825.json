@@ -23,12 +23,18 @@
       "originalLine": "8:35 am6814 NE 47TH AV [E]217BMT-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6135079,
-        45.5724904
+        -122.6135123322122,
+        45.57241842559587
       ],
       "displayName": "6814 NE 47th Ave, Portland, OR 97218, USA",
       "placeId": "ChIJJdGnkZamlVQRJnCYc6hIsd0",
-      "neighborhood": "Cully"
+      "neighborhood": "Cully",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6135079,
+        45.5724904
+      ],
+      "snapDistance": 8.010620846391172
     },
     {
       "id": "stop-3",
@@ -38,12 +44,18 @@
       "originalLine": "8:44 am6735 NE KILLINGSWORTH ST [N]217BMT-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.593197,
-        45.5631542
+        -122.59287470000001,
+        45.563013399999996
       ],
       "displayName": "6735 NE Killingsworth St, Portland, OR 97218, USA",
       "placeId": "ChIJ59yV2q-mlVQRDADzXIG4R6Q",
-      "neighborhood": "Cully"
+      "neighborhood": "Cully",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.593197,
+        45.5631542
+      ],
+      "snapDistance": 29.575024369024064
     },
     {
       "id": "stop-4",
@@ -53,12 +65,18 @@
       "originalLine": "8:45 am6415 NE KILLINGSWORTH ST (ARBOR MHP) [N]217BMT-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.596629,
-        45.5631844
+        -122.59663222965969,
+        45.56331249875914
       ],
       "displayName": "6415 NE Killingsworth St UNIT E10, Portland, OR 97218, USA",
       "placeId": "ChIJGxHXnbqmlVQRVbK949-kg0Q",
-      "neighborhood": "Cully"
+      "neighborhood": "Cully",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.596629,
+        45.5631844
+      ],
+      "snapDistance": 14.246151020047433
     },
     {
       "id": "stop-5",
@@ -118,7 +136,8 @@
         45.5489184
       ],
       "displayName": "4043 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Beaumont"
+      "schoolName": "Beaumont",
+      "neighborhood": "Northeast Portland"
     }
   ],
   "processedAt": "2025-12-12T22:36:38.491Z",
@@ -660,5 +679,11 @@
       45.54885,
       -122.62177
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 4,
+    "errors": 0,
+    "total": 8
+  }
 }

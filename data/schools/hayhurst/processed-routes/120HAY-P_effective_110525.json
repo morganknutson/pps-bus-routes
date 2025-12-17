@@ -1,0 +1,1075 @@
+{
+  "id": "120HAY-P_effective_110525.pdf",
+  "name": "120",
+  "direction": "Afternoon",
+  "filename": "120HAY-P_effective_110525.pdf",
+  "fileId": "120HAY-P_effective_110525.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "5037 SW Iowa St, Portland, OR 97221, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:HAYHURST GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7289138,
+        45.4801718
+      ],
+      "displayName": "5037 SW Iowa St, Portland, OR 97221, USA",
+      "schoolName": "Hayhurst"
+    },
+    {
+      "id": "stop-1",
+      "address": "SW Oleson Rd. & SW Dover St. [SE]",
+      "time": "2:40 pm",
+      "direction": "SE",
+      "originalLine": "2:40 pmSW OLESON RD @ SW DOVER ST [SE]120HAY-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7472651,
+        45.4825959
+      ],
+      "displayName": "SW Dover St & SW Oleson Rd, Beaverton, OR 97225, USA",
+      "placeId": "EjRTVyBEb3ZlciBTdCAmIFNXIE9sZXNvbiBSZCwgQmVhdmVydG9uLCBPUiA5NzIyNSwgVVNBImYiZAoUChIJefQwFY0LlVQRge-4FcbLXUoSFAoSCXn0MBWNC5VUEYHvuBXGy11KGhQKEgnXmR2FkguVVBHb7YIy_qz0bhoUChIJLzfGYnAMlVQRPwiM0xRsRfQiCg3nFxwbFfVA1rY"
+    },
+    {
+      "id": "stop-2",
+      "address": "6336 SW Beaverton Hillsdale Hwy [S]",
+      "time": "2:42 pm",
+      "direction": "S",
+      "originalLine": "2:42 pm6336 SW BEAVERTON HILLSDALE HWY [S]120HAY-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7424212,
+        45.48668310000001
+      ],
+      "displayName": "6336 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "ChIJ1T1QmOwLlVQR1bws9G6tfpQ",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-3",
+      "address": "5854 SW Beaverton Hillsdale Hwy [S]",
+      "time": "2:44 pm",
+      "direction": "S",
+      "originalLine": "2:44 pm5854 SW BEAVERTON HILLSDALE HWY [S]120HAY-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7380845623692,
+        45.48685526807119
+      ],
+      "displayName": "5854 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "ChIJHxe40pQLlVQRYRDq4BdcbxU",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-4",
+      "address": "5714 SW Beaverton Hillsdale Hwy [S]",
+      "time": "2:45 pm",
+      "direction": "S",
+      "originalLine": "2:45 pm5714 SW BEAVERTON HILLSDALE HWY [S]120HAY-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.73565302062892,
+        45.486751725389105
+      ],
+      "displayName": "5714 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "ChIJgflkJJULlVQRAMClqgwUInI",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-5",
+      "address": "SW Shattuck Rd. & SW Boundary St. [NW]",
+      "time": "2:47 pm",
+      "direction": "NW",
+      "originalLine": "2:47 pmSW SHATTUCK RD @ SW BOUNDARY ST [NW]120HAY-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7333104,
+        45.4857678
+      ],
+      "displayName": "SW Boundary St & SW Shattuck Rd, Portland, OR 97221, USA",
+      "placeId": "EjhTVyBCb3VuZGFyeSBTdCAmIFNXIFNoYXR0dWNrIFJkLCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCacRWaCVC5VUEdeHDcTmoT8wEhQKEgmnEVmglQuVVBHXhw3E5qE_MBoUChIJHyIJ4K8LlVQRtrwPf_44uVIaFAoSCZtOV1uVC5VUEZeROXH00pfHIgoNzpMcGxUQYti2",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-6",
+      "address": "5720 SW Boundary St. [N]",
+      "time": "2:48 pm",
+      "direction": "N",
+      "originalLine": "2:48 pm5720 SW BOUNDARY ST [N]120HAY-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.73595695529956,
+        45.485799571457235
+      ],
+      "displayName": "5720 SW Boundary St, Portland, OR 97221, USA",
+      "placeId": "ChIJ08r7-pQLlVQRVLzfYzR_Uac",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-7",
+      "address": "6005 SW Boundary St. [N]",
+      "time": "2:49 pm",
+      "direction": "N",
+      "originalLine": "2:49 pm6005 SW BOUNDARY ST [N]120HAY-P(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.73821091380205,
+        45.48582413847768
+      ],
+      "displayName": "6005 SW Boundary St, Portland, OR 97221, USA",
+      "placeId": "ChIJJ8vbuJQLlVQR9qCqUh3VZmI",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-8",
+      "address": "SW Boundary St. & SW 62nd Ave. [NE]",
+      "time": "2:50 pm",
+      "direction": "NE",
+      "originalLine": "2:50 pmSW BOUNDARY ST @ SW 62ND AV [NE]120HAY-P(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7397403,
+        45.4858418
+      ],
+      "displayName": "SW 62nd Ave & SW Boundary St, Portland, OR 97221, USA",
+      "placeId": "EjVTVyA2Mm5kIEF2ZSAmIFNXIEJvdW5kYXJ5IFN0LCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCdUNY6iUC5VUEdm0byTUrz1VEhQKEgnVDWOolAuVVBHZtG8k1K89VRoUChIJXWuxiIQMlVQRqfzuH1wGUgwaFAoSCR8iCeCvC5VUEba8D3_-OLlSIgoNspYcGxXlZte2",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-9",
+      "address": "SW Beaverton Hillsdale Hwy & SW 50th Ave. [SW]",
+      "time": "2:54 pm",
+      "direction": "SW",
+      "originalLine": "2:54 pmSW BEAVERTON HILLSDALE HWY @ SW 50TH AV [SW]120HAY-P(10)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7283565,
+        45.4870305
+      ],
+      "displayName": "SW 50th Ave & SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "EkFTVyA1MHRoIEF2ZSAmIFNXIEJlYXZlcnRvbiBIaWxsc2RhbGUgSHd5LCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCcd47Fa-C5VUEfpw_Ejc2iiyEhQKEgnHeOxWvguVVBH6cPxI3NooshoUChIJUcYxgJkLlVQRjkhiPtz8eLMaFAoSCV-GYUYGDJVUESiTnTebIIFAIgoNIcUcGxWTI9m2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-10",
+      "address": "SW Beaverton Hillsdale Hwy & SW 42nd Ave. [S]",
+      "time": "2:55 pm",
+      "direction": "S",
+      "originalLine": "2:55 pmSW BEAVERTON HILLSDALE HWY @ SW 42ND AV [S]120HAY-P(11)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7201195,
+        45.4855105
+      ],
+      "displayName": "SW 42nd Ave & SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "EkFTVyA0Mm5kIEF2ZSAmIFNXIEJlYXZlcnRvbiBIaWxsc2RhbGUgSHd5LCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCae2CpC7C5VUEdQhUx_F_yFGEhQKEgmntgqQuwuVVBHUIVMfxf8hRhoUChIJ_Qrz8XYLlVQRQ_OiRVkNeToaFAoSCV-GYUYGDJVUESiTnTebIIFAIgoNwYkcGxVVZdq2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-11",
+      "address": "3648 SW Beaverton Hillsdale Hwy [SW]",
+      "time": "2:56 pm",
+      "direction": "SW",
+      "originalLine": "2:56 pm3648 SW Beaverton Hillsdale Hwy [SW]120HAY-P(12)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.71469190963901,
+        45.483210700466636
+      ],
+      "displayName": "3648 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "ChIJoU6KVdULlVQRvSQjwIoCUkI",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-12",
+      "address": "3228/3212 SW Beaverton Hillsdale Hwy [S]",
+      "time": "2:58 pm",
+      "direction": "S",
+      "originalLine": "2:58 pm3228/3212 SW BEAVERTON HILLSDALE HWY [S]120HAY-P(13)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.71005127251892,
+        45.48117757959794
+      ],
+      "displayName": "3228 SW Beaverton Hillsdale Hwy, Portland, OR 97239, USA",
+      "placeId": "ChIJg5anuKULlVQR0BqbpH0n89k",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-13",
+      "address": "2714 SW Beaverton Hillsdale Hwy [SW]",
+      "time": "2:59 pm",
+      "direction": "SW",
+      "originalLine": "2:59 pm2714 SW Beaverton Hillsdale Hwy [SW]120HAY-P(14)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70507465449532,
+        45.48041734052915
+      ],
+      "displayName": "2714 SW Beaverton Hillsdale Hwy, Portland, OR 97239, USA",
+      "placeId": "ChIJ9eDYnqgLlVQR-uNsDAi8BGE",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-14",
+      "address": "2535 SW Bertha Blvd. [N]",
+      "time": "3:01 pm",
+      "direction": "N",
+      "originalLine": "3:01 pm2535 SW BERTHA BLVD [N]120HAY-P(15)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70298453417884,
+        45.47931103327011
+      ],
+      "displayName": "2535 SW Bertha Blvd, Portland, OR 97239, USA",
+      "placeId": "ChIJseUaZKgLlVQRZ6iPun8MiNA",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-15",
+      "address": "2703 SW Bertha Blvd. [N]",
+      "time": "3:01 pm",
+      "direction": "N",
+      "originalLine": "3:01 pm2703 SW BERTHA BLVD [N]120HAY-P(16)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7042246,
+        45.479429599999996
+      ],
+      "displayName": "2703 SW Bertha Blvd, Portland, OR 97239, USA",
+      "placeId": "ChIJN0jRgKgLlVQRxdVaW0YSbMo",
+      "neighborhood": "Southwest Portland"
+    }
+  ],
+  "neighborhoods": [
+    "Hayhurst",
+    "Southwest Portland"
+  ],
+  "processedAt": "2025-12-17T08:58:56.740Z",
+  "stats": {
+    "totalStops": 16,
+    "geocodedStops": 16,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.48015,
+      -122.72871
+    ],
+    [
+      45.4799,
+      -122.72874
+    ],
+    [
+      45.47991,
+      -122.72848
+    ],
+    [
+      45.47984,
+      -122.7283
+    ],
+    [
+      45.4793,
+      -122.72832
+    ],
+    [
+      45.47856,
+      -122.72832
+    ],
+    [
+      45.47728,
+      -122.72832
+    ],
+    [
+      45.47678,
+      -122.72831
+    ],
+    [
+      45.4763,
+      -122.72832
+    ],
+    [
+      45.47632,
+      -122.73016
+    ],
+    [
+      45.47633,
+      -122.73169
+    ],
+    [
+      45.47639,
+      -122.73765
+    ],
+    [
+      45.47641,
+      -122.7405
+    ],
+    [
+      45.47644,
+      -122.74334
+    ],
+    [
+      45.47646,
+      -122.74543
+    ],
+    [
+      45.47648,
+      -122.74674
+    ],
+    [
+      45.47649,
+      -122.74733
+    ],
+    [
+      45.47719,
+      -122.74713
+    ],
+    [
+      45.47761,
+      -122.74702
+    ],
+    [
+      45.47776,
+      -122.74701
+    ],
+    [
+      45.47809,
+      -122.74705
+    ],
+    [
+      45.47863,
+      -122.74737
+    ],
+    [
+      45.4794,
+      -122.7479
+    ],
+    [
+      45.47973,
+      -122.7481
+    ],
+    [
+      45.48001,
+      -122.74817
+    ],
+    [
+      45.4803,
+      -122.74817
+    ],
+    [
+      45.48054,
+      -122.74809
+    ],
+    [
+      45.48065,
+      -122.74803
+    ],
+    [
+      45.48092,
+      -122.74782
+    ],
+    [
+      45.48122,
+      -122.74755
+    ],
+    [
+      45.48158,
+      -122.74733
+    ],
+    [
+      45.48181,
+      -122.74727
+    ],
+    [
+      45.48232,
+      -122.74727
+    ],
+    [
+      45.48317,
+      -122.74726
+    ],
+    [
+      45.4835,
+      -122.74728
+    ],
+    [
+      45.4836,
+      -122.74732
+    ],
+    [
+      45.48415,
+      -122.7475
+    ],
+    [
+      45.48572,
+      -122.74799
+    ],
+    [
+      45.4861,
+      -122.7481
+    ],
+    [
+      45.4863,
+      -122.74817
+    ],
+    [
+      45.48643,
+      -122.74765
+    ],
+    [
+      45.48667,
+      -122.74666
+    ],
+    [
+      45.48684,
+      -122.74601
+    ],
+    [
+      45.48692,
+      -122.74575
+    ],
+    [
+      45.48696,
+      -122.74549
+    ],
+    [
+      45.487,
+      -122.74528
+    ],
+    [
+      45.48706,
+      -122.7446
+    ],
+    [
+      45.48709,
+      -122.74404
+    ],
+    [
+      45.4871,
+      -122.74336
+    ],
+    [
+      45.48709,
+      -122.74267
+    ],
+    [
+      45.48668,
+      -122.74267
+    ],
+    [
+      45.48668,
+      -122.74242
+    ],
+    [
+      45.48668,
+      -122.74267
+    ],
+    [
+      45.48709,
+      -122.74267
+    ],
+    [
+      45.48709,
+      -122.74233
+    ],
+    [
+      45.48709,
+      -122.74148
+    ],
+    [
+      45.48708,
+      -122.74053
+    ],
+    [
+      45.48708,
+      -122.73852
+    ],
+    [
+      45.48708,
+      -122.73798
+    ],
+    [
+      45.48689,
+      -122.73808
+    ],
+    [
+      45.48686,
+      -122.73808
+    ],
+    [
+      45.48689,
+      -122.73808
+    ],
+    [
+      45.48708,
+      -122.73798
+    ],
+    [
+      45.48707,
+      -122.73747
+    ],
+    [
+      45.48705,
+      -122.73565
+    ],
+    [
+      45.48679,
+      -122.73565
+    ],
+    [
+      45.48675,
+      -122.73565
+    ],
+    [
+      45.48679,
+      -122.73565
+    ],
+    [
+      45.48705,
+      -122.73565
+    ],
+    [
+      45.48705,
+      -122.73485
+    ],
+    [
+      45.48706,
+      -122.73272
+    ],
+    [
+      45.48707,
+      -122.73221
+    ],
+    [
+      45.48706,
+      -122.7321
+    ],
+    [
+      45.48699,
+      -122.73205
+    ],
+    [
+      45.48694,
+      -122.73201
+    ],
+    [
+      45.48691,
+      -122.73199
+    ],
+    [
+      45.48686,
+      -122.73196
+    ],
+    [
+      45.48674,
+      -122.73197
+    ],
+    [
+      45.48655,
+      -122.73219
+    ],
+    [
+      45.48624,
+      -122.73251
+    ],
+    [
+      45.48601,
+      -122.73279
+    ],
+    [
+      45.48591,
+      -122.73297
+    ],
+    [
+      45.48586,
+      -122.73309
+    ],
+    [
+      45.48577,
+      -122.73331
+    ],
+    [
+      45.48577,
+      -122.73344
+    ],
+    [
+      45.48579,
+      -122.73382
+    ],
+    [
+      45.48579,
+      -122.73408
+    ],
+    [
+      45.48578,
+      -122.73459
+    ],
+    [
+      45.4858,
+      -122.73596
+    ],
+    [
+      45.48583,
+      -122.7386
+    ],
+    [
+      45.48584,
+      -122.73955
+    ],
+    [
+      45.48584,
+      -122.73974
+    ],
+    [
+      45.48584,
+      -122.73955
+    ],
+    [
+      45.48583,
+      -122.73894
+    ],
+    [
+      45.48582,
+      -122.73764
+    ],
+    [
+      45.4858,
+      -122.73613
+    ],
+    [
+      45.48578,
+      -122.73459
+    ],
+    [
+      45.48579,
+      -122.73408
+    ],
+    [
+      45.48577,
+      -122.73344
+    ],
+    [
+      45.48577,
+      -122.73331
+    ],
+    [
+      45.48586,
+      -122.73309
+    ],
+    [
+      45.48591,
+      -122.73297
+    ],
+    [
+      45.48601,
+      -122.73279
+    ],
+    [
+      45.48624,
+      -122.73251
+    ],
+    [
+      45.48655,
+      -122.73219
+    ],
+    [
+      45.48674,
+      -122.73197
+    ],
+    [
+      45.48689,
+      -122.73182
+    ],
+    [
+      45.48704,
+      -122.73163
+    ],
+    [
+      45.48704,
+      -122.73138
+    ],
+    [
+      45.48704,
+      -122.73091
+    ],
+    [
+      45.48704,
+      -122.73048
+    ],
+    [
+      45.48704,
+      -122.72962
+    ],
+    [
+      45.48705,
+      -122.72884
+    ],
+    [
+      45.48701,
+      -122.7282
+    ],
+    [
+      45.48688,
+      -122.72756
+    ],
+    [
+      45.48676,
+      -122.72718
+    ],
+    [
+      45.48622,
+      -122.72601
+    ],
+    [
+      45.48613,
+      -122.72575
+    ],
+    [
+      45.48606,
+      -122.72547
+    ],
+    [
+      45.48599,
+      -122.72512
+    ],
+    [
+      45.48591,
+      -122.72446
+    ],
+    [
+      45.48583,
+      -122.7236
+    ],
+    [
+      45.48581,
+      -122.72339
+    ],
+    [
+      45.48578,
+      -122.72316
+    ],
+    [
+      45.48556,
+      -122.72065
+    ],
+    [
+      45.48551,
+      -122.72012
+    ],
+    [
+      45.48545,
+      -122.7197
+    ],
+    [
+      45.48528,
+      -122.71884
+    ],
+    [
+      45.48517,
+      -122.7184
+    ],
+    [
+      45.48497,
+      -122.71775
+    ],
+    [
+      45.4848,
+      -122.71728
+    ],
+    [
+      45.48425,
+      -122.71602
+    ],
+    [
+      45.48376,
+      -122.71493
+    ],
+    [
+      45.48368,
+      -122.71497
+    ],
+    [
+      45.48339,
+      -122.71491
+    ],
+    [
+      45.48329,
+      -122.71483
+    ],
+    [
+      45.48321,
+      -122.71469
+    ],
+    [
+      45.48329,
+      -122.71483
+    ],
+    [
+      45.48339,
+      -122.71491
+    ],
+    [
+      45.48368,
+      -122.71497
+    ],
+    [
+      45.48376,
+      -122.71493
+    ],
+    [
+      45.48299,
+      -122.71319
+    ],
+    [
+      45.48252,
+      -122.71213
+    ],
+    [
+      45.48217,
+      -122.71134
+    ],
+    [
+      45.48195,
+      -122.71078
+    ],
+    [
+      45.48186,
+      -122.71045
+    ],
+    [
+      45.48183,
+      -122.71029
+    ],
+    [
+      45.48167,
+      -122.71044
+    ],
+    [
+      45.48154,
+      -122.71058
+    ],
+    [
+      45.48143,
+      -122.71067
+    ],
+    [
+      45.48135,
+      -122.71072
+    ],
+    [
+      45.48129,
+      -122.71071
+    ],
+    [
+      45.48121,
+      -122.71058
+    ],
+    [
+      45.48111,
+      -122.7104
+    ],
+    [
+      45.48115,
+      -122.71023
+    ],
+    [
+      45.48117,
+      -122.71015
+    ],
+    [
+      45.48118,
+      -122.71008
+    ],
+    [
+      45.48118,
+      -122.71005
+    ],
+    [
+      45.48117,
+      -122.7101
+    ],
+    [
+      45.48115,
+      -122.71023
+    ],
+    [
+      45.48111,
+      -122.7104
+    ],
+    [
+      45.48121,
+      -122.71058
+    ],
+    [
+      45.48124,
+      -122.71063
+    ],
+    [
+      45.48131,
+      -122.71072
+    ],
+    [
+      45.48138,
+      -122.71071
+    ],
+    [
+      45.48149,
+      -122.71063
+    ],
+    [
+      45.48162,
+      -122.7105
+    ],
+    [
+      45.48183,
+      -122.71029
+    ],
+    [
+      45.48175,
+      -122.70969
+    ],
+    [
+      45.48173,
+      -122.70937
+    ],
+    [
+      45.48171,
+      -122.70872
+    ],
+    [
+      45.48167,
+      -122.70829
+    ],
+    [
+      45.48163,
+      -122.70797
+    ],
+    [
+      45.48149,
+      -122.70744
+    ],
+    [
+      45.48141,
+      -122.70721
+    ],
+    [
+      45.48114,
+      -122.70655
+    ],
+    [
+      45.4808,
+      -122.7057
+    ],
+    [
+      45.48047,
+      -122.70466
+    ],
+    [
+      45.48046,
+      -122.70461
+    ],
+    [
+      45.48032,
+      -122.70471
+    ],
+    [
+      45.48042,
+      -122.70507
+    ],
+    [
+      45.48032,
+      -122.70471
+    ],
+    [
+      45.48046,
+      -122.70461
+    ],
+    [
+      45.48037,
+      -122.70425
+    ],
+    [
+      45.48028,
+      -122.70381
+    ],
+    [
+      45.48021,
+      -122.70347
+    ],
+    [
+      45.48003,
+      -122.70252
+    ],
+    [
+      45.47989,
+      -122.70198
+    ],
+    [
+      45.47981,
+      -122.70175
+    ],
+    [
+      45.47963,
+      -122.70136
+    ],
+    [
+      45.47939,
+      -122.70098
+    ],
+    [
+      45.47919,
+      -122.70072
+    ],
+    [
+      45.47914,
+      -122.70064
+    ],
+    [
+      45.47904,
+      -122.70078
+    ],
+    [
+      45.47897,
+      -122.70095
+    ],
+    [
+      45.47896,
+      -122.70102
+    ],
+    [
+      45.47896,
+      -122.70115
+    ],
+    [
+      45.47906,
+      -122.70159
+    ],
+    [
+      45.4792,
+      -122.70228
+    ],
+    [
+      45.47931,
+      -122.70298
+    ],
+    [
+      45.47939,
+      -122.70375
+    ],
+    [
+      45.47943,
+      -122.70422
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 15,
+    "errors": 0,
+    "total": 16
+  }
+}

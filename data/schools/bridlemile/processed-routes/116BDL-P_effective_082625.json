@@ -19,7 +19,8 @@
         45.4917482
       ],
       "displayName": "4300 SW 47th Dr, Portland, OR 97221, USA",
-      "schoolName": "Bridlemile"
+      "schoolName": "Bridlemile",
+      "neighborhood": "Southwest Portland"
     },
     {
       "id": "stop-1",
@@ -1283,5 +1284,11 @@
       45.49467,
       -122.74362
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 19,
+    "errors": 0,
+    "total": 20
+  }
 }

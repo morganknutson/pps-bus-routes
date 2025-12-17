@@ -19,7 +19,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     },
     {
       "id": "stop-1",
@@ -29,12 +30,18 @@
       "originalLine": "2:38 pm2488 SW SHERWOOD DR [NW]111AIN-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.701099,
-        45.50235199999999
+        -122.70129700690538,
+        45.502436722768266
       ],
       "displayName": "2488 SW Sherwood Dr, Portland, OR 97201, USA",
       "placeId": "ChIJCc1yGjcKlVQRC__IbFf6ZA4",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.701099,
+        45.50235199999999
+      ],
+      "snapDistance": 18.079881554319233
     },
     {
       "id": "stop-2",
@@ -59,12 +66,18 @@
       "originalLine": "2:44 pm2221 SW BROADWAY DR [E]111AIN-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7009108,
-        45.5057407
+        -122.70076583124336,
+        45.50571383776916
       ],
       "displayName": "2221 SW Broadway Dr, Portland, OR 97201, USA",
       "placeId": "ChIJYyMQcjoKlVQRLV4hwrnNGjE",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7009108,
+        45.5057407
+      ],
+      "snapDistance": 11.685555127171657
     },
     {
       "id": "stop-4",
@@ -74,12 +87,18 @@
       "originalLine": "2:45 pm1807 SW BROADWAY DR [S]111AIN-P(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6985726,
-        45.5060355
+        -122.69860269698277,
+        45.50587682142333
       ],
       "displayName": "1807 SW Broadway Dr, Portland, OR 97201, USA",
       "placeId": "ChIJ_fXyNjoKlVQRHBpC1al7iFQ",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6985726,
+        45.5060355
+      ],
+      "snapDistance": 17.799458648652084
     },
     {
       "id": "stop-5",
@@ -1413,5 +1432,11 @@
       45.49255,
       -122.68403
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 5,
+    "errors": 0,
+    "total": 9
+  }
 }

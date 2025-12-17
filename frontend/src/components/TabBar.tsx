@@ -93,6 +93,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           transition: 'left 0.3s ease',
           zIndex: 1,
           boxShadow: '0 1px 3px var(--shadow-large)',
+          border: '1px solid var(--border-color)',
         }}
       />
     </div>

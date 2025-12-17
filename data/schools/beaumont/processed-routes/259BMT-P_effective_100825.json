@@ -19,7 +19,8 @@
         45.5489184
       ],
       "displayName": "4043 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Beaumont"
+      "schoolName": "Beaumont",
+      "neighborhood": "Northeast Portland"
     },
     {
       "id": "stop-1",
@@ -641,5 +642,11 @@
       45.56275,
       -122.60609
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 4,
+    "errors": 0,
+    "total": 5
+  }
 }

@@ -184,7 +184,8 @@
         45.5050873
       ],
       "displayName": "5800 SE Division St, Portland, OR 97206, USA",
-      "schoolName": "Atkinson"
+      "schoolName": "Atkinson",
+      "neighborhood": "South Tabor"
     }
   ],
   "neighborhoods": [
@@ -1132,5 +1133,11 @@
       45.50535,
       -122.60491
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 11,
+    "errors": 0,
+    "total": 12
+  }
 }

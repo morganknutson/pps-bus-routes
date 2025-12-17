@@ -1,0 +1,753 @@
+{
+  "id": "242LAN-A_effective_091025.pdf",
+  "name": "242",
+  "direction": "Morning",
+  "filename": "242LAN-A_effective_091025.pdf",
+  "fileId": "242LAN-A_effective_091025.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "SE 82nd Ave. No Intersection [W]",
+      "time": "8:25 am",
+      "direction": "W",
+      "originalLine": "8:25 amSE 82ND AV No Intersection [W]242LAN-AStop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5788084,
+        45.4894987
+      ],
+      "displayName": "SE 82nd Ave, Portland, OR, USA",
+      "placeId": "Eh5TRSA4Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SLCBVU0EiLiosChQKEgljgFnd9Z-VVBH3HsUIHwQGGRIUChIJJ3SpfQsLlVQRkYXR9ua5Nhw",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "8015 SE Martins St. [N]",
+      "time": "8:29 am",
+      "direction": "N",
+      "originalLine": "8:29 am8015 SE MARTINS ST [N]242LAN-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.58122323384279,
+        45.47894658020799
+      ],
+      "displayName": "8015 SE Martins St, Portland, OR 97206, USA",
+      "placeId": "ChIJEYb4Kx-glVQRSfjMg2wJNxA",
+      "neighborhood": "Mount Scott - Arleta"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Duke St. & SE 76th Ave. [N]",
+      "time": "8:31 am",
+      "direction": "N",
+      "originalLine": "8:31 amSE DUKE ST @ SE 76TH AV [N]242LAN-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5855168,
+        45.475879
+      ],
+      "displayName": "SE Duke St & SE 76th Ave, Portland, OR 97206, USA",
+      "placeId": "EjFTRSBEdWtlIFN0ICYgU0UgNzZ0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJ0RUvThyglVQRjBsBtkqsbVASFAoSCdEVL04coJVUEYwbAbZKrG1QGhQKEglzrKkxiZ-VVBEwY0us41KM8hoUChIJlQ_QsD2glVQR68pn-Qxr1PciCg2GERsbFUDv7rY",
+      "neighborhood": "Mount Scott - Arleta"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE Duke St. & SE 72nd Ave. [NE]",
+      "time": "8:32 am",
+      "direction": "NE",
+      "originalLine": "8:32 amSE DUKE ST @ SE 72ND AV [NE]242LAN-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5893663,
+        45.4758915
+      ],
+      "displayName": "SE Duke St & SE 72nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjFTRSBEdWtlIFN0ICYgU0UgNzJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJkfI8vByglVQRSMK0awtztF8SFAoSCZHyPLwcoJVUEUjCtGsLc7RfGhQKEglzrKkxiZ-VVBEwY0us41KM8hoUChIJGZ_Y9RmglVQRJZSNgvTSOKsiCg0DEhsbFeFY7rY",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE 72nd Ave. & SE Nehalem St. [NW]",
+      "time": "8:35 am",
+      "direction": "NW",
+      "originalLine": "8:35 amSE 72ND AV @ SE NEHALEM ST [NW]242LAN-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5893812,
+        45.4654219
+      ],
+      "displayName": "SE 72nd Ave & SE Nehalem St, Portland, OR 97206, USA",
+      "placeId": "EjRTRSA3Mm5kIEF2ZSAmIFNFIE5laGFsZW0gU3QsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJM4G5PfyflVQRpi2dQwi3TMoSFAoSCTOBuT38n5VUEaYtnUMIt0zKGhQKEgkZn9j1GaCVVBEllI2C9NI4qxoUChIJFYEGobYKlVQRwwWjfB6bPHkiCg0LeRkbFUxY7rY",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-7",
+      "address": "SE 72nd Ave. & SE Harney St. [NW]",
+      "time": "8:36 am",
+      "direction": "NW",
+      "originalLine": "8:36 amSE 72ND AV @ SE HARNEY ST [NW]242LAN-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5893802,
+        45.4632848
+      ],
+      "displayName": "SE Harney St & SE 72nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjNTRSBIYXJuZXkgU3QgJiBTRSA3Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEglnJBUE_Z-VVBHNAwPuxE0o1hIUChIJZyQVBP2flVQRzQMD7sRNKNYaFAoSCa9Q1UlWdZVUEZOK2CWOUirDGhQKEgkZn9j1GaCVVBEllI2C9NI4qyIKDZAlGRsVVljutg",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-8",
+      "address": "SE Harney St. & SE 60th Ave. [NE]",
+      "time": "8:38 am",
+      "direction": "NE",
+      "originalLine": "8:38 amSE HARNEY ST @ SE 60TH AV [NE]242LAN-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6022031,
+        45.4631157
+      ],
+      "displayName": "SE 60th Ave & SE Harney St, Portland, OR 97206, USA",
+      "placeId": "EjNTRSA2MHRoIEF2ZSAmIFNFIEhhcm5leSBTdCwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgk7JUD2U3WVVBGZPiIQrtc1YhIUChIJOyVA9lN1lVQRmT4iEK7XNWIaFAoSCTVZRqoPoJVUEenTTMWwccPAGhQKEgmvUNVJVnWVVBGTitgljlIqwyIKDfUeGRsVcWPstg",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-9",
+      "address": "5410 SE Harney Dr. [N]",
+      "time": "8:40 am",
+      "direction": "N",
+      "originalLine": "8:40 am5410 SE HARNEY DR [N]242LAN-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6073071380836,
+        45.46292515166676
+      ],
+      "displayName": "5410 SE Harney Dr, Portland, OR 97206, USA",
+      "placeId": "ChIJBZVrWlJ1lVQRCoaHi0Rqtew",
+      "neighborhood": "Darlington"
+    },
+    {
+      "id": "stop-10",
+      "address": "SE Steele St. & SE 41st Ave. [NE]",
+      "time": "8:47 am",
+      "direction": "NE",
+      "originalLine": "8:47 amSE STEELE ST @ SE 41ST AV [NE]242LAN-A(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6205893,
+        45.4847166
+      ],
+      "displayName": "SE Steele St & SE 41st Ave, Portland, OR 97202, USA",
+      "placeId": "EjNTRSBTdGVlbGUgU3QgJiBTRSA0MXN0IEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiZiJkChQKEgnT8Ht9daCVVBHqb9x7reg0ZRIUChIJ0_B7fXWglVQR6m_ce63oNGUaFAoSCQm4wGojoJVUEQw6ZUc3pi7BGhQKEglX2-CGdqCVVBG0QxiSKvutASIKDb5qHBsVO5Xptg",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-11",
+      "address": "SE 46th Ave. & SE Long St. [SE]",
+      "time": "8:49 am",
+      "direction": "SE",
+      "originalLine": "8:49 amSE 46TH AV @ SE LONG ST [SE]242LAN-A(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6148848,
+        45.4884845
+      ],
+      "displayName": "SE Long St & SE 46th Ave, Portland, OR 97206, USA",
+      "placeId": "EjFTRSBMb25nIFN0ICYgU0UgNDZ0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJsbft7HOglVQRk7xtvqX9qUMSFAoSCbG37exzoJVUEZO8bb6l_alDGhQKEgnnhJn0FaCVVBFCJYgW0IQLhxoUChIJbzPfoaAKlVQRZ_8c_9kvOM8iCg3t_RwbFRB06rY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-12",
+      "address": "4521 SE 58th Ave. [W]",
+      "time": "8:51 am",
+      "direction": "W",
+      "originalLine": "8:51 am4521 SE 58TH AV [W]242LAN-A(10)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60399960231948,
+        45.48984505853683
+      ],
+      "displayName": "4521 SE 58th Ave, Portland, OR 97206, USA",
+      "placeId": "ChIJE8HP_GyglVQR3SUhHz2fNmo",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-13",
+      "address": "SE 58th Ave. & SE Mitchell St. [NW]",
+      "time": "8:53 am",
+      "direction": "NW",
+      "originalLine": "8:53 amSE 58TH AV @ SE MITCHELL ST [NW]242LAN-A(11)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6040839,
+        45.4854174
+      ],
+      "displayName": "SE 58th Ave & SE Mitchell St, Portland, OR 97206, USA",
+      "placeId": "EjVTRSA1OHRoIEF2ZSAmIFNFIE1pdGNoZWxsIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCceD2HgNoJVUEXQa3GtnjAP3EhQKEgnHg9h4DaCVVBF0GtxrZ4wD9xoUChIJWZCy52yglVQRlc0XffE6p_QaFAoSCe0zdEI9oJVUEeDHaLKLBQEwIgoNHoYcGxX5Gey2",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-14",
+      "address": "SE Mitchell St. & SE 52nd Ave. [NE]",
+      "time": "8:54 am",
+      "direction": "NE",
+      "originalLine": "8:54 amSE MITCHELL ST @ SE 52ND AV [NE]242LAN-A(12)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6087695,
+        45.4856873
+      ],
+      "displayName": "SE Mitchell St & SE 52nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjVTRSBNaXRjaGVsbCBTdCAmIFNFIDUybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCeea79kMoJVUER24x93-4OU0EhQKEgnnmu_ZDKCVVBEduMfd_uDlNBoUChIJ7TN0Qj2glVQR4MdososFATAaFAoSCbHgTY4LoJVUEbCv47TpvNM0IgoNqZAcGxXxYuu2",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "7200 SE 60th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:LANE GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6014249,
+        45.4708481
+      ],
+      "displayName": "7200 SE 60th Ave, Portland, OR 97206, USA",
+      "schoolName": "Lane"
+    }
+  ],
+  "neighborhoods": [
+    "Brentwood-Darlington",
+    "Darlington",
+    "Lents",
+    "Mount Scott - Arleta",
+    "Southeast Portland"
+  ],
+  "processedAt": "2025-12-17T09:02:22.560Z",
+  "stats": {
+    "totalStops": 14,
+    "geocodedStops": 14,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.4895,
+      -122.57881
+    ],
+    [
+      45.48658,
+      -122.57889
+    ],
+    [
+      45.48551,
+      -122.57891
+    ],
+    [
+      45.48487,
+      -122.57894
+    ],
+    [
+      45.4838,
+      -122.57896
+    ],
+    [
+      45.4832,
+      -122.57897
+    ],
+    [
+      45.48261,
+      -122.57897
+    ],
+    [
+      45.48076,
+      -122.579
+    ],
+    [
+      45.48052,
+      -122.57899
+    ],
+    [
+      45.47985,
+      -122.57902
+    ],
+    [
+      45.47895,
+      -122.57905
+    ],
+    [
+      45.47894,
+      -122.58214
+    ],
+    [
+      45.47894,
+      -122.58314
+    ],
+    [
+      45.47894,
+      -122.58348
+    ],
+    [
+      45.47894,
+      -122.58418
+    ],
+    [
+      45.47825,
+      -122.58419
+    ],
+    [
+      45.47688,
+      -122.58421
+    ],
+    [
+      45.4762,
+      -122.58423
+    ],
+    [
+      45.47588,
+      -122.58418
+    ],
+    [
+      45.47588,
+      -122.58552
+    ],
+    [
+      45.47588,
+      -122.58808
+    ],
+    [
+      45.47589,
+      -122.58937
+    ],
+    [
+      45.47551,
+      -122.58936
+    ],
+    [
+      45.4735,
+      -122.58937
+    ],
+    [
+      45.46944,
+      -122.58936
+    ],
+    [
+      45.46867,
+      -122.58937
+    ],
+    [
+      45.46684,
+      -122.58938
+    ],
+    [
+      45.46434,
+      -122.58938
+    ],
+    [
+      45.46146,
+      -122.58938
+    ],
+    [
+      45.46146,
+      -122.59212
+    ],
+    [
+      45.46145,
+      -122.59692
+    ],
+    [
+      45.46144,
+      -122.60127
+    ],
+    [
+      45.46145,
+      -122.60152
+    ],
+    [
+      45.46164,
+      -122.60155
+    ],
+    [
+      45.46168,
+      -122.60156
+    ],
+    [
+      45.46178,
+      -122.60161
+    ],
+    [
+      45.46194,
+      -122.60174
+    ],
+    [
+      45.46212,
+      -122.60199
+    ],
+    [
+      45.46226,
+      -122.60222
+    ],
+    [
+      45.46274,
+      -122.60221
+    ],
+    [
+      45.46312,
+      -122.6022
+    ],
+    [
+      45.46274,
+      -122.60221
+    ],
+    [
+      45.46226,
+      -122.60222
+    ],
+    [
+      45.46202,
+      -122.60184
+    ],
+    [
+      45.46194,
+      -122.60174
+    ],
+    [
+      45.46178,
+      -122.60161
+    ],
+    [
+      45.46164,
+      -122.60155
+    ],
+    [
+      45.46145,
+      -122.60152
+    ],
+    [
+      45.46145,
+      -122.60168
+    ],
+    [
+      45.46146,
+      -122.60209
+    ],
+    [
+      45.46149,
+      -122.60238
+    ],
+    [
+      45.46161,
+      -122.60274
+    ],
+    [
+      45.4617,
+      -122.60294
+    ],
+    [
+      45.46192,
+      -122.60335
+    ],
+    [
+      45.4624,
+      -122.60423
+    ],
+    [
+      45.46272,
+      -122.60487
+    ],
+    [
+      45.46285,
+      -122.60522
+    ],
+    [
+      45.46289,
+      -122.60544
+    ],
+    [
+      45.46292,
+      -122.60703
+    ],
+    [
+      45.46294,
+      -122.60899
+    ],
+    [
+      45.46296,
+      -122.61005
+    ],
+    [
+      45.46461,
+      -122.61004
+    ],
+    [
+      45.46658,
+      -122.61003
+    ],
+    [
+      45.46864,
+      -122.61002
+    ],
+    [
+      45.4694,
+      -122.61004
+    ],
+    [
+      45.47049,
+      -122.61002
+    ],
+    [
+      45.47188,
+      -122.61002
+    ],
+    [
+      45.47224,
+      -122.60996
+    ],
+    [
+      45.47258,
+      -122.60989
+    ],
+    [
+      45.47445,
+      -122.60922
+    ],
+    [
+      45.47541,
+      -122.60889
+    ],
+    [
+      45.47576,
+      -122.60877
+    ],
+    [
+      45.47618,
+      -122.60875
+    ],
+    [
+      45.47701,
+      -122.60875
+    ],
+    [
+      45.47815,
+      -122.60874
+    ],
+    [
+      45.47917,
+      -122.60874
+    ],
+    [
+      45.4805,
+      -122.60875
+    ],
+    [
+      45.48205,
+      -122.60874
+    ],
+    [
+      45.48345,
+      -122.60876
+    ],
+    [
+      45.48425,
+      -122.60875
+    ],
+    [
+      45.48469,
+      -122.60877
+    ],
+    [
+      45.48471,
+      -122.60888
+    ],
+    [
+      45.48471,
+      -122.60894
+    ],
+    [
+      45.48471,
+      -122.60942
+    ],
+    [
+      45.4847,
+      -122.61142
+    ],
+    [
+      45.4847,
+      -122.61752
+    ],
+    [
+      45.4847,
+      -122.62005
+    ],
+    [
+      45.4847,
+      -122.62022
+    ],
+    [
+      45.48472,
+      -122.62059
+    ],
+    [
+      45.4847,
+      -122.62022
+    ],
+    [
+      45.4847,
+      -122.62005
+    ],
+    [
+      45.4847,
+      -122.61954
+    ],
+    [
+      45.48471,
+      -122.61549
+    ],
+    [
+      45.48668,
+      -122.61549
+    ],
+    [
+      45.48668,
+      -122.61488
+    ],
+    [
+      45.48848,
+      -122.61488
+    ],
+    [
+      45.4903,
+      -122.61488
+    ],
+    [
+      45.4903,
+      -122.6139
+    ],
+    [
+      45.4903,
+      -122.61195
+    ],
+    [
+      45.4903,
+      -122.60901
+    ],
+    [
+      45.49029,
+      -122.60399
+    ],
+    [
+      45.4879,
+      -122.60404
+    ],
+    [
+      45.48667,
+      -122.60406
+    ],
+    [
+      45.48542,
+      -122.60408
+    ],
+    [
+      45.48542,
+      -122.6047
+    ],
+    [
+      45.48542,
+      -122.60601
+    ],
+    [
+      45.48542,
+      -122.60727
+    ],
+    [
+      45.48542,
+      -122.60877
+    ],
+    [
+      45.48569,
+      -122.60877
+    ],
+    [
+      45.48502,
+      -122.60877
+    ],
+    [
+      45.48425,
+      -122.60875
+    ],
+    [
+      45.48345,
+      -122.60876
+    ],
+    [
+      45.48205,
+      -122.60874
+    ],
+    [
+      45.4805,
+      -122.60875
+    ],
+    [
+      45.47917,
+      -122.60874
+    ],
+    [
+      45.47815,
+      -122.60874
+    ],
+    [
+      45.47618,
+      -122.60875
+    ],
+    [
+      45.47583,
+      -122.60876
+    ],
+    [
+      45.47582,
+      -122.6083
+    ],
+    [
+      45.47583,
+      -122.60705
+    ],
+    [
+      45.47582,
+      -122.60593
+    ],
+    [
+      45.47582,
+      -122.60226
+    ],
+    [
+      45.47061,
+      -122.60221
+    ],
+    [
+      45.4706,
+      -122.60192
+    ],
+    [
+      45.47079,
+      -122.60192
+    ],
+    [
+      45.47079,
+      -122.60191
+    ],
+    [
+      45.4708,
+      -122.60158
+    ],
+    [
+      45.4708,
+      -122.60156
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 13,
+    "errors": 0,
+    "total": 14
+  }
+}

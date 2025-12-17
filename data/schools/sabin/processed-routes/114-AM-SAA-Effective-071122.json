@@ -1,0 +1,865 @@
+{
+  "id": "114-AM-SAA-Effective-071122.pdf",
+  "name": "114",
+  "direction": "Morning",
+  "filename": "114-AM-SAA-Effective-071122.pdf",
+  "fileId": "114-AM-SAA-Effective-071122.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NE 57th Ave. & NE Fremont St. [NW]",
+      "time": "8:16 am",
+      "direction": "NW",
+      "originalLine": "8:16 amNE 57TH AV @ NE FREMONT ST [NW]114SAB-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6045809,
+        45.5482469
+      ],
+      "displayName": "NE 57th Ave & NE Fremont St, Portland, OR 97213, USA",
+      "placeId": "EjRORSA1N3RoIEF2ZSAmIE5FIEZyZW1vbnQgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJl9O5CjOhlVQRtaX9VDNLA8cSFAoSCZfTuQozoZVUEbWl_VQzSwPHGhQKEgmLFt2uM6GVVBE-d9A0U1dLNBoUChIJ74qpgU-hlVQRQiF_j2HDor0iCg1lHCYbFY8G7LY",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE 54th Ave. & NE Stanton St. [NW]",
+      "time": "8:19 am",
+      "direction": "NW",
+      "originalLine": "8:19 amNE 54TH AV @ NE STANTON ST [NW]114SAB-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.607649,
+        45.5437213
+      ],
+      "displayName": "NE Stanton St & NE 54th Ave, Portland, OR 97213, USA",
+      "placeId": "EjRORSBTdGFudG9uIFN0ICYgTkUgNTR0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJ0x0kEy6hlVQRx-Tq1tqVRqwSFAoSCdMdJBMuoZVUEcfk6tbalUasGhQKEglx4tFH1aCVVBFoxn0BZrn8ExoUChIJs38-5jKhlVQRWMbFnSRdR2oiCg2dayUbFbaO67Y",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 52nd Ave. & NE Broadway St. [NW]",
+      "time": "8:22 am",
+      "direction": "NW",
+      "originalLine": "8:22 amNE 52ND AVE @ NE BROADWAY ST [NW]114SAB-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6099323,
+        45.53512629999999
+      ],
+      "displayName": "NE 52nd Ave & NE Broadway, Portland, OR 97213, USA",
+      "placeId": "EjJORSA1Mm5kIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCScqNRInoZVUEWlgVeT9be0EEhQKEgknKjUSJ6GVVBFpYFXk_W3tBBoUChIJTxlrgi2hlVQRhcG_w2FplB0aFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoN3xskGxWFNeu2",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Broadway St. & NE 47th Ave. [NE]",
+      "time": "8:24 am",
+      "direction": "NE",
+      "originalLine": "8:24 amNE BROADWAY ST @ NE 47TH AV [NE]114SAB-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6150055,
+        45.5351322
+      ],
+      "displayName": "NE 47th Ave & NE Broadway, Portland, OR 97213, USA",
+      "placeId": "EjJORSA0N3RoIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCddWiELYoJVUEfURgnfvoBuuEhQKEgnXVohC2KCVVBH1EYJ376AbrhoUChIJlYf2F8-mlVQR4yPm93KCk9waFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoNGhwkGxVZb-q2",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE Cesar E Chavez Blvd. & NE Broadway St. [SE]",
+      "time": "8:27 am",
+      "direction": "SE",
+      "originalLine": "8:27 amNE CESAR E CHAVEZ BLVD @ NE BROADWAY ST [SE]114SAB-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6230043,
+        45.53517799999999
+      ],
+      "displayName": "César E. Chávez Blvd & NE Broadway, Portland, OR 97212, USA",
+      "placeId": "Ej1Dw6lzYXIgRS4gQ2jDoXZleiBCbHZkICYgTkUgQnJvYWR3YXksIFBvcnRsYW5kLCBPUiA5NzIxMiwgVVNBImYiZAoUChIJJxSSutCglVQRaHl4iTSLAi8SFAoSCScUkrrQoJVUEWh5eIk0iwIvGhQKEglzL03u6aCVVBEURYDqbzIoERoUChIJ0elKwBWhlVQR3JVAnzpLm_0iCg3kHSQbFeU26bY",
+      "neighborhood": "Hollywood"
+    },
+    {
+      "id": "stop-6",
+      "address": "3560 NE Hollyrood Ct. (hollyrood) [S]",
+      "time": "8:30 am",
+      "direction": "S",
+      "originalLine": "8:30 am3560 NE HOLLYROOD CT (HOLLYROOD) [S]114SAB-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.62711366218092,
+        45.54142024563736
+      ],
+      "displayName": "3560 NE Hollyrood Ct, Portland, OR 97212, USA",
+      "placeId": "ChIJUzPp9NSglVQRwdlbfCrAggo",
+      "neighborhood": "Grant Park"
+    },
+    {
+      "id": "stop-7",
+      "address": "NE 45th Ave. & NE Fremont St. [SE]",
+      "time": "8:35 am",
+      "direction": "SE",
+      "originalLine": "8:35 amNE 45TH AV @ NE FREMONT ST [SE]114SAB-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6171906,
+        45.54829669999999
+      ],
+      "displayName": "NE 45th Ave & NE Fremont St, Portland, OR 97213, USA",
+      "placeId": "EjRORSA0NXRoIEF2ZSAmIE5FIEZyZW1vbnQgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJTyBzF9OmlVQRjktIX_8h8gISFAoSCU8gcxfTppVUEY5LSF__IfICGhQKEgmHulOwLKGVVBGjmHKCm61XHRoUChIJ74qpgU-hlVQRQiF_j2HDor0iCg1XHiYbFf4Z6rY",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-8",
+      "address": "3606 NE 42nd Ave. (beaumont Ms) [E]",
+      "time": "8:36 am",
+      "direction": "E",
+      "originalLine": "8:36 am3606 NE 42ND AV (BEAUMONT MS) [E]114SAB-A(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.62036213689862,
+        45.5491659314115
+      ],
+      "displayName": "3606 NE 42nd Ave, Portland, OR 97213, USA",
+      "placeId": "ChIJ0f2HkNOmlVQRPhd9YunuiDU",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-9",
+      "address": "3993 NE 41st Ave. [NE]",
+      "time": "8:37 am",
+      "direction": "NE",
+      "originalLine": "8:37 am3993 NE 41st Ave [NE]114SAB-A(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.62140988170793,
+        45.5516470091922
+      ],
+      "displayName": "3993 NE 41st Ave, Portland, OR 97212, USA",
+      "placeId": "ChIJKSI6bNGmlVQR3oaghmNbsj8",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-10",
+      "address": "NE Shaver St. & NE 33rd Ave. [NE]",
+      "time": "8:39 am",
+      "direction": "NE",
+      "originalLine": "8:39 amNE SHAVER ST @ NE 33RD AV [NE]114SAB-A(10)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6306912,
+        45.5517861
+      ],
+      "displayName": "NE 33rd Ave & NE Shaver St, Portland, OR 97212, USA",
+      "placeId": "EjNORSAzM3JkIEF2ZSAmIE5FIFNoYXZlciBTdCwgUG9ydGxhbmQsIE9SIDk3MjEyLCBVU0EiZiJkChQKEgn5Z6OX16aVVBG4Bxs_fwZbGRIUChIJ-Wejl9emlVQRuAcbP38GWxkaFAoSCc8paAzToJVUEV64Mk9kHt02GhQKEgltc3Hx16aVVBFsTUeAH81Q1CIKDaWmJhsVoArotg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-11",
+      "address": "1915 NE 33rd Ave. (beverly Cleary Fernwood) [W]",
+      "time": "8:43 am",
+      "direction": "W",
+      "originalLine": "8:43 am1915 NE 33RD AVE (BEVERLY CLEARY FERNWOOD) [W]114SAB-A(11)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.63171790000001,
+        45.5368995
+      ],
+      "displayName": "1915 NE 33rd Ave, Portland, OR 97212, USA",
+      "placeId": "ChIJvWQb9tGglVQRnHS1KbjRHgQ",
+      "neighborhood": "Grant Park"
+    },
+    {
+      "id": "stop-12",
+      "address": "NE Broadway St. & NE 26th Ave. [NE]",
+      "time": "8:45 am",
+      "direction": "NE",
+      "originalLine": "8:45 amNE BROADWAY ST @ NE 26TH AV [NE]114SAB-A(12)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6391379,
+        45.5351642
+      ],
+      "displayName": "NE 26th Ave & NE Broadway, Portland, OR 97212, USA",
+      "placeId": "EjJORSAyNnRoIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTIsIFVTQSJmImQKFAoSCXlaYw_MoJVUEWlG4eE9pIo0EhQKEgl5WmMPzKCVVBFpRuHhPaSKNBoUChIJnRwz7syglVQRDJ5mlykC59caFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoNWh0kGxWtwOa2",
+      "neighborhood": "Sullivan's Gulch"
+    },
+    {
+      "id": "stop-13",
+      "address": "3380 NE 27th Ave. (alameda School) [E]",
+      "time": "8:49 am",
+      "direction": "E",
+      "originalLine": "8:49 am3380 NE 27TH AVE (ALAMEDA SCHOOL) [E]114SAB-A(13)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.63734583377413,
+        45.54728141248316
+      ],
+      "displayName": "3380 NE 27th Ave, Portland, OR 97212, USA",
+      "placeId": "EikzMzgwIE5FIDI3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTIsIFVTQSIxEi8KFAoSCXW6K9Iup5VUETyH1oBOikQKELQaKhQKEgk3vV3g5qaVVBHqnVSunts1tg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "4013 NE 18th Ave, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:SABIN GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6478469,
+        45.5522028
+      ],
+      "displayName": "4013 NE 18th Ave, Portland, OR 97212, USA",
+      "schoolName": "Sabin"
+    }
+  ],
+  "neighborhoods": [
+    "Grant Park",
+    "Hollywood",
+    "Northeast Portland",
+    "Rose City Park",
+    "Sullivan's Gulch"
+  ],
+  "processedAt": "2025-12-17T09:08:12.062Z",
+  "stats": {
+    "totalStops": 14,
+    "geocodedStops": 14,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54825,
+      -122.60458
+    ],
+    [
+      45.54371,
+      -122.6046
+    ],
+    [
+      45.54372,
+      -122.60765
+    ],
+    [
+      45.54223,
+      -122.60766
+    ],
+    [
+      45.54148,
+      -122.60767
+    ],
+    [
+      45.54104,
+      -122.60764
+    ],
+    [
+      45.54041,
+      -122.60914
+    ],
+    [
+      45.54028,
+      -122.60951
+    ],
+    [
+      45.54011,
+      -122.61005
+    ],
+    [
+      45.54002,
+      -122.61031
+    ],
+    [
+      45.54002,
+      -122.60992
+    ],
+    [
+      45.53973,
+      -122.60993
+    ],
+    [
+      45.53904,
+      -122.60993
+    ],
+    [
+      45.53833,
+      -122.60993
+    ],
+    [
+      45.53513,
+      -122.60993
+    ],
+    [
+      45.53513,
+      -122.61399
+    ],
+    [
+      45.53513,
+      -122.61477
+    ],
+    [
+      45.53513,
+      -122.61501
+    ],
+    [
+      45.53558,
+      -122.615
+    ],
+    [
+      45.5358,
+      -122.615
+    ],
+    [
+      45.53724,
+      -122.615
+    ],
+    [
+      45.53795,
+      -122.615
+    ],
+    [
+      45.53835,
+      -122.61499
+    ],
+    [
+      45.5379,
+      -122.61594
+    ],
+    [
+      45.53744,
+      -122.61696
+    ],
+    [
+      45.5364,
+      -122.61933
+    ],
+    [
+      45.53592,
+      -122.6204
+    ],
+    [
+      45.53526,
+      -122.62196
+    ],
+    [
+      45.53519,
+      -122.62215
+    ],
+    [
+      45.53518,
+      -122.623
+    ],
+    [
+      45.53516,
+      -122.62342
+    ],
+    [
+      45.53516,
+      -122.62502
+    ],
+    [
+      45.54002,
+      -122.62501
+    ],
+    [
+      45.54175,
+      -122.62501
+    ],
+    [
+      45.54212,
+      -122.62501
+    ],
+    [
+      45.54212,
+      -122.62605
+    ],
+    [
+      45.54142,
+      -122.62605
+    ],
+    [
+      45.54142,
+      -122.62711
+    ],
+    [
+      45.54142,
+      -122.62605
+    ],
+    [
+      45.54212,
+      -122.62605
+    ],
+    [
+      45.54212,
+      -122.624
+    ],
+    [
+      45.54211,
+      -122.6232
+    ],
+    [
+      45.54211,
+      -122.62298
+    ],
+    [
+      45.54224,
+      -122.62298
+    ],
+    [
+      45.54342,
+      -122.62298
+    ],
+    [
+      45.54347,
+      -122.62298
+    ],
+    [
+      45.54364,
+      -122.62301
+    ],
+    [
+      45.54377,
+      -122.62296
+    ],
+    [
+      45.54382,
+      -122.62295
+    ],
+    [
+      45.54397,
+      -122.62283
+    ],
+    [
+      45.54411,
+      -122.62266
+    ],
+    [
+      45.54416,
+      -122.62259
+    ],
+    [
+      45.54436,
+      -122.62228
+    ],
+    [
+      45.5443,
+      -122.62205
+    ],
+    [
+      45.54438,
+      -122.62204
+    ],
+    [
+      45.54449,
+      -122.622
+    ],
+    [
+      45.54455,
+      -122.62196
+    ],
+    [
+      45.54469,
+      -122.62179
+    ],
+    [
+      45.54518,
+      -122.62108
+    ],
+    [
+      45.54542,
+      -122.62083
+    ],
+    [
+      45.5456,
+      -122.62083
+    ],
+    [
+      45.54631,
+      -122.62082
+    ],
+    [
+      45.54774,
+      -122.6208
+    ],
+    [
+      45.5483,
+      -122.62077
+    ],
+    [
+      45.5483,
+      -122.62
+    ],
+    [
+      45.5483,
+      -122.61878
+    ],
+    [
+      45.5483,
+      -122.61719
+    ],
+    [
+      45.5483,
+      -122.62
+    ],
+    [
+      45.5483,
+      -122.62036
+    ],
+    [
+      45.54846,
+      -122.62036
+    ],
+    [
+      45.54917,
+      -122.62036
+    ],
+    [
+      45.55031,
+      -122.62037
+    ],
+    [
+      45.55185,
+      -122.62039
+    ],
+    [
+      45.55185,
+      -122.62053
+    ],
+    [
+      45.55183,
+      -122.62141
+    ],
+    [
+      45.55165,
+      -122.62141
+    ],
+    [
+      45.55183,
+      -122.62141
+    ],
+    [
+      45.55182,
+      -122.62243
+    ],
+    [
+      45.55181,
+      -122.62445
+    ],
+    [
+      45.55181,
+      -122.62664
+    ],
+    [
+      45.55179,
+      -122.63069
+    ],
+    [
+      45.54905,
+      -122.6307
+    ],
+    [
+      45.5485,
+      -122.63071
+    ],
+    [
+      45.54777,
+      -122.63071
+    ],
+    [
+      45.54566,
+      -122.63071
+    ],
+    [
+      45.54465,
+      -122.63069
+    ],
+    [
+      45.54208,
+      -122.6307
+    ],
+    [
+      45.53818,
+      -122.63069
+    ],
+    [
+      45.53779,
+      -122.63068
+    ],
+    [
+      45.53746,
+      -122.63068
+    ],
+    [
+      45.53646,
+      -122.63069
+    ],
+    [
+      45.53645,
+      -122.63119
+    ],
+    [
+      45.53645,
+      -122.63202
+    ],
+    [
+      45.53658,
+      -122.63202
+    ],
+    [
+      45.53689,
+      -122.632
+    ],
+    [
+      45.5369,
+      -122.63172
+    ],
+    [
+      45.53689,
+      -122.632
+    ],
+    [
+      45.53675,
+      -122.63202
+    ],
+    [
+      45.53676,
+      -122.63204
+    ],
+    [
+      45.53677,
+      -122.63209
+    ],
+    [
+      45.53675,
+      -122.63213
+    ],
+    [
+      45.53668,
+      -122.63214
+    ],
+    [
+      45.53664,
+      -122.63219
+    ],
+    [
+      45.53664,
+      -122.6324
+    ],
+    [
+      45.5366,
+      -122.63244
+    ],
+    [
+      45.53657,
+      -122.63244
+    ],
+    [
+      45.53645,
+      -122.63243
+    ],
+    [
+      45.53645,
+      -122.63326
+    ],
+    [
+      45.53645,
+      -122.63476
+    ],
+    [
+      45.53645,
+      -122.63501
+    ],
+    [
+      45.53644,
+      -122.63816
+    ],
+    [
+      45.53644,
+      -122.63914
+    ],
+    [
+      45.53579,
+      -122.63913
+    ],
+    [
+      45.53539,
+      -122.63914
+    ],
+    [
+      45.53516,
+      -122.63914
+    ],
+    [
+      45.53517,
+      -122.63956
+    ],
+    [
+      45.53517,
+      -122.64033
+    ],
+    [
+      45.53516,
+      -122.64054
+    ],
+    [
+      45.53513,
+      -122.64093
+    ],
+    [
+      45.5351,
+      -122.64118
+    ],
+    [
+      45.53526,
+      -122.64119
+    ],
+    [
+      45.53573,
+      -122.64118
+    ],
+    [
+      45.53644,
+      -122.64117
+    ],
+    [
+      45.53897,
+      -122.64119
+    ],
+    [
+      45.54208,
+      -122.64114
+    ],
+    [
+      45.54364,
+      -122.64114
+    ],
+    [
+      45.54624,
+      -122.64115
+    ],
+    [
+      45.54758,
+      -122.64113
+    ],
+    [
+      45.54824,
+      -122.64113
+    ],
+    [
+      45.54823,
+      -122.64023
+    ],
+    [
+      45.54823,
+      -122.6401
+    ],
+    [
+      45.54824,
+      -122.63706
+    ],
+    [
+      45.54824,
+      -122.6368
+    ],
+    [
+      45.54788,
+      -122.63679
+    ],
+    [
+      45.54734,
+      -122.63678
+    ],
+    [
+      45.54724,
+      -122.63681
+    ],
+    [
+      45.54724,
+      -122.63691
+    ],
+    [
+      45.54728,
+      -122.63717
+    ],
+    [
+      45.54728,
+      -122.63735
+    ],
+    [
+      45.54728,
+      -122.63717
+    ],
+    [
+      45.54724,
+      -122.63691
+    ],
+    [
+      45.54724,
+      -122.63681
+    ],
+    [
+      45.54734,
+      -122.63678
+    ],
+    [
+      45.54788,
+      -122.63679
+    ],
+    [
+      45.54824,
+      -122.6368
+    ],
+    [
+      45.54824,
+      -122.63706
+    ],
+    [
+      45.54824,
+      -122.63807
+    ],
+    [
+      45.54823,
+      -122.6401
+    ],
+    [
+      45.54824,
+      -122.64148
+    ],
+    [
+      45.54824,
+      -122.64421
+    ],
+    [
+      45.54824,
+      -122.6473
+    ],
+    [
+      45.54825,
+      -122.64835
+    ],
+    [
+      45.54878,
+      -122.64834
+    ],
+    [
+      45.54884,
+      -122.64834
+    ],
+    [
+      45.55186,
+      -122.64832
+    ],
+    [
+      45.5522,
+      -122.64831
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 13,
+    "errors": 0,
+    "total": 14
+  }
+}

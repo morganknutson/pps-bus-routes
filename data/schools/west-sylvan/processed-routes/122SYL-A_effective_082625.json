@@ -1,18 +1,11 @@
 {
-  "id": "route-1765392547613",
+  "id": "122SYL-A_effective_082625.pdf",
   "name": "122",
   "direction": "Morning",
   "filename": "122SYL-A_effective_082625.pdf",
+  "fileId": "122SYL-A_effective_082625.pdf",
+  "modifiedTime": null,
   "stops": [
-    {
-      "id": "stop-1",
-      "address": "Capitol Hill Gt-st-cab LOAD ZONE On Sprg Gdn",
-      "time": "8:27 am",
-      "direction": null,
-      "originalLine": "8:27 amCAPITOL HILL GT-ST-CAB LOAD ZONE ON SPRG GDN122SYL-AStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": null
-    },
     {
       "id": "stop-2",
       "address": "S River Pkwy. & S River Dr. [S]",
@@ -25,6 +18,7 @@
         45.5072346
       ],
       "displayName": "S River Pkwy & S River Dr, Portland, OR 97201, USA",
+      "placeId": "EjJTIFJpdmVyIFBrd3kgJiBTIFJpdmVyIERyLCBQb3J0bGFuZCwgT1IgOTcyMDEsIFVTQSJmImQKFAoSCVfbcspsCpVUEcr2vPYWOP2oEhQKEglX23LKbAqVVBHK9rz2Fjj9qBoUChIJVReGDGkKlVQRq3U7OnFU9bkaFAoSCQFFzigTCpVUEY9DKuBDiivFIgoNWtofGxVSY-G2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -39,6 +33,7 @@
         45.5072346
       ],
       "displayName": "S River Pkwy & S River Dr, Portland, OR 97201, USA",
+      "placeId": "EjJTIFJpdmVyIFBrd3kgJiBTIFJpdmVyIERyLCBQb3J0bGFuZCwgT1IgOTcyMDEsIFVTQSJmImQKFAoSCVfbcspsCpVUEcr2vPYWOP2oEhQKEglX23LKbAqVVBHK9rz2Fjj9qBoUChIJVReGDGkKlVQRq3U7OnFU9bkaFAoSCQFFzigTCpVUEY9DKuBDiivFIgoNWtofGxVSY-G2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -53,6 +48,7 @@
         45.50987749999999
       ],
       "displayName": "SW Harrison St & SW 1st Ave, Portland, OR 97201, USA",
+      "placeId": "EjRTVyBIYXJyaXNvbiBTdCAmIFNXIDFzdCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMSwgVVNBImYiZAoUChIJk6MpvhMKlVQR4ju5MHXmPEISFAoSCZOjKb4TCpVUEeI7uTB15jxCGhQKEgk__K2RFgqVVBFS1QwTgWYg-BoUChIJ35csXVkKlVQRvC3y73V53uoiCg2XQSAbFSfP4LY",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -67,6 +63,7 @@
         45.5105095
       ],
       "displayName": "SW 4th Ave & SW Harrison St, Portland, OR 97201, USA",
+      "placeId": "EjRTVyA0dGggQXZlICYgU1cgSGFycmlzb24gU3QsIFBvcnRsYW5kLCBPUiA5NzIwMSwgVVNBImYiZAoUChIJhc75_xMKlVQR45PLjx0gcGsSFAoSCYXO-f8TCpVUEeOTy48dIHBrGhQKEglfGnue-AqVVBGxejEZiqWquBoUChIJP_ytkRYKlVQRUtUME4FmIPgiCg1HWiAbFe5g4LY",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -81,6 +78,7 @@
         45.5142851
       ],
       "displayName": "SW Park Ave & SW Clay St, Portland, OR 97201, USA",
+      "placeId": "EjFTVyBQYXJrIEF2ZSAmIFNXIENsYXkgU3QsIFBvcnRsYW5kLCBPUiA5NzIwMSwgVVNBImYiZAoUChIJNUtnvRAKlVQRmjDR4IMeQh0SFAoSCTVLZ70QCpVUEZow0eCDHkIdGhQKEgnX8lqIGgqVVBGABewILuVq4RoUChIJD-8KpBAKlVQREunpUExUdqEiCg3D7SAbFRn837Y",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -95,6 +93,7 @@
         45.5152185
       ],
       "displayName": "SW Clay St & SW 12th Ave, Portland, OR 97201, USA",
+      "placeId": "EjFTVyBDbGF5IFN0ICYgU1cgMTJ0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMSwgVVNBImYiZAoUChIJixWwihkKlVQRc4UVXq0Ki6MSFAoSCYsVsIoZCpVUEXOFFV6tCoujGhQKEgkP7wqkEAqVVBES6elQTFR2oRoUChIJ7dYNPRYKlVQRr7gM2v63LkAiCg05EiEbFZZy37Y",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -109,6 +108,7 @@
         45.5165625
       ],
       "displayName": "SW Jefferson St & SW 12th Ave, Portland, OR 97205, USA",
+      "placeId": "EjZTVyBKZWZmZXJzb24gU3QgJiBTVyAxMnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA1LCBVU0EiZiJkChQKEglPPGNKGgqVVBHPAqDF6OMnpxIUChIJTzxjShoKlVQRzwKgxejjJ6caFAoSCdWt1NIbCpVUEdatcACbExCnGhQKEglv6qSqAwqVVBHVzeZE6wOPIiIKDblGIRsVY43ftg",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -120,14 +120,19 @@
       "isSchoolStop": true,
       "skipGeocoding": false,
       "coordinates": [
-        -122.7621042,
-        45.5040646
+        -122.7622985,
+        45.5044894
       ],
       "displayName": "8111 SW West Slope Dr, Portland, OR 97225, USA",
-      "schoolName": "West Sylvan"
+      "schoolName": "West Sylvan",
+      "neighborhood": "Southwest Hills"
     }
   ],
-  "processedAt": "2025-12-10T18:49:10.550Z",
+  "neighborhoods": [
+    "Southwest Hills",
+    "Southwest Portland"
+  ],
+  "processedAt": "2025-12-17T08:54:02.456Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -983,12 +988,18 @@
       -122.76157
     ],
     [
-      45.50414,
+      45.50424,
+      -122.76161
+    ],
+    [
+      45.50438,
       -122.76158
     ]
   ],
-  "geometryUpdatedAt": "2025-12-10T18:54:32.721Z",
-  "neighborhoods": [
-    "Southwest Portland"
-  ]
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 7,
+    "errors": 0,
+    "total": 8
+  }
 }

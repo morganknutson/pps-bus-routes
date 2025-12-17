@@ -19,7 +19,8 @@
         45.4910818
       ],
       "displayName": "3119 SE Holgate Blvd, Portland, OR 97202, USA",
-      "schoolName": "Grout"
+      "schoolName": "Grout",
+      "neighborhood": "Creston - Kenilworth"
     },
     {
       "id": "stop-1",
@@ -29,12 +30,18 @@
       "originalLine": "2:38 pm4617 SE MILWAUKIE AV [E]228GRT-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6511707,
-        45.4894153
+        -122.6511291845784,
+        45.48947660644225
       ],
       "displayName": "4617 SE Milwaukie Ave, Portland, OR 97202, USA",
       "placeId": "ChIJjQbzOIkKlVQRPwhWgsoiwbk",
-      "neighborhood": "Brooklyn"
+      "neighborhood": "Brooklyn",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6511707,
+        45.4894153
+      ],
+      "snapDistance": 7.546132533041922
     },
     {
       "id": "stop-2",
@@ -44,12 +51,18 @@
       "originalLine": "2:39 pm1106 SE CORA ST [N]228GRT-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6540058,
-        45.49196360000001
+        -122.65422314820019,
+        45.49196405208298
       ],
       "displayName": "1106 SE Cora St, Portland, OR 97202, USA",
       "placeId": "ChIJ_4wsxIkKlVQRyID7R9G1YZk",
-      "neighborhood": "Brooklyn"
+      "neighborhood": "Brooklyn",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6540058,
+        45.49196360000001
+      ],
+      "snapDistance": 16.942079291430435
     },
     {
       "id": "stop-3",
@@ -59,12 +72,18 @@
       "originalLine": "2:42 pm3776 SE 8TH AV [E]228GRT-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6574328,
-        45.4952619
+        -122.65765755369485,
+        45.49521877787256
       ],
       "displayName": "3776 SE 8th Ave, Portland, OR 97202, USA",
       "placeId": "ChIJ78fTpWMKlVQRBAsqKjdfYx0",
-      "neighborhood": "Brooklyn"
+      "neighborhood": "Brooklyn",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6574328,
+        45.4952619
+      ],
+      "snapDistance": 18.162603908376415
     },
     {
       "id": "stop-4",
@@ -368,5 +387,11 @@
       45.49678,
       -122.65135
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 4,
+    "errors": 0,
+    "total": 8
+  }
 }

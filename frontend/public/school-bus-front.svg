@@ -1,0 +1,165 @@
+<svg
+  width="400"
+  height="300"
+  viewBox="0 0 400 300"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Main bus body (rectangular box) -->
+  <rect
+    x="60"
+    y="100"
+    width="280"
+    height="160"
+    fill="#fff"
+  />
+  
+  <!-- Roof cap -->
+  <rect
+    x="50"
+    y="90"
+    width="300"
+    height="20"
+    fill="#fff"
+  />
+  
+  <!-- Large windshield -->
+  <rect
+    x="80"
+    y="110"
+    width="240"
+    height="80"
+    fill="#fff"
+  />
+  
+  <!-- Windshield frame top -->
+  <rect
+    x="80"
+    y="110"
+    width="240"
+    height="4"
+    fill="#fff"
+  />
+  
+  <!-- Windshield frame bottom -->
+  <rect
+    x="80"
+    y="186"
+    width="240"
+    height="4"
+    fill="#fff"
+  />
+  
+  <!-- Windshield divider (vertical center post) -->
+  <rect
+    x="198"
+    y="110"
+    width="4"
+    height="80"
+    fill="#fff"
+  />
+  
+  <!-- Grille area -->
+  <rect
+    x="100"
+    y="200"
+    width="200"
+    height="50"
+    fill="#fff"
+  />
+  
+  <!-- Grille horizontal lines -->
+  <line
+    x1="100"
+    y1="215"
+    x2="300"
+    y2="215"
+    stroke="#fff"
+    stroke-width="3"
+  />
+  <line
+    x1="100"
+    y1="230"
+    x2="300"
+    y2="230"
+    stroke="#fff"
+    stroke-width="3"
+  />
+  <line
+    x1="100"
+    y1="245"
+    x2="300"
+    y2="245"
+    stroke="#fff"
+    stroke-width="3"
+  />
+  
+  <!-- Grille vertical lines -->
+  <line
+    x1="140"
+    y1="200"
+    x2="140"
+    y2="250"
+    stroke="#fff"
+    stroke-width="3"
+  />
+  <line
+    x1="200"
+    y1="200"
+    x2="200"
+    y2="250"
+    stroke="#fff"
+    stroke-width="3"
+  />
+  <line
+    x1="260"
+    y1="200"
+    x2="260"
+    y2="250"
+    stroke="#fff"
+    stroke-width="3"
+  />
+  
+  <!-- Headlights (oval/rectangular) -->
+  <rect
+    x="110"
+    y="220"
+    width="20"
+    height="15"
+    fill="#fff"
+    rx="2"
+  />
+  <rect
+    x="270"
+    y="220"
+    width="20"
+    height="15"
+    fill="#fff"
+    rx="2"
+  />
+  
+  <!-- Bumper -->
+  <rect
+    x="90"
+    y="260"
+    width="220"
+    height="15"
+    fill="#fff"
+  />
+  
+  <!-- Front wheels (partially visible) -->
+  <ellipse
+    cx="130"
+    cy="270"
+    rx="18"
+    ry="12"
+    fill="#fff"
+  />
+  <ellipse
+    cx="270"
+    cy="270"
+    rx="18"
+    ry="12"
+    fill="#fff"
+  />
+</svg>
+

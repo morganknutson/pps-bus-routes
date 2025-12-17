@@ -1,0 +1,278 @@
+{
+  "id": "239WDM-P_effective_082625.pdf",
+  "name": "239",
+  "direction": "Afternoon",
+  "filename": "239WDM-P_effective_082625.pdf",
+  "fileId": "239WDM-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "7900 SE Duke St, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:WOODMERE GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5824729,
+        45.4745839
+      ],
+      "displayName": "7900 SE Duke St, Portland, OR 97206, USA",
+      "schoolName": "Woodmere"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE Duke St. & SE 84th Ave. [SW]",
+      "time": "2:37 pm",
+      "direction": "SW",
+      "originalLine": "2:37 pmSE DUKE ST @ SE 84TH AV [SW]239WDM-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5770587,
+        45.47582939999999
+      ],
+      "displayName": "SE Duke St & SE 84th Ave, Portland, OR 97266, USA",
+      "placeId": "EjFTRSBEdWtlIFN0ICYgU0UgODR0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJp7AI1B-glVQR1E39DK6_SKYSFAoSCaewCNQfoJVUEdRN_Qyuv0imGhQKEglzrKkxiZ-VVBEwY0us41KM8hoUChIJtRt1xTeglVQR-x4unAIPvf8iCg2WDxsbFaU58LY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Tolman St. & SE 84th Pl. [SW]",
+      "time": "2:38 pm",
+      "direction": "SW",
+      "originalLine": "2:38 pmSE TOLMAN ST @ SE 84TH PL [SW]239WDM-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5770272,
+        45.4776309
+      ],
+      "displayName": "SE Tolman St & SE 84th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBUb2xtYW4gU3QgJiBTRSA4NHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgkvzyuaH6CVVBHyUDGh1qAxwRIUChIJL88rmh-glVQR8lAxodagMcEaFAoSCQXGXe6nCpVUEc-CAnVTeENpGhQKEgm1G3XFN6CVVBH7Hi6cAg-9_yIKDfVVGxsV4Drwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "9030 SE Cooper St. (kelly School) [S]",
+      "time": "2:44 pm",
+      "direction": "S",
+      "originalLine": "2:44 pm9030 SE COOPER ST (KELLY SCHOOL) [S]239WDM-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57077803333316,
+        45.47302099106446
+      ],
+      "displayName": "9030 SE Cooper St, Portland, OR 97266, USA",
+      "placeId": "ChIJdzS-o_SflVQRRUixiEUwojU",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "9330 SE Harold St. (wattles Boys & Girls Club)",
+      "time": "2:47 pm",
+      "direction": null,
+      "originalLine": "2:47 pm9330 SE HAROLD ST (WATTLES BOYS & GIRLS CLUB)239WDM-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5674637,
+        45.4825329
+      ],
+      "displayName": "9330 SE Harold St, Portland, OR 97266, USA",
+      "placeId": "ChIJGeB_ZyaglVQRuIJE67PR7no",
+      "neighborhood": "Lents"
+    }
+  ],
+  "neighborhoods": [
+    "Lents"
+  ],
+  "processedAt": "2025-12-17T08:57:06.250Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.47491,
+      -122.58245
+    ],
+    [
+      45.47492,
+      -122.58168
+    ],
+    [
+      45.475,
+      -122.58168
+    ],
+    [
+      45.47588,
+      -122.58168
+    ],
+    [
+      45.47588,
+      -122.58074
+    ],
+    [
+      45.47588,
+      -122.57931
+    ],
+    [
+      45.47586,
+      -122.57855
+    ],
+    [
+      45.47583,
+      -122.57706
+    ],
+    [
+      45.47763,
+      -122.57703
+    ],
+    [
+      45.47583,
+      -122.57706
+    ],
+    [
+      45.47578,
+      -122.57589
+    ],
+    [
+      45.47573,
+      -122.57387
+    ],
+    [
+      45.47567,
+      -122.57178
+    ],
+    [
+      45.47564,
+      -122.57075
+    ],
+    [
+      45.47487,
+      -122.57078
+    ],
+    [
+      45.47476,
+      -122.57072
+    ],
+    [
+      45.47429,
+      -122.57073
+    ],
+    [
+      45.47339,
+      -122.57073
+    ],
+    [
+      45.4734,
+      -122.57096
+    ],
+    [
+      45.47301,
+      -122.57096
+    ],
+    [
+      45.47302,
+      -122.57078
+    ],
+    [
+      45.47303,
+      -122.57075
+    ],
+    [
+      45.47308,
+      -122.57072
+    ],
+    [
+      45.4741,
+      -122.57073
+    ],
+    [
+      45.47473,
+      -122.57072
+    ],
+    [
+      45.47476,
+      -122.57072
+    ],
+    [
+      45.47474,
+      -122.56976
+    ],
+    [
+      45.47471,
+      -122.56865
+    ],
+    [
+      45.47559,
+      -122.56865
+    ],
+    [
+      45.47599,
+      -122.56865
+    ],
+    [
+      45.47741,
+      -122.56864
+    ],
+    [
+      45.47817,
+      -122.56864
+    ],
+    [
+      45.47876,
+      -122.56864
+    ],
+    [
+      45.47955,
+      -122.56863
+    ],
+    [
+      45.48005,
+      -122.56866
+    ],
+    [
+      45.48049,
+      -122.56864
+    ],
+    [
+      45.48132,
+      -122.56862
+    ],
+    [
+      45.48223,
+      -122.56863
+    ],
+    [
+      45.48272,
+      -122.56863
+    ],
+    [
+      45.48281,
+      -122.56863
+    ],
+    [
+      45.4828,
+      -122.56833
+    ],
+    [
+      45.48279,
+      -122.56785
+    ],
+    [
+      45.4828,
+      -122.56756
+    ],
+    [
+      45.48278,
+      -122.56738
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 4,
+    "errors": 0,
+    "total": 5
+  }
+}

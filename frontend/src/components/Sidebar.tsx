@@ -116,7 +116,7 @@ export function Sidebar({
           flexDirection: 'column',
           backgroundColor: backgroundColor || 'var(--bg-secondary)',
           overflow: 'hidden',
-          transition: 'left 0.3s ease-out',
+          transition: 'left 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)',
           zIndex: 1001,
           boxShadow: shouldShow ? '2px 0 8px rgba(0, 0, 0, 0.15)' : 'none',
           paddingTop: '74px', // Add padding to account for header height

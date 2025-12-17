@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ThemePicker } from './ThemePicker';
 import { DarkModeToggle } from './DarkModeToggle';
 import './Header.css';
 
@@ -18,7 +17,8 @@ export function Header({ rightContent }: HeaderProps = {}) {
                       location.pathname === '/tech' ||
                       location.pathname === '/verification' ||
                       location.pathname === '/jobs' ||
-                      location.pathname === '/servers';
+                      location.pathname === '/servers' ||
+                      location.pathname === '/architecture';
   const isAdminRoute = location.pathname === '/admin';
   const isExplorerPage = location.pathname === '/bus-route-explorer';
   
@@ -63,27 +63,47 @@ export function Header({ rightContent }: HeaderProps = {}) {
               </div>
             )}
             {rightContent}
-            {isAdminPage && <ThemePicker />}
             {isAdminPage && (
-              <Link
-                to="/bus-route-explorer"
-                className="admin-link"
-                style={{
-                  fontSize: '12px',
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.textDecoration = 'underline';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.textDecoration = 'none';
-                }}
-              >
-                → Explorer
-              </Link>
+              <>
+                <Link
+                  to="/architecture"
+                  className="admin-link"
+                  style={{
+                    fontSize: '12px',
+                    color: 'var(--text-primary)',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.textDecoration = 'underline';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.textDecoration = 'none';
+                  }}
+                >
+                  Architecture
+                </Link>
+                <Link
+                  to="/bus-route-explorer"
+                  className="admin-link"
+                  style={{
+                    fontSize: '12px',
+                    color: 'var(--text-primary)',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.textDecoration = 'underline';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.textDecoration = 'none';
+                  }}
+                >
+                  → Explorer
+                </Link>
+              </>
             )}
             {isAdminRoute && (
               <button

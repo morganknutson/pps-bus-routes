@@ -19,7 +19,8 @@
         45.5844519
       ],
       "displayName": "5103 N Willis Blvd, Portland, OR 97203, USA",
-      "schoolName": "Cesar Chavez"
+      "schoolName": "Cesar Chavez",
+      "neighborhood": "North Portland"
     },
     {
       "id": "stop-1",
@@ -600,5 +601,11 @@
       45.57723,
       -122.66136
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 5,
+    "errors": 0,
+    "total": 6
+  }
 }

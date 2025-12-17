@@ -1,8 +1,10 @@
 {
-  "id": "route-1765392549753",
+  "id": "124SYL-A_effective_100825.pdf",
   "name": "124",
   "direction": "Morning",
   "filename": "124SYL-A_effective_100825.pdf",
+  "fileId": "124SYL-A_effective_100825.pdf",
+  "modifiedTime": null,
   "stops": [
     {
       "id": "stop-1",
@@ -16,6 +18,7 @@
         45.515232
       ],
       "displayName": "Portland, OR, USA",
+      "placeId": "ChIJJ3SpfQsLlVQRkYXR9ua5Nhw",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -30,6 +33,7 @@
         45.5283735
       ],
       "displayName": "NW 23rd Ave & NW Johnson St, Portland, OR 97210, USA",
+      "placeId": "EjROVyAyM3JkIEF2ZSAmIE5XIEpvaG5zb24gU3QsIFBvcnRsYW5kLCBPUiA5NzIxMCwgVVNBImYiZAoUChIJGdYV-fAJlVQRPG3rVKHwxEESFAoSCRnWFfnwCZVUETxt61Sh8MRBGhQKEgmViiNp5QmVVBEKVM8RPQ3zMRoUChIJJ--iKPoJlVQRWZnGc52A4aMiCg0XFCMbFZav3bY",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -44,6 +48,7 @@
         45.5299785
       ],
       "displayName": "NW Cumberland Rd & NW Luray Terrace, Portland, OR 97210, USA",
+      "placeId": "EjxOVyBDdW1iZXJsYW5kIFJkICYgTlcgTHVyYXkgVGVycmFjZSwgUG9ydGxhbmQsIE9SIDk3MjEwLCBVU0EiZiJkChQKEgmtK6Sr7QmVVBG6h2Aujcu_qxIUChIJrSukq-0JlVQRuodgLo3Lv6saFAoSCf1EPx3tCZVUEWWHFTlzoGwRGhQKEglFS_KU7AmVVBGTKjTJMMtBnSIKDclSIxsVIu3btg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -58,6 +63,7 @@
         45.5255488
       ],
       "displayName": "NW Beuhla Vista Terrace & NW MacLeay Blvd, Portland, OR 97210, USA",
+      "placeId": "EkJOVyBCZXVobGEgVmlzdGEgVGVycmFjZSAmIE5XIE1hY0xlYXkgQmx2ZCwgUG9ydGxhbmQsIE9SIDk3MjEwLCBVU0EiZiJkChQKEglXeP-g8wmVVBFZHq748-piiRIUChIJV3j_oPMJlVQRWR6u-PPqYokaFAoSCbGktBDzCZVUER3AgqG8d-50GhQKEgmn25AtjQmVVBFjmgMn8otADSIKDcClIhsVPsjctg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -72,6 +78,7 @@
         45.5254291
       ],
       "displayName": "NW Beuhla Vista Terrace & NW Hermosa Blvd, Portland, OR 97210, USA",
+      "placeId": "EkJOVyBCZXVobGEgVmlzdGEgVGVycmFjZSAmIE5XIEhlcm1vc2EgQmx2ZCwgUG9ydGxhbmQsIE9SIDk3MjEwLCBVU0EiZiJkChQKEglHFUgljQmVVBGPCNyG3VXk8BIUChIJRxVIJY0JlVQRjwjcht1V5PAaFAoSCbGktBDzCZVUER3AgqG8d-50GhQKEgmxYLgHjQmVVBG0UNBituLr-iIKDROhIhsVTeHbtg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -86,6 +93,7 @@
         45.5242393
       ],
       "displayName": "NW Verde Vista Terrace & NW Hermosa Blvd, Portland, OR 97210, USA",
+      "placeId": "EkFOVyBWZXJkZSBWaXN0YSBUZXJyYWNlICYgTlcgSGVybW9zYSBCbHZkLCBQb3J0bGFuZCwgT1IgOTcyMTAsIFVTQSJmImQKFAoSCR8Yt7GNCZVUEVxbnUX4C_GTEhQKEgkfGLexjQmVVBFcW51F-AvxkxoUChIJWzoKsY0JlVQRs1VGmFJxZqMaFAoSCbFguAeNCZVUEbRQ0GK24uv6IgoNmXIiGxUjaNu2",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -100,6 +108,7 @@
         45.522346
       ],
       "displayName": "NW Seblar Dr & NW Seblar Terrace, Portland, OR 97210, USA",
+      "placeId": "EjlOVyBTZWJsYXIgRHIgJiBOVyBTZWJsYXIgVGVycmFjZSwgUG9ydGxhbmQsIE9SIDk3MjEwLCBVU0EiZiJkChQKEgl5LB72jwmVVBHguF-61rzPCRIUChIJeSwe9o8JlVQR4Lhfuta8zwkaFAoSCdEVMIyPCZVUEd_w6AMDcMbFGhQKEglf9RtRhQmVVBE3xDyZe3rIpiIKDaQoIhsVbefZtg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -111,14 +120,20 @@
       "isSchoolStop": true,
       "skipGeocoding": false,
       "coordinates": [
-        -122.7621042,
-        45.5040646
+        -122.7622985,
+        45.5044894
       ],
       "displayName": "8111 SW West Slope Dr, Portland, OR 97225, USA",
-      "schoolName": "West Sylvan"
+      "schoolName": "West Sylvan",
+      "neighborhood": "Southwest Hills"
     }
   ],
-  "processedAt": "2025-12-10T18:49:12.533Z",
+  "neighborhoods": [
+    "Northwest Portland",
+    "Southwest Hills",
+    "Southwest Portland"
+  ],
+  "processedAt": "2025-12-17T08:54:04.365Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -1854,13 +1869,18 @@
       -122.76157
     ],
     [
-      45.50414,
+      45.50424,
+      -122.76161
+    ],
+    [
+      45.50438,
       -122.76158
     ]
   ],
-  "geometryUpdatedAt": "2025-12-10T18:54:32.753Z",
-  "neighborhoods": [
-    "Northwest Portland",
-    "Southwest Portland"
-  ]
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 7,
+    "errors": 0,
+    "total": 8
+  }
 }

@@ -44,12 +44,18 @@
       "originalLine": "2:49 pm5250 NE MARTIN LUTHER KING JR BLVD (BLAZERS)206MLK-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6609469,
-        45.5614977
+        -122.66094549262074,
+        45.56181809547804
       ],
       "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
       "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
-      "neighborhood": "King"
+      "neighborhood": "King",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6609469,
+        45.5614977
+      ],
+      "snapDistance": 35.62652016310921
     },
     {
       "id": "stop-4",
@@ -59,12 +65,18 @@
       "originalLine": "2:53 pm700 N ROSA PARKS WY [N]206MLK-P(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6736069,
-        45.5695725
+        -122.67360994358727,
+        45.569930070553184
       ],
       "displayName": "700 N Rosa Parks Way, Portland, OR 97217, USA",
       "placeId": "ChIJE6RT6AenlVQRAIyKKbP40AY",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6736069,
+        45.5695725
+      ],
+      "snapDistance": 39.760737273037925
     },
     {
       "id": "stop-5",
@@ -149,12 +161,18 @@
       "originalLine": "3:16 pm4430 N TRENTON ST (ROSA PARKS SCHOOL) [NE]206MLK-P(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7130989,
-        45.5883466
+        -122.7134252946533,
+        45.58834897023545
       ],
       "displayName": "4430 N Trenton St, Portland, OR 97203, USA",
       "placeId": "ChIJRYXc5MKnlVQRCJoqshJJiMo",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7130989,
+        45.5883466
+      ],
+      "snapDistance": 25.39982255190339
     },
     {
       "id": "stop-11",
@@ -194,12 +212,18 @@
       "originalLine": "3:29 pm7439 N CHARLESTON AV (JAMES JOHN SCHOOL)206MLK-P(14)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7523281,
-        45.5903832
+        -122.7525836,
+        45.5902722
       ],
       "displayName": "7439 N Charleston Ave, Portland, OR 97203, USA",
       "placeId": "ChIJv7VRUwColVQRz2IWIILwcJE",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7523281,
+        45.5903832
+      ],
+      "snapDistance": 23.40080775256154
     },
     {
       "id": "stop-14",
@@ -1010,5 +1034,11 @@
       45.59027,
       -122.75258
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 4,
+    "skipped": 10,
+    "errors": 0,
+    "total": 14
+  }
 }

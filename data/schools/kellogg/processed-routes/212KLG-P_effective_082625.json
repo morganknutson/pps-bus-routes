@@ -1,0 +1,224 @@
+{
+  "id": "212KLG-P_effective_082625.pdf",
+  "name": "212",
+  "direction": "Afternoon",
+  "filename": "212KLG-P_effective_082625.pdf",
+  "fileId": "212KLG-P_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:KELLOGG GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5917225,
+        45.49871359999999
+      ],
+      "displayName": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "schoolName": "Kellogg"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE Pardee St. & SE 88th Ave. [SW]",
+      "time": "4:16 pm",
+      "direction": "SW",
+      "originalLine": "4:16 pmSE PARDEE ST @ SE 88TH AV [SW]212KLG-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5723422,
+        45.4890408
+      ],
+      "displayName": "SE Pardee St & SE 88th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBQYXJkZWUgU3QgJiBTRSA4OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgmRLM6eOqCVVBF9XIec3m_FlRIUChIJkSzOnjqglVQRfVyHnN5vxZUaFAoSCRcZTh0VoJVUEd5w8-mO4LjaGhQKEglZChLPMKCVVBGCuOPrgr65JyIKDagTHRsV4vHwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 88th Ave. & SE Steele St. [NW]",
+      "time": "4:17 pm",
+      "direction": "NW",
+      "originalLine": "4:17 pmSE 88TH AV & SE STEELE ST [NW]212KLG-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5723067,
+        45.4846613
+      ],
+      "displayName": "SE Steele St & SE 88th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBTdGVlbGUgU3QgJiBTRSA4OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgnHYBVZJKCVVBEJWfemX31USRIUChIJx2AVWSSglVQRCVn3pl99VEkaFAoSCQm4wGojoJVUEQw6ZUc3pi7BGhQKEglZChLPMKCVVBGCuOPrgr65JyIKDZVoHBsVRfPwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 82nd Ave. & SE Woodstock Blvd. [NW]",
+      "time": "4:21 pm",
+      "direction": "NW",
+      "originalLine": "4:21 pmSE 82ND AV @ SE WOODSTOCK BLVD [NW]212KLG-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5790271,
+        45.47949149999999
+      ],
+      "displayName": "SE Woodstock Blvd & SE 82nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjhTRSBXb29kc3RvY2sgQmx2ZCAmIFNFIDgybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCR9ziU8foJVUEcuJElxLt-DSEhQKEgkfc4lPH6CVVBHLiRJcS7fg0hoUChIJM-ZGQQWglVQRAUHhMI7BVjIaFAoSCWOAWd31n5VUEfcexQgfBAYZIgoNo54bGxXB7O-2",
+      "neighborhood": "Southeast Portland"
+    }
+  ],
+  "neighborhoods": [
+    "Lents",
+    "Southeast Portland"
+  ],
+  "processedAt": "2025-12-17T09:01:45.828Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.49889,
+      -122.59207
+    ],
+    [
+      45.49888,
+      -122.59231
+    ],
+    [
+      45.49779,
+      -122.59235
+    ],
+    [
+      45.49746,
+      -122.59234
+    ],
+    [
+      45.49745,
+      -122.5917
+    ],
+    [
+      45.49745,
+      -122.59133
+    ],
+    [
+      45.49744,
+      -122.58992
+    ],
+    [
+      45.49744,
+      -122.5893
+    ],
+    [
+      45.49744,
+      -122.58844
+    ],
+    [
+      45.49743,
+      -122.58802
+    ],
+    [
+      45.49708,
+      -122.58803
+    ],
+    [
+      45.49276,
+      -122.58803
+    ],
+    [
+      45.4915,
+      -122.58803
+    ],
+    [
+      45.49024,
+      -122.58804
+    ],
+    [
+      45.49025,
+      -122.58637
+    ],
+    [
+      45.49026,
+      -122.58098
+    ],
+    [
+      45.49026,
+      -122.57981
+    ],
+    [
+      45.49024,
+      -122.57821
+    ],
+    [
+      45.49024,
+      -122.57582
+    ],
+    [
+      45.49024,
+      -122.57484
+    ],
+    [
+      45.49016,
+      -122.57408
+    ],
+    [
+      45.49012,
+      -122.57235
+    ],
+    [
+      45.48674,
+      -122.57234
+    ],
+    [
+      45.48634,
+      -122.57228
+    ],
+    [
+      45.48579,
+      -122.57229
+    ],
+    [
+      45.48466,
+      -122.57231
+    ],
+    [
+      45.4829,
+      -122.57232
+    ],
+    [
+      45.48228,
+      -122.57231
+    ],
+    [
+      45.48226,
+      -122.57414
+    ],
+    [
+      45.48225,
+      -122.57485
+    ],
+    [
+      45.48177,
+      -122.57486
+    ],
+    [
+      45.47935,
+      -122.5749
+    ],
+    [
+      45.47941,
+      -122.57643
+    ],
+    [
+      45.47949,
+      -122.57903
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 3,
+    "errors": 0,
+    "total": 4
+  }
+}

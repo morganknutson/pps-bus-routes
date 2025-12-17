@@ -19,7 +19,8 @@
         45.5106758
       ],
       "displayName": "7910 SE Market St #3656, Portland, OR 97215, USA",
-      "schoolName": "Bridger"
+      "schoolName": "Bridger",
+      "neighborhood": "Montavilla"
     },
     {
       "id": "stop-1",
@@ -696,5 +697,11 @@
       45.52355,
       -122.66377
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 7,
+    "errors": 0,
+    "total": 8
+  }
 }

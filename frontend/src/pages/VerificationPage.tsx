@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { ProgressBar } from '../components/ProgressBar';
 
@@ -10,8 +10,9 @@ export function VerificationPage() {
   const [processingStatus, setProcessingStatus] = useState<Record<string, boolean>>({});
   const [fetching, setFetching] = useState<Record<string, boolean>>({});
   const [processing, setProcessing] = useState<Record<string, boolean>>({});
+  const [pdfProcessingStatus, setPdfProcessingStatus] = useState<Record<string, Record<string, 'pending' | 'processing' | 'success' | 'error'>>>({});
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
-  const [firstRoutes, setFirstRoutes] = useState<Record<string, any>>({});
+  const [allRoutes, setAllRoutes] = useState<Record<string, Record<string, any>>>({});
   const [loadingRoutes, setLoadingRoutes] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState<number | null>(null);
@@ -19,6 +20,7 @@ export function VerificationPage() {
   const [jobStatuses, setJobStatuses] = useState<Record<string, any>>({});
   const [shouldPollJobs, setShouldPollJobs] = useState(false);
   const [successMessages, setSuccessMessages] = useState<Record<string, string>>({});
+  const [refreshing, setRefreshing] = useState(false);
 
   // Define all functions before useEffects
   const loadJobStatuses = async () => {
@@ -58,7 +60,14 @@ export function VerificationPage() {
       console.log('[VerificationPage] Loading PDF status...');
       // Use regular fetch since PDF status endpoint doesn't support Content-Length header
       // and fetchWithProgress causes issues with response body consumption
-      const response = await fetch('/api/pdf-status/status');
+      // Always force refresh to get the latest data from disk
+      // This ensures we get fresh data even if the cached file is stale
+      const response = await fetch(`/api/pdf-status/status?refresh=1&t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
       console.log('[VerificationPage] PDF status response:', response.status, response.statusText, response.headers.get('content-type'));
       
       if (!response.ok) {
@@ -126,6 +135,73 @@ export function VerificationPage() {
       }
     } catch (err: any) {
       console.error('Failed to load processing status:', err);
+    }
+  };
+
+  const handleRefreshStatus = async () => {
+    setRefreshing(true);
+    try {
+      console.log('[VerificationPage] Refreshing status...');
+      const response = await fetch('/api/pdf-status/refresh-status', {
+        method: 'POST',
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to refresh status: ${response.status} ${errorText}`);
+      }
+      
+      const data = await response.json();
+      console.log('[VerificationPage] Refresh complete:', {
+        pdfStatus: data.pdfStatus?.summary,
+        processingStatusCount: Object.values(data.processingStatus || {}).filter(Boolean).length,
+      });
+      
+      // Update PDF status
+      if (data.pdfStatus) {
+        setPdfStatus(data.pdfStatus);
+      }
+      
+      // Update processing status
+      if (data.processingStatus) {
+        setProcessingStatus(data.processingStatus);
+      }
+      
+      // Also reload sync status (optional, but good to have)
+      await loadSyncStatus();
+      
+      // Show success message
+      setSuccessMessages(prev => ({
+        ...prev,
+        _refresh: 'Status refreshed successfully!',
+      }));
+      
+      // Auto-dismiss success message after 3 seconds
+      setTimeout(() => {
+        setSuccessMessages(prev => {
+          const updated = { ...prev };
+          delete updated._refresh;
+          return updated;
+        });
+      }, 3000);
+      
+    } catch (err: any) {
+      console.error('[VerificationPage] Error refreshing status:', err);
+      setSuccessMessages(prev => ({
+        ...prev,
+        _refresh: `Error: ${err.message || 'Failed to refresh status'}`,
+      }));
+      
+      // Auto-dismiss error message after 5 seconds
+      setTimeout(() => {
+        setSuccessMessages(prev => {
+          const updated = { ...prev };
+          delete updated._refresh;
+          return updated;
+        });
+      }, 5000);
+    } finally {
+      setRefreshing(false);
     }
   };
 
@@ -260,6 +336,26 @@ export function VerificationPage() {
       return updated;
     });
     
+    // Get the list of PDFs for this school
+    const school = pdfStatus?.schools?.find((s: any) => s.schoolId === schoolId);
+    const pdfFiles = school?.pdfFiles || [];
+    
+    // Initialize all PDFs as pending
+    setPdfProcessingStatus(prev => ({
+      ...prev,
+      [schoolId]: pdfFiles.reduce((acc: Record<string, 'pending'>, file: string) => {
+        acc[file] = 'pending';
+        return acc;
+      }, {})
+    }));
+    
+    // Start polling for route updates during processing (every 2 seconds)
+    // This allows routes to appear as they're processed
+    let pollInterval: NodeJS.Timeout | null = null;
+    pollInterval = setInterval(async () => {
+      await loadAllRoutes(schoolId, true);
+    }, 2000);
+    
     try {
       const response = await fetch(`/api/process-pdfs/process/${schoolId}`, {
         method: 'POST',
@@ -267,8 +363,34 @@ export function VerificationPage() {
       
       if (response.ok) {
         const result = await response.json();
-        // Reload processing status
+        
+        // Update status for each PDF based on results
+        setPdfProcessingStatus(prev => {
+          const updated = { ...prev };
+          if (!updated[schoolId]) {
+            updated[schoolId] = {};
+          }
+          
+          // Mark successful PDFs
+          if (result.processedDetails) {
+            result.processedDetails.forEach((detail: any) => {
+              updated[schoolId][detail.file] = 'success';
+            });
+          }
+          
+          // Mark failed PDFs
+          if (result.errorDetails) {
+            result.errorDetails.forEach((detail: any) => {
+              updated[schoolId][detail.file] = 'error';
+            });
+          }
+          
+          return updated;
+        });
+        
+        // Reload processing status and routes
         await loadProcessingStatus();
+        await loadAllRoutes(schoolId, true); // Force reload routes after processing
         
         // Set success message
         const message = result.errors > 0 
@@ -285,14 +407,24 @@ export function VerificationPage() {
           });
         }, 5000);
         
-        // Clear cached route if it exists, so it reloads on next expand
-        setFirstRoutes(prev => {
+        // Clear cached routes if they exist, so they reload on next expand
+        setAllRoutes(prev => {
           const updated = { ...prev };
           delete updated[schoolId];
           return updated;
         });
       } else {
         const error = await response.json();
+        // Mark all PDFs as error
+        setPdfProcessingStatus(prev => {
+          const updated = { ...prev };
+          if (updated[schoolId]) {
+            Object.keys(updated[schoolId]).forEach(file => {
+              updated[schoolId][file] = 'error';
+            });
+          }
+          return updated;
+        });
         setSuccessMessages(prev => ({ ...prev, [schoolId]: `Error: ${error.error}` }));
         // Auto-dismiss error message after 5 seconds
         setTimeout(() => {
@@ -304,6 +436,16 @@ export function VerificationPage() {
         }, 5000);
       }
     } catch (err: any) {
+      // Mark all PDFs as error
+      setPdfProcessingStatus(prev => {
+        const updated = { ...prev };
+        if (updated[schoolId]) {
+          Object.keys(updated[schoolId]).forEach(file => {
+            updated[schoolId][file] = 'error';
+          });
+        }
+        return updated;
+      });
       setSuccessMessages(prev => ({ ...prev, [schoolId]: `Error: ${err.message}` }));
       // Auto-dismiss error message after 5 seconds
       setTimeout(() => {
@@ -314,36 +456,45 @@ export function VerificationPage() {
         });
       }, 5000);
     } finally {
+      clearInterval(pollInterval); // Stop polling when done
       setProcessing(prev => ({ ...prev, [schoolId]: false }));
+      // Final reload to ensure we have all routes
+      await loadAllRoutes(schoolId, true);
     }
   };
 
-  const loadFirstRoute = async (schoolId: string) => {
-    // If we already have the route cached, don't reload
-    if (firstRoutes[schoolId]) {
+  const loadAllRoutes = async (schoolId: string, forceReload = false) => {
+    // If we already have routes cached and not forcing reload, don't reload
+    if (allRoutes[schoolId] && !forceReload) {
       return;
     }
 
     setLoadingRoutes(prev => ({ ...prev, [schoolId]: true }));
     try {
-      const response = await fetch(`/api/data/routes?schoolId=${encodeURIComponent(schoolId)}`);
+      const response = await fetch(`/api/data/routes?schoolId=${encodeURIComponent(schoolId)}&t=${Date.now()}`);
       if (response.ok) {
         const data = await response.json();
         const routes = data.routes || [];
-        // Store the first route if available
-        if (routes.length > 0) {
-          setFirstRoutes(prev => ({ ...prev, [schoolId]: routes[0] }));
-        } else {
-          // Store null to indicate no routes found
-          setFirstRoutes(prev => ({ ...prev, [schoolId]: null }));
-        }
+        // Store routes by filename for easy lookup
+        const routesByFilename: Record<string, any> = {};
+        routes.forEach((route: any) => {
+          // Match by filename (route.filename should match PDF filename)
+          if (route.filename) {
+            routesByFilename[route.filename] = route;
+          } else if (route.id) {
+            // Fallback: use route ID if filename not available
+            routesByFilename[route.id] = route;
+          }
+        });
+        console.log(`[VerificationPage] Loaded ${routes.length} routes for ${schoolId}, matched ${Object.keys(routesByFilename).length} by filename`);
+        setAllRoutes(prev => ({ ...prev, [schoolId]: routesByFilename }));
       } else {
         console.error('[VerificationPage] Failed to load routes for school:', schoolId);
-        setFirstRoutes(prev => ({ ...prev, [schoolId]: null }));
+        setAllRoutes(prev => ({ ...prev, [schoolId]: {} }));
       }
     } catch (err: any) {
       console.error('[VerificationPage] Error loading routes:', err);
-      setFirstRoutes(prev => ({ ...prev, [schoolId]: null }));
+      setAllRoutes(prev => ({ ...prev, [schoolId]: {} }));
     } finally {
       setLoadingRoutes(prev => ({ ...prev, [schoolId]: false }));
     }
@@ -353,9 +504,9 @@ export function VerificationPage() {
     const isExpanding = !expandedRows[schoolId];
     setExpandedRows(prev => ({ ...prev, [schoolId]: !prev[schoolId] }));
     
-    // Load first route when expanding
+    // Load all routes when expanding
     if (isExpanding) {
-      loadFirstRoute(schoolId);
+      loadAllRoutes(schoolId, true); // Force reload to get latest routes
     }
   };
 
@@ -428,6 +579,61 @@ export function VerificationPage() {
         position: 'relative',
         zIndex: 1,
       }}>
+      
+      {/* Refresh Button */}
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        marginBottom: '1.5rem',
+        flexWrap: 'wrap',
+        gap: '1rem',
+      }}>
+        <h1 style={{ 
+          margin: 0, 
+          fontSize: '2rem', 
+          fontWeight: 'bold', 
+          color: 'var(--text-primary)',
+        }}>
+          Verification & Status
+        </h1>
+        <button
+          onClick={handleRefreshStatus}
+          disabled={refreshing}
+          style={{
+            padding: '0.75rem 1.5rem',
+            backgroundColor: refreshing ? 'var(--bg-secondary)' : '#4ECDC4',
+            color: refreshing ? 'var(--text-secondary)' : 'white',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: refreshing ? 'not-allowed' : 'pointer',
+            fontSize: '14px',
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            opacity: refreshing ? 0.6 : 1,
+            transition: 'all 0.2s',
+            boxShadow: refreshing ? 'none' : 'var(--shadow-hover)',
+          }}
+          onMouseEnter={(e) => {
+            if (!refreshing) {
+              e.currentTarget.style.backgroundColor = '#5EDDD6';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!refreshing) {
+              e.currentTarget.style.backgroundColor = '#4ECDC4';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }
+          }}
+          title="Refresh status by checking filesystem for PDFs and processed routes"
+        >
+          <i className={`fas ${refreshing ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`}></i>
+          {refreshing ? 'Refreshing...' : 'Refresh Status'}
+        </button>
+      </div>
 
       {/* Summary Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
@@ -479,6 +685,60 @@ export function VerificationPage() {
       {Object.keys(successMessages).length > 0 && (
         <div style={{ marginBottom: '1.5rem' }}>
           {Object.entries(successMessages).map(([schoolId, message]) => {
+            // Handle refresh message (no school associated)
+            if (schoolId === '_refresh') {
+              const isError = message.startsWith('Error:');
+              return (
+                <div
+                  key={schoolId}
+                  style={{
+                    padding: '1rem 1.5rem',
+                    backgroundColor: isError ? '#fee' : '#efe',
+                    border: `1px solid ${isError ? '#fcc' : '#cfc'}`,
+                    borderRadius: '8px',
+                    color: isError ? '#c00' : '#0c0',
+                    marginBottom: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1 }}>
+                    <i className={`fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'}`} style={{ fontSize: '18px' }}></i>
+                    <div>{message}</div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setSuccessMessages(prev => {
+                        const updated = { ...prev };
+                        delete updated[schoolId];
+                        return updated;
+                      });
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: isError ? '#c00' : '#0c0',
+                      cursor: 'pointer',
+                      padding: '0.25rem 0.5rem',
+                      fontSize: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      opacity: 0.7,
+                      transition: 'opacity 0.2s',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                    onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
+                    title="Dismiss"
+                  >
+                    <i className="fas fa-times"></i>
+                  </button>
+                </div>
+              );
+            }
+            
             const school = pdfStatus.schools.find((s: any) => s.schoolId === schoolId);
             const schoolName = school?.schoolName || schoolId;
             const isError = message.startsWith('Error:');
@@ -559,9 +819,8 @@ export function VerificationPage() {
               {pdfStatus.schools.map((school: any, index: number) => {
                 const isExpanded = expandedRows[school.schoolId];
                 return (
-                  <>
+                  <React.Fragment key={school.schoolId}>
                     <tr
-                      key={school.schoolId}
                       style={{
                         borderBottom: isExpanded ? 'none' : '1px solid var(--bg-primary)',
                         backgroundColor: index % 2 === 0 ? 'var(--bg-secondary)' : 'var(--bg-primary)',
@@ -659,34 +918,39 @@ export function VerificationPage() {
                         </button>
                       </div>
                     ) : (
-                      school.hasPdfs ? (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleProcessPdfs(school.schoolId);
-                          }}
-                          disabled={processing[school.schoolId]}
-                          style={{
-                            padding: '0.5rem 1rem',
-                            backgroundColor: processing[school.schoolId] ? 'var(--bg-secondary)' : '#ffa500',
-                            color: processing[school.schoolId] ? 'var(--text-secondary)' : 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: processing[school.schoolId] ? 'not-allowed' : 'pointer',
-                            fontSize: '12px',
-                            fontWeight: 'bold',
-                            opacity: processing[school.schoolId] ? 0.6 : 1,
-                            minWidth: '120px',
-                          }}
-                        >
-                          {processing[school.schoolId] ? 'Processing...' : 'Process PDFs'}
-                        </button>
-                      ) : (
-                        <span style={{ color: '#f44', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <i className="fas fa-times-circle"></i>
-                          <span>No</span>
-                        </span>
-                      )
+                      (() => {
+                        const hasPdfs = school.hasPdfs || (school.pdfCount && school.pdfCount > 0);
+                        const isDisabled = processing[school.schoolId] || !hasPdfs;
+                        
+                        return (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (hasPdfs) {
+                                handleProcessPdfs(school.schoolId);
+                              } else {
+                                alert('No PDFs available for this school. Please fetch PDFs first.');
+                              }
+                            }}
+                            disabled={isDisabled}
+                            style={{
+                              padding: '0.5rem 1rem',
+                              backgroundColor: isDisabled ? 'var(--bg-secondary)' : '#ffa500',
+                              color: isDisabled ? 'var(--text-secondary)' : 'white',
+                              border: 'none',
+                              borderRadius: '4px',
+                              cursor: isDisabled ? 'not-allowed' : 'pointer',
+                              fontSize: '12px',
+                              fontWeight: 'bold',
+                              opacity: isDisabled ? 0.6 : 1,
+                              minWidth: '120px',
+                            }}
+                            title={!hasPdfs ? 'No PDFs available - fetch PDFs first' : 'Process PDFs for this school'}
+                          >
+                            {processing[school.schoolId] ? 'Processing...' : 'Process'}
+                          </button>
+                        );
+                      })()
                     )}
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
@@ -778,16 +1042,14 @@ export function VerificationPage() {
                     }}
                   >
                     <td colSpan={9} style={{ padding: '1.5rem' }}>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-                        {/* PDF Files List */}
+                      <div>
+                        {/* PDF Files List with Route Info */}
                         <div>
                           <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '16px', fontWeight: 'bold', color: 'var(--text-primary)' }}>
-                            PDF Files ({school.pdfFiles?.length || 0})
+                            PDF Files with Route Information ({school.pdfFiles?.length || 0})
                           </h3>
                           {school.pdfFiles && school.pdfFiles.length > 0 ? (
                             <div style={{ 
-                              maxHeight: '400px', 
-                              overflowY: 'auto', 
                               backgroundColor: 'var(--bg-primary)', 
                               padding: '1rem', 
                               borderRadius: '4px',
@@ -795,40 +1057,232 @@ export function VerificationPage() {
                             }}>
                               {school.pdfFiles.map((file: string, i: number) => {
                                 const pdfUrl = `/api/pdfs/${school.schoolId}/${encodeURIComponent(file)}`;
+                                const pdfStatus = pdfProcessingStatus[school.schoolId]?.[file];
+                                const isProcessing = processing[school.schoolId] && pdfStatus === 'pending';
+                                const isSuccess = pdfStatus === 'success';
+                                const isError = pdfStatus === 'error';
+                                
+                                // Find route for this PDF by matching filename
+                                // Try multiple matching strategies
+                                let route = allRoutes[school.schoolId]?.[file];
+                                if (!route && allRoutes[school.schoolId]) {
+                                  // Try matching by route filename field
+                                  const routesForSchool = Object.values(allRoutes[school.schoolId]);
+                                  route = routesForSchool.find((r: any) => 
+                                    r.filename === file || 
+                                    r.id === file || 
+                                    r.id === file.replace('.pdf', '.json') ||
+                                    r.filename === file.replace('.pdf', '.json')
+                                  ) as any;
+                                }
+                                console.log(`[VerificationPage] Looking for route for PDF "${file}":`, route ? 'FOUND' : 'NOT FOUND', route ? `(${route.name || route.id})` : '');
+                                
+                                let statusIcon = null;
+                                let statusColor = '#4ECDC4';
+                                
+                                if (isProcessing) {
+                                  statusIcon = <i className="fas fa-spinner fa-spin" style={{ marginLeft: '0.5rem', color: '#4ECDC4' }}></i>;
+                                  statusColor = '#4ECDC4';
+                                } else if (isSuccess) {
+                                  statusIcon = <i className="fas fa-check-circle" style={{ marginLeft: '0.5rem', color: '#4CAF50' }}></i>;
+                                  statusColor = '#4CAF50';
+                                } else if (isError) {
+                                  statusIcon = <i className="fas fa-times-circle" style={{ marginLeft: '0.5rem', color: '#f44336' }}></i>;
+                                  statusColor = '#f44336';
+                                }
+                                
                                 return (
-                                  <a
+                                  <div
                                     key={i}
-                                    href={pdfUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
                                     style={{ 
-                                      marginBottom: '0.5rem', 
-                                      color: '#4ECDC4',
-                                      fontSize: '12px',
-                                      padding: '0.5rem',
+                                      marginBottom: '1rem',
+                                      padding: '0.75rem',
                                       backgroundColor: 'var(--bg-secondary)',
                                       borderRadius: '4px',
-                                      display: 'block',
-                                      textDecoration: 'none',
-                                      cursor: 'pointer',
-                                      transition: 'all 0.2s',
+                                      border: '1px solid var(--bg-primary)',
                                     }}
-                                    onMouseEnter={(e) => {
-                                      e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
-                                      e.currentTarget.style.color = '#5EDDD6';
-                                      e.currentTarget.style.textDecoration = 'underline';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                      e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                                      e.currentTarget.style.color = '#4ECDC4';
-                                      e.currentTarget.style.textDecoration = 'none';
-                                    }}
-                                    title={`Open ${file} in new tab`}
                                   >
-                                    <i className="fas fa-file-pdf" style={{ marginRight: '0.5rem' }}></i>
-                                    {file}
-                                  </a>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: route ? '0.75rem' : '0' }}>
+                                      <a
+                                        href={pdfUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        style={{ 
+                                          color: statusColor,
+                                          fontSize: '12px',
+                                          display: 'flex',
+                                          alignItems: 'center',
+                                          flex: 1,
+                                          textDecoration: 'none',
+                                          cursor: 'pointer',
+                                          transition: 'all 0.2s',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                          e.currentTarget.style.textDecoration = 'underline';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                          e.currentTarget.style.textDecoration = 'none';
+                                        }}
+                                        title={`Open ${file} in new tab`}
+                                      >
+                                        <i className="fas fa-file-pdf" style={{ marginRight: '0.5rem' }}></i>
+                                        <span style={{ flex: 1 }}>{file}</span>
+                                        {statusIcon}
+                                      </a>
+                                    </div>
+                                    
+                                    {/* Route Information */}
+                                    {route ? (
+                                      <div style={{ 
+                                        marginTop: '0.75rem',
+                                        padding: '0.75rem',
+                                        backgroundColor: 'var(--bg-primary)',
+                                        borderRadius: '4px',
+                                        fontSize: '11px',
+                                      }}>
+                                        <div style={{ marginBottom: '0.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                                          Route: {route.name || 'Unknown'} {route.direction && `(${route.direction})`}
+                                        </div>
+                                        {route.stats && (
+                                          <div style={{ marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                                            {route.stats.totalStops} stops, {route.stats.geocodedStops} geocoded
+                                          </div>
+                                        )}
+                                        {route.stops && route.stops.length > 0 && (
+                                          <div style={{ marginTop: '0.5rem' }}>
+                                            <div style={{ color: 'var(--text-primary)', fontSize: '11px', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+                                              Stops ({route.stops.length}):
+                                            </div>
+                                            <div>
+                                              {route.stops.map((stop: any, stopIdx: number) => {
+                                                const isSkipped = stop.skipGeocoding;
+                                                const isSchoolStop = stop.isSchoolStop;
+                                                const hasGeocodeError = stop.geocodeError;
+                                                const isFiltered = isSkipped || hasGeocodeError;
+                                                
+                                                return (
+                                                  <div 
+                                                    key={stop.id || stopIdx} 
+                                                    style={{ 
+                                                      marginBottom: '0.5rem', 
+                                                      padding: '0.5rem',
+                                                      backgroundColor: isFiltered ? 'rgba(255, 193, 7, 0.1)' : 'var(--bg-secondary)',
+                                                      borderRadius: '4px',
+                                                      fontSize: '10px',
+                                                      border: isFiltered ? '1px solid rgba(255, 193, 7, 0.3)' : 'none',
+                                                    }}
+                                                  >
+                                                    {/* Status indicators */}
+                                                    {(isSkipped || isSchoolStop || hasGeocodeError) && (
+                                                      <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                                        {isSkipped && (
+                                                          <span style={{ 
+                                                            fontSize: '9px', 
+                                                            padding: '0.2rem 0.4rem', 
+                                                            backgroundColor: 'rgba(255, 193, 7, 0.2)', 
+                                                            color: '#856404',
+                                                            borderRadius: '3px',
+                                                            fontWeight: 'bold'
+                                                          }}>
+                                                            ⚠️ Skipped Geocoding
+                                                          </span>
+                                                        )}
+                                                        {isSchoolStop && (
+                                                          <span style={{ 
+                                                            fontSize: '9px', 
+                                                            padding: '0.2rem 0.4rem', 
+                                                            backgroundColor: 'rgba(78, 205, 196, 0.2)', 
+                                                            color: '#4ECDC4',
+                                                            borderRadius: '3px',
+                                                            fontWeight: 'bold'
+                                                          }}>
+                                                            🏫 School Stop
+                                                          </span>
+                                                        )}
+                                                        {hasGeocodeError && (
+                                                          <span style={{ 
+                                                            fontSize: '9px', 
+                                                            padding: '0.2rem 0.4rem', 
+                                                            backgroundColor: 'rgba(244, 67, 54, 0.2)', 
+                                                            color: '#f44336',
+                                                            borderRadius: '3px',
+                                                            fontWeight: 'bold'
+                                                          }}>
+                                                            ❌ Geocode Error
+                                                          </span>
+                                                        )}
+                                                      </div>
+                                                    )}
+                                                    
+                                                    {/* Cleaned address (main display) */}
+                                                    <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', marginBottom: '0.25rem' }}>
+                                                      {stop.address || stop.displayName || 'Unknown address'}
+                                                    </div>
+                                                    
+                                                    {/* Raw original line */}
+                                                    {stop.originalLine && stop.originalLine !== stop.address && (
+                                                      <div style={{ 
+                                                        color: 'var(--text-tertiary)', 
+                                                        fontSize: '9px',
+                                                        fontStyle: 'italic',
+                                                        marginBottom: '0.25rem',
+                                                        padding: '0.25rem',
+                                                        backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                                                        borderRadius: '3px',
+                                                      }}>
+                                                        <strong>Raw:</strong> {stop.originalLine}
+                                                      </div>
+                                                    )}
+                                                    
+                                                    {/* Display name if different from address */}
+                                                    {stop.displayName && stop.displayName !== stop.address && (
+                                                      <div style={{ 
+                                                        color: 'var(--text-secondary)', 
+                                                        fontSize: '9px',
+                                                        marginBottom: '0.25rem',
+                                                      }}>
+                                                        <strong>Geocoded:</strong> {stop.displayName}
+                                                      </div>
+                                                    )}
+                                                    
+                                                    {stop.coordinates && (
+                                                      <div style={{ color: 'var(--text-secondary)', fontSize: '9px' }}>
+                                                        Coordinates: [{stop.coordinates[0]?.toFixed(6)}, {stop.coordinates[1]?.toFixed(6)}]
+                                                      </div>
+                                                    )}
+                                                    {stop.time && (
+                                                      <div style={{ color: 'var(--text-secondary)', fontSize: '9px' }}>
+                                                        Time: {stop.time}
+                                                      </div>
+                                                    )}
+                                                    {stop.neighborhood && (
+                                                      <div style={{ color: 'var(--text-secondary)', fontSize: '9px' }}>
+                                                        Neighborhood: {stop.neighborhood}
+                                                      </div>
+                                                    )}
+                                                    {stop.geocodeError && (
+                                                      <div style={{ color: '#f44336', fontSize: '9px', marginTop: '0.25rem' }}>
+                                                        <strong>Error:</strong> {stop.geocodeError}
+                                                      </div>
+                                                    )}
+                                                  </div>
+                                                );
+                                              })}
+                                            </div>
+                                          </div>
+                                        )}
+                                      </div>
+                                    ) : loadingRoutes[school.schoolId] ? (
+                                      <div style={{ marginTop: '0.5rem', color: 'var(--text-secondary)', fontSize: '11px', fontStyle: 'italic' }}>
+                                        Loading route data...
+                                      </div>
+                                    ) : (
+                                      <div style={{ marginTop: '0.5rem', color: 'var(--text-secondary)', fontSize: '11px', fontStyle: 'italic' }}>
+                                        No processed route found
+                                      </div>
+                                    )}
+                                  </div>
                                 );
                               })}
                             </div>
@@ -836,137 +1290,11 @@ export function VerificationPage() {
                             <div style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>No PDFs available</div>
                           )}
                         </div>
-
-                        {/* First Processed Route */}
-                        <div>
-                          <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '16px', fontWeight: 'bold', color: 'var(--text-primary)' }}>
-                            First Processed Route
-                          </h3>
-                          {loadingRoutes[school.schoolId] ? (
-                            <div style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>Loading route data...</div>
-                          ) : firstRoutes[school.schoolId] === null ? (
-                            <div style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>No processed routes found</div>
-                          ) : firstRoutes[school.schoolId] ? (
-                            <div style={{ 
-                              maxHeight: '400px', 
-                              overflowY: 'auto', 
-                              backgroundColor: 'var(--bg-primary)', 
-                              padding: '1rem', 
-                              borderRadius: '4px',
-                              border: '1px solid var(--bg-primary)',
-                            }}>
-                              <div style={{ marginBottom: '1rem' }}>
-                                <div style={{ marginBottom: '0.5rem' }}>
-                                  <strong style={{ color: 'var(--text-primary)' }}>Route ID:</strong>{' '}
-                                  <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>{firstRoutes[school.schoolId].id}</span>
-                                </div>
-                                <div style={{ marginBottom: '0.5rem' }}>
-                                  <strong style={{ color: 'var(--text-primary)' }}>Name:</strong>{' '}
-                                  <span style={{ color: 'var(--text-secondary)' }}>{firstRoutes[school.schoolId].name}</span>
-                                </div>
-                                {firstRoutes[school.schoolId].direction && (
-                                  <div style={{ marginBottom: '0.5rem' }}>
-                                    <strong style={{ color: 'var(--text-primary)' }}>Direction:</strong>{' '}
-                                    <span style={{ color: 'var(--text-secondary)' }}>{firstRoutes[school.schoolId].direction}</span>
-                                  </div>
-                                )}
-                                {firstRoutes[school.schoolId].filename && (
-                                  <div style={{ marginBottom: '0.5rem' }}>
-                                    <strong style={{ color: 'var(--text-primary)' }}>Filename:</strong>{' '}
-                                    <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>{firstRoutes[school.schoolId].filename}</span>
-                                  </div>
-                                )}
-                                {firstRoutes[school.schoolId].stats && (
-                                  <div style={{ marginBottom: '0.5rem' }}>
-                                    <strong style={{ color: 'var(--text-primary)' }}>Stats:</strong>{' '}
-                                    <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>
-                                      {firstRoutes[school.schoolId].stats.totalStops} stops, {firstRoutes[school.schoolId].stats.geocodedStops} geocoded
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-                              <div style={{ marginTop: '1rem' }}>
-                                <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '0.5rem' }}>
-                                  Stops ({firstRoutes[school.schoolId].stops?.length || 0}):
-                                </strong>
-                                <div style={{ maxHeight: '250px', overflowY: 'auto' }}>
-                                  {firstRoutes[school.schoolId].stops?.slice(0, 10).map((stop: any, i: number) => (
-                                    <div 
-                                      key={stop.id || i} 
-                                      style={{ 
-                                        marginBottom: '0.5rem', 
-                                        padding: '0.5rem',
-                                        backgroundColor: 'var(--bg-secondary)',
-                                        borderRadius: '4px',
-                                        fontSize: '11px',
-                                      }}
-                                    >
-                                      <div style={{ color: 'var(--text-primary)', fontWeight: 'bold', marginBottom: '0.25rem' }}>
-                                        {stop.address || stop.originalLine || 'Unknown address'}
-                                      </div>
-                                      {stop.coordinates && (
-                                        <div style={{ color: 'var(--text-secondary)', fontSize: '10px' }}>
-                                          Coordinates: [{stop.coordinates[0]?.toFixed(6)}, {stop.coordinates[1]?.toFixed(6)}]
-                                        </div>
-                                      )}
-                                      {stop.time && (
-                                        <div style={{ color: 'var(--text-secondary)', fontSize: '10px' }}>
-                                          Time: {stop.time}
-                                        </div>
-                                      )}
-                                      {stop.neighborhood && (
-                                        <div style={{ color: 'var(--text-secondary)', fontSize: '10px' }}>
-                                          Neighborhood: {stop.neighborhood}
-                                        </div>
-                                      )}
-                                      {stop.geocodeError && (
-                                        <div style={{ color: '#f44', fontSize: '10px' }}>
-                                          Geocode Error: {stop.geocodeError}
-                                        </div>
-                                      )}
-                                      {stop.isSchoolStop && (
-                                        <div style={{ color: '#4ECDC4', fontSize: '10px', fontWeight: 'bold' }}>
-                                          School Stop
-                                        </div>
-                                      )}
-                                    </div>
-                                  ))}
-                                  {firstRoutes[school.schoolId].stops?.length > 10 && (
-                                    <div style={{ color: 'var(--text-secondary)', fontSize: '11px', fontStyle: 'italic', marginTop: '0.5rem' }}>
-                                      ... and {firstRoutes[school.schoolId].stops.length - 10} more stops
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                              <div style={{ marginTop: '1rem', padding: '0.75rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '4px' }}>
-                                <details>
-                                  <summary style={{ cursor: 'pointer', color: 'var(--text-primary)', fontWeight: 'bold', fontSize: '12px' }}>
-                                    View Full JSON Data
-                                  </summary>
-                                  <pre style={{ 
-                                    marginTop: '0.5rem', 
-                                    padding: '0.5rem', 
-                                    backgroundColor: 'var(--bg-primary)', 
-                                    borderRadius: '4px',
-                                    overflow: 'auto',
-                                    fontSize: '10px',
-                                    color: 'var(--text-secondary)',
-                                    maxHeight: '300px',
-                                  }}>
-                                    {JSON.stringify(firstRoutes[school.schoolId], null, 2)}
-                                  </pre>
-                                </details>
-                              </div>
-                            </div>
-                          ) : (
-                            <div style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>Click to load route data</div>
-                          )}
-                        </div>
                       </div>
                     </td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
               );
             })}
             </tbody>

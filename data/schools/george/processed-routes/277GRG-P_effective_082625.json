@@ -19,7 +19,8 @@
         45.5960566
       ],
       "displayName": "10000 N Burr Ave, Portland, OR 97203, USA",
-      "schoolName": "George"
+      "schoolName": "George",
+      "neighborhood": "North Portland"
     },
     {
       "id": "stop-1",
@@ -350,5 +351,11 @@
       45.58836,
       -122.71343
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 2,
+    "errors": 0,
+    "total": 3
+  }
 }

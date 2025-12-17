@@ -1,5 +1,5 @@
 import express from 'express';
-import { pm2Service } from '../services/pm2Service.js';
+import { restartService } from '../services/restartService.js';
 
 const router = express.Router();
 
@@ -22,9 +22,9 @@ router.post('/restart', async (req, res) => {
       });
     }
 
-    console.log('[ServersRoute] Calling pm2Service.restartProcess...');
-    const result = await pm2Service.restartProcess(processName);
-    console.log('[ServersRoute] PM2 restart result:', result.success ? 'success' : 'failed');
+    console.log('[ServersRoute] Calling restartService.restartProcess...');
+    const result = await restartService.restartProcess(processName);
+    console.log('[ServersRoute] Restart result:', result.success ? 'success' : 'failed');
     
     if (result.success) {
       res.json(result);
@@ -47,7 +47,7 @@ router.post('/restart', async (req, res) => {
 router.get('/status/:processName', async (req, res) => {
   try {
     const { processName } = req.params;
-    const result = await pm2Service.getProcessStatus(processName);
+    const result = await restartService.getProcessStatus(processName);
     
     if (result.success) {
       res.json(result);

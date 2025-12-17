@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export type Theme = 'light' | 'dark' | 'blue' | 'green' | 'purple' | 'orange';
+export type Theme = 'light' | 'dark' | 'auto' | 'blue' | 'green' | 'purple' | 'orange';
 
 export interface ThemeConfig {
   name: string;
@@ -18,6 +18,11 @@ export const themes: Record<Theme, ThemeConfig> = {
     name: 'dark',
     displayName: 'Dark',
     cssClass: 'theme-dark',
+  },
+  auto: {
+    name: 'auto',
+    displayName: 'Auto',
+    cssClass: 'theme-auto',
   },
   blue: {
     name: 'blue',
@@ -41,47 +46,81 @@ export const themes: Record<Theme, ThemeConfig> = {
   },
 };
 
+// Get the effective theme (resolves 'auto' to 'light' or 'dark' based on system preference)
+export function getEffectiveTheme(theme: Theme): 'light' | 'dark' {
+  if (theme === 'auto') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  if (theme === 'light' || theme === 'dark') {
+    return theme;
+  }
+  // For color themes (blue, green, etc.), treat as dark
+  return 'dark';
+}
+
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Check localStorage first
-    const stored = localStorage.getItem('theme');
-    if (stored && stored in themes) {
-      return stored as Theme;
-    }
-    // Fallback to dark mode preference
-    const darkMode = localStorage.getItem('darkMode');
-    if (darkMode === 'true') {
-      return 'dark';
-    }
-    // Check system preference
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
+    // Always use auto theme
+    return 'auto';
   });
 
+  // Get effective theme for applying CSS classes
+  const effectiveTheme = getEffectiveTheme(theme);
+
   useEffect(() => {
-    // Remove all theme classes
+    // Always use auto theme
     const root = document.documentElement;
     Object.values(themes).forEach((themeConfig) => {
       root.classList.remove(themeConfig.cssClass);
     });
     
-    // Add current theme class
-    root.classList.add(themes[theme].cssClass);
+    // Add auto theme class (with effective theme)
+    root.classList.add(`theme-${effectiveTheme}`);
+    root.classList.add('theme-auto');
     
     // Save to localStorage
-    localStorage.setItem('theme', theme);
+    localStorage.setItem('theme', 'auto');
     
     // Also update darkMode for backward compatibility
-    localStorage.setItem('darkMode', theme === 'dark' ? 'true' : 'false');
-  }, [theme]);
+    const isDark = effectiveTheme === 'dark';
+    localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+  }, [effectiveTheme]);
+
+  // Listen for system theme changes (always in auto mode)
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      // Force re-render by updating state
+      const root = document.documentElement;
+      const newEffectiveTheme = getEffectiveTheme('auto');
+      
+      // Remove old theme class
+      root.classList.remove('theme-light', 'theme-dark');
+      // Add new theme class
+      root.classList.add(`theme-${newEffectiveTheme}`);
+      root.classList.add('theme-auto');
+      
+      // Update darkMode for backward compatibility
+      localStorage.setItem('darkMode', newEffectiveTheme === 'dark' ? 'true' : 'false');
+    };
+
+    // Modern browsers
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    } else {
+      // Fallback for older browsers
+      mediaQuery.addListener(handleChange);
+      return () => mediaQuery.removeListener(handleChange);
+    }
+  }, []);
 
   const setThemeValue = (newTheme: Theme) => {
-    setTheme(newTheme);
+    // Theme is always auto, ignore changes
+    // This is kept for API compatibility but does nothing
   };
 
-  return { theme, setTheme: setThemeValue };
+  return { theme: 'auto' as const, setTheme: setThemeValue, effectiveTheme };
 }
 
 

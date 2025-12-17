@@ -44,12 +44,18 @@
       "originalLine": "7:45 am8510 SE STEELE ST [NE]232MRY-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.5750722,
-        45.4847853
+        -122.57506936890104,
+        45.48493354925328
       ],
       "displayName": "Parking lot, 8510 SE Steele St, Portland, OR 97266, USA",
       "placeId": "ChIJlYTWnCSglVQRrDeTO2Sdkvs",
-      "neighborhood": "Lents"
+      "neighborhood": "Lents",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.5750722,
+        45.4847853
+      ],
+      "snapDistance": 16.486042284642167
     },
     {
       "id": "stop-0",
@@ -64,7 +70,8 @@
         45.4868569
       ],
       "displayName": "7733 SE Raymond St, Portland, OR 97206, USA",
-      "schoolName": "Marysville"
+      "schoolName": "Marysville",
+      "neighborhood": "Foster - Powell"
     }
   ],
   "processedAt": "2025-12-12T22:36:04.227Z",
@@ -282,5 +289,11 @@
       45.48658,
       -122.58387
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 1,
+    "skipped": 2,
+    "errors": 0,
+    "total": 4
+  }
 }

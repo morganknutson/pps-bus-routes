@@ -19,7 +19,8 @@
         45.4685636
       ],
       "displayName": "7700 SE Reed College Pl #5, Portland, OR 97202, USA",
-      "schoolName": "Duniway"
+      "schoolName": "Duniway",
+      "neighborhood": "Southeast Portland"
     },
     {
       "id": "stop-1",
@@ -689,5 +690,11 @@
       45.45671,
       -122.64999
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 8,
+    "errors": 0,
+    "total": 9
+  }
 }

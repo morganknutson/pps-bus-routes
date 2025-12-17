@@ -19,7 +19,8 @@
         45.5403663
       ],
       "displayName": "1320 NE Brazee St, Portland, OR 97212, USA",
-      "schoolName": "Irvington"
+      "schoolName": "Irvington",
+      "neighborhood": "Irvington"
     },
     {
       "id": "stop-1",
@@ -44,12 +45,18 @@
       "originalLine": "2:39 pm1126 NE 21ST AV [W]294IRV-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6446133,
-        45.5312495
+        -122.64488411973751,
+        45.53125104224003
       ],
       "displayName": "1126 NE 21st Ave, Portland, OR 97232, USA",
       "placeId": "ChIJWTIzIraglVQR94MRZO2zA0w",
-      "neighborhood": "Sullivan's Gulch"
+      "neighborhood": "Sullivan's Gulch",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6446133,
+        45.5312495
+      ],
+      "snapDistance": 21.096006970590427
     },
     {
       "id": "stop-3",
@@ -283,5 +290,11 @@
       45.53453,
       -122.63672
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 1,
+    "skipped": 3,
+    "errors": 0,
+    "total": 5
+  }
 }

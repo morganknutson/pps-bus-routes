@@ -19,7 +19,8 @@
         45.5732156
       ],
       "displayName": "2409 N Saratoga St, Portland, OR 97217, USA",
-      "schoolName": "Chief Joseph"
+      "schoolName": "Chief Joseph",
+      "neighborhood": "North Portland"
     },
     {
       "id": "stop-1",
@@ -287,5 +288,11 @@
       45.56993,
       -122.67489
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 8,
+    "errors": 0,
+    "total": 9
+  }
 }

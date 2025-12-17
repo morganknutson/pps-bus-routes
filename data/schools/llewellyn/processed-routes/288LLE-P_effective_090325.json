@@ -19,7 +19,8 @@
         45.4771721
       ],
       "displayName": "6301 SE 14th Ave, Portland, OR 97202, USA",
-      "schoolName": "Llewellyn"
+      "schoolName": "Llewellyn",
+      "neighborhood": "Southeast Portland"
     },
     {
       "id": "stop-1",
@@ -89,12 +90,18 @@
       "originalLine": "2:51 pm4617 SE MILWAUKIE AV [E]288LLE-P(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6511707,
-        45.4894153
+        -122.6511291845784,
+        45.48947660644225
       ],
       "displayName": "4617 SE Milwaukie Ave, Portland, OR 97202, USA",
       "placeId": "ChIJjQbzOIkKlVQRPwhWgsoiwbk",
-      "neighborhood": "Brooklyn"
+      "neighborhood": "Brooklyn",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6511707,
+        45.4894153
+      ],
+      "snapDistance": 7.546132533041922
     },
     {
       "id": "stop-6",
@@ -433,5 +440,11 @@
       45.48948,
       -122.65113
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 1,
+    "skipped": 5,
+    "errors": 0,
+    "total": 7
+  }
 }

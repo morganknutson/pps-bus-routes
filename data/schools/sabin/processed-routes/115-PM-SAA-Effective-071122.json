@@ -1,0 +1,263 @@
+{
+  "id": "115-PM-SAA-Effective-071122.pdf",
+  "name": "115",
+  "direction": "Afternoon",
+  "filename": "115-PM-SAA-Effective-071122.pdf",
+  "fileId": "115-PM-SAA-Effective-071122.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "4013 NE 18th Ave, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:SABIN GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6478469,
+        45.5522028
+      ],
+      "displayName": "4013 NE 18th Ave, Portland, OR 97212, USA",
+      "schoolName": "Sabin"
+    },
+    {
+      "id": "stop-1",
+      "address": "NE Martin Luther King Jr Blvd. & NE Failing St. [SE]",
+      "time": "1:09 pm",
+      "direction": "SE",
+      "originalLine": "1:09 pmNE MARTIN LUTHER KING JR BLVD @ NE FAILING ST [SE]115SAB-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6615249,
+        45.5508071
+      ],
+      "displayName": "NE Failing St & NE Martin Luther King Jr Blvd, Portland, OR 97212, USA",
+      "placeId": "EkZORSBGYWlsaW5nIFN0ICYgTkUgTWFydGluIEx1dGhlciBLaW5nIEpyIEJsdmQsIFBvcnRsYW5kLCBPUiA5NzIxMiwgVVNBImYiZAoUChIJTeJ5iT6nlVQRJO9aeSKnYkcSFAoSCU3ieYk-p5VUESTvWnkip2JHGhQKEglvZgfCS6GVVBE2p-2eX2-_TRoUChIJ7ZajHg-nlVQRxOJdauFPJhQiCg1ngCYbFS9W47Y",
+      "neighborhood": "King"
+    },
+    {
+      "id": "stop-2",
+      "address": "4705 NE 7th Ave. (king Elementary On NE 7th Av) [E]",
+      "time": "1:12 pm",
+      "direction": "E",
+      "originalLine": "1:12 pm4705 NE 7TH AV (KING ELEMENTARY ON NE 7TH AV) [E]115SAB-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.65881606597708,
+        45.55703288696268
+      ],
+      "displayName": "4705 NE 7th Ave, Portland, OR 97211, USA",
+      "placeId": "ChIJI8yWgBenlVQRhQMeTKK2umY",
+      "neighborhood": "King"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Martin Luther King Jr Blvd. & NE Jessup St. [E]",
+      "time": "1:16 pm",
+      "direction": "E",
+      "originalLine": "1:16 pmNE MARTIN LUTHER KING JR BLVD @ NE JESSUP ST [E]115SAB-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6614372,
+        45.564065
+      ],
+      "displayName": "NE Jessup St & NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
+      "placeId": "EkVORSBKZXNzdXAgU3QgJiBORSBNYXJ0aW4gTHV0aGVyIEtpbmcgSnIgQmx2ZCwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEgkF5PE0G6eVVBHlQ6UmoS91GhIUChIJBeTxNBunlVQR5UOlJqEvdRoaFAoSCVfaozMbp5VUEfDqyBFt7OGvGhQKEgntlqMeD6eVVBHE4l1q4U8mFCIKDUqGKBsVnFnjtg",
+      "neighborhood": "King"
+    }
+  ],
+  "neighborhoods": [
+    "King"
+  ],
+  "processedAt": "2025-12-17T09:08:23.645Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.5522,
+      -122.64831
+    ],
+    [
+      45.55186,
+      -122.64832
+    ],
+    [
+      45.55187,
+      -122.64937
+    ],
+    [
+      45.55077,
+      -122.64938
+    ],
+    [
+      45.55078,
+      -122.65037
+    ],
+    [
+      45.55078,
+      -122.65279
+    ],
+    [
+      45.55079,
+      -122.65354
+    ],
+    [
+      45.55079,
+      -122.65571
+    ],
+    [
+      45.5508,
+      -122.65864
+    ],
+    [
+      45.55081,
+      -122.6614
+    ],
+    [
+      45.55081,
+      -122.66152
+    ],
+    [
+      45.55102,
+      -122.66152
+    ],
+    [
+      45.55138,
+      -122.66151
+    ],
+    [
+      45.55207,
+      -122.6615
+    ],
+    [
+      45.55331,
+      -122.66149
+    ],
+    [
+      45.5555,
+      -122.66149
+    ],
+    [
+      45.55549,
+      -122.6586
+    ],
+    [
+      45.55731,
+      -122.65856
+    ],
+    [
+      45.55733,
+      -122.6593
+    ],
+    [
+      45.55726,
+      -122.6593
+    ],
+    [
+      45.55725,
+      -122.65929
+    ],
+    [
+      45.55723,
+      -122.65925
+    ],
+    [
+      45.5571,
+      -122.65919
+    ],
+    [
+      45.55704,
+      -122.65913
+    ],
+    [
+      45.55703,
+      -122.65882
+    ],
+    [
+      45.55704,
+      -122.6591
+    ],
+    [
+      45.55706,
+      -122.65916
+    ],
+    [
+      45.55723,
+      -122.65926
+    ],
+    [
+      45.55725,
+      -122.6593
+    ],
+    [
+      45.55733,
+      -122.6593
+    ],
+    [
+      45.55731,
+      -122.65856
+    ],
+    [
+      45.55876,
+      -122.65853
+    ],
+    [
+      45.55898,
+      -122.65852
+    ],
+    [
+      45.55912,
+      -122.65853
+    ],
+    [
+      45.55912,
+      -122.65884
+    ],
+    [
+      45.55913,
+      -122.6595
+    ],
+    [
+      45.55913,
+      -122.66063
+    ],
+    [
+      45.55914,
+      -122.66144
+    ],
+    [
+      45.56076,
+      -122.66143
+    ],
+    [
+      45.56221,
+      -122.6614
+    ],
+    [
+      45.56302,
+      -122.66139
+    ],
+    [
+      45.56335,
+      -122.66138
+    ],
+    [
+      45.56359,
+      -122.66142
+    ],
+    [
+      45.56406,
+      -122.66144
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 3,
+    "errors": 0,
+    "total": 4
+  }
+}

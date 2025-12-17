@@ -19,7 +19,8 @@
         45.54754459999999
       ],
       "displayName": "620 N Fremont St, Portland, OR 97227, USA",
-      "schoolName": "Boise-Eliot"
+      "schoolName": "Boise-Eliot",
+      "neighborhood": "North Portland"
     },
     {
       "id": "stop-1",
@@ -29,12 +30,18 @@
       "originalLine": "2:41 pm5221 N HAIGHT AV [E]213BEL-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.670264,
-        45.5608111
+        -122.6700866308042,
+        45.56080323513
       ],
       "displayName": "5221 N Haight Ave, Portland, OR 97217, USA",
       "placeId": "ChIJu_wa3RGnlVQRrFZtHnThnZw",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.670264,
+        45.5608111
+      ],
+      "snapDistance": 13.836449438972497
     },
     {
       "id": "stop-2",
@@ -89,12 +96,18 @@
       "originalLine": "3:00 pm9469 N VANHOUTEN AVE [W]213BEL-P(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7237867,
-        45.5910684
+        -122.72378829717677,
+        45.591036376158755
       ],
       "displayName": "9469 N Van Houten Ave, Portland, OR 97203, USA",
       "placeId": "Ei45NDY5IE4gVmFuIEhvdXRlbiBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBIjESLwoUChIJyU00POenlVQR8k8VMIIgl3wQ_UkqFAoSCcMIZYfvp5VUES03A1Mp2_Qd",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7237867,
+        45.5910684
+      ],
+      "snapDistance": 3.5630567416744725
     },
     {
       "id": "stop-6",
@@ -506,5 +519,11 @@
       45.59104,
       -122.72379
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 2,
+    "skipped": 5,
+    "errors": 0,
+    "total": 8
+  }
 }

@@ -74,12 +74,18 @@
       "originalLine": "7:37 am1807 SW BROADWAY DR [N]111AIN-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6985726,
-        45.5060355
+        -122.69860269698277,
+        45.50587682142333
       ],
       "displayName": "1807 SW Broadway Dr, Portland, OR 97201, USA",
       "placeId": "ChIJ_fXyNjoKlVQRHBpC1al7iFQ",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6985726,
+        45.5060355
+      ],
+      "snapDistance": 17.799458648652084
     },
     {
       "id": "stop-6",
@@ -89,12 +95,18 @@
       "originalLine": "7:38 am2221 SW BROADWAY DR [W]111AIN-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.70077884197237,
-        45.505707774562154
+        -122.70076916468135,
+        45.50570575719811
       ],
       "displayName": "2221 SW Broadway Dr, Portland, OR 97201, USA",
       "placeId": "ChIJYyMQcjoKlVQRLV4hwrnNGjE",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.70077884197237,
+        45.505707774562154
+      ],
+      "snapDistance": 0.7868029458404664
     },
     {
       "id": "stop-7",
@@ -104,12 +116,18 @@
       "originalLine": "7:40 am2488 SW SHERWOOD DR [NW]111AIN-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.70131528377534,
-        45.50242555758448
+        -122.70130905391426,
+        45.50242289197486
       ],
       "displayName": "2488 SW Sherwood Dr, Portland, OR 97201, USA",
       "placeId": "ChIJCc1yGjcKlVQRC__IbFf6ZA4",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.70131528377534,
+        45.50242555758448
+      ],
+      "snapDistance": 0.5688437629428168
     },
     {
       "id": "stop-8",
@@ -139,7 +157,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     }
   ],
   "neighborhoods": [
@@ -1625,5 +1644,11 @@
       45.51014,
       -122.69937
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 5,
+    "errors": 0,
+    "total": 9
+  }
 }

@@ -1,0 +1,462 @@
+{
+  "id": "205OCG-P_effective_091025.pdf",
+  "name": "205",
+  "direction": "Afternoon",
+  "filename": "205OCG-P_effective_091025.pdf",
+  "fileId": "205OCG-P_effective_091025.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "6031 N Montana Ave, Portland, OR 97217, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:OCKLEY GREEN GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6806322,
+        45.5669933
+      ],
+      "displayName": "6031 N Montana Ave, Portland, OR 97217, USA",
+      "schoolName": "Ockley Green"
+    },
+    {
+      "id": "stop-1",
+      "address": "4705 NE 7th Ave. (king Elementary On NE 7th Av) [E]",
+      "time": "4:18 pm",
+      "direction": "E",
+      "originalLine": "4:18 pm4705 NE 7TH AV (KING ELEMENTARY ON NE 7TH AV) [E]205OCG-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.65881606597708,
+        45.55703288696268
+      ],
+      "displayName": "4705 NE 7th Ave, Portland, OR 97211, USA",
+      "placeId": "ChIJI8yWgBenlVQRhQMeTKK2umY",
+      "neighborhood": "King"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE 15th Ave. & NE Rosa Parks Wy [NW]",
+      "time": "4:26 pm",
+      "direction": "NW",
+      "originalLine": "4:26 pmNE 15TH AV @ NE ROSA PARKS WY [NW]205OCG-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.650078,
+        45.5698113
+      ],
+      "displayName": "NE Rosa Parks Way & NE 15th Ave, Portland, OR 97211, USA",
+      "placeId": "EjhORSBSb3NhIFBhcmtzIFdheSAmIE5FIDE1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCe8XYo38ppVUEUVNZuYVLCXmEhQKEgnvF2KN_KaVVBFFTWbmFSwl5hoUChIJt7Bclf2mlVQRKc6fmi5Uk2MaFAoSCVF4vEcip5VUERn4EaQeHuGGIgoNwWYpGxVUFeW2",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 17th Ave. & NE Morgan St. [SE]",
+      "time": "4:29 pm",
+      "direction": "SE",
+      "originalLine": "4:29 pmNE 17TH AV @ NE MORGAN ST [SE]205OCG-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6483438,
+        45.5741114
+      ],
+      "displayName": "NE 17th Ave & NE Morgan St, Portland, OR 97211, USA",
+      "placeId": "EjNORSAxN3RoIEF2ZSAmIE5FIE1vcmdhbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEgnZO3mE-aaVVBHjJ5d12S4nhxIUChIJ2Tt5hPmmlVQR4yeXddkuJ4caFAoSCXneQFbippVUESb5V5ufwWmNGhQKEglXWnQt-aaVVBG_ry9e1cKJ1SIKDboOKhsVElnltg",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-4",
+      "address": "Woodlawn School (7200 NE 11th Av) [W]",
+      "time": "4:31 pm",
+      "direction": "W",
+      "originalLine": "4:31 pmWOODLAWN SCHOOL (7200 NE 11TH AV) [W]205OCG-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.65269649999999,
+        45.574986599999995
+      ],
+      "displayName": "7200 NE 11th Ave, Portland, OR 97211, USA",
+      "placeId": "ChIJ0fcKJ_mmlVQRGGSHztIm6dw",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-5",
+      "address": "7321 NE 8th Ave. [SE]",
+      "time": "4:34 pm",
+      "direction": "SE",
+      "originalLine": "4:34 pm7321 NE 8TH AV [SE]205OCG-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.65675815437032,
+        45.57609571564337
+      ],
+      "displayName": "7321 NE 8th Ave, Portland, OR 97211, USA",
+      "placeId": "ChIJx3DdV_-mlVQR3QFKEGhoTTY",
+      "neighborhood": "Woodlawn"
+    }
+  ],
+  "neighborhoods": [
+    "King",
+    "Woodlawn"
+  ],
+  "processedAt": "2025-12-17T09:05:18.135Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.56699,
+      -122.68017
+    ],
+    [
+      45.56639,
+      -122.68017
+    ],
+    [
+      45.56639,
+      -122.679
+    ],
+    [
+      45.56639,
+      -122.67858
+    ],
+    [
+      45.56641,
+      -122.67482
+    ],
+    [
+      45.56644,
+      -122.67132
+    ],
+    [
+      45.56645,
+      -122.67019
+    ],
+    [
+      45.56644,
+      -122.66882
+    ],
+    [
+      45.56515,
+      -122.66879
+    ],
+    [
+      45.56296,
+      -122.66875
+    ],
+    [
+      45.56272,
+      -122.66875
+    ],
+    [
+      45.56232,
+      -122.66869
+    ],
+    [
+      45.56182,
+      -122.6686
+    ],
+    [
+      45.56109,
+      -122.66849
+    ],
+    [
+      45.56053,
+      -122.66841
+    ],
+    [
+      45.55995,
+      -122.66836
+    ],
+    [
+      45.55943,
+      -122.66831
+    ],
+    [
+      45.55917,
+      -122.66828
+    ],
+    [
+      45.55909,
+      -122.66829
+    ],
+    [
+      45.55911,
+      -122.66687
+    ],
+    [
+      45.55912,
+      -122.66589
+    ],
+    [
+      45.55912,
+      -122.66461
+    ],
+    [
+      45.55913,
+      -122.6632
+    ],
+    [
+      45.55914,
+      -122.66213
+    ],
+    [
+      45.55913,
+      -122.66089
+    ],
+    [
+      45.55913,
+      -122.6595
+    ],
+    [
+      45.55912,
+      -122.65884
+    ],
+    [
+      45.55912,
+      -122.65853
+    ],
+    [
+      45.55898,
+      -122.65852
+    ],
+    [
+      45.55876,
+      -122.65853
+    ],
+    [
+      45.55731,
+      -122.65856
+    ],
+    [
+      45.55733,
+      -122.6593
+    ],
+    [
+      45.55726,
+      -122.6593
+    ],
+    [
+      45.55725,
+      -122.65929
+    ],
+    [
+      45.55723,
+      -122.65925
+    ],
+    [
+      45.5571,
+      -122.65919
+    ],
+    [
+      45.55704,
+      -122.65913
+    ],
+    [
+      45.55703,
+      -122.65882
+    ],
+    [
+      45.55704,
+      -122.6591
+    ],
+    [
+      45.55706,
+      -122.65916
+    ],
+    [
+      45.55715,
+      -122.65921
+    ],
+    [
+      45.55723,
+      -122.65926
+    ],
+    [
+      45.55725,
+      -122.6593
+    ],
+    [
+      45.55733,
+      -122.6593
+    ],
+    [
+      45.55731,
+      -122.65856
+    ],
+    [
+      45.55876,
+      -122.65853
+    ],
+    [
+      45.55898,
+      -122.65852
+    ],
+    [
+      45.55912,
+      -122.65853
+    ],
+    [
+      45.55912,
+      -122.65756
+    ],
+    [
+      45.55912,
+      -122.65742
+    ],
+    [
+      45.55912,
+      -122.65658
+    ],
+    [
+      45.55911,
+      -122.6555
+    ],
+    [
+      45.55911,
+      -122.65364
+    ],
+    [
+      45.55909,
+      -122.64974
+    ],
+    [
+      45.56209,
+      -122.6497
+    ],
+    [
+      45.56251,
+      -122.6497
+    ],
+    [
+      45.56273,
+      -122.6497
+    ],
+    [
+      45.56273,
+      -122.65009
+    ],
+    [
+      45.5631,
+      -122.65009
+    ],
+    [
+      45.56453,
+      -122.65007
+    ],
+    [
+      45.56629,
+      -122.65005
+    ],
+    [
+      45.56788,
+      -122.65003
+    ],
+    [
+      45.56815,
+      -122.65003
+    ],
+    [
+      45.56829,
+      -122.65004
+    ],
+    [
+      45.56858,
+      -122.65006
+    ],
+    [
+      45.57186,
+      -122.65008
+    ],
+    [
+      45.57342,
+      -122.65007
+    ],
+    [
+      45.57411,
+      -122.65007
+    ],
+    [
+      45.57411,
+      -122.64834
+    ],
+    [
+      45.57411,
+      -122.65007
+    ],
+    [
+      45.57411,
+      -122.65099
+    ],
+    [
+      45.57411,
+      -122.65176
+    ],
+    [
+      45.57468,
+      -122.65177
+    ],
+    [
+      45.57494,
+      -122.65177
+    ],
+    [
+      45.57495,
+      -122.65261
+    ],
+    [
+      45.57496,
+      -122.65266
+    ],
+    [
+      45.57498,
+      -122.65269
+    ],
+    [
+      45.57501,
+      -122.6527
+    ],
+    [
+      45.57536,
+      -122.65271
+    ],
+    [
+      45.57574,
+      -122.65271
+    ],
+    [
+      45.57592,
+      -122.65271
+    ],
+    [
+      45.57592,
+      -122.65355
+    ],
+    [
+      45.57592,
+      -122.65466
+    ],
+    [
+      45.57594,
+      -122.65652
+    ],
+    [
+      45.57594,
+      -122.65676
+    ],
+    [
+      45.5761,
+      -122.65676
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 5,
+    "errors": 0,
+    "total": 6
+  }
+}

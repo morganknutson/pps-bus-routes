@@ -1,18 +1,11 @@
 {
-  "id": "route-1765392512704",
+  "id": "104SYL-A_effective_090325.pdf",
   "name": "104",
   "direction": "Morning",
   "filename": "104SYL-A_effective_090325.pdf",
+  "fileId": "104SYL-A_effective_090325.pdf",
+  "modifiedTime": null,
   "stops": [
-    {
-      "id": "stop-1",
-      "address": "Bridlemile Gt. Loading ZONE On 47th",
-      "time": "8:18 am",
-      "direction": null,
-      "originalLine": "8:18 amBRIDLEMILE GT LOADING ZONE ON 47TH104SYL-AStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": null
-    },
     {
       "id": "stop-2",
       "address": "SW Hamilton St. & SW 47th Ave. [SW]",
@@ -25,6 +18,7 @@
         45.4907226
       ],
       "displayName": "SW 47th Ave & SW Hamilton St, Portland, OR 97221, USA",
+      "placeId": "EjVTVyA0N3RoIEF2ZSAmIFNXIEhhbWlsdG9uIFN0LCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCc9CG5u4C5VUEWWZ8RF2KNXWEhQKEgnPQhubuAuVVBFlmfERdijV1hoUChIJGwsM23kLlVQRadjwQzFPgSAaFAoSCZ8adAK0C5VUEUvr2CfNttIdIgoNWlUdGxWwqdm2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -39,6 +33,7 @@
         45.4906783
       ],
       "displayName": "SW Hamilton St & SW 42nd Pl, Portland, OR 97221, USA",
+      "placeId": "EjRTVyBIYW1pbHRvbiBTdCAmIFNXIDQybmQgUGwsIFBvcnRsYW5kLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJGflPKbgLlVQRYvgEVjRpZOUSFAoSCRn5Tym4C5VUEWL4BFY0aWTlGhQKEgmfGnQCtAuVVBFL69gnzbbSHRoUChIJUQowzbkLlVQRlcLLbaIOML0iCg2fUx0bFTt_2rY",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -53,6 +48,7 @@
         45.4858613
       ],
       "displayName": "SW 39th Dr & SW 38th Pl, Portland, OR 97221, USA",
+      "placeId": "EjBTVyAzOXRoIERyICYgU1cgMzh0aCBQbCwgUG9ydGxhbmQsIE9SIDk3MjIxLCBVU0EiZiJkChQKEgk_VsauuwuVVBE9s5UG2DhFwBIUChIJP1bGrrsLlVQRPbOVBtg4RcAaFAoSCbMUQj26C5VUEQ57QHCHHRu2GhQKEgnnI7ZyuguVVBGQU6AYvYGU6CIKDXWXHBsVR7Tatg",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -63,10 +59,11 @@
       "originalLine": "8:28 am6651 SW CAPITOL HWY [S]104SYL-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7045785,
-        45.4769714
+        -122.70493429999999,
+        45.476926399999996
       ],
       "displayName": "6651 SW Capitol Hwy, Portland, OR 97219, USA",
+      "placeId": "ChIJqRnOiKcLlVQRkj1k-tlJrTQ",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -81,6 +78,7 @@
         45.4907633
       ],
       "displayName": "SW Hamilton St & SW Shattuck Rd, Portland, OR 97221, USA",
+      "placeId": "EjhTVyBIYW1pbHRvbiBTdCAmIFNXIFNoYXR0dWNrIFJkLCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCVupIrHAC5VUET4jK9oGnBi3EhQKEglbqSKxwAuVVBE-IyvaBpwYtxoUChIJnxp0ArQLlVQRS-vYJ8220h0aFAoSCZtOV1uVC5VUEZeROXH00pfHIgoN8VYdGxXWCNm2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -91,10 +89,11 @@
       "originalLine": "8:38 am4549 SW Shattuck Rd [W]104SYL-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7303604,
-        45.4901199
+        -122.73035318586446,
+        45.48996618668858
       ],
       "displayName": "4549 SW Shattuck Rd, Portland, OR 97221, USA",
+      "placeId": "ChIJ90J2msALlVQRxcOqwUlt3pw",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -105,10 +104,11 @@
       "originalLine": "8:38 am4721 SW 53RD AV [E]104SYL-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7317362,
-        45.4891586
+        -122.73148135820018,
+        45.489165434103924
       ],
       "displayName": "4721 SW 53rd Ave, Portland, OR 97221, USA",
+      "placeId": "ChIJqWEseMALlVQRY-TMxwbsabo",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -119,10 +119,11 @@
       "originalLine": "8:41 am6446 SW HAMILTON ST [N]104SYL-A(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7435417,
-        45.4905931
+        -122.74353735686202,
+        45.49083941734875
       ],
       "displayName": "6446 SW Hamilton St, Portland, OR 97221, USA",
+      "placeId": "ChIJ_8WvYekLlVQRR6YvNUV9V7M",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -133,10 +134,11 @@
       "originalLine": "8:42 am4004/4005 SW Scholls Ferry Rd [E]104SYL-A(9)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7426716,
-        45.4939857
+        -122.74265692235497,
+        45.49442216495088
       ],
       "displayName": "4004 SW Scholls Ferry Rd, Portland, OR 97221, USA",
+      "placeId": "ChIJB89rMOgLlVQRwjN6iN2lfe0",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -151,6 +153,7 @@
         45.49443180000001
       ],
       "displayName": "SW Thomas St & SW Scholls Ferry Rd, Southwest Hills, OR 97221, USA",
+      "placeId": "EkJTVyBUaG9tYXMgU3QgJiBTVyBTY2hvbGxzIEZlcnJ5IFJkLCBTb3V0aHdlc3QgSGlsbHMsIE9SIDk3MjIxLCBVU0EiZiJkChQKEgmhH0A96AuVVBH2zescSSyQnRIUChIJoR9APegLlVQR9s3rHEkskJ0aFAoSCQ2BQpHDC5VUEYyKfp-NNBl2GhQKEglfbgXKvw2VVBH03Ssu1n0viCIKDT7mHRsVL97Wtg",
       "neighborhood": "Southwest Hills"
     },
     {
@@ -161,10 +164,11 @@
       "originalLine": "8:51 am7501 SW CANYON RD [N]104SYL-A(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7543328,
-        45.5000249
+        -122.75443289716686,
+        45.4998674993165
       ],
-      "displayName": "7501 SW Canyon Rd, Portland, OR 97225, USA"
+      "displayName": "7501 SW Canyon Rd, Portland, OR 97225, USA",
+      "placeId": "ChIJT6IxB-ELlVQRLV3M-1yBXC4"
     },
     {
       "id": "stop-13",
@@ -177,7 +181,8 @@
         -122.7552082,
         45.498187
       ],
-      "displayName": "SW Canyon Rd & SW Linden Rd, Beaverton, OR 97225, USA"
+      "displayName": "SW Canyon Rd & SW Linden Rd, Beaverton, OR 97225, USA",
+      "placeId": "EjVTVyBDYW55b24gUmQgJiBTVyBMaW5kZW4gUmQsIEJlYXZlcnRvbiwgT1IgOTcyMjUsIFVTQSJmImQKFAoSCQPi6FvhC5VUEXOQ1LEh-2uNEhQKEgkD4uhb4QuVVBFzkNSxIftrjRoUChIJy96UQ18JlVQRC0wkOIlQi9QaFAoSCasuL9vjC5VUEeWHQ7NeN22bIgoN7ngeGxWuCtW2"
     },
     {
       "id": "stop-14",
@@ -190,7 +195,8 @@
         -122.7505978,
         45.4983253
       ],
-      "displayName": "SW Canyon Dr & SW 72nd Ave, Raleigh Hills, OR 97225, USA"
+      "displayName": "SW Canyon Dr & SW 72nd Ave, Raleigh Hills, OR 97225, USA",
+      "placeId": "EjhTVyBDYW55b24gRHIgJiBTVyA3Mm5kIEF2ZSwgUmFsZWlnaCBIaWxscywgT1IgOTcyMjUsIFVTQSJmImQKFAoSCQFraS7nC5VUEQEn6vZ6jJE6EhQKEgkBa2ku5wuVVBEBJ-r2eoyROhoUChIJa0IYLuALlVQRm607BJ4MzbAaFAoSCYdbSODmC5VUEczXVgWYR8KbIgoNVX4eGxXGvtW2"
     },
     {
       "id": "stop-15",
@@ -203,7 +209,8 @@
         -122.7483515,
         45.499831
       ],
-      "displayName": "SW Canyon Dr & SW Crestdale Dr, Raleigh Hills, OR 97225, USA"
+      "displayName": "SW Canyon Dr & SW Crestdale Dr, Raleigh Hills, OR 97225, USA",
+      "placeId": "EjxTVyBDYW55b24gRHIgJiBTVyBDcmVzdGRhbGUgRHIsIFJhbGVpZ2ggSGlsbHMsIE9SIDk3MjI1LCBVU0EiZiJkChQKEgk1PPYD3guVVBFoKTSiCmXNRxIUChIJNTz2A94LlVQRaCk0ogplzUcaFAoSCWtCGC7gC5VUEZutOwSeDM2wGhQKEgnT2TMx3guVVBFYNIZOBUanPyIKDSa5HhsVhRbWtg"
     },
     {
       "id": "stop-16",
@@ -216,7 +223,8 @@
         -122.7446927,
         45.5042761
       ],
-      "displayName": "SW Canyon Dr & SW Bucharest Ct, Raleigh Hills, OR 97225, USA"
+      "displayName": "SW Canyon Dr & SW Bucharest Ct, Raleigh Hills, OR 97225, USA",
+      "placeId": "EjxTVyBDYW55b24gRHIgJiBTVyBCdWNoYXJlc3QgQ3QsIFJhbGVpZ2ggSGlsbHMsIE9SIDk3MjI1LCBVU0EiZiJkChQKEgk7KNjI2AuVVBHp-cNesmUZNxIUChIJOyjYyNgLlVQR6fnDXrJlGTcaFAoSCWtCGC7gC5VUEZutOwSeDM2wGhQKEgkJXmEr2QuVVBF59Z5a50gVQSIKDclmHxsVcaXWtg"
     },
     {
       "id": "stop-17",
@@ -229,7 +237,8 @@
         -122.7439777,
         45.5049599
       ],
-      "displayName": "SW Canyon Dr & SW Sheridan St, West Slope, OR 97225, USA"
+      "displayName": "SW Canyon Dr & SW Sheridan St, West Slope, OR 97225, USA",
+      "placeId": "EjhTVyBDYW55b24gRHIgJiBTVyBTaGVyaWRhbiBTdCwgV2VzdCBTbG9wZSwgT1IgOTcyMjUsIFVTQSJmImQKFAoSCTv8p5XYC5VUEUm2JDstjdwbEhQKEgk7_KeV2AuVVBFJtiQ7LY3cGxoUChIJa0IYLuALlVQRm607BJ4MzbAaFAoSCY2b2P7YC5VUESo38uXO8EdkIgoNf4EfGxVfwda2"
     },
     {
       "id": "stop-0",
@@ -240,14 +249,19 @@
       "isSchoolStop": true,
       "skipGeocoding": false,
       "coordinates": [
-        -122.7621042,
-        45.5040646
+        -122.7622985,
+        45.5044894
       ],
       "displayName": "8111 SW West Slope Dr, Portland, OR 97225, USA",
-      "schoolName": "West Sylvan"
+      "schoolName": "West Sylvan",
+      "neighborhood": "Southwest Hills"
     }
   ],
-  "processedAt": "2025-12-10T18:48:37.900Z",
+  "neighborhoods": [
+    "Southwest Hills",
+    "Southwest Portland"
+  ],
+  "processedAt": "2025-12-17T08:53:32.351Z",
   "stats": {
     "totalStops": 17,
     "geocodedStops": 17,
@@ -1811,13 +1825,18 @@
       -122.76157
     ],
     [
-      45.50414,
+      45.50424,
+      -122.76161
+    ],
+    [
+      45.50438,
       -122.76158
     ]
   ],
-  "geometryUpdatedAt": "2025-12-10T18:54:32.704Z",
-  "neighborhoods": [
-    "Southwest Hills",
-    "Southwest Portland"
-  ]
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 16,
+    "errors": 0,
+    "total": 17
+  }
 }

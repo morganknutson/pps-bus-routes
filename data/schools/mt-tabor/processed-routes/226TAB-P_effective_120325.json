@@ -19,7 +19,8 @@
         45.5210407
       ],
       "displayName": "5800 SE Ash St, Portland, OR 97215, USA",
-      "schoolName": "Mt Tabor"
+      "schoolName": "Mt Tabor",
+      "neighborhood": "Southeast Portland"
     },
     {
       "id": "stop-1",
@@ -719,5 +720,11 @@
       45.48278,
       -122.56738
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 9,
+    "errors": 0,
+    "total": 10
+  }
 }

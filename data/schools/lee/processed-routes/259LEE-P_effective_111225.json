@@ -1,0 +1,489 @@
+{
+  "id": "259LEE-P_effective_111225.pdf",
+  "name": "259",
+  "direction": "Afternoon",
+  "filename": "259LEE-P_effective_111225.pdf",
+  "fileId": "259LEE-P_effective_111225.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2222 NE 92nd Ave, Portland, OR 97220, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:LEE GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5676595,
+        45.5381887
+      ],
+      "displayName": "2222 NE 92nd Ave, Portland, OR 97220, USA",
+      "schoolName": "Lee"
+    },
+    {
+      "id": "stop-1",
+      "address": "3313 NE Fremont Dr. [NE]",
+      "time": "2:37 pm",
+      "direction": "NE",
+      "originalLine": "2:37 pm3313 NE Fremont Dr [NE]259LEE-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5758216775217,
+        45.546645171178355
+      ],
+      "displayName": "3313 NE Fremont Dr, Portland, OR 97220, USA",
+      "placeId": "ChIJOZjq4kShlVQRjWXPywmecXM",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "8212 NE Sandy Blvd. (columbia Knoll Apt) [NE]",
+      "time": "2:40 pm",
+      "direction": "NE",
+      "originalLine": "2:40 pm8212 NE SANDY BLVD (COLUMBIA KNOLL APT) [NE]259LEE-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57780434936241,
+        45.55224296510663
+      ],
+      "displayName": "8212 NE Sandy Blvd, Portland, OR 97220, USA",
+      "placeId": "ChIJf35Sv1GhlVQR9NvAXAsDwxw",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 81st Ave. & NE Failing St. [NW]",
+      "time": "2:41 pm",
+      "direction": "NW",
+      "originalLine": "2:41 pmNE 81ST AV @ NE FAILING ST [NW]259LEE-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5797203,
+        45.5510229
+      ],
+      "displayName": "NE 81st Ave & NE Failing St, Portland, OR 97213, USA",
+      "placeId": "EjRORSA4MXN0IEF2ZSAmIE5FIEZhaWxpbmcgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJrWCGMk6hlVQR3TNTyPT-S-ASFAoSCa1ghjJOoZVUEd0zU8j0_kvgGhQKEgk3g9HmQKGVVBHarDjhNRmyGBoUChIJb2YHwkuhlVQRNqftnl9vv00iCg3ViCYbFa3R77Y",
+      "neighborhood": "Roseway"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE 76th Ave. & NE Fremont St. [NW]",
+      "time": "2:44 pm",
+      "direction": "NW",
+      "originalLine": "2:44 pmNE 76TH AV @ NE FREMONT ST [NW]259LEE-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5848566,
+        45.54819029999999
+      ],
+      "displayName": "NE Fremont St & NE 76th Ave, Portland, OR 97213, USA",
+      "placeId": "EjRORSBGcmVtb250IFN0ICYgTkUgNzZ0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJxUvXyEihlVQRqpZfxqCUPYMSFAoSCcVL18hIoZVUEaqWX8aglD2DGhQKEgnviqmBT6GVVBFCIX-PYcOivRoUChIJ2by8bkehlVQRHaoGGcelA6wiCg0vGiYbFQoJ77Y",
+      "neighborhood": "Roseway"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE 76th Ave. & NE Klickitat St. [NW]",
+      "time": "2:45 pm",
+      "direction": "NW",
+      "originalLine": "2:45 pmNE 76TH AV @ NE KLICKITAT ST [NW]259LEE-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5848878,
+        45.5463864
+      ],
+      "displayName": "NE Klickitat St & NE 76th Ave, Portland, OR 97213, USA",
+      "placeId": "EjZORSBLbGlja2l0YXQgU3QgJiBORSA3NnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEglbok8mRqGVVBFBjbOdHLvJRRIUChIJW6JPJkahlVQRQY2znRy7yUUaFAoSCSEaf7s2oZVUETkgzF9kfcIcGhQKEgnZvLxuR6GVVBEdqgYZx6UDrCIKDbjTJRsV0gfvtg",
+      "neighborhood": "Roseway"
+    },
+    {
+      "id": "stop-6",
+      "address": "NE Siskiyou St. & NE 77th Ave. [SW]",
+      "time": "2:45 pm",
+      "direction": "SW",
+      "originalLine": "2:45 pmNE SISKIYOU ST @ NE 77TH AV [SW]259LEE-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5839074,
+        45.5445523
+      ],
+      "displayName": "NE Siskiyou St & NE 77th Ave, Portland, OR 97213, USA",
+      "placeId": "EjVORSBTaXNraXlvdSBTdCAmIE5FIDc3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCXXYWqtHoZVUEQHinx25OMAlEhQKEgl12FqrR6GVVBEB4p8duTjAJRoUChIJudsSQkShlVQR942TDM4nUdAaFAoSCeUVmwVHoZVUEUMR7mI8zaAjIgoNE4wlGxUeLu-2",
+      "neighborhood": "Roseway"
+    }
+  ],
+  "neighborhoods": [
+    "Northeast Portland",
+    "Roseway"
+  ],
+  "processedAt": "2025-12-17T09:02:46.477Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.53834,
+      -122.56766
+    ],
+    [
+      45.53863,
+      -122.56766
+    ],
+    [
+      45.53863,
+      -122.56847
+    ],
+    [
+      45.53932,
+      -122.56848
+    ],
+    [
+      45.54015,
+      -122.56846
+    ],
+    [
+      45.54045,
+      -122.56851
+    ],
+    [
+      45.54089,
+      -122.56871
+    ],
+    [
+      45.54089,
+      -122.56905
+    ],
+    [
+      45.54089,
+      -122.56929
+    ],
+    [
+      45.54088,
+      -122.5698
+    ],
+    [
+      45.54103,
+      -122.56984
+    ],
+    [
+      45.5411,
+      -122.56986
+    ],
+    [
+      45.54122,
+      -122.56996
+    ],
+    [
+      45.54153,
+      -122.57023
+    ],
+    [
+      45.54168,
+      -122.57036
+    ],
+    [
+      45.54197,
+      -122.57063
+    ],
+    [
+      45.5422,
+      -122.57095
+    ],
+    [
+      45.54255,
+      -122.57157
+    ],
+    [
+      45.54281,
+      -122.57192
+    ],
+    [
+      45.54326,
+      -122.57236
+    ],
+    [
+      45.5437,
+      -122.5728
+    ],
+    [
+      45.54674,
+      -122.57582
+    ],
+    [
+      45.54665,
+      -122.57582
+    ],
+    [
+      45.54674,
+      -122.57582
+    ],
+    [
+      45.54739,
+      -122.57646
+    ],
+    [
+      45.54769,
+      -122.57676
+    ],
+    [
+      45.54798,
+      -122.57703
+    ],
+    [
+      45.54815,
+      -122.57708
+    ],
+    [
+      45.54815,
+      -122.57829
+    ],
+    [
+      45.54815,
+      -122.57877
+    ],
+    [
+      45.5487,
+      -122.57876
+    ],
+    [
+      45.55016,
+      -122.57873
+    ],
+    [
+      45.551,
+      -122.57872
+    ],
+    [
+      45.5512,
+      -122.57871
+    ],
+    [
+      45.55121,
+      -122.5782
+    ],
+    [
+      45.55122,
+      -122.57799
+    ],
+    [
+      45.55123,
+      -122.57737
+    ],
+    [
+      45.55123,
+      -122.57686
+    ],
+    [
+      45.55124,
+      -122.57672
+    ],
+    [
+      45.55129,
+      -122.57662
+    ],
+    [
+      45.55137,
+      -122.57653
+    ],
+    [
+      45.55144,
+      -122.57649
+    ],
+    [
+      45.55151,
+      -122.57646
+    ],
+    [
+      45.55169,
+      -122.57646
+    ],
+    [
+      45.55179,
+      -122.57646
+    ],
+    [
+      45.55196,
+      -122.57647
+    ],
+    [
+      45.55214,
+      -122.57649
+    ],
+    [
+      45.55218,
+      -122.57645
+    ],
+    [
+      45.5523,
+      -122.57644
+    ],
+    [
+      45.55232,
+      -122.57644
+    ],
+    [
+      45.5523,
+      -122.57688
+    ],
+    [
+      45.55229,
+      -122.57697
+    ],
+    [
+      45.55226,
+      -122.57722
+    ],
+    [
+      45.55225,
+      -122.57753
+    ],
+    [
+      45.55227,
+      -122.57772
+    ],
+    [
+      45.55224,
+      -122.5778
+    ],
+    [
+      45.55227,
+      -122.57772
+    ],
+    [
+      45.55225,
+      -122.57753
+    ],
+    [
+      45.55226,
+      -122.57722
+    ],
+    [
+      45.55229,
+      -122.57697
+    ],
+    [
+      45.5523,
+      -122.57688
+    ],
+    [
+      45.55232,
+      -122.57644
+    ],
+    [
+      45.55238,
+      -122.57645
+    ],
+    [
+      45.55245,
+      -122.57646
+    ],
+    [
+      45.55254,
+      -122.57652
+    ],
+    [
+      45.55267,
+      -122.57666
+    ],
+    [
+      45.55273,
+      -122.57677
+    ],
+    [
+      45.55284,
+      -122.57687
+    ],
+    [
+      45.55299,
+      -122.57694
+    ],
+    [
+      45.55314,
+      -122.57693
+    ],
+    [
+      45.5531,
+      -122.57703
+    ],
+    [
+      45.55279,
+      -122.57778
+    ],
+    [
+      45.55269,
+      -122.57802
+    ],
+    [
+      45.55228,
+      -122.57901
+    ],
+    [
+      45.552,
+      -122.5797
+    ],
+    [
+      45.55137,
+      -122.57971
+    ],
+    [
+      45.54994,
+      -122.57974
+    ],
+    [
+      45.54816,
+      -122.57978
+    ],
+    [
+      45.54816,
+      -122.58106
+    ],
+    [
+      45.54818,
+      -122.58383
+    ],
+    [
+      45.54819,
+      -122.58486
+    ],
+    [
+      45.54764,
+      -122.58486
+    ],
+    [
+      45.54728,
+      -122.58487
+    ],
+    [
+      45.54692,
+      -122.58488
+    ],
+    [
+      45.54639,
+      -122.58489
+    ],
+    [
+      45.54638,
+      -122.58387
+    ],
+    [
+      45.54547,
+      -122.58389
+    ],
+    [
+      45.54465,
+      -122.58391
+    ],
+    [
+      45.54455,
+      -122.58391
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 6,
+    "errors": 0,
+    "total": 7
+  }
+}

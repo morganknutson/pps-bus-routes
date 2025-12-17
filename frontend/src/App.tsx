@@ -19,6 +19,7 @@ import { VerificationPage } from './pages/VerificationPage';
 import { JobsPage } from './pages/JobsPage';
 import { HomePage } from './pages/HomePage';
 import { ServersPage } from './pages/ServersPage';
+import { ArchitecturePage } from './pages/ArchitecturePage';
 import { School } from './types';
 import { loadLocalRoutes } from './services/localRoutes';
 import { getSchoolTypes, getSchoolColor, createSchoolIcon } from './utils/schoolUtils';
@@ -29,6 +30,9 @@ import { SchoolTypeFilters } from './components/SchoolTypeFilter';
 import { ProgressBar } from './components/ProgressBar';
 import { AdminPasswordProtection } from './components/AdminPasswordProtection';
 import { useIsMobile } from './hooks/useMediaQuery';
+import { useUrlState } from './hooks/useUrlState';
+import { parseUrlPath } from './services/urlState';
+import { useLocation, useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 
 // Format date for display (e.g., "Dec 10, 2024" or "2 days ago")
@@ -71,8 +75,18 @@ function SchoolListMapView({
 }) {
   const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
   
+  // Filter to only show selected school when one is selected
+  const schoolsToShow = useMemo(() => {
+    if (selectedSchoolId) {
+      // Only show the selected school
+      return schoolsWithCoords.filter(s => s.id === selectedSchoolId);
+    }
+    // Show all schools when none is selected
+    return schoolsWithCoords;
+  }, [schoolsWithCoords, selectedSchoolId]);
+  
   const markerData: MarkerData[] = useMemo(() => {
-    return schoolsWithCoords.map(school => {
+    return schoolsToShow.map(school => {
       const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
       const schoolColor = getSchoolColor(schoolTypes);
       return {
@@ -88,7 +102,7 @@ function SchoolListMapView({
         },
       };
     });
-  }, [schoolsWithCoords, selectedSchoolId, onSelectSchool]);
+  }, [schoolsToShow, selectedSchoolId, onSelectSchool]);
 
   if (schoolsWithCoords.length === 0) {
     return (
@@ -178,15 +192,23 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
 }
 
 function ExplorerApp() {
-  const { isLoading, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress, routes } = useStore();
+  const { isLoading, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress, routes, directionFilter, selectedStop } = useStore();
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [swipeStartY, setSwipeStartY] = useState<number | null>(null);
   const [swipeCurrentY, setSwipeCurrentY] = useState<number | null>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
+  const [isSchoolDialogClosing, setIsSchoolDialogClosing] = useState<boolean>(false);
   
-  // Default to 'schools' tab, but check localStorage for saved preferences on mount
+  // Parse URL to determine initial active tab
+  const urlState = parseUrlPath(location.pathname, '/bus-route-explorer');
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
+    // Check URL first, then localStorage, then default
+    if (urlState.show) {
+      return urlState.show;
+    }
     // Check localStorage directly for initial render (before store hydration)
     if (typeof window !== 'undefined') {
       const savedSchoolId = localStorage.getItem('selectedSchoolId');
@@ -198,10 +220,18 @@ function ExplorerApp() {
     return 'schools';
   });
   
+  // Sync activeTab with URL when URL changes
+  useEffect(() => {
+    if (urlState.show && urlState.show !== activeTab) {
+      setActiveTab(urlState.show);
+    }
+  }, [urlState.show]);
+  
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
     if (tab === 'schools' || tab === 'routes') {
       setActiveTab(tab);
+      // URL will be updated automatically by useUrlState hook
       // Sidebar stays open on mobile when switching tabs
     }
   };
@@ -215,6 +245,13 @@ function ExplorerApp() {
     hybrid: true,
   });
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Clear search term when sidebar closes
+  useEffect(() => {
+    if (!sidebarOpen && isMobile) {
+      setSearchTerm('');
+    }
+  }, [sidebarOpen, isMobile]);
   
   // Reset loading state on mount if routes are already loaded
   useEffect(() => {
@@ -239,18 +276,7 @@ function ExplorerApp() {
           const data = await response.json();
           console.log('[ExplorerApp] Loaded', data.schools?.length || 0, 'schools');
           setSchools(data.schools || []);
-          // Check if we have both saved school and address
-          // (both are already loaded from localStorage by the store on init)
-          const currentState = useStore.getState();
-          if (currentState.selectedSchoolId && currentState.homeAddress) {
-            // Both are saved, ensure we're on routes tab
-            console.log('[ExplorerApp] Saved school and address found, showing routes');
-            setActiveTab('routes');
-          } else {
-            // No saved school or no saved address, show school list
-            console.log('[ExplorerApp] No saved preferences or missing address, showing school list');
-            setActiveTab('schools');
-          }
+          // URL state hook will handle syncing from URL after schools are loaded
         } else {
           console.error('[ExplorerApp] Failed to load schools:', response.status, response.statusText);
         }
@@ -261,6 +287,15 @@ function ExplorerApp() {
     loadSchools();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Initialize URL state sync (only after schools are loaded)
+  useUrlState({
+    basePath: '/bus-route-explorer',
+    schools,
+    routes,
+    activeTab,
+    debounceMs: 300,
+  });
 
   // Load routes when school changes (only when in routes tab)
   useEffect(() => {
@@ -320,21 +355,37 @@ function ExplorerApp() {
     prevSchoolIdRef.current = selectedSchoolId;
   }, [selectedSchoolId, activeTab, setRoutes, setLoading, routes.length]); // Include routes.length to detect when routes are cleared
 
-
-  // Update selectedSchoolForMap when selectedSchoolId changes (for schools tab)
+  // Update selectedSchoolForMap when selectedSchoolId changes
+  // Show dialog in schools tab when school is selected (either by click or URL)
+  // Don't show dialog in routes tab when school is selected via URL (only on explicit click)
   useEffect(() => {
-    if (activeTab === 'schools') {
-      if (selectedSchoolId && schools.length > 0) {
-        const school = schools.find(s => s.id === selectedSchoolId);
+    if (selectedSchoolId && schools.length > 0) {
+      const school = schools.find(s => s.id === selectedSchoolId);
+      // Only auto-show dialog in schools tab, not routes tab
+      if (activeTab === 'schools') {
         setSelectedSchoolForMap(school || null);
-      } else {
-        setSelectedSchoolForMap(null);
       }
+      // In routes tab, only set if it's already set (preserve existing dialog)
+      // This allows clicking school markers in routes tab to show dialog
     } else {
-      // Clear selectedSchoolForMap when not in schools tab
       setSelectedSchoolForMap(null);
     }
   }, [selectedSchoolId, schools, activeTab]);
+
+  // Handle school dialog closing animation
+  const handleCloseSchoolDialog = (preserveSchoolSelection = false) => {
+    setIsSchoolDialogClosing(true);
+    if (!preserveSchoolSelection && activeTab === 'schools') {
+      // Navigate to base path - URL sync will clear the school from store
+      // This ensures the URL and store stay in sync
+      navigate('/bus-route-explorer', { replace: true });
+      // updateStoreFromUrl will handle clearing selectedSchoolId when it sees the URL has no school
+    }
+    setTimeout(() => {
+      setSelectedSchoolForMap(null);
+      setIsSchoolDialogClosing(false);
+    }, 125); // Match animation duration
+  };
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -372,6 +423,39 @@ function ExplorerApp() {
   // Geocoding is now done server-side when processing PDFs
   // Routes should already have coordinates loaded from processed JSON files
   // useGeocodeStops(); // DISABLED - no client-side geocoding needed
+
+  // Custom thin X icon component
+  const ThinXIcon = () => (
+    <div style={{
+      width: '20px',
+      height: '20px',
+      position: 'relative',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+      <span style={{
+        display: 'block',
+        height: '1.5px',
+        width: '100%',
+        backgroundColor: 'currentColor',
+        borderRadius: '2px',
+        position: 'absolute',
+        transform: 'rotate(45deg)',
+        transformOrigin: 'center',
+      }} />
+      <span style={{
+        display: 'block',
+        height: '1.5px',
+        width: '100%',
+        backgroundColor: 'currentColor',
+        borderRadius: '2px',
+        position: 'absolute',
+        transform: 'rotate(-45deg)',
+        transformOrigin: 'center',
+      }} />
+    </div>
+  );
 
   // Custom Hamburger/Close icon component
   const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => (
@@ -468,7 +552,7 @@ function ExplorerApp() {
               onSelectSchool={(schoolId) => {
                 if (schoolId) {
                   setSelectedSchool(schoolId);
-                  // When a school is selected, also update selectedSchoolForMap to show info dialog
+                  // When a school is clicked in schools tab, show the dialog
                   const school = schools.find(s => s.id === schoolId);
                   if (school) {
                     setSelectedSchoolForMap(school);
@@ -521,7 +605,15 @@ function ExplorerApp() {
               />
             ) : (
               <>
-                <MapView />
+                <MapView 
+                  onSchoolStopClick={(schoolId) => {
+                    // When a school stop is clicked, show the school dialog
+                    const school = schools.find(s => s.id === schoolId);
+                    if (school) {
+                      setSelectedSchoolForMap(school);
+                    }
+                  }}
+                />
                 {isLoading && activeTab === 'routes' && selectedSchoolId && (
                   <div
                     style={{
@@ -545,14 +637,18 @@ function ExplorerApp() {
               </>
             )}
 
-            {/* Selected school info dialog (when in schools tab) */}
-            {activeTab === 'schools' && selectedSchoolForMap && (
+            {/* Selected school info dialog (shown for the currently selected school) */}
+            {(selectedSchoolForMap || isSchoolDialogClosing) && (
               <div 
                 ref={sheetRef}
                 style={{
                   position: 'absolute',
                   ...(isMobile ? {
-                    bottom: swipeCurrentY !== null ? Math.min(0, swipeCurrentY - (swipeStartY || 0)) : 0,
+                    bottom: isSchoolDialogClosing 
+                      ? '-100%' 
+                      : swipeCurrentY !== null 
+                        ? Math.min(0, swipeCurrentY - (swipeStartY || 0)) 
+                        : 0,
                     left: 0,
                     right: 0,
                     maxWidth: '100%',
@@ -563,7 +659,6 @@ function ExplorerApp() {
                     maxHeight: '70vh',
                     overflowY: swipeStartY === null ? 'auto' : 'hidden',
                     touchAction: 'pan-y',
-                    transition: swipeStartY === null ? 'bottom 0.3s ease-out' : 'none',
                   } : {
                     bottom: '1rem',
                     right: '1rem',
@@ -574,7 +669,12 @@ function ExplorerApp() {
                   padding: '1.5rem',
                   boxShadow: '0 4px 12px var(--shadow-hover)',
                   zIndex: 1000,
-                  animation: isMobile && swipeStartY === null ? 'slideUp 0.3s ease-out' : undefined,
+                  transition: swipeStartY === null 
+                    ? 'bottom 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' 
+                    : 'none',
+                  animation: isMobile && swipeStartY === null && !isSchoolDialogClosing 
+                    ? 'slideUp 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' 
+                    : undefined,
                 }}
                 onTouchStart={(e) => {
                   if (!isMobile) return;
@@ -590,13 +690,12 @@ function ExplorerApp() {
                     setSwipeCurrentY(touch.clientY);
                   }
                 }}
-                onTouchEnd={() => {
+                  onTouchEnd={() => {
                   if (!isMobile || swipeStartY === null) return;
                   const swipeDistance = swipeCurrentY! - swipeStartY;
                   // If swiped down more than 100px, close the sheet
                   if (swipeDistance > 100) {
-                    setSelectedSchool(null);
-                    setSelectedSchoolForMap(null);
+                    handleCloseSchoolDialog();
                   }
                   // Reset swipe state
                   setSwipeStartY(null);
@@ -626,9 +725,9 @@ function ExplorerApp() {
                 )}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                   <div style={{ flex: 1 }}>
-                    <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap.name}</h2>
-                    {(() => {
-                      const schoolTypes = selectedSchoolForMap.schoolTypes || getSchoolTypes(selectedSchoolForMap.name);
+                    <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap?.name}</h2>
+                    {selectedSchoolForMap && (() => {
+                      const schoolTypes = selectedSchoolForMap?.schoolTypes || getSchoolTypes(selectedSchoolForMap?.name || '');
                       const schoolColor = getSchoolColor(schoolTypes);
                       return (
                         <div style={{ fontSize: '14px', color: schoolColor, fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -639,21 +738,7 @@ function ExplorerApp() {
                     })()}
                   </div>
                   <button
-                    onClick={() => {
-                      // Deselect school and zoom out to show all schools
-                      setSelectedSchool(null);
-                      setSelectedSchoolForMap(null);
-                      // Trigger map bounds update by resetting the key
-                      if (mapRef.current) {
-                        const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
-                        if (schoolsWithCoords.length > 0) {
-                          const bounds = L.latLngBounds(
-                            schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
-                          );
-                          mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
-                        }
-                      }
-                    }}
+                    onClick={handleCloseSchoolDialog}
                     style={{
                       background: 'none',
                       border: 'none',
@@ -668,16 +753,19 @@ function ExplorerApp() {
                       marginTop: '-2px',
                     }}
                   >
-                    ×
+                    <ThinXIcon />
                   </button>
                 </div>
-                {selectedSchoolForMap.routeCount !== undefined && (
+                {selectedSchoolForMap?.routeCount !== undefined && (
                   <div style={{ marginBottom: '1.5rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Routes</div>
                     <div 
                       onClick={() => {
-                        setSelectedSchool(selectedSchoolForMap.id);
-                        setActiveTab('routes');
+                        if (selectedSchoolForMap) {
+                          setSelectedSchool(selectedSchoolForMap.id);
+                          setActiveTab('routes');
+                          handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
+                        }
                       }}
                       style={{ 
                         fontSize: '14px', 
@@ -700,9 +788,9 @@ function ExplorerApp() {
                         <circle cx="6" cy="12" r="2"></circle>
                         <circle cx="18" cy="12" r="2"></circle>
                       </svg>
-                      <span>{selectedSchoolForMap.routeCount} {selectedSchoolForMap.routeCount === 1 ? 'route' : 'routes'} available</span>
+                      <span>{selectedSchoolForMap?.routeCount} {selectedSchoolForMap?.routeCount === 1 ? 'route' : 'routes'} available</span>
                     </div>
-                    {selectedSchoolForMap.routesUpdatedAt && (
+                    {selectedSchoolForMap?.routesUpdatedAt && (
                       <div style={{ fontSize: '12px', color: '#666', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <i className="fas fa-clock" style={{ fontSize: '12px', width: '12px', flexShrink: 0 }}></i>
                         <span>Updated {formatDate(selectedSchoolForMap.routesUpdatedAt)}</span>
@@ -710,12 +798,21 @@ function ExplorerApp() {
                     )}
                   </div>
                 )}
-                {selectedSchoolForMap.address && (
+                {selectedSchoolForMap?.neighborhood && (
+                  <div style={{ marginBottom: isMobile ? '2rem' : '1.5rem' }}>
+                    <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Neighborhood</div>
+                    <div style={{ fontSize: '14px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: 'var(--text-tertiary)' }}></i>
+                      <span>{selectedSchoolForMap?.neighborhood}</span>
+                    </div>
+                  </div>
+                )}
+                {selectedSchoolForMap?.address && (
                   <div style={{ marginBottom: isMobile ? '2rem' : '1.5rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Address</div>
                     <a
                       href="#"
-                      onClick={(e) => handleMapLinkClick(e, selectedSchoolForMap.address!, selectedSchoolForMap.coordinates)}
+                      onClick={(e) => selectedSchoolForMap && handleMapLinkClick(e, selectedSchoolForMap.address!, selectedSchoolForMap.coordinates)}
                       style={{
                         fontSize: '14px',
                         color: 'var(--text-primary)',
@@ -740,14 +837,14 @@ function ExplorerApp() {
                     </a>
                   </div>
                 )}
-                {(selectedSchoolForMap.schoolPageLink || selectedSchoolForMap.driveLink) && (
+                {(selectedSchoolForMap?.schoolPageLink || selectedSchoolForMap?.driveLink) && (
                   <div style={{ 
                     display: 'flex', 
                     gap: '1rem',
                     marginBottom: isMobile ? '2rem' : '1.5rem',
                     flexWrap: 'wrap',
                   }}>
-                    {selectedSchoolForMap.schoolPageLink && (
+                    {selectedSchoolForMap?.schoolPageLink && (
                       <a
                         href={selectedSchoolForMap.schoolPageLink}
                         target="_blank"
@@ -771,7 +868,7 @@ function ExplorerApp() {
                         <span>School Page</span>
                       </a>
                     )}
-                    {selectedSchoolForMap.driveLink && (
+                    {selectedSchoolForMap?.driveLink && (
                       <a
                         href={selectedSchoolForMap.driveLink}
                         target="_blank"
@@ -797,12 +894,16 @@ function ExplorerApp() {
                     )}
                   </div>
                 )}
-                {/* Mobile "View Routes" button */}
-                {isMobile && selectedSchoolForMap.routeCount !== undefined && (
+                {/* "View Routes" button - only show when not already on routes tab */}
+                {selectedSchoolForMap?.routeCount !== undefined && activeTab !== 'routes' && (
                   <button
                     onClick={() => {
-                      setSelectedSchool(selectedSchoolForMap.id);
-                      setActiveTab('routes');
+                      if (selectedSchoolForMap) {
+                        // Set school and change tab together - React batches these updates
+                        setSelectedSchool(selectedSchoolForMap.id);
+                        setActiveTab('routes');
+                        handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
+                      }
                     }}
                     style={{
                       width: '100%',
@@ -852,18 +953,34 @@ function ExplorerApp() {
 }
 
 function AdminApp() {
-  const { isLoading, loadingProgress, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress } = useStore();
+  const { isLoading, loadingProgress, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress, routes, directionFilter, selectedStop } = useStore();
   const isMobile = useIsMobile();
-  const [activeTab, setActiveTab] = useState<'schools' | 'routes'>('routes');
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Parse URL to determine initial active tab
+  const urlState = parseUrlPath(location.pathname, '/admin');
+  const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
+    return urlState.show || 'routes';
+  });
+  
+  // Sync activeTab with URL when URL changes
+  useEffect(() => {
+    if (urlState.show && urlState.show !== activeTab) {
+      setActiveTab(urlState.show);
+    }
+  }, [urlState.show]);
   
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
     if (tab === 'schools' || tab === 'routes') {
       setActiveTab(tab);
+      // URL will be updated automatically by useUrlState hook
     }
   };
   const [selectedSchoolForMap, setSelectedSchoolForMap] = useState<School | null>(null);
   const mapRef = useRef<L.Map | null>(null);
+  const [isSchoolDialogClosing, setIsSchoolDialogClosing] = useState<boolean>(false);
   const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
     elementary: true,
     middle: true,
@@ -871,6 +988,37 @@ function AdminApp() {
     hybrid: true,
   });
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Custom thin X icon component
+  const ThinXIcon = () => (
+    <div style={{
+      width: '20px',
+      height: '20px',
+      position: 'relative',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+      <span style={{
+        display: 'block',
+        height: '1.5px',
+        width: '100%',
+        backgroundColor: 'currentColor',
+        borderRadius: '2px',
+        position: 'absolute',
+        transform: 'rotate(45deg)',
+      }}></span>
+      <span style={{
+        display: 'block',
+        height: '1.5px',
+        width: '100%',
+        backgroundColor: 'currentColor',
+        borderRadius: '2px',
+        position: 'absolute',
+        transform: 'rotate(-45deg)',
+      }}></span>
+    </div>
+  );
   
   // Load schools
   useEffect(() => {
@@ -882,8 +1030,7 @@ function AdminApp() {
           const data = await response.json();
           console.log('[AdminApp] Loaded', data.schools?.length || 0, 'schools');
           setSchools(data.schools || []);
-          // Admin doesn't auto-select - user must choose from list
-          // (but if a school was previously selected, it will be loaded from localStorage by the store)
+          // URL state hook will handle syncing from URL after schools are loaded
         } else {
           console.error('[AdminApp] Failed to load schools:', response.status, response.statusText);
         }
@@ -894,6 +1041,15 @@ function AdminApp() {
     loadSchools();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Initialize URL state sync (only after schools are loaded)
+  useUrlState({
+    basePath: '/admin',
+    schools,
+    routes,
+    activeTab,
+    debounceMs: 300,
+  });
 
   // Load routes when school changes (only when in routes tab)
   useEffect(() => {
@@ -928,6 +1084,24 @@ function AdminApp() {
     loadRoutes();
   }, [selectedSchoolId, activeTab, setRoutes, setLoading]);
 
+  // Update selectedSchoolForMap when selectedSchoolId changes
+  // Show dialog in schools tab when school is selected (either by click or URL)
+  // Don't show dialog in routes tab when school is selected via URL (only on explicit click)
+  useEffect(() => {
+    if (selectedSchoolId && schools.length > 0) {
+      const school = schools.find(s => s.id === selectedSchoolId);
+      // Only auto-show dialog in schools tab, not routes tab
+      if (activeTab === 'schools') {
+        setSelectedSchoolForMap(school || null);
+        setIsSchoolDialogClosing(false); // Reset closing state when school is selected
+      }
+      // In routes tab, only set if it's already set (preserve existing dialog)
+      // This allows clicking school markers in routes tab to show dialog
+    } else {
+      setSelectedSchoolForMap(null);
+    }
+  }, [selectedSchoolId, schools, activeTab]);
+
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
     return schools.filter(school => {
@@ -961,20 +1135,26 @@ function AdminApp() {
     });
   }, [schools, searchTerm, schoolTypeFilters]);
 
-  // Update selectedSchoolForMap when selectedSchoolId changes (for schools tab)
-  useEffect(() => {
-    if (activeTab === 'schools') {
-      if (selectedSchoolId && schools.length > 0) {
-        const school = schools.find(s => s.id === selectedSchoolId);
-        setSelectedSchoolForMap(school || null);
-      } else {
-        setSelectedSchoolForMap(null);
-      }
-    } else {
-      // Clear selectedSchoolForMap when not in schools tab
-      setSelectedSchoolForMap(null);
+  // Update selectedSchoolForMap when selectedSchoolId changes
+  // This effect ensures selectedSchoolForMap is always in sync with selectedSchoolId
+  // Only show school dialog when explicitly clicked, not when selected via URL
+  // Don't automatically set selectedSchoolForMap when school changes via URL in routes view
+  // Only set it when user explicitly clicks a school (in schools tab or on marker)
+
+  // Handle school dialog closing animation
+  const handleCloseSchoolDialog = (preserveSchoolSelection = false) => {
+    setIsSchoolDialogClosing(true);
+    if (!preserveSchoolSelection && activeTab === 'schools') {
+      // Navigate to base path - URL sync will clear the school from store
+      // This ensures the URL and store stay in sync
+      navigate('/admin', { replace: true });
+      // updateStoreFromUrl will handle clearing selectedSchoolId when it sees the URL has no school
     }
-  }, [selectedSchoolId, schools, activeTab]);
+    setTimeout(() => {
+      setSelectedSchoolForMap(null);
+      setIsSchoolDialogClosing(false);
+    }, 125); // Match animation duration
+  };
 
   // Geocoding is now done server-side when processing PDFs
   // Routes should already have coordinates loaded from processed JSON files
@@ -1094,6 +1274,13 @@ function AdminApp() {
                   editingMode={true} 
                   enableStreetHighlighting={true}
                   enableStreetPins={true}
+                  onSchoolStopClick={(schoolId) => {
+                    // When a school stop is clicked, show the school dialog
+                    const school = schools.find(s => s.id === schoolId);
+                    if (school) {
+                      setSelectedSchoolForMap(school);
+                    }
+                  }}
                 />
                 {isLoading && activeTab === 'routes' && selectedSchoolId && (
                   <div
@@ -1122,12 +1309,12 @@ function AdminApp() {
               </>
             )}
 
-            {/* Selected school info dialog (when in schools tab) */}
-            {activeTab === 'schools' && selectedSchoolForMap && (
+            {/* Selected school info dialog (shown for the currently selected school) */}
+            {(selectedSchoolForMap || isSchoolDialogClosing) && (
               <div style={{
                 position: 'absolute',
                 ...(isMobile ? {
-                  bottom: 0,
+                  bottom: isSchoolDialogClosing ? '-100%' : 0,
                   left: 0,
                   right: 0,
                   maxWidth: '100%',
@@ -1137,6 +1324,7 @@ function AdminApp() {
                   borderBottomRightRadius: 0,
                   maxHeight: '70vh',
                   overflowY: 'auto',
+                  transition: 'bottom 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)',
                 } : {
                   bottom: '1rem',
                   right: '1rem',
@@ -1147,7 +1335,7 @@ function AdminApp() {
                 padding: '1.5rem',
                 boxShadow: '0 4px 12px var(--shadow-hover)',
                 zIndex: 1000,
-                animation: isMobile ? 'slideUp 0.3s ease-out' : undefined,
+                animation: isMobile && !isSchoolDialogClosing ? 'slideUp 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' : undefined,
               }}>
                 {/* Drag handle for mobile */}
                 {isMobile && (
@@ -1162,9 +1350,9 @@ function AdminApp() {
                 )}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                   <div style={{ flex: 1 }}>
-                    <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap.name}</h2>
-                    {(() => {
-                      const schoolTypes = selectedSchoolForMap.schoolTypes || getSchoolTypes(selectedSchoolForMap.name);
+                    <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap?.name}</h2>
+                    {selectedSchoolForMap && (() => {
+                      const schoolTypes = selectedSchoolForMap?.schoolTypes || getSchoolTypes(selectedSchoolForMap?.name || '');
                       const schoolColor = getSchoolColor(schoolTypes);
                       return (
                         <div style={{ fontSize: '14px', color: schoolColor, fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -1175,21 +1363,7 @@ function AdminApp() {
                     })()}
                   </div>
                   <button
-                    onClick={() => {
-                      // Deselect school and zoom out to show all schools
-                      setSelectedSchool(null);
-                      setSelectedSchoolForMap(null);
-                      // Trigger map bounds update by resetting the key
-                      if (mapRef.current) {
-                        const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
-                        if (schoolsWithCoords.length > 0) {
-                          const bounds = L.latLngBounds(
-                            schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
-                          );
-                          mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
-                        }
-                      }
-                    }}
+                    onClick={handleCloseSchoolDialog}
                     style={{
                       background: 'none',
                       border: 'none',
@@ -1204,16 +1378,19 @@ function AdminApp() {
                       marginTop: '-2px',
                     }}
                   >
-                    ×
+                    <ThinXIcon />
                   </button>
                 </div>
-                {selectedSchoolForMap.routeCount !== undefined && (
+                {selectedSchoolForMap?.routeCount !== undefined && (
                   <div style={{ marginBottom: '1.5rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Routes</div>
                     <div 
                       onClick={() => {
-                        setSelectedSchool(selectedSchoolForMap.id);
-                        setActiveTab('routes');
+                        if (selectedSchoolForMap) {
+                          setSelectedSchool(selectedSchoolForMap.id);
+                          setActiveTab('routes');
+                          handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
+                        }
                       }}
                       style={{ 
                         fontSize: '14px', 
@@ -1236,9 +1413,9 @@ function AdminApp() {
                         <circle cx="6" cy="12" r="2"></circle>
                         <circle cx="18" cy="12" r="2"></circle>
                       </svg>
-                      <span>{selectedSchoolForMap.routeCount} {selectedSchoolForMap.routeCount === 1 ? 'route' : 'routes'} available</span>
+                      <span>{selectedSchoolForMap?.routeCount} {selectedSchoolForMap?.routeCount === 1 ? 'route' : 'routes'} available</span>
                     </div>
-                    {selectedSchoolForMap.routesUpdatedAt && (
+                    {selectedSchoolForMap?.routesUpdatedAt && (
                       <div style={{ fontSize: '12px', color: '#666', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <i className="fas fa-clock" style={{ fontSize: '12px', width: '12px', flexShrink: 0 }}></i>
                         <span>Updated {formatDate(selectedSchoolForMap.routesUpdatedAt)}</span>
@@ -1246,12 +1423,21 @@ function AdminApp() {
                     )}
                   </div>
                 )}
-                {selectedSchoolForMap.address && (
+                {selectedSchoolForMap?.neighborhood && (
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Neighborhood</div>
+                    <div style={{ fontSize: '14px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: 'var(--text-tertiary)' }}></i>
+                      <span>{selectedSchoolForMap?.neighborhood}</span>
+                    </div>
+                  </div>
+                )}
+                {selectedSchoolForMap?.address && (
                   <div style={{ marginBottom: '1.5rem' }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Address</div>
                     <a
                       href="#"
-                      onClick={(e) => handleMapLinkClick(e, selectedSchoolForMap.address!, selectedSchoolForMap.coordinates)}
+                      onClick={(e) => selectedSchoolForMap && handleMapLinkClick(e, selectedSchoolForMap.address!, selectedSchoolForMap.coordinates)}
                       style={{
                         fontSize: '14px',
                         color: 'var(--text-primary)',
@@ -1272,18 +1458,18 @@ function AdminApp() {
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                         <circle cx="12" cy="10" r="3"></circle>
                       </svg>
-                      <span>{selectedSchoolForMap.address}</span>
+                      <span>{selectedSchoolForMap?.address}</span>
                     </a>
                   </div>
                 )}
-                {(selectedSchoolForMap.schoolPageLink || selectedSchoolForMap.driveLink) && (
+                {(selectedSchoolForMap?.schoolPageLink || selectedSchoolForMap?.driveLink) && (
                   <div style={{ 
                     display: 'flex', 
                     gap: '1rem',
                     marginBottom: isMobile ? '2rem' : '1.5rem',
                     flexWrap: 'wrap',
                   }}>
-                    {selectedSchoolForMap.schoolPageLink && (
+                    {selectedSchoolForMap?.schoolPageLink && (
                       <a
                         href={selectedSchoolForMap.schoolPageLink}
                         target="_blank"
@@ -1307,7 +1493,7 @@ function AdminApp() {
                         <span>School Page</span>
                       </a>
                     )}
-                    {selectedSchoolForMap.driveLink && (
+                    {selectedSchoolForMap?.driveLink && (
                       <a
                         href={selectedSchoolForMap.driveLink}
                         target="_blank"
@@ -1333,12 +1519,16 @@ function AdminApp() {
                     )}
                   </div>
                 )}
-                {/* Mobile "View Routes" button */}
-                {isMobile && selectedSchoolForMap.routeCount !== undefined && (
+                {/* "View Routes" button - only show when not already on routes tab */}
+                {selectedSchoolForMap?.routeCount !== undefined && activeTab !== 'routes' && (
                   <button
                     onClick={() => {
-                      setSelectedSchool(selectedSchoolForMap.id);
-                      setActiveTab('routes');
+                      if (selectedSchoolForMap) {
+                        // Set school and change tab together - React batches these updates
+                        setSelectedSchool(selectedSchoolForMap.id);
+                        setActiveTab('routes');
+                        handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
+                      }
                     }}
                     style={{
                       width: '100%',
@@ -1384,9 +1574,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/bus-route-explorer" element={<ExplorerApp />} />
+        {/* Path-based routing for bus route explorer - catch-all to handle all segments */}
+        <Route path="/bus-route-explorer/*" element={<ExplorerApp />} />
+        {/* Path-based routing for admin - catch-all to handle all segments */}
         <Route 
-          path="/admin" 
+          path="/admin/*" 
           element={
             <AdminPasswordProtection>
               <AdminApp />
@@ -1398,6 +1590,7 @@ function App() {
         <Route path="/verification" element={<VerificationPage />} />
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/servers" element={<ServersPage />} />
+        <Route path="/architecture" element={<ArchitecturePage />} />
         {/* Deprecated: Schools List page - kept for backward compatibility but no longer linked */}
         <Route path="/data/schools" element={<SchoolsList />} />
       </Routes>

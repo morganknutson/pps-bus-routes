@@ -19,7 +19,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     },
     {
       "id": "stop-1",
@@ -29,12 +30,18 @@
       "originalLine": "2:42 pm4548 SW DOSCH RD [W]112AIN-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7100241,
-        45.4898477
+        -122.71002378310568,
+        45.4900281093953
       ],
       "displayName": "4548 SW Dosch Rd, Portland, OR 97239, USA",
       "placeId": "ChIJRTfFRLELlVQRSPOhRpsrFzQ",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7100241,
+        45.4898477
+      ],
+      "snapDistance": 20.060624685288953
     },
     {
       "id": "stop-2",
@@ -89,12 +96,18 @@
       "originalLine": "3:03 pm6651 SW CAPITOL HWY [N]112AIN-P(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7045785,
-        45.4769714
+        -122.70493429999999,
+        45.476926399999996
       ],
       "displayName": "6651 SW Capitol Hwy, Portland, OR 97219, USA",
       "placeId": "ChIJqRnOiKcLlVQRkj1k-tlJrTQ",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7045785,
+        45.4769714
+      ],
+      "snapDistance": 28.189188474822487
     },
     {
       "id": "stop-6",
@@ -149,12 +162,18 @@
       "originalLine": "3:15 pm6965 SW 45TH AV [W]112AIN-P(10)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7237787,
-        45.47446799999999
+        -122.72410299999999,
+        45.474345299999996
       ],
       "displayName": "6965 SW 45th Ave, Portland, OR 97219, USA",
       "placeId": "ChIJf4odlp4LlVQRLMwTztHYa9Y",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7237787,
+        45.47446799999999
+      ],
+      "snapDistance": 28.7325985405544
     },
     {
       "id": "stop-10",
@@ -194,12 +213,18 @@
       "originalLine": "3:22 pm10819 SW CAPITOL HWY (HOLLY FARM PARK) [NW]112AIN-P(13)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7263095,
-        45.4472764
+        -122.72629592329763,
+        45.44755695848756
       ],
       "displayName": "Holly Farm Park, 10819 SW Capitol Hwy, Portland, OR 97219, USA",
       "placeId": "ChIJ564Ui6EMlVQRriyYuDMODBw",
-      "neighborhood": "West Portland Park"
+      "neighborhood": "West Portland Park",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7263095,
+        45.4472764
+      ],
+      "snapDistance": 31.21465379721998
     }
   ],
   "neighborhoods": [
@@ -1922,5 +1947,11 @@
       45.44756,
       -122.7263
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 4,
+    "skipped": 8,
+    "errors": 0,
+    "total": 13
+  }
 }

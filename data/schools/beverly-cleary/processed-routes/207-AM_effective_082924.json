@@ -109,7 +109,8 @@
         45.5369687
       ],
       "displayName": "1915 NE 33rd Ave, Portland, OR 97212, USA",
-      "schoolName": "Beverly Cleary"
+      "schoolName": "Beverly Cleary",
+      "neighborhood": "Grant Park"
     }
   ],
   "neighborhoods": [
@@ -337,5 +338,11 @@
       45.5369,
       -122.63172
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 6,
+    "errors": 0,
+    "total": 7
+  }
 }

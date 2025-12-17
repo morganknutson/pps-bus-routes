@@ -19,7 +19,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     },
     {
       "id": "stop-1",
@@ -44,12 +45,18 @@
       "originalLine": "2:41 pm4703 SW PATTON RD [N]103AIN-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7253162,
-        45.4984685
+        -122.72527512324093,
+        45.4982083717322
       ],
       "displayName": "4703 SW Patton Rd, Portland, OR 97221, USA",
       "placeId": "ChIJbQSpBc8LlVQRgChYMzM8Tvc",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7253162,
+        45.4984685
+      ],
+      "snapDistance": 29.101581987068407
     },
     {
       "id": "stop-3",
@@ -59,12 +66,18 @@
       "originalLine": "2:48 pm5233 SW HEWETT BLVD [SE]103AIN-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7313811,
-        45.50357220000001
+        -122.73122500000001,
+        45.5034761
       ],
       "displayName": "5233 SW Hewett Blvd, Portland, OR 97221, USA",
       "placeId": "ChIJK1Cc4NALlVQRz3V-dryOH7k",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7313811,
+        45.50357220000001
+      ],
+      "snapDistance": 16.19201386858734
     },
     {
       "id": "stop-4",
@@ -104,12 +117,18 @@
       "originalLine": "2:56 pm3325 SW FAIRMOUNT BLVD [S]103AIN-P(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.707042,
-        45.4962781
+        -122.70708404103107,
+        45.49604530038654
       ],
       "displayName": "3325 SW Fairmount Blvd, Portland, OR 97239, USA",
       "placeId": "ChIJx7ner0oKlVQRdRz8ut7yLqU",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.707042,
+        45.4962781
+      ],
+      "snapDistance": 26.092708605202198
     },
     {
       "id": "stop-7",
@@ -149,12 +168,18 @@
       "originalLine": "2:59 pm4163 SW COUNCIL CREST DR [S]103AIN-P(10)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7005924,
-        45.4931586
+        -122.70059784819736,
+        45.49334362376388
       ],
       "displayName": "4163 SW Council Crest Dr, Portland, OR 97239, USA",
       "placeId": "ChIJY8HKmkwKlVQRxXFk8hAW6ck",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7005924,
+        45.4931586
+      ],
+      "snapDistance": 20.57808627757708
     },
     {
       "id": "stop-10",
@@ -179,12 +204,18 @@
       "originalLine": "3:06 pm3082 SW FAIRMOUNT BLVD [NE]103AIN-P(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6951825,
-        45.4898513
+        -122.69531615835723,
+        45.489720176027646
       ],
       "displayName": "3082 SW Fairmount Blvd, Portland, OR 97239, USA",
       "placeId": "ChIJYafwfVIKlVQRQTY4r3IQmE0",
-      "neighborhood": "Southwest Hills"
+      "neighborhood": "Southwest Hills",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6951825,
+        45.4898513
+      ],
+      "snapDistance": 17.920354902515896
     },
     {
       "id": "stop-12",
@@ -1862,5 +1893,11 @@
       45.50221,
       -122.7058
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 5,
+    "skipped": 9,
+    "errors": 0,
+    "total": 15
+  }
 }

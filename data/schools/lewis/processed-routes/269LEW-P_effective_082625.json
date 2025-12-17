@@ -19,7 +19,8 @@
         45.4738762
       ],
       "displayName": "4401 SE Evergreen St #121, Portland, OR 97206, USA",
-      "schoolName": "Lewis"
+      "schoolName": "Lewis",
+      "neighborhood": "Southeast Portland"
     },
     {
       "id": "stop-1",
@@ -59,12 +60,18 @@
       "originalLine": "2:40 pm5410 SE HARNEY DR [S]269LEW-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6073097,
-        45.4627687
+        -122.6073071380836,
+        45.46292515166676
       ],
       "displayName": "5410 SE Harney Dr, Portland, OR 97206, USA",
       "placeId": "ChIJBZVrWlJ1lVQRCoaHi0Rqtew",
-      "neighborhood": "Darlington"
+      "neighborhood": "Darlington",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6073097,
+        45.4627687
+      ],
+      "snapDistance": 17.39777893471774
     },
     {
       "id": "stop-4",
@@ -432,5 +439,11 @@
       45.47582,
       -122.60226
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 1,
+    "skipped": 6,
+    "errors": 0,
+    "total": 8
+  }
 }

@@ -19,7 +19,8 @@
         45.54754459999999
       ],
       "displayName": "620 N Fremont St, Portland, OR 97227, USA",
-      "schoolName": "Boise-Eliot"
+      "schoolName": "Boise-Eliot",
+      "neighborhood": "North Portland"
     },
     {
       "id": "stop-1",
@@ -29,12 +30,18 @@
       "originalLine": "2:41 pm2414 NE RODNEY AV [E]292BEL-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6639379,
-        45.5402853
+        -122.66416527818198,
+        45.54028646118941
       ],
       "displayName": "2414 NE Rodney Ave, Portland, OR 97212, USA",
       "placeId": "ChIJHUmU0UinlVQRGqIJ4lg6izE",
-      "neighborhood": "Eliot"
+      "neighborhood": "Eliot",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6639379,
+        45.5402853
+      ],
+      "snapDistance": 17.709086107767824
     },
     {
       "id": "stop-2",
@@ -44,12 +51,18 @@
       "originalLine": "2:48 pm5250 NE MARTIN LUTHER KING JR BLVD (BLAZERS)292BEL-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6609469,
-        45.5614977
+        -122.66094549262074,
+        45.56181809547804
       ],
       "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
       "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
-      "neighborhood": "King"
+      "neighborhood": "King",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6609469,
+        45.5614977
+      ],
+      "snapDistance": 35.62652016310921
     },
     {
       "id": "stop-3",
@@ -327,5 +340,11 @@
       45.55912,
       -122.66589
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 2,
+    "skipped": 2,
+    "errors": 0,
+    "total": 5
+  }
 }

@@ -470,12 +470,28 @@ class GeocodingService {
       
       // Skip geocoding for school stops that already have coordinates from schools.json
       // School stops should ALWAYS use address and coordinates from schools.json, never geocoded
+      // But we still want to get neighborhood information for them
       if (stop.isSchoolStop && stop.coordinates && Array.isArray(stop.coordinates) && stop.coordinates.length === 2) {
-        geocodedStops.push({
+        const schoolStopData = {
           ...stop,
           // Keep existing coordinates from schools.json
           skipGeocoding: false, // Keep false to indicate it has coordinates, just not from geocoding
-        });
+        };
+        
+        // Get neighborhood from coordinates using reverse geocoding (even though we skip geocoding)
+        if (!stop.neighborhood && !stop.skipGeocoding) {
+          try {
+            const neighborhoodResult = await neighborhoodService.getNeighborhood(stop.coordinates);
+            if (neighborhoodResult.success && neighborhoodResult.neighborhood) {
+              schoolStopData.neighborhood = neighborhoodResult.neighborhood;
+            }
+          } catch (error) {
+            console.warn(`[GeocodingService] Failed to get neighborhood for school stop "${stop.address}":`, error.message);
+            // Continue without neighborhood - not a critical error
+          }
+        }
+        
+        geocodedStops.push(schoolStopData);
         continue;
       }
       

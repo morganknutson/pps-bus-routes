@@ -14,12 +14,18 @@
       "originalLine": "7:13 am3124/3105 SW Barbur Blvd [W]109AIN-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.680437,
-        45.5004557
+        -122.68070717968568,
+        45.50038498710633
       ],
       "displayName": "3124 SW Barbur Blvd, Portland, OR 97239, USA",
       "placeId": "ChIJzTOfiEEKlVQRLfTSpzFRmBA",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.680437,
+        45.5004557
+      ],
+      "snapDistance": 22.477146651684297
     },
     {
       "id": "stop-2",
@@ -59,12 +65,18 @@
       "originalLine": "7:22 am2818 SW 1ST AV [W]109AIN-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6784602,
-        45.5026715
+        -122.67869949156615,
+        45.50267315123311
       ],
       "displayName": "2818 SW 1st Ave, Portland, OR 97201, USA",
       "placeId": "ChIJV8QDb2oKlVQReeVdZwrIDC0",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6784602,
+        45.5026715
+      ],
+      "snapDistance": 18.64981807612997
     },
     {
       "id": "stop-5",
@@ -104,12 +116,18 @@
       "originalLine": "7:27 am2045 S River Pkwy [S]109AIN-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6747613,
-        45.5070005
+        -122.6744690043006,
+        45.50691004508691
       ],
       "displayName": "2045 S River Pkwy, Portland, OR 97201, USA",
       "placeId": "ChIJwbLbs2wKlVQRPv_EMFsjqTU",
-      "neighborhood": "Southwest Portland"
+      "neighborhood": "Southwest Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6747613,
+        45.5070005
+      ],
+      "snapDistance": 24.89986152614247
     },
     {
       "id": "stop-8",
@@ -154,7 +172,8 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth"
+      "schoolName": "Ainsworth",
+      "neighborhood": "Southwest Hills"
     }
   ],
   "neighborhoods": [
@@ -1003,5 +1022,11 @@
       45.51014,
       -122.69937
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 6,
+    "errors": 0,
+    "total": 10
+  }
 }

@@ -1,8 +1,10 @@
 {
-  "id": "route-1765392545473",
+  "id": "121SYL-A_effective_092425.pdf",
   "name": "121",
   "direction": "Morning",
   "filename": "121SYL-A_effective_092425.pdf",
+  "fileId": "121SYL-A_effective_092425.pdf",
+  "modifiedTime": null,
   "stops": [
     {
       "id": "stop-1",
@@ -16,6 +18,7 @@
         45.515232
       ],
       "displayName": "Portland, OR, USA",
+      "placeId": "ChIJJ3SpfQsLlVQRkYXR9ua5Nhw",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -26,10 +29,11 @@
       "originalLine": "8:34 am783 NW NAITO PKWY [SW]121SYL-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6740184,
-        45.528495
+        -122.6738450416447,
+        45.52859937410099
       ],
       "displayName": "783 NW Naito Pkwy, Portland, OR 97209, USA",
+      "placeId": "ChIJx7ngNFWnlVQRKvFdvuDROUg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -44,6 +48,7 @@
         45.5299308
       ],
       "displayName": "NW Ironside Terrace & NW Naito Pkwy, Portland, OR 97209, USA",
+      "placeId": "EjxOVyBJcm9uc2lkZSBUZXJyYWNlICYgTlcgTmFpdG8gUGt3eSwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEgkTXPQQVaeVVBFq4Hoxok4ONBIUChIJE1z0EFWnlVQRauB6MaJODjQaFAoSCSmNdTdVp5VUEQB-uD6I9OYpGhQKEgl7me7X_wmVVBGo2XDGFxMwqiIKDexQIxsV6Tzhtg",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -58,6 +63,7 @@
         45.52460749999999
       ],
       "displayName": "NW Davis St & NW Naito Pkwy, Portland, OR 97209, USA",
+      "placeId": "EjROVyBEYXZpcyBTdCAmIE5XIE5haXRvIFBrd3ksIFBvcnRsYW5kLCBPUiA5NzIwOSwgVVNBImYiZAoUChIJ5VuUHaqglVQRe7ooQ8BxdIwSFAoSCeVblB2qoJVUEXu6KEPAcXSMGhQKEglFIxRqAgqVVBG9gF3wTJwhbRoUChIJe5nu1_8JlVQRqNlwxhcTMKoiCg37gCIbFTAA4rY",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -72,6 +78,7 @@
         45.5291972
       ],
       "displayName": "NW Kearney St & NW 20th Ave., Portland, OR 97209, USA",
+      "placeId": "EjVOVyBLZWFybmV5IFN0ICYgTlcgMjB0aCBBdmUuLCBQb3J0bGFuZCwgT1IgOTcyMDksIFVTQSJmImQKFAoSCenqDjj6CZVUEYw9ZIzUsZwvEhQKEgnp6g44-gmVVBGMPWSM1LGcLxoUChIJ29JkM_oJlVQRT_QKFsfuScIaFAoSCcEdGhT7CZVUEfkZ1SUOcOL7IgoNRDQjGxVzm962",
       "neighborhood": "Northwest Portland"
     },
     {
@@ -86,6 +93,7 @@
         45.5220362
       ],
       "displayName": "SW 15th Ave & SW Alder St, Portland, OR 97205, USA",
+      "placeId": "EjJTVyAxNXRoIEF2ZSAmIFNXIEFsZGVyIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDUsIFVTQSJmImQKFAoSCTsFGysdCpVUEYMbgqBAPNarEhQKEgk7BRsrHQqVVBGDG4KgQDzWqxoUChIJgQHrCxkKlVQRTLl3u1_dfXIaFAoSCc_UXZkECpVUETzZ2KciUwgzIgoNihwiGxUpet-2",
       "neighborhood": "Goose Hollow"
     },
     {
@@ -100,6 +108,7 @@
         45.519641
       ],
       "displayName": "SW 16th Ave & SW Salmon St, Portland, OR 97205, USA",
+      "placeId": "EjNTVyAxNnRoIEF2ZSAmIFNXIFNhbG1vbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjA1LCBVU0EiZiJkChQKEgnpjXZoHAqVVBFH03i0kcGzaBIUChIJ6Y12aBwKlVQRR9N4tJHBs2gaFAoSCYHoRVYYCpVUEUuNkxFYakihGhQKEgmNDWeTeAmVVBEzKXPLbJlgCiIKDfq-IRsVYhrftg",
       "neighborhood": "Goose Hollow"
     },
     {
@@ -111,14 +120,21 @@
       "isSchoolStop": true,
       "skipGeocoding": false,
       "coordinates": [
-        -122.7621042,
-        45.5040646
+        -122.7622985,
+        45.5044894
       ],
       "displayName": "8111 SW West Slope Dr, Portland, OR 97225, USA",
-      "schoolName": "West Sylvan"
+      "schoolName": "West Sylvan",
+      "neighborhood": "Southwest Hills"
     }
   ],
-  "processedAt": "2025-12-10T18:49:08.529Z",
+  "neighborhoods": [
+    "Goose Hollow",
+    "Northwest Portland",
+    "Southwest Hills",
+    "Southwest Portland"
+  ],
+  "processedAt": "2025-12-17T08:54:00.528Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -1418,14 +1434,18 @@
       -122.76157
     ],
     [
-      45.50414,
+      45.50424,
+      -122.76161
+    ],
+    [
+      45.50438,
       -122.76158
     ]
   ],
-  "geometryUpdatedAt": "2025-12-10T18:54:32.714Z",
-  "neighborhoods": [
-    "Goose Hollow",
-    "Northwest Portland",
-    "Southwest Portland"
-  ]
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 7,
+    "errors": 0,
+    "total": 8
+  }
 }

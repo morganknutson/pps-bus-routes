@@ -1,0 +1,281 @@
+{
+  "generatedAt": "2025-12-17T07:13:25.879Z",
+  "total": 39,
+  "withPdfs": 35,
+  "withoutPdfs": 4,
+  "schools": [
+    {
+      "id": "access",
+      "name": "ACCESS",
+      "address": "6318 S Corbett Ave, Portland, OR 97239, USA",
+      "hasPdfs": false,
+      "driveLink": null
+    },
+    {
+      "id": "davinci",
+      "name": "DaVinci",
+      "address": "2508 NE Everett St, Portland, OR 97232, USA",
+      "hasPdfs": false,
+      "driveLink": "https://drive.google.com/drive/folders/1K1dxXJ_0vDH2JZB652wYnDlv36TKfYik"
+    },
+    {
+      "id": "franklin",
+      "name": "Franklin",
+      "address": "5405 SE Woodward St, Portland, OR 97206, USA",
+      "hasPdfs": false,
+      "driveLink": "https://drive.google.com/drive/folders/1KIrpSYUBVL0zngxBBIf0ExIfSmZzfJb-"
+    },
+    {
+      "id": "gray",
+      "name": "Gray",
+      "address": "5505 SW 23rd Ave, Portland, OR 97239, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/149Nfaud8gFSZVCEHE0W0PmvzEgnIwFxu"
+    },
+    {
+      "id": "harrison-park",
+      "name": "Harrison Park",
+      "address": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/14NQ8nZ6U891axUun-1KfqG82U8f26nFb"
+    },
+    {
+      "id": "hayhurst",
+      "name": "Hayhurst",
+      "address": "5037 SW Iowa St, Portland, OR 97221, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/14RnZsukacVSJ8Od67K2x2M6cBCKPnxjP"
+    },
+    {
+      "id": "hosford",
+      "name": "Hosford",
+      "address": "2303 SE 28th Pl, Portland, OR 97214, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/14iie5UThX6R9K5cUNO5l6sheIoOkw9un"
+    },
+    {
+      "id": "jackson",
+      "name": "Jackson",
+      "address": "10625 SW 35th Ave, Portland, OR 97219, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/14q4zv3lBYQCJXswEtgk06YUtmzOGJ1lf"
+    },
+    {
+      "id": "james-john",
+      "name": "James John",
+      "address": "7439 N Charleston Ave, Portland, OR 97203, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/14nIblPsK6LnoMd81z2joGpRF7QnbOvSU"
+    },
+    {
+      "id": "kelly",
+      "name": "Kelly",
+      "address": "9030 SE Cooper St, Portland, OR 97266, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/14rEePEkr5kKUA6v6u6DGS9SkPcfiwJQh"
+    },
+    {
+      "id": "kellogg",
+      "name": "Kellogg",
+      "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1lMUDd4OOpBHoYM09qfhDFdIAIv7raKMm"
+    },
+    {
+      "id": "lane",
+      "name": "Lane",
+      "address": "7200 SE 60th Ave, Portland, OR 97206, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1ATZt9Nb_Vpz1iL2tLEHcSkWyvlYQRa3k"
+    },
+    {
+      "id": "lee",
+      "name": "Lee",
+      "address": "2222 NE 92nd Ave, Portland, OR 97220, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1C51RI0VAln6_ihZB50MPuj2Mn74rhnCO"
+    },
+    {
+      "id": "lent",
+      "name": "Lent",
+      "address": "5105 SE 97th Ave, Portland, OR 97266, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1ALsgIQwiUbUnzE6tb4fAGy5TCmMva8fv"
+    },
+    {
+      "id": "leodis-v-mcdaniel",
+      "name": "Leodis V. McDaniel",
+      "address": "2735 NE 82nd Ave, Portland, OR 97220, USA",
+      "hasPdfs": false,
+      "driveLink": "https://drive.google.com/drive/folders/1MaCNzyG0pACrE1jm6JT_MgUA30YIWQhg"
+    },
+    {
+      "id": "lincoln",
+      "name": "Lincoln",
+      "address": "1750 SW Salmon St, Portland, OR 97205, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/126UZiZumw3ZBB-Vz8m9kD7TvmJHyGTRu"
+    },
+    {
+      "id": "maplewood",
+      "name": "Maplewood",
+      "address": "7452 SW 52nd Ave, Portland, OR 97219, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1BbtthEMT4kPU2jgCUXQ0BLNKRJkqD3Zd"
+    },
+    {
+      "id": "markham",
+      "name": "Markham",
+      "address": "10531 SW Capitol Hwy, Portland, OR 97219, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1AXiHUdEFRiy_XMZr4WiICEaQ9uHjEllC"
+    },
+    {
+      "id": "ockley-green",
+      "name": "Ockley Green",
+      "address": "6031 N Montana Ave, Portland, OR 97217, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1AcGj_k1He8ovVY884Ddg_NU86y_9ntUs"
+    },
+    {
+      "id": "peninsula",
+      "name": "Peninsula",
+      "address": "8125 N Emerald Ave, Portland, OR 97217, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1AhUH6ELeKD5JXdspsRtlIxcFvjiALYsF"
+    },
+    {
+      "id": "richmond",
+      "name": "Richmond",
+      "address": "2276 SE 41st Ave, Portland, OR 97214, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/10mkJy_ZfQKFsmI84JMn-8TBSW7qQwgKc"
+    },
+    {
+      "id": "rieke",
+      "name": "Rieke",
+      "address": "1405 SW Vermont St, Portland, OR 97219, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1B1m6oVpHRY7jxTumGmgbN8ESBnaJ7CZs"
+    },
+    {
+      "id": "rigler",
+      "name": "Rigler",
+      "address": "5401 NE Prescott St, Portland, OR 97218, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1B1SaKRoFPndCFsrye60jBU9RCeu4VvVz"
+    },
+    {
+      "id": "rosa-parks",
+      "name": "Rosa Parks",
+      "address": "8960 N Woolsey Ave, Portland, OR 97203, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1QCa27KupgwYuTFtnHFbMuF5zJK-_Ve3h"
+    },
+    {
+      "id": "rose-city-park",
+      "name": "Rose City Park",
+      "address": "2334 NE 57th Ave, Portland, OR 97213, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1AnNjcE6mcwNfqhwKOKVxmyPr5s016jyx"
+    },
+    {
+      "id": "roseway-heights",
+      "name": "Roseway Heights",
+      "address": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1AWiPKBp1aG0m_EPtCsHK6qr7NBB3dufz"
+    },
+    {
+      "id": "sabin",
+      "name": "Sabin",
+      "address": "4013 NE 18th Ave, Portland, OR 97212, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/102-R5wgIGE07ltMsuOkHsRwClw8xu3Av"
+    },
+    {
+      "id": "scott",
+      "name": "Scott",
+      "address": "6700 NE Prescott St, Portland, OR 97218, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1Akemk1ysTHW4NQPTSC22fzACYPYcmOlV"
+    },
+    {
+      "id": "sellwood",
+      "name": "Sellwood",
+      "address": "8300 SE 15th Ave, Portland, OR 97202, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1B-AiQE6i3izdPgn0RRBto4as2mExvoD2"
+    },
+    {
+      "id": "sitton",
+      "name": "Sitton",
+      "address": "9930 N Smith St, Portland, OR 97203, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1B62x5JjJAZWDZ4-rMNCHMk1jXPV--mM2"
+    },
+    {
+      "id": "skyline",
+      "name": "Skyline",
+      "address": "11536 NW Skyline Blvd, Portland, OR 97231, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/11yS4mKChoAblrlWy8DK8P_V4n-PxWooe"
+    },
+    {
+      "id": "stephenson",
+      "name": "Stephenson",
+      "address": "2627 SW Stephenson St, Portland, OR 97219, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1B5SEBPRkbdfjeRs_PL4zBI1kV3j4XqvK"
+    },
+    {
+      "id": "tubman",
+      "name": "Tubman",
+      "address": "2231 N Flint Ave, Portland, OR 97227, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1B9aLGpw1wbfKr3ZJRQo_ZTyaaUnkCsp0"
+    },
+    {
+      "id": "vernon",
+      "name": "Vernon",
+      "address": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1BFFcmCQLESn5a6F0kC_4wR1_sbhK_X6o"
+    },
+    {
+      "id": "vestal",
+      "name": "Vestal",
+      "address": "161 NE 82nd Ave, Portland, OR 97220, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1Bw3LiMIPKIFIUJhIev21bDfUPDDUojxR"
+    },
+    {
+      "id": "whitman",
+      "name": "Whitman",
+      "address": "7326 SE Flavel St, Portland, OR 97206, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1BOpempBoVyZNwDHyg4R-iKpMFrvtkUL0"
+    },
+    {
+      "id": "woodlawn",
+      "name": "Woodlawn",
+      "address": "7200 NE 11th Ave, Portland, OR 97211, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1BL75PyGGfT3JfrcLXelVbr4A_dg0A-1_"
+    },
+    {
+      "id": "woodmere",
+      "name": "Woodmere",
+      "address": "7900 SE Duke St, Portland, OR 97206, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1BZ-1EgJe6bT4ALAjJuS8ws7Gmeeu-3H1"
+    },
+    {
+      "id": "woodstock",
+      "name": "Woodstock",
+      "address": "5601 SE 50th Ave, Portland, OR 97206, USA",
+      "hasPdfs": true,
+      "driveLink": "https://drive.google.com/drive/folders/1BS3K6V0MKOrCtK9wf2bSNUvGPkCjHGjB"
+    }
+  ]
+}

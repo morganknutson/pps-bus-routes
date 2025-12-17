@@ -1,0 +1,467 @@
+{
+  "id": "291HPK-A_effective_091925.pdf",
+  "name": "291",
+  "direction": "Morning",
+  "filename": "291HPK-A_effective_091925.pdf",
+  "fileId": "291HPK-A_effective_091925.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "7427 SE Division St. [N]",
+      "time": "8:40 am",
+      "direction": "N",
+      "originalLine": "8:40 am7427 SE DIVISION ST [N]291HPK-AStop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5861359,
+        45.5059174
+      ],
+      "displayName": "7427 SE Division St, Portland, OR 97206, USA",
+      "placeId": "ChIJE9EJv1GglVQRuvK2oLLcutI",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Division St. & SE 75th Ave. [NE]",
+      "time": "8:40 am",
+      "direction": "NE",
+      "originalLine": "8:40 amSE DIVISION ST @ SE 75TH AV [NE]291HPK-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5863578,
+        45.5054015
+      ],
+      "displayName": "SE Division St & SE 75th Ave, Portland, OR 97215, USA",
+      "placeId": "EjVTRSBEaXZpc2lvbiBTdCAmIFNFIDc1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCVM8Z79RoJVUESVS0gip_G-KEhQKEglTPGe_UaCVVBElUtIIqfxvihoUChIJF3pRRLGhlVQRIlzYWfgkuvAaFAoSCXMmfO49oJVUEe-eajoXNdeWIgoNv5IfGxVmzu62",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Division St. & SE 59th Ave. [NE]",
+      "time": "8:43 am",
+      "direction": "NE",
+      "originalLine": "8:43 amSE DIVISION ST @ SE 59TH AV [NE]291HPK-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6027629,
+        45.50535989999999
+      ],
+      "displayName": "SE 59th Ave & SE Division St, Portland, OR 97215, USA",
+      "placeId": "EjVTRSA1OXRoIEF2ZSAmIFNFIERpdmlzaW9uIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCUEy4bdeoJVUEclJBv30fRw0EhQKEglBMuG3XqCVVBHJSQb99H0cNBoUChIJ35mSAWiglVQRIIPJU5Jnk4waFAoSCRd6UUSxoZVUESJc2Fn4JLrwIgoNH5EfGxWTTey2",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE Division St. & SE 35th Pl. [NE]",
+      "time": "8:49 am",
+      "direction": "NE",
+      "originalLine": "8:49 amSE DIVISION ST @ SE 35TH PL [NE]291HPK-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6272753,
+        45.5047867
+      ],
+      "displayName": "SE Division St & SE 35th Pl, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBEaXZpc2lvbiBTdCAmIFNFIDM1dGggUGwsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJRbTImoiglVQRt-3F5ssIIjESFAoSCUW0yJqIoJVUEbftxebLCCIxGhQKEgkXelFEsaGVVBEiXNhZ-CS68BoUChIJRTebmH2glVQRZ0mky5Z9J24iCg27eh8bFQ-Q6LY",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-6",
+      "address": "5626 SE Woodward St. (clinton Park) [S]",
+      "time": "8:56 am",
+      "direction": "S",
+      "originalLine": "8:56 am5626 SE WOODWARD ST (CLINTON PARK) [S]291HPK-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60448102423194,
+        45.501410820029356
+      ],
+      "displayName": "5626 SE Woodward St, Portland, OR 97206, USA",
+      "placeId": "ChIJ9WGnhF2glVQRCtt3jULwap8",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-0",
+      "address": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:HARRISON PARK GT LOADING ZONE/2225 SE 87TH AV",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.574816,
+        45.5069498
+      ],
+      "displayName": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "schoolName": "Harrison Park"
+    }
+  ],
+  "neighborhoods": [
+    "Richmond",
+    "South Tabor",
+    "Southeast Portland"
+  ],
+  "processedAt": "2025-12-17T08:58:19.327Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50592,
+      -122.58614
+    ],
+    [
+      45.50557,
+      -122.58615
+    ],
+    [
+      45.50557,
+      -122.58636
+    ],
+    [
+      45.5054,
+      -122.58636
+    ],
+    [
+      45.5054,
+      -122.58658
+    ],
+    [
+      45.5054,
+      -122.58705
+    ],
+    [
+      45.5054,
+      -122.588
+    ],
+    [
+      45.50539,
+      -122.59124
+    ],
+    [
+      45.50537,
+      -122.5946
+    ],
+    [
+      45.50536,
+      -122.60027
+    ],
+    [
+      45.50536,
+      -122.60199
+    ],
+    [
+      45.50535,
+      -122.60378
+    ],
+    [
+      45.50533,
+      -122.60807
+    ],
+    [
+      45.5053,
+      -122.61203
+    ],
+    [
+      45.50527,
+      -122.61835
+    ],
+    [
+      45.50524,
+      -122.61862
+    ],
+    [
+      45.50519,
+      -122.61878
+    ],
+    [
+      45.5051,
+      -122.61894
+    ],
+    [
+      45.50491,
+      -122.61924
+    ],
+    [
+      45.50487,
+      -122.61933
+    ],
+    [
+      45.50483,
+      -122.61949
+    ],
+    [
+      45.5048,
+      -122.6198
+    ],
+    [
+      45.50478,
+      -122.62177
+    ],
+    [
+      45.50479,
+      -122.62302
+    ],
+    [
+      45.50478,
+      -122.62394
+    ],
+    [
+      45.50479,
+      -122.6257
+    ],
+    [
+      45.50479,
+      -122.62678
+    ],
+    [
+      45.50479,
+      -122.62728
+    ],
+    [
+      45.50479,
+      -122.62678
+    ],
+    [
+      45.50479,
+      -122.6257
+    ],
+    [
+      45.50479,
+      -122.6246
+    ],
+    [
+      45.50478,
+      -122.62335
+    ],
+    [
+      45.50478,
+      -122.62108
+    ],
+    [
+      45.50479,
+      -122.62032
+    ],
+    [
+      45.50481,
+      -122.61956
+    ],
+    [
+      45.50491,
+      -122.61924
+    ],
+    [
+      45.50515,
+      -122.61886
+    ],
+    [
+      45.50522,
+      -122.6187
+    ],
+    [
+      45.50526,
+      -122.61851
+    ],
+    [
+      45.50527,
+      -122.61811
+    ],
+    [
+      45.5053,
+      -122.61419
+    ],
+    [
+      45.5053,
+      -122.61173
+    ],
+    [
+      45.50533,
+      -122.60951
+    ],
+    [
+      45.50533,
+      -122.60902
+    ],
+    [
+      45.50515,
+      -122.60902
+    ],
+    [
+      45.50478,
+      -122.60902
+    ],
+    [
+      45.50437,
+      -122.609
+    ],
+    [
+      45.5039,
+      -122.60902
+    ],
+    [
+      45.50299,
+      -122.60902
+    ],
+    [
+      45.50143,
+      -122.60905
+    ],
+    [
+      45.50142,
+      -122.60506
+    ],
+    [
+      45.50141,
+      -122.60309
+    ],
+    [
+      45.50141,
+      -122.60101
+    ],
+    [
+      45.50144,
+      -122.60047
+    ],
+    [
+      45.50145,
+      -122.59986
+    ],
+    [
+      45.50146,
+      -122.59946
+    ],
+    [
+      45.50228,
+      -122.59946
+    ],
+    [
+      45.50268,
+      -122.59945
+    ],
+    [
+      45.50322,
+      -122.59945
+    ],
+    [
+      45.50439,
+      -122.59944
+    ],
+    [
+      45.50536,
+      -122.59943
+    ],
+    [
+      45.50536,
+      -122.59861
+    ],
+    [
+      45.50537,
+      -122.59753
+    ],
+    [
+      45.50537,
+      -122.5946
+    ],
+    [
+      45.50539,
+      -122.59124
+    ],
+    [
+      45.5054,
+      -122.58578
+    ],
+    [
+      45.50541,
+      -122.58407
+    ],
+    [
+      45.50538,
+      -122.58242
+    ],
+    [
+      45.50532,
+      -122.58166
+    ],
+    [
+      45.50513,
+      -122.5805
+    ],
+    [
+      45.50503,
+      -122.57988
+    ],
+    [
+      45.50497,
+      -122.57981
+    ],
+    [
+      45.50493,
+      -122.57958
+    ],
+    [
+      45.50475,
+      -122.57843
+    ],
+    [
+      45.50465,
+      -122.5777
+    ],
+    [
+      45.50461,
+      -122.57707
+    ],
+    [
+      45.50458,
+      -122.57616
+    ],
+    [
+      45.50455,
+      -122.57489
+    ],
+    [
+      45.50455,
+      -122.57465
+    ],
+    [
+      45.50454,
+      -122.57425
+    ],
+    [
+      45.50502,
+      -122.57426
+    ],
+    [
+      45.5058,
+      -122.57428
+    ],
+    [
+      45.5069,
+      -122.57428
+    ],
+    [
+      45.50735,
+      -122.57428
+    ],
+    [
+      45.50731,
+      -122.57437
+    ],
+    [
+      45.50728,
+      -122.5744
+    ],
+    [
+      45.50698,
+      -122.57441
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 5,
+    "errors": 0,
+    "total": 6
+  }
+}

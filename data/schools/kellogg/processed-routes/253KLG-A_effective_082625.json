@@ -1,0 +1,318 @@
+{
+  "id": "253KLG-A_effective_082625.pdf",
+  "name": "253",
+  "direction": "Morning",
+  "filename": "253KLG-A_effective_082625.pdf",
+  "fileId": "253KLG-A_effective_082625.pdf",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "SE Ellis St. & SE 104th Ave. [SW]",
+      "time": "8:51 am",
+      "direction": "SW",
+      "originalLine": "8:51 amSE ELLIS ST @ SE 104TH AV [SW]253KLG-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.555769,
+        45.481782
+      ],
+      "displayName": "SE 104th Ave & SE Ellis St, Portland, OR 97266, USA",
+      "placeId": "EjNTRSAxMDR0aCBBdmUgJiBTRSBFbGxpcyBTdCwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgl3gH1dh5-VVBHXxET1KGKaFhIUChIJd4B9XYeflVQR18RE9ShimhYaFAoSCUWrGoIroJVUETamzjrKTtQEGhQKEgllAJplGKCVVBEhvvHdGb_IgCIKDRz4GxsVRnnztg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Reedway St. & SE 102nd Ave. [NE]",
+      "time": "8:52 am",
+      "direction": "NE",
+      "originalLine": "8:52 amSE REEDWAY ST @ SE 102ND AV [NE]253KLG-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5584899,
+        45.4811668
+      ],
+      "displayName": "SE Reedway St & SE 102nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjVTRSBSZWVkd2F5IFN0ICYgU0UgMTAybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCeeSvoiHn5VUEcJHp67u8XebEhQKEgnnkr6Ih5-VVBHCR6eu7vF3mxoUChIJ0UKOsBmglVQRihJOgW8jE1EaFAoSCSFwN9rLoZVUEUTgyjwh7s-lIgoNFOAbGxX9DvO2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 97th Ave. & SE Ellis St. [SE]",
+      "time": "8:54 am",
+      "direction": "SE",
+      "originalLine": "8:54 amSE 97TH AV @ SE ELLIS ST [SE]253KLG-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5634639,
+        45.4819836
+      ],
+      "displayName": "SE Ellis St & SE 97th Ave, Portland, OR 97266, USA",
+      "placeId": "EjJTRSBFbGxpcyBTdCAmIFNFIDk3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCZGS2NAnoJVUEUlCCXEN89U8EhQKEgmRktjQJ6CVVBFJQglxDfPVPBoUChIJZQCaZRiglVQRIb7x3Rm_yIAaFAoSCWte4JKNn5VUEfUEj-9auOnJIgoN_P8bGxWxTPK2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE 92nd Ave. & SE Reedway St. [NW]",
+      "time": "8:56 am",
+      "direction": "NW",
+      "originalLine": "8:56 amSE 92ND AV & SE REEDWAY ST [NW]253KLG-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686208,
+        45.4813246
+      ],
+      "displayName": "SE Reedway St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjRTRSBSZWVkd2F5IFN0ICYgU0UgOTJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJjZCf5yaglVQRSx59bHKi_h0SFAoSCY2Qn-cmoJVUEUsefWxyov4dGhQKEgnRQo6wGaCVVBGKEk6BbyMTURoUChIJH9e6zyaglVQRMzhsp-U9UsYiCg0-5hsbFUCD8bY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-0",
+      "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:KELLOGG GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5917225,
+        45.49871359999999
+      ],
+      "displayName": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "schoolName": "Kellogg"
+    }
+  ],
+  "neighborhoods": [
+    "Lents"
+  ],
+  "processedAt": "2025-12-17T09:02:05.324Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.48178,
+      -122.55577
+    ],
+    [
+      45.48185,
+      -122.55846
+    ],
+    [
+      45.48117,
+      -122.55849
+    ],
+    [
+      45.48185,
+      -122.55846
+    ],
+    [
+      45.48189,
+      -122.55966
+    ],
+    [
+      45.48196,
+      -122.56268
+    ],
+    [
+      45.48198,
+      -122.56346
+    ],
+    [
+      45.48269,
+      -122.56346
+    ],
+    [
+      45.48273,
+      -122.56484
+    ],
+    [
+      45.48277,
+      -122.56613
+    ],
+    [
+      45.48277,
+      -122.56621
+    ],
+    [
+      45.48277,
+      -122.56687
+    ],
+    [
+      45.48279,
+      -122.56713
+    ],
+    [
+      45.48278,
+      -122.56738
+    ],
+    [
+      45.4828,
+      -122.56756
+    ],
+    [
+      45.4828,
+      -122.56809
+    ],
+    [
+      45.48281,
+      -122.56863
+    ],
+    [
+      45.48253,
+      -122.56864
+    ],
+    [
+      45.48169,
+      -122.56863
+    ],
+    [
+      45.48132,
+      -122.56862
+    ],
+    [
+      45.48169,
+      -122.56863
+    ],
+    [
+      45.48186,
+      -122.56863
+    ],
+    [
+      45.48281,
+      -122.56863
+    ],
+    [
+      45.48524,
+      -122.56861
+    ],
+    [
+      45.48787,
+      -122.5686
+    ],
+    [
+      45.48957,
+      -122.56861
+    ],
+    [
+      45.49042,
+      -122.56859
+    ],
+    [
+      45.49181,
+      -122.56859
+    ],
+    [
+      45.49397,
+      -122.56856
+    ],
+    [
+      45.49617,
+      -122.56854
+    ],
+    [
+      45.49674,
+      -122.56853
+    ],
+    [
+      45.49743,
+      -122.56854
+    ],
+    [
+      45.49744,
+      -122.57232
+    ],
+    [
+      45.49744,
+      -122.57316
+    ],
+    [
+      45.49744,
+      -122.57371
+    ],
+    [
+      45.4974,
+      -122.57386
+    ],
+    [
+      45.49737,
+      -122.57391
+    ],
+    [
+      45.49738,
+      -122.57406
+    ],
+    [
+      45.49739,
+      -122.57501
+    ],
+    [
+      45.4974,
+      -122.57682
+    ],
+    [
+      45.4974,
+      -122.57982
+    ],
+    [
+      45.49741,
+      -122.58005
+    ],
+    [
+      45.49742,
+      -122.58079
+    ],
+    [
+      45.4974,
+      -122.58128
+    ],
+    [
+      45.49742,
+      -122.58258
+    ],
+    [
+      45.49742,
+      -122.58389
+    ],
+    [
+      45.49743,
+      -122.58758
+    ],
+    [
+      45.49744,
+      -122.5893
+    ],
+    [
+      45.49745,
+      -122.59133
+    ],
+    [
+      45.49745,
+      -122.5917
+    ],
+    [
+      45.49746,
+      -122.59234
+    ],
+    [
+      45.49779,
+      -122.59235
+    ],
+    [
+      45.49888,
+      -122.59231
+    ],
+    [
+      45.49889,
+      -122.59207
+    ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 4,
+    "errors": 0,
+    "total": 5
+  }
+}

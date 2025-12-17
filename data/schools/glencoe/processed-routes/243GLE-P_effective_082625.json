@@ -19,7 +19,8 @@
         45.517248
       ],
       "displayName": "825 SE 51st Ave, Portland, OR 97215, USA",
-      "schoolName": "Glencoe"
+      "schoolName": "Glencoe",
+      "neighborhood": "Southeast Portland"
     },
     {
       "id": "stop-1",
@@ -253,5 +254,11 @@
       45.5283,
       -122.59866
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 4,
+    "errors": 0,
+    "total": 5
+  }
 }

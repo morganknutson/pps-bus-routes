@@ -19,7 +19,8 @@
         45.570994
       ],
       "displayName": "2930 NE Dekum St, Portland, OR 97211, USA",
-      "schoolName": "Faubion"
+      "schoolName": "Faubion",
+      "neighborhood": "Concordia"
     },
     {
       "id": "stop-1",
@@ -207,5 +208,11 @@
       45.56182,
       -122.66095
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 2,
+    "errors": 0,
+    "total": 3
+  }
 }

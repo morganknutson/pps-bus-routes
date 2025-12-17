@@ -14,12 +14,18 @@
       "originalLine": "7:28 am8125 N EMERALD AV ( [W]277BCH-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7008584,
-        45.5820664
+        -122.7007903,
+        45.581710699999995
       ],
       "displayName": "8125 N Emerald Ave, Portland, OR 97217, USA",
       "placeId": "ChIJAZjRSL-nlVQR8xFcC6ibgMI",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.7008584,
+        45.5820664
+      ],
+      "snapDistance": 39.90553378248655
     },
     {
       "id": "stop-2",
@@ -29,12 +35,18 @@
       "originalLine": "7:36 amCHIEF JOSEPH SCHOOL (2409 N SARATOGA ST) [S]277BCH-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6918619,
-        45.5727947
+        -122.6918625644027,
+        45.57264256280323
       ],
       "displayName": "2409 N Saratoga St, Portland, OR 97217, USA",
       "placeId": "ChIJ0zjJqaOnlVQRoNzecfozcwI",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6918619,
+        45.5727947
+      ],
+      "snapDistance": 16.916963481208963
     },
     {
       "id": "stop-3",
@@ -44,12 +56,18 @@
       "originalLine": "7:40 am700 N ROSA PARKS WY [S]277BCH-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6736069,
-        45.5695725
+        -122.67360994358727,
+        45.569930070553184
       ],
       "displayName": "700 N Rosa Parks Way, Portland, OR 97217, USA",
       "placeId": "ChIJE6RT6AenlVQRAIyKKbP40AY",
-      "neighborhood": "North Portland"
+      "neighborhood": "North Portland",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6736069,
+        45.5695725
+      ],
+      "snapDistance": 39.760737273037925
     },
     {
       "id": "stop-0",
@@ -64,7 +82,8 @@
         45.5579142
       ],
       "displayName": "1710 N Humboldt St, Portland, OR 97217, USA",
-      "schoolName": "Beach"
+      "schoolName": "Beach",
+      "neighborhood": "Overlook"
     }
   ],
   "processedAt": "2025-12-12T22:33:41.036Z",
@@ -418,5 +437,11 @@
       45.55779,
       -122.68551
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 0,
+    "errors": 0,
+    "total": 4
+  }
 }

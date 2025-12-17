@@ -3,12 +3,16 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+const router = express.Router();
+
+// Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const router = express.Router();
-const STATUS_FILE = path.join(__dirname, '..', '..', 'data', 'pdf-status.json');
-const DATA_DIR = path.join(__dirname, '..', '..', 'data');
+// Use absolute paths
+const DATA_DIR = path.resolve(__dirname, '..', '..', 'data');
+const STATUS_FILE = path.join(DATA_DIR, 'pdf-status.json');
+const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
 
 /**
  * Get PDF count and files for a school
@@ -26,84 +30,141 @@ function getSchoolPdfInfo(schoolId) {
 }
 
 /**
- * Get PDF status report
+ * Check if a school has processed routes
+ */
+function hasProcessedRoutes(schoolId) {
+  const processedRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
+  if (!fs.existsSync(processedRoutesDir)) {
+    return false;
+  }
+  const files = fs.readdirSync(processedRoutesDir).filter(f => f.endsWith('.json'));
+  return files.length > 0;
+}
+
+/**
+ * Generate fresh PDF status report by scanning filesystem
+ */
+function generatePdfStatus() {
+  if (!fs.existsSync(SCHOOLS_FILE)) {
+    throw new Error('Schools file not found');
+  }
+
+  const schools = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+  
+  const report = {
+    timestamp: new Date().toISOString(),
+    totalSchools: schools.length,
+    summary: {
+      schoolsWithPdfs: 0,
+      schoolsWithoutPdfs: 0,
+      totalPdfs: 0,
+      schoolsWithDriveLink: 0,
+    },
+    schools: [],
+  };
+
+  for (const school of schools) {
+    const pdfInfo = getSchoolPdfInfo(school.id);
+    const schoolStatus = {
+      schoolId: school.id,
+      schoolName: school.name,
+      driveLink: school.driveLink,
+      pdfCount: pdfInfo.count,
+      pdfFiles: pdfInfo.files,
+      hasPdfs: pdfInfo.count > 0,
+      hasDriveLink: !!school.driveLink,
+    };
+
+    report.schools.push(schoolStatus);
+
+    if (schoolStatus.hasDriveLink) {
+      report.summary.schoolsWithDriveLink++;
+    }
+    if (schoolStatus.hasPdfs) {
+      report.summary.schoolsWithPdfs++;
+      report.summary.totalPdfs += pdfInfo.count;
+    } else if (schoolStatus.hasDriveLink) {
+      report.summary.schoolsWithoutPdfs++;
+    }
+  }
+
+  return report;
+}
+
+/**
+ * Generate processing status for all schools
+ */
+function generateProcessingStatus() {
+  if (!fs.existsSync(SCHOOLS_FILE)) {
+    throw new Error('Schools file not found');
+  }
+
+  const schools = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+  const status = {};
+  
+  for (const school of schools) {
+    status[school.id] = hasProcessedRoutes(school.id);
+  }
+  
+  return status;
+}
+
+/**
+ * Get PDF status report - ALWAYS generates fresh data from filesystem
  */
 router.get('/status', (req, res) => {
   try {
-    console.log('[pdfStatus] GET /status - checking for status file:', STATUS_FILE);
-    if (fs.existsSync(STATUS_FILE)) {
-      console.log('[pdfStatus] Status file exists, reading...');
-      const content = fs.readFileSync(STATUS_FILE, 'utf8');
-      const report = JSON.parse(content);
-      console.log('[pdfStatus] Returning cached report with', report.schools?.length || 0, 'schools');
-      res.json(report);
-    } else {
-      console.log('[pdfStatus] Status file does not exist, generating on-the-fly...');
-      const schoolsFile = path.join(DATA_DIR, 'schools.json');
-      console.log('[pdfStatus] Checking for schools file:', schoolsFile);
-      
-      if (!fs.existsSync(schoolsFile)) {
-        console.error('[pdfStatus] Schools file does not exist:', schoolsFile);
-        return res.status(404).json({ 
-          error: 'Schools file not found. Please ensure data/schools.json exists.',
-          path: schoolsFile
-        });
-      }
-
-      const schoolsContent = fs.readFileSync(schoolsFile, 'utf8');
-      const schools = JSON.parse(schoolsContent);
-      console.log('[pdfStatus] Loaded', schools.length, 'schools from schools.json');
-      
-      const report = {
-        timestamp: new Date().toISOString(),
-        totalSchools: schools.length,
-        summary: {
-          schoolsWithPdfs: 0,
-          schoolsWithoutPdfs: 0,
-          totalPdfs: 0,
-          schoolsWithDriveLink: 0,
-        },
-        schools: [],
-      };
-
-      for (const school of schools) {
-        const pdfInfo = getSchoolPdfInfo(school.id);
-        report.schools.push({
-          schoolId: school.id,
-          schoolName: school.name,
-          driveLink: school.driveLink,
-          pdfCount: pdfInfo.count,
-          pdfFiles: pdfInfo.files,
-          hasPdfs: pdfInfo.count > 0,
-          hasDriveLink: !!school.driveLink,
-        });
-
-        if (pdfInfo.count > 0) {
-          report.summary.schoolsWithPdfs++;
-          report.summary.totalPdfs += pdfInfo.count;
-        } else if (school.driveLink) {
-          report.summary.schoolsWithoutPdfs++;
-        }
-        
-        if (school.driveLink) {
-          report.summary.schoolsWithDriveLink++;
-        }
-      }
-
-      console.log('[pdfStatus] Generated report:', {
-        totalSchools: report.totalSchools,
-        schoolsWithPdfs: report.summary.schoolsWithPdfs,
-        schoolsWithoutPdfs: report.summary.schoolsWithoutPdfs,
-        totalPdfs: report.summary.totalPdfs
-      });
-      res.json(report);
-    }
+    // Always generate fresh data by scanning filesystem
+    const report = generatePdfStatus();
+    
+    // Set no-cache headers
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    
+    res.json(report);
   } catch (error) {
     console.error('[pdfStatus] Error loading PDF status:', error);
-    console.error('[pdfStatus] Error stack:', error.stack);
     res.status(500).json({ 
       error: error.message,
-      details: error.stack
+    });
+  }
+});
+
+/**
+ * Refresh PDF status and processing status by scanning filesystem
+ * Returns fresh data without relying on cached files
+ */
+router.post('/refresh-status', (req, res) => {
+  try {
+    console.log('[pdfStatus] Refreshing status from filesystem...');
+    
+    // Generate fresh PDF status
+    const pdfStatus = generatePdfStatus();
+    
+    // Generate fresh processing status
+    const processingStatus = generateProcessingStatus();
+    
+    console.log('[pdfStatus] Refresh complete:', {
+      totalSchools: pdfStatus.totalSchools,
+      schoolsWithPdfs: pdfStatus.summary.schoolsWithPdfs,
+      schoolsProcessed: Object.values(processingStatus).filter(Boolean).length,
+    });
+    
+    // Set no-cache headers
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    
+    res.json({
+      pdfStatus,
+      processingStatus,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error('[pdfStatus] Error refreshing status:', error);
+    res.status(500).json({ 
+      error: error.message,
     });
   }
 });

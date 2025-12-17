@@ -19,7 +19,8 @@
         45.5489184
       ],
       "displayName": "4043 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Beaumont"
+      "schoolName": "Beaumont",
+      "neighborhood": "Northeast Portland"
     },
     {
       "id": "stop-1",
@@ -29,12 +30,18 @@
       "originalLine": "4:17 pm6735 NE KILLINGSWORTH ST [N]217BMT-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.593197,
-        45.5631542
+        -122.59287470000001,
+        45.563013399999996
       ],
       "displayName": "6735 NE Killingsworth St, Portland, OR 97218, USA",
       "placeId": "ChIJ59yV2q-mlVQRDADzXIG4R6Q",
-      "neighborhood": "Cully"
+      "neighborhood": "Cully",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.593197,
+        45.5631542
+      ],
+      "snapDistance": 29.575024369024064
     },
     {
       "id": "stop-2",
@@ -44,12 +51,18 @@
       "originalLine": "4:19 pm6415 NE KILLINGSWORTH ST (ARBOR MHP) [N]217BMT-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.596629,
-        45.5631844
+        -122.59663222965969,
+        45.56331249875914
       ],
       "displayName": "6415 NE Killingsworth St UNIT E10, Portland, OR 97218, USA",
       "placeId": "ChIJGxHXnbqmlVQRVbK949-kg0Q",
-      "neighborhood": "Cully"
+      "neighborhood": "Cully",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.596629,
+        45.5631844
+      ],
+      "snapDistance": 14.246151020047433
     },
     {
       "id": "stop-3",
@@ -104,12 +117,18 @@
       "originalLine": "4:30 pm6814 NE 47TH AV [E]217BMT-P(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6135079,
-        45.5724904
+        -122.6135123322122,
+        45.57241842559587
       ],
       "displayName": "6814 NE 47th Ave, Portland, OR 97218, USA",
       "placeId": "ChIJJdGnkZamlVQRJnCYc6hIsd0",
-      "neighborhood": "Cully"
+      "neighborhood": "Cully",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6135079,
+        45.5724904
+      ],
+      "snapDistance": 8.010620846391172
     }
   ],
   "processedAt": "2025-12-12T22:36:40.900Z",
@@ -607,5 +626,11 @@
       45.57242,
       -122.61349
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 3,
+    "errors": 0,
+    "total": 7
+  }
 }

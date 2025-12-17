@@ -19,7 +19,8 @@
         45.5579142
       ],
       "displayName": "1710 N Humboldt St, Portland, OR 97217, USA",
-      "schoolName": "Beach"
+      "schoolName": "Beach",
+      "neighborhood": "Overlook"
     },
     {
       "id": "stop-1",
@@ -59,12 +60,18 @@
       "originalLine": "2:45 pm5250 NE MARTIN LUTHER KING JR BLVD (BLAZERS)235BCH-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6609469,
-        45.5614977
+        -122.66094549262074,
+        45.56181809547804
       ],
       "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
       "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
-      "neighborhood": "King"
+      "neighborhood": "King",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6609469,
+        45.5614977
+      ],
+      "snapDistance": 35.62652016310921
     },
     {
       "id": "stop-4",
@@ -74,12 +81,18 @@
       "originalLine": "2:48 pm4705 NE 7TH AV (KING ELEMENTARY ON NE 7TH AV) [W]235BCH-P(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6588103,
-        45.5568985
+        -122.65881606597708,
+        45.55703288696268
       ],
       "displayName": "4705 NE 7th Ave, Portland, OR 97211, USA",
       "placeId": "ChIJI8yWgBenlVQRhQMeTKK2umY",
-      "neighborhood": "King"
+      "neighborhood": "King",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6588103,
+        45.5568985
+      ],
+      "snapDistance": 14.94989047075652
     },
     {
       "id": "stop-5",
@@ -104,12 +117,18 @@
       "originalLine": "2:59 pmVERNON SCHOOL (2044 NE KILLINGSWORTH ST) [S]235BCH-P(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6437449,
-        45.5624996
+        -122.64374319646474,
+        45.56269209941689
       ],
       "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
       "placeId": "ChIJww96suGmlVQRCl-EGDqJIb4",
-      "neighborhood": "Vernon"
+      "neighborhood": "Vernon",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6437449,
+        45.5624996
+      ],
+      "snapDistance": 21.40536938763483
     },
     {
       "id": "stop-7",
@@ -440,5 +459,11 @@
       45.56269,
       -122.64374
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 3,
+    "skipped": 4,
+    "errors": 0,
+    "total": 8
+  }
 }

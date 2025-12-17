@@ -34,7 +34,8 @@
         45.5332347
       ],
       "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
-      "schoolName": "Chapman"
+      "schoolName": "Chapman",
+      "neighborhood": "Northwest Portland"
     }
   ],
   "neighborhoods": [
@@ -99,5 +100,11 @@
       45.53349,
       -122.70623
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 1,
+    "errors": 0,
+    "total": 2
+  }
 }

@@ -49,7 +49,8 @@
         45.547482
       ],
       "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Alameda"
+      "schoolName": "Alameda",
+      "neighborhood": "Northeast Portland"
     }
   ],
   "processedAt": "2025-12-12T21:41:41.482Z",
@@ -166,5 +167,11 @@
   ],
   "neighborhoods": [
     "Rose City Park"
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 2,
+    "errors": 0,
+    "total": 3
+  }
 }

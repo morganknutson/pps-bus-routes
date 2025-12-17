@@ -19,7 +19,8 @@
         45.49551169999999
       ],
       "displayName": "4701 SE Bush St, Portland, OR 97206, USA",
-      "schoolName": "Creston"
+      "schoolName": "Creston",
+      "neighborhood": "Creston - Kenilworth"
     },
     {
       "id": "stop-1",
@@ -414,5 +415,11 @@
       45.49394,
       -122.59532
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 5,
+    "errors": 0,
+    "total": 6
+  }
 }

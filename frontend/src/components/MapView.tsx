@@ -10,6 +10,7 @@ import { geocodeAddress } from '../services/api';
 import { toLeafletPosition, validateLngLat, formatCoordinates } from '../utils/coordinates';
 import { DarkModeTileLayer } from './DarkModeTileLayer';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { Route } from '../types';
 import 'leaflet/dist/leaflet.css';
 
 const homeIcon = createHomeIcon();
@@ -23,6 +24,7 @@ interface MapViewProps {
   editingMode?: boolean;
   enableStreetHighlighting?: boolean;
   enableStreetPins?: boolean; // Enable the drop pins feature (admin only)
+  onSchoolStopClick?: (schoolId: string) => void; // Callback when a school stop marker is clicked
 }
 
 interface UndoStep {
@@ -47,8 +49,8 @@ interface StreetMarker {
   coordinates: [number, number]; // [lng, lat]
 }
 
-export function MapView({ editingMode = false, enableStreetHighlighting = false, enableStreetPins = false }: MapViewProps) {
-  const { routes, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, updateStopCoordinates, directionFilter, shouldZoomToHomeAddress, clearZoomToHomeAddress } = useStore();
+export function MapView({ editingMode = false, enableStreetHighlighting = false, enableStreetPins = false, onSchoolStopClick }: MapViewProps) {
+  const { routes, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, setSelectedSchool, updateStopCoordinates, directionFilter, shouldZoomToHomeAddress, clearZoomToHomeAddress } = useStore();
   const isMobile = useIsMobile();
   const mapRef = useRef<L.Map | null>(null);
   const [swipeStartY, setSwipeStartY] = useState<number | null>(null);
@@ -68,6 +70,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const [streetError, setStreetError] = useState<string | null>(null);
   const [streetMarkers, setStreetMarkers] = useState<StreetMarker[]>([]);
   const [loadingStreetPins, setLoadingStreetPins] = useState<boolean>(false);
+  const [isStopDialogClosing, setIsStopDialogClosing] = useState<boolean>(false);
 
   // Get selected routes, filtered by direction
   const selectedRoutes = routes.filter(route => {
@@ -203,8 +206,11 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       if (selectedStop && selectedStop.stop.coordinates) {
         const currentStopId = `${selectedStop.route.id}-${selectedStop.stop.id}`;
         
-        // Only zoom if this is a new stop or we haven't zoomed yet
-        if (prevStopIdRef.current === currentStopId && hasZoomedRef.current) {
+        // Always zoom to a new stop (don't skip if it's the same stop - user might want to re-center)
+        // Only skip if we just zoomed to this exact stop (within the same render cycle)
+        const isNewStop = prevStopIdRef.current !== currentStopId;
+        
+        if (!isNewStop && hasZoomedRef.current) {
           console.log('[MapView] Already zoomed to this stop, skipping');
           return;
         }
@@ -221,7 +227,13 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           stop: selectedStop.stop.address,
           stopCoords: selectedStop.stop.coordinates,
           stopPosition,
+          isNewStop,
         });
+        
+        // Reset zoom flag for new stop to ensure we always zoom
+        if (isNewStop) {
+          hasZoomedRef.current = false;
+        }
         
         // Small delay to ensure map is fully rendered
         const timer = setTimeout(() => {
@@ -253,6 +265,46 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     return null;
   }
 
+  /**
+   * Snap route geometry endpoints to school stop coordinates
+   * This ensures the route polyline ends exactly at the school pin location
+   * @param route The route object
+   * @param geometry Route geometry in [lat, lng][] format (Leaflet format)
+   * @returns Geometry with endpoints snapped to school stop coordinates
+   */
+  const snapGeometryToSchoolStop = (route: Route, geometry: [number, number][]): [number, number][] => {
+    if (!geometry || geometry.length === 0) {
+      return geometry;
+    }
+
+    const stopsWithCoords = route.stops.filter(stop => stop.coordinates && !stop.skipGeocoding);
+    if (stopsWithCoords.length === 0) {
+      return geometry;
+    }
+
+    const snappedGeometry = [...geometry];
+
+    // Check if first stop is a school stop (Afternoon routes)
+    const firstStop = stopsWithCoords[0];
+    if (firstStop.isSchoolStop && firstStop.coordinates && validateLngLat(firstStop.coordinates)) {
+      const schoolStopPosition = toLeafletPosition(firstStop.coordinates);
+      // Snap first point of geometry to school stop
+      snappedGeometry[0] = schoolStopPosition;
+      console.log(`[MapView] 📍 Snapped route start to school stop for ${route.name} (Afternoon route)`);
+    }
+
+    // Check if last stop is a school stop (Morning routes)
+    const lastStop = stopsWithCoords[stopsWithCoords.length - 1];
+    if (lastStop.isSchoolStop && lastStop.coordinates && validateLngLat(lastStop.coordinates)) {
+      const schoolStopPosition = toLeafletPosition(lastStop.coordinates);
+      // Snap last point of geometry to school stop
+      snappedGeometry[snappedGeometry.length - 1] = schoolStopPosition;
+      console.log(`[MapView] 📍 Snapped route end to school stop for ${route.name} (Morning route)`);
+    }
+
+    return snappedGeometry;
+  };
+
   // Function to recalculate route geometry
   const recalculateRouteGeometry = async (routeId: string) => {
     const route = routes.find(r => r.id === routeId);
@@ -272,7 +324,9 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     // Check if route already has cached geometry
     if (route.geometry && route.geometry.length > 0) {
       console.log(`[MapView] 💾 Using cached geometry for ${route.name}: ${route.geometry.length} points`);
-      setRouteGeometries(prevState => ({ ...prevState, [routeId]: route.geometry! }));
+      // Snap geometry endpoints to school stop coordinates
+      const snappedGeometry = snapGeometryToSchoolStop(route, route.geometry);
+      setRouteGeometries(prevState => ({ ...prevState, [routeId]: snappedGeometry }));
       return;
     }
 
@@ -295,9 +349,11 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       
       if (routeCoordinates && routeCoordinates.length > 0) {
         console.log(`[MapView] ✅ Route geometry fetched for ${route.name}: ${routeCoordinates.length} points`);
-        setRouteGeometries(prevState => ({ ...prevState, [routeId]: routeCoordinates }));
+        // Snap geometry endpoints to school stop coordinates
+        const snappedGeometry = snapGeometryToSchoolStop(route, routeCoordinates);
+        setRouteGeometries(prevState => ({ ...prevState, [routeId]: snappedGeometry }));
         
-        // Save geometry to backend for future use
+        // Save geometry to backend for future use (save snapped version)
         try {
           const response = await fetch(`/api/data/routes/${routeId}/geometry`, {
             method: 'PUT',
@@ -305,7 +361,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              geometry: routeCoordinates,
+              geometry: snappedGeometry,
               schoolId: selectedSchoolId,
             }),
           });
@@ -333,7 +389,9 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           return toLeafletPosition(stop.coordinates!);
         });
       console.warn(`[MapView] ⚠️  Using straight-line fallback for ${route.name}`);
-      setRouteGeometries(prevState => ({ ...prevState, [routeId]: fallbackCoordinates }));
+      // Snap geometry endpoints to school stop coordinates (even for fallback)
+      const snappedFallback = snapGeometryToSchoolStop(route, fallbackCoordinates);
+      setRouteGeometries(prevState => ({ ...prevState, [routeId]: snappedFallback }));
     }
   };
 
@@ -368,7 +426,9 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           // Check if route has cached geometry from backend
           if (route.geometry && route.geometry.length > 0) {
             console.log(`[MapView] 💾 Using cached geometry for ${route.name}`);
-            return { ...prev, [route.id]: route.geometry };
+            // Snap geometry endpoints to school stop coordinates
+            const snappedGeometry = snapGeometryToSchoolStop(route, route.geometry);
+            return { ...prev, [route.id]: snappedGeometry };
           }
 
           // Mark as loading and fetch route asynchronously
@@ -419,23 +479,12 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     }
   }, [selectedRoutes, routes, selectedStop]); // Removed homeAddress from dependencies
 
-  // Zoom to selected stop when it changes
-  // Skip if both homeAddress and selectedStop are present (let the combined zoom handle it)
+  // Handle stop selection changes (clear history, highlighted streets, etc.)
+  // Note: Zoom to stop is handled by FitHomeAndStopBounds component
   useEffect(() => {
-    // If both homeAddress and selectedStop are present, skip individual zoom
-    // The combined zoom effect will handle it
-    if (homeAddress && selectedStop && selectedStop.stop.coordinates) {
-      // Don't zoom individually, let the combined zoom effect handle it
-      return;
-    }
-
-    if (mapRef.current && selectedStop && selectedStop.stop.coordinates) {
-      if (!validateLngLat(selectedStop.stop.coordinates)) {
-        console.error('[MapView] Invalid selected stop coordinates:', selectedStop.stop.coordinates);
-        return;
-      }
-      const position = toLeafletPosition(selectedStop.stop.coordinates);
-      mapRef.current.setView(position, 18, { animate: true });
+    // Reset closing state when stop is selected
+    if (selectedStop) {
+      setIsStopDialogClosing(false);
     }
     
     // Clear undo history when a different stop is selected
@@ -457,7 +506,16 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     setStreetError(null);
     // Clear street markers when stop changes
     setStreetMarkers([]);
-  }, [selectedStop?.route.id, selectedStop?.stop.id, homeAddress]);
+  }, [selectedStop?.route.id, selectedStop?.stop.id]);
+
+  // Handle stop dialog closing animation
+  const handleCloseStopDialog = () => {
+    setIsStopDialogClosing(true);
+    setTimeout(() => {
+      clearSelectedStop();
+      setIsStopDialogClosing(false);
+    }, 125); // Match animation duration
+  };
 
   // Zoom to highlighted street bounds (only if feature is enabled)
   useEffect(() => {
@@ -759,6 +817,18 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                   draggable={editingMode}
                   eventHandlers={{
                     click: () => {
+                      // For school stops, show the school dialog instead of the stop dialog
+                      if (stop.isSchoolStop) {
+                        if (selectedSchoolId) {
+                          // Call the callback to show the school dialog
+                          if (onSchoolStopClick) {
+                            onSchoolStopClick(selectedSchoolId);
+                          }
+                        }
+                        clearSelectedStop();
+                        return;
+                      }
+                      // For regular stops, open the stop dialog
                       selectStop(route, stop, stopNumber);
                     },
                     ...(editingMode ? {
@@ -867,13 +937,17 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       </MapContainer>
 
       {/* Stop info overlay at bottom */}
-      {selectedStop && (
+      {(selectedStop || isStopDialogClosing) && selectedStop && (
         <div
           ref={stopSheetRef}
           style={{
             position: 'absolute',
             ...(isMobile ? {
-              bottom: swipeCurrentY !== null ? Math.min(0, swipeCurrentY - (swipeStartY || 0)) : 0,
+              bottom: isStopDialogClosing 
+                ? '-100%' 
+                : swipeCurrentY !== null 
+                  ? Math.min(0, swipeCurrentY - (swipeStartY || 0)) 
+                  : 0,
               left: 0,
               right: 0,
               maxWidth: '100%',
@@ -885,7 +959,6 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
               overflowY: swipeStartY === null ? 'auto' : 'hidden',
               minWidth: 'auto',
               touchAction: 'pan-y',
-              transition: swipeStartY === null ? 'bottom 0.3s ease-out' : 'none',
             } : {
               bottom: '1rem',
               right: '1rem',
@@ -897,9 +970,13 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             padding: '1rem 1.5rem',
             boxShadow: '0 4px 12px var(--shadow-hover)',
             zIndex: 1000,
-            border: `2px solid ${selectedStop.route.color}`,
-            transition: swipeStartY === null ? 'background-color 0.3s ease' : 'none',
-            animation: isMobile && swipeStartY === null ? 'slideUp 0.3s ease-out' : undefined,
+            border: 'none',
+            transition: swipeStartY === null 
+              ? 'background-color 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15), bottom 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' 
+              : 'none',
+            animation: isMobile && swipeStartY === null && !isStopDialogClosing 
+              ? 'slideUp 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' 
+              : undefined,
           }}
           onTouchStart={(e) => {
             if (!isMobile) return;
@@ -920,7 +997,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             const swipeDistance = swipeCurrentY! - swipeStartY;
             // If swiped down more than 100px, close the sheet
             if (swipeDistance > 100) {
-              clearSelectedStop();
+              handleCloseStopDialog();
             }
             // Reset swipe state
             setSwipeStartY(null);
@@ -950,7 +1027,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           )}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
             <div>
-              <div style={{ fontWeight: 'bold', fontSize: '16px', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <div style={{ fontWeight: 'bold', fontSize: '20px', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                 <span style={{ color: 'var(--text-primary)' }}>{selectedStop.route.name}</span>
                 {selectedStop.stopNumber > 0 && (
                   <span style={{ 
@@ -970,7 +1047,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                   <span>🏫</span> School Loading Zone
                 </div>
               )}
-              <div style={{ fontSize: '15px', fontWeight: '500', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
+              <div style={{ fontSize: '15px', fontWeight: '500', marginTop: '0.75rem', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
                 {selectedStop.stop.isSchoolStop && selectedStop.stop.schoolName ? (
                   selectedStop.stop.schoolName
                 ) : enableStreetHighlighting ? (
@@ -1233,15 +1310,19 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                 </button>
               )}
               <button
-                onClick={() => clearSelectedStop()}
+                onClick={handleCloseStopDialog}
                 style={{
                   background: 'none',
                   border: 'none',
-                  fontSize: '20px',
+                  fontSize: '32px',
                   cursor: 'pointer',
                   color: 'var(--text-tertiary)',
                   padding: '0',
                   lineHeight: '1',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: '-2px',
                   transition: 'color 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
@@ -1252,7 +1333,35 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                 }}
                 title="Close"
               >
-                ×
+                <div style={{
+                  width: '20px',
+                  height: '20px',
+                  position: 'relative',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  <span style={{
+                    display: 'block',
+                    height: '1.5px',
+                    width: '100%',
+                    backgroundColor: 'currentColor',
+                    borderRadius: '2px',
+                    position: 'absolute',
+                    transform: 'rotate(45deg)',
+                    transformOrigin: 'center',
+                  }} />
+                  <span style={{
+                    display: 'block',
+                    height: '1.5px',
+                    width: '100%',
+                    backgroundColor: 'currentColor',
+                    borderRadius: '2px',
+                    position: 'absolute',
+                    transform: 'rotate(-45deg)',
+                    transformOrigin: 'center',
+                  }} />
+                </div>
               </button>
             </div>
           </div>

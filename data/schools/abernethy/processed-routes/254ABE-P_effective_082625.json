@@ -19,7 +19,8 @@
         45.5058868
       ],
       "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
-      "schoolName": "Abernethy"
+      "schoolName": "Abernethy",
+      "neighborhood": "Ladd's Addition"
     },
     {
       "id": "stop-1",
@@ -44,12 +45,18 @@
       "originalLine": "2:43 pm1765 SE 32ND PL (EDWARDS SCHOOL) [E]254ABE-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6319731,
-        45.5101305
+        -122.63212589999999,
+        45.5102957
       ],
       "displayName": "1765 SE 32nd Pl, Portland, OR 97214, USA",
       "placeId": "EigxNzY1IFNFIDMybmQgUGwsIFBvcnRsYW5kLCBPUiA5NzIxNCwgVVNBIjESLwoUChIJ7bmQ0I-glVQRNCy9BVQ8vIQQ5Q0qFAoSCYXnMNePoJVUEf9pvi4KQsfD",
-      "neighborhood": "Richmond"
+      "neighborhood": "Richmond",
+      "snappedFromHouse": true,
+      "originalCoordinates": [
+        -122.6319731,
+        45.5101305
+      ],
+      "snapDistance": 21.890737340313756
     },
     {
       "id": "stop-3",
@@ -152,5 +159,11 @@
       45.5103,
       -122.63213
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 1,
+    "skipped": 2,
+    "errors": 0,
+    "total": 4
+  }
 }

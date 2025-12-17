@@ -19,7 +19,8 @@
         45.4862341
       ],
       "displayName": "5109 SE 66th Ave, Portland, OR 97206, USA",
-      "schoolName": "Arleta"
+      "schoolName": "Arleta",
+      "neighborhood": "Mount Scott - Arleta"
     },
     {
       "id": "stop-1",
@@ -389,5 +390,11 @@
       45.48267,
       -122.56784
     ]
-  ]
+  ],
+  "snapStats": {
+    "snapped": 0,
+    "skipped": 6,
+    "errors": 0,
+    "total": 7
+  }
 }

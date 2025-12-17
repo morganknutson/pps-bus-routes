@@ -44,7 +44,8 @@ const sections: Section[] = [
       { id: 'scheduler-service', title: '10. SchedulerService' },
       { id: 'verification-service', title: '11. VerificationService' },
       { id: 'google-sites-service', title: '12. GoogleSitesService' },
-      { id: 'job-queue-system', title: '13. Job Queue System' },
+      { id: 'restart-service', title: '13. RestartService' },
+      { id: 'job-queue-system', title: '14. Job Queue System' },
     ],
   },
   {
@@ -1777,9 +1778,64 @@ export function TechPage() {
               </div>
             </div>
 
+            <div id="restart-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                13. RestartService
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Handles process restarts for backend and frontend servers using script-based approach. Allows remote restart of server processes via API endpoints.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Methods:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>restartProcess(processName)</strong> - Restart a server process:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Valid process names: <code>'pps-backend'</code> or <code>'pps-frontend'</code></li>
+                      <li>Uses script-based restart approach (not PM2 API)</li>
+                      <li>Runs appropriate restart script from <code>scripts/</code> directory</li>
+                      <li>Returns success/failure status with message</li>
+                    </ul>
+                  </li>
+                  <li><strong>getProcessStatus(processName)</strong> - Get status of a server process:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Checks if process is running on expected port</li>
+                      <li>Backend: Port 3001, Frontend: Port 5173</li>
+                      <li>Uses <code>lsof</code> command to check port usage</li>
+                      <li>Returns process status or "not found" if process not running</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>API Endpoints:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><code>POST /api/servers/restart</code> - Restart a server process
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Body: <code>{'{ "processName": "pps-backend" | "pps-frontend" }'}</code></li>
+                      <li>Response: <code>{'{ "success": true/false, "message": "..." }'}</code></li>
+                    </ul>
+                  </li>
+                  <li><code>GET /api/servers/status/:processName</code> - Get process status
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Response: <code>{'{ "success": true/false, "status": {...}, "message": "..." }'}</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Implementation Details:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li>Uses Node.js <code>spawn</code> to run restart scripts</li>
+                  <li>Scripts located in <code>scripts/restart-backend.js</code> and <code>scripts/restart-frontend.js</code></li>
+                  <li>Status checking uses <code>lsof</code> system command to check port occupancy</li>
+                  <li>Designed for development and production environments without PM2 dependency</li>
+                </ul>
+              </div>
+            </div>
+
             <div id="job-queue-system" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                13. Job Queue System
+                14. Job Queue System
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Background job processing system for PDF synchronization and other async tasks. Uses BullMQ with Redis (optional) or falls back to in-memory queue for development.
@@ -2017,6 +2073,7 @@ export function TechPage() {
                   <li><code>POST /api/verification/verify/{'{schoolId}'}</code> - Verify specific school</li>
                   <li><code>POST /api/verification/verify-all</code> - Verify all schools</li>
                   <li><code>GET /api/pdf-status/status</code> - Get PDF status report</li>
+                  <li><code>GET /api/pdfs/{'{schoolId}'}/{'{filename}'}</code> - Serve PDF file for a school</li>
                   <li><code>POST /api/pdf-sync/fetch/{'{schoolId}'}</code> - Fetch PDFs for a school</li>
                   <li><code>GET /api/pdf-sync/status/{'{schoolId}'}</code> - Get sync status for a school</li>
                   <li><code>GET /api/pdf-sync/status</code> - Get sync status for all schools</li>
@@ -2029,6 +2086,8 @@ export function TechPage() {
                   <li><code>POST /api/jobs/{'{jobId}'}/retry</code> - Retry a failed job</li>
                   <li><code>GET /api/jobs/stats</code> - Get job queue statistics</li>
                   <li><code>GET /api/jobs/school/{'{schoolId}'}</code> - Get jobs for a specific school</li>
+                  <li><code>POST /api/servers/restart</code> - Restart a server process (pps-backend or pps-frontend)</li>
+                  <li><code>GET /api/servers/status/:processName</code> - Get status of a server process</li>
                   <li><code>GET /api/health</code> - Health check endpoint</li>
                 </ul>
               </div>
