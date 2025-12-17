@@ -51,14 +51,49 @@ export function HomePage() {
   const [error, setError] = useState<string | null>(null);
 
   // Set body background to match home page on mount and cleanup on unmount
+  // Also prevent scrolling on the home page
   useEffect(() => {
     const originalBackground = document.body.style.backgroundColor;
+    const originalOverflow = document.body.style.overflow;
+    const originalPosition = document.body.style.position;
+    const originalHtmlBackground = document.documentElement.style.backgroundColor;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalRootBackground = document.getElementById('root')?.style.backgroundColor;
+    const originalRootOverflow = document.getElementById('root')?.style.overflow;
+    
+    // Set background colors - ensure they extend beyond viewport
     document.body.style.backgroundColor = '#133A60';
+    document.body.style.minHeight = '100vh';
+    document.body.style.minHeight = '100dvh'; // Dynamic viewport height
     document.documentElement.style.backgroundColor = '#133A60';
+    document.documentElement.style.minHeight = '100vh';
+    document.documentElement.style.minHeight = '100dvh';
+    
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.style.backgroundColor = '#133A60';
+      rootElement.style.overflow = 'hidden';
+    }
+    
+    // Prevent body/html scrolling - only allow scrolling within the HomePage container
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.documentElement.style.overflow = 'hidden';
     
     return () => {
       document.body.style.backgroundColor = originalBackground;
-      document.documentElement.style.backgroundColor = '';
+      document.body.style.overflow = originalOverflow;
+      document.body.style.position = originalPosition;
+      document.body.style.minHeight = '';
+      document.body.style.width = '';
+      document.documentElement.style.backgroundColor = originalHtmlBackground;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.documentElement.style.minHeight = '';
+      if (rootElement) {
+        rootElement.style.backgroundColor = originalRootBackground || '';
+        rootElement.style.overflow = originalRootOverflow || '';
+      }
     };
   }, []);
 
@@ -390,8 +425,8 @@ export function HomePage() {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      minHeight: '100vh',
-      height: '100vh',
+      minHeight: '100dvh', // Dynamic viewport height for mobile
+      height: '100dvh', // Dynamic viewport height for mobile
       padding: '2rem',
       backgroundColor: '#133A60',
       position: 'fixed',
@@ -401,6 +436,9 @@ export function HomePage() {
       bottom: 0,
       width: '100%',
       overflowY: 'auto',
+      overflowX: 'hidden',
+      WebkitOverflowScrolling: 'touch',
+      zIndex: 1,
     }}>
       <div style={{
         width: '100%',
