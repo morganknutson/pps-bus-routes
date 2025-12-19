@@ -317,11 +317,13 @@ export function RouteListBase({
       <div
         key={route.id}
         style={{
-          border: '1px solid var(--border-color)',
+          border: '1px solid',
+          borderColor: isRouteSelected ? 'transparent' : 'var(--border-color)',
           borderRadius: '4px',
-          backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-primary)',
+          backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
+          boxShadow: isRouteSelected ? '0 1px 3px var(--shadow-large)' : 'none',
           overflow: 'hidden',
-          transition: 'background-color 0.3s ease, border-color 0.3s ease',
+          transition: 'background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'stretch' }}>
@@ -372,14 +374,14 @@ export function RouteListBase({
                     }}
                   >
                     {route.isSelected && (
-                      <i className="fas fa-check" style={{ fontSize: '10px', color: 'white' }}></i>
+                      <i className="fas fa-check" style={{ fontSize: '8px', color: 'white', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}></i>
                     )}
                   </div>
                 </div>
               )}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: '500', marginBottom: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  <span style={{ color: 'var(--text-primary)', fontSize: '14px', marginTop: '1px' }}>{route.name}</span>
+                  <span style={{ color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', fontSize: '14px', marginTop: '1px' }}>{route.name}</span>
                 </div>
                 {config.showGeocodingStats && route.geocodingProgress ? (
                   <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
@@ -552,7 +554,7 @@ export function RouteListBase({
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
+    <div style={{ padding: '0.5rem 1rem 1rem 1rem' }}>
       {error && (
         <div style={{ color: '#ff6b6b', marginBottom: '1rem', fontSize: '14px' }}>
           {error}

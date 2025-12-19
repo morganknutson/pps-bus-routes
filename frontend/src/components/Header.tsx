@@ -50,18 +50,16 @@ export function Header({ rightContent }: HeaderProps = {}) {
             ) : (
               <span 
                 className="logo-text"
-                style={isExplorerPage ? { color: 'white' } : {}}
+                style={{ color: 'white' }}
               >
                 Portland Public School Bus Routes
               </span>
             )}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-            {isExplorerPage && (
-              <div style={{ color: 'white' }}>
-                <DarkModeToggle />
-              </div>
-            )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', paddingRight: '0' }}>
+            <div style={{ color: 'white', margin: 0, padding: 0 }}>
+              <DarkModeToggle />
+            </div>
             {rightContent}
             {isAdminPage && (
               <>

@@ -59,6 +59,17 @@ const sections: Section[] = [
     ],
   },
   {
+    id: 'url-state-sync',
+    title: 'URL & State Synchronization',
+    subsections: [
+      { id: 'url-schema', title: '1. URL Schema & Hierarchy' },
+      { id: 'ui-url-interactions', title: '2. UI-to-URL Interactions' },
+      { id: 'url-to-ui-restoration', title: '3. URL-to-UI Restoration' },
+      { id: 'context-aware-navigation', title: '4. Context-Aware Navigation' },
+      { id: 'state-logic-rules', title: '5. Critical State Rules' },
+    ],
+  },
+  {
     id: 'data-examples',
     title: 'Complete Data Entry Examples',
     subsections: [
@@ -2260,6 +2271,108 @@ export function TechPage() {
   ]
 }`}
                 </pre>
+              </div>
+            </div>
+          </section>
+
+          <section id="url-state-sync" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '24px' }}>
+              URL & State Synchronization
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '20px' }}>
+              The application maintains a bidirectional synchronization between the complex UI state and the browser URL. 
+              This ensures that the exact view—including selected school, tab, direction filter, multiple route selections, 
+              and even a focused stop—is always bookmarkable and shareable.
+            </p>
+
+            <div id="url-schema" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                1. URL Schema & Hierarchy
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                The application uses a nested, hierarchical URL structure where the <code>schoolId</code> is the primary key.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', listStyleType: 'none', paddingLeft: 0 }}>
+                  <li style={{ marginBottom: '10px' }}><strong>Schools Index:</strong> <code>/bus-route-explorer/schools</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Selected School:</strong> <code>/bus-route-explorer/{'{schoolId}'}</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Routes View:</strong> <code>/bus-route-explorer/{'{schoolId}'}/routes</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Direction Filter:</strong> <code>/bus-route-explorer/{'{schoolId}'}/routes/morning</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Selected Routes:</strong> <code>/bus-route-explorer/{'{schoolId}'}/routes/morning/238,254</code></li>
+                  <li><strong>Focused Stop:</strong> <code>/bus-route-explorer/{'{schoolId}'}/routes/morning/238,254/254-1</code></li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="ui-url-interactions" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                2. UI-to-URL Interactions
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Every state-changing user interaction is mirrored in the URL to ensure consistency.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>School Selection:</strong> Clicking a school in the list or a pin on the map updates the URL to <code>/{'{schoolId}'}</code>.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Tab Switching:</strong> Switching between "Schools" and "Routes" tabs toggles the <code>/routes</code> segment.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Route Toggling:</strong> Selecting/deselecting routes in the list updates the comma-separated route names segment.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Direction Filter:</strong> Toggling "Morning", "Afternoon", or "Both" updates the direction segment.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Stop Selection:</strong> Clicking a bus stop adds the <code>{'{routeName}-{stopNumber}'}</code> identifier to the end of the URL.</li>
+                  <li><strong>Deselection:</strong> Closing a dialog (school or stop) removes the corresponding segment from the URL, moving the user "up" the hierarchy.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="url-to-ui-restoration" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                3. URL-to-UI Restoration (The Sync Loop)
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                When a user visits a direct URL, the application performs a multi-stage sync to restore the UI state.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ol style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Initial Parse:</strong> The <code>parseUrlPath</code> utility extracts the school, tab, direction, routes, and stop.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>School Load:</strong> If a <code>schoolId</code> is present, it is selected immediately.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Pre-Selection:</strong> Before routes are even set in the store, <code>applyUrlStateToRoutes</code> calculates their initial <code>isSelected</code> state based on the URL. This prevents the "select all" flicker.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Strict Selection:</strong> If the URL contains specific route names, ONLY those routes are selected for the current direction.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Default "Select All":</strong> If the user navigates to <code>/routes</code> without specific route names, the app defaults to selecting all routes for the current direction.</li>
+                  <li><strong>Stop Highlighting:</strong> Once routes are loaded, the app searches for the stop matching <code>{'{routeName}-{stopNumber}'}</code> and selects it, triggering the zoom behavior.</li>
+                </ol>
+              </div>
+            </div>
+
+            <div id="context-aware-navigation" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                4. Context-Aware Navigation
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                The application logic adapts its behavior based on the current tab and device context.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Preserving School Context:</strong> Closing the school info dialog while in the "Routes" tab will <em>not</em> deselect the school. This prevents the user from being kicked back to the schools index unintentionally.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Clean Tab Transitions:</strong> Clicking "View Routes" from a school dialog explicitly clears any previously selected stop to ensure the map zooms out to show all routes for that school.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Direction Switching:</strong> When switching from Morning to Afternoon, the app attempts to preserve the current stop selection by matching the street address in the new direction's route.</li>
+                  <li><strong>Mobile Optimization:</strong> Selecting a school from the sidebar on mobile devices automatically closes the sidebar to maximize map visibility.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="state-logic-rules" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                5. Critical State Rules
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                To prevent infinite loops and race conditions, the sync logic follows these strict rules:
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Atomic Updates:</strong> Route selections are updated in a single store action (<code>setSelectedRoutes</code>) rather than multiple individual toggles.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Direction Awareness:</strong> Route selections in the URL only affect the <em>current</em> direction filter. Selections in the "other" direction are preserved in the background state.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Navigation Locking:</strong> A <code>isNavigatingRef</code> flag prevents the app from re-syncing from the URL while it is in the middle of updating the URL from a user action.</li>
+                  <li><strong>Upcoming Route Handling:</strong> Routes and stops with future effective dates are uniquely identified with an <code>-upcoming</code> suffix in both the store and the URL (e.g., <code>104-upcoming/104-1-upcoming</code>).</li>
+                </ul>
               </div>
             </div>
           </section>

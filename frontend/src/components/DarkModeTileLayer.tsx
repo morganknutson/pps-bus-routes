@@ -1,41 +1,40 @@
 import { useEffect, useRef } from 'react';
 import { TileLayer, useMap } from 'react-leaflet';
-import { useTheme } from '../hooks/useTheme';
+import { useDarkMode } from '../hooks/useDarkMode';
 import L from 'leaflet';
 
 // Component that ensures map invalidates size after theme change
 function TileLayerUpdater() {
-  const { theme, effectiveTheme } = useTheme();
+  const { isDarkMode } = useDarkMode();
   const map = useMap();
-  const prevThemeRef = useRef<string>(effectiveTheme);
+  const prevDarkModeRef = useRef<boolean>(isDarkMode);
   
   useEffect(() => {
-    // Only update if effective theme actually changed
-    if (prevThemeRef.current === effectiveTheme) {
+    // Only update if dark mode actually changed
+    if (prevDarkModeRef.current === isDarkMode) {
       return;
     }
     
-    console.log('[DarkModeTileLayer] Effective theme changed from', prevThemeRef.current, 'to', effectiveTheme, '(theme:', theme, ')');
-    prevThemeRef.current = effectiveTheme;
+    console.log('[DarkModeTileLayer] Dark mode changed from', prevDarkModeRef.current, 'to', isDarkMode);
+    prevDarkModeRef.current = isDarkMode;
     
     // Invalidate map size to ensure tiles redraw properly
     // Use a small timeout to allow the new tile layer to mount first
     setTimeout(() => {
       map.invalidateSize();
     }, 100);
-  }, [theme, effectiveTheme, map]);
+  }, [isDarkMode, map]);
   
   return null;
 }
 
 export function DarkModeTileLayer() {
-  const { effectiveTheme } = useTheme();
-  const isDarkMode = effectiveTheme === 'dark';
+  const { isDarkMode } = useDarkMode();
   
   return (
     <>
       <TileLayer
-        key={effectiveTheme} // Force re-render when effective theme changes
+        key={isDarkMode ? 'dark' : 'light'} // Force re-render when dark mode changes
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url={
           isDarkMode

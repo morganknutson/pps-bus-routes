@@ -152,7 +152,7 @@ export function SchoolList({
         }
       `}</style>
       {/* Search */}
-      <div style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
+      <div style={{ padding: '0.5rem 1rem 1rem 1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
         <div style={{ position: 'relative' }}>
           <input
             type="text"

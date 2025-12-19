@@ -14,10 +14,9 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
         width: '100%',
         padding: '0.75rem 1rem',
         paddingTop: 'calc(0.75rem + 4px)',
-        paddingBottom: 'calc(0.75rem + 6px)',
+        paddingBottom: 'calc(0.5rem + 6px)',
         backgroundColor: 'var(--bg-secondary)',
-        borderRadius: '6px',
-        borderBottom: '1px solid var(--border-color)',
+        borderBottom: 'none',
         overflow: 'hidden',
       }}
     >

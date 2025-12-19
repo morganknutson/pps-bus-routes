@@ -120,7 +120,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {selectedSchool && (
-        <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
+        <div style={{ padding: '0.5rem 1rem 1rem 1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
           <div style={{ position: 'relative' }}>
             <div
               style={{
@@ -186,8 +186,8 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
       )}
       {/* Direction filter toggle */}
       <div style={{
-        padding: '0.75rem 0.75rem', // Reduced side padding to make toggle wider
-        borderBottom: '1px solid var(--border-color)',
+        padding: '0.75rem 0.75rem 0.5rem 0.75rem', // Reduced bottom padding to reduce space
+        borderBottom: 'none',
         backgroundColor: 'var(--bg-secondary)',
         flexShrink: 0,
         transition: 'background-color 0.3s ease, border-color 0.3s ease',

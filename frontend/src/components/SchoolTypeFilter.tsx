@@ -84,7 +84,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
             }}
           >
             {filters.elementary && (
-              <i className="fas fa-check" style={{ fontSize: '10px', color: 'white' }}></i>
+              <i className="fas fa-check" style={{ fontSize: '8px', color: 'white', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}></i>
             )}
           </div>
           <span>Elementary</span>
@@ -116,7 +116,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
             }}
           >
             {filters.middle && (
-              <i className="fas fa-check" style={{ fontSize: '10px', color: 'white' }}></i>
+              <i className="fas fa-check" style={{ fontSize: '8px', color: 'white', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}></i>
             )}
           </div>
           <span>Middle</span>
@@ -148,7 +148,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
             }}
           >
             {filters.high && (
-              <i className="fas fa-check" style={{ fontSize: '10px', color: 'white' }}></i>
+              <i className="fas fa-check" style={{ fontSize: '8px', color: 'white', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}></i>
             )}
           </div>
           <span>High</span>
