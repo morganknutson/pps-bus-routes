@@ -24,7 +24,6 @@ export function DataPageHeader({
   schedulerLoading = false,
 }: DataPageHeaderProps) {
   const location = useLocation();
-  const isRoutesActive = location.pathname === '/data';
   const isAllSchoolsActive = location.pathname === '/data/schools';
 
   return (
@@ -43,31 +42,6 @@ export function DataPageHeader({
       <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
         <div style={{ fontSize: '18px', fontWeight: '600' }}>{title}</div>
         <nav style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-          <Link
-            to="/data"
-            style={{
-              color: isRoutesActive ? '#4ECDC4' : '#000',
-              textDecoration: 'none',
-              fontSize: '0.95rem',
-              fontWeight: isRoutesActive ? '600' : '500',
-              transition: 'text-decoration 0.2s ease',
-              padding: '0.5rem 0',
-              borderBottom: isRoutesActive ? '2px solid #4ECDC4' : '2px solid transparent',
-              marginBottom: '-2px',
-            }}
-            onMouseEnter={(e) => {
-              if (!isRoutesActive) {
-                e.currentTarget.style.textDecoration = 'underline';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isRoutesActive) {
-                e.currentTarget.style.textDecoration = 'none';
-              }
-            }}
-          >
-            Routes
-          </Link>
           <Link
             to="/data/schools"
             style={{
