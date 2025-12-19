@@ -3,81 +3,505 @@
     "schoolId": "abernethy",
     "schoolName": "Abernethy",
     "placeId": "ChIJa069o3cKlVQRFWMZ0_zD7hg",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:28.298Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg",
+        "title": "File:OOjs UI icon edit-ltr-progressive.svg",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/9/96/Symbol_category_class.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/9/96/Symbol_category_class.svg",
+        "title": "File:Symbol category class.svg",
+        "width": 180,
+        "height": 185
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg",
+        "title": "File:Flag of Oregon.svg",
+        "width": 768,
+        "height": 512
+      }
+    ],
+    "photoCount": 3,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:35:48.419Z"
   },
   "access": {
     "schoolId": "access",
     "schoolName": "ACCESS",
     "placeId": "ChIJHZwZgfsKlVQR8I5LYMSbQIs",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:28.557Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/1886_Pioneer_Post_Office.jpeg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/1886_Pioneer_Post_Office.jpeg",
+        "title": "File:1886 Pioneer Post Office.jpeg",
+        "width": 590,
+        "height": 430
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/2015_Shamrock_Run.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/6/66/2015_Shamrock_Run.jpg",
+        "title": "File:2015 Shamrock Run.jpg",
+        "width": 3264,
+        "height": 2448
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Abies_lasiocarpa_0775.JPG",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Abies_lasiocarpa_0775.JPG",
+        "title": "File:Abies lasiocarpa 0775.JPG",
+        "width": 4272,
+        "height": 2848
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Adidas_Village_Giant_Shoes.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Adidas_Village_Giant_Shoes.jpg",
+        "title": "File:Adidas Village Giant Shoes.jpg",
+        "width": 4608,
+        "height": 3072
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Burnside_in_1937_%288516830500%29.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/8/87/Burnside_in_1937_%288516830500%29.jpg",
+        "title": "File:Burnside in 1937 (8516830500).jpg",
+        "width": 981,
+        "height": 690
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:35:49.961Z"
   },
   "ainsworth": {
     "schoolId": "ainsworth",
     "schoolName": "Ainsworth",
     "placeId": "ChIJBfTLTDsKlVQR68xcJ3RrSVw",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:28.811Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "title": "File:Commons-logo.svg",
+        "width": 1024,
+        "height": 1376
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/%281882%29_PUBLIC_SCHOOL_BUILDINGS%2C_PORTLAND%2C_OREGON.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/4/41/%281882%29_PUBLIC_SCHOOL_BUILDINGS%2C_PORTLAND%2C_OREGON.jpg",
+        "title": "File:(1882) PUBLIC SCHOOL BUILDINGS, PORTLAND, OREGON.jpg",
+        "width": 2237,
+        "height": 1385
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Couch_School-1.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Couch_School-1.jpg",
+        "title": "File:Couch School-1.jpg",
+        "width": 5197,
+        "height": 3465
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Enrollment_data_from_1999-2019.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/Enrollment_data_from_1999-2019.jpg",
+        "title": "File:Enrollment data from 1999-2019.jpg",
+        "width": 3354,
+        "height": 1790
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg",
+        "title": "File:Flag of Oregon.svg",
+        "width": 768,
+        "height": 512
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:35:51.466Z"
   },
   "alameda": {
     "schoolId": "alameda",
     "schoolName": "Alameda",
     "placeId": "ChIJ1_jPLSmnlVQR9wiqzPhNGgI",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:29.081Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/9/99/Question_book-new.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/9/99/Question_book-new.svg",
+        "title": "File:Question book-new.svg",
+        "width": 512,
+        "height": 399
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/9/96/Symbol_category_class.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/9/96/Symbol_category_class.svg",
+        "title": "File:Symbol category class.svg",
+        "width": 180,
+        "height": 185
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Alameda01.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Alameda01.jpg",
+        "title": "File:Alameda01.jpg",
+        "width": 400,
+        "height": 300
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/AlamedaNeighborhood.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c1/AlamedaNeighborhood.jpg",
+        "title": "File:AlamedaNeighborhood.jpg",
+        "width": 400,
+        "height": 300
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg",
+        "title": "File:Flag of Oregon.svg",
+        "width": 768,
+        "height": 512
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:35:52.952Z"
   },
   "arleta": {
     "schoolId": "arleta",
     "schoolName": "Arleta",
     "placeId": "ChIJG3rJ8xOglVQRAdzqCRO9tYs",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:29.333Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "title": "File:Commons-logo.svg",
+        "width": 1024,
+        "height": 1376
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/6300_block_of_SE_Foster_Rd_-_south_side.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/6300_block_of_SE_Foster_Rd_-_south_side.jpg",
+        "title": "File:6300 block of SE Foster Rd - south side.jpg",
+        "width": 800,
+        "height": 533
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/6500_block_of_SE_Foster_Rd_-_southside.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/6500_block_of_SE_Foster_Rd_-_southside.jpg",
+        "title": "File:6500 block of SE Foster Rd - southside.jpg",
+        "width": 800,
+        "height": 533
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Arleta_K-8_School%2C_Portland%2C_Oregon.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Arleta_K-8_School%2C_Portland%2C_Oregon.jpg",
+        "title": "File:Arleta K-8 School, Portland, Oregon.jpg",
+        "width": 1980,
+        "height": 800
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Laurelwood_UMC%2C_Portland%2C_Oregon.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Laurelwood_UMC%2C_Portland%2C_Oregon.jpg",
+        "title": "File:Laurelwood UMC, Portland, Oregon.jpg",
+        "width": 1628,
+        "height": 800
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:35:54.426Z"
   },
   "astor": {
     "schoolId": "astor",
     "schoolName": "Astor",
     "placeId": "ChIJzbsJ3fOnlVQRcXbeBO9Snnc",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:29.593Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "title": "File:Commons-logo.svg",
+        "width": 1024,
+        "height": 1376
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Appletons%27_Astor_John_Jacob_signature.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Appletons%27_Astor_John_Jacob_signature.jpg",
+        "title": "File:Appletons' Astor John Jacob signature.jpg",
+        "width": 505,
+        "height": 114
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/John_Jacob_Astor.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/John_Jacob_Astor.jpg",
+        "title": "File:John Jacob Astor.jpg",
+        "width": 1643,
+        "height": 1998
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/John_Wesley_Jarvis_-_John_Jacob_Astor_-_Google_Art_Project.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/John_Wesley_Jarvis_-_John_Jacob_Astor_-_Google_Art_Project.jpg",
+        "title": "File:John Wesley Jarvis - John Jacob Astor - Google Art Project.jpg",
+        "width": 4948,
+        "height": 5994
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mrs._John_Jacob_Astor_%28Sarah_Todd%29.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Mrs._John_Jacob_Astor_%28Sarah_Todd%29.jpg",
+        "title": "File:Mrs. John Jacob Astor (Sarah Todd).jpg",
+        "width": 1252,
+        "height": 1536
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:35:55.910Z"
   },
   "atkinson": {
     "schoolId": "atkinson",
     "schoolName": "Atkinson",
     "placeId": "ChIJCdjr8V6glVQRICgZSkWS03I",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:29.853Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "title": "File:Commons-logo.svg",
+        "width": 1024,
+        "height": 1376
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/%281882%29_PUBLIC_SCHOOL_BUILDINGS%2C_PORTLAND%2C_OREGON.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/4/41/%281882%29_PUBLIC_SCHOOL_BUILDINGS%2C_PORTLAND%2C_OREGON.jpg",
+        "title": "File:(1882) PUBLIC SCHOOL BUILDINGS, PORTLAND, OREGON.jpg",
+        "width": 2237,
+        "height": 1385
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Couch_School-1.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Couch_School-1.jpg",
+        "title": "File:Couch School-1.jpg",
+        "width": 5197,
+        "height": 3465
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Enrollment_data_from_1999-2019.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/Enrollment_data_from_1999-2019.jpg",
+        "title": "File:Enrollment data from 1999-2019.jpg",
+        "width": 3354,
+        "height": 1790
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Oregon.svg",
+        "title": "File:Flag of Oregon.svg",
+        "width": 768,
+        "height": 512
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:35:57.436Z"
   },
   "beach": {
     "schoolId": "beach",
     "schoolName": "Beach",
     "placeId": "ChIJ3zbaPnKnlVQRi0z01yWFvhc",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:30.107Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "title": "File:Commons-logo.svg",
+        "width": 1024,
+        "height": 1376
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/DorsetWeymouthPortland.png",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/DorsetWeymouthPortland.png",
+        "title": "File:DorsetWeymouthPortland.png",
+        "width": 200,
+        "height": 139
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Dorset_UK_location_map.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Dorset_UK_location_map.svg",
+        "title": "File:Dorset UK location map.svg",
+        "width": 1425,
+        "height": 990
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Dorset_geology.png",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/5/56/Dorset_geology.png",
+        "title": "File:Dorset geology.png",
+        "width": 1122,
+        "height": 806
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Dorset_transport.png",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Dorset_transport.png",
+        "title": "File:Dorset transport.png",
+        "width": 1118,
+        "height": 766
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:35:58.978Z"
   },
   "beaumont": {
     "schoolId": "beaumont",
     "schoolName": "Beaumont",
     "placeId": "ChIJi7XWddSmlVQRYxwxhYuDp1w",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:30.361Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Beaumont-Wilshire%28boundary%29.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Beaumont-Wilshire%28boundary%29.jpg",
+        "title": "File:Beaumont-Wilshire(boundary).jpg",
+        "width": 1650,
+        "height": 2373
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Beaumont-wilshire_%28topo%29.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Beaumont-wilshire_%28topo%29.jpg",
+        "title": "File:Beaumont-wilshire (topo).jpg",
+        "width": 472,
+        "height": 510
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Beaumont_Middle_School.JPG",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/5/57/Beaumont_Middle_School.JPG",
+        "title": "File:Beaumont Middle School.JPG",
+        "width": 2048,
+        "height": 1536
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Beaumont_Village_%28NE_Fremont%29_-1.JPG",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Beaumont_Village_%28NE_Fremont%29_-1.JPG",
+        "title": "File:Beaumont Village (NE Fremont) -1.JPG",
+        "width": 2048,
+        "height": 1536
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Beaumont_Village_%28NE_Fremont%29_-3.JPG",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Beaumont_Village_%28NE_Fremont%29_-3.JPG",
+        "title": "File:Beaumont Village (NE Fremont) -3.JPG",
+        "width": 2048,
+        "height": 1536
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:36:00.520Z"
   },
   "benson": {
     "schoolId": "benson",
     "schoolName": "Benson",
     "placeId": "ChIJqWVGVLCglVQRsySyu7v6r3c",
-    "photos": [],
-    "photoCount": 0,
-    "lastUpdated": "2025-12-17T10:25:30.630Z"
+    "photos": [
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/4/41/Bensonlogo.png",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/4/41/Bensonlogo.png",
+        "title": "File:Bensonlogo.png",
+        "width": 314,
+        "height": 315
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/4/4a/Commons-logo.svg",
+        "title": "File:Commons-logo.svg",
+        "width": 1024,
+        "height": 1376
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/BensonHighPano.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ad/BensonHighPano.jpg",
+        "title": "File:BensonHighPano.jpg",
+        "width": 7230,
+        "height": 1200
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Benson_High_School_Portland_Oregon_1920.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/Benson_High_School_Portland_Oregon_1920.jpg",
+        "title": "File:Benson High School Portland Oregon 1920.jpg",
+        "width": 712,
+        "height": 524
+      },
+      {
+        "source": "wikipedia",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Benson_High_School_main_entrance_-_Portland%2C_Oregon_%282019%29.jpg",
+        "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Benson_High_School_main_entrance_-_Portland%2C_Oregon_%282019%29.jpg",
+        "title": "File:Benson High School main entrance - Portland, Oregon (2019).jpg",
+        "width": 4878,
+        "height": 3230
+      }
+    ],
+    "photoCount": 5,
+    "sources": [
+      "wikipedia"
+    ],
+    "lastUpdated": "2025-12-17T10:36:02.034Z"
   },
   "beverly-cleary": {
     "schoolId": "beverly-cleary",

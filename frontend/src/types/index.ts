@@ -18,7 +18,6 @@ export interface Route {
   direction?: 'Morning' | 'Afternoon' | null; // "Morning" or "Afternoon"
   filename?: string;
   stops: Stop[];
-  neighborhoods?: string[]; // Aggregated unique neighborhoods from all stops
   color: string;
   isSelected: boolean;
   geocodingProgress?: {
@@ -39,12 +38,11 @@ export interface School {
   name: string;
   address?: string; // Physical address of the school
   coordinates?: [number, number]; // [lng, lat] geocoded coordinates
-  neighborhood?: string; // Neighborhood name from placesData
   schoolPageLink: string | null; // Link to school's page on PPS website
   driveLink: string | null; // Link to Google Drive folder with PDFs
   createdAt: string;
   updatedAt?: string;
-  schoolTypes?: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[]; // Array to support hybrid schools
+  schoolTypes?: ('Elementary School' | 'Middle School' | 'High School')[]; // Array to support hybrid schools
   routeCount?: number; // Number of routes available for this school
   routesUpdatedAt?: string | null; // Latest modifiedTime from all routes for this school
 }
@@ -55,7 +53,6 @@ export interface AppState {
   routes: Route[];
   homeAddress?: HomeAddress;
   isLoading: boolean;
-  loadingProgress: number | null; // 0-100 or null for indeterminate
   error?: string;
   selectedSchoolId: string | null;
   schools: School[];

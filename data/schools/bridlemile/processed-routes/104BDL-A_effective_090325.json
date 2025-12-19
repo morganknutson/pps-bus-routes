@@ -1,9 +1,9 @@
 {
-  "id": "104BDL-A_effective_090325.pdf",
+  "id": "164x253I8DAEb6DYZsszvOWLb_MoqoDAL",
   "name": "104",
   "direction": "Morning",
   "filename": "104BDL-A_effective_090325.pdf",
-  "fileId": "104BDL-A_effective_090325.pdf",
+  "fileId": "164x253I8DAEb6DYZsszvOWLb_MoqoDAL",
   "modifiedTime": null,
   "stops": [
     {
@@ -99,8 +99,8 @@
       "originalLine": "7:20 am7555 SW Canyon Rd [NW]104BDL-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7550169,
-        45.4992765
+        -122.75440362836255,
+        45.4990686653043
       ],
       "displayName": "7555 SW Canyon Rd, Portland, OR 97225, USA",
       "placeId": "ChIJ0YOnEuELlVQR4oaEGsmkPKs"
@@ -287,15 +287,14 @@
         45.4917482
       ],
       "displayName": "4300 SW 47th Dr, Portland, OR 97221, USA",
-      "schoolName": "Bridlemile",
-      "neighborhood": "Southwest Portland"
+      "schoolName": "Bridlemile"
     }
   ],
   "neighborhoods": [
     "Arlington Heights",
     "Southwest Hills"
   ],
-  "processedAt": "2025-12-16T09:56:09.524Z",
+  "processedAt": "2025-12-19T10:10:14.159Z",
   "stats": {
     "totalStops": 20,
     "geocodedStops": 20,
@@ -1970,11 +1969,5 @@
       45.49177,
       -122.72472
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 19,
-    "errors": 0,
-    "total": 20
-  }
+  ]
 }

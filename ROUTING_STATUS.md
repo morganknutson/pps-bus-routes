@@ -8,7 +8,7 @@ The routing system has been enhanced with comprehensive diagnostics, logging, mo
 ### Configuration
 - **Google Maps API Key**: ✅ Configured
 - **Provider**: Google Directions API (primary)
-- **Fallback**: OSRM (Open Source Routing Machine)
+- **Fallback**: Straight-line segments (if Google unavailable)
 - **Final Fallback**: Straight-line segments
 
 ### Test Results
@@ -48,7 +48,6 @@ curl http://localhost:3001/api/routes/diagnostics
 ### 3. Statistics Tracking ✅
 - **Backend Statistics:**
   - Google API requests/successes/failures
-  - OSRM requests/successes/failures
   - Straight-line fallbacks
   - Total routes calculated
   - Average response times
@@ -57,7 +56,7 @@ curl http://localhost:3001/api/routes/diagnostics
 - **Frontend Statistics:**
   - Total requests
   - Cache hits/misses
-  - Provider breakdown (Google/OSRM/Straight-line)
+  - Provider breakdown (Google/Straight-line)
   - Average response times
 
 ### 4. Error Handling ✅
@@ -68,15 +67,11 @@ curl http://localhost:3001/api/routes/diagnostics
   - Provides clear error messages
 
 - **Graceful Fallbacks:**
-  - Google API → OSRM → Straight-line
+  - Google API → Straight-line
   - Each fallback logged with reason
   - User-friendly error messages
 
 ### 5. Rate Limiting Optimization ✅
-- **OSRM Fallback:**
-  - Adaptive delays: 1s for small routes, 1.5s for large routes (>10 waypoints)
-  - Prevents overwhelming the free OSRM service
-  
 - **Google API:**
   - Batches requests for >25 waypoints
   - 200ms delay between batches
@@ -175,10 +170,9 @@ All routing operations are logged with clear prefixes:
 
 ### Key Metrics to Monitor
 1. **Google API Success Rate**: Should be >95%
-2. **OSRM Usage**: Should be minimal if Google API is configured
-3. **Straight-line Fallbacks**: Should be 0 for accurate routes
-4. **Average Response Time**: Should be <500ms for Google API
-5. **Cache Hit Rate**: Should increase over time
+2. **Straight-line Fallbacks**: Should be minimal (only when Google fails)
+3. **Average Response Time**: Should be <500ms for Google API
+4. **Cache Hit Rate**: Should increase over time
 
 ## Recommendations
 
@@ -188,14 +182,9 @@ All routing operations are logged with clear prefixes:
 3. Check API restrictions (IP, referrer, etc.)
 4. Review error messages in logs
 
-### If OSRM is Used Often
-1. Verify `GOOGLE_MAPS_API_KEY` is set in `backend/.env`
-2. Check backend logs for API errors
-3. Test API key with diagnostics endpoint
-
 ### If Routes Show Straight Lines
 1. Check network connectivity
-2. Verify both Google API and OSRM are accessible
+2. Verify Google API is accessible
 3. Check console for error messages
 4. Review route validation errors
 
@@ -203,7 +192,6 @@ All routing operations are logged with clear prefixes:
 
 ### Current Performance
 - **Google API**: ~200-400ms per route
-- **OSRM Fallback**: ~1-2s per route (segment-by-segment)
 - **Cache Hit**: <1ms (instant)
 
 ### Optimization Tips
@@ -236,7 +224,9 @@ All routing operations are logged with clear prefixes:
 - Performance optimized
 - Diagnostics available
 
-The system is production-ready with excellent observability and fallback mechanisms.
+The system is production-ready with excellent observability and Google Maps Directions API integration.
+
+
 
 
 

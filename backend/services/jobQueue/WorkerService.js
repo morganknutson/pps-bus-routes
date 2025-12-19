@@ -5,15 +5,16 @@
 
 import { Worker } from 'bullmq';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import { listFolderFiles, downloadFile } from '../driveService.js';
 import { parseRouteFromPDF } from '../pdfParser.js';
 import { geocodingService } from '../geocodingService.js';
+import { processSinglePDF } from '../routeProcessor.js';
 import { getSchoolIdFromFilename, getSchoolPdfDir } from '../../utils/schoolUtils.js';
 import { JOB_TYPES } from './jobTypes.js';
-import { jobHistoryService } from './JobHistoryService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -77,23 +78,10 @@ export class WorkerService {
     // Handle job events
     pdfSyncWorker.on('completed', (job) => {
       console.log(`[WorkerService] Job ${job.id} completed`);
-      jobHistoryService.recordEvent('completed', {
-        id: job.id,
-        name: job.name,
-        data: job.data,
-        result: job.returnvalue,
-      });
     });
 
     pdfSyncWorker.on('failed', (job, err) => {
       console.error(`[WorkerService] Job ${job.id} failed:`, err.message);
-      jobHistoryService.recordEvent('failed', {
-        id: job.id,
-        name: job.name,
-        data: job.data,
-        error: err.message,
-        failedReason: err.message,
-      });
     });
 
     pdfSyncWorker.on('error', (err) => {
@@ -132,42 +120,30 @@ export class WorkerService {
 
       try {
         // Get waiting jobs
-        const queue = this.pdfSyncQueue.getQueue();
+        // Use the queue instance's getJobs method which handles Redis/No-Redis correctly
+        const waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_SYNC, 'waiting', 1);
         
-        // If queue is null (no Redis), skip polling
-        if (!queue) {
-          pollInterval = setTimeout(poll, 1000); // Check again in 1 second
-          return;
-        }
-        
-        const waitingJobs = await queue.getWaiting(0, 1);
-        
-        if (waitingJobs.length > 0) {
+        if (waitingJobs && waitingJobs.length > 0) {
           const job = waitingJobs[0];
           isProcessing = true;
           lastProcessTime = Date.now();
 
           console.log(`[WorkerService] Processing job ${job.id} (development mode)`);
-          
-          // Record job started
-          jobHistoryService.recordEvent('started', {
-            id: job.id,
-            name: job.name,
-            data: job.data,
-          });
 
           try {
+            // In development mode (history only), we need to get the "real" job object if possible
+            // but since we're using polling, we'll just use the job data from history
+            
             // Create a mock job object with updateProgress method
             const mockJob = {
               id: job.id,
               data: job.data,
               updateProgress: async (progress) => {
-                // Update the actual job's progress
-                await job.updateProgress(progress);
-                // Record progress in history
+                // Update progress in history service
+                const { jobHistoryService } = await import('./JobHistoryService.js');
                 jobHistoryService.recordEvent('progress', {
                   id: job.id,
-                  progress,
+                  progress
                 });
               },
             };
@@ -175,30 +151,23 @@ export class WorkerService {
             // Process the job
             const result = await this.processPdfSyncJob(mockJob);
 
-            // Mark as completed
-            await job.moveToCompleted(result, '0', true);
-            console.log(`[WorkerService] Job ${job.id} completed`);
-            
             // Record completion in history
+            const { jobHistoryService } = await import('./JobHistoryService.js');
             jobHistoryService.recordEvent('completed', {
               id: job.id,
-              name: job.name,
-              data: job.data,
-              result,
+              result
             });
-          } catch (error) {
-            // Mark as failed
-            await job.moveToFailed(error, '0', true);
-            console.error(`[WorkerService] Job ${job.id} failed:`, error.message);
             
+            console.log(`[WorkerService] Job ${job.id} completed`);
+          } catch (error) {
             // Record failure in history
+            const { jobHistoryService } = await import('./JobHistoryService.js');
             jobHistoryService.recordEvent('failed', {
               id: job.id,
-              name: job.name,
-              data: job.data,
-              error: error.message,
-              failedReason: error.message,
+              error: error.message
             });
+            
+            console.error(`[WorkerService] Job ${job.id} failed:`, error.message);
           }
 
           isProcessing = false;
@@ -246,7 +215,7 @@ export class WorkerService {
 
     try {
       // Load schools
-      const schools = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+      const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
       const school = schools.find(s => s.id === schoolId);
 
       if (!school) {
@@ -266,11 +235,8 @@ export class WorkerService {
       // Update job progress
       await job.updateProgress(10);
 
-      // Get PDF directory (needed for cleanup operations)
-      const pdfDir = this.getSchoolPdfDir(schoolId);
-      
       // Get existing PDFs
-      const existingPdfs = this.getExistingPdfs(schoolId);
+      const existingPdfs = await this.getExistingPdfs(schoolId);
 
       // List files from Drive
       const apiKey = process.env.GOOGLE_API_KEY || null;
@@ -278,38 +244,13 @@ export class WorkerService {
       
       const driveFiles = await listFolderFiles(folderId, apiKey);
       const pdfFiles = driveFiles.filter(f => f.name.endsWith('.pdf'));
-      const drivePdfNames = new Set(pdfFiles.map(f => f.name));
 
-      // Find orphaned PDFs (files in cache that don't exist in Drive)
-      const orphanedPdfs = existingPdfs.filter(pdf => !drivePdfNames.has(pdf));
-      
       if (pdfFiles.length === 0) {
-        // If no PDFs in Drive but we have cached PDFs, delete them all
-        let deleted = 0;
-        const deletionErrors = [];
-        if (existingPdfs.length > 0) {
-          console.log(`[WorkerService] No PDFs in Drive for ${schoolId}, cleaning up ${existingPdfs.length} cached PDFs`);
-          for (const pdf of existingPdfs) {
-            try {
-              const filePath = path.join(pdfDir, pdf);
-              if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-                deleted++;
-              }
-            } catch (error) {
-              deletionErrors.push({
-                file: pdf,
-                error: error.message,
-              });
-            }
-          }
-        }
         return {
           schoolId,
           downloaded: 0,
+          processed: 0,
           skipped: 0,
-          deleted,
-          deletedErrors: deletionErrors,
           errors: [],
           totalInDrive: 0,
           lastModifiedPdf: null,
@@ -317,81 +258,98 @@ export class WorkerService {
         };
       }
 
-      // Find newest PDF modified time
+      // Update sync status
+      const syncStatus = await this.loadSyncStatus();
+      const schoolStatus = syncStatus[schoolId] || {};
+
+      // PDF and Processed JSON directories
+      const pdfDir = await this.getSchoolPdfDir(schoolId);
+      const processedDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
+
+      // Ensure processed directory exists
+      if (!fs.existsSync(processedDir)) {
+        await fsPromises.mkdir(processedDir, { recursive: true });
+      }
+
+      // Find newest PDF modified time from Drive
       const newestModifiedTime = pdfFiles
         .map(f => new Date(f.modifiedTime).getTime())
         .reduce((max, time) => Math.max(max, time), 0);
 
-      // Load sync status
-      const syncStatus = this.loadSyncStatus();
-      const schoolStatus = syncStatus[schoolId] || {};
-
-      // Determine which files to download
-      const lastKnownModified = schoolStatus.lastModifiedPdf 
-        ? new Date(schoolStatus.lastModifiedPdf).getTime() 
-        : 0;
-
-      const filesToDownload = existingPdfs.length === 0
-        ? pdfFiles
-        : pdfFiles.filter(f => new Date(f.modifiedTime).getTime() > lastKnownModified);
+      // Determine which files to download or re-process
+      const filesToDownload = [];
+      for (const file of pdfFiles) {
+        const filePath = path.join(pdfDir, file.name);
+        const jsonPath = path.join(processedDir, file.name.replace('.pdf', '.json'));
+        
+        let needsSync = false;
+        if (!fs.existsSync(filePath)) {
+          needsSync = true;
+          console.log(`[WorkerService] File ${file.name} missing locally, will download`);
+        } else if (!fs.existsSync(jsonPath)) {
+          needsSync = true;
+          console.log(`[WorkerService] JSON for ${file.name} missing, will process`);
+        } else {
+          // Both exist, check if Drive version is newer
+          const localStats = fs.statSync(filePath);
+          const driveModified = new Date(file.modifiedTime).getTime();
+          const localModified = localStats.mtime.getTime();
+          
+          if (driveModified > localModified + 1000) { // Add 1s buffer
+            needsSync = true;
+            console.log(`[WorkerService] Drive version of ${file.name} is newer, will sync`);
+          }
+        }
+        
+        if (needsSync) {
+          filesToDownload.push(file);
+        }
+      }
 
       await job.updateProgress(30);
 
       let downloaded = 0;
+      let processed = 0;
       let skipped = 0;
       const errors = [];
 
-      // Clean up orphaned PDFs (files in cache that no longer exist in Drive)
-      let deleted = 0;
-      const deletedErrors = [];
-      if (orphanedPdfs.length > 0) {
-        console.log(`[WorkerService] Found ${orphanedPdfs.length} orphaned PDF(s) for ${schoolId}, cleaning up...`);
-        for (const orphanedPdf of orphanedPdfs) {
-          try {
-            const filePath = path.join(pdfDir, orphanedPdf);
-            if (fs.existsSync(filePath)) {
-              fs.unlinkSync(filePath);
-              deleted++;
-              console.log(`[WorkerService] Deleted orphaned PDF: ${orphanedPdf}`);
-            }
-          } catch (error) {
-            console.error(`[WorkerService] Error deleting orphaned PDF ${orphanedPdf}:`, error);
-            deletedErrors.push({
-              file: orphanedPdf,
-              error: error.message,
-            });
-          }
-        }
-      }
-
-      // Download files
+      // Download and process files
       const totalFiles = filesToDownload.length;
-      for (let i = 0; i < filesToDownload.length; i++) {
+      for (let i = 0; i < totalFiles; i++) {
         const file = filesToDownload[i];
         
         try {
           const filePath = path.join(pdfDir, file.name);
+          let pdfBuffer;
 
-          // Skip if already exists
-          if (fs.existsSync(filePath)) {
+          // Download if doesn't exist
+          if (!fs.existsSync(filePath)) {
+            const result = await downloadFile(file.id, apiKey);
+            pdfBuffer = result.buffer;
+            await fsPromises.writeFile(filePath, pdfBuffer);
+            downloaded++;
+          } else {
+            pdfBuffer = await fsPromises.readFile(filePath);
             skipped++;
-            continue;
           }
 
-          // Download file
-          const result = await downloadFile(file.id, apiKey);
-          
-          // Save file
-          fs.writeFileSync(filePath, result.buffer);
-          downloaded++;
+          // Process the PDF
+          console.log(`[WorkerService] Processing PDF: ${file.name}`);
+          await processSinglePDF(pdfBuffer, file.name, file.id, {
+            logPrefix: '[WorkerService]',
+            saveToFile: true,
+            schoolId: schoolId,
+          });
+          processed++;
 
-          // Update progress (adjust progress range to account for cleanup phase)
+          // Update progress
           const progress = 30 + Math.floor((i + 1) / totalFiles * 60);
           await job.updateProgress(progress);
 
           // Add delay to avoid rate limiting
           await new Promise(resolve => setTimeout(resolve, 500));
         } catch (error) {
+          console.error(`[WorkerService] Error processing ${file.name}:`, error);
           errors.push({
             file: file.name,
             error: error.message,
@@ -407,16 +365,15 @@ export class WorkerService {
           lastChecked: new Date().toISOString(),
         },
       };
-      this.saveSyncStatus(newStatus);
+      await this.saveSyncStatus(newStatus);
 
       await job.updateProgress(100);
 
       return {
         schoolId,
         downloaded,
+        processed,
         skipped,
-        deleted: deleted || 0,
-        deletedErrors: deletedErrors.length > 0 ? deletedErrors : undefined,
         errors,
         totalInDrive: pdfFiles.length,
         lastModifiedPdf: newestModifiedTime > 0 ? new Date(newestModifiedTime).toISOString() : null,
@@ -437,23 +394,23 @@ export class WorkerService {
     return match ? match[1] : null;
   }
 
-  getSchoolPdfDir(schoolId) {
+  async getSchoolPdfDir(schoolId) {
     const pdfDir = path.join(DATA_DIR, 'schools', schoolId, 'pdfs');
     if (!fs.existsSync(pdfDir)) {
-      fs.mkdirSync(pdfDir, { recursive: true });
+      await fsPromises.mkdir(pdfDir, { recursive: true });
     }
     return pdfDir;
   }
 
-  getExistingPdfs(schoolId) {
-    const pdfDir = this.getSchoolPdfDir(schoolId);
-    return fs.readdirSync(pdfDir).filter(f => f.endsWith('.pdf'));
+  async getExistingPdfs(schoolId) {
+    const pdfDir = await this.getSchoolPdfDir(schoolId);
+    return (await fsPromises.readdir(pdfDir)).filter(f => f.endsWith('.pdf'));
   }
 
-  loadSyncStatus() {
+  async loadSyncStatus() {
     if (fs.existsSync(SYNC_STATUS_FILE)) {
       try {
-        return JSON.parse(fs.readFileSync(SYNC_STATUS_FILE, 'utf8'));
+        return JSON.parse(await fsPromises.readFile(SYNC_STATUS_FILE, 'utf8'));
       } catch (e) {
         return {};
       }
@@ -461,7 +418,9 @@ export class WorkerService {
     return {};
   }
 
-  saveSyncStatus(status) {
-    fs.writeFileSync(SYNC_STATUS_FILE, JSON.stringify(status, null, 2), 'utf8');
+  async saveSyncStatus(status) {
+    const tempFile = `${SYNC_STATUS_FILE}.tmp`;
+    await fsPromises.writeFile(tempFile, JSON.stringify(status, null, 2), 'utf8');
+    await fsPromises.rename(tempFile, SYNC_STATUS_FILE);
   }
 }

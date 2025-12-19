@@ -95,7 +95,7 @@ We can deploy directly to your GoDaddy server. This requires:
 3. Clone your GitHub repository
 4. Install dependencies
 5. Build the frontend
-6. Set up PM2 to run the backend
+6. Set up a process manager to run the backend (systemd, supervisor, etc.)
 7. Configure your domain to point to the server
 
 **This is more complex** - Option 1 (Railway + GoDaddy domain) is much easier!
@@ -137,6 +137,7 @@ If you get stuck:
 1. Share what type of GoDaddy hosting you have
 2. Share any error messages
 3. We can troubleshoot DNS configuration together
+
 
 
 

@@ -27,6 +27,34 @@ This is a bus route mapping application for Portland Public Schools (PPS) that:
 
 ## Core Principles
 
+### ⚠️ CRITICAL: NO PAID API CALLS ON PAGE LOAD ⚠️
+**HARD RULE - NEVER VIOLATE THIS:**
+- **NEVER make calls to paid or external APIs on page load, component mount, or in useEffect hooks that run automatically**
+- **ALWAYS use cached data first** - check for cached/stored data before making any API calls
+- **ONLY make API calls when explicitly requested by user action** (button clicks, form submissions, typing in search boxes, etc.)
+- **FAVOR DATA RETENTION** - When collecting lots of data from APIs:
+  - Save all API responses to local files/cache
+  - Use cached data for display
+  - Only refresh when user explicitly requests it
+  - Cache expiration should be reasonable (hours/days, not seconds)
+- **✅ EXCEPTION: Address Autocomplete is ALLOWED** - Google Places Autocomplete API calls are explicitly allowed for:
+  - Address search/autocomplete on HomePage (`/`)
+  - Address search/autocomplete on Explorer page (`/bus-route-explorer`)
+  - Address search/autocomplete on Admin page (`/admin`)
+  - These are user-initiated actions (typing in search box) and are properly debounced and cached
+- **Examples of what NOT to do:**
+  - ❌ `useEffect(() => { fetch('/api/external-service') }, [])` on page load
+  - ❌ Loading page that automatically calls Google Drive API
+  - ❌ Component that geocodes addresses on mount
+  - ❌ Automatically fetching data when component mounts without user interaction
+- **Examples of what TO do:**
+  - ✅ Load cached data on page load
+  - ✅ Show "Refresh" button for user to explicitly request fresh data
+  - ✅ Make API calls only in button click handlers
+  - ✅ **Address autocomplete when user types** (debounced, user-initiated)
+  - ✅ Save all API responses to cache/files for future use
+- **If you see code making API calls on page load, FIX IT IMMEDIATELY**
+
 ### Prioritize Reusable Code
 - **DRY (Don't Repeat Yourself)**: Extract common logic into reusable functions, classes, or utilities
 - **Single Responsibility**: Each class/function should have one clear purpose
@@ -336,6 +364,8 @@ class AddressFormatter {
 - Don't modify source PDFs in `data/schools/`
 - Don't skip error handling
 - Don't forget to handle loading states
+- **🚫 NEVER Make Paid/External API Calls on Page Load**: This is a CRITICAL rule. See "CRITICAL: NO PAID API CALLS ON PAGE LOAD" section above. If you see code doing this, FIX IT IMMEDIATELY. **EXCEPTION: Address autocomplete is allowed** - Google Places API calls for address autocomplete are explicitly allowed when triggered by user typing (not on page load).
+- **🚫 NEVER Skip Data Caching**: Always cache API responses. When collecting lots of data, save it to files and reuse cached data. Only refresh when user explicitly requests it.
 - **Don't Duplicate Code**: If you're copying code, extract it into a reusable function/class
 - **Don't Put Business Logic in Routes**: Keep route handlers thin, delegate to service classes
 - **Don't Create One-Off Solutions**: If you need something similar in multiple places, create a reusable abstraction

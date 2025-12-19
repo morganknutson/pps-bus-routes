@@ -25,7 +25,7 @@ router.get('/diagnostics', (req, res) => {
         hasApiKey,
         usingGoogle: directionsService.useGoogle,
         apiKeyPreview: maskedKey,
-        provider: directionsService.useGoogle ? 'Google Directions API' : 'OSRM (fallback)',
+        provider: directionsService.useGoogle ? 'Google Directions API' : 'Not configured (street-following routing disabled)',
       },
       statistics: stats,
       recommendations: generateRecommendations(stats, hasApiKey),
@@ -61,15 +61,6 @@ function generateRecommendations(stats, hasApiKey) {
         action: 'Verify API key and check Google Cloud Console for quota/errors',
       });
     }
-  }
-
-  if (stats.osrmRequests > stats.googleRequests && hasApiKey) {
-    recommendations.push({
-      type: 'configuration',
-      priority: 'low',
-      message: 'OSRM is being used more than Google API. This may indicate API key issues.',
-      action: 'Check API key configuration and Google Cloud Console',
-    });
   }
 
   if (stats.straightLineFallbacks > 0) {

@@ -169,8 +169,8 @@ apt update && apt upgrade -y
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt install -y nodejs
 
-# Install PM2 globally
-npm install -g pm2
+# Install a process manager (optional - you can use systemd, supervisor, or screen/tmux)
+# For systemd, no additional installation needed
 
 # Install Nginx (for reverse proxy)
 apt install -y nginx
@@ -196,17 +196,48 @@ cd ..
 
 Update `backend/server.js` to serve static files in production (see code changes below).
 
-### Step 5: Set Up PM2
+### Step 5: Set Up Process Manager
 
+For production, you'll need a process manager to keep the backend running. Options include:
+
+**Option A: systemd (Linux service)**
 ```bash
-# Start with PM2
-pm2 start ecosystem.config.cjs
+# Create a systemd service file
+sudo nano /etc/systemd/system/pps-bus-maps.service
+```
 
-# Save PM2 configuration
-pm2 save
+Add this content:
+```ini
+[Unit]
+Description=PPS Bus Maps Backend
+After=network.target
 
-# Set up PM2 to start on boot
-pm2 startup
+[Service]
+Type=simple
+User=your-username
+WorkingDirectory=/path/to/pps-bus-maps/backend
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=10
+Environment=NODE_ENV=production
+Environment=PORT=3001
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable pps-bus-maps
+sudo systemctl start pps-bus-maps
+```
+
+**Option B: screen/tmux (for development)**
+```bash
+screen -S backend
+cd backend && node server.js
+# Press Ctrl+A then D to detach
 ```
 
 ### Step 6: Configure Nginx
@@ -366,7 +397,7 @@ app.use(cors({
 ### Backend Won't Start
 - Check environment variables are set
 - Check port isn't already in use
-- Check logs: `pm2 logs` or service logs
+- Check logs: `journalctl -u pps-bus-maps -f` (systemd) or service logs
 
 ### Frontend Can't Reach Backend
 - Check CORS settings
@@ -399,7 +430,8 @@ Once comfortable, you can:
 - Railway: [docs.railway.app](https://docs.railway.app)
 - Render: [render.com/docs](https://render.com/docs)
 - Vercel: [vercel.com/docs](https://vercel.com/docs)
-- PM2: [pm2.keymetrics.io](https://pm2.keymetrics.io)
+- systemd: [systemd.io](https://systemd.io)
+
 
 
 

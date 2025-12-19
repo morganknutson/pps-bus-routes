@@ -1,37 +1,107 @@
 /**
- * Parse bus route information from PDF text
+ * @fileoverview PDF Parser for PPS Bus Route Documents
+ * 
+ * This module extracts bus stop information from Portland Public Schools (PPS)
+ * bus route PDF documents. It handles the specific formatting used by PPS,
+ * including route numbers, directions, stop times, and intersection addresses.
+ * 
+ * @module services/pdfParser
+ * @requires ../utils/formatAddress.js
+ * 
+ * @example
+ * // Parse a PDF after extracting text with pdf-parse
+ * import pdfParse from 'pdf-parse';
+ * import { parseRouteFromPDF } from './pdfParser.js';
+ * 
+ * const pdfData = await pdfParse(pdfBuffer);
+ * const route = parseRouteFromPDF(pdfData.text, 'file-123', '100SYL-A_effective_082625.pdf');
+ * 
+ * console.log(route.name);      // "100"
+ * console.log(route.direction); // "Morning"
+ * console.log(route.stops);     // [{ address: "SW Patton & Vista", time: "8:35 am", ... }]
+ * 
+ * @see {@link https://www.pps.net/transportation|PPS Transportation}
  */
+
 import { formatStreetName } from '../utils/formatAddress.js';
 
 /**
- * Extract route name and direction from filename or PDF text
- * Example: "100SYL-A_effective_082625.pdf" -> { name: "100", direction: "Morning" }
- * Also tries to extract from PDF text if filename doesn't match pattern
- * Supports any school code (not just SYL)
+ * Extracts route information from a PDF filename.
+ * 
+ * PPS route PDF filenames follow the pattern:
+ * `{ROUTE_NUMBER}{SCHOOL_CODE}-{DIRECTION}_effective_{DATE}.pdf`
+ * 
+ * - ROUTE_NUMBER: 1-3 digit route number (e.g., "100", "207")
+ * - SCHOOL_CODE: 2-4 letter school abbreviation (e.g., "SYL", "ABE", "BVC")
+ * - DIRECTION: "A" for AM (Morning) or "P" for PM (Afternoon)
+ * - DATE: Effective date in MMDDYY format
+ * 
+ * @private
+ * @param {string} filename - The PDF filename to parse
+ * @param {string|null} [text=null] - Optional PDF text content for fallback extraction
+ * @returns {Object} Route information object
+ * @returns {string} returns.name - Route number (e.g., "100") or "Unknown Route"
+ * @returns {string|null} returns.direction - "Morning", "Afternoon", or null
+ * 
+ * @example
+ * // Standard filename
+ * extractRouteInfoFromFilename('100SYL-A_effective_082625.pdf')
+ * // Returns: { name: '100', direction: 'Morning' }
+ * 
+ * @example
+ * // Afternoon route
+ * extractRouteInfoFromFilename('207BVC-P_effective_082625.pdf')
+ * // Returns: { name: '207', direction: 'Afternoon' }
+ * 
+ * @example
+ * // Fallback to PDF text
+ * extractRouteInfoFromFilename('unknown.pdf', 'Route: 238ABE-A some text')
+ * // Returns: { name: '238', direction: 'Morning' }
  */
 function extractRouteInfoFromFilename(filename, text = null) {
   if (!filename) {
-    return { name: 'Unknown Route', direction: null };
+    return { name: 'Unknown Route', direction: null, isUpcoming: false };
   }
   
   // Pattern: {ROUTE}{CODE}-{DIRECTION}_effective_{DATE}.pdf
   // Example: "100SYL-A_effective_082625.pdf" or "238ABE-A_effective_082625.pdf"
-  const match = filename.match(/(\d+)([A-Z]{2,})-([AP])_/);
+  const match = filename.match(/(\d+)([A-Z]{2,})-([AP])_effective_(\d{6})/);
   if (match) {
     const routeNum = match[1];
     const direction = match[3] === 'A' ? 'Morning' : 'Afternoon';
-    return { name: routeNum, direction };
+    const dateStr = match[4]; // MMDDYY
+    
+    // Check if date is in the future
+    let isUpcoming = false;
+    try {
+      const month = parseInt(dateStr.substring(0, 2)) - 1;
+      const day = parseInt(dateStr.substring(2, 4));
+      const year = 2000 + parseInt(dateStr.substring(4, 6));
+      const effectiveDate = new Date(year, month, day);
+      
+      // Set to start of day for comparison
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // If date is in the future (tomorrow or later), consider it upcoming
+      if (effectiveDate > today) {
+        isUpcoming = true;
+      }
+    } catch (e) {
+      console.error('Error parsing date from filename:', dateStr);
+    }
+    
+    const finalName = isUpcoming ? `${routeNum}-upcoming` : routeNum;
+    return { name: finalName, direction, isUpcoming };
   }
   
-  // If filename doesn't match, try to extract from PDF text
-  // Look for patterns like "Route: 207BVC-A" or "207BVC-A" in the text
+  // If filename doesn't match standard pattern, try text search
   if (text) {
-    // Try to find route pattern in text: number + school code + direction
     const textMatch = text.match(/(?:route[:\s]*)?(\d+)([A-Z]{2,})-([AP])/i);
     if (textMatch) {
       const routeNum = textMatch[1];
       const direction = textMatch[3].toUpperCase() === 'A' ? 'Morning' : 'Afternoon';
-      return { name: routeNum, direction };
+      return { name: routeNum, direction, isUpcoming: false };
     }
   }
   
@@ -40,13 +110,32 @@ function extractRouteInfoFromFilename(filename, text = null) {
   return {
     name: numMatch ? `Route ${numMatch[1]}` : 'Unknown Route',
     direction: null,
+    isUpcoming: false,
   };
 }
 
 /**
- * Extract anchor name (school loading zone) from PDF text
- * Format: "Anchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY"
- * This is used for matching routes to schools, not for creating stops
+ * Extracts the anchor name (school loading zone) from PDF text.
+ * 
+ * The anchor name identifies the school's bus loading zone location.
+ * It appears in the PDF as "Anchor Name:SCHOOL_NAME LOADING ZONE..."
+ * 
+ * This is used for:
+ * 1. Matching routes to schools
+ * 2. Filtering out the school stop from regular stops (added separately from schools.json)
+ * 
+ * @param {string} text - The full PDF text content
+ * @returns {string|null} The anchor name if found, null otherwise
+ * 
+ * @example
+ * // PDF contains: "Anchor Name:WEST SYLVAN GT LOADING ZONE IN DRIVEWAY"
+ * const anchor = extractAnchorName(pdfText);
+ * // Returns: "WEST SYLVAN GT LOADING ZONE IN DRIVEWAY"
+ * 
+ * @example
+ * // No anchor name in PDF
+ * const anchor = extractAnchorName("Some other text");
+ * // Returns: null
  */
 export function extractAnchorName(text) {
   const anchorMatch = text.match(/Anchor Name:\s*([^\n]+)/i);
@@ -57,15 +146,46 @@ export function extractAnchorName(text) {
 }
 
 /**
- * Parse bus stop addresses from PDF text
- * Format: "8:33 amADDRESS[DIRECTION]ROUTE(ORDER)Stop Order #:"
- * Examples:
- * - "8:33 amAINSWORTH GT & ST & CAB LOAD ZONE100SYL-AStop Order #:"
- * - "8:35 amSW PATTON@VISTA@GEORGIAN@BROADWAY [NW]100SYL-A(1)Stop Order #:"
- * - "8:36 amSW PATTON RD @ SW MONTGOMERY DR [NE]100SYL-A(2)Stop Order #:"
- * - "8:54 am3737 SW HUMPHREY BLVD [NE]100SYL-A(12)Stop Order #:"
- * @param text PDF text content
- * @param anchorName Optional anchor name to filter out (school loading zone)
+ * Parses bus stop information from PDF text content.
+ * 
+ * PPS PDF stop entries follow this format:
+ * `{TIME}{ADDRESS}[{DIRECTION}]{ROUTE_CODE}({ORDER})Stop Order #:`
+ * 
+ * Example line:
+ * `8:35 amSW PATTON@VISTA@GEORGIAN@BROADWAY [NW]100SYL-A(1)Stop Order #:`
+ * 
+ * This function:
+ * 1. Splits text into lines
+ * 2. Matches each line against the stop pattern regex
+ * 3. Cleans and formats addresses
+ * 4. Handles loading zones (marked as skipGeocoding)
+ * 5. Deduplicates stops by address
+ * 
+ * @private
+ * @param {string} text - The full PDF text content
+ * @param {string|null} [anchorName=null] - Optional anchor name to filter out
+ * @returns {Array<Object>} Array of stop objects
+ * 
+ * @example
+ * // Returns array of stops like:
+ * [
+ *   {
+ *     id: 'stop-1',
+ *     address: 'SW Patton & Vista & Georgian & Broadway [NW]',
+ *     time: '8:35 am',
+ *     direction: 'NW',
+ *     originalLine: '8:35 amSW PATTON@VISTA@GEORGIAN@BROADWAY [NW]100SYL-A(1)...',
+ *     skipGeocoding: false
+ *   },
+ *   {
+ *     id: 'stop-2',
+ *     address: 'Cab Load Zone',
+ *     time: '8:33 am',
+ *     direction: null,
+ *     originalLine: '...',
+ *     skipGeocoding: true  // Loading zones are not geocoded
+ *   }
+ * ]
  */
 function parseStops(text, anchorName = null) {
   const stops = [];
@@ -177,9 +297,67 @@ function parseStops(text, anchorName = null) {
 }
 
 /**
- * Parse route from PDF text
- * Note: School stops are NOT created here - they should be added from schools.json data
- * The anchor name is returned for matching routes to schools
+ * Parses a complete bus route from PDF text content.
+ * 
+ * This is the main entry point for PDF parsing. It:
+ * 1. Extracts route info (number, direction) from filename
+ * 2. Extracts anchor name for school matching
+ * 3. Parses all stops from the text
+ * 
+ * **Important**: School stops are NOT created here. They should be added
+ * separately from schools.json data by the route processor. The anchor name
+ * is returned for matching routes to the correct school.
+ * 
+ * @param {string} text - The full PDF text content (from pdf-parse)
+ * @param {string} fileId - Unique identifier for this route (Drive file ID or generated)
+ * @param {string} [filename=''] - Original PDF filename for route info extraction
+ * @returns {Object} Parsed route object
+ * @returns {string} returns.id - Route identifier
+ * @returns {string} returns.name - Route number (e.g., "100")
+ * @returns {string|null} returns.direction - "Morning" or "Afternoon"
+ * @returns {string} returns.filename - Original filename
+ * @returns {Array<Object>} returns.stops - Array of stop objects (without school stop)
+ * @returns {string|null} returns.anchorName - School loading zone name for matching
+ * @returns {string} returns.rawText - First 500 chars of PDF for debugging
+ * 
+ * @example
+ * import pdfParse from 'pdf-parse';
+ * import fs from 'fs';
+ * 
+ * // Read and parse PDF
+ * const pdfBuffer = fs.readFileSync('100SYL-A_effective_082625.pdf');
+ * const pdfData = await pdfParse(pdfBuffer);
+ * 
+ * // Parse route info
+ * const route = parseRouteFromPDF(
+ *   pdfData.text,
+ *   'drive-file-id-123',
+ *   '100SYL-A_effective_082625.pdf'
+ * );
+ * 
+ * console.log(route);
+ * // {
+ * //   id: 'drive-file-id-123',
+ * //   name: '100',
+ * //   direction: 'Morning',
+ * //   filename: '100SYL-A_effective_082625.pdf',
+ * //   stops: [
+ * //     { id: 'stop-1', address: 'SW Patton & Vista [NW]', time: '8:35 am', ... },
+ * //     { id: 'stop-2', address: 'SW Montgomery & Humphrey', time: '8:36 am', ... }
+ * //   ],
+ * //   anchorName: 'WEST SYLVAN GT LOADING ZONE IN DRIVEWAY',
+ * //   rawText: 'Route: 100SYL-A\nAnchor Name:WEST SYLVAN...'
+ * // }
+ * 
+ * @example
+ * // The route can then be processed further
+ * import { processSinglePDF } from './routeProcessor.js';
+ * 
+ * // routeProcessor will:
+ * // - Geocode all stops
+ * // - Add school stop from schools.json
+ * // - Calculate route geometry
+ * // - Save to JSON file
  */
 export function parseRouteFromPDF(text, fileId, filename = '') {
   const routeInfo = extractRouteInfoFromFilename(filename, text); // Pass text to extract route from PDF content
@@ -196,6 +374,3 @@ export function parseRouteFromPDF(text, fileId, filename = '') {
     rawText: text.substring(0, 500), // First 500 chars for debugging
   };
 }
-
-
-

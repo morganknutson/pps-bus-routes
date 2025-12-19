@@ -2,7 +2,7 @@
 
 ## What Was Implemented
 
-This implementation adds Google Maps APIs for accurate geocoding and routing, replacing the less reliable free services (Nominatim and OSRM).
+This implementation adds Google Maps APIs for accurate geocoding and routing, replacing the less reliable free services (Nominatim and OSRM). OSRM has been fully removed from the codebase.
 
 ## Changes Made
 
@@ -18,7 +18,6 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 #### `backend/services/directionsService.js`
 - **DirectionsService** class for Google Maps Directions API
 - Calculates routes through multiple waypoints (up to 25 per request)
-- Automatic fallback to OSRM if API key not configured
 - Handles batching for routes with >25 stops
 
 ### 2. Updated Routes
@@ -42,7 +41,6 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 
 #### `frontend/src/services/routing.ts`
 - Updated to use Google Directions API via backend
-- Falls back to OSRM if Google API fails
 - More efficient: can calculate entire route in one request
 
 #### `scripts/process-single-pdf.js`
@@ -76,7 +74,7 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 - ✅ **Traffic-Aware**: Can include real-time traffic (optional)
 - ✅ **More Reliable**: Google's infrastructure vs public OSRM servers
 - ✅ **Efficient Batching**: Can calculate entire route in one request
-- ✅ **Automatic Fallback**: Works without API key (uses OSRM)
+- ✅ **High Resolution**: Polyline decoding for smooth map visualization
 
 ## Setup Required
 
@@ -90,8 +88,8 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 ## Usage
 
 ### Without API Key (Fallback Mode)
-- System automatically uses Nominatim (geocoding) and OSRM (routing)
-- Works but less accurate
+- Geocoding automatically uses Nominatim (limited rate)
+- Street-following routing is disabled (straight lines only)
 - Logs warnings about missing API key
 
 ### With API Key (Recommended)
@@ -128,7 +126,7 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 
 ## Backward Compatibility
 
-- ✅ Works without API key (automatic fallback)
+- ✅ Works without API key (automatic fallback to straight lines/Nominatim)
 - ✅ Existing code continues to work
 - ✅ No breaking changes to API endpoints
 - ✅ Same data structures returned
@@ -162,6 +160,8 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 ## Questions?
 
 See `GOOGLE_MAPS_SETUP.md` for detailed setup instructions and troubleshooting.
+
+
 
 
 

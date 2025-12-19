@@ -1,10 +1,9 @@
 /**
- * Routing service using Google Maps Directions API (with OSRM fallback)
+ * Routing service using Google Maps Directions API
  * Fetches route geometry that follows actual streets between points
  */
 
 const API_BASE_URL = '/api/routes';
-const OSRM_BASE_URL = 'https://router.project-osrm.org/route/v1/driving';
 
 // Routing statistics (client-side)
 interface RoutingStats {
@@ -17,7 +16,6 @@ interface RoutingStats {
   lastRequestTime: string | null;
   providerBreakdown: {
     google: number;
-    osrm: number;
     straightLine: number;
   };
 }
@@ -32,7 +30,6 @@ let routingStats: RoutingStats = {
   lastRequestTime: null,
   providerBreakdown: {
     google: 0,
-    osrm: 0,
     straightLine: 0,
   },
 };
@@ -58,19 +55,9 @@ export function resetRoutingStats(): void {
     lastRequestTime: null,
     providerBreakdown: {
       google: 0,
-      osrm: 0,
       straightLine: 0,
     },
   };
-}
-
-interface OSRMRouteResponse {
-  code: string;
-  routes: Array<{
-    geometry: string; // Encoded polyline
-    distance: number;
-    duration: number;
-  }>;
 }
 
 interface RouteCache {
@@ -82,7 +69,7 @@ interface RouteCache {
 
 // Cache routes for 24 hours
 const CACHE_DURATION = 24 * 60 * 60 * 1000;
-const CACHE_KEY = 'osrm_route_cache';
+const CACHE_KEY = 'google_route_cache';
 
 /**
  * Get cached route or null if not found/expired
@@ -132,48 +119,6 @@ function saveRouteToCache(key: string, coordinates: [number, number][]): void {
 }
 
 /**
- * Decode OSRM polyline format (similar to Google's encoded polyline)
- */
-function decodePolyline(encoded: string): [number, number][] {
-  const coordinates: [number, number][] = [];
-  let index = 0;
-  const len = encoded.length;
-  let lat = 0;
-  let lng = 0;
-
-  while (index < len) {
-    let shift = 0;
-    let result = 0;
-    let byte: number;
-
-    do {
-      byte = encoded.charCodeAt(index++) - 63;
-      result |= (byte & 0x1f) << shift;
-      shift += 5;
-    } while (byte >= 0x20);
-
-    const deltaLat = (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
-    lat += deltaLat;
-
-    shift = 0;
-    result = 0;
-
-    do {
-      byte = encoded.charCodeAt(index++) - 63;
-      result |= (byte & 0x1f) << shift;
-      shift += 5;
-    } while (byte >= 0x20);
-
-    const deltaLng = (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
-    lng += deltaLng;
-
-    coordinates.push([lat / 1e5, lng / 1e5]);
-  }
-
-  return coordinates;
-}
-
-/**
  * Generate cache key for a route segment
  */
 function generateCacheKey(start: [number, number], end: [number, number]): string {
@@ -205,7 +150,7 @@ function validateCoordinates(coords: [number, number], name: string): boolean {
 }
 
 /**
- * Fetch route between two points using Google Directions API (with OSRM fallback)
+ * Fetch route between two points using Google Directions API
  * @param start [lng, lat] coordinates
  * @param end [lng, lat] coordinates
  * @returns Promise with array of [lat, lng] coordinates following streets
@@ -236,7 +181,7 @@ export async function fetchRouteBetweenPoints(
   routingStats.cacheMisses++;
 
   try {
-    // Try Google Directions API first (via backend)
+    // Try Google Directions API via backend
     // Convert from [lng, lat] to [lat, lng] for API
     const waypoints = [[start[1], start[0]], [end[1], end[0]]];
     
@@ -259,7 +204,7 @@ export async function fetchRouteBetweenPoints(
         
         // Update statistics
         routingStats.successfulRequests++;
-        routingStats.providerBreakdown[data.provider === 'google' ? 'google' : 'osrm']++;
+        routingStats.providerBreakdown.google++;
         routingStats.averageResponseTime = 
           (routingStats.averageResponseTime * (routingStats.successfulRequests - 1) + responseTime) / routingStats.successfulRequests;
         
@@ -273,76 +218,24 @@ export async function fetchRouteBetweenPoints(
       console.warn(`[Routing] ⚠️  Backend API error: ${response.status}`, errorText);
     }
 
-    // Fallback to OSRM if Google API fails
-    console.warn('[Routing] ⚠️  Backend API failed, falling back to OSRM');
-    return await fetchRouteWithOSRM(start, end, cacheKey, requestStartTime);
+    // Final fallback to straight line
+    routingStats.providerBreakdown.straightLine++;
+    console.warn('[Routing] ⚠️  Using straight-line fallback');
+    return [[start[1], start[0]], [end[1], end[0]]];
   } catch (error) {
     console.error('[Routing] ❌ Error fetching route:', error);
     routingStats.failedRequests++;
-    // Fallback to OSRM
-    return await fetchRouteWithOSRM(start, end, cacheKey, requestStartTime);
-  }
-}
-
-/**
- * Fetch route using OSRM (fallback)
- */
-async function fetchRouteWithOSRM(
-  start: [number, number],
-  end: [number, number],
-  cacheKey: string,
-  requestStartTime: number = Date.now()
-): Promise<[number, number][]> {
-  try {
-    // OSRM expects coordinates as lng,lat
-    const url = `${OSRM_BASE_URL}/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&geometries=polyline`;
-    
-    console.log(`[Routing] 🗺️  Fetching route via OSRM fallback`);
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      throw new Error(`OSRM API error: ${response.status}`);
-    }
-
-    const data: OSRMRouteResponse = await response.json();
-
-    if (data.code !== 'Ok' || !data.routes || data.routes.length === 0) {
-      throw new Error(`OSRM returned code: ${data.code}`);
-    }
-
-    // Decode the polyline geometry
-    const encodedGeometry = data.routes[0].geometry;
-    const coordinates = decodePolyline(encodedGeometry);
-    
-    // Coordinates are already in [lat, lng] format from polyline decode
-    const routeCoordinates: [number, number][] = coordinates;
-    const responseTime = Date.now() - requestStartTime;
-
-    // Save to cache
-    saveRouteToCache(cacheKey, routeCoordinates);
-
-    // Update statistics
-    routingStats.successfulRequests++;
-    routingStats.providerBreakdown.osrm++;
-    routingStats.averageResponseTime = 
-      (routingStats.averageResponseTime * (routingStats.successfulRequests - 1) + responseTime) / routingStats.successfulRequests;
-
-    console.log(`[Routing] ✅ OSRM route fetched: ${routeCoordinates.length} points (${responseTime}ms)`);
-    return routeCoordinates;
-  } catch (error) {
-    const responseTime = Date.now() - requestStartTime;
-    console.error(`[Routing] ❌ Error fetching route from OSRM (${responseTime}ms):`, error);
     
     // Final fallback to straight line
     routingStats.providerBreakdown.straightLine++;
-    console.warn('[Routing] ⚠️  Using straight-line fallback (route may not follow streets)');
+    console.warn('[Routing] ⚠️  Using straight-line fallback');
     return [[start[1], start[0]], [end[1], end[0]]];
   }
 }
 
 /**
  * Fetch complete route for a sequence of stops
- * Uses Google Directions API if available (supports multiple waypoints)
+ * Uses Google Directions API
  * @param stops Array of [lng, lat] coordinates
  * @returns Promise with combined route coordinates [lat, lng][]
  */
@@ -385,7 +278,7 @@ export async function fetchRouteForStops(
       if (data.coordinates && Array.isArray(data.coordinates) && data.coordinates.length > 0) {
         // Update statistics
         routingStats.successfulRequests++;
-        routingStats.providerBreakdown[data.provider === 'google' ? 'google' : 'osrm']++;
+        routingStats.providerBreakdown.google++;
         routingStats.averageResponseTime = 
           (routingStats.averageResponseTime * (routingStats.successfulRequests - 1) + responseTime) / routingStats.successfulRequests;
         
@@ -429,11 +322,6 @@ export async function fetchRouteForStops(
 
       successfulSegments++;
       console.log(`[Routing] ✅ Segment ${i + 1}/${stops.length - 1} completed: ${segment.length} points`);
-
-      // Add small delay to avoid rate limiting (only for OSRM fallback)
-      if (i < stops.length - 2) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
     } catch (error) {
       failedSegments++;
       console.error(`[Routing] ❌ Error fetching route segment ${i} to ${i + 1}:`, error);

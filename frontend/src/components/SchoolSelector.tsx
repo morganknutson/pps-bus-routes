@@ -55,9 +55,7 @@ export function SchoolSelector() {
       setLoading(true);
       setLoadingProgress(0);
       try {
-        const routes = await loadLocalRoutes(selectedSchoolId, (progress) => {
-          setLoadingProgress(progress);
-        });
+        const routes = await loadLocalRoutes(selectedSchoolId);
         console.log('[SchoolSelector] Loaded', routes.length, 'routes');
         setRoutes(routes);
         setLoadingProgress(100);

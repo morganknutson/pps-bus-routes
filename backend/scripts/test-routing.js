@@ -85,13 +85,13 @@ async function runTests() {
   // Show configuration
   const stats = directionsService.getStats();
   console.log('\n📊 Configuration:');
-  console.log(`   Using Google API: ${stats.usingGoogle ? '✅ Yes' : '❌ No (using OSRM fallback)'}`);
+  console.log(`   Using Google API: ${stats.usingGoogle ? '✅ Yes' : '❌ No (routing disabled)'}`);
   console.log(`   Has API Key: ${stats.hasApiKey ? '✅ Yes' : '❌ No'}`);
   
   if (!stats.hasApiKey) {
     console.log('\n⚠️  Warning: No Google Maps API key configured');
-    console.log('   Routes will use OSRM fallback (slower, less accurate)');
-    console.log('   Set GOOGLE_MAPS_API_KEY in backend/.env for better results');
+    console.log('   Street-following routing will be disabled');
+    console.log('   Set GOOGLE_MAPS_API_KEY in backend/.env for results');
   }
   
   console.log('\n' + '='.repeat(60));
@@ -123,7 +123,6 @@ async function runTests() {
   const finalStats = directionsService.getStats();
   console.log('\n📈 Service Statistics:');
   console.log(`   Google requests: ${finalStats.googleRequests} (${finalStats.googleSuccessRate} success rate)`);
-  console.log(`   OSRM requests: ${finalStats.osrmRequests} (${finalStats.osrmSuccessRate} success rate)`);
   console.log(`   Total routes calculated: ${finalStats.totalRoutes}`);
   console.log(`   Straight-line fallbacks: ${finalStats.straightLineFallbacks}`);
   
@@ -141,6 +140,9 @@ runTests().catch(error => {
   console.error('\n💥 Fatal error:', error);
   process.exit(1);
 });
+
+
+
 
 
 

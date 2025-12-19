@@ -65,13 +65,18 @@ async function hasPdfs(schoolId) {
     // Check if directory exists
     try {
       await fs.access(schoolPdfsDir);
-    } catch {
+    } catch (e) {
+      // console.log(`[hasPdfs] Directory not found for ${schoolId}: ${schoolPdfsDir}`);
       return false; // Directory doesn't exist
     }
 
     // Check if directory has any PDF files
     const files = await fs.readdir(schoolPdfsDir);
     const pdfFiles = files.filter(f => f.toLowerCase().endsWith('.pdf'));
+    
+    if (pdfFiles.length === 0) {
+      // console.log(`[hasPdfs] No PDFs found in ${schoolPdfsDir}`);
+    }
     
     return pdfFiles.length > 0;
   } catch (error) {
@@ -175,6 +180,9 @@ async function getRouteStats(schoolId) {
 router.get('/', async (req, res) => {
   const startTime = Date.now();
   try {
+    console.log(`[GET /api/schools] DATA_DIR: ${DATA_DIR}`);
+    console.log(`[GET /api/schools] SCHOOLS_FILE: ${SCHOOLS_FILE}`);
+    
     // Check if file exists
     try {
       await fs.access(SCHOOLS_FILE);

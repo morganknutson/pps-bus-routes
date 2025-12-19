@@ -795,7 +795,7 @@ export function TechPage() {
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                       <li>Stop markers are placed at each geocoded stop coordinate</li>
                       <li>Route line is drawn connecting stops using <strong>Routing Service</strong></li>
-                      <li>Route follows actual streets using Google Directions API or OSRM</li>
+                      <li>Route follows actual streets using Google Directions API</li>
                     </ul>
                   </li>
                 </ol>
@@ -835,7 +835,7 @@ export function TechPage() {
                   <li>For each route, collect all stop coordinates</li>
                   <li>Use <strong>Routing Service</strong> to calculate route between stops</li>
                   <li>If multiple stops: Use Google Directions API with waypoints (up to 25 per request)</li>
-                  <li>If API fails: Fallback to OSRM (Open Source Routing Machine)</li>
+                  <li>If API fails: Fallback to straight-line connection</li>
                   <li>Decode polyline response to get coordinate array</li>
                   <li>Cache route coordinates in localStorage (24-hour TTL)</li>
                   <li>Draw polyline on map using Leaflet's <code>Polyline</code> component</li>
@@ -1144,6 +1144,24 @@ export function TechPage() {
                   <strong>File Location:</strong> <code>data/schools/{'{schoolId}'}/processed-routes/{'{filename}'}.json</code>
                 </p>
               </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginTop: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Route Versioning (Upcoming & Superseded):</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>Upcoming Routes:</strong>
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Determined by parsing <code>_effective_MMDDYY</code> from the PDF filename.</li>
+                      <li>If the effective date is in the future (tomorrow or later), the route name is appended with <code>-upcoming</code> (e.g., "104-upcoming").</li>
+                      <li>These are displayed separately in the UI to allow families to preview future schedule changes.</li>
+                    </ul>
+                  </li>
+                  <li><strong>Superseded Routes:</strong>
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>If multiple versions of a "current" route exist for the same number and direction, only the one with the <strong>latest effective date</strong> (that is ≤ today) is returned by the frontend service.</li>
+                      <li>This ensures users only see the most current version of a route when multiple past versions are stored.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div id="route-processor" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
@@ -1245,6 +1263,7 @@ export function TechPage() {
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                       <li>Endpoint: <code>https://places.googleapis.com/v1/places/{'{placeId}'}</code></li>
                       <li>Purpose: Get coordinates for selected autocomplete suggestions</li>
+                      <li><strong>Road Snapping:</strong> House addresses are automatically snapped to the nearest street centerline using the Google Roads API to improve distance calculations for cul-de-sacs.</li>
                     </ul>
                   </li>
                   <li><strong>OpenStreetMap Nominatim</strong> (Fallback)
@@ -1506,14 +1525,6 @@ export function TechPage() {
                       <li>API Key: <code>GOOGLE_MAPS_API_KEY</code> or <code>GOOGLE_API_KEY</code></li>
                       <li>Supports: Up to 25 waypoints per request</li>
                       <li>Returns: Encoded polyline that is decoded to coordinates</li>
-                    </ul>
-                  </li>
-                  <li><strong>OSRM (Open Source Routing Machine)</strong> (Fallback)
-                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
-                      <li>Endpoint: <code>https://router.project-osrm.org/route/v1/driving</code></li>
-                      <li>Format: <code>/{'{lng1}'},{'{lat1}'};{'{lng2}'},{'{lat2}'}?overview=full&geometries=polyline</code></li>
-                      <li>Rate Limiting: 1 request/second recommended</li>
-                      <li>No API key required</li>
                     </ul>
                   </li>
                 </ul>
@@ -1791,7 +1802,7 @@ export function TechPage() {
                   <li><strong>restartProcess(processName)</strong> - Restart a server process:
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                       <li>Valid process names: <code>'pps-backend'</code> or <code>'pps-frontend'</code></li>
-                      <li>Uses script-based restart approach (not PM2 API)</li>
+                      <li>Uses script-based restart approach</li>
                       <li>Runs appropriate restart script from <code>scripts/</code> directory</li>
                       <li>Returns success/failure status with message</li>
                     </ul>
@@ -1828,7 +1839,7 @@ export function TechPage() {
                   <li>Uses Node.js <code>spawn</code> to run restart scripts</li>
                   <li>Scripts located in <code>scripts/restart-backend.js</code> and <code>scripts/restart-frontend.js</code></li>
                   <li>Status checking uses <code>lsof</code> system command to check port occupancy</li>
-                  <li>Designed for development and production environments without PM2 dependency</li>
+                  <li>Designed for development and production environments</li>
                 </ul>
               </div>
             </div>
@@ -1931,10 +1942,11 @@ export function TechPage() {
                   <li>Extract folder ID from school's Drive link</li>
                   <li>Get existing PDFs from local storage</li>
                   <li>List PDF files from Google Drive folder</li>
-                  <li>Compare modified times to determine which files need downloading</li>
+                  <li>Compare modified times and local existence to determine which files need downloading or processing</li>
                   <li>Download new/updated PDFs (with rate limiting)</li>
+                  <li>Process PDFs that are new, updated, or missing processed JSON results</li>
                   <li>Update sync status in <code>data/pdf-sync-status.json</code></li>
-                  <li>Return result with download counts and errors</li>
+                  <li>Return result with download and processing counts</li>
                 </ol>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -2180,7 +2192,6 @@ export function TechPage() {
                 <strong style={{ color: 'var(--text-primary)' }}>Endpoints:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li><code>POST /api/routes/calculate</code> - Calculate route between waypoints</li>
-                  <li>Fallback: Direct OSRM API calls if backend fails</li>
                 </ul>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
@@ -2197,7 +2208,7 @@ export function TechPage() {
                   fontSize: '13px',
                   marginTop: '10px'
                 }}>
-{`// Cache key: "osrm_route_cache"
+{`// Cache key: "google_route_cache"
 {
   "45.5152,-122.6784_45.5123,-122.6821": {
     "coordinates": [[45.5152, -122.6784], ...],

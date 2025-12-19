@@ -20,6 +20,7 @@ interface Store extends AppState {
   setCurrentGeocodingRoute: (routeId: string | null) => void;
   setSelectedSchool: (schoolId: string | null) => void;
   setSchools: (schools: School[]) => void;
+  setSelectedRoutes: (routeIds: string[]) => void;
   selectStop: (route: Route, stop: Stop, stopNumber: number) => void;
   clearSelectedStop: () => void;
   setDirectionFilter: (direction: 'Morning' | 'Afternoon' | 'Both') => void;
@@ -67,7 +68,7 @@ export const useStore = create<Store>((set) => ({
         // Preserve existing color if it's already set, otherwise assign a new one
         // This prevents color changes when routes are reloaded
         color: route.color && route.color !== '' ? route.color : (colorMap.get(route.id || '') || '#FF6B6B'),
-        isSelected: route.isSelected ?? true, // Default to selected
+        isSelected: route.isSelected ?? false,
         geocodingProgress: {
           total: totalStops,
           geocoded: geocodedStops,
@@ -227,23 +228,92 @@ export const useStore = create<Store>((set) => ({
 
   setSchools: (schools) => set({ schools }),
 
+  setSelectedRoutes: (routeIds) =>
+    set((state) => {
+      console.log('[useStore] Setting selected routes:', routeIds);
+      const updatedRoutes = state.routes.map((route) => {
+        const isSelected = routeIds.includes(route.id);
+        return route.isSelected === isSelected ? route : { ...route, isSelected };
+      });
+
+      // Clear selected stop if its route is no longer selected
+      let updatedSelectedStop = state.selectedStop;
+      if (state.selectedStop && !routeIds.includes(state.selectedStop.route.id)) {
+        console.log('[useStore] Clearing selected stop because its route was deselected');
+        updatedSelectedStop = null;
+      }
+
+      return {
+        routes: updatedRoutes,
+        selectedStop: updatedSelectedStop,
+      };
+    }),
+
   selectStop: (route, stop, stopNumber) => set({ selectedStop: { route, stop, stopNumber } }),
 
   clearSelectedStop: () => set({ selectedStop: null }),
 
   setDirectionFilter: (direction) => {
     set((state) => {
-      // Reset stop selection when direction filter changes
-      if (state.directionFilter !== direction && state.selectedStop) {
-        console.log(`[useStore] Direction filter changed from ${state.directionFilter} to ${direction}, clearing stop selection`);
-        return {
-          directionFilter: direction,
-          selectedStop: null,
-        };
+      if (state.directionFilter === direction) return state;
+
+      const oldDirection = state.directionFilter;
+      const newDirection = direction;
+
+      // 1. Carry over route selection (by name) from old direction to new direction
+      // Find names of currently selected routes in the OLD direction
+      const selectedNames = state.routes
+        .filter(r => r.isSelected && (oldDirection === 'Both' || r.direction === oldDirection))
+        .map(r => r.name);
+
+      // Update routes: if a route is in the new direction and its name was selected in the old, select it
+      const updatedRoutes = state.routes.map(r => {
+        // Only modify routes in the new target direction
+        if (r.direction === newDirection || newDirection === 'Both') {
+          if (selectedNames.includes(r.name)) {
+            return { ...r, isSelected: true };
+          }
+        }
+        return r;
+      });
+
+      // 2. Try to carry over stop selection if it exists
+      let updatedSelectedStop = state.selectedStop;
+      if (state.selectedStop && oldDirection !== newDirection) {
+        const currentStop = state.selectedStop.stop;
+        const currentRouteName = state.selectedStop.route.name;
+
+        // Look for the same route in the NEW direction
+        const newTargetRoute = updatedRoutes.find(r => 
+          r.name === currentRouteName && 
+          (newDirection === 'Both' || r.direction === newDirection)
+        );
+
+        if (newTargetRoute) {
+          // Try to find the matching stop by address
+          const matchingStopIndex = newTargetRoute.stops.findIndex(s => s.address === currentStop.address);
+          if (matchingStopIndex !== -1) {
+            const matchingStop = newTargetRoute.stops[matchingStopIndex];
+            updatedSelectedStop = {
+              route: newTargetRoute,
+              stop: matchingStop,
+              stopNumber: matchingStopIndex + 1
+            };
+          } else {
+            // If no exact address match, we might want to clear it or keep it?
+            // Usually best to clear if it's not the same physical location
+            updatedSelectedStop = null;
+          }
+        } else {
+          updatedSelectedStop = null;
+        }
       }
       
-      // Just update the direction filter if it's the same or no stop is selected
-      return { directionFilter: direction };
+      return { 
+        directionFilter: direction,
+        routes: updatedRoutes,
+        selectedStop: updatedSelectedStop
+      };
     });
   },
 

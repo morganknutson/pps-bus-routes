@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
@@ -17,22 +17,36 @@ const defaultIcon = createDefaultMarkerIcon();
 L.Marker.prototype.options.icon = defaultIcon;
 
 
-// Component to fit map bounds to show filtered schools
+// Component to handle map zoom - zooms to selected school or fits all schools
 function FitBounds({ schools, selectedSchool }: { schools: School[]; selectedSchool: School | null }) {
   const map = useMap();
+  const prevSelectedSchoolRef = useRef<School | null>(null);
   
   useEffect(() => {
-    // Don't update bounds if a school is selected (let the zoom effect handle it)
-    if (selectedSchool) {
+    if (!map) {
       return;
     }
-    
-    const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
-    if (schoolsWithCoords.length > 0) {
-      const bounds = L.latLngBounds(
-        schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
-      );
-      map.fitBounds(bounds, { padding: [50, 50], animate: true });
+
+    const prevSelected = prevSelectedSchoolRef.current;
+    prevSelectedSchoolRef.current = selectedSchool;
+
+    if (selectedSchool && selectedSchool.coordinates && selectedSchool.coordinates.length === 2) {
+      // Zoom to selected school
+      const [lng, lat] = selectedSchool.coordinates;
+      map.setView([lat, lng], 16, { animate: true });
+    } else if (!selectedSchool) {
+      // No school selected - zoom out to show all schools
+      const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
+      if (schoolsWithCoords.length > 0) {
+        try {
+          const bounds = L.latLngBounds(
+            schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
+          );
+          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+        } catch (error) {
+          console.error('[FitBounds] Error fitting bounds:', error);
+        }
+      }
     }
   }, [map, schools, selectedSchool]);
   
@@ -55,7 +69,6 @@ function SchoolMarkersManager({
   // Convert schools to marker data format
   // Use stable keys based on school IDs and positions
   const markerData: MarkerData[] = useMemo(() => {
-    console.log('[SchoolMarkersManager] Recalculating markerData for', schools.length, 'schools');
     const data = schools
       .filter(s => s.coordinates && s.coordinates.length === 2)
       .map(school => {
@@ -68,7 +81,6 @@ function SchoolMarkersManager({
           onClick: () => handleSchoolClick(school),
         };
       });
-    console.log('[SchoolMarkersManager] Marker IDs:', data.map(m => m.id));
     return data;
   }, [schools, handleSchoolClick]);
 
@@ -94,7 +106,6 @@ export function SchoolsList() {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSchool, setSelectedSchool] = useState<School | null>(null);
-  const mapRef = useRef<L.Map | null>(null);
   const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
     elementary: true,
     middle: true,
@@ -176,13 +187,7 @@ export function SchoolsList() {
 
   // Memoize filtered schools to avoid unnecessary recalculations
   const filteredSchools = useMemo(() => {
-    console.log('[SchoolsList] Filtering schools with filters:', schoolTypeFilters);
     const filtered = schools.filter(school => {
-      // Filter out ACCESS school
-      if (school.name === 'ACCESS') {
-        return false;
-      }
-      
       // Search filter
       const matchesSearch = 
         school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -200,7 +205,6 @@ export function SchoolsList() {
           return true; // Show hybrid schools if hybrid filter is enabled
         }
         // If hybrid filter is disabled, don't show hybrid schools
-        console.log(`[SchoolsList] Filtering out hybrid school ${school.name} - hybrid filter disabled`);
         return false;
       }
       
@@ -210,43 +214,21 @@ export function SchoolsList() {
         (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
         (schoolTypes.includes('High School') && schoolTypeFilters.high);
       
-      if (!matchesFilter) {
-        console.log(`[SchoolsList] Filtering out ${school.name} - types: ${schoolTypes.join(', ')}, filters:`, schoolTypeFilters);
-      }
-      
       return matchesFilter;
     });
-    console.log('[SchoolsList] Filtered schools count:', filtered.length, 'out of', schools.length);
     return filtered;
   }, [schools, searchTerm, schoolTypeFilters.elementary, schoolTypeFilters.middle, schoolTypeFilters.high, schoolTypeFilters.hybrid]);
 
   const allSchoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
   const schoolsWithCoords = useMemo(() => {
-    const filtered = filteredSchools.filter(s => s.coordinates && s.coordinates.length === 2);
-    console.log('[SchoolsList] Schools with coords after filtering:', filtered.length);
-    return filtered;
+    return filteredSchools.filter(s => s.coordinates && s.coordinates.length === 2);
   }, [filteredSchools]);
   const schoolsWithoutCoords = filteredSchools.filter(s => !s.coordinates || s.coordinates.length !== 2);
 
-  // Debug: Log when schoolsWithCoords changes
-  useEffect(() => {
-    console.log('[SchoolsList] schoolsWithCoords changed:', schoolsWithCoords.length, 'schools');
-    console.log('[SchoolsList] School IDs:', schoolsWithCoords.map(s => s.id));
-  }, [schoolsWithCoords]);
-
-  // Zoom to selected school when it changes
-  useEffect(() => {
-    if (mapRef.current && selectedSchool && selectedSchool.coordinates && selectedSchool.coordinates.length === 2) {
-      const [lng, lat] = selectedSchool.coordinates;
-      mapRef.current.setView([lat, lng], 16, { animate: true });
-    } else if (mapRef.current && !selectedSchool && schoolsWithCoords.length > 0) {
-      // Zoom out to show all schools when dialog is closed
-      const bounds = L.latLngBounds(
-        schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
-      );
-      mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
-    }
-  }, [selectedSchool, schoolsWithCoords]);
+  // Handle school selection toggle - clicking a selected school deselects it
+  const handleSchoolClick = useCallback((school: School) => {
+    setSelectedSchool(prev => prev?.id === school.id ? null : school);
+  }, []);
 
   if (loading) {
     return (
@@ -330,13 +312,7 @@ export function SchoolsList() {
           {/* School Type Filters */}
           <SchoolTypeFilter 
             filters={schoolTypeFilters}
-            onChange={(newFilters) => {
-              console.log('[SchoolsList] Filter onChange called with:', newFilters);
-              console.log('[SchoolsList] Current filters:', schoolTypeFilters);
-              console.log('[SchoolsList] Calling setSchoolTypeFilters...');
-              setSchoolTypeFilters(newFilters);
-              console.log('[SchoolsList] setSchoolTypeFilters called');
-            }}
+            onChange={setSchoolTypeFilters}
           />
 
           {/* Search */}
@@ -412,7 +388,7 @@ export function SchoolsList() {
                   return (
                     <div
                       key={school.id}
-                      onClick={() => setSelectedSchool(school)}
+                      onClick={() => handleSchoolClick(school)}
                       style={{
                         padding: '1rem',
                         borderBottom: '1px solid #eee',
@@ -495,14 +471,13 @@ export function SchoolsList() {
               center={[45.5152, -122.6784]} // Portland center
               zoom={12}
               style={{ height: '100%', width: '100%' }}
-              ref={mapRef}
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
               />
               <FitBounds schools={schoolsWithCoords} selectedSchool={selectedSchool} />
-              <SchoolMarkersManager schools={schoolsWithCoords} onSchoolClick={setSelectedSchool} />
+              <SchoolMarkersManager schools={schoolsWithCoords} onSchoolClick={handleSchoolClick} />
             </MapContainer>
           ) : (
             <div style={{
@@ -547,15 +522,25 @@ export function SchoolsList() {
             </div>
             <button
               onClick={() => setSelectedSchool(null)}
+              type="button"
               style={{
                 background: 'none',
                 border: 'none',
                 fontSize: '20px',
                 cursor: 'pointer',
                 color: '#999',
-                padding: '0',
+                padding: '4px',
                 lineHeight: '1',
+                flexShrink: 0,
+                minWidth: '24px',
+                minHeight: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1001,
+                position: 'relative',
               }}
+              aria-label="Close dialog"
             >
               ×
             </button>

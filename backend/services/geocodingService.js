@@ -1,7 +1,38 @@
 /**
- * Google Maps Geocoding Service
- * Provides accurate geocoding using Google Maps Geocoding API
- * Falls back to Nominatim if API key is not configured
+ * @fileoverview Google Maps Geocoding Service for PPS Bus Maps
+ * 
+ * This module provides geocoding functionality to convert street addresses
+ * to GPS coordinates. It uses the Google Maps Geocoding API as the primary
+ * service, with optional Nominatim fallback (currently disabled).
+ * 
+ * Key features:
+ * - Single address geocoding
+ * - Intersection/cross-street handling with multiple format attempts
+ * - Portland bounds validation
+ * - House address snapping to nearest street
+ * - Neighborhood enrichment via reverse geocoding
+ * - Batch geocoding for multiple stops
+ * 
+ * @module services/geocodingService
+ * @requires dotenv
+ * @requires ../utils/formatAddress.js
+ * @requires ./neighborhoodService.js
+ * @requires ./streetGeometryService.js
+ * 
+ * @example
+ * // Geocode a single address
+ * import { geocodingService } from './geocodingService.js';
+ * 
+ * const result = await geocodingService.geocodeAddress('SW Patton Rd & SW Vista Ave');
+ * if (result.success) {
+ *   console.log(result.coordinates); // [-122.7234, 45.5123] (lng, lat)
+ * }
+ * 
+ * @example
+ * // Geocode all stops in a route
+ * const geocodedStops = await geocodingService.geocodeStops(route.stops);
+ * 
+ * @see {@link https://developers.google.com/maps/documentation/geocoding|Google Geocoding API}
  */
 
 import dotenv from 'dotenv';
@@ -23,9 +54,42 @@ const GOOGLE_GEOCODING_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
 const ENABLE_NOMINATIM_FALLBACK = false;
 
 /**
- * GeocodingService class for Google Maps Geocoding API
+ * GeocodingService class for converting addresses to coordinates.
+ * 
+ * This class provides comprehensive geocoding functionality optimized for
+ * Portland, Oregon bus stop addresses. It handles:
+ * - Standard addresses (e.g., "1234 SW Main St")
+ * - Intersections (e.g., "SW Patton & Vista")
+ * - Multiple intersection formats
+ * - Portland bounds validation
+ * - House address snapping to streets
+ * 
+ * @class
+ * @example
+ * // Create custom instance with specific API key
+ * const customGeocoder = new GeocodingService('your-api-key');
+ * 
+ * @example
+ * // Use singleton instance (recommended)
+ * import { geocodingService } from './geocodingService.js';
+ * const result = await geocodingService.geocodeAddress('123 Main St');
  */
 class GeocodingService {
+  /**
+   * Creates a new GeocodingService instance.
+   * 
+   * @param {string|null} [apiKey=null] - Google Maps API key. If not provided,
+   *   falls back to GOOGLE_MAPS_API_KEY or GOOGLE_API_KEY environment variables.
+   * @throws {Error} If no API key is found and Nominatim fallback is disabled
+   * 
+   * @example
+   * // Using environment variable (default)
+   * const service = new GeocodingService();
+   * 
+   * @example
+   * // Using explicit API key
+   * const service = new GeocodingService('AIza...');
+   */
   constructor(apiKey = null) {
     this.apiKey = apiKey || GOOGLE_API_KEY;
     this.useGoogle = !!this.apiKey;
@@ -407,9 +471,9 @@ class GeocodingService {
         // Calculate distance moved (in meters, approximate)
         const distanceMoved = this.calculateDistance(coordinates, snappedCoords);
         
-        // Only use snapped coordinates if movement is reasonable (< 50 meters)
+        // Only use snapped coordinates if movement is reasonable (< 100 meters)
         // This prevents snapping to a completely different street
-        if (distanceMoved < 50) {
+        if (distanceMoved < 100) {
           console.log(`[GeocodingService] Snapped house address to street (moved ${distanceMoved.toFixed(1)}m)`);
           return snappedCoords;
         } else {
@@ -450,129 +514,112 @@ class GeocodingService {
   }
 
   /**
-   * Geocode all stops for a route
+   * Geocode all stops for a route with limited parallelism
    */
   async geocodeStops(stops, city = 'Portland', state = 'OR') {
-    const geocodedStops = [];
+    const CONCURRENCY = 3; // Process 3 stops at a time to be respectful of rate limits
+    const geocodedStops = new Array(stops.length);
     
-    for (let i = 0; i < stops.length; i++) {
-      const stop = stops[i];
-      
-      // Skip geocoding for stops marked to skip (e.g., LOADING ZONE, CAB LOAD ZONE)
-      if (stop.skipGeocoding) {
-        geocodedStops.push({
-          ...stop,
-          coordinates: null,
-          skipGeocoding: true,
-        });
-        continue;
-      }
-      
-      // Skip geocoding for school stops that already have coordinates from schools.json
-      // School stops should ALWAYS use address and coordinates from schools.json, never geocoded
-      // But we still want to get neighborhood information for them
-      if (stop.isSchoolStop && stop.coordinates && Array.isArray(stop.coordinates) && stop.coordinates.length === 2) {
-        const schoolStopData = {
-          ...stop,
-          // Keep existing coordinates from schools.json
-          skipGeocoding: false, // Keep false to indicate it has coordinates, just not from geocoding
-        };
+    // Process stops in chunks
+    for (let i = 0; i < stops.length; i += CONCURRENCY) {
+      const chunk = stops.slice(i, i + CONCURRENCY);
+      const chunkPromises = chunk.map(async (stop, index) => {
+        const actualIndex = i + index;
         
-        // Get neighborhood from coordinates using reverse geocoding (even though we skip geocoding)
-        if (!stop.neighborhood && !stop.skipGeocoding) {
-          try {
-            const neighborhoodResult = await neighborhoodService.getNeighborhood(stop.coordinates);
-            if (neighborhoodResult.success && neighborhoodResult.neighborhood) {
-              schoolStopData.neighborhood = neighborhoodResult.neighborhood;
+        // Skip geocoding for stops marked to skip (e.g., LOADING ZONE, CAB LOAD ZONE)
+        if (stop.skipGeocoding) {
+          geocodedStops[actualIndex] = {
+            ...stop,
+            coordinates: null,
+            skipGeocoding: true,
+          };
+          return;
+        }
+        
+        // Skip geocoding for school stops that already have coordinates from schools.json
+        if (stop.isSchoolStop && stop.coordinates && Array.isArray(stop.coordinates) && stop.coordinates.length === 2) {
+          const schoolStopData = {
+            ...stop,
+            skipGeocoding: false,
+          };
+          
+          if (!stop.neighborhood) {
+            try {
+              const neighborhoodResult = await neighborhoodService.getNeighborhood(stop.coordinates);
+              if (neighborhoodResult.success && neighborhoodResult.neighborhood) {
+                schoolStopData.neighborhood = neighborhoodResult.neighborhood;
+              }
+            } catch (error) {
+              console.warn(`[GeocodingService] Failed to get neighborhood for school stop "${stop.address}":`, error.message);
             }
-          } catch (error) {
-            console.warn(`[GeocodingService] Failed to get neighborhood for school stop "${stop.address}":`, error.message);
-            // Continue without neighborhood - not a critical error
           }
+          
+          geocodedStops[actualIndex] = schoolStopData;
+          return;
         }
         
-        geocodedStops.push(schoolStopData);
-        continue;
-      }
-      
-      let address = stop.address;
-      
-      // Check if this is an intersection
-      const isIntersection = address.includes('&') || address.includes(' AND ');
-      
-      let result;
-      if (isIntersection) {
-        result = await this.geocodeIntersection(address, city, state);
-      } else {
-        result = await this.geocodeAddress(address, city, state);
-      }
-      
-      if (result.success) {
-        let finalCoordinates = result.coordinates;
+        const address = stop.address;
+        const isIntersection = address.includes('&') || address.includes(' AND ');
         
-        // If this is a house address (not an intersection), snap it to the street
-        // Intersections should stay as-is since they're already on the street
-        if (!isIntersection && this.isHouseAddress(result)) {
-          console.log(`[GeocodingService] Attempting to snap house address "${stop.address}" to street`);
-          finalCoordinates = await this.snapHouseAddressToStreet(result.coordinates);
-          if (finalCoordinates !== result.coordinates) {
-            console.log(`[GeocodingService] Successfully snapped "${stop.address}" from [${result.coordinates[0]}, ${result.coordinates[1]}] to [${finalCoordinates[0]}, ${finalCoordinates[1]}]`);
-          } else {
-            console.log(`[GeocodingService] Snapping failed or skipped for "${stop.address}", keeping original coordinates`);
+        let result;
+        if (isIntersection) {
+          result = await this.geocodeIntersection(address, city, state);
+        } else {
+          result = await this.geocodeAddress(address, city, state);
+        }
+        
+        if (result.success) {
+          let finalCoordinates = result.coordinates;
+          
+          if (!isIntersection && this.isHouseAddress(result)) {
+            finalCoordinates = await this.snapHouseAddressToStreet(result.coordinates);
           }
-        } else if (!isIntersection) {
-          console.log(`[GeocodingService] Not snapping "${stop.address}": isHouseAddress=${this.isHouseAddress(result)}, locationType=${result.locationType}, hasAddressComponents=${!!result.addressComponents}`);
-        }
-        
-        const stopData = {
-          ...stop,
-          coordinates: finalCoordinates,
-          displayName: result.displayName,
-          placeId: result.placeId || null, // Save placeId for future lookups
-        };
-        
-        // Add flag if this is an approximate location
-        if (result.isApproximate) {
-          stopData.isApproximate = true;
-          stopData.geocodeWarning = result.geocodeWarning || 'Intersection not found, using approximate location';
-        }
-        
-        // Get neighborhood from coordinates using reverse geocoding
-        if (stopData.coordinates && !stop.skipGeocoding) {
-          try {
-            const neighborhoodResult = await neighborhoodService.getNeighborhood(stopData.coordinates);
-            if (neighborhoodResult.success && neighborhoodResult.neighborhood) {
-              stopData.neighborhood = neighborhoodResult.neighborhood;
+          
+          const stopData = {
+            ...stop,
+            coordinates: finalCoordinates,
+            displayName: result.displayName,
+            placeId: result.placeId || null,
+          };
+          
+          if (result.isApproximate) {
+            stopData.isApproximate = true;
+            stopData.geocodeWarning = result.geocodeWarning || 'Intersection not found, using approximate location';
+          }
+          
+          if (stopData.coordinates) {
+            try {
+              const neighborhoodResult = await neighborhoodService.getNeighborhood(stopData.coordinates);
+              if (neighborhoodResult.success && neighborhoodResult.neighborhood) {
+                stopData.neighborhood = neighborhoodResult.neighborhood;
+              }
+            } catch (error) {
+              console.warn(`[GeocodingService] Failed to get neighborhood for stop "${stop.address}":`, error.message);
             }
-          } catch (error) {
-            console.warn(`[GeocodingService] Failed to get neighborhood for stop "${stop.address}":`, error.message);
-            // Continue without neighborhood - not a critical error
           }
+          
+          geocodedStops[actualIndex] = stopData;
+        } else {
+          geocodedStops[actualIndex] = {
+            ...stop,
+            coordinates: null,
+            geocodeError: result.error,
+          };
         }
-        
-        geocodedStops.push(stopData);
-      } else {
-        geocodedStops.push({
-          ...stop,
-          coordinates: null,
-          geocodeError: result.error,
-        });
-      }
+      });
       
-      // Rate limiting: wait between requests
-      if (this.useGoogle && i < stops.length - 1) {
-        // Small delay for Google to avoid hitting rate limits
-        await new Promise(resolve => setTimeout(resolve, 50));
-      } else if (!this.useGoogle && ENABLE_NOMINATIM_FALLBACK && i < stops.length - 1) {
-        // Nominatim rate limiting (disabled)
-        await new Promise(resolve => setTimeout(resolve, 1000));
+      await Promise.all(chunkPromises);
+      
+      // Small delay between chunks to avoid hitting rate limits too fast
+      if (i + CONCURRENCY < stops.length) {
+        await new Promise(resolve => setTimeout(resolve, this.useGoogle ? 100 : 1000));
       }
     }
     
     // Check for duplicate coordinates and warn
     const coordinateMap = new Map();
     geocodedStops.forEach((stop, index) => {
-      if (stop.coordinates) {
+      if (stop && stop.coordinates) {
         const key = `${stop.coordinates[0].toFixed(6)},${stop.coordinates[1].toFixed(6)}`;
         if (coordinateMap.has(key)) {
           console.warn(`[GeocodingService] Duplicate coordinates detected: Stop ${index + 1} "${stop.address}" has same coordinates as stop ${coordinateMap.get(key) + 1}`);
@@ -586,24 +633,28 @@ class GeocodingService {
   }
 
   /**
-   * Batch geocode multiple addresses
+   * Batch geocode multiple addresses with limited parallelism
    */
   async batchGeocode(addresses, city = 'Portland', state = 'OR') {
-    const results = [];
+    const CONCURRENCY = 3;
+    const results = new Array(addresses.length);
     
-    for (let i = 0; i < addresses.length; i++) {
-      const address = addresses[i];
-      const result = await this.geocodeAddress(address, city, state);
-      results.push({
-        address,
-        ...result,
+    for (let i = 0; i < addresses.length; i += CONCURRENCY) {
+      const chunk = addresses.slice(i, i + CONCURRENCY);
+      const chunkPromises = chunk.map(async (address, index) => {
+        const actualIndex = i + index;
+        const result = await this.geocodeAddress(address, city, state);
+        results[actualIndex] = {
+          address,
+          ...result,
+        };
       });
       
+      await Promise.all(chunkPromises);
+      
       // Rate limiting
-      if (!this.useGoogle && i < addresses.length - 1) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      } else if (this.useGoogle && i < addresses.length - 1) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+      if (i + CONCURRENCY < addresses.length) {
+        await new Promise(resolve => setTimeout(resolve, this.useGoogle ? 100 : 1000));
       }
     }
     

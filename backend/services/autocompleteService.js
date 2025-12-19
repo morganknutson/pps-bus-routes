@@ -3,6 +3,8 @@ dotenv.config();
 
 const API_KEY = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
 
+import { geocodingService } from './geocodingService.js';
+
 /**
  * AutocompleteService class for address autocomplete
  * Uses Google Places Autocomplete API with Nominatim fallback
@@ -106,7 +108,7 @@ class AutocompleteService {
       const response = await fetch(url, {
         headers: {
           'X-Goog-Api-Key': this.apiKey,
-          'X-Goog-FieldMask': 'id,displayName,formattedAddress,location,addressComponents'
+          'X-Goog-FieldMask': 'id,displayName,formattedAddress,location,addressComponents,types'
         }
       });
 
@@ -117,9 +119,23 @@ class AutocompleteService {
       const data = await response.json();
       
       if (data.location) {
+        const coordinates = [data.location.longitude, data.location.latitude]; // [lng, lat]
+        
+        // Snap house addresses to nearest street for better "closest stop" calculations
+        // Cul-de-sacs often have houses physically closer to back streets than front streets
+        let finalCoordinates = coordinates;
+        const isHouse = data.addressComponents?.some(c => c.types.includes('street_number')) || 
+                       data.types?.includes('street_address') ||
+                       data.types?.includes('premise');
+        
+        if (isHouse) {
+          console.log(`[AutocompleteService] Snapping house address to street: ${data.formattedAddress}`);
+          finalCoordinates = await geocodingService.snapHouseAddressToStreet(coordinates);
+        }
+
         return {
           address: data.formattedAddress || data.displayName?.text || null,
-          coordinates: [data.location.longitude, data.location.latitude], // [lng, lat]
+          coordinates: finalCoordinates,
           displayName: data.formattedAddress || data.displayName?.text || null
         };
       }

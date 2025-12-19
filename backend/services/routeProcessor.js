@@ -1,10 +1,52 @@
 /**
- * Core route processing service
- * Processes a single PDF: parses, geocodes, adds school stop, calculates geometry
- * This is the shared logic used by all processors (CLI, API, Scheduler)
+ * @fileoverview Core Route Processing Service for PPS Bus Maps
+ * 
+ * This module orchestrates the complete PDF-to-JSON processing pipeline.
+ * It is the central service used by all route processors including CLI scripts,
+ * API endpoints, and the scheduler.
+ * 
+ * Processing Pipeline:
+ * 1. Determine school from filename/folder structure
+ * 2. Parse PDF text to extract stops
+ * 3. Load school data from schools.json
+ * 4. Geocode all stop addresses
+ * 5. Add school stop (positioned based on route direction)
+ * 6. Filter out loading zones
+ * 7. Calculate street-following route geometry
+ * 8. Aggregate neighborhood information
+ * 9. Save processed JSON to data/schools/{id}/processed-routes/
+ * 
+ * @module services/routeProcessor
+ * @requires fs
+ * @requires path
+ * @requires ./pdfParser.js
+ * @requires ./geocodingService.js
+ * @requires ./directionsService.js
+ * @requires ../utils/schoolUtils.js
+ * 
+ * @example
+ * // Process a PDF file
+ * import { processSinglePDF } from './routeProcessor.js';
+ * import fs from 'fs';
+ * 
+ * const pdfBuffer = fs.readFileSync('100SYL-A_effective_082625.pdf');
+ * const route = await processSinglePDF(pdfBuffer, '100SYL-A_effective_082625.pdf', null, {
+ *   logPrefix: '[Script]',
+ *   saveToFile: true,
+ *   schoolId: 'west-sylvan'
+ * });
+ * 
+ * console.log(route.name);               // "100"
+ * console.log(route.stops.length);       // 15
+ * console.log(route.stats.geocodedStops); // 14
+ * 
+ * @see {@link module:services/pdfParser} for PDF parsing
+ * @see {@link module:services/geocodingService} for geocoding
+ * @see {@link module:services/directionsService} for route geometry
  */
 
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
@@ -22,8 +64,19 @@ const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
 const pdfParse = require(path.join(__dirname, '..', 'node_modules', 'pdf-parse'));
 
 /**
- * Match anchor name to a school by finding school name in the anchor name
- * Returns the school object if found, null otherwise
+ * Matches an anchor name to a school in the schools database.
+ * 
+ * Anchor names appear in PDFs as "Anchor Name:WEST SYLVAN GT LOADING ZONE".
+ * This function tries to find a school whose name appears within the anchor name.
+ * 
+ * @private
+ * @param {string|null} anchorName - The anchor name from the PDF
+ * @param {Array<Object>} schools - Array of school objects from schools.json
+ * @returns {Object|null} The matched school object or null
+ * 
+ * @example
+ * const school = matchSchoolFromAnchorName('WEST SYLVAN GT LOADING ZONE', schools);
+ * // Returns: { id: 'west-sylvan', name: 'West Sylvan', ... }
  */
 function matchSchoolFromAnchorName(anchorName, schools) {
   if (!anchorName || !schools || schools.length === 0) {
@@ -45,8 +98,29 @@ function matchSchoolFromAnchorName(anchorName, schools) {
 }
 
 /**
- * Extract and validate school coordinates from various formats
- * Returns [lng, lat] array or null if invalid
+ * Extracts and validates school coordinates from various legacy formats.
+ * 
+ * Schools.json has evolved over time, so coordinates may appear in different formats:
+ * - `[lng, lat]` - Current GeoJSON standard format
+ * - `{lat, lng}` - Legacy object format
+ * - `school.lat, school.lng` - Very old format at top level
+ * 
+ * This function normalizes all formats to `[lng, lat]` and validates
+ * that coordinates are within reasonable bounds.
+ * 
+ * @private
+ * @param {Object} matchedSchool - School object from schools.json
+ * @returns {Array<number>|null} Coordinates as [lng, lat] or null if invalid
+ * 
+ * @example
+ * // GeoJSON format
+ * extractSchoolCoordinates({ coordinates: [-122.7, 45.5] })
+ * // Returns: [-122.7, 45.5]
+ * 
+ * @example
+ * // Legacy object format
+ * extractSchoolCoordinates({ coordinates: { lat: 45.5, lng: -122.7 } })
+ * // Returns: [-122.7, 45.5]
  */
 function extractSchoolCoordinates(matchedSchool) {
   // Handle [lng, lat] format (expected format from Google Places API)
@@ -132,7 +206,7 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
   
   if (fs.existsSync(SCHOOLS_FILE)) {
     try {
-      const schoolsContent = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+      const schoolsContent = await fsPromises.readFile(SCHOOLS_FILE, 'utf8');
       const schools = JSON.parse(schoolsContent);
       
       // PRIMARY: Use schoolId directly (from folder structure)
@@ -291,7 +365,7 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
     const processedRoutesDir = path.join(DATA_DIR, 'schools', finalSchoolId, 'processed-routes');
     try {
       if (!fs.existsSync(processedRoutesDir)) {
-        fs.mkdirSync(processedRoutesDir, { recursive: true });
+        await fsPromises.mkdir(processedRoutesDir, { recursive: true });
         console.log(`${logPrefix} 📁 Created processed-routes directory: ${processedRoutesDir}`);
       }
     } catch (error) {
@@ -302,7 +376,7 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
     // ALWAYS save the route - even if some data is missing
     const outputFilename = outputPath || path.join(processedRoutesDir, filename.replace('.pdf', '.json'));
     try {
-      fs.writeFileSync(outputFilename, JSON.stringify(finalRoute, null, 2));
+      await fsPromises.writeFile(outputFilename, JSON.stringify(finalRoute, null, 2));
       console.log(`${logPrefix} 💾 Saved route to: ${outputFilename}`);
       console.log(`${logPrefix}    Route: ${finalRoute.name}, Stops: ${finalRoute.stops.length}, Geocoded: ${finalRoute.stats.geocodedStops}/${finalRoute.stats.totalStops}`);
     } catch (error) {

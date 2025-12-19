@@ -75,13 +75,12 @@ nvm use 18
 node --version
 ```
 
-### Step 3: Install PM2 (Process Manager)
+### Step 3: Set Up Process Management
 
-```bash
-npm install -g pm2
-```
-
-PM2 will keep your app running and restart it if it crashes.
+You'll need to set up a process manager to keep your app running. Options include:
+- systemd (Linux service)
+- supervisor
+- screen/tmux for development
 
 ### Step 4: Clone Your Repository
 
@@ -141,32 +140,18 @@ node server.js
 
 If it starts without errors, press `Ctrl+C` to stop it.
 
-### Step 8: Start with PM2
+### Step 8: Start the Application
 
 ```bash
 # Go back to project root
 cd ~/pps-bus-maps
 
-# Start the app with PM2
-pm2 start ecosystem.config.production.cjs
-
-# Save PM2 configuration
-pm2 save
-
-# Set PM2 to start on server reboot
-pm2 startup
+# Start the backend server
+cd backend
+node server.js
 ```
 
-Follow the command that PM2 gives you (it will be something like `sudo env PATH=...`).
-
-### Step 9: Check PM2 Status
-
-```bash
-pm2 status
-pm2 logs
-```
-
-You should see your app running!
+For production, you'll want to set up a process manager (systemd, supervisor, etc.) to keep the app running and restart it automatically.
 
 ### Step 10: Configure Your Domain
 
@@ -211,21 +196,16 @@ After you run the checks above, share the results and I'll help you:
 # Check Node.js
 node --version
 
-# Check what's running
-pm2 status
+# Start backend server
+cd backend && node server.js
 
-# View logs
-pm2 logs pps-bus-maps
+# Check if server is running
+lsof -i :3001
 
-# Restart app
-pm2 restart pps-bus-maps
-
-# Stop app
-pm2 stop pps-bus-maps
-
-# View app info
-pm2 info pps-bus-maps
+# View logs (if using systemd)
+journalctl -u pps-bus-maps -f
 ```
+
 
 
 

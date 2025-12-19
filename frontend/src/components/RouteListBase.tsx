@@ -1,7 +1,7 @@
 import { useState, ReactNode } from 'react';
 import { formatStreetName } from '../utils/formatAddress';
+import { getSchoolTypes } from '../utils/schoolUtils';
 import type { Route, Stop } from '../types';
-import { ProgressBar } from './ProgressBar';
 
 /**
  * Configuration for route list display options
@@ -100,19 +100,21 @@ function renderStopItem(
         backgroundColor: hasError
           ? '#ffe6e6'
           : isSelected
-          ? '#e3f2fd'
+          ? 'var(--bg-tertiary)'
           : isClickable
           ? 'transparent'
           : 'var(--bg-secondary)',
-        borderLeft: isSelected ? '3px solid #4ECDC4' : hasError ? '3px solid #ff6b6b' : 'none',
+        borderLeft: isSelected ? `3px solid ${routeColor}` : hasError ? '3px solid #ff6b6b' : 'none',
         transition: 'background-color 0.15s',
         display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem',
+        alignItems: 'flex-start',
+        gap: '0.5rem',
+        padding: '0.75rem',
+        paddingLeft: '0.75rem',
       }}
       onMouseEnter={(e) => {
-        if (isClickable) {
-          e.currentTarget.style.backgroundColor = hasError ? '#ffcccc' : '#e3f2fd';
+        if (isClickable && !isSelected) {
+          e.currentTarget.style.backgroundColor = hasError ? '#ffcccc' : 'var(--bg-secondary)';
         }
       }}
       onMouseLeave={(e) => {
@@ -125,69 +127,102 @@ function renderStopItem(
       {stop.isSchoolStop ? (
         <div style={{ 
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
-          width: '18px',
-          height: '18px',
-          borderRadius: '50%',
-          backgroundColor: hasError ? '#ff6b6b' : routeColor,
-          color: 'white',
-          fontSize: '14px',
+          justifyContent: 'flex-start',
+          gap: '0.25rem',
           flexShrink: 0,
         }}>
-          <i className="fas fa-graduation-cap" style={{ fontSize: '9px' }}></i>
+          {/* School icon */}
+          <div style={{ 
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '16px',
+            height: '16px',
+            borderRadius: '50%',
+            backgroundColor: hasError ? '#ff6b6b' : routeColor,
+            color: 'white',
+            fontSize: '14px',
+            marginTop: '1px',
+          }}>
+            <i className="fas fa-graduation-cap" style={{ fontSize: '9px' }}></i>
+          </div>
+          {/* Time below icon */}
+          {stop.time && (
+            <div style={{
+              fontSize: '9px',
+              color: 'var(--text-tertiary)',
+              textAlign: 'center',
+            }}>
+              {stop.time}
+            </div>
+          )}
         </div>
       ) : (
         <div style={{ 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: '18px',
-          height: '18px',
+          width: '16px',
+          height: '16px',
           borderRadius: '50%',
           backgroundColor: hasError ? '#ff6b6b' : routeColor,
           color: 'white',
           fontSize: '9px',
           fontWeight: 'bold',
           flexShrink: 0,
+          marginTop: '1px',
         }}>
           {stopNumber}
         </div>
       )}
       
       {/* Stop details */}
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div style={{ flex: 1, minWidth: 0, paddingTop: '0.0625rem', paddingLeft: '0.25rem' }}>
         <div style={{ 
-          fontSize: '12px',
+          fontSize: '13px',
           fontWeight: '500',
+          marginBottom: '0.25rem',
           color: hasError ? '#ff6b6b' : (isClickable ? 'var(--text-secondary)' : 'var(--text-tertiary)'),
         }}>
           {stop.isSchoolStop && stop.schoolName 
-            ? stop.schoolName 
+            ? (() => {
+                const schoolTypes = getSchoolTypes(stop.schoolName);
+                let typeLabel = '';
+                if (schoolTypes.length > 0) {
+                  const type = schoolTypes[0];
+                  if (type === 'High School') {
+                    typeLabel = 'High School';
+                  } else {
+                    typeLabel = type.replace(' School', '');
+                  }
+                }
+                return `${stop.schoolName}${typeLabel ? ` ${typeLabel}` : ''}`;
+              })()
             : formatStreetName(stop.address)}
         </div>
+        {stop.time && !stop.isSchoolStop && (
+          <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+            {stop.time}
+          </div>
+        )}
         {config.showStopErrors && hasError && (
-          <div style={{ fontSize: '10px', color: '#ff6b6b', fontStyle: 'italic', marginTop: '0.25rem' }}>
+          <div style={{ fontSize: '10px', color: '#ff6b6b', fontStyle: 'italic' }}>
             ✗ {stop.geocodeError || 'No coordinates'}
           </div>
         )}
         {config.showStopErrors && !hasError && !stop.isSchoolStop && (
-          <div style={{ fontSize: '10px', color: '#4caf50', marginTop: '0.25rem' }}>
+          <div style={{ fontSize: '10px', color: '#4caf50' }}>
             ✓ Geocoded
           </div>
         )}
         {!hasCoordinates && !stop.isSchoolStop && !config.showStopErrors && (
-          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', fontStyle: 'italic', marginTop: '0.25rem' }}>
+          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
             No coordinates
           </div>
         )}
       </div>
-      {/* Time on the right */}
-      {stop.time && (
-        <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginRight: '0.5rem', flexShrink: 0 }}>
-          {stop.time}
-        </div>
-      )}
     </div>
   );
 }
@@ -207,8 +242,21 @@ export function RouteListBase({
 
   if (loading && routes.length === 0) {
     return (
-      <div style={{ padding: '2rem', maxWidth: '300px', margin: '0 auto' }}>
-        <ProgressBar label="Loading routes..." height={8} />
+      <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-tertiary)' }}>
+        <div style={{ marginBottom: '0.5rem' }}>
+          <div
+            style={{
+              width: '24px',
+              height: '24px',
+              border: '3px solid #4ECDC4',
+              borderTopColor: 'transparent',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
+              margin: '0 auto',
+            }}
+          />
+        </div>
+        <p>Loading routes...</p>
       </div>
     );
   }
@@ -228,11 +276,7 @@ export function RouteListBase({
 
   // Filter routes by direction if specified
   const filteredRoutes = config.directionFilter && config.directionFilter !== 'Both'
-    ? routes.filter(route => {
-        // If route has no direction (null), show it for any filter
-        if (!route.direction) return true;
-        return route.direction === config.directionFilter;
-      })
+    ? routes.filter(route => route.direction === config.directionFilter)
     : routes;
 
   // Group routes by direction (but only show the selected direction if filter is set)
@@ -269,6 +313,8 @@ export function RouteListBase({
     const routeColor = config.getRouteColor?.(route) || route.color;
     const isRouteSelected = config.isRouteSelected?.(route) || false;
     const displayStops = route.stops.filter(stop => !stop.skipGeocoding);
+    // Count only non-school stops for the display count
+    const regularStopCount = displayStops.filter(stop => !stop.isSchoolStop).length;
 
     return (
       <div
@@ -287,41 +333,23 @@ export function RouteListBase({
             config.renderRouteHeader(route)
           ) : (
             <div
-              onClick={() => {
-                // Only toggle route selection, not expand/collapse
-                if (config.showRouteSelection && config.onRouteSelectionChange) {
-                  config.onRouteSelectionChange(route.id, !route.isSelected);
-                }
-              }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.75rem',
-                padding: '0.75rem',
+                padding: '0.5rem 0.75rem',
                 flex: 1,
                 minWidth: 0,
                 cursor: config.showRouteSelection ? 'pointer' : 'default',
-                transition: 'background-color 0.15s ease',
               }}
-              onMouseEnter={(e) => {
-                if (config.showRouteSelection) {
-                  e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+              onClick={() => {
+                if (config.showRouteSelection && config.onRouteSelectionChange) {
+                  config.onRouteSelectionChange(route.id, !route.isSelected);
                 }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
               {config.showRouteSelection && (
-                <label
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                    flexShrink: 0,
-                  }}
-                  onClick={(e) => e.stopPropagation()}
-                >
+                <div style={{ flexShrink: 0 }}>
                   <input
                     type="checkbox"
                     checked={route.isSelected}
@@ -330,12 +358,13 @@ export function RouteListBase({
                         config.onRouteSelectionChange(route.id, e.target.checked);
                       }
                     }}
+                    onClick={(e) => e.stopPropagation()}
                     style={{ display: 'none' }}
                   />
                   <div
                     style={{
-                      width: '18px',
-                      height: '18px',
+                      width: '16px',
+                      height: '16px',
                       borderRadius: '50%',
                       border: `2px solid ${routeColor}`,
                       backgroundColor: route.isSelected ? routeColor : 'transparent',
@@ -343,21 +372,20 @@ export function RouteListBase({
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
-                      boxSizing: 'border-box',
                     }}
                   >
                     {route.isSelected && (
-                      <i className="fas fa-check" style={{ fontSize: '9px', color: 'white' }}></i>
+                      <i className="fas fa-check" style={{ fontSize: '10px', color: 'white' }}></i>
                     )}
                   </div>
-                </label>
+                </div>
               )}
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  <span style={{ color: 'var(--text-primary)' }}>{route.name}</span>
+                <div style={{ fontWeight: '500', marginBottom: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <span style={{ color: 'var(--text-primary)', fontSize: '14px', marginTop: '1px' }}>{route.name}</span>
                 </div>
-                {config.showGeocodingStats && route.geocodingProgress && (
-                  <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+                {config.showGeocodingStats && route.geocodingProgress ? (
+                  <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
                     {route.geocodingProgress.geocoded}/{route.geocodingProgress.total} geocoded
                     {route.geocodingProgress.total - route.geocodingProgress.geocoded > 0 && (
                       <span style={{ color: '#ff6b6b', marginLeft: '0.5rem' }}>
@@ -365,16 +393,16 @@ export function RouteListBase({
                       </span>
                     )}
                   </div>
-                )}
+                ) : null}
                 {config.showFilename && route.filename && (
-                  <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>
                     {route.filename}
                   </div>
                 )}
               </div>
               {!config.showGeocodingStats && (
-                <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginRight: '0.5rem', flexShrink: 0 }}>
-                  {displayStops.length} stops
+                <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                  {regularStopCount} {regularStopCount === 1 ? 'stop' : 'stops'}
                 </div>
               )}
             </div>
@@ -388,7 +416,7 @@ export function RouteListBase({
               background: 'none',
               border: 'none',
               borderLeft: '1px solid var(--border-color)',
-              padding: '0.75rem',
+              padding: '0.5rem 0.75rem',
               cursor: 'pointer',
               color: 'var(--text-tertiary)',
               display: 'flex',
@@ -398,15 +426,23 @@ export function RouteListBase({
             }}
             title={isExpanded ? 'Collapse' : 'Expand'}
           >
-            <i 
-              className="fas fa-chevron-down"
+            <svg 
+              width="16" 
+              height="16" 
+              viewBox="0 0 12 12" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="1" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
               style={{ 
                 transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                 transition: 'transform 0.2s',
                 display: 'inline-block',
-                fontSize: '12px',
               }}
-            />
+            >
+              <path d="M3 4.5L6 7.5L9 4.5" />
+            </svg>
           </button>
         </div>
         
@@ -415,6 +451,8 @@ export function RouteListBase({
           <div style={{ 
             borderTop: '1px solid var(--border-color)',
             backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
+            maxHeight: '400px',
+            overflowY: 'auto',
             transition: 'background-color 0.3s ease, border-color 0.3s ease',
           }}>
             {displayStops.map((stop, index) => 
@@ -488,19 +526,27 @@ export function RouteListBase({
             )}
             <span style={{ fontWeight: '400', color: 'var(--text-tertiary)' }}>({sectionRoutes.length})</span>
           </h3>
-          <i 
-            className="fas fa-chevron-down"
+          <svg 
+            width="16" 
+            height="16" 
+            viewBox="0 0 12 12" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="1" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
             style={{ 
               transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.2s',
               display: 'inline-block',
-              fontSize: '12px',
               color: 'var(--text-tertiary)',
             }}
-          />
+          >
+            <path d="M3 4.5L6 7.5L9 4.5" />
+          </svg>
         </button>
         {isExpanded && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {sectionRoutes.map(renderRoute)}
           </div>
         )}
@@ -524,7 +570,7 @@ export function RouteListBase({
           </>
         ) : (
           // When a specific direction is selected, show all routes of that direction in a single consolidated list
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {filteredRoutes.map(renderRoute)}
           </div>
         )}

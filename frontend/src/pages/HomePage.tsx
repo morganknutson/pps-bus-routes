@@ -16,15 +16,15 @@ interface AutocompleteSuggestion {
 
 export function HomePage() {
   const navigate = useNavigate();
-  const { 
-    setHomeAddress, 
-    setSelectedSchool, 
-    setRoutes, 
-    setLoading,
-    schools,
-    setSchools,
-    selectStop,
-  } = useStore();
+  
+  // Use selectors to prevent unnecessary re-renders when other parts of the store change
+  const setHomeAddress = useStore(state => state.setHomeAddress);
+  const setSelectedSchool = useStore(state => state.setSelectedSchool);
+  const setRoutes = useStore(state => state.setRoutes);
+  const setLoading = useStore(state => state.setLoading);
+  const schools = useStore(state => state.schools);
+  const setSchools = useStore(state => state.setSchools);
+  const selectStop = useStore(state => state.selectStop);
 
   // Address state
   const [addressQuery, setAddressQuery] = useState('');

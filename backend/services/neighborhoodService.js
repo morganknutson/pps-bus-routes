@@ -1,12 +1,43 @@
 /**
- * Neighborhood Service
- * Provides neighborhood lookup from coordinates using reverse geocoding
+ * @fileoverview Neighborhood Service for PPS Bus Maps
+ * 
+ * This module provides neighborhood name lookup from GPS coordinates using
+ * Google Maps Reverse Geocoding. Results are cached to minimize API calls
+ * and costs.
+ * 
+ * Key features:
+ * - Single coordinate → neighborhood lookup
+ * - Batch processing for multiple coordinates
+ * - Persistent file-based caching
+ * - Coordinate rounding for cache efficiency (~11m precision)
+ * - Route neighborhood aggregation
+ * 
+ * @module services/neighborhoodService
+ * @requires dotenv
+ * @requires fs
+ * 
+ * @example
+ * // Get neighborhood for a single location
+ * import { neighborhoodService } from './neighborhoodService.js';
+ * 
+ * const result = await neighborhoodService.getNeighborhood([-122.7, 45.5]);
+ * if (result.success) {
+ *   console.log(result.neighborhood); // "Southwest Hills"
+ * }
+ * 
+ * @example
+ * // Get all neighborhoods from routes
+ * const neighborhoods = await neighborhoodService.getNeighborhoodsFromRoutes(routes);
+ * // Returns: [{ name: "Southwest Hills", count: 5, routes: ["100", "101"] }]
+ * 
+ * @see {@link https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding|Reverse Geocoding}
  */
 
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -21,18 +52,36 @@ const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
 const CACHE_FILE = join(CACHE_DIR, 'neighborhood-cache.json');
 
 /**
- * NeighborhoodService class for reverse geocoding to get neighborhoods
+ * NeighborhoodService class for reverse geocoding coordinates to neighborhoods.
+ * 
+ * Uses Google Maps Reverse Geocoding to extract neighborhood names from
+ * coordinates. Implements persistent caching to minimize API calls.
+ * 
+ * @class
+ * @example
+ * // Use singleton instance (recommended)
+ * import { neighborhoodService } from './neighborhoodService.js';
+ * const result = await neighborhoodService.getNeighborhood([-122.7, 45.5]);
  */
 class NeighborhoodService {
+  /**
+   * Creates a new NeighborhoodService instance.
+   * 
+   * @param {string|null} [apiKey=null] - Google Maps API key. Falls back to
+   *   GOOGLE_MAPS_API_KEY or GOOGLE_API_KEY environment variables.
+   *   Service works in cache-only mode without API key.
+   */
   constructor(apiKey = null) {
     this.apiKey = apiKey || GOOGLE_API_KEY;
     this.useGoogle = !!this.apiKey;
     
     // In-memory cache: Map<"lng,lat", neighborhood>
     this.cache = new Map();
+    this.isSaving = false;
+    this.needsSave = false;
     
-    // Load cache from file
-    this.loadCache();
+    // Initial load
+    this.init();
     
     if (!this.useGoogle) {
       console.warn('[NeighborhoodService] No Google Maps API key found. Service will use cached data only. Set GOOGLE_MAPS_API_KEY or GOOGLE_API_KEY in backend/.env for full functionality.');
@@ -42,12 +91,20 @@ class NeighborhoodService {
   }
 
   /**
+   * Initial load of cache
+   */
+  async init() {
+    await this.loadCache();
+  }
+
+  /**
    * Load cache from file
    */
-  loadCache() {
+  async loadCache() {
     try {
       if (fs.existsSync(CACHE_FILE)) {
-        const cacheData = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
+        const content = await fsPromises.readFile(CACHE_FILE, 'utf8');
+        const cacheData = JSON.parse(content);
         this.cache = new Map(Object.entries(cacheData));
         console.log(`[NeighborhoodService] Loaded ${this.cache.size} cached neighborhoods`);
       }
@@ -59,18 +116,35 @@ class NeighborhoodService {
 
   /**
    * Save cache to file
+   * Implements a simple queue and atomic write to prevent corruption
    */
-  saveCache() {
+  async saveCache() {
+    if (this.isSaving) {
+      this.needsSave = true;
+      return;
+    }
+
+    this.isSaving = true;
+    this.needsSave = false;
+
     try {
       // Ensure cache directory exists
       if (!fs.existsSync(CACHE_DIR)) {
-        fs.mkdirSync(CACHE_DIR, { recursive: true });
+        await fsPromises.mkdir(CACHE_DIR, { recursive: true });
       }
       
       const cacheData = Object.fromEntries(this.cache);
-      fs.writeFileSync(CACHE_FILE, JSON.stringify(cacheData, null, 2));
+      const tempFile = `${CACHE_FILE}.tmp`;
+      
+      await fsPromises.writeFile(tempFile, JSON.stringify(cacheData, null, 2), 'utf8');
+      await fsPromises.rename(tempFile, CACHE_FILE);
     } catch (error) {
       console.warn('[NeighborhoodService] Failed to save cache:', error.message);
+    } finally {
+      this.isSaving = false;
+      if (this.needsSave) {
+        setImmediate(() => this.saveCache());
+      }
     }
   }
 

@@ -13,6 +13,11 @@
   background-color: #0a1f3a;
 }
 
+/* Darker blue border for explorer page header in dark mode */
+.theme-dark .app-header:not(.sticky-header) {
+  border-bottom-color: #051528;
+}
+
 .app-header.sticky-header {
   position: sticky;
   top: 0;
@@ -23,6 +28,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+  padding-left: 1rem;
   max-width: 100%;
 }
 

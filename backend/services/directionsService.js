@@ -1,7 +1,35 @@
 /**
- * Google Maps Directions Service
- * Provides accurate route calculation using Google Maps Directions API
- * Falls back to OSRM if API key is not configured
+ * @fileoverview Google Maps Directions Service for PPS Bus Maps
+ * 
+ * This module calculates street-following route geometry between bus stops.
+ * It uses the Google Maps Directions API as the primary service.
+ * 
+ * Key features:
+ * - Street-following route calculation (not straight lines)
+ * - Support for up to 25 waypoints per request (auto-batching for more)
+ * - Polyline decoding from Google's encoded format
+ * - Statistics tracking for monitoring
+ * 
+ * @module services/directionsService
+ * @requires dotenv
+ * 
+ * @example
+ * // Calculate route through stops
+ * import { directionsService } from './directionsService.js';
+ * 
+ * const waypoints = [
+ *   [45.5, -122.7],   // [lat, lng] - Note: Leaflet format!
+ *   [45.51, -122.71],
+ *   [45.52, -122.72]
+ * ];
+ * 
+ * const result = await directionsService.getRoute(waypoints);
+ * if (result.success) {
+ *   console.log(result.coordinates); // [[lat, lng], [lat, lng], ...]
+ *   console.log(result.provider);    // 'google'
+ * }
+ * 
+ * @see {@link https://developers.google.com/maps/documentation/directions|Google Directions API}
  */
 
 import dotenv from 'dotenv';
@@ -10,12 +38,39 @@ dotenv.config();
 
 const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_API_KEY;
 const GOOGLE_DIRECTIONS_URL = 'https://maps.googleapis.com/maps/api/directions/json';
-const OSRM_BASE_URL = 'https://router.project-osrm.org/route/v1/driving';
 
 /**
- * DirectionsService class for Google Maps Directions API
+ * DirectionsService class for calculating route geometry.
+ * 
+ * Calculates street-following paths between waypoints using Google Maps
+ * Directions API.
+ * 
+ * @class
+ * @example
+ * // Use singleton instance (recommended)
+ * import { directionsService } from './directionsService.js';
+ * const result = await directionsService.getRoute(waypoints);
+ * 
+ * @example
+ * // Check service statistics
+ * const stats = directionsService.getStats();
+ * console.log(stats.googleSuccessRate); // "95.50%"
  */
 class DirectionsService {
+  /**
+   * Creates a new DirectionsService instance.
+   * 
+   * @param {string|null} [apiKey=null] - Google Maps API key. Falls back to
+   *   GOOGLE_MAPS_API_KEY or GOOGLE_API_KEY environment variables.
+   * 
+   * @example
+   * // Using environment variable (default)
+   * const service = new DirectionsService();
+   * 
+   * @example
+   * // Using explicit API key
+   * const service = new DirectionsService('AIza...');
+   */
   constructor(apiKey = null) {
     this.apiKey = apiKey || GOOGLE_API_KEY;
     this.useGoogle = !!this.apiKey;
@@ -25,9 +80,6 @@ class DirectionsService {
       googleRequests: 0,
       googleSuccesses: 0,
       googleFailures: 0,
-      osrmRequests: 0,
-      osrmSuccesses: 0,
-      osrmFailures: 0,
       straightLineFallbacks: 0,
       totalRoutes: 0,
       totalWaypoints: 0,
@@ -36,8 +88,8 @@ class DirectionsService {
     };
     
     if (!this.useGoogle) {
-      console.warn('[DirectionsService] ⚠️  No Google Maps API key found, will use OSRM fallback');
-      console.warn('[DirectionsService] 💡 Set GOOGLE_MAPS_API_KEY in backend/.env for better routing accuracy');
+      console.warn('[DirectionsService] ⚠️  No Google Maps API key found.');
+      console.warn('[DirectionsService] 💡 Set GOOGLE_MAPS_API_KEY in backend/.env for routing accuracy');
     } else {
       console.log('[DirectionsService] ✅ Google Maps API key configured');
       // Mask API key in logs (show first 10 chars)
@@ -55,9 +107,6 @@ class DirectionsService {
       googleSuccessRate: this.stats.googleRequests > 0 
         ? (this.stats.googleSuccesses / this.stats.googleRequests * 100).toFixed(2) + '%'
         : 'N/A',
-      osrmSuccessRate: this.stats.osrmRequests > 0
-        ? (this.stats.osrmSuccesses / this.stats.osrmRequests * 100).toFixed(2) + '%'
-        : 'N/A',
       usingGoogle: this.useGoogle,
       hasApiKey: !!this.apiKey,
     };
@@ -71,9 +120,6 @@ class DirectionsService {
       googleRequests: 0,
       googleSuccesses: 0,
       googleFailures: 0,
-      osrmRequests: 0,
-      osrmSuccesses: 0,
-      osrmFailures: 0,
       straightLineFallbacks: 0,
       totalRoutes: 0,
       totalWaypoints: 0,
@@ -119,48 +165,6 @@ class DirectionsService {
       lng += deltaLng;
 
       // Google polyline returns [lat, lng]
-      coordinates.push([lat / 1e5, lng / 1e5]);
-    }
-
-    return coordinates;
-  }
-
-  /**
-   * Decode OSRM polyline format (for fallback)
-   */
-  decodeOSRMPolyline(encoded) {
-    const coordinates = [];
-    let index = 0;
-    const len = encoded.length;
-    let lat = 0;
-    let lng = 0;
-
-    while (index < len) {
-      let shift = 0;
-      let result = 0;
-      let byte;
-
-      do {
-        byte = encoded.charCodeAt(index++) - 63;
-        result |= (byte & 0x1f) << shift;
-        shift += 5;
-      } while (byte >= 0x20);
-
-      const deltaLat = (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
-      lat += deltaLat;
-
-      shift = 0;
-      result = 0;
-
-      do {
-        byte = encoded.charCodeAt(index++) - 63;
-        result |= (byte & 0x1f) << shift;
-        shift += 5;
-      } while (byte >= 0x20);
-
-      const deltaLng = (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
-      lng += deltaLng;
-
       coordinates.push([lat / 1e5, lng / 1e5]);
     }
 
@@ -344,111 +348,8 @@ class DirectionsService {
   }
 
   /**
-   * Get route using OSRM (fallback)
-   */
-  async getRouteWithOSRM(waypoints) {
-    const startTime = Date.now();
-    this.stats.osrmRequests++;
-    this.stats.totalWaypoints += waypoints.length;
-    this.stats.lastRequestTime = new Date().toISOString();
-
-    // Validate waypoints
-    const validation = this.validateWaypoints(waypoints);
-    if (!validation.valid) {
-      this.stats.osrmFailures++;
-      return {
-        success: false,
-        error: validation.error,
-      };
-    }
-
-    console.log(`[DirectionsService] 🗺️  Requesting route with ${waypoints.length} waypoints via OSRM (fallback)`);
-    const allCoordinates = [];
-    let successfulSegments = 0;
-    let failedSegments = 0;
-
-    // Fetch route between each consecutive pair of stops
-    for (let i = 0; i < waypoints.length - 1; i++) {
-      const start = waypoints[i];
-      const end = waypoints[i + 1];
-
-      try {
-        // OSRM expects coordinates as lng,lat
-        const url = `${OSRM_BASE_URL}/${start[1]},${start[0]};${end[1]},${end[0]}?overview=full&geometries=polyline`;
-        
-        const segmentStartTime = Date.now();
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-          throw new Error(`OSRM API error: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (data.code !== 'Ok' || !data.routes || data.routes.length === 0) {
-          throw new Error(`No route found: ${data.code}`);
-        }
-
-        const encodedGeometry = data.routes[0].geometry;
-        const segment = this.decodeOSRMPolyline(encodedGeometry);
-        const segmentTime = Date.now() - segmentStartTime;
-        
-        // Add segment coordinates, avoiding duplicate at junction
-        if (i === 0) {
-          allCoordinates.push(...segment);
-        } else {
-          allCoordinates.push(...segment.slice(1));
-        }
-
-        successfulSegments++;
-        if (waypoints.length > 2) {
-          console.log(`[DirectionsService] ✅ Segment ${i + 1}/${waypoints.length - 1}: ${segment.length} points (${segmentTime}ms)`);
-        }
-
-        // Rate limiting delay (OSRM recommends 1 request per second)
-        // Use adaptive delay: longer for many waypoints to avoid overwhelming the service
-        if (i < waypoints.length - 2) {
-          const delay = waypoints.length > 10 ? 1500 : 1000; // Longer delay for large routes
-          await new Promise(resolve => setTimeout(resolve, delay));
-        }
-      } catch (error) {
-        failedSegments++;
-        console.warn(`[DirectionsService] ⚠️  OSRM error for segment ${i} to ${i + 1}: ${error.message}`);
-        // Fallback to straight line for this segment
-        if (i === 0) {
-          allCoordinates.push([start[0], start[1]], [end[0], end[1]]);
-        } else {
-          allCoordinates.push([end[0], end[1]]);
-        }
-        this.stats.straightLineFallbacks++;
-      }
-    }
-
-    const responseTime = Date.now() - startTime;
-    
-    if (failedSegments > 0) {
-      console.warn(`[DirectionsService] ⚠️  OSRM route completed with ${failedSegments} failed segments (using straight lines)`);
-      this.stats.osrmFailures++;
-    } else {
-      this.stats.osrmSuccesses++;
-      this.stats.totalRoutes++;
-    }
-
-    console.log(`[DirectionsService] ✅ OSRM route completed: ${allCoordinates.length} points, ${successfulSegments}/${waypoints.length - 1} segments (${responseTime}ms)`);
-
-    return {
-      success: true,
-      coordinates: allCoordinates,
-      provider: 'osrm',
-      successfulSegments,
-      failedSegments,
-      responseTime,
-    };
-  }
-
-  /**
    * Get route through waypoints
-   * Uses Google Directions API if available, falls back to OSRM
+   * Uses Google Directions API
    * @param waypoints Array of [lat, lng] coordinates
    * @returns Promise with route coordinates [lat, lng][]
    */
@@ -459,17 +360,12 @@ class DirectionsService {
     }
 
     if (this.useGoogle) {
-      const result = await this.getRouteWithGoogle(waypoints);
-      // If Google fails, try OSRM as fallback
-      if (!result.success) {
-        console.warn('[DirectionsService] ⚠️  Google failed, trying OSRM fallback');
-        console.warn(`[DirectionsService] Error: ${result.error}`);
-        return await this.getRouteWithOSRM(waypoints);
-      }
-      return result;
+      return await this.getRouteWithGoogle(waypoints);
     } else {
-      console.log('[DirectionsService] 📍 Using OSRM (Google API key not configured)');
-      return await this.getRouteWithOSRM(waypoints);
+      return {
+        success: false,
+        error: 'Google API key not configured',
+      };
     }
   }
 }

@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { pdfSyncJobQueue } from '../services/jobQueue/index.js';
@@ -16,10 +17,10 @@ const SYNC_STATUS_FILE = path.join(DATA_DIR, 'pdf-sync-status.json');
 /**
  * Load sync status
  */
-function loadSyncStatus() {
+async function loadSyncStatus() {
   if (fs.existsSync(SYNC_STATUS_FILE)) {
     try {
-      return JSON.parse(fs.readFileSync(SYNC_STATUS_FILE, 'utf8'));
+      return JSON.parse(await fsPromises.readFile(SYNC_STATUS_FILE, 'utf8'));
     } catch (e) {
       return {};
     }
@@ -30,8 +31,10 @@ function loadSyncStatus() {
 /**
  * Save sync status
  */
-function saveSyncStatus(status) {
-  fs.writeFileSync(SYNC_STATUS_FILE, JSON.stringify(status, null, 2), 'utf8');
+async function saveSyncStatus(status) {
+  const tempFile = `${SYNC_STATUS_FILE}.tmp`;
+  await fsPromises.writeFile(tempFile, JSON.stringify(status, null, 2), 'utf8');
+  await fsPromises.rename(tempFile, SYNC_STATUS_FILE);
 }
 
 /**
@@ -53,13 +56,13 @@ function getSchoolPdfDir(schoolId) {
 /**
  * Get existing PDF files for a school
  */
-function getExistingPdfs(schoolId) {
+async function getExistingPdfs(schoolId) {
   const pdfDir = getSchoolPdfDir(schoolId);
   if (!fs.existsSync(pdfDir)) {
-    fs.mkdirSync(pdfDir, { recursive: true });
+    await fsPromises.mkdir(pdfDir, { recursive: true });
     return [];
   }
-  return fs.readdirSync(pdfDir).filter(f => f.endsWith('.pdf'));
+  return (await fsPromises.readdir(pdfDir)).filter(f => f.endsWith('.pdf'));
 }
 
 /**
@@ -77,7 +80,7 @@ router.post('/fetch/:schoolId', async (req, res) => {
     const { schoolId } = req.params;
 
     // Load schools to validate
-    const schools = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+    const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
     const school = schools.find(s => s.id === schoolId);
 
     if (!school) {
@@ -155,10 +158,10 @@ router.post('/fetch/:schoolId', async (req, res) => {
 /**
  * Get sync status for a school
  */
-router.get('/status/:schoolId', (req, res) => {
+router.get('/status/:schoolId', async (req, res) => {
   try {
     const { schoolId } = req.params;
-    const syncStatus = loadSyncStatus();
+    const syncStatus = await loadSyncStatus();
     res.json(syncStatus[schoolId] || null);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -168,9 +171,9 @@ router.get('/status/:schoolId', (req, res) => {
 /**
  * Get all sync status
  */
-router.get('/status', (req, res) => {
+router.get('/status', async (req, res) => {
   try {
-    const syncStatus = loadSyncStatus();
+    const syncStatus = await loadSyncStatus();
     res.json(syncStatus);
   } catch (error) {
     res.status(500).json({ error: error.message });

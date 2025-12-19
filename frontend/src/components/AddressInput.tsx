@@ -228,7 +228,7 @@ export function AddressInput() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '16px',
+              fontSize: '14px',
               lineHeight: '1',
               backgroundColor: 'transparent',
               color: 'var(--text-tertiary)',
@@ -240,8 +240,8 @@ export function AddressInput() {
               transition: 'background-color 0.2s ease, color 0.2s ease',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#ff6b6b';
-              e.currentTarget.style.color = 'white';
+              e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+              e.currentTarget.style.color = 'var(--text-primary)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';
@@ -249,7 +249,9 @@ export function AddressInput() {
             }}
             aria-label="Clear address"
           >
-            ×
+            <svg width="16" height="16" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 3L3 9M3 3l6 6" />
+            </svg>
           </button>
         </div>
       ) : (

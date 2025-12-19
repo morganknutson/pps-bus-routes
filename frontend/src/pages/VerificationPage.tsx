@@ -7,7 +7,7 @@ export function VerificationPage() {
   console.log('[VerificationPage] Component mounted successfully');
   const [pdfStatus, setPdfStatus] = useState<any>(null);
   const [syncStatus, setSyncStatus] = useState<Record<string, { lastModifiedPdf?: string; lastChecked?: string }>>({});
-  const [processingStatus, setProcessingStatus] = useState<Record<string, boolean>>({});
+  const [processingStatus, setProcessingStatus] = useState<Record<string, boolean | { hasProcessed: boolean; lastProcessed: string | null }>>({});
   const [fetching, setFetching] = useState<Record<string, boolean>>({});
   const [processing, setProcessing] = useState<Record<string, boolean>>({});
   const [pdfProcessingStatus, setPdfProcessingStatus] = useState<Record<string, Record<string, 'pending' | 'processing' | 'success' | 'error'>>>({});
@@ -21,16 +21,60 @@ export function VerificationPage() {
   const [shouldPollJobs, setShouldPollJobs] = useState(false);
   const [successMessages, setSuccessMessages] = useState<Record<string, string>>({});
   const [refreshing, setRefreshing] = useState(false);
+  const [pdfFetchInfo, setPdfFetchInfo] = useState<Record<string, any>>({});
+  const [driveLinkResults, setDriveLinkResults] = useState<any>(null);
+  const [checkingDriveLinks, setCheckingDriveLinks] = useState(false);
+  const [checkingSchool, setCheckingSchool] = useState<Record<string, boolean>>({});
+  const [fetchingAll, setFetchingAll] = useState(false);
+  const [fetchAllProgress, setFetchAllProgress] = useState<{ queued: number; total: number } | null>(null);
+  const [fixingAll, setFixingAll] = useState(false);
+  const [fixAllStatus, setFixAllStatus] = useState<{
+    phase: 'idle' | 'fetching' | 'waiting-fetch' | 'processing' | 'waiting-process' | 'complete';
+    fetchQueued: number;
+    fetchTotal: number;
+    processQueued: number;
+    processTotal: number;
+    message: string;
+  }>({ phase: 'idle', fetchQueued: 0, fetchTotal: 0, processQueued: 0, processTotal: 0, message: '' });
+  const [jobQueueStats, setJobQueueStats] = useState<{
+    waiting: number;
+    active: number;
+    completed: number;
+    failed: number;
+    total: number;
+    isRedisAvailable?: boolean;
+  } | null>(null);
+  const [activeJobs, setActiveJobs] = useState<any[]>([]);
+  const [fetchMessages, setFetchMessages] = useState<Record<string, { type: 'info' | 'success' | 'error'; message: string }>>({});
 
   // Define all functions before useEffects
+  const loadJobQueueStats = async () => {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+      
+      const response = await fetch('/api/jobs/stats', { signal: controller.signal });
+      clearTimeout(timeoutId);
+      
+      if (response.ok) {
+        const stats = await response.json();
+        setJobQueueStats(stats);
+      }
+    } catch (err: any) {
+      if (err.name !== 'AbortError') {
+        console.warn('[VerificationPage] Error loading job stats (non-fatal):', err.message || err);
+      }
+    }
+  };
+
   const loadJobStatuses = async () => {
     try {
       // Add timeout to prevent hanging
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
       
-      // Get jobs for all schools that might have active jobs
-      const response = await fetch('/api/jobs?status=active&limit=100', {
+      // Get all active and waiting jobs
+      const response = await fetch('/api/jobs?limit=100', {
         signal: controller.signal,
       });
       
@@ -39,12 +83,20 @@ export function VerificationPage() {
       if (response.ok) {
         const data = await response.json();
         const statusMap: Record<string, any> = {};
+        const activeJobsList: any[] = [];
+        
         data.jobs.forEach((job: any) => {
           if (job.data.schoolId) {
             statusMap[job.data.schoolId] = job;
           }
+          // Track active/waiting jobs for the queue panel
+          if (job.status === 'active' || job.status === 'waiting') {
+            activeJobsList.push(job);
+          }
         });
+        
         setJobStatuses(statusMap);
+        setActiveJobs(activeJobsList);
       }
     } catch (err: any) {
       // Silently handle errors - job status is optional
@@ -126,6 +178,290 @@ export function VerificationPage() {
     }
   };
 
+  const loadPdfFetchInfo = async () => {
+    try {
+      // Backend always includes cached Drive data (no API calls, cache only)
+      console.log('[VerificationPage] Loading PDF fetch info...');
+      const response = await fetch('/api/verification/pdf-fetch-info');
+      if (response.ok) {
+        const data = await response.json();
+        console.log('[VerificationPage] PDF fetch info loaded:', {
+          schoolCount: Object.keys(data || {}).length,
+          sampleSchool: Object.keys(data || {})[0],
+          sampleData: data ? data[Object.keys(data)[0]] : null,
+        });
+        
+        // Set state directly - backend already merges cached Drive data
+        setPdfFetchInfo(data || {});
+      } else {
+        console.error(`[VerificationPage] Failed to load PDF fetch info: ${response.status} ${response.statusText}`);
+      }
+    } catch (err: any) {
+      console.error('[VerificationPage] Failed to load PDF fetch info:', err);
+    }
+  };
+
+  const checkSingleSchoolDriveLink = async (schoolId: string) => {
+    try {
+      console.log(`[VerificationPage] Checking Drive link for ${schoolId}...`);
+      setCheckingSchool(prev => ({ ...prev, [schoolId]: true }));
+      
+      const response = await fetch(`/api/verification/check-drive-link/${schoolId}`, {
+        method: 'POST',
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log(`[VerificationPage] Drive check result for ${schoolId}:`, result);
+        
+        // Update the pdfFetchInfo state with the new Drive data
+        setPdfFetchInfo(prev => ({
+          ...prev,
+          [schoolId]: {
+            ...prev[schoolId],
+            driveLastModified: result.driveLastModified,
+            driveAccessible: result.accessible,
+            driveHasPdfs: result.hasPdfs,
+            drivePdfCount: result.pdfCount,
+            localLastModified: result.localLastModified || prev[schoolId]?.localLastModified,
+          },
+        }));
+        
+        // Show success message with match status
+        const school = pdfStatus?.schools?.find((s: any) => s.schoolId === schoolId);
+        const schoolName = school?.schoolName || schoolId;
+        let message = result.hasPdfs 
+          ? `${result.pdfCount} PDFs on Drive` 
+          : 'No PDFs on Drive';
+        
+        if (result.matches) {
+          message += ' ✓ Up to date';
+        } else if (result.needsUpdate) {
+          message += ' ⚠️ Needs update';
+        }
+        
+        setSuccessMessages(prev => ({
+          ...prev,
+          [schoolId]: message,
+        }));
+        
+        // Auto-dismiss after 4 seconds
+        setTimeout(() => {
+          setSuccessMessages(prev => {
+            const updated = { ...prev };
+            delete updated[schoolId];
+            return updated;
+          });
+        }, 4000);
+        
+        return result;
+      } else {
+        const error = await response.json();
+        console.error(`[VerificationPage] Error checking Drive link for ${schoolId}:`, error);
+        
+        // Show error message
+        setSuccessMessages(prev => ({
+          ...prev,
+          [schoolId]: `Error: ${error.error || 'Failed to check Drive link'}`,
+        }));
+        
+        setTimeout(() => {
+          setSuccessMessages(prev => {
+            const updated = { ...prev };
+            delete updated[schoolId];
+            return updated;
+          });
+        }, 5000);
+        
+        throw new Error(error.error || 'Failed to check Drive link');
+      }
+    } catch (err: any) {
+      console.error(`[VerificationPage] Error checking Drive link for ${schoolId}:`, err);
+      
+      // Show error message
+      setSuccessMessages(prev => ({
+        ...prev,
+        [schoolId]: `Error: ${err.message || 'Failed to check Drive link'}`,
+      }));
+      
+      setTimeout(() => {
+        setSuccessMessages(prev => {
+          const updated = { ...prev };
+          delete updated[schoolId];
+          return updated;
+        });
+      }, 5000);
+      
+      throw err;
+    } finally {
+      setCheckingSchool(prev => ({ ...prev, [schoolId]: false }));
+    }
+  };
+
+  const loadDriveLinkResults = async () => {
+    try {
+      const response = await fetch('/api/verification/drive-link-results');
+      if (response.ok) {
+        const data = await response.json();
+        setDriveLinkResults(data);
+      } else if (response.status === 404) {
+        // No results yet - that's okay
+        setDriveLinkResults(null);
+      }
+    } catch (err: any) {
+      console.error('[VerificationPage] Failed to load Drive link results:', err);
+      setDriveLinkResults(null);
+    }
+  };
+
+  const handleCheckDriveLinks = async () => {
+    setCheckingDriveLinks(true);
+    const startTime = Date.now(); // Track when we started to detect NEW results
+    
+    try {
+      // Use async mode (wait=false) for better UX - don't block the UI
+      const response = await fetch('/api/verification/check-drive-links', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ wait: false }),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        
+        // If results are returned immediately (shouldn't happen with wait=false, but handle it)
+        if (data.results) {
+          setDriveLinkResults(data);
+          await loadPdfFetchInfo(); // Reload to show Drive data in table
+          setCheckingDriveLinks(false);
+          setSuccessMessages(prev => ({
+            ...prev,
+            _driveCheck: `Drive link verification completed! Checked ${data.results?.length || 0} schools.`,
+          }));
+          setTimeout(() => {
+            setSuccessMessages(prev => {
+              const updated = { ...prev };
+              delete updated._driveCheck;
+              return updated;
+            });
+          }, 5000);
+        } else {
+          // Background mode - start polling
+          const totalSchools = data.totalSchools || '?';
+          setSuccessMessages(prev => ({
+            ...prev,
+            _driveCheck: `Checking Drive links for ${totalSchools} schools... This may take a few minutes.`,
+          }));
+          
+          // Poll for results (check every 3 seconds)
+          const pollInterval = setInterval(async () => {
+            try {
+              const resultsResponse = await fetch('/api/verification/drive-link-results');
+              if (resultsResponse.ok) {
+                const results = await resultsResponse.json();
+                
+                // Only consider results complete if timestamp is AFTER we started
+                // This ensures we wait for the new verification to complete
+                const resultsTime = results.timestamp ? new Date(results.timestamp).getTime() : 0;
+                
+                if (resultsTime > startTime) {
+                  // New results are ready!
+                  setDriveLinkResults(results);
+                  clearInterval(pollInterval);
+                  setCheckingDriveLinks(false);
+                  
+                  // Reload PDF fetch info to show updated Drive data in table
+                  await loadPdfFetchInfo();
+                  
+                  const schoolsChecked = results.results?.length || 0;
+                  const needsUpdate = results.summary?.needsUpdate || 0;
+                  const errors = results.summary?.errors || 0;
+                  
+                  let message = `Drive link verification completed! Checked ${schoolsChecked} schools.`;
+                  if (needsUpdate > 0) {
+                    message += ` ${needsUpdate} need updates.`;
+                  }
+                  if (errors > 0) {
+                    message += ` ${errors} errors.`;
+                  }
+                  
+                  setSuccessMessages(prev => ({
+                    ...prev,
+                    _driveCheck: message,
+                  }));
+                  setTimeout(() => {
+                    setSuccessMessages(prev => {
+                      const updated = { ...prev };
+                      delete updated._driveCheck;
+                      return updated;
+                    });
+                  }, 8000);
+                } else {
+                  // Results are old, keep polling
+                  // Update progress message
+                  const elapsed = Math.round((Date.now() - startTime) / 1000);
+                  setSuccessMessages(prev => ({
+                    ...prev,
+                    _driveCheck: `Checking Drive links for ${totalSchools} schools... (${elapsed}s elapsed)`,
+                  }));
+                }
+              }
+            } catch (err) {
+              // Keep polling on error
+              console.error('[VerificationPage] Polling error:', err);
+            }
+          }, 3000);
+          
+          // Stop polling after 10 minutes
+          setTimeout(() => {
+            clearInterval(pollInterval);
+            setCheckingDriveLinks(false);
+            setSuccessMessages(prev => ({
+              ...prev,
+              _driveCheck: 'Verification timed out. Check the console for errors.',
+            }));
+            setTimeout(() => {
+              setSuccessMessages(prev => {
+                const updated = { ...prev };
+                delete updated._driveCheck;
+                return updated;
+              });
+            }, 5000);
+          }, 600000);
+        }
+      } else {
+        const error = await response.json();
+        setCheckingDriveLinks(false);
+        setSuccessMessages(prev => ({
+          ...prev,
+          _driveCheck: `Error: ${error.error || 'Failed to start verification'}`,
+        }));
+        setTimeout(() => {
+          setSuccessMessages(prev => {
+            const updated = { ...prev };
+            delete updated._driveCheck;
+            return updated;
+          });
+        }, 5000);
+      }
+    } catch (err: any) {
+      setCheckingDriveLinks(false);
+      setSuccessMessages(prev => ({
+        ...prev,
+        _driveCheck: `Error: ${err.message || 'Failed to start verification'}`,
+      }));
+      setTimeout(() => {
+        setSuccessMessages(prev => {
+          const updated = { ...prev };
+          delete updated._driveCheck;
+          return updated;
+        });
+      }, 5000);
+    }
+  };
+
   const loadProcessingStatus = async () => {
     try {
       const response = await fetch('/api/process-pdfs/status');
@@ -167,8 +503,9 @@ export function VerificationPage() {
         setProcessingStatus(data.processingStatus);
       }
       
-      // Also reload sync status (optional, but good to have)
+      // Also reload sync status and PDF fetch info
       await loadSyncStatus();
+      await loadPdfFetchInfo();
       
       // Show success message
       setSuccessMessages(prev => ({
@@ -254,6 +591,17 @@ export function VerificationPage() {
         } catch (err) {
           console.error('[VerificationPage] Error loading job statuses (non-fatal):', err);
         }
+        try {
+          // Load PDF fetch info (uses only cached Drive data, no API calls)
+          await loadPdfFetchInfo();
+        } catch (err) {
+          console.error('[VerificationPage] Error loading PDF fetch info (non-fatal):', err);
+        }
+        try {
+          await loadDriveLinkResults();
+        } catch (err) {
+          console.error('[VerificationPage] Error loading Drive link results (non-fatal):', err);
+        }
       } catch (err: any) {
         console.error('[VerificationPage] Error loading data:', err);
         // Error should already be set by loadPdfStatus, but ensure it's set
@@ -280,11 +628,13 @@ export function VerificationPage() {
     
     // Load once immediately
     loadJobStatuses();
+    loadJobQueueStats();
     
-    // Then poll every 5 seconds (less frequent to reduce load)
+    // Then poll every 3 seconds for more responsive updates
     const interval = setInterval(() => {
       loadJobStatuses();
-    }, 5000); // Poll every 5 seconds
+      loadJobQueueStats();
+    }, 3000); // Poll every 3 seconds
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -292,6 +642,13 @@ export function VerificationPage() {
 
   const handleFetchPdfs = async (schoolId: string) => {
     setFetching(prev => ({ ...prev, [schoolId]: true }));
+    // Clear any previous message for this school
+    setFetchMessages(prev => {
+      const updated = { ...prev };
+      delete updated[schoolId];
+      return updated;
+    });
+    
     try {
       const response = await fetch(`/api/pdf-sync/fetch/${schoolId}`, {
         method: 'POST',
@@ -299,27 +656,420 @@ export function VerificationPage() {
       
       if (response.ok) {
         const result = await response.json();
-        // Job has been enqueued
-        alert(`PDF sync job has been queued (Job ID: ${result.jobId.substring(0, 8)}...). The job will run in the background.`);
+        // Job has been enqueued - show inline message instead of alert
+        setFetchMessages(prev => ({
+          ...prev,
+          [schoolId]: { type: 'info', message: `Queued (Job #${result.jobId.substring(0, 6)}...)` }
+        }));
+        
         // Reload job statuses to show the new job
         await loadJobStatuses();
-        // Reload PDF status after a delay (to allow job to complete)
-        setTimeout(async () => {
-          await loadPdfStatus();
-          await loadSyncStatus();
-        }, 5000);
+        await loadJobQueueStats();
+        
+        // Start polling for job completion
+        let pollCount = 0;
+        const maxPolls = 60; // Poll for up to 5 minutes (60 * 5 seconds)
+        const pollInterval = setInterval(async () => {
+          pollCount++;
+          await loadJobStatuses();
+          await loadJobQueueStats();
+          
+          // Get current job status from the API
+          const statusResponse = await fetch(`/api/jobs/school/${schoolId}`);
+          if (statusResponse.ok) {
+            const statusData = await statusResponse.json();
+            const jobs = statusData.jobs || [];
+            const activeJob = jobs.find((j: any) => j.status === 'waiting' || j.status === 'active');
+            const completedJob = jobs.find((j: any) => j.status === 'completed');
+            const failedJob = jobs.find((j: any) => j.status === 'failed');
+            
+            if (completedJob) {
+              clearInterval(pollInterval);
+              setFetchMessages(prev => ({
+                ...prev,
+                [schoolId]: { 
+                  type: 'success', 
+                  message: `Done! ${completedJob.result?.pdfCount || 0} PDFs synced`
+                }
+              }));
+              // Auto-clear success message after 10 seconds
+              setTimeout(() => {
+                setFetchMessages(prev => {
+                  const updated = { ...prev };
+                  delete updated[schoolId];
+                  return updated;
+                });
+              }, 10000);
+              // Reload PDF status and fetch info after job completes
+              await loadPdfStatus();
+              await loadSyncStatus();
+              await loadPdfFetchInfo();
+            } else if (failedJob) {
+              clearInterval(pollInterval);
+              setFetchMessages(prev => ({
+                ...prev,
+                [schoolId]: { 
+                  type: 'error', 
+                  message: `Failed: ${failedJob.error?.substring(0, 30) || 'Unknown error'}...`
+                }
+              }));
+            } else if (!activeJob && pollCount > 2) {
+              clearInterval(pollInterval);
+              // Reload PDF status and fetch info
+              await loadPdfStatus();
+              await loadSyncStatus();
+              await loadPdfFetchInfo();
+              // Clear the message since job completed
+              setFetchMessages(prev => {
+                const updated = { ...prev };
+                delete updated[schoolId];
+                return updated;
+              });
+            } else if (pollCount >= maxPolls) {
+              clearInterval(pollInterval);
+              console.warn(`[VerificationPage] Job polling timeout for ${schoolId}`);
+              setFetchMessages(prev => ({
+                ...prev,
+                [schoolId]: { type: 'error', message: 'Timeout - check back later' }
+              }));
+            }
+          }
+        }, 3000); // Poll every 3 seconds for faster updates
       } else {
         const error = await response.json();
         if (error.existingJob) {
-          alert(`A job for this school is already running. Job ID: ${error.existingJob.id.substring(0, 8)}...`);
+          setFetchMessages(prev => ({
+            ...prev,
+            [schoolId]: { type: 'info', message: 'Already running...' }
+          }));
         } else {
-          alert(`Error: ${error.error}`);
+          setFetchMessages(prev => ({
+            ...prev,
+            [schoolId]: { type: 'error', message: error.error || 'Failed to queue' }
+          }));
         }
       }
     } catch (err: any) {
-      alert(`Error: ${err.message}`);
+      setFetchMessages(prev => ({
+        ...prev,
+        [schoolId]: { type: 'error', message: err.message || 'Network error' }
+      }));
     } finally {
       setFetching(prev => ({ ...prev, [schoolId]: false }));
+    }
+  };
+
+  const handleFetchAllPdfs = async () => {
+    if (!pdfStatus?.schools) return;
+    
+    // Get all schools with Drive links
+    const schoolsWithDriveLinks = pdfStatus.schools.filter((school: any) => school.driveLink);
+    
+    if (schoolsWithDriveLinks.length === 0) {
+      alert('No schools with Drive links found');
+      return;
+    }
+    
+    setFetchingAll(true);
+    setFetchAllProgress({ queued: 0, total: schoolsWithDriveLinks.length });
+    
+    try {
+      let queued = 0;
+      
+      // Queue fetch jobs for all schools
+      for (const school of schoolsWithDriveLinks) {
+        try {
+          const response = await fetch(`/api/pdf-sync/fetch/${school.schoolId}`, {
+            method: 'POST',
+          });
+          
+          if (response.ok) {
+            queued++;
+            setFetchAllProgress({ queued, total: schoolsWithDriveLinks.length });
+          }
+        } catch (err) {
+          console.error(`[VerificationPage] Error queuing fetch for ${school.schoolId}:`, err);
+        }
+      }
+      
+      // Reload job statuses
+      await loadJobStatuses();
+      await loadJobQueueStats();
+      
+      setFetchAllProgress(null);
+      
+      // Show success message
+      setSuccessMessages(prev => ({
+        ...prev,
+        _fetchAll: `Queued ${queued} fetch jobs! Polling for completion...`,
+      }));
+      
+      // Poll for all jobs to complete, then refresh data
+      let pollCount = 0;
+      const maxPolls = 300; // 25 minutes max (300 * 5 seconds)
+      const pollInterval = setInterval(async () => {
+        pollCount++;
+        
+        // Check job queue stats
+        try {
+          const statsResponse = await fetch('/api/jobs/stats');
+          if (statsResponse.ok) {
+            const stats = await statsResponse.json();
+            setJobQueueStats(stats);
+            
+            // Update progress message
+            const activeCount = (stats.waiting || 0) + (stats.active || 0);
+            if (activeCount > 0) {
+              setSuccessMessages(prev => ({
+                ...prev,
+                _fetchAll: `Processing ${activeCount} remaining jobs...`,
+              }));
+            }
+            
+            // If no more jobs waiting or active, we're done
+            if (stats.waiting === 0 && stats.active === 0) {
+              clearInterval(pollInterval);
+              
+              // Reload all data to update Last Fetch column
+              await loadPdfStatus();
+              await loadSyncStatus();
+              await loadPdfFetchInfo();
+              await loadJobStatuses();
+              
+              setSuccessMessages(prev => ({
+                ...prev,
+                _fetchAll: `All ${queued} fetch jobs completed! Data refreshed.`,
+              }));
+              
+              // Auto-dismiss after 10 seconds
+              setTimeout(() => {
+                setSuccessMessages(prev => {
+                  const updated = { ...prev };
+                  delete updated._fetchAll;
+                  return updated;
+                });
+              }, 10000);
+            }
+          }
+        } catch (err) {
+          console.error('[VerificationPage] Error polling job stats:', err);
+        }
+        
+        // Timeout after maxPolls
+        if (pollCount >= maxPolls) {
+          clearInterval(pollInterval);
+          setSuccessMessages(prev => ({
+            ...prev,
+            _fetchAll: 'Polling timeout - some jobs may still be running. Refresh page to see latest data.',
+          }));
+          setTimeout(() => {
+            setSuccessMessages(prev => {
+              const updated = { ...prev };
+              delete updated._fetchAll;
+              return updated;
+            });
+          }, 10000);
+        }
+      }, 5000); // Poll every 5 seconds
+      
+    } catch (err: any) {
+      console.error('[VerificationPage] Error in fetch all:', err);
+      alert(`Error: ${err.message || 'Failed to queue fetch jobs'}`);
+    } finally {
+      setFetchingAll(false);
+      setFetchAllProgress(null);
+    }
+  };
+
+  /**
+   * Fix all mismatched schools by fetching PDFs and then reprocessing them
+   */
+  const handleFixAllMismatched = async () => {
+    if (!driveLinkResults?.results) return;
+
+    // Get all schools needing attention (either needsUpdate or error)
+    const schoolsNeedingFix = driveLinkResults.results.filter((r: any) => r.needsUpdate || r.countMismatch);
+
+    if (schoolsNeedingFix.length === 0) {
+      alert('No schools need fixing!');
+      return;
+    }
+
+    const confirmFix = window.confirm(
+      `This will fetch PDFs and reprocess routes for ${schoolsNeedingFix.length} schools. This may take several minutes. Continue?`
+    );
+    if (!confirmFix) return;
+
+    setFixingAll(true);
+    setFixAllStatus({
+      phase: 'fetching',
+      fetchQueued: 0,
+      fetchTotal: schoolsNeedingFix.length,
+      processQueued: 0,
+      processTotal: 0,
+      message: 'Queuing fetch jobs...',
+    });
+
+    try {
+      // Phase 1: Queue fetch jobs for all mismatched schools
+      let fetchQueued = 0;
+      for (const school of schoolsNeedingFix) {
+        try {
+          const response = await fetch(`/api/pdf-sync/fetch/${school.schoolId}`, {
+            method: 'POST',
+          });
+          if (response.ok) {
+            fetchQueued++;
+            setFixAllStatus(prev => ({
+              ...prev,
+              fetchQueued,
+              message: `Queued fetch for ${school.schoolName || school.schoolId}...`,
+            }));
+          }
+        } catch (err) {
+          console.error(`[VerificationPage] Error queuing fetch for ${school.schoolId}:`, err);
+        }
+      }
+
+      // Phase 2: Wait for all fetch jobs to complete
+      setFixAllStatus(prev => ({
+        ...prev,
+        phase: 'waiting-fetch',
+        message: `Waiting for ${fetchQueued} fetch jobs to complete...`,
+      }));
+
+      // Poll until all jobs complete
+      let fetchComplete = false;
+      let pollAttempts = 0;
+      const maxPollAttempts = 120; // 10 minutes max (5 sec intervals)
+
+      while (!fetchComplete && pollAttempts < maxPollAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+        pollAttempts++;
+
+        try {
+          const statsResponse = await fetch('/api/jobs/stats');
+          if (statsResponse.ok) {
+            const stats = await statsResponse.json();
+            setJobQueueStats(stats);
+            setFixAllStatus(prev => ({
+              ...prev,
+              message: `Fetching PDFs... ${stats.active || 0} active, ${stats.waiting || 0} waiting`,
+            }));
+
+            // Check if no more active or waiting jobs
+            if ((stats.active || 0) === 0 && (stats.waiting || 0) === 0) {
+              fetchComplete = true;
+            }
+          }
+        } catch (err) {
+          console.warn('[VerificationPage] Error polling job stats:', err);
+        }
+      }
+
+      // Refresh data after fetching
+      await loadPdfStatus();
+      await loadSyncStatus();
+      await loadPdfFetchInfo();
+      await loadDriveLinkResults();
+
+      // Phase 3: Process PDFs for all schools that were fetched
+      setFixAllStatus(prev => ({
+        ...prev,
+        phase: 'processing',
+        processTotal: schoolsNeedingFix.length,
+        message: 'Processing PDFs...',
+      }));
+
+      let processQueued = 0;
+      for (const school of schoolsNeedingFix) {
+        try {
+          // Get updated PDF list for this school
+          const schoolData = pdfStatus?.schools?.find((s: any) => s.schoolId === school.schoolId);
+          const pdfFiles = schoolData?.pdfFiles || [];
+
+          if (pdfFiles.length === 0) {
+            console.log(`[VerificationPage] No PDFs to process for ${school.schoolId}`);
+            continue;
+          }
+
+          const response = await fetch('/api/process-pdfs/process', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              schoolId: school.schoolId,
+              pdfFilenames: pdfFiles,
+            }),
+          });
+
+          if (response.ok) {
+            processQueued++;
+            setFixAllStatus(prev => ({
+              ...prev,
+              processQueued,
+              message: `Processing ${school.schoolName || school.schoolId}...`,
+            }));
+          }
+        } catch (err) {
+          console.error(`[VerificationPage] Error processing ${school.schoolId}:`, err);
+        }
+
+        // Small delay between process requests to avoid overwhelming the server
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+
+      // Phase 4: Wait for processing to complete and refresh all data
+      setFixAllStatus(prev => ({
+        ...prev,
+        phase: 'waiting-process',
+        message: 'Finishing up...',
+      }));
+
+      // Give some time for processing to complete
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      // Final refresh of all data
+      await loadPdfStatus();
+      await loadSyncStatus();
+      await loadPdfFetchInfo();
+      await loadDriveLinkResults();
+      await loadProcessingStatus();
+
+      setFixAllStatus({
+        phase: 'complete',
+        fetchQueued,
+        fetchTotal: schoolsNeedingFix.length,
+        processQueued,
+        processTotal: schoolsNeedingFix.length,
+        message: `Done! Fetched ${fetchQueued} schools, processed ${processQueued} schools.`,
+      });
+
+      // Show success message
+      setSuccessMessages(prev => ({
+        ...prev,
+        _fixAll: `Successfully fixed ${fetchQueued} schools!`,
+      }));
+
+      // Clear the success message after 10 seconds
+      setTimeout(() => {
+        setSuccessMessages(prev => {
+          const updated = { ...prev };
+          delete updated._fixAll;
+          return updated;
+        });
+        setFixAllStatus({ phase: 'idle', fetchQueued: 0, fetchTotal: 0, processQueued: 0, processTotal: 0, message: '' });
+      }, 10000);
+
+    } catch (err: any) {
+      console.error('[VerificationPage] Error in fix all:', err);
+      setFixAllStatus(prev => ({
+        ...prev,
+        phase: 'idle',
+        message: `Error: ${err.message || 'Unknown error'}`,
+      }));
+      alert(`Error: ${err.message || 'Failed to fix schools'}`);
+    } finally {
+      setFixingAll(false);
     }
   };
 
@@ -580,7 +1330,7 @@ export function VerificationPage() {
         zIndex: 1,
       }}>
       
-      {/* Refresh Button */}
+      {/* Header with Actions */}
       <div style={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
@@ -597,43 +1347,426 @@ export function VerificationPage() {
         }}>
           Verification & Status
         </h1>
-        <button
-          onClick={handleRefreshStatus}
-          disabled={refreshing}
-          style={{
-            padding: '0.75rem 1.5rem',
-            backgroundColor: refreshing ? 'var(--bg-secondary)' : '#4ECDC4',
-            color: refreshing ? 'var(--text-secondary)' : 'white',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: refreshing ? 'not-allowed' : 'pointer',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            opacity: refreshing ? 0.6 : 1,
-            transition: 'all 0.2s',
-            boxShadow: refreshing ? 'none' : 'var(--shadow-hover)',
-          }}
-          onMouseEnter={(e) => {
-            if (!refreshing) {
-              e.currentTarget.style.backgroundColor = '#5EDDD6';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!refreshing) {
-              e.currentTarget.style.backgroundColor = '#4ECDC4';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }
-          }}
-          title="Refresh status by checking filesystem for PDFs and processed routes"
-        >
-          <i className={`fas ${refreshing ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`}></i>
-          {refreshing ? 'Refreshing...' : 'Refresh Status'}
-        </button>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <button
+            onClick={handleCheckDriveLinks}
+            disabled={checkingDriveLinks}
+            style={{
+              padding: '0.75rem 1.5rem',
+              backgroundColor: checkingDriveLinks ? 'var(--bg-secondary)' : '#ffa500',
+              color: checkingDriveLinks ? 'var(--text-secondary)' : 'white',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: checkingDriveLinks ? 'not-allowed' : 'pointer',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              opacity: checkingDriveLinks ? 0.6 : 1,
+              transition: 'all 0.2s',
+              boxShadow: checkingDriveLinks ? 'none' : 'var(--shadow-hover)',
+            }}
+            onMouseEnter={(e) => {
+              if (!checkingDriveLinks) {
+                e.currentTarget.style.backgroundColor = '#ffb733';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!checkingDriveLinks) {
+                e.currentTarget.style.backgroundColor = '#ffa500';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }
+            }}
+            title="Refresh Drive status for all schools to see if latest modified dates match local dates"
+          >
+            <i className={`fas ${checkingDriveLinks ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`}></i>
+            {checkingDriveLinks ? 'Refreshing...' : 'Refresh All Drive Status'}
+          </button>
+          <button
+            onClick={handleFetchAllPdfs}
+            disabled={fetchingAll}
+            style={{
+              padding: '0.75rem 1.5rem',
+              backgroundColor: fetchingAll ? 'var(--bg-secondary)' : '#4ECDC4',
+              color: fetchingAll ? 'var(--text-secondary)' : 'white',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: fetchingAll ? 'not-allowed' : 'pointer',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              opacity: fetchingAll ? 0.6 : 1,
+              transition: 'all 0.2s',
+              boxShadow: fetchingAll ? 'none' : 'var(--shadow-hover)',
+            }}
+            onMouseEnter={(e) => {
+              if (!fetchingAll) {
+                e.currentTarget.style.backgroundColor = '#5EDDD6';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!fetchingAll) {
+                e.currentTarget.style.backgroundColor = '#4ECDC4';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }
+            }}
+            title="Queue fetch jobs for all schools with Drive links"
+          >
+            <i className={`fas ${fetchingAll ? 'fa-spinner fa-spin' : 'fa-download'}`}></i>
+            {fetchingAll 
+              ? (fetchAllProgress 
+                  ? `Queuing ${fetchAllProgress.queued}/${fetchAllProgress.total}...` 
+                  : 'Queuing...') 
+              : 'Fetch All PDFs'}
+          </button>
+        </div>
       </div>
+
+      {/* Job Queue Status Panel - Show when there are active/waiting jobs */}
+      {(activeJobs.length > 0 || (jobQueueStats && (jobQueueStats.waiting > 0 || jobQueueStats.active > 0))) && (
+        <div style={{
+          marginBottom: '1.5rem',
+          padding: '1rem 1.25rem',
+          backgroundColor: 'var(--bg-secondary)',
+          borderRadius: '8px',
+          border: '1px solid #4ECDC4',
+          boxShadow: '0 2px 8px rgba(78, 205, 196, 0.15)',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <i className="fas fa-tasks" style={{ color: '#4ECDC4', fontSize: '1.1rem' }}></i>
+                <span style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                  Job Queue
+                </span>
+              </div>
+              {jobQueueStats && (
+                <div style={{ display: 'flex', gap: '1rem', fontSize: '0.85rem' }}>
+                  {jobQueueStats.waiting > 0 && (
+                    <span style={{ 
+                      backgroundColor: 'rgba(255, 165, 0, 0.15)', 
+                      color: '#ffa500',
+                      padding: '0.25rem 0.6rem',
+                      borderRadius: '12px',
+                      fontWeight: '600',
+                    }}>
+                      <i className="fas fa-clock" style={{ marginRight: '0.35rem' }}></i>
+                      {jobQueueStats.waiting} waiting
+                    </span>
+                  )}
+                  {jobQueueStats.active > 0 && (
+                    <span style={{ 
+                      backgroundColor: 'rgba(78, 205, 196, 0.15)', 
+                      color: '#4ECDC4',
+                      padding: '0.25rem 0.6rem',
+                      borderRadius: '12px',
+                      fontWeight: '600',
+                    }}>
+                      <i className="fas fa-spinner fa-spin" style={{ marginRight: '0.35rem' }}></i>
+                      {jobQueueStats.active} running
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+          
+          {/* Active Jobs List */}
+          {activeJobs.length > 0 && (
+            <div style={{ marginTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {activeJobs.slice(0, 5).map((job: any) => {
+                const school = pdfStatus?.schools?.find((s: any) => s.schoolId === job.data.schoolId);
+                const schoolName = school?.schoolName || job.data.schoolId;
+                const progress = job.progress || 0;
+                const isActive = job.status === 'active';
+                
+                return (
+                  <div key={job.id} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.5rem 0.75rem',
+                    backgroundColor: 'var(--bg-primary)',
+                    borderRadius: '6px',
+                    fontSize: '0.85rem',
+                  }}>
+                    <i className={`fas ${isActive ? 'fa-sync fa-spin' : 'fa-clock'}`} 
+                       style={{ color: isActive ? '#4ECDC4' : '#ffa500', width: '16px' }}></i>
+                    <span style={{ 
+                      fontWeight: '500', 
+                      color: 'var(--text-primary)',
+                      minWidth: '150px',
+                    }}>
+                      {schoolName}
+                    </span>
+                    <span style={{ 
+                      color: 'var(--text-secondary)', 
+                      fontSize: '0.8rem',
+                      minWidth: '60px',
+                    }}>
+                      {isActive ? 'Running' : 'Queued'}
+                    </span>
+                    {isActive && (
+                      <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <div style={{
+                          flex: 1,
+                          height: '6px',
+                          backgroundColor: 'var(--bg-secondary)',
+                          borderRadius: '3px',
+                          overflow: 'hidden',
+                        }}>
+                          <div style={{
+                            width: `${progress}%`,
+                            height: '100%',
+                            backgroundColor: '#4ECDC4',
+                            borderRadius: '3px',
+                            transition: 'width 0.3s ease',
+                          }}></div>
+                        </div>
+                        <span style={{ 
+                          fontSize: '0.75rem', 
+                          color: 'var(--text-secondary)',
+                          minWidth: '35px',
+                          textAlign: 'right',
+                        }}>
+                          {progress}%
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              {activeJobs.length > 5 && (
+                <div style={{ 
+                  fontSize: '0.8rem', 
+                  color: 'var(--text-secondary)', 
+                  textAlign: 'center',
+                  paddingTop: '0.25rem',
+                }}>
+                  +{activeJobs.length - 5} more jobs in queue
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Drive Link Verification Results - Only show if there are schools needing attention */}
+      {driveLinkResults && driveLinkResults.results && (() => {
+        const schoolsNeedingAttention = driveLinkResults.results.filter((r: any) => r.needsUpdate || r.error);
+        const hasSchoolsNeedingAttention = schoolsNeedingAttention.length > 0;
+        const hasSummary = driveLinkResults.summary && (
+          driveLinkResults.summary.needsUpdate > 0 || 
+          driveLinkResults.summary.errors > 0
+        );
+        
+        // Only show this section if there are schools needing attention
+        if (!hasSchoolsNeedingAttention && !hasSummary) {
+          return null;
+        }
+        
+        return (
+          <div style={{ 
+            marginBottom: '2rem', 
+            backgroundColor: 'var(--bg-secondary)', 
+            borderRadius: '8px', 
+            boxShadow: 'var(--shadow-large)', 
+            padding: '1.5rem' 
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                <i className="fas fa-exclamation-triangle" style={{ color: '#ffa500', marginRight: '0.5rem' }}></i>
+                Schools Needing Attention
+              </h2>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <button
+                  onClick={handleFixAllMismatched}
+                  disabled={fixingAll}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    backgroundColor: fixingAll ? 'var(--bg-secondary)' : '#FF6B6B',
+                    color: fixingAll ? 'var(--text-secondary)' : 'white',
+                    border: 'none',
+                    borderRadius: '6px',
+                    cursor: fixingAll ? 'not-allowed' : 'pointer',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.2s ease',
+                    boxShadow: fixingAll ? 'none' : '0 2px 4px rgba(255, 107, 107, 0.3)',
+                  }}
+                  title="Fetch PDFs and reprocess all schools needing attention"
+                >
+                  <i className={`fas ${fixingAll ? 'fa-spinner fa-spin' : 'fa-magic'}`}></i>
+                  {fixingAll ? (
+                    <span>{fixAllStatus.message || 'Working...'}</span>
+                  ) : (
+                    <span>Fix All ({schoolsNeedingAttention.length})</span>
+                  )}
+                </button>
+                <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                  Last checked: {new Date(driveLinkResults.timestamp).toLocaleString()}
+                </div>
+              </div>
+            </div>
+            
+            {/* Fix All Progress */}
+            {fixingAll && fixAllStatus.phase !== 'idle' && (
+              <div style={{
+                padding: '1rem',
+                backgroundColor: 'var(--bg-primary)',
+                borderRadius: '6px',
+                marginBottom: '1rem',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+                  <i className="fas fa-spinner fa-spin" style={{ color: '#4ECDC4' }}></i>
+                  <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                    {fixAllStatus.phase === 'fetching' && 'Queuing fetch jobs...'}
+                    {fixAllStatus.phase === 'waiting-fetch' && 'Fetching PDFs from Drive...'}
+                    {fixAllStatus.phase === 'processing' && 'Processing PDFs...'}
+                    {fixAllStatus.phase === 'waiting-process' && 'Finishing up...'}
+                    {fixAllStatus.phase === 'complete' && 'Complete!'}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', gap: '2rem', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                  <div>
+                    <i className="fas fa-download" style={{ marginRight: '0.5rem' }}></i>
+                    Fetched: {fixAllStatus.fetchQueued}/{fixAllStatus.fetchTotal}
+                  </div>
+                  {(fixAllStatus.phase === 'processing' || fixAllStatus.phase === 'waiting-process' || fixAllStatus.phase === 'complete') && (
+                    <div>
+                      <i className="fas fa-cogs" style={{ marginRight: '0.5rem' }}></i>
+                      Processed: {fixAllStatus.processQueued}/{fixAllStatus.processTotal}
+                    </div>
+                  )}
+                </div>
+                {fixAllStatus.message && (
+                  <div style={{ marginTop: '0.5rem', fontSize: '11px', color: 'var(--text-tertiary)' }}>
+                    {fixAllStatus.message}
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {driveLinkResults.summary && (hasSummary) && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+                <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', borderRadius: '4px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#ffa500' }}>
+                    {driveLinkResults.summary.needsUpdate || 0}
+                  </div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Needs Update</div>
+                </div>
+                <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', borderRadius: '4px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#f44' }}>
+                    {driveLinkResults.summary.errors || 0}
+                  </div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Errors</div>
+                </div>
+              </div>
+            )}
+
+            {hasSchoolsNeedingAttention && (
+              <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--bg-primary)' }}>
+                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>School</th>
+                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Status</th>
+                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Drive Modified</th>
+                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Local Modified</th>
+                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {schoolsNeedingAttention.map((result: any, idx: number) => (
+                      <tr key={result.schoolId} style={{ 
+                        borderBottom: '1px solid var(--bg-primary)',
+                        backgroundColor: idx % 2 === 0 ? 'var(--bg-secondary)' : 'var(--bg-primary)',
+                      }}>
+                        <td style={{ padding: '0.75rem' }}>
+                          <div style={{ fontWeight: 'bold' }}>{result.schoolName}</div>
+                          <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{result.schoolId}</div>
+                        </td>
+                        <td style={{ padding: '0.75rem' }}>
+                          {result.error ? (
+                            <span style={{ color: '#f44' }}>
+                              <i className="fas fa-times-circle" style={{ marginRight: '0.25rem' }}></i>
+                              Error
+                            </span>
+                          ) : result.needsUpdate ? (
+                            <span style={{ color: '#ffa500' }}>
+                              <i className="fas fa-exclamation-triangle" style={{ marginRight: '0.25rem' }}></i>
+                              Needs Update
+                            </span>
+                          ) : (
+                            <span style={{ color: 'var(--text-secondary)' }}>—</span>
+                          )}
+                        </td>
+                        <td style={{ padding: '0.75rem', fontSize: '11px' }}>
+                          {result.driveLastModified ? new Date(result.driveLastModified).toLocaleString() : '—'}
+                        </td>
+                        <td style={{ padding: '0.75rem', fontSize: '11px' }}>
+                          {result.localLastModified ? new Date(result.localLastModified).toLocaleString() : '—'}
+                        </td>
+                        <td style={{ padding: '0.75rem' }}>
+                          {(() => {
+                            const jobStatus = getJobStatusForSchool(result.schoolId);
+                            const isJobActive = jobStatus && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
+                            const fetchMsg = fetchMessages[result.schoolId];
+                            
+                            return (
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'flex-start' }}>
+                                <button
+                                  onClick={() => handleFetchPdfs(result.schoolId)}
+                                  disabled={fetching[result.schoolId] || isJobActive}
+                                  style={{
+                                    padding: '0.35rem 0.75rem',
+                                    backgroundColor: (fetching[result.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#4ECDC4',
+                                    color: (fetching[result.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    cursor: (fetching[result.schoolId] || isJobActive) ? 'not-allowed' : 'pointer',
+                                    fontSize: '11px',
+                                    fontWeight: 'bold',
+                                  }}
+                                >
+                                  {fetching[result.schoolId] ? 'Queuing...' : isJobActive ? 'Running...' : 'Fetch PDFs'}
+                                </button>
+                                {isJobActive && jobStatus.progress > 0 && (
+                                  <div style={{ width: '80px' }}>
+                                    <ProgressBar progress={jobStatus.progress} height={3} showPercentage={false} containerStyle={{ margin: 0 }} />
+                                  </div>
+                                )}
+                                {fetchMsg && (
+                                  <span style={{ 
+                                    fontSize: '9px', 
+                                    color: fetchMsg.type === 'error' ? '#f44' : fetchMsg.type === 'success' ? '#4ECDC4' : 'var(--text-secondary)',
+                                  }}>
+                                    {fetchMsg.type === 'success' && '✓ '}
+                                    {fetchMsg.type === 'error' && '✗ '}
+                                    {fetchMsg.message}
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })()}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       {/* Summary Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
@@ -663,7 +1796,12 @@ export function VerificationPage() {
         </div>
         <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
           <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
-            {Object.values(processingStatus).filter(Boolean).length}
+            {Object.values(processingStatus).filter(status => {
+              if (typeof status === 'object' && status !== null) {
+                return status.hasProcessed === true;
+              }
+              return status === true;
+            }).length}
           </div>
           <div style={{ color: 'var(--text-secondary)', fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             <i className="fas fa-check-circle"></i>
@@ -806,13 +1944,18 @@ export function VerificationPage() {
               <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '2px solid var(--bg-primary)' }}>
                 <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', width: '40px' }}></th>
                 <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>School</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>PDF Count</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>PDF Files</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Modified in Drive</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Checked</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Local PDFs</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Local Modified</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive PDFs</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive Modified</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Match</th>
                 <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Processed</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Actions</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Processed</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Fetch</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Fetch</th>
                 <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive</th>
+                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Checked</th>
+                <th style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Check Drive</th>
               </tr>
             </thead>
             <tbody>
@@ -847,111 +1990,178 @@ export function VerificationPage() {
                           <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
                         )}
                       </td>
-                      <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '300px' }}>
-                        {school.pdfFiles && school.pdfFiles.length > 0 ? (
-                          <div style={{ color: 'var(--text-secondary)' }}>
-                            {school.pdfFiles.length} PDF{school.pdfFiles.length !== 1 ? 's' : ''}
-                          </div>
-                        ) : (
-                          <span style={{ color: 'var(--text-secondary)' }}>—</span>
-                        )}
-                      </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
-                    {syncStatus[school.schoolId]?.lastModifiedPdf ? (
+                    {pdfFetchInfo[school.schoolId]?.localLastModified ? (
                       <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                        {new Date(syncStatus[school.schoolId].lastModifiedPdf!).toLocaleString()}
+                        {new Date(pdfFetchInfo[school.schoolId].localLastModified).toLocaleString()}
                       </div>
                     ) : (
                       <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
                     )}
                   </td>
+                      <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
+                        {pdfFetchInfo[school.schoolId]?.driveHasPdfs !== undefined ? (
+                          pdfFetchInfo[school.schoolId].driveHasPdfs ? (
+                            <span style={{ fontWeight: 'bold', color: '#4ECDC4', fontSize: '18px' }}>
+                              {pdfFetchInfo[school.schoolId].drivePdfCount || '?'}
+                            </span>
+                          ) : (
+                            <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
+                          )
+                        ) : pdfFetchInfo[school.schoolId]?.driveAccessible === false ? (
+                          <span style={{ color: '#f44', fontSize: '12px' }}>Not accessible</span>
+                        ) : (
+                          <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
+                        )}
+                      </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
-                    {syncStatus[school.schoolId]?.lastChecked ? (
+                    {pdfFetchInfo[school.schoolId]?.driveLastModified ? (
                       <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                        {new Date(syncStatus[school.schoolId].lastChecked!).toLocaleString()}
+                        {new Date(pdfFetchInfo[school.schoolId].driveLastModified).toLocaleString()}
                       </div>
+                    ) : pdfFetchInfo[school.schoolId]?.driveAccessible === false ? (
+                      <span style={{ color: '#f44', fontSize: '12px' }}>Not accessible</span>
                     ) : (
                       <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
                     )}
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
-                    {processingStatus[school.schoolId] ? (
-                      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{ color: '#4ECDC4', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <i className="fas fa-check-circle"></i>
-                          <span>Yes</span>
-                        </span>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleProcessPdfs(school.schoolId);
-                          }}
-                          disabled={processing[school.schoolId]}
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            color: processing[school.schoolId] ? 'var(--text-secondary)' : '#4ECDC4',
-                            cursor: processing[school.schoolId] ? 'not-allowed' : 'pointer',
-                            padding: '0.25rem',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '14px',
-                            opacity: processing[school.schoolId] ? 0.6 : 1,
-                            transition: 'all 0.2s',
-                          }}
-                          onMouseEnter={(e) => {
-                            if (!processing[school.schoolId]) {
-                              e.currentTarget.style.color = '#5EDDD6';
-                              e.currentTarget.style.transform = 'rotate(180deg)';
-                            }
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!processing[school.schoolId]) {
-                              e.currentTarget.style.color = '#4ECDC4';
-                              e.currentTarget.style.transform = 'rotate(0deg)';
-                            }
-                          }}
-                          title="Reprocess routes for this school"
-                        >
-                          <i className={`fas ${processing[school.schoolId] ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`}></i>
-                        </button>
-                      </div>
-                    ) : (
-                      (() => {
-                        const hasPdfs = school.hasPdfs || (school.pdfCount && school.pdfCount > 0);
-                        const isDisabled = processing[school.schoolId] || !hasPdfs;
-                        
+                    {(() => {
+                      const driveModified = pdfFetchInfo[school.schoolId]?.driveLastModified;
+                      const localModified = pdfFetchInfo[school.schoolId]?.localLastModified;
+                      const drivePdfCount = pdfFetchInfo[school.schoolId]?.drivePdfCount;
+                      
+                      // Get the actual local PDF count from driveLinkResults (filesystem count, not cached)
+                      const driveResult = driveLinkResults?.results?.find((r: any) => r.schoolId === school.schoolId);
+                      const actualLocalPdfCount = driveResult?.localPdfCount;
+                      const hasCountMismatch = driveResult?.countMismatch === true;
+                      
+                      if (!driveModified || !localModified) {
+                        return <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>;
+                      }
+                      
+                      const driveTime = new Date(driveModified).getTime();
+                      const localTime = new Date(localModified).getTime();
+                      const diff = Math.abs(driveTime - localTime);
+                      const timestampMatches = diff < 1000; // Within 1 second
+                      const needsUpdate = driveTime > localTime;
+                      
+                      // Both timestamps must match AND counts must match
+                      const fullyMatches = timestampMatches && !hasCountMismatch;
+                      
+                      if (fullyMatches) {
                         return (
+                          <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '12px' }} title="Dates match"></i>
+                        );
+                      } else if (hasCountMismatch) {
+                        return (
+                          <i className="fas fa-exclamation-triangle" style={{ color: '#ffa500', fontSize: '12px' }} title={`PDF count mismatch: ${actualLocalPdfCount} local vs ${drivePdfCount} on Drive`}></i>
+                        );
+                      } else if (needsUpdate) {
+                        return (
+                          <i className="fas fa-exclamation-triangle" style={{ color: '#ffa500', fontSize: '12px' }} title="Drive has newer files"></i>
+                        );
+                      } else {
+                        return (
+                          <i className="fas fa-question-circle" style={{ color: '#f44', fontSize: '12px' }} title="Local is newer than Drive"></i>
+                        );
+                      }
+                    })()}
+                  </td>
+                  <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
+                    {(() => {
+                      const status = processingStatus[school.schoolId];
+                      const hasProcessed = typeof status === 'object' && status !== null ? status.hasProcessed : (status === true);
+                      
+                      return hasProcessed ? (
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '12px' }}></i>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              if (hasPdfs) {
-                                handleProcessPdfs(school.schoolId);
-                              } else {
-                                alert('No PDFs available for this school. Please fetch PDFs first.');
+                              handleProcessPdfs(school.schoolId);
+                            }}
+                            disabled={processing[school.schoolId]}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              color: processing[school.schoolId] ? 'var(--text-secondary)' : '#4ECDC4',
+                              cursor: processing[school.schoolId] ? 'not-allowed' : 'pointer',
+                              padding: '0.25rem',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '12px',
+                              opacity: processing[school.schoolId] ? 0.6 : 1,
+                              transition: 'all 0.2s',
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!processing[school.schoolId]) {
+                                e.currentTarget.style.color = '#5EDDD6';
+                                e.currentTarget.style.transform = 'rotate(180deg)';
                               }
                             }}
-                            disabled={isDisabled}
-                            style={{
-                              padding: '0.5rem 1rem',
-                              backgroundColor: isDisabled ? 'var(--bg-secondary)' : '#ffa500',
-                              color: isDisabled ? 'var(--text-secondary)' : 'white',
-                              border: 'none',
-                              borderRadius: '4px',
-                              cursor: isDisabled ? 'not-allowed' : 'pointer',
-                              fontSize: '12px',
-                              fontWeight: 'bold',
-                              opacity: isDisabled ? 0.6 : 1,
-                              minWidth: '120px',
+                            onMouseLeave={(e) => {
+                              if (!processing[school.schoolId]) {
+                                e.currentTarget.style.color = '#4ECDC4';
+                                e.currentTarget.style.transform = 'rotate(0deg)';
+                              }
                             }}
-                            title={!hasPdfs ? 'No PDFs available - fetch PDFs first' : 'Process PDFs for this school'}
+                            title="Reprocess routes for this school"
                           >
-                            {processing[school.schoolId] ? 'Processing...' : 'Process'}
+                            <i className={`fas ${processing[school.schoolId] ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`} style={{ fontSize: '12px' }}></i>
                           </button>
+                        </div>
+                      ) : (
+                        (() => {
+                          const hasPdfs = school.hasPdfs || (school.pdfCount && school.pdfCount > 0);
+                          const isDisabled = processing[school.schoolId] || !hasPdfs;
+                          
+                          return (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (hasPdfs) {
+                                  handleProcessPdfs(school.schoolId);
+                                }
+                              }}
+                              disabled={isDisabled}
+                              style={{
+                                padding: '0.5rem 1rem',
+                                backgroundColor: isDisabled ? 'var(--bg-secondary)' : '#ffa500',
+                                color: isDisabled ? 'var(--text-secondary)' : 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: isDisabled ? 'not-allowed' : 'pointer',
+                                fontSize: '12px',
+                                fontWeight: 'bold',
+                                opacity: isDisabled ? 0.6 : 1,
+                                minWidth: '120px',
+                              }}
+                              title={!hasPdfs ? 'No PDFs available - fetch PDFs first' : 'Process PDFs for this school'}
+                            >
+                              {processing[school.schoolId] ? 'Processing...' : (!hasPdfs ? 'None' : 'Process')}
+                            </button>
+                          );
+                        })()
+                      );
+                    })()}
+                  </td>
+                  <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
+                    {(() => {
+                      const status = processingStatus[school.schoolId];
+                      const lastProcessed = typeof status === 'object' && status !== null ? status.lastProcessed : null;
+                      
+                      if (lastProcessed) {
+                        return (
+                          <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                            {new Date(lastProcessed).toLocaleString()}
+                          </div>
                         );
-                      })()
-                    )}
+                      } else {
+                        return <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>;
+                      }
+                    })()}
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                     {(() => {
@@ -962,6 +2172,8 @@ export function VerificationPage() {
                       
                       const jobStatus = getJobStatusForSchool(school.schoolId);
                       const isJobActive = jobStatus && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
+                      
+                      const fetchMsg = fetchMessages[school.schoolId];
                       
                       return (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
@@ -984,30 +2196,51 @@ export function VerificationPage() {
                               minWidth: '120px',
                             }}
                           >
-                            {fetching[school.schoolId] ? 'Queuing...' : isJobActive ? 'Job Running...' : 'Fetch PDFs'}
+                            {fetching[school.schoolId] ? 'Queuing...' : isJobActive ? 'Running...' : 'Fetch'}
                           </button>
-                          {jobStatus && (
-                            <div style={{ fontSize: '10px', color: 'var(--text-secondary)', textAlign: 'center' }}>
-                              {jobStatus.status === 'active' && (
-                                <div style={{ width: '100px', margin: '0.25rem auto 0' }}>
-                                  <ProgressBar progress={jobStatus.progress} height={4} showPercentage={true} containerStyle={{ margin: 0 }} />
-                                </div>
-                              )}
-                              {jobStatus.status === 'completed' && jobStatus.result && (
-                                <div style={{ color: '#4ECDC4' }}>
-                                  ✓ {jobStatus.result.downloaded} downloaded
-                                </div>
-                              )}
-                              {jobStatus.status === 'failed' && (
-                                <div style={{ color: '#f44' }}>
-                                  ✗ Failed
-                                </div>
-                              )}
+                          {/* Progress bar for active jobs */}
+                          {jobStatus && jobStatus.status === 'active' && (
+                            <div style={{ width: '100px', margin: '0.25rem auto 0' }}>
+                              <ProgressBar progress={jobStatus.progress} height={4} showPercentage={true} containerStyle={{ margin: 0 }} />
+                            </div>
+                          )}
+                          {/* Status message */}
+                          {(fetchMsg || (jobStatus && (jobStatus.status === 'completed' || jobStatus.status === 'failed'))) && (
+                            <div style={{ 
+                              fontSize: '10px', 
+                              textAlign: 'center',
+                              color: fetchMsg?.type === 'error' || jobStatus?.status === 'failed' 
+                                ? '#f44' 
+                                : fetchMsg?.type === 'success' || jobStatus?.status === 'completed'
+                                  ? '#4ECDC4'
+                                  : 'var(--text-secondary)',
+                              maxWidth: '120px',
+                            }}>
+                              {fetchMsg ? (
+                                <span>
+                                  {fetchMsg.type === 'success' && '✓ '}
+                                  {fetchMsg.type === 'error' && '✗ '}
+                                  {fetchMsg.message}
+                                </span>
+                              ) : jobStatus?.status === 'completed' && jobStatus.result ? (
+                                <span>✓ {jobStatus.result.downloaded || jobStatus.result.pdfCount || 0} synced</span>
+                              ) : jobStatus?.status === 'failed' ? (
+                                <span>✗ Failed</span>
+                              ) : null}
                             </div>
                           )}
                         </div>
                       );
                     })()}
+                  </td>
+                  <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
+                    {pdfFetchInfo[school.schoolId]?.lastFetch ? (
+                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                        {new Date(pdfFetchInfo[school.schoolId].lastFetch).toLocaleString()}
+                      </div>
+                    ) : (
+                      <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
+                    )}
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                     {school.driveLink ? (
@@ -1026,10 +2259,52 @@ export function VerificationPage() {
                         onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
                         onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                       >
-                        <i className="fas fa-external-link-alt"></i>
+                        <i className="fas fa-external-link-alt" style={{ fontSize: '12px' }}></i>
                       </a>
                     ) : (
                       <span style={{ color: 'var(--text-secondary)' }}>—</span>
+                    )}
+                  </td>
+                  <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
+                    {pdfFetchInfo[school.schoolId]?.driveLastChecked ? (
+                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                        {new Date(pdfFetchInfo[school.schoolId].driveLastChecked).toLocaleString()}
+                      </div>
+                    ) : (
+                      <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
+                    )}
+                  </td>
+                  <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
+                    {school.driveLink && (
+                      <button
+                        onClick={async (e) => {
+                          e.stopPropagation();
+                          try {
+                            await checkSingleSchoolDriveLink(school.schoolId);
+                          } catch (err: any) {
+                            console.error(`[VerificationPage] Error checking ${school.schoolId}:`, err);
+                          }
+                        }}
+                        disabled={checkingSchool[school.schoolId]}
+                        style={{
+                          background: checkingSchool[school.schoolId] ? 'var(--bg-primary)' : 'none',
+                          border: checkingSchool[school.schoolId] ? '1px solid var(--bg-primary)' : 'none',
+                          color: checkingSchool[school.schoolId] ? 'var(--text-secondary)' : '#4ECDC4',
+                          cursor: checkingSchool[school.schoolId] ? 'not-allowed' : 'pointer',
+                          padding: '0.25rem 0.5rem',
+                          borderRadius: '4px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '12px',
+                          opacity: checkingSchool[school.schoolId] ? 0.6 : 1,
+                          transition: 'all 0.2s',
+                          minWidth: '32px',
+                        }}
+                        title={checkingSchool[school.schoolId] ? 'Checking Drive link...' : 'Check Drive link for this school'}
+                      >
+                        <i className={`fas ${checkingSchool[school.schoolId] ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`} style={{ fontSize: '12px' }}></i>
+                      </button>
                     )}
                   </td>
                 </tr>
@@ -1041,7 +2316,7 @@ export function VerificationPage() {
                       borderBottom: '1px solid var(--bg-primary)',
                     }}
                   >
-                    <td colSpan={9} style={{ padding: '1.5rem' }}>
+                    <td colSpan={11} style={{ padding: '1.5rem' }}>
                       <div>
                         {/* PDF Files List with Route Info */}
                         <div>

@@ -181,13 +181,15 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldZoomToHomeAddress, homeAddress]);
 
-  // Component to zoom to selected stop
+  // Component to zoom to selected stop or school
   // This component uses useMap() to access the map instance inside MapContainer
-  function FitHomeAndStopBounds() {
+  function FitMapBounds() {
     const map = useMap();
     const prevStopIdRef = useRef<string | null>(null);
+    const prevSchoolIdRef = useRef<string | null>(null);
     const hasZoomedRef = useRef<boolean>(false);
     const mapReadyRef = useRef<boolean>(false);
+    const { schools, selectedSchoolId, selectedStop } = useStore();
     
     // Mark map as ready when it's initialized
     useEffect(() => {
@@ -203,64 +205,98 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         return;
       }
       
+      // CASE 1: Stop is selected - priority zoom
       if (selectedStop && selectedStop.stop.coordinates) {
         const currentStopId = `${selectedStop.route.id}-${selectedStop.stop.id}`;
-        
-        // Always zoom to a new stop (don't skip if it's the same stop - user might want to re-center)
-        // Only skip if we just zoomed to this exact stop (within the same render cycle)
         const isNewStop = prevStopIdRef.current !== currentStopId;
         
         if (!isNewStop && hasZoomedRef.current) {
-          console.log('[MapView] Already zoomed to this stop, skipping');
           return;
         }
 
         if (!validateLngLat(selectedStop.stop.coordinates)) {
-          console.error('[MapView] Invalid selected stop coordinates:', selectedStop.stop.coordinates);
           return;
         }
 
-        // Zoom to just the stop, not including home address
         const stopPosition = toLeafletPosition(selectedStop.stop.coordinates);
         
-        console.log('[MapView] 🎯 Zooming to selected stop', {
-          stop: selectedStop.stop.address,
-          stopCoords: selectedStop.stop.coordinates,
-          stopPosition,
-          isNewStop,
-        });
-        
-        // Reset zoom flag for new stop to ensure we always zoom
         if (isNewStop) {
           hasZoomedRef.current = false;
         }
         
-        // Small delay to ensure map is fully rendered
         const timer = setTimeout(() => {
           try {
             map.setView(stopPosition, 16, { animate: true });
-            
             hasZoomedRef.current = true;
-            hasZoomedToStopRef.current = true;
-            lastAddressZoomTimeRef.current = Date.now();
             prevStopIdRef.current = currentStopId;
-            
-            console.log('[MapView] ✅ Successfully zoomed to selected stop');
+            prevSchoolIdRef.current = selectedSchoolId; // Update this too
           } catch (error) {
-            console.error('[MapView] ❌ Error zooming to stop:', error);
+            console.error('[MapView] Error zooming to stop:', error);
           }
         }, 150);
         
         return () => clearTimeout(timer);
-      } else {
-        // Reset zoom flag if stop is cleared
-        if (!selectedStop) {
-          hasZoomedRef.current = false;
-          hasZoomedToStopRef.current = false;
+      } 
+      
+      // CASE 2: No stop selected, but routes are selected - fit to routes
+      if (!selectedStop && selectedRoutes.length > 0) {
+        const allCoordinates: [number, number][] = [];
+        selectedRoutes.forEach(route => {
+          route.stops.forEach(stop => {
+            if (stop.coordinates && validateLngLat(stop.coordinates)) {
+              allCoordinates.push(toLeafletPosition(stop.coordinates));
+            }
+          });
+        });
+
+        if (allCoordinates.length > 0) {
+          const bounds = L.latLngBounds(allCoordinates);
+          const hasSelectedBefore = prevStopIdRef.current !== null || prevSchoolIdRef.current !== null;
+          
+          // Only animate if we were previously zoomed into something else
+          map.fitBounds(bounds, { padding: [50, 50], animate: hasSelectedBefore });
+          
           prevStopIdRef.current = null;
+          prevSchoolIdRef.current = selectedSchoolId;
+          hasZoomedRef.current = false;
+        }
+        return;
+      }
+
+      // CASE 3: No stop or routes selected, but school is selected - zoom to school
+      if (!selectedStop && selectedSchoolId) {
+        const school = schools.find(s => s.id === selectedSchoolId);
+        if (school && school.coordinates) {
+          const isNewSchool = prevSchoolIdRef.current !== selectedSchoolId;
+          
+          if (!isNewSchool && hasZoomedRef.current) {
+            return;
+          }
+
+          const schoolPosition = toLeafletPosition(school.coordinates);
+          
+          if (isNewSchool) {
+            hasZoomedRef.current = false;
+          }
+          
+          const timer = setTimeout(() => {
+            try {
+              map.setView(schoolPosition, 16, { animate: true });
+              hasZoomedRef.current = true;
+              prevSchoolIdRef.current = selectedSchoolId;
+              prevStopIdRef.current = null; // Clear stop ref
+            } catch (error) {
+              console.error('[MapView] Error zooming to school:', error);
+            }
+          }, 150);
+          
+          return () => clearTimeout(timer);
         }
       }
-    }, [map, selectedStop?.route.id, selectedStop?.stop.id]);
+
+      // CASE 4: Nothing selected - fit to all selected routes (already handled by CASE 2 if routes exist)
+      // If no routes and no school, just don't do anything or reset view
+    }, [map, selectedStop?.route.id, selectedStop?.stop.id, selectedSchoolId, schools.length, selectedRoutes.length]);
     
     return null;
   }
@@ -444,40 +480,6 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
 
     fetchRoutes();
   }, [selectedRoutes.map(r => r.id).join(',')]); // Re-fetch when selected routes change
-
-  // Calculate bounds to fit all routes when coordinates are available
-  // Only auto-fit if no stop is selected (to allow manual zooming)
-  // Don't auto-fit if we just zoomed to an address (within last 2 seconds)
-  useEffect(() => {
-    // Don't fit bounds if we just zoomed to an address (give address zoom priority)
-    const timeSinceAddressZoom = Date.now() - lastAddressZoomTimeRef.current;
-    if (timeSinceAddressZoom < 2000) {
-      return;
-    }
-    
-    if (mapRef.current && selectedRoutes.length > 0 && !selectedStop) {
-      const allCoordinates: [number, number][] = [];
-
-      selectedRoutes.forEach(route => {
-        route.stops.forEach(stop => {
-          if (stop.coordinates) {
-            if (!validateLngLat(stop.coordinates)) {
-              console.warn('[MapView] Invalid stop coordinates, skipping:', stop.coordinates);
-              return;
-            }
-            // Convert [lng, lat] to [lat, lng] for Leaflet
-            allCoordinates.push(toLeafletPosition(stop.coordinates));
-          }
-        });
-      });
-
-      // Don't include home address in bounds - let routes control the view
-      if (allCoordinates.length > 0) {
-        const bounds = L.latLngBounds(allCoordinates);
-        mapRef.current.fitBounds(bounds, { padding: [50, 50] });
-      }
-    }
-  }, [selectedRoutes, routes, selectedStop]); // Removed homeAddress from dependencies
 
   // Handle stop selection changes (clear history, highlighted streets, etc.)
   // Note: Zoom to stop is handled by FitHomeAndStopBounds component
@@ -702,7 +704,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       >
       <DarkModeTileLayer />
       <ZoomControl position="bottomleft" />
-      <FitHomeAndStopBounds />
+      <FitMapBounds />
 
       {/* Home address marker */}
       {homeAddress && (
@@ -1322,7 +1324,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginTop: '-2px',
+                  marginTop: '2px',
                   transition: 'color 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
@@ -1334,8 +1336,8 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                 title="Close"
               >
                 <div style={{
-                  width: '20px',
-                  height: '20px',
+                  width: '18px',
+                  height: '18px',
                   position: 'relative',
                   display: 'flex',
                   justifyContent: 'center',

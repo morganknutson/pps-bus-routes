@@ -65,30 +65,39 @@ app.use('/api/servers', serversRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {
-  const uptimeMs = Date.now() - serverStartTime;
-  const uptimeSeconds = Math.floor(uptimeMs / 1000);
-  const uptimeMinutes = Math.floor(uptimeSeconds / 60);
-  const uptimeHours = Math.floor(uptimeMinutes / 60);
-  const uptimeDays = Math.floor(uptimeHours / 24);
-  
-  // Format uptime
-  let uptimeString = '';
-  if (uptimeDays > 0) {
-    uptimeString = `${uptimeDays}d ${uptimeHours % 24}h ${uptimeMinutes % 60}m`;
-  } else if (uptimeHours > 0) {
-    uptimeString = `${uptimeHours}h ${uptimeMinutes % 60}m`;
-  } else if (uptimeMinutes > 0) {
-    uptimeString = `${uptimeMinutes}m ${uptimeSeconds % 60}s`;
-  } else {
-    uptimeString = `${uptimeSeconds}s`;
+  try {
+    const uptimeMs = Date.now() - serverStartTime;
+    const uptimeSeconds = Math.floor(uptimeMs / 1000);
+    const uptimeMinutes = Math.floor(uptimeSeconds / 60);
+    const uptimeHours = Math.floor(uptimeMinutes / 60);
+    const uptimeDays = Math.floor(uptimeHours / 24);
+    
+    // Format uptime
+    let uptimeString = '';
+    if (uptimeDays > 0) {
+      uptimeString = `${uptimeDays}d ${uptimeHours % 24}h ${uptimeMinutes % 60}m`;
+    } else if (uptimeHours > 0) {
+      uptimeString = `${uptimeHours}h ${uptimeMinutes % 60}m`;
+    } else if (uptimeMinutes > 0) {
+      uptimeString = `${uptimeMinutes}m ${uptimeSeconds % 60}s`;
+    } else {
+      uptimeString = `${uptimeSeconds}s`;
+    }
+    
+    res.json({ 
+      status: 'ok',
+      serverType: 'Backend API Server',
+      uptime: uptimeString,
+      uptimeMs: uptimeMs
+    });
+  } catch (error) {
+    console.error('[HealthCheck] Error in health endpoint:', error);
+    res.status(500).json({ 
+      status: 'error',
+      error: error.message || 'Internal server error',
+      serverType: 'Backend API Server'
+    });
   }
-  
-  res.json({ 
-    status: 'ok',
-    serverType: 'Backend API Server',
-    uptime: uptimeString,
-    uptimeMs: uptimeMs
-  });
 });
 
 // Serve static files from frontend/dist in production
@@ -121,20 +130,53 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Start worker service
-workerService.start();
+// Global error handler middleware (must be after all routes)
+app.use((err, req, res, next) => {
+  console.error('[Server] Unhandled error:', err);
+  res.status(500).json({ 
+    error: 'Internal server error',
+    message: err.message || 'An unexpected error occurred'
+  });
+});
+
+// Start worker service - triggered restart
+try {
+  workerService.start();
+} catch (error) {
+  console.error('[Server] Error starting worker service:', error);
+  // Don't crash the server if worker service fails to start
+}
 
 // Graceful shutdown
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, shutting down gracefully...');
-  await workerService.stop();
+  try {
+    await workerService.stop();
+  } catch (error) {
+    console.error('[Server] Error stopping worker service:', error);
+  }
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   console.log('SIGINT received, shutting down gracefully...');
-  await workerService.stop();
+  try {
+    await workerService.stop();
+  } catch (error) {
+    console.error('[Server] Error stopping worker service:', error);
+  }
   process.exit(0);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('[Server] Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('[Server] Uncaught Exception:', error);
+  // Don't exit immediately - let the server try to handle it
 });
 
 app.listen(PORT, () => {

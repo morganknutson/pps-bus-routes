@@ -1,233 +1,307 @@
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useStore } from '../store/useStore';
 import { School, Route } from '../types';
-import {
-  parseUrlPath,
-  buildUrlPath,
-  slugToSchoolId,
-  findRoutesByNumbers,
-  findStopByNumber,
-  urlToDirection,
-  getRouteNumbers,
-} from '../services/urlState';
+import { parseUrlPath, buildUrlPath, UrlState } from '../services/urlState';
+import { useStore } from '../store/useStore';
 
 interface UseUrlStateOptions {
-  basePath?: string;
+  basePath: string;
   schools: School[];
   routes: Route[];
-  activeTab?: 'schools' | 'routes';
+  activeTab: 'schools' | 'routes';
+  setActiveTab: (tab: 'schools' | 'routes') => void;
   debounceMs?: number;
 }
 
+interface UseUrlStateReturn {
+  cancelPendingUrlUpdate: () => void;
+  markRouteToggle: (routeId: string) => void;
+}
+
 /**
- * Hook to sync URL path with Zustand store state
- * Handles bidirectional sync: URL -> Store and Store -> URL
+ * Hook to sync URL state with application state
+ * Updates URL when:
+ * - School selection changes
+ * - Active tab changes
+ * - Route selection changes
  * 
- * Key principle: URL -> Store only runs on actual URL changes (navigation)
- * Store -> URL runs on user interactions (debounced)
+ * Also syncs application state from URL on mount and when URL changes
  */
-export function useUrlState(options: UseUrlStateOptions) {
-  const { basePath = '/bus-route-explorer', schools, routes, activeTab, debounceMs = 300 } = options;
+export function useUrlState({
+  basePath,
+  schools,
+  routes,
+  activeTab,
+  setActiveTab,
+  debounceMs = 300,
+}: UseUrlStateOptions): UseUrlStateReturn {
   const navigate = useNavigate();
   const location = useLocation();
-  const store = useStore();
-  const {
-    selectedSchoolId,
-    selectedStop,
-    directionFilter,
-    setSelectedSchool,
+  const { 
+    selectedSchoolId, 
+    setSelectedSchool, 
+    toggleRouteSelection, 
+    setSelectedRoutes,
+    directionFilter, 
     setDirectionFilter,
+    selectedStop,
     selectStop,
-    clearSelectedStop,
-    toggleRouteSelection,
-  } = store;
+    clearSelectedStop
+  } = useStore();
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const lastUrlStateRef = useRef<UrlState>({});
+  const previousRoutesRef = useRef<Route[]>([]);
+  const isNavigatingRef = useRef(false);
 
-  // Track if we're updating from URL (to prevent circular updates)
-  const isUpdatingFromUrlRef = useRef(false);
-  const updateUrlTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const lastUserActionRef = useRef<number>(0);
-  const storeRef = useRef({ routes, selectedSchoolId, selectedStop, directionFilter, schools });
-  const locationPathnameRef = useRef(location.pathname);
-  
-  // Keep refs in sync with current state (without triggering re-runs)
-  useEffect(() => {
-    storeRef.current = { routes, selectedSchoolId, selectedStop, directionFilter, schools };
-  }, [routes, selectedSchoolId, selectedStop, directionFilter, schools]);
-  
-  // Keep location pathname ref in sync
-  useEffect(() => {
-    locationPathnameRef.current = location.pathname;
-  }, [location.pathname]);
+  // Cancel any pending URL update
+  const cancelPendingUrlUpdate = useCallback(() => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+  }, []);
 
-  /**
-   * Update store from URL path
-   * ONLY runs when URL actually changes (navigation, back/forward)
-   * Uses refs to access current store state without triggering re-runs
-   */
-  const updateStoreFromUrl = useCallback(() => {
-    if (isUpdatingFromUrlRef.current) return;
+  // Update URL from current state (debounced)
+  const updateUrlFromState = useCallback((immediate = false) => {
+    cancelPendingUrlUpdate();
 
-    isUpdatingFromUrlRef.current = true;
+    const performUpdate = () => {
+      // Get latest state directly from store to avoid closure issues
+      const state = useStore.getState();
+      const currentRoutes = state.routes;
+      const currentSelectedStop = state.selectedStop;
+      const currentDirectionFilter = state.directionFilter;
+      const currentSelectedSchoolId = state.selectedSchoolId;
 
-    try {
-      const parsed = parseUrlPath(location.pathname, basePath);
-      const currentStore = storeRef.current;
+      const urlState: UrlState = {
+        show: activeTab,
+      };
 
-      // Update school
-      if (parsed.school) {
-        const schoolId = slugToSchoolId(parsed.school, currentStore.schools);
-        if (schoolId && schoolId !== currentStore.selectedSchoolId) {
-          // Skip if we just had a user action (within last 500ms) - user might have just deselected
-          const timeSinceUserAction = Date.now() - lastUserActionRef.current;
-          if (timeSinceUserAction < 500) {
-            console.log('[useUrlState] Skipping school update from URL - recent user action');
-          } else {
-            console.log('[useUrlState] Updating school from URL:', schoolId);
-            setSelectedSchool(schoolId);
+      if (currentSelectedSchoolId) {
+        urlState.schoolId = currentSelectedSchoolId;
+        
+        if (activeTab === 'routes') {
+          urlState.direction = currentDirectionFilter.toLowerCase() as 'morning' | 'afternoon' | 'both';
+          
+          const selectedRouteNames = currentRoutes
+            .filter(r => r.isSelected && (currentDirectionFilter === 'Both' || r.direction === currentDirectionFilter))
+            .map(r => r.name)
+            .filter((name): name is string => !!name);
+          
+          if (selectedRouteNames.length > 0) {
+            urlState.routeNames = selectedRouteNames;
+            
+            if (currentSelectedStop) {
+              const routeName = currentSelectedStop.route.name;
+              const stopId = currentSelectedStop.stop.id;
+              const stopMatch = stopId.match(/stop-(\d+)/);
+              const stopNumber = stopMatch ? stopMatch[1] : stopId;
+              
+              if (routeName.endsWith('-upcoming')) {
+                const baseName = routeName.replace('-upcoming', '');
+                urlState.stopId = `${baseName}-${stopNumber}-upcoming`;
+              } else {
+                urlState.stopId = `${routeName}-${stopNumber}`;
+              }
+            }
           }
         }
-      } else if (currentStore.selectedSchoolId) {
-        // URL has no school - clear it from store
-        // Only skip clearing if we're explicitly in routes view (routes view needs school)
-        // If parsed.show is null or 'schools', we should clear
-        // Always clear when URL has no school (user closed dialog or navigated to base path)
-        if (parsed.show !== 'routes') {
-          console.log('[useUrlState] Clearing school (not in URL, show is not routes)');
-          setSelectedSchool(null);
+      }
+
+      const newPath = buildUrlPath(basePath, urlState);
+      const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+      const normalizedNewPath = newPath.replace(/\/$/, '') || '/';
+
+      if (normalizedNewPath !== currentPath) {
+        console.log(`[useUrlState] ${immediate ? 'Sync' : 'Debounced'} URL update from state:`, normalizedNewPath);
+        isNavigatingRef.current = true;
+        navigate(newPath, { replace: true });
+      }
+    };
+
+    if (immediate) {
+      performUpdate();
+    } else {
+      debounceTimerRef.current = setTimeout(performUpdate, debounceMs);
+    }
+  }, [basePath, activeTab, routes, navigate, debounceMs, cancelPendingUrlUpdate]);
+
+  // Sync state from URL
+  useEffect(() => {
+    const urlState = parseUrlPath(location.pathname, basePath);
+    const previousUrlState = lastUrlStateRef.current;
+    lastUrlStateRef.current = urlState;
+    
+    const isFirstRoutesLoad = previousRoutesRef.current.length === 0 && routes.length > 0;
+    previousRoutesRef.current = routes;
+
+    // If we just navigated from state, ignore this URL change
+    if (isNavigatingRef.current) {
+      console.log('[useUrlState] Ignoring URL change: just navigated from state');
+      isNavigatingRef.current = false;
+      lastUrlStateRef.current = urlState; // Keep last state in sync
+      return;
+    }
+
+    // Only sync if URL actually changed OR if routes just loaded
+    const urlChanged = JSON.stringify(urlState) !== JSON.stringify(previousUrlState);
+    
+    // Check if only direction changed and a stop is selected
+    const directionChanged = urlState.direction !== previousUrlState.direction;
+    
+    // CRITICAL: We MUST sync if routes just loaded, even if URL didn't change,
+    // to override the store's default "select all" behavior.
+    if (!urlChanged && !isFirstRoutesLoad) {
+      return;
+    }
+
+    console.log('[useUrlState] Syncing state from URL:', location.pathname, urlState, { isFirstRoutesLoad, urlChanged });
+
+    try {
+      // 0. Sync tab selection
+      if (urlState.show && urlState.show !== activeTab) {
+        setActiveTab(urlState.show);
+      }
+
+      // 1. Sync school selection
+      if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
+        const school = schools.find(s => s.id === urlState.schoolId);
+        if (school) {
+          setSelectedSchool(urlState.schoolId);
+        }
+      } else if (!urlState.schoolId && previousUrlState.schoolId && urlChanged) {
+        setSelectedSchool(null);
+      }
+
+      // 2. Sync direction filter
+      if (urlState.direction) {
+        const newDir = urlState.direction === 'morning' ? 'Morning' : 
+                      urlState.direction === 'afternoon' ? 'Afternoon' : 'Both';
+        if (directionFilter !== newDir) {
+          setDirectionFilter(newDir);
         }
       }
 
-      // Update direction filter (only if routes are shown)
-      if (parsed.show === 'routes' && parsed.time) {
-        if (parsed.time !== currentStore.directionFilter) {
-          console.log('[useUrlState] Updating direction filter from URL:', parsed.time);
-          setDirectionFilter(parsed.time);
-        }
-      }
+      // 3. Sync route selection
+      // If we have route names in URL, enforce them strictly.
+      if (urlState.routeNames && urlState.routeNames.length > 0 && routes.length > 0) {
+        // Find routes that match the names in URL AND direction
+        const routesToSelect = routes.filter(r => {
+          const nameMatches = urlState.routeNames!.includes(r.name);
+          const directionMatches = urlState.direction === 'both' || !r.direction || r.direction?.toLowerCase() === urlState.direction;
+          return nameMatches && directionMatches;
+        });
+        
+        const otherDirectionSelectedIds = routes
+          .filter(r => r.isSelected && r.direction?.toLowerCase() !== urlState.direction && urlState.direction !== 'both')
+          .map(r => r.id);
+          
+        const targetRouteIds = [
+          ...otherDirectionSelectedIds,
+          ...routesToSelect.map(r => r.id)
+        ];
 
-      // Update route selection (only if routes are shown)
-      if (parsed.show === 'routes') {
-        if (parsed.routes.length > 0) {
-          const urlRouteNumbers = parsed.routes;
-          const urlRoutes = findRoutesByNumbers(currentStore.routes, urlRouteNumbers);
+        console.log('[useUrlState] Enforcing route selection from URL:', targetRouteIds);
+        setSelectedRoutes(targetRouteIds);
 
-          // Update route selection to match URL
-          currentStore.routes.forEach(route => {
-            const shouldBeSelected = urlRouteNumbers.includes(route.name);
-            if (route.isSelected !== shouldBeSelected) {
-              console.log('[useUrlState] Updating route selection:', route.name, shouldBeSelected);
-              toggleRouteSelection(route.id);
-            }
-          });
+        // 4. Sync stop selection
+        if (urlState.stopId) {
+          let routeName = '';
+          let stopNum = '';
+          
+          // Handle both {route}-{stop} and {route}-{stop}-upcoming
+          const isUpcoming = urlState.stopId.endsWith('-upcoming');
+          const cleanStopId = isUpcoming ? urlState.stopId.replace('-upcoming', '') : urlState.stopId;
+          const lastDashIndex = cleanStopId.lastIndexOf('-');
+          
+          if (lastDashIndex !== -1) {
+            const routeBase = cleanStopId.substring(0, lastDashIndex);
+            stopNum = cleanStopId.substring(lastDashIndex + 1);
+            routeName = isUpcoming ? `${routeBase}-upcoming` : routeBase;
+          }
 
-          // Update selected stop only if URL explicitly specifies one
-          if (parsed.stop && urlRoutes.length > 0) {
-            // Try to find stop in the first matching route (or could be smarter about which route)
-            // For now, use the first route that has enough stops
-            const routeWithStop = urlRoutes.find(r => r.stops.length >= parsed.stop!);
-            if (routeWithStop) {
-              const stop = findStopByNumber(routeWithStop, parsed.stop);
-              if (stop) {
-                const currentStopId = currentStore.selectedStop?.stop.id;
-                if (currentStopId !== stop.id) {
-                  console.log('[useUrlState] Updating selected stop from URL:', routeWithStop.name, parsed.stop);
-                  selectStop(routeWithStop, stop, parsed.stop);
+          if (routeName && stopNum) {
+            const stopIdToFind = stopNum.startsWith('stop-') ? stopNum : `stop-${stopNum}`;
+            const targetRoute = routesToSelect.find(r => r.name === routeName);
+            
+            if (targetRoute) {
+              const stopIndex = targetRoute.stops.findIndex(s => s.id === stopIdToFind);
+              if (stopIndex !== -1) {
+                const stop = targetRoute.stops[stopIndex];
+                if (!selectedStop || selectedStop.stop.id !== stop.id || selectedStop.route.id !== targetRoute.id) {
+                  console.log('[useUrlState] Selecting stop from URL:', urlState.stopId);
+                  selectStop(targetRoute, stop, stopIndex + 1);
                 }
               }
             }
           }
-          // Don't clear stop if URL has routes but no stop - user might have just selected a route
-          // Only clear if URL explicitly shows we're not in routes view
+        } else if (selectedStop && !directionChanged) {
+          // Clear stop ONLY if URL has no stop and direction hasn't changed
+          // If direction DID change, the store's setDirectionFilter handled the transition
+          clearSelectedStop();
         }
-        // If URL shows routes but no routes specified, don't clear anything - let user interact
-      }
-      // Don't clear stop when switching views - let user interactions handle it
-      // URL sync should only SET state from URL, not clear user selections
-    } catch (error) {
-      console.error('[useUrlState] Error updating store from URL:', error);
-    } finally {
-      isUpdatingFromUrlRef.current = false;
-    }
-  }, [
-    location.pathname,
-    basePath,
-    setSelectedSchool,
-    setDirectionFilter,
-    selectStop,
-    clearSelectedStop,
-    toggleRouteSelection,
-  ]);
-
-  /**
-   * Update URL from store state
-   * Runs when user interacts (store changes)
-   * Debounced to avoid too many URL updates
-   */
-  const updateUrlFromStore = useCallback(() => {
-    if (isUpdatingFromUrlRef.current) return;
-
-    // Mark that user just acted (to prevent URL sync from overriding)
-    lastUserActionRef.current = Date.now();
-
-    // Clear any pending URL update
-    if (updateUrlTimeoutRef.current) {
-      clearTimeout(updateUrlTimeoutRef.current);
-    }
-
-    // Debounce URL updates
-    updateUrlTimeoutRef.current = setTimeout(() => {
-      try {
-        const currentStore = storeRef.current;
-        
-        // Use activeTab if provided, otherwise infer from routes
-        const hasSelectedRoutes = currentStore.routes.some(r => r.isSelected);
-        const show: 'schools' | 'routes' = activeTab || (hasSelectedRoutes ? 'routes' : 'schools');
-
-        const routeNumbers = show === 'routes' && hasSelectedRoutes ? getRouteNumbers(currentStore.routes) : '';
-
-        const newPath = buildUrlPath(
-          basePath,
-          {
-            school: currentStore.selectedSchoolId,
-            show: show,
-            routes: routeNumbers ? routeNumbers.split(',') : [],
-            time: currentStore.directionFilter,
-            stop: currentStore.selectedStop ? currentStore.selectedStop.stopNumber : null,
-          },
-          currentStore.schools
+      } else if (urlState.schoolId && urlState.show === 'routes' && routes.length > 0) {
+        // URL targets routes tab but specifies NO specific route names.
+        // Default to "select all" for the current direction ONLY if nothing is selected yet.
+        const effectiveDirection = urlState.direction || directionFilter.toLowerCase();
+        const hasAnySelectedForDir = routes.some(r => 
+          r.isSelected && (effectiveDirection === 'both' || r.direction?.toLowerCase() === effectiveDirection)
         );
-
-        // Only update if path actually changed (use ref to get latest pathname)
-        if (newPath !== locationPathnameRef.current) {
-          console.log('[useUrlState] Updating URL from store:', newPath);
-          navigate(newPath, { replace: true });
+        
+        if (!hasAnySelectedForDir && (urlChanged || isFirstRoutesLoad)) {
+          console.log('[useUrlState] No routes selected for direction, defaulting to all');
+          const idsToSelect = routes
+            .filter(r => effectiveDirection === 'both' || !r.direction || r.direction?.toLowerCase() === effectiveDirection)
+            .map(r => r.id);
+          
+          const otherDirectionSelectedIds = routes
+            .filter(r => r.isSelected && r.direction?.toLowerCase() !== effectiveDirection && effectiveDirection !== 'both')
+            .map(r => r.id);
+          
+          setSelectedRoutes([...idsToSelect, ...otherDirectionSelectedIds]);
         }
-      } catch (error) {
-        console.error('[useUrlState] Error updating URL from store:', error);
+      } else if (urlState.schoolId && urlState.show === 'schools' && routes.length > 0 && urlChanged) {
+        // URL targets schools tab - clear any route selections to match the state
+        const anySelected = routes.some(r => r.isSelected);
+        if (anySelected) {
+          console.log('[useUrlState] URL changed to schools tab, clearing route selection');
+          setSelectedRoutes([]);
+          clearSelectedStop();
+        }
       }
-    }, debounceMs);
-  }, [
-    basePath,
-    location.pathname,
-    navigate,
-    debounceMs,
-    activeTab,
-  ]);
+    } catch (error) {
+      console.error('[useUrlState] Error syncing state from URL:', error);
+    }
+  }, [location.pathname, basePath, schools, routes, selectedSchoolId, setSelectedSchool, setSelectedRoutes, directionFilter, setDirectionFilter, selectedStop, selectStop, clearSelectedStop, activeTab, setActiveTab]);
 
-  // Update store from URL ONLY when URL actually changes (navigation, back/forward)
+  // Update URL when state changes
   useEffect(() => {
-    updateStoreFromUrl();
-  }, [location.pathname, basePath, updateStoreFromUrl]);
+    // We always want the URL to reflect the latest state.
+    // If it's a structural change (school or tab), we do it immediately.
+    // Otherwise (routes/stops), we debounce to avoid spamming the history.
+    
+    const currentUrlState = parseUrlPath(window.location.pathname, basePath);
+    const schoolChanged = selectedSchoolId !== currentUrlState.schoolId;
+    const tabChanged = activeTab !== currentUrlState.show;
+    
+    if (schoolChanged || tabChanged) {
+      updateUrlFromState(true); // Immediate update
+    } else {
+      updateUrlFromState(); // Debounced update
+    }
+    
+    return () => {
+      cancelPendingUrlUpdate();
+    };
+  }, [updateUrlFromState, cancelPendingUrlUpdate, selectedSchoolId, activeTab, routes, selectedStop, directionFilter, basePath]);
 
-  // Update URL from store when user interacts (store state changes)
-  useEffect(() => {
-    updateUrlFromStore();
-  }, [routes, selectedSchoolId, selectedStop, directionFilter, activeTab, updateUrlFromStore]);
+  const markRouteToggle = useCallback(() => {
+    // This is called when a route is toggled in the UI.
+    updateUrlFromState();
+  }, [updateUrlFromState]);
 
   return {
-    updateStoreFromUrl,
-    updateUrlFromStore,
+    cancelPendingUrlUpdate,
+    markRouteToggle,
   };
 }
-

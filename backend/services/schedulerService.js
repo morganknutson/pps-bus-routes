@@ -1,6 +1,38 @@
 /**
- * Scheduler service for checking and updating routes from Google Drive
- * Runs daily at 2am when enabled
+ * @fileoverview Scheduler Service for Automated PDF Synchronization
+ * 
+ * This module provides automated daily synchronization of bus route PDFs
+ * from Google Drive. When enabled, it runs at 2am Pacific Time daily,
+ * checking all schools with Drive links for new or updated PDFs.
+ * 
+ * Key features:
+ * - Cron-based scheduling (daily at 2am)
+ * - Persistent state tracking (enabled/disabled, last run, errors)
+ * - Integration with job queue for asynchronous processing
+ * - Manual trigger capability for on-demand sync
+ * 
+ * @module services/schedulerService
+ * @requires node-cron
+ * @requires fs
+ * @requires ./driveService.js
+ * @requires ./jobQueue/index.js
+ * @requires ./routeProcessor.js
+ * 
+ * @example
+ * // Enable scheduler
+ * import { toggleScheduler } from './schedulerService.js';
+ * toggleScheduler(true);
+ * 
+ * @example
+ * // Check status
+ * import { getStatus } from './schedulerService.js';
+ * console.log(getStatus());
+ * // { enabled: true, lastRun: '2024-01-01T10:00:00Z', nextRun: '2024-01-02T10:00:00Z' }
+ * 
+ * @example
+ * // Manual trigger
+ * import { runCheck } from './schedulerService.js';
+ * await runCheck();
  */
 
 import cron from 'node-cron';

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { School } from '../types';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 
@@ -106,11 +106,6 @@ export function SchoolList({
   const [editingDriveLink, setEditingDriveLink] = useState('');
 
   const filteredSchools = schools.filter(school => {
-    // Filter out ACCESS school
-    if (school.name === 'ACCESS') {
-      return false;
-    }
-    
     // Search filter
     const matchesSearch = 
       school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -122,28 +117,12 @@ export function SchoolList({
     const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
     const isHybrid = schoolTypes.includes('Hybrid');
     
-    // Debug logging for ACCESS
-    if (school.name === 'ACCESS') {
-      console.log('[SchoolList] ACCESS school:', {
-        name: school.name,
-        schoolTypes: school.schoolTypes,
-        inferredTypes: getSchoolTypes(school.name),
-        finalTypes: schoolTypes,
-        isHybrid,
-        hybridFilter: schoolTypeFilters.hybrid,
-        filters: schoolTypeFilters
-      });
-    }
-    
     // If it's a hybrid school, check hybrid filter
     if (isHybrid) {
       if (schoolTypeFilters.hybrid) {
         return true; // Show hybrid schools if hybrid filter is enabled
       }
       // If hybrid filter is disabled, don't show hybrid schools
-      if (school.name === 'ACCESS') {
-        console.log('[SchoolList] Filtering out ACCESS - hybrid filter disabled');
-      }
       return false;
     }
     
@@ -156,23 +135,22 @@ export function SchoolList({
     return matchesFilter;
   });
 
-  // Debug: Log filtered schools count
-  useEffect(() => {
-    console.log('[SchoolList] Filtered schools count:', filteredSchools.length);
-    const accessSchool = filteredSchools.find(s => s.name === 'ACCESS');
-    if (accessSchool) {
-      const schoolTypes = accessSchool.schoolTypes || getSchoolTypes(accessSchool.name);
-      console.log('[SchoolList] ACCESS in filtered list - types:', schoolTypes, 'isHybrid:', schoolTypes.includes('Hybrid'));
-    } else {
-      console.log('[SchoolList] ACCESS NOT in filtered list');
-    }
-  }, [filteredSchools]);
-
   const schoolsWithCoords = filteredSchools.filter(s => s.coordinates && s.coordinates.length === 2);
   const schoolsWithoutCoords = filteredSchools.filter(s => !s.coordinates || s.coordinates.length !== 2);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <style>{`
+        .school-list-item:hover {
+          background-color: var(--bg-secondary) !important;
+        }
+        .school-list-item.selected {
+          background-color: var(--bg-tertiary) !important;
+        }
+        .school-list-item.selected:hover {
+          background-color: var(--bg-tertiary) !important;
+        }
+      `}</style>
       {/* Search */}
       <div style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
         <div style={{ position: 'relative' }}>
@@ -251,10 +229,10 @@ export function SchoolList({
               return (
                 <div
                   key={school.id}
+                  className={`school-list-item ${isSelected ? 'selected' : ''}`}
                   style={{
                     borderBottom: '1px solid var(--border-color)',
                     borderLeft: `4px solid ${schoolColor}`,
-                    backgroundColor: isSelected ? 'var(--bg-tertiary)' : 'var(--bg-primary)',
                     transition: 'background-color 0.3s ease, border-color 0.3s ease',
                   }}
                 >
@@ -263,7 +241,7 @@ export function SchoolList({
                       if (!isEditing) {
                         // Toggle selection: if already selected, deselect; otherwise select
                         if (isSelected) {
-                          onSelectSchool(''); // Pass empty string to deselect
+                          onSelectSchool(null); // Pass null to deselect
                         } else {
                           onSelectSchool(school.id);
                         }
@@ -277,16 +255,6 @@ export function SchoolList({
                       justifyContent: 'space-between',
                       alignItems: 'flex-start',
                       gap: '0.5rem',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isSelected && !isEditing) {
-                        e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isSelected && !isEditing) {
-                        e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
-                      }
                     }}
                   >
                     <div style={{ flex: 1 }}>
@@ -460,6 +428,7 @@ export function SchoolList({
                   return (
                     <div
                       key={school.id}
+                      className={`school-list-item ${school.id === selectedSchoolId ? 'selected' : ''}`}
                       style={{
                         padding: '0.5rem',
                         fontSize: '14px',
@@ -471,7 +440,7 @@ export function SchoolList({
                           if (!isEditing) {
                             // Toggle selection: if already selected, deselect; otherwise select
                             if (school.id === selectedSchoolId) {
-                              onSelectSchool(''); // Pass empty string to deselect
+                              onSelectSchool(null); // Pass null to deselect
                             } else {
                               onSelectSchool(school.id);
                             }
@@ -482,16 +451,6 @@ export function SchoolList({
                           alignItems: 'center',
                           gap: '0.5rem',
                           cursor: isEditing ? 'default' : 'pointer',
-                        }}
-                        onMouseEnter={(e) => {
-                          if (!isEditing) {
-                            e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (!isEditing) {
-                            e.currentTarget.style.backgroundColor = 'transparent';
-                          }
                         }}
                       >
                         <span>{school.name}</span>

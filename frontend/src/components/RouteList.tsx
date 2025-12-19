@@ -5,13 +5,14 @@ interface RouteListProps {
   showBothOption?: boolean;
   onClearSchool?: () => void;
   onViewSchools?: () => void;
+  onRouteToggle?: () => void;  // Called when user explicitly toggles a route (for URL sync)
 }
 
 /**
  * Route list component for the main page
  * Uses the store directly and shows route selection checkboxes
  */
-export function RouteList({ showBothOption = false, onClearSchool, onViewSchools }: RouteListProps = {}) {
+export function RouteList({ showBothOption = false, onClearSchool, onViewSchools, onRouteToggle }: RouteListProps = {}) {
   const { routes, toggleRouteSelection, isLoading, error, selectStop, selectedStop, clearSelectedStop, selectedSchoolId, schools, directionFilter, setDirectionFilter, setSelectedSchool } = useStore();
 
   const selectedSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
@@ -20,6 +21,9 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
     directionFilter: directionFilter,
     showRouteSelection: true,
     onRouteSelectionChange: (routeId: string, checked: boolean) => {
+      // Mark that user is toggling a route (for URL sync to not override)
+      onRouteToggle?.();
+      
       if (checked) {
         // Route is being selected - ensure it's selected in store
         if (!routes.find(r => r.id === routeId)?.isSelected) {
@@ -37,7 +41,15 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
       if (selectedStop?.route.id === route.id && selectedStop?.stop.id === stop.id) {
         clearSelectedStop();
       } else {
-        selectStop(route, stop, stopNumber);
+        // If route is not selected, select it first so it shows on the map
+        let updatedRoute = route;
+        if (!route.isSelected) {
+          toggleRouteSelection(route.id);
+          // Update the route object to reflect the new selection state
+          updatedRoute = { ...route, isSelected: true };
+        }
+        // Then select the stop
+        selectStop(updatedRoute, stop, stopNumber);
       }
     },
     isRouteSelected: (route) => route.isSelected,
@@ -108,20 +120,21 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {selectedSchool && (
-        <div style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
+        <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
           <div style={{ position: 'relative' }}>
             <div
               style={{
                 width: '100%',
                 padding: '0.75rem',
+                paddingLeft: '1rem',
                 paddingRight: '2.5rem',
-                border: '1px solid var(--border-color)',
                 borderRadius: '4px',
                 fontSize: '14px',
                 boxSizing: 'border-box',
-                backgroundColor: 'var(--bg-primary)',
+                backgroundColor: 'var(--bg-tertiary)',
                 color: 'var(--text-primary)',
-                transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                transition: 'background-color 0.3s ease, color 0.3s ease',
+                boxShadow: '0 1px 3px var(--shadow-large)',
               }}
             >
               {selectedSchool.name}
@@ -135,7 +148,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
               }}
               style={{
                 position: 'absolute',
-                right: '8px',
+                right: '10px',
                 top: '50%',
                 transform: 'translateY(-50%)',
                 width: '20px',
@@ -143,7 +156,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '16px',
+                fontSize: '14px',
                 lineHeight: '1',
                 backgroundColor: 'transparent',
                 color: 'var(--text-tertiary)',
@@ -164,14 +177,16 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
               }}
               aria-label="Clear school selection"
             >
-              ×
+              <svg width="16" height="16" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 3L3 9M3 3l6 6" />
+              </svg>
             </button>
           </div>
         </div>
       )}
       {/* Direction filter toggle */}
       <div style={{
-        padding: '0.75rem 1rem',
+        padding: '0.75rem 0.75rem', // Reduced side padding to make toggle wider
         borderBottom: '1px solid var(--border-color)',
         backgroundColor: 'var(--bg-secondary)',
         flexShrink: 0,
@@ -264,7 +279,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 ? '0.25rem'
                 : 'calc(50% + 0.25rem)',
               width: showBothOption ? 'calc(33.333% - 0.5rem)' : 'calc(50% - 0.5rem)',
-              backgroundColor: 'var(--bg-primary)',
+              backgroundColor: 'var(--bg-tertiary)',
               borderRadius: '4px',
               transition: 'left 0.3s ease',
               zIndex: 1,

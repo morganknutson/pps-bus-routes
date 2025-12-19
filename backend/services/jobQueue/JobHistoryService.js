@@ -5,6 +5,7 @@
  */
 
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -28,19 +29,31 @@ export class JobHistoryService {
   constructor() {
     this.historyFile = JOBS_HISTORY_FILE;
     this.maxHistorySize = 10000; // Keep last 10,000 jobs
-    this.history = this.loadHistory();
+    this.history = [];
+    this.isSaving = false;
+    this.needsSave = false;
+    
+    // Initial load
+    this.init();
+  }
+
+  /**
+   * Initial load of history
+   */
+  async init() {
+    this.history = await this.loadHistory();
   }
 
   /**
    * Load job history from file
    */
-  loadHistory() {
+  async loadHistory() {
     if (!fs.existsSync(this.historyFile)) {
       return [];
     }
 
     try {
-      const data = fs.readFileSync(this.historyFile, 'utf8');
+      const data = await fsPromises.readFile(this.historyFile, 'utf8');
       const parsed = JSON.parse(data);
       return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
@@ -51,15 +64,34 @@ export class JobHistoryService {
 
   /**
    * Save job history to file
+   * Implements a simple queue and atomic write to prevent corruption
    */
-  saveHistory() {
+  async saveHistory() {
+    if (this.isSaving) {
+      this.needsSave = true;
+      return;
+    }
+
+    this.isSaving = true;
+    this.needsSave = false;
+
     try {
       // Keep only the most recent jobs
       const trimmed = this.history.slice(-this.maxHistorySize);
-      fs.writeFileSync(this.historyFile, JSON.stringify(trimmed, null, 2), 'utf8');
+      const tempFile = `${this.historyFile}.tmp`;
+      
+      await fsPromises.writeFile(tempFile, JSON.stringify(trimmed, null, 2), 'utf8');
+      await fsPromises.rename(tempFile, this.historyFile);
+      
       this.history = trimmed;
     } catch (error) {
       console.error('[JobHistoryService] Error saving history:', error);
+    } finally {
+      this.isSaving = false;
+      // If another save was requested while we were saving, run it now
+      if (this.needsSave) {
+        setImmediate(() => this.saveHistory());
+      }
     }
   }
 
@@ -143,8 +175,8 @@ export class JobHistoryService {
       job.events = job.events.slice(-50);
     }
 
-    // Save to file (async, don't block)
-    setImmediate(() => this.saveHistory());
+    // Trigger save (non-blocking)
+    this.saveHistory();
   }
 
   /**
@@ -241,6 +273,9 @@ export class JobHistoryService {
 
 // Export singleton instance
 export const jobHistoryService = new JobHistoryService();
+
+
+
 
 
 

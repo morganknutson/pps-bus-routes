@@ -109,15 +109,87 @@ The app is production-ready and can be deployed to:
 
 ## Documentation
 
-- **[PAGES_INDEX.md](./PAGES_INDEX.md)**: Comprehensive index of all pages in the application, including routes, purposes, features, and components used. **Reference this before making changes to pages to ensure you're working on the correct one.**
+- **[AGENTS.md](./AGENTS.md)**: Quick reference for AI coding assistants - read this first for rapid context
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)**: Comprehensive technical documentation including data flow, services, and API reference
+- **[PAGES_INDEX.md](./PAGES_INDEX.md)**: Comprehensive index of all pages in the application, including routes, purposes, features, and components used
 - **[TechPage](./frontend/src/pages/TechPage.tsx)**: In-app technical documentation (accessible at `/tech`)
+- **[.cursorrules](./.cursorrules)**: Coding conventions and project rules
 
 ## How It Works
 
 1. **PDF Fetching**: Backend uses Google Drive API to list and download PDFs from the folder
 2. **PDF Parsing**: Extracts text from PDFs and uses regex patterns to identify cross-street addresses
-3. **Geocoding**: Converts addresses to coordinates using OpenStreetMap Nominatim (free, no API key needed)
+3. **Geocoding**: Converts addresses to coordinates using Google Maps Geocoding API
 4. **Visualization**: Frontend uses Leaflet to display routes as colored lines with stop markers
+
+### Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph sources [Data Sources]
+        GD[Google Drive<br/>PDF Folders]
+        SchoolsDB[(schools.json)]
+    end
+
+    subgraph backend [Backend Services]
+        Drive[driveService.js<br/>Fetch PDFs]
+        Parser[pdfParser.js<br/>Extract Stops]
+        Geocoder[geocodingService.js<br/>Google Maps API]
+        Directions[directionsService.js<br/>Route Geometry]
+        Processor[routeProcessor.js<br/>Orchestrator]
+    end
+
+    subgraph storage [Data Storage]
+        PDFs[data/schools/id/pdfs/]
+        Routes[data/schools/id/<br/>processed-routes/]
+        Cache[data/cache/]
+    end
+
+    subgraph frontend [Frontend React App]
+        Store[Zustand Store]
+        Components[React Components]
+        Map[Leaflet Map]
+    end
+
+    GD --> Drive
+    Drive --> PDFs
+    PDFs --> Parser
+    Parser --> Geocoder
+    SchoolsDB --> Processor
+    Geocoder --> Processor
+    Directions --> Processor
+    Processor --> Routes
+    Routes --> Store
+    Cache --> Store
+    Store --> Components
+    Components --> Map
+```
+
+### Data Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant GoogleAPIs
+    participant Storage
+
+    User->>Frontend: Select School
+    Frontend->>Backend: GET /api/schools/:id/routes
+    Backend->>Storage: Read processed-routes/*.json
+    Storage-->>Backend: Route JSON files
+    Backend-->>Frontend: Routes with coordinates
+    Frontend->>Frontend: Load into Zustand store
+    Frontend->>User: Display on Leaflet map
+
+    Note over Backend,GoogleAPIs: PDF Processing (on demand)
+    Backend->>GoogleAPIs: Fetch PDF from Drive
+    Backend->>Backend: Parse PDF for stops
+    Backend->>GoogleAPIs: Geocode addresses
+    Backend->>GoogleAPIs: Calculate route geometry
+    Backend->>Storage: Save processed route JSON
+```
 
 ## Notes
 

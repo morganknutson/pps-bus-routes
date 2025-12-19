@@ -45,7 +45,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   color: 'inherit',
                 }}
               >
-                <span className="logo-text">Admin</span>
+                <span className="logo-text" style={{ color: 'white' }}>Admin</span>
               </Link>
             ) : (
               <span 
@@ -66,39 +66,126 @@ export function Header({ rightContent }: HeaderProps = {}) {
             {isAdminPage && (
               <>
                 <Link
-                  to="/architecture"
+                  to="/tech"
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: 'var(--text-primary)',
-                    textDecoration: 'none',
+                    color: location.pathname === '/tech' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname === '/tech' ? 'underline' : 'none',
+                    fontWeight: location.pathname === '/tech' ? '600' : '400',
                     transition: 'all 0.2s',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.textDecoration = 'underline';
+                    if (location.pathname !== '/tech') {
+                      e.currentTarget.style.textDecoration = 'underline';
+                      e.currentTarget.style.color = 'white';
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.textDecoration = 'none';
+                    if (location.pathname !== '/tech') {
+                      e.currentTarget.style.textDecoration = 'none';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                    }
+                  }}
+                >
+                  Tech
+                </Link>
+                <Link
+                  to="/architecture"
+                  className="admin-link"
+                  style={{
+                    fontSize: '12px',
+                    color: location.pathname === '/architecture' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname === '/architecture' ? 'underline' : 'none',
+                    fontWeight: location.pathname === '/architecture' ? '600' : '400',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (location.pathname !== '/architecture') {
+                      e.currentTarget.style.textDecoration = 'underline';
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (location.pathname !== '/architecture') {
+                      e.currentTarget.style.textDecoration = 'none';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                    }
                   }}
                 >
                   Architecture
+                </Link>
+                <Link
+                  to="/servers"
+                  className="admin-link"
+                  style={{
+                    fontSize: '12px',
+                    color: location.pathname === '/servers' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname === '/servers' ? 'underline' : 'none',
+                    fontWeight: location.pathname === '/servers' ? '600' : '400',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (location.pathname !== '/servers') {
+                      e.currentTarget.style.textDecoration = 'underline';
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (location.pathname !== '/servers') {
+                      e.currentTarget.style.textDecoration = 'none';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                    }
+                  }}
+                >
+                  Servers
+                </Link>
+                <Link
+                  to="/verification"
+                  className="admin-link"
+                  style={{
+                    fontSize: '12px',
+                    color: location.pathname === '/verification' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname === '/verification' ? 'underline' : 'none',
+                    fontWeight: location.pathname === '/verification' ? '600' : '400',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (location.pathname !== '/verification') {
+                      e.currentTarget.style.textDecoration = 'underline';
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (location.pathname !== '/verification') {
+                      e.currentTarget.style.textDecoration = 'none';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                    }
+                  }}
+                >
+                  Verification
                 </Link>
                 <Link
                   to="/bus-route-explorer"
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: 'var(--text-primary)',
+                    color: 'rgba(255, 255, 255, 0.8)',
                     textDecoration: 'none',
                     transition: 'all 0.2s',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.textDecoration = 'underline';
+                    e.currentTarget.style.color = 'white';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.textDecoration = 'none';
+                    e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
                   }}
                 >
                   → Explorer
@@ -110,9 +197,9 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 onClick={handleLogout}
                 style={{
                   fontSize: '12px',
-                  color: 'var(--text-primary)',
+                  color: 'white',
                   backgroundColor: 'transparent',
-                  border: '1px solid var(--text-tertiary)',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
                   borderRadius: '6px',
                   padding: '0.5rem 1rem',
                   cursor: 'pointer',
@@ -122,11 +209,11 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   gap: '0.5rem',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--text-secondary)';
-                  e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.6)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--text-tertiary)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
                   e.currentTarget.style.backgroundColor = 'transparent';
                 }}
               >

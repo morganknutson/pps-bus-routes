@@ -177,7 +177,7 @@ const backendFiles: FileNode[] = [
   ], dependents: ['server'] },
   { id: 'pdfsRouter', name: 'pdfs.js', path: 'backend/routes/pdfs.js', type: 'route', dependencies: [], dependents: ['server'] },
   { id: 'serversRouter', name: 'servers.js', path: 'backend/routes/servers.js', type: 'route', dependencies: [
-    'pm2Service'
+    'restartService'
   ], dependents: ['server'] },
   
   // Backend Services
@@ -196,7 +196,7 @@ const backendFiles: FileNode[] = [
     'driveService', 'pdfSyncJobQueue', 'routeProcessor', 'schoolUtils-backend'
   ], dependents: ['schedulerRouter'] },
   { id: 'verificationService', name: 'verificationService.js', path: 'backend/services/verificationService.js', type: 'backend-service', dependencies: [], dependents: ['verificationRouter'] },
-  { id: 'pm2Service', name: 'pm2Service.js', path: 'backend/services/pm2Service.js', type: 'backend-service', dependencies: [], dependents: ['serversRouter'] },
+  { id: 'restartService', name: 'restartService.js', path: 'backend/services/restartService.js', type: 'backend-service', dependencies: [], dependents: ['serversRouter'] },
   
   // Job Queue System
   { id: 'workerService', name: 'WorkerService.js', path: 'backend/services/jobQueue/WorkerService.js', type: 'backend-service', dependencies: [

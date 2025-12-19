@@ -110,37 +110,77 @@ export function ServersPage() {
 
       let data;
       try {
-        data = await response.json();
-      } catch (jsonError) {
-        // If server restarted before sending response, treat as success
-        if (processName === 'pps-backend' && !response.ok) {
-          console.log(`[ServersPage] Backend restart initiated (server may have restarted before response)`);
+        const responseText = await response.text();
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          // If we can't parse JSON, check if it's a backend restart
+          // Backend might restart before sending response
+          if (processName === 'pps-backend' && !response.ok) {
+            console.log(`[ServersPage] Backend restart initiated (server may have restarted before response)`);
+            setTimeout(() => {
+              checkBackendStatus();
+            }, 3000);
+            return;
+          }
+          // For other cases, show the HTTP error with the raw text
+          throw new Error(`HTTP ${response.status}: ${response.statusText}. ${responseText || 'Unknown error'}`);
+        }
+      } catch (error: any) {
+        // If we can't even read the response, it might be a network error
+        if (error.message && !error.message.includes('HTTP')) {
+          throw error; // Re-throw network errors to be handled below
+        }
+        throw error;
+      }
+
+      // Check if response indicates an error
+      if (!response.ok) {
+        const errorMessage = data.message || data.error || `HTTP ${response.status}: ${response.statusText}`;
+        console.error(`[ServersPage] Server returned error for ${processName}:`, errorMessage);
+        
+        // For backend restarts, if we get a 500, it might mean the restart is in progress
+        // Check status after a delay
+        if (processName === 'pps-backend' && response.status === 500) {
+          console.log(`[ServersPage] Backend returned 500, but restart may be in progress. Checking status...`);
           setTimeout(() => {
             checkBackendStatus();
           }, 3000);
+          setTimeout(() => {
+            checkBackendStatus();
+          }, 8000);
+          // Don't show error alert immediately - wait to see if server comes back
           return;
         }
-        throw new Error('Invalid response from server');
+        
+        alert(`Failed to restart ${processName}: ${errorMessage}`);
+        return;
       }
 
       if (data.success) {
-        console.log(`[ServersPage] Successfully restarted ${processName}`);
-        // Wait a moment for the server to restart, then check status
-        setTimeout(() => {
-          if (processName === 'pps-backend') {
+        console.log(`[ServersPage] Successfully initiated restart for ${processName}`);
+        if (processName === 'pps-backend') {
+          // For backend, wait longer as it may need to restart and reconnect
+          // Check status after 3 seconds, then again after 8 seconds to catch delayed starts
+          setTimeout(() => {
+            console.log(`[ServersPage] Checking backend status after restart...`);
             checkBackendStatus();
-          } else {
-            // For frontend, reset the uptime counter
-            frontendStartTime.current = Date.now();
-            setFrontendStatus(prev => ({
-              ...prev,
-              lastChecked: new Date(),
-            }));
-          }
-        }, 2000);
+          }, 3000);
+          setTimeout(() => {
+            console.log(`[ServersPage] Second backend status check after restart...`);
+            checkBackendStatus();
+          }, 8000);
+        } else {
+          // For frontend, reset the uptime counter
+          frontendStartTime.current = Date.now();
+          setFrontendStatus(prev => ({
+            ...prev,
+            lastChecked: new Date(),
+          }));
+        }
       } else {
-        console.error(`[ServersPage] Failed to restart ${processName}:`, data.message);
-        alert(`Failed to restart ${processName}: ${data.message}`);
+        console.error(`[ServersPage] Failed to restart ${processName}:`, data.message || data.error);
+        alert(`Failed to restart ${processName}: ${data.message || data.error || 'Unknown error'}`);
       }
     } catch (error: any) {
       console.error(`[ServersPage] Error restarting ${processName}:`, error);
@@ -162,7 +202,24 @@ export function ServersPage() {
         return;
       }
       
-      alert(`Error restarting ${processName}: ${error.message}`);
+      // For backend restarts, if we get a network error, it might mean the backend is down
+      // Try checking status after a delay to see if it started
+      if (processName === 'pps-backend' && 
+          (error.message === 'Failed to fetch' || 
+           error.message.includes('network') ||
+           error.name === 'TypeError')) {
+        console.log(`[ServersPage] Backend restart may have succeeded but connection lost`);
+        // Wait a bit longer then check status
+        setTimeout(() => {
+          checkBackendStatus();
+        }, 5000);
+        // Show a message that we're checking
+        alert(`Unable to confirm backend restart. Checking status...`);
+        return;
+      }
+      
+      const errorMessage = error.message || 'Unknown error occurred';
+      alert(`Error restarting ${processName}: ${errorMessage}`);
     } finally {
       setIsRestarting(false);
     }

@@ -31,7 +31,7 @@ import { ProgressBar } from './components/ProgressBar';
 import { AdminPasswordProtection } from './components/AdminPasswordProtection';
 import { useIsMobile } from './hooks/useMediaQuery';
 import { useUrlState } from './hooks/useUrlState';
-import { parseUrlPath } from './services/urlState';
+import { parseUrlPath, applyUrlStateToRoutes } from './services/urlState';
 import { useLocation, useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 
@@ -220,13 +220,6 @@ function ExplorerApp() {
     return 'schools';
   });
   
-  // Sync activeTab with URL when URL changes
-  useEffect(() => {
-    if (urlState.show && urlState.show !== activeTab) {
-      setActiveTab(urlState.show);
-    }
-  }, [urlState.show]);
-  
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
     if (tab === 'schools' || tab === 'routes') {
@@ -289,11 +282,12 @@ function ExplorerApp() {
   }, []);
 
   // Initialize URL state sync (only after schools are loaded)
-  useUrlState({
+  const { cancelPendingUrlUpdate, markRouteToggle } = useUrlState({
     basePath: '/bus-route-explorer',
     schools,
     routes,
     activeTab,
+    setActiveTab,
     debounceMs: 300,
   });
 
@@ -336,11 +330,14 @@ function ExplorerApp() {
       setLoading(true);
       setLoadingProgress(0);
       try {
-        const loadedRoutes = await loadLocalRoutes(selectedSchoolId, (progress) => {
-          setLoadingProgress(progress);
-        });
+        const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
+        
+        // Pre-apply URL state to avoid UI flicker
+        const urlState = parseUrlPath(window.location.pathname, '/bus-route-explorer');
+        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, urlState, directionFilter);
+        
         console.log('[ExplorerApp] Loaded', loadedRoutes.length, 'routes');
-        setRoutes(loadedRoutes);
+        setRoutes(syncedRoutes);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[ExplorerApp] Failed to load routes:', error);
@@ -356,30 +353,41 @@ function ExplorerApp() {
   }, [selectedSchoolId, activeTab, setRoutes, setLoading, routes.length]); // Include routes.length to detect when routes are cleared
 
   // Update selectedSchoolForMap when selectedSchoolId changes
-  // Show dialog in schools tab when school is selected (either by click or URL)
-  // Don't show dialog in routes tab when school is selected via URL (only on explicit click)
   useEffect(() => {
     if (selectedSchoolId && schools.length > 0) {
-      const school = schools.find(s => s.id === selectedSchoolId);
-      // Only auto-show dialog in schools tab, not routes tab
+      // Only auto-show the dialog if we are in the schools tab
+      // In the routes tab, the dialog should only show via explicit user interaction (e.g. clicking a school pin)
       if (activeTab === 'schools') {
-        setSelectedSchoolForMap(school || null);
+        const school = schools.find(s => s.id === selectedSchoolId);
+        if (school && selectedSchoolForMap?.id !== school.id) {
+          setSelectedSchoolForMap(school);
+        }
       }
-      // In routes tab, only set if it's already set (preserve existing dialog)
-      // This allows clicking school markers in routes tab to show dialog
-    } else {
+    } else if (!selectedSchoolId) {
       setSelectedSchoolForMap(null);
     }
   }, [selectedSchoolId, schools, activeTab]);
 
+  // Clear school dialog when a stop is selected
+  useEffect(() => {
+    if (selectedStop) {
+      setSelectedSchoolForMap(null);
+    }
+  }, [selectedStop]);
+
   // Handle school dialog closing animation
   const handleCloseSchoolDialog = (preserveSchoolSelection = false) => {
     setIsSchoolDialogClosing(true);
-    if (!preserveSchoolSelection && activeTab === 'schools') {
-      // Navigate to base path - URL sync will clear the school from store
-      // This ensures the URL and store stay in sync
-      navigate('/bus-route-explorer', { replace: true });
-      // updateStoreFromUrl will handle clearing selectedSchoolId when it sees the URL has no school
+    if (!preserveSchoolSelection) {
+      // Cancel any pending debounced URL updates to prevent race conditions
+      cancelPendingUrlUpdate();
+      
+      // Clear school selection ONLY if in schools tab
+      if (activeTab === 'schools') {
+        setSelectedSchool(null);
+        navigate('/bus-route-explorer', { replace: true });
+      }
+      // If in routes tab, we keep the school selected so we don't lose the routes
     }
     setTimeout(() => {
       setSelectedSchoolForMap(null);
@@ -427,8 +435,8 @@ function ExplorerApp() {
   // Custom thin X icon component
   const ThinXIcon = () => (
     <div style={{
-      width: '20px',
-      height: '20px',
+      width: '18px',
+      height: '18px',
       position: 'relative',
       display: 'flex',
       justifyContent: 'center',
@@ -550,21 +558,13 @@ function ExplorerApp() {
               schoolTypeFilters={schoolTypeFilters}
               onFiltersChange={setSchoolTypeFilters}
               onSelectSchool={(schoolId) => {
-                if (schoolId) {
-                  setSelectedSchool(schoolId);
-                  // When a school is clicked in schools tab, show the dialog
-                  const school = schools.find(s => s.id === schoolId);
-                  if (school) {
-                    setSelectedSchoolForMap(school);
-                  }
-                  // Close sidebar on mobile when a school is selected
-                  if (isMobile) {
-                    setSidebarOpen(false);
-                  }
-                } else {
-                  // Deselect school
+                if (selectedSchoolId === schoolId) {
                   setSelectedSchool(null);
-                  setSelectedSchoolForMap(null);
+                } else {
+                  setSelectedSchool(schoolId);
+                }
+                if (schoolId && isMobile) {
+                  setSidebarOpen(false);
                 }
               }}
             />
@@ -576,6 +576,7 @@ function ExplorerApp() {
                 setActiveTab('schools');
               }}
               onViewSchools={() => setActiveTab('schools')}
+              onRouteToggle={markRouteToggle}
             />
           )}
         </Sidebar>
@@ -590,15 +591,10 @@ function ExplorerApp() {
                 schools={filteredSchools}
                 selectedSchoolId={selectedSchoolId}
                 onSelectSchool={(schoolId) => {
-                  if (schoolId) {
-                    setSelectedSchool(schoolId);
-                    const school = schools.find(s => s.id === schoolId);
-                    if (school) {
-                      setSelectedSchoolForMap(school);
-                    }
-                  } else {
+                  if (selectedSchoolId === schoolId) {
                     setSelectedSchool(null);
-                    setSelectedSchoolForMap(null);
+                  } else {
+                    setSelectedSchool(schoolId);
                   }
                 }}
                 mapRef={mapRef}
@@ -738,7 +734,7 @@ function ExplorerApp() {
                     })()}
                   </div>
                   <button
-                    onClick={handleCloseSchoolDialog}
+                    onClick={() => handleCloseSchoolDialog()}
                     style={{
                       background: 'none',
                       border: 'none',
@@ -750,7 +746,7 @@ function ExplorerApp() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      marginTop: '-2px',
+                      marginTop: '2px',
                     }}
                   >
                     <ThinXIcon />
@@ -902,6 +898,8 @@ function ExplorerApp() {
                         // Set school and change tab together - React batches these updates
                         setSelectedSchool(selectedSchoolForMap.id);
                         setActiveTab('routes');
+                        // Use clearSelectedStop from store if available
+                        useStore.getState().clearSelectedStop();
                         handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
                       }
                     }}
@@ -964,13 +962,6 @@ function AdminApp() {
     return urlState.show || 'routes';
   });
   
-  // Sync activeTab with URL when URL changes
-  useEffect(() => {
-    if (urlState.show && urlState.show !== activeTab) {
-      setActiveTab(urlState.show);
-    }
-  }, [urlState.show]);
-  
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
     if (tab === 'schools' || tab === 'routes') {
@@ -992,8 +983,8 @@ function AdminApp() {
   // Custom thin X icon component
   const ThinXIcon = () => (
     <div style={{
-      width: '20px',
-      height: '20px',
+      width: '18px',
+      height: '18px',
       position: 'relative',
       display: 'flex',
       justifyContent: 'center',
@@ -1043,11 +1034,15 @@ function AdminApp() {
   }, []);
 
   // Initialize URL state sync (only after schools are loaded)
-  useUrlState({
+  const { 
+    cancelPendingUrlUpdate: cancelPendingUrlUpdateAdmin, 
+    markRouteToggle: markRouteToggleAdmin
+  } = useUrlState({
     basePath: '/admin',
     schools,
     routes,
     activeTab,
+    setActiveTab,
     debounceMs: 300,
   });
 
@@ -1066,11 +1061,14 @@ function AdminApp() {
       setLoading(true);
       setLoadingProgress(0);
       try {
-        const loadedRoutes = await loadLocalRoutes(selectedSchoolId, (progress) => {
-          setLoadingProgress(progress);
-        });
+        const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
+        
+        // Pre-apply URL state to avoid UI flicker
+        const urlState = parseUrlPath(window.location.pathname, '/admin');
+        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, urlState, directionFilter);
+        
         console.log('[AdminApp] Loaded', loadedRoutes.length, 'routes');
-        setRoutes(loadedRoutes);
+        setRoutes(syncedRoutes);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[AdminApp] Failed to load routes:', error);
@@ -1085,22 +1083,27 @@ function AdminApp() {
   }, [selectedSchoolId, activeTab, setRoutes, setLoading]);
 
   // Update selectedSchoolForMap when selectedSchoolId changes
-  // Show dialog in schools tab when school is selected (either by click or URL)
-  // Don't show dialog in routes tab when school is selected via URL (only on explicit click)
   useEffect(() => {
     if (selectedSchoolId && schools.length > 0) {
-      const school = schools.find(s => s.id === selectedSchoolId);
-      // Only auto-show dialog in schools tab, not routes tab
+      // Only auto-show the dialog if we are in the schools tab
+      // In the routes tab, the dialog should only show via explicit user interaction (e.g. clicking a school pin)
       if (activeTab === 'schools') {
-        setSelectedSchoolForMap(school || null);
-        setIsSchoolDialogClosing(false); // Reset closing state when school is selected
+        const school = schools.find(s => s.id === selectedSchoolId);
+        if (school && selectedSchoolForMap?.id !== school.id) {
+          setSelectedSchoolForMap(school);
+        }
       }
-      // In routes tab, only set if it's already set (preserve existing dialog)
-      // This allows clicking school markers in routes tab to show dialog
-    } else {
+    } else if (!selectedSchoolId) {
       setSelectedSchoolForMap(null);
     }
   }, [selectedSchoolId, schools, activeTab]);
+
+  // Clear school dialog when a stop is selected
+  useEffect(() => {
+    if (selectedStop) {
+      setSelectedSchoolForMap(null);
+    }
+  }, [selectedStop]);
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -1135,20 +1138,19 @@ function AdminApp() {
     });
   }, [schools, searchTerm, schoolTypeFilters]);
 
-  // Update selectedSchoolForMap when selectedSchoolId changes
-  // This effect ensures selectedSchoolForMap is always in sync with selectedSchoolId
-  // Only show school dialog when explicitly clicked, not when selected via URL
-  // Don't automatically set selectedSchoolForMap when school changes via URL in routes view
-  // Only set it when user explicitly clicks a school (in schools tab or on marker)
-
   // Handle school dialog closing animation
   const handleCloseSchoolDialog = (preserveSchoolSelection = false) => {
     setIsSchoolDialogClosing(true);
-    if (!preserveSchoolSelection && activeTab === 'schools') {
-      // Navigate to base path - URL sync will clear the school from store
-      // This ensures the URL and store stay in sync
-      navigate('/admin', { replace: true });
-      // updateStoreFromUrl will handle clearing selectedSchoolId when it sees the URL has no school
+    if (!preserveSchoolSelection) {
+      // Cancel any pending debounced URL updates to prevent race conditions
+      cancelPendingUrlUpdateAdmin();
+      
+      // Clear school selection ONLY if in schools tab
+      if (activeTab === 'schools') {
+        setSelectedSchool(null);
+        navigate('/admin', { replace: true });
+      }
+      // If in routes tab, we keep the school selected so we don't lose the routes
     }
     setTimeout(() => {
       setSelectedSchoolForMap(null);
@@ -1179,17 +1181,10 @@ function AdminApp() {
               schoolTypeFilters={schoolTypeFilters}
               onFiltersChange={setSchoolTypeFilters}
               onSelectSchool={(schoolId) => {
-                if (schoolId) {
-                  setSelectedSchool(schoolId);
-                  // When a school is selected, also update selectedSchoolForMap to show info dialog
-                  const school = schools.find(s => s.id === schoolId);
-                  if (school) {
-                    setSelectedSchoolForMap(school);
-                  }
-                } else {
-                  // Deselect school
+                if (selectedSchoolId === schoolId) {
                   setSelectedSchool(null);
-                  setSelectedSchoolForMap(null);
+                } else {
+                  setSelectedSchool(schoolId);
                 }
               }}
               onUpdateSchool={async (schoolId, updates) => {
@@ -1234,6 +1229,7 @@ function AdminApp() {
               showBothOption={true}
               onClearSchool={() => setActiveTab('schools')}
               onViewSchools={() => setActiveTab('schools')}
+              onRouteToggle={markRouteToggleAdmin}
             />
           )}
         </Sidebar>
@@ -1255,15 +1251,10 @@ function AdminApp() {
                 schools={filteredSchools}
                 selectedSchoolId={selectedSchoolId}
                 onSelectSchool={(schoolId) => {
-                  if (schoolId) {
-                    setSelectedSchool(schoolId);
-                    const school = schools.find(s => s.id === schoolId);
-                    if (school) {
-                      setSelectedSchoolForMap(school);
-                    }
-                  } else {
+                  if (selectedSchoolId === schoolId) {
                     setSelectedSchool(null);
-                    setSelectedSchoolForMap(null);
+                  } else {
+                    setSelectedSchool(schoolId);
                   }
                 }}
                 mapRef={mapRef}
@@ -1363,7 +1354,7 @@ function AdminApp() {
                     })()}
                   </div>
                   <button
-                    onClick={handleCloseSchoolDialog}
+                    onClick={() => handleCloseSchoolDialog()}
                     style={{
                       background: 'none',
                       border: 'none',
@@ -1375,7 +1366,7 @@ function AdminApp() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      marginTop: '-2px',
+                      marginTop: '2px',
                     }}
                   >
                     <ThinXIcon />
@@ -1527,6 +1518,8 @@ function AdminApp() {
                         // Set school and change tab together - React batches these updates
                         setSelectedSchool(selectedSchoolForMap.id);
                         setActiveTab('routes');
+                        // Use clearSelectedStop from store if available
+                        useStore.getState().clearSelectedStop();
                         handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
                       }
                     }}

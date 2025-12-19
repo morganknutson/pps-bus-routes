@@ -1,9 +1,9 @@
 {
-  "id": "104BDL-P_effective_090325.pdf",
+  "id": "1pZXYx3tYDUG1wva-JFWamQ9VaKOXenK7",
   "name": "104",
   "direction": "Afternoon",
   "filename": "104BDL-P_effective_090325.pdf",
-  "fileId": "104BDL-P_effective_090325.pdf",
+  "fileId": "1pZXYx3tYDUG1wva-JFWamQ9VaKOXenK7",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.4917482
       ],
       "displayName": "4300 SW 47th Dr, Portland, OR 97221, USA",
-      "schoolName": "Bridlemile",
-      "neighborhood": "Southwest Portland"
+      "schoolName": "Bridlemile"
     },
     {
       "id": "stop-1",
@@ -115,8 +114,8 @@
       "originalLine": "2:56 pm7555 SW Canyon Rd [NW]104BDL-P(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7550169,
-        45.4992765
+        -122.75440362836255,
+        45.4990686653043
       ],
       "displayName": "7555 SW Canyon Rd, Portland, OR 97225, USA",
       "placeId": "ChIJ0YOnEuELlVQR4oaEGsmkPKs"
@@ -279,7 +278,7 @@
   "neighborhoods": [
     "Southwest Hills"
   ],
-  "processedAt": "2025-12-16T09:56:14.991Z",
+  "processedAt": "2025-12-19T10:10:09.085Z",
   "stats": {
     "totalStops": 19,
     "geocodedStops": 19,
@@ -1922,11 +1921,5 @@
       45.50406,
       -122.74997
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 18,
-    "errors": 0,
-    "total": 19
-  }
+  ]
 }

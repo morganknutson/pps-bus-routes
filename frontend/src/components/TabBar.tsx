@@ -13,8 +13,11 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
         position: 'relative',
         width: '100%',
         padding: '0.75rem 1rem',
+        paddingTop: 'calc(0.75rem + 4px)',
+        paddingBottom: 'calc(0.75rem + 6px)',
         backgroundColor: 'var(--bg-secondary)',
         borderRadius: '6px',
+        borderBottom: '1px solid var(--border-color)',
         overflow: 'hidden',
       }}
     >
@@ -84,16 +87,15 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
       <div
         style={{
           position: 'absolute',
-          top: '13px',
+          top: '17px',
           height: '41px',
-          left: isSchoolsActive ? 'calc(1rem + 0.25rem)' : 'calc(50% + 0.25rem)',
-          width: 'calc(50% - 1rem - 0.5rem)',
-          backgroundColor: 'var(--bg-primary)',
+          left: isSchoolsActive ? '1rem' : 'calc(50%)',
+          width: 'calc(50% - 1rem)',
+          backgroundColor: 'var(--bg-tertiary)',
           borderRadius: '4px',
           transition: 'left 0.3s ease',
           zIndex: 1,
           boxShadow: '0 1px 3px var(--shadow-large)',
-          border: '1px solid var(--border-color)',
         }}
       />
     </div>
