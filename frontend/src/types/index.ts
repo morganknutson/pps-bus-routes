@@ -26,6 +26,7 @@ export interface Route {
     isGeocoding: boolean;
   };
   geometry?: [number, number][]; // Cached route geometry as [lat, lng][] following streets
+  effectiveDate?: string; // Effective date of the route (e.g., "082625" for Aug 26, 2025)
 }
 
 export interface HomeAddress {
@@ -45,6 +46,7 @@ export interface School {
   schoolTypes?: ('Elementary School' | 'Middle School' | 'High School')[]; // Array to support hybrid schools
   routeCount?: number; // Number of routes available for this school
   routesUpdatedAt?: string | null; // Latest modifiedTime from all routes for this school
+  neighborhood?: string; // Neighborhood name from reverse geocoding
 }
 
 export interface AppState {

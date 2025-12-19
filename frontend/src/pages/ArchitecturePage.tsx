@@ -275,7 +275,9 @@ function calculateLayout(files: FileNode[], showApiConnections: boolean = false)
         levels.set(depId, currentLevel + 1);
         visited.add(depId);
         const dep = nodeMap.get(depId);
-        if (dep) queue.push(dep);
+        if (dep) {
+          queue.push({ ...dep, x: dep.x ?? undefined, y: dep.y ?? undefined } as typeof filesWithPositions[0]);
+        }
       } else {
         // Update level if we found a shorter path
         const existingLevel = levels.get(depId) || Infinity;

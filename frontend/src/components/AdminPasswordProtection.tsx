@@ -29,7 +29,8 @@ export function AdminPasswordProtection({ children }: AdminPasswordProtectionPro
 
     // Get password from environment variable or use default
     // In production, this should be set via environment variable
-    const expectedPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'admin123';
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const expectedPassword = (import.meta as any).env?.VITE_ADMIN_PASSWORD || 'admin123';
 
     if (password === expectedPassword) {
       sessionStorage.setItem('adminAuthenticated', 'true');

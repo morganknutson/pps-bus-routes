@@ -1,4 +1,4 @@
-import { School } from '../types';
+import { School, Route } from '../types';
 
 export interface UrlState {
   show?: 'schools' | 'routes';

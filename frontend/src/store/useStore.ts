@@ -31,6 +31,7 @@ interface Store extends AppState {
   directionFilter: 'Morning' | 'Afternoon' | 'Both';
   lookupAddress: HomeAddress | undefined;
   shouldZoomToHomeAddress: boolean;
+  loadingProgress: number | null; // 0-100 or null for indeterminate
 }
 
 export const useStore = create<Store>((set) => ({

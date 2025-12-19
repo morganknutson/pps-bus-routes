@@ -1101,7 +1101,7 @@ export function VerificationPage() {
     
     // Start polling for route updates during processing (every 2 seconds)
     // This allows routes to appear as they're processed
-    let pollInterval: NodeJS.Timeout | null = null;
+    let pollInterval: ReturnType<typeof setInterval> | null = null;
     pollInterval = setInterval(async () => {
       await loadAllRoutes(schoolId, true);
     }, 2000);

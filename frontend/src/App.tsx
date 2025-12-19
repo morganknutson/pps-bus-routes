@@ -576,7 +576,7 @@ function ExplorerApp() {
                 setActiveTab('schools');
               }}
               onViewSchools={() => setActiveTab('schools')}
-              onRouteToggle={markRouteToggle}
+              onRouteToggle={() => {}}
             />
           )}
         </Sidebar>
@@ -1229,7 +1229,7 @@ function AdminApp() {
               showBothOption={true}
               onClearSchool={() => setActiveTab('schools')}
               onViewSchools={() => setActiveTab('schools')}
-              onRouteToggle={markRouteToggleAdmin}
+              onRouteToggle={() => {}}
             />
           )}
         </Sidebar>

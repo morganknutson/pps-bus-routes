@@ -48,7 +48,7 @@ export function useUrlState({
     selectStop,
     clearSelectedStop
   } = useStore();
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastUrlStateRef = useRef<UrlState>({});
   const previousRoutesRef = useRef<Route[]>([]);
   const isNavigatingRef = useRef(false);

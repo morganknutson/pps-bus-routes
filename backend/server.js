@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { readFileSync } from 'fs';
 import { driveRouter } from './routes/drive.js';
 import { geocodeRouter } from './routes/geocode.js';
 import { dataRouter } from './routes/data.js';
@@ -103,7 +104,18 @@ app.get('/api/health', (req, res) => {
 // Serve static files from frontend/dist in production
 if (process.env.NODE_ENV === 'production') {
   const frontendPath = path.join(__dirname, '../frontend/dist');
-  app.use(express.static(frontendPath));
+  app.use(express.static(frontendPath, {
+    etag: false,
+    lastModified: false,
+    setHeaders: (res, path) => {
+      // Disable caching for HTML files
+      if (path.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+      }
+    }
+  }));
   
   // Serve index.html for all non-API routes (SPA routing)
   app.get('*', (req, res) => {
@@ -111,7 +123,14 @@ if (process.env.NODE_ENV === 'production') {
     if (req.path.startsWith('/api')) {
       return res.status(404).json({ error: 'API endpoint not found' });
     }
-    res.sendFile(path.join(frontendPath, 'index.html'));
+    // Disable caching for index.html to ensure fresh content
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    // Read file fresh each time to bypass any caching
+    const indexPath = path.join(frontendPath, 'index.html');
+    const content = readFileSync(indexPath, 'utf8');
+    res.send(content);
   });
 } else {
   // Development: helpful message

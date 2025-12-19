@@ -94,7 +94,6 @@ function renderStopItem(
       }}
       style={{
         padding: '0.75rem',
-        paddingLeft: '0.75rem',
         borderBottom: stopIndex < allStops.length - 1 ? '1px solid var(--border-color)' : 'none',
         cursor: isClickable ? 'pointer' : 'default',
         backgroundColor: hasError
@@ -109,8 +108,6 @@ function renderStopItem(
         display: 'flex',
         alignItems: 'flex-start',
         gap: '0.5rem',
-        padding: '0.75rem',
-        paddingLeft: '0.75rem',
       }}
       onMouseEnter={(e) => {
         if (isClickable && !isSelected) {
