@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: '0.0.0.0', // Allow external connections (for mobile testing)
     port: 3000,
     proxy: {
       '/api': {

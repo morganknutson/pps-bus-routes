@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { ProgressBar } from '../components/ProgressBar';
+import { useIsMobile } from '../hooks/useMediaQuery';
 
 export function VerificationPage() {
   console.log('[VerificationPage] Component rendering...');
   console.log('[VerificationPage] Component mounted successfully');
+  const isMobile = useIsMobile();
   const [pdfStatus, setPdfStatus] = useState<any>(null);
   const [syncStatus, setSyncStatus] = useState<Record<string, { lastModifiedPdf?: string; lastChecked?: string }>>({});
   const [processingStatus, setProcessingStatus] = useState<Record<string, boolean | { hasProcessed: boolean; lastProcessed: string | null }>>({});
@@ -1268,8 +1270,8 @@ export function VerificationPage() {
         minHeight: '100vh',
       }}>
         <Header />
-        <div style={{ padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-          <div style={{ width: '300px' }}>
+        <div style={{ padding: isMobile ? '1rem' : '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+          <div style={{ width: isMobile ? '100%' : '300px', maxWidth: '300px' }}>
             <ProgressBar 
               label="Loading PDF status..." 
               height={8}
@@ -1290,10 +1292,10 @@ export function VerificationPage() {
         minHeight: '100vh',
       }}>
         <Header />
-        <div style={{ padding: '2rem', maxWidth: '1400px', margin: '0 auto', width: '100%', flex: 1 }}>
+        <div style={{ padding: isMobile ? '1rem' : '2rem', maxWidth: '1400px', margin: '0 auto', width: '100%', flex: 1 }}>
           <div
             style={{
-              padding: '2rem',
+              padding: isMobile ? '1rem' : '2rem',
               backgroundColor: '#fee',
               border: '1px solid #fcc',
               borderRadius: '8px',
@@ -1301,10 +1303,10 @@ export function VerificationPage() {
               textAlign: 'center',
             }}
           >
-            <h2 style={{ marginTop: 0 }}>⚠️ Error</h2>
-            <p>{error || 'Failed to load PDF status'}</p>
-            <p style={{ marginTop: '1rem', fontSize: '14px', color: '#666' }}>
-              Run the PDF status script: <code style={{ backgroundColor: '#f0f0f0', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>node scripts/generate-pdf-status.js</code>
+            <h2 style={{ marginTop: 0, fontSize: isMobile ? '1.25rem' : '1.5rem' }}>⚠️ Error</h2>
+            <p style={{ fontSize: isMobile ? '14px' : '16px' }}>{error || 'Failed to load PDF status'}</p>
+            <p style={{ marginTop: '1rem', fontSize: isMobile ? '12px' : '14px', color: '#666', wordBreak: 'break-word' }}>
+              Run the PDF status script: <code style={{ backgroundColor: '#f0f0f0', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: isMobile ? '11px' : '12px' }}>node scripts/generate-pdf-status.js</code>
             </p>
           </div>
         </div>
@@ -1321,7 +1323,7 @@ export function VerificationPage() {
     }}>
       <Header />
       <div style={{ 
-        padding: '2rem', 
+        padding: isMobile ? '1rem' : '2rem', 
         maxWidth: '1600px', 
         margin: '0 auto', 
         width: '100%',
@@ -1334,38 +1336,41 @@ export function VerificationPage() {
       <div style={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
-        alignItems: 'center', 
+        alignItems: isMobile ? 'flex-start' : 'center', 
         marginBottom: '1.5rem',
         flexWrap: 'wrap',
         gap: '1rem',
+        flexDirection: isMobile ? 'column' : 'row',
       }}>
         <h1 style={{ 
           margin: 0, 
-          fontSize: '2rem', 
+          fontSize: isMobile ? '1.5rem' : '2rem', 
           fontWeight: 'bold', 
           color: 'var(--text-primary)',
         }}>
           Verification & Status
         </h1>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', flexWrap: 'wrap', width: isMobile ? '100%' : 'auto' }}>
           <button
             onClick={handleCheckDriveLinks}
             disabled={checkingDriveLinks}
             style={{
-              padding: '0.75rem 1.5rem',
+              padding: isMobile ? '0.5rem 1rem' : '0.75rem 1.5rem',
               backgroundColor: checkingDriveLinks ? 'var(--bg-secondary)' : '#ffa500',
               color: checkingDriveLinks ? 'var(--text-secondary)' : 'white',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: '999px',
               cursor: checkingDriveLinks ? 'not-allowed' : 'pointer',
-              fontSize: '14px',
+              fontSize: isMobile ? '12px' : '14px',
               fontWeight: 'bold',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '0.5rem',
               opacity: checkingDriveLinks ? 0.6 : 1,
               transition: 'all 0.2s',
               boxShadow: checkingDriveLinks ? 'none' : 'var(--shadow-hover)',
+              flex: isMobile ? '1 1 auto' : 'none',
             }}
             onMouseEnter={(e) => {
               if (!checkingDriveLinks) {
@@ -1388,20 +1393,22 @@ export function VerificationPage() {
             onClick={handleFetchAllPdfs}
             disabled={fetchingAll}
             style={{
-              padding: '0.75rem 1.5rem',
+              padding: isMobile ? '0.5rem 1rem' : '0.75rem 1.5rem',
               backgroundColor: fetchingAll ? 'var(--bg-secondary)' : '#4ECDC4',
               color: fetchingAll ? 'var(--text-secondary)' : 'white',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: '999px',
               cursor: fetchingAll ? 'not-allowed' : 'pointer',
-              fontSize: '14px',
+              fontSize: isMobile ? '12px' : '14px',
               fontWeight: 'bold',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '0.5rem',
               opacity: fetchingAll ? 0.6 : 1,
               transition: 'all 0.2s',
               boxShadow: fetchingAll ? 'none' : 'var(--shadow-hover)',
+              flex: isMobile ? '1 1 auto' : 'none',
             }}
             onMouseEnter={(e) => {
               if (!fetchingAll) {
@@ -1431,31 +1438,31 @@ export function VerificationPage() {
       {(activeJobs.length > 0 || (jobQueueStats && (jobQueueStats.waiting > 0 || jobQueueStats.active > 0))) && (
         <div style={{
           marginBottom: '1.5rem',
-          padding: '1rem 1.25rem',
+          padding: isMobile ? '0.75rem' : '1rem 1.25rem',
           backgroundColor: 'var(--bg-secondary)',
           borderRadius: '8px',
           border: '1px solid #4ECDC4',
           boxShadow: '0 2px 8px rgba(78, 205, 196, 0.15)',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: isMobile ? '0.75rem' : '1rem', flexDirection: isMobile ? 'column' : 'row' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '0.5rem' : '1rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <i className="fas fa-tasks" style={{ color: '#4ECDC4', fontSize: '1.1rem' }}></i>
-                <span style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                <i className="fas fa-tasks" style={{ color: '#4ECDC4', fontSize: isMobile ? '1rem' : '1.1rem' }}></i>
+                <span style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: isMobile ? '0.85rem' : '0.95rem' }}>
                   Job Queue
                 </span>
               </div>
               {jobQueueStats && (
-                <div style={{ display: 'flex', gap: '1rem', fontSize: '0.85rem' }}>
+                <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', fontSize: isMobile ? '0.75rem' : '0.85rem', flexWrap: 'wrap' }}>
                   {jobQueueStats.waiting > 0 && (
                     <span style={{ 
                       backgroundColor: 'rgba(255, 165, 0, 0.15)', 
                       color: '#ffa500',
-                      padding: '0.25rem 0.6rem',
+                      padding: isMobile ? '0.2rem 0.5rem' : '0.25rem 0.6rem',
                       borderRadius: '12px',
                       fontWeight: '600',
                     }}>
-                      <i className="fas fa-clock" style={{ marginRight: '0.35rem' }}></i>
+                      <i className="fas fa-clock" style={{ marginRight: '0.25rem' }}></i>
                       {jobQueueStats.waiting} waiting
                     </span>
                   )}
@@ -1463,11 +1470,11 @@ export function VerificationPage() {
                     <span style={{ 
                       backgroundColor: 'rgba(78, 205, 196, 0.15)', 
                       color: '#4ECDC4',
-                      padding: '0.25rem 0.6rem',
+                      padding: isMobile ? '0.2rem 0.5rem' : '0.25rem 0.6rem',
                       borderRadius: '12px',
                       fontWeight: '600',
                     }}>
-                      <i className="fas fa-spinner fa-spin" style={{ marginRight: '0.35rem' }}></i>
+                      <i className="fas fa-spinner fa-spin" style={{ marginRight: '0.25rem' }}></i>
                       {jobQueueStats.active} running
                     </span>
                   )}
@@ -1489,30 +1496,32 @@ export function VerificationPage() {
                   <div key={job.id} style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.75rem',
-                    padding: '0.5rem 0.75rem',
+                    gap: isMobile ? '0.5rem' : '0.75rem',
+                    padding: isMobile ? '0.5rem' : '0.5rem 0.75rem',
                     backgroundColor: 'var(--bg-primary)',
                     borderRadius: '6px',
-                    fontSize: '0.85rem',
+                    fontSize: isMobile ? '0.75rem' : '0.85rem',
+                    flexWrap: isMobile ? 'wrap' : 'nowrap',
                   }}>
                     <i className={`fas ${isActive ? 'fa-sync fa-spin' : 'fa-clock'}`} 
-                       style={{ color: isActive ? '#4ECDC4' : '#ffa500', width: '16px' }}></i>
+                       style={{ color: isActive ? '#4ECDC4' : '#ffa500', width: isMobile ? '14px' : '16px' }}></i>
                     <span style={{ 
                       fontWeight: '500', 
                       color: 'var(--text-primary)',
-                      minWidth: '150px',
+                      minWidth: isMobile ? 'auto' : '150px',
+                      flex: isMobile ? '1 1 100%' : 'none',
                     }}>
                       {schoolName}
                     </span>
                     <span style={{ 
                       color: 'var(--text-secondary)', 
-                      fontSize: '0.8rem',
-                      minWidth: '60px',
+                      fontSize: isMobile ? '0.7rem' : '0.8rem',
+                      minWidth: isMobile ? 'auto' : '60px',
                     }}>
                       {isActive ? 'Running' : 'Queued'}
                     </span>
                     {isActive && (
-                      <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.5rem', width: isMobile ? '100%' : 'auto', minWidth: isMobile ? '100%' : 'auto' }}>
                         <div style={{
                           flex: 1,
                           height: '6px',
@@ -1529,9 +1538,9 @@ export function VerificationPage() {
                           }}></div>
                         </div>
                         <span style={{ 
-                          fontSize: '0.75rem', 
+                          fontSize: isMobile ? '0.7rem' : '0.75rem', 
                           color: 'var(--text-secondary)',
-                          minWidth: '35px',
+                          minWidth: isMobile ? 'auto' : '35px',
                           textAlign: 'right',
                         }}>
                           {progress}%
@@ -1576,31 +1585,40 @@ export function VerificationPage() {
             backgroundColor: 'var(--bg-secondary)', 
             borderRadius: '8px', 
             boxShadow: 'var(--shadow-large)', 
-            padding: '1.5rem' 
+            padding: isMobile ? '1rem' : '1.5rem' 
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: isMobile ? 'flex-start' : 'center', 
+              marginBottom: '1rem',
+              flexDirection: isMobile ? 'column' : 'row',
+              gap: isMobile ? '0.75rem' : '1rem',
+            }}>
+              <h2 style={{ margin: 0, fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
                 <i className="fas fa-exclamation-triangle" style={{ color: '#ffa500', marginRight: '0.5rem' }}></i>
                 Schools Needing Attention
               </h2>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '0.5rem' : '1rem', flexWrap: 'wrap', width: isMobile ? '100%' : 'auto' }}>
                 <button
                   onClick={handleFixAllMismatched}
                   disabled={fixingAll}
                   style={{
-                    padding: '0.5rem 1rem',
+                    padding: isMobile ? '0.5rem' : '0.5rem 1rem',
                     backgroundColor: fixingAll ? 'var(--bg-secondary)' : '#FF6B6B',
                     color: fixingAll ? 'var(--text-secondary)' : 'white',
                     border: 'none',
-                    borderRadius: '6px',
+                    borderRadius: '999px',
                     cursor: fixingAll ? 'not-allowed' : 'pointer',
-                    fontSize: '12px',
+                    fontSize: isMobile ? '11px' : '12px',
                     fontWeight: 'bold',
                     display: 'flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     gap: '0.5rem',
                     transition: 'all 0.2s ease',
                     boxShadow: fixingAll ? 'none' : '0 2px 4px rgba(255, 107, 107, 0.3)',
+                    flex: isMobile ? '1 1 auto' : 'none',
                   }}
                   title="Fetch PDFs and reprocess all schools needing attention"
                 >
@@ -1611,7 +1629,7 @@ export function VerificationPage() {
                     <span>Fix All ({schoolsNeedingAttention.length})</span>
                   )}
                 </button>
-                <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                <div style={{ fontSize: isMobile ? '10px' : '12px', color: 'var(--text-secondary)', width: isMobile ? '100%' : 'auto' }}>
                   Last checked: {new Date(driveLinkResults.timestamp).toLocaleString()}
                 </div>
               </div>
@@ -1638,12 +1656,12 @@ export function VerificationPage() {
                 <div style={{ display: 'flex', gap: '2rem', fontSize: '12px', color: 'var(--text-secondary)' }}>
                   <div>
                     <i className="fas fa-download" style={{ marginRight: '0.5rem' }}></i>
-                    Fetched: {fixAllStatus.fetchQueued}/{fixAllStatus.fetchTotal}
+                    Fetched {fixAllStatus.fetchQueued}/{fixAllStatus.fetchTotal}
                   </div>
                   {(fixAllStatus.phase === 'processing' || fixAllStatus.phase === 'waiting-process' || fixAllStatus.phase === 'complete') && (
                     <div>
                       <i className="fas fa-cogs" style={{ marginRight: '0.5rem' }}></i>
-                      Processed: {fixAllStatus.processQueued}/{fixAllStatus.processTotal}
+                      Processed {fixAllStatus.processQueued}/{fixAllStatus.processTotal}
                     </div>
                   )}
                 </div>
@@ -1674,54 +1692,133 @@ export function VerificationPage() {
 
             {hasSchoolsNeedingAttention && (
               <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--bg-primary)' }}>
-                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>School</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Status</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Drive Modified</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Local Modified</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {schoolsNeedingAttention.map((result: any, idx: number) => (
-                      <tr key={result.schoolId} style={{ 
-                        borderBottom: '1px solid var(--bg-primary)',
-                        backgroundColor: idx % 2 === 0 ? 'var(--bg-secondary)' : 'var(--bg-primary)',
-                      }}>
-                        <td style={{ padding: '0.75rem' }}>
-                          <div style={{ fontWeight: 'bold' }}>{result.schoolName}</div>
-                          <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{result.schoolId}</div>
-                        </td>
-                        <td style={{ padding: '0.75rem' }}>
-                          {result.error ? (
-                            <span style={{ color: '#f44' }}>
-                              <i className="fas fa-times-circle" style={{ marginRight: '0.25rem' }}></i>
-                              Error
-                            </span>
-                          ) : result.needsUpdate ? (
-                            <span style={{ color: '#ffa500' }}>
-                              <i className="fas fa-exclamation-triangle" style={{ marginRight: '0.25rem' }}></i>
-                              Needs Update
-                            </span>
-                          ) : (
-                            <span style={{ color: 'var(--text-secondary)' }}>—</span>
+                {isMobile ? (
+                  // Mobile card layout
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {schoolsNeedingAttention.map((result: any) => {
+                      const jobStatus = getJobStatusForSchool(result.schoolId);
+                      const isJobActive = jobStatus && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
+                      const fetchMsg = fetchMessages[result.schoolId];
+                      
+                      return (
+                        <div key={result.schoolId} style={{
+                          padding: '0.75rem',
+                          backgroundColor: 'var(--bg-primary)',
+                          borderRadius: '6px',
+                          border: '1px solid var(--border-color)',
+                        }}>
+                          <div style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '0.25rem' }}>
+                            {result.schoolName}
+                          </div>
+                          <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                            {result.schoolId}
+                          </div>
+                          <div style={{ fontSize: '11px', marginBottom: '0.5rem' }}>
+                            {result.error ? (
+                              <span style={{ color: '#f44' }}>
+                                <i className="fas fa-times-circle" style={{ marginRight: '0.25rem' }}></i>
+                                Error
+                              </span>
+                            ) : result.needsUpdate ? (
+                              <span style={{ color: '#ffa500' }}>
+                                <i className="fas fa-exclamation-triangle" style={{ marginRight: '0.25rem' }}></i>
+                                Needs Update
+                              </span>
+                            ) : null}
+                          </div>
+                          <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                            <div>Drive: {result.driveLastModified ? new Date(result.driveLastModified).toLocaleString() : '—'}</div>
+                            <div>Local: {result.localLastModified ? new Date(result.localLastModified).toLocaleString() : '—'}</div>
+                          </div>
+                          <button
+                            onClick={() => handleFetchPdfs(result.schoolId)}
+                            disabled={fetching[result.schoolId] || isJobActive}
+                            style={{
+                              padding: '0.5rem',
+                              backgroundColor: (fetching[result.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#4ECDC4',
+                              color: (fetching[result.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
+                              border: 'none',
+                              borderRadius: '999px',
+                              cursor: (fetching[result.schoolId] || isJobActive) ? 'not-allowed' : 'pointer',
+                              fontSize: '11px',
+                              fontWeight: 'bold',
+                              width: '100%',
+                              marginTop: '0.5rem',
+                              textAlign: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            {fetching[result.schoolId] ? 'Queuing...' : isJobActive ? 'Running...' : 'Fetch PDFs'}
+                          </button>
+                          {isJobActive && jobStatus.progress > 0 && (
+                            <div style={{ marginTop: '0.5rem' }}>
+                              <ProgressBar progress={jobStatus.progress} height={3} showPercentage={false} containerStyle={{ margin: 0 }} />
+                            </div>
                           )}
-                        </td>
-                        <td style={{ padding: '0.75rem', fontSize: '11px' }}>
-                          {result.driveLastModified ? new Date(result.driveLastModified).toLocaleString() : '—'}
-                        </td>
-                        <td style={{ padding: '0.75rem', fontSize: '11px' }}>
-                          {result.localLastModified ? new Date(result.localLastModified).toLocaleString() : '—'}
-                        </td>
-                        <td style={{ padding: '0.75rem' }}>
-                          {(() => {
-                            const jobStatus = getJobStatusForSchool(result.schoolId);
-                            const isJobActive = jobStatus && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
-                            const fetchMsg = fetchMessages[result.schoolId];
-                            
-                            return (
+                          {fetchMsg && (
+                            <div style={{ 
+                              fontSize: '9px', 
+                              color: fetchMsg.type === 'error' ? '#f44' : fetchMsg.type === 'success' ? '#4ECDC4' : 'var(--text-secondary)',
+                              marginTop: '0.5rem',
+                            }}>
+                              {fetchMsg.type === 'success' && '✓ '}
+                              {fetchMsg.type === 'error' && '✗ '}
+                              {fetchMsg.message}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  // Desktop table layout
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
+                    <thead>
+                      <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--bg-primary)' }}>
+                        <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>School</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Status</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Drive Modified</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Local Modified</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {schoolsNeedingAttention.map((result: any, idx: number) => {
+                        const jobStatus = getJobStatusForSchool(result.schoolId);
+                        const isJobActive = jobStatus && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
+                        const fetchMsg = fetchMessages[result.schoolId];
+                        
+                        return (
+                          <tr key={result.schoolId} style={{ 
+                            borderBottom: '1px solid var(--bg-primary)',
+                            backgroundColor: idx % 2 === 0 ? 'var(--bg-secondary)' : 'var(--bg-primary)',
+                          }}>
+                            <td style={{ padding: '0.75rem' }}>
+                              <div style={{ fontWeight: 'bold' }}>{result.schoolName}</div>
+                              <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{result.schoolId}</div>
+                            </td>
+                            <td style={{ padding: '0.75rem' }}>
+                              {result.error ? (
+                                <span style={{ color: '#f44' }}>
+                                  <i className="fas fa-times-circle" style={{ marginRight: '0.25rem' }}></i>
+                                  Error
+                                </span>
+                              ) : result.needsUpdate ? (
+                                <span style={{ color: '#ffa500' }}>
+                                  <i className="fas fa-exclamation-triangle" style={{ marginRight: '0.25rem' }}></i>
+                                  Needs Update
+                                </span>
+                              ) : (
+                                <span style={{ color: 'var(--text-secondary)' }}>—</span>
+                              )}
+                            </td>
+                            <td style={{ padding: '0.75rem', fontSize: '11px' }}>
+                              {result.driveLastModified ? new Date(result.driveLastModified).toLocaleString() : '—'}
+                            </td>
+                            <td style={{ padding: '0.75rem', fontSize: '11px' }}>
+                              {result.localLastModified ? new Date(result.localLastModified).toLocaleString() : '—'}
+                            </td>
+                            <td style={{ padding: '0.75rem' }}>
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'flex-start' }}>
                                 <button
                                   onClick={() => handleFetchPdfs(result.schoolId)}
@@ -1731,7 +1828,7 @@ export function VerificationPage() {
                                     backgroundColor: (fetching[result.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#4ECDC4',
                                     color: (fetching[result.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
                                     border: 'none',
-                                    borderRadius: '4px',
+                                    borderRadius: '999px',
                                     cursor: (fetching[result.schoolId] || isJobActive) ? 'not-allowed' : 'pointer',
                                     fontSize: '11px',
                                     fontWeight: 'bold',
@@ -1755,13 +1852,13 @@ export function VerificationPage() {
                                   </span>
                                 )}
                               </div>
-                            );
-                          })()}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                )}
               </div>
             )}
           </div>
@@ -1769,33 +1866,38 @@ export function VerificationPage() {
       })()}
 
       {/* Summary Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-        <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-          <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(180px, 1fr))', 
+        gap: isMobile ? '0.75rem' : '1rem', 
+        marginBottom: '2rem' 
+      }}>
+        <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
             {pdfStatus.totalSchools}
           </div>
-          <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Total Schools</div>
+          <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px' }}>Total Schools</div>
         </div>
-        <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-          <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
+        <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
             {pdfStatus.summary.schoolsWithPdfs}
           </div>
-          <div style={{ color: 'var(--text-secondary)', fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             <i className="fas fa-download"></i>
             <span>With PDFs</span>
           </div>
         </div>
-        <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-          <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
+        <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
             {pdfStatus.summary.totalPdfs}
           </div>
-          <div style={{ color: 'var(--text-secondary)', fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             <i className="fas fa-file-pdf"></i>
             <span>Total PDFs</span>
           </div>
         </div>
-        <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-          <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
+        <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
             {Object.values(processingStatus).filter(status => {
               if (typeof status === 'object' && status !== null) {
                 return status.hasProcessed === true;
@@ -1803,16 +1905,16 @@ export function VerificationPage() {
               return status === true;
             }).length}
           </div>
-          <div style={{ color: 'var(--text-secondary)', fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             <i className="fas fa-check-circle"></i>
             <span>Processed</span>
           </div>
         </div>
-        <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-          <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#f44', marginBottom: '0.5rem' }}>
+        <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#f44', marginBottom: '0.5rem' }}>
             {pdfStatus.summary.schoolsWithoutPdfs}
           </div>
-          <div style={{ color: 'var(--text-secondary)', fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             <i className="fas fa-times-circle"></i>
             <span>No PDFs</span>
           </div>
@@ -1830,7 +1932,7 @@ export function VerificationPage() {
                 <div
                   key={schoolId}
                   style={{
-                    padding: '1rem 1.5rem',
+                    padding: isMobile ? '0.75rem 1rem' : '1rem 1.5rem',
                     backgroundColor: isError ? '#fee' : '#efe',
                     border: `1px solid ${isError ? '#fcc' : '#cfc'}`,
                     borderRadius: '8px',
@@ -1839,12 +1941,12 @@ export function VerificationPage() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '1rem',
+                    gap: isMobile ? '0.5rem' : '1rem',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1 }}>
-                    <i className={`fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'}`} style={{ fontSize: '18px' }}></i>
-                    <div>{message}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '0.5rem' : '0.75rem', flex: 1 }}>
+                    <i className={`fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'}`} style={{ fontSize: isMobile ? '16px' : '18px' }}></i>
+                    <div style={{ fontSize: isMobile ? '12px' : '14px', wordBreak: 'break-word' }}>{message}</div>
                   </div>
                   <button
                     onClick={() => {
@@ -1885,7 +1987,7 @@ export function VerificationPage() {
               <div
                 key={schoolId}
                 style={{
-                  padding: '1rem 1.5rem',
+                  padding: isMobile ? '0.75rem 1rem' : '1rem 1.5rem',
                   backgroundColor: isError ? '#fee' : '#efe',
                   border: `1px solid ${isError ? '#fcc' : '#cfc'}`,
                   borderRadius: '8px',
@@ -1894,12 +1996,12 @@ export function VerificationPage() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '1rem',
+                  gap: isMobile ? '0.5rem' : '1rem',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1 }}>
-                  <i className={`fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'}`} style={{ fontSize: '18px' }}></i>
-                  <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '0.5rem' : '0.75rem', flex: 1 }}>
+                  <i className={`fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'}`} style={{ fontSize: isMobile ? '16px' : '18px' }}></i>
+                  <div style={{ fontSize: isMobile ? '12px' : '14px', wordBreak: 'break-word' }}>
                     <strong>{schoolName}:</strong> {message}
                   </div>
                 </div>
@@ -1936,28 +2038,29 @@ export function VerificationPage() {
         </div>
       )}
 
-      {/* Schools Table */}
-      <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', overflow: 'hidden' }}>
-        <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '2px solid var(--bg-primary)' }}>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', width: '40px' }}></th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>School</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Local PDFs</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Local Modified</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive PDFs</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive Modified</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Match</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Processed</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Processed</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Fetch</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Fetch</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive</th>
-                <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Checked</th>
-                <th style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Check Drive</th>
-              </tr>
-            </thead>
+      {/* Schools Table - Desktop */}
+      {!isMobile && (
+        <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '2px solid var(--bg-primary)' }}>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', width: '40px' }}></th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>School</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Local PDFs</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', opacity: 0.3 }}>—</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive PDFs</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', opacity: 0.3 }}>—</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Match</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Processed</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', opacity: 0.3 }}>—</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Fetch</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', opacity: 0.3 }}>—</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', opacity: 0.3 }}>—</th>
+                  <th style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Check Drive</th>
+                </tr>
+              </thead>
             <tbody>
               {pdfStatus.schools.map((school: any, index: number) => {
                 const isExpanded = expandedRows[school.schoolId];
@@ -1982,48 +2085,55 @@ export function VerificationPage() {
                         <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{school.schoolId}</div>
                       </td>
                       <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
-                        {school.hasPdfs ? (
-                          <span style={{ fontWeight: 'bold', color: '#4ECDC4', fontSize: '18px' }}>
-                            {school.pdfCount}
-                          </span>
-                        ) : (
-                          <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
-                        )}
-                      </td>
-                  <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
-                    {pdfFetchInfo[school.schoolId]?.localLastModified ? (
-                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                        {new Date(pdfFetchInfo[school.schoolId].localLastModified).toLocaleString()}
-                      </div>
-                    ) : (
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
-                    )}
-                  </td>
-                      <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
-                        {pdfFetchInfo[school.schoolId]?.driveHasPdfs !== undefined ? (
-                          pdfFetchInfo[school.schoolId].driveHasPdfs ? (
+                        <div>
+                          {school.hasPdfs ? (
                             <span style={{ fontWeight: 'bold', color: '#4ECDC4', fontSize: '18px' }}>
-                              {pdfFetchInfo[school.schoolId].drivePdfCount || '?'}
+                              {school.pdfCount}
                             </span>
                           ) : (
                             <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
-                          )
-                        ) : pdfFetchInfo[school.schoolId]?.driveAccessible === false ? (
-                          <span style={{ color: '#f44', fontSize: '12px' }}>Not accessible</span>
-                        ) : (
-                          <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
+                          )}
+                        </div>
+                        {pdfFetchInfo[school.schoolId]?.localLastModified && (
+                          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+                            {new Date(pdfFetchInfo[school.schoolId].localLastModified).toLocaleString()}
+                          </div>
                         )}
                       </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
-                    {pdfFetchInfo[school.schoolId]?.driveLastModified ? (
-                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                        {new Date(pdfFetchInfo[school.schoolId].driveLastModified).toLocaleString()}
-                      </div>
-                    ) : pdfFetchInfo[school.schoolId]?.driveAccessible === false ? (
-                      <span style={{ color: '#f44', fontSize: '12px' }}>Not accessible</span>
-                    ) : (
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
-                    )}
+                    {/* This column removed - timestamp now shown with Local PDFs */}
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
+                  </td>
+                      <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
+                        <div>
+                          {pdfFetchInfo[school.schoolId]?.driveHasPdfs !== undefined ? (
+                            pdfFetchInfo[school.schoolId].driveHasPdfs ? (
+                              <span style={{ fontWeight: 'bold', color: '#4ECDC4', fontSize: '18px' }}>
+                                {pdfFetchInfo[school.schoolId].drivePdfCount || '?'}
+                              </span>
+                            ) : (
+                              <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
+                            )
+                          ) : pdfFetchInfo[school.schoolId]?.driveAccessible === false ? (
+                            <span style={{ color: '#f44', fontSize: '12px' }}>Not accessible</span>
+                          ) : (
+                            <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
+                          )}
+                        </div>
+                        {pdfFetchInfo[school.schoolId]?.driveLastModified && (
+                          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+                            {new Date(pdfFetchInfo[school.schoolId].driveLastModified).toLocaleString()}
+                          </div>
+                        )}
+                        {pdfFetchInfo[school.schoolId]?.driveAccessible === false && !pdfFetchInfo[school.schoolId]?.driveLastModified && (
+                          <div style={{ fontSize: '10px', color: '#f44', marginTop: '0.25rem' }}>
+                            Not accessible
+                          </div>
+                        )}
+                      </td>
+                  <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
+                    {/* This column removed - timestamp now shown with Drive PDFs */}
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                     {(() => {
@@ -2072,45 +2182,53 @@ export function VerificationPage() {
                     {(() => {
                       const status = processingStatus[school.schoolId];
                       const hasProcessed = typeof status === 'object' && status !== null ? status.hasProcessed : (status === true);
+                      const lastProcessed = typeof status === 'object' && status !== null ? status.lastProcessed : null;
                       
                       return hasProcessed ? (
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '12px' }}></i>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleProcessPdfs(school.schoolId);
-                            }}
-                            disabled={processing[school.schoolId]}
-                            style={{
-                              background: 'none',
-                              border: 'none',
-                              color: processing[school.schoolId] ? 'var(--text-secondary)' : '#4ECDC4',
-                              cursor: processing[school.schoolId] ? 'not-allowed' : 'pointer',
-                              padding: '0.25rem',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              fontSize: '12px',
-                              opacity: processing[school.schoolId] ? 0.6 : 1,
-                              transition: 'all 0.2s',
-                            }}
-                            onMouseEnter={(e) => {
-                              if (!processing[school.schoolId]) {
-                                e.currentTarget.style.color = '#5EDDD6';
-                                e.currentTarget.style.transform = 'rotate(180deg)';
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              if (!processing[school.schoolId]) {
-                                e.currentTarget.style.color = '#4ECDC4';
-                                e.currentTarget.style.transform = 'rotate(0deg)';
-                              }
-                            }}
-                            title="Reprocess routes for this school"
-                          >
-                            <i className={`fas ${processing[school.schoolId] ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`} style={{ fontSize: '12px' }}></i>
-                          </button>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '12px' }}></i>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleProcessPdfs(school.schoolId);
+                              }}
+                              disabled={processing[school.schoolId]}
+                              style={{
+                                background: 'none',
+                                border: 'none',
+                                color: processing[school.schoolId] ? 'var(--text-secondary)' : '#4ECDC4',
+                                cursor: processing[school.schoolId] ? 'not-allowed' : 'pointer',
+                                padding: '0.25rem',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '12px',
+                                opacity: processing[school.schoolId] ? 0.6 : 1,
+                                transition: 'all 0.2s',
+                              }}
+                              onMouseEnter={(e) => {
+                                if (!processing[school.schoolId]) {
+                                  e.currentTarget.style.color = '#5EDDD6';
+                                  e.currentTarget.style.transform = 'rotate(180deg)';
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (!processing[school.schoolId]) {
+                                  e.currentTarget.style.color = '#4ECDC4';
+                                  e.currentTarget.style.transform = 'rotate(0deg)';
+                                }
+                              }}
+                              title="Reprocess routes for this school"
+                            >
+                              <i className={`fas ${processing[school.schoolId] ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`} style={{ fontSize: '12px' }}></i>
+                            </button>
+                          </div>
+                          {lastProcessed && (
+                            <div style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>
+                              {new Date(lastProcessed).toLocaleString()}
+                            </div>
+                          )}
                         </div>
                       ) : (
                         (() => {
@@ -2131,12 +2249,14 @@ export function VerificationPage() {
                                 backgroundColor: isDisabled ? 'var(--bg-secondary)' : '#ffa500',
                                 color: isDisabled ? 'var(--text-secondary)' : 'white',
                                 border: 'none',
-                                borderRadius: '4px',
+                                borderRadius: '999px',
                                 cursor: isDisabled ? 'not-allowed' : 'pointer',
                                 fontSize: '12px',
                                 fontWeight: 'bold',
                                 opacity: isDisabled ? 0.6 : 1,
                                 minWidth: '120px',
+                                textAlign: 'center',
+                                justifyContent: 'center',
                               }}
                               title={!hasPdfs ? 'No PDFs available - fetch PDFs first' : 'Process PDFs for this school'}
                             >
@@ -2148,20 +2268,8 @@ export function VerificationPage() {
                     })()}
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
-                    {(() => {
-                      const status = processingStatus[school.schoolId];
-                      const lastProcessed = typeof status === 'object' && status !== null ? status.lastProcessed : null;
-                      
-                      if (lastProcessed) {
-                        return (
-                          <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                            {new Date(lastProcessed).toLocaleString()}
-                          </div>
-                        );
-                      } else {
-                        return <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>;
-                      }
-                    })()}
+                    {/* This column removed - timestamp now shown with Processed status */}
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                     {(() => {
@@ -2174,6 +2282,8 @@ export function VerificationPage() {
                       const isJobActive = jobStatus && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
                       
                       const fetchMsg = fetchMessages[school.schoolId];
+                      
+                      const lastFetch = pdfFetchInfo[school.schoolId]?.lastFetch || pdfFetchInfo[school.schoolId]?.lastFetchTime;
                       
                       return (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
@@ -2188,16 +2298,23 @@ export function VerificationPage() {
                               backgroundColor: (fetching[school.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#4ECDC4',
                               color: (fetching[school.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
                               border: 'none',
-                              borderRadius: '4px',
+                              borderRadius: '999px',
                               cursor: (fetching[school.schoolId] || isJobActive) ? 'not-allowed' : 'pointer',
                               fontSize: '12px',
                               fontWeight: 'bold',
                               opacity: (fetching[school.schoolId] || isJobActive) ? 0.6 : 1,
                               minWidth: '120px',
+                              textAlign: 'center',
+                              justifyContent: 'center',
                             }}
                           >
                             {fetching[school.schoolId] ? 'Queuing...' : isJobActive ? 'Running...' : 'Fetch'}
                           </button>
+                          {lastFetch && (
+                            <div style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>
+                              {new Date(lastFetch).toLocaleString()}
+                            </div>
+                          )}
                           {/* Progress bar for active jobs */}
                           {jobStatus && jobStatus.status === 'active' && (
                             <div style={{ width: '100px', margin: '0.25rem auto 0' }}>
@@ -2234,13 +2351,8 @@ export function VerificationPage() {
                     })()}
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
-                    {pdfFetchInfo[school.schoolId]?.lastFetch ? (
-                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                        {new Date(pdfFetchInfo[school.schoolId].lastFetch).toLocaleString()}
-                      </div>
-                    ) : (
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
-                    )}
+                    {/* This column removed - timestamp now shown with Fetch button */}
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                     {school.driveLink ? (
@@ -2266,45 +2378,51 @@ export function VerificationPage() {
                     )}
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', fontSize: '12px', maxWidth: '200px' }}>
-                    {pdfFetchInfo[school.schoolId]?.driveLastChecked ? (
-                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                        {new Date(pdfFetchInfo[school.schoolId].driveLastChecked).toLocaleString()}
-                      </div>
-                    ) : (
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
-                    )}
+                    {/* This column removed - timestamp now shown with Check Drive button */}
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
                   </td>
                   <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                     {school.driveLink && (
-                      <button
-                        onClick={async (e) => {
-                          e.stopPropagation();
-                          try {
-                            await checkSingleSchoolDriveLink(school.schoolId);
-                          } catch (err: any) {
-                            console.error(`[VerificationPage] Error checking ${school.schoolId}:`, err);
-                          }
-                        }}
-                        disabled={checkingSchool[school.schoolId]}
-                        style={{
-                          background: checkingSchool[school.schoolId] ? 'var(--bg-primary)' : 'none',
-                          border: checkingSchool[school.schoolId] ? '1px solid var(--bg-primary)' : 'none',
-                          color: checkingSchool[school.schoolId] ? 'var(--text-secondary)' : '#4ECDC4',
-                          cursor: checkingSchool[school.schoolId] ? 'not-allowed' : 'pointer',
-                          padding: '0.25rem 0.5rem',
-                          borderRadius: '4px',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '12px',
-                          opacity: checkingSchool[school.schoolId] ? 0.6 : 1,
-                          transition: 'all 0.2s',
-                          minWidth: '32px',
-                        }}
-                        title={checkingSchool[school.schoolId] ? 'Checking Drive link...' : 'Check Drive link for this school'}
-                      >
-                        <i className={`fas ${checkingSchool[school.schoolId] ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`} style={{ fontSize: '12px' }}></i>
-                      </button>
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                        <button
+                          onClick={async (e) => {
+                            e.stopPropagation();
+                            try {
+                              await checkSingleSchoolDriveLink(school.schoolId);
+                            } catch (err: any) {
+                              console.error(`[VerificationPage] Error checking ${school.schoolId}:`, err);
+                            }
+                          }}
+                          disabled={checkingSchool[school.schoolId]}
+                          style={{
+                            background: checkingSchool[school.schoolId] ? 'var(--bg-primary)' : '#9B59B6',
+                            border: 'none',
+                            color: checkingSchool[school.schoolId] ? 'var(--text-secondary)' : 'white',
+                            cursor: checkingSchool[school.schoolId] ? 'not-allowed' : 'pointer',
+                            padding: '0.25rem 0.5rem',
+                            borderRadius: '999px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '12px',
+                            opacity: checkingSchool[school.schoolId] ? 0.6 : 1,
+                            transition: 'all 0.2s',
+                            minWidth: '32px',
+                          }}
+                          title={checkingSchool[school.schoolId] ? 'Checking Drive link...' : 'Check Drive link for this school'}
+                        >
+                          <i className={`fas ${checkingSchool[school.schoolId] ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`} style={{ fontSize: '12px' }}></i>
+                        </button>
+                        {(pdfFetchInfo[school.schoolId]?.driveLastChecked || syncStatus[school.schoolId]?.lastChecked) && (
+                          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>
+                            {pdfFetchInfo[school.schoolId]?.driveLastChecked 
+                              ? new Date(pdfFetchInfo[school.schoolId].driveLastChecked).toLocaleString()
+                              : syncStatus[school.schoolId]?.lastChecked
+                                ? new Date(syncStatus[school.schoolId].lastChecked).toLocaleString()
+                                : null}
+                          </div>
+                        )}
+                      </div>
                     )}
                   </td>
                 </tr>
@@ -2576,16 +2694,330 @@ export function VerificationPage() {
           </table>
         </div>
       </div>
+      )}
+
+      {/* Schools Cards - Mobile */}
+      {isMobile && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {pdfStatus.schools.map((school: any, index: number) => {
+            const isExpanded = expandedRows[school.schoolId];
+            const driveModified = pdfFetchInfo[school.schoolId]?.driveLastModified;
+            const localModified = pdfFetchInfo[school.schoolId]?.localLastModified;
+            const drivePdfCount = pdfFetchInfo[school.schoolId]?.drivePdfCount;
+            const driveResult = driveLinkResults?.results?.find((r: any) => r.schoolId === school.schoolId);
+            const actualLocalPdfCount = driveResult?.localPdfCount;
+            const hasCountMismatch = driveResult?.countMismatch === true;
+            const driveTime = driveModified ? new Date(driveModified).getTime() : null;
+            const localTime = localModified ? new Date(localModified).getTime() : null;
+            const diff = driveTime && localTime ? Math.abs(driveTime - localTime) : null;
+            const timestampMatches = diff !== null && diff < 1000;
+            const needsUpdate = driveTime && localTime ? driveTime > localTime : false;
+            const fullyMatches = timestampMatches && !hasCountMismatch;
+            const jobStatus = getJobStatusForSchool(school.schoolId);
+            const isJobActive = jobStatus && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
+            const fetchMsg = fetchMessages[school.schoolId];
+            const processingStatusForSchool = processingStatus[school.schoolId];
+            const hasProcessed = typeof processingStatusForSchool === 'object' && processingStatusForSchool !== null 
+              ? processingStatusForSchool.hasProcessed 
+              : (processingStatusForSchool === true);
+            const lastProcessed = typeof processingStatusForSchool === 'object' && processingStatusForSchool !== null 
+              ? processingStatusForSchool.lastProcessed 
+              : null;
+            const hasDriveLink = school.driveLink || school.hasDriveLink;
+
+            return (
+              <div
+                key={school.schoolId}
+                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderRadius: '8px',
+                  boxShadow: 'var(--shadow-large)',
+                  padding: '1rem',
+                  border: '1px solid var(--border-color)',
+                }}
+              >
+                {/* School Header */}
+                <div 
+                  style={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'flex-start',
+                    marginBottom: '0.75rem',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => handleRowExpand(school.schoolId)}
+                >
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 'bold', fontSize: '14px', marginBottom: '0.25rem' }}>
+                      {school.schoolName}
+                    </div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                      {school.schoolId}
+                    </div>
+                  </div>
+                  <i 
+                    className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'}`}
+                    style={{ fontSize: '14px', color: 'var(--text-primary)', marginLeft: '0.5rem' }}
+                  ></i>
+                </div>
+
+                {/* Data Pairs with Timestamps */}
+                <div style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                  marginBottom: '0.75rem',
+                }}>
+                  {/* Local PDFs with Local Modified */}
+                  <div style={{ 
+                    padding: '0.75rem',
+                    backgroundColor: 'var(--bg-primary)',
+                    borderRadius: '6px',
+                    border: '1px solid var(--border-color)',
+                  }}>
+                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+                      <span style={{ fontWeight: '600' }}>Local PDFs</span>{' '}
+                      {school.hasPdfs ? (
+                        <span style={{ color: '#4ECDC4', fontWeight: 'bold' }}>{school.pdfCount}</span>
+                      ) : (
+                        <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
+                      )}
+                    </div>
+                    {localModified && (
+                      <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+                        Modified {new Date(localModified).toLocaleString()}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Drive PDFs with Drive Modified */}
+                  <div style={{ 
+                    padding: '0.75rem',
+                    backgroundColor: 'var(--bg-primary)',
+                    borderRadius: '6px',
+                    border: '1px solid var(--border-color)',
+                  }}>
+                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+                      <span style={{ fontWeight: '600' }}>Drive PDFs</span>{' '}
+                      {pdfFetchInfo[school.schoolId]?.driveHasPdfs !== undefined ? (
+                        pdfFetchInfo[school.schoolId].driveHasPdfs ? (
+                          <span style={{ color: '#4ECDC4', fontWeight: 'bold' }}>
+                            {pdfFetchInfo[school.schoolId].drivePdfCount || '?'}
+                          </span>
+                        ) : (
+                          <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
+                        )
+                      ) : (
+                        <span>—</span>
+                      )}
+                    </div>
+                    {driveModified && (
+                      <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+                        Modified {new Date(driveModified).toLocaleString()}
+                      </div>
+                    )}
+                    {pdfFetchInfo[school.schoolId]?.driveAccessible === false && (
+                      <div style={{ fontSize: '10px', color: '#f44', marginTop: '0.25rem' }}>
+                        Not accessible
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Match Status */}
+                  {driveModified && localModified && (
+                    <div style={{ 
+                      padding: '0.75rem',
+                      backgroundColor: 'var(--bg-primary)',
+                      borderRadius: '6px',
+                      border: '1px solid var(--border-color)',
+                    }}>
+                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                        <span style={{ fontWeight: '600' }}>Match Status</span>{' '}
+                        {fullyMatches ? (
+                          <span style={{ color: '#4ECDC4' }}>
+                            <i className="fas fa-check-circle"></i> Matched
+                          </span>
+                        ) : hasCountMismatch ? (
+                          <span style={{ color: '#ffa500' }}>
+                            <i className="fas fa-exclamation-triangle"></i> Count Mismatch
+                          </span>
+                        ) : needsUpdate ? (
+                          <span style={{ color: '#ffa500' }}>
+                            <i className="fas fa-exclamation-triangle"></i> Drive Newer
+                          </span>
+                        ) : (
+                          <span style={{ color: '#f44' }}>
+                            <i className="fas fa-question-circle"></i> Local Newer
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Processed Status with Last Processed */}
+                  <div style={{ 
+                    padding: '0.75rem',
+                    backgroundColor: 'var(--bg-primary)',
+                    borderRadius: '6px',
+                    border: '1px solid var(--border-color)',
+                  }}>
+                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+                      <span style={{ fontWeight: '600' }}>Processed</span>{' '}
+                      {hasProcessed ? (
+                        <span style={{ color: '#4ECDC4' }}>
+                          <i className="fas fa-check-circle"></i> Yes
+                        </span>
+                      ) : (
+                        <span style={{ color: '#f44' }}>No</span>
+                      )}
+                    </div>
+                    {lastProcessed && (
+                      <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+                        Last {new Date(lastProcessed).toLocaleString()}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.75rem' }}>
+                  {hasDriveLink && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleFetchPdfs(school.schoolId);
+                      }}
+                      disabled={fetching[school.schoolId] || isJobActive}
+                      style={{
+                        padding: '0.5rem',
+                        backgroundColor: (fetching[school.schoolId] || isJobActive) ? 'var(--bg-primary)' : '#4ECDC4',
+                        color: (fetching[school.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
+                        border: 'none',
+                        borderRadius: '999px',
+                        cursor: (fetching[school.schoolId] || isJobActive) ? 'not-allowed' : 'pointer',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        width: '100%',
+                        textAlign: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {fetching[school.schoolId] ? 'Queuing...' : isJobActive ? 'Running...' : 'Fetch PDFs'}
+                    </button>
+                  )}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (school.hasPdfs || (school.pdfCount && school.pdfCount > 0)) {
+                        handleProcessPdfs(school.schoolId);
+                      }
+                    }}
+                    disabled={processing[school.schoolId] || !(school.hasPdfs || (school.pdfCount && school.pdfCount > 0))}
+                    style={{
+                      padding: '0.5rem',
+                      backgroundColor: (processing[school.schoolId] || !(school.hasPdfs || (school.pdfCount && school.pdfCount > 0))) ? 'var(--bg-primary)' : '#ffa500',
+                      color: (processing[school.schoolId] || !(school.hasPdfs || (school.pdfCount && school.pdfCount > 0))) ? 'var(--text-secondary)' : 'white',
+                      border: 'none',
+                      borderRadius: '999px',
+                      cursor: (processing[school.schoolId] || !(school.hasPdfs || (school.pdfCount && school.pdfCount > 0))) ? 'not-allowed' : 'pointer',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                      width: '100%',
+                      textAlign: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {processing[school.schoolId] ? 'Processing...' : hasProcessed ? 'Reprocess' : 'Process PDFs'}
+                  </button>
+                  {hasDriveLink && (
+                    <button
+                      onClick={async (e) => {
+                        e.stopPropagation();
+                        try {
+                          await checkSingleSchoolDriveLink(school.schoolId);
+                        } catch (err: any) {
+                          console.error(`[VerificationPage] Error checking ${school.schoolId}:`, err);
+                        }
+                      }}
+                      disabled={checkingSchool[school.schoolId]}
+                      style={{
+                        padding: '0.5rem',
+                        backgroundColor: checkingSchool[school.schoolId] ? 'var(--bg-primary)' : '#9B59B6',
+                        color: checkingSchool[school.schoolId] ? 'var(--text-secondary)' : 'white',
+                        border: 'none',
+                        borderRadius: '999px',
+                        cursor: checkingSchool[school.schoolId] ? 'not-allowed' : 'pointer',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        width: '100%',
+                        textAlign: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {checkingSchool[school.schoolId] ? 'Checking...' : 'Check Drive'}
+                    </button>
+                  )}
+                </div>
+
+                {/* Expanded Content */}
+                {isExpanded && (
+                  <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
+                    {/* Additional Timestamps */}
+                    {(pdfFetchInfo[school.schoolId]?.lastFetchTime || syncStatus[school.schoolId]?.lastChecked) && (
+                      <div style={{ 
+                        padding: '0.75rem',
+                        backgroundColor: 'var(--bg-primary)',
+                        borderRadius: '6px',
+                        marginBottom: '0.75rem',
+                      }}>
+                        {pdfFetchInfo[school.schoolId]?.lastFetchTime && (
+                          <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+                            <strong>Last Fetch</strong> {new Date(pdfFetchInfo[school.schoolId].lastFetchTime).toLocaleString()}
+                          </div>
+                        )}
+                        {syncStatus[school.schoolId]?.lastChecked && (
+                          <div style={{ fontSize: '10px', color: 'var(--text-secondary)' }}>
+                            <strong>Last Checked</strong> {new Date(syncStatus[school.schoolId].lastChecked).toLocaleString()}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Routes */}
+                    {allRoutes[school.schoolId] && Object.keys(allRoutes[school.schoolId]).length > 0 ? (
+                      <div style={{ marginTop: '0.75rem' }}>
+                        <div style={{ fontWeight: 'bold', fontSize: '12px', marginBottom: '0.5rem' }}>Routes</div>
+                        {Object.entries(allRoutes[school.schoolId]).map(([routeId, route]: [string, any]) => (
+                          <div key={routeId} style={{ fontSize: '11px', marginBottom: '0.5rem', padding: '0.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '4px' }}>
+                            <div style={{ fontWeight: '600' }}>{route.name || routeId}</div>
+                            <div style={{ color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                              {route.stops?.length || 0} stops
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : loadingRoutes[school.schoolId] ? (
+                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                        Loading route data...
+                      </div>
+                    ) : null}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Schools Without PDFs Section */}
       {pdfStatus.summary.schoolsWithoutPdfs > 0 && (
         <div style={{ marginTop: '3rem' }}>
-          <h2 style={{ marginBottom: '1rem' }}>Schools Without Downloaded PDFs</h2>
-          <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', padding: '1.5rem' }}>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+          <h2 style={{ marginBottom: '1rem', fontSize: isMobile ? '1.25rem' : '1.5rem' }}>Schools Without Downloaded PDFs</h2>
+          <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', padding: isMobile ? '1rem' : '1.5rem' }}>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: isMobile ? '12px' : '14px' }}>
               These schools have Drive links configured but PDFs could not be downloaded (likely due to access restrictions):
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.75rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.75rem' }}>
               {pdfStatus.schools
                 .filter((s: any) => s.hasDriveLink && !s.hasPdfs)
                 .map((school: any) => (

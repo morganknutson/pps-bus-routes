@@ -2,10 +2,13 @@
   --bg-primary: #ffffff;
   --bg-secondary: #fafafa;
   --bg-tertiary: #ffffff;
+  --bg-route-list: #f0f0f0;
   --text-primary: #000000;
   --text-secondary: #333333;
   --text-tertiary: #666666;
   --border-color: #e8e8e8;
+  --border-color-darker: #d0d0d0;
+  --border-color-darkest: #b0b0b0;
   --shadow: rgba(0, 0, 0, 0.05);
   --shadow-hover: rgba(0, 0, 0, 0.15);
   --shadow-large: rgba(0, 0, 0, 0.2);
@@ -16,10 +19,13 @@
   --bg-primary: #ffffff;
   --bg-secondary: #fafafa;
   --bg-tertiary: #ffffff;
+  --bg-route-list: #f0f0f0;
   --text-primary: #000000;
   --text-secondary: #333333;
   --text-tertiary: #666666;
   --border-color: #e8e8e8;
+  --border-color-darker: #d0d0d0;
+  --border-color-darkest: #b0b0b0;
   --shadow: rgba(0, 0, 0, 0.05);
   --shadow-hover: rgba(0, 0, 0, 0.15);
   --shadow-large: rgba(0, 0, 0, 0.2);
@@ -30,10 +36,12 @@
   --bg-primary: #1a1a1a;
   --bg-secondary: #2d2d2d;
   --bg-tertiary: #3a3a3a;
+  --bg-route-list: #2d2d2d;
   --text-primary: #ffffff;
   --text-secondary: #e0e0e0;
   --text-tertiary: #b0b0b0;
   --border-color: #404040;
+  --border-color-darker: #555555;
   --shadow: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
   --shadow-large: rgba(0, 0, 0, 0.5);
@@ -48,6 +56,8 @@
   --text-secondary: #c7d2fe;
   --text-tertiary: #a5b4fc;
   --border-color: #475569;
+  --border-color-darker: #64748b;
+  --border-color-darkest: #334155;
   --shadow: rgba(37, 99, 235, 0.2);
   --shadow-hover: rgba(37, 99, 235, 0.3);
   --shadow-large: rgba(37, 99, 235, 0.4);
@@ -62,6 +72,8 @@
   --text-secondary: #bbf7d0;
   --text-tertiary: #86efac;
   --border-color: #22c55e;
+  --border-color-darker: #16a34a;
+  --border-color-darkest: #15803d;
   --shadow: rgba(22, 163, 74, 0.2);
   --shadow-hover: rgba(22, 163, 74, 0.3);
   --shadow-large: rgba(22, 163, 74, 0.4);
@@ -76,6 +88,8 @@
   --text-secondary: #ddd6fe;
   --text-tertiary: #c4b5fd;
   --border-color: #7c3aed;
+  --border-color-darker: #9333ea;
+  --border-color-darkest: #6d28d9;
   --shadow: rgba(147, 51, 234, 0.2);
   --shadow-hover: rgba(147, 51, 234, 0.3);
   --shadow-large: rgba(147, 51, 234, 0.4);
@@ -90,6 +104,8 @@
   --text-secondary: #ffedd5;
   --text-tertiary: #fed7aa;
   --border-color: #ea580c;
+  --border-color-darker: #c2410c;
+  --border-color-darkest: #9a3412;
   --shadow: rgba(234, 88, 12, 0.2);
   --shadow-hover: rgba(234, 88, 12, 0.3);
   --shadow-large: rgba(234, 88, 12, 0.4);
@@ -100,10 +116,13 @@
   --bg-primary: #1a1a1a;
   --bg-secondary: #2d2d2d;
   --bg-tertiary: #3a3a3a;
+  --bg-route-list: #2d2d2d;
   --text-primary: #ffffff;
   --text-secondary: #e0e0e0;
   --text-tertiary: #b0b0b0;
   --border-color: #404040;
+  --border-color-darker: #555555;
+  --border-color-darkest: #2a2a2a;
   --shadow: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
   --shadow-large: rgba(0, 0, 0, 0.5);
@@ -158,12 +177,22 @@ body {
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-color: #ffffff;
+  background-color: var(--bg-primary) !important;
 }
 
-/* Dark mode: black background to prevent white flash while loading tiles */
-.theme-dark .leaflet-container {
-  background-color: #000000;
+/* Light mode: white background */
+.theme-light .leaflet-container {
+  background-color: #ffffff !important;
+}
+
+/* Dark mode and color themes: black background to prevent white flash while loading tiles */
+.theme-dark .leaflet-container,
+.theme-blue .leaflet-container,
+.theme-green .leaflet-container,
+.theme-purple .leaflet-container,
+.theme-orange .leaflet-container,
+.dark-mode .leaflet-container {
+  background-color: #000000 !important;
 }
 
 /* Style for numbered markers */
@@ -228,6 +257,26 @@ body {
 
 .theme-dark .leaflet-control-attribution a {
   color: var(--text-primary) !important;
+}
+
+/* Tooltip styles for school info, stops, and no routes guidance */
+.school-info-tooltip,
+.stop-info-tooltip,
+.no-routes-tooltip {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 12px var(--shadow-hover) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 20px !important; /* Container padding increased to 20px */
+  pointer-events: auto !important;
+}
+
+/* Hide the default Leaflet tooltip arrow */
+.school-info-tooltip::before,
+.stop-info-tooltip::before,
+.no-routes-tooltip::before {
+  display: none !important;
 }
 
 

@@ -144,6 +144,9 @@ export function AddressInput() {
       });
     }
     
+    // Explicitly trigger zoom when an address is selected
+    triggerZoomToHomeAddress();
+    
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);

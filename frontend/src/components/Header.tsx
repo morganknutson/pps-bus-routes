@@ -1,6 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { DarkModeToggle } from './DarkModeToggle';
+import { useIsMobile } from '../hooks/useMediaQuery';
 import './Header.css';
 
 interface HeaderProps {
@@ -10,6 +11,8 @@ interface HeaderProps {
 export function Header({ rightContent }: HeaderProps = {}) {
   const location = useLocation();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = useState(false);
   
   const isHomePage = location.pathname === '/';
   const isAdminPage = location.pathname === '/admin' || 
@@ -36,7 +39,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
     <>
       <header className={`app-header ${isAdminPage ? 'sticky-header' : ''}`}>
         <div className="header-content">
-          <div className="logo-container" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="logo-container" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingLeft: isMobile ? '15px' : '0' }}>
             {isAdminPage ? (
               <Link
                 to="/admin"
@@ -52,16 +55,16 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 className="logo-text"
                 style={{ color: 'white' }}
               >
-                Portland Public School Bus Routes
+                {isMobile ? 'PPS Bus Routes' : 'Portland Public School Bus Routes'}
               </span>
             )}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', paddingRight: '0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', paddingRight: '12px' }}>
             <div style={{ color: 'white', margin: 0, padding: 0 }}>
               <DarkModeToggle />
             </div>
             {rightContent}
-            {isAdminPage && (
+            {isAdminPage && !isMobile && (
               <>
                 <Link
                   to="/tech"
@@ -190,7 +193,26 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 </Link>
               </>
             )}
-            {isAdminRoute && (
+            {isAdminPage && isMobile && (
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'white',
+                  cursor: 'pointer',
+                  fontSize: '20px',
+                  padding: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                aria-label="Toggle menu"
+              >
+                <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+              </button>
+            )}
+            {isAdminRoute && !isMobile && (
               <button
                 onClick={handleLogout}
                 style={{
@@ -198,7 +220,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   color: 'white',
                   backgroundColor: 'transparent',
                   border: '1px solid rgba(255, 255, 255, 0.3)',
-                  borderRadius: '6px',
+                  borderRadius: '999px',
                   padding: '0.5rem 1rem',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
@@ -222,6 +244,114 @@ export function Header({ rightContent }: HeaderProps = {}) {
           </div>
         </div>
       </header>
+      {/* Mobile Menu */}
+      {isAdminPage && isMobile && menuOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '60px',
+            left: 0,
+            right: 0,
+            backgroundColor: '#2d2d2d',
+            zIndex: 1000,
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+            maxHeight: 'calc(100vh - 60px)',
+            overflowY: 'auto',
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', padding: '1rem' }}>
+            <Link
+              to="/tech"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                padding: '0.75rem 1rem',
+                color: location.pathname === '/tech' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                fontWeight: location.pathname === '/tech' ? '600' : '400',
+              }}
+            >
+              Tech
+            </Link>
+            <Link
+              to="/architecture"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                padding: '0.75rem 1rem',
+                color: location.pathname === '/architecture' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                fontWeight: location.pathname === '/architecture' ? '600' : '400',
+              }}
+            >
+              Architecture
+            </Link>
+            <Link
+              to="/servers"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                padding: '0.75rem 1rem',
+                color: location.pathname === '/servers' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                fontWeight: location.pathname === '/servers' ? '600' : '400',
+              }}
+            >
+              Servers
+            </Link>
+            <Link
+              to="/verification"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                padding: '0.75rem 1rem',
+                color: location.pathname === '/verification' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                fontWeight: location.pathname === '/verification' ? '600' : '400',
+              }}
+            >
+              Verification
+            </Link>
+            <Link
+              to="/bus-route-explorer"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                padding: '0.75rem 1rem',
+                color: 'rgba(255, 255, 255, 0.8)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+              }}
+            >
+              → Explorer
+            </Link>
+            {isAdminRoute && (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
+                style={{
+                  marginTop: '0.5rem',
+                  padding: '0.75rem 1rem',
+                  fontSize: '12px',
+                  color: 'white',
+                  backgroundColor: 'transparent',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  borderRadius: '999px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                }}
+              >
+                <i className="fas fa-sign-out-alt" />
+                Logout
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }

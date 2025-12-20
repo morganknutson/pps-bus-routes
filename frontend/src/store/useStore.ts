@@ -262,17 +262,20 @@ export const useStore = create<Store>((set) => ({
       const newDirection = direction;
 
       // 1. Carry over route selection (by name) from old direction to new direction
-      // Find names of currently selected routes in the OLD direction
+      // Find names of currently selected routes in the OLD context
       const selectedNames = state.routes
         .filter(r => r.isSelected && (oldDirection === 'Both' || r.direction === oldDirection))
         .map(r => r.name);
 
-      // Update routes: if a route is in the new direction and its name was selected in the old, select it
+      // Update routes: 
+      // Ensure the selection in the NEW context exactly matches the names from the OLD context.
       const updatedRoutes = state.routes.map(r => {
-        // Only modify routes in the new target direction
-        if (r.direction === newDirection || newDirection === 'Both') {
-          if (selectedNames.includes(r.name)) {
-            return { ...r, isSelected: true };
+        const isCurrentContext = newDirection === 'Both' || r.direction === newDirection;
+        
+        if (isCurrentContext) {
+          const shouldBeSelected = selectedNames.includes(r.name);
+          if (r.isSelected !== shouldBeSelected) {
+            return { ...r, isSelected: shouldBeSelected };
           }
         }
         return r;
@@ -330,6 +333,8 @@ if (typeof window !== 'undefined') {
     try {
       const address = JSON.parse(savedAddress);
       useStore.getState().setHomeAddress(address);
+      // Trigger zoom on initial load if address is present
+      useStore.getState().triggerZoomToHomeAddress();
     } catch (e) {
       console.error('Failed to load saved home address:', e);
     }

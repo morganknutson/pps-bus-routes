@@ -35,7 +35,7 @@ const serverStartTime = Date.now();
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? false : 'http://localhost:3000'),
+  origin: process.env.FRONTEND_URL || (process.env.NODE_ENV === 'production' ? false : true), // Allow all origins in development for mobile testing
   credentials: true,
 };
 

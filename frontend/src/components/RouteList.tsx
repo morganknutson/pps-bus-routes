@@ -1,5 +1,6 @@
 import { useStore } from '../store/useStore';
 import { RouteListBase, RouteListConfig } from './RouteListBase';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 interface RouteListProps {
   showBothOption?: boolean;
@@ -14,6 +15,7 @@ interface RouteListProps {
  */
 export function RouteList({ showBothOption = false, onClearSchool, onViewSchools, onRouteToggle }: RouteListProps = {}) {
   const { routes, toggleRouteSelection, isLoading, error, selectStop, selectedStop, clearSelectedStop, selectedSchoolId, schools, directionFilter, setDirectionFilter, setSelectedSchool } = useStore();
+  const { isDarkMode } = useDarkMode();
 
   const selectedSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
 
@@ -69,7 +71,8 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
         height: '100%',
         padding: '2rem',
         textAlign: 'center',
-        color: 'var(--text-secondary)'
+        color: 'var(--text-secondary)',
+        backgroundColor: 'var(--bg-primary)'
       }}>
         <i 
           className="fas fa-graduation-cap" 
@@ -118,7 +121,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'var(--bg-secondary)' }}>
       {selectedSchool && (
         <div style={{ padding: '0.5rem 1rem 1rem 1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
           <div style={{ position: 'relative' }}>
@@ -188,7 +191,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
       <div style={{
         padding: '0.75rem 0.75rem 0.5rem 0.75rem', // Reduced bottom padding to reduce space
         borderBottom: 'none',
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-route-list)',
         flexShrink: 0,
         transition: 'background-color 0.3s ease, border-color 0.3s ease',
       }}>
@@ -197,7 +200,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
             position: 'relative',
             width: '100%',
             height: '2.5rem',
-            backgroundColor: 'var(--bg-secondary)',
+            backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(0, 0, 0, 0.05)',
             borderRadius: '6px',
             overflow: 'hidden',
           }}
@@ -288,7 +291,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
           />
         </div>
       </div>
-      <div style={{ flex: 1, overflow: 'auto' }}>
+      <div style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--bg-route-list)' }}>
         <RouteListBase
           routes={routes}
           config={config}

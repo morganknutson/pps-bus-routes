@@ -80,6 +80,7 @@ export async function loadLocalRoutes(schoolId?: string | null): Promise<Route[]
         isSchoolStop: stop.isSchoolStop || false, // Pass through school stop flag
         skipGeocoding: stop.skipGeocoding || false, // Pass through skip geocoding flag
         schoolName: stop.schoolName, // Pass through school name for school stops
+        neighborhood: stop.neighborhood, // Pass through neighborhood name
       }));
       
       return {

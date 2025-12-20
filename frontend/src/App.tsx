@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { MapContainer, useMap } from 'react-leaflet';
+import { MapContainer, useMap, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import { RouteList } from './components/RouteList';
 import { MapView } from './components/MapView';
+import { SchoolInfoTooltip } from './components/SchoolInfoTooltip';
 import { AddressInput } from './components/AddressInput';
 import { AddressLookup } from './components/AddressLookup';
 import { SchoolList } from './components/SchoolList';
@@ -23,9 +24,9 @@ import { ArchitecturePage } from './pages/ArchitecturePage';
 import { School } from './types';
 import { loadLocalRoutes } from './services/localRoutes';
 import { getSchoolTypes, getSchoolColor, createSchoolIcon } from './utils/schoolUtils';
-import { createDefaultMarkerIcon } from './utils/fontAwesomeIcons';
+import { formatDate } from './utils/dateUtils';
+import { createDefaultMarkerIcon, createHomeIcon } from './utils/fontAwesomeIcons';
 import { handleMapLinkClick } from './utils/mapLinks';
-import { useMarkers, MarkerData } from './hooks/useMarkers';
 import { SchoolTypeFilters } from './components/SchoolTypeFilter';
 import { ProgressBar } from './components/ProgressBar';
 import { AdminPasswordProtection } from './components/AdminPasswordProtection';
@@ -35,33 +36,11 @@ import { parseUrlPath, applyUrlStateToRoutes } from './services/urlState';
 import { useLocation, useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 
-// Format date for display (e.g., "Dec 10, 2024" or "2 days ago")
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  
-  if (diffDays === 0) {
-    return 'today';
-  } else if (diffDays === 1) {
-    return 'yesterday';
-  } else if (diffDays < 7) {
-    return `${diffDays} days ago`;
-  } else if (diffDays < 30) {
-    const weeks = Math.floor(diffDays / 7);
-    return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
-  } else {
-    // Format as "MMM DD, YYYY"
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  }
-}
-
 // Set default marker icon to use Font Awesome
 const defaultIcon = createDefaultMarkerIcon();
 L.Marker.prototype.options.icon = defaultIcon;
 
-// Component to manage school markers on map using useMarkers hook
+// Component to manage school markers on map
 function SchoolListMapView({ 
   schools, 
   selectedSchoolId, 
@@ -73,38 +52,11 @@ function SchoolListMapView({
   onSelectSchool: (schoolId: string | null) => void;
   mapRef: React.RefObject<L.Map>;
 }) {
+  const { homeAddress } = useStore();
   const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
+  const homeIcon = useMemo(() => createHomeIcon(), []);
   
-  // Filter to only show selected school when one is selected
-  const schoolsToShow = useMemo(() => {
-    if (selectedSchoolId) {
-      // Only show the selected school
-      return schoolsWithCoords.filter(s => s.id === selectedSchoolId);
-    }
-    // Show all schools when none is selected
-    return schoolsWithCoords;
-  }, [schoolsWithCoords, selectedSchoolId]);
-  
-  const markerData: MarkerData[] = useMemo(() => {
-    return schoolsToShow.map(school => {
-      const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-      const schoolColor = getSchoolColor(schoolTypes);
-      return {
-        id: school.id,
-        position: [school.coordinates![1], school.coordinates![0]] as [number, number],
-        icon: createSchoolIcon(schoolColor),
-        onClick: () => {
-          if (selectedSchoolId === school.id) {
-            onSelectSchool(null);
-          } else {
-            onSelectSchool(school.id);
-          }
-        },
-      };
-    });
-  }, [schoolsToShow, selectedSchoolId, onSelectSchool]);
-
-  if (schoolsWithCoords.length === 0) {
+  if (schoolsWithCoords.length === 0 && !homeAddress) {
     return (
       <div style={{
         display: 'flex',
@@ -113,7 +65,7 @@ function SchoolListMapView({
         height: '100%',
         color: 'var(--text-tertiary)',
       }}>
-        No schools with coordinates to display on map
+        No data to display on map
       </div>
     );
   }
@@ -125,27 +77,85 @@ function SchoolListMapView({
       zoom={12}
       style={{ height: '100%', width: '100%' }}
       ref={mapRef}
+      zoomControl={false}
     >
       <DarkModeTileLayer />
       <FitSchoolBounds schools={schoolsWithCoords} selectedSchoolId={selectedSchoolId} />
-      <SchoolMarkersManager markers={markerData} />
+      
+      {/* Home address marker */}
+      {homeAddress && (
+        <Marker 
+          position={[homeAddress.coordinates[1], homeAddress.coordinates[0]]} 
+          icon={homeIcon}
+        />
+      )}
+
+      {schoolsWithCoords.map(school => {
+        const isSelected = selectedSchoolId === school.id;
+        const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
+        const schoolColor = getSchoolColor(schoolTypes);
+        const icon = createSchoolIcon(schoolColor);
+        const position = [school.coordinates![1], school.coordinates![0]] as [number, number];
+
+        return (
+          <Marker 
+            key={school.id}
+            position={position}
+            icon={icon}
+            eventHandlers={{
+              click: () => onSelectSchool(isSelected ? null : school.id)
+            }}
+            zIndexOffset={isSelected ? 1000 : 0}
+          >
+            {isSelected && (
+              <Tooltip 
+                permanent 
+                direction="bottom" 
+                offset={[0, 30]}
+                className="school-info-tooltip"
+                opacity={1}
+              >
+                        <SchoolInfoTooltip 
+                          school={school} 
+                          showRoutesButton={true}
+                          onClose={() => onSelectSchool(null)}
+                          onViewRoutes={() => {
+                    useStore.getState().setSelectedSchool(school.id);
+                    // This event is caught in ExplorerApp/AdminApp to change the tab
+                    window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
+                  }}
+                />
+              </Tooltip>
+            )}
+          </Marker>
+        );
+      })}
     </MapContainer>
   );
-}
-
-// Component that uses useMarkers hook
-function SchoolMarkersManager({ markers }: { markers: MarkerData[] }) {
-  useMarkers(markers, { debug: false });
-  return null;
 }
 
 // Component to fit map bounds to show all schools
 function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; selectedSchoolId: string | null }) {
   const map = useMap();
+  const { homeAddress } = useStore();
   const prevSelectedSchoolIdRef = useRef<string | null>(null);
-  const isMobile = useIsMobile();
+  const mapReadyRef = useRef<boolean>(false);
+  const hasZoomedRef = useRef<boolean>(false);
+  
+  // Mark map as ready when it's initialized
+  useEffect(() => {
+    if (map && !mapReadyRef.current) {
+      map.whenReady(() => {
+        mapReadyRef.current = true;
+      });
+    }
+  }, [map]);
   
   useEffect(() => {
+    if (!map || !mapReadyRef.current) {
+      return;
+    }
+
     const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
     
     if (selectedSchoolId && schoolsWithCoords.length > 0) {
@@ -153,40 +163,78 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
       const selectedSchool = schoolsWithCoords.find(s => s.id === selectedSchoolId);
       if (selectedSchool && selectedSchool.coordinates) {
         const [lng, lat] = selectedSchool.coordinates;
-        // Only zoom if this is a new selection
-        if (prevSelectedSchoolIdRef.current !== selectedSchoolId) {
-          map.setView([lat, lng], 16, { animate: true });
-          
-          // On mobile, shift the map up so the marker is visible above the dialog
-          if (isMobile) {
-            // Use setTimeout to ensure the view change completes before panning
-            setTimeout(() => {
-              // Shift map up by ~200px to account for the dialog at the bottom
-              // The dialog has maxHeight: 70vh, so we shift up to make marker visible
-              map.panBy([0, 200], { animate: true });
-            }, 100);
-          }
-          
+        const isNewSelection = prevSelectedSchoolIdRef.current !== selectedSchoolId;
+        
+        if (isNewSelection || !hasZoomedRef.current) {
+          // Update ref immediately to prevent multiple setViews for same selection
           prevSelectedSchoolIdRef.current = selectedSchoolId;
+          
+          if (isNewSelection) {
+            hasZoomedRef.current = false;
+          }
+
+          const timer = setTimeout(() => {
+            try {
+              // Calculate a target center that is shifted so the pin is 100px above the center
+              const zoom = 16;
+              const targetPoint = map.project([lat, lng], zoom).add([0, 100]);
+              const targetLatLng = map.unproject(targetPoint, zoom);
+
+              map.setView(targetLatLng, zoom, { 
+                animate: true,
+                duration: 0.6
+              });
+              
+              hasZoomedRef.current = true;
+              console.log('[FitSchoolBounds] 🎯 Centered and shifted map on school:', selectedSchool.name);
+            } catch (error) {
+              console.error('[FitSchoolBounds] Error zooming to school:', error);
+            }
+          }, 150);
+          
+          return () => clearTimeout(timer);
         }
         return;
       }
     }
     
-    // If no school selected, fit bounds to show all schools
-    if (!selectedSchoolId && schoolsWithCoords.length > 0) {
+    // If no school selected, fit bounds to show all schools (and home pin)
+    if (!selectedSchoolId && (schoolsWithCoords.length > 0 || homeAddress)) {
       // Only refit if we had a selection before (to avoid refitting on initial load)
       if (prevSelectedSchoolIdRef.current !== null) {
-        const bounds = L.latLngBounds(
-          schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
-        );
-        map.fitBounds(bounds, { padding: [50, 50], animate: true });
+        const allCoords: [number, number][] = schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number]);
+        
+        if (homeAddress) {
+          allCoords.push([homeAddress.coordinates[1], homeAddress.coordinates[0]]);
+        }
+
+        if (allCoords.length > 0) {
+          const bounds = L.latLngBounds(allCoords);
+          
+          // Use a small delay for zoom out to ensure smooth transition
+          const timer = setTimeout(() => {
+            try {
+              map.fitBounds(bounds, { 
+                padding: [50, 50], 
+                animate: true,
+                duration: 0.8
+              });
+              hasZoomedRef.current = false;
+            } catch (error) {
+              console.error('[FitSchoolBounds] Error fitting bounds:', error);
+            }
+          }, 100);
+          
+          prevSelectedSchoolIdRef.current = null;
+          return () => clearTimeout(timer);
+        }
       }
       prevSelectedSchoolIdRef.current = null;
     } else if (!selectedSchoolId) {
       prevSelectedSchoolIdRef.current = null;
+      hasZoomedRef.current = false;
     }
-  }, [map, schools, selectedSchoolId, isMobile]);
+  }, [map, schools, selectedSchoolId, homeAddress]);
   
   return null;
 }
@@ -197,11 +245,18 @@ function ExplorerApp() {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [swipeStartY, setSwipeStartY] = useState<number | null>(null);
-  const [swipeCurrentY, setSwipeCurrentY] = useState<number | null>(null);
-  const sheetRef = useRef<HTMLDivElement>(null);
-  const [isSchoolDialogClosing, setIsSchoolDialogClosing] = useState<boolean>(false);
-  
+
+  // Listen for tab change events
+  useEffect(() => {
+    const handleTabChangeEvent = (e: any) => {
+      if (e.detail === 'routes' || e.detail === 'schools') {
+        setActiveTab(e.detail);
+      }
+    };
+    window.addEventListener('change-tab', handleTabChangeEvent);
+    return () => window.removeEventListener('change-tab', handleTabChangeEvent);
+  }, []);
+
   // Parse URL to determine initial active tab
   const urlState = parseUrlPath(location.pathname, '/bus-route-explorer');
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
@@ -219,7 +274,17 @@ function ExplorerApp() {
     }
     return 'schools';
   });
-  
+
+  // Get selected routes, filtered by direction
+  const selectedRoutes = useMemo(() => {
+    return routes.filter(route => {
+      if (!route.isSelected) return false;
+      if (directionFilter === 'Both') return true;
+      if (!route.direction) return true;
+      return route.direction === directionFilter;
+    });
+  }, [routes, directionFilter]);
+
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
     if (tab === 'schools' || tab === 'routes') {
@@ -228,7 +293,6 @@ function ExplorerApp() {
       // Sidebar stays open on mobile when switching tabs
     }
   };
-  const [selectedSchoolForMap, setSelectedSchoolForMap] = useState<School | null>(null);
   const mapRef = useRef<L.Map | null>(null);
   const prevSchoolIdRef = useRef<string | null>(null);
   const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
@@ -351,49 +415,6 @@ function ExplorerApp() {
     loadRoutes();
     prevSchoolIdRef.current = selectedSchoolId;
   }, [selectedSchoolId, activeTab, setRoutes, setLoading, routes.length]); // Include routes.length to detect when routes are cleared
-
-  // Update selectedSchoolForMap when selectedSchoolId changes
-  useEffect(() => {
-    if (selectedSchoolId && schools.length > 0) {
-      // Only auto-show the dialog if we are in the schools tab
-      // In the routes tab, the dialog should only show via explicit user interaction (e.g. clicking a school pin)
-      if (activeTab === 'schools') {
-        const school = schools.find(s => s.id === selectedSchoolId);
-        if (school && selectedSchoolForMap?.id !== school.id) {
-          setSelectedSchoolForMap(school);
-        }
-      }
-    } else if (!selectedSchoolId) {
-      setSelectedSchoolForMap(null);
-    }
-  }, [selectedSchoolId, schools, activeTab]);
-
-  // Clear school dialog when a stop is selected
-  useEffect(() => {
-    if (selectedStop) {
-      setSelectedSchoolForMap(null);
-    }
-  }, [selectedStop]);
-
-  // Handle school dialog closing animation
-  const handleCloseSchoolDialog = (preserveSchoolSelection = false) => {
-    setIsSchoolDialogClosing(true);
-    if (!preserveSchoolSelection) {
-      // Cancel any pending debounced URL updates to prevent race conditions
-      cancelPendingUrlUpdate();
-      
-      // Clear school selection ONLY if in schools tab
-      if (activeTab === 'schools') {
-        setSelectedSchool(null);
-        navigate('/bus-route-explorer', { replace: true });
-      }
-      // If in routes tab, we keep the school selected so we don't lose the routes
-    }
-    setTimeout(() => {
-      setSelectedSchoolForMap(null);
-      setIsSchoolDialogClosing(false);
-    }, 125); // Match animation duration
-  };
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -520,7 +541,7 @@ function ExplorerApp() {
         border: 'none',
         cursor: 'pointer',
         color: 'white',
-        padding: '0.5rem',
+        padding: '0.5rem 13px 0.5rem 0.5rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -601,15 +622,7 @@ function ExplorerApp() {
               />
             ) : (
               <>
-                <MapView 
-                  onSchoolStopClick={(schoolId) => {
-                    // When a school stop is clicked, show the school dialog
-                    const school = schools.find(s => s.id === schoolId);
-                    if (school) {
-                      setSelectedSchoolForMap(school);
-                    }
-                  }}
-                />
+                <MapView />
                 {isLoading && activeTab === 'routes' && selectedSchoolId && (
                   <div
                     style={{
@@ -633,302 +646,7 @@ function ExplorerApp() {
               </>
             )}
 
-            {/* Selected school info dialog (shown for the currently selected school) */}
-            {(selectedSchoolForMap || isSchoolDialogClosing) && (
-              <div 
-                ref={sheetRef}
-                style={{
-                  position: 'absolute',
-                  ...(isMobile ? {
-                    bottom: isSchoolDialogClosing 
-                      ? '-100%' 
-                      : swipeCurrentY !== null 
-                        ? Math.min(0, swipeCurrentY - (swipeStartY || 0)) 
-                        : 0,
-                    left: 0,
-                    right: 0,
-                    maxWidth: '100%',
-                    borderTopLeftRadius: '16px',
-                    borderTopRightRadius: '16px',
-                    borderBottomLeftRadius: 0,
-                    borderBottomRightRadius: 0,
-                    maxHeight: '70vh',
-                    overflowY: swipeStartY === null ? 'auto' : 'hidden',
-                    touchAction: 'pan-y',
-                  } : {
-                    bottom: '1rem',
-                    right: '1rem',
-                    maxWidth: '400px',
-                    borderRadius: '8px',
-                  }),
-                  backgroundColor: 'var(--bg-primary)',
-                  padding: '1.5rem',
-                  boxShadow: '0 4px 12px var(--shadow-hover)',
-                  zIndex: 1000,
-                  transition: swipeStartY === null 
-                    ? 'bottom 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' 
-                    : 'none',
-                  animation: isMobile && swipeStartY === null && !isSchoolDialogClosing 
-                    ? 'slideUp 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' 
-                    : undefined,
-                }}
-                onTouchStart={(e) => {
-                  if (!isMobile) return;
-                  const touch = e.touches[0];
-                  setSwipeStartY(touch.clientY);
-                  setSwipeCurrentY(touch.clientY);
-                }}
-                onTouchMove={(e) => {
-                  if (!isMobile || swipeStartY === null) return;
-                  const touch = e.touches[0];
-                  // Only allow downward swipes
-                  if (touch.clientY > swipeStartY) {
-                    setSwipeCurrentY(touch.clientY);
-                  }
-                }}
-                  onTouchEnd={() => {
-                  if (!isMobile || swipeStartY === null) return;
-                  const swipeDistance = swipeCurrentY! - swipeStartY;
-                  // If swiped down more than 100px, close the sheet
-                  if (swipeDistance > 100) {
-                    handleCloseSchoolDialog();
-                  }
-                  // Reset swipe state
-                  setSwipeStartY(null);
-                  setSwipeCurrentY(null);
-                }}
-              >
-                {/* Drag handle for mobile */}
-                {isMobile && (
-                  <div 
-                    style={{
-                      width: '40px',
-                      height: '4px',
-                      backgroundColor: 'var(--text-tertiary)',
-                      borderRadius: '2px',
-                      margin: '0 auto 1rem',
-                      opacity: 0.5,
-                      cursor: 'grab',
-                      touchAction: 'none',
-                    }}
-                    onTouchStart={(e) => {
-                      e.stopPropagation();
-                      const touch = e.touches[0];
-                      setSwipeStartY(touch.clientY);
-                      setSwipeCurrentY(touch.clientY);
-                    }}
-                  />
-                )}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                  <div style={{ flex: 1 }}>
-                    <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap?.name}</h2>
-                    {selectedSchoolForMap && (() => {
-                      const schoolTypes = selectedSchoolForMap?.schoolTypes || getSchoolTypes(selectedSchoolForMap?.name || '');
-                      const schoolColor = getSchoolColor(schoolTypes);
-                      return (
-                        <div style={{ fontSize: '14px', color: schoolColor, fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <i className="fas fa-graduation-cap" style={{ fontSize: '14px' }}></i>
-                          <span>{schoolTypes.join(' & ')}</span>
-                        </div>
-                      );
-                    })()}
-                  </div>
-                  <button
-                    onClick={() => handleCloseSchoolDialog()}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      fontSize: '32px',
-                      cursor: 'pointer',
-                      color: 'var(--text-tertiary)',
-                      padding: '0',
-                      lineHeight: '1',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginTop: '2px',
-                    }}
-                  >
-                    <ThinXIcon />
-                  </button>
-                </div>
-                {selectedSchoolForMap?.routeCount !== undefined && (
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Routes</div>
-                    <div 
-                      onClick={() => {
-                        if (selectedSchoolForMap) {
-                          setSelectedSchool(selectedSchoolForMap.id);
-                          setActiveTab('routes');
-                          handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
-                        }
-                      }}
-                      style={{ 
-                        fontSize: '14px', 
-                        color: 'var(--text-primary)', 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        gap: '0.5rem',
-                        cursor: 'pointer',
-                        textDecoration: 'none',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                      }}
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                        <path d="M3 12h18M3 6h18M3 18h18"></path>
-                        <circle cx="6" cy="12" r="2"></circle>
-                        <circle cx="18" cy="12" r="2"></circle>
-                      </svg>
-                      <span>{selectedSchoolForMap?.routeCount} {selectedSchoolForMap?.routeCount === 1 ? 'route' : 'routes'} available</span>
-                    </div>
-                    {selectedSchoolForMap?.routesUpdatedAt && (
-                      <div style={{ fontSize: '12px', color: '#666', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <i className="fas fa-clock" style={{ fontSize: '12px', width: '12px', flexShrink: 0 }}></i>
-                        <span>Updated {formatDate(selectedSchoolForMap.routesUpdatedAt)}</span>
-                      </div>
-                    )}
-                  </div>
-                )}
-                {selectedSchoolForMap?.neighborhood && (
-                  <div style={{ marginBottom: isMobile ? '2rem' : '1.5rem' }}>
-                    <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Neighborhood</div>
-                    <div style={{ fontSize: '14px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: 'var(--text-tertiary)' }}></i>
-                      <span>{selectedSchoolForMap?.neighborhood}</span>
-                    </div>
-                  </div>
-                )}
-                {selectedSchoolForMap?.address && (
-                  <div style={{ marginBottom: isMobile ? '2rem' : '1.5rem' }}>
-                    <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Address</div>
-                    <a
-                      href="#"
-                      onClick={(e) => selectedSchoolForMap && handleMapLinkClick(e, selectedSchoolForMap.address!, selectedSchoolForMap.coordinates)}
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--text-primary)',
-                        textDecoration: 'none',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                      }}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                      </svg>
-                      <span>{selectedSchoolForMap.address}</span>
-                    </a>
-                  </div>
-                )}
-                {(selectedSchoolForMap?.schoolPageLink || selectedSchoolForMap?.driveLink) && (
-                  <div style={{ 
-                    display: 'flex', 
-                    gap: '1rem',
-                    marginBottom: isMobile ? '2rem' : '1.5rem',
-                    flexWrap: 'wrap',
-                  }}>
-                    {selectedSchoolForMap?.schoolPageLink && (
-                      <a
-                        href={selectedSchoolForMap.schoolPageLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          fontSize: '14px',
-                          color: 'var(--text-primary)',
-                          textDecoration: 'none',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.textDecoration = 'underline';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.textDecoration = 'none';
-                        }}
-                      >
-                        <i className="fas fa-external-link-alt" style={{ fontSize: '12px', flexShrink: 0 }}></i>
-                        <span>School Page</span>
-                      </a>
-                    )}
-                    {selectedSchoolForMap?.driveLink && (
-                      <a
-                        href={selectedSchoolForMap.driveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          fontSize: '14px',
-                          color: 'var(--text-primary)',
-                          textDecoration: 'none',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.textDecoration = 'underline';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.textDecoration = 'none';
-                        }}
-                      >
-                        <i className="fas fa-folder" style={{ fontSize: '12px', flexShrink: 0 }}></i>
-                        <span>Drive Folder</span>
-                      </a>
-                    )}
-                  </div>
-                )}
-                {/* "View Routes" button - only show when not already on routes tab */}
-                {selectedSchoolForMap?.routeCount !== undefined && activeTab !== 'routes' && (
-                  <button
-                    onClick={() => {
-                      if (selectedSchoolForMap) {
-                        // Set school and change tab together - React batches these updates
-                        setSelectedSchool(selectedSchoolForMap.id);
-                        setActiveTab('routes');
-                        // Use clearSelectedStop from store if available
-                        useStore.getState().clearSelectedStop();
-                        handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
-                      }
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: '1rem',
-                      backgroundColor: '#133A60',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '9999px',
-                      fontSize: '16px',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      marginTop: '1rem',
-                      transition: 'background-color 0.2s ease',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#0f2d4a';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#133A60';
-                    }}
-                  >
-                    View Routes
-                  </button>
-                )}
-              </div>
-            )}
+            {/* Selected school info dialog - DEPRECATED, now using Tooltip in SchoolListMapView */}
           </div>
         </div>
       </div>
@@ -956,12 +674,33 @@ function AdminApp() {
   const location = useLocation();
   const navigate = useNavigate();
   
+  // Listen for tab change events
+  useEffect(() => {
+    const handleTabChangeEvent = (e: any) => {
+      if (e.detail === 'routes' || e.detail === 'schools') {
+        setActiveTab(e.detail);
+      }
+    };
+    window.addEventListener('change-tab', handleTabChangeEvent);
+    return () => window.removeEventListener('change-tab', handleTabChangeEvent);
+  }, []);
+
   // Parse URL to determine initial active tab
   const urlState = parseUrlPath(location.pathname, '/admin');
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
     return urlState.show || 'routes';
   });
-  
+
+  // Get selected routes, filtered by direction
+  const selectedRoutes = useMemo(() => {
+    return routes.filter(route => {
+      if (!route.isSelected) return false;
+      if (directionFilter === 'Both') return true;
+      if (!route.direction) return true;
+      return route.direction === directionFilter;
+    });
+  }, [routes, directionFilter]);
+
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
     if (tab === 'schools' || tab === 'routes') {
@@ -969,9 +708,7 @@ function AdminApp() {
       // URL will be updated automatically by useUrlState hook
     }
   };
-  const [selectedSchoolForMap, setSelectedSchoolForMap] = useState<School | null>(null);
   const mapRef = useRef<L.Map | null>(null);
-  const [isSchoolDialogClosing, setIsSchoolDialogClosing] = useState<boolean>(false);
   const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
     elementary: true,
     middle: true,
@@ -979,37 +716,6 @@ function AdminApp() {
     hybrid: true,
   });
   const [searchTerm, setSearchTerm] = useState('');
-  
-  // Custom thin X icon component
-  const ThinXIcon = () => (
-    <div style={{
-      width: '18px',
-      height: '18px',
-      position: 'relative',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-      <span style={{
-        display: 'block',
-        height: '1.5px',
-        width: '100%',
-        backgroundColor: 'currentColor',
-        borderRadius: '2px',
-        position: 'absolute',
-        transform: 'rotate(45deg)',
-      }}></span>
-      <span style={{
-        display: 'block',
-        height: '1.5px',
-        width: '100%',
-        backgroundColor: 'currentColor',
-        borderRadius: '2px',
-        position: 'absolute',
-        transform: 'rotate(-45deg)',
-      }}></span>
-    </div>
-  );
   
   // Load schools
   useEffect(() => {
@@ -1082,29 +788,6 @@ function AdminApp() {
     loadRoutes();
   }, [selectedSchoolId, activeTab, setRoutes, setLoading]);
 
-  // Update selectedSchoolForMap when selectedSchoolId changes
-  useEffect(() => {
-    if (selectedSchoolId && schools.length > 0) {
-      // Only auto-show the dialog if we are in the schools tab
-      // In the routes tab, the dialog should only show via explicit user interaction (e.g. clicking a school pin)
-      if (activeTab === 'schools') {
-        const school = schools.find(s => s.id === selectedSchoolId);
-        if (school && selectedSchoolForMap?.id !== school.id) {
-          setSelectedSchoolForMap(school);
-        }
-      }
-    } else if (!selectedSchoolId) {
-      setSelectedSchoolForMap(null);
-    }
-  }, [selectedSchoolId, schools, activeTab]);
-
-  // Clear school dialog when a stop is selected
-  useEffect(() => {
-    if (selectedStop) {
-      setSelectedSchoolForMap(null);
-    }
-  }, [selectedStop]);
-
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
     return schools.filter(school => {
@@ -1137,26 +820,6 @@ function AdminApp() {
       return matchesFilter;
     });
   }, [schools, searchTerm, schoolTypeFilters]);
-
-  // Handle school dialog closing animation
-  const handleCloseSchoolDialog = (preserveSchoolSelection = false) => {
-    setIsSchoolDialogClosing(true);
-    if (!preserveSchoolSelection) {
-      // Cancel any pending debounced URL updates to prevent race conditions
-      cancelPendingUrlUpdateAdmin();
-      
-      // Clear school selection ONLY if in schools tab
-      if (activeTab === 'schools') {
-        setSelectedSchool(null);
-        navigate('/admin', { replace: true });
-      }
-      // If in routes tab, we keep the school selected so we don't lose the routes
-    }
-    setTimeout(() => {
-      setSelectedSchoolForMap(null);
-      setIsSchoolDialogClosing(false);
-    }, 125); // Match animation duration
-  };
 
   // Geocoding is now done server-side when processing PDFs
   // Routes should already have coordinates loaded from processed JSON files
@@ -1212,11 +875,6 @@ function AdminApp() {
                   );
                   setSchools(updatedSchools);
 
-                  // Update selectedSchoolForMap if this school is currently selected
-                  if (selectedSchoolId === schoolId) {
-                    setSelectedSchoolForMap(updatedSchool);
-                  }
-
                   console.log('[AdminApp] School updated successfully');
                 } catch (error: any) {
                   console.error('[AdminApp] Error updating school:', error);
@@ -1265,13 +923,6 @@ function AdminApp() {
                   editingMode={true} 
                   enableStreetHighlighting={true}
                   enableStreetPins={true}
-                  onSchoolStopClick={(schoolId) => {
-                    // When a school stop is clicked, show the school dialog
-                    const school = schools.find(s => s.id === schoolId);
-                    if (school) {
-                      setSelectedSchoolForMap(school);
-                    }
-                  }}
                 />
                 {isLoading && activeTab === 'routes' && selectedSchoolId && (
                   <div
@@ -1298,256 +949,6 @@ function AdminApp() {
                   </div>
                 )}
               </>
-            )}
-
-            {/* Selected school info dialog (shown for the currently selected school) */}
-            {(selectedSchoolForMap || isSchoolDialogClosing) && (
-              <div style={{
-                position: 'absolute',
-                ...(isMobile ? {
-                  bottom: isSchoolDialogClosing ? '-100%' : 0,
-                  left: 0,
-                  right: 0,
-                  maxWidth: '100%',
-                  borderTopLeftRadius: '16px',
-                  borderTopRightRadius: '16px',
-                  borderBottomLeftRadius: 0,
-                  borderBottomRightRadius: 0,
-                  maxHeight: '70vh',
-                  overflowY: 'auto',
-                  transition: 'bottom 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)',
-                } : {
-                  bottom: '1rem',
-                  right: '1rem',
-                  maxWidth: '400px',
-                  borderRadius: '8px',
-                }),
-                backgroundColor: 'var(--bg-primary)',
-                padding: '1.5rem',
-                boxShadow: '0 4px 12px var(--shadow-hover)',
-                zIndex: 1000,
-                animation: isMobile && !isSchoolDialogClosing ? 'slideUp 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' : undefined,
-              }}>
-                {/* Drag handle for mobile */}
-                {isMobile && (
-                  <div style={{
-                    width: '40px',
-                    height: '4px',
-                    backgroundColor: 'var(--text-tertiary)',
-                    borderRadius: '2px',
-                    margin: '0 auto 1rem',
-                    opacity: 0.5,
-                  }} />
-                )}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                  <div style={{ flex: 1 }}>
-                    <h2 style={{ margin: 0, fontSize: '20px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{selectedSchoolForMap?.name}</h2>
-                    {selectedSchoolForMap && (() => {
-                      const schoolTypes = selectedSchoolForMap?.schoolTypes || getSchoolTypes(selectedSchoolForMap?.name || '');
-                      const schoolColor = getSchoolColor(schoolTypes);
-                      return (
-                        <div style={{ fontSize: '14px', color: schoolColor, fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <i className="fas fa-graduation-cap" style={{ fontSize: '14px' }}></i>
-                          <span>{schoolTypes.join(' & ')}</span>
-                        </div>
-                      );
-                    })()}
-                  </div>
-                  <button
-                    onClick={() => handleCloseSchoolDialog()}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      fontSize: '32px',
-                      cursor: 'pointer',
-                      color: 'var(--text-tertiary)',
-                      padding: '0',
-                      lineHeight: '1',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginTop: '2px',
-                    }}
-                  >
-                    <ThinXIcon />
-                  </button>
-                </div>
-                {selectedSchoolForMap?.routeCount !== undefined && (
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Routes</div>
-                    <div 
-                      onClick={() => {
-                        if (selectedSchoolForMap) {
-                          setSelectedSchool(selectedSchoolForMap.id);
-                          setActiveTab('routes');
-                          handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
-                        }
-                      }}
-                      style={{ 
-                        fontSize: '14px', 
-                        color: 'var(--text-primary)', 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        gap: '0.5rem',
-                        cursor: 'pointer',
-                        textDecoration: 'none',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                      }}
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                        <path d="M3 12h18M3 6h18M3 18h18"></path>
-                        <circle cx="6" cy="12" r="2"></circle>
-                        <circle cx="18" cy="12" r="2"></circle>
-                      </svg>
-                      <span>{selectedSchoolForMap?.routeCount} {selectedSchoolForMap?.routeCount === 1 ? 'route' : 'routes'} available</span>
-                    </div>
-                    {selectedSchoolForMap?.routesUpdatedAt && (
-                      <div style={{ fontSize: '12px', color: '#666', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <i className="fas fa-clock" style={{ fontSize: '12px', width: '12px', flexShrink: 0 }}></i>
-                        <span>Updated {formatDate(selectedSchoolForMap.routesUpdatedAt)}</span>
-                      </div>
-                    )}
-                  </div>
-                )}
-                {selectedSchoolForMap?.neighborhood && (
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Neighborhood</div>
-                    <div style={{ fontSize: '14px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: 'var(--text-tertiary)' }}></i>
-                      <span>{selectedSchoolForMap?.neighborhood}</span>
-                    </div>
-                  </div>
-                )}
-                {selectedSchoolForMap?.address && (
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Address</div>
-                    <a
-                      href="#"
-                      onClick={(e) => selectedSchoolForMap && handleMapLinkClick(e, selectedSchoolForMap.address!, selectedSchoolForMap.coordinates)}
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--text-primary)',
-                        textDecoration: 'none',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecoration = 'underline';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecoration = 'none';
-                      }}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                      </svg>
-                      <span>{selectedSchoolForMap?.address}</span>
-                    </a>
-                  </div>
-                )}
-                {(selectedSchoolForMap?.schoolPageLink || selectedSchoolForMap?.driveLink) && (
-                  <div style={{ 
-                    display: 'flex', 
-                    gap: '1rem',
-                    marginBottom: isMobile ? '2rem' : '1.5rem',
-                    flexWrap: 'wrap',
-                  }}>
-                    {selectedSchoolForMap?.schoolPageLink && (
-                      <a
-                        href={selectedSchoolForMap.schoolPageLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          fontSize: '14px',
-                          color: 'var(--text-primary)',
-                          textDecoration: 'none',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.textDecoration = 'underline';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.textDecoration = 'none';
-                        }}
-                      >
-                        <i className="fas fa-external-link-alt" style={{ fontSize: '12px', flexShrink: 0 }}></i>
-                        <span>School Page</span>
-                      </a>
-                    )}
-                    {selectedSchoolForMap?.driveLink && (
-                      <a
-                        href={selectedSchoolForMap.driveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          fontSize: '14px',
-                          color: 'var(--text-primary)',
-                          textDecoration: 'none',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.textDecoration = 'underline';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.textDecoration = 'none';
-                        }}
-                      >
-                        <i className="fas fa-folder" style={{ fontSize: '12px', flexShrink: 0 }}></i>
-                        <span>Drive Folder</span>
-                      </a>
-                    )}
-                  </div>
-                )}
-                {/* "View Routes" button - only show when not already on routes tab */}
-                {selectedSchoolForMap?.routeCount !== undefined && activeTab !== 'routes' && (
-                  <button
-                    onClick={() => {
-                      if (selectedSchoolForMap) {
-                        // Set school and change tab together - React batches these updates
-                        setSelectedSchool(selectedSchoolForMap.id);
-                        setActiveTab('routes');
-                        // Use clearSelectedStop from store if available
-                        useStore.getState().clearSelectedStop();
-                        handleCloseSchoolDialog(true); // Preserve school selection when switching to routes
-                      }
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: '1rem',
-                      backgroundColor: '#133A60',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '9999px',
-                      fontSize: '16px',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      marginTop: '1rem',
-                      transition: 'background-color 0.2s ease',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#0f2d4a';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#133A60';
-                    }}
-                  >
-                    View Routes
-                  </button>
-                )}
-              </div>
             )}
           </div>
         </div>
@@ -1578,12 +979,54 @@ function App() {
             </AdminPasswordProtection>
           } 
         />
-        <Route path="/neighborhoods" element={<Neighborhoods />} />
-        <Route path="/tech" element={<TechPage />} />
-        <Route path="/verification" element={<VerificationPage />} />
-        <Route path="/jobs" element={<JobsPage />} />
-        <Route path="/servers" element={<ServersPage />} />
-        <Route path="/architecture" element={<ArchitecturePage />} />
+        <Route 
+          path="/neighborhoods" 
+          element={
+            <AdminPasswordProtection>
+              <Neighborhoods />
+            </AdminPasswordProtection>
+          } 
+        />
+        <Route 
+          path="/tech" 
+          element={
+            <AdminPasswordProtection>
+              <TechPage />
+            </AdminPasswordProtection>
+          } 
+        />
+        <Route 
+          path="/verification" 
+          element={
+            <AdminPasswordProtection>
+              <VerificationPage />
+            </AdminPasswordProtection>
+          } 
+        />
+        <Route 
+          path="/jobs" 
+          element={
+            <AdminPasswordProtection>
+              <JobsPage />
+            </AdminPasswordProtection>
+          } 
+        />
+        <Route 
+          path="/servers" 
+          element={
+            <AdminPasswordProtection>
+              <ServersPage />
+            </AdminPasswordProtection>
+          } 
+        />
+        <Route 
+          path="/architecture" 
+          element={
+            <AdminPasswordProtection>
+              <ArchitecturePage />
+            </AdminPasswordProtection>
+          } 
+        />
         {/* Deprecated: Schools List page - kept for backward compatibility but no longer linked */}
         <Route path="/data/schools" element={<SchoolsList />} />
       </Routes>

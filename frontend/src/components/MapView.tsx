@@ -1,16 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, Polyline, Marker, Popup, ZoomControl, useMap } from 'react-leaflet';
+import { MapContainer, Polyline, Marker, Popup, Tooltip, ZoomControl, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { useStore } from '../store/useStore';
 import { fetchRouteForStops } from '../services/routing';
 import { formatStreetName, extractStreetNames, expandAddressForGeocoding } from '../utils/formatAddress';
 import { createHomeIcon, createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
-import { createSchoolIcon, createNumberedIcon } from '../utils/markerIcons';
+import { createSchoolIcon, createNumberedIcon, getNumberedIconDimensions } from '../utils/markerIcons';
+import { getSchoolTypes, getSchoolColor, createSchoolIcon as createSchoolIconBase } from '../utils/schoolUtils';
+import { formatDate } from '../utils/dateUtils';
+import { handleMapLinkClick } from '../utils/mapLinks';
 import { geocodeAddress } from '../services/api';
 import { toLeafletPosition, validateLngLat, formatCoordinates } from '../utils/coordinates';
 import { DarkModeTileLayer } from './DarkModeTileLayer';
 import { useIsMobile } from '../hooks/useMediaQuery';
-import { Route } from '../types';
+import { Route, Stop } from '../types';
+import { SchoolInfoTooltip } from './SchoolInfoTooltip';
+import { StopInfoTooltip } from './StopInfoTooltip';
 import 'leaflet/dist/leaflet.css';
 
 const homeIcon = createHomeIcon();
@@ -50,12 +55,9 @@ interface StreetMarker {
 }
 
 export function MapView({ editingMode = false, enableStreetHighlighting = false, enableStreetPins = false, onSchoolStopClick }: MapViewProps) {
-  const { routes, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, setSelectedSchool, updateStopCoordinates, directionFilter, shouldZoomToHomeAddress, clearZoomToHomeAddress } = useStore();
+  const { routes, schools, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, setSelectedSchool, updateStopCoordinates, directionFilter, shouldZoomToHomeAddress, clearZoomToHomeAddress, isLoading } = useStore();
   const isMobile = useIsMobile();
   const mapRef = useRef<L.Map | null>(null);
-  const [swipeStartY, setSwipeStartY] = useState<number | null>(null);
-  const [swipeCurrentY, setSwipeCurrentY] = useState<number | null>(null);
-  const stopSheetRef = useRef<HTMLDivElement>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
   const [undoHistory, setUndoHistory] = useState<UndoStep[]>([]);
   const routeRecalcTimeoutRef = useRef<{ [routeId: string]: ReturnType<typeof setTimeout> }>({});
@@ -70,7 +72,12 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const [streetError, setStreetError] = useState<string | null>(null);
   const [streetMarkers, setStreetMarkers] = useState<StreetMarker[]>([]);
   const [loadingStreetPins, setLoadingStreetPins] = useState<boolean>(false);
-  const [isStopDialogClosing, setIsStopDialogClosing] = useState<boolean>(false);
+  const [showSchoolInfoPopup, setShowSchoolInfoPopup] = useState<boolean>(false);
+
+  // Reset school info popup when school changes
+  useEffect(() => {
+    setShowSchoolInfoPopup(false);
+  }, [selectedSchoolId]);
 
   // Get selected routes, filtered by direction
   const selectedRoutes = routes.filter(route => {
@@ -102,7 +109,10 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         return;
       }
       const position = toLeafletPosition(homeAddress.coordinates);
-      mapRef.current.setView(position, 16, { animate: true });
+      mapRef.current.setView(position, 16, { 
+        animate: true,
+        duration: 0.6 // Snappy zoom
+      });
       hasZoomedToAddressRef.current = true;
       lastAddressZoomTimeRef.current = Date.now();
     }
@@ -152,34 +162,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     }
   }, [lookupAddress]);
 
-  // Zoom to home address when triggered from address bar
-  useEffect(() => {
-    if (!shouldZoomToHomeAddress || !homeAddress) return;
-    
-    if (mapRef.current && validateLngLat(homeAddress.coordinates)) {
-      // Use requestAnimationFrame to ensure map is ready
-      const frameId = requestAnimationFrame(() => {
-        try {
-          if (mapRef.current && homeAddress) {
-            const position = toLeafletPosition(homeAddress.coordinates);
-            mapRef.current.setView(position, 16, { animate: true });
-            if (clearZoomToHomeAddress) {
-              clearZoomToHomeAddress();
-            }
-            console.log('[MapView] 🏠 Zoomed to home address from address bar:', homeAddress.address);
-          }
-        } catch (error) {
-          console.error('[MapView] ❌ Error zooming to home address:', error);
-          if (clearZoomToHomeAddress) {
-            clearZoomToHomeAddress();
-          }
-        }
-      });
-      
-      return () => cancelAnimationFrame(frameId);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldZoomToHomeAddress, homeAddress]);
+  // Zoom to home address when triggered from address bar - REMOVED, now handled in FitMapBounds
 
   // Component to zoom to selected stop or school
   // This component uses useMap() to access the map instance inside MapContainer
@@ -189,7 +172,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     const prevSchoolIdRef = useRef<string | null>(null);
     const hasZoomedRef = useRef<boolean>(false);
     const mapReadyRef = useRef<boolean>(false);
-    const { schools, selectedSchoolId, selectedStop } = useStore();
+    const { schools, selectedSchoolId, selectedStop, homeAddress, shouldZoomToHomeAddress, clearZoomToHomeAddress } = useStore();
     
     // Mark map as ready when it's initialized
     useEffect(() => {
@@ -203,6 +186,63 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     useEffect(() => {
       if (!map || !mapReadyRef.current) {
         return;
+      }
+
+      // CASE 0: Explicit request to zoom to home (e.g. from address bar or on load)
+      // This has high priority and can combine with selected routes
+      if (shouldZoomToHomeAddress && homeAddress && validateLngLat(homeAddress.coordinates)) {
+        // If routes are still loading, wait for them to finish before zooming 
+        // so we can correctly fit both home and routes
+        if (isLoading && selectedRoutes.length === 0) {
+          console.log('[FitMapBounds] ⏳ Routes are loading, waiting to zoom...');
+          return;
+        }
+
+        const homePosition = toLeafletPosition(homeAddress.coordinates);
+        const allCoords: [number, number][] = [homePosition];
+        
+        if (selectedRoutes.length > 0) {
+          selectedRoutes.forEach(route => {
+            route.stops.forEach(stop => {
+              if (stop.coordinates && validateLngLat(stop.coordinates)) {
+                allCoords.push(toLeafletPosition(stop.coordinates));
+              }
+            });
+          });
+        }
+
+        const timer = setTimeout(() => {
+          try {
+            if (allCoords.length > 1) {
+              // Zoom to fit both home and routes
+              const bounds = L.latLngBounds(allCoords);
+              map.fitBounds(bounds, { 
+                padding: [100, 100], 
+                animate: true,
+                duration: 0.6
+              });
+              console.log('[FitMapBounds] 🏠🗺️ Zoomed to show home and selected routes');
+            } else {
+              // Just zoom to home if no routes
+              map.setView(homePosition, 16, { 
+                animate: true,
+                duration: 0.6
+              });
+              console.log('[FitMapBounds] 🏠 Zoomed to home address only');
+            }
+            
+            if (clearZoomToHomeAddress) {
+              clearZoomToHomeAddress();
+            }
+          } catch (error) {
+            console.error('[FitMapBounds] Error zooming to home:', error);
+            if (clearZoomToHomeAddress) {
+              clearZoomToHomeAddress();
+            }
+          }
+        }, 150);
+
+        return () => clearTimeout(timer);
       }
       
       // CASE 1: Stop is selected - priority zoom
@@ -226,7 +266,20 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         
         const timer = setTimeout(() => {
           try {
-            map.setView(stopPosition, 16, { animate: true });
+            // Calculate a target center that is shifted so the pin is 100px above the center
+            const zoom = 16;
+            
+            // Get icon dimensions to account for horizontal offset (full width of the pin)
+            const dimensions = getNumberedIconDimensions(selectedStop.stopNumber, selectedStop.stop.time, true);
+            
+            const targetPoint = map.project(stopPosition, zoom).add([dimensions.centerShiftX, 100]);
+            const targetLatLng = map.unproject(targetPoint, zoom);
+
+            map.setView(targetLatLng, zoom, { 
+              animate: true,
+              duration: 0.6
+            });
+
             hasZoomedRef.current = true;
             prevStopIdRef.current = currentStopId;
             prevSchoolIdRef.current = selectedSchoolId; // Update this too
@@ -253,12 +306,23 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           const bounds = L.latLngBounds(allCoordinates);
           const hasSelectedBefore = prevStopIdRef.current !== null || prevSchoolIdRef.current !== null;
           
-          // Only animate if we were previously zoomed into something else
-          map.fitBounds(bounds, { padding: [50, 50], animate: hasSelectedBefore });
+          // Use a small delay for zoom out to ensure smooth transition
+          const timer = setTimeout(() => {
+            try {
+          map.fitBounds(bounds, { 
+            padding: [50, 50], 
+            animate: hasSelectedBefore,
+            duration: 0.6
+          });
+              hasZoomedRef.current = false;
+            } catch (error) {
+              console.error('[FitMapBounds] Error fitting bounds:', error);
+            }
+          }, 100);
           
           prevStopIdRef.current = null;
           prevSchoolIdRef.current = selectedSchoolId;
-          hasZoomedRef.current = false;
+          return () => clearTimeout(timer);
         }
         return;
       }
@@ -281,7 +345,16 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           
           const timer = setTimeout(() => {
             try {
-              map.setView(schoolPosition, 16, { animate: true });
+              // Calculate a target center that is shifted so the pin is 100px above the center
+              const zoom = 16;
+              const targetPoint = map.project(schoolPosition, zoom).add([0, 100]);
+              const targetLatLng = map.unproject(targetPoint, zoom);
+
+              map.setView(targetLatLng, zoom, { 
+                animate: true,
+                duration: 0.6
+              });
+
               hasZoomedRef.current = true;
               prevSchoolIdRef.current = selectedSchoolId;
               prevStopIdRef.current = null; // Clear stop ref
@@ -294,8 +367,36 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         }
       }
 
-      // CASE 4: Nothing selected - fit to all selected routes (already handled by CASE 2 if routes exist)
-      // If no routes and no school, just don't do anything or reset view
+      // CASE 4: Nothing selected (or only school) - fit to school if possible, or reset
+      if (!selectedStop && selectedRoutes.length === 0) {
+        if (selectedSchoolId) {
+          const school = schools.find(s => s.id === selectedSchoolId);
+          if (school && school.coordinates && (prevStopIdRef.current !== null)) {
+            const schoolPosition = toLeafletPosition(school.coordinates);
+            const timer = setTimeout(() => {
+              try {
+                // Same logic as Case 3
+                const zoom = 16;
+                const targetPoint = map.project(schoolPosition, zoom).add([0, 100]);
+                const targetLatLng = map.unproject(targetPoint, zoom);
+                map.setView(targetLatLng, zoom, { animate: true, duration: 0.6 });
+                hasZoomedRef.current = true;
+              } catch (error) {
+                console.error('[FitMapBounds] Error resetting to school:', error);
+              }
+            }, 100);
+            prevStopIdRef.current = null;
+            return () => clearTimeout(timer);
+          }
+        }
+        
+        // Final fallback - if nothing is selected and we were previously zoomed in
+        if (prevStopIdRef.current !== null || prevSchoolIdRef.current !== null) {
+          prevStopIdRef.current = null;
+          prevSchoolIdRef.current = null;
+          hasZoomedRef.current = false;
+        }
+      }
     }, [map, selectedStop?.route.id, selectedStop?.stop.id, selectedSchoolId, schools.length, selectedRoutes.length]);
     
     return null;
@@ -484,11 +585,6 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   // Handle stop selection changes (clear history, highlighted streets, etc.)
   // Note: Zoom to stop is handled by FitHomeAndStopBounds component
   useEffect(() => {
-    // Reset closing state when stop is selected
-    if (selectedStop) {
-      setIsStopDialogClosing(false);
-    }
-    
     // Clear undo history when a different stop is selected
     // (only keep history for the currently selected stop)
     if (selectedStop) {
@@ -510,15 +606,6 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     setStreetMarkers([]);
   }, [selectedStop?.route.id, selectedStop?.stop.id]);
 
-  // Handle stop dialog closing animation
-  const handleCloseStopDialog = () => {
-    setIsStopDialogClosing(true);
-    setTimeout(() => {
-      clearSelectedStop();
-      setIsStopDialogClosing(false);
-    }, 125); // Match animation duration
-  };
-
   // Zoom to highlighted street bounds (only if feature is enabled)
   useEffect(() => {
     if (enableStreetHighlighting && mapRef.current && highlightedStreet) {
@@ -526,7 +613,11 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         [highlightedStreet.bounds.south, highlightedStreet.bounds.west],
         [highlightedStreet.bounds.north, highlightedStreet.bounds.east]
       );
-      mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
+      mapRef.current.fitBounds(bounds, { 
+        padding: [50, 50], 
+        animate: true,
+        duration: 0.6
+      });
     }
   }, [highlightedStreet, enableStreetHighlighting]);
 
@@ -621,7 +712,11 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             return toLeafletPosition(marker.coordinates);
           })
         );
-        mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
+        mapRef.current.fitBounds(bounds, { 
+        padding: [50, 50], 
+        animate: true,
+        duration: 0.6
+      });
       }
     } catch (error) {
       console.error('[MapView] Error dropping street pins:', error);
@@ -690,6 +785,58 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     }
   };
 
+  const handleUndo = async () => {
+    const lastStep = undoHistory[0];
+    if (!lastStep || !selectedStop) return;
+
+    // Find the route and stop
+    const route = routes.find(r => r.id === lastStep.routeId);
+    if (!route) return;
+    const stop = route.stops.find(s => s.id === lastStep.stopId);
+    if (!stop) return;
+
+    // Remove from undo history
+    setUndoHistory(prev => prev.slice(1));
+
+    // Restore coordinates
+    updateStopCoordinates(lastStep.routeId, lastStep.stopId, lastStep.coordinates);
+
+    // Save to API
+    try {
+      const response = await fetch(`/api/data/routes/${lastStep.routeId}/stops/${lastStep.stopId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          coordinates: lastStep.coordinates, 
+          schoolId: selectedSchoolId 
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to undo coordinates');
+      }
+
+      // Recalculate route geometry after 1 second
+      if (routeRecalcTimeoutRef.current[lastStep.routeId]) {
+        clearTimeout(routeRecalcTimeoutRef.current[lastStep.routeId]);
+      }
+      
+      routeRecalcTimeoutRef.current[lastStep.routeId] = setTimeout(() => {
+        recalculateRouteGeometry(lastStep.routeId);
+      }, 1000);
+
+      // Update selected stop if it's the one being undone
+      if (selectedStop && selectedStop.route.id === lastStep.routeId && selectedStop.stop.id === lastStep.stopId) {
+        selectStop(route, stop, selectedStop.stopNumber);
+      }
+    } catch (error) {
+      console.error('Error undoing coordinates:', error);
+      alert('Failed to undo. Please try again.');
+    }
+  };
+
   // Default center (Portland, OR)
   const defaultCenter: [number, number] = [45.5152, -122.6784];
 
@@ -706,11 +853,82 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       <ZoomControl position="bottomleft" />
       <FitMapBounds />
 
+      {/* Standalone School Marker (handles school info and "no routes" guidance) */}
+      {selectedSchoolId && routes.length > 0 && !isLoading && (() => {
+        const school = schools.find(s => s.id === selectedSchoolId);
+        if (!school || !school.coordinates || !validateLngLat(school.coordinates)) return null;
+        
+        const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
+        const schoolColor = getSchoolColor(schoolTypes);
+        const icon = createSchoolIconBase(schoolColor);
+        const position = toLeafletPosition(school.coordinates);
+        
+        // Determine what to show in the tooltip
+        const showNoRoutesMessage = !selectedStop && selectedRoutes.length === 0;
+        
+        return (
+          <Marker 
+            position={position} 
+            icon={icon}
+            eventHandlers={{
+              click: (e) => {
+                const isOpening = !showSchoolInfoPopup;
+                setShowSchoolInfoPopup(isOpening);
+                
+                if (isOpening && e.target && e.target._map) {
+                  const map = e.target._map;
+                  const latlng = e.target.getLatLng();
+                  const zoom = 16;
+                  
+                  // Calculate a target center that is shifted so the pin is 100px above the center
+                  const targetPoint = map.project(latlng, zoom).add([0, 100]);
+                  const targetLatLng = map.unproject(targetPoint, zoom);
+                  
+                  map.setView(targetLatLng, zoom, { 
+                    animate: true,
+                    duration: 0.6
+                  });
+                }
+              }
+            }}
+            zIndexOffset={1000}
+          >
+            {(showNoRoutesMessage || showSchoolInfoPopup) && (
+              <Tooltip 
+                permanent 
+                direction="bottom" 
+                offset={[0, 30]}
+                className="no-routes-tooltip"
+                opacity={1}
+              >
+              <SchoolInfoTooltip 
+                school={school} 
+                onClose={() => setShowSchoolInfoPopup(false)}
+                message={showSchoolInfoPopup ? undefined : `Select a route to view stops for ${school.name}`}
+              />
+              </Tooltip>
+            )}
+          </Marker>
+        );
+      })()}
+
       {/* Home address marker */}
       {homeAddress && (
         <Marker 
           position={[homeAddress.coordinates[1], homeAddress.coordinates[0]]} 
           icon={homeIcon}
+          eventHandlers={{
+            click: (e) => {
+              const marker = e.target;
+              const map = marker._map;
+              if (map) {
+                map.setView(marker.getLatLng(), 16, { 
+                  animate: true,
+                  duration: 0.6
+                });
+              }
+            }
+          }}
         />
       )}
 
@@ -774,138 +992,136 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                 opacity={routeGeometry === null ? 0.4 : 0.8}
               />
             )}
-
-            {/* Stop markers with numbers */}
-            {stopsWithCoords.map((stop) => {
-              // Convert [lng, lat] to [lat, lng] for Leaflet
-              if (!validateLngLat(stop.coordinates)) {
-                console.error('[MapView] Invalid stop coordinates, skipping marker:', stop.coordinates);
-              return null;
-            }
-            const position = toLeafletPosition(stop.coordinates!);
-            const isSelected = selectedStop?.stop.id === stop.id && selectedStop?.route.id === route.id;
-              
-              // Determine stop number and icon
-              let stopNumber: number;
-              let icon: L.DivIcon;
-              
-              if (stop.isSchoolStop) {
-                // School stop: use school icon, no number
-                stopNumber = 0; // For identification, but won't be displayed
-                icon = createSchoolIcon(route.color, stop.time);
-              } else {
-                // Regular stop: calculate number by counting only non-school, non-skipped stops before this one
-                const allStopsWithCoords = route.stops.filter(s => s.coordinates && !s.skipGeocoding);
-                const currentIndexInAllStops = allStopsWithCoords.findIndex(s => s.id === stop.id);
-                // Count how many regular (non-school, non-skipped) stops come before this one
-                let regularStopCount = 0;
-                for (let i = 0; i < currentIndexInAllStops; i++) {
-                  const s = allStopsWithCoords[i];
-                  if (!s.isSchoolStop && !s.skipGeocoding) {
-                    regularStopCount++;
-                  }
-                }
-                stopNumber = regularStopCount + 1; // Number starts at 1
-                // Create unique ID from route and stop IDs to prevent CSS class collisions
-                const uniqueMarkerId = `${route.id}-${stop.id}`;
-                icon = createNumberedIcon(stopNumber, route.color, stop.time, isSelected, editingMode, uniqueMarkerId);
-              }
-
-              return (
-                <Marker
-                  key={`${route.id}-${stop.id}-${route.color}`}
-                  position={position}
-                  icon={icon}
-                  draggable={editingMode}
-                  eventHandlers={{
-                    click: () => {
-                      // For school stops, show the school dialog instead of the stop dialog
-                      if (stop.isSchoolStop) {
-                        if (selectedSchoolId) {
-                          // Call the callback to show the school dialog
-                          if (onSchoolStopClick) {
-                            onSchoolStopClick(selectedSchoolId);
-                          }
-                        }
-                        clearSelectedStop();
-                        return;
-                      }
-                      // For regular stops, open the stop dialog
-                      selectStop(route, stop, stopNumber);
-                    },
-                    ...(editingMode ? {
-                      dragend: async (e) => {
-                        const marker = e.target;
-                        const latlng = marker.getLatLng();
-                        // Leaflet gives us [lat, lng], convert to internal [lng, lat] format
-                        const newCoords: [number, number] = [latlng.lng, latlng.lat];
-                        if (!validateLngLat(newCoords)) {
-                          console.error('[MapView] Invalid new coordinates from drag:', newCoords);
-                          marker.setLatLng(position);
-                          alert('Invalid coordinates. Please try again.');
-                          return;
-                        }
-                        const oldCoords: [number, number] = stop.coordinates!;
-                        if (!validateLngLat(oldCoords)) {
-                          console.error('[MapView] Invalid old coordinates:', oldCoords);
-                          return;
-                        }
-                        
-                        // Add to undo history (keep max 5 steps)
-                        setUndoHistory(prev => {
-                          const newHistory = [
-                            { routeId: route.id, stopId: stop.id, coordinates: oldCoords },
-                            ...prev
-                          ];
-                          return newHistory.slice(0, 5); // Keep only last 5 steps
-                        });
-                        
-                        // Update store immediately for responsive UI
-                        updateStopCoordinates(route.id, stop.id, newCoords);
-                        
-                        // Save to API
-                        try {
-                          const response = await fetch(`/api/data/routes/${route.id}/stops/${stop.id}`, {
-                            method: 'PUT',
-                            headers: {
-                              'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ 
-                              coordinates: newCoords, 
-                              schoolId: selectedSchoolId 
-                            }),
-                          });
-
-                          if (!response.ok) {
-                            throw new Error('Failed to save coordinates');
-                          }
-
-                          // Schedule route recalculation after 1.5 second delay
-                          // Clear any existing timeout for this route
-                          if (routeRecalcTimeoutRef.current[route.id]) {
-                            clearTimeout(routeRecalcTimeoutRef.current[route.id]);
-                          }
-                          
-                          routeRecalcTimeoutRef.current[route.id] = setTimeout(() => {
-                            recalculateRouteGeometry(route.id);
-                          }, 1500);
-                        } catch (error) {
-                          console.error('Error saving coordinates:', error);
-                          // Revert the marker position on error
-                          marker.setLatLng(position);
-                          // Remove from undo history since save failed
-                          setUndoHistory(prev => prev.slice(1));
-                          alert('Failed to save coordinates. Please try again.');
-                        }
-                      },
-                    } : {}),
-                  }}
-                />
-              );
-            })}
           </div>
         );
       })}
+
+      {/* Stop markers with numbers - rendered separately to avoid duplication across routes */}
+      {(() => {
+        // Group all stops from all selected routes
+        // We want to show a stop only once if it's the same physical location and time
+        const allStops: { stop: Stop; route: Route; stopNumber: number }[] = [];
+        const seenStops = new Set<string>();
+
+        selectedRoutes.forEach(route => {
+          const stopsWithCoords = route.stops.filter(stop => stop.coordinates && !stop.skipGeocoding);
+          
+          stopsWithCoords.forEach((stop) => {
+            // Skip school stops - handled by standalone school marker
+            if (stop.isSchoolStop) return;
+
+            // Create a unique key for this stop location + time + route name
+            // We include route name because if the user selects TWO different routes (e.g. 100 and 101) 
+            // that happen to share a stop, we might want to see both? 
+            // But usually for PPS, duplicates are Morning/Afternoon versions of the same route.
+            const stopKey = `${stop.coordinates![0]},${stop.coordinates![1]}-${stop.time}-${route.name}`;
+            
+            if (!seenStops.has(stopKey)) {
+              seenStops.add(stopKey);
+              
+              // Calculate stop number
+              const currentIndexInAllStops = route.stops.filter(s => s.coordinates && !s.skipGeocoding).findIndex(s => s.id === stop.id);
+              let regularStopCount = 0;
+              for (let i = 0; i < currentIndexInAllStops; i++) {
+                const s = route.stops.filter(s => s.coordinates && !s.skipGeocoding)[i];
+                if (!s.isSchoolStop && !s.skipGeocoding) {
+                  regularStopCount++;
+                }
+              }
+              const stopNumber = regularStopCount + 1;
+              
+              allStops.push({ stop, route, stopNumber });
+            }
+          });
+        });
+
+        return allStops.map(({ stop, route, stopNumber }) => {
+          if (!validateLngLat(stop.coordinates)) return null;
+          
+          const position = toLeafletPosition(stop.coordinates!);
+          const isSelected = selectedStop?.stop.id === stop.id && selectedStop?.route.id === route.id;
+          
+          const uniqueMarkerId = `${route.id}-${stop.id}`;
+          const icon = createNumberedIcon(stopNumber, route.color, stop.time, isSelected, editingMode, uniqueMarkerId);
+
+          return (
+            <Marker
+              key={`${route.id}-${stop.id}-${route.color}`}
+              position={position}
+              icon={icon}
+              draggable={editingMode}
+              zIndexOffset={isSelected ? 1000 : 0}
+              eventHandlers={{
+                click: () => selectStop(route, stop, stopNumber),
+                ...(editingMode ? {
+                  dragend: async (e) => {
+                    const marker = e.target;
+                    const latlng = marker.getLatLng();
+                    const newCoords: [number, number] = [latlng.lng, latlng.lat];
+                    if (!validateLngLat(newCoords)) {
+                      marker.setLatLng(position);
+                      alert('Invalid coordinates. Please try again.');
+                      return;
+                    }
+                    const oldCoords: [number, number] = stop.coordinates!;
+                    
+                    setUndoHistory(prev => [{ routeId: route.id, stopId: stop.id, coordinates: oldCoords }, ...prev].slice(0, 5));
+                    updateStopCoordinates(route.id, stop.id, newCoords);
+                    
+                    try {
+                      const response = await fetch(`/api/data/routes/${route.id}/stops/${stop.id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ coordinates: newCoords, schoolId: selectedSchoolId }),
+                      });
+
+                      if (!response.ok) throw new Error('Failed to save');
+
+                      if (routeRecalcTimeoutRef.current[route.id]) clearTimeout(routeRecalcTimeoutRef.current[route.id]);
+                      routeRecalcTimeoutRef.current[route.id] = setTimeout(() => recalculateRouteGeometry(route.id), 1500);
+                    } catch (error) {
+                      marker.setLatLng(position);
+                      setUndoHistory(prev => prev.slice(1));
+                      alert('Failed to save coordinates.');
+                    }
+                  },
+                } : {}),
+              }}
+            >
+              {isSelected && (() => {
+                const dims = getNumberedIconDimensions(stopNumber, stop.time, true);
+                return (
+                  <Tooltip 
+                    permanent 
+                    direction="bottom" 
+                    offset={[dims.centerShiftX, dims.bottomGapY]}
+                    className="stop-info-tooltip"
+                    opacity={1}
+                  >
+                    <StopInfoTooltip 
+                      route={route}
+                      stop={stop}
+                      stopNumber={stopNumber}
+                      onClose={clearSelectedStop}
+                      enableStreetHighlighting={enableStreetHighlighting}
+                      highlightedStreetName={highlightedStreet?.name}
+                      loadingStreet={loadingStreet || undefined}
+                      streetError={streetError || undefined}
+                      onStreetClick={handleStreetClick}
+                      enableStreetPins={enableStreetPins}
+                      loadingStreetPins={loadingStreetPins}
+                      onDropStreetPins={handleDropStreetPins}
+                      editingMode={editingMode}
+                      undoHistoryCount={undoHistory.filter(step => step.routeId === route.id && step.stopId === stop.id).length}
+                      onUndo={handleUndo}
+                    />
+                  </Tooltip>
+                );
+              })()}
+            </Marker>
+          );
+        });
+      })()}
 
       {/* Highlighted street polyline - only show if feature is enabled */}
       {enableStreetHighlighting && highlightedStreet && highlightedStreet.geometry.length > 0 && (
@@ -937,438 +1153,6 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         );
       })}
       </MapContainer>
-
-      {/* Stop info overlay at bottom */}
-      {(selectedStop || isStopDialogClosing) && selectedStop && (
-        <div
-          ref={stopSheetRef}
-          style={{
-            position: 'absolute',
-            ...(isMobile ? {
-              bottom: isStopDialogClosing 
-                ? '-100%' 
-                : swipeCurrentY !== null 
-                  ? Math.min(0, swipeCurrentY - (swipeStartY || 0)) 
-                  : 0,
-              left: 0,
-              right: 0,
-              maxWidth: '100%',
-              borderTopLeftRadius: '16px',
-              borderTopRightRadius: '16px',
-              borderBottomLeftRadius: 0,
-              borderBottomRightRadius: 0,
-              maxHeight: '70vh',
-              overflowY: swipeStartY === null ? 'auto' : 'hidden',
-              minWidth: 'auto',
-              touchAction: 'pan-y',
-            } : {
-              bottom: '1rem',
-              right: '1rem',
-              minWidth: '300px',
-              maxWidth: '400px',
-              borderRadius: '8px',
-            }),
-            backgroundColor: 'var(--bg-primary)',
-            padding: '1rem 1.5rem',
-            boxShadow: '0 4px 12px var(--shadow-hover)',
-            zIndex: 1000,
-            border: 'none',
-            transition: swipeStartY === null 
-              ? 'background-color 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15), bottom 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' 
-              : 'none',
-            animation: isMobile && swipeStartY === null && !isStopDialogClosing 
-              ? 'slideUp 0.125s cubic-bezier(0.68, -0.15, 0.265, 1.15)' 
-              : undefined,
-          }}
-          onTouchStart={(e) => {
-            if (!isMobile) return;
-            const touch = e.touches[0];
-            setSwipeStartY(touch.clientY);
-            setSwipeCurrentY(touch.clientY);
-          }}
-          onTouchMove={(e) => {
-            if (!isMobile || swipeStartY === null) return;
-            const touch = e.touches[0];
-            // Only allow downward swipes
-            if (touch.clientY > swipeStartY) {
-              setSwipeCurrentY(touch.clientY);
-            }
-          }}
-          onTouchEnd={() => {
-            if (!isMobile || swipeStartY === null) return;
-            const swipeDistance = swipeCurrentY! - swipeStartY;
-            // If swiped down more than 100px, close the sheet
-            if (swipeDistance > 100) {
-              handleCloseStopDialog();
-            }
-            // Reset swipe state
-            setSwipeStartY(null);
-            setSwipeCurrentY(null);
-          }}
-        >
-          {/* Drag handle for mobile */}
-          {isMobile && (
-            <div 
-              style={{
-                width: '40px',
-                height: '4px',
-                backgroundColor: 'var(--text-tertiary)',
-                borderRadius: '2px',
-                margin: '0 auto 0.75rem',
-                opacity: 0.5,
-                cursor: 'grab',
-                touchAction: 'none',
-              }}
-              onTouchStart={(e) => {
-                e.stopPropagation();
-                const touch = e.touches[0];
-                setSwipeStartY(touch.clientY);
-                setSwipeCurrentY(touch.clientY);
-              }}
-            />
-          )}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-            <div>
-              <div style={{ fontWeight: 'bold', fontSize: '20px', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <span style={{ color: 'var(--text-primary)' }}>{selectedStop.route.name}</span>
-                {selectedStop.stopNumber > 0 && (
-                  <span style={{ 
-                    fontSize: '12px', 
-                    padding: '3px 10px',
-                    borderRadius: '12px',
-                    fontWeight: '500',
-                    backgroundColor: selectedStop.route.color,
-                    color: '#FFFFFF',
-                  }}>
-                    Stop {selectedStop.stopNumber}
-                  </span>
-                )}
-              </div>
-              {selectedStop.stop.isSchoolStop && (
-                <div style={{ fontSize: '14px', color: 'var(--text-tertiary)', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                  <span>🏫</span> School Loading Zone
-                </div>
-              )}
-              <div style={{ fontSize: '15px', fontWeight: '500', marginTop: '0.75rem', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
-                {selectedStop.stop.isSchoolStop && selectedStop.stop.schoolName ? (
-                  selectedStop.stop.schoolName
-                ) : enableStreetHighlighting ? (
-                  <div>
-                    {(() => {
-                      const address = selectedStop.stop.address;
-                      const streets = extractStreetNames(address);
-                      
-                      if (streets.length === 1) {
-                        // Single street - make it clickable
-                        const streetName = streets[0];
-                        const isHighlighted = highlightedStreet?.name === streetName;
-                        const isLoading = loadingStreet === streetName;
-                        
-                        return (
-                          <span
-                            onClick={() => !isLoading && handleStreetClick(streetName)}
-                            style={{
-                              cursor: isLoading ? 'not-allowed' : 'pointer',
-                              textDecoration: isLoading ? 'none' : 'underline',
-                              color: isHighlighted ? '#FFD700' : isLoading ? 'var(--text-tertiary)' : 'var(--text-primary)',
-                              fontWeight: isHighlighted ? 'bold' : 'normal',
-                              opacity: isLoading ? 0.6 : 1,
-                              transition: 'all 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                              if (!isLoading) {
-                                e.currentTarget.style.color = '#4ECDC4';
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              if (!isLoading) {
-                                e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)';
-                              }
-                            }}
-                            title={isLoading ? 'Loading street geometry...' : 'Click to highlight street on map'}
-                          >
-                            {formatStreetName(streetName)}
-                            {isLoading && (
-                              <span style={{ marginLeft: '0.5rem', display: 'inline-block' }}>
-                                <span style={{
-                                  display: 'inline-block',
-                                  width: '12px',
-                                  height: '12px',
-                                  border: '2px solid var(--text-tertiary)',
-                                  borderTopColor: 'transparent',
-                                  borderRadius: '50%',
-                                  animation: 'spin 0.8s linear infinite',
-                                }} />
-                              </span>
-                            )}
-                          </span>
-                        );
-                      } else if (streets.length > 1) {
-                        // Multiple streets - make each clickable
-                        return (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            {streets.map((streetName, index) => {
-                              const isHighlighted = highlightedStreet?.name === streetName;
-                              const isLoading = loadingStreet === streetName;
-                              
-                              return (
-                                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                  {index > 0 && (
-                                    <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>&</span>
-                                  )}
-                                  {isLoading ? (
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)' }}>
-                                      <span style={{
-                                        display: 'inline-block',
-                                        width: '12px',
-                                        height: '12px',
-                                        border: '2px solid var(--text-tertiary)',
-                                        borderTopColor: 'transparent',
-                                        borderRadius: '50%',
-                                        animation: 'spin 0.8s linear infinite',
-                                      }} />
-                                      <span style={{ fontSize: '14px' }}>Finding street geometry...</span>
-                                    </div>
-                                  ) : (
-                                    <span
-                                      onClick={() => handleStreetClick(streetName)}
-                                      style={{
-                                        cursor: 'pointer',
-                                        textDecoration: 'underline',
-                                        color: isHighlighted ? '#FFD700' : 'var(--text-primary)',
-                                        fontWeight: isHighlighted ? 'bold' : 'normal',
-                                        transition: 'all 0.2s ease',
-                                      }}
-                                      onMouseEnter={(e) => {
-                                        e.currentTarget.style.color = '#4ECDC4';
-                                      }}
-                                      onMouseLeave={(e) => {
-                                        e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)';
-                                      }}
-                                      title="Click to highlight street on map"
-                                    >
-                                      {formatStreetName(streetName)}
-                                    </span>
-                                  )}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        );
-                      } else {
-                        // Fallback: just show formatted address
-                        return formatStreetName(address);
-                      }
-                    })()}
-                  </div>
-                ) : (
-                  formatStreetName(selectedStop.stop.address)
-                )}
-              </div>
-              {enableStreetHighlighting && streetError && (
-                <div style={{ 
-                  fontSize: '12px', 
-                  color: '#f44336', 
-                  marginTop: '0.25rem',
-                  padding: '0.5rem',
-                  backgroundColor: 'rgba(244, 67, 54, 0.1)',
-                  borderRadius: '4px',
-                }}>
-                  ⚠️ {streetError}
-                </div>
-              )}
-              {selectedStop.stop.time && (
-                <div style={{ fontSize: '14px', color: 'var(--text-tertiary)' }}>
-                  {selectedStop.stop.time}
-                </div>
-              )}
-              {/* Drop pins button for intersections (admin only) */}
-              {enableStreetPins && !selectedStop.stop.isSchoolStop && extractStreetNames(selectedStop.stop.address).length > 0 && (
-                <button
-                  onClick={handleDropStreetPins}
-                  disabled={loadingStreetPins}
-                  style={{
-                    marginTop: '0.75rem',
-                    width: '100%',
-                    background: loadingStreetPins ? 'var(--text-tertiary)' : '#4ECDC4',
-                    border: 'none',
-                    fontSize: '14px',
-                    cursor: loadingStreetPins ? 'not-allowed' : 'pointer',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '4px',
-                    fontWeight: '500',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.5rem',
-                    opacity: loadingStreetPins ? 0.6 : 1,
-                    transition: 'background-color 0.2s ease, opacity 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!loadingStreetPins) {
-                      e.currentTarget.style.backgroundColor = '#3db8a8';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!loadingStreetPins) {
-                      e.currentTarget.style.backgroundColor = '#4ECDC4';
-                    }
-                  }}
-                  title="Drop pins on each street in this intersection"
-                >
-                  {loadingStreetPins ? (
-                    <>
-                      <span style={{
-                        display: 'inline-block',
-                        width: '14px',
-                        height: '14px',
-                        border: '2px solid white',
-                        borderTopColor: 'transparent',
-                        borderRadius: '50%',
-                        animation: 'spin 0.8s linear infinite',
-                      }} />
-                      <span>Dropping pins...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>📍</span>
-                      <span>Drop Pins on Streets</span>
-                    </>
-                  )}
-                </button>
-              )}
-            </div>
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              {editingMode && selectedStop && undoHistory.length > 0 && undoHistory[0]?.routeId === selectedStop.route.id && undoHistory[0]?.stopId === selectedStop.stop.id && (
-                <button
-                  onClick={async () => {
-                    const lastStep = undoHistory[0];
-                    if (!lastStep) return;
-
-                    // Find the route and stop
-                    const route = routes.find(r => r.id === lastStep.routeId);
-                    if (!route) return;
-                    const stop = route.stops.find(s => s.id === lastStep.stopId);
-                    if (!stop) return;
-
-                    // Remove from undo history
-                    setUndoHistory(prev => prev.slice(1));
-
-                    // Restore coordinates
-                    updateStopCoordinates(lastStep.routeId, lastStep.stopId, lastStep.coordinates);
-
-                    // Save to API
-                    try {
-                      const response = await fetch(`/api/data/routes/${lastStep.routeId}/stops/${lastStep.stopId}`, {
-                        method: 'PUT',
-                        headers: {
-                          'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ 
-                          coordinates: lastStep.coordinates, 
-                          schoolId: selectedSchoolId 
-                        }),
-                      });
-
-                      if (!response.ok) {
-                        throw new Error('Failed to undo coordinates');
-                      }
-
-                      // Recalculate route geometry after 1 second
-                      if (routeRecalcTimeoutRef.current[lastStep.routeId]) {
-                        clearTimeout(routeRecalcTimeoutRef.current[lastStep.routeId]);
-                      }
-                      
-                      routeRecalcTimeoutRef.current[lastStep.routeId] = setTimeout(() => {
-                        recalculateRouteGeometry(lastStep.routeId);
-                      }, 1000);
-
-                      // Update selected stop if it's the one being undone
-                      if (selectedStop && selectedStop.route.id === lastStep.routeId && selectedStop.stop.id === lastStep.stopId) {
-                        selectStop(route, stop, selectedStop.stopNumber);
-                      }
-                    } catch (error) {
-                      console.error('Error undoing coordinates:', error);
-                      alert('Failed to undo. Please try again.');
-                    }
-                  }}
-                  style={{
-                    background: '#4ECDC4',
-                    border: 'none',
-                    fontSize: '14px',
-                    cursor: 'pointer',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '4px',
-                    fontWeight: '500',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                  }}
-                  title={`Undo (${undoHistory.length} step${undoHistory.length !== 1 ? 's' : ''} available)`}
-                >
-                  <span>↶</span> Undo
-                </button>
-              )}
-              <button
-                onClick={handleCloseStopDialog}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '32px',
-                  cursor: 'pointer',
-                  color: 'var(--text-tertiary)',
-                  padding: '0',
-                  lineHeight: '1',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginTop: '2px',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--text-tertiary)';
-                }}
-                title="Close"
-              >
-                <div style={{
-                  width: '18px',
-                  height: '18px',
-                  position: 'relative',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                  <span style={{
-                    display: 'block',
-                    height: '1.5px',
-                    width: '100%',
-                    backgroundColor: 'currentColor',
-                    borderRadius: '2px',
-                    position: 'absolute',
-                    transform: 'rotate(45deg)',
-                    transformOrigin: 'center',
-                  }} />
-                  <span style={{
-                    display: 'block',
-                    height: '1.5px',
-                    width: '100%',
-                    backgroundColor: 'currentColor',
-                    borderRadius: '2px',
-                    position: 'absolute',
-                    transform: 'rotate(-45deg)',
-                    transformOrigin: 'center',
-                  }} />
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       
       {/* Loading spinner animation */}
       <style>{`

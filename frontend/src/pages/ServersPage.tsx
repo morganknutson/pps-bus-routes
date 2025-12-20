@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Header } from '../components/Header';
 
 interface ServerStatus {
   name: string;
@@ -295,12 +296,18 @@ export function ServersPage() {
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
       minHeight: '100vh',
-      padding: '2rem',
       backgroundColor: 'var(--bg-primary)',
     }}>
+      <Header />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        padding: '2rem',
+      }}>
       <div style={{
         width: '100%',
         maxWidth: '600px',
@@ -636,6 +643,7 @@ export function ServersPage() {
           <i className="fas fa-info-circle" style={{ marginRight: '0.5rem' }}></i>
           Status updates automatically every 5 seconds
         </div>
+      </div>
       </div>
     </div>
   );

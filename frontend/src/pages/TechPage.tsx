@@ -701,8 +701,8 @@ export function TechPage() {
                   </div>
                 </div>
                 <p style={{ color: 'var(--text-secondary)', marginTop: '15px', fontSize: '13px' }}>
-                  <strong>Note:</strong> This shows how a route appears in the RouteList component. The component automatically 
-                  displays stops with their addresses, times, and neighborhoods. Clicking stops would normally highlight them on the map.
+                  <strong>Note:</strong> This shows how a route appears in the RouteList component. Routes are automatically 
+                  grouped by their primary neighborhood. The component displays stops with their addresses, times, and neighborhoods.
                 </p>
               </ExpandableExample>
             </div>
@@ -857,6 +857,7 @@ export function TechPage() {
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li>Click markers to see stop details (address, time, neighborhood)</li>
                   <li>Toggle routes on/off via checkboxes in route list</li>
+                  <li>Routes are grouped by neighborhood with visual headings</li>
                   <li>Map auto-zooms to fit selected routes</li>
                   <li>Dark mode support via CSS variables</li>
                 </ul>

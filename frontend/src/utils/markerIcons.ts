@@ -39,128 +39,207 @@ export function createSchoolIcon(routeColor: string, time?: string): L.DivIcon {
   });
 }
 
+// Helper to calculate dimensions and offsets for the numbered icon
+// This is used by MapView to correctly position the tooltip
+export function getNumberedIconDimensions(number: number, time?: string, isSelected?: boolean) {
+  const hasTime = time && time.trim().length > 0;
+  const pillHeight = isSelected ? 32 : 26;
+  
+  // Mirror calculation logic from createNumberedIcon
+  const numberWidth = String(number).length * (isSelected ? 11 : 8);
+  const isSingleDigit = String(number).length === 1;
+  const borderWidth = 2;
+  const circleHeight = Math.round(pillHeight - (borderWidth * 2));
+  
+  const minPadding = Math.round(pillHeight * 0.23);
+  const numberPadding = Math.max(minPadding, (pillHeight - numberWidth) / 2);
+  
+  let circleWidth: number;
+  if (isSingleDigit) {
+    circleWidth = Math.round(circleHeight);
+  } else {
+    circleWidth = numberWidth + numberPadding * 2 + 1;
+  }
+  
+  const circleLeftEdge = 0;
+  const numberCenterX = circleLeftEdge + circleWidth / 2;
+  const circleRightEdge = circleLeftEdge + circleWidth;
+  const circleToTimeGap = 8;
+  const horizontalPadding = hasTime ? (isSelected ? 10 : 8) : (isSelected ? 8 : 6);
+  const estimatedTimeWidth = hasTime ? Math.max(25, time!.length * 5.5) : 0;
+  const timeRightPadding = 6;
+  
+  const totalWidth = circleRightEdge + (hasTime ? circleToTimeGap + estimatedTimeWidth + timeRightPadding : 0) + horizontalPadding;
+  const anchorX = numberCenterX;
+  const anchorY = pillHeight / 2;
+
+  return {
+    totalWidth,
+    pillHeight,
+    anchorX,
+    anchorY,
+    // Horizontal shift to center tooltip on the whole pill instead of the anchor (circle)
+    centerShiftX: (totalWidth / 2) - anchorX,
+    // Vertical shift to position tooltip 20px below the bottom edge of the pill
+    bottomGapY: (pillHeight / 2) + 20
+  };
+}
+
 // Create numbered marker icons with time
 export function createNumberedIcon(number: number, routeColor: string, time?: string, isSelected?: boolean, editingMode?: boolean, uniqueId?: string): L.DivIcon {
   const hasTime = time && time.trim().length > 0;
   const pillHeight = isSelected ? 32 : 26;
   const fontSize = isSelected ? '13px' : '11px';
   const timeFontSize = isSelected ? '11px' : '10px';
-  // Use route color for both selected and unselected states to maintain consistency
   const backgroundColor = routeColor;
   const opacity = isSelected ? '1' : '1';
-  // Normal padding on both sides
   const horizontalPadding = hasTime ? (isSelected ? 10 : 8) : (isSelected ? 8 : 6);
-  const gap = 6; // Gap between number and time
-  const circleToTimeGap = 8; // Additional gap to prevent time from overlapping circle
+  const gap = 6;
+  const circleToTimeGap = 8;
   
-  // Calculate number width first
-  // Use better estimate for selected state to account for larger font size
   const numberWidth = String(number).length * (isSelected ? 11 : 8);
-  
-  // Circle size - height matches pill inner content area (pill height minus border)
-  // Single digits should be perfect circles (width = height), multi-digit can be pill-shaped
   const isSingleDigit = String(number).length === 1;
-  const borderWidth = 2; // Pill has 2px border on all sides
-  const circleHeight = Math.round(pillHeight - (borderWidth * 2)); // Circle height matches pill inner content area (subtract top + bottom border)
+  const borderWidth = 2;
+  const circleHeight = Math.round(pillHeight - (borderWidth * 2));
   
-  // Calculate padding (needed for both single and multi-digit for positioning)
-  const minPadding = Math.round(pillHeight * 0.23); // ~6px for 26px, ~7px for 32px
+  const minPadding = Math.round(pillHeight * 0.23);
   const numberPadding = Math.max(minPadding, (pillHeight - numberWidth) / 2);
   
   let circleWidth: number;
   if (isSingleDigit) {
-    // For single digits, make a perfect circle: width = height
-    // Use Math.round to ensure exact pixel values
     circleWidth = Math.round(circleHeight);
   } else {
-    // For multi-digit, calculate width to fit the number with padding
-    // Add small buffer to ensure no gaps
     circleWidth = numberWidth + numberPadding * 2 + 1;
   }
-  const smallCircleSize = 6; // Final small circle size (slightly smaller)
   
-  // Calculate position - position circle so its left edge is at the pill's left edge
-  // This prevents white space for multi-digit numbers
-  const circleLeftEdge = 0; // Circle starts at the left edge of the pill
+  const circleLeftEdge = 0;
   const numberCenterX = circleLeftEdge + circleWidth / 2;
-  
-  // Calculate total width based on content
-  // Circle extends from circleLeftEdge to circleLeftEdge + circleWidth
-  // Then we need space for time and padding
-  const estimatedTimeWidth = hasTime ? Math.max(25, time.length * 5.5) : 0;
-  const timeRightPadding = 6; // Additional padding on right of time to keep it contained
   const circleRightEdge = circleLeftEdge + circleWidth;
+  const estimatedTimeWidth = hasTime ? Math.max(25, time.length * 5.5) : 0;
+  const timeRightPadding = 6;
   const totalWidth = circleRightEdge + (hasTime ? circleToTimeGap + estimatedTimeWidth + timeRightPadding : 0) + horizontalPadding;
   
-  // No expansion needed - just hide number on hover
-  
-  // Anchor at center of the number (both horizontally and vertically)
-  // The number is vertically centered in the pill, so anchor at pillHeight / 2
-  // Pill is shifted right, so anchor X is at number center, not pill center
   const anchorX = numberCenterX;
-  const anchorY = pillHeight / 2; // Anchor at vertical center of pill where number is
+  const anchorY = pillHeight / 2;
   
-  // Generate unique class ID to prevent CSS collisions between markers from different routes
-  // Use uniqueId if provided (should be routeId-stopId), otherwise fall back to number
-  // Sanitize to ensure valid CSS class name (replace non-alphanumeric with hyphens)
   const baseId = uniqueId || `stop-${number}`;
   const classId = baseId.replace(/[^a-zA-Z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  
+  // Wrapper size buffer for shadow and animation
+  const buffer = 30;
   
   return L.divIcon({
     className: 'numbered-marker',
     html: `
       <style>
         .numbered-marker-wrapper-${classId} {
+          width: ${totalWidth + buffer}px;
+          height: ${pillHeight + buffer}px;
+          position: relative;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          /* Use filter: drop-shadow so the shadow respects the transparent lens hole */
+          filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
+          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease-out;
+          will-change: transform, filter;
+        }
+        .numbered-marker-wrapper-${classId}:hover,
+        .numbered-marker-wrapper-${classId}.active-pin {
+          transform: scale(1.05) translateY(-2px);
+          filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+        }
+        /* When marker is being dragged, show closed hand cursor */
+        .leaflet-marker-dragging .numbered-marker-wrapper-${classId} {
+          cursor: grabbing !important;
+          transform: scale(1.05) translateY(-2px);
+        }
+        .numbered-marker-pill-${classId} {
+          transition: border-color 0.2s ease-out;
           width: ${totalWidth}px;
           height: ${pillHeight}px;
           position: relative;
-          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          border: 2px solid white;
+          border-radius: ${pillHeight}px;
+          padding: 0 ${horizontalPadding}px 0 0;
+          box-sizing: border-box;
+          /* Create a permanent circular 'window' hole in the background */
+          background: radial-gradient(
+            circle at ${numberCenterX}px 50%,
+            transparent ${circleHeight / 2}px,
+            ${backgroundColor} ${(circleHeight / 2) + 0.5}px
+          );
         }
-        /* When marker is being dragged, show closed hand cursor */
-        .leaflet-marker-dragging .numbered-marker-wrapper-${classId} .numbered-marker-pill-${classId} {
-          cursor: grabbing !important;
-        }
-        .numbered-marker-pill-${classId} {
-          transition: background-color 0.125s ease-out, border-color 0.125s ease-out;
-          width: ${totalWidth}px;
-        }
-        .numbered-marker-wrapper-${classId}:hover .numbered-marker-pill-${classId} {
-          background-color: rgba(255, 255, 255, 0.4) !important;
-          border-color: ${backgroundColor} !important;
+        .numbered-marker-wrapper-${classId}:hover .numbered-marker-pill-${classId},
+        .numbered-marker-wrapper-${classId}.active-pin .numbered-marker-pill-${classId} {
+          border-color: white !important;
         }
         .numbered-marker-grey-circle-${classId} {
           position: absolute;
           left: ${numberCenterX}px;
-          width: ${circleWidth}px;
-          height: ${circleHeight}px;
+          width: ${circleWidth + 1}px;
+          height: ${circleHeight + 1}px;
           border-radius: 50%;
-          background-color: ${backgroundColor};
+          background-color: white; /* Fully opaque white in resting state */
           pointer-events: none;
           transform: translate(-50%, -50%);
           top: 50%;
           box-sizing: border-box;
-          transition: left 0.125s ease-out, width 0.125s ease-out, height 0.125s ease-out, background-color 0.125s ease-out, border-radius 0.125s ease-out;
+          transition: background-color 0.2s ease-out, transform 0.2s ease-out;
           z-index: 0;
-          /* Inherit opacity from parent to match border and time text color exactly */
+          opacity: 1;
         }
-        .numbered-marker-wrapper-${classId}:hover .numbered-marker-grey-circle-${classId} {
-          left: ${numberCenterX}px;
-          width: ${smallCircleSize}px !important;
-          height: ${smallCircleSize}px !important;
-          border-radius: 50%;
-          background-color: ${backgroundColor};
+        .numbered-marker-wrapper-${classId}:hover .numbered-marker-grey-circle-${classId},
+        .numbered-marker-wrapper-${classId}.active-pin .numbered-marker-grey-circle-${classId} {
+          /* 35% white lens effect for better visibility while still transparent */
+          background-color: rgba(255, 255, 255, 0.35);
+          transform: translate(-50%, -50%) scale(0.95);
         }
-        .numbered-marker-number-${classId} {
+        @keyframes pinpointPop {
+          0% { transform: translate(-50%, -50%) scale(0); }
+          70% { transform: translate(-50%, -50%) scale(1.2); }
+          100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        .numbered-marker-dot-${classId} {
           position: absolute;
           left: ${numberCenterX}px;
           top: 50%;
+          width: 6px;
+          height: 6px;
+          background-color: ${backgroundColor};
+          border-radius: 50%;
+          transform: translate(-50%, -50%) scale(0);
+          z-index: 2;
+          pointer-events: none;
+          box-shadow: 0 1px 1px rgba(0,0,0,0.6), 0 0 2px rgba(255,255,255,0.8);
+          will-change: transform;
+        }
+        .numbered-marker-wrapper-${classId}:hover .numbered-marker-dot-${classId},
+        .numbered-marker-wrapper-${classId}.active-pin .numbered-marker-dot-${classId} {
+          animation: pinpointPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        .numbered-marker-number-${classId} {
+          position: absolute;
+          left: ${numberCenterX - 1}px; /* Optical alignment */
+          top: 50%;
           transform: translate(-50%, -50%);
-          transition: opacity 0.125s ease-out;
+          transition: opacity 0.2s ease-out, transform 0.2s ease-out;
           z-index: 1;
           pointer-events: none;
+          color: ${backgroundColor};
+          font-weight: bold;
+          font-size: ${fontSize};
+          line-height: 1;
+          white-space: nowrap;
         }
-        .numbered-marker-wrapper-${classId}:hover .numbered-marker-number-${classId} {
+        .numbered-marker-wrapper-${classId}:hover .numbered-marker-number-${classId},
+        .numbered-marker-wrapper-${classId}.active-pin .numbered-marker-number-${classId} {
           opacity: 0;
+          transform: translate(-50%, -50%) scale(0.8);
         }
         .numbered-marker-time-${classId} {
           position: absolute;
@@ -169,45 +248,31 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           transform: translateY(-50%);
           z-index: 1;
           pointer-events: none;
+          transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+          font-size: ${timeFontSize};
+          font-weight: 600;
+          color: white;
+          white-space: nowrap;
+          line-height: 1;
+          text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+        .numbered-marker-wrapper-${classId}:hover .numbered-marker-time-${classId},
+        .numbered-marker-wrapper-${classId}.active-pin .numbered-marker-time-${classId} {
+          opacity: 0.9;
+          transform: translateY(-50%) translateX(2px);
         }
       </style>
-      <div class="numbered-marker-wrapper-${classId}">
-        <div class="numbered-marker-pill-${classId}" style="
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          background-color: rgba(255, 255, 255, 1);
-          border: 2px solid ${backgroundColor};
-          border-radius: ${pillHeight}px;
-          padding: 0 ${horizontalPadding}px 0 0;
-          height: ${pillHeight}px;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-          opacity: ${opacity};
-          gap: ${hasTime ? gap : 0}px;
-          cursor: ${editingMode ? 'pointer' : (isSelected ? 'grab' : 'pointer')};
-        ">
+      <div class="numbered-marker-wrapper-${classId} ${isSelected ? 'active-pin' : ''}">
+        <div class="numbered-marker-pill-${classId}" style="opacity: ${opacity};">
           <div class="numbered-marker-grey-circle-${classId}"></div>
-          <span class="numbered-marker-number-${classId}" style="
-            color: white;
-            font-weight: bold;
-            font-size: ${fontSize};
-            line-height: 1;
-            white-space: nowrap;
-          ">${number}</span>
-          ${hasTime ? `<span class="numbered-marker-time-${classId}" style="
-            font-size: ${timeFontSize};
-            font-weight: 600;
-            color: ${backgroundColor};
-            white-space: nowrap;
-            line-height: 1;
-          ">${time}</span>` : ''}
+          <div class="numbered-marker-dot-${classId}"></div>
+          <span class="numbered-marker-number-${classId}">${number}</span>
+          ${hasTime ? `<span class="numbered-marker-time-${classId}">${time}</span>` : ''}
         </div>
       </div>
     `,
-    iconSize: [totalWidth, pillHeight],
-    iconAnchor: [anchorX, anchorY],
+    iconSize: [totalWidth + buffer, pillHeight + buffer],
+    iconAnchor: [anchorX + buffer / 2, anchorY + buffer / 2],
     popupAnchor: [0, -pillHeight],
   });
 }
-

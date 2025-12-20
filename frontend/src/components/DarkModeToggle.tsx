@@ -10,9 +10,9 @@ export function DarkModeToggle() {
       title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
       style={{
         position: 'relative',
-        width: '72px',
-        height: '32px',
-        borderRadius: '16px',
+        width: '61.2px',
+        height: '27.2px',
+        borderRadius: '13.6px',
         border: 'none',
         cursor: 'pointer',
         padding: '0',
@@ -36,7 +36,7 @@ export function DarkModeToggle() {
           position: 'absolute',
           width: '100%',
           height: '100%',
-          borderRadius: '16px',
+          borderRadius: '13.6px',
         }}
       >
         {/* Sun icon (left side - centered where thumb is in light mode) */}
@@ -44,10 +44,10 @@ export function DarkModeToggle() {
           className="fas fa-sun"
           style={{
             position: 'absolute',
-            left: '19px',
+            left: '16.15px',
             top: '50%',
             transform: 'translate(-50%, -50%)',
-            fontSize: '14px',
+            fontSize: '10px',
             color: isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.9)',
             transition: 'color 0.3s ease',
             zIndex: 1,
@@ -61,10 +61,10 @@ export function DarkModeToggle() {
           className="fas fa-moon"
           style={{
             position: 'absolute',
-            left: '53px',
+            left: '45.05px',
             top: '50%',
             transform: 'translate(-50%, -50%)',
-            fontSize: '14px',
+            fontSize: '10px',
             color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.3)',
             transition: 'color 0.3s ease',
             zIndex: 1,
@@ -79,12 +79,12 @@ export function DarkModeToggle() {
       <div
         style={{
           position: 'absolute',
-          width: '32px',
-          height: '26px',
-          borderRadius: '13px',
+          width: '27.2px',
+          height: '22.1px',
+          borderRadius: '11.05px',
           background: 'white',
-          left: isDarkMode ? 'calc(100% - 35px)' : '3px',
-          top: '3px',
+          left: isDarkMode ? 'calc(100% - 29.75px)' : '2.55px',
+          top: '2.55px',
           transition: 'left 0.3s ease',
           display: 'flex',
           alignItems: 'center',
@@ -97,7 +97,7 @@ export function DarkModeToggle() {
         <i
           className={isDarkMode ? 'fas fa-moon' : 'fas fa-sun'}
           style={{
-            fontSize: '14px',
+            fontSize: '10px',
             color: '#133A60',
             transition: 'transform 0.3s ease',
           }}

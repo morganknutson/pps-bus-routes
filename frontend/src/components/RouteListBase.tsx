@@ -137,13 +137,10 @@ function renderStopItem(
             justifyContent: 'center',
             width: '16px',
             height: '16px',
-            borderRadius: '50%',
-            backgroundColor: hasError ? '#ff6b6b' : routeColor,
-            color: 'white',
-            fontSize: '14px',
+            color: hasError ? '#ff6b6b' : routeColor,
             marginTop: '1px',
           }}>
-            <i className="fas fa-graduation-cap" style={{ fontSize: '9px' }}></i>
+            <i className="fas fa-graduation-cap" style={{ fontSize: '14px' }}></i>
           </div>
           {/* Time below icon */}
           {stop.time && (
@@ -202,6 +199,16 @@ function renderStopItem(
         {stop.time && !stop.isSchoolStop && (
           <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
             {stop.time}
+            {stop.neighborhood && (
+              <span style={{ marginLeft: '0.5rem', opacity: 0.8 }}>
+                • {stop.neighborhood}
+              </span>
+            )}
+          </div>
+        )}
+        {!stop.time && stop.neighborhood && !stop.isSchoolStop && (
+          <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+            {stop.neighborhood}
           </div>
         )}
         {config.showStopErrors && hasError && (
@@ -305,6 +312,30 @@ export function RouteListBase({
     });
   };
 
+  const getRouteNeighborhood = (route: Route): string => {
+    // 1. Try to find the most frequent neighborhood among non-school stops
+    const regularStops = route.stops.filter(s => !s.isSchoolStop && s.neighborhood);
+    if (regularStops.length > 0) {
+      const counts: Record<string, number> = {};
+      regularStops.forEach(s => {
+        if (s.neighborhood) {
+          counts[s.neighborhood] = (counts[s.neighborhood] || 0) + 1;
+        }
+      });
+      return Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+    }
+
+    // 2. Fallback to school stop neighborhood
+    const schoolStop = route.stops.find(s => s.isSchoolStop && s.neighborhood);
+    if (schoolStop?.neighborhood) return schoolStop.neighborhood;
+
+    // 3. Fallback to any stop neighborhood
+    const anyStop = route.stops.find(s => s.neighborhood);
+    if (anyStop?.neighborhood) return anyStop.neighborhood;
+
+    return 'Other';
+  };
+
   const renderRoute = (route: Route) => {
     const isExpanded = expandedRoutes.has(route.id);
     const routeColor = config.getRouteColor?.(route) || route.color;
@@ -320,10 +351,25 @@ export function RouteListBase({
           border: '1px solid',
           borderColor: isRouteSelected ? 'transparent' : 'var(--border-color)',
           borderRadius: '4px',
-          backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
+          backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'transparent',
           boxShadow: isRouteSelected ? '0 1px 3px var(--shadow-large)' : 'none',
           overflow: 'hidden',
           transition: 'background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
+        }}
+        onMouseDown={(e) => {
+          if (config.showRouteSelection) {
+            e.currentTarget.style.filter = 'brightness(0.9)';
+          }
+        }}
+        onMouseUp={(e) => {
+          if (config.showRouteSelection) {
+            e.currentTarget.style.filter = 'none';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (config.showRouteSelection) {
+            e.currentTarget.style.filter = 'none';
+          }
         }}
       >
         <div style={{ display: 'flex', alignItems: 'stretch' }}>
@@ -337,6 +383,7 @@ export function RouteListBase({
                 alignItems: 'center',
                 gap: '0.75rem',
                 padding: '0.5rem 0.75rem',
+                height: '40px',
                 flex: 1,
                 minWidth: 0,
                 cursor: config.showRouteSelection ? 'pointer' : 'default',
@@ -365,7 +412,7 @@ export function RouteListBase({
                       width: '16px',
                       height: '16px',
                       borderRadius: '50%',
-                      border: `2px solid ${routeColor}`,
+                      border: `1px solid ${route.isSelected ? routeColor : 'var(--border-color)'}`,
                       backgroundColor: route.isSelected ? routeColor : 'transparent',
                       display: 'flex',
                       alignItems: 'center',
@@ -449,7 +496,7 @@ export function RouteListBase({
         {isExpanded && (
           <div style={{ 
             borderTop: '1px solid var(--border-color)',
-            backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
+            backgroundColor: 'var(--bg-secondary)',
             maxHeight: '400px',
             overflowY: 'auto',
             transition: 'background-color 0.3s ease, border-color 0.3s ease',
@@ -459,6 +506,48 @@ export function RouteListBase({
             )}
           </div>
         )}
+      </div>
+    );
+  };
+
+  const renderRouteGroups = (sectionRoutes: Route[]) => {
+    // Group routes by neighborhood
+    const groups: Record<string, Route[]> = {};
+    sectionRoutes.forEach(route => {
+      const neighborhood = getRouteNeighborhood(route);
+      if (!groups[neighborhood]) {
+        groups[neighborhood] = [];
+      }
+      groups[neighborhood].push(route);
+    });
+
+    // Sort neighborhoods alphabetically, but keep "Other" at the end
+    const neighborhoodNames = Object.keys(groups).sort((a, b) => {
+      if (a === 'Other') return 1;
+      if (b === 'Other') return -1;
+      return a.localeCompare(b);
+    });
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        {neighborhoodNames.map(neighborhood => (
+          <div key={neighborhood}>
+            <div style={{ 
+              fontSize: '11px', 
+              fontWeight: '600', 
+              textTransform: 'uppercase', 
+              letterSpacing: '0.05em',
+              color: 'var(--text-tertiary)',
+              marginBottom: '0.75rem',
+              paddingLeft: '0.25rem'
+            }}>
+              {neighborhood}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {groups[neighborhood].map(renderRoute)}
+            </div>
+          </div>
+        ))}
       </div>
     );
   };
@@ -544,11 +633,7 @@ export function RouteListBase({
             <path d="M3 4.5L6 7.5L9 4.5" />
           </svg>
         </button>
-        {isExpanded && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {sectionRoutes.map(renderRoute)}
-          </div>
-        )}
+        {isExpanded && renderRouteGroups(sectionRoutes)}
       </div>
     );
   };
@@ -569,9 +654,7 @@ export function RouteListBase({
           </>
         ) : (
           // When a specific direction is selected, show all routes of that direction in a single consolidated list
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {filteredRoutes.map(renderRoute)}
-          </div>
+          renderRouteGroups(filteredRoutes)
         )}
       </div>
       <style>{`
