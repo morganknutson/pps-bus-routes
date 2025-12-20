@@ -13,6 +13,8 @@ import { listFolderFiles, downloadFile } from '../driveService.js';
 import { parseRouteFromPDF } from '../pdfParser.js';
 import { geocodingService } from '../geocodingService.js';
 import { processSinglePDF } from '../routeProcessor.js';
+import { pdfMetadataService } from '../pdfMetadataService.js';
+import { driveLinkVerificationService } from '../driveLinkVerificationService.js';
 import { getSchoolIdFromFilename, getSchoolPdfDir } from '../../utils/schoolUtils.js';
 import { JOB_TYPES } from './jobTypes.js';
 
@@ -63,6 +65,9 @@ export class WorkerService {
     const pdfSyncWorker = new Worker(
       this.pdfSyncQueue.queueName,
       async (job) => {
+        if (job.name === JOB_TYPES.DRIVE_CHECK) {
+          return await this.processDriveCheckJob(job);
+        }
         return await this.processPdfSyncJob(job);
       },
       {
@@ -121,14 +126,19 @@ export class WorkerService {
       try {
         // Get waiting jobs
         // Use the queue instance's getJobs method which handles Redis/No-Redis correctly
-        const waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_SYNC, 'waiting', 1);
+        // Poll for PDF_SYNC jobs first, then DRIVE_CHECK jobs
+        let waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_SYNC, 'waiting', 1);
+        
+        if (!waitingJobs || waitingJobs.length === 0) {
+          waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.DRIVE_CHECK, 'waiting', 1);
+        }
         
         if (waitingJobs && waitingJobs.length > 0) {
           const job = waitingJobs[0];
           isProcessing = true;
           lastProcessTime = Date.now();
 
-          console.log(`[WorkerService] Processing job ${job.id} (development mode)`);
+          console.log(`[WorkerService] Processing job ${job.id} (${job.name}) (development mode)`);
 
           try {
             // In development mode (history only), we need to get the "real" job object if possible
@@ -137,6 +147,7 @@ export class WorkerService {
             // Create a mock job object with updateProgress method
             const mockJob = {
               id: job.id,
+              name: job.name,
               data: job.data,
               updateProgress: async (progress) => {
                 // Update progress in history service
@@ -149,7 +160,12 @@ export class WorkerService {
             };
 
             // Process the job
-            const result = await this.processPdfSyncJob(mockJob);
+            let result;
+            if (job.name === JOB_TYPES.DRIVE_CHECK) {
+              result = await this.processDriveCheckJob(mockJob);
+            } else {
+              result = await this.processPdfSyncJob(mockJob);
+            }
 
             // Record completion in history
             const { jobHistoryService } = await import('./JobHistoryService.js');
@@ -203,6 +219,105 @@ export class WorkerService {
     this.workers = [];
 
     console.log('[WorkerService] Stopped');
+  }
+
+  /**
+   * Process a Drive check job
+   * @param {object} job - Job object
+   */
+  async processDriveCheckJob(job) {
+    const { schoolId } = job.data;
+    console.log(`[WorkerService] Processing Drive check for school: ${schoolId}`);
+
+    try {
+      // Load schools
+      const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
+      const school = schools.find(s => s.id === schoolId);
+
+      if (!school) {
+        throw new Error(`School not found: ${schoolId}`);
+      }
+
+      await job.updateProgress(20);
+
+      // Use the verification service logic
+      const result = await driveLinkVerificationService.verifySchoolDriveLink(school);
+      
+      await job.updateProgress(80);
+
+      // Update cache file (similar to the route handler logic)
+      let cachedResults = {
+        timestamp: new Date().toISOString(),
+        totalSchools: schools.length,
+        results: [],
+      };
+      
+      const DRIVE_VERIFICATION_CACHE_FILE = path.join(DATA_DIR, 'drive-link-verification-results.json');
+      
+      if (fs.existsSync(DRIVE_VERIFICATION_CACHE_FILE)) {
+        try {
+          const cacheContent = await fsPromises.readFile(DRIVE_VERIFICATION_CACHE_FILE, 'utf8');
+          cachedResults = JSON.parse(cacheContent);
+        } catch (error) {
+          console.warn('[WorkerService] Error loading cache for update:', error.message);
+        }
+      }
+      
+      // Save updated cache
+      await this.updateVerificationCache(schoolId, result);
+
+      await job.updateProgress(100);
+      return result;
+    } catch (error) {
+      console.error(`[WorkerService] Error processing Drive check for ${schoolId}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Update the verification results cache file for a specific school
+   * @param {string} schoolId 
+   * @param {object} result 
+   */
+  async updateVerificationCache(schoolId, result) {
+    try {
+      const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
+      
+      let cachedResults = {
+        timestamp: new Date().toISOString(),
+        totalSchools: schools.length,
+        results: [],
+      };
+      
+      const DRIVE_VERIFICATION_CACHE_FILE = path.join(DATA_DIR, 'drive-link-verification-results.json');
+      
+      if (fs.existsSync(DRIVE_VERIFICATION_CACHE_FILE)) {
+        try {
+          const cacheContent = await fsPromises.readFile(DRIVE_VERIFICATION_CACHE_FILE, 'utf8');
+          cachedResults = JSON.parse(cacheContent);
+        } catch (error) {
+          console.warn('[WorkerService] Error loading cache for update:', error.message);
+        }
+      }
+      
+      // Update or add this school's result
+      const existingIndex = cachedResults.results.findIndex(r => r.schoolId === schoolId);
+      if (existingIndex >= 0) {
+        cachedResults.results[existingIndex] = result;
+      } else {
+        cachedResults.results.push(result);
+      }
+      
+      // Update the global timestamp to now
+      cachedResults.timestamp = new Date().toISOString();
+      
+      // Save updated cache
+      const tempFile = `${DRIVE_VERIFICATION_CACHE_FILE}.tmp`;
+      await fsPromises.writeFile(tempFile, JSON.stringify(cachedResults, null, 2), 'utf8');
+      await fsPromises.rename(tempFile, DRIVE_VERIFICATION_CACHE_FILE);
+    } catch (error) {
+      console.warn('[WorkerService] Error updating verification cache:', error.message);
+    }
   }
 
   /**
@@ -342,6 +457,13 @@ export class WorkerService {
           });
           processed++;
 
+          // Update metadata service
+          await pdfMetadataService.updateFileMetadata(schoolId, file.id, {
+            filename: file.name,
+            modifiedTime: file.modifiedTime,
+            localPath: file.name,
+          });
+
           // Update progress
           const progress = 30 + Math.floor((i + 1) / totalFiles * 60);
           await job.updateProgress(progress);
@@ -357,6 +479,54 @@ export class WorkerService {
         }
       }
 
+      // Clean up orphaned local files (files that exist locally but not in Drive)
+      const driveFileNames = new Set(pdfFiles.map(f => f.name));
+      const driveFileIds = new Set(pdfFiles.map(f => f.id));
+      const currentLocalPdfs = await this.getExistingPdfs(schoolId);
+      const orphanedPdfs = currentLocalPdfs.filter(name => !driveFileNames.has(name));
+      
+      // Also check metadata for orphaned entries by file ID
+      const metadata = await pdfMetadataService.loadMetadata(schoolId);
+      const metadataFileIds = Object.keys(metadata.files || {});
+      const orphanedFileIds = metadataFileIds.filter(id => !driveFileIds.has(id));
+
+      let deletedCount = 0;
+      
+      // Delete files based on names not in Drive
+      for (const orphanedPdf of orphanedPdfs) {
+        try {
+          const pdfPath = path.join(pdfDir, orphanedPdf);
+          const jsonPath = path.join(processedDir, orphanedPdf.replace('.pdf', '.json'));
+          
+          if (fs.existsSync(pdfPath)) {
+            await fsPromises.unlink(pdfPath);
+            console.log(`[WorkerService] Deleted orphaned PDF: ${orphanedPdf}`);
+          }
+          
+          if (fs.existsSync(jsonPath)) {
+            await fsPromises.unlink(jsonPath);
+            console.log(`[WorkerService] Deleted orphaned JSON: ${orphanedPdf.replace('.pdf', '.json')}`);
+          }
+          deletedCount++;
+        } catch (err) {
+          console.error(`[WorkerService] Failed to delete orphaned file ${orphanedPdf}:`, err.message);
+        }
+      }
+
+      // Clean up metadata for orphaned file IDs
+      for (const orphanedId of orphanedFileIds) {
+        try {
+          await pdfMetadataService.removeFileMetadata(schoolId, orphanedId);
+          console.log(`[WorkerService] Removed orphaned metadata for file ID: ${orphanedId}`);
+        } catch (err) {
+          console.error(`[WorkerService] Failed to remove orphaned metadata ${orphanedId}:`, err.message);
+        }
+      }
+
+      if (deletedCount > 0 || orphanedFileIds.length > 0) {
+        console.log(`[WorkerService] Cleaned up ${deletedCount} orphaned files and ${orphanedFileIds.length} metadata entries for ${schoolId}`);
+      }
+
       // Update sync status
       const newStatus = {
         ...syncStatus,
@@ -367,6 +537,14 @@ export class WorkerService {
       };
       await this.saveSyncStatus(newStatus);
 
+      // Perform a final Drive check to update the verification results table
+      try {
+        const driveResult = await driveLinkVerificationService.verifySchoolDriveLink(school);
+        await this.updateVerificationCache(schoolId, driveResult);
+      } catch (cacheError) {
+        console.warn(`[WorkerService] Failed to update verification cache after sync for ${schoolId}:`, cacheError.message);
+      }
+
       await job.updateProgress(100);
 
       return {
@@ -374,6 +552,7 @@ export class WorkerService {
         downloaded,
         processed,
         skipped,
+        deleted: deletedCount,
         errors,
         totalInDrive: pdfFiles.length,
         lastModifiedPdf: newestModifiedTime > 0 ? new Date(newestModifiedTime).toISOString() : null,

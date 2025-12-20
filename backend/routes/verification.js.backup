@@ -1,0 +1,164 @@
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { driveLinkVerificationService } from '../services/driveLinkVerificationService.js';
+import { verificationService } from '../services/verificationService.js';
+import { pdfSyncJobQueue, JOB_PRIORITY } from '../services/jobQueue/PdfSyncJobQueue.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const router = express.Router();
+
+const DATA_DIR = path.join(__dirname, '../../data');
+const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
+const DRIVE_VERIFICATION_CACHE_FILE = path.join(DATA_DIR, 'drive-link-verification-results.json');
+
+// Get cached Drive link verification results
+router.get('/drive-link-results', (req, res) => {
+  try {
+    if (!fs.existsSync(DRIVE_VERIFICATION_CACHE_FILE)) {
+      return res.status(404).json({ message: 'No verification results found' });
+    }
+    const content = fs.readFileSync(DRIVE_VERIFICATION_CACHE_FILE, 'utf8');
+    res.json(JSON.parse(content));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Check a single school's Drive link and update cache
+router.post('/check-drive-link/:schoolId', async (req, res) => {
+  try {
+    const { schoolId } = req.params;
+
+    // Load schools
+    if (!fs.existsSync(SCHOOLS_FILE)) {
+      return res.status(404).json({ error: 'Schools file not found' });
+    }
+
+    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const schools = JSON.parse(content);
+    const school = schools.find(s => s.id === schoolId);
+
+    if (!school) {
+      return res.status(404).json({ error: `School not found: ${schoolId}` });
+    }
+
+    // Enqueue a background job instead of running synchronously
+    const jobId = await pdfSyncJobQueue.enqueueDriveCheckJob(schoolId, {
+      priority: JOB_PRIORITY.HIGH
+    });
+    
+    res.json({
+      jobId,
+      schoolId,
+      status: 'queued',
+      message: 'Drive check job has been queued'
+    });
+  } catch (error) {
+    console.error('Error checking Drive link:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Run full Drive link verification for all schools and cache results
+router.post('/check-drive-links', async (req, res) => {
+  try {
+    // Load schools
+    if (!fs.existsSync(SCHOOLS_FILE)) {
+      return res.status(404).json({ error: 'Schools file not found' });
+    }
+
+    const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
+    const schools = JSON.parse(content);
+    const schoolsWithDriveLinks = schools.filter(s => s.driveLink);
+
+    console.log(`[Verification] Queuing Drive check jobs for ${schoolsWithDriveLinks.length} schools`);
+
+    // Queue individual jobs for each school
+    const jobIds = [];
+    for (const school of schoolsWithDriveLinks) {
+      const jobId = await pdfSyncJobQueue.enqueueDriveCheckJob(school.id, {
+        priority: JOB_PRIORITY.NORMAL
+      });
+      jobIds.push(jobId);
+    }
+
+    res.json({
+      message: `Queued ${jobIds.length} Drive check jobs`,
+      totalJobs: jobIds.length,
+      status: 'queued'
+    });
+  } catch (error) {
+    console.error('Error starting Drive link verification:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * Find strange or incorrect stops in all routes
+ */
+router.post('/find-strange-stops', async (req, res) => {
+  try {
+    const report = await verificationService.findStrangeStops();
+    res.json(report);
+  } catch (error) {
+    console.error('Error finding strange stops:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * Fix strange or incorrect stops in all routes
+ */
+router.post('/fix-strange-stops', async (req, res) => {
+  try {
+    const result = await verificationService.fixStrangeStops();
+    res.json(result);
+  } catch (error) {
+    console.error('Error fixing strange stops:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * Verify all school stops in processed routes
+ */
+router.post('/verify-school-stops', async (req, res) => {
+  try {
+    const result = await verificationService.verifySchoolStops();
+    res.json(result);
+  } catch (error) {
+    console.error('Error verifying school stops:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get('/pdf-fetch-info', async (req, res) => {
+  try {
+    const statusFile = path.join(DATA_DIR, 'pdf-sync-status.json');
+    const syncStatus = fs.existsSync(statusFile) ? JSON.parse(fs.readFileSync(statusFile, 'utf8')) : {};
+    
+    const resultsFile = path.join(DATA_DIR, 'drive-link-verification-results.json');
+    const driveResults = fs.existsSync(resultsFile) ? JSON.parse(fs.readFileSync(resultsFile, 'utf8')) : { results: [] };
+
+    const fetchInfo = {};
+    for (const schoolId in syncStatus) {
+      const driveResult = driveResults.results.find(r => r.schoolId === schoolId);
+      fetchInfo[schoolId] = {
+        lastSync: syncStatus[schoolId].lastSync,
+        lastModifiedPdf: syncStatus[schoolId].lastModifiedPdf,
+        drivePdfCount: driveResult ? driveResult.pdfCount : null,
+        localPdfCount: driveResult ? driveResult.localPdfCount : null,
+        driveLastModified: driveResult ? driveResult.driveLastModified : null,
+        localLastModified: driveResult ? driveResult.localLastModified : null,
+      };
+    }
+    res.json(fetchInfo);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+export { router as verificationRouter };

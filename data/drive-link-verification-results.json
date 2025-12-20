@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-18T19:28:10.166Z",
+  "timestamp": "2025-12-20T11:09:33.144Z",
   "totalSchools": 72,
   "schoolsWithDriveLinks": 71,
   "results": [
@@ -935,6 +935,7 @@
       "accessible": true,
       "hasPdfs": true,
       "pdfCount": 38,
+      "localPdfCount": 38,
       "driveLastModified": "2025-11-25T17:01:16.141Z",
       "localLastModified": "2025-11-25T17:01:16.141Z",
       "matches": true,

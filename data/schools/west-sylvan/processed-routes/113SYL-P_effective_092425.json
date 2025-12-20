@@ -19,8 +19,7 @@
         45.5044894
       ],
       "displayName": "8111 SW West Slope Dr, Portland, OR 97225, USA",
-      "schoolName": "West Sylvan",
-      "neighborhood": "Southwest Hills"
+      "schoolName": "West Sylvan"
     },
     {
       "id": "stop-1",
@@ -114,10 +113,9 @@
     }
   ],
   "neighborhoods": [
-    "Northwest Portland",
-    "Southwest Hills"
+    "Northwest Portland"
   ],
-  "processedAt": "2025-12-17T08:53:47.249Z",
+  "processedAt": "2025-12-20T11:10:05.798Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -1056,11 +1054,5 @@
       45.5383,
       -122.68822
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

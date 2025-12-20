@@ -1,0 +1,183 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { driveService } from './driveService.js';
+import { pdfMetadataService } from './pdfMetadataService.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const DATA_DIR = path.join(__dirname, '../../data');
+const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
+
+class DriveLinkVerificationService {
+  /**
+   * Verifies if a school's Google Drive link is accessible and up to date.
+   * @param {Object} school The school object to verify
+   * @returns {Promise<Object>} Verification result
+   */
+  async verifySchoolDriveLink(school) {
+    const result = {
+      schoolId: school.id,
+      schoolName: school.name,
+      driveLink: school.driveLink || null,
+      hasDriveLink: !!school.driveLink,
+      accessible: false,
+      hasPdfs: false,
+      pdfCount: 0,
+      localPdfCount: 0,
+      driveLastModified: null,
+      localLastModified: null,
+      matches: false,
+      needsUpdate: false,
+      error: null,
+    };
+
+    if (!school.driveLink) {
+      return result;
+    }
+
+    try {
+      // 1. Extract folder ID
+      const folderId = driveService.extractFolderId(school.driveLink);
+      if (!folderId) {
+        result.error = 'Invalid Google Drive link format';
+        return result;
+      }
+
+      // 2. List files from Drive
+      const pdfFiles = await driveService.listPdfFiles(folderId);
+      
+      if (pdfFiles) {
+        result.accessible = true;
+        result.hasPdfs = pdfFiles.length > 0;
+        result.pdfCount = pdfFiles.length;
+
+        // Get local PDF count from metadata
+        const metadata = await pdfMetadataService.loadMetadata(school.id);
+        result.localPdfCount = Object.keys(metadata.files || {}).length;
+
+        if (pdfFiles.length > 0) {
+          // Find the most recently modified PDF in Drive
+          const mostRecentDrive = pdfFiles.reduce((latest, current) => {
+            if (!latest || new Date(current.modifiedTime) > new Date(latest.modifiedTime)) {
+              return current;
+            }
+            return latest;
+          }, null);
+
+          result.driveLastModified = mostRecentDrive ? mostRecentDrive.modifiedTime : null;
+
+          // 3. Compare with local data
+          // First try to get from metadata (most accurate - has actual Drive modifiedTimes)
+          result.localLastModified = await pdfMetadataService.getMostRecentModifiedTime(school.id);
+          
+          // If metadata doesn't have it, try matching with current Drive files
+          if (!result.localLastModified) {
+            result.localLastModified = await this.getMostRecentLocalDriveModifiedTime(
+              school.id,
+              pdfFiles
+            );
+          }
+
+          // 4. Determine if update is needed
+          if (result.localLastModified && result.driveLastModified) {
+            const driveDate = new Date(result.driveLastModified);
+            const localDate = new Date(result.localLastModified);
+            
+            // Set matches if the dates are within 2 seconds of each other
+            // (to account for slight variations in how dates are stored/retrieved)
+            result.matches = Math.abs(driveDate - localDate) < 2000;
+            
+            // If Drive is newer than local, it needs update
+            result.needsUpdate = driveDate > localDate && !result.matches;
+          } else if (result.driveLastModified && !result.localLastModified) {
+            // Have files in Drive but none locally
+            result.needsUpdate = true;
+          }
+          
+          // Also check if counts mismatch
+          if (result.pdfCount !== result.localPdfCount) {
+            result.needsUpdate = true;
+            result.countMismatch = true;
+          }
+        } else {
+          // Drive is empty
+          result.matches = result.localPdfCount === 0;
+        }
+      }
+    } catch (error) {
+      console.error(`[DriveLinkVerificationService] Error verifying ${school.id}:`, error.message);
+      result.error = error.message;
+    }
+
+    return result;
+  }
+
+  /**
+   * Helper to find most recent local modified time by matching with Drive file IDs
+   * @param {string} schoolId
+   * @param {Array} driveFiles
+   * @returns {Promise<string|null>}
+   */
+  async getMostRecentLocalDriveModifiedTime(schoolId, driveFiles) {
+    try {
+      // Load metadata to get file IDs we have locally
+      const metadata = await pdfMetadataService.loadMetadata(schoolId);
+      const localFileIds = new Set(Object.keys(metadata.files || {}));
+      
+      if (localFileIds.size === 0) return null;
+      
+      // Find the most recent modified time among Drive files that we also have locally
+      const latestMatched = driveFiles
+        .filter(df => localFileIds.has(df.id))
+        .reduce((latest, current) => {
+          if (!latest || new Date(current.modifiedTime) > new Date(latest.modifiedTime)) {
+            return current;
+          }
+          return latest;
+        }, null);
+        
+      return latestMatched ? latestMatched.modifiedTime : null;
+    } catch (error) {
+      console.error(`[DriveLinkVerificationService] Error in getMostRecentLocalDriveModifiedTime for ${schoolId}:`, error.message);
+      return null;
+    }
+  }
+
+  /**
+   * Runs verification for all schools with Drive links.
+   * @returns {Promise<Object>} Summary results
+   */
+  async verifyAllSchools() {
+    if (!fs.existsSync(SCHOOLS_FILE)) {
+      throw new Error('Schools file not found');
+    }
+
+    const schools = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+    const results = [];
+    
+    for (const school of schools) {
+      if (school.driveLink) {
+        const result = await this.verifySchoolDriveLink(school);
+        results.push(result);
+      }
+    }
+
+    const summary = {
+      timestamp: new Date().toISOString(),
+      totalSchools: schools.length,
+      schoolsWithDriveLinks: schools.filter(s => s.driveLink).length,
+      verifiedCount: results.length,
+      upToDate: results.filter(r => r.matches && !r.needsUpdate).length,
+      needsUpdate: results.filter(r => r.needsUpdate).length,
+      errors: results.filter(r => r.error).length,
+      results,
+    };
+
+    return summary;
+  }
+}
+
+export const driveLinkVerificationService = new DriveLinkVerificationService();
+export default driveLinkVerificationService;

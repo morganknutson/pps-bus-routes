@@ -1,0 +1,412 @@
+import fs from 'fs';
+import { promises as fsPromises } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import pdfParse from 'pdf-parse';
+import { pdfParser } from '../pdfParser.js';
+import { driveService } from '../driveService.js';
+import { JOB_TYPES } from './jobTypes.js';
+import { pdfMetadataService } from '../pdfMetadataService.js';
+import { driveLinkVerificationService } from '../driveLinkVerificationService.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const DATA_DIR = path.join(__dirname, '../../../data');
+const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
+
+class WorkerService {
+  constructor(pdfSyncJobQueue) {
+    this.pdfSyncJobQueue = pdfSyncJobQueue;
+    this.isProcessing = false;
+    this.currentJob = null;
+  }
+
+  /**
+   * Starts a basic polling worker for environments without Redis/BullMQ.
+   * This allows development to proceed without needing a full Redis setup.
+   */
+  startPollingWorker() {
+    console.log('[WorkerService] Starting background polling worker...');
+    
+    setInterval(async () => {
+      if (this.isProcessing) return;
+      
+      try {
+        const jobs = await this.getPendingJobs();
+        if (jobs.length > 0) {
+          const job = jobs[0];
+          this.isProcessing = true;
+          this.currentJob = job;
+          
+          console.log(`[WorkerService] Polling worker picking up job: ${job.id} (${job.name})`);
+          
+          try {
+            await this.updateJobStatus(job.id, 'active');
+            
+            let result;
+            if (job.name === JOB_TYPES.DRIVE_CHECK) {
+              result = await this.processDriveCheckJob(job);
+            } else {
+              result = await this.processPdfSyncJob(job);
+            }
+            
+            await this.completeJob(job.id, result);
+          } catch (error) {
+            console.error(`[WorkerService] Job ${job.id} failed:`, error);
+            await this.failJob(job.id, error);
+          } finally {
+            this.isProcessing = false;
+            this.currentJob = null;
+          }
+        }
+      } catch (error) {
+        console.error('[WorkerService] Polling worker error:', error);
+      }
+    }, 5000);
+  }
+
+  /**
+   * Main job processing logic.
+   */
+  async processPdfSyncJob(job) {
+    const { schoolId } = job.data;
+    console.log(`[WorkerService] Processing PDF sync for school: ${schoolId}`);
+
+    try {
+      // 1. Load school data
+      const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
+      const school = schools.find(s => s.id === schoolId);
+
+      if (!school || !school.driveLink) {
+        throw new Error(`School not found or missing Drive link: ${schoolId}`);
+      }
+
+      await job.updateProgress(10);
+
+      // 2. Setup directories
+      const schoolDir = path.join(DATA_DIR, 'schools', schoolId);
+      const pdfDir = path.join(schoolDir, 'pdfs');
+      const processedDir = path.join(schoolDir, 'processed-routes');
+
+      await fsPromises.mkdir(pdfDir, { recursive: true });
+      await fsPromises.mkdir(processedDir, { recursive: true });
+
+      // 3. Extract folder ID and list files
+      const folderId = driveService.extractFolderId(school.driveLink);
+      const pdfFiles = await driveService.listPdfFiles(folderId);
+
+      if (!pdfFiles || pdfFiles.length === 0) {
+        console.log(`[WorkerService] No PDFs found in Drive for ${schoolId}`);
+        await job.updateProgress(100);
+        return { schoolId, downloaded: 0, processed: 0, skipped: 0 };
+      }
+
+      await job.updateProgress(30);
+
+      // 4. Download and process files
+      let downloaded = 0;
+      let processed = 0;
+      let skipped = 0;
+      const errors = [];
+
+      // Clean up orphaned local files (files that exist locally but not in Drive)
+      const driveFileNames = new Set(pdfFiles.map(f => f.name));
+      const driveFileIds = new Set(pdfFiles.map(f => f.id));
+      const currentLocalPdfs = await this.getExistingPdfs(schoolId);
+      const orphanedPdfs = currentLocalPdfs.filter(name => !driveFileNames.has(name));
+      
+      // Also check metadata for orphaned entries by file ID
+      const metadata = await pdfMetadataService.loadMetadata(schoolId);
+      const metadataFileIds = Object.keys(metadata.files || {});
+      const orphanedFileIds = metadataFileIds.filter(id => !driveFileIds.has(id));
+
+      let deletedCount = 0;
+      
+      // Delete files based on names not in Drive
+      for (const orphanedPdf of orphanedPdfs) {
+        try {
+          const pdfPath = path.join(pdfDir, orphanedPdf);
+          const jsonPath = path.join(processedDir, orphanedPdf.replace('.pdf', '.json'));
+          
+          if (fs.existsSync(pdfPath)) {
+            await fsPromises.unlink(pdfPath);
+            console.log(`[WorkerService] Deleted orphaned PDF: ${orphanedPdf}`);
+          }
+          
+          if (fs.existsSync(jsonPath)) {
+            await fsPromises.unlink(jsonPath);
+            console.log(`[WorkerService] Deleted orphaned JSON: ${orphanedPdf.replace('.pdf', '.json')}`);
+          }
+          deletedCount++;
+        } catch (err) {
+          console.error(`[WorkerService] Failed to delete orphaned file ${orphanedPdf}:`, err.message);
+        }
+      }
+
+      // Clean up metadata for orphaned file IDs
+      for (const orphanedId of orphanedFileIds) {
+        try {
+          await pdfMetadataService.removeFileMetadata(schoolId, orphanedId);
+          console.log(`[WorkerService] Removed orphaned metadata for file ID: ${orphanedId}`);
+        } catch (err) {
+          console.error(`[WorkerService] Failed to remove orphaned metadata ${orphanedId}:`, err.message);
+        }
+      }
+
+      if (deletedCount > 0 || orphanedFileIds.length > 0) {
+        console.log(`[WorkerService] Cleaned up ${deletedCount} orphaned files and ${orphanedFileIds.length} metadata entries for ${schoolId}`);
+      }
+
+      for (let i = 0; i < pdfFiles.length; i++) {
+        const file = pdfFiles[i];
+        const pdfPath = path.join(pdfDir, file.name);
+        const jsonPath = path.join(processedDir, file.name.replace('.pdf', '.json'));
+
+        const progress = 30 + Math.floor((i / pdfFiles.length) * 60);
+        await job.updateProgress(progress);
+
+        try {
+          // Check if we need to download
+          let shouldDownload = !fs.existsSync(pdfPath);
+          if (!shouldDownload) {
+            const stats = await fsPromises.stat(pdfPath);
+            // This is a simple check, could be more robust
+            const driveDate = new Date(file.modifiedTime);
+            if (driveDate > stats.mtime) {
+              shouldDownload = true;
+            }
+          }
+
+          if (shouldDownload) {
+            console.log(`[WorkerService] Downloading ${file.name} for ${schoolId}`);
+            await driveService.downloadFile(file.id, pdfPath);
+            downloaded++;
+            
+            // Update metadata service
+            await pdfMetadataService.updateFileMetadata(schoolId, file.id, {
+              filename: file.name,
+              modifiedTime: file.modifiedTime,
+              localPath: file.name,
+            });
+          }
+
+          // Check if we need to process
+          if (shouldDownload || !fs.existsSync(jsonPath)) {
+            console.log(`[WorkerService] Processing ${file.name} for ${schoolId}`);
+            const dataBuffer = await fsPromises.readFile(pdfPath);
+            const data = await pdfParse(dataBuffer);
+            const routes = await pdfParser.parse(data.text, file.name, school);
+            
+            if (routes && routes.length > 0) {
+              await fsPromises.writeFile(jsonPath, JSON.stringify(routes, null, 2));
+              processed++;
+            }
+          } else {
+            skipped++;
+          }
+        } catch (err) {
+          console.error(`[WorkerService] Error processing ${file.name}:`, err);
+          errors.push({ file: file.name, error: err.message });
+        }
+      }
+
+      // 5. Update sync status
+      const newStatus = {
+        schoolId,
+        lastSync: new Date().toISOString(),
+        totalInDrive: pdfFiles.length,
+        downloaded,
+        processed,
+        deleted: deletedCount,
+        lastModifiedPdf: pdfFiles.reduce((latest, f) => {
+          return !latest || new Date(f.modifiedTime) > new Date(latest) ? f.modifiedTime : latest;
+        }, null)
+      };
+
+      await this.saveSyncStatus(newStatus);
+
+      // Perform a final Drive check to update the verification results table
+      try {
+        const driveResult = await driveLinkVerificationService.verifySchoolDriveLink(school);
+        await this.updateVerificationCache(schoolId, driveResult);
+      } catch (cacheError) {
+        console.warn(`[WorkerService] Failed to update verification cache after sync for ${schoolId}:`, cacheError.message);
+      }
+
+      await job.updateProgress(100);
+      return { ...newStatus, errors };
+    } catch (error) {
+      console.error(`[WorkerService] Error processing PDF sync for ${schoolId}:`, error);
+      throw error;
+    }
+  }
+
+  async processDriveCheckJob(job) {
+    const { schoolId } = job.data;
+    console.log(`[WorkerService] Processing Drive check for school: ${schoolId}`);
+
+    try {
+      // Load schools
+      const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
+      const school = schools.find(s => s.id === schoolId);
+
+      if (!school) {
+        throw new Error(`School not found: ${schoolId}`);
+      }
+
+      await job.updateProgress(20);
+
+      // Use the verification service logic
+      const result = await driveLinkVerificationService.verifySchoolDriveLink(school);
+      
+      await job.updateProgress(80);
+
+      // Update cache file
+      await this.updateVerificationCache(schoolId, result);
+
+      await job.updateProgress(100);
+      return result;
+    } catch (error) {
+      console.error(`[WorkerService] Error processing Drive check for ${schoolId}:`, error);
+      throw error;
+    }
+  }
+
+  async updateVerificationCache(schoolId, result) {
+    try {
+      const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
+      
+      let cachedResults = {
+        timestamp: new Date().toISOString(),
+        totalSchools: schools.length,
+        results: [],
+      };
+      
+      const DRIVE_VERIFICATION_CACHE_FILE = path.join(DATA_DIR, 'drive-link-verification-results.json');
+      
+      if (fs.existsSync(DRIVE_VERIFICATION_CACHE_FILE)) {
+        try {
+          const cacheContent = await fsPromises.readFile(DRIVE_VERIFICATION_CACHE_FILE, 'utf8');
+          cachedResults = JSON.parse(cacheContent);
+        } catch (error) {
+          console.warn('[WorkerService] Error loading cache for update:', error.message);
+        }
+      }
+      
+      // Update or add this school's result
+      const existingIndex = cachedResults.results.findIndex(r => r.schoolId === schoolId);
+      if (existingIndex >= 0) {
+        cachedResults.results[existingIndex] = result;
+      } else {
+        cachedResults.results.push(result);
+      }
+      
+      // Update the global timestamp to now
+      cachedResults.timestamp = new Date().toISOString();
+      
+      // Save updated cache
+      try {
+        await fsPromises.writeFile(DRIVE_VERIFICATION_CACHE_FILE, JSON.stringify(cachedResults, null, 2), 'utf8');
+      } catch (error) {
+        console.warn('[WorkerService] Error saving cache:', error.message);
+      }
+    } catch (error) {
+      console.error(`[WorkerService] Error updating verification cache for ${schoolId}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Helper to get existing PDF filenames for a school.
+   */
+  async getExistingPdfs(schoolId) {
+    const pdfDir = path.join(DATA_DIR, 'schools', schoolId, 'pdfs');
+    if (!fs.existsSync(pdfDir)) return [];
+    
+    try {
+      const files = await fsPromises.readdir(pdfDir);
+      return files.filter(f => f.toLowerCase().endsWith('.pdf'));
+    } catch (err) {
+      return [];
+    }
+  }
+
+  /**
+   * Helper to save sync status to the global status file.
+   */
+  async saveSyncStatus(status) {
+    const statusFile = path.join(DATA_DIR, 'pdf-sync-status.json');
+    let allStatus = {};
+    
+    try {
+      if (fs.existsSync(statusFile)) {
+        allStatus = JSON.parse(await fsPromises.readFile(statusFile, 'utf8'));
+      }
+      
+      allStatus[status.schoolId] = status;
+      await fsPromises.writeFile(statusFile, JSON.stringify(allStatus, null, 2));
+    } catch (err) {
+      console.error('[WorkerService] Failed to save sync status:', err);
+    }
+  }
+
+  // --- Mock/Development implementations for polling worker ---
+  
+  async getPendingJobs() {
+    const jobsFile = path.join(DATA_DIR, 'jobs-history', 'jobs.json');
+    if (!fs.existsSync(jobsFile)) return [];
+    
+    try {
+      const data = JSON.parse(await fsPromises.readFile(jobsFile, 'utf8'));
+      return data.jobs.filter(j => j.status === 'waiting' || j.status === 'queued')
+        .sort((a, b) => (a.data.priority || 5) - (b.data.priority || 5));
+    } catch (err) {
+      return [];
+    }
+  }
+
+  async updateJobStatus(jobId, status) {
+    const jobsFile = path.join(DATA_DIR, 'jobs-history', 'jobs.json');
+    try {
+      const data = JSON.parse(await fsPromises.readFile(jobsFile, 'utf8'));
+      const job = data.jobs.find(j => j.id === jobId);
+      if (job) {
+        job.status = status;
+        if (status === 'active') job.processedOn = Date.now();
+        await fsPromises.writeFile(jobsFile, JSON.stringify(data, null, 2));
+      }
+    } catch (err) {}
+  }
+
+  async completeJob(jobId, result) {
+    const jobsFile = path.join(DATA_DIR, 'jobs-history', 'jobs.json');
+    try {
+      const data = JSON.parse(await fsPromises.readFile(jobsFile, 'utf8'));
+      const job = data.jobs.find(j => j.id === jobId);
+      if (job) {
+        job.status = 'completed';
+        job.finishedOn = Date.now();
+        job.result = result;
+        job.progress = 100;
+        await fsPromises.writeFile(jobsFile, JSON.stringify(data, null, 2));
+      }
+    } catch (err) {}
+  }
+
+  async failJob(jobId, error) {
+    const jobsFile = path.join(DATA_DIR, 'jobs-history', 'jobs.json');
+    try {
+      const data = JSON.parse(await fsPromises.readFile(jobsFile, 'utf8'));
+      const job = data.jobs.find(j => j.id === jobId);
+      if (job) {
+        job.status = 'failed';
+        job.finishedOn = Date.now();
+        job.failedReason = error.message;
+        await fsPromises.writeFile(jobsFile, JSON.stringify(data, null, 2));
+      }
+    } catch (err) {}
+  }
+}
+
+export { WorkerService };

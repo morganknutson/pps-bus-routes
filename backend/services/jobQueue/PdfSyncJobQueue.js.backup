@@ -1,0 +1,93 @@
+import { JOB_TYPES } from './jobTypes.js';
+
+export const JOB_PRIORITY = {
+  LOW: 10,
+  NORMAL: 5,
+  HIGH: 1,
+};
+
+/**
+ * Service for managing PDF sync jobs in a queue.
+ * Provides methods for enqueuing sync and processing tasks.
+ */
+class PdfSyncJobQueue {
+  constructor() {
+    this.queue = null;
+  }
+
+  setQueue(queue) {
+    this.queue = queue;
+  }
+
+  /**
+   * Enqueue a job to sync PDFs for a school.
+   * @param {string} schoolId - The ID of the school to sync.
+   * @param {Object} options - Job options (priority, delay, etc.)
+   */
+  async enqueue(type, data, options = {}) {
+    if (!this.queue) {
+      console.warn('[PdfSyncJobQueue] Queue not initialized, running job immediately in background');
+      return null;
+    }
+
+    try {
+      const job = await this.queue.add(type, data, {
+        priority: options.priority || JOB_PRIORITY.NORMAL,
+        attempts: options.attempts || 3,
+        backoff: {
+          type: 'exponential',
+          delay: 5000,
+        },
+        removeOnComplete: true,
+        removeOnFail: false,
+        ...options,
+      });
+
+      console.log(`[PdfSyncJobQueue] Enqueued ${type} job: ${job.id} for ${data.schoolId}`);
+      return job.id;
+    } catch (error) {
+      console.error(`[PdfSyncJobQueue] Failed to enqueue ${type} job:`, error);
+      throw error;
+    }
+  }
+
+  async enqueuePdfSyncJob(schoolId, options = {}) {
+    return await this.enqueue(
+      JOB_TYPES.PDF_SYNC,
+      { schoolId },
+      {
+        priority: options.priority || JOB_PRIORITY.NORMAL,
+        delay: options.delay || 0,
+        ...options,
+      }
+    );
+  }
+
+  async enqueuePdfProcessJob(schoolId, options = {}) {
+    return await this.enqueue(
+      JOB_TYPES.PDF_PROCESS,
+      { schoolId },
+      {
+        priority: options.priority || JOB_PRIORITY.NORMAL,
+        delay: options.delay || 0,
+        ...options,
+      }
+    );
+  }
+
+  async enqueueDriveCheckJob(schoolId, options = {}) {
+    return await this.enqueue(
+      JOB_TYPES.DRIVE_CHECK,
+      { schoolId },
+      {
+        priority: options.priority || JOB_PRIORITY.NORMAL,
+        delay: options.delay || 0,
+        attempts: options.attempts || 3,
+        ...options,
+      }
+    );
+  }
+}
+
+export const pdfSyncJobQueue = new PdfSyncJobQueue();
+export default pdfSyncJobQueue;

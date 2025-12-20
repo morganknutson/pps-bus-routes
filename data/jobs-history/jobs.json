@@ -2428,5 +2428,95 @@
         }
       }
     ]
+  },
+  {
+    "id": "job_1766228971276_x2uhsaqxb",
+    "name": "pdf-sync",
+    "data": {
+      "schoolId": "west-sylvan"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "west-sylvan",
+      "downloaded": 0,
+      "processed": 0,
+      "skipped": 0,
+      "deleted": 2,
+      "errors": [],
+      "totalInDrive": 38,
+      "lastModifiedPdf": "2025-11-25T17:01:16.141Z",
+      "lastChecked": "2025-12-20T11:09:33.145Z"
+    },
+    "error": null,
+    "createdAt": "2025-12-20T11:09:31.276Z",
+    "processedAt": null,
+    "finishedAt": "2025-12-20T11:09:33.145Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2025-12-20T11:09:31.276Z",
+        "data": {
+          "id": "job_1766228971276_x2uhsaqxb",
+          "name": "pdf-sync",
+          "data": {
+            "schoolId": "west-sylvan"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2025-12-20T11:09:32.194Z",
+        "data": {
+          "id": "job_1766228971276_x2uhsaqxb",
+          "progress": 10
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2025-12-20T11:09:32.194Z",
+        "data": {
+          "id": "job_1766228971276_x2uhsaqxb",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2025-12-20T11:09:32.650Z",
+        "data": {
+          "id": "job_1766228971276_x2uhsaqxb",
+          "progress": 30
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2025-12-20T11:09:33.144Z",
+        "data": {
+          "id": "job_1766228971276_x2uhsaqxb",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2025-12-20T11:09:33.145Z",
+        "data": {
+          "id": "job_1766228971276_x2uhsaqxb",
+          "result": {
+            "schoolId": "west-sylvan",
+            "downloaded": 0,
+            "processed": 0,
+            "skipped": 0,
+            "deleted": 2,
+            "errors": [],
+            "totalInDrive": 38,
+            "lastModifiedPdf": "2025-11-25T17:01:16.141Z",
+            "lastChecked": "2025-12-20T11:09:33.145Z"
+          }
+        }
+      }
+    ]
   }
 ]

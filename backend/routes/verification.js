@@ -7,6 +7,8 @@ import { verificationService } from '../services/verificationService.js';
 import { pdfFetchTrackingService } from '../services/pdfFetchTrackingService.js';
 import { driveLinkVerificationService } from '../services/driveLinkVerificationService.js';
 import { pdfMetadataService } from '../services/pdfMetadataService.js';
+import { pdfSyncJobQueue } from '../services/jobQueue/index.js';
+import { JOB_PRIORITY } from '../services/jobQueue/jobTypes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -361,40 +363,17 @@ router.post('/check-drive-link/:schoolId', async (req, res) => {
       return res.status(404).json({ error: `School not found: ${schoolId}` });
     }
 
-    const result = await driveLinkVerificationService.verifySchoolDriveLink(school);
+    // Enqueue a background job instead of running synchronously
+    const jobId = await pdfSyncJobQueue.enqueueDriveCheckJob(schoolId, {
+      priority: JOB_PRIORITY.HIGH
+    });
     
-    // Update cache with this result
-    let cachedResults = {
-      timestamp: new Date().toISOString(),
-      totalSchools: schools.length,
-      results: [],
-    };
-    
-    if (fs.existsSync(DRIVE_VERIFICATION_CACHE_FILE)) {
-      try {
-        const cacheContent = fs.readFileSync(DRIVE_VERIFICATION_CACHE_FILE, 'utf8');
-        cachedResults = JSON.parse(cacheContent);
-      } catch (error) {
-        console.warn('[Verification] Error loading cache for update:', error.message);
-      }
-    }
-    
-    // Update or add this school's result
-    const existingIndex = cachedResults.results.findIndex(r => r.schoolId === schoolId);
-    if (existingIndex >= 0) {
-      cachedResults.results[existingIndex] = result;
-    } else {
-      cachedResults.results.push(result);
-    }
-    
-    // Save updated cache
-    try {
-      fs.writeFileSync(DRIVE_VERIFICATION_CACHE_FILE, JSON.stringify(cachedResults, null, 2), 'utf8');
-    } catch (error) {
-      console.warn('[Verification] Error saving cache:', error.message);
-    }
-    
-    res.json(result);
+    res.json({
+      jobId,
+      schoolId,
+      status: 'queued',
+      message: 'Drive check job has been queued'
+    });
   } catch (error) {
     console.error('Error checking Drive link:', error);
     res.status(500).json({ error: error.message });
@@ -403,12 +382,10 @@ router.post('/check-drive-link/:schoolId', async (req, res) => {
 
 /**
  * Check all Drive links
- * Supports both synchronous (wait=true) and asynchronous (wait=false or omitted) modes
+ *支持 both synchronous (wait=true) and asynchronous (wait=false or omitted) modes
  */
 router.post('/check-drive-links', async (req, res) => {
   try {
-    const { wait = false } = req.body; // Option to wait for results
-
     // Load schools
     if (!fs.existsSync(SCHOOLS_FILE)) {
       return res.status(404).json({ error: 'Schools file not found' });
@@ -416,36 +393,24 @@ router.post('/check-drive-links', async (req, res) => {
 
     const content = fs.readFileSync(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
+    const schoolsWithDriveLinks = schools.filter(s => s.driveLink);
 
-    if (wait) {
-      // Synchronous mode: wait for results
-      const results = await driveLinkVerificationService.verifyAllDriveLinks(schools);
-      
-      // Save results to file
-      const resultsFile = path.join(DATA_DIR, 'drive-link-verification-results.json');
-      fs.writeFileSync(resultsFile, JSON.stringify(results, null, 2), 'utf8');
-      
-      res.json(results);
-    } else {
-      // Asynchronous mode: return immediately and run in background
-      res.json({
-        message: 'Drive link verification started',
-        totalSchools: schools.length,
-        note: 'This operation may take several minutes. Check the results endpoint for progress.',
+    console.log(`[Verification] Queuing Drive check jobs for ${schoolsWithDriveLinks.length} schools`);
+
+    // Queue individual jobs for each school
+    const jobIds = [];
+    for (const school of schoolsWithDriveLinks) {
+      const jobId = await pdfSyncJobQueue.enqueueDriveCheckJob(school.id, {
+        priority: JOB_PRIORITY.NORMAL
       });
-
-      // Run verification in background (don't await)
-      driveLinkVerificationService.verifyAllDriveLinks(schools)
-        .then(results => {
-          // Save results to file for later retrieval
-          const resultsFile = path.join(DATA_DIR, 'drive-link-verification-results.json');
-          fs.writeFileSync(resultsFile, JSON.stringify(results, null, 2), 'utf8');
-          console.log('[Verification] Drive link verification completed');
-        })
-        .catch(error => {
-          console.error('[Verification] Error in background Drive link verification:', error);
-        });
+      jobIds.push(jobId);
     }
+
+    res.json({
+      message: `Queued ${jobIds.length} Drive check jobs`,
+      totalJobs: jobIds.length,
+      status: 'queued'
+    });
   } catch (error) {
     console.error('Error starting Drive link verification:', error);
     res.status(500).json({ error: error.message });
@@ -579,6 +544,45 @@ router.get('/drive-link-results', async (req, res) => {
     res.json(results);
   } catch (error) {
     console.error('Error loading Drive link verification results:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * Find strange or incorrect stops in all routes
+ */
+router.post('/find-strange-stops', async (req, res) => {
+  try {
+    const report = await verificationService.findStrangeStops();
+    res.json(report);
+  } catch (error) {
+    console.error('Error finding strange stops:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * Fix strange or incorrect stops in all routes
+ */
+router.post('/fix-strange-stops', async (req, res) => {
+  try {
+    const result = await verificationService.fixStrangeStops();
+    res.json(result);
+  } catch (error) {
+    console.error('Error fixing strange stops:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * Verify all school stops in processed routes
+ */
+router.post('/verify-school-stops', async (req, res) => {
+  try {
+    const result = await verificationService.verifySchoolStops();
+    res.json(result);
+  } catch (error) {
+    console.error('Error verifying school stops:', error);
     res.status(500).json({ error: error.message });
   }
 });

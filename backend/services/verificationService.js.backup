@@ -1,0 +1,651 @@
+/**
+ * Verification service for validating school Google Sites and Drive links
+ * Ensures initial data is correct before scheduler uses it
+ */
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { listFolderFiles } from './driveService.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DATA_DIR = path.join(__dirname, '..', '..', 'data');
+const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
+const SCHOOLS_DIR = path.join(DATA_DIR, 'schools');
+
+// Portland Metro Bounding Box
+const MIN_LAT = 45.3;
+const MAX_LAT = 45.7;
+const MIN_LNG = -123.0;
+const MAX_LNG = -122.3;
+
+class VerificationService {
+  constructor() {
+    this.requestDelay = 500; // 500ms delay between requests
+  }
+
+  /**
+   * Find strange or incorrect stops in all routes
+   */
+  async findStrangeStops() {
+    const issues = [];
+    if (!fs.existsSync(SCHOOLS_DIR)) return { summary: { totalRoutes: 0, totalStops: 0, totalIssues: 0 }, issues: [] };
+
+    const schools = fs.readdirSync(SCHOOLS_DIR).filter(f => 
+      fs.statSync(path.join(SCHOOLS_DIR, f)).isDirectory()
+    );
+
+    let totalRoutes = 0;
+    let totalStops = 0;
+
+    for (const schoolId of schools) {
+      const processedRoutesPath = path.join(SCHOOLS_DIR, schoolId, 'processed-routes');
+      if (!fs.existsSync(processedRoutesPath)) continue;
+
+      const routeFiles = fs.readdirSync(processedRoutesPath).filter(f => f.endsWith('.json'));
+
+      for (const routeFile of routeFiles) {
+        totalRoutes++;
+        const routePath = path.join(processedRoutesPath, routeFile);
+        try {
+          const route = JSON.parse(fs.readFileSync(routePath, 'utf8'));
+
+          if (!route.stops) continue;
+
+          route.stops.forEach((stop, index) => {
+            totalStops++;
+            const stopIssue = {
+              schoolId,
+              routeFile,
+              routeName: route.name,
+              stopIndex: index,
+              stopAddress: stop.address,
+              stopCoordinates: stop.coordinates,
+              reasons: []
+            };
+
+            if (!stop.coordinates) {
+              stopIssue.reasons.push('Missing coordinates');
+            } else {
+              const [lng, lat] = stop.coordinates;
+
+              if (lng === 0 && lat === 0) {
+                stopIssue.reasons.push('Coordinates are [0, 0]');
+              } else if (lat < MIN_LAT || lat > MAX_LAT || lng < MIN_LNG || lng > MAX_LNG) {
+                stopIssue.reasons.push(`Coordinates [${lng}, ${lat}] are outside Portland Metro area`);
+              }
+            }
+
+            if (stopIssue.reasons.length > 0) {
+              issues.push(stopIssue);
+            }
+          });
+        } catch (err) {
+          console.error(`Error parsing route ${routePath}:`, err);
+        }
+      }
+    }
+
+    const report = {
+      generatedAt: new Date().toISOString(),
+      summary: {
+        totalRoutes,
+        totalStops,
+        totalIssues: issues.length
+      },
+      issues
+    };
+
+    // Save report for future reference
+    const reportPath = path.join(DATA_DIR, 'strange-stops-report.json');
+    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+
+    return report;
+  }
+
+  /**
+   * Fix strange or incorrect stops in all routes
+   */
+  async fixStrangeStops() {
+    // Load schools for coordinate lookup
+    if (!fs.existsSync(SCHOOLS_FILE)) throw new Error('Schools file not found');
+    const schoolsData = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+    const schoolMap = new Map();
+    schoolsData.forEach(s => {
+      schoolMap.set(s.name.toLowerCase(), s);
+      if (s.id) schoolMap.set(s.id.toLowerCase(), s);
+    });
+
+    // Additional school name mappings for "Loading ZONE" stops
+    const schoolVariations = {
+      'mt tabor': 'Mt Tabor',
+      'hosford': 'Hosford',
+      'tubman': 'Tubman',
+      'cesar chavez': 'Cesar Chavez',
+      'vernon': 'Vernon',
+      'ockley green': 'Ockley Green',
+      'faubion': 'Faubion',
+      'george': 'George',
+      'chief joseph': 'Chief Joseph',
+      'astor': 'Astor',
+      'lent': 'Lent',
+      'lee': 'Lee',
+      'kellogg': 'Kellogg',
+      'sellwood': 'Sellwood',
+      'lincoln': 'Lincoln',
+      'clarendon': 'Cesar Chavez',
+      'ln.': 'Lane',
+      'lane': 'Lane',
+    };
+
+    if (!fs.existsSync(SCHOOLS_DIR)) return { summary: { totalIssues: 0, totalFixed: 0 } };
+
+    const schools = fs.readdirSync(SCHOOLS_DIR).filter(f => 
+      fs.statSync(path.join(SCHOOLS_DIR, f)).isDirectory()
+    );
+
+    let totalFixed = 0;
+    let totalIssues = 0;
+    const fixedDetails = [];
+
+    for (const schoolId of schools) {
+      const processedRoutesPath = path.join(SCHOOLS_DIR, schoolId, 'processed-routes');
+      if (!fs.existsSync(processedRoutesPath)) continue;
+
+      const routeFiles = fs.readdirSync(processedRoutesPath).filter(f => f.endsWith('.json'));
+
+      for (const routeFile of routeFiles) {
+        const routePath = path.join(processedRoutesPath, routeFile);
+        try {
+          const route = JSON.parse(fs.readFileSync(routePath, 'utf8'));
+          let modified = false;
+
+          if (!route.stops) continue;
+
+          route.stops.forEach((stop, index) => {
+            let hasIssue = false;
+            let fixed = false;
+
+            if (!stop.coordinates) {
+              hasIssue = true;
+            } else {
+              const [lng, lat] = stop.coordinates;
+              if (lng === 0 && lat === 0 || lat < MIN_LAT || lat > MAX_LAT || lng < MIN_LNG || lng > MAX_LNG) {
+                hasIssue = true;
+              }
+            }
+
+            if (hasIssue) {
+              totalIssues++;
+              const address = stop.address.toLowerCase();
+              let matchedSchool = null;
+
+              for (const [key, value] of Object.entries(schoolVariations)) {
+                if (address.includes(key)) {
+                  matchedSchool = schoolMap.get(value.toLowerCase());
+                  if (matchedSchool) break;
+                }
+              }
+
+              if (matchedSchool && matchedSchool.coordinates) {
+                stop.coordinates = matchedSchool.coordinates;
+                stop.displayName = matchedSchool.address;
+                stop.isSchoolStop = stop.isSchoolStop || false;
+                fixed = true;
+              } else if (address.includes('i5 fwy sb no intersection')) {
+                delete stop.coordinates;
+                delete stop.placeId;
+                delete stop.displayName;
+                fixed = true;
+              }
+
+              if (fixed) {
+                totalFixed++;
+                modified = true;
+                fixedDetails.push({
+                  schoolId,
+                  routeFile,
+                  stopAddress: stop.address,
+                  fixed: true
+                });
+              }
+            }
+          });
+
+          if (modified) {
+            if (route.geometry) {
+              delete route.geometry;
+            }
+            fs.writeFileSync(routePath, JSON.stringify(route, null, 2));
+          }
+        } catch (err) {
+          console.error(`Error processing route ${routePath}:`, err);
+        }
+      }
+    }
+
+    return {
+      summary: {
+        totalIssues,
+        totalFixed,
+        remainingIssues: totalIssues - totalFixed
+      },
+      fixedDetails
+    };
+  }
+
+  /**
+   * Verify all school stops in processed routes
+   */
+  async verifySchoolStops() {
+    if (!fs.existsSync(SCHOOLS_FILE)) throw new Error('Schools file not found');
+    const schoolsData = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+    const schoolsMap = new Map();
+    schoolsData.forEach(school => {
+      schoolsMap.set(school.id, school);
+    });
+
+    const routeFiles = [];
+    const mainProcessedPath = path.join(DATA_DIR, 'processed-routes');
+    if (fs.existsSync(mainProcessedPath)) {
+      const files = fs.readdirSync(mainProcessedPath)
+        .filter(f => f.endsWith('.json'))
+        .map(f => ({ path: path.join(mainProcessedPath, f), schoolId: null }));
+      routeFiles.push(...files);
+    }
+
+    if (fs.existsSync(SCHOOLS_DIR)) {
+      const schoolDirs = fs.readdirSync(SCHOOLS_DIR, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => dirent.name);
+
+      for (const schoolDir of schoolDirs) {
+        const processedRoutesPath = path.join(SCHOOLS_DIR, schoolDir, 'processed-routes');
+        if (fs.existsSync(processedRoutesPath)) {
+          const files = fs.readdirSync(processedRoutesPath)
+            .filter(f => f.endsWith('.json'))
+            .map(f => ({ path: path.join(processedRoutesPath, f), schoolId: schoolDir }));
+          routeFiles.push(...files);
+        }
+      }
+    }
+
+    const results = {
+      total: routeFiles.length,
+      valid: 0,
+      invalid: 0,
+      missingSchoolStop: 0,
+      issues: [],
+    };
+
+    for (const { path: routePath, schoolId } of routeFiles) {
+      try {
+        const route = JSON.parse(fs.readFileSync(routePath, 'utf8'));
+        const filename = path.basename(routePath);
+        const schoolStop = route.stops?.find(s => s.isSchoolStop === true);
+        
+        if (!schoolStop) {
+          results.missingSchoolStop++;
+          results.issues.push({
+            file: filename,
+            route: `${route.name} (${route.direction || 'Unknown'})`,
+            issue: 'MISSING_SCHOOL_STOP',
+            message: 'Route does not have a school stop (isSchoolStop: true)',
+          });
+          continue;
+        }
+
+        let expectedSchool = null;
+        if (schoolId) {
+          expectedSchool = schoolsMap.get(schoolId);
+        } else if (schoolStop.schoolName) {
+          expectedSchool = schoolsData.find(s => 
+            s.name.toLowerCase() === schoolStop.schoolName.toLowerCase()
+          );
+        }
+
+        if (!expectedSchool) {
+          results.invalid++;
+          results.issues.push({
+            file: filename,
+            route: `${route.name} (${route.direction || 'Unknown'})`,
+            issue: 'SCHOOL_NOT_FOUND',
+            message: `Could not find matching school in schools.json for "${schoolStop.schoolName || 'unknown'}"`,
+          });
+          continue;
+        }
+
+        const addressMatches = schoolStop.address === expectedSchool.address;
+        const coordinatesMatch = JSON.stringify(schoolStop.coordinates) === JSON.stringify(expectedSchool.coordinates);
+        const isMorning = route.direction === 'Morning';
+        const isAfternoon = route.direction === 'Afternoon';
+        const isFirstStop = route.stops[0]?.isSchoolStop === true;
+        const isLastStop = route.stops[route.stops.length - 1]?.isSchoolStop === true;
+        
+        let placementCorrect = false;
+        if (isMorning && isLastStop) placementCorrect = true;
+        else if (isAfternoon && isFirstStop) placementCorrect = true;
+        else if (!isMorning && !isAfternoon) placementCorrect = true;
+
+        const routeIssues = [];
+        if (!addressMatches) routeIssues.push({ type: 'ADDRESS_MISMATCH', expected: expectedSchool.address, actual: schoolStop.address });
+        if (!coordinatesMatch) routeIssues.push({ type: 'COORDINATES_MISMATCH', expected: expectedSchool.coordinates, actual: schoolStop.coordinates });
+        if (!placementCorrect) routeIssues.push({ type: 'PLACEMENT_INCORRECT', direction: route.direction, isFirst: isFirstStop, isLast: isLastStop });
+
+        if (routeIssues.length > 0) {
+          results.invalid++;
+          results.issues.push({
+            file: filename,
+            route: `${route.name} (${route.direction || 'Unknown'})`,
+            school: expectedSchool.name,
+            schoolId: expectedSchool.id,
+            issues: routeIssues,
+          });
+        } else {
+          results.valid++;
+        }
+      } catch (err) {
+        results.invalid++;
+        results.issues.push({ file: path.basename(routePath), issue: 'PARSE_ERROR', message: err.message });
+      }
+    }
+
+    const reportPath = path.join(DATA_DIR, 'school-stop-verification-report.json');
+    fs.writeFileSync(reportPath, JSON.stringify({ generatedAt: new Date().toISOString(), summary: results, issues: results.issues }, null, 2));
+
+    return { summary: results, issues: results.issues };
+  }
+
+  /**
+   * Extract folder ID from Google Drive URL
+   */
+  extractFolderId(url) {
+    if (!url || typeof url !== 'string') {
+      return null;
+    }
+
+    // Format 1: /drive/folders/FOLDER_ID
+    let match = url.match(/\/drive\/folders\/([a-zA-Z0-9_-]+)/);
+    if (match) return match[1];
+
+    // Format 2: /open?id=FOLDER_ID
+    match = url.match(/\/open\?id=([a-zA-Z0-9_-]+)/);
+    if (match) return match[1];
+
+    // Format 3: /embeddedfolderview?id=FOLDER_ID
+    match = url.match(/\/embeddedfolderview\?id=([a-zA-Z0-9_-]+)/);
+    if (match) return match[1];
+
+    return null;
+  }
+
+  /**
+   * Get variations of school name for matching
+   */
+  getSchoolNameVariations(schoolName) {
+    const variations = [schoolName];
+    
+    // Remove common suffixes
+    const withoutSuffix = schoolName
+      .replace(/\s+(Elementary|Middle|High|School)$/i, '')
+      .replace(/\s+(ES|MS|HS)$/i, '');
+    if (withoutSuffix !== schoolName) {
+      variations.push(withoutSuffix);
+    }
+
+    // Add uppercase version
+    variations.push(schoolName.toUpperCase());
+    
+    // Add lowercase version
+    variations.push(schoolName.toLowerCase());
+
+    return [...new Set(variations)];
+  }
+
+  /**
+   * Verify Google Sites link
+   */
+  async verifyGoogleSitesLink(school, siteUrl) {
+    const result = {
+      valid: false,
+      accessible: false,
+      schoolNameFound: false,
+      errors: [],
+      warnings: [],
+    };
+
+    if (!siteUrl) {
+      result.errors.push('No Google Sites URL provided');
+      return result;
+    }
+
+    // 1. Check accessibility
+    try {
+      const response = await fetch(siteUrl, {
+        method: 'HEAD',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        },
+        signal: AbortSignal.timeout(10000), // 10 second timeout
+      });
+
+      result.accessible = response.ok;
+      if (!response.ok) {
+        result.errors.push(`HTTP ${response.status}: ${response.statusText}`);
+        return result;
+      }
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        result.errors.push('Request timeout');
+      } else {
+        result.errors.push(`Network error: ${error.message}`);
+      }
+      return result;
+    }
+
+    // 2. Fetch page content to check for school name
+    try {
+      const htmlResponse = await fetch(siteUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        },
+        signal: AbortSignal.timeout(10000),
+      });
+
+      if (!htmlResponse.ok) {
+        result.errors.push(`Failed to fetch page content: HTTP ${htmlResponse.status}`);
+        return result;
+      }
+
+      const html = await htmlResponse.text();
+      const htmlLower = html.toLowerCase();
+
+      // 3. Check for school name in content
+      const schoolNameVariations = this.getSchoolNameVariations(school.name);
+      const foundVariation = schoolNameVariations.find(name => 
+        htmlLower.includes(name.toLowerCase())
+      );
+
+      if (foundVariation) {
+        result.schoolNameFound = true;
+      } else {
+        result.warnings.push(`School name "${school.name}" not found on page`);
+      }
+
+      // 4. Check for Drive links on the page (cross-reference)
+      const driveLinkPattern = /drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/g;
+      const driveMatches = [...html.matchAll(driveLinkPattern)];
+      if (driveMatches.length > 0) {
+        result.driveLinksFoundOnPage = driveMatches.length;
+      }
+
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        result.errors.push('Content fetch timeout');
+      } else {
+        result.errors.push(`Failed to fetch content: ${error.message}`);
+      }
+    }
+
+    // 5. Overall validity
+    result.valid = result.accessible && result.schoolNameFound;
+
+    return result;
+  }
+
+  /**
+   * Verify Drive folder link
+   */
+  async verifyDriveLink(school, driveUrl) {
+    const result = {
+      valid: false,
+      accessible: false,
+      hasPdfs: false,
+      pdfCount: 0,
+      errors: [],
+      warnings: [],
+    };
+
+    if (!driveUrl) {
+      result.errors.push('No Drive URL provided');
+      return result;
+    }
+
+    // 1. Extract folder ID
+    const folderId = this.extractFolderId(driveUrl);
+    if (!folderId) {
+      result.errors.push('Invalid Drive URL format - cannot extract folder ID');
+      return result;
+    }
+
+    // 2. Check accessibility
+    try {
+      const testUrl = `https://drive.google.com/drive/folders/${folderId}`;
+      const response = await fetch(testUrl, {
+        method: 'HEAD',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        },
+        signal: AbortSignal.timeout(10000),
+      });
+
+      result.accessible = response.ok;
+      if (!response.ok) {
+        result.errors.push(`HTTP ${response.status}: ${response.statusText}`);
+        return result;
+      }
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        result.errors.push('Request timeout');
+      } else {
+        result.errors.push(`Network error: ${error.message}`);
+      }
+      return result;
+    }
+
+    // 3. Try to list files in folder
+    try {
+      const apiKey = process.env.GOOGLE_API_KEY || null;
+      const files = await listFolderFiles(folderId, apiKey);
+      
+      const pdfFiles = files.filter(f => 
+        f.name && f.name.toLowerCase().endsWith('.pdf')
+      );
+      
+      result.pdfCount = pdfFiles.length;
+      result.hasPdfs = pdfFiles.length > 0;
+
+      if (pdfFiles.length === 0) {
+        result.warnings.push('No PDF files found in folder');
+      } else if (pdfFiles.length < 5) {
+        result.warnings.push(`Only ${pdfFiles.length} PDF(s) found - may be incomplete`);
+      }
+
+    } catch (error) {
+      result.errors.push(`Failed to list files: ${error.message}`);
+      // Still mark as accessible if we got past the HEAD check
+      result.accessible = true;
+    }
+
+    // 4. Overall validity
+    result.valid = result.accessible && result.hasPdfs;
+
+    return result;
+  }
+
+/**
+ * Verify both links for a school
+ */
+async verifySchoolLinks(school) {
+  const result = {
+    schoolId: school.id,
+    schoolName: school.name,
+    schoolPageLink: school.schoolPageLink || null, // Include actual URL
+    driveLink: school.driveLink || null, // Include actual URL
+    sitesLink: null,
+    driveLinkResult: null, // Renamed to avoid conflict
+    overallValid: false,
+    timestamp: new Date().toISOString(),
+  };
+
+    // Verify Google Sites link
+    if (school.schoolPageLink) {
+      result.sitesLink = await this.verifyGoogleSitesLink(school, school.schoolPageLink);
+      // Add delay between requests
+      await this.delay();
+    } else {
+      result.sitesLink = {
+        valid: false,
+        accessible: false,
+        schoolNameFound: false,
+        errors: ['No Google Sites URL configured'],
+        warnings: [],
+      };
+    }
+
+    // Verify Drive link
+    if (school.driveLink) {
+      result.driveLinkResult = await this.verifyDriveLink(school, school.driveLink);
+      // Add delay between requests
+      await this.delay();
+    } else {
+      result.driveLinkResult = {
+        valid: false,
+        accessible: false,
+        hasPdfs: false,
+        pdfCount: 0,
+        errors: ['No Drive URL configured'],
+        warnings: [],
+      };
+    }
+
+    // Overall validity: both links must be valid
+    result.overallValid = 
+      result.sitesLink.valid && 
+      result.driveLinkResult.valid;
+
+    return result;
+  }
+
+  /**
+   * Add delay between requests
+   */
+  async delay(ms = this.requestDelay) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+}
+
+// Export singleton instance
+export const verificationService = new VerificationService();
+export default VerificationService;
+
+
+
+
+
+
+
+
+
+

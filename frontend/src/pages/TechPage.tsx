@@ -46,6 +46,7 @@ const sections: Section[] = [
       { id: 'google-sites-service', title: '12. GoogleSitesService' },
       { id: 'restart-service', title: '13. RestartService' },
       { id: 'job-queue-system', title: '14. Job Queue System' },
+      { id: 'maintenance-scripts', title: '15. Maintenance Scripts' },
     ],
   },
   {
@@ -1162,7 +1163,7 @@ export function TechPage() {
                   <li><strong>Upcoming Routes:</strong>
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                       <li>Determined by parsing <code>_effective_MMDDYY</code> from the PDF filename.</li>
-                      <li>If the effective date is in the future (tomorrow or later), the route name is appended with <code>-upcoming</code> (e.g., "104-upcoming").</li>
+                      <li>If the effective date is in the future (tomorrow or later), the route displays with a "(Starting DATE)" label next to its number.</li>
                       <li>These are displayed separately in the UI to allow families to preview future schedule changes.</li>
                     </ul>
                   </li>
@@ -1670,6 +1671,27 @@ export function TechPage() {
                       <li>Includes local PDF count and file list</li>
                     </ul>
                   </li>
+                  <li><strong>findStrangeStops()</strong> - Scans all processed routes for coordinate issues:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Checks for missing coordinates or [0, 0] coordinates</li>
+                      <li>Validates coordinates are within Portland Metro bounds</li>
+                      <li>Generates detailed report of problematic stops</li>
+                    </ul>
+                  </li>
+                  <li><strong>verifySchoolStops()</strong> - Validates school stops across all routes:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Ensures every route has a school stop (<code>isSchoolStop: true</code>)</li>
+                      <li>Matches school addresses and coordinates against <code>schools.json</code></li>
+                      <li>Verifies correct placement (last for Morning, first for Afternoon)</li>
+                    </ul>
+                  </li>
+                  <li><strong>fixStrangeStops()</strong> - Automatically corrects common data issues:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Uses <code>schools.json</code> data to fix "Loading Zone" stops</li>
+                      <li>Removes incorrect geocoding (e.g., I-5 highway errors)</li>
+                      <li>Clears route geometry to trigger recalculation</li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -1957,8 +1979,9 @@ export function TechPage() {
                   <li>Compare modified times and local existence to determine which files need downloading or processing</li>
                   <li>Download new/updated PDFs (with rate limiting)</li>
                   <li>Process PDFs that are new, updated, or missing processed JSON results</li>
+                  <li>Clean up orphaned local PDFs and JSON files that are no longer present on Drive</li>
                   <li>Update sync status in <code>data/pdf-sync-status.json</code></li>
-                  <li>Return result with download and processing counts</li>
+                  <li>Return result with download, processing, and deletion counts</li>
                 </ol>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -2021,7 +2044,9 @@ export function TechPage() {
   "result": {
     "schoolId": "west-sylvan",
     "downloaded": 3,
+    "processed": 3,
     "skipped": 5,
+    "deleted": 2,
     "errors": [],
     "totalInDrive": 8,
     "lastModifiedPdf": "2024-01-20T10:00:00.000Z",
@@ -2047,6 +2072,44 @@ export function TechPage() {
 }`}
                 </pre>
               </ExpandableExample>
+            </div>
+
+            <div id="maintenance-scripts" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                15. Maintenance Scripts
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                A collection of command-line utilities for maintaining data integrity, fixing common issues, and verifying the consistency of processed routes.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Integrity Verification:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>scripts/find-strange-stops.js</strong> - Scans all processed routes for coordinates outside the Portland metro area, missing coordinates, or missing neighborhood data.</li>
+                  <li><strong>scripts/verify-school-stops.js</strong> - Ensures every route has a correctly identified school stop (<code>isSchoolStop: true</code>) with address and coordinates that exactly match the school's entry in <code>schools.json</code>.</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Data Fixes & Processing:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>scripts/fix-strange-stops.js</strong> - Automatically fixes common data issues:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li>Sets <code>skipGeocoding: true</code> for "Loading ZONE" stops.</li>
+                      <li>Removes incorrect geocoded coordinates (e.g., stops geocoded to California).</li>
+                      <li>Ensures school stops have the correct <code>schoolName</code> property.</li>
+                    </ul>
+                  </li>
+                  <li><strong>backend/scripts/recalculate-geometry.js</strong> - Recalculates the street-following geometry for all routes that are missing it or have invalid paths.</li>
+                  <li><strong>scripts/process-single-pdf.js</strong> - Re-processes a single PDF file through the full <code>RouteProcessor</code> pipeline, useful for testing fixes on specific routes.</li>
+                </ul>
+              </div>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Best Practices:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li>Run <code>verify-school-stops.js</code> after any major data import or manual correction.</li>
+                  <li>Check <code>find-strange-stops.js</code> periodically to catch geocoding drift or new edge cases.</li>
+                  <li>Always keep <code>schools.json</code> as the source of truth for school names, addresses, and coordinates.</li>
+                </ul>
+              </div>
             </div>
           </section>
 
@@ -2372,7 +2435,7 @@ export function TechPage() {
                   <li style={{ marginBottom: '8px' }}><strong>Atomic Updates:</strong> Route selections are updated in a single store action (<code>setSelectedRoutes</code>) rather than multiple individual toggles.</li>
                   <li style={{ marginBottom: '8px' }}><strong>Direction Awareness:</strong> Route selections in the URL only affect the <em>current</em> direction filter. Selections in the "other" direction are preserved in the background state.</li>
                   <li style={{ marginBottom: '8px' }}><strong>Navigation Locking:</strong> A <code>isNavigatingRef</code> flag prevents the app from re-syncing from the URL while it is in the middle of updating the URL from a user action.</li>
-                  <li><strong>Upcoming Route Handling:</strong> Routes and stops with future effective dates are uniquely identified with an <code>-upcoming</code> suffix in both the store and the URL (e.g., <code>104-upcoming/104-1-upcoming</code>).</li>
+                  <li><strong>Upcoming Route Handling:</strong> Routes with future effective dates are identified by their <code>effectiveDate</code> property. In the URL, their stops use an <code>-upcoming</code> suffix to distinguish them from current routes (e.g., <code>104/104-1-upcoming</code>).</li>
                 </ul>
               </div>
             </div>

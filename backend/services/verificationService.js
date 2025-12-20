@@ -3,11 +3,369 @@
  * Ensures initial data is correct before scheduler uses it
  */
 
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { listFolderFiles } from './driveService.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DATA_DIR = path.join(__dirname, '..', '..', 'data');
+const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
+const SCHOOLS_DIR = path.join(DATA_DIR, 'schools');
+
+// Portland Metro Bounding Box
+const MIN_LAT = 45.3;
+const MAX_LAT = 45.7;
+const MIN_LNG = -123.0;
+const MAX_LNG = -122.3;
 
 class VerificationService {
   constructor() {
     this.requestDelay = 500; // 500ms delay between requests
+  }
+
+  /**
+   * Find strange or incorrect stops in all routes
+   */
+  async findStrangeStops() {
+    const issues = [];
+    if (!fs.existsSync(SCHOOLS_DIR)) return { summary: { totalRoutes: 0, totalStops: 0, totalIssues: 0 }, issues: [] };
+
+    const schools = fs.readdirSync(SCHOOLS_DIR).filter(f => 
+      fs.statSync(path.join(SCHOOLS_DIR, f)).isDirectory()
+    );
+
+    let totalRoutes = 0;
+    let totalStops = 0;
+
+    for (const schoolId of schools) {
+      const processedRoutesPath = path.join(SCHOOLS_DIR, schoolId, 'processed-routes');
+      if (!fs.existsSync(processedRoutesPath)) continue;
+
+      const routeFiles = fs.readdirSync(processedRoutesPath).filter(f => f.endsWith('.json'));
+
+      for (const routeFile of routeFiles) {
+        totalRoutes++;
+        const routePath = path.join(processedRoutesPath, routeFile);
+        try {
+          const route = JSON.parse(fs.readFileSync(routePath, 'utf8'));
+
+          if (!route.stops) continue;
+
+          route.stops.forEach((stop, index) => {
+            totalStops++;
+            const stopIssue = {
+              schoolId,
+              routeFile,
+              routeName: route.name,
+              stopIndex: index,
+              stopAddress: stop.address,
+              stopCoordinates: stop.coordinates,
+              reasons: []
+            };
+
+            if (!stop.coordinates) {
+              // Ignore intentional highway stops or loading zones without coordinates
+              const address = stop.address.toLowerCase();
+              const isIntentional = 
+                address.includes('fwy') || 
+                address.includes('no intersection') || 
+                address.includes('bus yard') || 
+                address.includes('bus garage') ||
+                address.includes('load zone');
+
+              if (!isIntentional) {
+                stopIssue.reasons.push('Missing coordinates');
+              }
+            } else {
+              const [lng, lat] = stop.coordinates;
+
+              if (lng === 0 && lat === 0) {
+                stopIssue.reasons.push('Coordinates are [0, 0]');
+              } else if (lat < MIN_LAT || lat > MAX_LAT || lng < MIN_LNG || lng > MAX_LNG) {
+                stopIssue.reasons.push(`Coordinates [${lng}, ${lat}] are outside Portland Metro area`);
+              }
+            }
+
+            if (stopIssue.reasons.length > 0) {
+              issues.push(stopIssue);
+            }
+          });
+        } catch (err) {
+          console.error(`Error parsing route ${routePath}:`, err);
+        }
+      }
+    }
+
+    const report = {
+      generatedAt: new Date().toISOString(),
+      summary: {
+        totalRoutes,
+        totalStops,
+        totalIssues: issues.length
+      },
+      issues
+    };
+
+    // Save report for future reference
+    const reportPath = path.join(DATA_DIR, 'strange-stops-report.json');
+    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+
+    return report;
+  }
+
+  /**
+   * Fix strange or incorrect stops in all routes
+   */
+  async fixStrangeStops() {
+    // Load schools for coordinate lookup
+    if (!fs.existsSync(SCHOOLS_FILE)) throw new Error('Schools file not found');
+    const schoolsData = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+    const schoolMap = new Map();
+    schoolsData.forEach(s => {
+      schoolMap.set(s.name.toLowerCase(), s);
+      if (s.id) schoolMap.set(s.id.toLowerCase(), s);
+    });
+
+    // Additional school name mappings for "Loading ZONE" stops
+    const schoolVariations = {
+      'mt tabor': 'Mt Tabor',
+      'hosford': 'Hosford',
+      'tubman': 'Tubman',
+      'cesar chavez': 'Cesar Chavez',
+      'vernon': 'Vernon',
+      'ockley green': 'Ockley Green',
+      'faubion': 'Faubion',
+      'george': 'George',
+      'chief joseph': 'Chief Joseph',
+      'astor': 'Astor',
+      'lent': 'Lent',
+      'lee': 'Lee',
+      'kellogg': 'Kellogg',
+      'sellwood': 'Sellwood',
+      'lincoln': 'Lincoln',
+      'clarendon': 'Cesar Chavez',
+      'ln.': 'Lane',
+      'lane': 'Lane',
+    };
+
+    if (!fs.existsSync(SCHOOLS_DIR)) return { summary: { totalIssues: 0, totalFixed: 0 } };
+
+    const schools = fs.readdirSync(SCHOOLS_DIR).filter(f => 
+      fs.statSync(path.join(SCHOOLS_DIR, f)).isDirectory()
+    );
+
+    let totalFixed = 0;
+    let totalIssues = 0;
+    const fixedDetails = [];
+
+    for (const schoolId of schools) {
+      const processedRoutesPath = path.join(SCHOOLS_DIR, schoolId, 'processed-routes');
+      if (!fs.existsSync(processedRoutesPath)) continue;
+
+      const routeFiles = fs.readdirSync(processedRoutesPath).filter(f => f.endsWith('.json'));
+
+      for (const routeFile of routeFiles) {
+        const routePath = path.join(processedRoutesPath, routeFile);
+        try {
+          const route = JSON.parse(fs.readFileSync(routePath, 'utf8'));
+          let modified = false;
+
+          if (!route.stops) continue;
+
+          route.stops.forEach((stop, index) => {
+            let hasIssue = false;
+            let fixed = false;
+
+            if (!stop.coordinates) {
+              hasIssue = true;
+            } else {
+              const [lng, lat] = stop.coordinates;
+              if (lng === 0 && lat === 0 || lat < MIN_LAT || lat > MAX_LAT || lng < MIN_LNG || lng > MAX_LNG) {
+                hasIssue = true;
+              }
+            }
+
+            if (hasIssue) {
+              totalIssues++;
+              const address = stop.address.toLowerCase();
+              let matchedSchool = null;
+
+              for (const [key, value] of Object.entries(schoolVariations)) {
+                if (address.includes(key)) {
+                  matchedSchool = schoolMap.get(value.toLowerCase());
+                  if (matchedSchool) break;
+                }
+              }
+
+              if (matchedSchool && matchedSchool.coordinates) {
+                stop.coordinates = matchedSchool.coordinates;
+                stop.displayName = matchedSchool.address;
+                stop.isSchoolStop = stop.isSchoolStop || false;
+                fixed = true;
+              } else if (address.includes('i5 fwy sb no intersection')) {
+                delete stop.coordinates;
+                delete stop.placeId;
+                delete stop.displayName;
+                fixed = true;
+              }
+
+              if (fixed) {
+                totalFixed++;
+                modified = true;
+                fixedDetails.push({
+                  schoolId,
+                  routeFile,
+                  stopAddress: stop.address,
+                  fixed: true
+                });
+              }
+            }
+          });
+
+          if (modified) {
+            if (route.geometry) {
+              delete route.geometry;
+            }
+            fs.writeFileSync(routePath, JSON.stringify(route, null, 2));
+          }
+        } catch (err) {
+          console.error(`Error processing route ${routePath}:`, err);
+        }
+      }
+    }
+
+    return {
+      summary: {
+        totalIssues,
+        totalFixed,
+        remainingIssues: totalIssues - totalFixed
+      },
+      fixedDetails
+    };
+  }
+
+  /**
+   * Verify all school stops in processed routes
+   */
+  async verifySchoolStops() {
+    if (!fs.existsSync(SCHOOLS_FILE)) throw new Error('Schools file not found');
+    const schoolsData = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
+    const schoolsMap = new Map();
+    schoolsData.forEach(school => {
+      schoolsMap.set(school.id, school);
+    });
+
+    const routeFiles = [];
+    const mainProcessedPath = path.join(DATA_DIR, 'processed-routes');
+    if (fs.existsSync(mainProcessedPath)) {
+      const files = fs.readdirSync(mainProcessedPath)
+        .filter(f => f.endsWith('.json'))
+        .map(f => ({ path: path.join(mainProcessedPath, f), schoolId: null }));
+      routeFiles.push(...files);
+    }
+
+    if (fs.existsSync(SCHOOLS_DIR)) {
+      const schoolDirs = fs.readdirSync(SCHOOLS_DIR, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => dirent.name);
+
+      for (const schoolDir of schoolDirs) {
+        const processedRoutesPath = path.join(SCHOOLS_DIR, schoolDir, 'processed-routes');
+        if (fs.existsSync(processedRoutesPath)) {
+          const files = fs.readdirSync(processedRoutesPath)
+            .filter(f => f.endsWith('.json'))
+            .map(f => ({ path: path.join(processedRoutesPath, f), schoolId: schoolDir }));
+          routeFiles.push(...files);
+        }
+      }
+    }
+
+    const results = {
+      total: routeFiles.length,
+      valid: 0,
+      invalid: 0,
+      missingSchoolStop: 0,
+      issues: [],
+    };
+
+    for (const { path: routePath, schoolId } of routeFiles) {
+      try {
+        const route = JSON.parse(fs.readFileSync(routePath, 'utf8'));
+        const filename = path.basename(routePath);
+        const schoolStop = route.stops?.find(s => s.isSchoolStop === true);
+        
+        if (!schoolStop) {
+          results.missingSchoolStop++;
+          results.issues.push({
+            file: filename,
+            route: `${route.name} (${route.direction || 'Unknown'})`,
+            issue: 'MISSING_SCHOOL_STOP',
+            message: 'Route does not have a school stop (isSchoolStop: true)',
+          });
+          continue;
+        }
+
+        let expectedSchool = null;
+        if (schoolId) {
+          expectedSchool = schoolsMap.get(schoolId);
+        } else if (schoolStop.schoolName) {
+          expectedSchool = schoolsData.find(s => 
+            s.name.toLowerCase() === schoolStop.schoolName.toLowerCase()
+          );
+        }
+
+        if (!expectedSchool) {
+          results.invalid++;
+          results.issues.push({
+            file: filename,
+            route: `${route.name} (${route.direction || 'Unknown'})`,
+            issue: 'SCHOOL_NOT_FOUND',
+            message: `Could not find matching school in schools.json for "${schoolStop.schoolName || 'unknown'}"`,
+          });
+          continue;
+        }
+
+        const addressMatches = schoolStop.address === expectedSchool.address;
+        const coordinatesMatch = JSON.stringify(schoolStop.coordinates) === JSON.stringify(expectedSchool.coordinates);
+        const isMorning = route.direction === 'Morning';
+        const isAfternoon = route.direction === 'Afternoon';
+        const isFirstStop = route.stops[0]?.isSchoolStop === true;
+        const isLastStop = route.stops[route.stops.length - 1]?.isSchoolStop === true;
+        
+        let placementCorrect = false;
+        if (isMorning && isLastStop) placementCorrect = true;
+        else if (isAfternoon && isFirstStop) placementCorrect = true;
+        else if (!isMorning && !isAfternoon) placementCorrect = true;
+
+        const routeIssues = [];
+        if (!addressMatches) routeIssues.push({ type: 'ADDRESS_MISMATCH', expected: expectedSchool.address, actual: schoolStop.address });
+        if (!coordinatesMatch) routeIssues.push({ type: 'COORDINATES_MISMATCH', expected: expectedSchool.coordinates, actual: schoolStop.coordinates });
+        if (!placementCorrect) routeIssues.push({ type: 'PLACEMENT_INCORRECT', direction: route.direction, isFirst: isFirstStop, isLast: isLastStop });
+
+        if (routeIssues.length > 0) {
+          results.invalid++;
+          results.issues.push({
+            file: filename,
+            route: `${route.name} (${route.direction || 'Unknown'})`,
+            school: expectedSchool.name,
+            schoolId: expectedSchool.id,
+            issues: routeIssues,
+          });
+        } else {
+          results.valid++;
+        }
+      } catch (err) {
+        results.invalid++;
+        results.issues.push({ file: path.basename(routePath), issue: 'PARSE_ERROR', message: err.message });
+      }
+    }
+
+    const reportPath = path.join(DATA_DIR, 'school-stop-verification-report.json');
+    fs.writeFileSync(reportPath, JSON.stringify({ generatedAt: new Date().toISOString(), summary: results, issues: results.issues }, null, 2));
+
+    return { summary: results, issues: results.issues };
   }
 
   /**

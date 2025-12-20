@@ -7,15 +7,6 @@
   "modifiedTime": null,
   "stops": [
     {
-      "id": "stop-1",
-      "address": "Chief Joseph Gt. & St. & CAB Loading ZONE",
-      "time": "8:20 am",
-      "direction": null,
-      "originalLine": "8:20 amCHIEF JOSEPH GT & ST & CAB LOADING ZONE202AST-AStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": null
-    },
-    {
       "id": "stop-2",
       "address": "N Lombard St. & N Hurst Ave. [NE]",
       "time": "8:24 am",
@@ -88,11 +79,13 @@
         45.5786714
       ],
       "displayName": "5601 N Yale St, Portland, OR 97203, USA",
-      "schoolName": "Astor",
-      "neighborhood": "North Portland"
+      "schoolName": "Astor"
     }
   ],
-  "processedAt": "2025-12-12T22:30:22.590Z",
+  "neighborhoods": [
+    "North Portland"
+  ],
+  "processedAt": "2025-12-20T11:07:14.868Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -211,11 +204,5 @@
       45.57882,
       -122.73021
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  }
+  ]
 }

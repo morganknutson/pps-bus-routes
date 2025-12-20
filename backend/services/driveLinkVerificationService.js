@@ -111,10 +111,10 @@ class DriveLinkVerificationService {
    * @param {Array} driveFiles - Array of files from Drive with id and modifiedTime
    * @returns {string|null} ISO string of most recent Drive modifiedTime for files we have locally
    */
-  getMostRecentLocalDriveModifiedTime(schoolId, driveFiles) {
+  async getMostRecentLocalDriveModifiedTime(schoolId, driveFiles) {
     try {
       // Load metadata to get file IDs we have locally
-      const metadata = pdfMetadataService.loadMetadata(schoolId);
+      const metadata = await pdfMetadataService.loadMetadata(schoolId);
       const localFileIds = new Set(Object.keys(metadata.files || {}));
 
       if (localFileIds.size === 0) {
@@ -156,6 +156,7 @@ class DriveLinkVerificationService {
       accessible: false,
       hasPdfs: false,
       pdfCount: 0,
+      localPdfCount: 0,
       driveLastModified: null,
       localLastModified: null,
       matches: false,
@@ -188,6 +189,10 @@ class DriveLinkVerificationService {
       result.hasPdfs = pdfFiles.length > 0;
       result.pdfCount = pdfFiles.length;
 
+      // Get local PDF count from metadata
+      const metadata = await pdfMetadataService.loadMetadata(school.id);
+      result.localPdfCount = Object.keys(metadata.files || {}).length;
+
       if (pdfFiles.length > 0) {
         // Files should already be sorted by modifiedTime descending from listFolderFiles
         // Get the first one (most recently modified)
@@ -196,11 +201,11 @@ class DriveLinkVerificationService {
 
         // Get local last modified - prioritize metadata which has accurate Drive modifiedTimes
         // First try to get from metadata (most accurate - has actual Drive modifiedTimes)
-        result.localLastModified = pdfMetadataService.getMostRecentModifiedTime(school.id);
+        result.localLastModified = await pdfMetadataService.getMostRecentModifiedTime(school.id);
         
         // If metadata doesn't have it, try matching with current Drive files
         if (!result.localLastModified) {
-          result.localLastModified = this.getMostRecentLocalDriveModifiedTime(
+          result.localLastModified = await this.getMostRecentLocalDriveModifiedTime(
             school.id,
             pdfFiles
           );

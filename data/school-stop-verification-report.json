@@ -1,99 +1,11 @@
 {
-  "generatedAt": "2025-12-11T17:01:42.272Z",
+  "generatedAt": "2025-12-20T11:09:09.949Z",
   "summary": {
-    "total": 31,
-    "valid": 25,
-    "invalid": 6,
-    "missingSchoolStop": 0
+    "total": 477,
+    "valid": 477,
+    "invalid": 0,
+    "missingSchoolStop": 0,
+    "issues": []
   },
-  "issues": [
-    {
-      "file": "100SYL-A_effective_082625.json",
-      "route": "100 (Morning)",
-      "issue": "SCHOOL_NOT_FOUND",
-      "message": "Could not find matching school in schools.json for \"unknown\""
-    },
-    {
-      "file": "100SYL-P_effective_082625.json",
-      "route": "100 (Afternoon)",
-      "issue": "SCHOOL_NOT_FOUND",
-      "message": "Could not find matching school in schools.json for \"unknown\""
-    },
-    {
-      "file": "100SYL-A_effective_082625.json",
-      "route": "100 (Morning)",
-      "school": "West Sylvan",
-      "schoolId": "west-sylvan",
-      "issues": [
-        {
-          "type": "COORDINATES_MISMATCH",
-          "expected": [
-            -122.7621042,
-            45.5040646
-          ],
-          "actual": [
-            -122.7622985,
-            45.5044894
-          ]
-        }
-      ]
-    },
-    {
-      "file": "100SYL-P_effective_082625.json",
-      "route": "100 (Afternoon)",
-      "school": "West Sylvan",
-      "schoolId": "west-sylvan",
-      "issues": [
-        {
-          "type": "COORDINATES_MISMATCH",
-          "expected": [
-            -122.7621042,
-            45.5040646
-          ],
-          "actual": [
-            -122.7622985,
-            45.5044894
-          ]
-        }
-      ]
-    },
-    {
-      "file": "101SYL-A_effective_082625.json",
-      "route": "101 (Morning)",
-      "school": "West Sylvan",
-      "schoolId": "west-sylvan",
-      "issues": [
-        {
-          "type": "COORDINATES_MISMATCH",
-          "expected": [
-            -122.7621042,
-            45.5040646
-          ],
-          "actual": [
-            -122.7622985,
-            45.5044894
-          ]
-        }
-      ]
-    },
-    {
-      "file": "101SYL-P_effective_082625.json",
-      "route": "101 (Afternoon)",
-      "school": "West Sylvan",
-      "schoolId": "west-sylvan",
-      "issues": [
-        {
-          "type": "COORDINATES_MISMATCH",
-          "expected": [
-            -122.7621042,
-            45.5040646
-          ],
-          "actual": [
-            -122.7622985,
-            45.5044894
-          ]
-        }
-      ]
-    }
-  ]
+  "issues": []
 }

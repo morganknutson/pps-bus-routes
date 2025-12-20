@@ -1,0 +1,8 @@
+/**
+ * Defined job types for the PDF sync queue.
+ */
+export const JOB_TYPES = {
+  PDF_SYNC: 'pdf-sync',           // Download PDFs for a school from Drive
+  PDF_PROCESS: 'pdf-process',     // Process/parse PDFs for a school
+  DRIVE_CHECK: 'drive-check',     // Check for Drive updates (scheduled)
+};

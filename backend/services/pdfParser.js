@@ -91,8 +91,7 @@ function extractRouteInfoFromFilename(filename, text = null) {
       console.error('Error parsing date from filename:', dateStr);
     }
     
-    const finalName = isUpcoming ? `${routeNum}-upcoming` : routeNum;
-    return { name: finalName, direction, isUpcoming };
+    return { name: routeNum, direction, isUpcoming };
   }
   
   // If filename doesn't match standard pattern, try text search
@@ -264,13 +263,16 @@ function parseStops(text, anchorName = null) {
         }
       }
       
-      // Check if this is a loading zone (CAB LOAD ZONE, LOADING ZONE, LOAD ZONE, etc.)
-      // But exclude school loading zones (which are handled separately)
+      // Check if this is a loading zone or non-geocodable highway stop
       const normalizedAddress = address.toLowerCase();
       const isLoadingZone = (
         normalizedAddress.includes('cab load zone') ||
         normalizedAddress.includes('load zone') || 
-        normalizedAddress.includes('loading zone')
+        normalizedAddress.includes('loading zone') ||
+        normalizedAddress.includes('fwy') || // Highway stops like "I5 Fwy"
+        normalizedAddress.includes('no intersection') || // Non-intersection driver notes
+        normalizedAddress.includes('bus yard') ||
+        normalizedAddress.includes('bus garage')
       ) && !isSchoolLoadingZone;
       
       // Add direction to address if present
