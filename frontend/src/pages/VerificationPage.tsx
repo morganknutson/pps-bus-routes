@@ -12,6 +12,7 @@ export function VerificationPage() {
   const [processingStatus, setProcessingStatus] = useState<Record<string, boolean | { hasProcessed: boolean; lastProcessed: string | null }>>({});
   const [fetching, setFetching] = useState<Record<string, boolean>>({});
   const [processing, setProcessing] = useState<Record<string, boolean>>({});
+  const [processMessages, setProcessMessages] = useState<Record<string, { type: 'info' | 'success' | 'error'; message: string }>>({});
   const [pdfProcessingStatus, setPdfProcessingStatus] = useState<Record<string, Record<string, 'pending' | 'processing' | 'success' | 'error'>>>({});
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
   const [allRoutes, setAllRoutes] = useState<Record<string, Record<string, any>>>({});
@@ -1152,32 +1153,11 @@ export function VerificationPage() {
 
   const handleProcessPdfs = async (schoolId: string) => {
     setProcessing(prev => ({ ...prev, [schoolId]: true }));
-    // Clear any existing success message for this school
-    setSuccessMessages(prev => {
+    setProcessMessages(prev => {
       const updated = { ...prev };
       delete updated[schoolId];
       return updated;
     });
-    
-    // Get the list of PDFs for this school
-    const school = pdfStatus?.schools?.find((s: any) => s.schoolId === schoolId);
-    const pdfFiles = school?.pdfFiles || [];
-    
-    // Initialize all PDFs as pending
-    setPdfProcessingStatus(prev => ({
-      ...prev,
-      [schoolId]: pdfFiles.reduce((acc: Record<string, 'pending'>, file: string) => {
-        acc[file] = 'pending';
-        return acc;
-      }, {})
-    }));
-    
-    // Start polling for route updates during processing (every 2 seconds)
-    // This allows routes to appear as they're processed
-    let pollInterval: ReturnType<typeof setInterval> | null = null;
-    pollInterval = setInterval(async () => {
-      await loadAllRoutes(schoolId, true);
-    }, 2000);
     
     try {
       const response = await fetch(`/api/process-pdfs/process/${schoolId}`, {
@@ -1187,102 +1167,75 @@ export function VerificationPage() {
       if (response.ok) {
         const result = await response.json();
         
-        // Update status for each PDF based on results
-        setPdfProcessingStatus(prev => {
-          const updated = { ...prev };
-          if (!updated[schoolId]) {
-            updated[schoolId] = {};
-          }
+        // Show info message about queuing
+        setProcessMessages(prev => ({
+          ...prev,
+          [schoolId]: { type: 'info', message: `Queued (Job #${result.jobId.substring(0, 6)}...)` }
+        }));
+
+        // Reload job statuses
+        await loadJobStatuses();
+        await loadJobQueueStats();
+
+        // Start polling for completion
+        let pollCount = 0;
+        const maxPolls = 60; // 5 minutes
+        const pollInterval = setInterval(async () => {
+          pollCount++;
+          await loadJobStatuses();
           
-          // Mark successful PDFs
-          if (result.processedDetails) {
-            result.processedDetails.forEach((detail: any) => {
-              updated[schoolId][detail.file] = 'success';
-            });
+          const statusResponse = await fetch(`/api/jobs/school/${schoolId}`);
+          if (statusResponse.ok) {
+            const statusData = await statusResponse.json();
+            const jobs = statusData.jobs || [];
+            const processJob = jobs.find((j: any) => j.id === result.jobId);
+            
+            if (processJob && processJob.status === 'completed') {
+              clearInterval(pollInterval);
+              setProcessing(prev => ({ ...prev, [schoolId]: false }));
+              setProcessMessages(prev => ({
+                ...prev,
+                [schoolId]: { 
+                  type: 'success', 
+                  message: `Done! Processed ${processJob.result?.processed || 0} routes`
+                }
+              }));
+              
+              await Promise.all([
+                loadProcessingStatus(),
+                loadAllRoutes(schoolId, true)
+              ]);
+
+              setTimeout(() => {
+                setProcessMessages(prev => {
+                  const updated = { ...prev };
+                  delete updated[schoolId];
+                  return updated;
+                });
+              }, 10000);
+            } else if (processJob && processJob.status === 'failed') {
+              clearInterval(pollInterval);
+              setProcessing(prev => ({ ...prev, [schoolId]: false }));
+              setProcessMessages(prev => ({
+                ...prev,
+                [schoolId]: { type: 'error', message: `Failed: ${processJob.error || 'Unknown error'}` }
+              }));
+            } else if (pollCount >= maxPolls) {
+              clearInterval(pollInterval);
+              setProcessing(prev => ({ ...prev, [schoolId]: false }));
+            }
           }
-          
-          // Mark failed PDFs
-          if (result.errorDetails) {
-            result.errorDetails.forEach((detail: any) => {
-              updated[schoolId][detail.file] = 'error';
-            });
-          }
-          
-          return updated;
-        });
-        
-        // Reload processing status and routes
-        await loadProcessingStatus();
-        await loadAllRoutes(schoolId, true); // Force reload routes after processing
-        
-        // Set success message
-        const message = result.errors > 0 
-          ? `Processed ${result.processed} PDF(s). ${result.errors} error(s) occurred.`
-          : `Successfully processed ${result.processed} PDF(s)!`;
-        setSuccessMessages(prev => ({ ...prev, [schoolId]: message }));
-        
-        // Auto-dismiss success message after 5 seconds
-        setTimeout(() => {
-          setSuccessMessages(prev => {
-            const updated = { ...prev };
-            delete updated[schoolId];
-            return updated;
-          });
         }, 5000);
-        
-        // Clear cached routes if they exist, so they reload on next expand
-        setAllRoutes(prev => {
-          const updated = { ...prev };
-          delete updated[schoolId];
-          return updated;
-        });
+
       } else {
         const error = await response.json();
-        // Mark all PDFs as error
-        setPdfProcessingStatus(prev => {
-          const updated = { ...prev };
-          if (updated[schoolId]) {
-            Object.keys(updated[schoolId]).forEach(file => {
-              updated[schoolId][file] = 'error';
-            });
-          }
-          return updated;
-        });
-        setSuccessMessages(prev => ({ ...prev, [schoolId]: `Error: ${error.error}` }));
-        // Auto-dismiss error message after 5 seconds
-        setTimeout(() => {
-          setSuccessMessages(prev => {
-            const updated = { ...prev };
-            delete updated[schoolId];
-            return updated;
-          });
-        }, 5000);
+        setProcessMessages(prev => ({ ...prev, [schoolId]: { type: 'error', message: `Error: ${error.error}` } }));
+        setProcessing(prev => ({ ...prev, [schoolId]: false }));
       }
     } catch (err: any) {
-      // Mark all PDFs as error
-      setPdfProcessingStatus(prev => {
-        const updated = { ...prev };
-        if (updated[schoolId]) {
-          Object.keys(updated[schoolId]).forEach(file => {
-            updated[schoolId][file] = 'error';
-          });
-        }
-        return updated;
-      });
-      setSuccessMessages(prev => ({ ...prev, [schoolId]: `Error: ${err.message}` }));
-      // Auto-dismiss error message after 5 seconds
-      setTimeout(() => {
-        setSuccessMessages(prev => {
-          const updated = { ...prev };
-          delete updated[schoolId];
-          return updated;
-        });
-      }, 5000);
-    } finally {
-      clearInterval(pollInterval); // Stop polling when done
+      console.error(`[VerificationPage] Error processing PDFs:`, err);
+      setProcessMessages(prev => ({ ...prev, [schoolId]: { type: 'error', message: `Network error: ${err.message}` } }));
       setProcessing(prev => ({ ...prev, [schoolId]: false }));
-      // Final reload to ensure we have all routes
-      await loadAllRoutes(schoolId, true);
     }
   };
 
@@ -2443,86 +2396,127 @@ export function VerificationPage() {
                       const hasProcessed = typeof status === 'object' && status !== null ? status.hasProcessed : (status === true);
                       const lastProcessed = typeof status === 'object' && status !== null ? status.lastProcessed : null;
                       
-                      return hasProcessed ? (
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '12px' }}></i>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleProcessPdfs(school.schoolId);
-                              }}
-                              disabled={processing[school.schoolId]}
-                              style={{
-                                background: 'none',
-                                border: 'none',
-                                color: processing[school.schoolId] ? 'var(--text-secondary)' : '#4ECDC4',
-                                cursor: processing[school.schoolId] ? 'not-allowed' : 'pointer',
-                                padding: '0.25rem',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: '12px',
-                                opacity: processing[school.schoolId] ? 0.6 : 1,
-                                transition: 'all 0.2s',
-                              }}
-                              onMouseEnter={(e) => {
-                                if (!processing[school.schoolId]) {
-                                  e.currentTarget.style.color = '#5EDDD6';
-                                  e.currentTarget.style.transform = 'rotate(180deg)';
-                                }
-                              }}
-                              onMouseLeave={(e) => {
-                                if (!processing[school.schoolId]) {
-                                  e.currentTarget.style.color = '#4ECDC4';
-                                  e.currentTarget.style.transform = 'rotate(0deg)';
-                                }
-                              }}
-                              title="Reprocess routes for this school"
-                            >
-                              <i className={`fas ${processing[school.schoolId] ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`} style={{ fontSize: '12px' }}></i>
-                            </button>
-                          </div>
-                          {lastProcessed && (
-                            <div style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>
-                              {new Date(lastProcessed).toLocaleString()}
+                      const processMsg = processMessages[school.schoolId];
+                      const jobStatus = getJobStatusForSchool(school.schoolId);
+                      const isProcessJobActive = jobStatus && jobStatus.name === 'pdf-process' && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
+
+                      return (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
+                          {hasProcessed ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '12px' }}></i>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleProcessPdfs(school.schoolId);
+                                  }}
+                                  disabled={processing[school.schoolId] || isProcessJobActive}
+                                  style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    color: (processing[school.schoolId] || isProcessJobActive) ? 'var(--text-secondary)' : '#4ECDC4',
+                                    cursor: (processing[school.schoolId] || isProcessJobActive) ? 'not-allowed' : 'pointer',
+                                    padding: '0.25rem',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '12px',
+                                    opacity: (processing[school.schoolId] || isProcessJobActive) ? 0.6 : 1,
+                                    transition: 'all 0.2s',
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    if (!processing[school.schoolId] && !isProcessJobActive) {
+                                      e.currentTarget.style.color = '#5EDDD6';
+                                      e.currentTarget.style.transform = 'rotate(180deg)';
+                                    }
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    if (!processing[school.schoolId] && !isProcessJobActive) {
+                                      e.currentTarget.style.color = '#4ECDC4';
+                                      e.currentTarget.style.transform = 'rotate(0deg)';
+                                    }
+                                  }}
+                                  title="Reprocess routes for this school"
+                                >
+                                  <i className={`fas ${(processing[school.schoolId] || isProcessJobActive) ? 'fa-spinner fa-spin' : 'fa-sync-alt'}`} style={{ fontSize: '12px' }}></i>
+                                </button>
+                              </div>
+                              {lastProcessed && !isProcessJobActive && (
+                                <div style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>
+                                  {lastProcessed && new Date(lastProcessed).toLocaleString()}
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            (() => {
+                              const hasPdfs = school.hasPdfs || (school.pdfCount && school.pdfCount > 0);
+                              const isDisabled = processing[school.schoolId] || isProcessJobActive || !hasPdfs;
+                              
+                              return (
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (hasPdfs) {
+                                      handleProcessPdfs(school.schoolId);
+                                    }
+                                  }}
+                                  disabled={isDisabled}
+                                  style={{
+                                    padding: '0.5rem 1rem',
+                                    backgroundColor: isDisabled ? 'var(--bg-secondary)' : '#ffa500',
+                                    color: isDisabled ? 'var(--text-secondary)' : 'white',
+                                    border: 'none',
+                                    borderRadius: '999px',
+                                    cursor: isDisabled ? 'not-allowed' : 'pointer',
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
+                                    opacity: isDisabled ? 0.6 : 1,
+                                    minWidth: '120px',
+                                    textAlign: 'center',
+                                    justifyContent: 'center',
+                                  }}
+                                  title={!hasPdfs ? 'No PDFs available - fetch PDFs first' : 'Process PDFs for this school'}
+                                >
+                                  {(processing[school.schoolId] || isProcessJobActive) ? 'Processing...' : (!hasPdfs ? 'None' : 'Process')}
+                                </button>
+                              );
+                            })()
+                          )}
+
+                          {/* Progress bar for active process jobs */}
+                          {jobStatus && jobStatus.name === 'pdf-process' && jobStatus.status === 'active' && (
+                            <div style={{ width: '100px', margin: '0.25rem auto 0' }}>
+                              <ProgressBar progress={jobStatus.progress} height={4} showPercentage={true} containerStyle={{ margin: 0 }} />
+                            </div>
+                          )}
+
+                          {/* Status message */}
+                          {(processMsg || (jobStatus && jobStatus.name === 'pdf-process' && (jobStatus.status === 'completed' || jobStatus.status === 'failed'))) && (
+                            <div style={{ 
+                              fontSize: '10px', 
+                              textAlign: 'center',
+                              color: processMsg?.type === 'error' || (jobStatus?.name === 'pdf-process' && jobStatus?.status === 'failed')
+                                ? '#f44' 
+                                : processMsg?.type === 'success' || (jobStatus?.name === 'pdf-process' && jobStatus?.status === 'completed')
+                                  ? '#4ECDC4'
+                                  : 'var(--text-secondary)',
+                              maxWidth: '120px',
+                            }}>
+                              {processMsg ? (
+                                <span>
+                                  {processMsg.type === 'success' && '✓ '}
+                                  {processMsg.type === 'error' && '✗ '}
+                                  {processMsg.message}
+                                </span>
+                              ) : jobStatus?.status === 'completed' && jobStatus.result ? (
+                                <span>✓ Done</span>
+                              ) : jobStatus?.status === 'failed' ? (
+                                <span>✗ Failed</span>
+                              ) : null}
                             </div>
                           )}
                         </div>
-                      ) : (
-                        (() => {
-                          const hasPdfs = school.hasPdfs || (school.pdfCount && school.pdfCount > 0);
-                          const isDisabled = processing[school.schoolId] || !hasPdfs;
-                          
-                          return (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                if (hasPdfs) {
-                                  handleProcessPdfs(school.schoolId);
-                                }
-                              }}
-                              disabled={isDisabled}
-                              style={{
-                                padding: '0.5rem 1rem',
-                                backgroundColor: isDisabled ? 'var(--bg-secondary)' : '#ffa500',
-                                color: isDisabled ? 'var(--text-secondary)' : 'white',
-                                border: 'none',
-                                borderRadius: '999px',
-                                cursor: isDisabled ? 'not-allowed' : 'pointer',
-                                fontSize: '12px',
-                                fontWeight: 'bold',
-                                opacity: isDisabled ? 0.6 : 1,
-                                minWidth: '120px',
-                                textAlign: 'center',
-                                justifyContent: 'center',
-                              }}
-                              title={!hasPdfs ? 'No PDFs available - fetch PDFs first' : 'Process PDFs for this school'}
-                            >
-                              {processing[school.schoolId] ? 'Processing...' : (!hasPdfs ? 'None' : 'Process')}
-                            </button>
-                          );
-                        })()
                       );
                     })()}
                   </td>
@@ -2667,9 +2661,9 @@ export function VerificationPage() {
                         {(pdfFetchInfo[school.schoolId]?.driveLastChecked || syncStatus[school.schoolId]?.lastChecked) && (
                           <div style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>
                             {pdfFetchInfo[school.schoolId]?.driveLastChecked 
-                              ? new Date(pdfFetchInfo[school.schoolId].driveLastChecked).toLocaleString()
+                              ? new Date(pdfFetchInfo[school.schoolId].driveLastChecked!).toLocaleString()
                               : syncStatus[school.schoolId]?.lastChecked
-                                ? new Date(syncStatus[school.schoolId].lastChecked).toLocaleString()
+                                ? new Date(syncStatus[school.schoolId].lastChecked!).toLocaleString()
                                 : null}
                           </div>
                         )}
@@ -3124,7 +3118,7 @@ export function VerificationPage() {
                     </div>
                     {lastProcessed && (
                       <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
-                        Last {new Date(lastProcessed).toLocaleString()}
+                        Last {new Date(lastProcessed!).toLocaleString()}
                       </div>
                     )}
                   </div>
@@ -3223,12 +3217,12 @@ export function VerificationPage() {
                       }}>
                         {pdfFetchInfo[school.schoolId]?.lastFetchTime && (
                           <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
-                            <strong>Last Fetch</strong> {new Date(pdfFetchInfo[school.schoolId].lastFetchTime).toLocaleString()}
+                            <strong>Last Fetch</strong> {new Date(pdfFetchInfo[school.schoolId].lastFetchTime!).toLocaleString()}
                           </div>
                         )}
                         {syncStatus[school.schoolId]?.lastChecked && (
                           <div style={{ fontSize: '10px', color: 'var(--text-secondary)' }}>
-                            <strong>Last Checked</strong> {new Date(syncStatus[school.schoolId].lastChecked).toLocaleString()}
+                            <strong>Last Checked</strong> {new Date(syncStatus[school.schoolId].lastChecked!).toLocaleString()}
                           </div>
                         )}
                       </div>

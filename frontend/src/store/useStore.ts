@@ -26,6 +26,8 @@ interface Store extends AppState {
   setDirectionFilter: (direction: 'Morning' | 'Afternoon' | 'Both') => void;
   triggerZoomToHomeAddress: () => void;
   clearZoomToHomeAddress: () => void;
+  toggleDarkMode: () => void;
+  setIsDarkMode: (isDark: boolean) => void;
   currentGeocodingRouteId: string | null;
   selectedStop: { route: Route; stop: Stop; stopNumber: number } | null;
   directionFilter: 'Morning' | 'Afternoon' | 'Both';
@@ -49,6 +51,14 @@ export const useStore = create<Store>((set) => ({
   selectedStop: null,
   directionFilter: 'Morning',
   shouldZoomToHomeAddress: false,
+  isDarkMode: (() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('darkMode');
+      if (saved !== null) return saved === 'true';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  })(),
 
   setDriveLink: (link) => set({ driveLink: link }),
 
@@ -323,7 +333,36 @@ export const useStore = create<Store>((set) => ({
 
   triggerZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: true }),
   clearZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: false }),
+
+  toggleDarkMode: () => set((state) => {
+    const next = !state.isDarkMode;
+    localStorage.setItem('darkMode', String(next));
+    if (next) {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+    return { isDarkMode: next };
+  }),
+
+  setIsDarkMode: (isDark) => {
+    localStorage.setItem('darkMode', String(isDark));
+    if (isDark) {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+    set({ isDarkMode: isDark });
+  },
 }));
+
+// Apply initial dark mode class to document root
+if (typeof window !== 'undefined') {
+  const isDark = useStore.getState().isDarkMode;
+  if (isDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+}
 
 // Load saved state from localStorage on init
 if (typeof window !== 'undefined') {

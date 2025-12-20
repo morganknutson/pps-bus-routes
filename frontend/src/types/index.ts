@@ -58,6 +58,7 @@ export interface AppState {
   error?: string;
   selectedSchoolId: string | null;
   schools: School[];
+  isDarkMode: boolean;
 }
 
 export interface Neighborhood {

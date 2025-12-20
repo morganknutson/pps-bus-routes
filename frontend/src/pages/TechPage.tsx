@@ -57,6 +57,7 @@ const sections: Section[] = [
       { id: 'local-routes-service', title: '2. Local Routes Service' },
       { id: 'routing-service', title: '3. Routing Service' },
       { id: 'route-cache-service', title: '4. Route Cache Service' },
+      { id: 'theme-service', title: '5. Theme Service' },
     ],
   },
   {
@@ -433,11 +434,11 @@ export function TechPage() {
                 </p>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li><strong>Single Processor</strong> (<code>scripts/process-single-pdf.js</code>) - CLI tool for processing one PDF</li>
-                  <li><strong>Batch Processor</strong> (<code>backend/routes/processPdfs.js</code>) - API endpoint that processes all PDFs for a school (calls single processor in a loop)</li>
-                  <li><strong>Scheduled Processor</strong> (<code>backend/services/schedulerService.js</code>) - Automated daily processing from Google Drive (calls batch processor)</li>
+                  <li><strong>Batch Processor</strong> (<code>backend/routes/processPdfs.js</code>) - API endpoint that enqueues processing jobs (processed by <strong>WorkerService</strong>)</li>
+                  <li><strong>Scheduled Processor</strong> (<code>backend/services/schedulerService.js</code>) - Automated daily processing that enqueues jobs via the Job Queue</li>
                 </ul>
                 <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
-                  <strong>Hierarchy:</strong> Scheduled Processor → Batch Processor → Single Processor → RouteProcessor
+                  <strong>Hierarchy:</strong> Scheduled/Batch Trigger → Job Queue → WorkerService → RouteProcessor
                 </p>
               </div>
 
@@ -2335,6 +2336,23 @@ export function TechPage() {
   ]
 }`}
                 </pre>
+              </div>
+            </div>
+
+            <div id="theme-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                5. Theme Service
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Manages global dark/light mode state and ensures synchronization across all components, including the interactive map.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Centralized State:</strong> Theme state is managed in the global Zustand store to ensure all components react simultaneously to theme changes.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Persistence:</strong> Selected theme is persisted in <code>localStorage</code> and automatically restored on page load.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>System Sync:</strong> Defaults to the user's system color scheme preference if no manual override is stored.</li>
+                  <li><strong>Map Integration:</strong> The <code>DarkModeTileLayer</code> component listens to the global theme state to instantly swap between Light and Dark map tile sets.</li>
+                </ul>
               </div>
             </div>
           </section>

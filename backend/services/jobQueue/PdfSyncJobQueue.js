@@ -56,6 +56,25 @@ export class PdfSyncJobQueue extends JobQueue {
   }
 
   /**
+   * Enqueue a PDF process job for a school
+   * @param {string} schoolId - School ID
+   * @param {object} options - Job options
+   * @returns {Promise<string>} Job ID
+   */
+  async enqueueProcessJob(schoolId, options = {}) {
+    return await this.enqueue(
+      JOB_TYPES.PDF_PROCESS,
+      { schoolId },
+      {
+        priority: options.priority || JOB_PRIORITY.NORMAL,
+        delay: options.delay || 0,
+        attempts: options.attempts || 3,
+        ...options,
+      }
+    );
+  }
+
+  /**
    * Enqueue multiple PDF sync jobs (for scheduled checks)
    * @param {Array<string>} schoolIds - Array of school IDs
    * @param {object} options - Job options
@@ -91,9 +110,9 @@ export class PdfSyncJobQueue extends JobQueue {
    * @returns {Promise<Array>} Array of jobs
    */
   async getJobsForSchool(schoolId, limit = 10) {
-    const allJobs = await this.getJobs(JOB_TYPES.PDF_SYNC, null, 1000);
+    const allJobs = await this.getJobs(null, null, 1000);
     return allJobs
-      .filter(job => job.data.schoolId === schoolId)
+      .filter(job => job.data && job.data.schoolId === schoolId)
       .slice(0, limit);
   }
 }

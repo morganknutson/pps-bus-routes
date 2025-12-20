@@ -68,6 +68,9 @@ export class WorkerService {
         if (job.name === JOB_TYPES.DRIVE_CHECK) {
           return await this.processDriveCheckJob(job);
         }
+        if (job.name === JOB_TYPES.PDF_PROCESS) {
+          return await this.processPdfProcessJob(job);
+        }
         return await this.processPdfSyncJob(job);
       },
       {
@@ -163,6 +166,8 @@ export class WorkerService {
             let result;
             if (job.name === JOB_TYPES.DRIVE_CHECK) {
               result = await this.processDriveCheckJob(mockJob);
+            } else if (job.name === JOB_TYPES.PDF_PROCESS) {
+              result = await this.processPdfProcessJob(mockJob);
             } else {
               result = await this.processPdfSyncJob(mockJob);
             }
@@ -560,6 +565,98 @@ export class WorkerService {
       };
     } catch (error) {
       console.error(`[WorkerService] Error processing PDF sync for ${schoolId}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Process a PDF process job
+   * @param {object} job - Job object
+   */
+  async processPdfProcessJob(job) {
+    const { schoolId } = job.data;
+    console.log(`[WorkerService] Processing PDFs for school: ${schoolId}`);
+
+    try {
+      // Load schools
+      const schoolsContent = await fsPromises.readFile(SCHOOLS_FILE, 'utf8');
+      const schools = JSON.parse(schoolsContent);
+      const school = schools.find(s => s.id === schoolId);
+
+      if (!school) {
+        throw new Error(`School not found: ${schoolId}`);
+      }
+
+      await job.updateProgress(10);
+
+      // Get PDF directory
+      const pdfDir = await this.getSchoolPdfDir(schoolId);
+      if (!fs.existsSync(pdfDir)) {
+        throw new Error(`No PDF directory found for ${schoolId}`);
+      }
+
+      const pdfFiles = (await fsPromises.readdir(pdfDir)).filter(f => f.endsWith('.pdf'));
+      if (pdfFiles.length === 0) {
+        return {
+          schoolId,
+          processed: 0,
+          errors: [],
+          totalProcessed: 0,
+          message: 'No PDFs found to process'
+        };
+      }
+
+      await job.updateProgress(20);
+
+      const processed = [];
+      const errors = [];
+      const totalFiles = pdfFiles.length;
+
+      // Process PDFs one by one
+      for (let i = 0; i < totalFiles; i++) {
+        const pdfFile = pdfFiles[i];
+        try {
+          const pdfPath = path.join(pdfDir, pdfFile);
+          const pdfBuffer = await fsPromises.readFile(pdfPath);
+
+          console.log(`[WorkerService] Processing: ${pdfFile}`);
+          const finalRoute = await processSinglePDF(pdfBuffer, pdfFile, pdfFile, {
+            logPrefix: '[WorkerService]',
+            saveToFile: true,
+            schoolId: schoolId,
+          });
+
+          processed.push({
+            file: pdfFile,
+            routeName: finalRoute.name || 'Unknown',
+            stops: finalRoute.stops ? finalRoute.stops.length : 0,
+            geocoded: finalRoute.stats ? finalRoute.stats.geocodedStops : 0,
+          });
+        } catch (error) {
+          console.error(`[WorkerService] Error processing ${pdfFile}:`, error.message);
+          errors.push({ file: pdfFile, error: error.message });
+        }
+
+        // Update progress (from 20% to 100%)
+        const progress = 20 + Math.floor(((i + 1) / totalFiles) * 80);
+        await job.updateProgress(progress);
+      }
+
+      return {
+        schoolId,
+        schoolName: school.name,
+        processed: processed.length,
+        errors: errors.length,
+        processedDetails: processed,
+        errorDetails: errors,
+        summary: {
+          totalPdfs: totalFiles,
+          successful: processed.length,
+          failed: errors.length,
+        },
+      };
+    } catch (error) {
+      console.error(`[WorkerService] Error processing job for ${schoolId}:`, error);
       throw error;
     }
   }

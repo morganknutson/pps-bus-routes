@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { processSinglePDF } from '../services/routeProcessor.js';
 import { getSchoolIdFromFilename } from '../utils/schoolUtils.js';
-import { pdfMetadataService } from '../services/pdfMetadataService.js';
+import { pdfSyncJobQueue } from '../services/jobQueue/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -212,12 +212,11 @@ router.get('/status', async (req, res) => {
 });
 
 /**
- * Process all PDFs for a school
+ * Process all PDFs for a school (Background Job)
  */
 router.post('/process/:schoolId', async (req, res) => {
   try {
     const { schoolId } = req.params;
-    const apiKey = process.env.GOOGLE_API_KEY || null;
 
     // Load schools
     const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
@@ -227,59 +226,29 @@ router.post('/process/:schoolId', async (req, res) => {
       return res.status(404).json({ error: 'School not found' });
     }
 
-    if (!school.driveLink) {
-      return res.status(400).json({ error: 'School has no Drive link configured' });
-    }
-
-    // Extract folder ID
-    const folderIdMatch = school.driveLink.match(/\/drive\/folders\/([a-zA-Z0-9_-]+)/);
-    if (!folderIdMatch) {
-      return res.status(400).json({ error: 'Invalid Drive link format' });
-    }
-    const folderId = folderIdMatch[1];
-
-    // Get PDF directory
+    // Verify PDF directory exists and has files
     const pdfDir = path.join(DATA_DIR, 'schools', schoolId, 'pdfs');
     if (!fs.existsSync(pdfDir)) {
-      return res.status(400).json({ error: 'No PDFs found for this school. Download PDFs first.' });
+      return res.status(400).json({ error: 'No PDFs found. Download PDFs first.' });
     }
 
     const pdfFiles = (await fsPromises.readdir(pdfDir)).filter(f => f.endsWith('.pdf'));
     if (pdfFiles.length === 0) {
-      return res.status(400).json({ error: 'No PDF files found in PDF directory' });
+      return res.status(400).json({ error: 'No PDF files found to process.' });
     }
 
-    // Create processed routes directory
-    const processedRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
-    if (!fs.existsSync(processedRoutesDir)) {
-      await fsPromises.mkdir(processedRoutesDir, { recursive: true });
-    }
-
-    // Process all PDFs using batch processor (which uses shared single processor)
-    const { processed, errors, cleanupResult } = await processBatchPDFs(schoolId, pdfFiles, pdfDir);
+    // Enqueue the processing job
+    const jobId = await pdfSyncJobQueue.enqueueProcessJob(schoolId);
 
     res.json({
+      success: true,
+      message: 'Processing job enqueued',
+      jobId,
       schoolId,
-      schoolName: school.name,
-      processed: processed.length,
-      errors: errors.length,
-      processedDetails: processed,
-      errorDetails: errors,
-      cleanup: {
-        orphanedRoutesDeleted: cleanupResult.deleted || 0,
-        cleanupErrors: cleanupResult.errors || [],
-      },
-      summary: {
-        totalPdfs: pdfFiles.length,
-        successful: processed.length,
-        failed: errors.length,
-        totalRoutesProcessed: processed.length,
-        totalStopsProcessed: processed.reduce((sum, p) => sum + (p.stops || 0), 0),
-        totalStopsGeocoded: processed.reduce((sum, p) => sum + (p.geocoded || 0), 0),
-      },
+      pdfCount: pdfFiles.length
     });
   } catch (error) {
-    console.error('Error processing PDFs:', error);
+    console.error('Error enqueuing processing job:', error);
     res.status(500).json({ error: error.message });
   }
 });

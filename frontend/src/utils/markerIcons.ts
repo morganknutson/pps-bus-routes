@@ -55,9 +55,11 @@ export function getNumberedIconDimensions(number: number, time?: string, isSelec
   const numberPadding = Math.max(minPadding, (pillHeight - numberWidth) / 2);
   
   let circleWidth: number;
-  if (isSingleDigit) {
+  if (numberWidth <= circleHeight) {
+    // For 1 and 2 digit numbers, keep it as a perfect circle if it fits
     circleWidth = Math.round(circleHeight);
   } else {
+    // For 3+ digit numbers, expand into a stadium shape
     circleWidth = numberWidth + numberPadding * 2 + 1;
   }
   
@@ -106,9 +108,11 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
   const numberPadding = Math.max(minPadding, (pillHeight - numberWidth) / 2);
   
   let circleWidth: number;
-  if (isSingleDigit) {
+  if (numberWidth <= circleHeight) {
+    // For 1 and 2 digit numbers, keep it as a perfect circle if it fits
     circleWidth = Math.round(circleHeight);
   } else {
+    // For 3+ digit numbers, expand into a stadium shape
     circleWidth = numberWidth + numberPadding * 2 + 1;
   }
   
@@ -167,11 +171,11 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           border-radius: ${pillHeight}px;
           padding: 0 ${horizontalPadding}px 0 0;
           box-sizing: border-box;
-          /* Create a permanent circular 'window' hole in the background */
+          /* Create a permanent 'window' hole in the background */
           background: radial-gradient(
-            circle at ${numberCenterX}px 50%,
-            transparent ${circleHeight / 2}px,
-            ${backgroundColor} ${(circleHeight / 2) + 0.5}px
+            ellipse ${circleWidth / 2}px ${circleHeight / 2}px at ${numberCenterX}px 50%,
+            transparent 99%,
+            ${backgroundColor} 100%
           );
         }
         .numbered-marker-wrapper-${classId}:hover .numbered-marker-pill-${classId},
@@ -183,7 +187,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           left: ${numberCenterX}px;
           width: ${circleWidth + 1}px;
           height: ${circleHeight + 1}px;
-          border-radius: 50%;
+          border-radius: ${circleHeight}px;
           background-color: white; /* Fully opaque white in resting state */
           pointer-events: none;
           transform: translate(-50%, -50%);
