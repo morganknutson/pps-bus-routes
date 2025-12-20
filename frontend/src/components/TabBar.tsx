@@ -78,12 +78,12 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           >
             {activeTab === 'neighborhoods' ? (
               <>
-                <i className="fas fa-map-marker-alt" style={{ fontSize: '14px' }}></i>
+                <i className="fas fa-map-marker-alt" style={{ fontSize: '12px' }}></i>
                 Neighborhoods
               </>
             ) : (
               <>
-                <i className="fas fa-route" style={{ fontSize: '14px' }}></i>
+                <i className="fas fa-route" style={{ fontSize: '12px' }}></i>
                 Routes
               </>
             )}
