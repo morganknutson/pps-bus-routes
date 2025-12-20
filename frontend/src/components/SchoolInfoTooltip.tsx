@@ -22,22 +22,25 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
   const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
   const schoolColor = getSchoolColor(schoolTypes);
 
-  return (
-    <div style={{ 
-      minWidth: '200px', 
-      maxWidth: '300px', 
-      fontSize: '13px',
-      backgroundColor: 'var(--bg-primary)',
-      color: 'var(--text-primary)',
-      pointerEvents: 'auto', // Allow clicks inside tooltip
-    }}>
-      {message ? (
+  if (message) {
+    return (
+      <div style={{ 
+        minWidth: '200px', 
+        maxWidth: '300px', 
+        fontSize: '13px',
+        backgroundColor: 'var(--bg-primary)',
+        color: 'var(--text-primary)',
+        borderRadius: '12px',
+        boxShadow: '0 4px 12px var(--shadow-hover)',
+        border: '1px solid var(--border-color)',
+        padding: '0.5rem 1rem',
+        pointerEvents: 'auto', // Allow clicks inside tooltip
+      }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: '0.75rem',
           minWidth: '200px',
-          padding: '0.25rem 0',
         }}>
           <div style={{
             width: '32px',
@@ -60,165 +63,238 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             {message}
           </div>
         </div>
-      ) : (
-        <>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-            <h3 style={{ margin: 0, fontSize: '16px', color: 'var(--text-secondary)', flex: 1 }}>{school.name}</h3>
-            {onClose && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onClose();
-                }}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '18px',
-                  cursor: 'pointer',
-                  color: 'var(--text-tertiary)',
-                  padding: '0 0 0 0.5rem',
-                  lineHeight: '1',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}
-              >
-                <i className="fas fa-times"></i>
-              </button>
-            )}
-          </div>
-          <div style={{ fontSize: '12px', color: schoolColor, fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
-            <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ 
+      minWidth: '280px', 
+      maxWidth: '320px', 
+      backgroundColor: 'var(--bg-primary)',
+      color: 'var(--text-primary)',
+      borderRadius: '16px',
+      overflow: 'hidden',
+      boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
+      border: '1px solid var(--border-color)',
+      pointerEvents: 'auto',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    }}>
+      {/* Header with School Name & Type */}
+      <div style={{ 
+        padding: '12px 1.25rem',
+        backgroundColor: 'var(--bg-secondary)', 
+        borderBottom: '1px solid var(--border-color)',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        gap: '1rem'
+      }}>
+        <div style={{ flex: 1 }}>
+          <h3 style={{ 
+            margin: '0 0 0.25rem 0', 
+            fontSize: '16px', 
+            fontWeight: '700',
+            lineHeight: '1.2',
+            color: 'var(--text-primary)' 
+          }}>
+            {school.name}
+          </h3>
+          <div style={{ 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '0.4rem',
+            padding: '2px 8px',
+            backgroundColor: `${schoolColor}15`,
+            color: schoolColor,
+            borderRadius: '20px',
+            fontSize: '10px',
+            fontWeight: '700',
+            textTransform: 'uppercase',
+            letterSpacing: '0.02em'
+          }}>
+            <i className="fas fa-graduation-cap" style={{ fontSize: '9px' }}></i>
             <span>{schoolTypes.join(' & ')}</span>
           </div>
+        </div>
 
-          {school.routeCount !== undefined && (
-            <div style={{ marginBottom: '0.5rem' }}>
-              <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.125rem' }}>Routes</div>
-              <div style={{ fontSize: '13px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <i className="fas fa-route" style={{ fontSize: '11px', opacity: 0.7 }}></i>
-                <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'} available</span>
-              </div>
-              {school.routesUpdatedAt && (
-                <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginTop: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <i className="fas fa-clock" style={{ fontSize: '11px', opacity: 0.7 }}></i>
-                  <span>Updated {formatDate(school.routesUpdatedAt)}</span>
+        {onClose && (
+          <button
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            style={{
+              background: 'none',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--text-tertiary)',
+              cursor: 'pointer',
+              fontSize: '18px',
+              padding: '2px',
+              marginTop: '2px',
+              transition: 'color 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}
+          >
+            <i className="fas fa-times"></i>
+          </button>
+        )}
+      </div>
+
+      <div style={{ padding: '1.25rem' }}>
+        {/* Details Grid */}
+        <div style={{ display: 'grid', gap: '1rem' }}>
+          {/* Neighborhood & Address */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {school.neighborhood && (
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                <div style={{ fontSize: '13px' }}>
+                  <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '2px' }}>Neighborhood</div>
+                  <div style={{ color: 'var(--text-primary)', fontWeight: '500' }}>{school.neighborhood}</div>
                 </div>
-              )}
-            </div>
-          )}
-
-          {school.neighborhood && (
-            <div style={{ marginBottom: '0.5rem' }}>
-              <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.125rem' }}>Neighborhood</div>
-              <div style={{ fontSize: '13px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <i className="fas fa-map-marker-alt" style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}></i>
-                <span>{school.neighborhood}</span>
               </div>
-            </div>
-          )}
+            )}
 
-          {school.address && (
-            <div style={{ marginBottom: '0.5rem' }}>
-              <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.125rem' }}>Address</div>
+            {school.address && (
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                <div style={{ fontSize: '13px' }}>
+                  <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '2px' }}>Address</div>
+                  <a
+                    href="#"
+                    onClick={(e) => handleMapLinkClick(e, school.address!, school.coordinates)}
+                    style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500', display: 'block', marginTop: '1px' }}
+                  >
+                    {school.address}
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {school.routesUpdatedAt && (
+              <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <i className="fas fa-clock" style={{ fontSize: '10px', opacity: 0.7 }}></i>
+                <span>Updated {formatDate(school.routesUpdatedAt)}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Action Links */}
+        {(school.schoolPageLink || school.driveLink) && (
+          <div style={{ 
+            display: 'flex', 
+            gap: '1rem', 
+            marginTop: '1.25rem',
+            paddingTop: '1rem',
+            borderTop: '1px solid var(--border-color)'
+          }}>
+            {school.schoolPageLink && (
               <a
-                href="#"
-                onClick={(e) => handleMapLinkClick(e, school.address!, school.coordinates)}
-                style={{
-                  fontSize: '13px',
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                }}
+                href={school.schoolPageLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               >
-                <i className="fas fa-directions" style={{ fontSize: '12px', opacity: 0.7 }}></i>
-                <span>{school.address}</span>
+                <i className="fas fa-link"></i>
+                <span>Website</span>
               </a>
-            </div>
-          )}
+            )}
+            {school.driveLink && (
+              <a
+                href={school.driveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              >
+                <i className="fas fa-folder-open"></i>
+                <span>Files</span>
+              </a>
+            )}
+          </div>
+        )}
 
-          {(school.schoolPageLink || school.driveLink) && (
-            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap', marginBottom: showRoutesButton ? '1rem' : 0 }}>
-              {school.schoolPageLink && (
-                <a
-                  href={school.schoolPageLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontSize: '12px',
-                    color: 'var(--text-primary)',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.3rem',
-                  }}
-                >
-                  <i className="fas fa-external-link-alt" style={{ fontSize: '10px' }}></i>
-                  <span>School Page</span>
-                </a>
-              )}
-              {school.driveLink && (
-                <a
-                  href={school.driveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontSize: '12px',
-                    color: 'var(--text-primary)',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.3rem',
-                  }}
-                >
-                  <i className="fas fa-folder" style={{ fontSize: '10px' }}></i>
-                  <span>Drive Folder</span>
-                </a>
-              )}
-            </div>
-          )}
-
-          {showRoutesButton && onViewRoutes && (
-            <button
-              onClick={(e) => {
+        {/* Unified Routes Action Button */}
+        {school.routeCount !== undefined && (
+          <button
+            onClick={(e) => {
+              if (showRoutesButton && onViewRoutes) {
                 e.stopPropagation();
                 onViewRoutes();
-              }}
-              style={{
-                width: '100%',
-                padding: '0.75rem',
-                backgroundColor: 'var(--text-secondary)',
-                color: 'var(--bg-primary)',
-                border: 'none',
-                borderRadius: '9999px',
-                fontSize: '14px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                marginTop: '0.5rem',
-                transition: 'all 0.2s ease',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '0.9';
+              }
+            }}
+            disabled={!showRoutesButton || !onViewRoutes}
+            style={{ 
+              display: 'flex', 
+              gap: '0.75rem', 
+              padding: '8px 16px',
+              backgroundColor: 'var(--bg-tertiary)',
+              borderRadius: '9999px',
+              border: '1px solid var(--border-color)',
+              textAlign: 'left',
+              cursor: (showRoutesButton && onViewRoutes) ? 'pointer' : 'default',
+              transition: 'all 0.2s ease',
+              width: '100%',
+              alignItems: 'center',
+              marginTop: '1.25rem',
+              boxShadow: '0 1px 3px var(--shadow-large)'
+            }}
+            onMouseEnter={(e) => {
+              if (showRoutesButton && onViewRoutes) {
+                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
                 e.currentTarget.style.transform = 'translateY(-1px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (showRoutesButton && onViewRoutes) {
+                e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
                 e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              View Routes
-            </button>
-          )}
-        </>
-      )}
+                e.currentTarget.style.boxShadow = '0 1px 3px var(--shadow-large)';
+              }
+            }}
+          >
+            <div style={{ 
+              width: '28px', 
+              height: '28px', 
+              backgroundColor: 'var(--bg-primary)', 
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+            }}>
+              <i className="fas fa-route" style={{ color: schoolColor, fontSize: '13px' }}></i>
+            </div>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ 
+                fontSize: '13px', 
+                fontWeight: '700', 
+                color: 'var(--text-primary)',
+              }}>
+                Explore {school.routeCount} {school.routeCount === 1 ? 'Route' : 'Routes'}
+              </div>
+              {(showRoutesButton && onViewRoutes) && (
+                <svg 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="1.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  style={{ opacity: 0.6, marginLeft: '0.5rem' }}
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              )}
+            </div>
+          </button>
+        )}
+      </div>
     </div>
   );
 };
-

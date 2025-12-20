@@ -164,8 +164,8 @@ export function SchoolList({
               padding: '0.75rem',
               paddingRight: searchTerm ? '2.5rem' : '0.75rem',
               border: '1px solid var(--border-color)',
-              borderRadius: '4px',
-              fontSize: '14px',
+              borderRadius: '12px',
+              fontSize: '12px',
               boxSizing: 'border-box',
               backgroundColor: 'var(--bg-primary)',
               color: 'var(--text-primary)',
@@ -259,7 +259,7 @@ export function SchoolList({
                   >
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                        <div style={{ fontWeight: '600', fontSize: '16px', color: 'var(--text-secondary)' }}>
+                        <div style={{ fontWeight: '600', fontSize: '12px', color: 'var(--text-secondary)' }}>
                           {school.name}
                         </div>
                         {enableEditing && (
@@ -327,7 +327,7 @@ export function SchoolList({
                               padding: '0.5rem',
                               fontSize: '12px',
                               border: '1px solid var(--border-color)',
-                              borderRadius: '4px',
+                              borderRadius: '8px',
                               boxSizing: 'border-box',
                               backgroundColor: 'var(--bg-primary)',
                               color: 'var(--text-primary)',
@@ -350,7 +350,7 @@ export function SchoolList({
                               padding: '0.5rem',
                               fontSize: '12px',
                               border: '1px solid var(--border-color)',
-                              borderRadius: '4px',
+                              borderRadius: '8px',
                               boxSizing: 'border-box',
                               backgroundColor: 'var(--bg-primary)',
                               color: 'var(--text-primary)',
@@ -380,7 +380,7 @@ export function SchoolList({
                               backgroundColor: '#4ECDC4',
                               color: 'white',
                               border: 'none',
-                              borderRadius: '4px',
+                              borderRadius: '9999px',
                               cursor: 'pointer',
                               fontWeight: '500',
                             }}
@@ -401,7 +401,7 @@ export function SchoolList({
                               backgroundColor: '#ccc',
                               color: 'white',
                               border: 'none',
-                              borderRadius: '4px',
+                              borderRadius: '9999px',
                               cursor: 'pointer',
                               fontWeight: '500',
                             }}
@@ -428,7 +428,7 @@ export function SchoolList({
                       className={`school-list-item ${school.id === selectedSchoolId ? 'selected' : ''}`}
                       style={{
                         padding: '0.5rem',
-                        fontSize: '14px',
+                        fontSize: '12px',
                         color: 'var(--text-tertiary)',
                       }}
                     >

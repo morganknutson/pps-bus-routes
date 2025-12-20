@@ -90,7 +90,7 @@ export function SchoolSelector() {
           padding: '0.5rem',
           fontSize: '14px',
           border: '1px solid #ddd',
-          borderRadius: '4px',
+          borderRadius: '12px',
           backgroundColor: 'white',
           cursor: 'pointer',
         }}

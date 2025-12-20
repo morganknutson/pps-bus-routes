@@ -190,7 +190,7 @@ export function AddressInput() {
       display: 'flex',
       alignItems: 'center',
       backgroundColor: 'var(--bg-primary)',
-      borderRadius: '8px',
+      borderRadius: '12px',
       boxShadow: '0 4px 12px var(--shadow-large)',
       transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
     }}>
@@ -208,7 +208,7 @@ export function AddressInput() {
               triggerZoomToHomeAddress();
             }}
             style={{ 
-              fontSize: '14px', 
+              fontSize: '12px', 
               fontWeight: '500', 
               flex: 1, 
               color: 'var(--text-primary)',
@@ -298,8 +298,8 @@ export function AddressInput() {
                 height: '100%',
                 padding: '0 0.5rem 0 1.5rem',
                 border: 'none',
-                borderRadius: '4px',
-                fontSize: '14px',
+                borderRadius: '12px',
+                fontSize: '12px',
                 boxSizing: 'border-box',
                 backgroundColor: 'transparent',
                 color: 'var(--text-primary)',
@@ -332,7 +332,7 @@ export function AddressInput() {
                 marginTop: '4px',
                 backgroundColor: 'var(--bg-primary)',
                 border: '1px solid var(--border-color)',
-                borderRadius: '4px',
+                borderRadius: '12px',
                 boxShadow: '0 2px 8px var(--shadow-hover)',
                 maxHeight: '200px',
                 overflowY: 'auto',
@@ -349,7 +349,7 @@ export function AddressInput() {
                     padding: '0.75rem',
                     cursor: 'pointer',
                     borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     color: 'var(--text-primary)',
                     backgroundColor: highlightedIndex === index ? 'rgba(78, 205, 196, 0.2)' : 'var(--bg-primary)',
                     transition: 'background-color 0.2s ease',

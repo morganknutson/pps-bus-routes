@@ -350,7 +350,7 @@ export function RouteListBase({
         style={{
           border: '1px solid',
           borderColor: isRouteSelected ? 'transparent' : 'var(--border-color)',
-          borderRadius: '4px',
+          borderRadius: '12px',
           backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'transparent',
           boxShadow: isRouteSelected ? '0 1px 3px var(--shadow-large)' : 'none',
           overflow: 'hidden',
@@ -428,7 +428,7 @@ export function RouteListBase({
               )}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: '500', marginBottom: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  <span style={{ color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', fontSize: '14px', marginTop: '1px' }}>{route.name}</span>
+                  <span style={{ color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', fontSize: '12px', marginTop: '1px' }}>{route.name}</span>
                 </div>
                 {config.showGeocodingStats && route.geocodingProgress ? (
                   <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
@@ -579,7 +579,7 @@ export function RouteListBase({
               <span style={{ 
                 fontSize: '14px', 
                 padding: '4px 10px',
-                borderRadius: '12px',
+                borderRadius: '9999px',
                 fontWeight: '500',
                 backgroundColor: '#B3E5FC',
                 color: '#01579B',
@@ -596,7 +596,7 @@ export function RouteListBase({
               <span style={{ 
                 fontSize: '14px', 
                 padding: '4px 10px',
-                borderRadius: '12px',
+                borderRadius: '9999px',
                 fontWeight: '500',
                 backgroundColor: '#C8E6C9',
                 color: '#1B5E20',

@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { DarkModeToggle } from './DarkModeToggle';
+import { useStore } from '../store/useStore';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import './Header.css';
 
@@ -55,7 +56,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 className="logo-text"
                 style={{ color: 'white' }}
               >
-                {isMobile ? 'PPS Bus Routes' : 'Portland Public School Bus Routes'}
+                PPS Bus Routes
               </span>
             )}
           </div>

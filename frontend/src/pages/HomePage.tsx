@@ -452,7 +452,7 @@ export function HomePage() {
           color: 'white',
           textAlign: 'center',
         }}>
-          PPS School Bus Routes
+          PPS Bus Routes
         </h1>
 
         {/* Address Input */}
@@ -464,7 +464,7 @@ export function HomePage() {
               gap: '0.5rem',
               padding: '0.75rem',
               backgroundColor: 'var(--bg-primary)',
-              borderRadius: '8px',
+              borderRadius: '12px',
               border: '1px solid var(--border-color)',
               height: '46px',
               boxSizing: 'border-box',
@@ -518,7 +518,7 @@ export function HomePage() {
                   width: '100%',
                   padding: '0.75rem',
                   border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
+                  borderRadius: '12px',
                   fontSize: '14px',
                   backgroundColor: 'var(--bg-primary)',
                   color: 'var(--text-primary)',
@@ -551,7 +551,7 @@ export function HomePage() {
                     marginTop: '4px',
                     backgroundColor: 'var(--bg-primary)',
                     border: '1px solid var(--border-color)',
-                    borderRadius: '8px',
+                    borderRadius: '12px',
                     boxShadow: '0 2px 8px var(--shadow-hover)',
                     maxHeight: '200px',
                     overflowY: 'auto',
@@ -591,7 +591,7 @@ export function HomePage() {
               gap: '0.5rem',
               padding: '0.75rem',
               backgroundColor: 'var(--bg-primary)',
-              borderRadius: '8px',
+              borderRadius: '12px',
               border: '1px solid var(--border-color)',
               height: '46px',
               boxSizing: 'border-box',
@@ -661,7 +661,7 @@ export function HomePage() {
                   width: '100%',
                   padding: '0.75rem',
                   border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
+                  borderRadius: '12px',
                   fontSize: '14px',
                   backgroundColor: 'var(--bg-primary)',
                   color: 'var(--text-primary)',
@@ -682,7 +682,7 @@ export function HomePage() {
                     marginTop: '4px',
                     backgroundColor: 'var(--bg-primary)',
                     border: '1px solid var(--border-color)',
-                    borderRadius: '8px',
+                    borderRadius: '12px',
                     boxShadow: '0 2px 8px var(--shadow-hover)',
                     maxHeight: '200px',
                     overflowY: 'auto',
@@ -739,7 +739,7 @@ export function HomePage() {
             marginBottom: '1rem',
             backgroundColor: '#fee',
             color: '#c33',
-            borderRadius: '8px',
+            borderRadius: '12px',
             fontSize: '14px',
           }}>
             {error}
@@ -758,7 +758,7 @@ export function HomePage() {
             color: 'white',
             backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? '#999' : '#4ECDC4',
             border: 'none',
-            borderRadius: '8px',
+            borderRadius: '9999px',
             cursor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? 'not-allowed' : 'pointer',
             transition: 'background-color 0.2s ease',
             display: 'flex',

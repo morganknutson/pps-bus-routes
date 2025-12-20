@@ -567,7 +567,7 @@ function ExplorerApp() {
         justifyContent: 'center',
         width: '40px',
         height: '40px',
-        borderRadius: '4px',
+        borderRadius: '9999px',
       }}
       aria-label={sidebarOpen ? "Close menu" : "Open menu"}
     >
@@ -655,7 +655,7 @@ function ExplorerApp() {
                       padding: '0.75rem 1.5rem',
                       backgroundColor: 'var(--bg-primary)',
                       color: 'var(--text-primary)',
-                      borderRadius: '8px',
+                      borderRadius: '12px',
                       boxShadow: '0 2px 8px var(--shadow-large)',
                       width: '200px',
                       pointerEvents: 'none', // Don't block map clicks
@@ -957,7 +957,7 @@ function AdminApp() {
                       padding: '0.75rem 1.5rem',
                       backgroundColor: 'var(--bg-primary)',
                       color: 'var(--text-primary)',
-                      borderRadius: '8px',
+                      borderRadius: '12px',
                       boxShadow: '0 2px 8px var(--shadow-large)',
                       width: '200px',
                       pointerEvents: 'none', // Don't block map clicks

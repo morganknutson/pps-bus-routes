@@ -131,7 +131,7 @@ export function AdminPasswordProtection({ children }: AdminPasswordProtectionPro
                 padding: '0.75rem',
                 fontSize: '16px',
                 border: `1px solid ${error ? '#ff4444' : 'var(--text-tertiary)'}`,
-                borderRadius: '8px',
+                borderRadius: '12px',
                 backgroundColor: 'var(--bg-primary)',
                 color: 'var(--text-primary)',
                 outline: 'none',
@@ -169,7 +169,7 @@ export function AdminPasswordProtection({ children }: AdminPasswordProtectionPro
               backgroundColor: 'var(--text-secondary)',
               color: 'var(--bg-primary)',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: '9999px',
               cursor: 'pointer',
               transition: 'opacity 0.2s',
             }}
