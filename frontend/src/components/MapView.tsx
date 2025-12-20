@@ -58,6 +58,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const { routes, schools, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, setSelectedSchool, updateStopCoordinates, directionFilter, shouldZoomToHomeAddress, clearZoomToHomeAddress, isLoading } = useStore();
   const isMobile = useIsMobile();
   const mapRef = useRef<L.Map | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
   const [undoHistory, setUndoHistory] = useState<UndoStep[]>([]);
   const routeRecalcTimeoutRef = useRef<{ [routeId: string]: ReturnType<typeof setTimeout> }>({});
@@ -73,6 +74,23 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const [streetMarkers, setStreetMarkers] = useState<StreetMarker[]>([]);
   const [loadingStreetPins, setLoadingStreetPins] = useState<boolean>(false);
   const [showSchoolInfoPopup, setShowSchoolInfoPopup] = useState<boolean>(false);
+
+  // Handle map resizing when sidebar changes
+  useEffect(() => {
+    if (!containerRef.current || !mapRef.current) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (mapRef.current) {
+        mapRef.current.invalidateSize({ animate: true });
+      }
+    });
+
+    resizeObserver.observe(containerRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   // Reset school info popup when school changes
   useEffect(() => {
@@ -841,7 +859,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const defaultCenter: [number, number] = [45.5152, -122.6784];
 
   return (
-    <div style={{ position: 'relative', height: '100%', width: '100%' }}>
+    <div ref={containerRef} style={{ position: 'relative', height: '100%', width: '100%' }}>
       <MapContainer
         center={defaultCenter}
         zoom={12}

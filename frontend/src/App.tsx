@@ -53,8 +53,26 @@ function SchoolListMapView({
   mapRef: React.RefObject<L.Map>;
 }) {
   const { homeAddress } = useStore();
+  const containerRef = useRef<HTMLDivElement>(null);
   const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
   const homeIcon = useMemo(() => createHomeIcon(), []);
+
+  // Handle map resizing when sidebar changes
+  useEffect(() => {
+    if (!containerRef.current || !mapRef.current) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (mapRef.current) {
+        mapRef.current.invalidateSize({ animate: true });
+      }
+    });
+
+    resizeObserver.observe(containerRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [mapRef]);
   
   if (schoolsWithCoords.length === 0 && !homeAddress) {
     return (
@@ -71,66 +89,68 @@ function SchoolListMapView({
   }
 
   return (
-    <MapContainer
-      key="schools-map"
-      center={[45.5152, -122.6784]}
-      zoom={12}
-      style={{ height: '100%', width: '100%' }}
-      ref={mapRef}
-      zoomControl={false}
-    >
-      <DarkModeTileLayer />
-      <FitSchoolBounds schools={schoolsWithCoords} selectedSchoolId={selectedSchoolId} />
-      
-      {/* Home address marker */}
-      {homeAddress && (
-        <Marker 
-          position={[homeAddress.coordinates[1], homeAddress.coordinates[0]]} 
-          icon={homeIcon}
-        />
-      )}
-
-      {schoolsWithCoords.map(school => {
-        const isSelected = selectedSchoolId === school.id;
-        const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-        const schoolColor = getSchoolColor(schoolTypes);
-        const icon = createSchoolIcon(schoolColor);
-        const position = [school.coordinates![1], school.coordinates![0]] as [number, number];
-
-        return (
+    <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
+      <MapContainer
+        key="schools-map"
+        center={[45.5152, -122.6784]}
+        zoom={12}
+        style={{ height: '100%', width: '100%' }}
+        ref={mapRef}
+        zoomControl={false}
+      >
+        <DarkModeTileLayer />
+        <FitSchoolBounds schools={schoolsWithCoords} selectedSchoolId={selectedSchoolId} />
+        
+        {/* Home address marker */}
+        {homeAddress && (
           <Marker 
-            key={school.id}
-            position={position}
-            icon={icon}
-            eventHandlers={{
-              click: () => onSelectSchool(isSelected ? null : school.id)
-            }}
-            zIndexOffset={isSelected ? 1000 : 0}
-          >
-            {isSelected && (
-              <Tooltip 
-                permanent 
-                direction="bottom" 
-                offset={[0, 30]}
-                className="school-info-tooltip"
-                opacity={1}
-              >
-                        <SchoolInfoTooltip 
-                          school={school} 
-                          showRoutesButton={true}
-                          onClose={() => onSelectSchool(null)}
-                          onViewRoutes={() => {
-                    useStore.getState().setSelectedSchool(school.id);
-                    // This event is caught in ExplorerApp/AdminApp to change the tab
-                    window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
-                  }}
-                />
-              </Tooltip>
-            )}
-          </Marker>
-        );
-      })}
-    </MapContainer>
+            position={[homeAddress.coordinates[1], homeAddress.coordinates[0]]} 
+            icon={homeIcon}
+          />
+        )}
+
+        {schoolsWithCoords.map(school => {
+          const isSelected = selectedSchoolId === school.id;
+          const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
+          const schoolColor = getSchoolColor(schoolTypes);
+          const icon = createSchoolIcon(schoolColor);
+          const position = [school.coordinates![1], school.coordinates![0]] as [number, number];
+
+          return (
+            <Marker 
+              key={school.id}
+              position={position}
+              icon={icon}
+              eventHandlers={{
+                click: () => onSelectSchool(isSelected ? null : school.id)
+              }}
+              zIndexOffset={isSelected ? 1000 : 0}
+            >
+              {isSelected && (
+                <Tooltip 
+                  permanent 
+                  direction="bottom" 
+                  offset={[0, 30]}
+                  className="school-info-tooltip"
+                  opacity={1}
+                >
+                          <SchoolInfoTooltip 
+                            school={school} 
+                            showRoutesButton={true}
+                            onClose={() => onSelectSchool(null)}
+                            onViewRoutes={() => {
+                      useStore.getState().setSelectedSchool(school.id);
+                      // This event is caught in ExplorerApp/AdminApp to change the tab
+                      window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
+                    }}
+                  />
+                </Tooltip>
+              )}
+            </Marker>
+          );
+        })}
+      </MapContainer>
+    </div>
   );
 }
 
@@ -569,6 +589,7 @@ function ExplorerApp() {
           tabs={<TabBar activeTab={activeTab} onTabChange={handleTabChange} />}
           isOpen={!isMobile || sidebarOpen}
           onClose={() => setSidebarOpen(false)}
+          persistenceKey="sidebar-width-explorer"
         >
           {activeTab === 'schools' ? (
             <SchoolList
@@ -833,6 +854,7 @@ function AdminApp() {
         <Sidebar
           header={null}
           tabs={<TabBar activeTab={activeTab} onTabChange={handleTabChange} />}
+          persistenceKey="sidebar-width-admin"
         >
           {activeTab === 'schools' ? (
             <SchoolList

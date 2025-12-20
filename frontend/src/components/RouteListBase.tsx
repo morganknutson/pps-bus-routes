@@ -472,23 +472,15 @@ export function RouteListBase({
             }}
             title={isExpanded ? 'Collapse' : 'Expand'}
           >
-            <svg 
-              width="16" 
-              height="16" 
-              viewBox="0 0 12 12" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="1" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
+            <i 
+              className="fas fa-chevron-down"
               style={{ 
+                fontSize: '10px',
                 transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                 transition: 'transform 0.2s',
                 display: 'inline-block',
               }}
-            >
-              <path d="M3 4.5L6 7.5L9 4.5" />
-            </svg>
+            ></i>
           </button>
         </div>
         
@@ -592,7 +584,11 @@ export function RouteListBase({
                 backgroundColor: '#B3E5FC',
                 color: '#01579B',
                 transition: 'opacity 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem'
               }}>
+                <i className="fas fa-route" style={{ fontSize: '11px' }}></i>
                 Morning
               </span>
             )}
@@ -605,7 +601,11 @@ export function RouteListBase({
                 backgroundColor: '#C8E6C9',
                 color: '#1B5E20',
                 transition: 'opacity 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem'
               }}>
+                <i className="fas fa-route" style={{ fontSize: '11px' }}></i>
                 Afternoon
               </span>
             )}
@@ -614,24 +614,16 @@ export function RouteListBase({
             )}
             <span style={{ fontWeight: '400', color: 'var(--text-tertiary)' }}>({sectionRoutes.length})</span>
           </h3>
-          <svg 
-            width="16" 
-            height="16" 
-            viewBox="0 0 12 12" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="1" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
+          <i 
+            className="fas fa-chevron-down"
             style={{ 
+              fontSize: '12px',
               transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.2s',
               display: 'inline-block',
               color: 'var(--text-tertiary)',
             }}
-          >
-            <path d="M3 4.5L6 7.5L9 4.5" />
-          </svg>
+          ></i>
         </button>
         {isExpanded && renderRouteGroups(sectionRoutes)}
       </div>

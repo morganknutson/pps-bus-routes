@@ -33,6 +33,7 @@ export function HomePage() {
   const [addressLoading, setAddressLoading] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<HomeAddress | null>(null);
   const [highlightedAddressIndex, setHighlightedAddressIndex] = useState(-1);
+  const [isAddressFocused, setIsAddressFocused] = useState(false);
   const addressInputRef = useRef<HTMLInputElement>(null);
   const addressSuggestionsRef = useRef<HTMLDivElement>(null);
   const addressAbortControllerRef = useRef<AbortController | null>(null);
@@ -442,20 +443,16 @@ export function HomePage() {
     }}>
       <div style={{
         width: '100%',
-        maxWidth: '500px',
-        backgroundColor: 'var(--bg-secondary)',
-        padding: '2rem',
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px var(--shadow-large)',
+        maxWidth: '440px',
       }}>
         <h1 style={{
           margin: '0 0 2rem 0',
-          fontSize: '28px',
+          fontSize: '32px',
           fontWeight: '600',
-          color: 'var(--text-primary)',
+          color: 'white',
           textAlign: 'center',
         }}>
-          Find My Bus Stop
+          PPS School Bus Routes
         </h1>
 
         {/* Address Input */}
@@ -469,9 +466,11 @@ export function HomePage() {
               backgroundColor: 'var(--bg-primary)',
               borderRadius: '8px',
               border: '1px solid var(--border-color)',
+              height: '46px',
+              boxSizing: 'border-box',
             }}>
               <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: '14px' }}></i>
-              <div style={{ flex: 1, fontSize: '14px', color: 'var(--text-primary)' }}>
+              <div style={{ flex: 1, fontSize: '14px', color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {selectedAddress.address}
               </div>
               <button
@@ -485,8 +484,11 @@ export function HomePage() {
                   color: 'var(--text-tertiary)',
                   cursor: 'pointer',
                   fontSize: '18px',
-                  padding: '0',
+                  padding: '0 4px',
                   lineHeight: '1',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
                 aria-label="Clear address"
               >
@@ -502,9 +504,14 @@ export function HomePage() {
                 onChange={(e) => setAddressQuery(e.target.value)}
                 onKeyDown={handleAddressKeyDown}
                 onFocus={() => {
+                  setIsAddressFocused(true);
                   if (addressSuggestions.length > 0) {
                     setShowAddressSuggestions(true);
                   }
+                }}
+                onBlur={() => {
+                  // Small delay to allow clicks on suggestions
+                  setTimeout(() => setIsAddressFocused(false), 200);
                 }}
                 placeholder="Enter your address..."
                 style={{
@@ -516,6 +523,9 @@ export function HomePage() {
                   backgroundColor: 'var(--bg-primary)',
                   color: 'var(--text-primary)',
                   boxSizing: 'border-box',
+                  height: '46px',
+                  outline: 'none',
+                  transition: 'background-color 0.2s ease',
                 }}
               />
               {addressLoading && (
@@ -583,9 +593,11 @@ export function HomePage() {
               backgroundColor: 'var(--bg-primary)',
               borderRadius: '8px',
               border: '1px solid var(--border-color)',
+              height: '46px',
+              boxSizing: 'border-box',
             }}>
               <i className="fas fa-graduation-cap" style={{ color: 'var(--text-primary)', fontSize: '14px' }}></i>
-              <div style={{ flex: 1, fontSize: '14px', color: 'var(--text-primary)' }}>
+              <div style={{ flex: 1, fontSize: '14px', color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {selectedSchoolLocal.name}
               </div>
               <button
@@ -599,8 +611,11 @@ export function HomePage() {
                   color: 'var(--text-tertiary)',
                   cursor: 'pointer',
                   fontSize: '18px',
-                  padding: '0',
+                  padding: '0 4px',
                   lineHeight: '1',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
                 aria-label="Clear school"
               >
@@ -651,6 +666,9 @@ export function HomePage() {
                   backgroundColor: 'var(--bg-primary)',
                   color: 'var(--text-primary)',
                   boxSizing: 'border-box',
+                  height: '46px',
+                  outline: 'none',
+                  transition: 'background-color 0.2s ease',
                 }}
               />
               {showSchoolSuggestions && schoolSuggestions.length > 0 && (

@@ -180,9 +180,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
               }}
               aria-label="Clear school selection"
             >
-              <svg width="16" height="16" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 3L3 9M3 3l6 6" />
-              </svg>
+              <i className="fas fa-times" style={{ fontSize: '12px' }}></i>
             </button>
           </div>
         </div>

@@ -589,7 +589,7 @@ export function ArchitecturePage() {
           overflow: 'hidden',
           flexShrink: 0,
         }}>
-          <Sidebar header={null}>
+          <Sidebar header={null} persistenceKey="sidebar-width-architecture">
             <div style={{ padding: '1rem' }}>
               <h2 style={{ margin: '0 0 1rem 0', fontSize: '18px', color: 'var(--text-primary)' }}>
                 Architecture Map

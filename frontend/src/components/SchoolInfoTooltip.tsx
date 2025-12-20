@@ -99,7 +99,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             <div style={{ marginBottom: '0.5rem' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.125rem' }}>Routes</div>
               <div style={{ fontSize: '13px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <i className="fas fa-bus" style={{ fontSize: '11px', opacity: 0.7 }}></i>
+                <i className="fas fa-route" style={{ fontSize: '11px', opacity: 0.7 }}></i>
                 <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'} available</span>
               </div>
               {school.routesUpdatedAt && (

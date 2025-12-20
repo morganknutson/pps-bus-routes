@@ -222,6 +222,7 @@ export function TechPage() {
         overflow: 'hidden' 
       }}>
         <Sidebar
+          persistenceKey="sidebar-width-tech"
           header={
             <div>
               <h2 style={{ 

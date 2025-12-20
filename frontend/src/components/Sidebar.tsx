@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState, useRef, useCallback } from 'react';
 import { useIsMobile } from '../hooks/useMediaQuery';
 
 export interface SidebarProps {
@@ -9,6 +9,10 @@ export interface SidebarProps {
   backgroundColor?: string;
   isOpen?: boolean;
   onClose?: () => void;
+  resizable?: boolean;
+  minWidth?: number;
+  maxWidth?: number;
+  persistenceKey?: string;
 }
 
 /**
@@ -20,13 +24,81 @@ export function Sidebar({
   children, 
   header,
   tabs,
-  width = '350px',
+  width: initialWidth = '350px',
   backgroundColor,
   isOpen,
-  onClose
+  onClose,
+  resizable = true,
+  minWidth = 250,
+  maxWidth = 600,
+  persistenceKey = 'sidebar-width'
 }: SidebarProps) {
   const isMobile = useIsMobile();
   
+  // Use numeric width for resizing
+  const getInitialWidth = () => {
+    if (isMobile) return window.innerWidth;
+    const savedWidth = localStorage.getItem(persistenceKey);
+    if (savedWidth) return parseInt(savedWidth, 10);
+    return parseInt(initialWidth, 10) || 350;
+  };
+
+  const [sidebarWidth, setSidebarWidth] = useState(getInitialWidth());
+  const [isResizing, setIsResizing] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  // Update width when isMobile changes
+  useEffect(() => {
+    if (isMobile) {
+      setSidebarWidth(window.innerWidth);
+    } else {
+      const savedWidth = localStorage.getItem(persistenceKey);
+      setSidebarWidth(savedWidth ? parseInt(savedWidth, 10) : parseInt(initialWidth, 10) || 350);
+    }
+  }, [isMobile, initialWidth, persistenceKey]);
+
+  const startResizing = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+  }, []);
+
+  const stopResizing = useCallback(() => {
+    setIsResizing(false);
+    if (!isMobile) {
+      localStorage.setItem(persistenceKey, sidebarWidth.toString());
+    }
+  }, [isMobile, persistenceKey, sidebarWidth]);
+
+  const resize = useCallback((e: MouseEvent) => {
+    if (isResizing) {
+      const newWidth = e.clientX;
+      if (newWidth >= minWidth && newWidth <= maxWidth) {
+        setSidebarWidth(newWidth);
+      }
+    }
+  }, [isResizing, minWidth, maxWidth]);
+
+  useEffect(() => {
+    if (isResizing) {
+      window.addEventListener('mousemove', resize);
+      window.addEventListener('mouseup', stopResizing);
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+    } else {
+      window.removeEventListener('mousemove', resize);
+      window.removeEventListener('mouseup', stopResizing);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', resize);
+      window.removeEventListener('mouseup', stopResizing);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+  }, [isResizing, resize, stopResizing]);
+
   // Default to true on desktop, false on mobile
   const shouldShow = isOpen !== undefined ? isOpen : !isMobile;
 
@@ -44,16 +116,43 @@ export function Sidebar({
   if (!isMobile && shouldShow) {
     return (
       <div
+        ref={sidebarRef}
         style={{
-          width,
+          width: `${sidebarWidth}px`,
+          position: 'relative',
           borderRight: '1px solid var(--border-color)',
           display: 'flex',
           flexDirection: 'column',
           backgroundColor: backgroundColor || 'var(--bg-secondary)',
           overflow: 'hidden',
-          transition: 'background-color 0.3s ease, border-color 0.3s ease',
+          transition: isResizing ? 'none' : 'background-color 0.3s ease, border-color 0.3s ease, width 0.1s ease',
+          flexShrink: 0,
         }}
       >
+        {/* Resize Handle */}
+        {resizable && (
+          <div
+            onMouseDown={startResizing}
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: -3,
+              bottom: 0,
+              width: '6px',
+              cursor: 'col-resize',
+              zIndex: 10,
+              backgroundColor: isResizing ? 'var(--accent-primary, #4ECDC4)' : 'transparent',
+              transition: 'background-color 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (!isResizing) e.currentTarget.style.backgroundColor = 'rgba(78, 205, 196, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              if (!isResizing) e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+          />
+        )}
+        
         {/* Fixed Header Section */}
         {header && (
           <div style={{ 

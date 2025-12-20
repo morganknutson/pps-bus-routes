@@ -416,10 +416,7 @@ export function SchoolsList() {
                       </div>
                       {school.address && (
                         <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, color: '#999' }}>
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                          </svg>
+                          <i className="fas fa-map-marker-alt" style={{ fontSize: '12px', color: '#999', width: '12px', display: 'flex', justifyContent: 'center' }}></i>
                           <span>{school.address.split(',')[0]}</span>
                         </div>
                       )}
@@ -448,10 +445,7 @@ export function SchoolsList() {
                         {school.name}
                         {school.address && (
                           <div style={{ fontSize: '11px', color: '#999', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                              <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
+                            <i className="fas fa-map-marker-alt" style={{ fontSize: '11px', width: '11px', display: 'flex', justifyContent: 'center' }}></i>
                             <span>{school.address}</span>
                           </div>
                         )}
@@ -549,11 +543,7 @@ export function SchoolsList() {
             <div style={{ marginBottom: '0.75rem' }}>
               <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Routes</div>
               <div style={{ fontSize: '14px', color: '#333', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 12h18M3 6h18M3 18h18"></path>
-                  <circle cx="6" cy="12" r="2"></circle>
-                  <circle cx="18" cy="12" r="2"></circle>
-                </svg>
+                <i className="fas fa-route" style={{ fontSize: '14px', color: '#999' }}></i>
                 <span>{selectedSchool.routeCount} {selectedSchool.routeCount === 1 ? 'route' : 'routes'} available</span>
               </div>
             </div>
@@ -637,10 +627,7 @@ export function SchoolsList() {
                   e.currentTarget.style.textDecoration = 'none';
                 }}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
+                <i className="fas fa-map-marker-alt" style={{ fontSize: '14px', color: '#999', width: '14px', display: 'flex', justifyContent: 'center' }}></i>
                 <span>{selectedSchool.address}</span>
               </a>
             </div>

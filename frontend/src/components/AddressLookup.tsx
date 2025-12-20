@@ -157,8 +157,10 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
       left: '1rem',
       right: '1rem',
       zIndex: 1000,
-      padding: '8px',
-      paddingBottom: '7px',
+      padding: '0 0.75rem',
+      height: '40px',
+      display: 'flex',
+      alignItems: 'center',
       backgroundColor: 'var(--bg-primary)',
       borderRadius: '8px',
       boxShadow: '0 4px 12px var(--shadow-large)',
@@ -169,6 +171,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
+          width: '100%',
         }}>
           <i className="fas fa-map-marker-alt" style={{ color: 'var(--text-primary)', fontSize: '12px', flexShrink: 0 }}></i>
           <div style={{ fontSize: '14px', fontWeight: '500', flex: 1, color: 'var(--text-primary)' }}>{lookupAddress.address}</div>
@@ -211,8 +214,10 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
+          width: '100%',
+          height: '100%',
         }}>
-          <div style={{ position: 'relative', flex: 1 }}>
+          <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
           <input
             ref={inputRef}
             type="text"
@@ -226,16 +231,15 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             placeholder="Search for an address..."
             style={{
               width: '100%',
-              padding: '0.375rem 0.5rem',
-              borderImage: 'none',
-              borderStyle: 'solid',
-              borderWidth: '1px',
-              borderColor: 'var(--border-color)',
+              height: '100%',
+              padding: '0 0.5rem',
+              border: 'none',
               borderRadius: '4px',
               fontSize: '14px',
               boxSizing: 'border-box',
-              backgroundColor: 'var(--bg-primary)',
+              backgroundColor: 'transparent',
               color: 'var(--text-primary)',
+              outline: 'none',
               transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
             }}
           />

@@ -185,7 +185,10 @@ export function AddressInput() {
       left: '1rem',
       right: '1rem',
       zIndex: 1000,
-      padding: '0.5rem 0.75rem',
+      padding: '0 0.75rem',
+      height: '40px',
+      display: 'flex',
+      alignItems: 'center',
       backgroundColor: 'var(--bg-primary)',
       borderRadius: '8px',
       boxShadow: '0 4px 12px var(--shadow-large)',
@@ -196,6 +199,7 @@ export function AddressInput() {
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
+          width: '100%',
         }}>
           <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: '12px', flexShrink: 0 }}></i>
           <div 
@@ -252,9 +256,7 @@ export function AddressInput() {
             }}
             aria-label="Clear address"
           >
-            <svg width="16" height="16" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 3L3 9M3 3l6 6" />
-            </svg>
+            <i className="fas fa-times" style={{ fontSize: '12px' }}></i>
           </button>
         </div>
       ) : (
@@ -262,13 +264,15 @@ export function AddressInput() {
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
+          width: '100%',
+          height: '100%',
         }}>
-          <div style={{ position: 'relative', flex: 1 }}>
+          <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
             <i 
               className="fas fa-house" 
               style={{ 
                 position: 'absolute',
-                left: '12px',
+                left: '4px',
                 top: '50%',
                 transform: 'translateY(-50%)',
                 fontSize: '11px',
@@ -291,13 +295,15 @@ export function AddressInput() {
               placeholder="Enter your address..."
               style={{
                 width: '100%',
-                padding: '0.375rem 0.5rem 0.375rem 2.25rem',
+                height: '100%',
+                padding: '0 0.5rem 0 1.5rem',
                 border: 'none',
                 borderRadius: '4px',
                 fontSize: '14px',
                 boxSizing: 'border-box',
-                backgroundColor: 'var(--bg-primary)',
+                backgroundColor: 'transparent',
                 color: 'var(--text-primary)',
+                outline: 'none',
                 transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
               }}
             />
