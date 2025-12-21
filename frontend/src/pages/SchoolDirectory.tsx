@@ -170,7 +170,7 @@ export function SchoolDirectory() {
               return (
                 <Link 
                   key={school.id}
-                  to={`/bus-route-explorer/${school.id}`}
+                  to={`/${school.id}`}
                   style={{ 
                     textDecoration: 'none',
                     display: 'flex',

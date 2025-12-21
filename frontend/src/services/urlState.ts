@@ -74,7 +74,15 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
   }
 
   // Case 2: Clean Hierarchy (schoolId first)
-  state.schoolId = segments[0]?.toLowerCase();
+  const firstSegment = segments[0]?.toLowerCase();
+  
+  // List of keywords that should NOT be treated as school IDs
+  const reservedKeywords = ['schools', 'routes', 'morning', 'afternoon', 'both', 'explore', 'map'];
+  
+  if (firstSegment && !reservedKeywords.includes(firstSegment)) {
+    state.schoolId = firstSegment;
+  }
+  
   state.show = 'schools'; // Default
 
   if (segments.length > 1 && segments[1] === 'routes') {
@@ -135,7 +143,9 @@ export function buildUrlPath(basePath: string, state: UrlState): string {
   } else if (state.show === 'routes') {
     parts.push('routes');
   } else if (state.show === 'schools') {
-    parts.push('schools');
+    // If no school ID and we are showing schools tab, use 'explore' keyword
+    // to distinguish from the static /schools directory page
+    parts.push('explore');
   }
   
   return parts.join('/').replace(/\/+$/g, '');

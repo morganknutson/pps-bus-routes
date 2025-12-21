@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { autocompleteAddress, geocodeAddress } from '../services/api';
 import { analyticsService } from '../services/analytics';
-import { calculateDistance } from '../utils/coordinates';
+import { findClosestStop } from '../utils/findClosestStop';
 import { formatStreetName } from '../utils/formatAddress';
 import { Route, Stop } from '../types';
 
@@ -46,41 +46,24 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   const handleFindClosestStop = () => {
     if (!lookupAddress || !routes || routes.length === 0) return;
 
-    let closestStop: Stop | null = null;
-    let closestRoute: Route | null = null;
-    let minDistance = Infinity;
-    let closestStopNumber = -1;
+    const result = findClosestStop(lookupAddress, routes);
 
-    routes.forEach(route => {
-      route.stops.forEach((stop, index) => {
-        if (stop.coordinates) {
-          const distance = calculateDistance(lookupAddress.coordinates, stop.coordinates);
-          if (distance < minDistance) {
-            minDistance = distance;
-            closestStop = stop;
-            closestRoute = route;
-            closestStopNumber = index + 1;
-          }
-        }
-      });
-    });
-
-    if (closestStop && closestRoute) {
-      const route = closestRoute as Route;
+    if (result) {
+      const { route, stop, stopNumber, distance } = result;
       
       // Update direction filter if the route has a specific direction
       if (route.direction) {
         setDirectionFilter(route.direction);
       }
       
-      selectStop(route, closestStop, closestStopNumber);
+      selectStop(route, stop, stopNumber);
       
       // Automatically switch to routes tab to show the found stop
       window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
       
       analyticsService.trackAction('find_my_stop_admin', {
         schoolId: selectedSchoolId,
-        distance: minDistance
+        distance
       });
     }
   };

@@ -397,7 +397,7 @@ App.tsx
 ├── HomePage (/)
 │   ├── AddressAutocomplete
 │   └── SchoolAutocomplete
-├── ExplorerApp (/bus-route-explorer)
+├── ExplorerApp (/*)
 │   ├── Header
 │   ├── Sidebar
 │   │   ├── TabBar

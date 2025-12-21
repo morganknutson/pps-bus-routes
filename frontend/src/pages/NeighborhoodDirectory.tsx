@@ -162,7 +162,7 @@ export function NeighborhoodDirectory() {
                     {neighborhood.schools.map(school => (
                       <Link 
                         key={school.id}
-                        to={`/bus-route-explorer/${school.id}`}
+                        to={`/${school.id}`}
                         style={{ 
                           fontSize: '0.875rem', 
                           color: '#4ECDC4', 
@@ -193,7 +193,7 @@ export function NeighborhoodDirectory() {
                     {neighborhood.routeCount} Active Routes
                   </span>
                   <Link 
-                    to="/bus-route-explorer"
+                    to="/explore"
                     onClick={() => {
                       setSelectedSchool(null);
                       setRoutes([]);

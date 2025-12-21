@@ -11,11 +11,11 @@ This document provides a comprehensive index of all pages in the application to 
   - Address autocomplete with suggestions
   - School search/autocomplete
   - Finds closest stop to user's address
-  - Navigates to `/bus-route-explorer` (Explorer page) with results
+  - Navigates to `/explore` (Explorer page) with results
 - **State Management**: Uses Zustand store (`useStore`) for routes, schools, home address
 - **Components Used**: `ProgressBar`
 - **API Calls**: `/api/schools`, address autocomplete service
-- **Navigation**: Navigates to `/bus-route-explorer` (Explorer page) after finding stop
+- **Navigation**: Navigates to `/explore` (Explorer page) after finding stop
 
 ---
 
@@ -38,7 +38,7 @@ This document provides a comprehensive index of all pages in the application to 
 
 ---
 
-### 4. Explorer (`/bus-route-explorer`)
+### 4. Explorer (`/explore` or `/{schoolId}`)
 - **Component**: `ExplorerApp` (defined in `frontend/src/App.tsx`)
 - **Purpose**: Main interactive map page for exploring bus routes
 - **Key Features**:
@@ -181,7 +181,7 @@ This document provides a comprehensive index of all pages in the application to 
 | Page | Route | Purpose | Editing | Street Highlighting | Street Pins | Address Input | School Editing |
 |------|-------|---------|---------|-------------------|-------------|---------------|----------------|
 | HomePage | `/` | Find stop | ❌ | ❌ | ❌ | ✅ (autocomplete) | ❌ |
-| ExplorerApp | `/bus-route-explorer` | Explore routes | ❌ | ❌ | ❌ | ✅ (simple) | ❌ |
+| ExplorerApp | `/*` | Explore routes | ❌ | ❌ | ❌ | ✅ (simple) | ❌ |
 | AdminApp | `/admin` | Admin interface | ✅ | ✅ | ✅ | ✅ (lookup) | ✅ |
 | Neighborhoods | `/neighborhoods` | Neighborhood view | ❌ | ❌ | ❌ | ❌ | ❌ |
 | TechPage | `/tech` | Documentation | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -240,7 +240,7 @@ This document provides a comprehensive index of all pages in the application to 
 1. **Always check this index** before making changes to ensure you're working on the correct page
 2. **Admin vs Explorer**: 
    - `/admin` = Admin interface with editing
-   - `/bus-route-explorer` = User-facing Explorer page
+   - `/*` = User-facing Explorer page
 3. **Deprecated Pages**: Do not work on `/data/schools` - use `/admin` instead
 4. **Tech Page Updates**: Must update `TechPage.tsx` when functionality changes
 5. **Component Reuse**: Many components are shared - check if changes affect multiple pages
@@ -250,7 +250,7 @@ This document provides a comprehensive index of all pages in the application to 
 
 ## Quick Reference
 
-- **User-facing pages**: `/` (HomePage), `/bus-route-explorer` (Explorer), `/neighborhoods` (Neighborhoods)
+- **User-facing pages**: `/` (HomePage), `/explore` (Explorer), `/neighborhoods` (Neighborhoods)
 - **Admin pages**: `/admin`
 - **Utility pages**: `/tech`, `/verification`, `/jobs`
 - **Deprecated pages**: `/data/schools` (do not modify)

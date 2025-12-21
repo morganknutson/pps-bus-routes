@@ -20,7 +20,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
   const isHomePage = location.pathname === '/';
   const adminPaths = ['/admin', '/neighborhoods', '/tech', '/verification', '/jobs', '/servers', '/architecture'];
   const isAdminPage = adminPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
-  const isExplorerPage = location.pathname.startsWith('/bus-route-explorer');
+  const isExplorerPage = !isAdminPage && !isHomePage;
   
   const handleLogout = () => {
     sessionStorage.removeItem('adminAuthenticated');
@@ -194,7 +194,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   Jobs
                 </Link>
                 <Link
-                  to="/bus-route-explorer"
+                  to="/explore"
                   onClick={() => {
                     setSelectedSchool(null);
                     setRoutes([]);
@@ -353,7 +353,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
               Jobs
             </Link>
             <Link
-              to="/bus-route-explorer"
+              to="/explore"
               onClick={() => {
                 setSelectedSchool(null);
                 setRoutes([]);

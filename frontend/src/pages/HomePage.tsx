@@ -6,6 +6,7 @@ import { autocompleteAddress, geocodeAddress } from '../services/api';
 import { loadLocalRoutes } from '../services/localRoutes';
 import { findClosestStop } from '../utils/findClosestStop';
 import { formatDistance, calculateDistance } from '../utils/distance';
+import { buildUrlPath, UrlState } from '../services/urlState';
 import { School, HomeAddress } from '../types';
 import { ProgressBar } from '../components/ProgressBar';
 import { SEO } from '../components/SEO';
@@ -409,25 +410,37 @@ export function HomePage() {
         distance: formatDistance(closestStop.distance, true),
       });
 
-      // Set all routes, but only select the one with the closest stop
-      const routesWithSelection = routes.map(route => ({
-        ...route,
-        isSelected: route.id === closestStop.route.id,
-      }));
-
       // Update store
-      setRoutes(routesWithSelection);
       setSelectedSchool(selectedSchoolLocal.id);
       setHomeAddress(selectedAddress);
       
       // Select the closest stop so it's highlighted on the map
       selectStop(closestStop.route, closestStop.stop, closestStop.stopNumber);
       
-      // Set loading to false before navigation to ensure ExplorerApp doesn't show loading
+      // Set loading to false before navigation
       setLoading(false);
 
-      // Navigate to explorer page
-      navigate('/bus-route-explorer');
+      // Build the URL state for navigation
+      const stopId = closestStop.stop.id;
+      const stopMatch = stopId.match(/stop-(\d+)/);
+      const stopNumber = stopMatch ? stopMatch[1] : stopId;
+      const routeName = closestStop.route.name;
+      
+      const urlState: UrlState = {
+        show: 'routes',
+        schoolId: selectedSchoolLocal.id,
+        direction: closestStop.route.direction?.toLowerCase() as 'morning' | 'afternoon' | 'both' || 'both',
+        routeNames: [routeName],
+        stopId: routeName.endsWith('-upcoming') 
+          ? `${routeName.replace('-upcoming', '')}-${stopNumber}-upcoming`
+          : `${routeName}-${stopNumber}`
+      };
+
+      const explorerPath = buildUrlPath('', urlState);
+      console.log('[HomePage] Navigating to:', explorerPath);
+
+      // Navigate to explorer page with full state in URL
+      navigate(explorerPath);
     } catch (error: any) {
       console.error('[HomePage] Error finding stop:', error);
       setError(error.message || 'Failed to find closest stop');
@@ -818,7 +831,7 @@ export function HomePage() {
             textAlign: 'center',
           }}>
             <Link
-              to="/bus-route-explorer"
+              to="/explore"
               onClick={() => {
                 setSelectedSchool(null);
                 setRoutes([]);

@@ -20,7 +20,7 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer</loc>
+    <loc>https://pps-bus-maps.vercel.app/explore</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -40,433 +40,433 @@
 
   <!-- School Pages (Dynamic) -->
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/abernethy</loc>
+    <loc>https://pps-bus-maps.vercel.app/abernethy</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/access</loc>
+    <loc>https://pps-bus-maps.vercel.app/access</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/ainsworth</loc>
+    <loc>https://pps-bus-maps.vercel.app/ainsworth</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/alameda</loc>
+    <loc>https://pps-bus-maps.vercel.app/alameda</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/arleta</loc>
+    <loc>https://pps-bus-maps.vercel.app/arleta</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/astor</loc>
+    <loc>https://pps-bus-maps.vercel.app/astor</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/atkinson</loc>
+    <loc>https://pps-bus-maps.vercel.app/atkinson</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/beach</loc>
+    <loc>https://pps-bus-maps.vercel.app/beach</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/beaumont</loc>
+    <loc>https://pps-bus-maps.vercel.app/beaumont</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/benson</loc>
+    <loc>https://pps-bus-maps.vercel.app/benson</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/beverly-cleary</loc>
+    <loc>https://pps-bus-maps.vercel.app/beverly-cleary</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/boise-eliot</loc>
+    <loc>https://pps-bus-maps.vercel.app/boise-eliot</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/bridger</loc>
+    <loc>https://pps-bus-maps.vercel.app/bridger</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/bridlemile</loc>
+    <loc>https://pps-bus-maps.vercel.app/bridlemile</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/buckman</loc>
+    <loc>https://pps-bus-maps.vercel.app/buckman</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/capitol</loc>
+    <loc>https://pps-bus-maps.vercel.app/capitol</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/cesar-chavez</loc>
+    <loc>https://pps-bus-maps.vercel.app/cesar-chavez</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/chapman</loc>
+    <loc>https://pps-bus-maps.vercel.app/chapman</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/chief-joseph</loc>
+    <loc>https://pps-bus-maps.vercel.app/chief-joseph</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/clark</loc>
+    <loc>https://pps-bus-maps.vercel.app/clark</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/creston</loc>
+    <loc>https://pps-bus-maps.vercel.app/creston</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/davinci</loc>
+    <loc>https://pps-bus-maps.vercel.app/davinci</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/duniway</loc>
+    <loc>https://pps-bus-maps.vercel.app/duniway</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/faubion</loc>
+    <loc>https://pps-bus-maps.vercel.app/faubion</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/forest-park</loc>
+    <loc>https://pps-bus-maps.vercel.app/forest-park</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/franklin</loc>
+    <loc>https://pps-bus-maps.vercel.app/franklin</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/george</loc>
+    <loc>https://pps-bus-maps.vercel.app/george</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/glencoe</loc>
+    <loc>https://pps-bus-maps.vercel.app/glencoe</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/gray</loc>
+    <loc>https://pps-bus-maps.vercel.app/gray</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/grout</loc>
+    <loc>https://pps-bus-maps.vercel.app/grout</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/harrison-park</loc>
+    <loc>https://pps-bus-maps.vercel.app/harrison-park</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/hayhurst</loc>
+    <loc>https://pps-bus-maps.vercel.app/hayhurst</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/hosford</loc>
+    <loc>https://pps-bus-maps.vercel.app/hosford</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/irvington</loc>
+    <loc>https://pps-bus-maps.vercel.app/irvington</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/jackson</loc>
+    <loc>https://pps-bus-maps.vercel.app/jackson</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/james-john</loc>
+    <loc>https://pps-bus-maps.vercel.app/james-john</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/kelly</loc>
+    <loc>https://pps-bus-maps.vercel.app/kelly</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/kellogg</loc>
+    <loc>https://pps-bus-maps.vercel.app/kellogg</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/lane</loc>
+    <loc>https://pps-bus-maps.vercel.app/lane</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/lee</loc>
+    <loc>https://pps-bus-maps.vercel.app/lee</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/lent</loc>
+    <loc>https://pps-bus-maps.vercel.app/lent</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/leodis-v-mcdaniel</loc>
+    <loc>https://pps-bus-maps.vercel.app/leodis-v-mcdaniel</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/lewis</loc>
+    <loc>https://pps-bus-maps.vercel.app/lewis</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/lincoln</loc>
+    <loc>https://pps-bus-maps.vercel.app/lincoln</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/llewellyn</loc>
+    <loc>https://pps-bus-maps.vercel.app/llewellyn</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/dr-martin-luther-king</loc>
+    <loc>https://pps-bus-maps.vercel.app/dr-martin-luther-king</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/maplewood</loc>
+    <loc>https://pps-bus-maps.vercel.app/maplewood</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/markham</loc>
+    <loc>https://pps-bus-maps.vercel.app/markham</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/marysville</loc>
+    <loc>https://pps-bus-maps.vercel.app/marysville</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/mt-tabor</loc>
+    <loc>https://pps-bus-maps.vercel.app/mt-tabor</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/ockley-green</loc>
+    <loc>https://pps-bus-maps.vercel.app/ockley-green</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/peninsula</loc>
+    <loc>https://pps-bus-maps.vercel.app/peninsula</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/richmond</loc>
+    <loc>https://pps-bus-maps.vercel.app/richmond</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/rieke</loc>
+    <loc>https://pps-bus-maps.vercel.app/rieke</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/rigler</loc>
+    <loc>https://pps-bus-maps.vercel.app/rigler</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/rosa-parks</loc>
+    <loc>https://pps-bus-maps.vercel.app/rosa-parks</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/rose-city-park</loc>
+    <loc>https://pps-bus-maps.vercel.app/rose-city-park</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/roseway-heights</loc>
+    <loc>https://pps-bus-maps.vercel.app/roseway-heights</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/sabin</loc>
+    <loc>https://pps-bus-maps.vercel.app/sabin</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/scott</loc>
+    <loc>https://pps-bus-maps.vercel.app/scott</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/sellwood</loc>
+    <loc>https://pps-bus-maps.vercel.app/sellwood</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/sitton</loc>
+    <loc>https://pps-bus-maps.vercel.app/sitton</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/skyline</loc>
+    <loc>https://pps-bus-maps.vercel.app/skyline</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/stephenson</loc>
+    <loc>https://pps-bus-maps.vercel.app/stephenson</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/tubman</loc>
+    <loc>https://pps-bus-maps.vercel.app/tubman</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/vernon</loc>
+    <loc>https://pps-bus-maps.vercel.app/vernon</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/vestal</loc>
+    <loc>https://pps-bus-maps.vercel.app/vestal</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/west-sylvan</loc>
+    <loc>https://pps-bus-maps.vercel.app/west-sylvan</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/whitman</loc>
+    <loc>https://pps-bus-maps.vercel.app/whitman</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/woodlawn</loc>
+    <loc>https://pps-bus-maps.vercel.app/woodlawn</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/woodmere</loc>
+    <loc>https://pps-bus-maps.vercel.app/woodmere</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bus-route-explorer/woodstock</loc>
+    <loc>https://pps-bus-maps.vercel.app/woodstock</loc>
     <lastmod>2025-12-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -72,7 +72,7 @@ function SchoolListMapView({
 
     const resizeObserver = new ResizeObserver(() => {
       if (mapRef.current) {
-        mapRef.current.invalidateSize({ animate: true });
+        mapRef.current.invalidateSize({ animate: false });
       }
     });
 
@@ -195,66 +195,77 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
     }
 
     const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
+    const homeCoordsKey = homeAddress ? `${homeAddress.coordinates[0]},${homeAddress.coordinates[1]}` : 'none';
+    const schoolsKey = `${schools.length}-${homeCoordsKey}`;
     
-    // Zoom to selected school
+    // CASE 1: School is selected - zoom to school
     if (selectedSchoolId) {
       const selectedSchool = schoolsWithCoords.find(s => s.id === selectedSchoolId);
       if (selectedSchool && selectedSchool.coordinates) {
         const [lng, lat] = selectedSchool.coordinates;
         const isNewSelection = prevSelectedSchoolIdRef.current !== selectedSchoolId;
         
-        if (isNewSelection || !hasZoomedRef.current) {
-          console.log('[FitSchoolBounds] Target school selected:', selectedSchool.name);
-          prevSelectedSchoolIdRef.current = selectedSchoolId;
-          isInitialLoadRef.current = false;
-          
-          if (isNewSelection) {
-            hasZoomedRef.current = false;
-          }
-
-          const timer = setTimeout(() => {
-            try {
-              const zoom = 16;
-              const targetPoint = map.project([lat, lng], zoom).add([0, 100]);
-              const targetLatLng = map.unproject(targetPoint, zoom);
-
-              console.log('[FitSchoolBounds] 🎯 Centering map on school:', selectedSchool.name);
-              map.setView(targetLatLng, zoom, { animate: true, duration: 0.6 });
-              hasZoomedRef.current = true;
-            } catch (error) {
-              console.error('[FitSchoolBounds] Error zooming to school:', error);
-            }
-          }, 150);
-          
-          return () => clearTimeout(timer);
+        // If we've already zoomed to this specific school and the school list hasn't changed drastically, skip
+        if (!isNewSelection && hasZoomedRef.current) {
+          return;
         }
-        return;
+
+        console.log('[FitSchoolBounds] 🎯 Target school selected:', selectedSchool.name);
+        isInitialLoadRef.current = false;
+        
+        const timer = setTimeout(() => {
+          try {
+            const zoom = 16;
+            const targetPoint = map.project([lat, lng], zoom).add([0, 100]);
+            const targetLatLng = map.unproject(targetPoint, zoom);
+
+            console.log('[FitSchoolBounds] ⚡ Moving map to school:', selectedSchool.name);
+            map.setView(targetLatLng, zoom, { 
+              animate: true, 
+              duration: 0.8,
+              noMoveStart: true
+            });
+            
+            hasZoomedRef.current = true;
+            prevSelectedSchoolIdRef.current = selectedSchoolId;
+          } catch (error) {
+            console.error('[FitSchoolBounds] Error zooming to school:', error);
+          }
+        }, 150);
+        
+        return () => clearTimeout(timer);
       }
-    }
+    } 
     
-    // Fit all schools when no school is selected
-    if (!selectedSchoolId) {
+    // CASE 2: No school selected - fit to all schools
+    else {
       const wasSelectedBefore = prevSelectedSchoolIdRef.current !== null;
       const isFirstLoad = isInitialLoadRef.current;
 
+      // Only zoom out if we were previously zoomed into a school, 
+      // or if this is the very first load of the map.
       if (wasSelectedBefore || isFirstLoad) {
         const allCoords: [number, number][] = schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number]);
         if (homeAddress) allCoords.push([homeAddress.coordinates[1], homeAddress.coordinates[0]]);
 
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
-          prevSelectedSchoolIdRef.current = null;
           isInitialLoadRef.current = false;
 
+          console.log('[FitSchoolBounds] 🗺️ Preparing to fit all schools (reason: ' + (wasSelectedBefore ? 'deselection' : 'initial load') + ')');
+          
           const timer = setTimeout(() => {
             try {
-              console.log('[FitSchoolBounds] 🗺️ Fitting all schools on map (reason: ' + (wasSelectedBefore ? 'deselection' : 'initial load') + ')');
+              console.log('[FitSchoolBounds] ⚡ Fitting map bounds to all schools');
               map.fitBounds(bounds, { 
                 padding: [50, 50], 
                 animate: true,
-                duration: 0.8
+                duration: 1.0,
+                noMoveStart: true
               });
+              
               hasZoomedRef.current = false;
+              prevSelectedSchoolIdRef.current = null;
             } catch (error) {
               console.error('[FitSchoolBounds] Error fitting bounds:', error);
             }
@@ -263,12 +274,6 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
           return () => clearTimeout(timer);
         }
       }
-    }
-
-    // Ensure ref is updated if we have a selection that didn't trigger zoom
-    if (selectedSchoolId) {
-      prevSelectedSchoolIdRef.current = selectedSchoolId;
-      isInitialLoadRef.current = false;
     }
   }, [map, isMapReady, schools, selectedSchoolId, homeAddress]);
   
@@ -294,7 +299,7 @@ function ExplorerApp() {
   }, []);
 
   // Parse URL to determine initial active tab
-  const urlState = parseUrlPath(location.pathname, '/bus-route-explorer');
+  const urlState = parseUrlPath(location.pathname, '');
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
     return urlState.show || 'schools';
   });
@@ -378,7 +383,7 @@ function ExplorerApp() {
 
   // Initialize URL state sync (only after schools are loaded)
   const { cancelPendingUrlUpdate, markRouteToggle } = useUrlState({
-    basePath: '/bus-route-explorer',
+    basePath: '',
     schools,
     routes,
     activeTab,
@@ -406,7 +411,7 @@ function ExplorerApp() {
       if (activeTab === 'routes' && !routes.some(r => r.isSelected)) {
         console.log('[ExplorerApp] Tab changed to routes, applying default selection');
         const syncedRoutes = applyUrlStateToRoutes(routes, {
-          ...parseUrlPath(window.location.pathname, '/bus-route-explorer'),
+          ...parseUrlPath(window.location.pathname, ''),
           show: 'routes',
           schoolId: selectedSchoolId
         }, directionFilter);
@@ -421,7 +426,7 @@ function ExplorerApp() {
     if (isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
       console.log('[ExplorerApp] Routes already loaded (from navigation), applying selection');
       const syncedRoutes = applyUrlStateToRoutes(routes, {
-        ...parseUrlPath(window.location.pathname, '/bus-route-explorer'),
+        ...parseUrlPath(window.location.pathname, ''),
         show: activeTab,
         schoolId: selectedSchoolId
       }, directionFilter);
@@ -443,7 +448,7 @@ function ExplorerApp() {
         // Pre-apply state to avoid UI flicker by using current activeTab/schoolId
         // This is more reliable than parsing from URL which might be debounced
         const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, {
-          ...parseUrlPath(window.location.pathname, '/bus-route-explorer'),
+          ...parseUrlPath(window.location.pathname, ''),
           show: activeTab,
           schoolId: selectedSchoolId
         }, directionFilter);
@@ -1177,17 +1182,8 @@ function AppContent() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/schools" element={<SchoolDirectory />} />
         <Route path="/neighborhood-directory" element={<NeighborhoodDirectory />} />
-        {/* Path-based routing for bus route explorer - catch-all to handle all segments */}
-        <Route path="/bus-route-explorer/*" element={<ExplorerApp />} />
-        {/* Path-based routing for admin - catch-all to handle all segments */}
-        <Route 
-          path="/admin/*" 
-          element={
-            <AdminPasswordProtection>
-              <AdminApp />
-            </AdminPasswordProtection>
-          } 
-        />
+        
+        {/* Admin and system routes */}
         <Route 
           path="/neighborhoods" 
           element={
@@ -1238,6 +1234,20 @@ function AppContent() {
         />
         {/* Deprecated: Schools List page - kept for backward compatibility but no longer linked */}
         <Route path="/data/schools" element={<SchoolsList />} />
+
+        {/* Path-based routing for admin - catch-all to handle all segments */}
+        <Route 
+          path="/admin/*" 
+          element={
+            <AdminPasswordProtection>
+              <AdminApp />
+            </AdminPasswordProtection>
+          } 
+        />
+
+        {/* CATCH-ALL: Clean URLs for school/route explorer */}
+        {/* Any path not matched above will be treated as a potential school ID */}
+        <Route path="/*" element={<ExplorerApp />} />
       </Routes>
   );
 }

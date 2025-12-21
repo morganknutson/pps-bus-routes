@@ -2384,12 +2384,12 @@ export function TechPage() {
               </p>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
                 <ul style={{ color: 'var(--text-secondary)', listStyleType: 'none', paddingLeft: 0 }}>
-                  <li style={{ marginBottom: '10px' }}><strong>Schools Index:</strong> <code>/bus-route-explorer/schools</code></li>
-                  <li style={{ marginBottom: '10px' }}><strong>Selected School:</strong> <code>/bus-route-explorer/{'{schoolId}'}</code></li>
-                  <li style={{ marginBottom: '10px' }}><strong>Routes View:</strong> <code>/bus-route-explorer/{'{schoolId}'}/routes</code></li>
-                  <li style={{ marginBottom: '10px' }}><strong>Direction Filter:</strong> <code>/bus-route-explorer/{'{schoolId}'}/routes/morning</code></li>
-                  <li style={{ marginBottom: '10px' }}><strong>Selected Routes:</strong> <code>/bus-route-explorer/{'{schoolId}'}/routes/morning/238,254</code></li>
-                  <li><strong>Focused Stop:</strong> <code>/bus-route-explorer/{'{schoolId}'}/routes/morning/238,254/254-1</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Schools Index:</strong> <code>/explore</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Selected School:</strong> <code>/{'{schoolId}'}</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Routes View:</strong> <code>/{'{schoolId}'}/routes</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Direction Filter:</strong> <code>/{'{schoolId}'}/routes/morning</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Selected Routes:</strong> <code>/{'{schoolId}'}/routes/morning/238,254</code></li>
+                  <li><strong>Focused Stop:</strong> <code>/{'{schoolId}'}/routes/morning/238,254/254-1</code></li>
                 </ul>
               </div>
             </div>

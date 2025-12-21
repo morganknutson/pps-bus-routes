@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { autocompleteAddress, geocodeAddress } from '../services/api';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { analyticsService } from '../services/analytics';
 import { formatStreetName } from '../utils/formatAddress';
-import { calculateDistance } from '../utils/coordinates';
+import { findClosestStop } from '../utils/findClosestStop';
+import { formatDistance } from '../utils/distance';
 import { Route, Stop } from '../types';
 
 interface AutocompleteSuggestion {
@@ -37,45 +38,27 @@ export function AddressInput() {
   const handleFindClosestStop = () => {
     if (!homeAddress || !routes || routes.length === 0) return;
 
-    let closestStop: Stop | null = null;
-    let closestRoute: Route | null = null;
-    let minDistance = Infinity;
-    let closestStopNumber = -1;
-
     console.log(`[AddressInput] Finding closest stop for school ${selectedSchoolId} among ${routes.length} routes`);
 
-    routes.forEach(route => {
-      route.stops.forEach((stop, index) => {
-        if (stop.coordinates) {
-          const distance = calculateDistance(homeAddress.coordinates, stop.coordinates);
-          if (distance < minDistance) {
-            minDistance = distance;
-            closestStop = stop;
-            closestRoute = route;
-            closestStopNumber = index + 1;
-          }
-        }
-      });
-    });
+    const result = findClosestStop(homeAddress, routes);
 
-    if (closestStop && closestRoute) {
-      const stop = closestStop as Stop;
-      const route = closestRoute as Route;
-      console.log(`[AddressInput] Found closest stop: ${stop.address} at ${minDistance.toFixed(1)}m`);
+    if (result) {
+      const { route, stop, stopNumber, distance } = result;
+      console.log(`[AddressInput] Found closest stop: ${stop.address} at ${formatDistance(distance, true)}`);
       
       // Update direction filter if the route has a specific direction
       if (route.direction) {
         setDirectionFilter(route.direction);
       }
       
-      selectStop(route, stop, closestStopNumber);
+      selectStop(route, stop, stopNumber);
       
       // Automatically switch to routes tab to show the found stop
       window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
       
       analyticsService.trackAction('find_my_stop', {
         schoolId: selectedSchoolId,
-        distance: minDistance,
+        distance,
         stopAddress: stop.address
       });
     } else {

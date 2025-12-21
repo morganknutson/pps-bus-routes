@@ -44,7 +44,7 @@ async function generateSitemap() {
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>${BASE_URL}/bus-route-explorer</loc>
+    <loc>${BASE_URL}/explore</loc>
     <lastmod>${lastMod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -68,7 +68,7 @@ async function generateSitemap() {
     for (const school of schools) {
       if (school.id) {
         xml += `  <url>
-    <loc>${BASE_URL}/bus-route-explorer/${school.id}</loc>
+    <loc>${BASE_URL}/${school.id}</loc>
     <lastmod>${lastMod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

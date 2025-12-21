@@ -187,15 +187,16 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
 
   // Zoom to home address when triggered from address bar - REMOVED, now handled in FitMapBounds
 
-  // Component to zoom to selected stop or school
+    // Component to zoom to selected stop or school
   // This component uses useMap() to access the map instance inside MapContainer
   function FitMapBounds() {
     const map = useMap();
     const prevStopIdRef = useRef<string | null>(null);
     const prevSchoolIdRef = useRef<string | null>(null);
+    const prevRouteIdsRef = useRef<string>('');
     const hasZoomedRef = useRef<boolean>(false);
     const mapReadyRef = useRef<boolean>(false);
-    const { schools, selectedSchoolId, selectedStop, homeAddress, shouldZoomToHomeAddress, clearZoomToHomeAddress } = useStore();
+    const { schools, selectedSchoolId, selectedStop, homeAddress, shouldZoomToHomeAddress, clearZoomToHomeAddress, isLoading } = useStore();
     
     // Mark map as ready when it's initialized
     useEffect(() => {
@@ -205,14 +206,144 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         });
       }
     }, [map]);
+
+    const selectedRoutesKey = selectedRoutes.map(r => r.id).sort().join(',');
+
+    // CASE 0: Explicit request to zoom to home (e.g. from address bar or on load)
+    // This is handled in its own effect to ensure it responds to isLoading changes
+    useEffect(() => {
+      if (!map || !mapReadyRef.current || !shouldZoomToHomeAddress || !homeAddress) {
+        return;
+      }
+
+      if (!validateLngLat(homeAddress.coordinates)) {
+        console.warn('[FitMapBounds] Invalid home coordinates for zoom');
+        if (clearZoomToHomeAddress) clearZoomToHomeAddress();
+        return;
+      }
+
+      // If routes are still loading, wait for them to finish before zooming 
+      // so we can correctly fit both home and routes
+      if (isLoading && selectedRoutes.length === 0) {
+        console.log('[FitMapBounds] ⏳ Routes are loading, waiting to zoom to home...');
+        return;
+      }
+
+      const homePosition = toLeafletPosition(homeAddress.coordinates);
+      const allCoords: [number, number][] = [homePosition];
+      
+      if (selectedRoutes.length > 0) {
+        selectedRoutes.forEach(route => {
+          route.stops.forEach(stop => {
+            if (stop.coordinates && validateLngLat(stop.coordinates)) {
+              allCoords.push(toLeafletPosition(stop.coordinates));
+            }
+          });
+        });
+      }
+
+      const timer = setTimeout(() => {
+        try {
+          if (allCoords.length > 1) {
+            // Zoom to fit both home and routes
+            const bounds = L.latLngBounds(allCoords);
+            console.log('[FitMapBounds] 🏠🗺️ Fitting bounds to home and selected routes');
+            map.fitBounds(bounds, { 
+              padding: [100, 100], 
+              animate: true,
+              duration: 0.6
+            });
+          } else {
+            // Just zoom to home if no routes
+            console.log('[FitMapBounds] 🏠 Centering map on home address');
+            map.setView(homePosition, 16, { 
+              animate: true,
+              duration: 0.6
+            });
+          }
+          
+          if (clearZoomToHomeAddress) {
+            clearZoomToHomeAddress();
+          }
+          hasZoomedRef.current = true;
+        } catch (error) {
+          console.error('[FitMapBounds] Error zooming to home:', error);
+          if (clearZoomToHomeAddress) {
+            clearZoomToHomeAddress();
+          }
+        }
+      }, 150);
+
+      return () => clearTimeout(timer);
+    }, [map, mapReadyRef.current, shouldZoomToHomeAddress, homeAddress, isLoading, selectedRoutesKey, clearZoomToHomeAddress]);
     
     useEffect(() => {
       if (!map || !mapReadyRef.current) {
         return;
       }
 
+      // If school info popup is open, don't auto-zoom to routes or school
+      // This allows the manual zoom from clicking the school pin to stick
+      if (showSchoolInfoPopup) {
+        console.log('[FitMapBounds] ℹ️ School info popup is open, skipping auto-zoom');
+        return;
+      }
+
+      // CASE 1: Stop is selected - priority zoom
+      // We prioritize zooming to a specific stop if one is selected
+      if (selectedStop && selectedStop.stop.coordinates) {
+        const currentStopId = `${selectedStop.route.id}-${selectedStop.stop.id}`;
+        const isNewStop = prevStopIdRef.current !== currentStopId;
+        
+        if (!isNewStop && hasZoomedRef.current) {
+          return;
+        }
+
+        if (!validateLngLat(selectedStop.stop.coordinates)) {
+          return;
+        }
+
+        const stopPosition = toLeafletPosition(selectedStop.stop.coordinates);
+        
+        if (isNewStop) {
+          hasZoomedRef.current = false;
+        }
+        
+        const timer = setTimeout(() => {
+          try {
+            // Calculate a target center that is shifted so the pin is 100px above the center
+            const zoom = 16;
+            
+            // Get icon dimensions to account for horizontal offset (full width of the pin)
+            const dimensions = getNumberedIconDimensions(selectedStop.stopNumber, selectedStop.stop.time, true);
+            
+            const targetPoint = map.project(stopPosition, zoom).add([dimensions.centerShiftX, 100]);
+            const targetLatLng = map.unproject(targetPoint, zoom);
+
+            console.log('[FitMapBounds] 🎯 Centering map on stop:', selectedStop.stop.address);
+            map.setView(targetLatLng, zoom, { 
+              animate: true,
+              duration: 0.6
+            });
+
+            hasZoomedRef.current = true;
+            prevStopIdRef.current = currentStopId;
+            prevSchoolIdRef.current = selectedSchoolId; 
+            
+            // Clear home zoom flag since stop zoom takes precedence
+            if (shouldZoomToHomeAddress && clearZoomToHomeAddress) {
+              clearZoomToHomeAddress();
+            }
+          } catch (error) {
+            console.error('[MapView] Error zooming to stop:', error);
+          }
+        }, 150);
+        
+        return () => clearTimeout(timer);
+      } 
+
       // CASE 0: Explicit request to zoom to home (e.g. from address bar or on load)
-      // This has high priority and can combine with selected routes
+      // This has high priority if no specific stop is selected
       if (shouldZoomToHomeAddress && homeAddress && validateLngLat(homeAddress.coordinates)) {
         // If routes are still loading, wait for them to finish before zooming 
         // so we can correctly fit both home and routes
@@ -257,6 +388,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             if (clearZoomToHomeAddress) {
               clearZoomToHomeAddress();
             }
+            hasZoomedRef.current = true;
           } catch (error) {
             console.error('[FitMapBounds] Error zooming to home:', error);
             if (clearZoomToHomeAddress) {
@@ -268,54 +400,15 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         return () => clearTimeout(timer);
       }
       
-      // CASE 1: Stop is selected - priority zoom
-      if (selectedStop && selectedStop.stop.coordinates) {
-        const currentStopId = `${selectedStop.route.id}-${selectedStop.stop.id}`;
-        const isNewStop = prevStopIdRef.current !== currentStopId;
-        
-        if (!isNewStop && hasZoomedRef.current) {
-          return;
-        }
-
-        if (!validateLngLat(selectedStop.stop.coordinates)) {
-          return;
-        }
-
-        const stopPosition = toLeafletPosition(selectedStop.stop.coordinates);
-        
-        if (isNewStop) {
-          hasZoomedRef.current = false;
-        }
-        
-        const timer = setTimeout(() => {
-          try {
-            // Calculate a target center that is shifted so the pin is 100px above the center
-            const zoom = 16;
-            
-            // Get icon dimensions to account for horizontal offset (full width of the pin)
-            const dimensions = getNumberedIconDimensions(selectedStop.stopNumber, selectedStop.stop.time, true);
-            
-            const targetPoint = map.project(stopPosition, zoom).add([dimensions.centerShiftX, 100]);
-            const targetLatLng = map.unproject(targetPoint, zoom);
-
-            map.setView(targetLatLng, zoom, { 
-              animate: true,
-              duration: 0.6
-            });
-
-            hasZoomedRef.current = true;
-            prevStopIdRef.current = currentStopId;
-            prevSchoolIdRef.current = selectedSchoolId; // Update this too
-          } catch (error) {
-            console.error('[MapView] Error zooming to stop:', error);
-          }
-        }, 150);
-        
-        return () => clearTimeout(timer);
-      } 
-      
       // CASE 2: No stop selected, but routes are selected - fit to routes
       if (!selectedStop && selectedRoutes.length > 0) {
+        const currentRouteIds = selectedRoutes.map(r => r.id).sort().join(',');
+        const isNewSelection = prevRouteIdsRef.current !== currentRouteIds;
+        
+        if (!isNewSelection && hasZoomedRef.current) {
+          return;
+        }
+
         const allCoordinates: [number, number][] = [];
         selectedRoutes.forEach(route => {
           route.stops.forEach(stop => {
@@ -327,17 +420,19 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
 
         if (allCoordinates.length > 0) {
           const bounds = L.latLngBounds(allCoordinates);
-          const hasSelectedBefore = prevStopIdRef.current !== null || prevSchoolIdRef.current !== null;
+          const hasSelectedBefore = prevStopIdRef.current !== null || prevSchoolIdRef.current !== null || prevRouteIdsRef.current !== '';
           
           // Use a small delay for zoom out to ensure smooth transition
           const timer = setTimeout(() => {
             try {
-          map.fitBounds(bounds, { 
-            padding: [50, 50], 
-            animate: hasSelectedBefore,
-            duration: 0.6
-          });
-              hasZoomedRef.current = false;
+              console.log('[FitMapBounds] 🗺️ Fitting map bounds to routes');
+              map.fitBounds(bounds, { 
+                padding: [50, 50], 
+                animate: hasSelectedBefore,
+                duration: 0.6
+              });
+              hasZoomedRef.current = true;
+              prevRouteIdsRef.current = currentRouteIds;
             } catch (error) {
               console.error('[FitMapBounds] Error fitting bounds:', error);
             }
@@ -373,14 +468,17 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
               const targetPoint = map.project(schoolPosition, zoom).add([0, 100]);
               const targetLatLng = map.unproject(targetPoint, zoom);
 
+              console.log('[FitMapBounds] 🏫 Centering map on school:', school.name);
               map.setView(targetLatLng, zoom, { 
                 animate: true,
                 duration: 0.6
               });
 
               hasZoomedRef.current = true;
+              // Update refs only when the action is actually occurring
               prevSchoolIdRef.current = selectedSchoolId;
-              prevStopIdRef.current = null; // Clear stop ref
+              prevStopIdRef.current = null;
+              prevRouteIdsRef.current = '';
             } catch (error) {
               console.error('[MapView] Error zooming to school:', error);
             }
@@ -396,31 +494,40 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           const school = schools.find(s => s.id === selectedSchoolId);
           if (school && school.coordinates && (prevStopIdRef.current !== null)) {
             const schoolPosition = toLeafletPosition(school.coordinates);
+
             const timer = setTimeout(() => {
               try {
                 // Same logic as Case 3
                 const zoom = 16;
                 const targetPoint = map.project(schoolPosition, zoom).add([0, 100]);
                 const targetLatLng = map.unproject(targetPoint, zoom);
+                console.log('[FitMapBounds] 🏫 Resetting map to school:', school.name);
                 map.setView(targetLatLng, zoom, { animate: true, duration: 0.6 });
                 hasZoomedRef.current = true;
+                
+                // Update refs inside timer
+                prevStopIdRef.current = null;
+                prevRouteIdsRef.current = '';
               } catch (error) {
                 console.error('[FitMapBounds] Error resetting to school:', error);
               }
             }, 100);
-            prevStopIdRef.current = null;
             return () => clearTimeout(timer);
           }
         }
         
         // Final fallback - if nothing is selected and we were previously zoomed in
-        if (prevStopIdRef.current !== null || prevSchoolIdRef.current !== null) {
+        if (prevStopIdRef.current !== null || prevSchoolIdRef.current !== null || prevRouteIdsRef.current !== '') {
+          // It's safe to clear these immediately in the fallback case as there's no animation to wait for
           prevStopIdRef.current = null;
           prevSchoolIdRef.current = null;
+          prevRouteIdsRef.current = '';
           hasZoomedRef.current = false;
         }
       }
-    }, [map, selectedStop?.route.id, selectedStop?.stop.id, selectedSchoolId, schools.length, selectedRoutes.length]);
+    }, [map, selectedStop?.route.id, selectedStop?.stop.id, selectedSchoolId, schools.length, selectedRoutesKey, showSchoolInfoPopup]);
+
+
     
     return null;
   }
@@ -465,6 +572,8 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     return snappedGeometry;
   };
 
+  const lastGeometryFetchIdRef = useRef<{ [routeId: string]: number }>({});
+
   // Function to recalculate route geometry
   const recalculateRouteGeometry = async (routeId: string) => {
     const route = routes.find(r => r.id === routeId);
@@ -490,9 +599,13 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       return;
     }
 
+    // Increment and capture fetch ID to handle race conditions
+    const fetchId = (lastGeometryFetchIdRef.current[routeId] || 0) + 1;
+    lastGeometryFetchIdRef.current[routeId] = fetchId;
+
     // Mark as loading
     setRouteGeometries(prev => ({ ...prev, [routeId]: null }));
-    console.log(`[MapView] 🗺️  Fetching route geometry for ${route.name} (${stopsWithCoords.length} stops)`);
+    console.log(`[MapView] 🗺️  Fetching route geometry for ${route.name} (${stopsWithCoords.length} stops), fetchId: ${fetchId}`);
 
     try {
       // Convert stops to [lng, lat] format for routing service
@@ -507,6 +620,12 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       // Fetch route following streets
       const routeCoordinates = await fetchRouteForStops(stopCoordinates);
       
+      // Only apply if this is still the latest fetch for this route
+      if (lastGeometryFetchIdRef.current[routeId] !== fetchId) {
+        console.log(`[MapView] 🛑 Stale geometry fetch for ${route.name}, ignoring`);
+        return;
+      }
+
       if (routeCoordinates && routeCoordinates.length > 0) {
         console.log(`[MapView] ✅ Route geometry fetched for ${route.name}: ${routeCoordinates.length} points`);
         // Snap geometry endpoints to school stop coordinates
@@ -539,6 +658,9 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         throw new Error('Route calculation returned empty coordinates');
       }
     } catch (error) {
+      // Only apply if this is still the latest fetch
+      if (lastGeometryFetchIdRef.current[routeId] !== fetchId) return;
+
       console.error(`[MapView] ❌ Error fetching route for ${route.name}:`, error);
         // Fallback to straight line
         const fallbackCoordinates = stopsWithCoords.map(stop => {
