@@ -16,6 +16,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { Route, Stop } from '../types';
 import { SchoolInfoTooltip } from './SchoolInfoTooltip';
 import { StopInfoTooltip } from './StopInfoTooltip';
+import { MapInfoPanel } from './MapInfoPanel';
 import 'leaflet/dist/leaflet.css';
 
 const homeIcon = createHomeIcon();
@@ -75,6 +76,19 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const [loadingStreetPins, setLoadingStreetPins] = useState<boolean>(false);
   const [showSchoolInfoPopup, setShowSchoolInfoPopup] = useState<boolean>(false);
 
+  // Get selected routes, filtered by direction
+  const selectedRoutes = routes.filter(route => {
+    if (!route.isSelected) return false;
+    if (directionFilter === 'Both') return true;
+    // If route has no direction (null), show it for any filter
+    if (!route.direction) return true;
+    return route.direction === directionFilter;
+  });
+
+  // Determine what to show in the info panel
+  const activeSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
+  const showNoRoutesMessage = !!activeSchool && !selectedStop && selectedRoutes.length === 0 && !showSchoolInfoPopup;
+
   // Handle map resizing when sidebar changes
   useEffect(() => {
     if (!containerRef.current || !mapRef.current) return;
@@ -96,15 +110,6 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   useEffect(() => {
     setShowSchoolInfoPopup(false);
   }, [selectedSchoolId]);
-
-  // Get selected routes, filtered by direction
-  const selectedRoutes = routes.filter(route => {
-    if (!route.isSelected) return false;
-    if (directionFilter === 'Both') return true;
-    // If route has no direction (null), show it for any filter
-    if (!route.direction) return true;
-    return route.direction === directionFilter;
-  });
 
   // Zoom to home address only when it's first added or coordinates change
   useEffect(() => {
@@ -892,6 +897,8 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
               click: (e) => {
                 const isOpening = !showSchoolInfoPopup;
                 setShowSchoolInfoPopup(isOpening);
+                // Clear stop selection if we're showing school info
+                if (isOpening) clearSelectedStop();
                 
                 if (isOpening && e.target && e.target._map) {
                   const map = e.target._map;
@@ -910,23 +917,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
               }
             }}
             zIndexOffset={1000}
-          >
-            {(showNoRoutesMessage || showSchoolInfoPopup) && (
-              <Tooltip 
-                permanent 
-                direction="bottom" 
-                offset={[0, 30]}
-                className="no-routes-tooltip"
-                opacity={1}
-              >
-              <SchoolInfoTooltip 
-                school={school} 
-                onClose={() => setShowSchoolInfoPopup(false)}
-                message={showSchoolInfoPopup ? undefined : `Select a route to view stops for ${school.name}`}
-              />
-              </Tooltip>
-            )}
-          </Marker>
+          />
         );
       })()}
 
@@ -1070,7 +1061,10 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
               draggable={editingMode}
               zIndexOffset={isSelected ? 1000 : 0}
               eventHandlers={{
-                click: () => selectStop(route, stop, stopNumber),
+                click: () => {
+                  selectStop(route, stop, stopNumber);
+                  setShowSchoolInfoPopup(false); // Clear school info if stop is selected
+                },
                 ...(editingMode ? {
                   dragend: async (e) => {
                     const marker = e.target;
@@ -1105,38 +1099,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                   },
                 } : {}),
               }}
-            >
-              {isSelected && (() => {
-                const dims = getNumberedIconDimensions(stopNumber, stop.time, true);
-                return (
-                  <Tooltip 
-                    permanent 
-                    direction="bottom" 
-                    offset={[dims.centerShiftX, dims.bottomGapY]}
-                    className="stop-info-tooltip"
-                    opacity={1}
-                  >
-                    <StopInfoTooltip 
-                      route={route}
-                      stop={stop}
-                      stopNumber={stopNumber}
-                      onClose={clearSelectedStop}
-                      enableStreetHighlighting={enableStreetHighlighting}
-                      highlightedStreetName={highlightedStreet?.name}
-                      loadingStreet={loadingStreet || undefined}
-                      streetError={streetError || undefined}
-                      onStreetClick={handleStreetClick}
-                      enableStreetPins={enableStreetPins}
-                      loadingStreetPins={loadingStreetPins}
-                      onDropStreetPins={handleDropStreetPins}
-                      editingMode={editingMode}
-                      undoHistoryCount={undoHistory.filter(step => step.routeId === route.id && step.stopId === stop.id).length}
-                      onUndo={handleUndo}
-                    />
-                  </Tooltip>
-                );
-              })()}
-            </Marker>
+            />
           );
         });
       })()}
@@ -1172,6 +1135,42 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       })}
       </MapContainer>
       
+      {/* Map Info Panel (Bottom sheet on mobile, anchored bottom on desktop) */}
+      <MapInfoPanel 
+        isOpen={!!selectedStop || showSchoolInfoPopup || showNoRoutesMessage} 
+        onClose={() => {
+          if (selectedStop) clearSelectedStop();
+          if (showSchoolInfoPopup) setShowSchoolInfoPopup(false);
+          // No routes message doesn't have an explicit close, but we can clear school selection or just hide it
+        }}
+      >
+        {selectedStop ? (
+          <StopInfoTooltip 
+            route={selectedStop.route}
+            stop={selectedStop.stop}
+            stopNumber={selectedStop.stopNumber}
+            onClose={clearSelectedStop}
+            enableStreetHighlighting={enableStreetHighlighting}
+            highlightedStreetName={highlightedStreet?.name}
+            loadingStreet={loadingStreet || undefined}
+            streetError={streetError || undefined}
+            onStreetClick={handleStreetClick}
+            enableStreetPins={enableStreetPins}
+            loadingStreetPins={loadingStreetPins}
+            onDropStreetPins={handleDropStreetPins}
+            editingMode={editingMode}
+            undoHistoryCount={undoHistory.filter(step => step.routeId === selectedStop.route.id && step.stopId === selectedStop.stop.id).length}
+            onUndo={handleUndo}
+          />
+        ) : (showSchoolInfoPopup || showNoRoutesMessage) && activeSchool ? (
+          <SchoolInfoTooltip 
+            school={activeSchool} 
+            onClose={showSchoolInfoPopup ? () => setShowSchoolInfoPopup(false) : undefined}
+            message={showNoRoutesMessage ? `Select a route to view stops for ${activeSchool.name}` : undefined}
+          />
+        ) : null}
+      </MapInfoPanel>
+
       {/* Loading spinner animation */}
       <style>{`
         @keyframes spin {

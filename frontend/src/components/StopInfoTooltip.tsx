@@ -3,6 +3,7 @@ import { Route, Stop } from '../types';
 import { formatStreetName, extractStreetNames } from '../utils/formatAddress';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatEffectiveDate } from '../utils/dateUtils';
+import { useIsMobile } from '../hooks/useMediaQuery';
 
 interface StopInfoTooltipProps {
   route: Route;
@@ -85,6 +86,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
   undoHistoryCount = 0,
   onUndo,
 }) => {
+  const isMobile = useIsMobile();
   const [copied, setCopied] = useState(false);
   const streets = extractStreetNames(stop.address);
   const formattedAddress = formatStreetName(stop.address);
@@ -98,14 +100,15 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
 
   return (
     <div style={{ 
-      minWidth: '280px', 
-      maxWidth: '350px', 
+      minWidth: isMobile ? 'auto' : '280px', 
+      maxWidth: isMobile ? 'none' : '350px', 
+      width: isMobile ? '100%' : 'auto',
       backgroundColor: 'var(--bg-primary)',
       color: 'var(--text-primary)',
-      borderRadius: '12px',
+      borderRadius: isMobile ? '0' : '12px',
       overflow: 'hidden',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-      border: '1px solid var(--border-color)',
+      boxShadow: isMobile ? 'none' : '0 4px 20px rgba(0,0,0,0.15)',
+      border: isMobile ? 'none' : '1px solid var(--border-color)',
       pointerEvents: 'auto',
     }}>
       {/* Header with Route Info */}
@@ -113,9 +116,10 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'flex-start', 
-        padding: '12px 16px',
+        padding: isMobile ? '24px 2rem 12px 2rem' : '12px 16px',
         borderBottom: '1px solid var(--border-color)',
         backgroundColor: 'var(--bg-secondary)',
+        position: 'relative',
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
           <span style={{ fontWeight: '700', fontSize: '15px' }}>
@@ -142,25 +146,30 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
           style={{
             background: 'none',
             border: 'none',
-            fontSize: '14px',
+            fontSize: '24px',
             cursor: 'pointer',
             color: 'var(--text-tertiary)',
-            padding: '2px',
+            padding: '4px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            position: 'absolute',
+            top: isMobile ? '-3px' : '8px',
+            right: isMobile ? '22px' : '18px',
             transition: 'color 0.2s ease',
-            marginTop: '2px',
+            zIndex: 10,
+            fontWeight: 200,
+            lineHeight: 1
           }}
           onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
           onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}
         >
-          <i className="fas fa-times"></i>
+          ×
         </button>
       </div>
 
       {/* Main Content */}
-      <div style={{ padding: '20px 16px' }}>
+      <div style={{ padding: isMobile ? '20px 2rem' : '20px 16px' }}>
         {/* Details Grid */}
         <div style={{ display: 'grid', gap: '1rem' }}>
           {/* Address & Neighborhood */}

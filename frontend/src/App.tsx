@@ -12,6 +12,7 @@ import { SchoolList } from './components/SchoolList';
 import { TabBar } from './components/TabBar';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
+import { MapInfoPanel } from './components/MapInfoPanel';
 import { DarkModeTileLayer } from './components/DarkModeTileLayer';
 import { SEO } from './components/SEO';
 import { useStore } from './store/useStore';
@@ -133,31 +134,32 @@ function SchoolListMapView({
                 click: () => onSelectSchool(isSelected ? null : school.id)
               }}
               zIndexOffset={isSelected ? 1000 : 0}
-            >
-              {isSelected && (
-                <Tooltip 
-                  permanent 
-                  direction="bottom" 
-                  offset={[0, 30]}
-                  className="school-info-tooltip"
-                  opacity={1}
-                >
-                          <SchoolInfoTooltip 
-                            school={school} 
-                            showRoutesButton={true}
-                            onClose={() => onSelectSchool(null)}
-                            onViewRoutes={() => {
-                      useStore.getState().setSelectedSchool(school.id);
-                      // This event is caught in ExplorerApp/AdminApp to change the tab
-                      window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
-                    }}
-                  />
-                </Tooltip>
-              )}
-            </Marker>
+            />
           );
         })}
       </MapContainer>
+
+      <MapInfoPanel 
+        isOpen={!!selectedSchoolId} 
+        onClose={() => onSelectSchool(null)}
+      >
+        {selectedSchoolId && (() => {
+          const school = schools.find(s => s.id === selectedSchoolId);
+          if (!school) return null;
+          return (
+            <SchoolInfoTooltip 
+              school={school} 
+              showRoutesButton={true}
+              onClose={() => onSelectSchool(null)}
+              onViewRoutes={() => {
+                useStore.getState().setSelectedSchool(school.id);
+                // This event is caught in ExplorerApp/AdminApp to change the tab
+                window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
+              }}
+            />
+          );
+        })()}
+      </MapInfoPanel>
     </div>
   );
 }

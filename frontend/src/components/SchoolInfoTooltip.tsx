@@ -3,6 +3,7 @@ import { School } from '../types';
 import { getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatDate } from '../utils/dateUtils';
+import { useIsMobile } from '../hooks/useMediaQuery';
 
 interface SchoolInfoTooltipProps {
   school: School;
@@ -19,20 +20,22 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
   onClose,
   message
 }) => {
+  const isMobile = useIsMobile();
   const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
   const schoolColor = getSchoolColor(schoolTypes);
 
   if (message) {
     return (
       <div style={{ 
-        minWidth: '200px', 
-        maxWidth: '300px', 
+        minWidth: isMobile ? 'auto' : '200px', 
+        maxWidth: isMobile ? 'none' : '300px', 
+        width: isMobile ? '100%' : 'auto',
         fontSize: '13px',
         backgroundColor: 'var(--bg-primary)',
         color: 'var(--text-primary)',
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px var(--shadow-hover)',
-        border: '1px solid var(--border-color)',
+        borderRadius: isMobile ? '0' : '12px',
+        boxShadow: isMobile ? 'none' : '0 4px 12px var(--shadow-hover)',
+        border: isMobile ? 'none' : '1px solid var(--border-color)',
         padding: '0.5rem 1rem',
         pointerEvents: 'auto', // Allow clicks inside tooltip
       }}>
@@ -40,7 +43,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
           display: 'flex',
           alignItems: 'center',
           gap: '0.75rem',
-          minWidth: '200px',
+          minWidth: isMobile ? 'auto' : '200px',
         }}>
           <div style={{
             width: '32px',
@@ -69,20 +72,21 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
 
   return (
     <div style={{ 
-      minWidth: '280px', 
-      maxWidth: '320px', 
+      minWidth: isMobile ? 'auto' : '280px', 
+      maxWidth: isMobile ? 'none' : '320px', 
+      width: isMobile ? '100%' : 'auto',
       backgroundColor: 'var(--bg-primary)',
       color: 'var(--text-primary)',
-      borderRadius: '16px',
+      borderRadius: isMobile ? '0' : '16px',
       overflow: 'hidden',
-      boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
-      border: '1px solid var(--border-color)',
+      boxShadow: isMobile ? 'none' : '0 10px 25px rgba(0, 0, 0, 0.2)',
+      border: isMobile ? 'none' : '1px solid var(--border-color)',
       pointerEvents: 'auto',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
       {/* Header with School Name & Type */}
       <div style={{ 
-        padding: '12px 1.25rem',
+        padding: isMobile ? '24px 2rem 12px 2rem' : '12px 1.25rem',
         backgroundColor: 'var(--bg-secondary)', 
         borderBottom: '1px solid var(--border-color)',
         position: 'relative',
@@ -130,20 +134,25 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               justifyContent: 'center',
               color: 'var(--text-tertiary)',
               cursor: 'pointer',
-              fontSize: '14px',
-              padding: '2px',
-              marginTop: '2px',
-              transition: 'color 0.2s ease'
+              fontSize: '24px',
+              padding: '4px',
+              position: 'absolute',
+              top: isMobile ? '-3px' : '8px',
+              right: isMobile ? '22px' : '18px',
+              transition: 'color 0.2s ease',
+              zIndex: 10,
+              fontWeight: 200,
+              lineHeight: 1
             }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
             onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}
           >
-            <i className="fas fa-times"></i>
+            ×
           </button>
         )}
       </div>
 
-      <div style={{ padding: '1.25rem' }}>
+      <div style={{ padding: isMobile ? '1.5rem 2rem' : '1.25rem' }}>
         {/* Details Grid */}
         <div style={{ display: 'grid', gap: '1rem' }}>
           {/* Neighborhood & Address */}

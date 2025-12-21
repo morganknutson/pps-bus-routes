@@ -110,6 +110,11 @@ class GeocodingService {
    * Strips parenthetical content, expands abbreviations, and removes direction brackets
    */
   formatAddressForGeocoding(address) {
+    if (!address) return '';
+    
+    // Keep a copy of original to fall back to if cleaning removes everything
+    const originalAddress = address;
+    
     // First remove parenthetical content (descriptive notes, not part of address)
     // e.g., "(wee Village Dc)" should be removed to prevent misinterpretation
     // This must be done BEFORE expansion to avoid processing parenthetical content
@@ -123,6 +128,20 @@ class GeocodingService {
       .replace(/\s*\[([NWES]+)\]\s*/g, '') // Remove direction brackets
       .replace(/\s+/g, ' ') // Normalize whitespace
       .trim();
+      
+    // If the cleaned address is empty or too short, it likely means the 
+    // important part was in parentheses or brackets (e.g., "(chapman School) [E]")
+    if (!cleaned || cleaned.length < 2) {
+      // Try again by just removing the brackets/parentheses but keeping content
+      cleaned = originalAddress
+        .replace(/[()\[\]]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+        
+      // Also expand this fallback version
+      cleaned = expandAddressForGeocoding(cleaned);
+    }
+    
     return cleaned;
   }
 
