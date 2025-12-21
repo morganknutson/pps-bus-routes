@@ -169,7 +169,7 @@ export function useUrlState({
         if (school) {
           setSelectedSchool(school.id);
         }
-      } else if (!urlState.schoolId && previousUrlState.schoolId && urlChanged) {
+      } else if (!urlState.schoolId && selectedSchoolId) {
         setSelectedSchool(null);
       }
 

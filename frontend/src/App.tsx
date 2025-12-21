@@ -296,19 +296,7 @@ function ExplorerApp() {
   // Parse URL to determine initial active tab
   const urlState = parseUrlPath(location.pathname, '/bus-route-explorer');
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
-    // Check URL first, then localStorage, then default
-    if (urlState.show) {
-      return urlState.show;
-    }
-    // Check localStorage directly for initial render (before store hydration)
-    if (typeof window !== 'undefined') {
-      const savedSchoolId = localStorage.getItem('selectedSchoolId');
-      const savedAddress = localStorage.getItem('homeAddress');
-      if (savedSchoolId && savedAddress) {
-        return 'routes';
-      }
-    }
-    return 'schools';
+    return urlState.show || 'schools';
   });
 
   // Get selected routes, filtered by direction
@@ -402,17 +390,35 @@ function ExplorerApp() {
     const isInitialMount = prevSchoolIdRef.current === null;
     const schoolChanged = prevSchoolIdRef.current !== selectedSchoolId;
     
-    // On initial mount with existing routes from navigation, skip reload
-    if (isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
-      console.log('[ExplorerApp] Routes already loaded (from navigation), skipping initial reload');
-      prevSchoolIdRef.current = selectedSchoolId;
+    // If school hasn't changed and we have valid routes, check if we need to update selection
+    if (!schoolChanged && !isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
+      console.log('[ExplorerApp] School unchanged and routes already loaded');
+      
+      // If we are on routes tab and nothing is selected, apply the sync
+      if (activeTab === 'routes' && !routes.some(r => r.isSelected)) {
+        console.log('[ExplorerApp] Tab changed to routes, applying default selection');
+        const syncedRoutes = applyUrlStateToRoutes(routes, {
+          ...parseUrlPath(window.location.pathname, '/bus-route-explorer'),
+          show: 'routes',
+          schoolId: selectedSchoolId
+        }, directionFilter);
+        setRoutes(syncedRoutes);
+      }
+      
       setLoading(false);
       return;
     }
 
-    // If school hasn't changed and we have valid routes, skip reload
-    if (!schoolChanged && !isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
-      console.log('[ExplorerApp] School unchanged and routes already loaded, skipping reload');
+    // On initial mount with existing routes from navigation, apply selection
+    if (isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
+      console.log('[ExplorerApp] Routes already loaded (from navigation), applying selection');
+      const syncedRoutes = applyUrlStateToRoutes(routes, {
+        ...parseUrlPath(window.location.pathname, '/bus-route-explorer'),
+        show: activeTab,
+        schoolId: selectedSchoolId
+      }, directionFilter);
+      setRoutes(syncedRoutes);
+      prevSchoolIdRef.current = selectedSchoolId;
       setLoading(false);
       return;
     }
@@ -426,9 +432,13 @@ function ExplorerApp() {
       try {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
         
-        // Pre-apply URL state to avoid UI flicker
-        const urlState = parseUrlPath(window.location.pathname, '/bus-route-explorer');
-        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, urlState, directionFilter);
+        // Pre-apply state to avoid UI flicker by using current activeTab/schoolId
+        // This is more reliable than parsing from URL which might be debounced
+        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, {
+          ...parseUrlPath(window.location.pathname, '/bus-route-explorer'),
+          show: activeTab,
+          schoolId: selectedSchoolId
+        }, directionFilter);
         
         console.log('[ExplorerApp] Loaded', loadedRoutes.length, 'routes');
         setRoutes(syncedRoutes);
@@ -444,7 +454,7 @@ function ExplorerApp() {
 
     loadRoutes();
     prevSchoolIdRef.current = selectedSchoolId;
-  }, [selectedSchoolId, setRoutes, setLoading, routes.length]); // Removed activeTab dependency
+  }, [selectedSchoolId, setRoutes, setLoading, routes.length, activeTab]); // Added activeTab dependency
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -833,6 +843,31 @@ function AdminApp() {
       return;
     }
 
+    // Optimization: if routes already loaded and school hasn't changed, just update selection if needed
+    if (routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
+      const currentUrlState = parseUrlPath(window.location.pathname, '/admin');
+      const schoolInUrl = currentUrlState.schoolId?.toLowerCase();
+      const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
+      
+      if (schoolMatches) {
+        console.log('[AdminApp] Routes already loaded and school matches URL');
+        
+        // If we are on routes tab and nothing is selected, apply the sync
+        if (activeTab === 'routes' && !routes.some(r => r.isSelected)) {
+          console.log('[AdminApp] Tab changed to routes, applying default selection');
+          const syncedRoutes = applyUrlStateToRoutes(routes, {
+            ...currentUrlState,
+            show: 'routes',
+            schoolId: selectedSchoolId
+          }, directionFilter);
+          setRoutes(syncedRoutes);
+        }
+        
+        setLoading(false);
+        return;
+      }
+    }
+
     console.log('[AdminApp] Loading routes for school:', selectedSchoolId);
     const loadRoutes = async () => {
       setLoading(true);
@@ -840,9 +875,13 @@ function AdminApp() {
       try {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
         
-        // Pre-apply URL state to avoid UI flicker
-        const urlState = parseUrlPath(window.location.pathname, '/admin');
-        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, urlState, directionFilter);
+        // Pre-apply state to avoid UI flicker by using current activeTab/schoolId
+        // This is more reliable than parsing from URL which might be debounced
+        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, {
+          ...parseUrlPath(window.location.pathname, '/admin'),
+          show: activeTab,
+          schoolId: selectedSchoolId
+        }, directionFilter);
         
         console.log('[AdminApp] Loaded', loadedRoutes.length, 'routes');
         setRoutes(syncedRoutes);
@@ -857,7 +896,7 @@ function AdminApp() {
     };
 
     loadRoutes();
-  }, [selectedSchoolId, setRoutes, setLoading]); // Removed activeTab dependency
+  }, [selectedSchoolId, setRoutes, setLoading, activeTab]); // Added activeTab dependency
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {

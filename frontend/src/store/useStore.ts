@@ -405,12 +405,6 @@ if (typeof window !== 'undefined') {
     }
   }
 
-  // Load selected school
-  const savedSchoolId = localStorage.getItem('selectedSchoolId');
-  if (savedSchoolId) {
-    useStore.getState().setSelectedSchool(savedSchoolId);
-  }
-
   // Load lookup address
   const savedLookupAddress = localStorage.getItem('lookupAddress');
   if (savedLookupAddress) {
