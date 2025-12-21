@@ -299,6 +299,14 @@ function ExplorerApp() {
     return urlState.show || 'schools';
   });
 
+  // Initialize school selection from URL on mount to avoid race conditions
+  useEffect(() => {
+    if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
+      console.log('[ExplorerApp] Initializing school from URL on mount:', urlState.schoolId);
+      setSelectedSchool(urlState.schoolId);
+    }
+  }, []);
+
   // Get selected routes, filtered by direction
   const selectedRoutes = useMemo(() => {
     return routes.filter(route => {
@@ -774,6 +782,14 @@ function AdminApp() {
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
     return urlState.show || 'routes';
   });
+
+  // Initialize school selection from URL on mount to avoid race conditions
+  useEffect(() => {
+    if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
+      console.log('[AdminApp] Initializing school from URL on mount:', urlState.schoolId);
+      setSelectedSchool(urlState.schoolId);
+    }
+  }, []);
 
   // Get selected routes, filtered by direction
   const selectedRoutes = useMemo(() => {

@@ -52,6 +52,7 @@ export function useUrlState({
   const lastUrlStateRef = useRef<UrlState>({});
   const previousRoutesRef = useRef<Route[]>([]);
   const isNavigatingRef = useRef(false);
+  const hasSyncedFromUrlRef = useRef(false);
 
   // Cancel any pending URL update
   const cancelPendingUrlUpdate = useCallback(() => {
@@ -63,6 +64,14 @@ export function useUrlState({
 
   // Update URL from current state (debounced)
   const updateUrlFromState = useCallback((immediate = false) => {
+    // CRITICAL: If we haven't finished syncing the initial URL into the store yet,
+    // don't build a new URL from the store's partial state. This prevents 
+    // overwriting complex deep links with truncated versions while data is loading.
+    if (!hasSyncedFromUrlRef.current) {
+      console.log('[useUrlState] Skipping URL update: initial sync from URL in progress');
+      return;
+    }
+
     cancelPendingUrlUpdate();
 
     const performUpdate = () => {
@@ -113,6 +122,8 @@ export function useUrlState({
       const normalizedNewPath = newPath.replace(/\/$/, '') || '/';
 
       if (normalizedNewPath !== currentPath) {
+        // If we are about to navigate, mark that we are in sync or about to be
+        hasSyncedFromUrlRef.current = true;
         console.log(`[useUrlState] ${immediate ? 'Sync' : 'Debounced'} URL update from state:`, normalizedNewPath);
         isNavigatingRef.current = true;
         navigate(newPath, { replace: true });
@@ -139,7 +150,7 @@ export function useUrlState({
     if (isNavigatingRef.current) {
       console.log('[useUrlState] Ignoring URL change: just navigated from state');
       isNavigatingRef.current = false;
-      lastUrlStateRef.current = urlState; // Keep last state in sync
+      hasSyncedFromUrlRef.current = true; // We are definitely in sync now
       return;
     }
 
@@ -149,10 +160,14 @@ export function useUrlState({
     // Check if only direction changed and a stop is selected
     const directionChanged = urlState.direction !== previousUrlState.direction;
     
-    // CRITICAL: We MUST sync if routes just loaded, even if URL didn't change,
-    // to override the store's default "select all" behavior.
     if (!urlChanged && !isFirstRoutesLoad) {
       return;
+    }
+
+    // We are starting a sync from URL, so block any sync TO URL until we are done
+    if (urlChanged || isFirstRoutesLoad) {
+      console.log('[useUrlState] Starting sync from URL, blocking sync back to URL');
+      hasSyncedFromUrlRef.current = false;
     }
 
     console.log('[useUrlState] Syncing state from URL:', location.pathname, urlState, { isFirstRoutesLoad, urlChanged });
@@ -164,12 +179,30 @@ export function useUrlState({
       }
 
       // 1. Sync school selection
-      if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
+      if (urlState.schoolId) {
+        // Try to find the school in our loaded list
         const school = schools.find(s => s.id.toLowerCase() === urlState.schoolId?.toLowerCase());
-        if (school) {
-          setSelectedSchool(school.id);
+        
+        // Determine if we have a mismatch that needs syncing
+        // If we found the school, we want the store to match its official ID
+        // If schools haven't loaded yet, we just want it to match the URL string
+        const hasIdMismatch = school 
+          ? selectedSchoolId?.toLowerCase() !== school.id.toLowerCase()
+          : selectedSchoolId?.toLowerCase() !== urlState.schoolId.toLowerCase();
+
+        if (hasIdMismatch) {
+          if (school) {
+            console.log('[useUrlState] Syncing school from URL (with school list):', school.id);
+            setSelectedSchool(school.id);
+          } else if (schools.length === 0) {
+            // CRITICAL: Trust the URL ID even if schools haven't loaded yet
+            // This prevents the store->URL sync from overwriting the URL with an empty state
+            console.log('[useUrlState] Syncing school from URL (pre-loading schools):', urlState.schoolId);
+            setSelectedSchool(urlState.schoolId);
+          }
         }
       } else if (!urlState.schoolId && selectedSchoolId) {
+        console.log('[useUrlState] URL has no school, clearing selection');
         setSelectedSchool(null);
       }
 
@@ -269,8 +302,19 @@ export function useUrlState({
           clearSelectedStop();
         }
       }
+
+      // Mark as synced if we've processed the URL completely
+      // If there are routes/stops in the URL, we aren't "synced" until routes are loaded
+      const hasRoutesInUrl = !!urlState.routeNames;
+      const routesReady = routes.length > 0;
+      
+      if (!hasRoutesInUrl || routesReady) {
+        console.log('[useUrlState] Sync from URL complete, unblocking sync back to URL');
+        hasSyncedFromUrlRef.current = true;
+      }
     } catch (error) {
       console.error('[useUrlState] Error syncing state from URL:', error);
+      hasSyncedFromUrlRef.current = true; // Unblock on error to avoid being stuck
     }
   }, [location.pathname, basePath, schools, routes, selectedSchoolId, setSelectedSchool, setSelectedRoutes, directionFilter, setDirectionFilter, selectedStop, selectStop, clearSelectedStop, activeTab, setActiveTab]);
 
@@ -281,7 +325,7 @@ export function useUrlState({
     // Otherwise (routes/stops), we debounce to avoid spamming the history.
     
     const currentUrlState = parseUrlPath(window.location.pathname, basePath);
-    const schoolChanged = selectedSchoolId !== currentUrlState.schoolId;
+    const schoolChanged = selectedSchoolId?.toLowerCase() !== currentUrlState.schoolId?.toLowerCase();
     const tabChanged = activeTab !== currentUrlState.show;
     
     if (schoolChanged || tabChanged) {
