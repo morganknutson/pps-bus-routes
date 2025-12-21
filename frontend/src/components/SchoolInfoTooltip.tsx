@@ -108,17 +108,15 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             {school.name}
           </h3>
           <div style={{ 
-            display: 'inline-flex', 
+            display: 'flex', 
             alignItems: 'center', 
             gap: '0.4rem',
-            padding: '2px 8px',
-            backgroundColor: `${schoolColor}15`,
             color: schoolColor,
-            borderRadius: '20px',
             fontSize: '10px',
             fontWeight: '700',
             textTransform: 'uppercase',
-            letterSpacing: '0.02em'
+            letterSpacing: '0.02em',
+            marginTop: '0.2rem'
           }}>
             <i className="fas fa-graduation-cap" style={{ fontSize: '9px' }}></i>
             <span>{schoolTypes.join(' & ')}</span>
@@ -227,7 +225,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         )}
 
         {/* Unified Routes Action Button */}
-        {school.routeCount !== undefined && (
+        {school.routeCount !== undefined && showRoutesButton && onViewRoutes && (
           <button
             onClick={(e) => {
               if (showRoutesButton && onViewRoutes) {
@@ -235,7 +233,6 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
                 onViewRoutes();
               }
             }}
-            disabled={!showRoutesButton || !onViewRoutes}
             style={{ 
               display: 'flex', 
               gap: '0.75rem', 
@@ -244,7 +241,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               borderRadius: '9999px',
               border: isDarkMode ? '1px solid var(--border-color)' : 'none',
               textAlign: 'left',
-              cursor: (showRoutesButton && onViewRoutes) ? 'pointer' : 'default',
+              cursor: 'pointer',
               transition: 'all 0.2s ease',
               width: '100%',
               alignItems: 'center',
@@ -252,18 +249,14 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               boxShadow: isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)'
             }}
             onMouseEnter={(e) => {
-              if (showRoutesButton && onViewRoutes) {
-                e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-secondary)' : '#1a4b7c';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-                e.currentTarget.style.boxShadow = isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '0 4px 12px rgba(19, 58, 96, 0.3)';
-              }
+              e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-secondary)' : '#1a4b7c';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.boxShadow = isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '0 4px 12px rgba(19, 58, 96, 0.3)';
             }}
             onMouseLeave={(e) => {
-              if (showRoutesButton && onViewRoutes) {
-                e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)';
-              }
+              e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)';
             }}
           >
             <div style={{ 
@@ -287,21 +280,19 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               }}>
                 Explore {school.routeCount} {school.routeCount === 1 ? 'Route' : 'Routes'}
               </div>
-              {(showRoutesButton && onViewRoutes) && (
-                <svg 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="1.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  style={{ opacity: 0.6, marginLeft: '0.5rem' }}
-                >
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              )}
+              <svg 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="1.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                style={{ opacity: 0.6, marginLeft: '0.5rem' }}
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
             </div>
           </button>
         )}

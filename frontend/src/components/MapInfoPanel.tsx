@@ -16,7 +16,7 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
     position: 'absolute',
     bottom: '24px',
     right: '24px',
-    zIndex: 1000,
+    zIndex: 999,
     pointerEvents: 'auto',
     animation: 'slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   };
@@ -26,7 +26,7 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
     bottom: 0,
     left: 0,
     right: 0,
-    zIndex: 2000,
+    zIndex: 999,
     backgroundColor: 'var(--bg-secondary)',
     borderTopLeftRadius: '20px',
     borderTopRightRadius: '20px',
@@ -48,7 +48,7 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
             right: 0,
             bottom: 0,
             backgroundColor: 'transparent',
-            zIndex: 1999,
+            zIndex: 998,
             pointerEvents: 'none',
           }}
         />

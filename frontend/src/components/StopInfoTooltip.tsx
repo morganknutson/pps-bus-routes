@@ -43,7 +43,7 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
       <div style={{
         width: '20px',
         height: '20px',
-        backgroundColor: color,
+        backgroundColor: color || '#4ECDC4', // Fallback to brand color if route color is missing
         borderRadius: '50%',
         display: 'flex',
         alignItems: 'center',

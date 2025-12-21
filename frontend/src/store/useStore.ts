@@ -92,13 +92,22 @@ export const useStore = create<Store>((set) => ({
     set((state) => {
       const shouldClearSelectedStop = routesWithColors.length === 0 && state.selectedStop;
       
-      if (shouldClearSelectedStop) {
-        console.log('[useStore] Routes cleared, clearing selected stop');
+      // Update selectedStop's route if it exists and matches one of the new routes
+      // This ensures the selected stop always has the latest route data (including colors)
+      let updatedSelectedStop = state.selectedStop;
+      if (updatedSelectedStop && !shouldClearSelectedStop) {
+        const matchingRoute = routesWithColors.find(r => r.id === updatedSelectedStop!.route.id);
+        if (matchingRoute) {
+          updatedSelectedStop = {
+            ...updatedSelectedStop,
+            route: matchingRoute
+          };
+        }
       }
       
       return {
         routes: routesWithColors,
-        selectedStop: shouldClearSelectedStop ? null : state.selectedStop,
+        selectedStop: shouldClearSelectedStop ? null : updatedSelectedStop,
       };
     });
     
@@ -260,7 +269,24 @@ export const useStore = create<Store>((set) => ({
       };
     }),
 
-  selectStop: (route, stop, stopNumber) => set({ selectedStop: { route, stop, stopNumber } }),
+  selectStop: (route, stop, stopNumber) => set((state) => {
+    // Ensure we use the route object from the store that has the color assigned
+    const routeWithColor = state.routes.find(r => r.id === route.id) || route;
+    
+    // Auto-select the route when a stop is selected so it appears on the map
+    const updatedRoutes = state.routes.map(r => 
+      r.id === route.id ? { ...r, isSelected: true } : r
+    );
+
+    return { 
+      routes: updatedRoutes,
+      selectedStop: { 
+        route: routeWithColor, 
+        stop, 
+        stopNumber 
+      } 
+    };
+  }),
 
   clearSelectedStop: () => set({ selectedStop: null }),
 

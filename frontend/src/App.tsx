@@ -390,16 +390,11 @@ function ExplorerApp() {
     debounceMs: 300,
   });
 
-  // Load routes when school changes (only when in routes tab)
+  // Load routes when school changes
   useEffect(() => {
-    if (!selectedSchoolId || activeTab !== 'routes') {
-      console.log('[ExplorerApp] No school selected or not in routes tab, skipping route load');
-      if (activeTab !== 'routes') {
-        setRoutes([]);
-      } else if (!selectedSchoolId) {
-        // If in routes tab but no school selected, clear routes (RouteList will show empty state)
-        setRoutes([]);
-      }
+    if (!selectedSchoolId) {
+      console.log('[ExplorerApp] No school selected, clearing routes');
+      setRoutes([]);
       return;
     }
 
@@ -449,7 +444,7 @@ function ExplorerApp() {
 
     loadRoutes();
     prevSchoolIdRef.current = selectedSchoolId;
-  }, [selectedSchoolId, activeTab, setRoutes, setLoading, routes.length]); // Include routes.length to detect when routes are cleared
+  }, [selectedSchoolId, setRoutes, setLoading, routes.length]); // Removed activeTab dependency
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -830,13 +825,11 @@ function AdminApp() {
     debounceMs: 300,
   });
 
-  // Load routes when school changes (only when in routes tab)
+  // Load routes when school changes
   useEffect(() => {
-    if (!selectedSchoolId || activeTab !== 'routes') {
-      console.log('[AdminApp] No school selected or not in routes tab, skipping route load');
-      if (activeTab !== 'routes') {
-        setRoutes([]);
-      }
+    if (!selectedSchoolId) {
+      console.log('[AdminApp] No school selected, clearing routes');
+      setRoutes([]);
       return;
     }
 
@@ -864,7 +857,7 @@ function AdminApp() {
     };
 
     loadRoutes();
-  }, [selectedSchoolId, activeTab, setRoutes, setLoading]);
+  }, [selectedSchoolId, setRoutes, setLoading]); // Removed activeTab dependency
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -1033,14 +1026,12 @@ function AdminApp() {
 
         {/* Map */}
         <div style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
-          {activeTab === 'routes' && (
-            <AddressLookup 
-              onAddressSelect={(_address, _coordinates) => {
-                // Address is already saved to store by AddressLookup component
-                // This callback is still called but parameters are unused since MapView reads from store
-              }}
-            />
-          )}
+          <AddressLookup 
+            onAddressSelect={(_address, _coordinates) => {
+              // Address is already saved to store by AddressLookup component
+              // This callback is still called but parameters are unused since MapView reads from store
+            }}
+          />
           <div style={{ flex: 1, position: 'relative' }}>
             {activeTab === 'schools' ? (
               // Schools map view - uses filtered schools

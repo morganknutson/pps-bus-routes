@@ -26,7 +26,8 @@ export function AddressInput() {
     triggerZoomToHomeAddress,
     selectedSchoolId,
     routes,
-    selectStop
+    selectStop,
+    setDirectionFilter
   } = useStore();
   const isMobile = useIsMobile();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -59,8 +60,19 @@ export function AddressInput() {
 
     if (closestStop && closestRoute) {
       const stop = closestStop as Stop;
+      const route = closestRoute as Route;
       console.log(`[AddressInput] Found closest stop: ${stop.address} at ${minDistance.toFixed(1)}m`);
-      selectStop(closestRoute, stop, closestStopNumber);
+      
+      // Update direction filter if the route has a specific direction
+      if (route.direction) {
+        setDirectionFilter(route.direction);
+      }
+      
+      selectStop(route, stop, closestStopNumber);
+      
+      // Automatically switch to routes tab to show the found stop
+      window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
+      
       analyticsService.trackAction('find_my_stop', {
         schoolId: selectedSchoolId,
         distance: minDistance,
@@ -248,7 +260,6 @@ export function AddressInput() {
         borderRadius: '9999px',
         boxShadow: '0 4px 12px var(--shadow-large)',
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
-        overflow: 'hidden'
       }}>
         {homeAddress ? (
           <div style={{ 

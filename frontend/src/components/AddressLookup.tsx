@@ -27,7 +27,8 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     clearLookupAddress,
     selectedSchoolId,
     routes,
-    selectStop
+    selectStop,
+    setDirectionFilter
   } = useStore();
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
@@ -65,7 +66,18 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     });
 
     if (closestStop && closestRoute) {
-      selectStop(closestRoute, closestStop, closestStopNumber);
+      const route = closestRoute as Route;
+      
+      // Update direction filter if the route has a specific direction
+      if (route.direction) {
+        setDirectionFilter(route.direction);
+      }
+      
+      selectStop(route, closestStop, closestStopNumber);
+      
+      // Automatically switch to routes tab to show the found stop
+      window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
+      
       analyticsService.trackAction('find_my_stop_admin', {
         schoolId: selectedSchoolId,
         distance: minDistance
@@ -223,7 +235,6 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
         borderRadius: '9999px',
         boxShadow: '0 4px 12px var(--shadow-large)',
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
-        overflow: 'hidden'
       }}>
         {lookupAddress ? (
           <div style={{ 
