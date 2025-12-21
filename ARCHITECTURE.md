@@ -21,6 +21,7 @@
 10. [Processing Pipeline](#processing-pipeline)
 11. [State Management](#state-management)
 12. [Coordinate Systems](#coordinate-systems)
+13. [Deployment](#deployment)
 
 ---
 
@@ -748,6 +749,30 @@ const PORTLAND_BOUNDS = {
   lng: { min: -123.0, max: -122.3 }
 };
 ```
+
+---
+
+## Deployment
+
+### Overview
+The deployment process is automated through a shell script that handles stopping servers, updating code, rebuilding the frontend, and restarting the production server.
+
+### Deployment Script (`deploy.sh`)
+**Purpose**: Centralized deployment orchestration.
+
+**Pipeline Steps**:
+1. **Stop Servers**: Identifies and terminates existing `server.js` processes.
+2. **Pull Changes**: Fetches and pulls the latest code from the `main` branch.
+3. **Build Frontend**: Executes `npm run build` in the `frontend` directory.
+4. **Restart Servers**: Starts the production server using `npm run start:production`.
+5. **Verification**: Checks if the server is running and responding to API requests.
+
+### Server Management
+- **Production Server**: Started with `npm run start:production`.
+- **Port**: Defaults to `3002`.
+- **Logs**:
+  - Runtime logs: `logs/server.log`
+  - Build logs: `logs/build.log`
 
 ---
 

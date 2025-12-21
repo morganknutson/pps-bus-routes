@@ -143,6 +143,12 @@ interface School {
 - Convert coords: `[lng, lat]` → `[lat, lng]` for Leaflet
 - Icons: `utils/fontAwesomeIcons.ts`
 
+### Deployment
+- **Script**: `./deploy.sh`
+- **What it does**: Stops servers, pulls latest from `main`, rebuilds frontend, and restarts production server
+- **When to use**: After merging changes to `main` or when the user says "deploy"
+- **Logs**: `logs/server.log` (runtime) and `logs/build.log` (build process)
+
 ---
 
 ## Quick Links

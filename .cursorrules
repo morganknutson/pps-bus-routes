@@ -271,6 +271,13 @@ class AddressFormatter {
 - Check server logs for backend issues
 - Verify data structure matches TypeScript types
 
+### Deployment
+- **Deployment Script**: `./deploy.sh` is the source of truth for the deployment process.
+- **Process**: Deployment involves stopping servers, pulling the latest code from GitHub (`main` branch), rebuilding the frontend, and restarting the production server.
+- **"Deploy" Command**: When the user says "deploy", it means executing `./deploy.sh`.
+- **Server Management**: Use `npm run start:production` for the backend. Logs are stored in `logs/server.log`.
+- **Frontend Build**: Use `npm run build` in the `frontend` directory. Logs are stored in `logs/build.log`.
+
 ## Important Notes
 - The app works without Google Drive API key (uses public folder parsing)
 - Geocoding uses OpenStreetMap Nominatim (rate limited: 1 req/sec)

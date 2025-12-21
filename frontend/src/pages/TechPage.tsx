@@ -108,6 +108,14 @@ const sections: Section[] = [
       { id: 'sitemap-generation', title: '3. Sitemap Generation' },
     ],
   },
+  {
+    id: 'deployment',
+    title: 'Deployment',
+    subsections: [
+      { id: 'deployment-script', title: '1. Deployment Script (deploy.sh)' },
+      { id: 'deployment-process', title: '2. Deployment Process' },
+    ],
+  },
 ];
 
 // Example data for UI components
@@ -2804,6 +2812,52 @@ export function TechPage() {
                   <li><strong>Output:</strong> <code>frontend/public/sitemap.xml</code></li>
                 </ul>
               </div>
+            </div>
+          </section>
+
+          <section id="deployment" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '24px' }}>
+              Deployment
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '30px' }}>
+              The application uses a centralized deployment script to ensure consistent and reliable updates across environments.
+            </p>
+
+            <div id="deployment-script" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                1. Deployment Script (deploy.sh)
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                The <code>deploy.sh</code> script at the project root orchestrates the entire deployment pipeline.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Path:</strong> <code>deploy.sh</code></li>
+                  <li style={{ marginBottom: '8px' }}><strong>Permissions:</strong> Must be executable (<code>chmod +x deploy.sh</code>)</li>
+                  <li><strong>Command:</strong> <code>./deploy.sh</code></li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="deployment-process" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                2. Deployment Process
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                When executed, the deployment script follows these steps:
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ol style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Stop Servers:</strong> Identifies and kills running <code>node server.js</code> processes.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Pull Latest:</strong> Fetches and pulls the latest changes from <code>origin main</code>.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Build Frontend:</strong> Runs <code>npm run build</code> in the <code>frontend/</code> directory.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Start Servers:</strong> Launches the production server using <code>npm run start:production</code>.</li>
+                  <li><strong>Verification:</strong> Confirms the server is running and responding to API calls.</li>
+                </ol>
+              </div>
+              <p style={{ color: 'var(--text-secondary)', marginTop: '20px' }}>
+                <strong>Logs:</strong> Build logs are written to <code>logs/build.log</code> and server runtime logs to <code>logs/server.log</code>.
+              </p>
             </div>
           </section>
         </div>
