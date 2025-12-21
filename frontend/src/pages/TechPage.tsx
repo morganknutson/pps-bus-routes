@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
+import { SEO } from '../components/SEO';
 import { ExpandableExample } from '../components/ExpandableExample';
 import { RouteListBase } from '../components/RouteListBase';
 import { SchoolList } from '../components/SchoolList';
@@ -87,6 +88,24 @@ const sections: Section[] = [
   {
     id: 'coordinate-format',
     title: 'Coordinate Format Notes',
+  },
+  {
+    id: 'analytics-instrumentation',
+    title: 'Analytics & Instrumentation',
+    subsections: [
+      { id: 'ga4-setup', title: '1. GA4 Setup & Service' },
+      { id: 'event-tracking', title: '2. Event Tracking Schema' },
+      { id: 'page-view-tracking', title: '3. Page View Tracking' },
+    ],
+  },
+  {
+    id: 'seo-discovery',
+    title: 'Discovery & SEO',
+    subsections: [
+      { id: 'meta-tags-management', title: '1. Meta Tags Management' },
+      { id: 'robots-txt', title: '2. Robots.txt' },
+      { id: 'sitemap-generation', title: '3. Sitemap Generation' },
+    ],
   },
 ];
 
@@ -215,6 +234,10 @@ export function TechPage() {
       flexDirection: 'column',
       overflow: 'hidden'
     }}>
+      <SEO 
+        title="Technical Documentation" 
+        description="Comprehensive technical documentation for the PPS Bus Maps application, including backend services, frontend architecture, and data processing."
+      />
       <Header />
       <div style={{ 
         display: 'flex', 
@@ -2437,7 +2460,8 @@ export function TechPage() {
                   <li style={{ marginBottom: '8px' }}><strong>Preserving School Context:</strong> Closing the school info dialog while in the "Routes" tab will <em>not</em> deselect the school. This prevents the user from being kicked back to the schools index unintentionally.</li>
                   <li style={{ marginBottom: '8px' }}><strong>Clean Tab Transitions:</strong> Clicking "View Routes" from a school dialog explicitly clears any previously selected stop to ensure the map zooms out to show all routes for that school.</li>
                   <li style={{ marginBottom: '8px' }}><strong>Direction Switching:</strong> When switching from Morning to Afternoon, the app attempts to preserve the current stop selection by matching the street address in the new direction's route.</li>
-                  <li><strong>Mobile Optimization:</strong> Selecting a school from the sidebar on mobile devices automatically closes the sidebar to maximize map visibility.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Mobile Optimization:</strong> Selecting a school from the sidebar on mobile devices automatically closes the sidebar to maximize map visibility.</li>
+                  <li><strong>Viewport Stability:</strong> To prevent mobile Safari from shifting the UI when toolbars resize or when the URL changes (e.g., toggling routes), the app uses <code>100dvh</code> (Dynamic Viewport Height) and locks the main container with <code>position: fixed</code> and <code>window.scrollTo(0, 0)</code> resets.</li>
                 </ul>
               </div>
             </div>
@@ -2662,6 +2686,139 @@ export function TechPage() {
                 <li><strong>Storage:</strong> All stored coordinates use <code>[lng, lat]</code> format</li>
                 <li><strong>Conversion:</strong> Convert to <code>[lat, lng]</code> when passing to Leaflet components</li>
               </ul>
+            </div>
+          </section>
+
+          <section id="analytics-instrumentation" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '24px' }}>
+              Analytics & Instrumentation
+            </h2>
+            
+            <div id="ga4-setup" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                1. GA4 Setup & Service
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                The application uses Google Analytics 4 (GA4) via the <code>react-ga4</code> library. Instrumentation is handled by a centralized <code>AnalyticsService</code>.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Service:</strong> <code>frontend/src/services/analytics.ts</code></li>
+                  <li style={{ marginBottom: '8px' }}><strong>Environment Variable:</strong> <code>VITE_GA_TRACKING_ID</code></li>
+                  <li><strong>Initialization:</strong> Occurs in the root <code>App</code> component on mount.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="event-tracking" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                2. Event Tracking Schema
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Key user interactions are instrumented with custom events:
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--text-secondary)', fontSize: '13px' }}>
+                  <thead>
+                    <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
+                      <th style={{ padding: '8px', color: 'var(--text-primary)' }}>Category</th>
+                      <th style={{ padding: '8px', color: 'var(--text-primary)' }}>Action</th>
+                      <th style={{ padding: '8px', color: 'var(--text-primary)' }}>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                      <td style={{ padding: '8px' }}>Search</td>
+                      <td style={{ padding: '8px' }}>address_search</td>
+                      <td style={{ padding: '8px' }}>Tracked when a user selects an address from autocomplete.</td>
+                    </tr>
+                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                      <td style={{ padding: '8px' }}>Selection</td>
+                      <td style={{ padding: '8px' }}>school_select</td>
+                      <td style={{ padding: '8px' }}>Tracked when a school is selected from the list or map.</td>
+                    </tr>
+                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                      <td style={{ padding: '8px' }}>Selection</td>
+                      <td style={{ padding: '8px' }}>route_select/deselect</td>
+                      <td style={{ padding: '8px' }}>Tracked when a bus route is toggled in the explorer.</td>
+                    </tr>
+                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                      <td style={{ padding: '8px' }}>Navigation</td>
+                      <td style={{ padding: '8px' }}>tab_change</td>
+                      <td style={{ padding: '8px' }}>Tracked when switching between Schools and Routes tabs.</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: '8px' }}>Admin</td>
+                      <td style={{ padding: '8px' }}>pdf_sync / drive_check</td>
+                      <td style={{ padding: '8px' }}>Tracked when administrative actions are performed.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div id="page-view-tracking" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                3. Page View Tracking
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Automatic page view tracking is implemented using the <code>usePageTracking</code> hook, which listens to <code>react-router-dom</code> location changes.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <code style={{ color: 'var(--text-primary)' }}>frontend/src/hooks/usePageTracking.ts</code>
+              </div>
+            </div>
+          </section>
+
+          <section id="seo-discovery" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '24px' }}>
+              Discovery & SEO
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '30px' }}>
+              The application implements technical SEO to ensure bus routes and school information are discoverable by search engines.
+            </p>
+
+            <div id="meta-tags-management" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                1. Meta Tags Management (SEO.tsx)
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Dynamic meta tags (title, description, Open Graph, Twitter Card) are managed using <code>react-helmet-async</code>.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Component:</strong> <code>frontend/src/components/SEO.tsx</code></li>
+                  <li style={{ marginBottom: '8px' }}><strong>Home Page:</strong> Static title "Find Your Stop" and specific description.</li>
+                  <li><strong>Explorer Page:</strong> Dynamic titles based on the selected school (e.g., "Lincoln High School Bus Routes").</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="robots-txt" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                2. Robots.txt
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                A <code>robots.txt</code> file guides search engine crawlers on which paths to index.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <code style={{ color: 'var(--text-primary)' }}>frontend/public/robots.txt</code>
+              </div>
+            </div>
+
+            <div id="sitemap-generation" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                3. Sitemap Generation
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                A script automatically generates a <code>sitemap.xml</code> file containing all school-specific routes.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Script:</strong> <code>scripts/generate-sitemap.js</code></li>
+                  <li><strong>Output:</strong> <code>frontend/public/sitemap.xml</code></li>
+                </ul>
+              </div>
             </div>
           </section>
         </div>

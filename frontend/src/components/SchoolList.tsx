@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { School } from '../types';
+import { analyticsService } from '../services/analytics';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 
 // Infer school type(s) from name - returns array to support hybrid schools
@@ -243,6 +244,7 @@ export function SchoolList({
                         if (isSelected) {
                           onSelectSchool(null); // Pass null to deselect
                         } else {
+                          analyticsService.trackSchoolSelect(school.name, enableEditing ? 'admin_list' : 'explorer_list');
                           onSelectSchool(school.id);
                         }
                       }

@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import { analyticsService } from '../services/analytics';
 import { autocompleteAddress, geocodeAddress } from '../services/api';
 import { loadLocalRoutes } from '../services/localRoutes';
 import { findClosestStop } from '../utils/findClosestStop';
 import { formatDistance, calculateDistance } from '../utils/distance';
 import { School, HomeAddress } from '../types';
 import { ProgressBar } from '../components/ProgressBar';
+import { SEO } from '../components/SEO';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -65,15 +67,16 @@ export function HomePage() {
     // Set background colors - ensure they extend beyond viewport
     document.body.style.backgroundColor = '#133A60';
     document.body.style.minHeight = '100vh';
-    document.body.style.minHeight = '100dvh'; // Dynamic viewport height
+    document.body.style.minHeight = 'var(--app-height)';
     document.documentElement.style.backgroundColor = '#133A60';
     document.documentElement.style.minHeight = '100vh';
-    document.documentElement.style.minHeight = '100dvh';
+    document.documentElement.style.minHeight = 'var(--app-height)';
     
     const rootElement = document.getElementById('root');
     if (rootElement) {
       rootElement.style.backgroundColor = '#133A60';
       rootElement.style.overflow = 'hidden';
+      rootElement.style.height = 'var(--app-height)';
     }
     
     // Prevent body/html scrolling - only allow scrolling within the HomePage container
@@ -256,6 +259,7 @@ export function HomePage() {
   }, []);
 
   const handleSelectAddress = async (suggestion: AutocompleteSuggestion) => {
+    analyticsService.trackAddressSearch('homepage', suggestion.address);
     if (!suggestion.coordinates) {
       try {
         setAddressLoading(true);
@@ -315,6 +319,7 @@ export function HomePage() {
   };
 
   const handleSelectSchool = (school: School) => {
+    analyticsService.trackSchoolSelect(school.name, 'homepage');
     setSelectedSchoolLocal(school);
     setSchoolQuery('');
     setSchoolSuggestions([]);
@@ -358,6 +363,7 @@ export function HomePage() {
       return;
     }
 
+    analyticsService.trackEvent('Search', 'find_stop', `${selectedSchoolLocal.name}`);
     setIsFinding(true);
     setError(null);
 
@@ -426,8 +432,8 @@ export function HomePage() {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      minHeight: '100dvh', // Dynamic viewport height for mobile
-      height: '100dvh', // Dynamic viewport height for mobile
+      minHeight: 'var(--app-height)',
+      height: 'var(--app-height)',
       padding: '2rem',
       backgroundColor: '#133A60',
       position: 'fixed',
@@ -441,6 +447,10 @@ export function HomePage() {
       WebkitOverflowScrolling: 'touch',
       zIndex: 1,
     }}>
+      <SEO 
+        title="Find Your Stop" 
+        description="Find your closest Portland Public Schools bus stop. Enter your address and school to see your bus route and stop location."
+      />
       <div style={{
         width: '100%',
         maxWidth: '440px',
@@ -793,10 +803,14 @@ export function HomePage() {
         </button>
       </div>
 
-      {/* Explore Instead Link */}
+      {/* Explore Instead & School Directory Links */}
       <div style={{
         marginTop: '1.5rem',
         textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'center'
       }}>
         <Link
           to="/bus-route-explorer"
@@ -817,7 +831,29 @@ export function HomePage() {
           }}
         >
           <i className="fas fa-map" style={{ fontSize: '12px' }}></i>
-          Explore Instead
+          Explore Map
+        </Link>
+
+        <Link
+          to="/schools"
+          style={{
+            color: 'white',
+            fontSize: '14px',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            transition: 'color 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'white';
+          }}
+        >
+          <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
+          School Directory
         </Link>
       </div>
 

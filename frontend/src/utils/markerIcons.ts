@@ -34,7 +34,7 @@ export function createSchoolIcon(routeColor: string, time?: string): L.DivIcon {
       </div>
     `,
     iconSize: [totalSize, totalSize],
-    iconAnchor: [anchorX, anchorY],
+    iconAnchor: [anchorX, anchorY - 3],
     popupAnchor: [0, -totalSize],
   });
 }
@@ -73,7 +73,7 @@ export function getNumberedIconDimensions(number: number, time?: string, isSelec
   
   const totalWidth = circleRightEdge + (hasTime ? circleToTimeGap + estimatedTimeWidth + timeRightPadding : 0) + horizontalPadding;
   const anchorX = numberCenterX;
-  const anchorY = pillHeight / 2;
+  const anchorY = (pillHeight / 2) - 3;
 
   return {
     totalWidth,
@@ -276,7 +276,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
       </div>
     `,
     iconSize: [totalWidth + buffer, pillHeight + buffer],
-    iconAnchor: [anchorX + buffer / 2, anchorY + buffer / 2],
+    iconAnchor: [anchorX + buffer / 2, (anchorY + buffer / 2) - 3],
     popupAnchor: [0, -pillHeight],
   });
 }

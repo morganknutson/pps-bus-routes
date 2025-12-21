@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /bus-route-explorer
+
+# Sitemaps
+Sitemap: https://pps-bus-maps.vercel.app/sitemap.xml
+

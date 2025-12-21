@@ -17,6 +17,7 @@ PDFs (Google Drive) → Parse stops → Geocode addresses → Display on Leaflet
 | Layer | Technology |
 |-------|------------|
 | Frontend | React 18 + TypeScript + Vite |
+| SEO | react-helmet-async |
 | State | Zustand |
 | Maps | Leaflet + react-leaflet |
 | Backend | Node.js + Express (ES Modules) |
@@ -164,6 +165,6 @@ PORT=3001                  # Backend port
 
 ---
 
-*Last updated: December 2024*
+*Last updated: December 20, 2025*
 
 

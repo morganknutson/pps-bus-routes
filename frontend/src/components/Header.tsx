@@ -256,7 +256,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
             backgroundColor: '#2d2d2d',
             zIndex: 1000,
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-            maxHeight: 'calc(100vh - 60px)',
+            maxHeight: 'calc(var(--app-height) - 60px)',
             overflowY: 'auto',
           }}
         >

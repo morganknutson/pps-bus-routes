@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { ProgressBar } from '../components/ProgressBar';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { analyticsService } from '../services/analytics';
 
 export function VerificationPage() {
   console.log('[VerificationPage] Component rendering...');
@@ -283,6 +284,7 @@ export function VerificationPage() {
   };
 
   const handleCheckDriveLinks = async () => {
+    analyticsService.trackAdminAction('drive_check_all');
     if (!pdfStatus?.schools) return;
     
     // Get all schools with Drive links
@@ -572,8 +574,7 @@ export function VerificationPage() {
     // Override root styles for this page
     const root = document.getElementById('root');
     if (root) {
-      root.style.height = 'auto';
-      root.style.minHeight = '100vh';
+      root.style.height = '100vh';
       root.style.overflowY = 'auto';
       root.style.overflowX = 'hidden';
     }
@@ -582,7 +583,6 @@ export function VerificationPage() {
       // Restore original styles when component unmounts
       if (root) {
         root.style.height = '100vh';
-        root.style.minHeight = '';
         root.style.overflowY = 'hidden';
         root.style.overflowX = '';
       }
@@ -705,6 +705,7 @@ export function VerificationPage() {
   }, [jobStatuses, lastCompletedJobIds]);
 
   const handleFetchPdfs = async (schoolId: string) => {
+    analyticsService.trackAdminAction('pdf_sync', schoolId);
     setFetching(prev => ({ ...prev, [schoolId]: true }));
     // Clear any previous message for this school
     setFetchMessages(prev => {
@@ -834,6 +835,7 @@ export function VerificationPage() {
   };
 
   const handleFetchAllPdfs = async () => {
+    analyticsService.trackAdminAction('pdf_sync_all');
     if (!pdfStatus?.schools) return;
     
     // Get all schools with Drive links

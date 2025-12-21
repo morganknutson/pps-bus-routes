@@ -1,6 +1,7 @@
 import { useStore } from '../store/useStore';
 import { RouteListBase, RouteListConfig } from './RouteListBase';
 import { useDarkMode } from '../hooks/useDarkMode';
+import { analyticsService } from '../services/analytics';
 
 interface RouteListProps {
   showBothOption?: boolean;
@@ -25,6 +26,11 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
     onRouteSelectionChange: (routeId: string, checked: boolean) => {
       // Mark that user is toggling a route (for URL sync to not override)
       onRouteToggle?.();
+      
+      const route = routes.find(r => r.id === routeId);
+      if (route && selectedSchool) {
+        analyticsService.trackRouteToggle(route.name, selectedSchool.name, checked);
+      }
       
       if (checked) {
         // Route is being selected - ensure it's selected in store

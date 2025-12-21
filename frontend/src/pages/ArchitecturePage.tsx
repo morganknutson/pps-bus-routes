@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
+import { SEO } from '../components/SEO';
 
 interface FileNode {
   id: string;
@@ -559,6 +560,10 @@ export function ArchitecturePage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw' }}>
+      <SEO 
+        title="App Architecture" 
+        description="Technical architecture and file structure of the PPS Bus Maps application."
+      />
       <Header />
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Toggle button for sidebar */}

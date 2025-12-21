@@ -25,8 +25,7 @@ export function JobsPage() {
   useEffect(() => {
     const root = document.getElementById('root');
     if (root) {
-      root.style.height = 'auto';
-      root.style.minHeight = '100vh';
+      root.style.height = '100vh';
       root.style.overflowY = 'auto';
       root.style.overflowX = 'hidden';
     }
@@ -34,7 +33,6 @@ export function JobsPage() {
     return () => {
       if (root) {
         root.style.height = '100vh';
-        root.style.minHeight = '';
         root.style.overflowY = 'hidden';
         root.style.overflowX = '';
       }

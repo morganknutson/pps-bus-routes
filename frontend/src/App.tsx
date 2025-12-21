@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { MapContainer, useMap, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import { RouteList } from './components/RouteList';
@@ -12,8 +13,10 @@ import { TabBar } from './components/TabBar';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { DarkModeTileLayer } from './components/DarkModeTileLayer';
+import { SEO } from './components/SEO';
 import { useStore } from './store/useStore';
 import { SchoolsList } from './pages/SchoolsList';
+import { SchoolDirectory } from './pages/SchoolDirectory';
 import { Neighborhoods } from './pages/Neighborhoods';
 import { TechPage } from './pages/TechPage';
 import { VerificationPage } from './pages/VerificationPage';
@@ -32,6 +35,8 @@ import { ProgressBar } from './components/ProgressBar';
 import { AdminPasswordProtection } from './components/AdminPasswordProtection';
 import { useIsMobile } from './hooks/useMediaQuery';
 import { useUrlState } from './hooks/useUrlState';
+import { usePageTracking } from './hooks/usePageTracking';
+import { analyticsService } from './services/analytics';
 import { parseUrlPath, applyUrlStateToRoutes } from './services/urlState';
 import { useLocation, useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
@@ -575,8 +580,51 @@ function ExplorerApp() {
     </button>
   ) : null;
 
+  const selectedSchool = useMemo(() => 
+    schools.find(s => s.id === selectedSchoolId),
+    [schools, selectedSchoolId]
+  );
+
+  // Prevent viewport shifting on mobile navigation/route selection
+  useEffect(() => {
+    if (isMobile) {
+      // Reset any accidental window scroll that Safari might have performed
+      window.scrollTo(0, 0);
+      
+      // Ensure body is locked to prevent background scrolling
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.height = '100%';
+      
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.height = '';
+      };
+    }
+  }, [isMobile, location.pathname]);
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw' }}>
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      height: 'var(--app-height)', 
+      width: '100vw',
+      position: isMobile ? 'fixed' : 'relative',
+      top: 0,
+      left: 0,
+      overflow: 'hidden'
+    }}>
+      <SEO 
+        title={selectedSchool ? `${selectedSchool.name} Bus Routes` : 'Bus Route Explorer'}
+        description={selectedSchool 
+          ? `View bus routes and stops for ${selectedSchool.name} in Portland. See interactive maps and stop schedules.`
+          : 'Explore Portland Public Schools bus routes and stops on an interactive map.'
+        }
+        school={selectedSchool}
+      />
       <Header rightContent={
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           {hamburgerButton}
@@ -846,8 +894,38 @@ function AdminApp() {
   // Routes should already have coordinates loaded from processed JSON files
   // useGeocodeStops(); // DISABLED - no client-side geocoding needed
 
+  // Prevent viewport shifting on mobile navigation/route selection
+  useEffect(() => {
+    if (isMobile) {
+      // Reset any accidental window scroll that Safari might have performed
+      window.scrollTo(0, 0);
+      
+      // Ensure body is locked to prevent background scrolling
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.height = '100%';
+      
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.height = '';
+      };
+    }
+  }, [isMobile, location.pathname]);
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw' }}>
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      height: 'var(--app-height)', 
+      width: '100vw',
+      position: isMobile ? 'fixed' : 'relative',
+      top: 0,
+      left: 0,
+      overflow: 'hidden'
+    }}>
       <Header />
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Sidebar */}
@@ -874,6 +952,7 @@ function AdminApp() {
               }}
               onUpdateSchool={async (schoolId, updates) => {
                 try {
+                  analyticsService.trackAdminAction('school_update', schoolId);
                   console.log('[AdminApp] Updating school:', schoolId, updates);
                   const response = await fetch(`/api/schools/${schoolId}`, {
                     method: 'PUT',
@@ -986,10 +1065,31 @@ function AdminApp() {
 }
 
 function App() {
+  // Initialize Google Analytics 4
+  useEffect(() => {
+    const trackingId = import.meta.env.VITE_GA_TRACKING_ID;
+    if (trackingId) {
+      analyticsService.init(trackingId);
+    }
+  }, []);
+
   return (
-    <BrowserRouter>
-      <Routes>
+    <HelmetProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </HelmetProvider>
+  );
+}
+
+function AppContent() {
+  // Track page views on route changes
+  usePageTracking();
+
+  return (
+    <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/schools" element={<SchoolDirectory />} />
         {/* Path-based routing for bus route explorer - catch-all to handle all segments */}
         <Route path="/bus-route-explorer/*" element={<ExplorerApp />} />
         {/* Path-based routing for admin - catch-all to handle all segments */}
@@ -1052,7 +1152,6 @@ function App() {
         {/* Deprecated: Schools List page - kept for backward compatibility but no longer linked */}
         <Route path="/data/schools" element={<SchoolsList />} />
       </Routes>
-    </BrowserRouter>
   );
 }
 

@@ -12,6 +12,13 @@
   --shadow: rgba(0, 0, 0, 0.05);
   --shadow-hover: rgba(0, 0, 0, 0.15);
   --shadow-large: rgba(0, 0, 0, 0.2);
+  --app-height: 100vh;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --app-height: 100dvh;
+  }
 }
 
 /* Light theme (default) */
@@ -142,7 +149,8 @@ html {
   background-color: var(--bg-primary);
   height: 100%;
   min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  min-height: var(--app-height);
+  overflow: hidden;
 }
 
 body {
@@ -159,13 +167,14 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  min-height: var(--app-height);
+  overflow: hidden;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
-  height: 100dvh; /* Dynamic viewport height for mobile */
+  height: var(--app-height);
   overflow: hidden;
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -223,31 +232,66 @@ body {
 }
 
 /* Dark mode styles for Leaflet zoom controls */
-.theme-dark .leaflet-control-zoom a {
+.theme-dark .leaflet-control-zoom a,
+.theme-blue .leaflet-control-zoom a,
+.theme-green .leaflet-control-zoom a,
+.theme-purple .leaflet-control-zoom a,
+.theme-orange .leaflet-control-zoom a,
+.dark-mode .leaflet-control-zoom a {
   background-color: var(--bg-secondary) !important;
   color: var(--text-primary) !important;
   border: 1px solid var(--border-color) !important;
 }
 
-.theme-dark .leaflet-control-zoom a:hover {
+.theme-dark .leaflet-control-zoom a:hover,
+.theme-blue .leaflet-control-zoom a:hover,
+.theme-green .leaflet-control-zoom a:hover,
+.theme-purple .leaflet-control-zoom a:hover,
+.theme-orange .leaflet-control-zoom a:hover,
+.dark-mode .leaflet-control-zoom a:hover {
   background-color: var(--bg-tertiary) !important;
   color: var(--text-primary) !important;
 }
 
 .theme-dark .leaflet-control-zoom-in,
-.theme-dark .leaflet-control-zoom-out {
+.theme-dark .leaflet-control-zoom-out,
+.theme-blue .leaflet-control-zoom-in,
+.theme-blue .leaflet-control-zoom-out,
+.theme-green .leaflet-control-zoom-in,
+.theme-green .leaflet-control-zoom-out,
+.theme-purple .leaflet-control-zoom-in,
+.theme-purple .leaflet-control-zoom-out,
+.theme-orange .leaflet-control-zoom-in,
+.theme-orange .leaflet-control-zoom-out,
+.dark-mode .leaflet-control-zoom-in,
+.dark-mode .leaflet-control-zoom-out {
   background-color: var(--bg-secondary) !important;
   color: var(--text-primary) !important;
   border: 1px solid var(--border-color) !important;
 }
 
 .theme-dark .leaflet-control-zoom-in:hover,
-.theme-dark .leaflet-control-zoom-out:hover {
+.theme-dark .leaflet-control-zoom-out:hover,
+.theme-blue .leaflet-control-zoom-in:hover,
+.theme-blue .leaflet-control-zoom-out:hover,
+.theme-green .leaflet-control-zoom-in:hover,
+.theme-green .leaflet-control-zoom-out:hover,
+.theme-purple .leaflet-control-zoom-in:hover,
+.theme-purple .leaflet-control-zoom-out:hover,
+.theme-orange .leaflet-control-zoom-in:hover,
+.theme-orange .leaflet-control-zoom-out:hover,
+.dark-mode .leaflet-control-zoom-in:hover,
+.dark-mode .leaflet-control-zoom-out:hover {
   background-color: var(--bg-tertiary) !important;
 }
 
 /* Dark mode styles for Leaflet attribution control */
-.theme-dark .leaflet-control-attribution {
+.theme-dark .leaflet-control-attribution,
+.theme-blue .leaflet-control-attribution,
+.theme-green .leaflet-control-attribution,
+.theme-purple .leaflet-control-attribution,
+.theme-orange .leaflet-control-attribution,
+.dark-mode .leaflet-control-attribution {
   background-color: transparent !important;
   background: transparent !important;
   color: var(--text-secondary) !important;
@@ -255,7 +299,12 @@ body {
   box-shadow: none !important;
 }
 
-.theme-dark .leaflet-control-attribution a {
+.theme-dark .leaflet-control-attribution a,
+.theme-blue .leaflet-control-attribution a,
+.theme-green .leaflet-control-attribution a,
+.theme-purple .leaflet-control-attribution a,
+.theme-orange .leaflet-control-attribution a,
+.dark-mode .leaflet-control-attribution a {
   color: var(--text-primary) !important;
 }
 

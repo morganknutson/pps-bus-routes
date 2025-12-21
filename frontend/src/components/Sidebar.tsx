@@ -209,7 +209,7 @@ export function Sidebar({
           top: 0,
           left: shouldShow ? 0 : '-100%',
           width: '100%',
-          height: '100vh',
+          height: 'var(--app-height)',
           borderRight: '1px solid var(--border-color)',
           display: 'flex',
           flexDirection: 'column',

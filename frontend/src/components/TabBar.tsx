@@ -1,4 +1,5 @@
 import { useStore } from '../store/useStore';
+import { analyticsService } from '../services/analytics';
 
 interface TabBarProps {
   activeTab: 'schools' | 'routes' | 'neighborhoods';
@@ -41,7 +42,10 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           zIndex: 2,
         }}>
           <div
-            onClick={() => onTabChange('schools')}
+            onClick={() => {
+              analyticsService.trackTabChange('schools');
+              onTabChange('schools');
+            }}
             style={{
               flex: 1,
               display: 'flex',
@@ -60,7 +64,11 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             Schools
           </div>
           <div
-            onClick={() => onTabChange(activeTab === 'neighborhoods' ? 'neighborhoods' : 'routes')}
+            onClick={() => {
+              const tab = activeTab === 'neighborhoods' ? 'neighborhoods' : 'routes';
+              analyticsService.trackTabChange(tab);
+              onTabChange(tab);
+            }}
             style={{
               flex: 1,
               display: 'flex',

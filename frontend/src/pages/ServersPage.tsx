@@ -230,6 +230,14 @@ export function ServersPage() {
     // Check backend status on mount
     checkBackendStatus();
     
+    // Override root styles for this page to allow scrolling
+    const root = document.getElementById('root');
+    if (root) {
+      root.style.height = '100vh';
+      root.style.overflowY = 'auto';
+      root.style.overflowX = 'hidden';
+    }
+    
     // Update frontend uptime every second
     const frontendUptimeInterval = setInterval(() => {
       const uptimeMs = Date.now() - frontendStartTime.current;
@@ -247,6 +255,13 @@ export function ServersPage() {
     return () => {
       clearInterval(frontendUptimeInterval);
       clearInterval(backendCheckInterval);
+      
+      // Restore root styles
+      if (root) {
+        root.style.height = '100vh';
+        root.style.overflowY = 'hidden';
+        root.style.overflowX = '';
+      }
     };
   }, []);
 

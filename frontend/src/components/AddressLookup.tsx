@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { autocompleteAddress, geocodeAddress } from '../services/api';
+import { analyticsService } from '../services/analytics';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -96,6 +97,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   }, []);
 
   const handleSelectSuggestion = async (suggestion: AutocompleteSuggestion) => {
+    analyticsService.trackAddressSearch('admin', suggestion.address);
     // If coordinates are missing, geocode the address
     if (!suggestion.coordinates) {
       try {
