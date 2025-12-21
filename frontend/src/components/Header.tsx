@@ -14,6 +14,8 @@ export function Header({ rightContent }: HeaderProps = {}) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [menuOpen, setMenuOpen] = useState(false);
+  const setSelectedSchool = useStore(state => state.setSelectedSchool);
+  const setRoutes = useStore(state => state.setRoutes);
   
   const isHomePage = location.pathname === '/';
   const adminPaths = ['/admin', '/neighborhoods', '/tech', '/verification', '/jobs', '/servers', '/architecture'];
@@ -193,6 +195,10 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 </Link>
                 <Link
                   to="/bus-route-explorer"
+                  onClick={() => {
+                    setSelectedSchool(null);
+                    setRoutes([]);
+                  }}
                   className="admin-link"
                   style={{
                     fontSize: '12px',
@@ -348,7 +354,11 @@ export function Header({ rightContent }: HeaderProps = {}) {
             </Link>
             <Link
               to="/bus-route-explorer"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setSelectedSchool(null);
+                setRoutes([]);
+                setMenuOpen(false);
+              }}
               style={{
                 padding: '0.75rem 1rem',
                 color: 'rgba(255, 255, 255, 0.8)',

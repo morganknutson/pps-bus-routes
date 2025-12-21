@@ -819,6 +819,10 @@ export function HomePage() {
           }}>
             <Link
               to="/bus-route-explorer"
+              onClick={() => {
+                setSelectedSchool(null);
+                setRoutes([]);
+              }}
               style={{
                 color: 'white',
                 fontSize: '14px',

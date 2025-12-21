@@ -2445,6 +2445,7 @@ export function TechPage() {
                   <li style={{ marginBottom: '8px' }}><strong>Clean Tab Transitions:</strong> Clicking "View Routes" from a school dialog explicitly clears any previously selected stop to ensure the map zooms out to show all routes for that school.</li>
                   <li style={{ marginBottom: '8px' }}><strong>Direction Switching:</strong> When switching from Morning to Afternoon, the app attempts to preserve the current stop selection by matching the street address in the new direction's route.</li>
                   <li style={{ marginBottom: '8px' }}><strong>Mobile Optimization:</strong> Selecting a school from the sidebar on mobile devices automatically closes the sidebar to maximize map visibility.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Generic Entry Points:</strong> Clicking "Explore Map" from the homepage or neighborhood directory explicitly clears any existing school or route selection to ensure the user starts with a clean "Show All Schools" view.</li>
                   <li><strong>Viewport Stability:</strong> To prevent mobile Safari from shifting the UI when toolbars resize or when the URL changes (e.g., toggling routes), the app uses <code>100dvh</code> (Dynamic Viewport Height) and locks the main container with <code>position: fixed</code> and <code>window.scrollTo(0, 0)</code> resets.</li>
                 </ul>
               </div>

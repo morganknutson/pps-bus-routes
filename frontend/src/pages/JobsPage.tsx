@@ -200,7 +200,7 @@ export function JobsPage() {
               </p>
               <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)' }}>
                 Redis and BullMQ have been removed for efficiency. Jobs are tracked in a lightweight persistent history system.
-                {process.env.NODE_ENV === 'production' ? (
+                {import.meta.env.PROD ? (
                   <span style={{ color: '#f44', fontWeight: 'bold', display: 'block', marginTop: '0.5rem' }}>
                     ⚠️ Background processing and polling are DISABLED in production mode.
                   </span>

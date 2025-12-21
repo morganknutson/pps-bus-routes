@@ -9,7 +9,7 @@ import { Route, Stop } from '../types';
 interface AutocompleteSuggestion {
   displayName: string;
   address: string;
-  coordinates: [number, number];
+  coordinates: [number, number] | null;
 }
 
 interface AddressLookupProps {

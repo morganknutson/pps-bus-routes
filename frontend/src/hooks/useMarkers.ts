@@ -10,8 +10,8 @@ export interface MarkerData {
   position: [number, number]; // [lat, lng]
   icon: L.Icon | L.DivIcon;
   onClick?: () => void;
-  popup?: string | HTMLElement | React.ReactNode;
-  tooltip?: string | HTMLElement | React.ReactNode;
+  popup?: L.Content;
+  tooltip?: L.Content;
   [key: string]: any; // Allow additional properties
 }
 

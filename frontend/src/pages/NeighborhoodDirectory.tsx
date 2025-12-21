@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { SEO } from '../components/SEO';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { useStore } from '../store/useStore';
 
 interface NeighborhoodData {
   name: string;
@@ -13,6 +14,8 @@ interface NeighborhoodData {
 }
 
 export function NeighborhoodDirectory() {
+  const setSelectedSchool = useStore(state => state.setSelectedSchool);
+  const setRoutes = useStore(state => state.setRoutes);
   const [neighborhoods, setNeighborhoods] = useState<NeighborhoodData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -191,6 +194,10 @@ export function NeighborhoodDirectory() {
                   </span>
                   <Link 
                     to="/bus-route-explorer"
+                    onClick={() => {
+                      setSelectedSchool(null);
+                      setRoutes([]);
+                    }}
                     style={{ 
                       fontSize: '0.875rem', 
                       color: 'var(--text-tertiary)',

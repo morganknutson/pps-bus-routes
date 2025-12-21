@@ -74,7 +74,10 @@ class AnalyticsService {
    * @param address The address searched (anonymized or full depending on privacy)
    */
   trackAddressSearch(source: string, address?: string) {
-    this.trackEvent('Search', 'address_search', source);
+    this.trackEvent('Search', 'address_search', source, undefined, false);
+    if (address) {
+      this.trackAction('address_search_detail', { source, address });
+    }
   }
 
   /**
@@ -118,6 +121,19 @@ class AnalyticsService {
    */
   trackMapInteraction(action: string) {
     this.trackEvent('Map', action);
+  }
+
+  /**
+   * Track a generic action with properties
+   * @param action The action name
+   * @param properties Optional properties
+   */
+  trackAction(action: string, properties?: any) {
+    if (!this.isInitialized) return;
+    
+    // In GA4, we can send custom parameters with events
+    ReactGA.event(action, properties);
+    console.log(`[AnalyticsService] Action tracked: ${action}`, properties);
   }
 }
 
