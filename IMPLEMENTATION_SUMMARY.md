@@ -102,14 +102,14 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 
 1. **Test Geocoding**:
    ```bash
-   curl -X POST http://localhost:3001/api/geocode/address \
+   curl -X POST http://localhost:3002/api/geocode/address \
      -H "Content-Type: application/json" \
      -d '{"address": "SW Patton Rd & SW Montgomery Dr", "city": "Portland", "state": "OR"}'
    ```
 
 2. **Test Routing**:
    ```bash
-   curl -X POST http://localhost:3001/api/routes/calculate \
+   curl -X POST http://localhost:3002/api/routes/calculate \
      -H "Content-Type: application/json" \
      -d '{"waypoints": [[45.5, -122.7], [45.51, -122.71]]}'
    ```

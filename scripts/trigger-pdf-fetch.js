@@ -13,7 +13,7 @@
  *   node scripts/trigger-pdf-fetch.js --all
  */
 
-const API_BASE = process.env.API_BASE || 'http://localhost:3001/api';
+const API_BASE = process.env.API_BASE || 'http://localhost:3002/api';
 const POLL_INTERVAL = 2000; // 2 seconds
 const MAX_WAIT_TIME = 5 * 60 * 1000; // 5 minutes per job
 const JOB_STATUS_TIMEOUT = 5000; // 5 seconds for status check
@@ -35,7 +35,7 @@ Examples:
   node scripts/trigger-pdf-fetch.js --all
 
 Environment Variables:
-  API_BASE    API base URL (default: http://localhost:3001/api)
+  API_BASE    API base URL (default: http://localhost:3002/api)
 
 The script will:
   1. Enqueue a PDF sync job for the school(s)

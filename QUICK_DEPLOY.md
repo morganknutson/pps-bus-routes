@@ -28,7 +28,7 @@ In the Railway dashboard, go to your service settings:
 **Variables Tab:**
 Add these environment variables:
 - `NODE_ENV` = `production`
-- `PORT` = `3001` (Railway will override this, but set it anyway)
+- `PORT` = `3002` (Railway will override this, but set it anyway)
 - `GOOGLE_API_KEY` = `your_key_here` (optional - only if you have one)
 
 ### 5. Deploy!

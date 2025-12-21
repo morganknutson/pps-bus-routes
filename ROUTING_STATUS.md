@@ -29,7 +29,7 @@ All routing tests passed successfully:
 
 **Usage:**
 ```bash
-curl http://localhost:3001/api/routes/diagnostics
+curl http://localhost:3002/api/routes/diagnostics
 ```
 
 ### 2. Comprehensive Logging ✅

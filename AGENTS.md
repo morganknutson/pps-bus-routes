@@ -160,7 +160,7 @@ interface School {
 # backend/.env
 GOOGLE_MAPS_API_KEY=xxx    # Required for geocoding
 GOOGLE_API_KEY=xxx         # Alternative key name
-PORT=3001                  # Backend port
+PORT=3002                  # Backend port
 ```
 
 ---

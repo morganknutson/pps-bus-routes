@@ -16,7 +16,7 @@ fi
 # Start the servers
 echo "🚀 Starting frontend and backend servers..."
 echo "   Frontend: http://localhost:5173"
-echo "   Backend:  http://localhost:3001"
+echo "   Backend:  http://localhost:3002"
 echo ""
 echo "Press Ctrl+C to stop the servers."
 echo ""

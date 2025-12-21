@@ -54,7 +54,7 @@ export async function batchGeocode(addresses: string[], city = 'Portland', state
       
       // Check if backend is not running
       if (response.status === 0 || response.status === 500) {
-        console.error('[API] Backend may not be running! Make sure the backend server is started on port 3001');
+        console.error('[API] Backend may not be running! Make sure the backend server is started on port 3002');
       }
       
       throw new Error(`Failed to geocode addresses: ${response.status} ${errorText}`);
@@ -68,7 +68,7 @@ export async function batchGeocode(addresses: string[], city = 'Portland', state
     
     // Check if it's a network error (backend not running)
     if (error.message?.includes('Failed to fetch') || error.message?.includes('NetworkError')) {
-      console.error('[API] Network error - backend server may not be running on port 3001');
+      console.error('[API] Network error - backend server may not be running on port 3002');
       console.error('[API] Please start the backend with: cd backend && npm run dev');
     }
     

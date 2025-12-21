@@ -59,7 +59,7 @@ npm run dev
 
 The app will be available at:
 - Frontend: http://localhost:3000
-- Backend: http://localhost:3001
+- Backend: http://localhost:3002
 
 ## Usage
 

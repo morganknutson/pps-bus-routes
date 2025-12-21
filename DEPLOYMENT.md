@@ -57,7 +57,7 @@ data/backups
 
 5. **Environment Variables** (in Railway dashboard):
    - `NODE_ENV=production`
-   - `PORT=3001` (Railway will override this, but set it anyway)
+   - `PORT=3002` (Railway will override this, but set it anyway)
    - `GOOGLE_API_KEY=your_key_here` (optional, if you have one)
 
 6. **Deploy**: Railway will automatically deploy when you push to your main branch
@@ -103,7 +103,7 @@ Same as Railway - ensure backend can serve frontend.
 
 5. **Environment Variables**:
    - `NODE_ENV=production`
-   - `PORT=3001`
+   - `PORT=3002`
    - `GOOGLE_API_KEY=your_key_here` (optional)
 
 6. **Deploy**: Render will build and deploy automatically
@@ -220,7 +220,7 @@ ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=10
 Environment=NODE_ENV=production
-Environment=PORT=3001
+Environment=PORT=3002
 
 [Install]
 WantedBy=multi-user.target
@@ -261,7 +261,7 @@ server {
 
     # Proxy API requests to backend
     location /api {
-        proxy_pass http://localhost:3001;
+        proxy_pass http://localhost:3002;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -369,7 +369,7 @@ If deploying frontend and backend separately, update your frontend services to u
 
 ```typescript
 // frontend/src/services/api.ts (or wherever your API base URL is)
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3002';
 ```
 
 Then set `VITE_API_URL` in your frontend deployment environment.

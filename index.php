@@ -1,10 +1,10 @@
 <?php
 /**
  * PHP Proxy for Node.js App
- * Routes all requests to the Node.js server on port 3001
+ * Routes all requests to the Node.js server on port 3002
  */
 
-$nodeUrl = 'http://localhost:3001' . $_SERVER['REQUEST_URI'];
+$nodeUrl = 'http://localhost:3002' . $_SERVER['REQUEST_URI'];
 
 // Get the original request method and headers
 $ch = curl_init($nodeUrl);

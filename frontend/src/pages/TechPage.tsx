@@ -1890,7 +1890,7 @@ export function TechPage() {
                   <li><strong>getProcessStatus(processName)</strong> - Get status of a server process:
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                       <li>Checks if process is running on expected port</li>
-                      <li>Backend: Port 3001, Frontend: Port 5173</li>
+                      <li>Backend: Port 3002, Frontend: Port 5173</li>
                       <li>Uses <code>lsof</code> command to check port usage</li>
                       <li>Returns process status or "not found" if process not running</li>
                     </ul>
