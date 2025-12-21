@@ -26,7 +26,7 @@ export interface Route {
     isGeocoding: boolean;
   };
   geometry?: [number, number][]; // Cached route geometry as [lat, lng][] following streets
-  effectiveDate?: string; // Effective date of the route (e.g., "082625" for Aug 26, 2025)
+  effectiveDate?: string | Date | null; // Effective date of the route
 }
 
 export interface HomeAddress {

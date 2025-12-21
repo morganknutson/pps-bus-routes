@@ -1,6 +1,7 @@
 import { useState, ReactNode } from 'react';
 import { formatStreetName } from '../utils/formatAddress';
 import { getSchoolTypes } from '../utils/schoolUtils';
+import { formatEffectiveDate } from '../utils/dateUtils';
 import type { Route, Stop } from '../types';
 
 /**
@@ -381,7 +382,7 @@ export function RouteListBase({
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.75rem',
+                gap: '0.5rem',
                 padding: '0.5rem 0.75rem',
                 height: '40px',
                 flex: 1,
@@ -427,8 +428,26 @@ export function RouteListBase({
                 </div>
               )}
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: '500', marginBottom: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  <span style={{ color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', fontSize: '12px', marginTop: '1px' }}>{route.name}</span>
+                <div style={{ marginBottom: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <span style={{ 
+                    color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', 
+                    fontSize: '15px', 
+                    fontWeight: '600',
+                    marginTop: '1px' 
+                  }}>
+                    {route.name.replace('-upcoming', '')}
+                  </span>
+                  {route.name.includes('-upcoming') && route.effectiveDate && (
+                    <span style={{ 
+                      fontWeight: 'normal', 
+                      fontSize: '13px',
+                      color: 'var(--text-tertiary)', 
+                      marginLeft: '2px',
+                      marginTop: '1.5px'
+                    }}>
+                      ({formatEffectiveDate(route.effectiveDate)})
+                    </span>
+                  )}
                 </div>
                 {config.showGeocodingStats && route.geocodingProgress ? (
                   <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
@@ -447,7 +466,13 @@ export function RouteListBase({
                 )}
               </div>
               {!config.showGeocodingStats && (
-                <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                <div style={{ 
+                  fontSize: '13px', 
+                  color: 'var(--text-tertiary)', 
+                  whiteSpace: 'nowrap', 
+                  flexShrink: 0,
+                  opacity: 0.8
+                }}>
                   {regularStopCount} {regularStopCount === 1 ? 'stop' : 'stops'}
                 </div>
               )}

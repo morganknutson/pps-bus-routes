@@ -22,5 +22,33 @@ export function formatDate(dateString: string): string {
   }
 }
 
+/**
+ * Get ordinal suffix for a day (1st, 2nd, 3rd, etc.)
+ */
+export function getOrdinalSuffix(day: number): string {
+  if (day > 3 && day < 21) return 'th';
+  switch (day % 10) {
+    case 1: return 'st';
+    case 2: return 'nd';
+    case 3: return 'rd';
+    default: return 'th';
+  }
+}
+
+/**
+ * Format effective date for upcoming routes: "Jan 15th, 2026"
+ */
+export function formatEffectiveDate(date: Date | string): string {
+  const d = typeof date === 'string' ? new Date(date) : date;
+  if (!d || isNaN(d.getTime())) return '';
+
+  const month = d.toLocaleDateString('en-US', { month: 'short' });
+  const day = d.getDate();
+  const year = d.getFullYear();
+  const suffix = getOrdinalSuffix(day);
+
+  return `${month} ${day}${suffix}, ${year}`;
+}
+
 
 

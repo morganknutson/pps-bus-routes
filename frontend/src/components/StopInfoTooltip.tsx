@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Route, Stop } from '../types';
 import { formatStreetName, extractStreetNames } from '../utils/formatAddress';
 import { handleMapLinkClick } from '../utils/mapLinks';
+import { formatEffectiveDate } from '../utils/dateUtils';
 
 interface StopInfoTooltipProps {
   route: Route;
@@ -117,7 +118,21 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         backgroundColor: 'var(--bg-secondary)',
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ fontWeight: '700', fontSize: '15px' }}>Route {route.name}</span>
+          <span style={{ fontWeight: '700', fontSize: '15px' }}>
+            Route {route.name.replace('-upcoming', '')}
+            {route.name.includes('-upcoming') && route.effectiveDate && (
+              <span style={{ 
+                fontWeight: 'normal', 
+                fontSize: '13px', 
+                color: 'var(--text-tertiary)', 
+                marginLeft: '6px',
+                marginTop: '1.5px',
+                display: 'inline-block'
+              }}>
+                ({formatEffectiveDate(route.effectiveDate)})
+              </span>
+            )}
+          </span>
           {stopNumber > 0 && (
             <StopPill number={stopNumber} time={stop.time} color={route.color} />
           )}
