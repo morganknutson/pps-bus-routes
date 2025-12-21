@@ -17,11 +17,14 @@ import { SEO } from './components/SEO';
 import { useStore } from './store/useStore';
 import { SchoolsList } from './pages/SchoolsList';
 import { SchoolDirectory } from './pages/SchoolDirectory';
+import { NeighborhoodDirectory } from './pages/NeighborhoodDirectory';
 import { Neighborhoods } from './pages/Neighborhoods';
 import { TechPage } from './pages/TechPage';
 import { VerificationPage } from './pages/VerificationPage';
 import { JobsPage } from './pages/JobsPage';
 import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
 import { ServersPage } from './pages/ServersPage';
 import { ArchitecturePage } from './pages/ArchitecturePage';
 import { School } from './types';
@@ -352,13 +355,12 @@ function ExplorerApp() {
   useEffect(() => {
     const loadSchools = async () => {
       try {
-        console.log('[ExplorerApp] Loading schools...');
-        const response = await fetch('/api/schools');
+        console.log('[ExplorerApp] Loading schools with stats...');
+        const response = await fetch('/api/schools?includeStats=true');
         if (response.ok) {
           const data = await response.json();
           console.log('[ExplorerApp] Loaded', data.schools?.length || 0, 'schools');
           setSchools(data.schools || []);
-          // URL state hook will handle syncing from URL after schools are loaded
         } else {
           console.error('[ExplorerApp] Failed to load schools:', response.status, response.statusText);
         }
@@ -790,13 +792,12 @@ function AdminApp() {
   useEffect(() => {
     const loadSchools = async () => {
       try {
-        console.log('[AdminApp] Loading schools...');
-        const response = await fetch('/api/schools');
+        console.log('[AdminApp] Loading schools with stats...');
+        const response = await fetch('/api/schools?includeStats=true');
         if (response.ok) {
           const data = await response.json();
           console.log('[AdminApp] Loaded', data.schools?.length || 0, 'schools');
           setSchools(data.schools || []);
-          // URL state hook will handle syncing from URL after schools are loaded
         } else {
           console.error('[AdminApp] Failed to load schools:', response.status, response.statusText);
         }
@@ -1089,7 +1090,10 @@ function AppContent() {
   return (
     <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/schools" element={<SchoolDirectory />} />
+        <Route path="/neighborhood-directory" element={<NeighborhoodDirectory />} />
         {/* Path-based routing for bus route explorer - catch-all to handle all segments */}
         <Route path="/bus-route-explorer/*" element={<ExplorerApp />} />
         {/* Path-based routing for admin - catch-all to handle all segments */}

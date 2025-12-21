@@ -28,7 +28,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = 3002;
 
 // Track server start time for uptime calculation
 const serverStartTime = Date.now();
@@ -195,7 +195,12 @@ process.on('unhandledRejection', (reason, promise) => {
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
   console.error('[Server] Uncaught Exception:', error);
-  // Don't exit immediately - let the server try to handle it
+  // Exit if it's a port binding error or other critical startup error
+  if (error.code === 'EADDRINUSE' || error.code === 'EACCES') {
+    console.error(`[Server] Critical error ${error.code}. Exiting.`);
+    process.exit(1);
+  }
+  // For other errors, let the server try to stay alive but log it
 });
 
 app.listen(PORT, () => {

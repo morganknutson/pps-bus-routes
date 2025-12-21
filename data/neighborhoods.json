@@ -1,0 +1,2195 @@
+[
+  {
+    "name": "Ardenwald",
+    "schoolIds": [
+      "sellwood"
+    ],
+    "routeCount": 1,
+    "stopCount": 2,
+    "schools": [
+      {
+        "id": "sellwood",
+        "name": "Sellwood"
+      }
+    ]
+  },
+  {
+    "name": "Arlington Heights",
+    "schoolIds": [
+      "ainsworth",
+      "bridlemile",
+      "west-sylvan"
+    ],
+    "routeCount": 4,
+    "stopCount": 22,
+    "schools": [
+      {
+        "id": "ainsworth",
+        "name": "Ainsworth"
+      },
+      {
+        "id": "bridlemile",
+        "name": "Bridlemile"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      }
+    ]
+  },
+  {
+    "name": "Boise",
+    "schoolIds": [
+      "dr-martin-luther-king"
+    ],
+    "routeCount": 1,
+    "stopCount": 2,
+    "schools": [
+      {
+        "id": "dr-martin-luther-king",
+        "name": "Dr Martin Luther King"
+      }
+    ]
+  },
+  {
+    "name": "Brentwood-Darlington",
+    "schoolIds": [
+      "kellogg",
+      "lane",
+      "lent",
+      "lewis",
+      "mt-tabor",
+      "sellwood",
+      "whitman",
+      "woodmere"
+    ],
+    "routeCount": 11,
+    "stopCount": 61,
+    "schools": [
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "lane",
+        "name": "Lane"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "lewis",
+        "name": "Lewis"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "sellwood",
+        "name": "Sellwood"
+      },
+      {
+        "id": "whitman",
+        "name": "Whitman"
+      },
+      {
+        "id": "woodmere",
+        "name": "Woodmere"
+      }
+    ]
+  },
+  {
+    "name": "Bridgeton",
+    "schoolIds": [
+      "cesar-chavez",
+      "faubion"
+    ],
+    "routeCount": 3,
+    "stopCount": 10,
+    "schools": [
+      {
+        "id": "cesar-chavez",
+        "name": "Cesar Chavez"
+      },
+      {
+        "id": "faubion",
+        "name": "Faubion"
+      }
+    ]
+  },
+  {
+    "name": "Bridlemile",
+    "schoolIds": [
+      "bridlemile",
+      "gray",
+      "west-sylvan"
+    ],
+    "routeCount": 4,
+    "stopCount": 14,
+    "schools": [
+      {
+        "id": "bridlemile",
+        "name": "Bridlemile"
+      },
+      {
+        "id": "gray",
+        "name": "Gray"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      }
+    ]
+  },
+  {
+    "name": "Brooklyn",
+    "schoolIds": [
+      "duniway",
+      "grout",
+      "hosford",
+      "kellogg",
+      "llewellyn"
+    ],
+    "routeCount": 6,
+    "stopCount": 21,
+    "schools": [
+      {
+        "id": "duniway",
+        "name": "Duniway"
+      },
+      {
+        "id": "grout",
+        "name": "Grout"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "llewellyn",
+        "name": "Llewellyn"
+      }
+    ]
+  },
+  {
+    "name": "Cathedral Park",
+    "schoolIds": [
+      "george",
+      "richmond"
+    ],
+    "routeCount": 2,
+    "stopCount": 4,
+    "schools": [
+      {
+        "id": "george",
+        "name": "George"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      }
+    ]
+  },
+  {
+    "name": "Concordia",
+    "schoolIds": [
+      "beaumont",
+      "faubion",
+      "mt-tabor",
+      "richmond",
+      "rigler",
+      "rose-city-park",
+      "vernon",
+      "woodlawn"
+    ],
+    "routeCount": 14,
+    "stopCount": 28,
+    "schools": [
+      {
+        "id": "beaumont",
+        "name": "Beaumont"
+      },
+      {
+        "id": "faubion",
+        "name": "Faubion"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "vernon",
+        "name": "Vernon"
+      },
+      {
+        "id": "woodlawn",
+        "name": "Woodlawn"
+      }
+    ]
+  },
+  {
+    "name": "Creston - Kenilworth",
+    "schoolIds": [
+      "arleta",
+      "atkinson",
+      "creston",
+      "grout",
+      "hosford",
+      "kellogg",
+      "mt-tabor"
+    ],
+    "routeCount": 9,
+    "stopCount": 28,
+    "schools": [
+      {
+        "id": "arleta",
+        "name": "Arleta"
+      },
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "creston",
+        "name": "Creston"
+      },
+      {
+        "id": "grout",
+        "name": "Grout"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      }
+    ]
+  },
+  {
+    "name": "Cully",
+    "schoolIds": [
+      "beaumont",
+      "mt-tabor",
+      "richmond",
+      "rigler",
+      "rose-city-park",
+      "roseway-heights",
+      "scott",
+      "vernon"
+    ],
+    "routeCount": 14,
+    "stopCount": 122,
+    "schools": [
+      {
+        "id": "beaumont",
+        "name": "Beaumont"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "roseway-heights",
+        "name": "Roseway Heights"
+      },
+      {
+        "id": "scott",
+        "name": "Scott"
+      },
+      {
+        "id": "vernon",
+        "name": "Vernon"
+      }
+    ]
+  },
+  {
+    "name": "Darlington",
+    "schoolIds": [
+      "lane",
+      "lewis",
+      "sellwood"
+    ],
+    "routeCount": 3,
+    "stopCount": 6,
+    "schools": [
+      {
+        "id": "lane",
+        "name": "Lane"
+      },
+      {
+        "id": "lewis",
+        "name": "Lewis"
+      },
+      {
+        "id": "sellwood",
+        "name": "Sellwood"
+      }
+    ]
+  },
+  {
+    "name": "East Columbia",
+    "schoolIds": [
+      "cesar-chavez",
+      "faubion"
+    ],
+    "routeCount": 4,
+    "stopCount": 29,
+    "schools": [
+      {
+        "id": "cesar-chavez",
+        "name": "Cesar Chavez"
+      },
+      {
+        "id": "faubion",
+        "name": "Faubion"
+      }
+    ]
+  },
+  {
+    "name": "Eliot",
+    "schoolIds": [
+      "boise-eliot"
+    ],
+    "routeCount": 1,
+    "stopCount": 2,
+    "schools": [
+      {
+        "id": "boise-eliot",
+        "name": "Boise-Eliot"
+      }
+    ]
+  },
+  {
+    "name": "Forest Park",
+    "schoolIds": [
+      "ainsworth",
+      "forest-park",
+      "lincoln",
+      "skyline",
+      "west-sylvan"
+    ],
+    "routeCount": 13,
+    "stopCount": 76,
+    "schools": [
+      {
+        "id": "ainsworth",
+        "name": "Ainsworth"
+      },
+      {
+        "id": "forest-park",
+        "name": "Forest Park"
+      },
+      {
+        "id": "lincoln",
+        "name": "Lincoln"
+      },
+      {
+        "id": "skyline",
+        "name": "Skyline"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      }
+    ]
+  },
+  {
+    "name": "Foster - Powell",
+    "schoolIds": [
+      "arleta",
+      "bridger",
+      "creston",
+      "harrison-park",
+      "hosford",
+      "lent",
+      "marysville",
+      "richmond",
+      "rose-city-park",
+      "roseway-heights"
+    ],
+    "routeCount": 12,
+    "stopCount": 26,
+    "schools": [
+      {
+        "id": "arleta",
+        "name": "Arleta"
+      },
+      {
+        "id": "bridger",
+        "name": "Bridger"
+      },
+      {
+        "id": "creston",
+        "name": "Creston"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "marysville",
+        "name": "Marysville"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "roseway-heights",
+        "name": "Roseway Heights"
+      }
+    ]
+  },
+  {
+    "name": "Goose Hollow",
+    "schoolIds": [
+      "ainsworth",
+      "chapman",
+      "west-sylvan"
+    ],
+    "routeCount": 6,
+    "stopCount": 18,
+    "schools": [
+      {
+        "id": "ainsworth",
+        "name": "Ainsworth"
+      },
+      {
+        "id": "chapman",
+        "name": "Chapman"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      }
+    ]
+  },
+  {
+    "name": "Grant Park",
+    "schoolIds": [
+      "beverly-cleary",
+      "mt-tabor",
+      "richmond",
+      "sabin"
+    ],
+    "routeCount": 5,
+    "stopCount": 16,
+    "schools": [
+      {
+        "id": "beverly-cleary",
+        "name": "Beverly Cleary"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "sabin",
+        "name": "Sabin"
+      }
+    ]
+  },
+  {
+    "name": "Hayden Island Neighborhood Network",
+    "schoolIds": [
+      "beach",
+      "cesar-chavez",
+      "faubion"
+    ],
+    "routeCount": 4,
+    "stopCount": 18,
+    "schools": [
+      {
+        "id": "beach",
+        "name": "Beach"
+      },
+      {
+        "id": "cesar-chavez",
+        "name": "Cesar Chavez"
+      },
+      {
+        "id": "faubion",
+        "name": "Faubion"
+      }
+    ]
+  },
+  {
+    "name": "Hayhurst",
+    "schoolIds": [
+      "ainsworth",
+      "bridlemile",
+      "gray",
+      "hayhurst",
+      "jackson",
+      "maplewood",
+      "mt-tabor",
+      "west-sylvan"
+    ],
+    "routeCount": 15,
+    "stopCount": 133,
+    "schools": [
+      {
+        "id": "ainsworth",
+        "name": "Ainsworth"
+      },
+      {
+        "id": "bridlemile",
+        "name": "Bridlemile"
+      },
+      {
+        "id": "gray",
+        "name": "Gray"
+      },
+      {
+        "id": "hayhurst",
+        "name": "Hayhurst"
+      },
+      {
+        "id": "jackson",
+        "name": "Jackson"
+      },
+      {
+        "id": "maplewood",
+        "name": "Maplewood"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      }
+    ]
+  },
+  {
+    "name": "Hazelwood",
+    "schoolIds": [
+      "woodstock"
+    ],
+    "routeCount": 1,
+    "stopCount": 1,
+    "schools": [
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "Hollywood",
+    "schoolIds": [
+      "mt-tabor",
+      "richmond",
+      "rigler",
+      "roseway-heights",
+      "sabin"
+    ],
+    "routeCount": 6,
+    "stopCount": 12,
+    "schools": [
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      },
+      {
+        "id": "roseway-heights",
+        "name": "Roseway Heights"
+      },
+      {
+        "id": "sabin",
+        "name": "Sabin"
+      }
+    ]
+  },
+  {
+    "name": "Hosford-Abernethy",
+    "schoolIds": [
+      "abernethy",
+      "kellogg",
+      "mt-tabor"
+    ],
+    "routeCount": 3,
+    "stopCount": 8,
+    "schools": [
+      {
+        "id": "abernethy",
+        "name": "Abernethy"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      }
+    ]
+  },
+  {
+    "name": "Humboldt",
+    "schoolIds": [
+      "boise-eliot"
+    ],
+    "routeCount": 1,
+    "stopCount": 2,
+    "schools": [
+      {
+        "id": "boise-eliot",
+        "name": "Boise-Eliot"
+      }
+    ]
+  },
+  {
+    "name": "Irvington",
+    "schoolIds": [
+      "irvington"
+    ],
+    "routeCount": 1,
+    "stopCount": 2,
+    "schools": [
+      {
+        "id": "irvington",
+        "name": "Irvington"
+      }
+    ]
+  },
+  {
+    "name": "Kerns",
+    "schoolIds": [
+      "bridger",
+      "buckman",
+      "hosford",
+      "rigler"
+    ],
+    "routeCount": 4,
+    "stopCount": 8,
+    "schools": [
+      {
+        "id": "bridger",
+        "name": "Bridger"
+      },
+      {
+        "id": "buckman",
+        "name": "Buckman"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      }
+    ]
+  },
+  {
+    "name": "King",
+    "schoolIds": [
+      "beach",
+      "boise-eliot",
+      "dr-martin-luther-king",
+      "faubion",
+      "ockley-green",
+      "richmond",
+      "sabin",
+      "tubman",
+      "vernon",
+      "woodlawn"
+    ],
+    "routeCount": 11,
+    "stopCount": 29,
+    "schools": [
+      {
+        "id": "beach",
+        "name": "Beach"
+      },
+      {
+        "id": "boise-eliot",
+        "name": "Boise-Eliot"
+      },
+      {
+        "id": "dr-martin-luther-king",
+        "name": "Dr Martin Luther King"
+      },
+      {
+        "id": "faubion",
+        "name": "Faubion"
+      },
+      {
+        "id": "ockley-green",
+        "name": "Ockley Green"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "sabin",
+        "name": "Sabin"
+      },
+      {
+        "id": "tubman",
+        "name": "Tubman"
+      },
+      {
+        "id": "vernon",
+        "name": "Vernon"
+      },
+      {
+        "id": "woodlawn",
+        "name": "Woodlawn"
+      }
+    ]
+  },
+  {
+    "name": "Ladd's Addition",
+    "schoolIds": [
+      "abernethy",
+      "atkinson",
+      "richmond"
+    ],
+    "routeCount": 5,
+    "stopCount": 9,
+    "schools": [
+      {
+        "id": "abernethy",
+        "name": "Abernethy"
+      },
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      }
+    ]
+  },
+  {
+    "name": "Laurelhurst",
+    "schoolIds": [
+      "mt-tabor",
+      "richmond"
+    ],
+    "routeCount": 2,
+    "stopCount": 4,
+    "schools": [
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      }
+    ]
+  },
+  {
+    "name": "Lents",
+    "schoolIds": [
+      "arleta",
+      "atkinson",
+      "clark",
+      "harrison-park",
+      "kellogg",
+      "kelly",
+      "lane",
+      "lent",
+      "marysville",
+      "mt-tabor",
+      "richmond",
+      "rose-city-park",
+      "whitman",
+      "woodmere",
+      "woodstock"
+    ],
+    "routeCount": 24,
+    "stopCount": 159,
+    "schools": [
+      {
+        "id": "arleta",
+        "name": "Arleta"
+      },
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "clark",
+        "name": "Clark"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "kelly",
+        "name": "Kelly"
+      },
+      {
+        "id": "lane",
+        "name": "Lane"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "marysville",
+        "name": "Marysville"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "whitman",
+        "name": "Whitman"
+      },
+      {
+        "id": "woodmere",
+        "name": "Woodmere"
+      },
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "Linnton",
+    "schoolIds": [
+      "skyline"
+    ],
+    "routeCount": 1,
+    "stopCount": 4,
+    "schools": [
+      {
+        "id": "skyline",
+        "name": "Skyline"
+      }
+    ]
+  },
+  {
+    "name": "Markham",
+    "schoolIds": [
+      "capitol",
+      "jackson",
+      "markham",
+      "richmond",
+      "stephenson",
+      "woodstock"
+    ],
+    "routeCount": 12,
+    "stopCount": 60,
+    "schools": [
+      {
+        "id": "capitol",
+        "name": "Capitol"
+      },
+      {
+        "id": "jackson",
+        "name": "Jackson"
+      },
+      {
+        "id": "markham",
+        "name": "Markham"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "stephenson",
+        "name": "Stephenson"
+      },
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "Metzger",
+    "schoolIds": [
+      "jackson",
+      "markham"
+    ],
+    "routeCount": 2,
+    "stopCount": 4,
+    "schools": [
+      {
+        "id": "jackson",
+        "name": "Jackson"
+      },
+      {
+        "id": "markham",
+        "name": "Markham"
+      }
+    ]
+  },
+  {
+    "name": "Montavilla",
+    "schoolIds": [
+      "atkinson",
+      "bridger",
+      "buckman",
+      "clark",
+      "harrison-park",
+      "kellogg",
+      "lent",
+      "richmond",
+      "rose-city-park",
+      "roseway-heights",
+      "vestal",
+      "woodstock"
+    ],
+    "routeCount": 18,
+    "stopCount": 96,
+    "schools": [
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "bridger",
+        "name": "Bridger"
+      },
+      {
+        "id": "buckman",
+        "name": "Buckman"
+      },
+      {
+        "id": "clark",
+        "name": "Clark"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "roseway-heights",
+        "name": "Roseway Heights"
+      },
+      {
+        "id": "vestal",
+        "name": "Vestal"
+      },
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "Mount Park",
+    "schoolIds": [
+      "jackson",
+      "stephenson"
+    ],
+    "routeCount": 3,
+    "stopCount": 28,
+    "schools": [
+      {
+        "id": "jackson",
+        "name": "Jackson"
+      },
+      {
+        "id": "stephenson",
+        "name": "Stephenson"
+      }
+    ]
+  },
+  {
+    "name": "Mount Scott - Arleta",
+    "schoolIds": [
+      "arleta",
+      "atkinson",
+      "harrison-park",
+      "hosford",
+      "kellogg",
+      "lane",
+      "mt-tabor",
+      "richmond",
+      "woodstock"
+    ],
+    "routeCount": 10,
+    "stopCount": 33,
+    "schools": [
+      {
+        "id": "arleta",
+        "name": "Arleta"
+      },
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "lane",
+        "name": "Lane"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "North Portland",
+    "schoolIds": [
+      "astor",
+      "beach",
+      "benson",
+      "boise-eliot",
+      "cesar-chavez",
+      "chief-joseph",
+      "dr-martin-luther-king",
+      "faubion",
+      "george",
+      "james-john",
+      "mt-tabor",
+      "ockley-green",
+      "peninsula",
+      "richmond",
+      "rosa-parks",
+      "sabin",
+      "sitton",
+      "tubman",
+      "woodlawn"
+    ],
+    "routeCount": 32,
+    "stopCount": 285,
+    "schools": [
+      {
+        "id": "astor",
+        "name": "Astor"
+      },
+      {
+        "id": "beach",
+        "name": "Beach"
+      },
+      {
+        "id": "benson",
+        "name": "Benson"
+      },
+      {
+        "id": "boise-eliot",
+        "name": "Boise-Eliot"
+      },
+      {
+        "id": "cesar-chavez",
+        "name": "Cesar Chavez"
+      },
+      {
+        "id": "chief-joseph",
+        "name": "Chief Joseph"
+      },
+      {
+        "id": "dr-martin-luther-king",
+        "name": "Dr Martin Luther King"
+      },
+      {
+        "id": "faubion",
+        "name": "Faubion"
+      },
+      {
+        "id": "george",
+        "name": "George"
+      },
+      {
+        "id": "james-john",
+        "name": "James John"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "ockley-green",
+        "name": "Ockley Green"
+      },
+      {
+        "id": "peninsula",
+        "name": "Peninsula"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rosa-parks",
+        "name": "Rosa Parks"
+      },
+      {
+        "id": "sabin",
+        "name": "Sabin"
+      },
+      {
+        "id": "sitton",
+        "name": "Sitton"
+      },
+      {
+        "id": "tubman",
+        "name": "Tubman"
+      },
+      {
+        "id": "woodlawn",
+        "name": "Woodlawn"
+      }
+    ]
+  },
+  {
+    "name": "North Tabor",
+    "schoolIds": [
+      "atkinson",
+      "glencoe",
+      "kellogg",
+      "mt-tabor",
+      "vestal"
+    ],
+    "routeCount": 6,
+    "stopCount": 34,
+    "schools": [
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "glencoe",
+        "name": "Glencoe"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "vestal",
+        "name": "Vestal"
+      }
+    ]
+  },
+  {
+    "name": "Northeast Portland",
+    "schoolIds": [
+      "alameda",
+      "beaumont",
+      "beverly-cleary",
+      "buckman",
+      "cesar-chavez",
+      "hosford",
+      "kellogg",
+      "lee",
+      "lent",
+      "mt-tabor",
+      "ockley-green",
+      "richmond",
+      "rigler",
+      "rose-city-park",
+      "roseway-heights",
+      "sabin",
+      "scott",
+      "tubman",
+      "vernon"
+    ],
+    "routeCount": 30,
+    "stopCount": 116,
+    "schools": [
+      {
+        "id": "alameda",
+        "name": "Alameda"
+      },
+      {
+        "id": "beaumont",
+        "name": "Beaumont"
+      },
+      {
+        "id": "beverly-cleary",
+        "name": "Beverly Cleary"
+      },
+      {
+        "id": "buckman",
+        "name": "Buckman"
+      },
+      {
+        "id": "cesar-chavez",
+        "name": "Cesar Chavez"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "lee",
+        "name": "Lee"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "ockley-green",
+        "name": "Ockley Green"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "roseway-heights",
+        "name": "Roseway Heights"
+      },
+      {
+        "id": "sabin",
+        "name": "Sabin"
+      },
+      {
+        "id": "scott",
+        "name": "Scott"
+      },
+      {
+        "id": "tubman",
+        "name": "Tubman"
+      },
+      {
+        "id": "vernon",
+        "name": "Vernon"
+      }
+    ]
+  },
+  {
+    "name": "Northwest Portland",
+    "schoolIds": [
+      "ainsworth",
+      "chapman",
+      "forest-park",
+      "lincoln",
+      "mt-tabor",
+      "richmond",
+      "skyline",
+      "west-sylvan"
+    ],
+    "routeCount": 33,
+    "stopCount": 492,
+    "schools": [
+      {
+        "id": "ainsworth",
+        "name": "Ainsworth"
+      },
+      {
+        "id": "chapman",
+        "name": "Chapman"
+      },
+      {
+        "id": "forest-park",
+        "name": "Forest Park"
+      },
+      {
+        "id": "lincoln",
+        "name": "Lincoln"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "skyline",
+        "name": "Skyline"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      }
+    ]
+  },
+  {
+    "name": "Overlook",
+    "schoolIds": [
+      "beach",
+      "markham",
+      "mt-tabor",
+      "ockley-green",
+      "richmond"
+    ],
+    "routeCount": 8,
+    "stopCount": 14,
+    "schools": [
+      {
+        "id": "beach",
+        "name": "Beach"
+      },
+      {
+        "id": "markham",
+        "name": "Markham"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "ockley-green",
+        "name": "Ockley Green"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      }
+    ]
+  },
+  {
+    "name": "Powellhurst-Gilbert",
+    "schoolIds": [
+      "atkinson",
+      "clark",
+      "harrison-park",
+      "lane",
+      "lent",
+      "richmond",
+      "rose-city-park",
+      "roseway-heights",
+      "woodstock"
+    ],
+    "routeCount": 12,
+    "stopCount": 44,
+    "schools": [
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "clark",
+        "name": "Clark"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "lane",
+        "name": "Lane"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "roseway-heights",
+        "name": "Roseway Heights"
+      },
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "Reed",
+    "schoolIds": [
+      "hosford"
+    ],
+    "routeCount": 2,
+    "stopCount": 6,
+    "schools": [
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      }
+    ]
+  },
+  {
+    "name": "Richmond",
+    "schoolIds": [
+      "abernethy",
+      "atkinson",
+      "creston",
+      "glencoe",
+      "harrison-park",
+      "hosford",
+      "kellogg",
+      "mt-tabor",
+      "woodstock"
+    ],
+    "routeCount": 11,
+    "stopCount": 32,
+    "schools": [
+      {
+        "id": "abernethy",
+        "name": "Abernethy"
+      },
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "creston",
+        "name": "Creston"
+      },
+      {
+        "id": "glencoe",
+        "name": "Glencoe"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "Rose City Park",
+    "schoolIds": [
+      "alameda",
+      "atkinson",
+      "beaumont",
+      "beverly-cleary",
+      "mt-tabor",
+      "richmond",
+      "rigler",
+      "rose-city-park",
+      "roseway-heights",
+      "sabin",
+      "scott"
+    ],
+    "routeCount": 14,
+    "stopCount": 50,
+    "schools": [
+      {
+        "id": "alameda",
+        "name": "Alameda"
+      },
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "beaumont",
+        "name": "Beaumont"
+      },
+      {
+        "id": "beverly-cleary",
+        "name": "Beverly Cleary"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "roseway-heights",
+        "name": "Roseway Heights"
+      },
+      {
+        "id": "sabin",
+        "name": "Sabin"
+      },
+      {
+        "id": "scott",
+        "name": "Scott"
+      }
+    ]
+  },
+  {
+    "name": "Roseway",
+    "schoolIds": [
+      "clark",
+      "kellogg",
+      "lee",
+      "lent",
+      "rigler",
+      "rose-city-park",
+      "scott",
+      "vestal"
+    ],
+    "routeCount": 8,
+    "stopCount": 25,
+    "schools": [
+      {
+        "id": "clark",
+        "name": "Clark"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "lee",
+        "name": "Lee"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "scott",
+        "name": "Scott"
+      },
+      {
+        "id": "vestal",
+        "name": "Vestal"
+      }
+    ]
+  },
+  {
+    "name": "Sabin",
+    "schoolIds": [
+      "mt-tabor",
+      "richmond",
+      "tubman"
+    ],
+    "routeCount": 4,
+    "stopCount": 18,
+    "schools": [
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "tubman",
+        "name": "Tubman"
+      }
+    ]
+  },
+  {
+    "name": "South Tabor",
+    "schoolIds": [
+      "arleta",
+      "atkinson",
+      "bridger",
+      "harrison-park",
+      "lent",
+      "mt-tabor",
+      "richmond"
+    ],
+    "routeCount": 11,
+    "stopCount": 51,
+    "schools": [
+      {
+        "id": "arleta",
+        "name": "Arleta"
+      },
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "bridger",
+        "name": "Bridger"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      }
+    ]
+  },
+  {
+    "name": "Southeast Portland",
+    "schoolIds": [
+      "atkinson",
+      "bridger",
+      "buckman",
+      "clark",
+      "creston",
+      "duniway",
+      "glencoe",
+      "harrison-park",
+      "hosford",
+      "kellogg",
+      "lane",
+      "lent",
+      "lewis",
+      "llewellyn",
+      "marysville",
+      "mt-tabor",
+      "richmond",
+      "rose-city-park",
+      "roseway-heights",
+      "sabin",
+      "sellwood",
+      "whitman",
+      "woodmere",
+      "woodstock"
+    ],
+    "routeCount": 46,
+    "stopCount": 190,
+    "schools": [
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "bridger",
+        "name": "Bridger"
+      },
+      {
+        "id": "buckman",
+        "name": "Buckman"
+      },
+      {
+        "id": "clark",
+        "name": "Clark"
+      },
+      {
+        "id": "creston",
+        "name": "Creston"
+      },
+      {
+        "id": "duniway",
+        "name": "Duniway"
+      },
+      {
+        "id": "glencoe",
+        "name": "Glencoe"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "kellogg",
+        "name": "Kellogg"
+      },
+      {
+        "id": "lane",
+        "name": "Lane"
+      },
+      {
+        "id": "lent",
+        "name": "Lent"
+      },
+      {
+        "id": "lewis",
+        "name": "Lewis"
+      },
+      {
+        "id": "llewellyn",
+        "name": "Llewellyn"
+      },
+      {
+        "id": "marysville",
+        "name": "Marysville"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rose-city-park",
+        "name": "Rose City Park"
+      },
+      {
+        "id": "roseway-heights",
+        "name": "Roseway Heights"
+      },
+      {
+        "id": "sabin",
+        "name": "Sabin"
+      },
+      {
+        "id": "sellwood",
+        "name": "Sellwood"
+      },
+      {
+        "id": "whitman",
+        "name": "Whitman"
+      },
+      {
+        "id": "woodmere",
+        "name": "Woodmere"
+      },
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "Southwest Hills",
+    "schoolIds": [
+      "ainsworth",
+      "bridlemile",
+      "gray",
+      "lincoln",
+      "rieke",
+      "skyline",
+      "west-sylvan"
+    ],
+    "routeCount": 26,
+    "stopCount": 220,
+    "schools": [
+      {
+        "id": "ainsworth",
+        "name": "Ainsworth"
+      },
+      {
+        "id": "bridlemile",
+        "name": "Bridlemile"
+      },
+      {
+        "id": "gray",
+        "name": "Gray"
+      },
+      {
+        "id": "lincoln",
+        "name": "Lincoln"
+      },
+      {
+        "id": "rieke",
+        "name": "Rieke"
+      },
+      {
+        "id": "skyline",
+        "name": "Skyline"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      }
+    ]
+  },
+  {
+    "name": "Southwest Portland",
+    "schoolIds": [
+      "ainsworth",
+      "bridlemile",
+      "capitol",
+      "chapman",
+      "gray",
+      "harrison-park",
+      "hayhurst",
+      "jackson",
+      "maplewood",
+      "markham",
+      "ockley-green",
+      "richmond",
+      "rieke",
+      "rigler",
+      "stephenson",
+      "west-sylvan",
+      "woodlawn",
+      "woodstock"
+    ],
+    "routeCount": 76,
+    "stopCount": 1276,
+    "schools": [
+      {
+        "id": "ainsworth",
+        "name": "Ainsworth"
+      },
+      {
+        "id": "bridlemile",
+        "name": "Bridlemile"
+      },
+      {
+        "id": "capitol",
+        "name": "Capitol"
+      },
+      {
+        "id": "chapman",
+        "name": "Chapman"
+      },
+      {
+        "id": "gray",
+        "name": "Gray"
+      },
+      {
+        "id": "harrison-park",
+        "name": "Harrison Park"
+      },
+      {
+        "id": "hayhurst",
+        "name": "Hayhurst"
+      },
+      {
+        "id": "jackson",
+        "name": "Jackson"
+      },
+      {
+        "id": "maplewood",
+        "name": "Maplewood"
+      },
+      {
+        "id": "markham",
+        "name": "Markham"
+      },
+      {
+        "id": "ockley-green",
+        "name": "Ockley Green"
+      },
+      {
+        "id": "richmond",
+        "name": "Richmond"
+      },
+      {
+        "id": "rieke",
+        "name": "Rieke"
+      },
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      },
+      {
+        "id": "stephenson",
+        "name": "Stephenson"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      },
+      {
+        "id": "woodlawn",
+        "name": "Woodlawn"
+      },
+      {
+        "id": "woodstock",
+        "name": "Woodstock"
+      }
+    ]
+  },
+  {
+    "name": "Sullivan's Gulch",
+    "schoolIds": [
+      "beverly-cleary",
+      "buckman",
+      "hosford",
+      "irvington",
+      "sabin",
+      "tubman"
+    ],
+    "routeCount": 7,
+    "stopCount": 15,
+    "schools": [
+      {
+        "id": "beverly-cleary",
+        "name": "Beverly Cleary"
+      },
+      {
+        "id": "buckman",
+        "name": "Buckman"
+      },
+      {
+        "id": "hosford",
+        "name": "Hosford"
+      },
+      {
+        "id": "irvington",
+        "name": "Irvington"
+      },
+      {
+        "id": "sabin",
+        "name": "Sabin"
+      },
+      {
+        "id": "tubman",
+        "name": "Tubman"
+      }
+    ]
+  },
+  {
+    "name": "Sunderland",
+    "schoolIds": [
+      "rigler"
+    ],
+    "routeCount": 1,
+    "stopCount": 2,
+    "schools": [
+      {
+        "id": "rigler",
+        "name": "Rigler"
+      }
+    ]
+  },
+  {
+    "name": "Sunnyside",
+    "schoolIds": [
+      "atkinson",
+      "mt-tabor"
+    ],
+    "routeCount": 2,
+    "stopCount": 4,
+    "schools": [
+      {
+        "id": "atkinson",
+        "name": "Atkinson"
+      },
+      {
+        "id": "mt-tabor",
+        "name": "Mt Tabor"
+      }
+    ]
+  },
+  {
+    "name": "Vernon",
+    "schoolIds": [
+      "beach",
+      "dr-martin-luther-king",
+      "faubion"
+    ],
+    "routeCount": 3,
+    "stopCount": 5,
+    "schools": [
+      {
+        "id": "beach",
+        "name": "Beach"
+      },
+      {
+        "id": "dr-martin-luther-king",
+        "name": "Dr Martin Luther King"
+      },
+      {
+        "id": "faubion",
+        "name": "Faubion"
+      }
+    ]
+  },
+  {
+    "name": "West Portland Park",
+    "schoolIds": [
+      "ainsworth",
+      "jackson",
+      "markham",
+      "stephenson",
+      "west-sylvan"
+    ],
+    "routeCount": 12,
+    "stopCount": 66,
+    "schools": [
+      {
+        "id": "ainsworth",
+        "name": "Ainsworth"
+      },
+      {
+        "id": "jackson",
+        "name": "Jackson"
+      },
+      {
+        "id": "markham",
+        "name": "Markham"
+      },
+      {
+        "id": "stephenson",
+        "name": "Stephenson"
+      },
+      {
+        "id": "west-sylvan",
+        "name": "West Sylvan"
+      }
+    ]
+  },
+  {
+    "name": "Woodlawn",
+    "schoolIds": [
+      "beach",
+      "ockley-green"
+    ],
+    "routeCount": 3,
+    "stopCount": 12,
+    "schools": [
+      {
+        "id": "beach",
+        "name": "Beach"
+      },
+      {
+        "id": "ockley-green",
+        "name": "Ockley Green"
+      }
+    ]
+  }
+]

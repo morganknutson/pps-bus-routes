@@ -2,6 +2,11 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { School } from '../types';
 
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -11,6 +16,7 @@ interface SEOProps {
   ogImage?: string;
   twitterCard?: string;
   school?: School;
+  faqItems?: FAQItem[];
 }
 
 export const SEO: React.FC<SEOProps> = ({
@@ -22,6 +28,7 @@ export const SEO: React.FC<SEOProps> = ({
   ogImage = '/school-bus-front.svg',
   twitterCard = 'summary_large_image',
   school,
+  faqItems,
 }) => {
   const siteTitle = 'PPS Bus Routes';
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
@@ -68,6 +75,22 @@ export const SEO: React.FC<SEOProps> = ({
     }
 
     structuredData.push(schoolSchema);
+  }
+
+  // 3. FAQ Schema
+  if (faqItems && faqItems.length > 0) {
+    structuredData.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
+    });
   }
 
   return (

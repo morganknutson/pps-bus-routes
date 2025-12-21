@@ -8,34 +8,81 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 
 export function SchoolDirectory() {
   const [schools, setSchools] = useState<School[]>([]);
+  const [neighborhoods, setNeighborhoods] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    async function fetchSchools() {
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.style.overflow = 'auto';
+      rootElement.style.height = 'auto';
+      rootElement.style.minHeight = '100vh';
+    }
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    
+    return () => {
+      if (rootElement) {
+        rootElement.style.overflow = 'hidden';
+        rootElement.style.height = 'var(--app-height)';
+      }
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    };
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
       try {
         setLoading(true);
-        const response = await fetch('/api/schools');
-        if (response.ok) {
-          const data = await response.json();
+        const [schoolsRes, neighborhoodsRes] = await Promise.all([
+          fetch('/api/schools'),
+          fetch('/api/neighborhoods/data')
+        ]);
+        
+        if (schoolsRes.ok) {
+          const data = await schoolsRes.json();
           setSchools(data.schools || []);
         }
+        
+        if (neighborhoodsRes.ok) {
+          const data = await neighborhoodsRes.json();
+          setNeighborhoods(data);
+        }
       } catch (err) {
-        console.error('Failed to load schools:', err);
+        console.error('Failed to load data:', err);
       } finally {
         setLoading(false);
       }
     }
-    fetchSchools();
+    fetchData();
   }, []);
 
+  // Map school IDs to neighborhood names
+  const schoolToNeighborhood = useMemo(() => {
+    const map = new Map<string, string>();
+    neighborhoods.forEach(n => {
+      n.schoolIds.forEach((id: string) => {
+        // If multiple neighborhoods serve a school, we'll just take the last one for now
+        // or we could combine them.
+        map.set(id, n.name);
+      });
+    });
+    return map;
+  }, [neighborhoods]);
+
   const filteredSchools = useMemo(() => {
-    return schools.filter(school =>
-      school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase()))
-    ).sort((a, b) => a.name.localeCompare(b.name));
-  }, [schools, searchTerm]);
+    return schools.filter(school => {
+      const neighborhood = schoolToNeighborhood.get(school.id) || '';
+      return (
+        school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        neighborhood.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }).sort((a, b) => a.name.localeCompare(b.name));
+  }, [schools, searchTerm, schoolToNeighborhood]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
@@ -54,15 +101,31 @@ export function SchoolDirectory() {
         boxSizing: 'border-box'
       }}>
         <div style={{ marginBottom: '2rem' }}>
-          <h1 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>PPS School Directory</h1>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-            Select a school to view its interactive bus route maps and stop schedules.
-          </p>
+          <h1 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>PPS Bus Routes & Stops Directory</h1>
+          <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+            <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
+              Select a school to view its interactive bus route maps and stop schedules.
+            </p>
+            <Link 
+              to="/neighborhood-directory" 
+              style={{ 
+                color: '#4ECDC4', 
+                textDecoration: 'none', 
+                fontSize: '0.875rem',
+                fontWeight: '600',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+            >
+              <i className="fas fa-city"></i> Browse by Neighborhood
+            </Link>
+          </div>
           
           <div style={{ position: 'relative', maxWidth: '500px' }}>
             <input
               type="text"
-              placeholder="Search schools by name or address..."
+              placeholder="Search by school, address, or neighborhood..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{
@@ -102,6 +165,7 @@ export function SchoolDirectory() {
             {filteredSchools.map(school => {
               const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
               const schoolColor = getSchoolColor(schoolTypes);
+              const neighborhood = schoolToNeighborhood.get(school.id);
               
               return (
                 <Link 
@@ -131,15 +195,30 @@ export function SchoolDirectory() {
                     margin: '0 0 0.5rem 0', 
                     fontSize: '1.25rem', 
                     color: 'var(--text-primary)' 
-                  }}>{school.name}</h2>
+                  }}>{school.name} Bus Routes & Stops</h2>
                   
                   <div style={{ 
                     fontSize: '0.875rem', 
                     color: schoolColor, 
                     fontWeight: '600',
-                    marginBottom: '0.75rem'
+                    marginBottom: '0.75rem',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                   }}>
-                    {schoolTypes.join(' & ')}
+                    <span>{schoolTypes.join(' & ')}</span>
+                    {neighborhood && (
+                      <span style={{ 
+                        fontSize: '0.75rem', 
+                        color: 'var(--text-tertiary)',
+                        fontWeight: 'normal',
+                        padding: '0.125rem 0.5rem',
+                        backgroundColor: 'var(--bg-tertiary)',
+                        borderRadius: '4px'
+                      }}>
+                        {neighborhood}
+                      </span>
+                    )}
                   </div>
                   
                   {school.address && (

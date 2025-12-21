@@ -19,7 +19,26 @@ This document provides a comprehensive index of all pages in the application to 
 
 ---
 
-### 2. Explorer (`/bus-route-explorer`)
+### 2. About Page (`/about`)
+- **File**: `frontend/src/pages/AboutPage.tsx`
+- **Purpose**: Informational page about the application
+- **Key Features**:
+  - Explains the purpose of the app
+  - Information about data sources
+  - Disclaimer about official information
+
+---
+
+### 3. Contact Page (`/contact`)
+- **File**: `frontend/src/pages/ContactPage.tsx`
+- **Purpose**: Contact information for users
+- **Key Features**:
+  - PPS Transportation contact details
+  - Technical support information
+
+---
+
+### 4. Explorer (`/bus-route-explorer`)
 - **Component**: `ExplorerApp` (defined in `frontend/src/App.tsx`)
 - **Purpose**: Main interactive map page for exploring bus routes
 - **Key Features**:

@@ -38,6 +38,12 @@ async function generateSitemap() {
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>${BASE_URL}/neighborhood-directory</loc>
+    <lastmod>${lastMod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>${BASE_URL}/bus-route-explorer</loc>
     <lastmod>${lastMod}</lastmod>
     <changefreq>weekly</changefreq>
@@ -74,7 +80,7 @@ async function generateSitemap() {
 
     fs.writeFileSync(SITEMAP_PATH, xml);
     console.log(`Sitemap generated successfully at ${SITEMAP_PATH}`);
-    console.log(`Total URLs: ${schools.length + 5}`);
+    console.log(`Total URLs: ${schools.length + 6}`);
 
   } catch (error) {
     console.error('Error generating sitemap:', error);

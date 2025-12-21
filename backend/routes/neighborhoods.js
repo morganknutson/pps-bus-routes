@@ -264,6 +264,23 @@ router.get('/list', async (req, res) => {
   }
 });
 
+/**
+ * Get processed neighborhoods data for directory
+ */
+router.get('/data', async (req, res) => {
+  try {
+    const neighborhoodsPath = path.join(DATA_DIR, 'neighborhoods.json');
+    if (!fs.existsSync(neighborhoodsPath)) {
+      return res.status(404).json({ error: 'Neighborhoods data not found. Run generate-neighborhoods-data.js script.' });
+    }
+    const content = fs.readFileSync(neighborhoodsPath, 'utf8');
+    res.json(JSON.parse(content));
+  } catch (error) {
+    console.error('[Neighborhoods] Error reading neighborhoods data:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export { router as neighborhoodsRouter };
 
 

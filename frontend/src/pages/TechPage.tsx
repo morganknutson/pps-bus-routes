@@ -27,6 +27,7 @@ const sections: Section[] = [
       { id: 'plotting-routes', title: '6. Plotting Routes on Map' },
       { id: 'route-visualization', title: '7. Route Visualization' },
       { id: 'neighborhood-exploration', title: '8. Neighborhood Exploration' },
+      { id: 'homepage-experience', title: '9. Home Page Experience' },
     ],
   },
   {
@@ -978,6 +979,25 @@ export function TechPage() {
 }`}
                 </pre>
               </ExpandableExample>
+            </div>
+
+            <div id="homepage-experience" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                9. Home Page Experience
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>
+                The home page provides a landing experience designed to help users find their specific bus stop quickly.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Key Features:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>Hero Section:</strong> Full viewport height (100vh) landing area with primary search controls</li>
+                  <li><strong>Address Autocomplete:</strong> Real-time address suggestions using Google Places Autocomplete API</li>
+                  <li><strong>School Search:</strong> Filterable list of schools, sorted by proximity if address is provided</li>
+                  <li><strong>FAQ Section:</strong> Comprehensive list of common questions, presented in a full-width layout</li>
+                  <li><strong>Consolidated Footer:</strong> Centralized navigation for secondary pages like School Directory, Neighborhoods, About, and Contact</li>
+                </ul>
+              </div>
             </div>
           </section>
 

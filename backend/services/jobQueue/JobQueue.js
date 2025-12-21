@@ -364,13 +364,9 @@ export class JobQueue extends BaseJobQueue {
     if (!this.isRedisAvailable) {
       try {
         const historyJobs = jobHistoryService.getJobs(jobType, status, limit);
-        const duration = Date.now() - startTime;
-        console.log(`[JobQueue] Redis not available (isRedisAvailable=${this.isRedisAvailable}) - returning ${historyJobs.length} jobs from persistent history in ${duration}ms`);
         return historyJobs;
       } catch (error) {
         console.error('[JobQueue] Error getting history jobs:', error);
-        const duration = Date.now() - startTime;
-        console.log(`[JobQueue] Returning empty array after ${duration}ms due to history error`);
         return [];
       }
     }

@@ -122,7 +122,7 @@ export class WorkerService {
       // Don't process if already processing or too soon since last job
       const timeSinceLastProcess = Date.now() - lastProcessTime;
       if (isProcessing || timeSinceLastProcess < minInterval) {
-        pollInterval = setTimeout(poll, 1000); // Check again in 1 second
+        pollInterval = setTimeout(poll, 5000); // Check again in 5 seconds
         return;
       }
 
@@ -199,7 +199,7 @@ export class WorkerService {
       }
 
       // Continue polling
-      pollInterval = setTimeout(poll, 1000);
+      pollInterval = setTimeout(poll, 5000); // Wait 5 seconds between polls
     };
 
     // Start polling
