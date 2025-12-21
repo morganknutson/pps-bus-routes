@@ -58,12 +58,13 @@ export function AddressInput() {
     });
 
     if (closestStop && closestRoute) {
-      console.log(`[AddressInput] Found closest stop: ${closestStop.address} at ${minDistance.toFixed(1)}m`);
-      selectStop(closestRoute, closestStop, closestStopNumber);
+      const stop = closestStop as Stop;
+      console.log(`[AddressInput] Found closest stop: ${stop.address} at ${minDistance.toFixed(1)}m`);
+      selectStop(closestRoute, stop, closestStopNumber);
       analyticsService.trackAction('find_my_stop', {
         schoolId: selectedSchoolId,
         distance: minDistance,
-        stopAddress: closestStop.address
+        stopAddress: stop.address
       });
     } else {
       console.warn('[AddressInput] No stops with coordinates found in current routes');

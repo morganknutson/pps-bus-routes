@@ -169,35 +169,44 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
   const map = useMap();
   const { homeAddress } = useStore();
   const prevSelectedSchoolIdRef = useRef<string | null>(null);
-  const mapReadyRef = useRef<boolean>(false);
+  const [isMapReady, setIsMapReady] = useState(false);
   const hasZoomedRef = useRef<boolean>(false);
+  const isInitialLoadRef = useRef<boolean>(true);
   
-  // Mark map as ready when it's initialized
+  // Mark map as ready when it's initialized and has a container
   useEffect(() => {
-    if (map && !mapReadyRef.current) {
-      map.whenReady(() => {
-        mapReadyRef.current = true;
-      });
-    }
+    if (!map) return;
+    
+    const checkReady = () => {
+      if (map.getContainer()) {
+        console.log('[FitSchoolBounds] Map container ready');
+        setIsMapReady(true);
+      }
+    };
+
+    map.whenReady(checkReady);
+    checkReady();
   }, [map]);
   
   useEffect(() => {
-    if (!map || !mapReadyRef.current) {
+    // We need the map to be ready AND we need some schools to have loaded
+    if (!map || !isMapReady || schools.length === 0) {
       return;
     }
 
     const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
     
-    if (selectedSchoolId && schoolsWithCoords.length > 0) {
-      // If a school is selected, zoom to it
+    // Zoom to selected school
+    if (selectedSchoolId) {
       const selectedSchool = schoolsWithCoords.find(s => s.id === selectedSchoolId);
       if (selectedSchool && selectedSchool.coordinates) {
         const [lng, lat] = selectedSchool.coordinates;
         const isNewSelection = prevSelectedSchoolIdRef.current !== selectedSchoolId;
         
         if (isNewSelection || !hasZoomedRef.current) {
-          // Update ref immediately to prevent multiple setViews for same selection
+          console.log('[FitSchoolBounds] Target school selected:', selectedSchool.name);
           prevSelectedSchoolIdRef.current = selectedSchoolId;
+          isInitialLoadRef.current = false;
           
           if (isNewSelection) {
             hasZoomedRef.current = false;
@@ -205,18 +214,13 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
 
           const timer = setTimeout(() => {
             try {
-              // Calculate a target center that is shifted so the pin is 100px above the center
               const zoom = 16;
               const targetPoint = map.project([lat, lng], zoom).add([0, 100]);
               const targetLatLng = map.unproject(targetPoint, zoom);
 
-              map.setView(targetLatLng, zoom, { 
-                animate: true,
-                duration: 0.6
-              });
-              
+              console.log('[FitSchoolBounds] 🎯 Centering map on school:', selectedSchool.name);
+              map.setView(targetLatLng, zoom, { animate: true, duration: 0.6 });
               hasZoomedRef.current = true;
-              console.log('[FitSchoolBounds] 🎯 Centered and shifted map on school:', selectedSchool.name);
             } catch (error) {
               console.error('[FitSchoolBounds] Error zooming to school:', error);
             }
@@ -228,22 +232,23 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
       }
     }
     
-    // If no school selected, fit bounds to show all schools (and home pin)
-    if (!selectedSchoolId && (schoolsWithCoords.length > 0 || homeAddress)) {
-      // Only refit if we had a selection before (to avoid refitting on initial load)
-      if (prevSelectedSchoolIdRef.current !== null) {
+    // Fit all schools when no school is selected
+    if (!selectedSchoolId) {
+      const wasSelectedBefore = prevSelectedSchoolIdRef.current !== null;
+      const isFirstLoad = isInitialLoadRef.current;
+
+      if (wasSelectedBefore || isFirstLoad) {
         const allCoords: [number, number][] = schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number]);
-        
-        if (homeAddress) {
-          allCoords.push([homeAddress.coordinates[1], homeAddress.coordinates[0]]);
-        }
+        if (homeAddress) allCoords.push([homeAddress.coordinates[1], homeAddress.coordinates[0]]);
 
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
-          
-          // Use a small delay for zoom out to ensure smooth transition
+          prevSelectedSchoolIdRef.current = null;
+          isInitialLoadRef.current = false;
+
           const timer = setTimeout(() => {
             try {
+              console.log('[FitSchoolBounds] 🗺️ Fitting all schools on map (reason: ' + (wasSelectedBefore ? 'deselection' : 'initial load') + ')');
               map.fitBounds(bounds, { 
                 padding: [50, 50], 
                 animate: true,
@@ -253,18 +258,19 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
             } catch (error) {
               console.error('[FitSchoolBounds] Error fitting bounds:', error);
             }
-          }, 100);
+          }, isFirstLoad ? 500 : 100);
           
-          prevSelectedSchoolIdRef.current = null;
           return () => clearTimeout(timer);
         }
       }
-      prevSelectedSchoolIdRef.current = null;
-    } else if (!selectedSchoolId) {
-      prevSelectedSchoolIdRef.current = null;
-      hasZoomedRef.current = false;
     }
-  }, [map, schools, selectedSchoolId, homeAddress]);
+
+    // Ensure ref is updated if we have a selection that didn't trigger zoom
+    if (selectedSchoolId) {
+      prevSelectedSchoolIdRef.current = selectedSchoolId;
+      isInitialLoadRef.current = false;
+    }
+  }, [map, isMapReady, schools, selectedSchoolId, homeAddress]);
   
   return null;
 }
