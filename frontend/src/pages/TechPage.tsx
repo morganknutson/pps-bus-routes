@@ -883,6 +883,7 @@ export function TechPage() {
                 <strong style={{ color: 'var(--text-primary)' }}>Interactive Features:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li>Click markers to see stop details (address, time, neighborhood)</li>
+                  <li><strong>Find My Stop</strong> - Automatically find and select the closest bus stop to the user's home address for the selected school</li>
                   <li>Toggle routes on/off via checkboxes in route list</li>
                   <li>Routes are grouped by neighborhood with visual headings</li>
                   <li>Map auto-zooms to fit selected routes</li>
@@ -2187,7 +2188,7 @@ export function TechPage() {
                   <li><code>GET /api/data/routes</code> - Get processed routes</li>
                   <li><code>PUT /api/data/routes/{'{routeId}'}/stops/{'{stopId}'}</code> - Update stop data</li>
                   <li><code>PUT /api/data/routes/{'{routeId}'}/geometry</code> - Update route geometry</li>
-                  <li><code>GET /api/schools</code> - Get schools list</li>
+                  <li><code>GET /api/schools</code> - Get schools list (filters for schools with PDFs by default; use <code>?all=true</code> to get all schools)</li>
                   <li><code>GET /api/schools/{'{schoolId}'}</code> - Get specific school</li>
                   <li><code>POST /api/schools</code> - Create new school</li>
                   <li><code>PUT /api/schools/{'{schoolId}'}</code> - Update school</li>

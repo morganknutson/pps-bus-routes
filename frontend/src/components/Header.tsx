@@ -16,15 +16,9 @@ export function Header({ rightContent }: HeaderProps = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
   
   const isHomePage = location.pathname === '/';
-  const isAdminPage = location.pathname === '/admin' || 
-                      location.pathname === '/neighborhoods' || 
-                      location.pathname === '/tech' ||
-                      location.pathname === '/verification' ||
-                      location.pathname === '/jobs' ||
-                      location.pathname === '/servers' ||
-                      location.pathname === '/architecture';
-  const isAdminRoute = location.pathname === '/admin';
-  const isExplorerPage = location.pathname === '/bus-route-explorer';
+  const adminPaths = ['/admin', '/neighborhoods', '/tech', '/verification', '/jobs', '/servers', '/architecture'];
+  const isAdminPage = adminPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
+  const isExplorerPage = location.pathname.startsWith('/bus-route-explorer');
   
   const handleLogout = () => {
     sessionStorage.removeItem('adminAuthenticated');
@@ -72,20 +66,20 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname === '/tech' ? 'white' : 'rgba(255, 255, 255, 0.8)',
-                    textDecoration: location.pathname === '/tech' ? 'underline' : 'none',
-                    fontWeight: location.pathname === '/tech' ? '600' : '400',
+                    color: location.pathname.startsWith('/tech') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname.startsWith('/tech') ? 'underline' : 'none',
+                    fontWeight: location.pathname.startsWith('/tech') ? '600' : '400',
                     transition: 'all 0.2s',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
-                    if (location.pathname !== '/tech') {
+                    if (!location.pathname.startsWith('/tech')) {
                       e.currentTarget.style.textDecoration = 'underline';
                       e.currentTarget.style.color = 'white';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (location.pathname !== '/tech') {
+                    if (!location.pathname.startsWith('/tech')) {
                       e.currentTarget.style.textDecoration = 'none';
                       e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
                     }
@@ -98,20 +92,20 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname === '/architecture' ? 'white' : 'rgba(255, 255, 255, 0.8)',
-                    textDecoration: location.pathname === '/architecture' ? 'underline' : 'none',
-                    fontWeight: location.pathname === '/architecture' ? '600' : '400',
+                    color: location.pathname.startsWith('/architecture') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname.startsWith('/architecture') ? 'underline' : 'none',
+                    fontWeight: location.pathname.startsWith('/architecture') ? '600' : '400',
                     transition: 'all 0.2s',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
-                    if (location.pathname !== '/architecture') {
+                    if (!location.pathname.startsWith('/architecture')) {
                       e.currentTarget.style.textDecoration = 'underline';
                       e.currentTarget.style.color = 'white';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (location.pathname !== '/architecture') {
+                    if (!location.pathname.startsWith('/architecture')) {
                       e.currentTarget.style.textDecoration = 'none';
                       e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
                     }
@@ -124,20 +118,20 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname === '/servers' ? 'white' : 'rgba(255, 255, 255, 0.8)',
-                    textDecoration: location.pathname === '/servers' ? 'underline' : 'none',
-                    fontWeight: location.pathname === '/servers' ? '600' : '400',
+                    color: location.pathname.startsWith('/servers') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname.startsWith('/servers') ? 'underline' : 'none',
+                    fontWeight: location.pathname.startsWith('/servers') ? '600' : '400',
                     transition: 'all 0.2s',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
-                    if (location.pathname !== '/servers') {
+                    if (!location.pathname.startsWith('/servers')) {
                       e.currentTarget.style.textDecoration = 'underline';
                       e.currentTarget.style.color = 'white';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (location.pathname !== '/servers') {
+                    if (!location.pathname.startsWith('/servers')) {
                       e.currentTarget.style.textDecoration = 'none';
                       e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
                     }
@@ -150,26 +144,52 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname === '/verification' ? 'white' : 'rgba(255, 255, 255, 0.8)',
-                    textDecoration: location.pathname === '/verification' ? 'underline' : 'none',
-                    fontWeight: location.pathname === '/verification' ? '600' : '400',
+                    color: location.pathname.startsWith('/verification') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname.startsWith('/verification') ? 'underline' : 'none',
+                    fontWeight: location.pathname.startsWith('/verification') ? '600' : '400',
                     transition: 'all 0.2s',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
-                    if (location.pathname !== '/verification') {
+                    if (!location.pathname.startsWith('/verification')) {
                       e.currentTarget.style.textDecoration = 'underline';
                       e.currentTarget.style.color = 'white';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (location.pathname !== '/verification') {
+                    if (!location.pathname.startsWith('/verification')) {
                       e.currentTarget.style.textDecoration = 'none';
                       e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
                     }
                   }}
                 >
                   Verification
+                </Link>
+                <Link
+                  to="/jobs"
+                  className="admin-link"
+                  style={{
+                    fontSize: '12px',
+                    color: location.pathname.startsWith('/jobs') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: location.pathname.startsWith('/jobs') ? 'underline' : 'none',
+                    fontWeight: location.pathname.startsWith('/jobs') ? '600' : '400',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!location.pathname.startsWith('/jobs')) {
+                      e.currentTarget.style.textDecoration = 'underline';
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!location.pathname.startsWith('/jobs')) {
+                      e.currentTarget.style.textDecoration = 'none';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                    }
+                  }}
+                >
+                  Jobs
                 </Link>
                 <Link
                   to="/bus-route-explorer"
@@ -213,7 +233,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
               </button>
             )}
-            {isAdminRoute && !isMobile && (
+            {isAdminPage && !isMobile && (
               <button
                 onClick={handleLogout}
                 style={{
@@ -266,10 +286,10 @@ export function Header({ rightContent }: HeaderProps = {}) {
               onClick={() => setMenuOpen(false)}
               style={{
                 padding: '0.75rem 1rem',
-                color: location.pathname === '/tech' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                color: location.pathname.startsWith('/tech') ? 'white' : 'rgba(255, 255, 255, 0.8)',
                 textDecoration: 'none',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                fontWeight: location.pathname === '/tech' ? '600' : '400',
+                fontWeight: location.pathname.startsWith('/tech') ? '600' : '400',
               }}
             >
               Tech
@@ -279,10 +299,10 @@ export function Header({ rightContent }: HeaderProps = {}) {
               onClick={() => setMenuOpen(false)}
               style={{
                 padding: '0.75rem 1rem',
-                color: location.pathname === '/architecture' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                color: location.pathname.startsWith('/architecture') ? 'white' : 'rgba(255, 255, 255, 0.8)',
                 textDecoration: 'none',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                fontWeight: location.pathname === '/architecture' ? '600' : '400',
+                fontWeight: location.pathname.startsWith('/architecture') ? '600' : '400',
               }}
             >
               Architecture
@@ -292,10 +312,10 @@ export function Header({ rightContent }: HeaderProps = {}) {
               onClick={() => setMenuOpen(false)}
               style={{
                 padding: '0.75rem 1rem',
-                color: location.pathname === '/servers' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                color: location.pathname.startsWith('/servers') ? 'white' : 'rgba(255, 255, 255, 0.8)',
                 textDecoration: 'none',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                fontWeight: location.pathname === '/servers' ? '600' : '400',
+                fontWeight: location.pathname.startsWith('/servers') ? '600' : '400',
               }}
             >
               Servers
@@ -305,13 +325,26 @@ export function Header({ rightContent }: HeaderProps = {}) {
               onClick={() => setMenuOpen(false)}
               style={{
                 padding: '0.75rem 1rem',
-                color: location.pathname === '/verification' ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                color: location.pathname.startsWith('/verification') ? 'white' : 'rgba(255, 255, 255, 0.8)',
                 textDecoration: 'none',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                fontWeight: location.pathname === '/verification' ? '600' : '400',
+                fontWeight: location.pathname.startsWith('/verification') ? '600' : '400',
               }}
             >
               Verification
+            </Link>
+            <Link
+              to="/jobs"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                padding: '0.75rem 1rem',
+                color: location.pathname.startsWith('/jobs') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                fontWeight: location.pathname.startsWith('/jobs') ? '600' : '400',
+              }}
+            >
+              Jobs
             </Link>
             <Link
               to="/bus-route-explorer"
@@ -325,7 +358,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
             >
               → Explorer
             </Link>
-            {isAdminRoute && (
+            {isAdminPage && (
               <button
                 onClick={() => {
                   handleLogout();

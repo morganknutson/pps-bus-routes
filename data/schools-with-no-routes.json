@@ -1,13 +1,13 @@
 {
   "generatedAt": "2025-12-17T07:13:25.879Z",
-  "total": 39,
+  "total": 74,
   "withPdfs": 35,
-  "withoutPdfs": 4,
+  "withoutPdfs": 39,
   "schools": [
     {
-      "id": "access",
-      "name": "ACCESS",
-      "address": "6318 S Corbett Ave, Portland, OR 97239, USA",
+      "id": "benson",
+      "name": "Benson",
+      "address": "546 NE 12th Ave, Portland, OR 97232, USA",
       "hasPdfs": false,
       "driveLink": null
     },

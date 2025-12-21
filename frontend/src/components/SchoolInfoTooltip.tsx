@@ -130,7 +130,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               justifyContent: 'center',
               color: 'var(--text-tertiary)',
               cursor: 'pointer',
-              fontSize: '18px',
+              fontSize: '14px',
               padding: '2px',
               marginTop: '2px',
               transition: 'color 0.2s ease'

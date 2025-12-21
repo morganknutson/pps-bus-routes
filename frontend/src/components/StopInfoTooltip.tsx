@@ -127,7 +127,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
           style={{
             background: 'none',
             border: 'none',
-            fontSize: '18px',
+            fontSize: '14px',
             cursor: 'pointer',
             color: 'var(--text-tertiary)',
             padding: '2px',

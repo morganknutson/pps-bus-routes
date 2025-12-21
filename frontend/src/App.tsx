@@ -792,8 +792,8 @@ function AdminApp() {
   useEffect(() => {
     const loadSchools = async () => {
       try {
-        console.log('[AdminApp] Loading schools with stats...');
-        const response = await fetch('/api/schools?includeStats=true');
+        console.log('[AdminApp] Loading all schools with stats...');
+        const response = await fetch('/api/schools?includeStats=true&all=true');
         if (response.ok) {
           const data = await response.json();
           console.log('[AdminApp] Loaded', data.schools?.length || 0, 'schools');
@@ -951,6 +951,35 @@ function AdminApp() {
                   setSelectedSchool(schoolId);
                 }
               }}
+              onAddSchool={async (newSchool) => {
+                try {
+                  analyticsService.trackAdminAction('school_create', newSchool.name);
+                  console.log('[AdminApp] Creating school:', newSchool);
+                  const response = await fetch('/api/schools', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newSchool),
+                  });
+
+                  if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Failed to create school');
+                  }
+
+                  const data = await response.json();
+                  const createdSchool = data.school;
+
+                  // Update schools in state
+                  setSchools([...schools, createdSchool]);
+
+                  console.log('[AdminApp] School created successfully');
+                } catch (error: any) {
+                  console.error('[AdminApp] Error creating school:', error);
+                  alert(`Failed to create school: ${error.message}`);
+                }
+              }}
               onUpdateSchool={async (schoolId, updates) => {
                 try {
                   analyticsService.trackAdminAction('school_update', schoolId);
@@ -973,7 +1002,7 @@ function AdminApp() {
 
                   // Update schools in state
                   const updatedSchools = schools.map(s => 
-                    s.id === schoolId ? updatedSchool : s
+                    s.id === schoolId ? { ...s, ...updatedSchool } : s
                   );
                   setSchools(updatedSchools);
 

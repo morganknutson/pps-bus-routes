@@ -27,10 +27,33 @@
     {
       "schoolId": "access",
       "schoolName": "ACCESS",
-      "driveLink": null,
-      "pdfCount": 0,
-      "pdfFiles": [],
-      "hasPdfs": false,
+      "driveLink": "https://drive.google.com/drive/folders/1J7rIlQ2vooB3mYwPka73NZGER-cTymGP",
+      "pdfCount": 22,
+      "pdfFiles": [
+        "105ACC-A_effective_010726.pdf",
+        "105ACC-A_effective_120325.pdf",
+        "105ACC-P_effective_010726.pdf",
+        "105ACC-P_effective_120325.pdf",
+        "223ACC-A_effective_121725.pdf",
+        "223ACC-P_effective_121725.pdf",
+        "260ACC-A_effective_110325.pdf",
+        "260ACC-P_effective_102225.pdf",
+        "278ACC-A_effective_102925.pdf",
+        "278ACC-P_effective_102925.pdf",
+        "280ACC-A_effective_100825.pdf",
+        "280ACC-P_effective_100825.pdf",
+        "281ACC-A_effective_102225.pdf",
+        "281ACC-P_effective_100125.pdf",
+        "282ACC-A_effective_091025.pdf",
+        "282ACC-P_effective_082625.pdf",
+        "284ACC-A_effective_111225.pdf",
+        "284ACC-P_effective_102925.pdf",
+        "286ACC-A_effective_091025.pdf",
+        "286ACC-P_effective_091025.pdf",
+        "287ACC-A_effective_102925.pdf",
+        "287ACC-P_effective_102925.pdf"
+      ],
+      "hasPdfs": true,
       "hasDriveLink": false
     },
     {
@@ -149,14 +172,11 @@
     {
       "schoolId": "benson",
       "schoolName": "Benson",
-      "driveLink": "https://drive.google.com/drive/folders/1B8kNwlF2YAF7_IBIkHOhO7u88v05DSec",
-      "pdfCount": 2,
-      "pdfFiles": [
-        "202AST-A_effective_082625.pdf",
-        "202AST-P_effective_082625.pdf"
-      ],
-      "hasPdfs": true,
-      "hasDriveLink": true
+      "driveLink": null,
+      "pdfCount": 0,
+      "pdfFiles": [],
+      "hasPdfs": false,
+      "hasDriveLink": false
     },
     {
       "schoolId": "beverly-cleary",

@@ -126,17 +126,33 @@ async function getRouteStats(schoolId) {
     
     for (const filename of files) {
       if (!filename.endsWith('.json')) continue;
-      // Filename format is usually "Route 100 (Morning).json" or similar
-      const routeNameMatch = filename.match(/^Route\s+([A-Z0-9]+)/i);
-      const routeName = routeNameMatch ? routeNameMatch[1] : filename.split('.')[0];
-      if (routeName) uniqueRouteNames.add(routeName);
+      
+      // Try standard "Route 100" format
+      let routeNameMatch = filename.match(/^Route\s+([A-Z0-9]+)/i);
+      if (routeNameMatch) {
+        uniqueRouteNames.add(routeNameMatch[1]);
+        continue;
+      }
+      
+      // Try compact "{RouteNumber}{SchoolCode}-" format (e.g. 105ACC-A)
+      routeNameMatch = filename.match(/^(\d+)[A-Z]{2,}-/);
+      if (routeNameMatch) {
+        uniqueRouteNames.add(routeNameMatch[1]);
+        continue;
+      }
+      
+      // Fallback: use filename without extension
+      const fallbackName = filename.split('.')[0];
+      if (fallbackName) uniqueRouteNames.add(fallbackName);
     }
 
-    stats.routeCount = uniqueRouteNames.size;
+    const routeCount = uniqueRouteNames.size;
+    stats.routeCount = routeCount;
     
-    // Skip fs.stat for all files in batch mode to save time
-    // We'll only do it if explicitly requested or for single school
+    console.log(`[getRouteStats] School ${schoolId}: found ${files.length} files, ${routeCount} unique routes`);
     
+    // Only cache if we found routes, OR if it's been 0 for a while
+    // This helps with "cold starts" for new schools
     setCachedStats(schoolId, stats);
     return stats;
   } catch (error) {
@@ -151,30 +167,37 @@ async function getRouteStats(schoolId) {
 router.get('/', async (req, res) => {
   const startTime = Date.now();
   const includeStats = req.query.includeStats === 'true';
+  const showAll = req.query.all === 'true';
   
   try {
     // Check global schools cache
     let schools;
     const now = Date.now();
-    if (SCHOOLS_WITH_PDFS_CACHE.data && (now - SCHOOLS_WITH_PDFS_CACHE.timestamp < CACHE_TTL)) {
+    
+    // Use separate cache for "all schools" vs "schools with PDFs"
+    if (!showAll && SCHOOLS_WITH_PDFS_CACHE.data && (now - SCHOOLS_WITH_PDFS_CACHE.timestamp < CACHE_TTL)) {
       schools = SCHOOLS_WITH_PDFS_CACHE.data;
     } else {
-      console.log(`[GET /api/schools] Cache miss, loading from ${SCHOOLS_FILE}`);
+      console.log(`[GET /api/schools] Loading from ${SCHOOLS_FILE}, showAll=${showAll}`);
       const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
       const allSchools = JSON.parse(content);
       
-      // Filter schools that have PDFs - use a simple loop instead of Promise.all to avoid disk slamming
-      console.log(`[GET /api/schools] Checking PDFs for ${allSchools.length} schools...`);
-      schools = [];
-      for (const school of allSchools) {
-        if (await hasPdfs(school.id)) {
-          schools.push(school);
+      if (showAll) {
+        schools = allSchools;
+      } else {
+        // Filter schools that have PDFs - use a simple loop instead of Promise.all to avoid disk slamming
+        console.log(`[GET /api/schools] Checking PDFs for ${allSchools.length} schools...`);
+        schools = [];
+        for (const school of allSchools) {
+          if (await hasPdfs(school.id)) {
+            schools.push(school);
+          }
         }
+        console.log(`[GET /api/schools] Found ${schools.length} schools with PDFs`);
+        
+        SCHOOLS_WITH_PDFS_CACHE.data = schools;
+        SCHOOLS_WITH_PDFS_CACHE.timestamp = now;
       }
-      console.log(`[GET /api/schools] Found ${schools.length} schools with PDFs`);
-      
-      SCHOOLS_WITH_PDFS_CACHE.data = schools;
-      SCHOOLS_WITH_PDFS_CACHE.timestamp = now;
     }
     
     let schoolsResponse;
@@ -261,7 +284,7 @@ router.get('/:schoolId', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   try {
-    const { name, schoolPageLink, driveLink } = req.body;
+    const { name, schoolPageLink, driveLink, address, coordinates } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: 'School name is required' });
@@ -286,7 +309,11 @@ router.post('/', async (req, res) => {
       name,
       schoolPageLink: schoolPageLink || null,
       driveLink: driveLink || null,
+      address: address || null,
+      coordinates: coordinates || null,
+      schoolTypes: getSchoolTypes(name),
       createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
 
     schools.push(newSchool);

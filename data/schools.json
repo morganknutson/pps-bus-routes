@@ -114,15 +114,15 @@
   {
     "id": "access",
     "name": "ACCESS",
-    "driveLink": null,
+    "driveLink": "https://drive.google.com/drive/folders/1J7rIlQ2vooB3mYwPka73NZGER-cTymGP",
     "createdAt": "2025-01-01T00:00:00.000Z",
-    "schoolPageLink": null,
+    "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/access-terwilliger",
     "address": "6318 S Corbett Ave, Portland, OR 97239, USA",
     "coordinates": [
       -122.6755175,
       45.478418
     ],
-    "updatedAt": "2025-12-09T04:55:18.363Z",
+    "updatedAt": "2025-12-21T08:18:02.518Z",
     "placeId": "ChIJHZwZgfsKlVQR8I5LYMSbQIs",
     "placesData": {
       "id": "ChIJHZwZgfsKlVQR8I5LYMSbQIs",
@@ -1010,7 +1010,7 @@
   {
     "id": "benson",
     "name": "Benson",
-    "driveLink": "https://drive.google.com/drive/folders/1B8kNwlF2YAF7_IBIkHOhO7u88v05DSec",
+    "driveLink": null,
     "createdAt": "2025-01-01T00:00:00.000Z",
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/benson",
     "address": "546 NE 12th Ave, Portland, OR 97232, USA",

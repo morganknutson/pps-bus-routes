@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-20T11:09:33.144Z",
+  "timestamp": "2025-12-21T08:23:50.808Z",
   "totalSchools": 72,
   "schoolsWithDriveLinks": 71,
   "results": [
@@ -118,13 +118,13 @@
     {
       "schoolId": "benson",
       "schoolName": "Benson",
-      "driveLink": "https://drive.google.com/drive/folders/1B8kNwlF2YAF7_IBIkHOhO7u88v05DSec",
-      "hasDriveLink": true,
-      "accessible": true,
-      "hasPdfs": true,
-      "pdfCount": 2,
-      "driveLastModified": "2025-08-02T20:12:11.315Z",
-      "localLastModified": "2025-08-02T20:12:11.315Z",
+      "driveLink": null,
+      "hasDriveLink": false,
+      "accessible": false,
+      "hasPdfs": false,
+      "pdfCount": 0,
+      "driveLastModified": null,
+      "localLastModified": null,
       "matches": true,
       "needsUpdate": false,
       "error": null
@@ -994,6 +994,21 @@
       "pdfCount": 4,
       "driveLastModified": "2025-10-24T13:39:59.549Z",
       "localLastModified": "2025-10-24T13:39:59.549Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    {
+      "schoolId": "access",
+      "schoolName": "ACCESS",
+      "driveLink": "https://drive.google.com/drive/folders/1J7rIlQ2vooB3mYwPka73NZGER-cTymGP",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 22,
+      "localPdfCount": 22,
+      "driveLastModified": "2025-12-17T14:12:46.455Z",
+      "localLastModified": "2025-12-17T14:12:46.455Z",
       "matches": true,
       "needsUpdate": false,
       "error": null

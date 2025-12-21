@@ -71,7 +71,8 @@ interface SchoolListProps {
   selectedSchoolId: string | null;
   onSelectSchool: (schoolId: string | null) => void;
   enableEditing?: boolean;
-  onUpdateSchool?: (schoolId: string, updates: { schoolPageLink?: string | null; driveLink?: string | null }) => void;
+  onUpdateSchool?: (schoolId: string, updates: { name?: string; schoolPageLink?: string | null; driveLink?: string | null; address?: string | null; coordinates?: [number, number] | null }) => void;
+  onAddSchool?: (school: { name: string; schoolPageLink: string | null; driveLink: string | null; address: string | null; coordinates: [number, number] | null }) => Promise<void>;
   searchTerm?: string;
   onSearchChange?: (term: string) => void;
   schoolTypeFilters?: SchoolTypeFilters;
@@ -84,6 +85,7 @@ export function SchoolList({
   onSelectSchool, 
   enableEditing = false, 
   onUpdateSchool,
+  onAddSchool,
   searchTerm: externalSearchTerm,
   onSearchChange: externalOnSearchChange,
   schoolTypeFilters: externalFilters,
@@ -103,8 +105,15 @@ export function SchoolList({
   const schoolTypeFilters = externalFilters !== undefined ? externalFilters : internalFilters;
   const setSchoolTypeFilters = externalOnFiltersChange || setInternalFilters;
   const [editingSchoolId, setEditingSchoolId] = useState<string | null>(null);
+  const [editingName, setEditingName] = useState('');
   const [editingPageLink, setEditingPageLink] = useState('');
   const [editingDriveLink, setEditingDriveLink] = useState('');
+  const [editingAddress, setEditingAddress] = useState('');
+  const [isAddingSchool, setIsAddingSchool] = useState(false);
+  const [newSchoolName, setNewSchoolName] = useState('');
+  const [newSchoolPageLink, setNewSchoolPageLink] = useState('');
+  const [newSchoolDriveLink, setNewSchoolDriveLink] = useState('');
+  const [newSchoolAddress, setNewSchoolAddress] = useState('');
 
   const filteredSchools = schools.filter(school => {
     // Search filter
@@ -154,64 +163,222 @@ export function SchoolList({
       `}</style>
       {/* Search */}
       <div style={{ padding: '0.5rem 1rem 1rem 1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
-        <div style={{ position: 'relative' }}>
-          <input
-            type="text"
-            placeholder="Search schools..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              paddingRight: searchTerm ? '2.5rem' : '0.75rem',
-              border: '1px solid var(--border-color)',
-              borderRadius: '12px',
-              fontSize: '12px',
-              boxSizing: 'border-box',
-              backgroundColor: 'var(--bg-primary)',
-              color: 'var(--text-primary)',
-              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, padding-right 0.2s ease',
-            }}
-          />
-          {searchTerm && (
-            <button
-              onClick={() => setSearchTerm('')}
+        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          <div style={{ position: 'relative', flex: 1 }}>
+            <input
+              type="text"
+              placeholder="Search schools..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               style={{
-                position: 'absolute',
-                right: '8px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '20px',
-                height: '20px',
+                width: '100%',
+                padding: '0.75rem',
+                paddingRight: searchTerm ? '2.5rem' : '0.75rem',
+                border: '1px solid var(--border-color)',
+                borderRadius: '12px',
+                fontSize: '12px',
+                boxSizing: 'border-box',
+                backgroundColor: 'var(--bg-primary)',
+                color: 'var(--text-primary)',
+                transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, padding-right 0.2s ease',
+              }}
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                style={{
+                  position: 'absolute',
+                  right: '8px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '20px',
+                  height: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '16px',
+                  lineHeight: '1',
+                  backgroundColor: 'transparent',
+                  color: 'var(--text-tertiary)',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  padding: 0,
+                  flexShrink: 0,
+                  transition: 'background-color 0.2s ease, color 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = 'var(--text-tertiary)';
+                }}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
+          </div>
+          {enableEditing && (
+            <button
+              onClick={() => setIsAddingSchool(!isAddingSchool)}
+              style={{
+                backgroundColor: isAddingSchool ? 'var(--text-tertiary)' : '#4ECDC4',
+                color: 'white',
+                border: 'none',
+                borderRadius: '12px',
+                width: '38px',
+                height: '38px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '16px',
-                lineHeight: '1',
-                backgroundColor: 'transparent',
-                color: 'var(--text-tertiary)',
-                border: 'none',
-                borderRadius: '4px',
                 cursor: 'pointer',
-                padding: 0,
+                transition: 'background-color 0.2s ease',
                 flexShrink: 0,
-                transition: 'background-color 0.2s ease, color 0.2s ease',
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                e.currentTarget.style.color = 'var(--text-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.color = 'var(--text-tertiary)';
-              }}
-              aria-label="Clear search"
+              title={isAddingSchool ? "Cancel adding school" : "Add new school"}
             >
-              ×
+              <i className={`fas ${isAddingSchool ? 'fa-times' : 'fa-plus'}`}></i>
             </button>
           )}
         </div>
       </div>
+
+      {/* Add School Form */}
+      {isAddingSchool && enableEditing && (
+        <div style={{ 
+          padding: '1rem', 
+          backgroundColor: 'var(--bg-secondary)', 
+          borderBottom: '1px solid var(--border-color)',
+          transition: 'background-color 0.3s ease, border-color 0.3s ease'
+        }}>
+          <div style={{ fontWeight: '600', fontSize: '13px', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+            Add New School
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                School Name *
+              </label>
+              <input
+                type="text"
+                value={newSchoolName}
+                onChange={(e) => setNewSchoolName(e.target.value)}
+                placeholder="e.g. Lincoln High School"
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  fontSize: '12px',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '8px',
+                  boxSizing: 'border-box',
+                  backgroundColor: 'var(--bg-primary)',
+                  color: 'var(--text-primary)',
+                }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                Address
+              </label>
+              <input
+                type="text"
+                value={newSchoolAddress}
+                onChange={(e) => setNewSchoolAddress(e.target.value)}
+                placeholder="Full address..."
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  fontSize: '12px',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '8px',
+                  boxSizing: 'border-box',
+                  backgroundColor: 'var(--bg-primary)',
+                  color: 'var(--text-primary)',
+                }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                Page Link
+              </label>
+              <input
+                type="text"
+                value={newSchoolPageLink}
+                onChange={(e) => setNewSchoolPageLink(e.target.value)}
+                placeholder="PPS website URL..."
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  fontSize: '12px',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '8px',
+                  boxSizing: 'border-box',
+                  backgroundColor: 'var(--bg-primary)',
+                  color: 'var(--text-primary)',
+                }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                Drive Link
+              </label>
+              <input
+                type="text"
+                value={newSchoolDriveLink}
+                onChange={(e) => setNewSchoolDriveLink(e.target.value)}
+                placeholder="Google Drive folder URL..."
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  fontSize: '12px',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '8px',
+                  boxSizing: 'border-box',
+                  backgroundColor: 'var(--bg-primary)',
+                  color: 'var(--text-primary)',
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+              <button
+                disabled={!newSchoolName}
+                onClick={async () => {
+                  if (onAddSchool && newSchoolName) {
+                    await onAddSchool({
+                      name: newSchoolName,
+                      schoolPageLink: newSchoolPageLink || null,
+                      driveLink: newSchoolDriveLink || null,
+                      address: newSchoolAddress || null,
+                      coordinates: null, // Backend doesn't support geocoding on create yet
+                    });
+                    setIsAddingSchool(false);
+                    setNewSchoolName('');
+                    setNewSchoolPageLink('');
+                    setNewSchoolDriveLink('');
+                    setNewSchoolAddress('');
+                  }
+                }}
+                style={{
+                  flex: 1,
+                  padding: '0.6rem',
+                  fontSize: '12px',
+                  backgroundColor: newSchoolName ? '#4ECDC4' : 'var(--text-tertiary)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  cursor: newSchoolName ? 'pointer' : 'not-allowed',
+                  fontWeight: '600',
+                }}
+              >
+                Create School
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* School list */}
       <div style={{ flex: 1, overflow: 'auto' }}>
@@ -269,8 +436,10 @@ export function SchoolList({
                             onClick={(e) => {
                               e.stopPropagation();
                               setEditingSchoolId(school.id);
+                              setEditingName(school.name);
                               setEditingPageLink(school.schoolPageLink || '');
                               setEditingDriveLink(school.driveLink || '');
+                              setEditingAddress(school.address || '');
                             }}
                             style={{
                               background: 'none',
@@ -315,6 +484,52 @@ export function SchoolList({
                   {isEditing && enableEditing && onUpdateSchool && (
                     <div style={{ padding: '0 1rem 1rem 1rem', backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'background-color 0.3s ease, border-color 0.3s ease' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.75rem' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                            School Name
+                          </label>
+                          <input
+                            type="text"
+                            value={editingName}
+                            onChange={(e) => setEditingName(e.target.value)}
+                            placeholder="School name..."
+                            style={{
+                              width: '100%',
+                              padding: '0.5rem',
+                              fontSize: '12px',
+                              border: '1px solid var(--border-color)',
+                              borderRadius: '8px',
+                              boxSizing: 'border-box',
+                              backgroundColor: 'var(--bg-primary)',
+                              color: 'var(--text-primary)',
+                              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                            Address
+                          </label>
+                          <input
+                            type="text"
+                            value={editingAddress}
+                            onChange={(e) => setEditingAddress(e.target.value)}
+                            placeholder="School physical address..."
+                            style={{
+                              width: '100%',
+                              padding: '0.5rem',
+                              fontSize: '12px',
+                              border: '1px solid var(--border-color)',
+                              borderRadius: '8px',
+                              boxSizing: 'border-box',
+                              backgroundColor: 'var(--bg-primary)',
+                              color: 'var(--text-primary)',
+                              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                        </div>
                         <div>
                           <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
                             Page Link
@@ -367,12 +582,16 @@ export function SchoolList({
                               e.stopPropagation();
                               if (onUpdateSchool) {
                                 await onUpdateSchool(school.id, {
+                                  name: editingName,
                                   schoolPageLink: editingPageLink || null,
                                   driveLink: editingDriveLink || null,
+                                  address: editingAddress || null,
                                 });
                                 setEditingSchoolId(null);
+                                setEditingName('');
                                 setEditingPageLink('');
                                 setEditingDriveLink('');
+                                setEditingAddress('');
                               }
                             }}
                             style={{
@@ -458,8 +677,10 @@ export function SchoolList({
                             onClick={(e) => {
                               e.stopPropagation();
                               setEditingSchoolId(school.id);
+                              setEditingName(school.name);
                               setEditingPageLink(school.schoolPageLink || '');
                               setEditingDriveLink(school.driveLink || '');
+                              setEditingAddress(school.address || '');
                             }}
                             style={{
                               background: 'none',
@@ -493,8 +714,54 @@ export function SchoolList({
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                             <div>
                               <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                                Page Link
+                                School Name
                               </label>
+                              <input
+                                type="text"
+                                value={editingName}
+                                onChange={(e) => setEditingName(e.target.value)}
+                                placeholder="School name..."
+                                style={{
+                                  width: '100%',
+                                  padding: '0.5rem',
+                                  fontSize: '12px',
+                                  border: '1px solid var(--border-color)',
+                                  borderRadius: '4px',
+                                  boxSizing: 'border-box',
+                                  backgroundColor: 'var(--bg-secondary)',
+                                  color: 'var(--text-primary)',
+                                  transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                                Address
+                              </label>
+                            <input
+                              type="text"
+                              value={editingAddress}
+                              onChange={(e) => setEditingAddress(e.target.value)}
+                              placeholder="School physical address..."
+                              style={{
+                                width: '100%',
+                                padding: '0.5rem',
+                                fontSize: '12px',
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '4px',
+                                boxSizing: 'border-box',
+                                backgroundColor: 'var(--bg-secondary)',
+                                color: 'var(--text-primary)',
+                                transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                              }}
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                          </div>
+                          <div>
+                            <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                              Page Link
+                            </label>
                               <input
                                 type="text"
                                 value={editingPageLink}

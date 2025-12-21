@@ -184,10 +184,10 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 e.currentTarget.style.backgroundColor = 'transparent';
                 e.currentTarget.style.color = 'var(--text-tertiary)';
               }}
-              aria-label="Clear school selection"
-            >
-              <i className="fas fa-times" style={{ fontSize: '12px' }}></i>
-            </button>
+            aria-label="Clear school selection"
+          >
+            <i className="fas fa-times" style={{ fontSize: '14px' }}></i>
+          </button>
           </div>
         </div>
       )}

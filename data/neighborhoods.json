@@ -1148,7 +1148,6 @@
     "schoolIds": [
       "astor",
       "beach",
-      "benson",
       "boise-eliot",
       "cesar-chavez",
       "chief-joseph",
@@ -1176,10 +1175,6 @@
       {
         "id": "beach",
         "name": "Beach"
-      },
-      {
-        "id": "benson",
-        "name": "Benson"
       },
       {
         "id": "boise-eliot",
