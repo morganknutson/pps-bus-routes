@@ -165,9 +165,9 @@ export function useUrlState({
 
       // 1. Sync school selection
       if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
-        const school = schools.find(s => s.id === urlState.schoolId);
+        const school = schools.find(s => s.id.toLowerCase() === urlState.schoolId?.toLowerCase());
         if (school) {
-          setSelectedSchool(urlState.schoolId);
+          setSelectedSchool(school.id);
         }
       } else if (!urlState.schoolId && previousUrlState.schoolId && urlChanged) {
         setSelectedSchool(null);

@@ -428,7 +428,7 @@ export function SchoolList({
                   >
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                        <div style={{ fontWeight: '600', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                        <div style={{ fontWeight: '600', fontSize: '14px', color: 'var(--text-secondary)' }}>
                           {school.name}
                         </div>
                         {enableEditing && (
@@ -671,7 +671,7 @@ export function SchoolList({
                           cursor: isEditing ? 'default' : 'pointer',
                         }}
                       >
-                        <span>{school.name}</span>
+                        <span style={{ fontSize: '14px', fontWeight: '600' }}>{school.name}</span>
                         {enableEditing && (
                           <button
                             onClick={(e) => {

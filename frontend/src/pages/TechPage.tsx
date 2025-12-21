@@ -1623,7 +1623,7 @@ export function TechPage() {
                 10. SchedulerService
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
-                Automatically checks Google Drive for updated PDFs, downloads them, and processes them using the shared <strong>RouteProcessor</strong> service.
+                Automatically checks Google Drive for updated PDFs, downloads them, and processes them using the shared <strong>RouteProcessor</strong> service. <strong>Note:</strong> This service is only active in development environments.
               </p>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>APIs Used:</strong>
@@ -1632,20 +1632,21 @@ export function TechPage() {
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                       <li>Schedule: Daily at 2:00 AM (America/Los_Angeles timezone)</li>
                       <li>Cron Expression: <code>0 2 * * *</code></li>
+                      <li><strong>Availability:</strong> Only runs in development (local) mode. Disabled in production.</li>
                     </ul>
                   </li>
                   <li><strong>PdfSyncJobQueue</strong> (for enqueueing PDF sync jobs)</li>
-                  <li><strong>WorkerService</strong> (processes the enqueued jobs in background)</li>
+                  <li><strong>WorkerService</strong> (processes the enqueued jobs via polling in dev)</li>
                   <li><strong>RouteProcessor</strong> (for processing downloaded PDFs)</li>
                 </ul>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>Process:</strong>
                 <ol style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li>Scheduler runs daily at 2:00 AM</li>
+                  <li>Scheduler runs daily at 2:00 AM (if enabled and in dev mode)</li>
                   <li>Loads all schools with Drive links from <code>data/schools.json</code></li>
                   <li>Enqueues PDF sync jobs for each school using <strong>PdfSyncJobQueue</strong></li>
-                  <li>Jobs are processed by <strong>WorkerService</strong> in the background</li>
+                  <li>Jobs are processed by <strong>WorkerService</strong> polling worker in development</li>
                   <li>For each downloaded PDF:
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                       <li>Downloads PDF from Google Drive using <strong>DriveService</strong></li>
@@ -1654,7 +1655,6 @@ export function TechPage() {
                       <li>Saves processed route to <code>data/schools/{'{schoolId}'}/processed-routes/</code></li>
                     </ul>
                   </li>
-                  <li>Jobs use <code>LOW</code> priority for scheduled checks</li>
                   <li>Results are stored in <code>data/pdf-sync-status.json</code></li>
                 </ol>
               </div>
@@ -1929,43 +1929,24 @@ export function TechPage() {
                 14. Job Queue System
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
-                Background job processing system for PDF synchronization and other async tasks. Uses BullMQ with Redis (optional) or falls back to in-memory queue for development.
+                Background job processing system for PDF synchronization and other async tasks. Uses persistent history for job tracking and a polling worker for local development.
               </p>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>Components:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li><strong>BaseJobQueue</strong> - Abstract base class defining job queue interface</li>
-                  <li><strong>JobQueue</strong> - Concrete implementation using BullMQ with Redis or in-memory fallback</li>
+                  <li><strong>JobQueue</strong> - Concrete implementation using persistent history (Redis/BullMQ removed)</li>
                   <li><strong>PdfSyncJobQueue</strong> - Specialized queue for PDF sync operations</li>
-                  <li><strong>WorkerService</strong> - Worker service that processes jobs from the queue</li>
+                  <li><strong>WorkerService</strong> - Worker service that processes jobs via polling in development</li>
                 </ul>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
-                <strong style={{ color: 'var(--text-primary)' }}>Libraries Used:</strong>
+                <strong style={{ color: 'var(--text-primary)' }}>Implementation Details:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li><strong>BullMQ</strong> (npm package)
-                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
-                      <li>Library: <code>bullmq</code></li>
-                      <li>Purpose: Job queue management with Redis backend</li>
-                      <li>Features: Job prioritization, retries, delayed jobs, job history</li>
-                    </ul>
-                  </li>
-                  <li><strong>ioredis</strong> (npm package)
-                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
-                      <li>Library: <code>ioredis</code></li>
-                      <li>Purpose: Redis client for BullMQ</li>
-                      <li>Optional: Falls back to in-memory queue if Redis not available</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
-                <strong style={{ color: 'var(--text-primary)' }}>Redis Configuration:</strong>
-                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li><strong>Environment Variable:</strong> <code>REDIS_URL</code> (optional)</li>
-                  <li><strong>Production Mode:</strong> When <code>REDIS_URL</code> is set, uses Redis for persistent job storage</li>
-                  <li><strong>Development Mode:</strong> When <code>REDIS_URL</code> is not set, uses in-memory queue (jobs lost on restart)</li>
-                  <li><strong>Worker Service:</strong> Automatically detects Redis availability and uses appropriate worker mode</li>
+                  <li><strong>Development Mode:</strong> Uses a polling worker that checks the queue every 5 seconds for new jobs.</li>
+                  <li><strong>Production Mode:</strong> Background jobs and polling are <strong>DISABLED</strong> in production to save resources.</li>
+                  <li><strong>Data Storage:</strong> All jobs are tracked in <code>data/job-history.json</code> for persistence across restarts.</li>
+                  <li><strong>Resource Usage:</strong> Redis and BullMQ have been stripped out to minimize server resource consumption.</li>
                 </ul>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -1973,7 +1954,7 @@ export function TechPage() {
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li><code>PDF_SYNC</code> - Download PDFs for a school from Google Drive</li>
                   <li><code>PDF_PROCESS</code> - Process/parse PDFs for a school</li>
-                  <li><code>DRIVE_CHECK</code> - Check for Drive updates (scheduled)</li>
+                  <li><code>DRIVE_CHECK</code> - Check for Drive updates</li>
                 </ul>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -1983,37 +1964,16 @@ export function TechPage() {
                   <li><code>active</code> - Job is currently being processed by a worker</li>
                   <li><code>completed</code> - Job completed successfully</li>
                   <li><code>failed</code> - Job failed after all retry attempts</li>
-                  <li><code>delayed</code> - Job is scheduled for future execution</li>
-                  <li><code>paused</code> - Job queue is paused</li>
+                  <li><code>cancelled</code> - Job was cancelled by user</li>
                 </ul>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
-                <strong style={{ color: 'var(--text-primary)' }}>Job Priorities:</strong>
+                <strong style={{ color: 'var(--text-primary)' }}>Worker Service (Development Mode Only):</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li><code>LOW (1)</code> - Scheduled checks (e.g., daily scheduler)</li>
-                  <li><code>NORMAL (5)</code> - Default priority for user-initiated jobs</li>
-                  <li><code>HIGH (10)</code> - Manual user requests that should be processed quickly</li>
-                </ul>
-              </div>
-              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
-                <strong style={{ color: 'var(--text-primary)' }}>Worker Service:</strong>
-                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li><strong>Production Mode (with Redis):</strong>
-                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
-                      <li>Uses BullMQ Worker for background processing</li>
-                      <li>Concurrency: Configurable via <code>WORKER_CONCURRENCY</code> env var (default: 2)</li>
-                      <li>Rate Limiting: Max 1 job per 2 seconds (to avoid Drive API rate limits)</li>
-                      <li>Automatic retries with exponential backoff</li>
-                    </ul>
-                  </li>
-                  <li><strong>Development Mode (without Redis):</strong>
-                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
-                      <li>Uses polling worker that checks queue every 1 second</li>
-                      <li>Processes jobs synchronously</li>
-                      <li>Maintains 2-second minimum interval between jobs (rate limiting)</li>
-                      <li>Jobs are lost on server restart (in-memory queue)</li>
-                    </ul>
-                  </li>
+                  <li>Uses a polling worker that checks the queue every 5 seconds</li>
+                  <li>Processes jobs synchronously</li>
+                  <li>Maintains 2-second minimum interval between jobs (rate limiting)</li>
+                  <li>Jobs are persisted in <code>data/jobs-history/jobs.json</code></li>
                 </ul>
               </div>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -2033,8 +1993,7 @@ export function TechPage() {
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>Configuration:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li><code>REDIS_URL</code> - Redis connection URL (optional)</li>
-                  <li><code>WORKER_CONCURRENCY</code> - Number of concurrent workers (default: 2)</li>
+                  <li><code>WORKER_CONCURRENCY</code> - Number of concurrent workers (default: 2, development only)</li>
                   <li><code>JOB_RETRY_ATTEMPTS</code> - Number of retry attempts (default: 3)</li>
                   <li><code>JOB_RETRY_DELAY</code> - Retry delay in ms (default: 5000)</li>
                   <li><code>JOB_HISTORY_RETENTION_DAYS</code> - Days to keep completed jobs (default: 30)</li>
@@ -2044,8 +2003,12 @@ export function TechPage() {
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>Data Storage:</strong>
                 <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>
-                  Job data is stored in Redis (if available) or in-memory. Sync status is persisted to:
+                  Job data is stored in persistent JSON files:
                 </p>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><code>data/jobs-history/jobs.json</code> - Persistent job history</li>
+                  <li><code>data/pdf-sync-status.json</code> - School-specific sync timestamps</li>
+                </ul>
                 <pre style={{ 
                   backgroundColor: '#1e1e1e', 
                   padding: '15px', 
@@ -2114,7 +2077,7 @@ export function TechPage() {
   "failed": 1,
   "delayed": 0,
   "total": 49,
-  "isRedisAvailable": true
+  "isPollingMode": true
 }`}
                 </pre>
               </ExpandableExample>

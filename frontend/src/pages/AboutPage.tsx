@@ -24,7 +24,7 @@ export function AboutPage() {
 
   return (
     <div style={{
-      backgroundColor: '#133A60',
+      backgroundColor: 'var(--brand-primary)',
       minHeight: '100vh',
       color: 'white',
       padding: '4rem 2rem',

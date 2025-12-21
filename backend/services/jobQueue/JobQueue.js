@@ -1,10 +1,8 @@
 /**
- * Concrete job queue implementation using BullMQ
- * Falls back to in-memory queue if Redis is not available
+ * Job queue implementation using persistent history only
+ * Redis and BullMQ have been removed to save resources
  */
 
-import { Queue, QueueEvents, Worker } from 'bullmq';
-import Redis from 'ioredis';
 import { BaseJobQueue } from './BaseJobQueue.js';
 import { JOB_STATUS } from './jobTypes.js';
 import { jobHistoryService } from './JobHistoryService.js';
@@ -13,163 +11,20 @@ export class JobQueue extends BaseJobQueue {
   constructor(queueName, options = {}) {
     super();
     this.queueName = queueName;
-    this.connection = this.getRedisConnection();
-    this.isRedisAvailable = this.connection !== null;
-    
-    // Only create BullMQ Queue and QueueEvents if Redis is available
-    // BullMQ does NOT support in-memory mode - it always tries to connect to Redis
-    if (this.isRedisAvailable) {
-      this.options = {
-        connection: this.connection,
-        defaultJobOptions: {
-          attempts: options.attempts || 3,
-          backoff: {
-            type: 'exponential',
-            delay: options.retryDelay || 5000,
-          },
-          removeOnComplete: {
-            age: options.historyRetentionDays ? options.historyRetentionDays * 24 * 3600 : 30 * 24 * 3600, // 30 days default
-            count: options.historyRetentionCount || 1000,
-          },
-          removeOnFail: {
-            age: options.failedRetentionDays ? options.failedRetentionDays * 24 * 3600 : 7 * 24 * 3600, // 7 days default
-          },
+    this.isRedisAvailable = false;
+    this.queue = null;
+    this.queueEvents = null;
+    this.options = {
+      defaultJobOptions: {
+        attempts: options.attempts || 3,
+        backoff: {
+          type: 'exponential',
+          delay: options.retryDelay || 5000,
         },
-        ...options,
-      };
-
-      this.queue = new Queue(queueName, this.options);
-      this.queueEvents = new QueueEvents(queueName, this.options);
-      console.log(`[JobQueue] Redis connection available - using production mode`);
-      
-      // Set up event listeners to record job history
-      this.setupEventListeners();
-    } else {
-      // No Redis - don't create Queue/QueueEvents to avoid connection attempts
-      this.queue = null;
-      this.queueEvents = null;
-      this.options = {
-        defaultJobOptions: {
-          attempts: options.attempts || 3,
-          backoff: {
-            type: 'exponential',
-            delay: options.retryDelay || 5000,
-          },
-        },
-        ...options,
-      };
-      console.log(`[JobQueue] No Redis connection - using polling mode with persistent history only`);
-    }
-  }
-
-  /**
-   * Set up event listeners to record job history
-   */
-  setupEventListeners() {
-    // Only set up event listeners if Redis is available
-    // In-memory queues don't support QueueEvents properly
-    if (!this.isRedisAvailable) {
-      console.log('[JobQueue] Skipping event listeners - Redis not available (will use polling worker events instead)');
-      return;
-    }
-    
-    // Listen to queue events
-    this.queueEvents.on('waiting', ({ jobId }) => {
-      this.queue.getJob(jobId).then(job => {
-        if (job) {
-          jobHistoryService.recordEvent('created', {
-            id: jobId,
-            name: job.name,
-            data: job.data,
-            attempts: job.opts.attempts,
-          });
-        }
-      }).catch(err => console.error('[JobQueue] Error recording created event:', err));
-    });
-
-    this.queueEvents.on('active', ({ jobId }) => {
-      this.queue.getJob(jobId).then(job => {
-        if (job) {
-          jobHistoryService.recordEvent('started', {
-            id: jobId,
-            name: job.name,
-            data: job.data,
-          });
-        }
-      }).catch(err => console.error('[JobQueue] Error recording started event:', err));
-    });
-
-    this.queueEvents.on('progress', ({ jobId, data }) => {
-      jobHistoryService.recordEvent('progress', {
-        id: jobId,
-        progress: data,
-      });
-    });
-
-    this.queueEvents.on('completed', ({ jobId, returnvalue }) => {
-      this.queue.getJob(jobId).then(job => {
-        if (job) {
-          jobHistoryService.recordEvent('completed', {
-            id: jobId,
-            name: job.name,
-            data: job.data,
-            result: returnvalue,
-          });
-        }
-      }).catch(err => console.error('[JobQueue] Error recording completed event:', err));
-    });
-
-    this.queueEvents.on('failed', ({ jobId, failedReason }) => {
-      this.queue.getJob(jobId).then(job => {
-        if (job) {
-          jobHistoryService.recordEvent('failed', {
-            id: jobId,
-            name: job.name,
-            data: job.data,
-            error: failedReason,
-            failedReason,
-          });
-        }
-      }).catch(err => console.error('[JobQueue] Error recording failed event:', err));
-    });
-  }
-
-  /**
-   * Get Redis connection or return null if Redis is not available
-   * Note: BullMQ does NOT support in-memory mode - it always requires Redis
-   */
-  getRedisConnection() {
-    const redisUrl = process.env.REDIS_URL;
-    
-    if (!redisUrl) {
-      console.log(`[JobQueue] No REDIS_URL found - job queue will use history-only mode (no Redis)`);
-      return null;
-    }
-
-    try {
-      // Create Redis connection with retry disabled to avoid connection spam
-      // Use lazyConnect and disable automatic reconnection to prevent error spam
-      const redis = new Redis(redisUrl, {
-        maxRetriesPerRequest: null,
-        enableReadyCheck: false,
-        retryStrategy: () => null, // Disable retry - return null to stop retrying
-        lazyConnect: true, // Don't connect immediately - will connect on first use
-        enableOfflineQueue: false, // Don't queue commands when offline
-      });
-      
-      // Set up error handler to prevent unhandled errors
-      redis.on('error', (err) => {
-        // Only log if it's not a connection refused (expected when Redis isn't running)
-        if (err.code !== 'ECONNREFUSED') {
-          console.error(`[JobQueue] Redis connection error: ${err.message}`);
-        }
-      });
-      
-      return redis;
-    } catch (error) {
-      console.error(`[JobQueue] Failed to create Redis connection: ${error.message}, using history-only mode`);
-      return null;
-    }
+      },
+      ...options,
+    };
+    console.log(`[JobQueue] Redis/BullMQ disabled - using persistent history only`);
   }
 
   /**
@@ -183,67 +38,24 @@ export class JobQueue extends BaseJobQueue {
       ...options,
     };
 
-    // If Redis is not available, create a job ID and record it in history only
-    if (!this.isRedisAvailable || !this.queue) {
-      const jobId = `job_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      console.log(`[JobQueue] Enqueued job ${jobId} of type ${jobType} (history only, no Redis)`);
-      
-      // Record job creation in history
-      jobHistoryService.recordEvent('created', {
-        id: jobId,
-        name: jobType,
-        data,
-        attempts: jobOptions.attempts,
-      });
-      
-      return jobId;
-    }
-
-    const job = await this.queue.add(jobType, data, jobOptions);
-    console.log(`[JobQueue] Enqueued job ${job.id} of type ${jobType}`);
+    const jobId = `job_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    console.log(`[JobQueue] Enqueued job ${jobId} of type ${jobType} (persistent history mode)`);
     
-    // Record job creation in history (immediate, in case events don't fire)
+    // Record job creation in history
     jobHistoryService.recordEvent('created', {
-      id: job.id,
+      id: jobId,
       name: jobType,
       data,
       attempts: jobOptions.attempts,
     });
     
-    return job.id;
+    return jobId;
   }
 
   /**
    * Get job status by ID
    */
   async getJobStatus(jobId) {
-    // First try to get from queue (if Redis available)
-    if (this.queue && this.isRedisAvailable) {
-      const job = await this.queue.getJob(jobId);
-      
-      if (job) {
-        const state = await job.getState();
-        const progress = job.progress || 0;
-        const result = job.returnvalue || null;
-        const failedReason = job.failedReason || null;
-
-        return {
-          id: job.id,
-          name: job.name,
-          data: job.data,
-          status: this.mapBullMQStateToStatus(state),
-          progress,
-          result,
-          error: failedReason,
-          createdAt: new Date(job.timestamp),
-          processedAt: job.processedOn ? new Date(job.processedOn) : null,
-          finishedAt: job.finishedOn ? new Date(job.finishedOn) : null,
-          attemptsMade: job.attemptsMade,
-          attemptsTotal: job.opts.attempts,
-        };
-      }
-    }
-    
     // Fallback to history
     const historyJob = jobHistoryService.getJob(jobId);
     if (historyJob) {
@@ -268,39 +80,10 @@ export class JobQueue extends BaseJobQueue {
   }
 
   /**
-   * Map BullMQ state to our status enum
-   */
-  mapBullMQStateToStatus(state) {
-    const mapping = {
-      'waiting': JOB_STATUS.WAITING,
-      'active': JOB_STATUS.ACTIVE,
-      'completed': JOB_STATUS.COMPLETED,
-      'failed': JOB_STATUS.FAILED,
-      'delayed': JOB_STATUS.DELAYED,
-      'paused': JOB_STATUS.PAUSED,
-    };
-    return mapping[state] || state;
-  }
-
-  /**
    * Cancel a job
    */
   async cancelJob(jobId) {
-    if (this.queue && this.isRedisAvailable) {
-      const job = await this.queue.getJob(jobId);
-      if (job) {
-        await job.remove();
-        // Record cancellation in history
-        jobHistoryService.recordEvent('cancelled', {
-          id: jobId,
-          name: job.name,
-          data: job.data,
-        });
-        return true;
-      }
-    }
-    
-    // If not in Redis, just record in history
+    // Just record in history
     const historyJob = jobHistoryService.getJob(jobId);
     if (historyJob && (historyJob.status === 'waiting' || historyJob.status === 'active')) {
       jobHistoryService.recordEvent('cancelled', {
@@ -318,273 +101,58 @@ export class JobQueue extends BaseJobQueue {
    * Retry a failed job
    */
   async retryJob(jobId) {
-    if (!this.isRedisAvailable || !this.queue) {
-      // Get job from history and re-enqueue
-      const historyJob = jobHistoryService.getJob(jobId);
-      if (!historyJob) {
-        throw new Error(`Job ${jobId} not found`);
-      }
-      if (historyJob.status !== JOB_STATUS.FAILED) {
-        throw new Error(`Job ${jobId} is not in failed state (current: ${historyJob.status})`);
-      }
-      // Re-enqueue using the enqueue method
-      return await this.enqueue(historyJob.name, historyJob.data, {
-        priority: historyJob.priority || 5,
-        attempts: historyJob.attemptsTotal || 3,
-      });
-    }
-
-    const job = await this.queue.getJob(jobId);
-    if (!job) {
+    // Get job from history and re-enqueue
+    const historyJob = jobHistoryService.getJob(jobId);
+    if (!historyJob) {
       throw new Error(`Job ${jobId} not found`);
     }
-
-    const state = await job.getState();
-    if (state !== 'failed') {
-      throw new Error(`Job ${jobId} is not in failed state (current: ${state})`);
+    if (historyJob.status !== JOB_STATUS.FAILED) {
+      throw new Error(`Job ${jobId} is not in failed state (current: ${historyJob.status})`);
     }
-
-    // Create a new job with the same data
-    const newJob = await this.queue.add(job.name, job.data, {
-      priority: job.opts.priority,
-      attempts: job.opts.attempts,
+    // Re-enqueue using the enqueue method
+    return await this.enqueue(historyJob.name, historyJob.data, {
+      priority: historyJob.priority || 5,
+      attempts: historyJob.attemptsTotal || 3,
     });
-
-    return newJob.id;
   }
 
   /**
    * Get jobs by type and status
    */
   async getJobs(jobType = null, status = null, limit = 100) {
-    const startTime = Date.now();
-    
-    // CRITICAL: Check Redis availability FIRST before doing anything else
-    // If Redis is not available, return history jobs immediately - don't touch the queue
-    if (!this.isRedisAvailable) {
-      try {
-        const historyJobs = jobHistoryService.getJobs(jobType, status, limit);
-        return historyJobs;
-      } catch (error) {
-        console.error('[JobQueue] Error getting history jobs:', error);
-        return [];
-      }
-    }
-    
-    // Always get jobs from history (for merging with Redis jobs)
-    const historyJobs = jobHistoryService.getJobs(jobType, status, limit * 2);
-    
-    // Check if queue is initialized
-    if (!this.queue) {
-      console.log('[JobQueue] Queue not initialized, returning history jobs only');
-      return historyJobs.slice(0, limit);
-    }
-    
-    const jobs = [];
-    
-    // Get jobs from different states
-    const states = status 
-      ? [this.mapStatusToBullMQState(status)]
-      : ['waiting', 'active', 'completed', 'failed', 'delayed', 'paused'];
-
-    // Limit per state to avoid fetching too many jobs
-    // If we have 6 states and want 100 jobs total, fetch ~20 per state
-    const perStateLimit = Math.ceil(limit / states.length) + 10; // Add buffer for filtering
-
-    console.log(`[JobQueue] getJobs: fetching up to ${perStateLimit} jobs per state from ${states.length} states (total limit: ${limit})`);
-
-    // Wrap entire operation in a timeout to prevent hanging
     try {
-      const getJobsPromise = (async () => {
-        for (const state of states) {
-          // Skip if we already have enough jobs
-          if (jobs.length >= limit) {
-            break;
-          }
-
-          let stateJobs = [];
-          
-          try {
-            // Add timeout per state fetch (3 seconds max per state)
-            const stateFetchPromise = (async () => {
-              switch (state) {
-                case 'waiting':
-                  return await this.queue.getWaiting(0, perStateLimit);
-                case 'active':
-                  return await this.queue.getActive(0, perStateLimit);
-                case 'completed':
-                  return await this.queue.getCompleted(0, perStateLimit);
-                case 'failed':
-                  return await this.queue.getFailed(0, perStateLimit);
-                case 'delayed':
-                  return await this.queue.getDelayed(0, perStateLimit);
-                case 'paused':
-                  return await this.queue.getPaused(0, perStateLimit);
-                default:
-                  return [];
-              }
-            })();
-
-            const timeoutPromise = new Promise((_, reject) => 
-              setTimeout(() => reject(new Error(`Timeout fetching ${state} jobs`)), 3000)
-            );
-
-            stateJobs = await Promise.race([stateFetchPromise, timeoutPromise]);
-            console.log(`[JobQueue] Fetched ${stateJobs.length} ${state} jobs`);
-          } catch (error) {
-            console.error(`[JobQueue] Error fetching ${state} jobs:`, error.message);
-            // Continue with other states even if one fails
-            continue;
-          }
-
-          // Filter by job type if specified
-          if (jobType) {
-            stateJobs = stateJobs.filter(job => job.name === jobType);
-          }
-
-          // Convert to our format - use the state we already know instead of calling getState()
-          const mappedStatus = this.mapBullMQStateToStatus(state);
-          for (const job of stateJobs) {
-            jobs.push({
-              id: job.id,
-              name: job.name,
-              data: job.data,
-              status: mappedStatus, // Use the state we already know
-              progress: job.progress || 0,
-              result: job.returnvalue || null,
-              error: job.failedReason || null,
-              createdAt: new Date(job.timestamp),
-              processedAt: job.processedOn ? new Date(job.processedOn) : null,
-              finishedAt: job.finishedOn ? new Date(job.finishedOn) : null,
-              attemptsMade: job.attemptsMade,
-              attemptsTotal: job.opts.attempts,
-            });
-          }
-        }
-
-        // Sort by creation time (newest first) and limit
-        jobs.sort((a, b) => {
-          const timeA = a.createdAt instanceof Date ? a.createdAt.getTime() : new Date(a.createdAt).getTime();
-          const timeB = b.createdAt instanceof Date ? b.createdAt.getTime() : new Date(b.createdAt).getTime();
-          return timeB - timeA;
-        });
-        
-        // Merge with history jobs (prefer Redis jobs for active jobs, but include history for completed/failed)
-        const redisJobIds = new Set(jobs.map(j => j.id));
-        const additionalHistoryJobs = historyJobs.filter(hj => !redisJobIds.has(hj.id));
-        
-        // Combine and deduplicate
-        const allJobs = [...jobs, ...additionalHistoryJobs];
-        allJobs.sort((a, b) => {
-          const timeA = a.createdAt instanceof Date ? a.createdAt.getTime() : new Date(a.createdAt).getTime();
-          const timeB = b.createdAt instanceof Date ? b.createdAt.getTime() : new Date(b.createdAt).getTime();
-          return timeB - timeA;
-        });
-        
-        return allJobs.slice(0, limit);
-      })();
-
-      // Overall timeout of 10 seconds
-      const overallTimeout = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Overall timeout fetching jobs')), 10000)
-      );
-
-      const result = await Promise.race([getJobsPromise, overallTimeout]);
-      const duration = Date.now() - startTime;
-      console.log(`[JobQueue] getJobs completed in ${duration}ms, returning ${result.length} jobs`);
-      return result;
-    } catch (error) {
-      const duration = Date.now() - startTime;
-      console.error(`[JobQueue] getJobs failed after ${duration}ms:`, error.message);
-      // On error, return history jobs as fallback
-      console.log(`[JobQueue] Returning ${historyJobs.length} history jobs as fallback`);
+      const historyJobs = jobHistoryService.getJobs(jobType, status, limit);
       return historyJobs;
+    } catch (error) {
+      console.error('[JobQueue] Error getting history jobs:', error);
+      return [];
     }
-  }
-
-  /**
-   * Map our status to BullMQ state
-   */
-  mapStatusToBullMQState(status) {
-    const mapping = {
-      [JOB_STATUS.WAITING]: 'waiting',
-      [JOB_STATUS.ACTIVE]: 'active',
-      [JOB_STATUS.COMPLETED]: 'completed',
-      [JOB_STATUS.FAILED]: 'failed',
-      [JOB_STATUS.DELAYED]: 'delayed',
-      [JOB_STATUS.PAUSED]: 'paused',
-    };
-    return mapping[status] || status;
   }
 
   /**
    * Get job statistics
    */
   async getStats() {
-    // Always get stats from history (works even without Redis)
+    // Always get stats from history
     const historyStats = jobHistoryService.getStats();
     
-    // If Redis is not available, return history stats
-    if (!this.isRedisAvailable) {
-      console.log('[JobQueue] Redis not available - returning stats from persistent history');
-      return {
-        ...historyStats,
-        delayed: 0,
-        isRedisAvailable: false,
-        isPollingMode: true, // Indicate we're in polling mode
-      };
-    }
-
-    if (!this.queue) {
-      return {
-        ...historyStats,
-        delayed: 0,
-        isRedisAvailable: false,
-        isPollingMode: true,
-      };
-    }
-
-    try {
-      const [waiting, active, completed, failed, delayed] = await Promise.all([
-        this.queue.getWaitingCount(),
-        this.queue.getActiveCount(),
-        this.queue.getCompletedCount(),
-        this.queue.getFailedCount(),
-        this.queue.getDelayedCount(),
-      ]);
-
-      // Merge Redis stats with history stats (prefer Redis for active counts, history for totals)
-      return {
-        waiting: Math.max(waiting, historyStats.waiting), // Use Redis if available, but don't lose history
-        active: Math.max(active, historyStats.active),
-        completed: Math.max(completed, historyStats.completed),
-        failed: Math.max(failed, historyStats.failed),
-        delayed,
-        total: Math.max(waiting + active + completed + failed + delayed, historyStats.total),
-        isRedisAvailable: this.isRedisAvailable,
-        isPollingMode: false,
-      };
-    } catch (error) {
-      console.error('[JobQueue] Error getting stats:', error.message);
-      // On error, return history stats as fallback
-      return {
-        ...historyStats,
-        delayed: 0,
-        isRedisAvailable: false,
-        isPollingMode: true,
-      };
-    }
+    return {
+      ...historyStats,
+      delayed: 0,
+      isRedisAvailable: false,
+      isPollingMode: true,
+    };
   }
 
   /**
-   * Get the underlying BullMQ queue (for worker setup)
+   * Get the underlying queue (deprecated)
    */
   getQueue() {
-    return this.queue;
+    return null;
   }
 
   /**
-   * Get queue options (for worker setup)
+   * Get queue options
    */
   getOptions() {
     return this.options;
@@ -594,15 +162,6 @@ export class JobQueue extends BaseJobQueue {
    * Close the queue
    */
   async close() {
-    if (this.queue) {
-      await this.queue.close();
-    }
-    if (this.queueEvents) {
-      await this.queueEvents.close();
-    }
-    if (this.connection) {
-      await this.connection.quit();
-    }
+    // Nothing to close
   }
 }
-

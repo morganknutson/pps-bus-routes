@@ -66,8 +66,8 @@ export function HomePage() {
     const originalRootHeight = rootElement?.style.height;
     
     // Set background colors
-    document.body.style.backgroundColor = '#133A60';
-    document.documentElement.style.backgroundColor = '#133A60';
+    document.body.style.backgroundColor = 'var(--brand-primary)';
+    document.documentElement.style.backgroundColor = 'var(--brand-primary)';
     
     // On mobile/all devices, we want the body to scroll normally if content exceeds viewport
     document.body.style.overflow = 'auto';
@@ -439,7 +439,7 @@ export function HomePage() {
 
   return (
     <div style={{
-      backgroundColor: '#133A60',
+      backgroundColor: 'var(--brand-primary)',
       minHeight: '100vh',
       width: '100%',
       display: 'flex',

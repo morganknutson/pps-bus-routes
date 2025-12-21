@@ -1847,9 +1847,6 @@ export function VerificationPage() {
                     <span>Fix All ({schoolsNeedingAttention.length})</span>
                   )}
                 </button>
-                <div style={{ fontSize: isMobile ? '10px' : '12px', color: 'var(--text-secondary)', width: isMobile ? '100%' : 'auto' }}>
-                  Last checked: {new Date(driveLinkResults.timestamp).toLocaleString()}
-                </div>
               </div>
             </div>
             
@@ -1945,9 +1942,9 @@ export function VerificationPage() {
                             ) : null}
                           </div>
                           <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
-                            <div>Drive PDFs: {result.pdfCount || 0} | Local PDFs: {result.localPdfCount || 0}</div>
-                            <div>Drive: {result.driveLastModified ? new Date(result.driveLastModified).toLocaleString() : '—'}</div>
+                            <div>Local PDFs: {result.localPdfCount || 0} | Drive PDFs: {result.pdfCount || 0}</div>
                             <div>Local: {result.localLastModified ? new Date(result.localLastModified).toLocaleString() : '—'}</div>
+                            <div>Drive: {result.driveLastModified ? new Date(result.driveLastModified).toLocaleString() : '—'}</div>
                           </div>
                           <button
                             onClick={() => handleFetchPdfs(result.schoolId)}
@@ -1996,10 +1993,10 @@ export function VerificationPage() {
                       <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--bg-primary)' }}>
                         <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>School</th>
                         <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Status</th>
-                        <th style={{ padding: '0.75rem', textAlign: 'center', fontWeight: 'bold' }}>Drive PDFs</th>
                         <th style={{ padding: '0.75rem', textAlign: 'center', fontWeight: 'bold' }}>Local PDFs</th>
-                        <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Drive Modified</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'center', fontWeight: 'bold' }}>Drive PDFs</th>
                         <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Local Modified</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Drive Modified</th>
                         <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: 'bold' }}>Action</th>
                       </tr>
                     </thead>
@@ -2034,16 +2031,16 @@ export function VerificationPage() {
                               )}
                             </td>
                             <td style={{ padding: '0.75rem', textAlign: 'center', fontWeight: '500' }}>
-                              {result.pdfCount || 0}
-                            </td>
-                            <td style={{ padding: '0.75rem', textAlign: 'center', fontWeight: '500' }}>
                               {result.localPdfCount || 0}
                             </td>
-                            <td style={{ padding: '0.75rem', fontSize: '11px' }}>
-                              {result.driveLastModified ? new Date(result.driveLastModified).toLocaleString() : '—'}
+                            <td style={{ padding: '0.75rem', textAlign: 'center', fontWeight: '500' }}>
+                              {result.pdfCount || 0}
                             </td>
                             <td style={{ padding: '0.75rem', fontSize: '11px' }}>
                               {result.localLastModified ? new Date(result.localLastModified).toLocaleString() : '—'}
+                            </td>
+                            <td style={{ padding: '0.75rem', fontSize: '11px' }}>
+                              {result.driveLastModified ? new Date(result.driveLastModified).toLocaleString() : '—'}
                             </td>
                             <td style={{ padding: '0.75rem' }}>
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'flex-start' }}>

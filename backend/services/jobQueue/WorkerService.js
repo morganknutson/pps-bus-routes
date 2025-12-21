@@ -3,19 +3,15 @@
  * Handles PDF sync, PDF processing, and Drive check jobs
  */
 
-import { Worker } from 'bullmq';
 import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import { listFolderFiles, downloadFile } from '../driveService.js';
-import { parseRouteFromPDF } from '../pdfParser.js';
-import { geocodingService } from '../geocodingService.js';
 import { processSinglePDF } from '../routeProcessor.js';
 import { pdfMetadataService } from '../pdfMetadataService.js';
 import { driveLinkVerificationService } from '../driveLinkVerificationService.js';
-import { getSchoolIdFromFilename, getSchoolPdfDir } from '../../utils/schoolUtils.js';
 import { JOB_TYPES } from './jobTypes.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,7 +21,6 @@ const require = createRequire(import.meta.url);
 const DATA_DIR = path.join(__dirname, '..', '..', '..', 'data');
 const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
 const SYNC_STATUS_FILE = path.join(DATA_DIR, 'pdf-sync-status.json');
-const pdfParse = require(path.join(__dirname, '..', '..', 'node_modules', 'pdf-parse'));
 
 /**
  * Worker service class
@@ -47,59 +42,17 @@ export class WorkerService {
       return;
     }
 
-    console.log(`[WorkerService] Starting with concurrency: ${this.concurrency}`);
-
-    // Get Redis connection from queue (may be null for in-memory)
-    // The connection is stored in the queue's options
-    const connection = this.pdfSyncQueue.getOptions().connection || null;
-
-    if (!connection) {
-      // Development mode: Use polling worker for in-memory queue
-      console.warn('[WorkerService] ⚠️  No Redis connection available, using development polling worker');
-      console.warn('[WorkerService] 💡 Set REDIS_URL environment variable for production background processing');
-      this.startPollingWorker();
+    // Disable jobs and polling in production
+    if (process.env.NODE_ENV === 'production') {
+      console.log('[WorkerService] 🚫 Background jobs and polling are DISABLED in production mode');
       return;
     }
 
-    // Production mode: Use BullMQ Worker with Redis
-    const pdfSyncWorker = new Worker(
-      this.pdfSyncQueue.queueName,
-      async (job) => {
-        if (job.name === JOB_TYPES.DRIVE_CHECK) {
-          return await this.processDriveCheckJob(job);
-        }
-        if (job.name === JOB_TYPES.PDF_PROCESS) {
-          return await this.processPdfProcessJob(job);
-        }
-        return await this.processPdfSyncJob(job);
-      },
-      {
-        connection,
-        concurrency: this.concurrency,
-        limiter: {
-          max: 1, // Max 1 job per interval
-          duration: 2000, // 2 seconds (rate limiting for Drive API)
-        },
-      }
-    );
+    console.log(`[WorkerService] Starting in development mode (polling worker)`);
+    console.log(`[WorkerService] Concurrency: ${this.concurrency}`);
 
-    // Handle job events
-    pdfSyncWorker.on('completed', (job) => {
-      console.log(`[WorkerService] Job ${job.id} completed`);
-    });
-
-    pdfSyncWorker.on('failed', (job, err) => {
-      console.error(`[WorkerService] Job ${job.id} failed:`, err.message);
-    });
-
-    pdfSyncWorker.on('error', (err) => {
-      console.error('[WorkerService] Worker error:', err);
-    });
-
-    this.workers.push(pdfSyncWorker);
-    this.isRunning = true;
-
-    console.log('[WorkerService] Started successfully with Redis');
+    // In this stripped-down version, we only support the polling worker for local development
+    this.startPollingWorker();
   }
 
   /**
@@ -218,9 +171,6 @@ export class WorkerService {
     console.log('[WorkerService] Stopping workers...');
     
     this.isRunning = false;
-    
-    // Close BullMQ workers
-    await Promise.all(this.workers.map(worker => worker.close()));
     this.workers = [];
 
     console.log('[WorkerService] Stopped');
@@ -250,24 +200,6 @@ export class WorkerService {
       
       await job.updateProgress(80);
 
-      // Update cache file (similar to the route handler logic)
-      let cachedResults = {
-        timestamp: new Date().toISOString(),
-        totalSchools: schools.length,
-        results: [],
-      };
-      
-      const DRIVE_VERIFICATION_CACHE_FILE = path.join(DATA_DIR, 'drive-link-verification-results.json');
-      
-      if (fs.existsSync(DRIVE_VERIFICATION_CACHE_FILE)) {
-        try {
-          const cacheContent = await fsPromises.readFile(DRIVE_VERIFICATION_CACHE_FILE, 'utf8');
-          cachedResults = JSON.parse(cacheContent);
-        } catch (error) {
-          console.warn('[WorkerService] Error loading cache for update:', error.message);
-        }
-      }
-      
       // Save updated cache
       await this.updateVerificationCache(schoolId, result);
 

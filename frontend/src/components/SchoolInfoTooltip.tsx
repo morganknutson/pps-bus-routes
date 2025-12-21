@@ -4,6 +4,7 @@ import { getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { useStore } from '../store/useStore';
 
 interface SchoolInfoTooltipProps {
   school: School;
@@ -21,6 +22,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
   message
 }) => {
   const isMobile = useIsMobile();
+  const isDarkMode = useStore(state => state.isDarkMode);
   const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
   const schoolColor = getSchoolColor(schoolTypes);
 
@@ -237,51 +239,51 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             style={{ 
               display: 'flex', 
               gap: '0.75rem', 
-              padding: '8px 16px',
-              backgroundColor: 'var(--bg-tertiary)',
+              padding: '8px 16px 8px 8px',
+              backgroundColor: isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)',
               borderRadius: '9999px',
-              border: '1px solid var(--border-color)',
+              border: isDarkMode ? '1px solid var(--border-color)' : 'none',
               textAlign: 'left',
               cursor: (showRoutesButton && onViewRoutes) ? 'pointer' : 'default',
               transition: 'all 0.2s ease',
               width: '100%',
               alignItems: 'center',
               marginTop: '1.25rem',
-              boxShadow: '0 1px 3px var(--shadow-large)'
+              boxShadow: isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)'
             }}
             onMouseEnter={(e) => {
               if (showRoutesButton && onViewRoutes) {
-                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-secondary)' : '#1a4b7c';
                 e.currentTarget.style.transform = 'translateY(-1px)';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+                e.currentTarget.style.boxShadow = isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '0 4px 12px rgba(19, 58, 96, 0.3)';
               }
             }}
             onMouseLeave={(e) => {
               if (showRoutesButton && onViewRoutes) {
-                e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)';
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 1px 3px var(--shadow-large)';
+                e.currentTarget.style.boxShadow = isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)';
               }
             }}
           >
             <div style={{ 
               width: '28px', 
               height: '28px', 
-              backgroundColor: 'var(--bg-primary)', 
+              backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(255, 255, 255, 0.2)', 
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+              boxShadow: isDarkMode ? '0 2px 4px rgba(0,0,0,0.05)' : 'none'
             }}>
-              <i className="fas fa-route" style={{ color: schoolColor, fontSize: '13px' }}></i>
+              <i className="fas fa-route" style={{ color: isDarkMode ? schoolColor : '#ffffff', fontSize: '13px' }}></i>
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ 
                 fontSize: '13px', 
                 fontWeight: '700', 
-                color: 'var(--text-primary)',
+                color: isDarkMode ? 'var(--text-primary)' : '#ffffff',
               }}>
                 Explore {school.routeCount} {school.routeCount === 1 ? 'Route' : 'Routes'}
               </div>

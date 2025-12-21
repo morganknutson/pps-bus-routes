@@ -98,7 +98,7 @@ export function DarkModeToggle() {
           className={isDarkMode ? 'fas fa-moon' : 'fas fa-sun'}
           style={{
             fontSize: '10px',
-            color: '#133A60',
+            color: 'var(--brand-primary)',
             transition: 'transform 0.3s ease',
           }}
         />

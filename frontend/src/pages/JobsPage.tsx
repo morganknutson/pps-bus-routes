@@ -187,31 +187,30 @@ export function JobsPage() {
         </p>
         {stats && (
           <div style={{ marginBottom: '1rem' }}>
-            {stats.isRedisAvailable ? (
-              <p style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>
-                ✅ Redis connected - Production mode
+            <div style={{
+              padding: '1rem',
+              backgroundColor: 'var(--bg-secondary)',
+              border: '1px solid var(--bg-primary)',
+              borderRadius: '8px',
+              boxShadow: 'var(--shadow-large)',
+              marginBottom: '1rem',
+            }}>
+              <p style={{ margin: 0, fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+                🔄 Job Queue Mode: Persistent History
               </p>
-            ) : (
-              <div style={{
-                padding: '1rem',
-                backgroundColor: '#d1ecf1',
-                border: '1px solid #bee5eb',
-                borderRadius: '8px',
-                color: '#0c5460',
-                marginBottom: '1rem',
-              }}>
-                <p style={{ margin: 0, fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                  🔄 Polling Mode (Development)
-                </p>
-                <p style={{ margin: 0, fontSize: '14px' }}>
-                  Redis is not configured. Jobs are running in polling mode and are tracked in persistent history.
-                  All job events are saved to <code>data/jobs-history/jobs.json</code>.
-                </p>
-                <p style={{ margin: '0.5rem 0 0 0', fontSize: '12px', fontStyle: 'italic' }}>
-                  💡 To enable Redis for production mode, set the REDIS_URL environment variable in your backend configuration.
-                </p>
-              </div>
-            )}
+              <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)' }}>
+                Redis and BullMQ have been removed for efficiency. Jobs are tracked in a lightweight persistent history system.
+                {process.env.NODE_ENV === 'production' ? (
+                  <span style={{ color: '#f44', fontWeight: 'bold', display: 'block', marginTop: '0.5rem' }}>
+                    ⚠️ Background processing and polling are DISABLED in production mode.
+                  </span>
+                ) : (
+                  <span style={{ display: 'block', marginTop: '0.5rem' }}>
+                    ✅ Polling worker is active for local development.
+                  </span>
+                )}
+              </p>
+            </div>
           </div>
         )}
       </div>
@@ -349,9 +348,7 @@ export function JobsPage() {
             No jobs found
           </p>
           <p style={{ fontSize: '14px' }}>
-            {stats.isRedisAvailable 
-              ? 'No jobs have been queued yet. Jobs will appear here when you trigger PDF sync or other background tasks.'
-              : 'No jobs in history. Jobs will appear here when you trigger PDF sync or other background tasks. Job history is persisted to data/jobs-history/jobs.json.'}
+            No jobs in history. Jobs will appear here when you trigger PDF sync or other background tasks. Job history is persisted to <code>data/jobs-history/jobs.json</code>.
           </p>
         </div>
       )}

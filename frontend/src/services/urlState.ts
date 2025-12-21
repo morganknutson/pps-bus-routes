@@ -74,7 +74,7 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
   }
 
   // Case 2: Clean Hierarchy (schoolId first)
-  state.schoolId = segments[0];
+  state.schoolId = segments[0]?.toLowerCase();
   state.show = 'schools'; // Default
 
   if (segments.length > 1 && segments[1] === 'routes') {

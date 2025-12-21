@@ -222,6 +222,12 @@ function startScheduler() {
     return;
   }
   
+  // Disable scheduler in production
+  if (process.env.NODE_ENV === 'production') {
+    console.log('[Scheduler] 🚫 Scheduler is DISABLED in production mode');
+    return;
+  }
+
   // Schedule for 2am daily
   cronJob = cron.schedule('0 2 * * *', async () => {
     if (schedulerState.enabled) {
@@ -311,4 +317,3 @@ export {
   startScheduler,
   stopScheduler,
 };
-
