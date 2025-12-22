@@ -4,6 +4,8 @@ import { Header } from '../components/Header';
 import { SEO } from '../components/SEO';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useStore } from '../store/useStore';
+import { useDarkMode } from '../hooks/useDarkMode';
+import { Footer } from '../components/Footer';
 
 interface NeighborhoodData {
   name: string;
@@ -16,7 +18,9 @@ interface NeighborhoodData {
 export function NeighborhoodDirectory() {
   const setSelectedSchool = useStore(state => state.setSelectedSchool);
   const setRoutes = useStore(state => state.setRoutes);
+  const { isDarkMode } = useDarkMode();
   const [neighborhoods, setNeighborhoods] = useState<NeighborhoodData[]>([]);
+
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const isMobile = useIsMobile();
@@ -88,7 +92,7 @@ export function NeighborhoodDirectory() {
             Find active bus routes and school stops serving your Portland neighborhood.
           </p>
           
-          <div style={{ position: 'relative', maxWidth: '500px' }}>
+          <div style={{ position: 'relative', width: '100%' }}>
             <input
               type="text"
               placeholder="Search by neighborhood or school..."
@@ -165,21 +169,21 @@ export function NeighborhoodDirectory() {
                         to={`/${school.id}`}
                         style={{ 
                           fontSize: '0.875rem', 
-                          color: '#4ECDC4', 
+                          color: 'var(--text-primary)', 
                           textDecoration: 'none',
                           padding: '0.25rem 0.75rem',
-                          backgroundColor: 'rgba(78, 205, 196, 0.1)',
+                          backgroundColor: 'var(--bg-primary)',
                           borderRadius: '999px',
-                          border: '1px solid rgba(78, 205, 196, 0.2)',
+                          border: '1px solid var(--border-color)',
                           transition: 'all 0.2s ease'
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(78, 205, 196, 0.2)';
-                          e.currentTarget.style.borderColor = 'rgba(78, 205, 196, 0.4)';
+                          e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                          e.currentTarget.style.borderColor = 'var(--text-tertiary)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(78, 205, 196, 0.1)';
-                          e.currentTarget.style.borderColor = 'rgba(78, 205, 196, 0.2)';
+                          e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+                          e.currentTarget.style.borderColor = 'var(--border-color)';
                         }}
                       >
                         {school.name}
@@ -215,6 +219,8 @@ export function NeighborhoodDirectory() {
           </div>
         )}
       </main>
+
+      <Footer />
     </div>
   );
 }

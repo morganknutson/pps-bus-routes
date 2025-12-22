@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { ProgressBar } from '../components/ProgressBar';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { Footer } from '../components/Footer';
 
 export function DataPage() {
   console.log('[DataPage] Component rendering...');
@@ -288,6 +289,14 @@ export function DataPage() {
         }}>
           Data
         </h1>
+        <p style={{ 
+          marginTop: '0.5rem', 
+          fontSize: '1rem', 
+          color: 'var(--text-secondary)',
+          lineHeight: '1.5'
+        }}>
+          This data is gathered regularly from the publicly available PDFs provided by the Portland Public School District
+        </p>
       </div>
 
       {/* Summary Stats */}
@@ -865,6 +874,7 @@ export function DataPage() {
         </div>
       )}
       </div>
+      <Footer />
     </div>
   );
 }

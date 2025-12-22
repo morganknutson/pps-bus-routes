@@ -5,12 +5,17 @@ import { SEO } from '../components/SEO';
 import { School } from '../types';
 import { getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { useDarkMode } from '../hooks/useDarkMode';
+import { MapPinIcon } from '../components/MapPinIcon';
+import { Footer } from '../components/Footer';
 
 export function SchoolDirectory() {
   const [schools, setSchools] = useState<School[]>([]);
   const [neighborhoods, setNeighborhoods] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isDarkMode } = useDarkMode();
   const [searchTerm, setSearchTerm] = useState('');
+
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -109,20 +114,33 @@ export function SchoolDirectory() {
             <Link 
               to="/neighborhood-directory" 
               style={{ 
-                color: '#4ECDC4', 
+                color: 'var(--text-primary)', 
                 textDecoration: 'none', 
                 fontSize: '0.875rem',
                 fontWeight: '600',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem'
+                gap: '0.5rem',
+                padding: '0.25rem 0.75rem',
+                backgroundColor: 'var(--bg-tertiary)',
+                borderRadius: '999px',
+                border: '1px solid var(--border-color)',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                e.currentTarget.style.borderColor = 'var(--text-tertiary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                e.currentTarget.style.borderColor = 'var(--border-color)';
               }}
             >
               <i className="fas fa-city"></i> Browse by Neighborhood
             </Link>
           </div>
           
-          <div style={{ position: 'relative', maxWidth: '500px' }}>
+          <div style={{ position: 'relative', width: '100%' }}>
             <input
               type="text"
               placeholder="Search by school, address, or neighborhood..."
@@ -178,7 +196,7 @@ export function SchoolDirectory() {
                     padding: '1.5rem',
                     backgroundColor: 'var(--bg-secondary)',
                     borderRadius: '16px',
-                    borderLeft: `6px solid ${schoolColor}`,
+                    borderLeft: `2px solid ${schoolColor}`,
                     boxShadow: '0 2px 8px var(--shadow-large)',
                     transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                   }}
@@ -206,7 +224,10 @@ export function SchoolDirectory() {
                     justifyContent: 'space-between',
                     alignItems: 'center'
                   }}>
-                    <span>{schoolTypes.join(' & ')}</span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <i className="fas fa-graduation-cap" style={{ width: '16px' }}></i>
+                      {schoolTypes.join(' & ')}
+                    </span>
                     {neighborhood && (
                       <span style={{ 
                         fontSize: '0.75rem', 
@@ -229,7 +250,7 @@ export function SchoolDirectory() {
                       alignItems: 'center',
                       gap: '0.5rem'
                     }}>
-                      <i className="fas fa-map-marker-alt" style={{ width: '14px' }}></i>
+                      <MapPinIcon width={14} height={18} style={{ flexShrink: 0 }} />
                       <span>{school.address.split(',')[0]}</span>
                     </div>
                   )}
@@ -251,6 +272,8 @@ export function SchoolDirectory() {
           </div>
         )}
       </main>
+
+      <Footer />
     </div>
   );
 }
