@@ -77,7 +77,7 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
   const firstSegment = segments[0]?.toLowerCase();
   
   // List of keywords that should NOT be treated as school IDs
-  const reservedKeywords = ['schools', 'routes', 'morning', 'afternoon', 'both', 'explore', 'map'];
+  const reservedKeywords = ['schools', 'schools-directory', 'routes', 'morning', 'afternoon', 'both', 'explore', 'map'];
   
   if (firstSegment && !reservedKeywords.includes(firstSegment)) {
     state.schoolId = firstSegment;
@@ -143,9 +143,8 @@ export function buildUrlPath(basePath: string, state: UrlState): string {
   } else if (state.show === 'routes') {
     parts.push('routes');
   } else if (state.show === 'schools') {
-    // If no school ID and we are showing schools tab, use 'explore' keyword
-    // to distinguish from the static /schools directory page
-    parts.push('explore');
+    // Show all schools on the map
+    parts.push('schools');
   }
   
   return parts.join('/').replace(/\/+$/g, '');

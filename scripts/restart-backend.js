@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const projectRoot = resolve(__dirname, '..');
 const backendDir = resolve(projectRoot, 'backend');
-const PORT = 3002;
+const PORT = process.env.PORT || 3005;
 
 // Find process by port - returns array of PIDs
 async function findProcessesByPort(port) {

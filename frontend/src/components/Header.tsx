@@ -43,21 +43,48 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 style={{
                   textDecoration: 'none',
                   color: 'inherit',
+                  display: 'flex',
+                  alignItems: 'center',
                 }}
               >
-                <span className="logo-text" style={{ color: 'white' }}>Admin</span>
+                <img 
+                  src="/logo.svg" 
+                  alt="PPS Bus Routes" 
+                  className="header-logo"
+                  style={{ 
+                    height: '13px',
+                    width: 'auto',
+                    display: 'block',
+                    paddingLeft: '5px',
+                  }}
+                />
               </Link>
             ) : (
-              <span 
-                className="logo-text"
-                style={{ color: 'white' }}
+              <Link
+                to="/schools"
+                style={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
               >
-                PPS Bus Routes
-              </span>
+                <img 
+                  src="/logo.svg" 
+                  alt="PPS Bus Routes" 
+                  className="header-logo"
+                  style={{ 
+                    height: '13px',
+                    width: 'auto',
+                    display: 'block',
+                    paddingLeft: '5px',
+                  }}
+                />
+              </Link>
             )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', paddingRight: '12px' }}>
-            <div style={{ color: 'white', margin: 0, padding: 0 }}>
+            <div style={{ margin: 0, padding: 0 }}>
               <DarkModeToggle />
             </div>
             {rightContent}
@@ -68,7 +95,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname.startsWith('/tech') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    color: location.pathname.startsWith('/tech') ? 'var(--header-text-color)' : 'var(--header-text-color-muted)',
                     textDecoration: location.pathname.startsWith('/tech') ? 'underline' : 'none',
                     fontWeight: location.pathname.startsWith('/tech') ? '600' : '400',
                     transition: 'all 0.2s',
@@ -77,13 +104,13 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   onMouseEnter={(e) => {
                     if (!location.pathname.startsWith('/tech')) {
                       e.currentTarget.style.textDecoration = 'underline';
-                      e.currentTarget.style.color = 'white';
+                      e.currentTarget.style.color = 'var(--header-text-color)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!location.pathname.startsWith('/tech')) {
                       e.currentTarget.style.textDecoration = 'none';
-                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                      e.currentTarget.style.color = 'var(--header-text-color-muted)';
                     }
                   }}
                 >
@@ -94,7 +121,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname.startsWith('/architecture') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    color: location.pathname.startsWith('/architecture') ? 'var(--header-text-color)' : 'var(--header-text-color-muted)',
                     textDecoration: location.pathname.startsWith('/architecture') ? 'underline' : 'none',
                     fontWeight: location.pathname.startsWith('/architecture') ? '600' : '400',
                     transition: 'all 0.2s',
@@ -103,13 +130,13 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   onMouseEnter={(e) => {
                     if (!location.pathname.startsWith('/architecture')) {
                       e.currentTarget.style.textDecoration = 'underline';
-                      e.currentTarget.style.color = 'white';
+                      e.currentTarget.style.color = 'var(--header-text-color)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!location.pathname.startsWith('/architecture')) {
                       e.currentTarget.style.textDecoration = 'none';
-                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                      e.currentTarget.style.color = 'var(--header-text-color-muted)';
                     }
                   }}
                 >
@@ -120,7 +147,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname.startsWith('/servers') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    color: location.pathname.startsWith('/servers') ? 'var(--header-text-color)' : 'var(--header-text-color-muted)',
                     textDecoration: location.pathname.startsWith('/servers') ? 'underline' : 'none',
                     fontWeight: location.pathname.startsWith('/servers') ? '600' : '400',
                     transition: 'all 0.2s',
@@ -129,13 +156,13 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   onMouseEnter={(e) => {
                     if (!location.pathname.startsWith('/servers')) {
                       e.currentTarget.style.textDecoration = 'underline';
-                      e.currentTarget.style.color = 'white';
+                      e.currentTarget.style.color = 'var(--header-text-color)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!location.pathname.startsWith('/servers')) {
                       e.currentTarget.style.textDecoration = 'none';
-                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                      e.currentTarget.style.color = 'var(--header-text-color-muted)';
                     }
                   }}
                 >
@@ -146,7 +173,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname.startsWith('/verification') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    color: location.pathname.startsWith('/verification') ? 'var(--header-text-color)' : 'var(--header-text-color-muted)',
                     textDecoration: location.pathname.startsWith('/verification') ? 'underline' : 'none',
                     fontWeight: location.pathname.startsWith('/verification') ? '600' : '400',
                     transition: 'all 0.2s',
@@ -155,13 +182,13 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   onMouseEnter={(e) => {
                     if (!location.pathname.startsWith('/verification')) {
                       e.currentTarget.style.textDecoration = 'underline';
-                      e.currentTarget.style.color = 'white';
+                      e.currentTarget.style.color = 'var(--header-text-color)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!location.pathname.startsWith('/verification')) {
                       e.currentTarget.style.textDecoration = 'none';
-                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                      e.currentTarget.style.color = 'var(--header-text-color-muted)';
                     }
                   }}
                 >
@@ -172,7 +199,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: location.pathname.startsWith('/jobs') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                    color: location.pathname.startsWith('/jobs') ? 'var(--header-text-color)' : 'var(--header-text-color-muted)',
                     textDecoration: location.pathname.startsWith('/jobs') ? 'underline' : 'none',
                     fontWeight: location.pathname.startsWith('/jobs') ? '600' : '400',
                     transition: 'all 0.2s',
@@ -181,39 +208,35 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   onMouseEnter={(e) => {
                     if (!location.pathname.startsWith('/jobs')) {
                       e.currentTarget.style.textDecoration = 'underline';
-                      e.currentTarget.style.color = 'white';
+                      e.currentTarget.style.color = 'var(--header-text-color)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!location.pathname.startsWith('/jobs')) {
                       e.currentTarget.style.textDecoration = 'none';
-                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                      e.currentTarget.style.color = 'var(--header-text-color-muted)';
                     }
                   }}
                 >
                   Jobs
                 </Link>
                 <Link
-                  to="/explore"
-                  onClick={() => {
-                    setSelectedSchool(null);
-                    setRoutes([]);
-                  }}
+                  to="/schools"
                   className="admin-link"
                   style={{
                     fontSize: '12px',
-                    color: 'rgba(255, 255, 255, 0.8)',
+                    color: 'var(--header-text-color-muted)',
                     textDecoration: 'none',
                     transition: 'all 0.2s',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.textDecoration = 'underline';
-                    e.currentTarget.style.color = 'white';
+                    e.currentTarget.style.color = 'var(--header-text-color)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.textDecoration = 'none';
-                    e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+                    e.currentTarget.style.color = 'var(--header-text-color-muted)';
                   }}
                 >
                   → Explorer
@@ -226,7 +249,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'white',
+                  color: 'var(--header-text-color)',
                   cursor: 'pointer',
                   fontSize: '20px',
                   padding: '0.5rem',
@@ -244,9 +267,9 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 onClick={handleLogout}
                 style={{
                   fontSize: '12px',
-                  color: 'white',
+                  color: 'var(--header-text-color)',
                   backgroundColor: 'transparent',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  border: '1px solid var(--header-border-color)',
                   borderRadius: '999px',
                   padding: '0.5rem 1rem',
                   cursor: 'pointer',
@@ -256,11 +279,11 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   gap: '0.5rem',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.6)';
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.borderColor = 'var(--header-border-color-hover)';
+                  e.currentTarget.style.backgroundColor = 'var(--header-bg-hover)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                  e.currentTarget.style.borderColor = 'var(--header-border-color)';
                   e.currentTarget.style.backgroundColor = 'transparent';
                 }}
               >
@@ -353,10 +376,8 @@ export function Header({ rightContent }: HeaderProps = {}) {
               Jobs
             </Link>
             <Link
-              to="/explore"
+              to="/schools"
               onClick={() => {
-                setSelectedSchool(null);
-                setRoutes([]);
                 setMenuOpen(false);
               }}
               style={{

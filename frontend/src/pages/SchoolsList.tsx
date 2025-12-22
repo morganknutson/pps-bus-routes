@@ -10,6 +10,7 @@ import { handleMapLinkClick } from '../utils/mapLinks';
 import { createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { useMarkers, MarkerData } from '../hooks/useMarkers';
 import { ProgressBar } from '../components/ProgressBar';
+import { RouteIcon } from '../components/RouteIcon';
 import 'leaflet/dist/leaflet.css';
 
 // Set default marker icon to use Font Awesome
@@ -20,32 +21,52 @@ L.Marker.prototype.options.icon = defaultIcon;
 // Component to handle map zoom - zooms to selected school or fits all schools
 function FitBounds({ schools, selectedSchool }: { schools: School[]; selectedSchool: School | null }) {
   const map = useMap();
-  const prevSelectedSchoolRef = useRef<School | null>(null);
+  const prevSelectedSchoolIdRef = useRef<string | null>(null);
   
   useEffect(() => {
     if (!map) {
       return;
     }
 
-    const prevSelected = prevSelectedSchoolRef.current;
-    prevSelectedSchoolRef.current = selectedSchool;
+    const currentSchoolId = selectedSchool?.id || null;
+    const wasSelectedBefore = prevSelectedSchoolIdRef.current !== null;
+    const isNewSelection = currentSchoolId !== prevSelectedSchoolIdRef.current;
 
     if (selectedSchool && selectedSchool.coordinates && selectedSchool.coordinates.length === 2) {
+      if (!isNewSelection) return;
+
       // Zoom to selected school
       const [lng, lat] = selectedSchool.coordinates;
-      map.setView([lat, lng], 16, { animate: true });
-    } else if (!selectedSchool) {
+      
+      // Update ref immediately
+      prevSelectedSchoolIdRef.current = currentSchoolId;
+
+      const timer = setTimeout(() => {
+        try {
+          map.setView([lat, lng], 16, { animate: true });
+        } catch (error) {
+          console.error('[FitBounds] Error setting view:', error);
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    } else if (!selectedSchool && wasSelectedBefore) {
       // No school selected - zoom out to show all schools
       const schoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
       if (schoolsWithCoords.length > 0) {
-        try {
-          const bounds = L.latLngBounds(
-            schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
-          );
-          map.fitBounds(bounds, { padding: [50, 50], animate: true });
-        } catch (error) {
-          console.error('[FitBounds] Error fitting bounds:', error);
-        }
+        // Update ref immediately
+        prevSelectedSchoolIdRef.current = null;
+
+        const timer = setTimeout(() => {
+          try {
+            const bounds = L.latLngBounds(
+              schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
+            );
+            map.fitBounds(bounds, { padding: [50, 50], animate: true });
+          } catch (error) {
+            console.error('[FitBounds] Error fitting bounds:', error);
+          }
+        }, 100);
+        return () => clearTimeout(timer);
       }
     }
   }, [map, schools, selectedSchool]);
@@ -543,7 +564,7 @@ export function SchoolsList() {
             <div style={{ marginBottom: '0.75rem' }}>
               <div style={{ fontSize: '12px', color: '#666', marginBottom: '0.25rem' }}>Routes</div>
               <div style={{ fontSize: '14px', color: '#333', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <i className="fas fa-route" style={{ fontSize: '14px', color: '#999' }}></i>
+                <RouteIcon size={14} color="#999" />
                 <span>{selectedSchool.routeCount} {selectedSchool.routeCount === 1 ? 'route' : 'routes'} available</span>
               </div>
             </div>

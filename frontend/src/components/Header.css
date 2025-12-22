@@ -1,18 +1,18 @@
 .app-header {
   width: 100%;
-  background-color: var(--brand-primary);
-  border-bottom: 1px solid var(--brand-secondary);
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-color);
   box-shadow: 0 2px 4px var(--shadow);
   z-index: 1002;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   position: relative;
 }
 
-/* Darker blue header in dark mode */
+/* Dark gray header in dark mode */
 .theme-dark .app-header,
 .dark-mode .app-header {
-  background-color: #0a1f3a;
-  border-bottom: 1px solid #001625;
+  background-color: #3A3A3A;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .app-header.sticky-header {
@@ -45,6 +45,66 @@
   font-weight: 600;
   color: var(--text-secondary);
   transition: color 0.3s ease;
+}
+
+/* Logo styling - invert in light mode since logo is white */
+.header-logo {
+  filter: brightness(0);
+  transition: filter 0.3s ease;
+}
+
+/* Keep logo white in dark mode */
+.theme-dark .header-logo,
+.dark-mode .header-logo {
+  filter: brightness(0) invert(1);
+}
+
+/* Header text colors - dark text for white background */
+.app-header {
+  --header-text-color: #000000;
+  --header-text-color-muted: rgba(0, 0, 0, 0.7);
+  --header-border-color: rgba(0, 0, 0, 0.2);
+  --header-border-color-hover: rgba(0, 0, 0, 0.4);
+  --header-bg-hover: rgba(0, 0, 0, 0.05);
+  color: var(--header-text-color);
+}
+
+.app-header a,
+.app-header button,
+.app-header .admin-link {
+  color: var(--header-text-color);
+}
+
+.app-header a:hover,
+.app-header button:hover {
+  color: var(--header-text-color);
+}
+
+/* Dark mode - use light text on dark gray background */
+.theme-dark .app-header,
+.dark-mode .app-header {
+  --header-text-color: #ffffff;
+  --header-text-color-muted: rgba(255, 255, 255, 0.8);
+  --header-border-color: rgba(255, 255, 255, 0.3);
+  --header-border-color-hover: rgba(255, 255, 255, 0.6);
+  --header-bg-hover: rgba(255, 255, 255, 0.1);
+  color: var(--header-text-color);
+}
+
+.theme-dark .app-header a,
+.theme-dark .app-header button,
+.theme-dark .app-header .admin-link,
+.dark-mode .app-header a,
+.dark-mode .app-header button,
+.dark-mode .app-header .admin-link {
+  color: var(--header-text-color);
+}
+
+.theme-dark .app-header a:hover,
+.theme-dark .app-header button:hover,
+.dark-mode .app-header a:hover,
+.dark-mode .app-header button:hover {
+  color: var(--header-text-color);
 }
 
 .header-nav {

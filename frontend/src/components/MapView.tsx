@@ -461,6 +461,12 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             hasZoomedRef.current = false;
           }
           
+          // Update refs immediately to prevent "debouncing to death" during rapid re-renders
+          hasZoomedRef.current = true;
+          prevSchoolIdRef.current = selectedSchoolId;
+          prevStopIdRef.current = null;
+          prevRouteIdsRef.current = '';
+
           const timer = setTimeout(() => {
             try {
               // Calculate a target center that is shifted so the pin is 100px above the center
@@ -473,12 +479,6 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                 animate: true,
                 duration: 0.6
               });
-
-              hasZoomedRef.current = true;
-              // Update refs only when the action is actually occurring
-              prevSchoolIdRef.current = selectedSchoolId;
-              prevStopIdRef.current = null;
-              prevRouteIdsRef.current = '';
             } catch (error) {
               console.error('[MapView] Error zooming to school:', error);
             }
@@ -495,6 +495,11 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           if (school && school.coordinates && (prevStopIdRef.current !== null)) {
             const schoolPosition = toLeafletPosition(school.coordinates);
 
+            // Update refs immediately to prevent "debouncing to death" during rapid re-renders
+            hasZoomedRef.current = true;
+            prevStopIdRef.current = null;
+            prevRouteIdsRef.current = '';
+
             const timer = setTimeout(() => {
               try {
                 // Same logic as Case 3
@@ -503,11 +508,6 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                 const targetLatLng = map.unproject(targetPoint, zoom);
                 console.log('[FitMapBounds] 🏫 Resetting map to school:', school.name);
                 map.setView(targetLatLng, zoom, { animate: true, duration: 0.6 });
-                hasZoomedRef.current = true;
-                
-                // Update refs inside timer
-                prevStopIdRef.current = null;
-                prevRouteIdsRef.current = '';
               } catch (error) {
                 console.error('[FitMapBounds] Error resetting to school:', error);
               }
@@ -1177,7 +1177,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
 
           return (
             <Marker
-              key={`${route.id}-${stop.id}-${route.color}`}
+              key={`${route.id}-${stop.id}-${route.color}-${isSelected}`}
               position={position}
               icon={icon}
               draggable={editingMode}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { School } from '../types';
 import { analyticsService } from '../services/analytics';
+import { RouteIcon } from './RouteIcon';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 
 // Infer school type(s) from name - returns array to support hybrid schools
@@ -474,7 +475,7 @@ export function SchoolList({
                       )}
                       {school.routeCount !== undefined && (
                         <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <i className="fas fa-route" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                          <RouteIcon size={10} color="var(--text-tertiary)" style={{ width: '10px', flexShrink: 0 }} />
                           <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'}</span>
                         </div>
                       )}

@@ -179,7 +179,8 @@ class RestartService {
   async getProcessStatus(processName) {
     try {
       // Check if process is running by checking the port
-      const port = processName === 'pps-backend' ? 3002 : 5173;
+      const backendPort = process.env.PORT || 3005;
+      const port = processName === 'pps-backend' ? backendPort : 3000;
       
       return new Promise((resolve) => {
         const lsof = spawn('lsof', ['-ti', `:${port}`], {

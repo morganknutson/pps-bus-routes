@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { autocompleteAddress, geocodeAddress } from '../services/api';
+import { useDarkMode } from '../hooks/useDarkMode';
 import { analyticsService } from '../services/analytics';
 import { findClosestStop } from '../utils/findClosestStop';
 import { formatStreetName } from '../utils/formatAddress';
@@ -30,6 +31,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     selectStop,
     setDirectionFilter
   } = useStore();
+  const { isDarkMode } = useDarkMode();
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -214,7 +216,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
         height: '40px',
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: 'var(--bg-primary)',
+        backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
         borderRadius: '9999px',
         boxShadow: '0 4px 12px var(--shadow-large)',
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
@@ -366,7 +368,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
           style={{
             padding: '0 1.25rem',
             height: '40px',
-            backgroundColor: 'var(--bg-primary)',
+            backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
             color: 'var(--text-primary)',
             border: 'none',
             borderRadius: '9999px',
@@ -387,7 +389,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
           e.currentTarget.style.boxShadow = '0 6px 16px var(--shadow-large)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+          e.currentTarget.style.backgroundColor = isDarkMode ? '#3A3A3A' : 'var(--bg-primary)';
           e.currentTarget.style.transform = 'translateY(0)';
           e.currentTarget.style.boxShadow = '0 4px 12px var(--shadow-large)';
         }}

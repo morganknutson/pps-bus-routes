@@ -2,6 +2,7 @@ import { useState, ReactNode } from 'react';
 import { formatStreetName } from '../utils/formatAddress';
 import { getSchoolTypes } from '../utils/schoolUtils';
 import { formatEffectiveDate } from '../utils/dateUtils';
+import { RouteIcon } from './RouteIcon';
 import type { Route, Stop } from '../types';
 
 /**
@@ -613,7 +614,7 @@ export function RouteListBase({
                 alignItems: 'center',
                 gap: '0.4rem'
               }}>
-                <i className="fas fa-route" style={{ fontSize: '11px' }}></i>
+                <RouteIcon size={11} color="#01579B" />
                 Morning
               </span>
             )}
@@ -630,7 +631,7 @@ export function RouteListBase({
                 alignItems: 'center',
                 gap: '0.4rem'
               }}>
-                <i className="fas fa-route" style={{ fontSize: '11px' }}></i>
+                <RouteIcon size={11} color="#1B5E20" />
                 Afternoon
               </span>
             )}

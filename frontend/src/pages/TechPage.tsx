@@ -5,6 +5,7 @@ import { SEO } from '../components/SEO';
 import { ExpandableExample } from '../components/ExpandableExample';
 import { RouteListBase } from '../components/RouteListBase';
 import { SchoolList } from '../components/SchoolList';
+import { RouteIcon } from '../components/RouteIcon';
 import { Route, School, Stop } from '../types';
 
 interface Section {
@@ -56,10 +57,12 @@ const sections: Section[] = [
     title: 'Frontend Services',
     subsections: [
       { id: 'api-service', title: '1. API Service' },
-      { id: 'local-routes-service', title: '2. Local Routes Service' },
-      { id: 'routing-service', title: '3. Routing Service' },
-      { id: 'route-cache-service', title: '4. Route Cache Service' },
-      { id: 'theme-service', title: '5. Theme Service' },
+      { id: 'frontend-routing', title: '2. Frontend Routing' },
+      { id: 'local-routes-service', title: '3. Local Routes Service' },
+      { id: 'routing-service', title: '4. Routing Service' },
+      { id: 'route-cache-service', title: '5. Route Cache Service' },
+      { id: 'theme-service', title: '6. Theme Service' },
+      { id: 'global-store', title: '7. Global Store (Zustand)' },
     ],
   },
   {
@@ -573,7 +576,7 @@ export function TechPage() {
                   </div>
                   <div style={{ marginBottom: '20px', paddingLeft: '0' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                      <i className="fas fa-route" style={{ fontSize: '14px', color: 'var(--text-primary)', flexShrink: 0 }}></i>
+                      <RouteIcon size={14} color="var(--text-primary)" style={{ flexShrink: 0 }} />
                       <div>
                         <strong style={{ color: 'var(--text-primary)', fontSize: '16px' }}>Calculate Route Geometry</strong>
                         <ul style={{ marginTop: '8px', paddingLeft: '20px', color: 'var(--text-secondary)' }}>
@@ -868,7 +871,7 @@ export function TechPage() {
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                 <strong style={{ color: 'var(--text-primary)' }}>Visual Elements:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
-                  <li><strong>Stop Markers</strong> - Numbered markers at each stop location</li>
+                  <li><strong>Stop Markers</strong> - Numbered markers at each stop location featuring a "lens" effect (transparent window) that reveals the map behind. When selected, markers transition to a larger circular pin with pulse and bounce animations, and the time is hidden for a cleaner focus.</li>
                   <li><strong>Route Lines</strong> - Colored polylines following streets between stops</li>
                   <li><strong>School Marker</strong> - Special marker at school location</li>
                   <li><strong>Home Address Marker</strong> - Optional marker for user's address</li>
@@ -891,6 +894,7 @@ export function TechPage() {
                 <strong style={{ color: 'var(--text-primary)' }}>Interactive Features:</strong>
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li>Click markers to see stop details (address, time, neighborhood)</li>
+                  <li><strong>Selection State</strong> - Selected stop pins use a high-visibility circular style with a selection bounce and pulse animation</li>
                   <li><strong>Find My Stop</strong> - Automatically find and select the closest bus stop to the user's home address for the selected school</li>
                   <li>Toggle routes on/off via checkboxes in route list</li>
                   <li>Routes are grouped by neighborhood with visual headings</li>
@@ -2197,9 +2201,32 @@ export function TechPage() {
               </div>
             </div>
 
+            <div id="frontend-routing" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                2. Frontend Routing (App.tsx)
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Defines the application's page structure and navigation using React Router v7.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Main Routes:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><code>/</code> - <strong>Home Page:</strong> Landing page with address/school search.</li>
+                  <li><code>/schools</code> - <strong>Explorer Map:</strong> Interactive map showing all schools (captured by catch-all).</li>
+                  <li><code>/schools</code> or <code>/explore</code> - <strong>Explorer Map:</strong> Interactive map showing all schools and routes.</li>
+                  <li><code>/school-directory</code> - <strong>School Directory:</strong> Searchable list of all schools.</li>
+                  <li><code>/neighborhood-directory</code> - <strong>Neighborhoods:</strong> Browse by neighborhood.</li>
+                  <li><code>/admin</code> - <strong>Admin Interface:</strong> School and route management.</li>
+                  <li><code>/:schoolId</code> - <strong>School Routes:</strong> Explorer view for a specific school.</li>
+                  <li><code>/*</code> - <strong>Explorer Catch-all:</strong> Handles path-based state for route explorer.</li>
+                  <li><code>/explore</code>, <code>/bus-route-explorer</code> - <strong>Legacy Redirects:</strong> Redirects to <code>/schools</code>.</li>
+                </ul>
+              </div>
+            </div>
+
             <div id="local-routes-service" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                2. Local Routes Service (localRoutes.ts)
+                3. Local Routes Service (localRoutes.ts)
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Loads routes from backend API and converts to frontend format.
@@ -2371,6 +2398,22 @@ export function TechPage() {
                 </ul>
               </div>
             </div>
+
+            <div id="global-store" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                6. Global Store (Zustand)
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Manages all application state and provides debounced caching for route updates.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Atomic Updates:</strong> Uses synchronous state updates to prevent race conditions during complex operations.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Debounced Caching:</strong> Implements a 250ms debounced cache write mechanism to handle bulk updates (like geocoding) without redundant <code>localStorage</code> operations.</li>
+                  <li><strong>Centralized Logic:</strong> Encapsulates color assignment, route selection, and direction filtering logic in a single location.</li>
+                </ul>
+              </div>
+            </div>
           </section>
 
           <section id="url-state-sync" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
@@ -2392,7 +2435,7 @@ export function TechPage() {
               </p>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
                 <ul style={{ color: 'var(--text-secondary)', listStyleType: 'none', paddingLeft: 0 }}>
-                  <li style={{ marginBottom: '10px' }}><strong>Schools Index:</strong> <code>/explore</code></li>
+                  <li style={{ marginBottom: '10px' }}><strong>Schools Index:</strong> <code>/schools</code></li>
                   <li style={{ marginBottom: '10px' }}><strong>Selected School:</strong> <code>/{'{schoolId}'}</code></li>
                   <li style={{ marginBottom: '10px' }}><strong>Routes View:</strong> <code>/{'{schoolId}'}/routes</code></li>
                   <li style={{ marginBottom: '10px' }}><strong>Direction Filter:</strong> <code>/{'{schoolId}'}/routes/morning</code></li>

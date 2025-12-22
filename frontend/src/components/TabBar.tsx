@@ -1,5 +1,6 @@
 import { useStore } from '../store/useStore';
 import { analyticsService } from '../services/analytics';
+import { RouteIcon } from './RouteIcon';
 
 interface TabBarProps {
   activeTab: 'schools' | 'routes' | 'neighborhoods';
@@ -91,7 +92,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
               </>
             ) : (
               <>
-                <i className="fas fa-route" style={{ fontSize: '12px' }}></i>
+                <RouteIcon size={12} color={isRoutesActive ? 'var(--text-primary)' : 'var(--text-secondary)'} />
                 Routes
               </>
             )}

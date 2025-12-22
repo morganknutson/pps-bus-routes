@@ -38,7 +38,7 @@ This document provides a comprehensive index of all pages in the application to 
 
 ---
 
-### 4. Explorer (`/explore` or `/{schoolId}`)
+### 4. Explorer (`/explore`, `/schools`, or `/{schoolId}`)
 - **Component**: `ExplorerApp` (defined in `frontend/src/App.tsx`)
 - **Purpose**: Main interactive map page for exploring bus routes
 - **Key Features**:
@@ -49,6 +49,9 @@ This document provides a comprehensive index of all pages in the application to 
   - Interactive map with route visualization
   - School type filters (Elementary, Middle, High, Hybrid)
   - Search functionality for schools
+  - **URL Structure**:
+    - `/schools` or `/explore` - Show map with all schools
+    - `/{schoolId}` - Show map focused on a specific school
 - **State Management**: Uses Zustand store (`useStore`)
 - **Components Used**:
   - `Header`, `Sidebar`, `TabBar`
@@ -73,7 +76,19 @@ This document provides a comprehensive index of all pages in the application to 
 
 ---
 
-### 3. Admin Page (`/admin`)
+### 5. School Directory (`/school-directory`)
+- **File**: `frontend/src/pages/SchoolDirectory.tsx`
+- **Purpose**: A searchable, sortable list of all schools in the district.
+- **Key Features**:
+  - Search by school name or address
+  - Filter by school level (Elementary, Middle, High)
+  - Sorting options
+  - Direct links to school routes
+- **Special Note**: Previously at `/schools`. Redirects from `/schools-directory` to `/school-directory` are in place.
+
+---
+
+### 6. Admin Page (`/admin`)
 - **Component**: `AdminApp` (defined in `frontend/src/App.tsx`)
 - **Purpose**: Administrative interface for editing schools and managing routes
 - **Key Features**:

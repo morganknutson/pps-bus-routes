@@ -193,7 +193,7 @@ export function NeighborhoodDirectory() {
                     {neighborhood.routeCount} Active Routes
                   </span>
                   <Link 
-                    to="/explore"
+                    to="/schools"
                     onClick={() => {
                       setSelectedSchool(null);
                       setRoutes([]);

@@ -459,30 +459,41 @@ export function ServersPage() {
               fontSize: '14px',
               fontWeight: '600',
               color: 'white',
-              backgroundColor: isRestartingBackend ? '#999' : '#FF6B6B',
+              backgroundColor: isRestartingBackend ? '#999' : (backendStatus.status === 'offline' ? '#ccc' : '#FF6B6B'),
               border: 'none',
               borderRadius: '6px',
-              cursor: isRestartingBackend ? 'not-allowed' : 'pointer',
+              cursor: (isRestartingBackend || backendStatus.status === 'offline') ? 'not-allowed' : 'pointer',
               transition: 'background-color 0.2s ease',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '0.5rem',
             }}
+            title={backendStatus.status === 'offline' ? 'Backend must be running to use this button' : ''}
             onMouseEnter={(e) => {
-              if (!isRestartingBackend) {
+              if (!isRestartingBackend && backendStatus.status !== 'offline') {
                 e.currentTarget.style.backgroundColor = '#e55a5a';
               }
             }}
             onMouseLeave={(e) => {
-              if (!isRestartingBackend) {
+              if (!isRestartingBackend && backendStatus.status !== 'offline') {
                 e.currentTarget.style.backgroundColor = '#FF6B6B';
               }
             }}
           >
             <i className={`fas ${isRestartingBackend ? 'fa-spinner fa-spin' : 'fa-redo'}`}></i>
-            {isRestartingBackend ? 'Restarting...' : 'Restart Server'}
+            {isRestartingBackend ? 'Restarting...' : (backendStatus.status === 'offline' ? 'Backend Offline' : 'Restart Server')}
           </button>
+          {backendStatus.status === 'offline' && (
+            <p style={{
+              marginTop: '0.5rem',
+              fontSize: '11px',
+              color: 'var(--text-tertiary)',
+              textAlign: 'center',
+            }}>
+              Note: The restart button requires the backend to be reachable. If it's completely down, please restart it manually from the terminal.
+            </p>
+          )}
         </div>
 
         {/* Frontend Server Status */}

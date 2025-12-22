@@ -170,7 +170,12 @@ export function useUrlState({
       hasSyncedFromUrlRef.current = false;
     }
 
-    console.log('[useUrlState] Syncing state from URL:', location.pathname, urlState, { isFirstRoutesLoad, urlChanged });
+    console.log('[useUrlState] Syncing state from URL:', location.pathname, urlState, { 
+      isFirstRoutesLoad, 
+      urlChanged,
+      currentStoreSchoolId: selectedSchoolId,
+      currentStoreTab: activeTab
+    });
 
     try {
       // 0. Sync tab selection

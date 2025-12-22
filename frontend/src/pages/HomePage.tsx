@@ -10,6 +10,7 @@ import { buildUrlPath, UrlState } from '../services/urlState';
 import { School, HomeAddress } from '../types';
 import { ProgressBar } from '../components/ProgressBar';
 import { SEO } from '../components/SEO';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -19,6 +20,7 @@ interface AutocompleteSuggestion {
 
 export function HomePage() {
   const navigate = useNavigate();
+  const { isDarkMode } = useDarkMode();
   
   // Use selectors to prevent unnecessary re-renders when other parts of the store change
   const setHomeAddress = useStore(state => state.setHomeAddress);
@@ -66,9 +68,10 @@ export function HomePage() {
     const originalRootOverflow = rootElement?.style.overflow;
     const originalRootHeight = rootElement?.style.height;
     
-    // Set background colors
-    document.body.style.backgroundColor = 'var(--brand-primary)';
-    document.documentElement.style.backgroundColor = 'var(--brand-primary)';
+    // Set background colors to match header (white in light mode, #3A3A3A in dark mode)
+    const headerBgColor = isDarkMode ? '#3A3A3A' : '#ffffff';
+    document.body.style.backgroundColor = headerBgColor;
+    document.documentElement.style.backgroundColor = headerBgColor;
     
     // On mobile/all devices, we want the body to scroll normally if content exceeds viewport
     document.body.style.overflow = 'auto';
@@ -92,7 +95,7 @@ export function HomePage() {
         rootElement.style.minHeight = '';
       }
     };
-  }, []);
+  }, [isDarkMode]);
 
   // Load schools on mount
   useEffect(() => {
@@ -450,9 +453,19 @@ export function HomePage() {
     }
   };
 
+  // Match header background colors
+  const headerBgColor = isDarkMode ? '#3A3A3A' : '#ffffff';
+  // Text colors that work with the new backgrounds
+  const textColor = isDarkMode ? '#ffffff' : '#000000';
+  const textColorMuted = isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.7)';
+  const textColorSecondary = isDarkMode ? 'rgba(255, 255, 255, 0.6)' : 'rgba(0, 0, 0, 0.6)';
+  const textColorTertiary = isDarkMode ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.4)';
+  const borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+  const sectionBgColor = isDarkMode ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.02)';
+  
   return (
     <div style={{
-      backgroundColor: 'var(--brand-primary)',
+      backgroundColor: headerBgColor,
       minHeight: '100vh',
       width: '100%',
       display: 'flex',
@@ -479,15 +492,22 @@ export function HomePage() {
           width: '100%',
           maxWidth: '440px',
         }}>
-          <h1 style={{
+          <div style={{
             margin: '0 0 2rem 0',
-            fontSize: '32px',
-            fontWeight: '600',
-            color: 'white',
-            textAlign: 'center',
+            width: '100%',
           }}>
-            PPS Bus Routes
-          </h1>
+            <img 
+              src="/logo.svg" 
+              alt="PPS Bus Routes" 
+              className="header-logo"
+              style={{ 
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                maxHeight: '60px',
+              }}
+            />
+          </div>
 
           {/* Address Input */}
           <div style={{ marginBottom: '1.5rem' }}>
@@ -790,7 +810,7 @@ export function HomePage() {
               fontSize: '16px',
               fontWeight: '600',
               color: 'white',
-              backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? '#999' : '#4ECDC4',
+              backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? (isDarkMode ? '#666' : '#999') : '#4ECDC4',
               border: 'none',
               borderRadius: '9999px',
               cursor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? 'not-allowed' : 'pointer',
@@ -831,13 +851,13 @@ export function HomePage() {
             textAlign: 'center',
           }}>
             <Link
-              to="/explore"
+              to="/schools"
               onClick={() => {
                 setSelectedSchool(null);
                 setRoutes([]);
               }}
               style={{
-                color: 'white',
+                color: textColorMuted,
                 fontSize: '14px',
                 textDecoration: 'none',
                 display: 'inline-flex',
@@ -846,10 +866,10 @@ export function HomePage() {
                 transition: 'color 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)';
+                e.currentTarget.style.color = textColor;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'white';
+                e.currentTarget.style.color = textColorMuted;
               }}
             >
               <i className="fas fa-map" style={{ fontSize: '12px' }}></i>
@@ -863,17 +883,17 @@ export function HomePage() {
       <div style={{
         width: '100%',
         padding: '6rem 2rem',
-        backgroundColor: 'rgba(255, 255, 255, 0.03)',
+        backgroundColor: sectionBgColor,
         boxSizing: 'border-box',
-        borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+        borderTop: `1px solid ${borderColor}`,
+        borderBottom: `1px solid ${borderColor}`,
       }}>
         <div style={{
           maxWidth: '1000px',
           margin: '0 auto',
         }}>
           <h2 style={{
-            color: 'white',
+            color: textColor,
             fontSize: '32px',
             fontWeight: '600',
             marginBottom: '4rem',
@@ -889,7 +909,7 @@ export function HomePage() {
             {faqItems.map((item, index) => (
               <div key={index}>
                 <h3 style={{
-                  color: 'white',
+                  color: textColor,
                   fontSize: '18px',
                   fontWeight: '600',
                   marginBottom: '1rem',
@@ -898,7 +918,7 @@ export function HomePage() {
                   {item.question}
                 </h3>
                 <p style={{
-                  color: 'rgba(255, 255, 255, 0.6)',
+                  color: textColorSecondary,
                   fontSize: '15px',
                   lineHeight: '1.7',
                   margin: 0
@@ -930,9 +950,9 @@ export function HomePage() {
           width: '100%',
         }}>
           <Link
-            to="/schools"
+            to="/school-directory"
             style={{
-              color: 'rgba(255, 255, 255, 0.8)',
+              color: textColorMuted,
               fontSize: '14px',
               textDecoration: 'none',
               display: 'flex',
@@ -940,8 +960,8 @@ export function HomePage() {
               gap: '0.5rem',
               transition: 'color 0.2s ease',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.color = 'white'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'}
+            onMouseEnter={(e) => e.currentTarget.style.color = textColor}
+            onMouseLeave={(e) => e.currentTarget.style.color = textColorMuted}
           >
             <i className="fas fa-graduation-cap" style={{ width: '16px' }}></i>
             School Directory
@@ -949,7 +969,7 @@ export function HomePage() {
           <Link
             to="/neighborhood-directory"
             style={{
-              color: 'rgba(255, 255, 255, 0.8)',
+              color: textColorMuted,
               fontSize: '14px',
               textDecoration: 'none',
               display: 'flex',
@@ -957,8 +977,8 @@ export function HomePage() {
               gap: '0.5rem',
               transition: 'color 0.2s ease',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.color = 'white'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'}
+            onMouseEnter={(e) => e.currentTarget.style.color = textColor}
+            onMouseLeave={(e) => e.currentTarget.style.color = textColorMuted}
           >
             <i className="fas fa-city" style={{ width: '16px' }}></i>
             Browse by Neighborhood
@@ -966,7 +986,7 @@ export function HomePage() {
           <Link
             to="/about"
             style={{
-              color: 'rgba(255, 255, 255, 0.8)',
+              color: textColorMuted,
               fontSize: '14px',
               textDecoration: 'none',
               display: 'flex',
@@ -974,8 +994,8 @@ export function HomePage() {
               gap: '0.5rem',
               transition: 'color 0.2s ease',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.color = 'white'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'}
+            onMouseEnter={(e) => e.currentTarget.style.color = textColor}
+            onMouseLeave={(e) => e.currentTarget.style.color = textColorMuted}
           >
             <i className="fas fa-info-circle" style={{ width: '16px' }}></i>
             About
@@ -983,7 +1003,7 @@ export function HomePage() {
           <Link
             to="/contact"
             style={{
-              color: 'rgba(255, 255, 255, 0.8)',
+              color: textColorMuted,
               fontSize: '14px',
               textDecoration: 'none',
               display: 'flex',
@@ -991,16 +1011,33 @@ export function HomePage() {
               gap: '0.5rem',
               transition: 'color 0.2s ease',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.color = 'white'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'}
+            onMouseEnter={(e) => e.currentTarget.style.color = textColor}
+            onMouseLeave={(e) => e.currentTarget.style.color = textColorMuted}
           >
             <i className="fas fa-envelope" style={{ width: '16px' }}></i>
             Contact
           </Link>
+          <Link
+            to="/data"
+            style={{
+              color: textColorMuted,
+              fontSize: '14px',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              transition: 'color 0.2s ease',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = textColor}
+            onMouseLeave={(e) => e.currentTarget.style.color = textColorMuted}
+          >
+            <i className="fas fa-database" style={{ width: '16px' }}></i>
+            Data
+          </Link>
         </div>
         <div style={{
           marginTop: '3rem',
-          color: 'rgba(255, 255, 255, 0.4)',
+          color: textColorTertiary,
           fontSize: '12px',
         }}>
           &copy; {new Date().getFullYear()} Portland Public Schools Bus Routes. Not an official PPS website.

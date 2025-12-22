@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const projectRoot = resolve(__dirname, '..');
 const frontendDir = resolve(projectRoot, 'frontend');
-const PORT = 5173; // Vite default port
+const PORT = 3000; // Updated from 5173 to match vite.config.ts
 
 // Find process by port - returns array of PIDs
 async function findProcessesByPort(port) {

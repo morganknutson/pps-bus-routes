@@ -5,6 +5,7 @@ import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useStore } from '../store/useStore';
+import { RouteIcon } from './RouteIcon';
 
 interface SchoolInfoTooltipProps {
   school: School;
@@ -57,7 +58,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             justifyContent: 'center',
             flexShrink: 0,
           }}>
-            <i className="fas fa-route" style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}></i>
+            <RouteIcon size={14} color="var(--text-tertiary)" />
           </div>
           <div style={{ 
             fontSize: '13px', 
@@ -270,7 +271,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               flexShrink: 0,
               boxShadow: isDarkMode ? '0 2px 4px rgba(0,0,0,0.05)' : 'none'
             }}>
-              <i className="fas fa-route" style={{ color: isDarkMode ? schoolColor : '#ffffff', fontSize: '13px' }}></i>
+              <RouteIcon size={13} color={isDarkMode ? schoolColor : '#ffffff'} />
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ 

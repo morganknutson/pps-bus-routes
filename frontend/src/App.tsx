@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { MapContainer, useMap, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
@@ -22,6 +22,7 @@ import { NeighborhoodDirectory } from './pages/NeighborhoodDirectory';
 import { Neighborhoods } from './pages/Neighborhoods';
 import { TechPage } from './pages/TechPage';
 import { VerificationPage } from './pages/VerificationPage';
+import { DataPage } from './pages/DataPage';
 import { JobsPage } from './pages/JobsPage';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -213,6 +214,10 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
         console.log('[FitSchoolBounds] 🎯 Target school selected:', selectedSchool.name);
         isInitialLoadRef.current = false;
         
+        // Update refs immediately to prevent "debouncing to death" during rapid re-renders
+        hasZoomedRef.current = true;
+        prevSelectedSchoolIdRef.current = selectedSchoolId;
+
         const timer = setTimeout(() => {
           try {
             const zoom = 16;
@@ -225,9 +230,6 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
               duration: 0.8,
               noMoveStart: true
             });
-            
-            hasZoomedRef.current = true;
-            prevSelectedSchoolIdRef.current = selectedSchoolId;
           } catch (error) {
             console.error('[FitSchoolBounds] Error zooming to school:', error);
           }
@@ -254,6 +256,10 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
 
           console.log('[FitSchoolBounds] 🗺️ Preparing to fit all schools (reason: ' + (wasSelectedBefore ? 'deselection' : 'initial load') + ')');
           
+          // Update refs immediately to prevent "debouncing to death" during rapid re-renders
+          hasZoomedRef.current = false;
+          prevSelectedSchoolIdRef.current = null;
+
           const timer = setTimeout(() => {
             try {
               console.log('[FitSchoolBounds] ⚡ Fitting map bounds to all schools');
@@ -263,9 +269,6 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
                 duration: 1.0,
                 noMoveStart: true
               });
-              
-              hasZoomedRef.current = false;
-              prevSelectedSchoolIdRef.current = null;
             } catch (error) {
               console.error('[FitSchoolBounds] Error fitting bounds:', error);
             }
@@ -281,6 +284,7 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
 }
 
 function ExplorerApp() {
+  console.log('[ExplorerApp] Rendering...');
   const { isLoading, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress, routes, directionFilter, selectedStop } = useStore();
   const isMobile = useIsMobile();
   const location = useLocation();
@@ -299,18 +303,35 @@ function ExplorerApp() {
   }, []);
 
   // Parse URL to determine initial active tab
-  const urlState = parseUrlPath(location.pathname, '');
+  const urlState = useMemo(() => parseUrlPath(location.pathname, ''), [location.pathname]);
+  console.log('[ExplorerApp] Render state:', { 
+    pathname: location.pathname, 
+    urlState, 
+    selectedSchoolId, 
+    schoolsCount: schools.length 
+  });
+
   const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
     return urlState.show || 'schools';
   });
 
   // Initialize school selection from URL on mount to avoid race conditions
   useEffect(() => {
-    if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
-      console.log('[ExplorerApp] Initializing school from URL on mount:', urlState.schoolId);
+    console.log('[ExplorerApp] Mount sync check:', { urlSchoolId: urlState.schoolId, storeSchoolId: selectedSchoolId, pathname: location.pathname });
+    
+    const isCleanPath = location.pathname === '/schools' || location.pathname === '/explore';
+    
+    if (isCleanPath) {
+      if (selectedSchoolId) {
+        console.log('[ExplorerApp] Clean path detected on mount, clearing store school selection');
+        setSelectedSchool(null);
+      }
+    } else if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
+      console.log('[ExplorerApp] Syncing school from URL on mount:', urlState.schoolId);
       setSelectedSchool(urlState.schoolId);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
 
   // Get selected routes, filtered by direction
   const selectedRoutes = useMemo(() => {
@@ -340,6 +361,17 @@ function ExplorerApp() {
   });
   const [searchTerm, setSearchTerm] = useState('');
   
+  // Automatically switch to routes tab when a school is selected
+  useEffect(() => {
+    // Only auto-switch if the school ID actually CHANGED
+    // This allows users to manually switch back to the schools tab even when a school is selected
+    if (selectedSchoolId && selectedSchoolId !== prevSchoolIdRef.current && activeTab === 'schools') {
+      console.log('[ExplorerApp] School changed, auto-switching to routes tab');
+      setActiveTab('routes');
+    }
+    prevSchoolIdRef.current = selectedSchoolId;
+  }, [selectedSchoolId, activeTab]);
+
   // Clear search term when sidebar closes
   useEffect(() => {
     if (!sidebarOpen && isMobile) {
@@ -347,22 +379,10 @@ function ExplorerApp() {
     }
   }, [sidebarOpen, isMobile]);
   
-  // Reset loading state on mount if routes are already loaded
-  useEffect(() => {
-    if (routes.length > 0 && isLoading) {
-      console.log('[ExplorerApp] Routes already loaded on mount, resetting loading state');
-      setLoading(false);
-    }
-    // Also ensure loading is false if no school is selected
-    if (!selectedSchoolId && isLoading) {
-      console.log('[ExplorerApp] No school selected, resetting loading state');
-      setLoading(false);
-    }
-  }, []); // Only run on mount
-  
   // Load schools
   useEffect(() => {
     const loadSchools = async () => {
+      setLoading(true);
       try {
         console.log('[ExplorerApp] Loading schools with stats...');
         const response = await fetch('/api/schools?includeStats=true');
@@ -375,6 +395,8 @@ function ExplorerApp() {
         }
       } catch (error) {
         console.error('[ExplorerApp] Error loading schools:', error);
+      } finally {
+        setLoading(false);
       }
     };
     loadSchools();
@@ -410,11 +432,16 @@ function ExplorerApp() {
       // If we are on routes tab and nothing is selected, apply the sync
       if (activeTab === 'routes' && !routes.some(r => r.isSelected)) {
         console.log('[ExplorerApp] Tab changed to routes, applying default selection');
-        const syncedRoutes = applyUrlStateToRoutes(routes, {
-          ...parseUrlPath(window.location.pathname, ''),
-          show: 'routes',
-          schoolId: selectedSchoolId
-        }, directionFilter);
+        
+        const urlState = parseUrlPath(window.location.pathname, '');
+        const schoolInUrl = urlState.schoolId?.toLowerCase();
+        const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
+        
+        const stateToApply = schoolMatches 
+          ? { ...urlState, show: 'routes', schoolId: selectedSchoolId }
+          : { schoolId: selectedSchoolId, show: 'routes' };
+
+        const syncedRoutes = applyUrlStateToRoutes(routes, stateToApply, directionFilter);
         setRoutes(syncedRoutes);
       }
       
@@ -425,11 +452,16 @@ function ExplorerApp() {
     // On initial mount with existing routes from navigation, apply selection
     if (isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
       console.log('[ExplorerApp] Routes already loaded (from navigation), applying selection');
-      const syncedRoutes = applyUrlStateToRoutes(routes, {
-        ...parseUrlPath(window.location.pathname, ''),
-        show: activeTab,
-        schoolId: selectedSchoolId
-      }, directionFilter);
+      
+      const urlState = parseUrlPath(window.location.pathname, '');
+      const schoolInUrl = urlState.schoolId?.toLowerCase();
+      const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
+      
+      const stateToApply = schoolMatches 
+        ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
+        : { schoolId: selectedSchoolId, show: activeTab };
+
+      const syncedRoutes = applyUrlStateToRoutes(routes, stateToApply, directionFilter);
       setRoutes(syncedRoutes);
       prevSchoolIdRef.current = selectedSchoolId;
       setLoading(false);
@@ -445,15 +477,24 @@ function ExplorerApp() {
       try {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
         
-        // Pre-apply state to avoid UI flicker by using current activeTab/schoolId
-        // This is more reliable than parsing from URL which might be debounced
-        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, {
-          ...parseUrlPath(window.location.pathname, ''),
-          show: activeTab,
-          schoolId: selectedSchoolId
-        }, directionFilter);
+        // Pre-apply state to avoid UI flicker
+        const urlState = parseUrlPath(window.location.pathname, '');
+        const schoolInUrl = urlState.schoolId?.toLowerCase();
+        const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
-        console.log('[ExplorerApp] Loaded', loadedRoutes.length, 'routes');
+        // If school matches URL, use full URL state (including specific routes).
+        // Otherwise, use a clean state for the new school to avoid carrying over selections.
+        const stateToApply = schoolMatches 
+          ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
+          : { schoolId: selectedSchoolId, show: activeTab };
+
+        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, stateToApply, directionFilter);
+        
+        console.log('[ExplorerApp] Loaded routes for school:', selectedSchoolId, { 
+          schoolMatches, 
+          syncedCount: syncedRoutes.filter(r => r.isSelected).length 
+        });
+        
         setRoutes(syncedRoutes);
         setLoadingProgress(100);
       } catch (error) {
@@ -467,7 +508,7 @@ function ExplorerApp() {
 
     loadRoutes();
     prevSchoolIdRef.current = selectedSchoolId;
-  }, [selectedSchoolId, setRoutes, setLoading, routes.length, activeTab]); // Added activeTab dependency
+  }, [selectedSchoolId, setRoutes, setLoading]); // Removed routes.length and activeTab to prevent loops
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -704,19 +745,50 @@ function ExplorerApp() {
           <AddressInput />
           <div style={{ flex: 1, position: 'relative' }}>
             {activeTab === 'schools' ? (
-              // Schools map view - uses filtered schools
-              <SchoolListMapView 
-                schools={filteredSchools}
-                selectedSchoolId={selectedSchoolId}
-                onSelectSchool={(schoolId) => {
-                  if (selectedSchoolId === schoolId) {
-                    setSelectedSchool(null);
-                  } else {
-                    setSelectedSchool(schoolId);
-                  }
-                }}
-                mapRef={mapRef}
-              />
+              <>
+                {/* Schools map view - uses filtered schools */}
+                <SchoolListMapView 
+                  schools={filteredSchools}
+                  selectedSchoolId={selectedSchoolId}
+                  onSelectSchool={(schoolId) => {
+                    if (selectedSchoolId === schoolId) {
+                      setSelectedSchool(null);
+                    } else {
+                      setSelectedSchool(schoolId);
+                    }
+                  }}
+                  mapRef={mapRef}
+                />
+                {isLoading && schools.length === 0 && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      zIndex: 1000,
+                      padding: '1.5rem',
+                      backgroundColor: 'var(--bg-primary)',
+                      borderRadius: '12px',
+                      boxShadow: '0 4px 12px var(--shadow-large)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '1rem',
+                    }}
+                  >
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      border: '3px solid var(--border-color)',
+                      borderTopColor: '#4ECDC4',
+                      borderRadius: '50%',
+                      animation: 'spin 1s linear infinite'
+                    }} />
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Loading schools...</div>
+                  </div>
+                )}
+              </>
             ) : (
               <>
                 <MapView />
@@ -814,6 +886,7 @@ function AdminApp() {
     }
   };
   const mapRef = useRef<L.Map | null>(null);
+  const prevSchoolIdRef = useRef<string | null>(null);
   const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
     elementary: true,
     middle: true,
@@ -822,9 +895,20 @@ function AdminApp() {
   });
   const [searchTerm, setSearchTerm] = useState('');
   
+  // Automatically switch to routes tab when a school is selected
+  useEffect(() => {
+    // Only auto-switch if the school ID actually CHANGED
+    if (selectedSchoolId && selectedSchoolId !== prevSchoolIdRef.current && activeTab === 'schools') {
+      console.log('[AdminApp] School changed, auto-switching to routes tab');
+      setActiveTab('routes');
+    }
+    prevSchoolIdRef.current = selectedSchoolId;
+  }, [selectedSchoolId, activeTab]);
+
   // Load schools
   useEffect(() => {
     const loadSchools = async () => {
+      setLoading(true);
       try {
         console.log('[AdminApp] Loading all schools with stats...');
         const response = await fetch('/api/schools?includeStats=true&all=true');
@@ -837,6 +921,8 @@ function AdminApp() {
         }
       } catch (error) {
         console.error('[AdminApp] Error loading schools:', error);
+      } finally {
+        setLoading(false);
       }
     };
     loadSchools();
@@ -864,47 +950,80 @@ function AdminApp() {
       return;
     }
 
-    // Optimization: if routes already loaded and school hasn't changed, just update selection if needed
-    if (routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
-      const currentUrlState = parseUrlPath(window.location.pathname, '/admin');
-      const schoolInUrl = currentUrlState.schoolId?.toLowerCase();
-      const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
+    // Check if we need to load routes
+    const isInitialMount = prevSchoolIdRef.current === null;
+    const schoolChanged = prevSchoolIdRef.current !== selectedSchoolId;
+    
+    // If school hasn't changed and we have valid routes, check if we need to update selection
+    if (!schoolChanged && !isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
+      console.log('[AdminApp] School unchanged and routes already loaded');
       
-      if (schoolMatches) {
-        console.log('[AdminApp] Routes already loaded and school matches URL');
+      // If we are on routes tab and nothing is selected, apply the sync
+      if (activeTab === 'routes' && !routes.some(r => r.isSelected)) {
+        console.log('[AdminApp] Tab changed to routes, applying default selection');
         
-        // If we are on routes tab and nothing is selected, apply the sync
-        if (activeTab === 'routes' && !routes.some(r => r.isSelected)) {
-          console.log('[AdminApp] Tab changed to routes, applying default selection');
-          const syncedRoutes = applyUrlStateToRoutes(routes, {
-            ...currentUrlState,
-            show: 'routes',
-            schoolId: selectedSchoolId
-          }, directionFilter);
-          setRoutes(syncedRoutes);
-        }
+        const urlState = parseUrlPath(window.location.pathname, '/admin');
+        const schoolInUrl = urlState.schoolId?.toLowerCase();
+        const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
-        setLoading(false);
-        return;
+        const stateToApply = schoolMatches 
+          ? { ...urlState, show: 'routes', schoolId: selectedSchoolId }
+          : { schoolId: selectedSchoolId, show: 'routes' };
+
+        const syncedRoutes = applyUrlStateToRoutes(routes, stateToApply, directionFilter);
+        setRoutes(syncedRoutes);
       }
+      
+      setLoading(false);
+      return;
     }
 
-    console.log('[AdminApp] Loading routes for school:', selectedSchoolId);
+    // On initial mount with existing routes from navigation, apply selection
+    if (isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
+      console.log('[AdminApp] Routes already loaded (from navigation), applying selection');
+      
+      const urlState = parseUrlPath(window.location.pathname, '/admin');
+      const schoolInUrl = urlState.schoolId?.toLowerCase();
+      const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
+      
+      const stateToApply = schoolMatches 
+        ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
+        : { schoolId: selectedSchoolId, show: activeTab };
+
+      const syncedRoutes = applyUrlStateToRoutes(routes, stateToApply, directionFilter);
+      setRoutes(syncedRoutes);
+      prevSchoolIdRef.current = selectedSchoolId;
+      setLoading(false);
+      return;
+    }
+
+    // Load routes for the selected school
+    console.log('[AdminApp] Loading routes for school:', selectedSchoolId, isInitialMount ? '(initial mount)' : '(school changed)');
+
     const loadRoutes = async () => {
       setLoading(true);
       setLoadingProgress(0);
       try {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
         
-        // Pre-apply state to avoid UI flicker by using current activeTab/schoolId
-        // This is more reliable than parsing from URL which might be debounced
-        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, {
-          ...parseUrlPath(window.location.pathname, '/admin'),
-          show: activeTab,
-          schoolId: selectedSchoolId
-        }, directionFilter);
+        // Pre-apply state to avoid UI flicker
+        const urlState = parseUrlPath(window.location.pathname, '/admin');
+        const schoolInUrl = urlState.schoolId?.toLowerCase();
+        const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
-        console.log('[AdminApp] Loaded', loadedRoutes.length, 'routes');
+        // If school matches URL, use full URL state (including specific routes).
+        // Otherwise, use a clean state for the new school to avoid carrying over selections.
+        const stateToApply = schoolMatches 
+          ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
+          : { schoolId: selectedSchoolId, show: activeTab };
+
+        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, stateToApply, directionFilter);
+        
+        console.log('[AdminApp] Loaded routes for school:', selectedSchoolId, { 
+          schoolMatches, 
+          syncedCount: syncedRoutes.filter(r => r.isSelected).length 
+        });
+        
         setRoutes(syncedRoutes);
         setLoadingProgress(100);
       } catch (error) {
@@ -917,7 +1036,8 @@ function AdminApp() {
     };
 
     loadRoutes();
-  }, [selectedSchoolId, setRoutes, setLoading, activeTab]); // Added activeTab dependency
+    prevSchoolIdRef.current = selectedSchoolId;
+  }, [selectedSchoolId, setRoutes, setLoading]); // Removed activeTab and routes.length to prevent loops
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -1094,19 +1214,50 @@ function AdminApp() {
           />
           <div style={{ flex: 1, position: 'relative' }}>
             {activeTab === 'schools' ? (
-              // Schools map view - uses filtered schools
-              <SchoolListMapView 
-                schools={filteredSchools}
-                selectedSchoolId={selectedSchoolId}
-                onSelectSchool={(schoolId) => {
-                  if (selectedSchoolId === schoolId) {
-                    setSelectedSchool(null);
-                  } else {
-                    setSelectedSchool(schoolId);
-                  }
-                }}
-                mapRef={mapRef}
-              />
+              <>
+                {/* Schools map view - uses filtered schools */}
+                <SchoolListMapView 
+                  schools={filteredSchools}
+                  selectedSchoolId={selectedSchoolId}
+                  onSelectSchool={(schoolId) => {
+                    if (selectedSchoolId === schoolId) {
+                      setSelectedSchool(null);
+                    } else {
+                      setSelectedSchool(schoolId);
+                    }
+                  }}
+                  mapRef={mapRef}
+                />
+                {isLoading && schools.length === 0 && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      zIndex: 1000,
+                      padding: '1.5rem',
+                      backgroundColor: 'var(--bg-primary)',
+                      borderRadius: '12px',
+                      boxShadow: '0 4px 12px var(--shadow-large)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '1rem',
+                    }}
+                  >
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      border: '3px solid var(--border-color)',
+                      borderTopColor: '#4ECDC4',
+                      borderRadius: '50%',
+                      animation: 'spin 1s linear infinite'
+                    }} />
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Loading schools...</div>
+                  </div>
+                )}
+              </>
             ) : (
               <>
                 <MapView 
@@ -1154,13 +1305,39 @@ function AdminApp() {
 }
 
 function App() {
-  // Initialize Google Analytics 4
+  const initializeStore = useStore(state => state.initialize);
+  const isDarkMode = useStore(state => state.isDarkMode);
+
+  // Apply dark mode class to document root
   useEffect(() => {
+    console.log('[App] Dark mode changed:', isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+      document.body.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+      document.body.classList.remove('dark-mode');
+    }
+  }, [isDarkMode]);
+
+  // Initialize store and analytics
+  useEffect(() => {
+    console.log('[App] Initializing store...');
+    
+    // Don't restore school selection if on a clean explorer path
+    // This prevents race conditions where the store restores a school from localStorage
+    // while the URL is /schools, triggering a redirect to the school URL.
+    const isCleanPath = window.location.pathname === '/schools' || 
+                       window.location.pathname === '/explore' || 
+                       window.location.pathname === '/';
+                       
+    initializeStore({ skipSchoolSelection: isCleanPath });
+
     const trackingId = import.meta.env.VITE_GA_TRACKING_ID;
     if (trackingId) {
       analyticsService.init(trackingId);
     }
-  }, []);
+  }, [initializeStore]);
 
   return (
     <HelmetProvider>
@@ -1180,8 +1357,12 @@ function AppContent() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/schools" element={<SchoolDirectory />} />
+        <Route path="/school-directory" element={<SchoolDirectory />} />
         <Route path="/neighborhood-directory" element={<NeighborhoodDirectory />} />
+        
+        {/* Redirects for legacy routes */}
+        <Route path="/schools-directory" element={<Navigate to="/school-directory" replace />} />
+        <Route path="/bus-route-explorer" element={<Navigate to="/explore" replace />} />
         
         {/* Admin and system routes */}
         <Route 
@@ -1206,8 +1387,9 @@ function AppContent() {
             <AdminPasswordProtection>
               <VerificationPage />
             </AdminPasswordProtection>
-          } 
+          }
         />
+        <Route path="/data" element={<DataPage />} />
         <Route 
           path="/jobs" 
           element={
@@ -1245,8 +1427,9 @@ function AppContent() {
           } 
         />
 
-        {/* CATCH-ALL: Clean URLs for school/route explorer */}
-        {/* Any path not matched above will be treated as a potential school ID */}
+        {/* Explorer Map (Catch-all handles both /schools, /explore, and /{schoolId}) */}
+        <Route path="/schools" element={<ExplorerApp />} />
+        <Route path="/explore" element={<ExplorerApp />} />
         <Route path="/*" element={<ExplorerApp />} />
       </Routes>
   );
