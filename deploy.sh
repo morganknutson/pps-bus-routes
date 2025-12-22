@@ -65,6 +65,11 @@ echo ""
 echo "3️⃣  Rebuilding frontend..."
 cd frontend
 
+# Clear previous build artifacts and caches for fresh build
+echo "   Clearing previous build artifacts..."
+rm -rf dist
+rm -rf node_modules/.vite 2>/dev/null || true
+
 if npm run build 2>&1 | tee ../logs/build.log | tail -20; then
     echo "   ✅ Frontend build successful"
 else
