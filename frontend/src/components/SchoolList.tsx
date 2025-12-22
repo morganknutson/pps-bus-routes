@@ -432,7 +432,7 @@ export function SchoolList({
                   >
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                        <div style={{ fontWeight: '700', fontSize: '14px', color: 'var(--text-secondary)' }}>
+                        <div style={{ fontWeight: '500', fontSize: '16px', color: 'var(--text-secondary)' }}>
                           {getSchoolDisplayName(school.name)}
                         </div>
                         {enableEditing && (
@@ -699,7 +699,7 @@ export function SchoolList({
                           cursor: isEditing ? 'default' : 'pointer',
                         }}
                       >
-                        <span style={{ fontSize: '14px', fontWeight: '700' }}>{getSchoolDisplayName(school.name)}</span>
+                        <span style={{ fontSize: '16px', fontWeight: '500' }}>{getSchoolDisplayName(school.name)}</span>
                         {enableEditing && (
                           <button
                             onClick={(e) => {

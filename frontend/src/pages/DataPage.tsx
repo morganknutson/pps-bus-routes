@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
+import { SEO } from '../components/SEO';
 import { ProgressBar } from '../components/ProgressBar';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { Footer } from '../components/Footer';
@@ -266,6 +267,10 @@ export function DataPage() {
       flexDirection: 'column',
       minHeight: '100vh',
     }}>
+      <SEO 
+        title="Bus Route Data Status" 
+        description="Live status of Portland Public Schools bus route data. Track PDF synchronization, geocoding progress, and route processing across the district."
+      />
       <Header />
       <div style={{ 
         padding: isMobile ? '1rem' : '2rem', 

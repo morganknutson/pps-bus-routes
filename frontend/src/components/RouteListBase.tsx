@@ -477,7 +477,7 @@ export function RouteListBase({
                   <span style={{ 
                     color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', 
                     fontSize: '14px', 
-                    fontWeight: '700',
+                    fontWeight: '600',
                     marginTop: '1px' 
                   }}>
                     {route.name.replace('-upcoming', '')}

@@ -139,7 +139,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 paddingRight: '2.5rem',
                 borderRadius: '12px',
                 fontSize: '14px',
-                fontWeight: '500',
+                fontWeight: '600',
                 height: '40px',
                 boxSizing: 'border-box',
                 backgroundColor: 'var(--bg-tertiary)',

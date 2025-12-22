@@ -654,6 +654,11 @@ export function ExplorerApp() {
     [schools, selectedSchoolId]
   );
 
+  const selectedRoutesForSEO = useMemo(() => 
+    routes.filter(r => r.isSelected),
+    [routes]
+  );
+
   // Prevent viewport shifting on mobile navigation/route selection
   useEffect(() => {
     if (isMobile) {
@@ -687,12 +692,9 @@ export function ExplorerApp() {
       overflow: 'hidden'
     }}>
       <SEO 
-        title={selectedSchool ? `${selectedSchool.name} Bus Routes` : 'Bus Route Explorer'}
-        description={selectedSchool 
-          ? `View bus routes and stops for ${selectedSchool.name} in Portland. See interactive maps and stop schedules.`
-          : 'Explore Portland Public Schools bus routes and stops on an interactive map.'
-        }
         school={selectedSchool}
+        selectedRoutes={selectedRoutesForSEO}
+        selectedStop={selectedStop}
       />
       <Header rightContent={
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -1161,9 +1163,15 @@ function AdminApp() {
     });
   }, [schools, searchTerm, schoolTypeFilters]);
 
-  // Geocoding is now done server-side when processing PDFs
-  // Routes should already have coordinates loaded from processed JSON files
-  // useGeocodeStops(); // DISABLED - no client-side geocoding needed
+  const selectedSchool = useMemo(() => 
+    schools.find(s => s.id === selectedSchoolId),
+    [schools, selectedSchoolId]
+  );
+
+  const selectedRoutesForSEO = useMemo(() => 
+    routes.filter(r => r.isSelected),
+    [routes]
+  );
 
   // Prevent viewport shifting on mobile navigation/route selection
   useEffect(() => {
@@ -1197,6 +1205,11 @@ function AdminApp() {
       left: 0,
       overflow: 'hidden'
     }}>
+      <SEO 
+        school={selectedSchool}
+        selectedRoutes={selectedRoutesForSEO}
+        selectedStop={selectedStop}
+      />
       <Header />
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Sidebar */}

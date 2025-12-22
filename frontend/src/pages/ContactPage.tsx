@@ -35,7 +35,10 @@ export function ContactPage() {
       display: 'flex',
       flexDirection: 'column',
     }}>
-      <SEO title="Contact" description="Contact us about PPS Bus Routes" />
+      <SEO 
+        title="Contact" 
+        description="Get in touch about the PPS Bus Routes project. We welcome feedback and questions about Portland Public Schools transportation mapping." 
+      />
       <Header />
       
       <main style={{

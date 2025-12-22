@@ -2837,7 +2837,14 @@ export function TechPage() {
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li style={{ marginBottom: '8px' }}><strong>Component:</strong> <code>frontend/src/components/SEO.tsx</code></li>
                   <li style={{ marginBottom: '8px' }}><strong>Home Page:</strong> Static title "Find Your Stop" and specific description.</li>
-                  <li><strong>Explorer Page:</strong> Dynamic titles based on the selected school (e.g., "Lincoln High School Bus Routes").</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Explorer Page:</strong> Hierarchical dynamic titles:
+                    <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
+                      <li><strong>Stop Selection:</strong> "Stop at [Address] | Route [Name] | [School]"</li>
+                      <li><strong>Route Selection:</strong> "Route [Names] | [School]"</li>
+                      <li><strong>School Focus:</strong> "[School Name] Bus Routes"</li>
+                    </ul>
+                  </li>
+                  <li><strong>Social Compatibility:</strong> Uses absolute URLs for Open Graph (og:image) and Twitter images to ensure correct display on social platforms.</li>
                 </ul>
               </div>
             </div>

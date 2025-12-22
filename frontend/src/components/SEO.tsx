@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { School } from '../types';
+import { School, Route, Stop } from '../types';
 
 interface FAQItem {
   question: string;
@@ -16,23 +16,57 @@ interface SEOProps {
   ogImage?: string;
   twitterCard?: string;
   school?: School;
+  selectedRoutes?: Route[];
+  selectedStop?: { route: Route; stop: Stop; stopNumber: number } | null;
   faqItems?: FAQItem[];
 }
 
 export const SEO: React.FC<SEOProps> = ({
-  title,
-  description = 'Interactive bus route maps for Portland Public Schools. Find your school, view routes, and locate bus stops.',
+  title: manualTitle,
+  description: manualDescription,
   keywords = 'PPS, Portland Public Schools, bus routes, school bus, Portland, education, transportation',
   canonical,
   ogType = 'website',
-  ogImage = '/school-bus-front.svg',
+  ogImage = '/og-image.png',
   twitterCard = 'summary_large_image',
   school,
+  selectedRoutes = [],
+  selectedStop,
   faqItems,
 }) => {
   const siteTitle = 'PPS Bus Routes';
-  const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   const url = window.location.href;
+  const origin = window.location.origin;
+
+  // 1. Dynamic Title Hierarchy
+  let title = manualTitle;
+  if (selectedStop) {
+    title = `Stop at ${selectedStop.stop.address} | Route ${selectedStop.route.name}${school ? ` | ${school.name}` : ''}`;
+  } else if (selectedRoutes.length > 0) {
+    const names = selectedRoutes.map(r => r.name).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).join(', ');
+    title = `Route${selectedRoutes.length > 1 ? 's' : ''} ${names}${school ? ` | ${school.name}` : ''}`;
+  } else if (school) {
+    title = `${school.name} Bus Routes`;
+  }
+
+  const fullTitle = title ? `${title} | ${siteTitle}` : `${siteTitle} | Portland Public Schools`;
+
+  // 2. Dynamic Description
+  let description = manualDescription || 'Interactive bus route maps for Portland Public Schools. Find your school, view routes, and locate bus stops.';
+  if (selectedStop) {
+    description = `View bus stop at ${selectedStop.stop.address} for ${school?.name || 'Portland Public Schools'}. Route ${selectedStop.route.name} map and schedule.`;
+  } else if (selectedRoutes.length > 0) {
+    const names = selectedRoutes.map(r => r.name).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).join(', ');
+    description = `Interactive map showing bus route${selectedRoutes.length > 1 ? 's' : ''} ${names}${school ? ` for ${school.name}` : ''}.`;
+  } else if (school) {
+    description = `Find bus routes and stop locations for ${school.name}. Interactive maps and schedules for PPS students and families.`;
+  }
+
+  // 3. Absolute URL for Image Compatibility
+  // og:image must be an absolute URL for many platforms to display it correctly
+  const absoluteOgImage = ogImage.startsWith('http') 
+    ? ogImage 
+    : `${origin}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
 
   // Generate JSON-LD Structured Data
   const structuredData = [];
@@ -106,14 +140,17 @@ export const SEO: React.FC<SEOProps> = ({
       <meta property="og:url" content={url} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
+      <meta property="og:image" content={absoluteOgImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
 
       {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />
       <meta name="twitter:url" content={url} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image" content={absoluteOgImage} />
 
       {/* Structured Data */}
       {structuredData.map((data, index) => (

@@ -52,7 +52,10 @@ export function AboutPage() {
       display: 'flex',
       flexDirection: 'column',
     }}>
-      <SEO title="About" description="About Portland Public Schools Bus Routes" />
+      <SEO 
+        title="About" 
+        description="Learn about the PPS Bus Routes project - an interactive mapping platform designed to help Portland Public Schools families navigate the district's transportation system." 
+      />
       <Header />
       
       <main style={{
