@@ -93,7 +93,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
       <div style={{ 
         padding: isMobile ? '8px 2rem 12px 2rem' : '12px 1.25rem',
         backgroundColor: 'var(--bg-secondary)', 
-        borderBottom: '1px solid rgb(228, 228, 228)',
+        borderBottom: '1px solid var(--border-color)',
         position: 'relative',
         display: 'flex',
         alignItems: 'flex-start',
@@ -201,7 +201,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             gap: '1rem', 
             marginTop: '1.25rem',
             paddingTop: '1rem',
-            borderTop: '1px solid rgb(238, 238, 238)'
+            borderTop: '1px solid var(--border-color)'
           }}>
             {school.schoolPageLink && (
               <a

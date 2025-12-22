@@ -1427,6 +1427,8 @@ function App() {
   // Apply dark mode class to document root
   useEffect(() => {
     console.log('[App] Dark mode changed:', isDarkMode);
+    
+    // Update body classes
     if (isDarkMode) {
       document.documentElement.classList.add('dark-mode');
       document.body.classList.add('dark-mode');

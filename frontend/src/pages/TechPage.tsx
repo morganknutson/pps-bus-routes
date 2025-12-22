@@ -29,6 +29,7 @@ const sections: Section[] = [
       { id: 'route-visualization', title: '7. Route Visualization' },
       { id: 'neighborhood-exploration', title: '8. Neighborhood Exploration' },
       { id: 'homepage-experience', title: '9. Home Page Experience' },
+      { id: 'mobile-gestures', title: '10. Mobile Interactions & Gestures' },
     ],
   },
   {
@@ -1020,6 +1021,27 @@ export function TechPage() {
                   <li><strong>School Search:</strong> Filterable list of schools, sorted by proximity if address is provided</li>
                   <li><strong>FAQ Section:</strong> Comprehensive list of common questions, presented in a full-width layout</li>
                   <li><strong>Consolidated Footer:</strong> Centralized navigation for secondary pages like School Directory, Neighborhoods, About, and Contact</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="mobile-gestures" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                10. Mobile Interactions & Gestures
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>
+                The mobile experience uses a "bottom sheet" pattern for school and stop details, featuring bulletproof swipe-to-close interactions implemented via <code>MapInfoPanel.tsx</code>.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Gesture Implementation Details:</strong>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li><strong>Performance:</strong> Uses direct DOM manipulation (<code>panelRef.current.style.transform</code>) during gestures to bypass React's render cycle, ensuring 60fps performance on mobile devices.</li>
+                  <li><strong>Thresholds:</strong> Panel closes if swiped down more than 120px, or if a "flick" is detected with a velocity greater than 0.5px/ms.</li>
+                  <li><strong>Gesture Hijacking Prevention:</strong> The swipe-to-close gesture only activates if the user starts the gesture at the top of the scrollable content (<code>scrollTop &lt;= 0</code>).</li>
+                  <li><strong>Dismissal Behavior:</strong> Panel can only be dismissed via a downward swipe gesture or by clicking the "X" close button. Tapping outside the panel is intentionally disabled on mobile to allow direct map interaction.</li>
+                  <li><strong>Visual Feedback:</strong> Features smooth snap-back animations using <code>cubic-bezier(0.4, 0, 0.2, 1)</code>. The background remains transparent on mobile to ensure the map is always visible and interactable.</li>
+                  <li><strong>Layering:</strong> The panel's <code>z-index</code> is set to 900, ensuring it stays below the main navigation menu and other high-priority UI overlays.</li>
+                  <li><strong>CSS Optimizations:</strong> Uses <code>will-change: transform</code> and <code>touch-action: none</code> to optimize for mobile GPU acceleration and prevent browser default gesture interference.</li>
                 </ul>
               </div>
             </div>
@@ -2439,8 +2461,10 @@ export function TechPage() {
                 <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
                   <li style={{ marginBottom: '8px' }}><strong>Web App Manifest:</strong> <code>frontend/public/manifest.json</code> defines the app's name, icons, and display mode (standalone).</li>
                   <li style={{ marginBottom: '8px' }}><strong>iOS Integration:</strong> Uses <code>apple-touch-icon</code> and specific meta tags (<code>apple-mobile-web-app-capable</code>) for optimal performance on iOS devices.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Status Bar Management:</strong> Uses <code>default</code> status bar style combined with dynamic <code>theme-color</code> updates to ensure the system status bar background matches the app's header color perfectly across both Light and Dark modes.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Dynamic Theme Tints:</strong> The <code>theme-color</code> meta tag is updated dynamically in <code>App.tsx</code> whenever the dark mode state changes, forcing Safari to re-tint the browser UI to match the application's current theme.</li>
                   <li style={{ marginBottom: '8px' }}><strong>Icons:</strong> High-resolution <code>apple-touch-icon.png</code> (180x180) provided in the public directory.</li>
-                  <li><strong>Status Bar:</strong> Configured for a seamless look with the system UI using <code>apple-mobile-web-app-status-bar-style</code>.</li>
+                  <li><strong>Viewport Fit:</strong> Uses <code>viewport-fit=cover</code> to ensure the application utilizes the full screen on "notched" devices.</li>
                 </ul>
               </div>
             </div>

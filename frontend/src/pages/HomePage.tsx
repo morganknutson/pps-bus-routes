@@ -73,10 +73,7 @@ export function HomePage() {
     const originalRootOverflow = rootElement?.style.overflow;
     const originalRootHeight = rootElement?.style.height;
     
-    // Set background colors to match header (white in light mode, #3A3A3A in dark mode)
-    const headerBgColor = isDarkMode ? '#3A3A3A' : '#ffffff';
-    document.body.style.backgroundColor = headerBgColor;
-    document.documentElement.style.backgroundColor = headerBgColor;
+    // Background colors are now managed by CSS variables in index.css (html/body use --bg-header)
     
     // On mobile/all devices, we want the body to scroll normally if content exceeds viewport
     document.body.style.overflow = 'auto';
