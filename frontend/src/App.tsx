@@ -595,7 +595,7 @@ function ExplorerApp() {
         display: 'block',
         height: '1.5px',
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: 'var(--text-primary)',
         borderRadius: '2px',
         transition: 'all 0.3s ease',
         position: 'absolute',
@@ -606,7 +606,7 @@ function ExplorerApp() {
         display: 'block',
         height: '1.5px',
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: 'var(--text-primary)',
         borderRadius: '2px',
         transition: 'all 0.3s ease',
         opacity: isOpen ? 0 : 1,
@@ -616,7 +616,7 @@ function ExplorerApp() {
         display: 'block',
         height: '1.5px',
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: 'var(--text-primary)',
         borderRadius: '2px',
         transition: 'all 0.3s ease',
         position: 'absolute',
@@ -634,7 +634,7 @@ function ExplorerApp() {
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        color: 'white',
+        color: 'var(--text-primary)',
         padding: '0.5rem 13px 0.5rem 0.5rem',
         display: 'flex',
         alignItems: 'center',
@@ -810,6 +810,95 @@ function ExplorerApp() {
                     }}
                   >
                     <ProgressBar label="Loading routes..." />
+                  </div>
+                )}
+                {/* Overlay for mobile when no school is selected on routes tab */}
+                {isMobile && activeTab === 'routes' && !selectedSchoolId && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      zIndex: 1000,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '1rem',
+                      textAlign: 'center',
+                      pointerEvents: 'auto', // Allow clicks on the overlay
+                      width: 'calc(100% - 2rem)',
+                      maxWidth: '320px',
+                      boxSizing: 'border-box',
+                    }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                        borderRadius: '16px',
+                        padding: '2rem 1.5rem',
+                        boxShadow: '0 4px 16px var(--shadow-large)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '1.25rem',
+                        width: '100%',
+                        minWidth: '260px',
+                        minHeight: '240px',
+                        border: '1px solid var(--border-color)',
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      <i 
+                        className="fas fa-graduation-cap" 
+                        style={{ 
+                          fontSize: '48px',
+                          color: 'var(--text-tertiary)',
+                          opacity: 0.6
+                        }}
+                      />
+                      <p style={{ 
+                        fontSize: '16px',
+                        fontWeight: '500',
+                        margin: 0,
+                        color: 'var(--text-secondary)',
+                        lineHeight: '1.4',
+                        textAlign: 'center',
+                      }}>
+                        Please select a school<br />to view routes
+                      </p>
+                      <button
+                        onClick={() => {
+                          setActiveTab('schools');
+                          if (isMobile) {
+                            setSidebarOpen(true);
+                          }
+                        }}
+                        style={{
+                          padding: '0.875rem 1.5rem',
+                          backgroundColor: 'var(--bg-primary)',
+                          color: 'var(--text-primary)',
+                          border: '1px solid var(--border-color)',
+                          borderRadius: '9999px',
+                          cursor: 'pointer',
+                          fontSize: '14px',
+                          fontWeight: '500',
+                          transition: 'background-color 0.2s ease, border-color 0.2s ease',
+                          width: '100%',
+                          minHeight: '44px', // Ensure minimum touch target size
+                          marginTop: '0.5rem', // Extra space between text and button
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+                        }}
+                      >
+                        View Schools
+                      </button>
+                    </div>
                   </div>
                 )}
               </>

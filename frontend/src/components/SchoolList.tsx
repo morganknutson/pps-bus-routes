@@ -3,6 +3,7 @@ import { School } from '../types';
 import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
+import { MapPinIcon } from './MapPinIcon';
 
 // Infer school type(s) from name - returns array to support hybrid schools
 function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
@@ -429,7 +430,7 @@ export function SchoolList({
                   >
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                        <div style={{ fontWeight: '600', fontSize: '14px', color: 'var(--text-secondary)' }}>
+                        <div style={{ fontWeight: '600', fontSize: '18px', color: 'var(--text-secondary)' }}>
                           {school.name}
                         </div>
                         {enableEditing && (
@@ -469,7 +470,7 @@ export function SchoolList({
                       </div>
                       {school.address && (
                         <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <i className="fas fa-map-marker-alt" style={{ fontSize: '10px', width: '10px', flexShrink: 0, color: 'var(--text-tertiary)' }}></i>
+                          <MapPinIcon width={8} height={12} style={{ flexShrink: 0, color: 'var(--text-tertiary)' }} />
                           <span>{school.address.split(',')[0]}</span>
                         </div>
                       )}
@@ -672,7 +673,7 @@ export function SchoolList({
                           cursor: isEditing ? 'default' : 'pointer',
                         }}
                       >
-                        <span style={{ fontSize: '14px', fontWeight: '600' }}>{school.name}</span>
+                        <span style={{ fontSize: '18px', fontWeight: '600' }}>{school.name}</span>
                         {enableEditing && (
                           <button
                             onClick={(e) => {

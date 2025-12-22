@@ -6,6 +6,28 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 export function DataPage() {
   console.log('[DataPage] Component rendering...');
   const isMobile = useIsMobile();
+
+  // Enable scrolling on this page (similar to VerificationPage)
+  useEffect(() => {
+    const root = document.getElementById('root');
+    const originalOverflowX = root?.style.overflowX;
+    const originalOverflowY = root?.style.overflowY;
+    
+    if (root) {
+      root.style.overflowX = 'hidden';
+    }
+    
+    if (root) {
+      root.style.overflowY = 'auto';
+    }
+
+    return () => {
+      if (root) {
+        root.style.overflowX = originalOverflowX || '';
+        root.style.overflowY = originalOverflowY || '';
+      }
+    };
+  }, []);
   const [pdfStatus, setPdfStatus] = useState<any>(null);
   const [syncStatus, setSyncStatus] = useState<Record<string, { lastModifiedPdf?: string; lastChecked?: string }>>({});
   const [processingStatus, setProcessingStatus] = useState<Record<string, boolean | { hasProcessed: boolean; lastProcessed: string | null }>>({});
@@ -124,13 +146,30 @@ export function DataPage() {
     
     setLoadingRoutes(prev => ({ ...prev, [schoolId]: true }));
     try {
-      const response = await fetch(`/api/routes?schoolId=${schoolId}`);
+      const response = await fetch(`/api/data/routes?schoolId=${encodeURIComponent(schoolId)}&t=${Date.now()}`);
       if (response.ok) {
         const data = await response.json();
-        setAllRoutes(prev => ({ ...prev, [schoolId]: data.routes || {} }));
+        const routes = data.routes || [];
+        // Store routes by filename for easy lookup (matching VerificationPage format)
+        const routesByFilename: Record<string, any> = {};
+        routes.forEach((route: any) => {
+          // Match by filename (route.filename should match PDF filename)
+          if (route.filename) {
+            routesByFilename[route.filename] = route;
+          } else if (route.id) {
+            // Fallback: use route ID if filename not available
+            routesByFilename[route.id] = route;
+          }
+        });
+        console.log(`[DataPage] Loaded ${routes.length} routes for ${schoolId}, matched ${Object.keys(routesByFilename).length} by filename`);
+        setAllRoutes(prev => ({ ...prev, [schoolId]: routesByFilename }));
+      } else {
+        console.error('[DataPage] Failed to load routes for school:', schoolId);
+        setAllRoutes(prev => ({ ...prev, [schoolId]: {} }));
       }
     } catch (err: any) {
-      console.error(`[DataPage] Failed to load routes for ${schoolId}:`, err);
+      console.error('[DataPage] Error loading routes:', err);
+      setAllRoutes(prev => ({ ...prev, [schoolId]: {} }));
     } finally {
       setLoadingRoutes(prev => ({ ...prev, [schoolId]: false }));
     }
@@ -267,7 +306,7 @@ export function DataPage() {
           }}>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Total Schools</div>
             <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-primary)' }}>
-              {pdfStatus.summary.totalSchools || 0}
+              {pdfStatus.summary.totalSchools || pdfStatus.totalSchools || pdfStatus.schools?.length || 0}
             </div>
           </div>
           <div style={{
@@ -300,7 +339,16 @@ export function DataPage() {
           }}>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Schools Processed</div>
             <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#4ECDC4' }}>
-              {pdfStatus.summary.schoolsProcessed || 0}
+              {pdfStatus.summary.schoolsProcessed ?? (() => {
+                // Calculate from processingStatus if not in summary
+                if (Object.keys(processingStatus).length > 0) {
+                  return Object.values(processingStatus).filter(status => {
+                    const hasProcessed = typeof status === 'object' && status !== null ? status.hasProcessed : (status === true);
+                    return hasProcessed;
+                  }).length;
+                }
+                return 0;
+              })()}
             </div>
           </div>
         </div>
@@ -315,32 +363,15 @@ export function DataPage() {
                 <tr style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '2px solid var(--bg-primary)' }}>
                   <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)', width: '40px' }}></th>
                   <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>School</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Local PDFs</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive PDFs</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Match</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Processed</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive Link</th>
+                  <th style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>PDFs</th>
+                  <th style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Last Checked</th>
+                  <th style={{ padding: '1rem', textAlign: 'center', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>Drive Link</th>
                 </tr>
               </thead>
               <tbody>
                 {pdfStatus.schools.map((school: any, index: number) => {
                   const isExpanded = expandedRows[school.schoolId];
-                  const driveModified = pdfFetchInfo[school.schoolId]?.driveLastModified;
                   const localModified = pdfFetchInfo[school.schoolId]?.localLastModified;
-                  const drivePdfCount = pdfFetchInfo[school.schoolId]?.drivePdfCount;
-                  const driveResult = driveLinkResults?.results?.find((r: any) => r.schoolId === school.schoolId);
-                  const actualLocalPdfCount = driveResult?.localPdfCount;
-                  const hasCountMismatch = driveResult?.countMismatch === true;
-                  const driveTime = driveModified ? new Date(driveModified).getTime() : 0;
-                  const localTime = localModified ? new Date(localModified).getTime() : 0;
-                  const diff = Math.abs(driveTime - localTime);
-                  const timestampMatches = diff < 1000;
-                  const needsUpdate = driveTime > localTime;
-                  const fullyMatches = timestampMatches && !hasCountMismatch;
-                  
-                  const status = processingStatus[school.schoolId];
-                  const hasProcessed = typeof status === 'object' && status !== null ? status.hasProcessed : (status === true);
-                  const lastProcessed = typeof status === 'object' && status !== null ? status.lastProcessed : null;
                   
                   return (
                     <React.Fragment key={school.schoolId}>
@@ -359,8 +390,7 @@ export function DataPage() {
                           ></i>
                         </td>
                         <td style={{ padding: '1rem', verticalAlign: 'middle' }}>
-                          <div style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>{school.schoolName}</div>
-                          <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{school.schoolId}</div>
+                          <div style={{ fontWeight: 'bold' }}>{school.schoolName}</div>
                         </td>
                         <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                           <div>
@@ -372,59 +402,14 @@ export function DataPage() {
                               <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
                             )}
                           </div>
-                          {localModified && (
-                            <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
+                        </td>
+                        <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
+                          {localModified ? (
+                            <div style={{ fontSize: '12px', color: 'var(--text-primary)' }}>
                               {new Date(localModified).toLocaleString()}
                             </div>
-                          )}
-                        </td>
-                        <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
-                          <div>
-                            {pdfFetchInfo[school.schoolId]?.driveHasPdfs !== undefined ? (
-                              pdfFetchInfo[school.schoolId].driveHasPdfs ? (
-                                <span style={{ fontWeight: 'bold', color: '#4ECDC4', fontSize: '18px' }}>
-                                  {pdfFetchInfo[school.schoolId].drivePdfCount || '?'}
-                                </span>
-                              ) : (
-                                <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
-                              )
-                            ) : (
-                              <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
-                            )}
-                          </div>
-                          {driveModified && (
-                            <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
-                              {new Date(driveModified).toLocaleString()}
-                            </div>
-                          )}
-                        </td>
-                        <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
-                          {driveModified && localModified ? (
-                            fullyMatches ? (
-                              <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '18px' }} title="Dates match"></i>
-                            ) : hasCountMismatch ? (
-                              <i className="fas fa-exclamation-triangle" style={{ color: '#ffa500', fontSize: '18px' }} title={`PDF count mismatch`}></i>
-                            ) : needsUpdate ? (
-                              <i className="fas fa-exclamation-triangle" style={{ color: '#ffa500', fontSize: '18px' }} title="Drive has newer files"></i>
-                            ) : (
-                              <i className="fas fa-question-circle" style={{ color: '#f44', fontSize: '18px' }} title="Local is newer than Drive"></i>
-                            )
                           ) : (
                             <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
-                          )}
-                        </td>
-                        <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
-                          {hasProcessed ? (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                              <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '18px' }}></i>
-                              {lastProcessed && (
-                                <div style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>
-                                  {new Date(lastProcessed).toLocaleString()}
-                                </div>
-                              )}
-                            </div>
-                          ) : (
-                            <span style={{ color: '#f44' }}>No</span>
                           )}
                         </td>
                         <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
@@ -451,28 +436,147 @@ export function DataPage() {
                       </tr>
                       {isExpanded && (
                         <tr>
-                          <td colSpan={7} style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)' }}>
-                            <div style={{ paddingLeft: '2rem' }}>
-                              {/* Routes */}
-                              {allRoutes[school.schoolId] && Object.keys(allRoutes[school.schoolId]).length > 0 ? (
-                                <div>
-                                  <div style={{ fontWeight: 'bold', fontSize: '12px', marginBottom: '0.5rem' }}>Routes</div>
-                                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.5rem' }}>
-                                    {Object.entries(allRoutes[school.schoolId]).map(([routeId, route]: [string, any]) => (
-                                      <div key={routeId} style={{ fontSize: '11px', padding: '0.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '4px' }}>
-                                        <div style={{ fontWeight: '600' }}>{route.name || routeId}</div>
-                                        <div style={{ color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                                          {route.stops?.length || 0} stops
+                          <td colSpan={5} style={{ padding: '1.5rem', backgroundColor: 'var(--bg-primary)' }}>
+                            <div>
+                              {/* PDF Files List with Route Info */}
+                              <div>
+                                <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '16px', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                                  PDF Files with Route Information ({school.pdfFiles?.length || 0})
+                                </h3>
+                                {school.pdfFiles && school.pdfFiles.length > 0 ? (
+                                  <div style={{ 
+                                    backgroundColor: 'var(--bg-secondary)', 
+                                    padding: '1rem', 
+                                    borderRadius: '4px',
+                                    border: '1px solid var(--border-color)',
+                                  }}>
+                                    {school.pdfFiles.map((file: string, i: number) => {
+                                      const pdfUrl = `/api/pdfs/${school.schoolId}/${encodeURIComponent(file)}`;
+                                      
+                                      // Find route for this PDF by matching filename
+                                      let route = allRoutes[school.schoolId]?.[file];
+                                      if (!route && allRoutes[school.schoolId]) {
+                                        // Try matching by route filename field
+                                        const routesForSchool = Object.values(allRoutes[school.schoolId]);
+                                        route = routesForSchool.find((r: any) => 
+                                          r.filename === file || 
+                                          r.id === file || 
+                                          r.id === file.replace('.pdf', '.json') ||
+                                          r.filename === file.replace('.pdf', '.json')
+                                        ) as any;
+                                      }
+                                      
+                                      return (
+                                        <div
+                                          key={i}
+                                          style={{ 
+                                            marginBottom: '1rem',
+                                            padding: '0.75rem',
+                                            backgroundColor: 'var(--bg-primary)',
+                                            borderRadius: '4px',
+                                            border: '1px solid var(--border-color)',
+                                          }}
+                                        >
+                                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: route ? '0.75rem' : '0' }}>
+                                            <a
+                                              href={pdfUrl}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              onClick={(e) => e.stopPropagation()}
+                                              style={{ 
+                                                color: '#4ECDC4',
+                                                fontSize: '12px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                flex: 1,
+                                                textDecoration: 'none',
+                                                cursor: 'pointer',
+                                              }}
+                                              onMouseEnter={(e) => {
+                                                e.currentTarget.style.textDecoration = 'underline';
+                                              }}
+                                              onMouseLeave={(e) => {
+                                                e.currentTarget.style.textDecoration = 'none';
+                                              }}
+                                              title={`Open ${file} in new tab`}
+                                            >
+                                              <i className="fas fa-file-pdf" style={{ marginRight: '0.5rem' }}></i>
+                                              <span style={{ flex: 1 }}>{file}</span>
+                                            </a>
+                                          </div>
+                                          
+                                          {/* Route Information */}
+                                          {route ? (
+                                            <div style={{ 
+                                              marginTop: '0.75rem',
+                                              padding: '0.75rem',
+                                              backgroundColor: 'var(--bg-secondary)',
+                                              borderRadius: '4px',
+                                              fontSize: '11px',
+                                            }}>
+                                              <div style={{ marginBottom: '0.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                                                Route: {route.name || 'Unknown'} {route.direction && `(${route.direction})`}
+                                              </div>
+                                              {route.stats && (
+                                                <div style={{ marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                                                  {route.stats.totalStops} stops, {route.stats.geocodedStops} geocoded
+                                                </div>
+                                              )}
+                                              {route.stops && route.stops.length > 0 && (
+                                                <div style={{ marginTop: '0.5rem' }}>
+                                                  <div style={{ color: 'var(--text-primary)', fontSize: '11px', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+                                                    Stops ({route.stops.length}):
+                                                  </div>
+                                                  <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                                                    {route.stops.slice(0, 20).map((stop: any, stopIdx: number) => (
+                                                      <div 
+                                                        key={stop.id || stopIdx} 
+                                                        style={{ 
+                                                          marginBottom: '0.5rem', 
+                                                          padding: '0.5rem',
+                                                          backgroundColor: 'var(--bg-primary)',
+                                                          borderRadius: '4px',
+                                                          fontSize: '10px',
+                                                        }}
+                                                      >
+                                                        <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>
+                                                          {stop.address}
+                                                        </div>
+                                                        {stop.coordinates && (
+                                                          <div style={{ color: 'var(--text-secondary)', marginTop: '0.25rem', fontSize: '9px' }}>
+                                                            {stop.coordinates[1].toFixed(6)}, {stop.coordinates[0].toFixed(6)}
+                                                          </div>
+                                                        )}
+                                                      </div>
+                                                    ))}
+                                                    {route.stops.length > 20 && (
+                                                      <div style={{ color: 'var(--text-secondary)', fontSize: '10px', fontStyle: 'italic', marginTop: '0.5rem' }}>
+                                                        ...and {route.stops.length - 20} more stops
+                                                      </div>
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              )}
+                                            </div>
+                                          ) : loadingRoutes[school.schoolId] ? (
+                                            <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.5rem' }}>
+                                              Loading route data...
+                                            </div>
+                                          ) : (
+                                            <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.5rem' }}>
+                                              No route data available
+                                            </div>
+                                          )}
                                         </div>
-                                      </div>
-                                    ))}
+                                      );
+                                    })}
                                   </div>
-                                </div>
-                              ) : loadingRoutes[school.schoolId] ? (
-                                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
-                                  Loading route data...
-                                </div>
-                              ) : null}
+                                ) : (
+                                  <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
+                                    No PDF files found for this school
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </td>
                         </tr>
@@ -491,20 +595,7 @@ export function DataPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {pdfStatus.schools.map((school: any) => {
             const isExpanded = expandedRows[school.schoolId];
-            const driveModified = pdfFetchInfo[school.schoolId]?.driveLastModified;
             const localModified = pdfFetchInfo[school.schoolId]?.localLastModified;
-            const driveResult = driveLinkResults?.results?.find((r: any) => r.schoolId === school.schoolId);
-            const hasCountMismatch = driveResult?.countMismatch === true;
-            const driveTime = driveModified ? new Date(driveModified).getTime() : 0;
-            const localTime = localModified ? new Date(localModified).getTime() : 0;
-            const diff = Math.abs(driveTime - localTime);
-            const timestampMatches = diff < 1000;
-            const needsUpdate = driveTime > localTime;
-            const fullyMatches = timestampMatches && !hasCountMismatch;
-            
-            const status = processingStatus[school.schoolId];
-            const hasProcessed = typeof status === 'object' && status !== null ? status.hasProcessed : (status === true);
-            const lastProcessed = typeof status === 'object' && status !== null ? status.lastProcessed : null;
             
             return (
               <div
@@ -521,8 +612,7 @@ export function DataPage() {
                   onClick={() => handleRowExpand(school.schoolId)}
                 >
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>{school.schoolName}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{school.schoolId}</div>
+                    <div style={{ fontWeight: 'bold' }}>{school.schoolName}</div>
                   </div>
                   <i 
                     className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'}`}
@@ -537,7 +627,7 @@ export function DataPage() {
                   gap: '0.75rem',
                   marginBottom: '0.75rem',
                 }}>
-                  {/* Local PDFs */}
+                  {/* PDFs */}
                   <div style={{ 
                     padding: '0.75rem',
                     backgroundColor: 'var(--bg-primary)',
@@ -545,21 +635,16 @@ export function DataPage() {
                     border: '1px solid var(--border-color)',
                   }}>
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
-                      <span style={{ fontWeight: '600' }}>Local PDFs</span>{' '}
+                      <span style={{ fontWeight: '600' }}>PDFs</span>{' '}
                       {school.hasPdfs ? (
                         <span style={{ color: '#4ECDC4', fontWeight: 'bold' }}>{school.pdfCount}</span>
                       ) : (
                         <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
                       )}
                     </div>
-                    {localModified && (
-                      <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
-                        Modified {new Date(localModified).toLocaleString()}
-                      </div>
-                    )}
                   </div>
 
-                  {/* Drive PDFs */}
+                  {/* Last Checked */}
                   <div style={{ 
                     padding: '0.75rem',
                     backgroundColor: 'var(--bg-primary)',
@@ -567,77 +652,15 @@ export function DataPage() {
                     border: '1px solid var(--border-color)',
                   }}>
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
-                      <span style={{ fontWeight: '600' }}>Drive PDFs</span>{' '}
-                      {pdfFetchInfo[school.schoolId]?.driveHasPdfs !== undefined ? (
-                        pdfFetchInfo[school.schoolId].driveHasPdfs ? (
-                          <span style={{ color: '#4ECDC4', fontWeight: 'bold' }}>
-                            {pdfFetchInfo[school.schoolId].drivePdfCount || '?'}
-                          </span>
-                        ) : (
-                          <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
-                        )
-                      ) : (
-                        <span>—</span>
-                      )}
+                      <span style={{ fontWeight: '600' }}>Last Checked</span>
                     </div>
-                    {driveModified && (
-                      <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
-                        Modified {new Date(driveModified).toLocaleString()}
+                    {localModified ? (
+                      <div style={{ fontSize: '12px', color: 'var(--text-primary)', marginTop: '0.25rem' }}>
+                        {new Date(localModified).toLocaleString()}
                       </div>
-                    )}
-                  </div>
-
-                  {/* Match Status */}
-                  {driveModified && localModified && (
-                    <div style={{ 
-                      padding: '0.75rem',
-                      backgroundColor: 'var(--bg-primary)',
-                      borderRadius: '6px',
-                      border: '1px solid var(--border-color)',
-                    }}>
-                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
-                        <span style={{ fontWeight: '600' }}>Match Status</span>{' '}
-                        {fullyMatches ? (
-                          <span style={{ color: '#4ECDC4' }}>
-                            <i className="fas fa-check-circle"></i> Matched
-                          </span>
-                        ) : hasCountMismatch ? (
-                          <span style={{ color: '#ffa500' }}>
-                            <i className="fas fa-exclamation-triangle"></i> Count Mismatch
-                          </span>
-                        ) : needsUpdate ? (
-                          <span style={{ color: '#ffa500' }}>
-                            <i className="fas fa-exclamation-triangle"></i> Drive Newer
-                          </span>
-                        ) : (
-                          <span style={{ color: '#f44' }}>
-                            <i className="fas fa-question-circle"></i> Local Newer
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Processed Status */}
-                  <div style={{ 
-                    padding: '0.75rem',
-                    backgroundColor: 'var(--bg-primary)',
-                    borderRadius: '6px',
-                    border: '1px solid var(--border-color)',
-                  }}>
-                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
-                      <span style={{ fontWeight: '600' }}>Processed</span>{' '}
-                      {hasProcessed ? (
-                        <span style={{ color: '#4ECDC4' }}>
-                          <i className="fas fa-check-circle"></i> Yes
-                        </span>
-                      ) : (
-                        <span style={{ color: '#f44' }}>No</span>
-                      )}
-                    </div>
-                    {lastProcessed && (
-                      <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', marginTop: '0.25rem' }}>
-                        Last {new Date(lastProcessed).toLocaleString()}
+                    ) : (
+                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                        —
                       </div>
                     )}
                   </div>
@@ -646,24 +669,145 @@ export function DataPage() {
                 {/* Expanded Content */}
                 {isExpanded && (
                   <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
-                    {/* Routes */}
-                    {allRoutes[school.schoolId] && Object.keys(allRoutes[school.schoolId]).length > 0 ? (
-                      <div>
-                        <div style={{ fontWeight: 'bold', fontSize: '12px', marginBottom: '0.5rem' }}>Routes</div>
-                        {Object.entries(allRoutes[school.schoolId]).map(([routeId, route]: [string, any]) => (
-                          <div key={routeId} style={{ fontSize: '11px', marginBottom: '0.5rem', padding: '0.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '4px' }}>
-                            <div style={{ fontWeight: '600' }}>{route.name || routeId}</div>
-                            <div style={{ color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                              {route.stops?.length || 0} stops
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : loadingRoutes[school.schoolId] ? (
-                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
-                        Loading route data...
-                      </div>
-                    ) : null}
+                    {/* PDF Files List with Route Info */}
+                    <div>
+                      <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '16px', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                        PDF Files with Route Information ({school.pdfFiles?.length || 0})
+                      </h3>
+                      {school.pdfFiles && school.pdfFiles.length > 0 ? (
+                        <div style={{ 
+                          backgroundColor: 'var(--bg-primary)', 
+                          padding: '1rem', 
+                          borderRadius: '4px',
+                          border: '1px solid var(--border-color)',
+                        }}>
+                          {school.pdfFiles.map((file: string, i: number) => {
+                            const pdfUrl = `/api/pdfs/${school.schoolId}/${encodeURIComponent(file)}`;
+                            
+                            // Find route for this PDF by matching filename
+                            let route = allRoutes[school.schoolId]?.[file];
+                            if (!route && allRoutes[school.schoolId]) {
+                              // Try matching by route filename field
+                              const routesForSchool = Object.values(allRoutes[school.schoolId]);
+                              route = routesForSchool.find((r: any) => 
+                                r.filename === file || 
+                                r.id === file || 
+                                r.id === file.replace('.pdf', '.json') ||
+                                r.filename === file.replace('.pdf', '.json')
+                              ) as any;
+                            }
+                            
+                            return (
+                              <div
+                                key={i}
+                                style={{ 
+                                  marginBottom: '1rem',
+                                  padding: '0.75rem',
+                                  backgroundColor: 'var(--bg-secondary)',
+                                  borderRadius: '4px',
+                                  border: '1px solid var(--border-color)',
+                                }}
+                              >
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: route ? '0.75rem' : '0' }}>
+                                  <a
+                                    href={pdfUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    style={{ 
+                                      color: '#4ECDC4',
+                                      fontSize: '12px',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      flex: 1,
+                                      textDecoration: 'none',
+                                      cursor: 'pointer',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      e.currentTarget.style.textDecoration = 'underline';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.currentTarget.style.textDecoration = 'none';
+                                    }}
+                                    title={`Open ${file} in new tab`}
+                                  >
+                                    <i className="fas fa-file-pdf" style={{ marginRight: '0.5rem' }}></i>
+                                    <span style={{ flex: 1 }}>{file}</span>
+                                  </a>
+                                </div>
+                                
+                                {/* Route Information */}
+                                {route ? (
+                                  <div style={{ 
+                                    marginTop: '0.75rem',
+                                    padding: '0.75rem',
+                                    backgroundColor: 'var(--bg-primary)',
+                                    borderRadius: '4px',
+                                    fontSize: '11px',
+                                  }}>
+                                    <div style={{ marginBottom: '0.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                                      Route: {route.name || 'Unknown'} {route.direction && `(${route.direction})`}
+                                    </div>
+                                    {route.stats && (
+                                      <div style={{ marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                                        {route.stats.totalStops} stops, {route.stats.geocodedStops} geocoded
+                                      </div>
+                                    )}
+                                    {route.stops && route.stops.length > 0 && (
+                                      <div style={{ marginTop: '0.5rem' }}>
+                                        <div style={{ color: 'var(--text-primary)', fontSize: '11px', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+                                          Stops ({route.stops.length}):
+                                        </div>
+                                        <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                                          {route.stops.slice(0, 20).map((stop: any, stopIdx: number) => (
+                                            <div 
+                                              key={stop.id || stopIdx} 
+                                              style={{ 
+                                                marginBottom: '0.5rem', 
+                                                padding: '0.5rem',
+                                                backgroundColor: 'var(--bg-secondary)',
+                                                borderRadius: '4px',
+                                                fontSize: '10px',
+                                              }}
+                                            >
+                                              <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>
+                                                {stop.address}
+                                              </div>
+                                              {stop.coordinates && (
+                                                <div style={{ color: 'var(--text-secondary)', marginTop: '0.25rem', fontSize: '9px' }}>
+                                                  {stop.coordinates[1].toFixed(6)}, {stop.coordinates[0].toFixed(6)}
+                                                </div>
+                                              )}
+                                            </div>
+                                          ))}
+                                          {route.stops.length > 20 && (
+                                            <div style={{ color: 'var(--text-secondary)', fontSize: '10px', fontStyle: 'italic', marginTop: '0.5rem' }}>
+                                              ...and {route.stops.length - 20} more stops
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                ) : loadingRoutes[school.schoolId] ? (
+                                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.5rem' }}>
+                                    Loading route data...
+                                  </div>
+                                ) : (
+                                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.5rem' }}>
+                                    No route data available
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
+                          No PDF files found for this school
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>

@@ -8,6 +8,7 @@ import { formatStreetName } from '../utils/formatAddress';
 import { findClosestStop } from '../utils/findClosestStop';
 import { formatDistance } from '../utils/distance';
 import { Route, Stop } from '../types';
+import { MapPinIcon } from './MapPinIcon';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -300,15 +301,17 @@ export function AddressInput() {
                 cursor: 'pointer',
                 padding: 0,
                 flexShrink: 0,
-                transition: 'background-color 0.2s ease, color 0.2s ease',
+                transition: 'background-color 0.2s ease, color 0.2s ease, borderRadius 0.2s ease',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
                 e.currentTarget.style.color = 'var(--text-primary)';
+                e.currentTarget.style.borderRadius = '50%';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'transparent';
                 e.currentTarget.style.color = 'var(--text-tertiary)';
+                e.currentTarget.style.borderRadius = '4px';
               }}
             aria-label="Clear address"
           >
@@ -454,16 +457,7 @@ export function AddressInput() {
           e.currentTarget.style.boxShadow = '0 4px 12px var(--shadow-large)';
         }}
       >
-        <svg 
-          width="9" 
-          height="12" 
-          viewBox="0 0 9 12" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ marginRight: '0.5rem', flexShrink: 0 }}
-        >
-          <path d="M4.5 0C6.98528 3.22128e-08 9 2.01472 9 4.5C9 6.98526 7.0714 10.2856 4.5 11.5713C1.9286 10.2856 3.08342e-08 6.98526 0 4.5C0 2.01472 2.01472 0 4.5 0ZM4.5 2.57129C3.43488 2.57129 2.57129 3.43488 2.57129 4.5C2.57129 5.56512 3.43488 6.42871 4.5 6.42871C5.56512 6.42871 6.42871 5.56512 6.42871 4.5C6.42871 3.43488 5.56512 2.57129 4.5 2.57129Z" fill="currentColor"/>
-        </svg>
+        <MapPinIcon style={{ marginRight: '0.5rem', flexShrink: 0 }} />
         <span>Find My Stop</span>
       </button>
     )}

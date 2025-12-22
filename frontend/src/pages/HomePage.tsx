@@ -11,6 +11,7 @@ import { School, HomeAddress } from '../types';
 import { ProgressBar } from '../components/ProgressBar';
 import { SEO } from '../components/SEO';
 import { useDarkMode } from '../hooks/useDarkMode';
+import { MapPinIcon } from '../components/MapPinIcon';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -840,7 +841,7 @@ export function HomePage() {
               </>
             ) : (
               <>
-                <i className="fas fa-search" style={{ fontSize: '14px' }}></i>
+                <MapPinIcon width={14} height={18} style={{ flexShrink: 0 }} />
                 Find My Stop
               </>
             )}

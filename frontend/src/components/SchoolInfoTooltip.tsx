@@ -6,6 +6,7 @@ import { formatDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useStore } from '../store/useStore';
 import { RouteIcon } from './RouteIcon';
+import { MapPinIcon } from './MapPinIcon';
 
 interface SchoolInfoTooltipProps {
   school: School;
@@ -89,7 +90,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
     }}>
       {/* Header with School Name & Type */}
       <div style={{ 
-        padding: isMobile ? '24px 2rem 12px 2rem' : '12px 1.25rem',
+        padding: isMobile ? '8px 2rem 12px 2rem' : '12px 1.25rem',
         backgroundColor: 'var(--bg-secondary)', 
         borderBottom: '1px solid var(--border-color)',
         position: 'relative',
@@ -101,8 +102,8 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         <div style={{ flex: 1 }}>
           <h3 style={{ 
             margin: '0 0 0.25rem 0', 
-            fontSize: '16px', 
-            fontWeight: '700',
+            fontSize: isMobile ? '26px' : '18px', 
+            fontWeight: '600',
             lineHeight: '1.2',
             color: 'var(--text-primary)' 
           }}>
@@ -111,15 +112,14 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: '0.4rem',
+            gap: '0.375rem',
             color: schoolColor,
-            fontSize: '10px',
-            fontWeight: '700',
-            textTransform: 'uppercase',
-            letterSpacing: '0.02em',
-            marginTop: '0.2rem'
+            fontSize: '12px',
+            fontWeight: '500',
+            marginTop: '0.2rem',
+            marginBottom: isMobile ? '14px' : '0'
           }}>
-            <i className="fas fa-graduation-cap" style={{ fontSize: '9px' }}></i>
+            <i className="fas fa-graduation-cap" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
             <span>{schoolTypes.join(' & ')}</span>
           </div>
         </div>
@@ -157,24 +157,26 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         {/* Details Grid */}
         <div style={{ display: 'grid', gap: '1rem' }}>
           {/* Neighborhood & Address */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {school.neighborhood && (
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                <div style={{ fontSize: '13px' }}>
-                  <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '2px' }}>Neighborhood</div>
+              <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
+                <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '5px' }}>Neighborhood</div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                  <i className="fas fa-city" style={{ fontSize: isMobile ? '11px' : '9px', color: 'var(--text-tertiary)', flexShrink: 0, marginTop: isMobile ? '5px' : '4px' }}></i>
                   <div style={{ color: 'var(--text-primary)', fontWeight: '500' }}>{school.neighborhood}</div>
                 </div>
               </div>
             )}
 
             {school.address && (
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                <div style={{ fontSize: '13px' }}>
-                  <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '2px' }}>Address</div>
+              <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
+                <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '5px' }}>Address</div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                  <MapPinIcon width={isMobile ? 11 : 9} height={isMobile ? 15 : 13} style={{ flexShrink: 0, color: 'var(--text-tertiary)', marginTop: isMobile ? '4px' : '3px' }} />
                   <a
                     href="#"
                     onClick={(e) => handleMapLinkClick(e, school.address!, school.coordinates)}
-                    style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500', display: 'block', marginTop: '1px' }}
+                    style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500', display: 'block' }}
                   >
                     {school.address}
                   </a>
@@ -195,6 +197,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         {(school.schoolPageLink || school.driveLink) && (
           <div style={{ 
             display: 'flex', 
+            justifyContent: 'space-between',
             gap: '1rem', 
             marginTop: '1.25rem',
             paddingTop: '1rem',
@@ -216,7 +219,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
                 href={school.driveLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', marginLeft: 'auto' }}
               >
                 <i className="fas fa-folder-open"></i>
                 <span>Files</span>

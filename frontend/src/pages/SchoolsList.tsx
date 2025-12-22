@@ -429,7 +429,7 @@ export function SchoolsList() {
                         }
                       }}
                     >
-                      <div style={{ fontWeight: '600', fontSize: '16px', color: '#333', marginBottom: '0.25rem' }}>
+                      <div style={{ fontWeight: '600', fontSize: '18px', color: '#333', marginBottom: '0.25rem' }}>
                         {school.name}
                       </div>
                       <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.25rem', fontWeight: '500' }}>

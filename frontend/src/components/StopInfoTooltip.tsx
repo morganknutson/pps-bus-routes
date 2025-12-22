@@ -4,6 +4,7 @@ import { formatStreetName, extractStreetNames } from '../utils/formatAddress';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatEffectiveDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { MapPinIcon } from './MapPinIcon';
 
 interface StopInfoTooltipProps {
   route: Route;
@@ -51,7 +52,7 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
         color: 'white',
         fontSize: '11px',
         fontWeight: 'bold',
-        boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(0,0,0,0.08)',
       }}>
         {number}
       </div>
@@ -116,13 +117,13 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'flex-start', 
-        padding: isMobile ? '24px 2rem 12px 2rem' : '12px 16px',
+        padding: isMobile ? '8px 2rem 12px 2rem' : '12px 16px',
         borderBottom: '1px solid var(--border-color)',
         backgroundColor: 'var(--bg-secondary)',
         position: 'relative',
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ fontWeight: '700', fontSize: '15px' }}>
+          <span style={{ fontWeight: '600', fontSize: isMobile ? '26px' : '18px' }}>
             Route {route.name.replace('-upcoming', '')}
             {route.name.includes('-upcoming') && route.effectiveDate && (
               <span style={{ 
@@ -138,7 +139,9 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             )}
           </span>
           {stopNumber > 0 && (
-            <StopPill number={stopNumber} time={stop.time} color={route.color} />
+            <div style={{ marginBottom: isMobile ? '14px' : '0px' }}>
+              <StopPill number={stopNumber} time={stop.time} color={route.color} />
+            </div>
           )}
         </div>
         <button
@@ -173,10 +176,12 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         {/* Details Grid */}
         <div style={{ display: 'grid', gap: '1rem' }}>
           {/* Address & Neighborhood */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <div style={{ fontSize: '13px' }}>
-              <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '2px' }}>Address</div>
-              <div style={{ color: 'var(--text-primary)', fontWeight: '500', lineHeight: '1.4' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
+              <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '5px' }}>Address</div>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                <MapPinIcon width={isMobile ? 11 : 9} height={isMobile ? 15 : 13} style={{ flexShrink: 0, color: 'var(--text-tertiary)', marginTop: isMobile ? '4px' : '3px' }} />
+                <div style={{ color: 'var(--text-primary)', fontWeight: '500', lineHeight: '1.4' }}>
                 {stop.isSchoolStop && stop.schoolName ? (
                   stop.schoolName
                 ) : enableStreetHighlighting && streets.length > 0 ? (
@@ -208,13 +213,17 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                 ) : (
                   formattedAddress
                 )}
+                </div>
               </div>
             </div>
 
             {stop.neighborhood && (
-              <div style={{ fontSize: '13px' }}>
-                <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '2px' }}>Neighborhood</div>
-                <div style={{ color: 'var(--text-primary)', fontWeight: '500' }}>{stop.neighborhood}</div>
+              <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
+                <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '5px' }}>Neighborhood</div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                  <i className="fas fa-city" style={{ fontSize: isMobile ? '11px' : '9px', color: 'var(--text-tertiary)', flexShrink: 0, marginTop: isMobile ? '5px' : '4px' }}></i>
+                  <div style={{ color: 'var(--text-primary)', fontWeight: '500' }}>{stop.neighborhood}</div>
+                </div>
               </div>
             )}
 
