@@ -137,10 +137,10 @@ export function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle Schoo
       case 'High School':
         return '#FF9800'; // Orange
       default:
-        return '#4ECDC4'; // Default teal
+        return '#FFFFFF'; // Default teal
     }
   }
-  return '#4ECDC4'; // Default teal
+  return '#FFFFFF'; // Default teal
 }
 
 export function createSchoolIcon(color: string): L.DivIcon {

@@ -45,7 +45,7 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
       <div style={{
         width: '20px',
         height: '20px',
-        backgroundColor: color || '#4ECDC4', // Fallback to brand color if route color is missing
+        backgroundColor: color || '#FFFFFF', // Fallback to brand color if route color is missing
         borderRadius: '50%',
         display: 'flex',
         alignItems: 'center',
@@ -313,7 +313,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
           <div style={{ 
             fontSize: '11px', 
             fontWeight: '700', 
-            color: '#4ECDC4', 
+            color: '#FFFFFF', 
             textTransform: 'uppercase', 
             letterSpacing: '0.08em',
             marginBottom: '4px'
@@ -327,7 +327,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
               disabled={loadingStreetPins}
               style={{
                 width: '100%',
-                background: loadingStreetPins ? 'var(--bg-tertiary)' : '#4ECDC4',
+                background: loadingStreetPins ? 'var(--bg-tertiary)' : '#FFFFFF',
                 border: 'none',
                 fontSize: '13px',
                 cursor: loadingStreetPins ? 'not-allowed' : 'pointer',

@@ -13,6 +13,7 @@ import { SEO } from '../components/SEO';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { MapPinIcon } from '../components/MapPinIcon';
 import { Footer } from '../components/Footer';
+import { WhoSection } from '../components/WhoSection';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
 
 interface AutocompleteSuggestion {
@@ -947,6 +948,8 @@ export function HomePage() {
               </div>
             ))}
           </div>
+
+          <WhoSection style={{ marginTop: '6rem' }} />
         </div>
       </div>
 

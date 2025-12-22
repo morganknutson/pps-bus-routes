@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 interface SchoolTypeFilters {
   elementary: boolean;
   middle: boolean;
   high: boolean;
   hybrid: boolean;
+  noRoutes: boolean;
 }
 
 interface SchoolTypeFilterProps {
@@ -12,147 +13,278 @@ interface SchoolTypeFilterProps {
   onChange: (filters: SchoolTypeFilters) => void;
 }
 
+const FILTER_COLORS = {
+  elementary: '#2196F3',
+  middle: '#4CAF50',
+  high: '#FF9800',
+  hybrid: '#9C27B0',
+  noRoutes: '#f44'
+};
+
 export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
-    console.log('[SchoolTypeFilter] Component mounted');
-    console.log('[SchoolTypeFilter] Initial filters:', filters);
-    console.log('[SchoolTypeFilter] onChange function:', typeof onChange === 'function' ? 'is function' : 'NOT A FUNCTION');
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        popoverRef.current &&
+        !popoverRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
-  
-  useEffect(() => {
-    console.log('[SchoolTypeFilter] Filters changed:', filters);
-  }, [filters]);
-  
-  console.log('[SchoolTypeFilter] Rendering with filters:', filters);
-  
-  const handleElementaryClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('[SchoolTypeFilter] Elementary clicked, current value:', filters.elementary);
-    const newFilters = { ...filters, elementary: !filters.elementary };
-    console.log('[SchoolTypeFilter] Calling onChange with:', newFilters);
-    onChange(newFilters);
+
+  const handleFilterChange = (key: keyof SchoolTypeFilters) => {
+    onChange({ ...filters, [key]: !filters[key] });
   };
   
-  const handleMiddleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('[SchoolTypeFilter] Middle clicked');
-    onChange({ ...filters, middle: !filters.middle });
-  };
-  
-  const handleHighClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('[SchoolTypeFilter] High clicked');
-    onChange({ ...filters, high: !filters.high });
-  };
-  
+  const activeFilterCount = Object.values(filters).filter(Boolean).length;
+  const isAllSelected = activeFilterCount === 5;
+
+  const CustomCheckbox = ({ checked, color, size = 18 }: { checked: boolean; color: string; size?: number }) => (
+    <div
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        borderRadius: '50%',
+        border: `2px solid ${checked ? color : 'var(--text-tertiary)'}`,
+        backgroundColor: checked ? color : 'transparent',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+        transition: 'all 0.2s ease',
+      }}
+    >
+      {checked && (
+        <i className="fas fa-check" style={{ fontSize: `${size * 0.55}px`, color: 'white' }}></i>
+      )}
+    </div>
+  );
+
   return (
-    <div style={{ padding: '1rem 2rem', backgroundColor: 'var(--bg-secondary)' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-        <label 
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '12px', userSelect: 'none' }}
-          onClick={handleElementaryClick}
-          onMouseDown={() => {
-            console.log('[SchoolTypeFilter] Elementary mousedown');
+    <div style={{ padding: '0.75rem 1rem', borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--bg-route-list)' }}>
+      <div style={{ position: 'relative', width: '100%' }}>
+        <button
+          ref={buttonRef}
+          onClick={() => setIsOpen(!isOpen)}
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'stretch',
+            padding: 0,
+            backgroundColor: 'var(--bg-tertiary)',
+            color: 'var(--text-primary)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '12px',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+            height: '44px',
+            boxSizing: 'border-box',
+            boxShadow: '0 1px 3px var(--shadow-large)',
+            transition: 'background-color 0.2s, border-color 0.2s',
+            overflow: 'hidden',
           }}
-          onMouseUp={() => {
-            console.log('[SchoolTypeFilter] Elementary mouseup');
-          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
         >
-          <input
-            type="checkbox"
-            checked={filters.elementary}
-            onChange={(e) => {
-              console.log('[SchoolTypeFilter] Input onChange triggered for elementary:', e.target.checked);
-              onChange({ ...filters, elementary: e.target.checked });
-            }}
-            style={{ display: 'none' }}
-          />
-          <div
-            style={{
-              width: '16px',
-              height: '16px',
-              borderRadius: '50%',
-              border: '2px solid #2196F3',
-              backgroundColor: filters.elementary ? '#2196F3' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            {filters.elementary && (
-              <i className="fas fa-check" style={{ fontSize: '8px', color: 'white', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}></i>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.75rem', 
+            padding: '0 1rem', 
+            flex: 1,
+            minWidth: 0 
+          }}>
+            <span style={{ color: 'var(--text-primary)', fontSize: '13px' }}>Filters</span>
+            {!isAllSelected && (
+              <span style={{
+                color: 'var(--text-tertiary)',
+                fontSize: '12px',
+                fontWeight: '400',
+                marginLeft: 'auto'
+              }}>
+                {activeFilterCount} active
+              </span>
             )}
           </div>
-          <span>Elementary</span>
-        </label>
-        <label 
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '12px', userSelect: 'none' }}
-          onClick={handleMiddleClick}
-        >
-          <input
-            type="checkbox"
-            checked={filters.middle}
-            onChange={(e) => {
-              console.log('[SchoolTypeFilter] Input onChange triggered for middle:', e.target.checked);
-              onChange({ ...filters, middle: e.target.checked });
-            }}
-            style={{ display: 'none' }}
-          />
+          <div style={{
+            width: '44px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderLeft: '1px solid var(--border-color)',
+            color: 'var(--text-tertiary)',
+          }}>
+            <i 
+              className="fas fa-chevron-down" 
+              style={{ 
+                fontSize: '12px',
+                transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
+                transition: 'transform 0.2s',
+              }}
+            ></i>
+          </div>
+        </button>
+
+        {isOpen && (
           <div
+            ref={popoverRef}
             style={{
-              width: '16px',
-              height: '16px',
-              borderRadius: '50%',
-              border: '2px solid #4CAF50',
-              backgroundColor: filters.middle ? '#4CAF50' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
+              position: 'absolute',
+              bottom: 'calc(100% + 8px)',
+              left: 0,
+              right: 0,
+              backgroundColor: 'var(--bg-primary)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '12px',
+              boxShadow: '0 4px 20px var(--shadow-large)',
+              padding: '0.5rem',
+              zIndex: 1000,
             }}
           >
-            {filters.middle && (
-              <i className="fas fa-check" style={{ fontSize: '8px', color: 'white', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}></i>
-            )}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+              <label 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.75rem', 
+                  cursor: 'pointer', 
+                  fontSize: '14px', 
+                  padding: '0.75rem',
+                  borderRadius: '8px',
+                  userSelect: 'none',
+                  color: 'var(--text-primary)',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <input
+                  type="checkbox"
+                  checked={filters.elementary}
+                  onChange={() => handleFilterChange('elementary')}
+                  style={{ display: 'none' }}
+                />
+                <CustomCheckbox checked={filters.elementary} color={FILTER_COLORS.elementary} />
+                <span style={{ flex: 1 }}>Elementary Schools</span>
+              </label>
+
+              <label 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.75rem', 
+                  cursor: 'pointer', 
+                  fontSize: '14px', 
+                  padding: '0.75rem',
+                  borderRadius: '8px',
+                  userSelect: 'none',
+                  color: 'var(--text-primary)',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <input
+                  type="checkbox"
+                  checked={filters.middle}
+                  onChange={() => handleFilterChange('middle')}
+                  style={{ display: 'none' }}
+                />
+                <CustomCheckbox checked={filters.middle} color={FILTER_COLORS.middle} />
+                <span style={{ flex: 1 }}>Middle Schools</span>
+              </label>
+
+              <label 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.75rem', 
+                  cursor: 'pointer', 
+                  fontSize: '14px', 
+                  padding: '0.75rem',
+                  borderRadius: '8px',
+                  userSelect: 'none',
+                  color: 'var(--text-primary)',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <input
+                  type="checkbox"
+                  checked={filters.high}
+                  onChange={() => handleFilterChange('high')}
+                  style={{ display: 'none' }}
+                />
+                <CustomCheckbox checked={filters.high} color={FILTER_COLORS.high} />
+                <span style={{ flex: 1 }}>High Schools</span>
+              </label>
+              
+              <label 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.75rem', 
+                  cursor: 'pointer', 
+                  fontSize: '14px', 
+                  padding: '0.75rem',
+                  borderRadius: '8px',
+                  userSelect: 'none',
+                  color: 'var(--text-primary)',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <input
+                  type="checkbox"
+                  checked={filters.hybrid}
+                  onChange={() => handleFilterChange('hybrid')}
+                  style={{ display: 'none' }}
+                />
+                <CustomCheckbox checked={filters.hybrid} color={FILTER_COLORS.hybrid} />
+                <span style={{ flex: 1 }}>Hybrid Schools</span>
+              </label>
+
+              <div style={{ height: '1px', backgroundColor: 'var(--border-color)', margin: '0.25rem 0' }}></div>
+
+              <label 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.75rem', 
+                  cursor: 'pointer', 
+                  fontSize: '14px', 
+                  padding: '0.75rem',
+                  borderRadius: '8px',
+                  userSelect: 'none',
+                  color: 'var(--text-primary)',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <input
+                  type="checkbox"
+                  checked={filters.noRoutes}
+                  onChange={() => handleFilterChange('noRoutes')}
+                  style={{ display: 'none' }}
+                />
+                <CustomCheckbox checked={filters.noRoutes} color={FILTER_COLORS.noRoutes} />
+                <span style={{ flex: 1 }}>School without route data</span>
+                <i className="fas fa-exclamation-circle" style={{ color: '#f44', fontSize: '12px' }}></i>
+              </label>
+            </div>
           </div>
-          <span>Middle</span>
-        </label>
-        <label 
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '12px', userSelect: 'none' }}
-          onClick={handleHighClick}
-        >
-          <input
-            type="checkbox"
-            checked={filters.high}
-            onChange={(e) => {
-              console.log('[SchoolTypeFilter] Input onChange triggered for high:', e.target.checked);
-              onChange({ ...filters, high: e.target.checked });
-            }}
-            style={{ display: 'none' }}
-          />
-          <div
-            style={{
-              width: '16px',
-              height: '16px',
-              borderRadius: '50%',
-              border: '2px solid #FF9800',
-              backgroundColor: filters.high ? '#FF9800' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            {filters.high && (
-              <i className="fas fa-check" style={{ fontSize: '8px', color: 'white', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}></i>
-            )}
-          </div>
-          <span>High</span>
-        </label>
+        )}
       </div>
     </div>
   );

@@ -141,7 +141,7 @@ export function Sidebar({
               width: '6px',
               cursor: 'col-resize',
               zIndex: 10,
-              backgroundColor: isResizing ? 'var(--accent-primary, #4ECDC4)' : 'transparent',
+              backgroundColor: isResizing ? 'var(--accent-primary, #FFFFFF)' : 'transparent',
               transition: 'background-color 0.2s ease',
             }}
             onMouseEnter={(e) => {

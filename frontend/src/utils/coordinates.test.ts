@@ -14,10 +14,8 @@ describe('Coordinate Utilities', () => {
     });
 
     it('throws error for invalid input', () => {
-      // @ts-ignore
-      expect(() => toLeafletPosition(null)).toThrow();
-      // @ts-ignore
-      expect(() => toLeafletPosition([1])).toThrow();
+      expect(() => toLeafletPosition(null as any)).toThrow();
+      expect(() => toLeafletPosition([1] as any)).toThrow();
     });
   });
 

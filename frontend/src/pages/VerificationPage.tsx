@@ -1424,7 +1424,7 @@ export function VerificationPage() {
             disabled={fetchingAll}
             style={{
               padding: isMobile ? '0.5rem 1rem' : '0.75rem 1.5rem',
-              backgroundColor: fetchingAll ? 'var(--bg-secondary)' : '#4ECDC4',
+              backgroundColor: fetchingAll ? 'var(--bg-secondary)' : '#FFFFFF',
               color: fetchingAll ? 'var(--text-secondary)' : 'white',
               border: 'none',
               borderRadius: '999px',
@@ -1448,7 +1448,7 @@ export function VerificationPage() {
             }}
             onMouseLeave={(e) => {
               if (!fetchingAll) {
-                e.currentTarget.style.backgroundColor = '#4ECDC4';
+                e.currentTarget.style.backgroundColor = '#FFFFFF';
                 e.currentTarget.style.transform = 'translateY(0)';
               }
             }}
@@ -1649,13 +1649,13 @@ export function VerificationPage() {
           padding: isMobile ? '0.75rem' : '1rem 1.25rem',
           backgroundColor: 'var(--bg-secondary)',
           borderRadius: '8px',
-          border: '1px solid #4ECDC4',
+          border: '1px solid #FFFFFF',
           boxShadow: '0 2px 8px rgba(78, 205, 196, 0.15)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: isMobile ? '0.75rem' : '1rem', flexDirection: isMobile ? 'column' : 'row' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '0.5rem' : '1rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <i className="fas fa-tasks" style={{ color: '#4ECDC4', fontSize: isMobile ? '1rem' : '1.1rem' }}></i>
+                <i className="fas fa-tasks" style={{ color: '#FFFFFF', fontSize: isMobile ? '1rem' : '1.1rem' }}></i>
                 <span style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: isMobile ? '0.85rem' : '0.95rem' }}>
                   Job Queue
                 </span>
@@ -1677,7 +1677,7 @@ export function VerificationPage() {
                   {jobQueueStats.active > 0 && (
                     <span style={{ 
                       backgroundColor: 'rgba(78, 205, 196, 0.15)', 
-                      color: '#4ECDC4',
+                      color: '#FFFFFF',
                       padding: isMobile ? '0.2rem 0.5rem' : '0.25rem 0.6rem',
                       borderRadius: '12px',
                       fontWeight: '600',
@@ -1714,7 +1714,7 @@ export function VerificationPage() {
                     flexWrap: isMobile ? 'wrap' : 'nowrap',
                   }}>
                     <i className={`fas ${isActive ? 'fa-sync fa-spin' : 'fa-clock'}`} 
-                       style={{ color: isActive ? (isDriveCheck ? '#9B59B6' : '#4ECDC4') : '#ffa500', width: isMobile ? '14px' : '16px' }}></i>
+                       style={{ color: isActive ? (isDriveCheck ? '#9B59B6' : '#FFFFFF') : '#ffa500', width: isMobile ? '14px' : '16px' }}></i>
                     <span style={{ 
                       fontWeight: '500', 
                       color: 'var(--text-primary)',
@@ -1750,7 +1750,7 @@ export function VerificationPage() {
                           <div style={{
                             width: `${progress}%`,
                             height: '100%',
-                            backgroundColor: '#4ECDC4',
+                            backgroundColor: '#FFFFFF',
                             borderRadius: '3px',
                             transition: 'width 0.3s ease',
                           }}></div>
@@ -1859,7 +1859,7 @@ export function VerificationPage() {
                 marginBottom: '1rem',
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
-                  <i className="fas fa-spinner fa-spin" style={{ color: '#4ECDC4' }}></i>
+                  <i className="fas fa-spinner fa-spin" style={{ color: '#FFFFFF' }}></i>
                   <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>
                     {fixAllStatus.phase === 'fetching' && 'Queuing fetch jobs...'}
                     {fixAllStatus.phase === 'waiting-fetch' && 'Fetching PDFs from Drive...'}
@@ -1951,7 +1951,7 @@ export function VerificationPage() {
                             disabled={fetching[result.schoolId] || isJobActive}
                             style={{
                               padding: '0.5rem',
-                              backgroundColor: (fetching[result.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#4ECDC4',
+                              backgroundColor: (fetching[result.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#FFFFFF',
                               color: (fetching[result.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
                               border: 'none',
                               borderRadius: '999px',
@@ -1974,7 +1974,7 @@ export function VerificationPage() {
                           {fetchMsg && (
                             <div style={{ 
                               fontSize: '9px', 
-                              color: fetchMsg.type === 'error' ? '#f44' : fetchMsg.type === 'success' ? '#4ECDC4' : 'var(--text-secondary)',
+                              color: fetchMsg.type === 'error' ? '#f44' : fetchMsg.type === 'success' ? '#FFFFFF' : 'var(--text-secondary)',
                               marginTop: '0.5rem',
                             }}>
                               {fetchMsg.type === 'success' && '✓ '}
@@ -2049,7 +2049,7 @@ export function VerificationPage() {
                                   disabled={fetching[result.schoolId] || isJobActive}
                                   style={{
                                     padding: '0.35rem 0.75rem',
-                                    backgroundColor: (fetching[result.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#4ECDC4',
+                                    backgroundColor: (fetching[result.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#FFFFFF',
                                     color: (fetching[result.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
                                     border: 'none',
                                     borderRadius: '999px',
@@ -2068,7 +2068,7 @@ export function VerificationPage() {
                                 {fetchMsg && (
                                   <span style={{ 
                                     fontSize: '9px', 
-                                    color: fetchMsg.type === 'error' ? '#f44' : fetchMsg.type === 'success' ? '#4ECDC4' : 'var(--text-secondary)',
+                                    color: fetchMsg.type === 'error' ? '#f44' : fetchMsg.type === 'success' ? '#FFFFFF' : 'var(--text-secondary)',
                                   }}>
                                     {fetchMsg.type === 'success' && '✓ '}
                                     {fetchMsg.type === 'error' && '✗ '}
@@ -2103,7 +2103,7 @@ export function VerificationPage() {
           <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px' }}>Total Schools</div>
         </div>
         <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
+          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#FFFFFF', marginBottom: '0.5rem' }}>
             {pdfStatus.summary.schoolsWithPdfs}
           </div>
           <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
@@ -2112,7 +2112,7 @@ export function VerificationPage() {
           </div>
         </div>
         <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
+          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#FFFFFF', marginBottom: '0.5rem' }}>
             {pdfStatus.summary.totalPdfs}
           </div>
           <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
@@ -2121,7 +2121,7 @@ export function VerificationPage() {
           </div>
         </div>
         <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
+          <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#FFFFFF', marginBottom: '0.5rem' }}>
             {Object.values(processingStatus).filter(status => {
               if (typeof status === 'object' && status !== null) {
                 return status.hasProcessed === true;
@@ -2306,7 +2306,7 @@ export function VerificationPage() {
                       <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                         <div>
                           {school.hasPdfs ? (
-                            <span style={{ fontWeight: 'bold', color: '#4ECDC4', fontSize: '18px' }}>
+                            <span style={{ fontWeight: 'bold', color: '#FFFFFF', fontSize: '18px' }}>
                               {school.pdfCount}
                             </span>
                           ) : (
@@ -2323,7 +2323,7 @@ export function VerificationPage() {
                         <div>
                           {pdfFetchInfo[school.schoolId]?.driveHasPdfs !== undefined ? (
                             pdfFetchInfo[school.schoolId].driveHasPdfs ? (
-                              <span style={{ fontWeight: 'bold', color: '#4ECDC4', fontSize: '18px' }}>
+                              <span style={{ fontWeight: 'bold', color: '#FFFFFF', fontSize: '18px' }}>
                                 {pdfFetchInfo[school.schoolId].drivePdfCount || '?'}
                               </span>
                             ) : (
@@ -2372,7 +2372,7 @@ export function VerificationPage() {
                       
                       if (fullyMatches) {
                         return (
-                          <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '12px' }} title="Dates match"></i>
+                          <i className="fas fa-check-circle" style={{ color: '#FFFFFF', fontSize: '12px' }} title="Dates match"></i>
                         );
                       } else if (hasCountMismatch) {
                         return (
@@ -2404,7 +2404,7 @@ export function VerificationPage() {
                           {hasProcessed ? (
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
                               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <i className="fas fa-check-circle" style={{ color: '#4ECDC4', fontSize: '12px' }}></i>
+                                <i className="fas fa-check-circle" style={{ color: '#FFFFFF', fontSize: '12px' }}></i>
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -2414,7 +2414,7 @@ export function VerificationPage() {
                                   style={{
                                     background: 'none',
                                     border: 'none',
-                                    color: (processing[school.schoolId] || isProcessJobActive) ? 'var(--text-secondary)' : '#4ECDC4',
+                                    color: (processing[school.schoolId] || isProcessJobActive) ? 'var(--text-secondary)' : '#FFFFFF',
                                     cursor: (processing[school.schoolId] || isProcessJobActive) ? 'not-allowed' : 'pointer',
                                     padding: '0.25rem',
                                     display: 'inline-flex',
@@ -2432,7 +2432,7 @@ export function VerificationPage() {
                                   }}
                                   onMouseLeave={(e) => {
                                     if (!processing[school.schoolId] && !isProcessJobActive) {
-                                      e.currentTarget.style.color = '#4ECDC4';
+                                      e.currentTarget.style.color = '#FFFFFF';
                                       e.currentTarget.style.transform = 'rotate(0deg)';
                                     }
                                   }}
@@ -2498,7 +2498,7 @@ export function VerificationPage() {
                               color: processMsg?.type === 'error' || (jobStatus?.name === 'pdf-process' && jobStatus?.status === 'failed')
                                 ? '#f44' 
                                 : processMsg?.type === 'success' || (jobStatus?.name === 'pdf-process' && jobStatus?.status === 'completed')
-                                  ? '#4ECDC4'
+                                  ? '#FFFFFF'
                                   : 'var(--text-secondary)',
                               maxWidth: '120px',
                             }}>
@@ -2543,7 +2543,7 @@ export function VerificationPage() {
                             disabled={fetching[school.schoolId] || isJobActive}
                             style={{
                               padding: '0.5rem 1rem',
-                              backgroundColor: (fetching[school.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#4ECDC4',
+                              backgroundColor: (fetching[school.schoolId] || isJobActive) ? 'var(--bg-secondary)' : '#FFFFFF',
                               color: (fetching[school.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
                               border: 'none',
                               borderRadius: '999px',
@@ -2577,7 +2577,7 @@ export function VerificationPage() {
                               color: fetchMsg?.type === 'error' || jobStatus?.status === 'failed' 
                                 ? '#f44' 
                                 : fetchMsg?.type === 'success' || jobStatus?.status === 'completed'
-                                  ? '#4ECDC4'
+                                  ? '#FFFFFF'
                                   : 'var(--text-secondary)',
                               maxWidth: '120px',
                             }}>
@@ -2611,7 +2611,7 @@ export function VerificationPage() {
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
                           style={{
-                            color: '#4ECDC4',
+                            color: '#FFFFFF',
                             textDecoration: 'none',
                             fontSize: '18px',
                             display: 'inline-block',
@@ -2728,11 +2728,11 @@ export function VerificationPage() {
                                 console.log(`[VerificationPage] Looking for route for PDF "${file}":`, route ? 'FOUND' : 'NOT FOUND', route ? `(${route.name || route.id})` : '');
                                 
                                 let statusIcon = null;
-                                let statusColor = '#4ECDC4';
+                                let statusColor = '#FFFFFF';
                                 
                                 if (isProcessing) {
-                                  statusIcon = <i className="fas fa-spinner fa-spin" style={{ marginLeft: '0.5rem', color: '#4ECDC4' }}></i>;
-                                  statusColor = '#4ECDC4';
+                                  statusIcon = <i className="fas fa-spinner fa-spin" style={{ marginLeft: '0.5rem', color: '#FFFFFF' }}></i>;
+                                  statusColor = '#FFFFFF';
                                 } else if (isSuccess) {
                                   statusIcon = <i className="fas fa-check-circle" style={{ marginLeft: '0.5rem', color: '#4CAF50' }}></i>;
                                   statusColor = '#4CAF50';
@@ -2843,7 +2843,7 @@ export function VerificationPage() {
                                                             fontSize: '9px', 
                                                             padding: '0.2rem 0.4rem', 
                                                             backgroundColor: 'rgba(78, 205, 196, 0.2)', 
-                                                            color: '#4ECDC4',
+                                                            color: '#FFFFFF',
                                                             borderRadius: '3px',
                                                             fontWeight: 'bold'
                                                           }}>
@@ -3035,7 +3035,7 @@ export function VerificationPage() {
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                       <span style={{ fontWeight: '600' }}>Local PDFs</span>{' '}
                       {school.hasPdfs ? (
-                        <span style={{ color: '#4ECDC4', fontWeight: 'bold' }}>{school.pdfCount}</span>
+                        <span style={{ color: '#FFFFFF', fontWeight: 'bold' }}>{school.pdfCount}</span>
                       ) : (
                         <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
                       )}
@@ -3063,7 +3063,7 @@ export function VerificationPage() {
                       <span style={{ fontWeight: '600' }}>Drive PDFs</span>{' '}
                       {pdfFetchInfo[school.schoolId]?.driveHasPdfs !== undefined ? (
                         pdfFetchInfo[school.schoolId].driveHasPdfs ? (
-                          <span style={{ color: '#4ECDC4', fontWeight: 'bold' }}>
+                          <span style={{ color: '#FFFFFF', fontWeight: 'bold' }}>
                             {pdfFetchInfo[school.schoolId].drivePdfCount || '?'}
                           </span>
                         ) : (
@@ -3096,7 +3096,7 @@ export function VerificationPage() {
                       <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
                         <span style={{ fontWeight: '600' }}>Match Status</span>{' '}
                         {fullyMatches ? (
-                          <span style={{ color: '#4ECDC4' }}>
+                          <span style={{ color: '#FFFFFF' }}>
                             <i className="fas fa-check-circle"></i> Matched
                           </span>
                         ) : hasCountMismatch ? (
@@ -3126,7 +3126,7 @@ export function VerificationPage() {
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                       <span style={{ fontWeight: '600' }}>Processed</span>{' '}
                       {hasProcessed ? (
-                        <span style={{ color: '#4ECDC4' }}>
+                        <span style={{ color: '#FFFFFF' }}>
                           <i className="fas fa-check-circle"></i> Yes
                         </span>
                       ) : (
@@ -3152,7 +3152,7 @@ export function VerificationPage() {
                       disabled={fetching[school.schoolId] || isJobActive}
                       style={{
                         padding: '0.5rem',
-                        backgroundColor: (fetching[school.schoolId] || isJobActive) ? 'var(--bg-primary)' : '#4ECDC4',
+                        backgroundColor: (fetching[school.schoolId] || isJobActive) ? 'var(--bg-primary)' : '#FFFFFF',
                         color: (fetching[school.schoolId] || isJobActive) ? 'var(--text-secondary)' : 'white',
                         border: 'none',
                         borderRadius: '999px',

@@ -132,6 +132,7 @@ export function SchoolsList() {
     middle: true,
     high: true,
     hybrid: true,
+    noRoutes: true,
   });
   const [updatingAddress, setUpdatingAddress] = useState(false);
   
@@ -219,6 +220,12 @@ export function SchoolsList() {
       // School type filter
       const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
       const isHybrid = schoolTypes.includes('Hybrid');
+      const hasNoRoutes = school.routeCount === 0;
+
+      // "School without route data" filter overrides type filters
+      if (hasNoRoutes) {
+        return schoolTypeFilters.noRoutes;
+      }
       
       // If it's a hybrid school, check hybrid filter
       if (isHybrid) {
@@ -238,7 +245,7 @@ export function SchoolsList() {
       return matchesFilter;
     });
     return filtered;
-  }, [schools, searchTerm, schoolTypeFilters.elementary, schoolTypeFilters.middle, schoolTypeFilters.high, schoolTypeFilters.hybrid]);
+  }, [schools, searchTerm, schoolTypeFilters.elementary, schoolTypeFilters.middle, schoolTypeFilters.high, schoolTypeFilters.hybrid, schoolTypeFilters.noRoutes]);
 
   const allSchoolsWithCoords = schools.filter(s => s.coordinates && s.coordinates.length === 2);
   const schoolsWithCoords = useMemo(() => {
@@ -616,7 +623,7 @@ export function SchoolsList() {
                   }}
                   disabled={updatingAddress}
                   style={{
-                    background: updatingAddress ? '#ccc' : '#4ECDC4',
+                    background: updatingAddress ? '#ccc' : '#FFFFFF',
                     color: 'white',
                     border: 'none',
                     padding: '0.25rem 0.5rem',
@@ -689,7 +696,7 @@ export function SchoolsList() {
                 }}
                 disabled={updatingAddress}
                 style={{
-                  background: updatingAddress ? '#ccc' : '#4ECDC4',
+                  background: updatingAddress ? '#ccc' : '#FFFFFF',
                   color: 'white',
                   border: 'none',
                   padding: '0.5rem 1rem',

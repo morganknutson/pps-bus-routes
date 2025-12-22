@@ -49,9 +49,32 @@ export function ContactPage() {
         padding: '4rem 2rem',
         boxSizing: 'border-box',
       }}>
-        <h1 style={{ fontSize: '32px', marginBottom: '2rem', color: 'var(--text-primary)' }}>Contact Us</h1>
-        <p style={{ lineHeight: '1.6', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-          Have questions or feedback about the bus route maps? We'd love to hear from you.
+        <h1 style={{ 
+          fontSize: 'var(--font-size-h1)', 
+          marginBottom: '2rem', 
+          color: 'var(--text-primary)',
+          fontFamily: 'var(--font-family-heading)',
+          fontWeight: '600'
+        }}>
+          Contact Us
+        </h1>
+        <p style={{ 
+          lineHeight: 'var(--line-height-body)', 
+          color: 'var(--text-secondary)', 
+          marginBottom: '1rem',
+          fontSize: 'var(--font-size-body)',
+          fontFamily: 'var(--font-family-body)'
+        }}>
+          For technical issues with this website or data corrections, please contact the development team.
+        </p>
+        <p style={{ 
+          lineHeight: 'var(--line-height-body)', 
+          color: 'var(--text-secondary)', 
+          marginBottom: '2rem',
+          fontSize: 'var(--font-size-body)',
+          fontFamily: 'var(--font-family-body)'
+        }}>
+          For official questions about your student's bus assignment, please contact PPS Transportation directly:
         </p>
         
         <div style={{
@@ -60,35 +83,44 @@ export function ContactPage() {
           borderRadius: '16px',
           border: '1px solid var(--border-color)',
         }}>
-          <p style={{ marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
-            <strong>Official PPS Transportation:</strong><br />
-            For official questions about your student's bus assignment, please contact PPS Transportation directly:
+          <p style={{ 
+            marginBottom: '1.5rem', 
+            color: 'var(--text-primary)',
+            fontFamily: 'var(--font-family-body)',
+            fontSize: 'var(--font-size-body)'
+          }}>
+            <strong>Official PPS Transportation</strong>
           </p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <ul style={{ 
+            listStyle: 'none', 
+            padding: 0, 
+            margin: 0, 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '1rem',
+            fontFamily: 'var(--font-family-body)',
+            fontSize: 'var(--font-size-body)'
+          }}>
             <li>
-              <i className="fas fa-phone" style={{ marginRight: '0.75rem', color: '#4ECDC4' }}></i>
+              <i className="fas fa-phone" style={{ marginRight: '0.75rem', color: isDarkMode ? '#FFFFFF' : 'var(--text-primary)' }}></i>
               <span style={{ color: 'var(--text-secondary)' }}>503-916-3619</span>
             </li>
             <li>
-              <i className="fas fa-envelope" style={{ marginRight: '0.75rem', color: '#4ECDC4' }}></i>
+              <i className="fas fa-envelope" style={{ marginRight: '0.75rem', color: isDarkMode ? '#FFFFFF' : 'var(--text-primary)' }}></i>
               <span style={{ color: 'var(--text-secondary)' }}>transportation@pps.net</span>
             </li>
             <li>
-              <i className="fas fa-globe" style={{ marginRight: '0.75rem', color: '#4ECDC4' }}></i>
-              <a href="https://www.pps.net/transportation" target="_blank" rel="noopener noreferrer" style={{ color: '#4ECDC4', textDecoration: 'none' }}>
+              <i className="fas fa-globe" style={{ marginRight: '0.75rem', color: isDarkMode ? '#FFFFFF' : 'var(--text-primary)' }}></i>
+              <a href="https://www.pps.net/transportation" target="_blank" rel="noopener noreferrer" style={{ color: isDarkMode ? '#FFFFFF' : 'var(--text-primary)', textDecoration: 'underline' }}>
                 pps.net/transportation
               </a>
             </li>
           </ul>
         </div>
 
-        <p style={{ lineHeight: '1.6', color: 'var(--text-tertiary)', marginTop: '3rem' }}>
-          For technical issues with this website or data corrections, please contact the development team.
-        </p>
       </main>
 
       <Footer />
     </div>
   );
 }
-

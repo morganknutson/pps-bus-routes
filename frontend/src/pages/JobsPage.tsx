@@ -231,7 +231,7 @@ export function JobsPage() {
             <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>🔄 Active</div>
           </div>
           <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#4ECDC4', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#FFFFFF', marginBottom: '0.5rem' }}>
               {stats.completed}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>✅ Completed</div>

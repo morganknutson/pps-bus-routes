@@ -39,7 +39,7 @@ export function ProgressBar({
   progress,
   label,
   height = 8,
-  color = '#4ECDC4',
+  color = '#FFFFFF',
   showPercentage = false,
   containerStyle,
   labelStyle,

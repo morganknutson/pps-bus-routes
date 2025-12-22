@@ -34,7 +34,7 @@ export function JobList({ jobs, onRetry, onCancel, showSchoolName = false, schoo
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return '#4ECDC4';
+        return '#FFFFFF';
       case 'active':
         return '#ffa500';
       case 'failed':
@@ -179,7 +179,7 @@ export function JobList({ jobs, onRetry, onCancel, showSchoolName = false, schoo
                           }}
                           style={{
                             padding: '0.25rem 0.5rem',
-                            backgroundColor: '#4ECDC4',
+                            backgroundColor: '#FFFFFF',
                             color: 'white',
                             border: 'none',
                             borderRadius: '4px',

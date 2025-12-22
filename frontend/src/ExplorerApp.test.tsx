@@ -5,15 +5,16 @@ import { HelmetProvider } from 'react-helmet-async';
 import './test/mocks.tsx';
 import { ExplorerApp } from './App';
 import { useStore } from './store/useStore';
+import { School, Route } from './types';
 
 // Mock API data
-const mockSchools = [
+const mockSchools: School[] = [
   {
     id: 'west-sylvan',
     name: 'West Sylvan',
     address: '1301 SW 25th Ave, Portland, OR 97201',
-    coordinates: [-122.6984, 45.5123] as [number, number],
-    schoolTypes: ['Middle School'] as any,
+    coordinates: [-122.6984, 45.5123],
+    schoolTypes: ['Middle School'],
     schoolPageLink: 'http://example.com',
     driveLink: 'http://example.com/drive',
     createdAt: new Date().toISOString(),
@@ -23,8 +24,8 @@ const mockSchools = [
     id: 'lincoln',
     name: 'Lincoln',
     address: '1600 SW Salmon St, Portland, OR 97205',
-    coordinates: [-122.6841, 45.5231] as [number, number],
-    schoolTypes: ['High School'] as any,
+    coordinates: [-122.6841, 45.5231],
+    schoolTypes: ['High School'],
     schoolPageLink: 'http://example.com',
     driveLink: 'http://example.com/drive',
     createdAt: new Date().toISOString(),
@@ -32,28 +33,49 @@ const mockSchools = [
   }
 ];
 
-const mockRoutes = [
+const mockRoutes: Route[] = [
   {
     id: 'route-101',
     name: '101',
     direction: 'Morning',
+    color: '#FF0000',
+    isSelected: false,
     stops: [
-      { id: 'stop-1', address: '123 Main St', coordinates: [-122.6, 45.5] as [number, number] },
-      { id: 'stop-2', address: '456 Oak St', coordinates: [-122.61, 45.51] as [number, number] }
+      { id: 'stop-1', address: '123 Main St', coordinates: [-122.6, 45.5] },
+      { id: 'stop-2', address: '456 Oak St', coordinates: [-122.61, 45.51] }
     ]
   }
 ];
 
 // Mock fetch
-globalThis.fetch = vi.fn().mockImplementation((url) => {
-  if (url.includes('/api/schools')) {
+globalThis.fetch = vi.fn((url: string | URL | Request) => {
+  const urlString = url.toString();
+  if (urlString.includes('/api/schools')) {
     return Promise.resolve({
       ok: true,
-      json: () => Promise.resolve({ schools: mockSchools })
-    });
+      json: () => Promise.resolve({ schools: mockSchools }),
+      headers: new Headers(),
+      redirected: false,
+      status: 200,
+      statusText: 'OK',
+      type: 'basic',
+      url: urlString,
+      clone: () => ({} as Response),
+      body: null,
+      bodyUsed: false,
+      arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      blob: () => Promise.resolve(new Blob()),
+      formData: () => Promise.resolve(new FormData()),
+      text: () => Promise.resolve(JSON.stringify({ schools: mockSchools })),
+    } as Response);
   }
-  return Promise.resolve({ ok: false });
-});
+  return Promise.resolve({
+    ok: false,
+    status: 404,
+    statusText: 'Not Found',
+    json: () => Promise.resolve({}),
+  } as Response);
+}) as unknown as typeof fetch;
 
 // Mock localRoutes service
 vi.mock('./services/localRoutes', () => ({
@@ -62,9 +84,10 @@ vi.mock('./services/localRoutes', () => ({
       id: 'route-101',
       name: '101',
       direction: 'Morning',
+      color: '#FF0000',
       isSelected: false,
       stops: [
-        { id: 'stop-1', address: '123 Main St', coordinates: [-122.6, 45.5] as [number, number] }
+        { id: 'stop-1', address: '123 Main St', coordinates: [-122.6, 45.5] }
       ]
     }
   ])

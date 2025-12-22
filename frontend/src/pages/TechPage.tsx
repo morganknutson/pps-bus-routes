@@ -184,7 +184,7 @@ const exampleRoute: Route = {
       direction: 'NE',
     },
   ],
-  color: '#4ECDC4',
+  color: '#FFFFFF',
   isSelected: true,
   geocodingProgress: {
     total: 2,
@@ -493,7 +493,7 @@ export function TechPage() {
                 padding: '20px', 
                 borderRadius: '12px', 
                 marginBottom: '20px',
-                border: '2px solid #4ECDC4',
+                border: '2px solid #FFFFFF',
                 boxShadow: '0 4px 12px rgba(78, 205, 196, 0.15)',
                 scrollMarginTop: '80px',
               }}>
@@ -503,7 +503,7 @@ export function TechPage() {
                   gap: '10px', 
                   marginBottom: '15px' 
                 }}>
-                  <span style={{ fontSize: '20px', color: '#4ECDC4' }}>⭐</span>
+                  <span style={{ fontSize: '20px', color: '#FFFFFF' }}>⭐</span>
                   <strong style={{ color: 'var(--text-primary)', fontSize: '18px' }}>
                     Step-by-Step Processing Flow
                   </strong>
@@ -2299,7 +2299,7 @@ export function TechPage() {
         "time": "8:36 am"
       }
     ],
-    "color": "#4ECDC4",
+    "color": "#FFFFFF",
     "isSelected": true,
     "geocodingProgress": {
       "total": 15,

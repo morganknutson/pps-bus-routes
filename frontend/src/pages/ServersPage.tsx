@@ -268,7 +268,7 @@ export function ServersPage() {
   const getStatusColor = (status: ServerStatus['status']) => {
     switch (status) {
       case 'online':
-        return '#4ECDC4';
+        return '#FFFFFF';
       case 'offline':
         return '#FF6B6B';
       case 'checking':
@@ -631,7 +631,7 @@ export function ServersPage() {
             fontSize: '16px',
             fontWeight: '600',
             color: 'white',
-            backgroundColor: backendStatus.status === 'checking' ? '#999' : '#4ECDC4',
+            backgroundColor: backendStatus.status === 'checking' ? '#999' : '#FFFFFF',
             border: 'none',
             borderRadius: '8px',
             cursor: backendStatus.status === 'checking' ? 'not-allowed' : 'pointer',
@@ -648,7 +648,7 @@ export function ServersPage() {
           }}
           onMouseLeave={(e) => {
             if (backendStatus.status !== 'checking') {
-              e.currentTarget.style.backgroundColor = '#4ECDC4';
+              e.currentTarget.style.backgroundColor = '#FFFFFF';
             }
           }}
         >

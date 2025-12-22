@@ -256,7 +256,7 @@ export function RouteListBase({
             style={{
               width: '24px',
               height: '24px',
-              border: '3px solid #4ECDC4',
+              border: '3px solid #FFFFFF',
               borderTopColor: 'transparent',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite',

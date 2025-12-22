@@ -100,7 +100,7 @@ export function DriveLinkInput() {
           disabled={isLoading || !link}
           style={{
             padding: '0.5rem 1rem',
-            backgroundColor: '#4ECDC4',
+            backgroundColor: '#FFFFFF',
             color: 'white',
             border: 'none',
             borderRadius: '4px',

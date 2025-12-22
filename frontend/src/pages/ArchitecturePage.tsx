@@ -417,7 +417,7 @@ export function ArchitecturePage() {
 
   const getFileColor = (type: FileNode['type']) => {
     switch (type) {
-      case 'page': return '#4ECDC4';
+      case 'page': return '#FFFFFF';
       case 'component': return '#95E1D3';
       case 'service': return '#F38181';
       case 'hook': return '#AA96DA';

@@ -330,7 +330,7 @@ export function DataPage() {
             border: '1px solid var(--border-color)',
           }}>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Schools with PDFs</div>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#4ECDC4' }}>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FFFFFF' }}>
               {pdfStatus.summary.schoolsWithPdfs || 0}
             </div>
           </div>
@@ -352,7 +352,7 @@ export function DataPage() {
             border: '1px solid var(--border-color)',
           }}>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Schools Processed</div>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#4ECDC4' }}>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FFFFFF' }}>
               {pdfStatus.summary.schoolsProcessed ?? (() => {
                 // Calculate from processingStatus if not in summary
                 if (Object.keys(processingStatus).length > 0) {
@@ -385,7 +385,17 @@ export function DataPage() {
               <tbody>
                 {pdfStatus.schools.map((school: any, index: number) => {
                   const isExpanded = expandedRows[school.schoolId];
-                  const localModified = pdfFetchInfo[school.schoolId]?.localLastModified;
+                  const fetchInfo = pdfFetchInfo[school.schoolId];
+                  const lastSyncCheck = fetchInfo?.lastChecked;
+                  const lastDriveCheck = fetchInfo?.driveLastChecked;
+                  
+                  // Determine the most recent check time
+                  let mostRecentCheck = null;
+                  if (lastSyncCheck && lastDriveCheck) {
+                    mostRecentCheck = new Date(lastSyncCheck).getTime() > new Date(lastDriveCheck).getTime() ? lastSyncCheck : lastDriveCheck;
+                  } else {
+                    mostRecentCheck = lastSyncCheck || lastDriveCheck;
+                  }
                   
                   return (
                     <React.Fragment key={school.schoolId}>
@@ -409,7 +419,7 @@ export function DataPage() {
                         <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
                           <div>
                             {school.hasPdfs ? (
-                              <span style={{ fontWeight: 'bold', color: '#4ECDC4', fontSize: '18px' }}>
+                              <span style={{ fontWeight: 'bold', color: '#FFFFFF', fontSize: '18px' }}>
                                 {school.pdfCount}
                               </span>
                             ) : (
@@ -418,9 +428,9 @@ export function DataPage() {
                           </div>
                         </td>
                         <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
-                          {localModified ? (
+                          {mostRecentCheck ? (
                             <div style={{ fontSize: '12px', color: 'var(--text-primary)' }}>
-                              {new Date(localModified).toLocaleString()}
+                              {new Date(mostRecentCheck).toLocaleString()}
                             </div>
                           ) : (
                             <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>—</span>
@@ -435,7 +445,7 @@ export function DataPage() {
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
                                 style={{
-                                  color: '#4ECDC4',
+                                  color: '#FFFFFF',
                                   textDecoration: 'none',
                                   fontSize: '18px',
                                   display: 'inline-block',
@@ -511,7 +521,7 @@ export function DataPage() {
                                               rel="noopener noreferrer"
                                               onClick={(e) => e.stopPropagation()}
                                               style={{ 
-                                                color: '#4ECDC4',
+                                                color: '#FFFFFF',
                                                 fontSize: '12px',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -622,7 +632,17 @@ export function DataPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {pdfStatus.schools.map((school: any) => {
             const isExpanded = expandedRows[school.schoolId];
-            const localModified = pdfFetchInfo[school.schoolId]?.localLastModified;
+            const fetchInfo = pdfFetchInfo[school.schoolId];
+            const lastSyncCheck = fetchInfo?.lastChecked;
+            const lastDriveCheck = fetchInfo?.driveLastChecked;
+            
+            // Determine the most recent check time
+            let mostRecentCheck = null;
+            if (lastSyncCheck && lastDriveCheck) {
+              mostRecentCheck = new Date(lastSyncCheck).getTime() > new Date(lastDriveCheck).getTime() ? lastSyncCheck : lastDriveCheck;
+            } else {
+              mostRecentCheck = lastSyncCheck || lastDriveCheck;
+            }
             
             return (
               <div
@@ -664,7 +684,7 @@ export function DataPage() {
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                       <span style={{ fontWeight: '600' }}>PDFs</span>{' '}
                       {school.hasPdfs ? (
-                        <span style={{ color: '#4ECDC4', fontWeight: 'bold' }}>{school.pdfCount}</span>
+                        <span style={{ color: '#FFFFFF', fontWeight: 'bold' }}>{school.pdfCount}</span>
                       ) : (
                         <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
                       )}
@@ -686,9 +706,9 @@ export function DataPage() {
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                       <span style={{ fontWeight: '600' }}>Last Checked</span>
                     </div>
-                    {localModified ? (
+                    {mostRecentCheck ? (
                       <div style={{ fontSize: '12px', color: 'var(--text-primary)', marginTop: '0.25rem' }}>
-                        {new Date(localModified).toLocaleString()}
+                        {new Date(mostRecentCheck).toLocaleString()}
                       </div>
                     ) : (
                       <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
@@ -747,7 +767,7 @@ export function DataPage() {
                                     rel="noopener noreferrer"
                                     onClick={(e) => e.stopPropagation()}
                                     style={{ 
-                                      color: '#4ECDC4',
+                                      color: '#FFFFFF',
                                       fontSize: '12px',
                                       display: 'flex',
                                       alignItems: 'center',

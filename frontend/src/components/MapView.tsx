@@ -1243,7 +1243,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           console.error('[MapView] Invalid street marker coordinates, skipping:', marker.coordinates);
           return null;
         }
-        const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8'];
+        const colors = ['#FF6B6B', '#FFFFFF', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8'];
         const color = colors[index % colors.length];
         const position = toLeafletPosition(marker.coordinates);
         

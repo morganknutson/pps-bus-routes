@@ -358,6 +358,7 @@ export function ExplorerApp() {
     middle: true,
     high: true,
     hybrid: true,
+    noRoutes: true,
   });
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -523,6 +524,12 @@ export function ExplorerApp() {
       // School type filter
       const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
       const isHybrid = schoolTypes.includes('Hybrid');
+      const hasNoRoutes = school.routeCount === 0;
+
+      // "School without route data" filter overrides type filters
+      if (hasNoRoutes) {
+        return schoolTypeFilters.noRoutes;
+      }
       
       // If it's a hybrid school, check hybrid filter
       if (isHybrid) {
@@ -783,7 +790,7 @@ export function ExplorerApp() {
                       width: '40px',
                       height: '40px',
                       border: '3px solid var(--border-color)',
-                      borderTopColor: '#4ECDC4',
+                      borderTopColor: '#FFFFFF',
                       borderRadius: '50%',
                       animation: 'spin 1s linear infinite'
                     }} />
@@ -983,6 +990,7 @@ function AdminApp() {
     middle: true,
     high: true,
     hybrid: true,
+    noRoutes: true,
   });
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -1143,6 +1151,12 @@ function AdminApp() {
       // School type filter
       const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
       const isHybrid = schoolTypes.includes('Hybrid');
+      const hasNoRoutes = school.routeCount === 0;
+
+      // "School without route data" filter overrides type filters
+      if (hasNoRoutes) {
+        return schoolTypeFilters.noRoutes;
+      }
       
       // If it's a hybrid school, check hybrid filter
       if (isHybrid) {
@@ -1352,7 +1366,7 @@ function AdminApp() {
                       width: '40px',
                       height: '40px',
                       border: '3px solid var(--border-color)',
-                      borderTopColor: '#4ECDC4',
+                      borderTopColor: '#FFFFFF',
                       borderRadius: '50%',
                       animation: 'spin 1s linear infinite'
                     }} />

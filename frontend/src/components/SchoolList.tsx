@@ -62,11 +62,11 @@ function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'H
       case 'High School':
         return '#FF9800'; // Orange
       default:
-        return '#4ECDC4'; // Default teal
+        return '#FFFFFF'; // Default teal
     }
   }
   
-  return '#4ECDC4'; // Default teal
+  return '#FFFFFF'; // Default teal
 }
 
 interface SchoolListProps {
@@ -100,6 +100,7 @@ export function SchoolList({
     middle: true,
     high: true,
     hybrid: true,
+    noRoutes: true,
   });
   
   // Use external state if provided, otherwise use internal state
@@ -129,6 +130,14 @@ export function SchoolList({
     // School type filter
     const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
     const isHybrid = schoolTypes.includes('Hybrid');
+    const hasNoRoutes = school.routeCount === 0;
+
+    // "School without route data" filter overrides type filters
+    // If a school has no routes, it is ONLY shown if the noRoutes filter is enabled
+    // regardless of its type.
+    if (hasNoRoutes) {
+      return schoolTypeFilters.noRoutes;
+    }
     
     // If it's a hybrid school, check hybrid filter
     if (isHybrid) {
@@ -228,7 +237,7 @@ export function SchoolList({
             <button
               onClick={() => setIsAddingSchool(!isAddingSchool)}
               style={{
-                backgroundColor: isAddingSchool ? 'var(--text-tertiary)' : '#4ECDC4',
+                backgroundColor: isAddingSchool ? 'var(--text-tertiary)' : '#FFFFFF',
                 color: 'white',
                 border: 'none',
                 borderRadius: '12px',
@@ -368,7 +377,7 @@ export function SchoolList({
                   flex: 1,
                   padding: '0.6rem',
                   fontSize: '12px',
-                  backgroundColor: newSchoolName ? '#4ECDC4' : 'var(--text-tertiary)',
+                  backgroundColor: newSchoolName ? '#FFFFFF' : 'var(--text-tertiary)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '9999px',
@@ -456,7 +465,7 @@ export function SchoolList({
                               transition: 'color 0.2s ease',
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.color = '#4ECDC4';
+                              e.currentTarget.style.color = '#FFFFFF';
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.color = 'var(--text-tertiary)';
@@ -626,7 +635,7 @@ export function SchoolList({
                               flex: 1,
                               padding: '0.5rem',
                               fontSize: '12px',
-                              backgroundColor: '#4ECDC4',
+                              backgroundColor: '#FFFFFF',
                               color: 'white',
                               border: 'none',
                               borderRadius: '9999px',
@@ -721,7 +730,7 @@ export function SchoolList({
                               transition: 'color 0.2s ease',
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.color = '#4ECDC4';
+                              e.currentTarget.style.color = '#FFFFFF';
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.color = 'var(--text-tertiary)';
@@ -879,7 +888,7 @@ export function SchoolList({
                                   flex: 1,
                                   padding: '0.5rem',
                                   fontSize: '12px',
-                                  backgroundColor: '#4ECDC4',
+                                  backgroundColor: '#FFFFFF',
                                   color: 'white',
                                   border: 'none',
                                   borderRadius: '4px',

@@ -45,13 +45,13 @@ export function DataPageHeader({
           <Link
             to="/data/schools"
             style={{
-              color: isAllSchoolsActive ? '#4ECDC4' : '#000',
+              color: isAllSchoolsActive ? '#FFFFFF' : '#000',
               textDecoration: 'none',
               fontSize: '0.95rem',
               fontWeight: isAllSchoolsActive ? '600' : '500',
               transition: 'text-decoration 0.2s ease',
               padding: '0.5rem 0',
-              borderBottom: isAllSchoolsActive ? '2px solid #4ECDC4' : '2px solid transparent',
+              borderBottom: isAllSchoolsActive ? '2px solid #FFFFFF' : '2px solid transparent',
               marginBottom: '-2px',
             }}
             onMouseEnter={(e) => {
@@ -104,7 +104,7 @@ export function DataPageHeader({
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  backgroundColor: schedulerStatus.enabled ? '#4ECDC4' : '#ccc',
+                  backgroundColor: schedulerStatus.enabled ? '#FFFFFF' : '#ccc',
                   transition: '0.3s',
                   borderRadius: '26px',
                   opacity: schedulerLoading ? 0.6 : 1,
