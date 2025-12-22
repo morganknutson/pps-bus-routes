@@ -422,24 +422,37 @@ export function DataPage() {
                           )}
                         </td>
                         <td style={{ padding: '1rem', verticalAlign: 'middle', textAlign: 'center' }}>
-                          {school.driveLink ? (
-                            <a
-                              href={school.driveLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              style={{
-                                color: '#4ECDC4',
-                                textDecoration: 'none',
-                                fontSize: '18px',
-                                display: 'inline-block',
-                              }}
-                              title={school.driveLink}
-                            >
-                              <i className="fas fa-external-link-alt" style={{ fontSize: '14px' }}></i>
-                            </a>
+                          {school.hasPdfs ? (
+                            school.driveLink ? (
+                              <a
+                                href={school.driveLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                style={{
+                                  color: '#4ECDC4',
+                                  textDecoration: 'none',
+                                  fontSize: '18px',
+                                  display: 'inline-block',
+                                }}
+                                title={school.driveLink}
+                              >
+                                <i className="fas fa-external-link-alt" style={{ fontSize: '14px' }}></i>
+                              </a>
+                            ) : (
+                              <span style={{ color: 'var(--text-secondary)' }}>—</span>
+                            )
                           ) : (
-                            <span style={{ color: 'var(--text-secondary)' }}>—</span>
+                            <div style={{ 
+                              fontSize: '10px', 
+                              color: '#f44', 
+                              fontWeight: '600',
+                              lineHeight: '1.2',
+                              maxWidth: '150px',
+                              margin: '0 auto'
+                            }}>
+                              Route information not provided on the web by school district.
+                            </div>
                           )}
                         </td>
                       </tr>
@@ -651,6 +664,11 @@ export function DataPage() {
                         <span style={{ color: '#f44', fontWeight: 'bold' }}>0</span>
                       )}
                     </div>
+                    {!school.hasPdfs && (
+                      <div style={{ fontSize: '10px', color: '#f44', fontWeight: '600', marginTop: '0.25rem', lineHeight: '1.2' }}>
+                        Route information not provided on the web by school district.
+                      </div>
+                    )}
                   </div>
 
                   {/* Last Checked */}
@@ -826,16 +844,16 @@ export function DataPage() {
       )}
 
       {/* Schools Without PDFs Section */}
-      {pdfStatus.summary.schoolsWithoutPdfs > 0 && (
+      {pdfStatus.schools.some((s: any) => !s.hasPdfs) && (
         <div style={{ marginTop: '3rem' }}>
-          <h2 style={{ marginBottom: '1rem', fontSize: isMobile ? '1.25rem' : '1.5rem', color: 'var(--text-primary)' }}>Schools Without Downloaded PDFs</h2>
+          <h2 style={{ marginBottom: '1rem', fontSize: isMobile ? '1.25rem' : '1.5rem', color: 'var(--text-primary)' }}>Schools Without Route Data</h2>
           <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', padding: isMobile ? '1rem' : '1.5rem' }}>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: isMobile ? '12px' : '14px' }}>
-              These schools have Drive links configured but PDFs could not be downloaded (likely due to access restrictions):
+              The following schools do not have publicly available route information at this time:
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.75rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(250px, 1fr))', gap: '0.75rem' }}>
               {pdfStatus.schools
-                .filter((s: any) => s.hasDriveLink && !s.hasPdfs)
+                .filter((s: any) => !s.hasPdfs)
                 .map((school: any) => (
                   <div
                     key={school.schoolId}
@@ -843,30 +861,15 @@ export function DataPage() {
                       padding: '0.75rem',
                       backgroundColor: 'var(--bg-primary)',
                       borderRadius: '4px',
-                      border: '1px solid var(--bg-primary)',
+                      border: '1px solid var(--border-color)',
                     }}
                   >
                     <div style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>{school.schoolName}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{school.schoolId}</div>
-                    {school.driveLink && (
-                      <a
-                        href={school.driveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          color: '#4ECDC4',
-                          fontSize: '11px',
-                          textDecoration: 'none',
-                          display: 'block',
-                          marginTop: '0.25rem',
-                          wordBreak: 'break-all',
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
-                        onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
-                      >
-                        Drive Link
-                      </a>
-                    )}
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{school.schoolId}</div>
+                    <div style={{ color: '#f44', fontSize: '11px', fontWeight: 'bold', lineHeight: '1.4' }}>
+                      <i className="fas fa-exclamation-circle" style={{ marginRight: '0.25rem' }}></i>
+                      Route information not provided on the web by school district.
+                    </div>
                   </div>
                 ))}
             </div>

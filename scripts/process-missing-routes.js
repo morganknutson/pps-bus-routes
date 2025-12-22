@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
-const API_BASE = process.env.API_BASE || 'http://localhost:3002/api';
+const API_BASE = process.env.API_BASE || 'http://localhost:3001/api';
 
 /**
  * Check if a school has PDFs but no processed routes

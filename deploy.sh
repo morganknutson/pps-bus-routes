@@ -102,8 +102,8 @@ fi
 
 # Verify server is responding
 sleep 2
-if curl -s http://localhost:3002/api/schools 2>&1 | head -1 | grep -q "schools"; then
-    echo "   ✅ Server is responding on port 3002"
+if curl -s http://localhost:3001/api/schools 2>&1 | head -1 | grep -q "schools"; then
+    echo "   ✅ Server is responding on port 3001"
 else
     echo "   ⚠️  Server not responding yet (may still be starting)"
     echo "   Check logs/server.log for details"
@@ -116,7 +116,7 @@ echo "📊 Summary:"
 echo "   - Servers: Stopped and restarted"
 echo "   - Code: Up to date with GitHub"
 echo "   - Build: Fresh build completed"
-echo "   - Status: Server running on port 3002"
+echo "   - Status: Server running on port 3001"
 echo ""
 echo "📝 Logs:"
 echo "   - Server: logs/server.log"

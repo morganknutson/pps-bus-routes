@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const projectRoot = resolve(__dirname, '..');
 const backendDir = resolve(projectRoot, 'backend');
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 3001;
 
 // Find process by port - returns array of PIDs
 async function findProcessesByPort(port) {
@@ -230,7 +230,7 @@ async function restartBackend() {
   try {
     console.log('[RestartBackend] Checking for existing backend process...');
     
-    // Find existing processes on port 3002
+    // Find existing processes on port 3001
     const existingPids = await findProcessesByPort(PORT);
     
     if (existingPids.length > 0) {

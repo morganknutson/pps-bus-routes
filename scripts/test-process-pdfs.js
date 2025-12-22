@@ -78,10 +78,10 @@ async function testProcessing() {
 
   // Test the API endpoint
   console.log('🔗 Testing API endpoint...\n');
-  console.log(`   POST http://localhost:3002/api/process-pdfs/process/${targetSchool.id}`);
+  console.log(`   POST http://localhost:3001/api/process-pdfs/process/${targetSchool.id}`);
   console.log('');
   console.log('   To test manually:');
-  console.log(`   curl -X POST http://localhost:3002/api/process-pdfs/process/${targetSchool.id}`);
+  console.log(`   curl -X POST http://localhost:3001/api/process-pdfs/process/${targetSchool.id}`);
   console.log('');
   console.log('   Or use the frontend verification page and click "Process PDFs" button');
   console.log('');

@@ -241,32 +241,46 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               display: 'flex', 
               gap: '0.75rem', 
               padding: '8px 16px 8px 8px',
-              backgroundColor: isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)',
+              backgroundColor: school.routeCount === 0 
+                ? (isDarkMode ? 'rgba(244, 67, 54, 0.1)' : 'rgba(244, 67, 54, 0.05)')
+                : (isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)'),
               borderRadius: '9999px',
-              border: isDarkMode ? '1px solid var(--border-color)' : 'none',
+              border: school.routeCount === 0
+                ? `1px solid ${isDarkMode ? 'rgba(244, 67, 54, 0.3)' : 'rgba(244, 67, 54, 0.2)'}`
+                : (isDarkMode ? '1px solid var(--border-color)' : 'none'),
               textAlign: 'left',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
               width: '100%',
               alignItems: 'center',
               marginTop: '1.25rem',
-              boxShadow: isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)'
+              boxShadow: school.routeCount === 0 ? 'none' : (isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)')
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-secondary)' : '#1a4b7c';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-              e.currentTarget.style.boxShadow = isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '0 4px 12px rgba(19, 58, 96, 0.3)';
+              if (school.routeCount! > 0) {
+                e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-secondary)' : '#1a4b7c';
+                e.currentTarget.style.transform = 'translateY(-1px)';
+                e.currentTarget.style.boxShadow = isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '0 4px 12px rgba(19, 58, 96, 0.3)';
+              } else {
+                e.currentTarget.style.backgroundColor = isDarkMode ? 'rgba(244, 67, 54, 0.15)' : 'rgba(244, 67, 54, 0.1)';
+              }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)';
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)';
+              if (school.routeCount! > 0) {
+                e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)';
+              } else {
+                e.currentTarget.style.backgroundColor = isDarkMode ? 'rgba(244, 67, 54, 0.1)' : 'rgba(244, 67, 54, 0.05)';
+              }
             }}
           >
             <div style={{ 
               width: '28px', 
               height: '28px', 
-              backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(255, 255, 255, 0.2)', 
+              backgroundColor: school.routeCount === 0
+                ? 'rgba(244, 67, 54, 0.2)'
+                : (isDarkMode ? 'var(--bg-primary)' : 'rgba(255, 255, 255, 0.2)'), 
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
@@ -274,29 +288,34 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               flexShrink: 0,
               boxShadow: isDarkMode ? '0 2px 4px rgba(0,0,0,0.05)' : 'none'
             }}>
-              <RouteIcon size={13} color={isDarkMode ? schoolColor : '#ffffff'} />
+              <RouteIcon size={13} color={school.routeCount === 0 ? '#f44' : (isDarkMode ? schoolColor : '#ffffff')} />
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ 
                 fontSize: '13px', 
                 fontWeight: '700', 
-                color: isDarkMode ? 'var(--text-primary)' : '#ffffff',
+                color: school.routeCount === 0 ? '#f44' : (isDarkMode ? 'var(--text-primary)' : '#ffffff'),
+                lineHeight: '1.2'
               }}>
-                Explore {school.routeCount} {school.routeCount === 1 ? 'Route' : 'Routes'}
+                {school.routeCount === 0 
+                  ? 'Route information not provided on the web' 
+                  : `Explore ${school.routeCount} ${school.routeCount === 1 ? 'Route' : 'Routes'}`}
               </div>
-              <svg 
-                width="16" 
-                height="16" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="1.5" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                style={{ opacity: 0.6, marginLeft: '0.5rem' }}
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
+              {school.routeCount! > 0 && (
+                <svg 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="1.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  style={{ opacity: 0.6, marginLeft: '0.5rem' }}
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              )}
             </div>
           </button>
         )}

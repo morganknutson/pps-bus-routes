@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-12-17T08:25:12.620Z",
+  "timestamp": "2025-12-22T04:54:40.497Z",
   "totalSchools": 72,
   "summary": {
     "schoolsWithPdfs": 68,
-    "schoolsWithoutPdfs": 3,
-    "totalPdfs": 481,
-    "schoolsWithDriveLink": 71
+    "schoolsWithoutPdfs": 4,
+    "totalPdfs": 507,
+    "schoolsWithDriveLink": 68
   },
   "schools": [
     {
@@ -54,13 +54,13 @@
         "287ACC-P_effective_102925.pdf"
       ],
       "hasPdfs": true,
-      "hasDriveLink": false
+      "hasDriveLink": true
     },
     {
       "schoolId": "ainsworth",
       "schoolName": "Ainsworth",
       "driveLink": "https://drive.google.com/drive/folders/13u1ptKYLSgilE5C2TcSahTMhQ0qObaZ3",
-      "pdfCount": 17,
+      "pdfCount": 15,
       "pdfFiles": [
         "100AIN-A_effective_082625.pdf",
         "100AIN-P_effective_082625.pdf",
@@ -72,9 +72,7 @@
         "109AIN-P_effective_082625.pdf",
         "111AIN-A_effective_091725.pdf",
         "111AIN-P_effective_091725.pdf",
-        "112AIN-A_effective_111225.pdf",
         "112AIN-A_effective_121725.pdf",
-        "112AIN-P_effective_111225.pdf",
         "112AIN-P_effective_121725.pdf",
         "113AIN-A_effective_101525.pdf",
         "113AIN-P_effective_101525.pdf",
@@ -129,11 +127,13 @@
       "schoolId": "atkinson",
       "schoolName": "Atkinson",
       "driveLink": "https://drive.google.com/drive/folders/1eQCHoeSM-XkpkxglEji_YFawcR6avllW",
-      "pdfCount": 4,
+      "pdfCount": 6,
       "pdfFiles": [
         "247ATK-A_effective_102925.pdf",
         "247ATK-P_effective_102925.pdf",
+        "279ATK-A_effective_010726.pdf",
         "279ATK-A_effective_102225.pdf",
+        "279ATK-P_effective_010726.pdf",
         "279ATK-P_effective_102925.pdf"
       ],
       "hasPdfs": true,
@@ -208,9 +208,8 @@
       "schoolId": "bridger",
       "schoolName": "Bridger",
       "driveLink": "https://drive.google.com/drive/folders/11VTzWHqVisITHhZT0t2ZtxPv4PrHjG5i",
-      "pdfCount": 5,
+      "pdfCount": 4,
       "pdfFiles": [
-        "211BDG-A_effective_091025.pdf",
         "211BDG-A_effective_121725.pdf",
         "211BDG-P_effective_091025.pdf",
         "222BDG-A_effective_082625.pdf",
@@ -225,13 +224,13 @@
       "driveLink": "https://drive.google.com/drive/folders/1hGPmN8bkUgi0iR3Qffm95w3p0roM6TXL",
       "pdfCount": 12,
       "pdfFiles": [
+        "104BDL-A_effective_010726.pdf",
         "104BDL-A_effective_090325.pdf",
+        "104BDL-P_effective_010726.pdf",
         "104BDL-P_effective_090325.pdf",
         "114BDL-A_effective_082625.pdf",
         "114BDL-P_effective_082625.pdf",
-        "115BDL-A_effective_092425.pdf",
         "115BDL-A_effective_120325.pdf",
-        "115BDL-P_effective_092425.pdf",
         "115BDL-P_effective_120325.pdf",
         "116BDL-A_effective_090325.pdf",
         "116BDL-P_effective_082625.pdf",
@@ -293,15 +292,19 @@
       "schoolId": "chapman",
       "schoolName": "Chapman",
       "driveLink": "https://drive.google.com/drive/folders/11kY3J5_a-i3NTtzVby9_-IM14B4ZzInF",
-      "pdfCount": 8,
+      "pdfCount": 12,
       "pdfFiles": [
         "121CHP-A_effective_082625.pdf",
         "121CHP-P_effective_082625.pdf",
         "124CHP-A_effective_091725.pdf",
         "124CHP-P_effective_091725.pdf",
+        "125CHP-A_effective_010725.pdf",
         "125CHP-A_effective_102225.pdf",
+        "125CHP-P_effective_010725.pdf",
         "125CHP-P_effective_102225.pdf",
+        "149CHP-A_effective_010726.pdf",
         "149CHP-A_effective_082625.pdf",
+        "149CHP-P_effective_010726.pdf",
         "149CHP-P_effective_102225.pdf"
       ],
       "hasPdfs": true,
@@ -350,11 +353,11 @@
     {
       "schoolId": "davinci",
       "schoolName": "DaVinci",
-      "driveLink": "https://drive.google.com/drive/folders/1K1dxXJ_0vDH2JZB652wYnDlv36TKfYik",
+      "driveLink": null,
       "pdfCount": 0,
       "pdfFiles": [],
       "hasPdfs": false,
-      "hasDriveLink": true
+      "hasDriveLink": false
     },
     {
       "schoolId": "duniway",
@@ -410,11 +413,11 @@
     {
       "schoolId": "franklin",
       "schoolName": "Franklin",
-      "driveLink": "https://drive.google.com/drive/folders/1KIrpSYUBVL0zngxBBIf0ExIfSmZzfJb-",
+      "driveLink": null,
       "pdfCount": 0,
       "pdfFiles": [],
       "hasPdfs": false,
-      "hasDriveLink": true
+      "hasDriveLink": false
     },
     {
       "schoolId": "george",
@@ -486,8 +489,9 @@
       "schoolId": "harrison-park",
       "schoolName": "Harrison Park",
       "driveLink": "https://drive.google.com/drive/folders/14NQ8nZ6U891axUun-1KfqG82U8f26nFb",
-      "pdfCount": 10,
+      "pdfCount": 11,
       "pdfFiles": [
+        "201HPK-A_effective_010726.pdf",
         "201HPK-A_effective_091925.pdf",
         "201HPK-P_effective_091925.pdf",
         "231HPK-A_effective_100125.pdf",
@@ -554,13 +558,15 @@
       "schoolId": "jackson",
       "schoolName": "Jackson",
       "driveLink": "https://drive.google.com/drive/folders/14q4zv3lBYQCJXswEtgk06YUtmzOGJ1lf",
-      "pdfCount": 30,
+      "pdfCount": 32,
       "pdfFiles": [
         "107JKS-A_effective_111225.pdf",
         "107JKS-P_effective_100125.pdf",
         "108JKS-A_effective_102925.pdf",
         "108JKS-P_effective_102925.pdf",
+        "110JKS-A_effective_010726.pdf",
         "110JKS-A_effective_110525.pdf",
+        "110JKS-P_effective_010726.pdf",
         "110JKS-P_effective_082625.pdf",
         "114JKS-A_effective_110525.pdf",
         "114JKS-P_effective_100125.pdf",
@@ -631,10 +637,10 @@
         "227KLG-A_effective_082625.pdf",
         "227KLG-P_effective_082625.pdf",
         "228KLG-A_effective_111925.pdf",
-        "228KLG-P_effective_111925.pdf",
         "228KLG-P_effective_121725.pdf",
         "253KLG-A_effective_082625.pdf",
         "253KLG-P_effective_082625.pdf",
+        "269KLG-A_effective_010726.pdf",
         "269KLG-A_effective_082625.pdf",
         "269KLG-P_effective_082625.pdf"
       ],
@@ -692,11 +698,11 @@
     {
       "schoolId": "leodis-v-mcdaniel",
       "schoolName": "Leodis V. McDaniel",
-      "driveLink": "https://drive.google.com/drive/folders/1MaCNzyG0pACrE1jm6JT_MgUA30YIWQhg",
+      "driveLink": null,
       "pdfCount": 0,
       "pdfFiles": [],
       "hasPdfs": false,
-      "hasDriveLink": true
+      "hasDriveLink": false
     },
     {
       "schoolId": "lewis",
@@ -714,13 +720,11 @@
       "schoolId": "lincoln",
       "schoolName": "Lincoln",
       "driveLink": "https://drive.google.com/drive/folders/126UZiZumw3ZBB-Vz8m9kD7TvmJHyGTRu",
-      "pdfCount": 18,
+      "pdfCount": 16,
       "pdfFiles": [
         "102LNC-A_effective_102925.pdf",
         "102LNC-P_effective_102925.pdf",
-        "123LNC-A_effective_082625.pdf",
         "123LNC-A_effective_121725.pdf",
-        "123LNC-P_effective_090325.pdf",
         "123LNC-P_effective_121725.pdf",
         "142LNC-A_effective_091725.pdf",
         "142LNC-P_effective_091725.pdf",
@@ -755,10 +759,12 @@
       "schoolId": "dr-martin-luther-king",
       "schoolName": "Dr Martin Luther King",
       "driveLink": "https://drive.google.com/drive/folders/1A10dKprzg68PukybKhQwiZG3k5bqtjl6",
-      "pdfCount": 2,
+      "pdfCount": 4,
       "pdfFiles": [
         "206MLK-A_effective_102225.pdf",
-        "206MLK-P_effective_102225.pdf"
+        "206MLK-P_effective_102225.pdf",
+        "271MLK-A_effective_010726.pdf",
+        "271MLK-P_effective_010726.pdf"
       ],
       "hasPdfs": true,
       "hasDriveLink": true
@@ -821,7 +827,7 @@
       "schoolId": "mt-tabor",
       "schoolName": "Mt Tabor",
       "driveLink": "https://drive.google.com/drive/folders/1AVph0mS-EheR_hUlddk6SujWoJjnUhyX",
-      "pdfCount": 12,
+      "pdfCount": 13,
       "pdfFiles": [
         "226TAB-A_effective_120325.pdf",
         "226TAB-P_effective_120325.pdf",
@@ -831,6 +837,7 @@
         "240TAB-P_effective_100125.pdf",
         "243TAB-A_effective_092425.pdf",
         "243TAB-P_effective_092425.pdf",
+        "285TAB-A_effective_010726.pdf",
         "285TAB-A_effective_090325.pdf",
         "285TAB-P_effective_082625.pdf",
         "288TAB-A_effective_100825.pdf",
@@ -843,11 +850,13 @@
       "schoolId": "ockley-green",
       "schoolName": "Ockley Green",
       "driveLink": "https://drive.google.com/drive/folders/1AcGj_k1He8ovVY884Ddg_NU86y_9ntUs",
-      "pdfCount": 6,
+      "pdfCount": 8,
       "pdfFiles": [
         "203OCG-A_effective_091025.pdf",
         "203OCG-P_effective_091025.pdf",
+        "204OCG-A_effective_010726.pdf",
         "204OCG-A_effective_090325.pdf",
+        "204OCG-P_effective_010726.pdf",
         "204OCG-P_effective_100825.pdf",
         "205OCG-A_effective_091025.pdf",
         "205OCG-P_effective_091025.pdf"
@@ -905,15 +914,19 @@
       "schoolId": "rigler",
       "schoolName": "Rigler",
       "driveLink": "https://drive.google.com/drive/folders/1B1SaKRoFPndCFsrye60jBU9RCeu4VvVz",
-      "pdfCount": 8,
+      "pdfCount": 12,
       "pdfFiles": [
+        "201RIG-A_effective_010726.pdf",
         "201RIG-A_effective_082625.pdf",
+        "201RIG-P_effective_010726.pdf",
         "201RIG-P_effective_082625.pdf",
+        "214RIG-A_effective_010726.pdf",
         "214RIG-A_effective_082625.pdf",
+        "214RIG-P_effective_010726.pdf",
         "214RIG-P_effective_082625.pdf",
-        "234RIG-A_effective_102224.pdf",
+        "234RIG-A_effective_010725.pdf",
         "234RIG-A_effective_121725.pdf",
-        "234RIG-P_effective_102224.pdf",
+        "234RIG-P_effective_010725.pdf",
         "234RIG-P_effective_121725.pdf"
       ],
       "hasPdfs": true,
@@ -960,7 +973,7 @@
         "209RWH-A_effective_100825.pdf",
         "209RWH-P_effective_100825.pdf",
         "219RWH-A_effective_101525.pdf",
-        "219RWH-A_effective_121725.pdf",
+        "219RWH-P_effective_010726.pdf",
         "219RWH-P_effective_101525.pdf",
         "233RWH-A_effective_082625.pdf",
         "233RWH-P_effective_082625.pdf",
@@ -991,9 +1004,8 @@
       "schoolId": "scott",
       "schoolName": "Scott",
       "driveLink": "https://drive.google.com/drive/folders/1Akemk1ysTHW4NQPTSC22fzACYPYcmOlV",
-      "pdfCount": 7,
+      "pdfCount": 6,
       "pdfFiles": [
-        "211SCT-A_effective_082625.pdf",
         "211SCT-A_effective_121725.pdf",
         "211SCT-P_effective_082625.pdf",
         "222SCT-A_effective_082625.pdf",
@@ -1044,7 +1056,7 @@
       "schoolId": "skyline",
       "schoolName": "Skyline",
       "driveLink": "https://drive.google.com/drive/folders/11yS4mKChoAblrlWy8DK8P_V4n-PxWooe",
-      "pdfCount": 12,
+      "pdfCount": 10,
       "pdfFiles": [
         "136SKY-A_effective_102925.pdf",
         "136SKY-P_effective_102925.pdf",
@@ -1054,9 +1066,7 @@
         "138SKY-P_effective_111225.pdf",
         "139SKY-A_effective_102925.pdf",
         "139SKY-P_effective_110525.pdf",
-        "140SKY-A_effective_102925.pdf",
         "140SKY-A_effective_121725.pdf",
-        "140SKY-P_effective_102925.pdf",
         "140SKY-P_effective_121725.pdf"
       ],
       "hasPdfs": true,
@@ -1082,13 +1092,11 @@
       "schoolId": "tubman",
       "schoolName": "Tubman",
       "driveLink": "https://drive.google.com/drive/folders/1B9aLGpw1wbfKr3ZJRQo_ZTyaaUnkCsp0",
-      "pdfCount": 8,
+      "pdfCount": 6,
       "pdfFiles": [
         "206TUB-A_effective_120325.pdf",
         "206TUB-P_effective_082625.pdf",
-        "220TUB-A_effective_082625.pdf",
         "220TUB-A_effective_121725.pdf",
-        "220TUB-P_effective_082625.pdf",
         "220TUB-P_effective_121725.pdf",
         "292TUB-A_effective_090325.pdf",
         "292TUB-P_effective_090325.pdf"
@@ -1126,7 +1134,7 @@
       "schoolId": "west-sylvan",
       "schoolName": "West Sylvan",
       "driveLink": "https://drive.google.com/drive/folders/1BC03MH02DFuUL6teeq4jkcT2THRGgzxj",
-      "pdfCount": 40,
+      "pdfCount": 38,
       "pdfFiles": [
         "100SYL-A_effective_082625.pdf",
         "100SYL-P_effective_082625.pdf",
@@ -1144,9 +1152,7 @@
         "112SYL-P_effective_082625.pdf",
         "113SYL-A_effective_092425.pdf",
         "113SYL-P_effective_092425.pdf",
-        "115SYL-A_effective_092425.pdf",
         "115SYL-A_effective_120325.pdf",
-        "115SYL-P_effective_092425.pdf",
         "115SYL-P_effective_120325.pdf",
         "116SYL-A_effective_092425.pdf",
         "116SYL-P_effective_092425.pdf",

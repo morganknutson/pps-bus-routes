@@ -24,6 +24,7 @@ PDFs (Google Drive) → Parse stops → Geocode addresses → Display on Leaflet
 | Geocoding | Google Maps Geocoding API |
 | Routing | Google Maps Directions API |
 | Icons | **Font Awesome ONLY** (no react-icons) |
+| Testing | Vitest (Frontend), Node --test (Backend) |
 
 ---
 
@@ -149,6 +150,12 @@ interface School {
 - **When to use**: After merging changes to `main` or when the user says "deploy"
 - **Logs**: `logs/server.log` (runtime) and `logs/build.log` (build process)
 
+### Testing
+- **Run all tests**: `npm test` (from root)
+- **Backend tests**: `npm run test:backend` or `node --test backend/tests/*.test.js`
+- **Frontend tests**: `npm run test:frontend` or `cd frontend && npm run test`
+- **Location**: Backend tests in `backend/tests/`, Frontend tests in `frontend/src/**/*.test.ts`
+
 ---
 
 ## Quick Links
@@ -166,7 +173,7 @@ interface School {
 # backend/.env
 GOOGLE_MAPS_API_KEY=xxx    # Required for geocoding
 GOOGLE_API_KEY=xxx         # Alternative key name
-PORT=3002                  # Backend port
+PORT=3001                  # Backend port
 ```
 
 ---

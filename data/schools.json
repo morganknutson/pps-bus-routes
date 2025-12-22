@@ -1012,13 +1012,13 @@
     "name": "Benson",
     "driveLink": null,
     "createdAt": "2025-01-01T00:00:00.000Z",
-    "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/benson",
+    "schoolPageLink": "https://benson.pps.net/",
     "address": "546 NE 12th Ave, Portland, OR 97232, USA",
     "coordinates": [
       -122.6528034,
       45.5272468
     ],
-    "updatedAt": "2025-12-11T17:21:26.232Z",
+    "updatedAt": "2025-12-22T05:01:48.201Z",
     "placeId": "ChIJqWVGVLCglVQRsySyu7v6r3c",
     "placesData": {
       "id": "ChIJqWVGVLCglVQRsySyu7v6r3c",
@@ -2354,7 +2354,7 @@
   {
     "id": "davinci",
     "name": "DaVinci",
-    "driveLink": "https://drive.google.com/drive/folders/1K1dxXJ_0vDH2JZB652wYnDlv36TKfYik",
+    "driveLink": null,
     "createdAt": "2025-01-01T00:00:00.000Z",
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/davinci",
     "address": "2508 NE Everett St, Portland, OR 97232, USA",
@@ -2802,7 +2802,7 @@
   {
     "id": "franklin",
     "name": "Franklin",
-    "driveLink": "https://drive.google.com/drive/folders/1KIrpSYUBVL0zngxBBIf0ExIfSmZzfJb-",
+    "driveLink": null,
     "createdAt": "2025-01-01T00:00:00.000Z",
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/franklin",
     "address": "5405 SE Woodward St, Portland, OR 97206, USA",
@@ -4594,7 +4594,7 @@
   {
     "id": "leodis-v-mcdaniel",
     "name": "Leodis V. McDaniel",
-    "driveLink": "https://drive.google.com/drive/folders/1MaCNzyG0pACrE1jm6JT_MgUA30YIWQhg",
+    "driveLink": null,
     "createdAt": "2025-01-01T00:00:00.000Z",
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/leodis-v-mcdaniel",
     "address": "2735 NE 82nd Ave, Portland, OR 97220, USA",

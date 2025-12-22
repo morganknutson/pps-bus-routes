@@ -475,9 +475,25 @@ export function SchoolList({
                         </div>
                       )}
                       {school.routeCount !== undefined && (
-                        <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <RouteIcon size={10} color="var(--text-tertiary)" style={{ width: '10px', flexShrink: 0 }} />
-                          <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'}</span>
+                        <div style={{ 
+                          fontSize: '11px', 
+                          color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          gap: '0.375rem',
+                          fontWeight: school.routeCount === 0 ? '600' : '400'
+                        }}>
+                          {school.routeCount === 0 ? (
+                            <>
+                              <i className="fas fa-exclamation-circle" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                              <span>Routes not provided by district</span>
+                            </>
+                          ) : (
+                            <>
+                              <RouteIcon size={10} color="var(--text-tertiary)" style={{ width: '10px', flexShrink: 0 }} />
+                              <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'}</span>
+                            </>
+                          )}
                         </div>
                       )}
                     </div>
@@ -709,6 +725,29 @@ export function SchoolList({
                         <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
                           <i className="fas fa-map-marker-alt" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
                           <span>{school.address}</span>
+                        </div>
+                      )}
+                      {school.routeCount !== undefined && (
+                        <div style={{ 
+                          fontSize: '11px', 
+                          color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)', 
+                          marginTop: '0.25rem',
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          gap: '0.375rem',
+                          fontWeight: school.routeCount === 0 ? '600' : '400'
+                        }}>
+                          {school.routeCount === 0 ? (
+                            <>
+                              <i className="fas fa-exclamation-circle" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                              <span>Routes not provided by district</span>
+                            </>
+                          ) : (
+                            <>
+                              <RouteIcon size={10} color="var(--text-tertiary)" style={{ width: '10px', flexShrink: 0 }} />
+                              <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'}</span>
+                            </>
+                          )}
                         </div>
                       )}
                       {isEditing && enableEditing && onUpdateSchool && (

@@ -37,7 +37,7 @@ node scripts/trigger-pdf-fetch.js --all
 - Error handling with clear messages
 
 **Requirements:**
-- Backend server must be running (default: http://localhost:3002)
+- Backend server must be running (default: http://localhost:3001)
 - Schools must have `driveLink` configured in `data/schools.json`
 - Works in development mode (no Redis required)
 

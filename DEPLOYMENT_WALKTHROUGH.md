@@ -128,7 +128,7 @@ Environment variables are settings your app needs to run properly.
 
 Railway usually sets this automatically, but you can add:
 - **Key:** `PORT`
-- **Value:** `3002`
+- **Value:** `3001`
 
 ### 5.4 Add Google API Key (Optional - Only if you have one)
 
@@ -267,7 +267,7 @@ Whenever you make changes:
 
 **Environment Variables:**
 - `NODE_ENV` = `production`
-- `PORT` = `3002` (optional, Railway sets this)
+- `PORT` = `3001` (optional, Railway sets this)
 - `GOOGLE_API_KEY` = (optional, only if you have one)
 
 ---

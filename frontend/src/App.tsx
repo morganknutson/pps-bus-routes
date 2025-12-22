@@ -42,7 +42,7 @@ import { useIsMobile } from './hooks/useMediaQuery';
 import { useUrlState } from './hooks/useUrlState';
 import { usePageTracking } from './hooks/usePageTracking';
 import { analyticsService } from './services/analytics';
-import { parseUrlPath, applyUrlStateToRoutes } from './services/urlState';
+import { parseUrlPath, applyUrlStateToRoutes, type UrlState } from './services/urlState';
 import { useLocation, useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 
@@ -437,7 +437,7 @@ function ExplorerApp() {
         const schoolInUrl = urlState.schoolId?.toLowerCase();
         const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
-        const stateToApply = schoolMatches 
+        const stateToApply: UrlState = schoolMatches 
           ? { ...urlState, show: 'routes', schoolId: selectedSchoolId }
           : { schoolId: selectedSchoolId, show: 'routes' };
 
@@ -457,7 +457,7 @@ function ExplorerApp() {
       const schoolInUrl = urlState.schoolId?.toLowerCase();
       const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
       
-      const stateToApply = schoolMatches 
+      const stateToApply: UrlState = schoolMatches 
         ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
         : { schoolId: selectedSchoolId, show: activeTab };
 
@@ -484,7 +484,7 @@ function ExplorerApp() {
         
         // If school matches URL, use full URL state (including specific routes).
         // Otherwise, use a clean state for the new school to avoid carrying over selections.
-        const stateToApply = schoolMatches 
+        const stateToApply: UrlState = schoolMatches 
           ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
           : { schoolId: selectedSchoolId, show: activeTab };
 
@@ -1055,7 +1055,7 @@ function AdminApp() {
         const schoolInUrl = urlState.schoolId?.toLowerCase();
         const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
-        const stateToApply = schoolMatches 
+        const stateToApply: UrlState = schoolMatches 
           ? { ...urlState, show: 'routes', schoolId: selectedSchoolId }
           : { schoolId: selectedSchoolId, show: 'routes' };
 
@@ -1075,7 +1075,7 @@ function AdminApp() {
       const schoolInUrl = urlState.schoolId?.toLowerCase();
       const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
       
-      const stateToApply = schoolMatches 
+      const stateToApply: UrlState = schoolMatches 
         ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
         : { schoolId: selectedSchoolId, show: activeTab };
 
@@ -1102,7 +1102,7 @@ function AdminApp() {
         
         // If school matches URL, use full URL state (including specific routes).
         // Otherwise, use a clean state for the new school to avoid carrying over selections.
-        const stateToApply = schoolMatches 
+        const stateToApply: UrlState = schoolMatches 
           ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
           : { schoolId: selectedSchoolId, show: activeTab };
 

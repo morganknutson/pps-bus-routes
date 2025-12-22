@@ -125,7 +125,7 @@ nano .env
 Add these lines:
 ```
 NODE_ENV=production
-PORT=3002
+PORT=3001
 ```
 
 Press `Ctrl+X`, then `Y`, then `Enter` to save.
@@ -174,7 +174,7 @@ nginx -v
 #### Option B: Direct Port Access
 
 If your server allows direct port access, you might be able to access it via:
-- `http://yourdomain.com:3002`
+- `http://yourdomain.com:3001`
 
 But this isn't ideal. We want it on port 80/443.
 
@@ -200,7 +200,7 @@ node --version
 cd backend && node server.js
 
 # Check if server is running
-lsof -i :3002
+lsof -i :3001
 
 # View logs (if using systemd)
 journalctl -u pps-bus-maps -f

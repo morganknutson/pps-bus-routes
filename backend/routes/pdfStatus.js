@@ -83,7 +83,7 @@ function generatePdfStatus() {
     if (schoolStatus.hasPdfs) {
       report.summary.schoolsWithPdfs++;
       report.summary.totalPdfs += pdfInfo.count;
-    } else if (schoolStatus.hasDriveLink) {
+    } else {
       report.summary.schoolsWithoutPdfs++;
     }
   }

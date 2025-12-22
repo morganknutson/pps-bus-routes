@@ -769,7 +769,7 @@ The deployment process is automated through a shell script that handles stopping
 
 ### Server Management
 - **Production Server**: Started with `npm run start:production`.
-- **Port**: Defaults to `3002`.
+- **Port**: Defaults to `3001`.
 - **Logs**:
   - Runtime logs: `logs/server.log`
   - Build logs: `logs/build.log`

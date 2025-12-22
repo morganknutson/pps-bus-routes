@@ -43,7 +43,7 @@ export function SchoolDirectory() {
       try {
         setLoading(true);
         const [schoolsRes, neighborhoodsRes] = await Promise.all([
-          fetch('/api/schools'),
+          fetch('/api/schools?includeStats=true'),
           fetch('/api/neighborhoods/data')
         ]);
         
@@ -255,7 +255,25 @@ export function SchoolDirectory() {
                     </div>
                   )}
                   
-                  <div style={{ marginTop: 'auto', paddingTop: '1rem', display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ marginTop: 'auto', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ 
+                      fontSize: '0.8125rem', 
+                      color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)',
+                      fontWeight: school.routeCount === 0 ? '600' : 'normal',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.375rem'
+                    }}>
+                      {school.routeCount === 0 ? (
+                        <>
+                          <i className="fas fa-exclamation-circle"></i> Routes not provided by district
+                        </>
+                      ) : (
+                        <>
+                          <i className="fas fa-bus"></i> {school.routeCount} {school.routeCount === 1 ? 'Route' : 'Routes'}
+                        </>
+                      )}
+                    </span>
                     <span style={{ 
                       fontSize: '0.875rem', 
                       color: 'var(--text-tertiary)',
@@ -263,7 +281,7 @@ export function SchoolDirectory() {
                       alignItems: 'center',
                       gap: '0.25rem'
                     }}>
-                      View Routes <i className="fas fa-chevron-right" style={{ fontSize: '0.75rem' }}></i>
+                      {school.routeCount === 0 ? 'Details' : 'View Routes'} <i className="fas fa-chevron-right" style={{ fontSize: '0.75rem' }}></i>
                     </span>
                   </div>
                 </Link>

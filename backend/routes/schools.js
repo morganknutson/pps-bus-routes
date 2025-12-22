@@ -182,7 +182,7 @@ router.get('/', async (req, res) => {
       const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
       const allSchools = JSON.parse(content);
       
-      if (showAll) {
+      if (showAll || includeStats) {
         schools = allSchools;
       } else {
         // Filter schools that have PDFs - use a simple loop instead of Promise.all to avoid disk slamming

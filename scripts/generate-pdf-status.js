@@ -67,7 +67,7 @@ function generatePdfStatus() {
     if (schoolStatus.hasPdfs) {
       report.summary.schoolsWithPdfs++;
       report.summary.totalPdfs += pdfInfo.count;
-    } else if (schoolStatus.hasDriveLink) {
+    } else {
       report.summary.schoolsWithoutPdfs++;
     }
   }
@@ -77,9 +77,9 @@ function generatePdfStatus() {
   
   console.log('📊 PDF Status Report');
   console.log('===================');
-  console.log(`Total schools: ${report.summary.totalSchools}`);
+  console.log(`Total schools: ${report.totalSchools}`);
   console.log(`Schools with PDFs: ${report.summary.schoolsWithPdfs}`);
-  console.log(`Schools without PDFs (but have Drive link): ${report.summary.schoolsWithoutPdfs}`);
+  console.log(`Schools without PDFs: ${report.summary.schoolsWithoutPdfs}`);
   console.log(`Total PDFs downloaded: ${report.summary.totalPdfs}`);
   console.log(`\nReport saved to: ${STATUS_FILE}`);
   

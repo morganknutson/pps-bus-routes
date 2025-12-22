@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const FOLDER_ID = '1BC03MH02DFuUL6teeq4jkcT2THRGgzxj';
-const API_BASE = 'http://localhost:3002/api';
+const API_BASE = 'http://localhost:3001/api';
 const OUTPUT_DIR = path.join(__dirname, '..', 'data');
 const ROUTES_FILE = path.join(OUTPUT_DIR, 'routes.json');
 

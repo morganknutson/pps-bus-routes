@@ -296,13 +296,30 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
         </div>
       </div>
       <div style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--bg-route-list)' }}>
-        <RouteListBase
-          routes={routes}
-          config={config}
-          loading={isLoading}
-          error={error}
-          emptyMessage="No routes found. Make sure routes.json exists in the public folder."
-        />
+        {!isLoading && routes.length === 0 ? (
+          <div style={{
+            padding: '2rem',
+            textAlign: 'center',
+            color: 'var(--text-secondary)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <i className="fas fa-exclamation-circle" style={{ fontSize: '32px', color: '#f44', opacity: 0.8 }}></i>
+            <p style={{ fontSize: '14px', fontWeight: '500', lineHeight: '1.4' }}>
+              Route information not provided on the web by school district.
+            </p>
+          </div>
+        ) : (
+          <RouteListBase
+            routes={routes}
+            config={config}
+            loading={isLoading}
+            error={error}
+            emptyMessage="No routes found. Make sure routes.json exists in the public folder."
+          />
+        )}
       </div>
     </div>
   );

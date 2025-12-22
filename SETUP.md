@@ -33,7 +33,7 @@ cp .env.example .env
 3. Add the API key to `backend/.env` (optional):
 ```
 GOOGLE_API_KEY=your_actual_api_key_here
-PORT=3002
+PORT=3001
 ```
 
 **Note:** The app will work without this - it will parse the public Drive folder page instead.
@@ -46,7 +46,7 @@ npm run dev
 ```
 
 This starts both:
-- Backend on http://localhost:3002
+- Backend on http://localhost:3001
 - Frontend on http://localhost:3000
 
 ## 4. Use the App

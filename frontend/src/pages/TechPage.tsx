@@ -119,6 +119,15 @@ const sections: Section[] = [
       { id: 'deployment-process', title: '2. Deployment Process' },
     ],
   },
+  {
+    id: 'testing-infrastructure',
+    title: 'Testing Infrastructure',
+    subsections: [
+      { id: 'backend-testing', title: '1. Backend Testing (Node --test)' },
+      { id: 'frontend-testing', title: '2. Frontend Testing (Vitest)' },
+      { id: 'running-tests', title: '3. Running Tests' },
+    ],
+  },
 ];
 
 // Example data for UI components
@@ -1902,7 +1911,7 @@ export function TechPage() {
                   <li><strong>getProcessStatus(processName)</strong> - Get status of a server process:
                     <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                       <li>Checks if process is running on expected port</li>
-                      <li>Backend: Port 3002, Frontend: Port 5173</li>
+                      <li>Backend: Port 3001, Frontend: Port 5173</li>
                       <li>Uses <code>lsof</code> command to check port usage</li>
                       <li>Returns process status or "not found" if process not running</li>
                     </ul>
@@ -2901,6 +2910,68 @@ export function TechPage() {
               <p style={{ color: 'var(--text-secondary)', marginTop: '20px' }}>
                 <strong>Logs:</strong> Build logs are written to <code>logs/build.log</code> and server runtime logs to <code>logs/server.log</code>.
               </p>
+            </div>
+          </section>
+
+          <section id="testing-infrastructure" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: '20px', fontSize: '24px' }}>
+              Testing Infrastructure
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '30px' }}>
+              The project uses a multi-layered testing approach to ensure reliability of both backend logic and frontend components.
+            </p>
+
+            <div id="backend-testing" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                1. Backend Testing (Node --test)
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Backend tests use the native Node.js test runner (available in Node 18+). This provides a fast, zero-dependency testing environment.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Location:</strong> <code>backend/tests/*.test.js</code></li>
+                  <li style={{ marginBottom: '8px' }}><strong>Runner:</strong> <code>node --test</code></li>
+                  <li style={{ marginBottom: '8px' }}><strong>Assertions:</strong> Native <code>node:assert</code></li>
+                  <li><strong>Focus:</strong> Utility functions, API services, and data processing logic.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="frontend-testing" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                2. Frontend Testing (Vitest)
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Frontend tests use Vitest, a Vite-native testing framework that is significantly faster than Jest and shares configuration with the build system.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Location:</strong> <code>frontend/src/**/*.test.ts</code> or <code>.tsx</code></li>
+                  <li style={{ marginBottom: '8px' }}><strong>Libraries:</strong> Vitest, React Testing Library, jsdom</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Setup:</strong> <code>frontend/src/test/setup.ts</code></li>
+                  <li><strong>Focus:</strong> Component rendering, UI logic, and frontend utilities.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="running-tests" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                3. Running Tests
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                Tests can be run individually by package or collectively from the root.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', fontFamily: 'monospace' }}>
+                <div style={{ marginBottom: '10px', color: 'var(--text-primary)' }}># Run all tests</div>
+                <div style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>npm test</div>
+                
+                <div style={{ marginBottom: '10px', color: 'var(--text-primary)' }}># Backend only</div>
+                <div style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>npm run test:backend</div>
+                
+                <div style={{ marginBottom: '10px', color: 'var(--text-primary)' }}># Frontend only</div>
+                <div style={{ color: 'var(--text-secondary)' }}>npm run test:frontend</div>
+              </div>
             </div>
           </section>
         </div>
