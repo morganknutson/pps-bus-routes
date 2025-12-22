@@ -5,6 +5,7 @@ import { RouteIcon } from './RouteIcon';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 import { MapPinIcon } from './MapPinIcon';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
+import { XIcon } from './XIcon';
 
 // Infer school type(s) from name - returns array to support hybrid schools
 function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
@@ -229,7 +230,7 @@ export function SchoolList({
                 }}
                 aria-label="Clear search"
               >
-                ×
+                <XIcon />
               </button>
             )}
           </div>
@@ -252,7 +253,7 @@ export function SchoolList({
               }}
               title={isAddingSchool ? "Cancel adding school" : "Add new school"}
             >
-              <i className={`fas ${isAddingSchool ? 'fa-times' : 'fa-plus'}`}></i>
+              {isAddingSchool ? <XIcon color="white" /> : <i className="fas fa-plus"></i>}
             </button>
           )}
         </div>
@@ -440,7 +441,7 @@ export function SchoolList({
                     }}
                   >
                     <div style={{ flex: 1 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.1rem' }}>
                         <div style={{ fontWeight: '500', fontSize: '16px', color: 'var(--text-secondary)' }}>
                           {getSchoolDisplayName(school.name)}
                         </div>
@@ -475,7 +476,7 @@ export function SchoolList({
                           </button>
                         )}
                       </div>
-                      <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.25rem', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                      <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.75rem', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
                         <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <i className="fas fa-graduation-cap" style={{ fontSize: '11px' }}></i>
                         </div>
@@ -933,12 +934,10 @@ export function SchoolList({
       </div>
 
       {/* School Type Filters */}
-      <div style={{ flexShrink: 0, borderTop: '1px solid var(--border-color)' }}>
-        <SchoolTypeFilter 
-          filters={schoolTypeFilters}
-          onChange={setSchoolTypeFilters}
-        />
-      </div>
+      <SchoolTypeFilter 
+        filters={schoolTypeFilters}
+        onChange={setSchoolTypeFilters}
+      />
     </div>
   );
 }

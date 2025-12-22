@@ -183,7 +183,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           border-radius: ${pillHeight}px;
           padding: 0;
           box-sizing: border-box;
-          background: ${isSelected ? 'transparent !important' : `radial-gradient(
+          background: ${isSelected ? 'var(--active-marker-lens-bg, transparent) !important' : `radial-gradient(
             ellipse ${circleWidth / 2}px ${circleHeight / 2}px at ${numberCenterX}px 50%,
             transparent 99%,
             ${backgroundColor} 100%
@@ -194,7 +194,7 @@ export function createNumberedIcon(number: number, routeColor: string, time?: st
           border-color: white !important;
         }
         .numbered-marker-wrapper-${classId}.active-pin .numbered-marker-pill-${classId} {
-          border-color: rgba(255, 255, 255, 0.3) !important;
+          border-color: white !important;
         }
         .numbered-marker-lens-${classId} {
           position: absolute;

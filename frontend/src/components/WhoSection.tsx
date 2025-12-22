@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ChevronIcon } from './ChevronIcon';
 
 interface Contact {
   name: string;
@@ -242,15 +243,7 @@ export function WhoSection({ className, style }: { className?: string; style?: R
                 minWidth: '40px',
               }}
             >
-               <i 
-                  className="fas fa-chevron-down"
-                  style={{ 
-                    fontSize: '10px',
-                    transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-                    transition: 'transform 0.2s',
-                    display: 'inline-block',
-                  }}
-               ></i>
+               <ChevronIcon direction={isExpanded ? 'up' : 'down'} size={10} />
             </div>
         </div>
 

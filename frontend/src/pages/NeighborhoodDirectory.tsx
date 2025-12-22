@@ -6,6 +6,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { useStore } from '../store/useStore';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { Footer } from '../components/Footer';
+import { ChevronIcon } from '../components/ChevronIcon';
 
 interface NeighborhoodData {
   name: string;
@@ -211,7 +212,7 @@ export function NeighborhoodDirectory() {
                       gap: '0.25rem'
                     }}
                   >
-                    Explore Map <i className="fas fa-chevron-right" style={{ fontSize: '0.75rem' }}></i>
+                    Explore Map <ChevronIcon direction="right" size={12} />
                   </Link>
                 </div>
               </div>

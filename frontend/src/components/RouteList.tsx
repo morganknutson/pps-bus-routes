@@ -2,6 +2,7 @@ import { useStore } from '../store/useStore';
 import { RouteListBase, RouteListConfig } from './RouteListBase';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { analyticsService } from '../services/analytics';
+import { XIcon } from './XIcon';
 
 interface RouteListProps {
   showBothOption?: boolean;
@@ -190,7 +191,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
               }}
             aria-label="Clear school selection"
           >
-            <i className="fas fa-times" style={{ fontSize: '14px' }}></i>
+            <XIcon />
           </button>
           </div>
         </div>

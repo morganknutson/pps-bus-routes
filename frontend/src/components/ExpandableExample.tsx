@@ -1,4 +1,5 @@
 import { useState, ReactNode } from 'react';
+import { ChevronIcon } from './ChevronIcon';
 
 interface ExpandableExampleProps {
   title: string;
@@ -42,15 +43,7 @@ export function ExpandableExample({ title, children, defaultExpanded = false }: 
         }}
       >
         <span>{title}</span>
-        <i 
-          className="fas fa-chevron-down"
-          style={{
-            fontSize: '12px',
-            transition: 'transform 0.2s ease',
-            transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-            display: 'inline-block',
-          }}
-        />
+        <ChevronIcon direction={isExpanded ? 'up' : 'down'} size={12} />
       </button>
       {isExpanded && (
         <div style={{

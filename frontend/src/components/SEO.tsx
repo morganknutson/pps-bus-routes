@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { School, Route, Stop } from '../types';
+import { useStore } from '../store/useStore';
 
 interface FAQItem {
   question: string;
@@ -34,6 +35,9 @@ export const SEO: React.FC<SEOProps> = ({
   selectedStop,
   faqItems,
 }) => {
+  const isDarkMode = useStore(state => state.isDarkMode);
+  const themeColor = isDarkMode ? '#3A3A3A' : '#ffffff';
+  
   const siteTitle = 'PPS Bus Routes';
   const url = window.location.href;
   const origin = window.location.origin;
@@ -133,6 +137,7 @@ export const SEO: React.FC<SEOProps> = ({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
+      <meta name="theme-color" content={themeColor} />
       {canonical && <link rel="canonical" href={canonical} />}
 
       {/* Open Graph / Facebook */}

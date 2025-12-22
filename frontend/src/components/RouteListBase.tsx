@@ -3,6 +3,7 @@ import { formatStreetName } from '../utils/formatAddress';
 import { getSchoolTypes } from '../utils/schoolUtils';
 import { formatEffectiveDate } from '../utils/dateUtils';
 import { RouteIcon } from './RouteIcon';
+import { ChevronIcon } from './ChevronIcon';
 import type { Route, Stop } from '../types';
 
 /**
@@ -394,8 +395,7 @@ export function RouteListBase({
       <div
         key={route.id}
         style={{
-          border: '1px solid',
-          borderColor: isRouteSelected ? 'transparent' : 'var(--border-color)',
+          border: isRouteSelected ? '0px solid rgba(0, 0, 0, 0)' : '1px solid var(--border-color)',
           borderRadius: '12px',
           backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'transparent',
           boxShadow: isRouteSelected ? '0 1px 3px var(--shadow-large)' : 'none',
@@ -542,15 +542,7 @@ export function RouteListBase({
             }}
             title={isExpanded ? 'Collapse' : 'Expand'}
           >
-            <i 
-              className="fas fa-chevron-down"
-              style={{ 
-                fontSize: '10px',
-                transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.2s',
-                display: 'inline-block',
-              }}
-            ></i>
+            <ChevronIcon direction={isExpanded ? 'up' : 'down'} size={10} />
           </button>
         </div>
         
@@ -634,16 +626,7 @@ export function RouteListBase({
             )}
             <span style={{ fontWeight: '400', color: 'var(--text-tertiary)' }}>({sectionRoutes.length})</span>
           </h3>
-          <i 
-            className="fas fa-chevron-down"
-            style={{ 
-              transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-              transition: 'transform 0.2s',
-              display: 'inline-block',
-              fontSize: '12px',
-              color: 'var(--text-tertiary)',
-            }}
-          />
+          <ChevronIcon direction={isExpanded ? 'up' : 'down'} size={12} />
         </button>
         {isExpanded && renderRouteGroups(sectionRoutes)}
       </div>

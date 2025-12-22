@@ -169,10 +169,10 @@ export function Sidebar({
         {/* Tabs */}
         {tabs}
         
-        {/* Scrollable Content Section */}
+        {/* Content Section */}
         <div style={{ 
           flex: 1, 
-          overflow: 'auto',
+          overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
         }}>
@@ -237,10 +237,10 @@ export function Sidebar({
         {/* Tabs */}
         {tabs}
         
-        {/* Scrollable Content Section */}
+        {/* Content Section */}
         <div style={{ 
           flex: 1, 
-          overflow: 'auto',
+          overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
         }}>

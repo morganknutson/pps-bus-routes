@@ -63,6 +63,7 @@ const sections: Section[] = [
       { id: 'route-cache-service', title: '5. Route Cache Service' },
       { id: 'theme-service', title: '6. Theme Service' },
       { id: 'global-store', title: '7. Global Store (Zustand)' },
+      { id: 'pwa-support', title: '8. PWA & Home Screen Support' },
     ],
   },
   {
@@ -2413,7 +2414,7 @@ export function TechPage() {
 
             <div id="global-store" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                6. Global Store (Zustand)
+                7. Global Store (Zustand)
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Manages all application state and provides debounced caching for route updates.
@@ -2423,6 +2424,23 @@ export function TechPage() {
                   <li style={{ marginBottom: '8px' }}><strong>Atomic Updates:</strong> Uses synchronous state updates to prevent race conditions during complex operations.</li>
                   <li style={{ marginBottom: '8px' }}><strong>Debounced Caching:</strong> Implements a 250ms debounced cache write mechanism to handle bulk updates (like geocoding) without redundant <code>localStorage</code> operations.</li>
                   <li><strong>Centralized Logic:</strong> Encapsulates color assignment, route selection, and direction filtering logic in a single location.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="pwa-support" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                8. PWA & Home Screen Support
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                The application supports Progressive Web App (PWA) features for a "native-like" experience when saved to a device's home screen.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Web App Manifest:</strong> <code>frontend/public/manifest.json</code> defines the app's name, icons, and display mode (standalone).</li>
+                  <li style={{ marginBottom: '8px' }}><strong>iOS Integration:</strong> Uses <code>apple-touch-icon</code> and specific meta tags (<code>apple-mobile-web-app-capable</code>) for optimal performance on iOS devices.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Icons:</strong> High-resolution <code>apple-touch-icon.png</code> (180x180) provided in the public directory.</li>
+                  <li><strong>Status Bar:</strong> Configured for a seamless look with the system UI using <code>apple-mobile-web-app-status-bar-style</code>.</li>
                 </ul>
               </div>
             </div>

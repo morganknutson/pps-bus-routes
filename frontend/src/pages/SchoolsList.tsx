@@ -11,6 +11,7 @@ import { createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { useMarkers, MarkerData } from '../hooks/useMarkers';
 import { ProgressBar } from '../components/ProgressBar';
 import { RouteIcon } from '../components/RouteIcon';
+import { XIcon } from '../components/XIcon';
 import 'leaflet/dist/leaflet.css';
 
 // Set default marker icon to use Font Awesome
@@ -337,12 +338,6 @@ export function SchoolsList() {
           flexDirection: 'column',
           overflow: 'hidden',
         }}>
-          {/* School Type Filters */}
-          <SchoolTypeFilter 
-            filters={schoolTypeFilters}
-            onChange={setSchoolTypeFilters}
-          />
-
           {/* Search */}
           <div style={{ padding: '1rem', borderBottom: '1px solid #ddd' }}>
             <div style={{ position: 'relative' }}>
@@ -396,7 +391,7 @@ export function SchoolsList() {
                   }}
                   aria-label="Clear search"
                 >
-                  ×
+                  <XIcon />
                 </button>
               )}
             </div>
@@ -436,10 +431,10 @@ export function SchoolsList() {
                         }
                       }}
                     >
-                      <div style={{ fontWeight: '600', fontSize: '18px', color: '#333', marginBottom: '0.25rem' }}>
+                      <div style={{ fontWeight: '600', fontSize: '18px', color: '#333', marginBottom: '0.1rem' }}>
                         {getSchoolDisplayName(school.name)}
                       </div>
-                      <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.25rem', fontWeight: '500' }}>
+                      <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.75rem', fontWeight: '500' }}>
                         {schoolTypes.join(' & ')}
                       </div>
                       {school.address && (
@@ -484,6 +479,12 @@ export function SchoolsList() {
               </div>
             )}
           </div>
+
+          {/* School Type Filters */}
+          <SchoolTypeFilter 
+            filters={schoolTypeFilters}
+            onChange={setSchoolTypeFilters}
+          />
         </div>
 
         {/* Map */}
@@ -564,7 +565,7 @@ export function SchoolsList() {
               }}
               aria-label="Close dialog"
             >
-              ×
+              <XIcon size={16} />
             </button>
           </div>
           {selectedSchool.routeCount !== undefined && (

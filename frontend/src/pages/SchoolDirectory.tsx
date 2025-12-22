@@ -8,6 +8,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { MapPinIcon } from '../components/MapPinIcon';
 import { Footer } from '../components/Footer';
+import { ChevronIcon } from '../components/ChevronIcon';
 
 export function SchoolDirectory() {
   const [schools, setSchools] = useState<School[]>([]);
@@ -283,7 +284,7 @@ export function SchoolDirectory() {
                       alignItems: 'center',
                       gap: '0.25rem'
                     }}>
-                      {school.routeCount === 0 ? 'Details' : 'View Routes'} <i className="fas fa-chevron-right" style={{ fontSize: '0.75rem' }}></i>
+                      {school.routeCount === 0 ? 'Details' : 'View Routes'} <ChevronIcon direction="right" size={12} />
                     </span>
                   </div>
                 </Link>

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { ChevronIcon } from './ChevronIcon';
 
 interface SchoolTypeFilters {
   elementary: boolean;
@@ -81,60 +82,46 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
           style={{
             width: '100%',
             display: 'flex',
-            alignItems: 'stretch',
-            padding: 0,
+            alignItems: 'center',
+            padding: '0 1.25rem',
             backgroundColor: 'var(--bg-tertiary)',
             color: 'var(--text-primary)',
-            border: '1px solid var(--border-color)',
-            borderRadius: '12px',
+            border: 'none',
+            borderRadius: '9999px',
             cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: '600',
+            fontSize: '12px',
+            fontWeight: '500',
             height: '44px',
             boxSizing: 'border-box',
             boxShadow: '0 1px 3px var(--shadow-large)',
-            transition: 'background-color 0.2s, border-color 0.2s',
+            transition: 'background-color 0.2s, transform 0.1s',
             overflow: 'hidden',
           }}
           onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
+          onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.98)'}
+          onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
         >
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '0.75rem', 
-            padding: '0 1rem', 
-            flex: 1,
-            minWidth: 0 
-          }}>
-            <span style={{ color: 'var(--text-primary)', fontSize: '13px' }}>Filters</span>
-            {!isAllSelected && (
-              <span style={{
-                color: 'var(--text-tertiary)',
-                fontSize: '12px',
-                fontWeight: '400',
-                marginLeft: 'auto'
-              }}>
-                {activeFilterCount} active
-              </span>
-            )}
-          </div>
+          <span style={{ color: 'var(--text-primary)' }}>Filters</span>
+          {!isAllSelected && (
+            <span style={{
+              color: 'var(--text-tertiary)',
+              fontSize: '11px',
+              fontWeight: '400',
+              marginLeft: '0.5rem',
+              opacity: 0.8
+            }}>
+              ({activeFilterCount} active)
+            </span>
+          )}
           <div style={{
-            width: '44px',
+            marginLeft: 'auto',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            borderLeft: '1px solid var(--border-color)',
             color: 'var(--text-tertiary)',
           }}>
-            <i 
-              className="fas fa-chevron-down" 
-              style={{ 
-                fontSize: '12px',
-                transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
-                transition: 'transform 0.2s',
-              }}
-            ></i>
+            <ChevronIcon direction={isOpen ? 'up' : 'down'} size={10} />
           </div>
         </button>
 

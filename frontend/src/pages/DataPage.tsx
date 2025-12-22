@@ -4,6 +4,7 @@ import { SEO } from '../components/SEO';
 import { ProgressBar } from '../components/ProgressBar';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { Footer } from '../components/Footer';
+import { ChevronIcon } from '../components/ChevronIcon';
 
 export function DataPage() {
   console.log('[DataPage] Component rendering...');
@@ -408,10 +409,7 @@ export function DataPage() {
                         onClick={() => handleRowExpand(school.schoolId)}
                       >
                         <td style={{ padding: '1rem', verticalAlign: 'middle', width: '40px' }}>
-                          <i 
-                            className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'}`}
-                            style={{ fontSize: '14px', color: 'var(--text-primary)' }}
-                          ></i>
+                          <ChevronIcon direction={isExpanded ? 'down' : 'right'} size={14} color="var(--text-primary)" />
                         </td>
                         <td style={{ padding: '1rem', verticalAlign: 'middle' }}>
                           <div style={{ fontWeight: 'bold' }}>{school.schoolName}</div>
@@ -661,10 +659,7 @@ export function DataPage() {
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 'bold' }}>{school.schoolName}</div>
                   </div>
-                  <i 
-                    className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'}`}
-                    style={{ fontSize: '14px', color: 'var(--text-primary)', marginLeft: '0.5rem' }}
-                  ></i>
+                  <ChevronIcon direction={isExpanded ? 'down' : 'right'} size={14} color="var(--text-primary)" style={{ marginLeft: '0.5rem' }} />
                 </div>
 
                 {/* Data Pairs */}

@@ -3,6 +3,8 @@ import { Header } from '../components/Header';
 import { ProgressBar } from '../components/ProgressBar';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { analyticsService } from '../services/analytics';
+import { XIcon } from '../components/XIcon';
+import { ChevronIcon } from '../components/ChevronIcon';
 
 export function VerificationPage() {
   console.log('[VerificationPage] Component rendering...');
@@ -1566,7 +1568,7 @@ export function VerificationPage() {
                   onClick={() => setStrangeStopsReport(null)}
                   style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}
                 >
-                  <i className="fas fa-times"></i>
+                  <XIcon />
                 </button>
               </div>
               <div style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>
@@ -1598,7 +1600,7 @@ export function VerificationPage() {
                   onClick={() => setSchoolStopsReport(null)}
                   style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}
                 >
-                  <i className="fas fa-times"></i>
+                  <XIcon />
                 </button>
               </div>
               <div style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>
@@ -1631,7 +1633,7 @@ export function VerificationPage() {
                   onClick={() => setFixStopsResult(null)}
                   style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}
                 >
-                  <i className="fas fa-times"></i>
+                  <XIcon />
                 </button>
               </div>
               <div style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>
@@ -1931,7 +1933,7 @@ export function VerificationPage() {
                           <div style={{ fontSize: '11px', marginBottom: '0.5rem' }}>
                             {result.error ? (
                               <span style={{ color: '#f44' }}>
-                                <i className="fas fa-times-circle" style={{ marginRight: '0.25rem' }}></i>
+                                <XIcon color="#f44" style={{ marginRight: '0.25rem', display: 'inline-block' }} />
                                 Error
                               </span>
                             ) : result.needsUpdate ? (
@@ -2018,7 +2020,7 @@ export function VerificationPage() {
                             <td style={{ padding: '0.75rem' }}>
                               {result.error ? (
                                 <span style={{ color: '#f44' }}>
-                                  <i className="fas fa-times-circle" style={{ marginRight: '0.25rem' }}></i>
+                                  <XIcon color="#f44" style={{ marginRight: '0.25rem', display: 'inline-block' }} />
                                   Error
                                 </span>
                               ) : result.needsUpdate ? (
@@ -2139,7 +2141,7 @@ export function VerificationPage() {
             {pdfStatus.summary.schoolsWithoutPdfs}
           </div>
           <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-            <i className="fas fa-times-circle"></i>
+            <XIcon color="#f44" style={{ display: 'inline-block' }} />
             <span>No PDFs</span>
           </div>
         </div>
@@ -2197,7 +2199,7 @@ export function VerificationPage() {
                     onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
                     title="Dismiss"
                   >
-                    <i className="fas fa-times"></i>
+                    <XIcon />
                   </button>
                 </div>
               );
@@ -2294,10 +2296,7 @@ export function VerificationPage() {
                       onClick={() => handleRowExpand(school.schoolId)}
                     >
                       <td style={{ padding: '1rem', verticalAlign: 'middle', width: '40px' }}>
-                        <i 
-                          className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'}`}
-                          style={{ fontSize: '14px', color: 'var(--text-primary)' }}
-                        ></i>
+                        <ChevronIcon direction={isExpanded ? 'down' : 'right'} size={14} color="var(--text-primary)" />
                       </td>
                       <td style={{ padding: '1rem', verticalAlign: 'middle' }}>
                         <div style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>{school.schoolName}</div>
@@ -2737,7 +2736,7 @@ export function VerificationPage() {
                                   statusIcon = <i className="fas fa-check-circle" style={{ marginLeft: '0.5rem', color: '#4CAF50' }}></i>;
                                   statusColor = '#4CAF50';
                                 } else if (isError) {
-                                  statusIcon = <i className="fas fa-times-circle" style={{ marginLeft: '0.5rem', color: '#f44336' }}></i>;
+                                  statusIcon = <XIcon color="#f44336" style={{ marginLeft: '0.5rem', display: 'inline-block' }} />;
                                   statusColor = '#f44336';
                                 }
                                 
@@ -3012,10 +3011,7 @@ export function VerificationPage() {
                       {school.schoolId}
                     </div>
                   </div>
-                  <i 
-                    className={`fas ${isExpanded ? 'fa-chevron-down' : 'fa-chevron-right'}`}
-                    style={{ fontSize: '14px', color: 'var(--text-primary)', marginLeft: '0.5rem' }}
-                  ></i>
+                  <ChevronIcon direction={isExpanded ? 'down' : 'right'} size={14} color="var(--text-primary)" style={{ marginLeft: '0.5rem' }} />
                 </div>
 
                 {/* Data Pairs with Timestamps */}

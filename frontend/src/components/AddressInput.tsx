@@ -9,6 +9,7 @@ import { findClosestStop } from '../utils/findClosestStop';
 import { formatDistance } from '../utils/distance';
 import { Route, Stop } from '../types';
 import { MapPinIcon } from './MapPinIcon';
+import { XIcon } from './XIcon';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -315,7 +316,7 @@ export function AddressInput() {
               }}
             aria-label="Clear address"
           >
-            <i className="fas fa-times" style={{ fontSize: '14px' }}></i>
+            <XIcon />
           </button>
         </div>
         ) : (

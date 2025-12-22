@@ -1,0 +1,18 @@
+{
+  "short_name": "PPS Bus Maps",
+  "name": "PPS Bus Route Maps",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "description": "Interactive bus route maps for Portland Public Schools."
+}
+
+

@@ -15,6 +15,7 @@ import { MapPinIcon } from '../components/MapPinIcon';
 import { Footer } from '../components/Footer';
 import { WhoSection } from '../components/WhoSection';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
+import { XIcon } from '../components/XIcon';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -556,7 +557,7 @@ export function HomePage() {
                   }}
                   aria-label="Clear address"
                 >
-                  ×
+                  <XIcon />
                 </button>
               </div>
             ) : (
@@ -683,7 +684,7 @@ export function HomePage() {
                   }}
                   aria-label="Clear school"
                 >
-                  ×
+                  <XIcon />
                 </button>
               </div>
             ) : (

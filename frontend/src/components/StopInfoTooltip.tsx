@@ -6,6 +6,7 @@ import { formatEffectiveDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { MapPinIcon } from './MapPinIcon';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
+import { XIcon } from './XIcon';
 
 interface StopInfoTooltipProps {
   route: Route;
@@ -53,7 +54,7 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
         color: 'white',
         fontSize: '11px',
         fontWeight: 'bold',
-        boxShadow: '0 1px 2px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(0,0,0,0.08)',
+        boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.08)',
       }}>
         {number}
       </div>
@@ -110,7 +111,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
       borderRadius: isMobile ? '0' : '12px',
       overflow: 'hidden',
       boxShadow: isMobile ? 'none' : '0 4px 20px rgba(0,0,0,0.15)',
-      border: isMobile ? 'none' : '1px solid var(--border-color)',
+      border: isMobile ? 'none' : '1px solid var(--border-color-darker)',
       pointerEvents: 'auto',
     }}>
       {/* Header with Route Info */}
@@ -123,7 +124,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         backgroundColor: 'var(--bg-secondary)',
         position: 'relative',
       }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
           <span style={{ fontWeight: '600', fontSize: isMobile ? '26px' : '18px' }}>
             Route {route.name.replace('-upcoming', '')}
             {route.name.includes('-upcoming') && route.effectiveDate && (
@@ -150,25 +151,24 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
           style={{
             background: 'none',
             border: 'none',
-            fontSize: '24px',
-            cursor: 'pointer',
-            color: 'var(--text-tertiary)',
-            padding: '4px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            color: 'var(--text-tertiary)',
+            cursor: 'pointer',
+            padding: '4px',
             position: 'absolute',
-            top: isMobile ? '-3px' : '8px',
+            top: isMobile ? '3px' : '14px',
             right: isMobile ? '22px' : '18px',
             transition: 'color 0.2s ease',
             zIndex: 10,
-            fontWeight: 200,
             lineHeight: 1
           }}
           onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
           onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}
+          aria-label="Close dialog"
         >
-          ×
+          <XIcon />
         </button>
       </div>
 
@@ -305,7 +305,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         <div style={{ 
           padding: '16px', 
           backgroundColor: 'rgba(78, 205, 196, 0.05)', 
-          borderTop: '1px solid var(--border-color)',
+          borderTop: '1px solid var(--border-color-darker)', 
           display: 'flex',
           flexDirection: 'column',
           gap: '10px'

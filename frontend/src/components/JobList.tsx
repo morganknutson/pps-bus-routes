@@ -4,6 +4,7 @@
  */
 
 import { useState, useEffect } from 'react';
+import { ChevronIcon } from './ChevronIcon';
 
 export interface Job {
   id: string;
@@ -209,10 +210,7 @@ export function JobList({ jobs, onRetry, onCancel, showSchoolName = false, schoo
                           Cancel
                         </button>
                       )}
-                      <i 
-                        className={`fas ${expandedJobs[job.id] ? 'fa-chevron-down' : 'fa-chevron-right'}`}
-                        style={{ fontSize: '12px', color: 'var(--text-secondary)', marginLeft: '0.5rem' }}
-                      ></i>
+                      <ChevronIcon direction={expandedJobs[job.id] ? 'down' : 'right'} size={12} color="var(--text-secondary)" style={{ marginLeft: '0.5rem' }} />
                     </div>
                   </td>
                 </tr>
@@ -286,6 +284,7 @@ export function JobList({ jobs, onRetry, onCancel, showSchoolName = false, schoo
     </div>
   );
 }
+
 
 
 

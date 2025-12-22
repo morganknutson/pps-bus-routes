@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { DarkModeToggle } from './DarkModeToggle';
 import { useStore } from '../store/useStore';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { XIcon } from './XIcon';
 import './Header.css';
 
 interface HeaderProps {
@@ -259,7 +260,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
                 }}
                 aria-label="Toggle menu"
               >
-                <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                {menuOpen ? <XIcon /> : <i className="fas fa-bars"></i>}
               </button>
             )}
             {isAdminPage && !isMobile && (

@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
 import { SEO } from '../components/SEO';
+import { XIcon } from '../components/XIcon';
 
 interface FileNode {
   id: string;
@@ -924,7 +925,7 @@ export function ArchitecturePage() {
                     lineHeight: 1,
                   }}
                 >
-                  ×
+                  <XIcon />
                 </button>
               </div>
 

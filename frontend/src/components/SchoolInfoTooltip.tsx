@@ -7,6 +7,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { useStore } from '../store/useStore';
 import { RouteIcon } from './RouteIcon';
 import { MapPinIcon } from './MapPinIcon';
+import { XIcon } from './XIcon';
 
 interface SchoolInfoTooltipProps {
   school: School;
@@ -84,7 +85,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
       borderRadius: isMobile ? '0' : '16px',
       overflow: 'hidden',
       boxShadow: isMobile ? 'none' : '0 10px 25px rgba(0, 0, 0, 0.2)',
-      border: isMobile ? 'none' : '1px solid var(--border-color)',
+      border: isMobile ? 'none' : '1px solid var(--border-color-darker)',
       pointerEvents: 'auto',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
@@ -92,7 +93,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
       <div style={{ 
         padding: isMobile ? '8px 2rem 12px 2rem' : '12px 1.25rem',
         backgroundColor: 'var(--bg-secondary)', 
-        borderBottom: '1px solid var(--border-color)',
+        borderBottom: '1px solid rgb(228, 228, 228)',
         position: 'relative',
         display: 'flex',
         alignItems: 'flex-start',
@@ -135,20 +136,19 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               justifyContent: 'center',
               color: 'var(--text-tertiary)',
               cursor: 'pointer',
-              fontSize: '24px',
               padding: '4px',
               position: 'absolute',
-              top: isMobile ? '-3px' : '8px',
+              top: isMobile ? '3px' : '14px',
               right: isMobile ? '22px' : '18px',
               transition: 'color 0.2s ease',
               zIndex: 10,
-              fontWeight: 200,
               lineHeight: 1
             }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
             onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}
+            aria-label="Close dialog"
           >
-            ×
+            <XIcon />
           </button>
         )}
       </div>
@@ -201,7 +201,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             gap: '1rem', 
             marginTop: '1.25rem',
             paddingTop: '1rem',
-            borderTop: '1px solid var(--border-color)'
+            borderTop: '1px solid rgb(238, 238, 238)'
           }}>
             {school.schoolPageLink && (
               <a
