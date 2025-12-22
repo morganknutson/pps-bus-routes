@@ -434,7 +434,7 @@ export function ExplorerApp() {
       if (activeTab === 'routes' && !routes.some(r => r.isSelected)) {
         console.log('[ExplorerApp] Tab changed to routes, applying default selection');
         
-        const urlState = parseUrlPath(window.location.pathname, '');
+        const urlState = parseUrlPath(location.pathname, '');
         const schoolInUrl = urlState.schoolId?.toLowerCase();
         const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
@@ -454,7 +454,7 @@ export function ExplorerApp() {
     if (isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
       console.log('[ExplorerApp] Routes already loaded (from navigation), applying selection');
       
-      const urlState = parseUrlPath(window.location.pathname, '');
+      const urlState = parseUrlPath(location.pathname, '');
       const schoolInUrl = urlState.schoolId?.toLowerCase();
       const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
       
@@ -479,7 +479,7 @@ export function ExplorerApp() {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
         
         // Pre-apply state to avoid UI flicker
-        const urlState = parseUrlPath(window.location.pathname, '');
+        const urlState = parseUrlPath(location.pathname, '');
         const schoolInUrl = urlState.schoolId?.toLowerCase();
         const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
@@ -509,7 +509,7 @@ export function ExplorerApp() {
 
     loadRoutes();
     prevSchoolIdRef.current = selectedSchoolId;
-  }, [selectedSchoolId, setRoutes, setLoading]); // Removed routes.length and activeTab to prevent loops
+  }, [selectedSchoolId, setRoutes, setLoading, activeTab, location.pathname]); // Added activeTab and location.pathname
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -1061,7 +1061,7 @@ function AdminApp() {
       if (activeTab === 'routes' && !routes.some(r => r.isSelected)) {
         console.log('[AdminApp] Tab changed to routes, applying default selection');
         
-        const urlState = parseUrlPath(window.location.pathname, '/admin');
+        const urlState = parseUrlPath(location.pathname, '/admin');
         const schoolInUrl = urlState.schoolId?.toLowerCase();
         const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
@@ -1081,7 +1081,7 @@ function AdminApp() {
     if (isInitialMount && routes.length > 0 && routes.some(r => r.stops && r.stops.length > 0)) {
       console.log('[AdminApp] Routes already loaded (from navigation), applying selection');
       
-      const urlState = parseUrlPath(window.location.pathname, '/admin');
+      const urlState = parseUrlPath(location.pathname, '/admin');
       const schoolInUrl = urlState.schoolId?.toLowerCase();
       const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
       
@@ -1106,7 +1106,7 @@ function AdminApp() {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
         
         // Pre-apply state to avoid UI flicker
-        const urlState = parseUrlPath(window.location.pathname, '/admin');
+        const urlState = parseUrlPath(location.pathname, '/admin');
         const schoolInUrl = urlState.schoolId?.toLowerCase();
         const schoolMatches = schoolInUrl === selectedSchoolId.toLowerCase();
         
@@ -1136,7 +1136,7 @@ function AdminApp() {
 
     loadRoutes();
     prevSchoolIdRef.current = selectedSchoolId;
-  }, [selectedSchoolId, setRoutes, setLoading]); // Removed activeTab and routes.length to prevent loops
+  }, [selectedSchoolId, setRoutes, setLoading, activeTab, location.pathname]); // Added activeTab and location.pathname
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {

@@ -3,8 +3,21 @@ import React from 'react';
 
 // Mock Leaflet
 vi.mock('react-leaflet', () => {
+  const mockMap = {
+    setView: vi.fn(),
+    fitBounds: vi.fn(),
+    project: vi.fn(() => ({ add: vi.fn(() => ({ lat: 0, lng: 0 })) })),
+    unproject: vi.fn(() => ({ lat: 0, lng: 0 })),
+    getContainer: vi.fn(() => ({})),
+    whenReady: vi.fn((cb: any) => cb()),
+    invalidateSize: vi.fn(),
+  };
+
   return {
-    MapContainer: ({ children }: any) => <div data-testid="map-container">{children}</div>,
+    MapContainer: require('react').forwardRef(({ children }: any, ref: any) => {
+      require('react').useImperativeHandle(ref, () => mockMap);
+      return <div data-testid="map-container">{children}</div>;
+    }),
     TileLayer: () => <div data-testid="tile-layer" />,
     Marker: ({ eventHandlers, children }: any) => (
       <div 
@@ -17,15 +30,7 @@ vi.mock('react-leaflet', () => {
     Polyline: () => <div data-testid="polyline" />,
     Tooltip: ({ children }: any) => <div data-testid="tooltip">{children}</div>,
     ZoomControl: () => <div data-testid="zoom-control" />,
-    useMap: () => ({
-      setView: vi.fn(),
-      fitBounds: vi.fn(),
-      project: vi.fn(() => ({ add: vi.fn(() => ({ lat: 0, lng: 0 })) })),
-      unproject: vi.fn(() => ({ lat: 0, lng: 0 })),
-      getContainer: vi.fn(() => ({})),
-      whenReady: vi.fn((cb) => cb()),
-      invalidateSize: vi.fn(),
-    }),
+    useMap: () => mockMap,
   };
 });
 

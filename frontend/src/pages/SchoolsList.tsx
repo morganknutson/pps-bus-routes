@@ -95,7 +95,8 @@ function SchoolMarkersManager({
       .filter(s => s.coordinates && s.coordinates.length === 2)
       .map(school => {
         const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-        const schoolColor = getSchoolColor(schoolTypes);
+        const isNoRoutes = school.routeCount === 0;
+        const schoolColor = isNoRoutes ? '#f44' : getSchoolColor(schoolTypes);
         return {
           id: school.id,
           position: [school.coordinates![1], school.coordinates![0]] as [number, number], // [lat, lng]
@@ -407,7 +408,8 @@ export function SchoolsList() {
               <div>
                 {schoolsWithCoords.map((school) => {
                   const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-                  const schoolColor = getSchoolColor(schoolTypes);
+                  const isNoRoutes = school.routeCount === 0;
+                  const schoolColor = isNoRoutes ? '#f44' : getSchoolColor(schoolTypes);
                   return (
                     <div
                       key={school.id}
@@ -431,8 +433,13 @@ export function SchoolsList() {
                         }
                       }}
                     >
-                      <div style={{ fontWeight: '600', fontSize: '18px', color: '#333', marginBottom: '0.1rem' }}>
-                        {getSchoolDisplayName(school.name)}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.1rem' }}>
+                        <div style={{ fontWeight: '600', fontSize: '18px', color: '#333' }}>
+                          {getSchoolDisplayName(school.name)}
+                        </div>
+                        {isNoRoutes && (
+                          <i className="fas fa-exclamation-circle" style={{ color: '#f44', fontSize: '14px' }} title="No route data available"></i>
+                        )}
                       </div>
                       <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.75rem', fontWeight: '500' }}>
                         {schoolTypes.join(' & ')}
@@ -534,11 +541,23 @@ export function SchoolsList() {
               <h2 style={{ margin: 0, fontSize: '20px', color: '#333', marginBottom: '0.5rem' }}>{getSchoolDisplayName(selectedSchool.name)}</h2>
               {(() => {
                 const schoolTypes = selectedSchool.schoolTypes || getSchoolTypes(selectedSchool.name);
-                const schoolColor = getSchoolColor(schoolTypes);
+                const isNoRoutes = selectedSchool.routeCount === 0;
+                const schoolColor = isNoRoutes ? '#f44' : getSchoolColor(schoolTypes);
                 return (
                   <div style={{ fontSize: '14px', color: schoolColor, fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <i className="fas fa-graduation-cap" style={{ fontSize: '14px' }}></i>
                     <span>{schoolTypes.join(' & ')}</span>
+                    {isNoRoutes && (
+                      <span style={{ 
+                        backgroundColor: 'rgba(244, 67, 54, 0.1)', 
+                        padding: '2px 8px', 
+                        borderRadius: '4px',
+                        fontSize: '11px',
+                        fontWeight: '700'
+                      }}>
+                        NO ROUTE DATA
+                      </span>
+                    )}
                   </div>
                 );
               })()}

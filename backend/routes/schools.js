@@ -13,14 +13,9 @@ const SCHOOLS_FILE = path.join(__dirname, '..', '..', 'data', 'schools.json');
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 
 // Simple in-memory cache for route counts and update times
-// Cache expires after 10 minutes
+// Cache expires after 5 minutes
 const routeStatsCache = new Map();
-const pdfExistenceCache = new Map(); // Cache for hasPdfs check
-const SCHOOLS_WITH_PDFS_CACHE = {
-  data: null,
-  timestamp: 0
-};
-const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 function getCachedStats(schoolId) {
   const cached = routeStatsCache.get(schoolId);
@@ -37,25 +32,8 @@ function setCachedStats(schoolId, data) {
   });
 }
 
-function getCachedPdfExistence(schoolId) {
-  const cached = pdfExistenceCache.get(schoolId);
-  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
-    return cached.exists;
-  }
-  return null;
-}
-
-function setCachedPdfExistence(schoolId, exists) {
-  pdfExistenceCache.set(schoolId, {
-    exists,
-    timestamp: Date.now(),
-  });
-}
-
 function invalidateRouteStatsCache(schoolId) {
   routeStatsCache.delete(schoolId);
-  pdfExistenceCache.delete(schoolId);
-  SCHOOLS_WITH_PDFS_CACHE.data = null;
 }
 
 // Export function to allow other modules to invalidate cache
@@ -81,28 +59,35 @@ function extractNeighborhood(placesData) {
 
 // Helper function to check if a school has PDFs downloaded
 async function hasPdfs(schoolId) {
-  // Check cache first
-  const cached = getCachedPdfExistence(schoolId);
-  if (cached !== null) {
-    return cached;
-  }
-
   try {
     const schoolPdfsDir = path.join(DATA_DIR, 'schools', schoolId, 'pdfs');
     
-    // Check if directory exists - use sync for speed in batch if needed, but async is usually fine
-    // However, readdir is enough to check existence
-    const files = await fs.readdir(schoolPdfsDir).catch(() => []);
-    const exists = files.some(f => f.toLowerCase().endsWith('.pdf'));
+    // Check if directory exists
+    try {
+      await fs.access(schoolPdfsDir);
+    } catch (e) {
+      // console.log(`[hasPdfs] Directory not found for ${schoolId}: ${schoolPdfsDir}`);
+      return false; // Directory doesn't exist
+    }
+
+    // Check if directory has any PDF files
+    const files = await fs.readdir(schoolPdfsDir);
+    const pdfFiles = files.filter(f => f.toLowerCase().endsWith('.pdf'));
     
-    setCachedPdfExistence(schoolId, exists);
-    return exists;
+    if (pdfFiles.length === 0) {
+      // console.log(`[hasPdfs] No PDFs found in ${schoolPdfsDir}`);
+    }
+    
+    return pdfFiles.length > 0;
   } catch (error) {
+    console.error(`Error checking PDFs for school ${schoolId}:`, error);
     return false;
   }
 }
 
 // Helper function to get route count and update time for a school (optimized)
+// Counts unique routes (morning and afternoon versions of the same route count as 1)
+// Returns both count and latest update time in one pass
 async function getRouteStats(schoolId) {
   // Check cache first
   const cached = getCachedStats(schoolId);
@@ -114,8 +99,15 @@ async function getRouteStats(schoolId) {
 
   try {
     const schoolRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
-    const files = await fs.readdir(schoolRoutesDir).catch(() => []);
     
+    try {
+      await fs.access(schoolRoutesDir);
+    } catch {
+      setCachedStats(schoolId, stats);
+      return stats;
+    }
+
+    const files = (await fs.readdir(schoolRoutesDir)).filter(f => f.endsWith('.json'));
     if (files.length === 0) {
       setCachedStats(schoolId, stats);
       return stats;
@@ -123,39 +115,35 @@ async function getRouteStats(schoolId) {
     
     // Track unique route names
     const uniqueRouteNames = new Set();
+    let latestTime = 0;
     
+    // Instead of reading every file content (which is slow), 
+    // let's just use the filenames and file stats for the count and time
+    // if the filename contains the route name.
     for (const filename of files) {
-      if (!filename.endsWith('.json')) continue;
-      
-      // Try standard "Route 100" format
-      let routeNameMatch = filename.match(/^Route\s+([A-Z0-9]+)/i);
-      if (routeNameMatch) {
-        uniqueRouteNames.add(routeNameMatch[1]);
-        continue;
+      // Filename format is usually "Route 100 (Morning).json" or similar
+      const routeNameMatch = filename.match(/^Route\s+([A-Z0-9]+)/i) || [null, filename.split('.')[0]];
+      const routeName = routeNameMatch[1];
+      if (routeName) uniqueRouteNames.add(routeName);
+
+      try {
+        const stats = await fs.stat(path.join(schoolRoutesDir, filename));
+        if (stats.mtimeMs > latestTime) {
+          latestTime = stats.mtimeMs;
+        }
+      } catch (e) {
+        // Ignore stat errors
       }
-      
-      // Try compact "{RouteNumber}{SchoolCode}-" format (e.g. 105ACC-A)
-      routeNameMatch = filename.match(/^(\d+)[A-Z]{2,}-/);
-      if (routeNameMatch) {
-        uniqueRouteNames.add(routeNameMatch[1]);
-        continue;
-      }
-      
-      // Fallback: use filename without extension
-      const fallbackName = filename.split('.')[0];
-      if (fallbackName) uniqueRouteNames.add(fallbackName);
     }
 
-    const routeCount = uniqueRouteNames.size;
-    stats.routeCount = routeCount;
+    stats.routeCount = uniqueRouteNames.size;
+    stats.routesUpdatedAt = latestTime > 0 ? new Date(latestTime).toISOString() : null;
     
-    console.log(`[getRouteStats] School ${schoolId}: found ${files.length} files, ${routeCount} unique routes`);
-    
-    // Only cache if we found routes, OR if it's been 0 for a while
-    // This helps with "cold starts" for new schools
+    // Cache the result
     setCachedStats(schoolId, stats);
     return stats;
   } catch (error) {
+    console.error(`Error getting route stats for school ${schoolId}:`, error);
     setCachedStats(schoolId, stats);
     return stats;
   }
@@ -166,75 +154,64 @@ async function getRouteStats(schoolId) {
  */
 router.get('/', async (req, res) => {
   const startTime = Date.now();
-  const includeStats = req.query.includeStats === 'true';
-  const showAll = req.query.all === 'true';
-  
   try {
-    // Check global schools cache
-    let schools;
-    const now = Date.now();
+    console.log(`[GET /api/schools] Request started`);
     
-    // Use separate cache for "all schools" vs "schools with PDFs"
-    if (!showAll && SCHOOLS_WITH_PDFS_CACHE.data && (now - SCHOOLS_WITH_PDFS_CACHE.timestamp < CACHE_TTL)) {
-      schools = SCHOOLS_WITH_PDFS_CACHE.data;
-    } else {
-      console.log(`[GET /api/schools] Loading from ${SCHOOLS_FILE}, showAll=${showAll}`);
-      const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
-      const allSchools = JSON.parse(content);
-      
-      if (showAll || includeStats) {
-        schools = allSchools;
-      } else {
-        // Filter schools that have PDFs - use a simple loop instead of Promise.all to avoid disk slamming
-        console.log(`[GET /api/schools] Checking PDFs for ${allSchools.length} schools...`);
-        schools = [];
-        for (const school of allSchools) {
-          if (await hasPdfs(school.id)) {
-            schools.push(school);
-          }
-        }
-        console.log(`[GET /api/schools] Found ${schools.length} schools with PDFs`);
+    // Check if file exists
+    try {
+      await fs.access(SCHOOLS_FILE);
+    } catch {
+      console.log(`[GET /api/schools] Schools file missing, creating default`);
+      // Create default schools file if it doesn't exist
+      const defaultSchools = [
+        {
+          id: 'west-sylvan',
+          name: 'West Sylvan',
+          schoolPageLink: null,
+          driveLink: null,
+          createdAt: new Date().toISOString(),
+        },
+      ];
+      await fs.writeFile(SCHOOLS_FILE, JSON.stringify(defaultSchools, null, 2));
+    }
+
+    const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
+    const schools = JSON.parse(content);
+    
+    if (!Array.isArray(schools)) {
+      throw new Error('Invalid schools data format: not an array');
+    }
+    
+    console.log(`[GET /api/schools] Processing ${schools.length} schools`);
+    
+    // Process all schools in parallel for better performance
+    const statsPromises = schools.map(async (school) => {
+      try {
+        const stats = await getRouteStats(school.id);
+        const { placesData, placeId, ...schoolData } = school;
+        const neighborhood = extractNeighborhood(placesData);
         
-        SCHOOLS_WITH_PDFS_CACHE.data = schools;
-        SCHOOLS_WITH_PDFS_CACHE.timestamp = now;
-      }
-    }
-    
-    let schoolsResponse;
-    
-    if (includeStats) {
-      console.log(`[GET /api/schools] Getting stats for ${schools.length} schools...`);
-      // Get route stats - use a simple loop
-      const statsArray = [];
-      for (const school of schools) {
-        statsArray.push(await getRouteStats(school.id));
-      }
-      
-      schoolsResponse = schools.map((school, index) => {
-        const { placesData, placeId, ...schoolData } = school;
-        const neighborhood = extractNeighborhood(placesData);
         return {
           ...schoolData,
           ...(neighborhood && { neighborhood }),
-          routeCount: statsArray[index].routeCount,
+          routeCount: stats.routeCount,
+          routesUpdatedAt: stats.routesUpdatedAt,
         };
-      });
-    } else {
-      schoolsResponse = schools.map((school) => {
-        const { placesData, placeId, ...schoolData } = school;
-        const neighborhood = extractNeighborhood(placesData);
-        return {
-          ...schoolData,
-          ...(neighborhood && { neighborhood }),
-        };
-      });
-    }
+      } catch (err) {
+        console.error(`[GET /api/schools] Error processing school ${school.id}:`, err.message);
+        return null;
+      }
+    });
+    
+    const results = await Promise.all(statsPromises);
+    const schoolsWithCounts = results.filter(s => s !== null);
     
     const duration = Date.now() - startTime;
-    console.log(`[GET /api/schools] Success: ${schoolsResponse.length} schools (${duration}ms, stats=${includeStats})`);
-    res.json({ schools: schoolsResponse });
+    console.log(`[GET /api/schools] Success: Returning ${schoolsWithCounts.length} schools (${duration}ms)`);
+    res.json({ schools: schoolsWithCounts });
   } catch (error) {
-    console.error(`[GET /api/schools] Error:`, error);
+    const duration = Date.now() - startTime;
+    console.error(`[GET /api/schools] FATAL ERROR after ${duration}ms:`, error.message);
     res.status(500).json({ error: error.message });
   }
 });
@@ -284,7 +261,7 @@ router.get('/:schoolId', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   try {
-    const { name, schoolPageLink, driveLink, address, coordinates } = req.body;
+    const { name, schoolPageLink, driveLink } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: 'School name is required' });
@@ -309,11 +286,7 @@ router.post('/', async (req, res) => {
       name,
       schoolPageLink: schoolPageLink || null,
       driveLink: driveLink || null,
-      address: address || null,
-      coordinates: coordinates || null,
-      schoolTypes: getSchoolTypes(name),
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
     };
 
     schools.push(newSchool);

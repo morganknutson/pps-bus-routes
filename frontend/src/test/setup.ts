@@ -17,6 +17,19 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
+// Mock ResizeObserver
+class MockResizeObserver {
+  observe = vi.fn();
+  unobserve = vi.fn();
+  disconnect = vi.fn();
+}
+
+Object.defineProperty(window, 'ResizeObserver', {
+  writable: true,
+  configurable: true,
+  value: MockResizeObserver,
+});
+
 import { useStore } from '../store/useStore';
 
 // Run cleanup after each test case
