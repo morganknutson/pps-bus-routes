@@ -6,6 +6,7 @@ import { fetchRouteForStops } from '../services/routing';
 import { formatStreetName, extractStreetNames, expandAddressForGeocoding } from '../utils/formatAddress';
 import { createHomeIcon, createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { createSchoolIcon, createNumberedIcon } from '../utils/markerIcons';
+import { getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
 import { geocodeAddress } from '../services/api';
 import { toLeafletPosition, validateLngLat, formatCoordinates } from '../utils/coordinates';
 import { DarkModeTileLayer } from './DarkModeTileLayer';
@@ -50,7 +51,7 @@ interface StreetMarker {
 export function MapView({ editingMode = false, enableStreetHighlighting = false, enableStreetPins = false }: MapViewProps) {
   const { routes, schools, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, setSelectedSchool, updateStopCoordinates, directionFilter, isLoading } = useStore();
   const isMobile = useIsMobile();
-  const mapRef = useRef<L.Map | null>(null);
+  const [map, setMap] = useState<L.Map | null>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
   const [undoHistory, setUndoHistory] = useState<UndoStep[]>([]);
   const routeRecalcTimeoutRef = useRef<{ [routeId: string]: ReturnType<typeof setTimeout> }>({});
@@ -90,13 +91,13 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       hasZoomedToAddressRef.current = false;
     }
     
-    if ((wasJustAdded || coordinatesChanged) && mapRef.current && homeAddress && !hasZoomedToAddressRef.current) {
+    if ((wasJustAdded || coordinatesChanged) && map && homeAddress && !hasZoomedToAddressRef.current) {
       if (!validateLngLat(homeAddress.coordinates)) {
         console.error('[MapView] Invalid home address coordinates:', homeAddress.coordinates);
         return;
       }
       const position = toLeafletPosition(homeAddress.coordinates);
-      mapRef.current.setView(position, 16, { animate: true });
+      map.setView(position, 16, { animate: true });
       hasZoomedToAddressRef.current = true;
       lastAddressZoomTimeRef.current = Date.now();
     }
@@ -108,11 +109,11 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     if (!homeAddress) {
       hasZoomedToAddressRef.current = false;
     }
-  }, [homeAddress]);
+  }, [homeAddress, map]);
 
   // Zoom to lookup address only when it actually changes (different coordinates)
   useEffect(() => {
-    if (lookupAddress && mapRef.current) {
+    if (lookupAddress && map) {
       if (!validateLngLat(lookupAddress.coordinates)) {
         console.error('[MapView] Invalid lookup address coordinates:', lookupAddress.coordinates);
         return;
@@ -133,7 +134,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       // Only zoom if it's a new address or we haven't zoomed to this address yet
       if (isNewAddress && !hasZoomedToLookupAddressRef.current) {
         const position = toLeafletPosition(lookupAddress.coordinates);
-        mapRef.current.setView(position, 16, { animate: true });
+        map.setView(position, 16, { animate: true });
         hasZoomedToLookupAddressRef.current = true;
         lastAddressZoomTimeRef.current = Date.now();
       }
@@ -144,7 +145,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       hasZoomedToLookupAddressRef.current = false;
       previousLookupAddressRef.current = null;
     }
-  }, [lookupAddress]);
+  }, [lookupAddress, map]);
 
   // Function to recalculate route geometry
   const recalculateRouteGeometry = async (routeId: string) => {
@@ -185,7 +186,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
 
       // Fetch route following streets
       const routeCoordinates = await fetchRouteForStops(stopCoordinates);
-      
+
       if (routeCoordinates && routeCoordinates.length > 0) {
         console.log(`[MapView] ✅ Route geometry fetched for ${route.name}: ${routeCoordinates.length} points`);
         setRouteGeometries(prevState => ({ ...prevState, [routeId]: routeCoordinates }));
@@ -288,39 +289,45 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       return;
     }
     
-    if (mapRef.current && selectedRoutes.length > 0 && !selectedStop) {
-      const allCoordinates: [number, number][] = [];
+    if (map && !selectedStop) {
+      if (selectedRoutes.length > 0) {
+        const allCoordinates: [number, number][] = [];
 
-      selectedRoutes.forEach(route => {
-        route.stops.forEach(stop => {
-          if (stop.coordinates) {
-            if (!validateLngLat(stop.coordinates)) {
-              console.warn('[MapView] Invalid stop coordinates, skipping:', stop.coordinates);
-              return;
+        selectedRoutes.forEach(route => {
+          route.stops.forEach(stop => {
+            if (stop.coordinates) {
+              if (!validateLngLat(stop.coordinates)) {
+                console.warn('[MapView] Invalid stop coordinates, skipping:', stop.coordinates);
+                return;
+              }
+              // Convert [lng, lat] to [lat, lng] for Leaflet
+              allCoordinates.push(toLeafletPosition(stop.coordinates));
             }
-            // Convert [lng, lat] to [lat, lng] for Leaflet
-            allCoordinates.push(toLeafletPosition(stop.coordinates));
-          }
+          });
         });
-      });
 
-      // Don't include home address in bounds - let routes control the view
-      if (allCoordinates.length > 0) {
-        const bounds = L.latLngBounds(allCoordinates);
-        mapRef.current.fitBounds(bounds, { padding: [50, 50] });
+        // Don't include home address in bounds - let routes control the view
+        if (allCoordinates.length > 0) {
+          const bounds = L.latLngBounds(allCoordinates);
+          map.fitBounds(bounds, { padding: [50, 50] });
+        }
+      } else if (activeSchool && activeSchool.coordinates && validateLngLat(activeSchool.coordinates)) {
+        // If no routes but school is selected, zoom to school
+        const position = toLeafletPosition(activeSchool.coordinates);
+        map.setView(position, 15, { animate: true });
       }
     }
-  }, [selectedRoutes, routes, selectedStop]); // Removed homeAddress from dependencies
+  }, [selectedRoutes, routes, selectedStop, activeSchool?.id, map]); // Added map to dependencies
 
   // Zoom to selected stop when it changes
   useEffect(() => {
-    if (mapRef.current && selectedStop && selectedStop.stop.coordinates) {
+    if (map && selectedStop && selectedStop.stop.coordinates) {
       if (!validateLngLat(selectedStop.stop.coordinates)) {
         console.error('[MapView] Invalid selected stop coordinates:', selectedStop.stop.coordinates);
         return;
       }
       const position = toLeafletPosition(selectedStop.stop.coordinates);
-      mapRef.current.setView(position, 18, { animate: true });
+      map.setView(position, 18, { animate: true });
     }
     
     // Clear undo history when a different stop is selected
@@ -342,18 +349,18 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     setStreetError(null);
     // Clear street markers when stop changes
     setStreetMarkers([]);
-  }, [selectedStop?.route.id, selectedStop?.stop.id]);
+  }, [selectedStop?.route.id, selectedStop?.stop.id, map]); // Added map to dependencies
 
   // Zoom to highlighted street bounds (only if feature is enabled)
   useEffect(() => {
-    if (enableStreetHighlighting && mapRef.current && highlightedStreet) {
+    if (enableStreetHighlighting && map && highlightedStreet) {
       const bounds = L.latLngBounds(
         [highlightedStreet.bounds.south, highlightedStreet.bounds.west],
         [highlightedStreet.bounds.north, highlightedStreet.bounds.east]
       );
-      mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
+      map.fitBounds(bounds, { padding: [50, 50], animate: true });
     }
-  }, [highlightedStreet, enableStreetHighlighting]);
+  }, [highlightedStreet, enableStreetHighlighting, map]); // Added map to dependencies
 
   // Function to create a simple pin icon for street markers
   const createStreetPinIcon = (color: string = '#FF6B6B'): L.DivIcon => {
@@ -436,7 +443,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       setStreetMarkers(newMarkers);
       
       // Zoom to fit all markers if we have any
-      if (newMarkers.length > 0 && mapRef.current) {
+      if (newMarkers.length > 0 && map) {
         const bounds = L.latLngBounds(
           newMarkers.map(marker => {
             if (!validateLngLat(marker.coordinates)) {
@@ -446,7 +453,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             return toLeafletPosition(marker.coordinates);
           })
         );
-        mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
+        map.fitBounds(bounds, { padding: [50, 50], animate: true });
       }
     } catch (error) {
       console.error('[MapView] Error dropping street pins:', error);
@@ -524,7 +531,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         center={defaultCenter}
         zoom={12}
         style={{ height: '100%', width: '100%' }}
-        ref={mapRef}
+        ref={setMap}
         zoomControl={false}
       >
       <DarkModeTileLayer />
@@ -551,6 +558,27 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             icon={defaultMarkerIcon}
           >
             <Popup>{lookupAddress.address}</Popup>
+          </Marker>
+        );
+      })()}
+
+      {/* Active school marker - show even if there are no routes */}
+      {activeSchool && activeSchool.coordinates && (() => {
+        if (!validateLngLat(activeSchool.coordinates)) {
+          console.error('[MapView] Invalid school coordinates:', activeSchool.coordinates);
+          return null;
+        }
+        const position = toLeafletPosition(activeSchool.coordinates);
+        const schoolTypes = activeSchool.schoolTypes || getSchoolTypes(activeSchool.name);
+        const schoolColor = getSchoolColor(schoolTypes);
+        
+        return (
+          <Marker 
+            position={position} 
+            icon={createSchoolIcon(schoolColor)}
+            zIndexOffset={100} // Keep school icon on top
+          >
+            <Popup>{activeSchool.name}</Popup>
           </Marker>
         );
       })()}
@@ -622,40 +650,40 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                 const allStopsWithCoords = route.stops.filter(s => s.coordinates && !s.skipGeocoding);
                 const currentIndexInAllStops = allStopsWithCoords.findIndex(s => s.id === stop.id);
                 // Count how many regular (non-school, non-skipped) stops come before this one
-                let regularStopCount = 0;
-                for (let i = 0; i < currentIndexInAllStops; i++) {
+              let regularStopCount = 0;
+              for (let i = 0; i < currentIndexInAllStops; i++) {
                   const s = allStopsWithCoords[i];
-                  if (!s.isSchoolStop && !s.skipGeocoding) {
-                    regularStopCount++;
-                  }
+                if (!s.isSchoolStop && !s.skipGeocoding) {
+                  regularStopCount++;
                 }
+              }
                 stopNumber = regularStopCount + 1; // Number starts at 1
-                icon = createNumberedIcon(stopNumber, route.color, stop.time, isSelected, editingMode);
+                icon = createNumberedIcon(stopNumber, route.color, stop.time, isSelected, editingMode, `${route.id}-${stop.id}`);
               }
 
-              return (
-                <Marker
+          return (
+            <Marker
                   key={`${route.id}-${stop.id}-${route.color}`}
-                  position={position}
-                  icon={icon}
-                  draggable={editingMode}
-                  eventHandlers={{
-                    click: () => {
-                      selectStop(route, stop, stopNumber);
-                    },
-                    ...(editingMode ? {
-                      dragend: async (e) => {
-                        const marker = e.target;
-                        const latlng = marker.getLatLng();
+              position={position}
+              icon={icon}
+              draggable={editingMode}
+              eventHandlers={{
+                click: () => {
+                  selectStop(route, stop, stopNumber);
+                },
+                ...(editingMode ? {
+                  dragend: async (e) => {
+                    const marker = e.target;
+                    const latlng = marker.getLatLng();
                         // Leaflet gives us [lat, lng], convert to internal [lng, lat] format
-                        const newCoords: [number, number] = [latlng.lng, latlng.lat];
-                        if (!validateLngLat(newCoords)) {
+                    const newCoords: [number, number] = [latlng.lng, latlng.lat];
+                    if (!validateLngLat(newCoords)) {
                           console.error('[MapView] Invalid new coordinates from drag:', newCoords);
-                          marker.setLatLng(position);
-                          alert('Invalid coordinates. Please try again.');
-                          return;
-                        }
-                        const oldCoords: [number, number] = stop.coordinates!;
+                      marker.setLatLng(position);
+                      alert('Invalid coordinates. Please try again.');
+                      return;
+                    }
+                    const oldCoords: [number, number] = stop.coordinates!;
                         if (!validateLngLat(oldCoords)) {
                           console.error('[MapView] Invalid old coordinates:', oldCoords);
                           return;
@@ -671,12 +699,12 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                         });
                         
                         // Update store immediately for responsive UI
-                        updateStopCoordinates(route.id, stop.id, newCoords);
-                        
+                    updateStopCoordinates(route.id, stop.id, newCoords);
+                    
                         // Save to API
-                        try {
-                          const response = await fetch(`/api/data/routes/${route.id}/stops/${stop.id}`, {
-                            method: 'PUT',
+                    try {
+                      const response = await fetch(`/api/data/routes/${route.id}/stops/${stop.id}`, {
+                        method: 'PUT',
                             headers: {
                               'Content-Type': 'application/json',
                             },
@@ -699,19 +727,19 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                           routeRecalcTimeoutRef.current[route.id] = setTimeout(() => {
                             recalculateRouteGeometry(route.id);
                           }, 1500);
-                        } catch (error) {
+                    } catch (error) {
                           console.error('Error saving coordinates:', error);
                           // Revert the marker position on error
-                          marker.setLatLng(position);
+                      marker.setLatLng(position);
                           // Remove from undo history since save failed
-                          setUndoHistory(prev => prev.slice(1));
+                      setUndoHistory(prev => prev.slice(1));
                           alert('Failed to save coordinates. Please try again.');
-                        }
-                      },
-                    } : {}),
-                  }}
-                />
-              );
+                    }
+                  },
+                } : {}),
+              }}
+            />
+          );
             })}
           </div>
         );
@@ -743,11 +771,11 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             key={`street-${index}-${marker.streetName}`}
             position={position}
             icon={createStreetPinIcon(color)}
-        />
-      );
-    })}
-    </MapContainer>
-
+          />
+        );
+      })}
+      </MapContainer>
+      
     {/* Centered "NO ROUTES" overlay on mobile when school has no routes */}
     {isMobile && schoolHasNoRoutes && (
       <div style={{
@@ -1168,7 +1196,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           </div>
         </div>
       )}
-      
+
       {/* Loading spinner animation */}
       <style>{`
         @keyframes spin {

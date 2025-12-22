@@ -172,7 +172,7 @@ export function Sidebar({
         {/* Content Section */}
         <div style={{ 
           flex: 1, 
-          overflow: 'hidden',
+          overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column',
         }}>
@@ -240,7 +240,7 @@ export function Sidebar({
         {/* Content Section */}
         <div style={{ 
           flex: 1, 
-          overflow: 'hidden',
+          overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column',
         }}>
