@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useStore } from '../store/useStore';
 import { loadLocalRoutes } from '../services/localRoutes';
+import { getSchoolDisplayName } from '../utils/schoolUtils';
 
 export function SchoolSelector() {
   const { 
@@ -98,7 +99,7 @@ export function SchoolSelector() {
         <option value="">Select a school...</option>
         {schools.map((school) => (
           <option key={school.id} value={school.id}>
-            {school.name}
+            {getSchoolDisplayName(school.name)}
           </option>
         ))}
       </select>

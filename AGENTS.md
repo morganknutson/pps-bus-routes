@@ -151,9 +151,10 @@ interface School {
 - **Logs**: `logs/server.log` (runtime) and `logs/build.log` (build process)
 
 ### Testing
-- **Run all tests**: `npm test` (from root)
+- **Run all tests**: `npm test` (includes backend, frontend, and type checking)
 - **Backend tests**: `npm run test:backend` or `node --test backend/tests/*.test.js`
 - **Frontend tests**: `npm run test:frontend` or `cd frontend && npm run test`
+- **Type checking**: `npm run test:types` (runs `tsc --noEmit` in frontend)
 - **Location**: Backend tests in `backend/tests/`, Frontend tests in `frontend/src/**/*.test.ts`
 
 ---

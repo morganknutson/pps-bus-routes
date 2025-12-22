@@ -45,6 +45,78 @@ export function getSchoolTypes(schoolName: string): ('Elementary School' | 'Midd
   return types;
 }
 
+/**
+ * Get the display name for a school, mapping shortened names to full official names
+ * for the frontend only, while keeping the underlying data/IDs the same.
+ */
+export function getSchoolDisplayName(name: string): string {
+  const mapping: Record<string, string> = {
+    'Lee': 'Jason Lee Elementary',
+    'Boise-Eliot': 'Boise-Eliot/Humboldt',
+    'Dr Martin Luther King': 'Dr. Martin Luther King Jr. Elementary',
+    'Abernethy': 'Abernethy Elementary',
+    'Ainsworth': 'Ainsworth Elementary',
+    'Alameda': 'Alameda Elementary',
+    'Arleta': 'Arleta Elementary',
+    'Astor': 'Astor Elementary',
+    'Atkinson': 'Atkinson Elementary',
+    'Beach': 'Beach Elementary',
+    'Bridger': 'Bridger Elementary',
+    'Bridlemile': 'Bridlemile Elementary',
+    'Buckman': 'Buckman Arts Focus Elementary',
+    'Capitol': 'Capitol Hill Elementary',
+    'Cesar Chavez': 'César Chávez K-8 School',
+    'Chapman': 'Chapman Elementary',
+    'Chief Joseph': 'Chief Joseph Elementary',
+    'Clark': 'Clark Elementary at Binnsmead',
+    'Creston': 'Creston Elementary',
+    'Duniway': 'Duniway Elementary',
+    'Faubion': 'Faubion PK-8 School',
+    'Forest Park': 'Forest Park Elementary',
+    'Glencoe': 'Glencoe Elementary',
+    'Grout': 'Grout Elementary',
+    'Hayhurst': 'Hayhurst Elementary',
+    'Irvington': 'Irvington Elementary',
+    'James John': 'James John Elementary',
+    'Kelly': 'Kelly Elementary',
+    'Lent': 'Lent Elementary',
+    'Lewis': 'Lewis Elementary',
+    'Llewellyn': 'Llewellyn Elementary',
+    'Maplewood': 'Maplewood Elementary',
+    'Markham': 'Markham Elementary',
+    'Marysville': 'Marysville Elementary',
+    'Peninsula': 'Peninsula Elementary',
+    'Richmond': 'Richmond Elementary',
+    'Rieke': 'Rieke Elementary',
+    'Rigler': 'Rigler Elementary',
+    'Rosa Parks': 'Rosa Parks Elementary',
+    'Rose City Park': 'Rose City Park Elementary',
+    'Sabin': 'Sabin Elementary',
+    'Scott': 'Scott Elementary',
+    'Sitton': 'Sitton Elementary',
+    'Stephenson': 'Stephenson Elementary',
+    'Vernon': 'Vernon Elementary',
+    'Vestal': 'Vestal Elementary',
+    'Whitman': 'Whitman Elementary',
+    'Woodlawn': 'Woodlawn Elementary',
+    'Woodmere': 'Woodmere Elementary',
+    'Woodstock': 'Woodstock Elementary',
+    'Gray': 'Robert Gray Middle School',
+    'Hosford': 'Hosford Middle School',
+    'Lane': 'Lane Middle School',
+    'Mt Tabor': 'Mt. Tabor Middle School',
+    'Sellwood': 'Sellwood Middle School',
+    'Tubman': 'Harriet Tubman Middle School',
+    'Benson': 'Benson Polytechnic High School',
+    'Franklin': 'Franklin High School',
+    'Lincoln': 'Lincoln High School',
+    'Leodis V. McDaniel': 'McDaniel High School',
+    'Ida B. Wells-Barnett High School': 'Ida B. Wells High School',
+  };
+
+  return mapping[name] || name;
+}
+
 export function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[]): string {
   if (schoolTypes.includes('Hybrid')) {
     return '#9C27B0'; // Purple for hybrid schools

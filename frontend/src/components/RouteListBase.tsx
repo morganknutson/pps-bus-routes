@@ -113,7 +113,7 @@ function renderStopItem(
       }}
       onMouseEnter={(e) => {
         if (isClickable && !isSelected) {
-          e.currentTarget.style.backgroundColor = hasError ? '#ffcccc' : 'var(--bg-secondary)';
+          e.currentTarget.style.backgroundColor = hasError ? '#ffcccc' : 'rgba(255, 255, 255, 0.05)';
         }
       }}
       onMouseLeave={(e) => {
@@ -139,7 +139,9 @@ function renderStopItem(
             justifyContent: 'center',
             width: '16px',
             height: '16px',
-            color: hasError ? '#ff6b6b' : routeColor,
+            borderRadius: '50%',
+            backgroundColor: hasError ? '#ff6b6b' : routeColor,
+            color: 'white',
             marginTop: '1px',
           }}>
             <i className="fas fa-graduation-cap" style={{ fontSize: '14px' }}></i>
@@ -175,7 +177,7 @@ function renderStopItem(
       )}
       
       {/* Stop details */}
-      <div style={{ flex: 1, minWidth: 0, paddingTop: '0.0625rem', paddingLeft: '0.25rem' }}>
+      <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ 
           fontSize: '13px',
           fontWeight: '500',
@@ -338,6 +340,48 @@ export function RouteListBase({
     return 'Other';
   };
 
+  const renderRouteGroups = (sectionRoutes: Route[]) => {
+    // Group routes by neighborhood
+    const groups: Record<string, Route[]> = {};
+    sectionRoutes.forEach(route => {
+      const neighborhood = getRouteNeighborhood(route);
+      if (!groups[neighborhood]) {
+        groups[neighborhood] = [];
+      }
+      groups[neighborhood].push(route);
+    });
+
+    // Sort neighborhoods alphabetically, but keep "Other" at the end
+    const neighborhoodNames = Object.keys(groups).sort((a, b) => {
+      if (a === 'Other') return 1;
+      if (b === 'Other') return -1;
+      return a.localeCompare(b);
+    });
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        {neighborhoodNames.map(neighborhood => (
+          <div key={neighborhood}>
+            <div style={{ 
+              fontSize: '11px', 
+              fontWeight: '600', 
+              textTransform: 'uppercase', 
+              letterSpacing: '0.05em',
+              color: 'var(--text-tertiary)',
+              marginBottom: '0.75rem',
+              paddingLeft: '0.25rem'
+            }}>
+              {neighborhood}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {groups[neighborhood].map(renderRoute)}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   const renderRoute = (route: Route) => {
     const isExpanded = expandedRoutes.has(route.id);
     const routeColor = config.getRouteColor?.(route) || route.color;
@@ -432,8 +476,8 @@ export function RouteListBase({
                 <div style={{ marginBottom: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                   <span style={{ 
                     color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', 
-                    fontSize: '15px', 
-                    fontWeight: '600',
+                    fontSize: '14px', 
+                    fontWeight: '700',
                     marginTop: '1px' 
                   }}>
                     {route.name.replace('-upcoming', '')}
@@ -528,48 +572,6 @@ export function RouteListBase({
     );
   };
 
-  const renderRouteGroups = (sectionRoutes: Route[]) => {
-    // Group routes by neighborhood
-    const groups: Record<string, Route[]> = {};
-    sectionRoutes.forEach(route => {
-      const neighborhood = getRouteNeighborhood(route);
-      if (!groups[neighborhood]) {
-        groups[neighborhood] = [];
-      }
-      groups[neighborhood].push(route);
-    });
-
-    // Sort neighborhoods alphabetically, but keep "Other" at the end
-    const neighborhoodNames = Object.keys(groups).sort((a, b) => {
-      if (a === 'Other') return 1;
-      if (b === 'Other') return -1;
-      return a.localeCompare(b);
-    });
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        {neighborhoodNames.map(neighborhood => (
-          <div key={neighborhood}>
-            <div style={{ 
-              fontSize: '11px', 
-              fontWeight: '600', 
-              textTransform: 'uppercase', 
-              letterSpacing: '0.05em',
-              color: 'var(--text-tertiary)',
-              marginBottom: '0.75rem',
-              paddingLeft: '0.25rem'
-            }}>
-              {neighborhood}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {groups[neighborhood].map(renderRoute)}
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   const renderSection = (sectionName: string, sectionRoutes: Route[], color?: string) => {
     if (sectionRoutes.length === 0) return null;
     
@@ -605,16 +607,12 @@ export function RouteListBase({
               <span style={{ 
                 fontSize: '14px', 
                 padding: '4px 10px',
-                borderRadius: '9999px',
+                borderRadius: '12px',
                 fontWeight: '500',
                 backgroundColor: '#B3E5FC',
                 color: '#01579B',
                 transition: 'opacity 0.3s ease',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.4rem'
               }}>
-                <RouteIcon size={11} color="#01579B" />
                 Morning
               </span>
             )}
@@ -622,16 +620,12 @@ export function RouteListBase({
               <span style={{ 
                 fontSize: '14px', 
                 padding: '4px 10px',
-                borderRadius: '9999px',
+                borderRadius: '12px',
                 fontWeight: '500',
                 backgroundColor: '#C8E6C9',
                 color: '#1B5E20',
                 transition: 'opacity 0.3s ease',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.4rem'
               }}>
-                <RouteIcon size={11} color="#1B5E20" />
                 Afternoon
               </span>
             )}
@@ -643,13 +637,13 @@ export function RouteListBase({
           <i 
             className="fas fa-chevron-down"
             style={{ 
-              fontSize: '12px',
               transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.2s',
               display: 'inline-block',
+              fontSize: '12px',
               color: 'var(--text-tertiary)',
             }}
-          ></i>
+          />
         </button>
         {isExpanded && renderRouteGroups(sectionRoutes)}
       </div>
@@ -657,7 +651,7 @@ export function RouteListBase({
   };
 
   return (
-    <div style={{ padding: '0.5rem 1rem 1rem 1rem' }}>
+    <div style={{ padding: '1rem' }}>
       {error && (
         <div style={{ color: '#ff6b6b', marginBottom: '1rem', fontSize: '14px' }}>
           {error}

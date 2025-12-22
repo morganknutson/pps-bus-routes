@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { SEO } from '../components/SEO';
 import { School } from '../types';
-import { getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
+import { getSchoolTypes, getSchoolColor, getSchoolDisplayName } from '../utils/schoolUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { MapPinIcon } from '../components/MapPinIcon';
@@ -209,11 +209,13 @@ export function SchoolDirectory() {
                     e.currentTarget.style.boxShadow = '0 2px 8px var(--shadow-large)';
                   }}
                 >
-                  <h2 style={{ 
-                    margin: '0 0 0.5rem 0', 
-                    fontSize: '1.25rem', 
-                    color: 'var(--text-primary)' 
-                  }}>{school.name} Bus Routes & Stops</h2>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                    <h2 style={{ 
+                      margin: 0, 
+                      fontSize: '1.25rem', 
+                      color: 'var(--text-primary)' 
+                    }}>{getSchoolDisplayName(school.name)} Bus Routes & Stops</h2>
+                  </div>
                   
                   <div style={{ 
                     fontSize: '0.875rem', 

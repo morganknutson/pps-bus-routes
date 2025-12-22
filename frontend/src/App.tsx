@@ -283,7 +283,7 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
   return null;
 }
 
-function ExplorerApp() {
+export function ExplorerApp() {
   console.log('[ExplorerApp] Rendering...');
   const { isLoading, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress, routes, directionFilter, selectedStop } = useStore();
   const isMobile = useIsMobile();

@@ -4,6 +4,7 @@ import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 import { MapPinIcon } from './MapPinIcon';
+import { getSchoolDisplayName } from '../utils/schoolUtils';
 
 // Infer school type(s) from name - returns array to support hybrid schools
 function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
@@ -399,6 +400,7 @@ export function SchoolList({
               return (
                 <div
                   key={school.id}
+                  data-testid="school-list-item"
                   className={`school-list-item ${isSelected ? 'selected' : ''}`}
                   style={{
                     borderBottom: '1px solid var(--border-color)',
@@ -430,8 +432,8 @@ export function SchoolList({
                   >
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                        <div style={{ fontWeight: '600', fontSize: '18px', color: 'var(--text-secondary)' }}>
-                          {school.name}
+                        <div style={{ fontWeight: '700', fontSize: '14px', color: 'var(--text-secondary)' }}>
+                          {getSchoolDisplayName(school.name)}
                         </div>
                         {enableEditing && (
                           <button
@@ -465,18 +467,22 @@ export function SchoolList({
                         )}
                       </div>
                       <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.25rem', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                        <i className="fas fa-graduation-cap" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                        <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <i className="fas fa-graduation-cap" style={{ fontSize: '11px' }}></i>
+                        </div>
                         <span>{schoolTypes.join(' & ')}</span>
                       </div>
                       {school.address && (
                         <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <MapPinIcon width={8} height={12} style={{ flexShrink: 0, color: 'var(--text-tertiary)' }} />
+                          <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <MapPinIcon width={10} height={13} style={{ color: 'var(--text-tertiary)' }} />
+                          </div>
                           <span>{school.address.split(',')[0]}</span>
                         </div>
                       )}
                       {school.routeCount !== undefined && (
                         <div style={{ 
-                          fontSize: '11px', 
+                          fontSize: '12px', 
                           color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)', 
                           display: 'flex', 
                           alignItems: 'center', 
@@ -485,12 +491,16 @@ export function SchoolList({
                         }}>
                           {school.routeCount === 0 ? (
                             <>
-                              <i className="fas fa-exclamation-circle" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                              <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <i className="fas fa-exclamation-circle" style={{ fontSize: '12px' }}></i>
+                              </div>
                               <span>Routes not provided by district</span>
                             </>
                           ) : (
                             <>
-                              <RouteIcon size={10} color="var(--text-tertiary)" style={{ width: '10px', flexShrink: 0 }} />
+                              <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <RouteIcon size={10} color="var(--text-tertiary)" />
+                              </div>
                               <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'}</span>
                             </>
                           )}
@@ -689,7 +699,7 @@ export function SchoolList({
                           cursor: isEditing ? 'default' : 'pointer',
                         }}
                       >
-                        <span style={{ fontSize: '18px', fontWeight: '600' }}>{school.name}</span>
+                        <span style={{ fontSize: '14px', fontWeight: '700' }}>{getSchoolDisplayName(school.name)}</span>
                         {enableEditing && (
                           <button
                             onClick={(e) => {
@@ -722,14 +732,16 @@ export function SchoolList({
                         )}
                       </div>
                       {school.address && (
-                        <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <i className="fas fa-map-marker-alt" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                        <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                          <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <i className="fas fa-map-marker-alt" style={{ fontSize: '12px' }}></i>
+                          </div>
                           <span>{school.address}</span>
                         </div>
                       )}
                       {school.routeCount !== undefined && (
                         <div style={{ 
-                          fontSize: '11px', 
+                          fontSize: '12px', 
                           color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)', 
                           marginTop: '0.25rem',
                           display: 'flex', 
@@ -739,12 +751,16 @@ export function SchoolList({
                         }}>
                           {school.routeCount === 0 ? (
                             <>
-                              <i className="fas fa-exclamation-circle" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
+                              <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <i className="fas fa-exclamation-circle" style={{ fontSize: '12px' }}></i>
+                              </div>
                               <span>Routes not provided by district</span>
                             </>
                           ) : (
                             <>
-                              <RouteIcon size={10} color="var(--text-tertiary)" style={{ width: '10px', flexShrink: 0 }} />
+                              <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <RouteIcon size={10} color="var(--text-tertiary)" />
+                              </div>
                               <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'}</span>
                             </>
                           )}

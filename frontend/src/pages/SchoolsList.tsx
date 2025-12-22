@@ -5,7 +5,7 @@ import L from 'leaflet';
 import { School } from '../types';
 import { DataPageHeader } from '../components/DataPageHeader';
 import { SchoolTypeFilter, SchoolTypeFilters } from '../components/SchoolTypeFilter';
-import { getSchoolTypes, getSchoolColor, createSchoolIcon } from '../utils/schoolUtils';
+import { getSchoolTypes, getSchoolColor, createSchoolIcon, getSchoolDisplayName } from '../utils/schoolUtils';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { useMarkers, MarkerData } from '../hooks/useMarkers';
@@ -430,7 +430,7 @@ export function SchoolsList() {
                       }}
                     >
                       <div style={{ fontWeight: '600', fontSize: '18px', color: '#333', marginBottom: '0.25rem' }}>
-                        {school.name}
+                        {getSchoolDisplayName(school.name)}
                       </div>
                       <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.25rem', fontWeight: '500' }}>
                         {schoolTypes.join(' & ')}
@@ -523,7 +523,7 @@ export function SchoolsList() {
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem' }}>
             <div style={{ flex: 1 }}>
-              <h2 style={{ margin: 0, fontSize: '20px', color: '#333', marginBottom: '0.5rem' }}>{selectedSchool.name}</h2>
+              <h2 style={{ margin: 0, fontSize: '20px', color: '#333', marginBottom: '0.5rem' }}>{getSchoolDisplayName(selectedSchool.name)}</h2>
               {(() => {
                 const schoolTypes = selectedSchool.schoolTypes || getSchoolTypes(selectedSchool.name);
                 const schoolColor = getSchoolColor(schoolTypes);

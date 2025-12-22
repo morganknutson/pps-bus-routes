@@ -64,7 +64,9 @@ export const useStore = create<Store>((set, get) => {
       if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('darkMode');
         if (saved !== null) return saved === 'true';
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (typeof window.matchMedia === 'function') {
+          return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
       }
       return false;
     })(),

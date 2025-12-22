@@ -448,6 +448,20 @@
     }
   },
   {
+    "id": "alliance-high-school",
+    "name": "Alliance High School",
+    "address": "1530 NE Glisan St, Portland, OR 97232, USA",
+    "coordinates": [
+      -122.65022700000002,
+      45.526095999999995
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:51.505Z",
+    "updatedAt": "2025-12-22T05:15:51.505Z",
+    "routeCount": 0
+  },
+  {
     "id": "arleta",
     "name": "Arleta",
     "driveLink": "https://drive.google.com/drive/folders/174oj5f1dyPJk7im2dNEigf9boalKkvLh",
@@ -2240,6 +2254,34 @@
     }
   },
   {
+    "id": "cleveland-high-school",
+    "name": "Cleveland High School",
+    "address": "3400 SE 26th Ave, Portland, OR 97202, USA",
+    "coordinates": [
+      -122.63945009999999,
+      45.4985839
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:40.163Z",
+    "updatedAt": "2025-12-22T05:15:40.163Z",
+    "routeCount": 0
+  },
+  {
+    "id": "creative-science-school",
+    "name": "Creative Science School",
+    "address": "7910 SE Market St #3656, Portland, OR 97215, USA",
+    "coordinates": [
+      -122.58207089999998,
+      45.5106758
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:50.217Z",
+    "updatedAt": "2025-12-22T05:15:50.217Z",
+    "routeCount": 0
+  },
+  {
     "id": "creston",
     "name": "Creston",
     "driveLink": "https://drive.google.com/drive/folders/13hfTFsHIdNaaFJD53hKEV-8esBBBwV4t",
@@ -2352,6 +2394,20 @@
     }
   },
   {
+    "id": "darnell-wright-heights",
+    "name": "Darnell Wright Heights",
+    "address": "12839 SE Holgate Blvd, Portland, OR 97236, USA",
+    "coordinates": [
+      -122.5311705,
+      45.4905487
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:55.160Z",
+    "updatedAt": "2025-12-22T05:15:55.160Z",
+    "routeCount": 0
+  },
+  {
     "id": "davinci",
     "name": "DaVinci",
     "driveLink": null,
@@ -2445,6 +2501,118 @@
         {
           "longText": "3134",
           "shortText": "3134",
+          "types": [
+            "postal_code_suffix"
+          ],
+          "languageCode": "en-US"
+        }
+      ],
+      "plusCode": null,
+      "websiteUri": null,
+      "phoneNumber": null,
+      "regularOpeningHours": null,
+      "photos": null,
+      "editorialSummary": null,
+      "types": [
+        "premise",
+        "street_address"
+      ]
+    }
+  },
+  {
+    "id": "dr-martin-luther-king",
+    "name": "Dr Martin Luther King",
+    "driveLink": "https://drive.google.com/drive/folders/1A10dKprzg68PukybKhQwiZG3k5bqtjl6",
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/dr-martin-luther-king",
+    "address": "4906 NE 6th Ave, Portland, OR 97211, USA",
+    "coordinates": [
+      -122.6589942,
+      45.5580929
+    ],
+    "updatedAt": "2025-12-11T17:24:20.303Z",
+    "placeId": "ChIJp6pQ2xmnlVQRI7SGhtJYwUo",
+    "placesData": {
+      "id": "ChIJp6pQ2xmnlVQRI7SGhtJYwUo",
+      "displayName": "4906 NE 6th Ave",
+      "formattedAddress": "4906 NE 6th Ave, Portland, OR 97211, USA",
+      "location": {
+        "lat": 45.5580929,
+        "lng": -122.6589942
+      },
+      "addressComponents": [
+        {
+          "longText": "4906",
+          "shortText": "4906",
+          "types": [
+            "street_number"
+          ],
+          "languageCode": "en-US"
+        },
+        {
+          "longText": "Northeast 6th Avenue",
+          "shortText": "NE 6th Ave",
+          "types": [
+            "route"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "King",
+          "shortText": "King",
+          "types": [
+            "neighborhood",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Portland",
+          "shortText": "Portland",
+          "types": [
+            "locality",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Multnomah County",
+          "shortText": "Multnomah County",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Oregon",
+          "shortText": "OR",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "United States",
+          "shortText": "US",
+          "types": [
+            "country",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "97211",
+          "shortText": "97211",
+          "types": [
+            "postal_code"
+          ],
+          "languageCode": "en-US"
+        },
+        {
+          "longText": "3912",
+          "shortText": "3912",
           "types": [
             "postal_code_suffix"
           ],
@@ -3136,6 +3304,20 @@
     }
   },
   {
+    "id": "grant-high-school",
+    "name": "Grant High School",
+    "address": "2245 NE 36th Ave, Portland, OR 97212, USA",
+    "coordinates": [
+      -122.62655189999998,
+      45.539050499999995
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:41.423Z",
+    "updatedAt": "2025-12-22T05:15:41.423Z",
+    "routeCount": 0
+  },
+  {
     "id": "gray",
     "name": "Gray",
     "driveLink": "https://drive.google.com/drive/folders/149Nfaud8gFSZVCEHE0W0PmvzEgnIwFxu",
@@ -3696,6 +3878,20 @@
     }
   },
   {
+    "id": "ida-b-wells-barnett-high-school",
+    "name": "Ida B. Wells-Barnett High School",
+    "address": "1151 SW Vermont St, Portland, OR 97219, USA",
+    "coordinates": [
+      -122.68994409999998,
+      45.4772306
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:42.738Z",
+    "updatedAt": "2025-12-22T05:15:42.738Z",
+    "routeCount": 0
+  },
+  {
     "id": "irvington",
     "name": "Irvington",
     "driveLink": "https://drive.google.com/drive/folders/1xQ3FN_vR8_p_xkxSDvVYM2w9YcB5r_3P",
@@ -4040,6 +4236,124 @@
     }
   },
   {
+    "id": "jefferson-high-school",
+    "name": "Jefferson High School",
+    "address": "5210 N Kerby Ave, Portland, OR 97217, USA",
+    "coordinates": [
+      -122.67204319999999,
+      45.560784399999996
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:43.997Z",
+    "updatedAt": "2025-12-22T05:15:43.997Z",
+    "routeCount": 0
+  },
+  {
+    "id": "kellogg",
+    "name": "Kellogg",
+    "driveLink": "https://drive.google.com/drive/folders/1lMUDd4OOpBHoYM09qfhDFdIAIv7raKMm",
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/kellogg",
+    "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.5917225,
+      45.49871359999999
+    ],
+    "updatedAt": "2025-12-11T17:23:54.114Z",
+    "placeId": "ChIJK5MdbUSglVQRIt5HcgMhzKs",
+    "placesData": {
+      "id": "ChIJK5MdbUSglVQRIt5HcgMhzKs",
+      "displayName": "3400 SE 69th Ave",
+      "formattedAddress": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "location": {
+        "lat": 45.498713599999995,
+        "lng": -122.59172249999999
+      },
+      "addressComponents": [
+        {
+          "longText": "3400",
+          "shortText": "3400",
+          "types": [
+            "street_number"
+          ],
+          "languageCode": "en-US"
+        },
+        {
+          "longText": "Southeast 69th Avenue",
+          "shortText": "SE 69th Ave",
+          "types": [
+            "route"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "South Tabor",
+          "shortText": "South Tabor",
+          "types": [
+            "neighborhood",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Portland",
+          "shortText": "Portland",
+          "types": [
+            "locality",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Multnomah County",
+          "shortText": "Multnomah County",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "Oregon",
+          "shortText": "OR",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "United States",
+          "shortText": "US",
+          "types": [
+            "country",
+            "political"
+          ],
+          "languageCode": "en"
+        },
+        {
+          "longText": "97206",
+          "shortText": "97206",
+          "types": [
+            "postal_code"
+          ],
+          "languageCode": "en-US"
+        }
+      ],
+      "plusCode": null,
+      "websiteUri": null,
+      "phoneNumber": null,
+      "regularOpeningHours": null,
+      "photos": null,
+      "editorialSummary": null,
+      "types": [
+        "premise",
+        "street_address"
+      ]
+    }
+  },
+  {
     "id": "kelly",
     "name": "Kelly",
     "driveLink": "https://drive.google.com/drive/folders/14rEePEkr5kKUA6v6u6DGS9SkPcfiwJQh",
@@ -4135,110 +4449,6 @@
           "shortText": "5541",
           "types": [
             "postal_code_suffix"
-          ],
-          "languageCode": "en-US"
-        }
-      ],
-      "plusCode": null,
-      "websiteUri": null,
-      "phoneNumber": null,
-      "regularOpeningHours": null,
-      "photos": null,
-      "editorialSummary": null,
-      "types": [
-        "premise",
-        "street_address"
-      ]
-    }
-  },
-  {
-    "id": "kellogg",
-    "name": "Kellogg",
-    "driveLink": "https://drive.google.com/drive/folders/1lMUDd4OOpBHoYM09qfhDFdIAIv7raKMm",
-    "createdAt": "2025-01-01T00:00:00.000Z",
-    "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/kellogg",
-    "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
-    "coordinates": [
-      -122.5917225,
-      45.49871359999999
-    ],
-    "updatedAt": "2025-12-11T17:23:54.114Z",
-    "placeId": "ChIJK5MdbUSglVQRIt5HcgMhzKs",
-    "placesData": {
-      "id": "ChIJK5MdbUSglVQRIt5HcgMhzKs",
-      "displayName": "3400 SE 69th Ave",
-      "formattedAddress": "3400 SE 69th Ave, Portland, OR 97206, USA",
-      "location": {
-        "lat": 45.498713599999995,
-        "lng": -122.59172249999999
-      },
-      "addressComponents": [
-        {
-          "longText": "3400",
-          "shortText": "3400",
-          "types": [
-            "street_number"
-          ],
-          "languageCode": "en-US"
-        },
-        {
-          "longText": "Southeast 69th Avenue",
-          "shortText": "SE 69th Ave",
-          "types": [
-            "route"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "South Tabor",
-          "shortText": "South Tabor",
-          "types": [
-            "neighborhood",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "Portland",
-          "shortText": "Portland",
-          "types": [
-            "locality",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "Multnomah County",
-          "shortText": "Multnomah County",
-          "types": [
-            "administrative_area_level_2",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "Oregon",
-          "shortText": "OR",
-          "types": [
-            "administrative_area_level_1",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "United States",
-          "shortText": "US",
-          "types": [
-            "country",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "97206",
-          "shortText": "97206",
-          "types": [
-            "postal_code"
           ],
           "languageCode": "en-US"
         }
@@ -5065,118 +5275,6 @@
     }
   },
   {
-    "id": "dr-martin-luther-king",
-    "name": "Dr Martin Luther King",
-    "driveLink": "https://drive.google.com/drive/folders/1A10dKprzg68PukybKhQwiZG3k5bqtjl6",
-    "createdAt": "2025-01-01T00:00:00.000Z",
-    "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/dr-martin-luther-king",
-    "address": "4906 NE 6th Ave, Portland, OR 97211, USA",
-    "coordinates": [
-      -122.6589942,
-      45.5580929
-    ],
-    "updatedAt": "2025-12-11T17:24:20.303Z",
-    "placeId": "ChIJp6pQ2xmnlVQRI7SGhtJYwUo",
-    "placesData": {
-      "id": "ChIJp6pQ2xmnlVQRI7SGhtJYwUo",
-      "displayName": "4906 NE 6th Ave",
-      "formattedAddress": "4906 NE 6th Ave, Portland, OR 97211, USA",
-      "location": {
-        "lat": 45.5580929,
-        "lng": -122.6589942
-      },
-      "addressComponents": [
-        {
-          "longText": "4906",
-          "shortText": "4906",
-          "types": [
-            "street_number"
-          ],
-          "languageCode": "en-US"
-        },
-        {
-          "longText": "Northeast 6th Avenue",
-          "shortText": "NE 6th Ave",
-          "types": [
-            "route"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "King",
-          "shortText": "King",
-          "types": [
-            "neighborhood",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "Portland",
-          "shortText": "Portland",
-          "types": [
-            "locality",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "Multnomah County",
-          "shortText": "Multnomah County",
-          "types": [
-            "administrative_area_level_2",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "Oregon",
-          "shortText": "OR",
-          "types": [
-            "administrative_area_level_1",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "United States",
-          "shortText": "US",
-          "types": [
-            "country",
-            "political"
-          ],
-          "languageCode": "en"
-        },
-        {
-          "longText": "97211",
-          "shortText": "97211",
-          "types": [
-            "postal_code"
-          ],
-          "languageCode": "en-US"
-        },
-        {
-          "longText": "3912",
-          "shortText": "3912",
-          "types": [
-            "postal_code_suffix"
-          ],
-          "languageCode": "en-US"
-        }
-      ],
-      "plusCode": null,
-      "websiteUri": null,
-      "phoneNumber": null,
-      "regularOpeningHours": null,
-      "photos": null,
-      "editorialSummary": null,
-      "types": [
-        "premise",
-        "street_address"
-      ]
-    }
-  },
-  {
     "id": "maplewood",
     "name": "Maplewood",
     "driveLink": "https://drive.google.com/drive/folders/1BbtthEMT4kPU2jgCUXQ0BLNKRJkqD3Zd",
@@ -5522,6 +5620,20 @@
     }
   },
   {
+    "id": "metropolitan-learning-center",
+    "name": "Metropolitan Learning Center",
+    "address": "2033 NW Glisan St, Portland, OR 97209, USA",
+    "coordinates": [
+      -122.6932642,
+      45.5264228
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:47.795Z",
+    "updatedAt": "2025-12-22T05:15:47.795Z",
+    "routeCount": 0
+  },
+  {
     "id": "mt-tabor",
     "name": "Mt Tabor",
     "driveLink": "https://drive.google.com/drive/folders/1AVph0mS-EheR_hUlddk6SujWoJjnUhyX",
@@ -5746,6 +5858,20 @@
     }
   },
   {
+    "id": "odyssey-program",
+    "name": "Odyssey Program",
+    "address": "1849 SW 58th Ave, Portland, OR 97221, USA",
+    "coordinates": [
+      -122.73707249999998,
+      45.5099503
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:53.948Z",
+    "updatedAt": "2025-12-22T05:15:53.948Z",
+    "routeCount": 0
+  },
+  {
     "id": "peninsula",
     "name": "Peninsula",
     "driveLink": "https://drive.google.com/drive/folders/1AhUH6ELeKD5JXdspsRtlIxcFvjiALYsF",
@@ -5856,6 +5982,20 @@
         "street_address"
       ]
     }
+  },
+  {
+    "id": "pioneer-program",
+    "name": "Pioneer Program",
+    "address": "2600 SE 71st Ave, Portland, OR 97206, USA",
+    "coordinates": [
+      -122.5891006,
+      45.5036329
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:52.747Z",
+    "updatedAt": "2025-12-22T05:15:52.747Z",
+    "routeCount": 0
   },
   {
     "id": "richmond",
@@ -6184,6 +6324,20 @@
         "street_address"
       ]
     }
+  },
+  {
+    "id": "roosevelt-high-school",
+    "name": "Roosevelt High School",
+    "address": "6941 N Central St, Portland, OR 97203, USA",
+    "coordinates": [
+      -122.7384029,
+      45.5890511
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:45.263Z",
+    "updatedAt": "2025-12-22T05:15:45.263Z",
+    "routeCount": 0
   },
   {
     "id": "rosa-parks",
@@ -7234,6 +7388,20 @@
     }
   },
   {
+    "id": "sunnyside-environmental-school",
+    "name": "Sunnyside Environmental School",
+    "address": "3421 SE Salmon St, Portland, OR 97214, USA",
+    "coordinates": [
+      -122.62889200000001,
+      45.515427599999995
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:46.555Z",
+    "updatedAt": "2025-12-22T05:15:46.555Z",
+    "routeCount": 0
+  },
+  {
     "id": "tubman",
     "name": "Tubman",
     "driveLink": "https://drive.google.com/drive/folders/1B9aLGpw1wbfKr3ZJRQo_ZTyaaUnkCsp0",
@@ -7780,6 +7948,20 @@
         "street_address"
       ]
     }
+  },
+  {
+    "id": "winterhaven-school",
+    "name": "Winterhaven School",
+    "address": "3830 SE 14th Ave, Portland, OR 97202, USA",
+    "coordinates": [
+      -122.65090669999998,
+      45.494924499999996
+    ],
+    "schoolPageLink": null,
+    "driveLink": null,
+    "createdAt": "2025-12-22T05:15:49.006Z",
+    "updatedAt": "2025-12-22T05:15:49.006Z",
+    "routeCount": 0
   },
   {
     "id": "woodlawn",

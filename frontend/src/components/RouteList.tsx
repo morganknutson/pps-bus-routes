@@ -138,12 +138,16 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 paddingLeft: '1rem',
                 paddingRight: '2.5rem',
                 borderRadius: '12px',
-                fontSize: '12px',
+                fontSize: '14px',
+                fontWeight: '500',
+                height: '40px',
                 boxSizing: 'border-box',
                 backgroundColor: 'var(--bg-tertiary)',
                 color: 'var(--text-primary)',
                 transition: 'background-color 0.3s ease, color 0.3s ease',
                 boxShadow: '0 1px 3px var(--shadow-large)',
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
               {selectedSchool.name}
@@ -304,10 +308,27 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
             gap: '1rem'
           }}>
-            <i className="fas fa-exclamation-circle" style={{ fontSize: '32px', color: '#f44', opacity: 0.8 }}></i>
-            <p style={{ fontSize: '14px', fontWeight: '500', lineHeight: '1.4' }}>
+            <div style={{ 
+              backgroundColor: 'rgba(244, 67, 54, 0.1)', 
+              color: '#f44', 
+              fontSize: '14px', 
+              padding: '8px 20px', 
+              borderRadius: '999px',
+              fontWeight: '700',
+              textTransform: 'uppercase',
+              border: '1px solid rgba(244, 67, 54, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <i className="fas fa-exclamation-triangle" style={{ fontSize: '14px' }}></i>
+              NO ROUTES
+            </div>
+            <p style={{ fontSize: '13px', color: 'var(--text-tertiary)', maxWidth: '200px', lineHeight: '1.4' }}>
               Route information not provided on the web by school district.
             </p>
           </div>

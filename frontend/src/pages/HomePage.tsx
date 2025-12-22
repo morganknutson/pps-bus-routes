@@ -13,6 +13,7 @@ import { SEO } from '../components/SEO';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { MapPinIcon } from '../components/MapPinIcon';
 import { Footer } from '../components/Footer';
+import { getSchoolDisplayName } from '../utils/schoolUtils';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -660,7 +661,7 @@ export function HomePage() {
               }}>
                 <i className="fas fa-graduation-cap" style={{ color: 'var(--text-primary)', fontSize: '14px' }}></i>
                 <div style={{ flex: 1, fontSize: '14px', color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  {selectedSchoolLocal.name}
+                  {getSchoolDisplayName(selectedSchoolLocal.name)}
                 </div>
                 <button
                   onClick={() => {
@@ -775,7 +776,7 @@ export function HomePage() {
                             alignItems: 'center',
                           }}
                         >
-                          <span>{school.name}</span>
+                          <span>{getSchoolDisplayName(school.name)}</span>
                           {distance !== null && (
                             <span style={{
                               fontSize: '12px',

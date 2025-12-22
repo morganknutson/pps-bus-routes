@@ -1,6 +1,6 @@
 import React from 'react';
 import { School } from '../types';
-import { getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
+import { getSchoolTypes, getSchoolColor, getSchoolDisplayName } from '../utils/schoolUtils';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
@@ -107,7 +107,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             lineHeight: '1.2',
             color: 'var(--text-primary)' 
           }}>
-            {school.name}
+            {getSchoolDisplayName(school.name)}
           </h3>
           <div style={{ 
             display: 'flex', 
@@ -172,7 +172,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
                 <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '5px' }}>Address</div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                  <MapPinIcon width={isMobile ? 11 : 9} height={isMobile ? 15 : 13} style={{ flexShrink: 0, color: 'var(--text-tertiary)', marginTop: isMobile ? '4px' : '3px' }} />
+                  <MapPinIcon width={isMobile ? 11 : 9} height={isMobile ? 15 : 13} style={{ flexShrink: 0, color: 'var(--text-tertiary)', marginTop: isMobile ? '4px' : '2px' }} />
                   <a
                     href="#"
                     onClick={(e) => handleMapLinkClick(e, school.address!, school.coordinates)}

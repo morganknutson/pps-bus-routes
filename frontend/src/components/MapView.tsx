@@ -6,7 +6,7 @@ import { fetchRouteForStops } from '../services/routing';
 import { formatStreetName, extractStreetNames, expandAddressForGeocoding } from '../utils/formatAddress';
 import { createHomeIcon, createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { createSchoolIcon, createNumberedIcon, getNumberedIconDimensions } from '../utils/markerIcons';
-import { getSchoolTypes, getSchoolColor, createSchoolIcon as createSchoolIconBase } from '../utils/schoolUtils';
+import { getSchoolTypes, getSchoolColor, createSchoolIcon as createSchoolIconBase, getSchoolDisplayName } from '../utils/schoolUtils';
 import { formatDate } from '../utils/dateUtils';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { geocodeAddress } from '../services/api';
@@ -87,7 +87,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
 
   // Determine what to show in the info panel
   const activeSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
-  const showNoRoutesMessage = !!activeSchool && !selectedStop && selectedRoutes.length === 0 && !showSchoolInfoPopup;
+  const showNoRoutesMessage = !!activeSchool && !selectedStop && selectedRoutes.length === 0 && !showSchoolInfoPopup && activeSchool.routeCount !== 0;
 
   // Handle map resizing when sidebar changes
   useEffect(() => {
@@ -1288,7 +1288,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
           <SchoolInfoTooltip 
             school={activeSchool} 
             onClose={showSchoolInfoPopup ? () => setShowSchoolInfoPopup(false) : undefined}
-            message={showNoRoutesMessage ? `Select a route to view stops for ${activeSchool.name}` : undefined}
+            message={showNoRoutesMessage ? `Select a route to view stops for ${getSchoolDisplayName(activeSchool.name)}` : undefined}
           />
         ) : null}
       </MapInfoPanel>

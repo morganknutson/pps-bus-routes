@@ -5,6 +5,7 @@ import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatEffectiveDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { MapPinIcon } from './MapPinIcon';
+import { getSchoolDisplayName } from '../utils/schoolUtils';
 
 interface StopInfoTooltipProps {
   route: Route;
@@ -183,7 +184,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                 <MapPinIcon width={isMobile ? 11 : 9} height={isMobile ? 15 : 13} style={{ flexShrink: 0, color: 'var(--text-tertiary)', marginTop: isMobile ? '4px' : '3px' }} />
                 <div style={{ color: 'var(--text-primary)', fontWeight: '500', lineHeight: '1.4' }}>
                 {stop.isSchoolStop && stop.schoolName ? (
-                  stop.schoolName
+                  getSchoolDisplayName(stop.schoolName)
                 ) : enableStreetHighlighting && streets.length > 0 ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     {streets.map((streetName, index) => {

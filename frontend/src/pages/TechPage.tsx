@@ -125,7 +125,8 @@ const sections: Section[] = [
     subsections: [
       { id: 'backend-testing', title: '1. Backend Testing (Node --test)' },
       { id: 'frontend-testing', title: '2. Frontend Testing (Vitest)' },
-      { id: 'running-tests', title: '3. Running Tests' },
+      { id: 'build-verification', title: '3. Build & Type Verification' },
+      { id: 'running-tests', title: '4. Running Tests' },
     ],
   },
 ];
@@ -2129,6 +2130,7 @@ export function TechPage() {
                     </ul>
                   </li>
                   <li><strong>backend/scripts/recalculate-geometry.js</strong> - Recalculates the street-following geometry for all routes that are missing it or have invalid paths.</li>
+                  <li><strong>backend/scripts/add-missing-schools.js</strong> - Adds missing schools to <code>schools.json</code> and geocodes them using the Google Places API.</li>
                   <li><strong>scripts/process-single-pdf.js</strong> - Re-processes a single PDF file through the full <code>RouteProcessor</code> pipeline, useful for testing fixes on specific routes.</li>
                 </ul>
               </div>
@@ -2138,6 +2140,7 @@ export function TechPage() {
                   <li>Run <code>verify-school-stops.js</code> after any major data import or manual correction.</li>
                   <li>Check <code>find-strange-stops.js</code> periodically to catch geocoding drift or new edge cases.</li>
                   <li>Always keep <code>schools.json</code> as the source of truth for school names, addresses, and coordinates.</li>
+                  <li><strong>Frontend Name Mapping:</strong> Use <code>getSchoolDisplayName()</code> in <code>frontend/src/utils/schoolUtils.ts</code> to map shortened data names (e.g., "Lee") to full official names (e.g., "Jason Lee Elementary") for UI display only.</li>
                 </ul>
               </div>
             </div>
@@ -2955,22 +2958,41 @@ export function TechPage() {
               </div>
             </div>
 
+            <div id="build-verification" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
+                3. Build & Type Verification
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
+                To ensure code quality and prevent runtime errors, the project includes static type checking and build verification.
+              </p>
+              <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px' }}>
+                <ul style={{ color: 'var(--text-secondary)', marginTop: '10px', paddingLeft: '20px' }}>
+                  <li style={{ marginBottom: '8px' }}><strong>Type Checking:</strong> <code>tsc --noEmit</code> verifies all TypeScript types in the frontend without generating files.</li>
+                  <li style={{ marginBottom: '8px' }}><strong>Build Test:</strong> The <code>npm run build</code> command is verified to ensure Vite can successfully bundle the application.</li>
+                  <li><strong>Integration:</strong> Type checking is integrated into the main <code>npm test</code> command.</li>
+                </ul>
+              </div>
+            </div>
+
             <div id="running-tests" style={{ marginBottom: '30px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '10px', fontSize: '18px' }}>
-                3. Running Tests
+                4. Running Tests
               </h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '10px' }}>
                 Tests can be run individually by package or collectively from the root.
               </p>
               <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', fontFamily: 'monospace' }}>
-                <div style={{ marginBottom: '10px', color: 'var(--text-primary)' }}># Run all tests</div>
+                <div style={{ marginBottom: '10px', color: 'var(--text-primary)' }}># Run all tests (Backend, Frontend, Types)</div>
                 <div style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>npm test</div>
                 
                 <div style={{ marginBottom: '10px', color: 'var(--text-primary)' }}># Backend only</div>
                 <div style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>npm run test:backend</div>
                 
                 <div style={{ marginBottom: '10px', color: 'var(--text-primary)' }}># Frontend only</div>
-                <div style={{ color: 'var(--text-secondary)' }}>npm run test:frontend</div>
+                <div style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>npm run test:frontend</div>
+
+                <div style={{ marginBottom: '10px', color: 'var(--text-primary)' }}># Type check only</div>
+                <div style={{ color: 'var(--text-secondary)' }}>npm run test:types</div>
               </div>
             </div>
           </section>
