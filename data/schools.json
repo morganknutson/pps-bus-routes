@@ -7,10 +7,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/abernethy",
     "address": "2421 SE Orange Ave, Portland, OR 97214, USA",
     "coordinates": [
-      -122.6516263,
-      45.5058868
+      -122.65114760898362,
+      45.505606761237296
     ],
-    "updatedAt": "2025-12-11T17:11:20.502Z",
+    "updatedAt": "2025-12-23T10:25:27.936Z",
     "placeId": "ChIJa069o3cKlVQRFWMZ0_zD7hg",
     "placesData": {
       "id": "ChIJa069o3cKlVQRFWMZ0_zD7hg",
@@ -109,6 +109,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6516263,
+        45.5058868
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:27.936Z",
+      "snapDistance": 48.59252731798899
     }
   },
   {
@@ -119,10 +128,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/access-terwilliger",
     "address": "6318 S Corbett Ave, Portland, OR 97239, USA",
     "coordinates": [
-      -122.6755175,
-      45.478418
+      -122.67551323135346,
+      45.47870309628849
     ],
-    "updatedAt": "2025-12-21T08:18:02.518Z",
+    "updatedAt": "2025-12-23T10:25:27.934Z",
     "placeId": "ChIJHZwZgfsKlVQR8I5LYMSbQIs",
     "placesData": {
       "id": "ChIJHZwZgfsKlVQR8I5LYMSbQIs",
@@ -221,6 +230,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6755175,
+        45.478418
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:27.934Z",
+      "snapDistance": 31.703007858104748
     }
   },
   {
@@ -231,10 +249,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/ainsworth",
     "address": "2425 SW Vista Ave, Portland, OR 97201, USA",
     "coordinates": [
-      -122.699551,
-      45.5098062
+      -122.6997329911976,
+      45.50947964025391
     ],
-    "updatedAt": "2025-12-11T17:21:02.734Z",
+    "updatedAt": "2025-12-23T10:25:27.609Z",
     "placeId": "ChIJBfTLTDsKlVQR68xcJ3RrSVw",
     "placesData": {
       "id": "ChIJBfTLTDsKlVQR68xcJ3RrSVw",
@@ -333,6 +351,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.699551,
+        45.5098062
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:27.610Z",
+      "snapDistance": 38.98283429112155
     }
   },
   {
@@ -343,10 +370,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/alameda",
     "address": "2732 NE Fremont St, Portland, OR 97212, USA",
     "coordinates": [
-      -122.6376923,
-      45.547482
+      -122.63791566216806,
+      45.54747105721316
     ],
-    "updatedAt": "2025-12-11T17:21:06.260Z",
+    "updatedAt": "2025-12-23T10:25:27.947Z",
     "placeId": "ChIJ1_jPLSmnlVQR9wiqzPhNGgI",
     "placesData": {
       "id": "ChIJ1_jPLSmnlVQR9wiqzPhNGgI",
@@ -445,6 +472,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6376923,
+        45.547482
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:27.947Z",
+      "snapDistance": 17.436124709654397
     }
   },
   {
@@ -452,14 +488,23 @@
     "name": "Alliance High School",
     "address": "1530 NE Glisan St, Portland, OR 97232, USA",
     "coordinates": [
-      -122.65022700000002,
-      45.526095999999995
+      -122.65032696778029,
+      45.52609719826594
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:51.505Z",
-    "updatedAt": "2025-12-22T05:15:51.505Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:27.936Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.65022700000002,
+        45.526095999999995
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:27.936Z",
+      "snapDistance": 7.7887720633557125
+    }
   },
   {
     "id": "arleta",
@@ -469,10 +514,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/arleta",
     "address": "5109 SE 66th Ave, Portland, OR 97206, USA",
     "coordinates": [
-      -122.5960967,
-      45.4862341
+      -122.59571681120549,
+      45.48623427159183
     ],
-    "updatedAt": "2025-12-11T17:21:09.599Z",
+    "updatedAt": "2025-12-23T10:25:28.566Z",
     "placeId": "ChIJG3rJ8xOglVQRAdzqCRO9tYs",
     "placesData": {
       "id": "ChIJG3rJ8xOglVQRAdzqCRO9tYs",
@@ -571,6 +616,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5960967,
+        45.4862341
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:28.566Z",
+      "snapDistance": 29.614847551558896
     }
   },
   {
@@ -581,10 +635,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/astor",
     "address": "5601 N Yale St, Portland, OR 97203, USA",
     "coordinates": [
-      -122.729655,
-      45.5786714
+      -122.7302108,
+      45.578823
     ],
-    "updatedAt": "2025-12-11T17:21:12.622Z",
+    "updatedAt": "2025-12-23T10:25:28.563Z",
     "placeId": "ChIJzbsJ3fOnlVQRcXbeBO9Snnc",
     "placesData": {
       "id": "ChIJzbsJ3fOnlVQRcXbeBO9Snnc",
@@ -683,6 +737,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.729655,
+        45.5786714
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:28.563Z",
+      "snapDistance": 46.425611944359474
     }
   },
   {
@@ -693,10 +756,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/atkinson",
     "address": "5800 SE Division St, Portland, OR 97206, USA",
     "coordinates": [
-      -122.6049256,
-      45.5050873
+      -122.6049282515573,
+      45.505348092373374
     ],
-    "updatedAt": "2025-12-11T17:21:16.869Z",
+    "updatedAt": "2025-12-23T10:25:28.563Z",
     "placeId": "ChIJCdjr8V6glVQRICgZSkWS03I",
     "placesData": {
       "id": "ChIJCdjr8V6glVQRICgZSkWS03I",
@@ -795,6 +858,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6049256,
+        45.5050873
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:28.563Z",
+      "snapDistance": 28.999525033483373
     }
   },
   {
@@ -805,10 +877,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/beach",
     "address": "1710 N Humboldt St, Portland, OR 97217, USA",
     "coordinates": [
-      -122.685501,
-      45.5579142
+      -122.68551093186925,
+      45.55778576596907
     ],
-    "updatedAt": "2025-12-11T17:21:20.010Z",
+    "updatedAt": "2025-12-23T10:25:28.564Z",
     "placeId": "ChIJ3zbaPnKnlVQRi0z01yWFvhc",
     "placesData": {
       "id": "ChIJ3zbaPnKnlVQRi0z01yWFvhc",
@@ -907,6 +979,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.685501,
+        45.5579142
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:28.564Z",
+      "snapDistance": 14.302132044109653
     }
   },
   {
@@ -917,10 +998,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/beaumont",
     "address": "4043 NE Fremont St, Portland, OR 97212, USA",
     "coordinates": [
-      -122.6217722,
-      45.5489184
+      -122.62176722669342,
+      45.54885488200823
     ],
-    "updatedAt": "2025-12-11T17:21:23.245Z",
+    "updatedAt": "2025-12-23T10:25:28.562Z",
     "placeId": "ChIJi7XWddSmlVQRYxwxhYuDp1w",
     "placesData": {
       "id": "ChIJi7XWddSmlVQRYxwxhYuDp1w",
@@ -1019,6 +1100,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6217722,
+        45.5489184
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:28.562Z",
+      "snapDistance": 7.073487849930083
     }
   },
   {
@@ -1141,10 +1231,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/beverly-cleary",
     "address": "1915 NE 33rd Ave, Portland, OR 97212, USA",
     "coordinates": [
-      -122.6314977,
-      45.5369687
+      -122.63171790000001,
+      45.5368995
     ],
-    "updatedAt": "2025-12-11T17:21:29.259Z",
+    "updatedAt": "2025-12-23T10:25:29.172Z",
     "placeId": "ChIJvWQb9tGglVQRnHS1KbjRHgQ",
     "placesData": {
       "id": "ChIJvWQb9tGglVQRnHS1KbjRHgQ",
@@ -1243,6 +1333,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6314977,
+        45.5369687
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.172Z",
+      "snapDistance": 18.79763051200063
     }
   },
   {
@@ -1253,10 +1352,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/boise-eliot",
     "address": "620 N Fremont St, Portland, OR 97227, USA",
     "coordinates": [
-      -122.6729801,
-      45.54754459999999
+      -122.67290380000001,
+      45.5475867
     ],
-    "updatedAt": "2025-12-11T17:21:32.545Z",
+    "updatedAt": "2025-12-23T10:25:29.172Z",
     "placeId": "ChIJiSYRg0GnlVQRicNBlECs7j8",
     "placesData": {
       "id": "ChIJiSYRg0GnlVQRicNBlECs7j8",
@@ -1355,6 +1454,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6729801,
+        45.54754459999999
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.172Z",
+      "snapDistance": 7.564215425591571
     }
   },
   {
@@ -1365,10 +1473,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/bridger",
     "address": "7910 SE Market St #3656, Portland, OR 97215, USA",
     "coordinates": [
-      -122.5820709,
-      45.5106758
+      -122.58207295340277,
+      45.510827684220025
     ],
-    "updatedAt": "2025-12-11T17:21:35.729Z",
+    "updatedAt": "2025-12-23T10:25:29.172Z",
     "placeId": "ChIJR6_fqVSglVQRntMaJa5xMvc",
     "placesData": {
       "id": "ChIJR6_fqVSglVQRntMaJa5xMvc",
@@ -1467,6 +1575,15 @@
         "subpremise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5820709,
+        45.5106758
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.172Z",
+      "snapDistance": 16.889512650574776
     }
   },
   {
@@ -1477,10 +1594,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/bridlemile",
     "address": "4300 SW 47th Dr, Portland, OR 97221, USA",
     "coordinates": [
-      -122.7242829,
-      45.4917482
+      -122.72471890000001,
+      45.4917693
     ],
-    "updatedAt": "2025-12-11T17:21:38.829Z",
+    "updatedAt": "2025-12-23T10:25:29.177Z",
     "placeId": "ChIJE4-Zg8cLlVQRUcljQoPw4CA",
     "placesData": {
       "id": "ChIJE4-Zg8cLlVQRUcljQoPw4CA",
@@ -1579,6 +1696,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7242829,
+        45.4917482
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.177Z",
+      "snapDistance": 34.06663642440799
     }
   },
   {
@@ -1589,10 +1715,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/buckman",
     "address": "320 SE 16th Ave, Portland, OR 97214, USA",
     "coordinates": [
-      -122.6491015,
-      45.5204329
+      -122.64909832007817,
+      45.520760996842185
     ],
-    "updatedAt": "2025-12-11T17:21:41.880Z",
+    "updatedAt": "2025-12-23T10:25:29.792Z",
     "placeId": "ChIJxQwUUaOglVQR2_XfoYD-vs8",
     "placesData": {
       "id": "ChIJxQwUUaOglVQR2_XfoYD-vs8",
@@ -1691,6 +1817,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6491015,
+        45.5204329
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.792Z",
+      "snapDistance": 36.483545474112155
     }
   },
   {
@@ -1701,10 +1836,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/capitol",
     "address": "8401 SW 17th Ave, Portland, OR 97219, USA",
     "coordinates": [
-      -122.6959942,
-      45.464172
+      -122.69597900000001,
+      45.4645794
     ],
-    "updatedAt": "2025-12-11T17:21:45.306Z",
+    "updatedAt": "2025-12-23T10:25:29.776Z",
     "placeId": "ChIJfWop8xMLlVQRQVFDLYlacBc",
     "placesData": {
       "id": "ChIJfWop8xMLlVQRQVFDLYlacBc",
@@ -1803,6 +1938,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6959942,
+        45.464172
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.776Z",
+      "snapDistance": 45.3163198236532
     }
   },
   {
@@ -1813,10 +1957,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/cesar-chavez",
     "address": "5103 N Willis Blvd, Portland, OR 97203, USA",
     "coordinates": [
-      -122.7193347,
-      45.5844519
+      -122.71933700307288,
+      45.5847538590517
     ],
-    "updatedAt": "2025-12-11T17:21:48.530Z",
+    "updatedAt": "2025-12-23T10:25:29.777Z",
     "placeId": "ChIJFSgvI-mnlVQRluNVhqLIOG8",
     "placesData": {
       "id": "ChIJFSgvI-mnlVQRluNVhqLIOG8",
@@ -1915,6 +2059,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7193347,
+        45.5844519
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.777Z",
+      "snapDistance": 33.576792942829194
     }
   },
   {
@@ -1925,10 +2078,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/chapman",
     "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
     "coordinates": [
-      -122.7058526,
-      45.5332347
+      -122.70622510000001,
+      45.533489599999996
     ],
-    "updatedAt": "2025-12-11T17:21:51.797Z",
+    "updatedAt": "2025-12-23T10:25:29.781Z",
     "placeId": "ChIJb6et2O4JlVQRLDllfbZiabQ",
     "placesData": {
       "id": "ChIJb6et2O4JlVQRLDllfbZiabQ",
@@ -2027,6 +2180,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7058526,
+        45.5332347
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.781Z",
+      "snapDistance": 40.56108933999232
     }
   },
   {
@@ -2037,10 +2199,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/chief-joseph",
     "address": "2409 N Saratoga St, Portland, OR 97217, USA",
     "coordinates": [
-      -122.691249,
-      45.5732156
+      -122.69124726865239,
+      45.573527980006965
     ],
-    "updatedAt": "2025-12-11T17:21:54.796Z",
+    "updatedAt": "2025-12-23T10:25:29.782Z",
     "placeId": "ChIJr2f6CaOnlVQRxcngThDm65I",
     "placesData": {
       "id": "ChIJr2f6CaOnlVQRxcngThDm65I",
@@ -2139,6 +2301,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.691249,
+        45.5732156
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:29.782Z",
+      "snapDistance": 34.735333374006416
     }
   },
   {
@@ -2149,10 +2320,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/clark",
     "address": "1231 SE 92nd Ave, Portland, OR 97216, USA",
     "coordinates": [
-      -122.5698501,
-      45.5135543
+      -122.5697493,
+      45.513852799999995
     ],
-    "updatedAt": "2025-12-11T17:21:57.872Z",
+    "updatedAt": "2025-12-23T10:25:30.390Z",
     "placeId": "ChIJr7AkPK-hlVQREuBjcKxqYM4",
     "placesData": {
       "id": "ChIJr7AkPK-hlVQREuBjcKxqYM4",
@@ -2251,6 +2422,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5698501,
+        45.5135543
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:30.390Z",
+      "snapDistance": 34.10830315204299
     }
   },
   {
@@ -2258,28 +2438,46 @@
     "name": "Cleveland High School",
     "address": "3400 SE 26th Ave, Portland, OR 97202, USA",
     "coordinates": [
-      -122.63945009999999,
-      45.4985839
+      -122.63964210947574,
+      45.498580171289696
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:40.163Z",
-    "updatedAt": "2025-12-22T05:15:40.163Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:30.398Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.63945009999999,
+        45.4985839
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:30.398Z",
+      "snapDistance": 14.97086819643086
+    }
   },
   {
     "id": "creative-science-school",
     "name": "Creative Science School",
     "address": "7910 SE Market St #3656, Portland, OR 97215, USA",
     "coordinates": [
-      -122.58207089999998,
-      45.5106758
+      -122.58207295340277,
+      45.510827684220025
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:50.217Z",
-    "updatedAt": "2025-12-22T05:15:50.217Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:30.398Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.58207089999998,
+        45.5106758
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:30.398Z",
+      "snapDistance": 16.88951265059576
+    }
   },
   {
     "id": "creston",
@@ -2289,10 +2487,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/creston",
     "address": "4701 SE Bush St, Portland, OR 97206, USA",
     "coordinates": [
-      -122.6142517,
-      45.49551169999999
+      -122.61412949999999,
+      45.495183499999996
     ],
-    "updatedAt": "2025-12-11T17:22:01.036Z",
+    "updatedAt": "2025-12-23T10:25:30.397Z",
     "placeId": "ChIJVQCwZ2WglVQRVdd8xCPqgRs",
     "placesData": {
       "id": "ChIJVQCwZ2WglVQRVdd8xCPqgRs",
@@ -2391,6 +2589,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6142517,
+        45.49551169999999
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:30.397Z",
+      "snapDistance": 37.71665124702155
     }
   },
   {
@@ -2398,14 +2605,23 @@
     "name": "Darnell Wright Heights",
     "address": "12839 SE Holgate Blvd, Portland, OR 97236, USA",
     "coordinates": [
-      -122.5311705,
-      45.4905487
+      -122.5312472,
+      45.49028359999999
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:55.160Z",
-    "updatedAt": "2025-12-22T05:15:55.160Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:30.398Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.5311705,
+        45.4905487
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:30.398Z",
+      "snapDistance": 30.077992028439276
+    }
   },
   {
     "id": "davinci",
@@ -2415,10 +2631,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/davinci",
     "address": "2508 NE Everett St, Portland, OR 97232, USA",
     "coordinates": [
-      -122.6394381,
-      45.524379
+      -122.6399884,
+      45.524291600000005
     ],
-    "updatedAt": "2025-12-11T17:22:32.685Z",
+    "updatedAt": "2025-12-23T10:25:30.998Z",
     "placeId": "ChIJddOr17iglVQRG37zobrKIGU",
     "placesData": {
       "id": "ChIJddOr17iglVQRG37zobrKIGU",
@@ -2517,6 +2733,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6394381,
+        45.524379
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:30.998Z",
+      "snapDistance": 43.958245712437936
     }
   },
   {
@@ -2527,10 +2752,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/dr-martin-luther-king",
     "address": "4906 NE 6th Ave, Portland, OR 97211, USA",
     "coordinates": [
-      -122.6589942,
-      45.5580929
+      -122.65854482085618,
+      45.55808785024154
     ],
-    "updatedAt": "2025-12-11T17:24:20.303Z",
+    "updatedAt": "2025-12-23T10:25:31.007Z",
     "placeId": "ChIJp6pQ2xmnlVQRI7SGhtJYwUo",
     "placesData": {
       "id": "ChIJp6pQ2xmnlVQRI7SGhtJYwUo",
@@ -2629,6 +2854,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6589942,
+        45.5580929
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:31.007Z",
+      "snapDistance": 34.99186443242537
     }
   },
   {
@@ -2639,10 +2873,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/duniway",
     "address": "7700 SE Reed College Pl #5, Portland, OR 97202, USA",
     "coordinates": [
-      -122.6286055,
-      45.4685636
+      -122.62844253706355,
+      45.46821806728733
     ],
-    "updatedAt": "2025-12-11T17:22:36.136Z",
+    "updatedAt": "2025-12-23T10:25:31.007Z",
     "placeId": "EjM3NzAwIFNFIFJlZWQgQ29sbGVnZSBQbCAjNSwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiHRobChYKFAoSCdPce0a3CpVUEf2ixINt4eesEgE1",
     "placesData": {
       "id": "EjM3NzAwIFNFIFJlZWQgQ29sbGVnZSBQbCAjNSwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiHRobChYKFAoSCdPce0a3CpVUEf2ixINt4eesEgE1",
@@ -2749,6 +2983,15 @@
         "subpremise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6286055,
+        45.4685636
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:31.007Z",
+      "snapDistance": 40.46857172205336
     }
   },
   {
@@ -2759,10 +3002,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/faubion",
     "address": "2930 NE Dekum St, Portland, OR 97211, USA",
     "coordinates": [
-      -122.6343091,
-      45.570994
+      -122.6345032289462,
+      45.57099976793625
     ],
-    "updatedAt": "2025-12-11T17:22:39.340Z",
+    "updatedAt": "2025-12-23T10:25:31.006Z",
     "placeId": "ChIJnV3CT-6mlVQRXMn_cUK8-9I",
     "placesData": {
       "id": "ChIJnV3CT-6mlVQRXMn_cUK8-9I",
@@ -2853,6 +3096,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6343091,
+        45.570994
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:31.006Z",
+      "snapDistance": 15.124450551348023
     }
   },
   {
@@ -2863,10 +3115,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/forest-park",
     "address": "9935 NW Durrett St, Portland, OR 97229, USA",
     "coordinates": [
-      -122.7776603,
-      45.5425414
+      -122.77785593972504,
+      45.542351869990824
     ],
-    "updatedAt": "2025-12-11T17:22:42.459Z",
+    "updatedAt": "2025-12-23T10:25:31.005Z",
     "placeId": "ChIJ58hVCPwIlVQRYFttS2zr_SI",
     "placesData": {
       "id": "ChIJ58hVCPwIlVQRYFttS2zr_SI",
@@ -2965,6 +3217,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7776603,
+        45.5425414
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:31.005Z",
+      "snapDistance": 26.00552674934653
     }
   },
   {
@@ -2975,10 +3236,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/franklin",
     "address": "5405 SE Woodward St, Portland, OR 97206, USA",
     "coordinates": [
-      -122.6068516,
-      45.502314
+      -122.6073603,
+      45.5021693
     ],
-    "updatedAt": "2025-12-11T17:23:14.756Z",
+    "updatedAt": "2025-12-23T10:25:31.622Z",
     "placeId": "ChIJX_PIWWeglVQR7WxVc3xLits",
     "placesData": {
       "id": "ChIJX_PIWWeglVQR7WxVc3xLits",
@@ -3077,6 +3338,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6068516,
+        45.502314
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:31.622Z",
+      "snapDistance": 42.785877841803945
     }
   },
   {
@@ -3087,10 +3357,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/george",
     "address": "10000 N Burr Ave, Portland, OR 97203, USA",
     "coordinates": [
-      -122.7364726,
-      45.5960566
+      -122.73663689999998,
+      45.595747100000004
     ],
-    "updatedAt": "2025-12-11T17:23:18.063Z",
+    "updatedAt": "2025-12-23T10:25:31.624Z",
     "placeId": "ChIJaRwQ2AuolVQRSTGxy2G9c2I",
     "placesData": {
       "id": "ChIJaRwQ2AuolVQRSTGxy2G9c2I",
@@ -3189,6 +3459,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7364726,
+        45.5960566
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:31.624Z",
+      "snapDistance": 36.71230807794875
     }
   },
   {
@@ -3308,14 +3587,23 @@
     "name": "Grant High School",
     "address": "2245 NE 36th Ave, Portland, OR 97212, USA",
     "coordinates": [
-      -122.62655189999998,
-      45.539050499999995
+      -122.62603612413542,
+      45.53905189174985
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:41.423Z",
-    "updatedAt": "2025-12-22T05:15:41.423Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:31.624Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.62655189999998,
+        45.539050499999995
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:31.624Z",
+      "snapDistance": 40.17071772553642
+    }
   },
   {
     "id": "gray",
@@ -3325,10 +3613,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/gray",
     "address": "5505 SW 23rd Ave, Portland, OR 97239, USA",
     "coordinates": [
-      -122.701385,
-      45.4824889
+      -122.70096219999998,
+      45.482209499999996
     ],
-    "updatedAt": "2025-12-11T17:23:25.023Z",
+    "updatedAt": "2025-12-23T10:25:31.625Z",
     "placeId": "ChIJx4exSakLlVQRaTTX5exbPpY",
     "placesData": {
       "id": "ChIJx4exSakLlVQRaTTX5exbPpY",
@@ -3427,6 +3715,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.701385,
+        45.4824889
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:31.625Z",
+      "snapDistance": 45.29599370209098
     }
   },
   {
@@ -3437,10 +3734,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/grout",
     "address": "3119 SE Holgate Blvd, Portland, OR 97202, USA",
     "coordinates": [
-      -122.6332002,
-      45.4910818
+      -122.63271525842389,
+      45.49108255407001
     ],
-    "updatedAt": "2025-12-11T17:23:28.369Z",
+    "updatedAt": "2025-12-23T10:25:32.230Z",
     "placeId": "ChIJIXIG_YIKlVQRgEzR4aWZ0IQ",
     "placesData": {
       "id": "ChIJIXIG_YIKlVQRgEzR4aWZ0IQ",
@@ -3539,6 +3836,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6332002,
+        45.4910818
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.230Z",
+      "snapDistance": 37.8012391428473
     }
   },
   {
@@ -3549,10 +3855,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/harrison-park",
     "address": "2225 SE 87th Ave, Portland, OR 97216, USA",
     "coordinates": [
-      -122.574816,
-      45.5069498
+      -122.57440755976658,
+      45.506976548254976
     ],
-    "updatedAt": "2025-12-11T17:23:31.568Z",
+    "updatedAt": "2025-12-23T10:25:32.238Z",
     "placeId": "ChIJeyCKubKhlVQR8-2dQbdhmFA",
     "placesData": {
       "id": "ChIJeyCKubKhlVQR8-2dQbdhmFA",
@@ -3651,6 +3957,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.574816,
+        45.5069498
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.238Z",
+      "snapDistance": 31.967560018937704
     }
   },
   {
@@ -3661,10 +3976,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/hayhurst",
     "address": "5037 SW Iowa St, Portland, OR 97221, USA",
     "coordinates": [
-      -122.7289138,
-      45.4801718
+      -122.72870996425216,
+      45.48016209993043
     ],
-    "updatedAt": "2025-12-11T17:23:34.764Z",
+    "updatedAt": "2025-12-23T10:25:32.238Z",
     "placeId": "ChIJ-3QVcpcLlVQRbNEINaBem14",
     "placesData": {
       "id": "ChIJ-3QVcpcLlVQRbNEINaBem14",
@@ -3763,6 +4078,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7289138,
+        45.4801718
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.238Z",
+      "snapDistance": 15.928615003182896
     }
   },
   {
@@ -3773,10 +4097,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/hosford",
     "address": "2303 SE 28th Pl, Portland, OR 97214, USA",
     "coordinates": [
-      -122.6371059,
-      45.5062214
+      -122.63673421545275,
+      45.50622262865189
     ],
-    "updatedAt": "2025-12-11T17:23:37.825Z",
+    "updatedAt": "2025-12-23T10:25:32.234Z",
     "placeId": "ChIJ43xciYSglVQRJ5JQ1M5cU5Q",
     "placesData": {
       "id": "ChIJ43xciYSglVQRJ5JQ1M5cU5Q",
@@ -3875,6 +4199,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6371059,
+        45.5062214
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.234Z",
+      "snapDistance": 28.9653054047798
     }
   },
   {
@@ -3899,10 +4232,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/irvington",
     "address": "1320 NE Brazee St, Portland, OR 97212, USA",
     "coordinates": [
-      -122.6519732,
-      45.5403663
+      -122.65196862143296,
+      45.54053503843107
     ],
-    "updatedAt": "2025-12-11T17:23:40.840Z",
+    "updatedAt": "2025-12-23T10:25:32.837Z",
     "placeId": "ChIJJ45fxTWnlVQRKJiXVzxldTo",
     "placesData": {
       "id": "ChIJJ45fxTWnlVQRKJiXVzxldTo",
@@ -4001,6 +4334,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6519732,
+        45.5403663
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.837Z",
+      "snapDistance": 18.76624559424215
     }
   },
   {
@@ -4011,10 +4353,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/jackson",
     "address": "10625 SW 35th Ave, Portland, OR 97219, USA",
     "coordinates": [
-      -122.7131363,
-      45.4506715
+      -122.71316600619298,
+      45.45067183848486
     ],
-    "updatedAt": "2025-12-11T17:23:44.155Z",
+    "updatedAt": "2025-12-23T10:25:32.836Z",
     "placeId": "ChIJk8bFeF4LlVQRi3CiOg7HvT0",
     "placesData": {
       "id": "ChIJk8bFeF4LlVQRi3CiOg7HvT0",
@@ -4121,6 +4463,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7131363,
+        45.4506715
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.836Z",
+      "snapDistance": 2.3175611846190396
     }
   },
   {
@@ -4131,10 +4482,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/james-john",
     "address": "7439 N Charleston Ave, Portland, OR 97203, USA",
     "coordinates": [
-      -122.7521813,
-      45.5905294
+      -122.75196018785907,
+      45.59086540910344
     ],
-    "updatedAt": "2025-12-11T17:23:47.622Z",
+    "updatedAt": "2025-12-23T10:25:32.855Z",
     "placeId": "ChIJYco_UwColVQR9MKL1Xnb39E",
     "placesData": {
       "id": "ChIJYco_UwColVQR9MKL1Xnb39E",
@@ -4233,6 +4584,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7521813,
+        45.5905294
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.855Z",
+      "snapDistance": 41.133617027889535
     }
   },
   {
@@ -4240,14 +4600,23 @@
     "name": "Jefferson High School",
     "address": "5210 N Kerby Ave, Portland, OR 97217, USA",
     "coordinates": [
-      -122.67204319999999,
-      45.560784399999996
+      -122.67243719999999,
+      45.560305799999995
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:43.997Z",
-    "updatedAt": "2025-12-22T05:15:43.997Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:32.852Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.67204319999999,
+        45.560784399999996
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.852Z",
+      "snapDistance": 61.42524171350689
+    }
   },
   {
     "id": "kellogg",
@@ -4257,10 +4626,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/kellogg",
     "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
     "coordinates": [
-      -122.5917225,
-      45.49871359999999
+      -122.59207359999999,
+      45.498892
     ],
-    "updatedAt": "2025-12-11T17:23:54.114Z",
+    "updatedAt": "2025-12-23T10:25:32.856Z",
     "placeId": "ChIJK5MdbUSglVQRIt5HcgMhzKs",
     "placesData": {
       "id": "ChIJK5MdbUSglVQRIt5HcgMhzKs",
@@ -4351,6 +4720,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5917225,
+        45.49871359999999
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:32.856Z",
+      "snapDistance": 33.79832868776125
     }
   },
   {
@@ -4361,10 +4739,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/kelly",
     "address": "9030 SE Cooper St, Portland, OR 97266, USA",
     "coordinates": [
-      -122.5706198,
-      45.47270289999999
+      -122.57077803333316,
+      45.47302099106446
     ],
-    "updatedAt": "2025-12-11T17:23:50.920Z",
+    "updatedAt": "2025-12-23T10:25:33.465Z",
     "placeId": "ChIJdzS-o_SflVQRRUixiEUwojU",
     "placesData": {
       "id": "ChIJdzS-o_SflVQRRUixiEUwojU",
@@ -4463,6 +4841,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5706198,
+        45.47270289999999
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:33.465Z",
+      "snapDistance": 37.46034655483951
     }
   },
   {
@@ -4473,10 +4860,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/lane",
     "address": "7200 SE 60th Ave, Portland, OR 97206, USA",
     "coordinates": [
-      -122.6014249,
-      45.4708481
+      -122.60155999999999,
+      45.4707978
     ],
-    "updatedAt": "2025-12-11T17:23:57.422Z",
+    "updatedAt": "2025-12-23T10:25:33.473Z",
     "placeId": "ChIJwdIixwCglVQRv89p_8phIa8",
     "placesData": {
       "id": "ChIJwdIixwCglVQRv89p_8phIa8",
@@ -4575,6 +4962,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6014249,
+        45.4708481
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:33.473Z",
+      "snapDistance": 11.927498615549629
     }
   },
   {
@@ -4585,10 +4981,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/lee",
     "address": "2222 NE 92nd Ave, Portland, OR 97220, USA",
     "coordinates": [
-      -122.5676595,
-      45.5381887
+      -122.56766300000001,
+      45.538344599999995
     ],
-    "updatedAt": "2025-12-11T17:24:00.886Z",
+    "updatedAt": "2025-12-23T10:25:33.472Z",
     "placeId": "ChIJE_YaF2mhlVQRxj9A0lSfbVI",
     "placesData": {
       "id": "ChIJE_YaF2mhlVQRxj9A0lSfbVI",
@@ -4687,6 +5083,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5676595,
+        45.5381887
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:33.472Z",
+      "snapDistance": 17.337432205609222
     }
   },
   {
@@ -4809,10 +5214,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/leodis-v-mcdaniel",
     "address": "2735 NE 82nd Ave, Portland, OR 97220, USA",
     "coordinates": [
-      -122.5810188,
-      45.5419741
+      -122.58115049999999,
+      45.541760800000006
     ],
-    "updatedAt": "2025-12-11T17:24:07.303Z",
+    "updatedAt": "2025-12-23T10:25:33.465Z",
     "placeId": "ChIJ__C8KUGhlVQRIA6pcGoIaJk",
     "placesData": {
       "id": "ChIJ__C8KUGhlVQRIA6pcGoIaJk",
@@ -4936,6 +5341,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5810188,
+        45.5419741
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:33.465Z",
+      "snapDistance": 25.840635802311464
     }
   },
   {
@@ -4946,10 +5360,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/lewis",
     "address": "4401 SE Evergreen St #121, Portland, OR 97206, USA",
     "coordinates": [
-      -122.6176979,
-      45.4738762
+      -122.61827256188344,
+      45.47392189652238
     ],
-    "updatedAt": "2025-12-11T17:24:10.288Z",
+    "updatedAt": "2025-12-23T10:25:34.077Z",
     "placeId": "EjI0NDAxIFNFIEV2ZXJncmVlbiBTdCAjMTIxLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSIfGh0KFgoUChIJW6be7aUKlVQRPRtrU9tlpUsSAzEyMQ",
     "placesData": {
       "id": "EjI0NDAxIFNFIEV2ZXJncmVlbiBTdCAjMTIxLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSIfGh0KFgoUChIJW6be7aUKlVQRPRtrU9tlpUsSAzEyMQ",
@@ -5056,6 +5470,15 @@
         "subpremise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6176979,
+        45.4738762
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.077Z",
+      "snapDistance": 45.095680680235695
     }
   },
   {
@@ -5066,10 +5489,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/lincoln",
     "address": "1750 SW Salmon St, Portland, OR 97205, USA",
     "coordinates": [
-      -122.6917196,
-      45.5191852
+      -122.69193597675005,
+      45.51924802956022
     ],
-    "updatedAt": "2025-12-11T17:24:13.513Z",
+    "updatedAt": "2025-12-23T10:25:34.078Z",
     "placeId": "ChIJnz4fIRwKlVQRpLrIePp94dg",
     "placesData": {
       "id": "ChIJnz4fIRwKlVQRpLrIePp94dg",
@@ -5160,6 +5583,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6917196,
+        45.5191852
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.078Z",
+      "snapDistance": 18.24842268218531
     }
   },
   {
@@ -5170,10 +5602,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/llewellyn",
     "address": "6301 SE 14th Ave, Portland, OR 97202, USA",
     "coordinates": [
-      -122.6521794,
-      45.4771721
+      -122.65177158104453,
+      45.47717403415026
     ],
-    "updatedAt": "2025-12-11T17:24:16.655Z",
+    "updatedAt": "2025-12-23T10:25:34.078Z",
     "placeId": "ChIJtS9ug-sKlVQRYLLMaLnFh0I",
     "placesData": {
       "id": "ChIJtS9ug-sKlVQRYLLMaLnFh0I",
@@ -5272,6 +5704,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6521794,
+        45.4771721
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.078Z",
+      "snapDistance": 31.798022790294798
     }
   },
   {
@@ -5403,10 +5844,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/markham",
     "address": "10531 SW Capitol Hwy, Portland, OR 97219, USA",
     "coordinates": [
-      -122.7261874,
-      45.4490585
+      -122.72651099999999,
+      45.4485938
     ],
-    "updatedAt": "2025-12-11T17:24:26.616Z",
+    "updatedAt": "2025-12-23T10:25:34.078Z",
     "placeId": "ChIJXxPHZZ8MlVQRWOgoZtq7WTY",
     "placesData": {
       "id": "ChIJXxPHZZ8MlVQRWOgoZtq7WTY",
@@ -5505,6 +5946,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7261874,
+        45.4490585
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.078Z",
+      "snapDistance": 57.50877594716854
     }
   },
   {
@@ -5515,10 +5965,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/marysville",
     "address": "7733 SE Raymond St, Portland, OR 97206, USA",
     "coordinates": [
-      -122.5838743,
-      45.4868569
+      -122.58387114160045,
+      45.48657919194155
     ],
-    "updatedAt": "2025-12-11T17:24:29.930Z",
+    "updatedAt": "2025-12-23T10:25:34.682Z",
     "placeId": "ChIJIYuSrj2glVQRQvzA99hIbjU",
     "placesData": {
       "id": "ChIJIYuSrj2glVQRQvzA99hIbjU",
@@ -5617,6 +6067,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5838743,
+        45.4868569
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.682Z",
+      "snapDistance": 30.88070875976605
     }
   },
   {
@@ -5624,14 +6083,23 @@
     "name": "Metropolitan Learning Center",
     "address": "2033 NW Glisan St, Portland, OR 97209, USA",
     "coordinates": [
-      -122.6932642,
-      45.5264228
+      -122.69326079345734,
+      45.52632772319382
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:47.795Z",
-    "updatedAt": "2025-12-22T05:15:47.795Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:34.682Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.6932642,
+        45.5264228
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.682Z",
+      "snapDistance": 10.575388580002858
+    }
   },
   {
     "id": "mt-tabor",
@@ -5641,10 +6109,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/mt-tabor",
     "address": "5800 SE Ash St, Portland, OR 97215, USA",
     "coordinates": [
-      -122.6040112,
-      45.5210407
+      -122.60330830000001,
+      45.5207804
     ],
-    "updatedAt": "2025-12-11T17:24:33.309Z",
+    "updatedAt": "2025-12-23T10:25:34.682Z",
     "placeId": "ChIJ6f2PneSglVQRzBs0azfyxo0",
     "placesData": {
       "id": "ChIJ6f2PneSglVQRzBs0azfyxo0",
@@ -5743,6 +6211,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6040112,
+        45.5210407
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.682Z",
+      "snapDistance": 61.940531607152124
     }
   },
   {
@@ -5753,10 +6230,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/ockley-green",
     "address": "6031 N Montana Ave, Portland, OR 97217, USA",
     "coordinates": [
-      -122.6806322,
-      45.5669933
+      -122.68016649929721,
+      45.56699129753221
     ],
-    "updatedAt": "2025-12-11T17:24:36.574Z",
+    "updatedAt": "2025-12-23T10:25:34.681Z",
     "placeId": "ChIJERGEHwqnlVQRjvCBCsIzgpk",
     "placesData": {
       "id": "ChIJERGEHwqnlVQRjvCBCsIzgpk",
@@ -5855,6 +6332,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6806322,
+        45.5669933
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.681Z",
+      "snapDistance": 36.25304745739646
     }
   },
   {
@@ -5862,14 +6348,23 @@
     "name": "Odyssey Program",
     "address": "1849 SW 58th Ave, Portland, OR 97221, USA",
     "coordinates": [
-      -122.73707249999998,
-      45.5099503
+      -122.7372776382903,
+      45.51001582661388
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:53.948Z",
-    "updatedAt": "2025-12-22T05:15:53.948Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:34.682Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.73707249999998,
+        45.5099503
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:34.682Z",
+      "snapDistance": 17.56740895018939
+    }
   },
   {
     "id": "peninsula",
@@ -5879,10 +6374,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/peninsula",
     "address": "8125 N Emerald Ave, Portland, OR 97217, USA",
     "coordinates": [
-      -122.7008584,
-      45.5820664
+      -122.7007903,
+      45.581710699999995
     ],
-    "updatedAt": "2025-12-11T17:24:40.079Z",
+    "updatedAt": "2025-12-23T10:25:35.282Z",
     "placeId": "ChIJAZjRSL-nlVQR8xFcC6ibgMI",
     "placesData": {
       "id": "ChIJAZjRSL-nlVQR8xFcC6ibgMI",
@@ -5981,6 +6476,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7008584,
+        45.5820664
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.282Z",
+      "snapDistance": 39.90553378248655
     }
   },
   {
@@ -5988,14 +6492,23 @@
     "name": "Pioneer Program",
     "address": "2600 SE 71st Ave, Portland, OR 97206, USA",
     "coordinates": [
-      -122.5891006,
-      45.5036329
+      -122.58910784538045,
+      45.50397439616715
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:52.747Z",
-    "updatedAt": "2025-12-22T05:15:52.747Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:35.289Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.5891006,
+        45.5036329
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.289Z",
+      "snapDistance": 37.976839159383665
+    }
   },
   {
     "id": "richmond",
@@ -6005,10 +6518,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/richmond",
     "address": "2276 SE 41st Ave, Portland, OR 97214, USA",
     "coordinates": [
-      -122.6198598,
-      45.5064327
+      -122.6199553,
+      45.506730399999995
     ],
-    "updatedAt": "2025-12-11T17:24:43.605Z",
+    "updatedAt": "2025-12-23T10:25:35.288Z",
     "placeId": "ChIJZ8PazIuglVQRQETneuH8bvQ",
     "placesData": {
       "id": "ChIJZ8PazIuglVQRQETneuH8bvQ",
@@ -6107,6 +6620,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6198598,
+        45.5064327
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.288Z",
+      "snapDistance": 33.92899277883778
     }
   },
   {
@@ -6117,10 +6639,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/rieke",
     "address": "1405 SW Vermont St, Portland, OR 97219, USA",
     "coordinates": [
-      -122.6949474,
-      45.4768255
+      -122.6947658,
+      45.476649900000005
     ],
-    "updatedAt": "2025-12-11T17:24:46.786Z",
+    "updatedAt": "2025-12-23T10:25:35.292Z",
     "placeId": "ChIJze_58gYLlVQRUAuMae25gx8",
     "placesData": {
       "id": "ChIJze_58gYLlVQRUAuMae25gx8",
@@ -6211,6 +6733,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6949474,
+        45.4768255
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.292Z",
+      "snapDistance": 24.119368882613017
     }
   },
   {
@@ -6221,10 +6752,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/rigler",
     "address": "5401 NE Prescott St, Portland, OR 97218, USA",
     "coordinates": [
-      -122.6086616,
-      45.5564011
+      -122.608401,
+      45.55598609999999
     ],
-    "updatedAt": "2025-12-11T17:24:49.994Z",
+    "updatedAt": "2025-12-23T10:25:35.292Z",
     "placeId": "ChIJOaQ_CsmmlVQR2SMT7FOZfdk",
     "placesData": {
       "id": "ChIJOaQ_CsmmlVQR2SMT7FOZfdk",
@@ -6323,6 +6854,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6086616,
+        45.5564011
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.292Z",
+      "snapDistance": 50.40969827308294
     }
   },
   {
@@ -6347,10 +6887,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/rosa-parks",
     "address": "8960 N Woolsey Ave, Portland, OR 97203, USA",
     "coordinates": [
-      -122.7129162,
-      45.5879512
+      -122.71291102376212,
+      45.588067504723874
     ],
-    "updatedAt": "2025-12-11T17:24:53.270Z",
+    "updatedAt": "2025-12-23T10:25:35.891Z",
     "placeId": "ChIJhRzu5MKnlVQRVX6jE3zuoMw",
     "placesData": {
       "id": "ChIJhRzu5MKnlVQRVX6jE3zuoMw",
@@ -6449,6 +6989,15 @@
         "subpremise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7129162,
+        45.5879512
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.891Z",
+      "snapDistance": 12.938766352482537
     }
   },
   {
@@ -6459,10 +7008,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/rose-city-park",
     "address": "2334 NE 57th Ave, Portland, OR 97213, USA",
     "coordinates": [
-      -122.6036629,
-      45.5394216
+      -122.60370615931419,
+      45.539757425626966
     ],
-    "updatedAt": "2025-12-11T17:24:56.431Z",
+    "updatedAt": "2025-12-23T10:25:35.895Z",
     "placeId": "ChIJD9LhciWhlVQRmNUvbQJCDEM",
     "placesData": {
       "id": "ChIJD9LhciWhlVQRmNUvbQJCDEM",
@@ -6610,6 +7159,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6036629,
+        45.5394216
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.895Z",
+      "snapDistance": 37.49378713804539
     }
   },
   {
@@ -6620,10 +7178,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/roseway-heights",
     "address": "7334 NE Siskiyou St, Portland, OR 97213, USA",
     "coordinates": [
-      -122.5873484,
-      45.5440613
+      -122.58729934502999,
+      45.543779976795825
     ],
-    "updatedAt": "2025-12-11T17:24:59.728Z",
+    "updatedAt": "2025-12-23T10:25:35.895Z",
     "placeId": "ChIJWQLei0ehlVQR-maswlIein4",
     "placesData": {
       "id": "ChIJWQLei0ehlVQR-maswlIein4",
@@ -6722,6 +7280,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5873484,
+        45.5440613
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.895Z",
+      "snapDistance": 31.514120838481762
     }
   },
   {
@@ -6732,10 +7299,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/sabin",
     "address": "4013 NE 18th Ave, Portland, OR 97212, USA",
     "coordinates": [
-      -122.6478469,
-      45.5522028
+      -122.64831416575548,
+      45.55220390487624
     ],
-    "updatedAt": "2025-12-11T17:25:02.636Z",
+    "updatedAt": "2025-12-23T10:25:35.895Z",
     "placeId": "ChIJrebtfCSnlVQRiQV6HTwV4bQ",
     "placesData": {
       "id": "ChIJrebtfCSnlVQRiQV6HTwV4bQ",
@@ -6834,6 +7401,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6478469,
+        45.5522028
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:35.895Z",
+      "snapDistance": 36.38397746974339
     }
   },
   {
@@ -6844,10 +7420,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/scott",
     "address": "6700 NE Prescott St, Portland, OR 97218, USA",
     "coordinates": [
-      -122.5944324,
-      45.555031
+      -122.5944427,
+      45.5549968
     ],
-    "updatedAt": "2025-12-11T17:25:05.820Z",
+    "updatedAt": "2025-12-23T10:25:36.498Z",
     "placeId": "ChIJIYtrt7SmlVQRkmzgSveNLm4",
     "placesData": {
       "id": "ChIJIYtrt7SmlVQRkmzgSveNLm4",
@@ -6946,6 +7522,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5944324,
+        45.555031
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:36.498Z",
+      "snapDistance": 3.886509072493406
     }
   },
   {
@@ -6956,10 +7541,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/sellwood",
     "address": "8300 SE 15th Ave, Portland, OR 97202, USA",
     "coordinates": [
-      -122.6498774,
-      45.4625412
+      -122.65016472081483,
+      45.46255357661636
     ],
-    "updatedAt": "2025-12-11T17:25:08.998Z",
+    "updatedAt": "2025-12-23T10:25:36.503Z",
     "placeId": "ChIJpU0Yd9AKlVQRMpcZTOvdVA4",
     "placesData": {
       "id": "ChIJpU0Yd9AKlVQRMpcZTOvdVA4",
@@ -7058,6 +7643,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6498774,
+        45.4625412
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:36.503Z",
+      "snapDistance": 22.450193617730136
     }
   },
   {
@@ -7068,10 +7662,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/sitton",
     "address": "9930 N Smith St, Portland, OR 97203, USA",
     "coordinates": [
-      -122.7582655,
-      45.6000407
+      -122.75869197032827,
+      45.59990259550716
     ],
-    "updatedAt": "2025-12-11T17:25:12.327Z",
+    "updatedAt": "2025-12-23T10:25:36.503Z",
     "placeId": "ChIJs9CIjRuolVQRBaJVyQtfBaA",
     "placesData": {
       "id": "ChIJs9CIjRuolVQRBaJVyQtfBaA",
@@ -7170,6 +7764,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7582655,
+        45.6000407
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:36.503Z",
+      "snapDistance": 36.560469104551075
     }
   },
   {
@@ -7180,10 +7783,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/skyline",
     "address": "11536 NW Skyline Blvd, Portland, OR 97231, USA",
     "coordinates": [
-      -122.8564165,
-      45.6075836
+      -122.85612990000001,
+      45.607818599999995
     ],
-    "updatedAt": "2025-12-11T17:25:15.470Z",
+    "updatedAt": "2025-12-23T10:25:36.501Z",
     "placeId": "ChIJFTkpJOMGlVQR4m2mq7RkI9s",
     "placesData": {
       "id": "ChIJFTkpJOMGlVQR4m2mq7RkI9s",
@@ -7273,6 +7876,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.8564165,
+        45.6075836
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:36.501Z",
+      "snapDistance": 34.34891044096085
     }
   },
   {
@@ -7283,10 +7895,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/stephenson",
     "address": "2627 SW Stephenson St, Portland, OR 97219, USA",
     "coordinates": [
-      -122.7033309,
-      45.4407591
+      -122.70360100944407,
+      45.44076697394362
     ],
-    "updatedAt": "2025-12-11T17:25:18.596Z",
+    "updatedAt": "2025-12-23T10:25:36.501Z",
     "placeId": "ChIJpZ8Im1YLlVQRlcXENEI5fAs",
     "placesData": {
       "id": "ChIJpZ8Im1YLlVQRlcXENEI5fAs",
@@ -7385,6 +7997,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.7033309,
+        45.4407591
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:36.501Z",
+      "snapDistance": 21.091986330764747
     }
   },
   {
@@ -7392,14 +8013,23 @@
     "name": "Sunnyside Environmental School",
     "address": "3421 SE Salmon St, Portland, OR 97214, USA",
     "coordinates": [
-      -122.62889200000001,
-      45.515427599999995
+      -122.62889195307568,
+      45.5157411513453
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:46.555Z",
-    "updatedAt": "2025-12-22T05:15:46.555Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:37.109Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.62889200000001,
+        45.515427599999995
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.109Z",
+      "snapDistance": 34.86531903246242
+    }
   },
   {
     "id": "tubman",
@@ -7409,10 +8039,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/tubman",
     "address": "2231 N Flint Ave, Portland, OR 97227, USA",
     "coordinates": [
-      -122.6695743,
-      45.5394497
+      -122.66956744969835,
+      45.53959508214014
     ],
-    "updatedAt": "2025-12-11T17:25:21.605Z",
+    "updatedAt": "2025-12-23T10:25:37.110Z",
     "placeId": "ChIJDwa3vU-nlVQRW4_sOT_yo94",
     "placesData": {
       "id": "ChIJDwa3vU-nlVQRW4_sOT_yo94",
@@ -7503,6 +8133,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6695743,
+        45.5394497
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.110Z",
+      "snapDistance": 16.174557946527262
     }
   },
   {
@@ -7513,10 +8152,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/vernon",
     "address": "2044 NE Killingsworth St, Portland, OR 97211, USA",
     "coordinates": [
-      -122.6438366,
-      45.5623398
+      -122.64386825313926,
+      45.56208420605658
     ],
-    "updatedAt": "2025-12-11T17:25:24.939Z",
+    "updatedAt": "2025-12-23T10:25:37.111Z",
     "placeId": "ChIJWdREruGmlVQROaPOPKX7JLE",
     "placesData": {
       "id": "ChIJWdREruGmlVQROaPOPKX7JLE",
@@ -7615,6 +8254,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6438366,
+        45.5623398
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.111Z",
+      "snapDistance": 28.527381622549985
     }
   },
   {
@@ -7625,10 +8273,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/vestal",
     "address": "161 NE 82nd Ave, Portland, OR 97220, USA",
     "coordinates": [
-      -122.5796921,
-      45.5246104
+      -122.58010580618522,
+      45.524605439892284
     ],
-    "updatedAt": "2025-12-11T17:25:28.997Z",
+    "updatedAt": "2025-12-23T10:25:37.110Z",
     "placeId": "ChIJx8hinQ-hlVQRSodBWZcbmvE",
     "placesData": {
       "id": "ChIJx8hinQ-hlVQRSodBWZcbmvE",
@@ -7727,6 +8375,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5796921,
+        45.5246104
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.110Z",
+      "snapDistance": 32.23387222174464
     }
   },
   {
@@ -7845,10 +8502,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/whitman",
     "address": "7326 SE Flavel St, Portland, OR 97206, USA",
     "coordinates": [
-      -122.5877156,
-      45.4683958
+      -122.58771676539588,
+      45.468658644016806
     ],
-    "updatedAt": "2025-12-11T17:25:33.478Z",
+    "updatedAt": "2025-12-23T10:25:37.715Z",
     "placeId": "ChIJJxhFa_mflVQRI87QPZ05IaI",
     "placesData": {
       "id": "ChIJJxhFa_mflVQRI87QPZ05IaI",
@@ -7947,6 +8604,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5877156,
+        45.4683958
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.715Z",
+      "snapDistance": 29.227062457379944
     }
   },
   {
@@ -7954,14 +8620,23 @@
     "name": "Winterhaven School",
     "address": "3830 SE 14th Ave, Portland, OR 97202, USA",
     "coordinates": [
-      -122.65090669999998,
-      45.494924499999996
+      -122.65138468819441,
+      45.494928129518755
     ],
     "schoolPageLink": null,
     "driveLink": null,
     "createdAt": "2025-12-22T05:15:49.006Z",
-    "updatedAt": "2025-12-22T05:15:49.006Z",
-    "routeCount": 0
+    "updatedAt": "2025-12-23T10:25:37.724Z",
+    "routeCount": 0,
+    "metadata": {
+      "originalCoordinates": [
+        -122.65090669999998,
+        45.494924499999996
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.724Z",
+      "snapDistance": 37.258773489050206
+    }
   },
   {
     "id": "woodlawn",
@@ -7971,10 +8646,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/woodlawn",
     "address": "7200 NE 11th Ave, Portland, OR 97211, USA",
     "coordinates": [
-      -122.6531854,
-      45.5749134
+      -122.652704591821,
+      45.575006972349804
     ],
-    "updatedAt": "2025-12-11T17:25:37.812Z",
+    "updatedAt": "2025-12-23T10:25:37.721Z",
     "placeId": "ChIJ6XQI2fimlVQRRghQWioYQcA",
     "placesData": {
       "id": "ChIJ6XQI2fimlVQRRghQWioYQcA",
@@ -8073,6 +8748,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.6531854,
+        45.5749134
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.722Z",
+      "snapDistance": 38.842593662636624
     }
   },
   {
@@ -8083,10 +8767,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/woodmere",
     "address": "7900 SE Duke St, Portland, OR 97206, USA",
     "coordinates": [
-      -122.5824729,
-      45.4745839
+      -122.58244520000001,
+      45.4749135
     ],
-    "updatedAt": "2025-12-11T17:25:41.263Z",
+    "updatedAt": "2025-12-23T10:25:37.717Z",
     "placeId": "ChIJMagg7B2glVQRqsxxlvNFBxw",
     "placesData": {
       "id": "ChIJMagg7B2glVQRqsxxlvNFBxw",
@@ -8185,6 +8869,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.5824729,
+        45.4745839
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.717Z",
+      "snapDistance": 36.71343414393718
     }
   },
   {
@@ -8195,10 +8888,10 @@
     "schoolPageLink": "https://sites.google.com/pps.net/gt-bus-schedule/GT-Bus-Schedules/woodstock",
     "address": "5601 SE 50th Ave, Portland, OR 97206, USA",
     "coordinates": [
-      -122.612305,
-      45.4820555
+      -122.6125116,
+      45.48208770000001
     ],
-    "updatedAt": "2025-12-11T17:25:44.629Z",
+    "updatedAt": "2025-12-23T10:25:37.724Z",
     "placeId": "ChIJo9HbsQuglVQR1_ogKFqaaTQ",
     "placesData": {
       "id": "ChIJo9HbsQuglVQR1_ogKFqaaTQ",
@@ -8297,6 +8990,15 @@
         "premise",
         "street_address"
       ]
+    },
+    "metadata": {
+      "originalCoordinates": [
+        -122.612305,
+        45.4820555
+      ],
+      "snappedToRoad": true,
+      "snappedAt": "2025-12-23T10:25:37.724Z",
+      "snapDistance": 16.500183922957437
     }
   }
 ]

@@ -788,7 +788,26 @@ export function MapView({
           if (!activeSchool || !activeSchool.coordinates) return null;
           if (!validateLngLat(activeSchool.coordinates)) return null;
           
-          const position = toLeafletPosition(activeSchool.coordinates);
+          // Try to get curb position from route geometry if available, 
+          // otherwise use the snapped coordinates from schools.json
+          let position = toLeafletPosition(activeSchool.coordinates);
+          
+          if (selectedRoutes.length > 0) {
+            // Find the first route that has street-snapped geometry
+            for (const route of selectedRoutes) {
+              const geometry = routeGeometries[route.id];
+              if (geometry && geometry.length > 0) {
+                // Morning routes end at school (last point), Afternoon start there (first point)
+                // geometry is [lat, lng][] for Leaflet
+                const curbPoint = route.direction === 'Afternoon' ? geometry[0] : geometry[geometry.length - 1];
+                if (curbPoint) {
+                  position = curbPoint;
+                  break;
+                }
+              }
+            }
+          }
+          
           const schoolTypes = activeSchool.schoolTypes || getSchoolTypes(activeSchool.name);
           const schoolColor = getSchoolColor(schoolTypes);
           
@@ -868,9 +887,8 @@ export function MapView({
               let icon: L.DivIcon;
               
               if (stop.isSchoolStop) {
-                // School stop: use school icon, no number
-                stopNumber = 0; // For identification, but won't be displayed
-                icon = createSchoolIcon(route.color, stop.time);
+                // Skip rendering individual school pins - the main landmark pin handles this
+                return null;
               } else {
                 // Regular stop: calculate number by counting only non-school, non-skipped stops before this one
                 const allStopsWithCoords = route.stops.filter(s => s.coordinates && !s.skipGeocoding);
