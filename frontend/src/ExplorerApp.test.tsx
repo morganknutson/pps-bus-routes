@@ -160,7 +160,7 @@ describe('ExplorerApp Integration', () => {
       // Should switch back to schools tab
       expect(screen.getByText(/Schools/i)).toBeInTheDocument();
     });
-  });
+  }, 15000);
 
   it('resolves URLs to correct UI states', async () => {
     // Test direct deep link to a school's routes

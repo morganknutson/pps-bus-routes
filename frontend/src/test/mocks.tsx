@@ -28,6 +28,7 @@ vi.mock('react-leaflet', () => {
       </div>
     ),
     Polyline: () => <div data-testid="polyline" />,
+    Popup: ({ children }: any) => <div data-testid="popup">{children}</div>,
     Tooltip: ({ children }: any) => <div data-testid="tooltip">{children}</div>,
     ZoomControl: () => <div data-testid="zoom-control" />,
     useMap: () => mockMap,

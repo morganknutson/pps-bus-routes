@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { MapContainer, Polyline, Marker, Popup, ZoomControl } from 'react-leaflet';
 import L from 'leaflet';
 import { useStore } from '../store/useStore';
 import { fetchRouteForStops } from '../services/routing';
+import { School } from '../types';
 import { formatStreetName, extractStreetNames, expandAddressForGeocoding } from '../utils/formatAddress';
 import { createHomeIcon, createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { createSchoolIcon, createNumberedIcon } from '../utils/markerIcons';
@@ -11,6 +12,9 @@ import { geocodeAddress } from '../services/api';
 import { toLeafletPosition, validateLngLat, formatCoordinates } from '../utils/coordinates';
 import { DarkModeTileLayer } from './DarkModeTileLayer';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { MapInfoPanel } from './MapInfoPanel';
+import { StopInfoTooltip } from './StopInfoTooltip';
+import { SchoolInfoTooltip } from './SchoolInfoTooltip';
 import 'leaflet/dist/leaflet.css';
 
 const homeIcon = createHomeIcon();
@@ -21,9 +25,12 @@ interface RouteGeometry {
 }
 
 interface MapViewProps {
+  viewMode: 'schools' | 'routes';
   editingMode?: boolean;
   enableStreetHighlighting?: boolean;
   enableStreetPins?: boolean; // Enable the drop pins feature (admin only)
+  onSelectSchool?: (schoolId: string | null) => void;
+  schools?: School[]; // Optional: provide filtered schools for the map
 }
 
 interface UndoStep {
@@ -48,13 +55,39 @@ interface StreetMarker {
   coordinates: [number, number]; // [lng, lat]
 }
 
-export function MapView({ editingMode = false, enableStreetHighlighting = false, enableStreetPins = false }: MapViewProps) {
-  const { routes, schools, homeAddress, lookupAddress, selectedStop, clearSelectedStop, selectStop, selectedSchoolId, setSelectedSchool, updateStopCoordinates, directionFilter, isLoading } = useStore();
+export function MapView({ 
+  viewMode, 
+  editingMode = false, 
+  enableStreetHighlighting = false, 
+  enableStreetPins = false,
+  onSelectSchool,
+  schools: schoolsProp
+}: MapViewProps) {
+  const { 
+    routes, 
+    schools: schoolsFromStore, 
+    homeAddress, 
+    lookupAddress, 
+    selectedStop, 
+    clearSelectedStop, 
+    selectStop, 
+    selectedSchoolId, 
+    setSelectedSchool, 
+    updateStopCoordinates, 
+    directionFilter, 
+    isLoading 
+  } = useStore();
+
+  const schools = schoolsProp || schoolsFromStore;
   const isMobile = useIsMobile();
   const [map, setMap] = useState<L.Map | null>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
   const [undoHistory, setUndoHistory] = useState<UndoStep[]>([]);
   const routeRecalcTimeoutRef = useRef<{ [routeId: string]: ReturnType<typeof setTimeout> }>({});
+  const lastHandledSchoolIdRef = useRef<string | null | undefined>(undefined);
+  const [isMapReady, setIsMapReady] = useState(false);
+  const isInitialLoadRef = useRef<boolean>(true);
+  
   const previousHomeAddressRef = useRef<typeof homeAddress>(undefined);
   const hasZoomedToAddressRef = useRef<boolean>(false);
   const previousLookupAddressRef = useRef<{ address: string; coordinates: [number, number] } | null>(null);
@@ -65,6 +98,139 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const [streetError, setStreetError] = useState<string | null>(null);
   const [streetMarkers, setStreetMarkers] = useState<StreetMarker[]>([]);
   const [loadingStreetPins, setLoadingStreetPins] = useState<boolean>(false);
+  const [showSchoolInfo, setShowSchoolInfo] = useState<boolean>(false);
+
+  // Memoize schools with coordinates
+  const schoolsWithCoords = useMemo(() => 
+    schools.filter((s: School) => s.coordinates && s.coordinates.length === 2),
+    [schools]
+  );
+
+  // Track the set of schools for fitting
+  const schoolsKey = useMemo(() => 
+    schoolsWithCoords.map((s: School) => s.id).sort().join(','),
+    [schoolsWithCoords]
+  );
+
+  // Track if we have successfully fitted the map to the initial set of schools
+  const hasInitiallyFittedRef = useRef<boolean>(false);
+
+  // Mark map as ready
+  useEffect(() => {
+    if (!map) return;
+    const checkReady = () => {
+      if (map.getContainer()) {
+        console.log('[MapView] Map container ready');
+        setIsMapReady(true);
+      }
+    };
+    map.whenReady(checkReady);
+    checkReady();
+  }, [map]);
+
+  // Unified Zoom/Fit Logic
+  useEffect(() => {
+    if (!map || !isMapReady) return;
+
+    // Give priority to manual address zoom
+    const timeSinceAddressZoom = Date.now() - lastAddressZoomTimeRef.current;
+    if (timeSinceAddressZoom < 2000) return;
+
+    const isStateChanged = lastHandledSchoolIdRef.current !== selectedSchoolId;
+    const isFirstLoad = isInitialLoadRef.current;
+
+    // Handle Route View Zooming
+    if (viewMode === 'routes') {
+      if (selectedStop) {
+        // Stop selected - zoom to stop
+        if (!validateLngLat(selectedStop.stop.coordinates)) return;
+        const position = toLeafletPosition(selectedStop.stop.coordinates);
+        map.setView(position, 18, { animate: true });
+        lastHandledSchoolIdRef.current = 'STOP_SELECTED';
+        return;
+      }
+
+      const selectedRoutes = routes.filter(r => r.isSelected && (directionFilter === 'Both' || r.direction === directionFilter));
+      
+      if (selectedRoutes.length > 0) {
+        // Routes selected - fit to routes
+        const allCoords: [number, number][] = [];
+        selectedRoutes.forEach(route => {
+          route.stops.forEach(stop => {
+            if (stop.coordinates && validateLngLat(stop.coordinates)) {
+              allCoords.push(toLeafletPosition(stop.coordinates));
+            }
+          });
+        });
+
+        if (allCoords.length > 0) {
+          const bounds = L.latLngBounds(allCoords);
+          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+          lastHandledSchoolIdRef.current = 'ROUTES_FIT';
+        }
+      } else if (selectedSchoolId) {
+        // No routes but school selected - zoom to school
+        const school = schoolsWithCoords.find(s => s.id === selectedSchoolId);
+        if (school && school.coordinates) {
+          const [lng, lat] = school.coordinates;
+          const zoom = 16;
+          // Offset to account for bottom panel
+          const targetPoint = map.project([lat, lng], zoom).add([0, 100]);
+          const targetLatLng = map.unproject(targetPoint, zoom);
+          map.setView(targetLatLng, zoom, { animate: true });
+          lastHandledSchoolIdRef.current = selectedSchoolId;
+        }
+      } else {
+        // No school selected in routes mode - this usually happens during transition
+        // We don't do anything here, wait for viewMode to change to 'schools'
+      }
+    } 
+    // Handle Schools View Zooming
+    else if (viewMode === 'schools') {
+      if (selectedSchoolId) {
+        // Zoom to single school
+        if (!isStateChanged && !isFirstLoad && lastHandledSchoolIdRef.current === selectedSchoolId) return;
+        const school = schoolsWithCoords.find(s => s.id === selectedSchoolId);
+        if (school && school.coordinates) {
+          const [lng, lat] = school.coordinates;
+          const zoom = 16;
+          const targetPoint = map.project([lat, lng], zoom).add([0, 100]);
+          const targetLatLng = map.unproject(targetPoint, zoom);
+          map.setView(targetLatLng, zoom, { animate: true });
+          lastHandledSchoolIdRef.current = selectedSchoolId;
+        }
+      } else {
+        // Fit all schools
+        const wasSelectedBefore = lastHandledSchoolIdRef.current !== null && lastHandledSchoolIdRef.current !== undefined;
+        // If we just loaded schools for the first time, or if we were zoomed in and now aren't
+        if (wasSelectedBefore || isFirstLoad || isStateChanged || (!hasInitiallyFittedRef.current && schoolsWithCoords.length > 0)) {
+          const allCoords: [number, number][] = schoolsWithCoords.map((s: School) => [s.coordinates![1], s.coordinates![0]] as [number, number]);
+          if (homeAddress) allCoords.push([homeAddress.coordinates[1], homeAddress.coordinates[0]]);
+          
+          if (allCoords.length > 0) {
+            const bounds = L.latLngBounds(allCoords);
+            map.fitBounds(bounds, { padding: [50, 50], animate: true });
+            lastHandledSchoolIdRef.current = null;
+            hasInitiallyFittedRef.current = true;
+          }
+        }
+      }
+    }
+
+    isInitialLoadRef.current = false;
+  }, [map, isMapReady, viewMode, selectedSchoolId, selectedStop, routes, directionFilter, schoolsWithCoords, homeAddress, schoolsKey]);
+
+  // Clear school info tooltip when a stop is selected
+  useEffect(() => {
+    if (selectedStop) {
+      setShowSchoolInfo(false);
+    }
+  }, [selectedStop]);
+
+  // Clear everything when school changes
+  useEffect(() => {
+    setShowSchoolInfo(false);
+  }, [selectedSchoolId]);
 
   // Get selected routes, filtered by direction
   const selectedRoutes = routes.filter(route => {
@@ -76,72 +242,47 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
   const activeSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
   const schoolHasNoRoutes = !!activeSchool && !isLoading && routes.length === 0;
 
-  // Zoom to home address only when it's first added or coordinates change
+  // Zoom to home address
   useEffect(() => {
-    // Check if address was just added (changed from undefined to a value)
-    // or if coordinates actually changed (not just object reference)
     const prevCoords = previousHomeAddressRef.current?.coordinates;
     const currentCoords = homeAddress?.coordinates;
     const coordinatesChanged = prevCoords && currentCoords && 
       (prevCoords[0] !== currentCoords[0] || prevCoords[1] !== currentCoords[1]);
     const wasJustAdded = !previousHomeAddressRef.current && homeAddress;
     
-    // If coordinates changed, reset the zoom flag so we can zoom to the new address
     if (coordinatesChanged) {
       hasZoomedToAddressRef.current = false;
     }
     
     if ((wasJustAdded || coordinatesChanged) && map && homeAddress && !hasZoomedToAddressRef.current) {
-      if (!validateLngLat(homeAddress.coordinates)) {
-        console.error('[MapView] Invalid home address coordinates:', homeAddress.coordinates);
-        return;
+      if (validateLngLat(homeAddress.coordinates)) {
+        const position = toLeafletPosition(homeAddress.coordinates);
+        map.setView(position, 16, { animate: true });
+        hasZoomedToAddressRef.current = true;
+        lastAddressZoomTimeRef.current = Date.now();
       }
-      const position = toLeafletPosition(homeAddress.coordinates);
-      map.setView(position, 16, { animate: true });
-      hasZoomedToAddressRef.current = true;
-      lastAddressZoomTimeRef.current = Date.now();
     }
-    
-    // Update the ref to track previous value
     previousHomeAddressRef.current = homeAddress;
-    
-    // Reset zoom flag if address is cleared
-    if (!homeAddress) {
-      hasZoomedToAddressRef.current = false;
-    }
+    if (!homeAddress) hasZoomedToAddressRef.current = false;
   }, [homeAddress, map]);
 
-  // Zoom to lookup address only when it actually changes (different coordinates)
+  // Zoom to lookup address
   useEffect(() => {
     if (lookupAddress && map) {
-      if (!validateLngLat(lookupAddress.coordinates)) {
-        console.error('[MapView] Invalid lookup address coordinates:', lookupAddress.coordinates);
-        return;
-      }
-      
-      // Check if coordinates actually changed (compare by value, not object reference)
+      if (!validateLngLat(lookupAddress.coordinates)) return;
       const prevCoords = previousLookupAddressRef.current?.coordinates;
       const currentCoords = lookupAddress.coordinates;
-      const isNewAddress = !prevCoords || 
-        prevCoords[0] !== currentCoords[0] || 
-        prevCoords[1] !== currentCoords[1];
+      const isNewAddress = !prevCoords || prevCoords[0] !== currentCoords[0] || prevCoords[1] !== currentCoords[1];
       
-      // If it's a new address, reset the zoom flag so we can zoom to it
-      if (isNewAddress) {
-        hasZoomedToLookupAddressRef.current = false;
-      }
-      
-      // Only zoom if it's a new address or we haven't zoomed to this address yet
+      if (isNewAddress) hasZoomedToLookupAddressRef.current = false;
       if (isNewAddress && !hasZoomedToLookupAddressRef.current) {
         const position = toLeafletPosition(lookupAddress.coordinates);
         map.setView(position, 16, { animate: true });
         hasZoomedToLookupAddressRef.current = true;
         lastAddressZoomTimeRef.current = Date.now();
       }
-      
       previousLookupAddressRef.current = lookupAddress;
     } else {
-      // Reset zoom flag when lookupAddress is cleared
       hasZoomedToLookupAddressRef.current = false;
       previousLookupAddressRef.current = null;
     }
@@ -522,8 +663,66 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
     }
   };
 
+  // Function to handle undoing coordinate changes
+  const handleUndo = async () => {
+    if (!selectedStop) return;
+    const lastStep = undoHistory[0];
+    if (!lastStep) return;
+
+    // Find the route and stop
+    const route = routes.find(r => r.id === lastStep.routeId);
+    if (!route) return;
+    const stop = route.stops.find(s => s.id === lastStep.stopId);
+    if (!stop) return;
+
+    // Remove from undo history
+    setUndoHistory(prev => prev.slice(1));
+
+    // Restore coordinates
+    updateStopCoordinates(lastStep.routeId, lastStep.stopId, lastStep.coordinates);
+
+    // Save to API
+    try {
+      const response = await fetch(`/api/data/routes/${lastStep.routeId}/stops/${lastStep.stopId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          coordinates: lastStep.coordinates, 
+          schoolId: selectedSchoolId 
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to undo coordinates');
+      }
+
+      // Recalculate route geometry after 1 second
+      if (routeRecalcTimeoutRef.current[lastStep.routeId]) {
+        clearTimeout(routeRecalcTimeoutRef.current[lastStep.routeId]);
+      }
+      
+      routeRecalcTimeoutRef.current[lastStep.routeId] = setTimeout(() => {
+        recalculateRouteGeometry(lastStep.routeId);
+      }, 1000);
+
+      // Update selected stop if it's the one being undone
+      if (selectedStop && selectedStop.route.id === lastStep.routeId && selectedStop.stop.id === lastStep.stopId) {
+        selectStop(route, stop, selectedStop.stopNumber);
+      }
+    } catch (error) {
+      console.error('Error undoing coordinates:', error);
+      alert('Failed to undo. Please try again.');
+    }
+  };
+
   // Default center (Portland, OR)
   const defaultCenter: [number, number] = [45.5152, -122.6784];
+
+  // Improved Stop/School info overlay using MapInfoPanel
+  const isPanelOpen = !!selectedStop || showSchoolInfo || (viewMode === 'schools' && !!selectedSchoolId);
+  const displaySchool = showSchoolInfo ? activeSchool : (viewMode === 'schools' ? schools.find(s => s.id === selectedSchoolId) : null);
 
   return (
     <div style={{ position: 'relative', height: '100%', width: '100%' }}>
@@ -562,25 +761,52 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         );
       })()}
 
-      {/* Active school marker - show even if there are no routes */}
-      {activeSchool && activeSchool.coordinates && (() => {
-        if (!validateLngLat(activeSchool.coordinates)) {
-          console.error('[MapView] Invalid school coordinates:', activeSchool.coordinates);
-          return null;
+      {/* School markers - show all in 'schools' view, only active in 'routes' view */}
+      {(() => {
+        if (viewMode === 'schools') {
+          return schoolsWithCoords.map((school: School) => {
+            const isSelected = selectedSchoolId === school.id;
+            const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
+            const schoolColor = getSchoolColor(schoolTypes);
+            const icon = createSchoolIcon(schoolColor);
+            const position = toLeafletPosition(school.coordinates!);
+
+            return (
+              <Marker 
+                key={`school-all-${school.id}`}
+                position={position}
+                icon={icon}
+                eventHandlers={{
+                  click: () => onSelectSchool?.(isSelected ? null : school.id)
+                }}
+                zIndexOffset={isSelected ? 1000 : 0}
+              />
+            );
+          });
+        } else {
+          // Routes view - only show active school
+          if (!activeSchool || !activeSchool.coordinates) return null;
+          if (!validateLngLat(activeSchool.coordinates)) return null;
+          
+          const position = toLeafletPosition(activeSchool.coordinates);
+          const schoolTypes = activeSchool.schoolTypes || getSchoolTypes(activeSchool.name);
+          const schoolColor = getSchoolColor(schoolTypes);
+          
+          return (
+            <Marker 
+              key={`school-active-${activeSchool.id}`}
+              position={position} 
+              icon={createSchoolIcon(schoolColor)}
+              zIndexOffset={100}
+              eventHandlers={{
+                click: () => {
+                  clearSelectedStop();
+                  setShowSchoolInfo(true);
+                }
+              }}
+            />
+          );
         }
-        const position = toLeafletPosition(activeSchool.coordinates);
-        const schoolTypes = activeSchool.schoolTypes || getSchoolTypes(activeSchool.name);
-        const schoolColor = getSchoolColor(schoolTypes);
-        
-        return (
-          <Marker 
-            position={position} 
-            icon={createSchoolIcon(schoolColor)}
-            zIndexOffset={100} // Keep school icon on top
-          >
-            <Popup>{activeSchool.name}</Popup>
-          </Marker>
-        );
       })()}
 
       {/* Route lines and stop dots */}
@@ -616,7 +842,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
         }
 
         return (
-          <div key={route.id}>
+          <React.Fragment key={route.id}>
             {/* Route polyline - follows streets when available */}
             {routeCoordinates.length > 1 && (
               <Polyline
@@ -705,28 +931,28 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
                     try {
                       const response = await fetch(`/api/data/routes/${route.id}/stops/${stop.id}`, {
                         method: 'PUT',
-                            headers: {
-                              'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ 
-                              coordinates: newCoords, 
-                              schoolId: selectedSchoolId 
-                            }),
-                          });
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 
+                          coordinates: newCoords, 
+                          schoolId: selectedSchoolId 
+                        }),
+                      });
 
-                          if (!response.ok) {
-                            throw new Error('Failed to save coordinates');
-                          }
+                      if (!response.ok) {
+                        throw new Error('Failed to save coordinates');
+                      }
 
-                          // Schedule route recalculation after 1.5 second delay
-                          // Clear any existing timeout for this route
-                          if (routeRecalcTimeoutRef.current[route.id]) {
-                            clearTimeout(routeRecalcTimeoutRef.current[route.id]);
-                          }
-                          
-                          routeRecalcTimeoutRef.current[route.id] = setTimeout(() => {
-                            recalculateRouteGeometry(route.id);
-                          }, 1500);
+                      // Schedule route recalculation after 1.5 second delay
+                      // Clear any existing timeout for this route
+                      if (routeRecalcTimeoutRef.current[route.id]) {
+                        clearTimeout(routeRecalcTimeoutRef.current[route.id]);
+                      }
+                      
+                      routeRecalcTimeoutRef.current[route.id] = setTimeout(() => {
+                        recalculateRouteGeometry(route.id);
+                      }, 1500);
                     } catch (error) {
                           console.error('Error saving coordinates:', error);
                           // Revert the marker position on error
@@ -741,7 +967,7 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
             />
           );
             })}
-          </div>
+          </React.Fragment>
         );
       })}
 
@@ -863,339 +1089,54 @@ export function MapView({ editingMode = false, enableStreetHighlighting = false,
       </div>
     )}
 
-    {/* Stop info overlay at bottom */}
-      {selectedStop && (
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '1rem',
-            right: '1rem',
-            backgroundColor: 'var(--bg-primary)',
-            padding: '1rem 1.5rem',
-            borderRadius: '8px',
-            boxShadow: '0 4px 12px var(--shadow-hover)',
-            minWidth: '300px',
-            maxWidth: '400px',
-            zIndex: 1000,
-            border: `2px solid ${selectedStop.route.color}`,
-            transition: 'background-color 0.3s ease',
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-            <div>
-              <div style={{ fontWeight: 'bold', fontSize: '16px', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <span style={{ color: 'var(--text-primary)' }}>{selectedStop.route.name}</span>
-                {selectedStop.route.direction && (
-                  <span style={{ 
-                    fontSize: '12px', 
-                    padding: '3px 10px',
-                    borderRadius: '12px',
-                    fontWeight: '500',
-                    backgroundColor: selectedStop.route.direction === 'Morning' ? '#B3E5FC' : '#C8E6C9',
-                    color: selectedStop.route.direction === 'Morning' ? '#01579B' : '#1B5E20',
-                  }}>
-                    {selectedStop.route.direction}
-                  </span>
-                )}
-              </div>
-              {selectedStop.stopNumber > 0 && (
-                <div style={{ fontSize: '14px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                  Stop {selectedStop.stopNumber}
-                </div>
-              )}
-              {selectedStop.stop.isSchoolStop && (
-                <div style={{ fontSize: '14px', color: 'var(--text-tertiary)', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                  <span>🏫</span> School Loading Zone
-                </div>
-              )}
-              <div style={{ fontSize: '15px', fontWeight: '500', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
-                {selectedStop.stop.isSchoolStop && selectedStop.stop.schoolName ? (
-                  selectedStop.stop.schoolName
-                ) : enableStreetHighlighting ? (
-                  <div>
-                    {(() => {
-                      const address = selectedStop.stop.address;
-                      const streets = extractStreetNames(address);
-                      
-                      if (streets.length === 1) {
-                        // Single street - make it clickable
-                        const streetName = streets[0];
-                        const isHighlighted = highlightedStreet?.name === streetName;
-                        const isLoading = loadingStreet === streetName;
-                        
-                        return (
-                          <span
-                            onClick={() => !isLoading && handleStreetClick(streetName)}
-                            style={{
-                              cursor: isLoading ? 'not-allowed' : 'pointer',
-                              textDecoration: isLoading ? 'none' : 'underline',
-                              color: isHighlighted ? '#FFD700' : isLoading ? 'var(--text-tertiary)' : 'var(--text-primary)',
-                              fontWeight: isHighlighted ? 'bold' : 'normal',
-                              opacity: isLoading ? 0.6 : 1,
-                              transition: 'all 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                              if (!isLoading) {
-                                e.currentTarget.style.color = '#4ECDC4';
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              if (!isLoading) {
-                                e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)';
-                              }
-                            }}
-                            title={isLoading ? 'Loading street geometry...' : 'Click to highlight street on map'}
-                          >
-                            {formatStreetName(streetName)}
-                            {isLoading && (
-                              <span style={{ marginLeft: '0.5rem', display: 'inline-block' }}>
-                                <span style={{
-                                  display: 'inline-block',
-                                  width: '12px',
-                                  height: '12px',
-                                  border: '2px solid var(--text-tertiary)',
-                                  borderTopColor: 'transparent',
-                                  borderRadius: '50%',
-                                  animation: 'spin 0.8s linear infinite',
-                                }} />
-                              </span>
-                            )}
-                          </span>
-                        );
-                      } else if (streets.length > 1) {
-                        // Multiple streets - make each clickable
-                        return (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            {streets.map((streetName, index) => {
-                              const isHighlighted = highlightedStreet?.name === streetName;
-                              const isLoading = loadingStreet === streetName;
-                              
-                              return (
-                                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                  {index > 0 && (
-                                    <span style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>&</span>
-                                  )}
-                                  {isLoading ? (
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)' }}>
-                                      <span style={{
-                                        display: 'inline-block',
-                                        width: '12px',
-                                        height: '12px',
-                                        border: '2px solid var(--text-tertiary)',
-                                        borderTopColor: 'transparent',
-                                        borderRadius: '50%',
-                                        animation: 'spin 0.8s linear infinite',
-                                      }} />
-                                      <span style={{ fontSize: '14px' }}>Finding street geometry...</span>
-                                    </div>
-                                  ) : (
-                                    <span
-                                      onClick={() => handleStreetClick(streetName)}
-                                      style={{
-                                        cursor: 'pointer',
-                                        textDecoration: 'underline',
-                                        color: isHighlighted ? '#FFD700' : 'var(--text-primary)',
-                                        fontWeight: isHighlighted ? 'bold' : 'normal',
-                                        transition: 'all 0.2s ease',
-                                      }}
-                                      onMouseEnter={(e) => {
-                                        e.currentTarget.style.color = '#4ECDC4';
-                                      }}
-                                      onMouseLeave={(e) => {
-                                        e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)';
-                                      }}
-                                      title="Click to highlight street on map"
-                                    >
-                                      {formatStreetName(streetName)}
-                                    </span>
-                                  )}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        );
-                      } else {
-                        // Fallback: just show formatted address
-                        return formatStreetName(address);
-                      }
-                    })()}
-                  </div>
-                ) : (
-                  formatStreetName(selectedStop.stop.address)
-                )}
-              </div>
-              {enableStreetHighlighting && streetError && (
-                <div style={{ 
-                  fontSize: '12px', 
-                  color: '#f44336', 
-                  marginTop: '0.25rem',
-                  padding: '0.5rem',
-                  backgroundColor: 'rgba(244, 67, 54, 0.1)',
-                  borderRadius: '4px',
-                }}>
-                  ⚠️ {streetError}
-                </div>
-              )}
-              {selectedStop.stop.time && (
-                <div style={{ fontSize: '14px', color: 'var(--text-tertiary)' }}>
-                  {selectedStop.stop.time}
-                </div>
-              )}
-              {/* Drop pins button for intersections (admin only) */}
-              {enableStreetPins && !selectedStop.stop.isSchoolStop && extractStreetNames(selectedStop.stop.address).length > 0 && (
-                <button
-                  onClick={handleDropStreetPins}
-                  disabled={loadingStreetPins}
-                  style={{
-                    marginTop: '0.75rem',
-                    width: '100%',
-                    background: loadingStreetPins ? 'var(--text-tertiary)' : '#4ECDC4',
-                    border: 'none',
-                    fontSize: '14px',
-                    cursor: loadingStreetPins ? 'not-allowed' : 'pointer',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '4px',
-                    fontWeight: '500',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.5rem',
-                    opacity: loadingStreetPins ? 0.6 : 1,
-                    transition: 'background-color 0.2s ease, opacity 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!loadingStreetPins) {
-                      e.currentTarget.style.backgroundColor = '#3db8a8';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!loadingStreetPins) {
-                      e.currentTarget.style.backgroundColor = '#4ECDC4';
-                    }
-                  }}
-                  title="Drop pins on each street in this intersection"
-                >
-                  {loadingStreetPins ? (
-                    <>
-                      <span style={{
-                        display: 'inline-block',
-                        width: '14px',
-                        height: '14px',
-                        border: '2px solid white',
-                        borderTopColor: 'transparent',
-                        borderRadius: '50%',
-                        animation: 'spin 0.8s linear infinite',
-                      }} />
-                      <span>Dropping pins...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>📍</span>
-                      <span>Drop Pins on Streets</span>
-                    </>
-                  )}
-                </button>
-              )}
-            </div>
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              {editingMode && selectedStop && undoHistory.length > 0 && undoHistory[0]?.routeId === selectedStop.route.id && undoHistory[0]?.stopId === selectedStop.stop.id && (
-                <button
-                  onClick={async () => {
-                    const lastStep = undoHistory[0];
-                    if (!lastStep) return;
-
-                    // Find the route and stop
-                    const route = routes.find(r => r.id === lastStep.routeId);
-                    if (!route) return;
-                    const stop = route.stops.find(s => s.id === lastStep.stopId);
-                    if (!stop) return;
-
-                    // Remove from undo history
-                    setUndoHistory(prev => prev.slice(1));
-
-                    // Restore coordinates
-                    updateStopCoordinates(lastStep.routeId, lastStep.stopId, lastStep.coordinates);
-
-                    // Save to API
-                    try {
-                      const response = await fetch(`/api/data/routes/${lastStep.routeId}/stops/${lastStep.stopId}`, {
-                        method: 'PUT',
-                        headers: {
-                          'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ 
-                          coordinates: lastStep.coordinates, 
-                          schoolId: selectedSchoolId 
-                        }),
-                      });
-
-                      if (!response.ok) {
-                        throw new Error('Failed to undo coordinates');
-                      }
-
-                      // Recalculate route geometry after 1 second
-                      if (routeRecalcTimeoutRef.current[lastStep.routeId]) {
-                        clearTimeout(routeRecalcTimeoutRef.current[lastStep.routeId]);
-                      }
-                      
-                      routeRecalcTimeoutRef.current[lastStep.routeId] = setTimeout(() => {
-                        recalculateRouteGeometry(lastStep.routeId);
-                      }, 1000);
-
-                      // Update selected stop if it's the one being undone
-                      if (selectedStop && selectedStop.route.id === lastStep.routeId && selectedStop.stop.id === lastStep.stopId) {
-                        selectStop(route, stop, selectedStop.stopNumber);
-                      }
-                    } catch (error) {
-                      console.error('Error undoing coordinates:', error);
-                      alert('Failed to undo. Please try again.');
-                    }
-                  }}
-                  style={{
-                    background: '#4ECDC4',
-                    border: 'none',
-                    fontSize: '14px',
-                    cursor: 'pointer',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '4px',
-                    fontWeight: '500',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                  }}
-                  title={`Undo (${undoHistory.length} step${undoHistory.length !== 1 ? 's' : ''} available)`}
-                >
-                  <span>↶</span> Undo
-                </button>
-              )}
-              <button
-                onClick={() => clearSelectedStop()}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '20px',
-                  cursor: 'pointer',
-                  color: 'var(--text-tertiary)',
-                  padding: '0',
-                  lineHeight: '1',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--text-tertiary)';
-                }}
-                title="Close"
-              >
-                ×
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Improved Stop/School info overlay using MapInfoPanel */}
+      <MapInfoPanel 
+        isOpen={isPanelOpen} 
+        onClose={() => {
+          clearSelectedStop();
+          setShowSchoolInfo(false);
+          if (viewMode === 'schools') onSelectSchool?.(null);
+        }}
+      >
+        {selectedStop ? (
+          <StopInfoTooltip
+            route={selectedStop.route}
+            stop={selectedStop.stop}
+            stopNumber={selectedStop.stopNumber}
+            enableStreetHighlighting={enableStreetHighlighting}
+            highlightedStreetName={highlightedStreet?.name}
+            loadingStreet={loadingStreet || undefined}
+            streetError={streetError || undefined}
+            onStreetClick={handleStreetClick}
+            onClose={() => {
+              clearSelectedStop();
+            }}
+            enableStreetPins={enableStreetPins}
+            loadingStreetPins={loadingStreetPins}
+            onDropStreetPins={handleDropStreetPins}
+            editingMode={editingMode}
+            undoHistoryCount={undoHistory.length}
+            onUndo={handleUndo}
+          />
+        ) : isPanelOpen && displaySchool ? (
+          <SchoolInfoTooltip 
+            school={displaySchool} 
+            showRoutesButton={viewMode === 'schools'}
+            onClose={() => {
+              setShowSchoolInfo(false);
+              if (viewMode === 'schools') onSelectSchool?.(null);
+            }}
+            onViewRoutes={() => {
+              setShowSchoolInfo(false);
+              if (viewMode === 'schools') {
+                setSelectedSchool(displaySchool.id);
+                // Dispatch event to change tab
+                window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
+              }
+            }}
+          />
+        ) : null}
+      </MapInfoPanel>
 
       {/* Loading spinner animation */}
       <style>{`
