@@ -395,7 +395,6 @@ export function HomePage() {
       if (routes.length === 0) {
         setError('No routes found for this school');
         setIsFinding(false);
-        setLoading(false);
         return;
       }
 
@@ -405,7 +404,6 @@ export function HomePage() {
       if (!closestStop) {
         setError('No stops with coordinates found for this school');
         setIsFinding(false);
-        setLoading(false);
         return;
       }
 
@@ -422,9 +420,9 @@ export function HomePage() {
       // Select the closest stop so it's highlighted on the map
       selectStop(closestStop.route, closestStop.stop, closestStop.stopNumber);
       
-      // Set loading to false before navigation
-      setLoading(false);
-
+      // Explicitly set the Map Intent to DOUBLE_FIT
+      useStore.getState().setMapIntent({ type: 'DOUBLE_FIT' });
+      
       // Build the URL state for navigation
       const stopId = closestStop.stop.id;
       const stopMatch = stopId.match(/stop-(\d+)/);
@@ -438,7 +436,8 @@ export function HomePage() {
         routeNames: [routeName],
         stopId: routeName.endsWith('-upcoming') 
           ? `${routeName.replace('-upcoming', '')}-${stopNumber}-upcoming`
-          : `${routeName}-${stopNumber}`
+          : `${routeName}-${stopNumber}`,
+        focus: 'my-stop'
       };
 
       const explorerPath = buildUrlPath('', urlState);

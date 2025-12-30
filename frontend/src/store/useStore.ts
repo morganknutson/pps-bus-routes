@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { AppState, Route, HomeAddress, School, Stop } from '../types';
+import { AppState, Route, HomeAddress, School, Stop, MapIntent } from '../types';
 import { assignUniqueColors } from '../utils/colorGenerator';
 import { saveRoutesToCache, mergeCachedCoordinates } from '../services/routeCache';
 import { validateLngLat } from '../utils/coordinates';
@@ -30,13 +30,18 @@ interface Store extends AppState {
   clearZoomToHomeAddress: () => void;
   toggleDarkMode: () => void;
   setIsDarkMode: (isDark: boolean) => void;
+  activeTab: 'schools' | 'routes' | 'neighborhoods';
+  setActiveTab: (tab: 'schools' | 'routes' | 'neighborhoods') => void;
+  setMapIntent: (intent: MapIntent | null) => void;
+  mapIntent: MapIntent | null;
   currentGeocodingRouteId: string | null;
   selectedStop: { route: Route; stop: Stop; stopNumber: number } | null;
   directionFilter: 'Morning' | 'Afternoon' | 'Both';
-  lookupAddress: HomeAddress | undefined;
-  shouldZoomToHomeAddress: boolean;
-  loadingProgress: number | null; // 0-100 or null for indeterminate
-}
+    lookupAddress: HomeAddress | undefined;
+    shouldZoomToHomeAddress: boolean;
+    loadingCount: number;
+    loadingProgress: number | null; // 0-100 or null for indeterminate
+  }
 
 export const useStore = create<Store>((set, get) => {
   // Create a debounced function for saving to cache to prevent race conditions
@@ -52,6 +57,7 @@ export const useStore = create<Store>((set, get) => {
     homeAddress: undefined,
     lookupAddress: undefined,
     isLoading: false,
+    loadingCount: 0,
     loadingProgress: null as number | null, // 0-100 or null for indeterminate
     error: undefined,
     selectedSchoolId: null,
@@ -59,6 +65,8 @@ export const useStore = create<Store>((set, get) => {
     currentGeocodingRouteId: null,
     selectedStop: null,
     directionFilter: 'Morning',
+    activeTab: 'schools',
+    mapIntent: null,
     shouldZoomToHomeAddress: false,
     isDarkMode: (() => {
       if (typeof window !== 'undefined') {
@@ -211,9 +219,19 @@ export const useStore = create<Store>((set, get) => {
       localStorage.removeItem('lookupAddress');
     },
 
-    setLoading: (loading) => set({ isLoading: loading, loadingProgress: loading ? null : null }),
+    setLoading: (loading) => set((state) => {
+      const newCount = loading ? state.loadingCount + 1 : Math.max(0, state.loadingCount - 1);
+      return { 
+        loadingCount: newCount,
+        isLoading: newCount > 0,
+        loadingProgress: newCount === 0 ? null : state.loadingProgress 
+      };
+    }),
 
-    setLoadingProgress: (progress) => set({ loadingProgress: progress, isLoading: progress !== null && progress < 100 }),
+    setLoadingProgress: (progress) => set((state) => ({ 
+      loadingProgress: progress, 
+      isLoading: progress !== null && progress < 100 || state.loadingCount > 0 
+    })),
 
     setError: (error) => set({ error }),
 
@@ -287,6 +305,7 @@ export const useStore = create<Store>((set, get) => {
           selectedSchoolId: schoolId,
           selectedStop: null,
           routes: [], // Clear routes immediately to prevent URL sync issues
+          // Tab switching is now handled by the UI components/URL logic explicitly
         };
       });
       // Save to localStorage
@@ -410,6 +429,10 @@ export const useStore = create<Store>((set, get) => {
 
     triggerZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: true }),
     clearZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: false }),
+
+    setActiveTab: (tab) => set({ activeTab: tab }),
+
+    setMapIntent: (intent) => set({ mapIntent: intent }),
 
     toggleDarkMode: () => set((state) => {
       const next = !state.isDarkMode;

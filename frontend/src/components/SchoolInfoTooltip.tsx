@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { School } from '../types';
 import { getSchoolTypes, getSchoolColor, getSchoolDisplayName } from '../utils/schoolUtils';
 import { handleMapLinkClick } from '../utils/mapLinks';
@@ -8,6 +9,7 @@ import { useStore } from '../store/useStore';
 import { RouteIcon } from './RouteIcon';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
+import { parseUrlPath, buildUrlPath } from '../services/urlState';
 
 interface SchoolInfoTooltipProps {
   school: School;
@@ -25,9 +27,25 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
   message
 }) => {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+  const location = useLocation();
   const isDarkMode = useStore(state => state.isDarkMode);
   const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
   const schoolColor = getSchoolColor(schoolTypes);
+
+  const handleViewRoutes = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
+    const urlState = parseUrlPath(location.pathname, basePath);
+    const newState = {
+      ...urlState,
+      schoolId: school.id,
+      show: 'routes' as const,
+      focus: undefined // Clear school-info focus when exploring routes
+    };
+    navigate(buildUrlPath(basePath, newState));
+    if (onViewRoutes) onViewRoutes();
+  };
 
   if (message) {
     return (
@@ -229,14 +247,9 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         )}
 
         {/* Unified Routes Action Button */}
-        {school.routeCount !== undefined && showRoutesButton && onViewRoutes && (
+        {school.routeCount !== undefined && showRoutesButton && (
           <button
-            onClick={(e) => {
-              if (showRoutesButton && onViewRoutes) {
-                e.stopPropagation();
-                onViewRoutes();
-              }
-            }}
+            onClick={handleViewRoutes}
             style={{ 
               display: 'flex', 
               gap: '0.75rem', 

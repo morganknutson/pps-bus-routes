@@ -1,8 +1,10 @@
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { RouteListBase, RouteListConfig } from './RouteListBase';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { analyticsService } from '../services/analytics';
 import { XIcon } from './XIcon';
+import { parseUrlPath, buildUrlPath } from '../services/urlState';
 
 interface RouteListProps {
   showBothOption?: boolean;
@@ -16,6 +18,8 @@ interface RouteListProps {
  * Uses the store directly and shows route selection checkboxes
  */
 export function RouteList({ showBothOption = false, onClearSchool, onViewSchools, onRouteToggle }: RouteListProps = {}) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { routes, toggleRouteSelection, isLoading, error, selectStop, selectedStop, clearSelectedStop, selectedSchoolId, schools, directionFilter, setDirectionFilter, setSelectedSchool } = useStore();
   const { isDarkMode } = useDarkMode();
 
@@ -46,19 +50,36 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
       }
     },
     onStopClick: (route, stop, stopNumber) => {
+      const urlState = parseUrlPath(location.pathname, '');
+      const stopMatch = stop.id.match(/stop-(\d+)/);
+      const stopNumberStr = stopMatch ? stopMatch[1] : stop.id;
+      
+      let finalStopId = `${route.name}-${stopNumberStr}`;
+      if (route.name.endsWith('-upcoming')) {
+        const baseName = route.name.replace('-upcoming', '');
+        finalStopId = `${baseName}-${stopNumberStr}-upcoming`;
+      }
+
       // If clicking the same stop that's already selected, deselect it
       if (selectedStop?.route.id === route.id && selectedStop?.stop.id === stop.id) {
-        clearSelectedStop();
+        const newState = { ...urlState, stopId: undefined, focus: undefined };
+        navigate(buildUrlPath('', newState));
       } else {
-        // If route is not selected, select it first so it shows on the map
-        let updatedRoute = route;
-        if (!route.isSelected) {
-          toggleRouteSelection(route.id);
-          // Update the route object to reflect the new selection state
-          updatedRoute = { ...route, isSelected: true };
+        // Navigate to the stop URL
+        const currentSelectedRoutes = routes.filter(r => r.isSelected).map(r => r.name);
+        if (!currentSelectedRoutes.includes(route.name)) {
+          currentSelectedRoutes.push(route.name);
         }
-        // Then select the stop
-        selectStop(updatedRoute, stop, stopNumber);
+
+        const newState = {
+          ...urlState,
+          show: 'routes' as const,
+          direction: (route.direction?.toLowerCase() || 'morning') as any,
+          routeNames: currentSelectedRoutes,
+          stopId: finalStopId,
+          focus: undefined // Focus is implied by stopId
+        };
+        navigate(buildUrlPath('', newState));
       }
     },
     isRouteSelected: (route) => route.isSelected,
@@ -155,7 +176,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
             </div>
             <button
               onClick={() => {
-                setSelectedSchool(null);
+                navigate('/schools');
                 if (onClearSchool) {
                   onClearSchool();
                 }

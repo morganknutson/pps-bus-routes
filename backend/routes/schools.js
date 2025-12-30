@@ -117,6 +117,14 @@ async function getRouteStats(schoolId) {
     const uniqueRouteNames = new Set();
     let latestTime = 0;
     
+    // Check directory stat for latest update time as a shortcut
+    try {
+      const dirStats = await fs.stat(schoolRoutesDir);
+      latestTime = dirStats.mtimeMs;
+    } catch (e) {
+      // Ignore
+    }
+
     // Instead of reading every file content (which is slow), 
     // let's just use the filenames and file stats for the count and time
     // if the filename contains the route name.
@@ -125,15 +133,6 @@ async function getRouteStats(schoolId) {
       const routeNameMatch = filename.match(/^Route\s+([A-Z0-9]+)/i) || [null, filename.split('.')[0]];
       const routeName = routeNameMatch[1];
       if (routeName) uniqueRouteNames.add(routeName);
-
-      try {
-        const stats = await fs.stat(path.join(schoolRoutesDir, filename));
-        if (stats.mtimeMs > latestTime) {
-          latestTime = stats.mtimeMs;
-        }
-      } catch (e) {
-        // Ignore stat errors
-      }
     }
 
     stats.routeCount = uniqueRouteNames.size;

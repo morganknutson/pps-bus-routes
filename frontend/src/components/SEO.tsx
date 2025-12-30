@@ -43,17 +43,39 @@ export const SEO: React.FC<SEOProps> = ({
   const origin = window.location.origin;
 
   // 1. Dynamic Title Hierarchy
-  let title = manualTitle;
-  if (selectedStop) {
-    title = `Stop at ${selectedStop.stop.address} | Route ${selectedStop.route.name}${school ? ` | ${school.name}` : ''}`;
-  } else if (selectedRoutes.length > 0) {
-    const names = selectedRoutes.map(r => r.name).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).join(', ');
-    title = `Route${selectedRoutes.length > 1 ? 's' : ''} ${names}${school ? ` | ${school.name}` : ''}`;
-  } else if (school) {
-    title = `${school.name} Bus Routes`;
+  let fullTitle = '';
+  
+  if (school) {
+    const titleParts = [];
+    titleParts.push(`${school.name} Bus Routes & Stops`);
+    
+    if (selectedRoutes.length > 0) {
+      // Only show routes segment if multiple routes are selected OR if no stop is selected
+      // (If only one route and a stop is selected, the stop segment already mentions the route)
+      if (selectedRoutes.length > 1 || !selectedStop) {
+        const names = selectedRoutes
+          .map(r => r.name)
+          .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+          .join(', ');
+        titleParts.push(`Route${selectedRoutes.length > 1 ? 's' : ''} ${names}`);
+      }
+    }
+    
+    if (selectedStop) {
+      titleParts.push(`Route ${selectedStop.route.name} Stop ${selectedStop.stopNumber}`);
+    }
+    
+    fullTitle = titleParts.join(' | ');
   }
 
-  const fullTitle = title ? `${title} | ${siteTitle}` : `${siteTitle} | Portland Public Schools`;
+  // Fallback to manual title or default site title
+  if (!fullTitle) {
+    if (manualTitle) {
+      fullTitle = `${manualTitle} | ${siteTitle}`;
+    } else {
+      fullTitle = `${siteTitle} | Portland Public Schools`;
+    }
+  }
 
   // 2. Dynamic Description
   let description = manualDescription || 'Interactive bus route maps for Portland Public Schools. Find your school, view routes, and locate bus stops.';

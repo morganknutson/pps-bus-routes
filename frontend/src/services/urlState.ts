@@ -1,11 +1,12 @@
 import { School, Route } from '../types';
 
 export interface UrlState {
-  show?: 'schools' | 'routes';
+  show?: 'schools' | 'routes' | 'neighborhoods';
   schoolId?: string;
   direction?: 'morning' | 'afternoon' | 'both';
   routeNames?: string[];
   stopId?: string;
+  focus?: string; // 'school-info', 'home', or 'lat,lng,zoom'
 }
 
 /**
@@ -14,10 +15,7 @@ export interface UrlState {
  * - /{basePath}/{schoolId} -> Schools tab, school selected
  * - /{basePath}/{schoolId}/routes -> Routes tab, school selected
  * - /{basePath}/{schoolId}/routes/{direction}/{routeNames}/{stopId}
- * 
- * Legacy/Explicit support:
- * - /basePath/schools/{schoolId}
- * - /basePath/routes/{schoolId}
+ * - .../{focus} (focus can be 'school-info', 'home', or 'lat,lng,zoom')
  */
 export function parseUrlPath(pathname: string, basePath: string): UrlState {
   let path = pathname;
@@ -33,80 +31,58 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
   const segments = path.split('/').filter(Boolean);
   const state: UrlState = {};
 
-  // Case 1: Explicit prefixes
+  // List of keywords that should NOT be treated as school IDs
+  const reservedKeywords = ['schools', 'schools-directory', 'routes', 'morning', 'afternoon', 'both', 'explore', 'map', 'neighborhoods'];
+  const focusKeywords = ['school-info', 'home', 'my-stop'];
+  const isCoords = (s: string) => /^-?\d+\.?\d*,-?\d+\.?\d*,\d+$/.test(s);
+
+  let currentIdx = 0;
+
+  // 1. Check for explicit prefixes or clean schoolId
   if (segments[0] === 'schools') {
     state.show = 'schools';
-    if (segments.length > 1) {
-      state.schoolId = segments[1];
+    currentIdx = 1;
+    if (segments.length > currentIdx && !focusKeywords.includes(segments[currentIdx]) && !isCoords(segments[currentIdx])) {
+      state.schoolId = segments[currentIdx];
+      currentIdx++;
     }
-    return state;
-  } 
-  
-  if (segments[0] === 'routes') {
+  } else if (segments[0] === 'routes') {
     state.show = 'routes';
-    if (segments.length > 1) {
-      state.schoolId = segments[1];
-      
-      let nextIdx = 2;
-      // Handle optional /routes/{id}/routes shorthand
-      if (segments.length > nextIdx && segments[nextIdx] === 'routes') {
-        nextIdx++;
-      }
-      
-      if (segments.length > nextIdx) {
-        const dir = segments[nextIdx].toLowerCase();
-        if (['morning', 'afternoon', 'both'].includes(dir)) {
-          state.direction = dir as any;
-          nextIdx++;
-          
-          if (segments.length > nextIdx) {
-            state.routeNames = segments[nextIdx].split(',').filter(Boolean);
-            nextIdx++;
-            
-            if (segments.length > nextIdx) {
-              state.stopId = segments[nextIdx];
-            }
-          }
-        }
-      }
+    currentIdx = 1;
+    if (segments.length > currentIdx && !focusKeywords.includes(segments[currentIdx]) && !isCoords(segments[currentIdx])) {
+      state.schoolId = segments[currentIdx];
+      currentIdx++;
     }
-    return state;
+  } else if (segments[0] === 'neighborhoods') {
+    state.show = 'neighborhoods';
+    currentIdx = 1;
+  } else if (!reservedKeywords.includes(segments[0]?.toLowerCase())) {
+    state.schoolId = segments[0];
+    state.show = 'schools'; // Default
+    currentIdx = 1;
+  } else {
+    // Default fallback
+    state.show = 'schools';
   }
 
-  // Case 2: Clean Hierarchy (schoolId first)
-  const firstSegment = segments[0]?.toLowerCase();
-  
-  // List of keywords that should NOT be treated as school IDs
-  const reservedKeywords = ['schools', 'schools-directory', 'routes', 'morning', 'afternoon', 'both', 'explore', 'map'];
-  
-  if (firstSegment && !reservedKeywords.includes(firstSegment)) {
-    state.schoolId = firstSegment;
-  }
-  
-  state.show = 'schools'; // Default
+  // 2. Process remaining segments
+  while (currentIdx < segments.length) {
+    const segment = segments[currentIdx];
+    const segmentLower = segment.toLowerCase();
 
-  if (segments.length > 1 && segments[1] === 'routes') {
-    state.show = 'routes';
+    if (segmentLower === 'routes') {
+      state.show = 'routes';
+    } else if (['morning', 'afternoon', 'both'].includes(segmentLower)) {
+      state.direction = segmentLower as any;
+    } else if (focusKeywords.includes(segmentLower) || isCoords(segment)) {
+      state.focus = segmentLower;
+    } else if (state.show === 'routes' && !state.routeNames) {
+      state.routeNames = segment.split(',').filter(Boolean);
+    } else if (state.show === 'routes' && state.routeNames && !state.stopId) {
+      state.stopId = segment;
+    }
     
-    if (segments.length > 2) {
-      const next = segments[2].toLowerCase();
-      // Handle direction segment
-      if (['morning', 'afternoon', 'both'].includes(next)) {
-        state.direction = next as any;
-        if (segments.length > 3) {
-          state.routeNames = segments[3].split(',').filter(Boolean);
-          if (segments.length > 4) {
-            state.stopId = segments[4];
-          }
-        }
-      } else {
-        // Handle direct routeNames segment (shorthand)
-        state.routeNames = segments[2].split(',').filter(Boolean);
-        if (segments.length > 3) {
-          state.stopId = segments[3];
-        }
-      }
-    }
+    currentIdx++;
   }
 
   return state;
@@ -120,31 +96,41 @@ export function buildUrlPath(basePath: string, state: UrlState): string {
   const parts = [basePath];
   
   if (state.schoolId) {
-    // School ID always comes first in the hierarchy
     parts.push(state.schoolId);
     
     if (state.show === 'routes') {
       parts.push('routes');
       
-      if (state.direction || (state.routeNames && state.routeNames.length > 0)) {
-        if (state.direction) {
-          parts.push(state.direction);
-        }
+      if (state.direction) {
+        parts.push(state.direction);
+      }
+      
+      if (state.routeNames && state.routeNames.length > 0) {
+        parts.push(state.routeNames.join(','));
         
-        if (state.routeNames && state.routeNames.length > 0) {
-          parts.push(state.routeNames.join(','));
-          
-          if (state.stopId) {
-            parts.push(state.stopId);
-          }
+        if (state.stopId) {
+          parts.push(state.stopId);
         }
       }
+    } else if (state.show === 'neighborhoods') {
+      parts.push('neighborhoods');
     }
-  } else if (state.show === 'routes') {
-    parts.push('routes');
-  } else if (state.show === 'schools') {
-    // Show all schools on the map
-    parts.push('schools');
+    
+    if (state.focus) {
+      parts.push(state.focus);
+    }
+  } else {
+    if (state.show === 'routes') {
+      parts.push('routes');
+    } else if (state.show === 'neighborhoods') {
+      parts.push('neighborhoods');
+    } else {
+      parts.push('schools');
+    }
+    
+    if (state.focus) {
+      parts.push(state.focus);
+    }
   }
   
   return parts.join('/').replace(/\/+$/g, '');
@@ -175,14 +161,10 @@ export function applyUrlStateToRoutes(routes: Route[], state: UrlState, currentD
     });
   }
 
-  // 2. Routes tab with NO specific names: Default to "Select All" for current direction
-  if (state.show === 'routes') {
-    return routes.map(r => ({
-      ...r,
-      isSelected: direction === 'both' || !r.direction || r.direction.toLowerCase() === direction
-    }));
-  }
-
-  // 3. Schools tab: Default to unselected
-  return routes.map(r => ({ ...r, isSelected: false }));
+  // 2. Default behavior: Select all routes matching current direction when a school is selected
+  // We do this regardless of state.show so that routes are ready when switching to the routes tab
+  return routes.map(r => ({
+    ...r,
+    isSelected: direction === 'both' || !r.direction || r.direction.toLowerCase() === direction
+  }));
 }

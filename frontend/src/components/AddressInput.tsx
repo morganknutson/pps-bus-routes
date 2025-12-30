@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { autocompleteAddress, geocodeAddress } from '../services/api';
 import { useIsMobile } from '../hooks/useMediaQuery';
@@ -10,6 +11,7 @@ import { formatDistance } from '../utils/distance';
 import { Route, Stop } from '../types';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
+import { parseUrlPath, buildUrlPath } from '../services/urlState';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -23,12 +25,14 @@ export function AddressInput() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const navigate = useNavigate();
+  const location = useLocation();
   const { 
     setHomeAddress, 
     homeAddress, 
     clearHomeAddress, 
     triggerZoomToHomeAddress,
-    selectedSchoolId,
+    selectedSchoolId, 
     routes,
     selectStop,
     setDirectionFilter
@@ -50,15 +54,27 @@ export function AddressInput() {
       const { route, stop, stopNumber, distance } = result;
       console.log(`[AddressInput] Found closest stop: ${stop.address} at ${formatDistance(distance, true)}`);
       
-      // Update direction filter if the route has a specific direction
-      if (route.direction) {
-        setDirectionFilter(route.direction);
+      const urlState = parseUrlPath(location.pathname, '');
+      const stopMatch = stop.id.match(/stop-(\d+)/);
+      const stopNumberStr = stopMatch ? stopMatch[1] : stop.id;
+      
+      let finalStopId = `${route.name}-${stopNumberStr}`;
+      if (route.name.endsWith('-upcoming')) {
+        const baseName = route.name.replace('-upcoming', '');
+        finalStopId = `${baseName}-${stopNumberStr}-upcoming`;
       }
-      
-      selectStop(route, stop, stopNumber);
-      
-      // Automatically switch to routes tab to show the found stop
-      window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
+
+      // Update URL with stop and home focus
+      const newState = {
+        ...urlState,
+        show: 'routes' as const,
+        direction: (route.direction?.toLowerCase() || 'morning') as any,
+        routeNames: [route.name],
+        stopId: finalStopId,
+        focus: 'my-stop'
+      };
+
+      navigate(buildUrlPath('', newState));
       
       analyticsService.trackAction('find_my_stop', {
         schoolId: selectedSchoolId,
@@ -193,7 +209,12 @@ export function AddressInput() {
     }
     
     // Explicitly trigger zoom when an address is selected
-    triggerZoomToHomeAddress();
+    const urlState = parseUrlPath(location.pathname, '');
+    const newState = {
+      ...urlState,
+      focus: 'home'
+    };
+    navigate(buildUrlPath('', newState));
     
     setQuery('');
     setSuggestions([]);
@@ -259,7 +280,12 @@ export function AddressInput() {
             <div 
               onClick={() => {
                 console.log('[AddressInput] Clicked address to zoom:', homeAddress.address);
-                triggerZoomToHomeAddress();
+                const urlState = parseUrlPath(location.pathname, '');
+                const newState = {
+                  ...urlState,
+                  focus: 'home'
+                };
+                navigate(buildUrlPath('', newState));
               }}
               style={{ 
                 fontSize: '12px', 

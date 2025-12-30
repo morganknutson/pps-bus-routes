@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { School, Route } from '../types';
+import { School, Route, MapIntent } from '../types';
 import { parseUrlPath, buildUrlPath, UrlState } from '../services/urlState';
 import { useStore } from '../store/useStore';
 
@@ -8,8 +8,6 @@ interface UseUrlStateOptions {
   basePath: string;
   schools: School[];
   routes: Route[];
-  activeTab: 'schools' | 'routes';
-  setActiveTab: (tab: 'schools' | 'routes') => void;
   debounceMs?: number;
 }
 
@@ -31,8 +29,6 @@ export function useUrlState({
   basePath,
   schools,
   routes,
-  activeTab,
-  setActiveTab,
   debounceMs = 300,
 }: UseUrlStateOptions): UseUrlStateReturn {
   const navigate = useNavigate();
@@ -40,13 +36,17 @@ export function useUrlState({
   const { 
     selectedSchoolId, 
     setSelectedSchool, 
+    activeTab,
+    setActiveTab,
     toggleRouteSelection, 
     setSelectedRoutes,
     directionFilter, 
     setDirectionFilter,
     selectedStop,
     selectStop,
-    clearSelectedStop
+    clearSelectedStop,
+    setMapIntent,
+    mapIntent
   } = useStore();
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastUrlStateRef = useRef<UrlState>({});
@@ -81,15 +81,17 @@ export function useUrlState({
       const currentSelectedStop = state.selectedStop;
       const currentDirectionFilter = state.directionFilter;
       const currentSelectedSchoolId = state.selectedSchoolId;
+      const currentActiveTab = state.activeTab;
+      const currentMapIntent = state.mapIntent;
 
       const urlState: UrlState = {
-        show: activeTab,
+        show: currentActiveTab,
       };
 
       if (currentSelectedSchoolId) {
         urlState.schoolId = currentSelectedSchoolId;
         
-        if (activeTab === 'routes') {
+        if (currentActiveTab === 'routes') {
           urlState.direction = currentDirectionFilter.toLowerCase() as 'morning' | 'afternoon' | 'both';
           
           const selectedRouteNames = currentRoutes
@@ -117,6 +119,19 @@ export function useUrlState({
         }
       }
 
+      // Handle focus/intent in URL
+      if (currentMapIntent) {
+        if (currentMapIntent.type === 'ZOOM_SCHOOL' && currentMapIntent.data?.showInfo) {
+          urlState.focus = 'school-info';
+        } else if (currentMapIntent.type === 'FIT_HOME') {
+          urlState.focus = 'home';
+        } else if (currentMapIntent.type === 'DOUBLE_FIT') {
+          urlState.focus = 'my-stop';
+        } else if (currentMapIntent.type === 'MANUAL' && currentMapIntent.data) {
+          urlState.focus = `${currentMapIntent.data.lat},${currentMapIntent.data.lng},${currentMapIntent.data.zoom}`;
+        }
+      }
+
       const newPath = buildUrlPath(basePath, urlState);
       const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
       const normalizedNewPath = newPath.replace(/\/$/, '') || '/';
@@ -135,7 +150,7 @@ export function useUrlState({
     } else {
       debounceTimerRef.current = setTimeout(performUpdate, debounceMs);
     }
-  }, [basePath, activeTab, routes, navigate, debounceMs, cancelPendingUrlUpdate]);
+  }, [basePath, routes, navigate, debounceMs, cancelPendingUrlUpdate, mapIntent]);
 
   // Sync state from URL
   useEffect(() => {
@@ -189,8 +204,6 @@ export function useUrlState({
         const school = schools.find(s => s.id.toLowerCase() === urlState.schoolId?.toLowerCase());
         
         // Determine if we have a mismatch that needs syncing
-        // If we found the school, we want the store to match its official ID
-        // If schools haven't loaded yet, we just want it to match the URL string
         const hasIdMismatch = school 
           ? selectedSchoolId?.toLowerCase() !== school.id.toLowerCase()
           : selectedSchoolId?.toLowerCase() !== urlState.schoolId.toLowerCase();
@@ -200,8 +213,6 @@ export function useUrlState({
             console.log('[useUrlState] Syncing school from URL (with school list):', school.id);
             setSelectedSchool(school.id);
           } else if (schools.length === 0) {
-            // CRITICAL: Trust the URL ID even if schools haven't loaded yet
-            // This prevents the store->URL sync from overwriting the URL with an empty state
             console.log('[useUrlState] Syncing school from URL (pre-loading schools):', urlState.schoolId);
             setSelectedSchool(urlState.schoolId);
           }
@@ -221,9 +232,7 @@ export function useUrlState({
       }
 
       // 3. Sync route selection
-      // If we have route names in URL, enforce them strictly.
       if (urlState.routeNames && urlState.routeNames.length > 0 && routes.length > 0) {
-        // Find routes that match the names in URL AND direction
         const routesToSelect = routes.filter(r => {
           const nameMatches = urlState.routeNames!.includes(r.name);
           const directionMatches = urlState.direction === 'both' || !r.direction || r.direction?.toLowerCase() === urlState.direction;
@@ -237,17 +246,19 @@ export function useUrlState({
         const targetRouteIds = [
           ...otherDirectionSelectedIds,
           ...routesToSelect.map(r => r.id)
-        ];
+        ].sort();
 
-        console.log('[useUrlState] Enforcing route selection from URL:', targetRouteIds);
-        setSelectedRoutes(targetRouteIds);
+        const currentSelectedRouteIds = routes.filter(r => r.isSelected).map(r => r.id).sort();
+
+        if (JSON.stringify(targetRouteIds) !== JSON.stringify(currentSelectedRouteIds)) {
+          console.log('[useUrlState] Enforcing route selection from URL:', targetRouteIds);
+          setSelectedRoutes(targetRouteIds);
+        }
 
         // 4. Sync stop selection
         if (urlState.stopId) {
           let routeName = '';
           let stopNum = '';
-          
-          // Handle both {route}-{stop} and {route}-{stop}-upcoming
           const isUpcoming = urlState.stopId.endsWith('-upcoming');
           const cleanStopId = isUpcoming ? urlState.stopId.replace('-upcoming', '') : urlState.stopId;
           const lastDashIndex = cleanStopId.lastIndexOf('-');
@@ -266,7 +277,8 @@ export function useUrlState({
               const stopIndex = targetRoute.stops.findIndex(s => s.id === stopIdToFind);
               if (stopIndex !== -1) {
                 const stop = targetRoute.stops[stopIndex];
-                if (!selectedStop || selectedStop.stop.id !== stop.id || selectedStop.route.id !== targetRoute.id) {
+                const isAlreadySelected = selectedStop?.stop.id === stop.id && selectedStop?.route.id === targetRoute.id;
+                if (!isAlreadySelected) {
                   console.log('[useUrlState] Selecting stop from URL:', urlState.stopId);
                   selectStop(targetRoute, stop, stopIndex + 1);
                 }
@@ -274,20 +286,15 @@ export function useUrlState({
             }
           }
         } else if (selectedStop && !directionChanged) {
-          // Clear stop ONLY if URL has no stop and direction hasn't changed
-          // If direction DID change, the store's setDirectionFilter handled the transition
           clearSelectedStop();
         }
       } else if (urlState.schoolId && urlState.show === 'routes' && routes.length > 0) {
-        // URL targets routes tab but specifies NO specific route names.
-        // Default to "select all" for the current direction ONLY if nothing is selected yet.
         const effectiveDirection = urlState.direction || directionFilter.toLowerCase();
         const hasAnySelectedForDir = routes.some(r => 
           r.isSelected && (effectiveDirection === 'both' || r.direction?.toLowerCase() === effectiveDirection)
         );
         
         if (!hasAnySelectedForDir && (urlChanged || isFirstRoutesLoad)) {
-          console.log('[useUrlState] No routes selected for direction, defaulting to all');
           const idsToSelect = routes
             .filter(r => effectiveDirection === 'both' || !r.direction || r.direction?.toLowerCase() === effectiveDirection)
             .map(r => r.id);
@@ -299,7 +306,6 @@ export function useUrlState({
           setSelectedRoutes([...idsToSelect, ...otherDirectionSelectedIds]);
         }
       } else if (urlState.schoolId && urlState.show === 'schools' && routes.length > 0 && urlChanged) {
-        // URL targets schools tab - clear any route selections to match the state
         const anySelected = routes.some(r => r.isSelected);
         if (anySelected) {
           console.log('[useUrlState] URL changed to schools tab, clearing route selection');
@@ -308,10 +314,57 @@ export function useUrlState({
         }
       }
 
+      // 5. Sync Map Intent
+      const focusKeywords = ['school-info', 'home', 'my-stop'];
+      const isCoords = (s: string) => /^-?\d+\.?\d*,-?\d+\.?\d*,\d+$/.test(s || '');
+      
+      let intent: MapIntent | null = null;
+      
+      if (urlState.focus === 'school-info') {
+        intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId, showInfo: true } };
+      } else if (urlState.focus === 'home') {
+        intent = { type: 'FIT_HOME', data: { showInfo: true } };
+      } else if (urlState.focus === 'my-stop') {
+        intent = { type: 'DOUBLE_FIT' };
+      } else if (urlState.stopId) {
+        intent = { type: 'ZOOM_STOP', data: { stopId: urlState.stopId, showInfo: true } };
+      } else if (urlState.focus && isCoords(urlState.focus)) {
+        const parts = urlState.focus.split(',');
+        if (parts.length === 3) {
+          const [lat, lng, zoom] = parts.map(Number);
+          if (!isNaN(lat) && !isNaN(lng) && !isNaN(zoom)) {
+            intent = { type: 'MANUAL', data: { lat, lng, zoom } };
+          }
+        }
+      } else if (urlState.show === 'routes' && urlState.schoolId) {
+        if (urlState.routeNames && urlState.routeNames.length > 0) {
+          intent = { type: 'FIT_ROUTES' };
+        } else if (routes.length > 0) {
+          intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId } };
+        }
+      } else if (urlState.schoolId && urlState.show === 'schools') {
+        intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId } };
+      } else if (urlState.show === 'schools' || !urlState.schoolId) {
+        intent = { type: 'FIT_SCHOOLS' };
+      }
+
+      if (intent) {
+        const currentIntent = useStore.getState().mapIntent;
+        if (JSON.stringify(intent) !== JSON.stringify(currentIntent)) {
+          console.log('[useUrlState] Derived map intent from URL:', intent);
+          setMapIntent(intent);
+        }
+      } else {
+        const currentIntent = useStore.getState().mapIntent;
+        if (currentIntent !== null) {
+          setMapIntent(null);
+        }
+      }
+
       // Mark as synced if we've processed the URL completely
       // If there are routes/stops in the URL, we aren't "synced" until routes are loaded
       const hasRoutesInUrl = !!urlState.routeNames;
-      const routesReady = routes.length > 0;
+      const routesReady = routes.length > 0 || (schools.length > 0 && selectedSchoolId && !useStore.getState().isLoading);
       
       if (!hasRoutesInUrl || routesReady) {
         console.log('[useUrlState] Sync from URL complete, unblocking sync back to URL');
@@ -321,7 +374,7 @@ export function useUrlState({
       console.error('[useUrlState] Error syncing state from URL:', error);
       hasSyncedFromUrlRef.current = true; // Unblock on error to avoid being stuck
     }
-  }, [location.pathname, basePath, schools, routes, selectedSchoolId, setSelectedSchool, setSelectedRoutes, directionFilter, setDirectionFilter, selectedStop, selectStop, clearSelectedStop, activeTab, setActiveTab]);
+  }, [location.pathname, basePath, schools, routes, selectedSchoolId, setSelectedSchool, setSelectedRoutes, directionFilter, setDirectionFilter, selectedStop, selectStop, clearSelectedStop, activeTab, setActiveTab, setMapIntent]);
 
   // Update URL when state changes
   useEffect(() => {
@@ -342,7 +395,7 @@ export function useUrlState({
     return () => {
       cancelPendingUrlUpdate();
     };
-  }, [updateUrlFromState, cancelPendingUrlUpdate, selectedSchoolId, activeTab, routes, selectedStop, directionFilter, basePath]);
+  }, [updateUrlFromState, cancelPendingUrlUpdate, selectedSchoolId, activeTab, routes, selectedStop, directionFilter, basePath, mapIntent]);
 
   const markRouteToggle = useCallback(() => {
     // This is called when a route is toggled in the UI.

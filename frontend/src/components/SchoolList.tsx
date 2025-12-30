@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { School } from '../types';
 import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
@@ -6,6 +7,7 @@ import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 import { MapPinIcon } from './MapPinIcon';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
 import { XIcon } from './XIcon';
+import { parseUrlPath, buildUrlPath } from '../services/urlState';
 
 // Infer school type(s) from name - returns array to support hybrid schools
 function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
@@ -108,7 +110,12 @@ export function SchoolList({
   const searchTerm = externalSearchTerm !== undefined ? externalSearchTerm : internalSearchTerm;
   const setSearchTerm = externalOnSearchChange || setInternalSearchTerm;
   const schoolTypeFilters = externalFilters !== undefined ? externalFilters : internalFilters;
-  const setSchoolTypeFilters = externalOnFiltersChange || setInternalFilters;
+  const setSchoolTypeFilters = (filters: SchoolTypeFilters) => {
+    if (externalOnFiltersChange) externalOnFiltersChange(filters);
+    else setInternalFilters(filters);
+  };
+  const navigate = useNavigate();
+  const location = useLocation();
   const [editingSchoolId, setEditingSchoolId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState('');
   const [editingPageLink, setEditingPageLink] = useState('');
@@ -423,10 +430,10 @@ export function SchoolList({
                       if (!isEditing) {
                         // Toggle selection: if already selected, deselect; otherwise select
                         if (isSelected) {
-                          onSelectSchool(null); // Pass null to deselect
+                          navigate('/schools');
                         } else {
                           analyticsService.trackSchoolSelect(school.name, enableEditing ? 'admin_list' : 'explorer_list');
-                          onSelectSchool(school.id);
+                          navigate(`/${school.id}/school-info`);
                         }
                       }
                     }}

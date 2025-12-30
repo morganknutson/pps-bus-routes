@@ -53,7 +53,21 @@ L.Marker.prototype.options.icon = defaultIcon;
 // Header, Sidebar, and Map unification logic
 export function ExplorerApp() {
   console.log('[ExplorerApp] Rendering...');
-  const { isLoading, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress, routes, directionFilter, selectedStop } = useStore();
+  const { 
+    isLoading, 
+    selectedSchoolId, 
+    setSelectedSchool, 
+    schools, 
+    setSchools, 
+    setRoutes, 
+    setLoading, 
+    setLoadingProgress, 
+    routes, 
+    directionFilter, 
+    selectedStop,
+    activeTab,
+    setActiveTab
+  } = useStore();
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
@@ -68,37 +82,15 @@ export function ExplorerApp() {
     };
     window.addEventListener('change-tab', handleTabChangeEvent);
     return () => window.removeEventListener('change-tab', handleTabChangeEvent);
-  }, []);
+  }, [setActiveTab]);
 
-  // Parse URL to determine initial active tab
+  // Parse URL to determine initial state
   const urlState = useMemo(() => parseUrlPath(location.pathname, ''), [location.pathname]);
-  const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
-    return urlState.show || 'schools';
-  });
-
-  // Initialize school selection from URL on mount
-  useEffect(() => {
-    const isCleanPath = location.pathname === '/schools' || location.pathname === '/explore';
-    if (isCleanPath) {
-      if (selectedSchoolId) setSelectedSchool(null);
-    } else if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
-      setSelectedSchool(urlState.schoolId);
-    }
-  }, []);
 
   const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
     elementary: true, middle: true, high: true, hybrid: true, noRoutes: true,
   });
   const [searchTerm, setSearchTerm] = useState('');
-
-  // Automatically switch to routes tab when a school is selected
-  const prevSchoolIdRef = useRef<string | null>(null);
-  useEffect(() => {
-    if (selectedSchoolId && selectedSchoolId !== prevSchoolIdRef.current && activeTab === 'schools') {
-      setActiveTab('routes');
-    }
-    prevSchoolIdRef.current = selectedSchoolId;
-  }, [selectedSchoolId, activeTab]);
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -117,7 +109,7 @@ export function ExplorerApp() {
   }, [schools, searchTerm, schoolTypeFilters]);
 
   // Sync state with URL
-  useUrlState({ basePath: '', schools, routes, activeTab, setActiveTab, debounceMs: 300 });
+  useUrlState({ basePath: '', schools, routes, debounceMs: 300 });
 
   // Load schools
   useEffect(() => {
@@ -136,24 +128,25 @@ export function ExplorerApp() {
       }
     };
     loadSchools();
-  }, []);
+  }, [setSchools, setLoading]);
 
   // Load routes when school changes
   useEffect(() => {
+    console.log('[ExplorerApp] selectedSchoolId changed:', selectedSchoolId);
     if (!selectedSchoolId) {
       setRoutes([]);
       return;
     }
     const loadRoutes = async () => {
+      console.log('[ExplorerApp] Fetching routes for:', selectedSchoolId);
       setLoading(true);
       setLoadingProgress(0);
       try {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
-        const stateToApply = urlState.schoolId?.toLowerCase() === selectedSchoolId.toLowerCase()
-          ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
-          : { schoolId: selectedSchoolId, show: activeTab };
-        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, stateToApply, directionFilter);
-        setRoutes(syncedRoutes);
+        console.log('[ExplorerApp] Loaded routes:', loadedRoutes.length);
+        // We set the routes without selection initially. 
+        // useUrlState hook will handle syncing selection from URL once routes are loaded.
+        setRoutes(loadedRoutes);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[ExplorerApp] Failed to load routes:', error);
@@ -164,7 +157,7 @@ export function ExplorerApp() {
       }
     };
     loadRoutes();
-  }, [selectedSchoolId]);
+  }, [selectedSchoolId, setRoutes, setLoading, setLoadingProgress]);
 
   // Custom Hamburger/Close icon component
   const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => (
@@ -224,9 +217,7 @@ export function ExplorerApp() {
   ) : null;
 
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
-    if (tab === 'schools' || tab === 'routes') {
-      setActiveTab(tab);
-    }
+    setActiveTab(tab);
   };
 
   return (
@@ -237,8 +228,10 @@ export function ExplorerApp() {
         <Sidebar header={null} tabs={<TabBar activeTab={activeTab} onTabChange={handleTabChange} />} isOpen={!isMobile || sidebarOpen} onClose={() => setSidebarOpen(false)} persistenceKey="sidebar-width-explorer">
           {activeTab === 'schools' ? (
             <SchoolList schools={schools} selectedSchoolId={selectedSchoolId} searchTerm={searchTerm} onSearchChange={setSearchTerm} schoolTypeFilters={schoolTypeFilters} onFiltersChange={setSchoolTypeFilters} onSelectSchool={setSelectedSchool} />
+          ) : activeTab === 'neighborhoods' ? (
+            <div style={{ padding: '1rem', color: 'var(--text-secondary)' }}>Neighborhoods coming soon...</div>
           ) : (
-            <RouteList showBothOption={false} onClearSchool={() => { setSelectedSchool(null); setActiveTab('schools'); }} onViewSchools={() => setActiveTab('schools')} />
+            <RouteList showBothOption={false} onClearSchool={() => { navigate('/schools'); }} onViewSchools={() => setActiveTab('schools')} />
           )}
         </Sidebar>
 
@@ -247,7 +240,7 @@ export function ExplorerApp() {
           <div style={{ flex: 1, position: 'relative' }}>
             {/* UNIFIED MAP: Stays mounted! */}
             <MapView 
-              viewMode={activeTab} 
+              viewMode={activeTab as 'schools' | 'routes'} 
               onSelectSchool={setSelectedSchool}
               schools={filteredSchools}
             />
@@ -258,7 +251,7 @@ export function ExplorerApp() {
                 <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '16px', padding: '2rem 1.5rem', boxShadow: '0 4px 16px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem', width: '100%', border: '1px solid var(--border-color)' }}>
                   <i className="fas fa-graduation-cap" style={{ fontSize: '48px', color: 'var(--text-tertiary)', opacity: 0.6 }} />
                   <p style={{ fontSize: '16px', fontWeight: '500', margin: 0, color: 'var(--text-secondary)', lineHeight: '1.4' }}>Please select a school to view routes</p>
-                  <button onClick={() => { setActiveTab('schools'); if (isMobile) setSidebarOpen(true); }} style={{ padding: '0.875rem 1.5rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: '9999px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', width: '100%' }}>View Schools</button>
+                  <button onClick={() => { navigate('/schools'); if (isMobile) setSidebarOpen(true); }} style={{ padding: '0.875rem 1.5rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: '9999px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', width: '100%' }}>View Schools</button>
                 </div>
               </div>
             )}
@@ -285,7 +278,22 @@ export function ExplorerApp() {
 }
 
 function AdminApp() {
-  const { isLoading, loadingProgress, selectedSchoolId, setSelectedSchool, schools, setSchools, setRoutes, setLoading, setLoadingProgress, routes, directionFilter, selectedStop } = useStore();
+  const { 
+    isLoading, 
+    loadingProgress, 
+    selectedSchoolId, 
+    setSelectedSchool, 
+    schools, 
+    setSchools, 
+    setRoutes, 
+    setLoading, 
+    setLoadingProgress, 
+    routes, 
+    directionFilter, 
+    selectedStop,
+    activeTab,
+    setActiveTab
+  } = useStore();
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
@@ -299,43 +307,22 @@ function AdminApp() {
     };
     window.addEventListener('change-tab', handleTabChangeEvent);
     return () => window.removeEventListener('change-tab', handleTabChangeEvent);
-  }, []);
+  }, [setActiveTab]);
 
-  // Parse URL to determine initial active tab
-  const urlState = parseUrlPath(location.pathname, '/admin');
-  const [activeTab, setActiveTab] = useState<'schools' | 'routes'>(() => {
-    return urlState.show || 'routes';
-  });
-
-  // Initialize school selection from URL on mount
-  useEffect(() => {
-    if (urlState.schoolId && urlState.schoolId !== selectedSchoolId) {
-      setSelectedSchool(urlState.schoolId);
-    }
-  }, []);
+  // Parse URL to determine initial state
+  const urlState = useMemo(() => parseUrlPath(location.pathname, '/admin'), [location.pathname]);
 
   const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
     elementary: true, middle: true, high: true, hybrid: true, noRoutes: true,
   });
   const [searchTerm, setSearchTerm] = useState('');
   
-  // Automatically switch to routes tab when a school is selected
-  const prevSchoolIdRef = useRef<string | null>(null);
-  useEffect(() => {
-    if (selectedSchoolId && selectedSchoolId !== prevSchoolIdRef.current && activeTab === 'schools') {
-      setActiveTab('routes');
-    }
-    prevSchoolIdRef.current = selectedSchoolId;
-  }, [selectedSchoolId, activeTab]);
-
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
-    if (tab === 'schools' || tab === 'routes') {
-      setActiveTab(tab);
-    }
+    setActiveTab(tab);
   };
 
   // Sync state with URL
-  useUrlState({ basePath: '/admin', schools, routes, activeTab, setActiveTab, debounceMs: 300 });
+  useUrlState({ basePath: '/admin', schools, routes, debounceMs: 300 });
 
   // Load schools
   useEffect(() => {
@@ -354,7 +341,7 @@ function AdminApp() {
       }
     };
     loadSchools();
-  }, []);
+  }, [setSchools, setLoading]);
 
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
@@ -383,11 +370,9 @@ function AdminApp() {
       setLoadingProgress(0);
       try {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
-        const stateToApply = urlState.schoolId?.toLowerCase() === selectedSchoolId.toLowerCase()
-          ? { ...urlState, show: activeTab, schoolId: selectedSchoolId }
-          : { schoolId: selectedSchoolId, show: activeTab };
-        const syncedRoutes = applyUrlStateToRoutes(loadedRoutes, stateToApply, directionFilter);
-        setRoutes(syncedRoutes);
+        // We set the routes without selection initially. 
+        // useUrlState hook will handle syncing selection from URL once routes are loaded.
+        setRoutes(loadedRoutes);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[AdminApp] Failed to load routes:', error);
@@ -398,7 +383,7 @@ function AdminApp() {
       }
     };
     loadRoutes();
-  }, [selectedSchoolId]);
+  }, [selectedSchoolId, setRoutes, setLoading, setLoadingProgress]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: 'var(--app-height)', width: '100vw', position: isMobile ? 'fixed' : 'relative', top: 0, left: 0, overflow: 'hidden' }}>
@@ -427,8 +412,10 @@ function AdminApp() {
                 } catch (error) { console.error(error); }
               }}
             />
+          ) : activeTab === 'neighborhoods' ? (
+            <div style={{ padding: '1rem', color: 'var(--text-secondary)' }}>Neighborhoods coming soon...</div>
           ) : (
-            <RouteList showBothOption={true} onClearSchool={() => setActiveTab('schools')} onViewSchools={() => setActiveTab('schools')} />
+            <RouteList showBothOption={true} onClearSchool={() => navigate('/admin/schools')} onViewSchools={() => setActiveTab('schools')} />
           )}
         </Sidebar>
 
@@ -437,32 +424,13 @@ function AdminApp() {
           <div style={{ flex: 1, position: 'relative' }}>
             {/* UNIFIED MAP: Stays mounted! */}
             <MapView 
-              viewMode={activeTab} 
+              viewMode={activeTab as 'schools' | 'routes'} 
               editingMode={true} 
               enableStreetHighlighting={true}
               enableStreetPins={true}
               onSelectSchool={setSelectedSchool}
               schools={filteredSchools}
             />
-
-            {/* Admin Map Info (Only when in schools mode and school selected) */}
-            <MapInfoPanel isOpen={activeTab === 'schools' && !!selectedSchoolId} onClose={() => setSelectedSchool(null)}>
-              {selectedSchoolId && (() => {
-                const school = schools.find(s => s.id === selectedSchoolId);
-                if (!school) return null;
-                return (
-                  <SchoolInfoTooltip 
-                    school={school} 
-                    showRoutesButton={true}
-                    onClose={() => setSelectedSchool(null)}
-                    onViewRoutes={() => {
-                      setSelectedSchool(school.id);
-                      setActiveTab('routes');
-                    }}
-                  />
-                );
-              })()}
-            </MapInfoPanel>
 
             {/* Loading Indicator */}
             {isLoading && activeTab === 'routes' && selectedSchoolId && (

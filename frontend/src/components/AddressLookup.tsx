@@ -62,6 +62,13 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
       
       selectStop(route, stop, stopNumber);
       
+      // Explicitly set the Map Intent to DOUBLE_FIT
+      useStore.getState().setMapIntent({ type: 'DOUBLE_FIT' });
+      
+      // signal to MapView to perform a "double-fit" (Home + Stop)
+      // This is now redundant since we use setMapIntent, but kept for compatibility
+      window.dispatchEvent(new CustomEvent('find-my-stop-executed'));
+      
       // Automatically switch to routes tab to show the found stop
       window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
       

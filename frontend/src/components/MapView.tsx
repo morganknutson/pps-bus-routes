@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { MapContainer, Polyline, Marker, Popup, ZoomControl } from 'react-leaflet';
 import L from 'leaflet';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { fetchRouteForStops } from '../services/routing';
-import { School } from '../types';
+import { School, MapIntent } from '../types';
 import { formatStreetName, extractStreetNames, expandAddressForGeocoding } from '../utils/formatAddress';
 import { createHomeIcon, createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { createSchoolIcon, createNumberedIcon } from '../utils/markerIcons';
@@ -15,6 +16,8 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { MapInfoPanel } from './MapInfoPanel';
 import { StopInfoTooltip } from './StopInfoTooltip';
 import { SchoolInfoTooltip } from './SchoolInfoTooltip';
+import { HomeInfoTooltip } from './HomeInfoTooltip';
+import { parseUrlPath, buildUrlPath } from '../services/urlState';
 import 'leaflet/dist/leaflet.css';
 
 const homeIcon = createHomeIcon();
@@ -75,10 +78,15 @@ export function MapView({
     setSelectedSchool, 
     updateStopCoordinates, 
     directionFilter, 
-    isLoading 
+    isLoading,
+    mapIntent,
+    setMapIntent
   } = useStore();
 
+  const navigate = useNavigate();
+  const location = useLocation();
   const schools = schoolsProp || schoolsFromStore;
+  const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
   const isMobile = useIsMobile();
   const [map, setMap] = useState<L.Map | null>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
@@ -90,7 +98,7 @@ export function MapView({
   
   const previousHomeAddressRef = useRef<typeof homeAddress>(undefined);
   const hasZoomedToAddressRef = useRef<boolean>(false);
-  const previousLookupAddressRef = useRef<{ address: string; coordinates: [number, number] } | null>(null);
+  const previousLookupAddressRef = useRef<typeof lookupAddress>(undefined);
   const hasZoomedToLookupAddressRef = useRef<boolean>(false);
   const lastAddressZoomTimeRef = useRef<number>(0);
   const [highlightedStreet, setHighlightedStreet] = useState<HighlightedStreet | null>(null);
@@ -98,7 +106,12 @@ export function MapView({
   const [streetError, setStreetError] = useState<string | null>(null);
   const [streetMarkers, setStreetMarkers] = useState<StreetMarker[]>([]);
   const [loadingStreetPins, setLoadingStreetPins] = useState<boolean>(false);
-  const [showSchoolInfo, setShowSchoolInfo] = useState<boolean>(false);
+
+  // Derive info panel state from URL to avoid redundant/stale local state
+  const currentUrlState = useMemo(() => parseUrlPath(location.pathname, basePath), [location.pathname, basePath]);
+  const isSchoolInfoFocused = currentUrlState.focus === 'school-info';
+  const isHomeInfoFocused = currentUrlState.focus === 'home';
+  const isStopInfoFocused = !!selectedStop; // selectedStop is already synced from URL by useUrlState
 
   // Memoize schools with coordinates
   const schoolsWithCoords = useMemo(() => 
@@ -110,6 +123,13 @@ export function MapView({
   const schoolsKey = useMemo(() => 
     schoolsWithCoords.map((s: School) => s.id).sort().join(','),
     [schoolsWithCoords]
+  );
+
+  // Track the set of selected routes for fitting
+  const selectedRoutesKey = useMemo(() => 
+    routes.filter(r => r.isSelected && (directionFilter === 'Both' || r.direction === directionFilter))
+          .map(r => r.id).sort().join(','),
+    [routes, directionFilter]
   );
 
   // Track if we have successfully fitted the map to the initial set of schools
@@ -128,32 +148,75 @@ export function MapView({
     checkReady();
   }, [map]);
 
-  // Unified Zoom/Fit Logic
+  // Helper to zoom to a point with mobile-aware centering
+  const zoomToPoint = (position: L.LatLngExpression, zoom: number = 18) => {
+    if (!map) return;
+    
+    if (isMobile) {
+      // Offset to account for bottom panel on mobile
+      const targetPoint = map.project(position, zoom).add([0, 100]);
+      const targetLatLng = map.unproject(targetPoint, zoom);
+      map.setView(targetLatLng, zoom, { animate: true });
+    } else {
+      // Direct center on desktop
+      map.setView(position, zoom, { animate: true });
+    }
+    
+    lastAddressZoomTimeRef.current = Date.now();
+  };
+
+  // Unified Zoom/Fit Logic (Intent-Driven)
   useEffect(() => {
-    if (!map || !isMapReady) return;
+    if (!map || !isMapReady || !mapIntent) return;
 
-    // Give priority to manual address zoom
-    const timeSinceAddressZoom = Date.now() - lastAddressZoomTimeRef.current;
-    if (timeSinceAddressZoom < 2000) return;
+    console.log('[MapView] Executing map intent:', mapIntent.type, mapIntent.data);
 
-    const isStateChanged = lastHandledSchoolIdRef.current !== selectedSchoolId;
-    const isFirstLoad = isInitialLoadRef.current;
-
-    // Handle Route View Zooming
-    if (viewMode === 'routes') {
-      if (selectedStop) {
-        // Stop selected - zoom to stop
-        if (!validateLngLat(selectedStop.stop.coordinates)) return;
-        const position = toLeafletPosition(selectedStop.stop.coordinates);
-        map.setView(position, 18, { animate: true });
-        lastHandledSchoolIdRef.current = 'STOP_SELECTED';
-        return;
+    switch (mapIntent.type) {
+      case 'DOUBLE_FIT': {
+        const activeHome = homeAddress || lookupAddress;
+        if (selectedStop && activeHome && 
+            validateLngLat(selectedStop.stop.coordinates) && 
+            validateLngLat(activeHome.coordinates)) {
+          const stopPos = toLeafletPosition(selectedStop.stop.coordinates);
+          const homePos = toLeafletPosition(activeHome.coordinates);
+          const bounds = L.latLngBounds([stopPos, homePos]);
+          
+          // Fit to bounds with padding (extra bottom padding on mobile for the panel)
+          const padding: L.PointExpression = isMobile ? [50, 150] : [100, 100];
+          map.fitBounds(bounds, { padding, animate: true });
+          
+          // After fitting, zoom out one more step as requested
+          // We use once('zoomend') to ensure the fitBounds animation finished
+          const handleZoomEnd = () => {
+            map.setZoom(map.getZoom() - 1, { animate: true });
+          };
+          map.once('zoomend', handleZoomEnd);
+          
+          lastAddressZoomTimeRef.current = Date.now();
+        }
+        break;
       }
-
-      const selectedRoutes = routes.filter(r => r.isSelected && (directionFilter === 'Both' || r.direction === directionFilter));
       
-      if (selectedRoutes.length > 0) {
-        // Routes selected - fit to routes
+      case 'ZOOM_STOP': {
+        if (selectedStop && validateLngLat(selectedStop.stop.coordinates)) {
+          const position = toLeafletPosition(selectedStop.stop.coordinates);
+          zoomToPoint(position, 18);
+        }
+        break;
+      }
+      
+      case 'ZOOM_SCHOOL': {
+        const schoolId = mapIntent.data?.schoolId || selectedSchoolId;
+        const targetSchool = schoolsWithCoords.find(s => s.id === schoolId);
+        if (targetSchool && targetSchool.coordinates) {
+          const position = toLeafletPosition(targetSchool.coordinates);
+          zoomToPoint(position, 18);
+        }
+        break;
+      }
+      
+      case 'FIT_ROUTES': {
+        const selectedRoutes = routes.filter(r => r.isSelected && (directionFilter === 'Both' || r.direction === directionFilter));
         const allCoords: [number, number][] = [];
         selectedRoutes.forEach(route => {
           route.stops.forEach(stop => {
@@ -166,71 +229,74 @@ export function MapView({
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
           map.fitBounds(bounds, { padding: [50, 50], animate: true });
-          lastHandledSchoolIdRef.current = 'ROUTES_FIT';
         }
-      } else if (selectedSchoolId) {
-        // No routes but school selected - zoom to school
-        const school = schoolsWithCoords.find(s => s.id === selectedSchoolId);
-        if (school && school.coordinates) {
-          const [lng, lat] = school.coordinates;
-          const zoom = 16;
-          // Offset to account for bottom panel
-          const targetPoint = map.project([lat, lng], zoom).add([0, 100]);
-          const targetLatLng = map.unproject(targetPoint, zoom);
-          map.setView(targetLatLng, zoom, { animate: true });
-          lastHandledSchoolIdRef.current = selectedSchoolId;
-        }
-      } else {
-        // No school selected in routes mode - this usually happens during transition
-        // We don't do anything here, wait for viewMode to change to 'schools'
+        break;
       }
-    } 
-    // Handle Schools View Zooming
-    else if (viewMode === 'schools') {
-      if (selectedSchoolId) {
-        // Zoom to single school
-        if (!isStateChanged && !isFirstLoad && lastHandledSchoolIdRef.current === selectedSchoolId) return;
-        const school = schoolsWithCoords.find(s => s.id === selectedSchoolId);
-        if (school && school.coordinates) {
-          const [lng, lat] = school.coordinates;
-          const zoom = 16;
-          const targetPoint = map.project([lat, lng], zoom).add([0, 100]);
-          const targetLatLng = map.unproject(targetPoint, zoom);
-          map.setView(targetLatLng, zoom, { animate: true });
-          lastHandledSchoolIdRef.current = selectedSchoolId;
-        }
-      } else {
-        // Fit all schools
-        const wasSelectedBefore = lastHandledSchoolIdRef.current !== null && lastHandledSchoolIdRef.current !== undefined;
-        // If we just loaded schools for the first time, or if we were zoomed in and now aren't
-        if (wasSelectedBefore || isFirstLoad || isStateChanged || (!hasInitiallyFittedRef.current && schoolsWithCoords.length > 0)) {
-          const allCoords: [number, number][] = schoolsWithCoords.map((s: School) => [s.coordinates![1], s.coordinates![0]] as [number, number]);
-          if (homeAddress) allCoords.push([homeAddress.coordinates[1], homeAddress.coordinates[0]]);
-          
-          if (allCoords.length > 0) {
-            const bounds = L.latLngBounds(allCoords);
-            map.fitBounds(bounds, { padding: [50, 50], animate: true });
-            lastHandledSchoolIdRef.current = null;
-            hasInitiallyFittedRef.current = true;
+      
+      case 'FIT_HOME': {
+        const selectedRoutes = routes.filter(r => r.isSelected && (directionFilter === 'Both' || r.direction === directionFilter));
+        const allCoords: [number, number][] = [];
+        selectedRoutes.forEach(route => {
+          route.stops.forEach(stop => {
+            if (stop.coordinates && validateLngLat(stop.coordinates)) {
+              allCoords.push(toLeafletPosition(stop.coordinates));
+            }
+          });
+        });
+        
+        if (homeAddress && validateLngLat(homeAddress.coordinates)) {
+          const homePos = toLeafletPosition(homeAddress.coordinates);
+          allCoords.push(homePos);
+          if (mapIntent.data?.showInfo) {
+            zoomToPoint(homePos, 18);
+            return; // Don't do fitBounds if we are zooming to home
           }
         }
+
+        if (allCoords.length > 0) {
+          const bounds = L.latLngBounds(allCoords);
+          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+        }
+        break;
+      }
+      
+      case 'FIT_SCHOOLS': {
+        const allCoords: [number, number][] = schoolsWithCoords.map((s: School) => [s.coordinates![1], s.coordinates![0]] as [number, number]);
+        if (homeAddress && validateLngLat(homeAddress.coordinates)) {
+          allCoords.push([homeAddress.coordinates[1], homeAddress.coordinates[0]]);
+        }
+        
+        if (allCoords.length > 0) {
+          const bounds = L.latLngBounds(allCoords);
+          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+        }
+        break;
+      }
+      
+      case 'MANUAL': {
+        if (mapIntent.data) {
+          const { lat, lng, zoom } = mapIntent.data;
+          map.setView([lat, lng], zoom, { animate: true });
+        }
+        break;
+      }
+      
+      case 'STREET_HIGHLIGHT': {
+        if (enableStreetHighlighting && highlightedStreet) {
+          const bounds = L.latLngBounds(
+            [highlightedStreet.bounds.south, highlightedStreet.bounds.west],
+            [highlightedStreet.bounds.north, highlightedStreet.bounds.east]
+          );
+          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+        }
+        break;
       }
     }
-
+    
+    // Reset initial load ref after first intent execution
     isInitialLoadRef.current = false;
-  }, [map, isMapReady, viewMode, selectedSchoolId, selectedStop, routes, directionFilter, schoolsWithCoords, homeAddress, schoolsKey]);
+  }, [map, isMapReady, mapIntent, schoolsWithCoords, selectedStop, homeAddress, routes, directionFilter, highlightedStreet, enableStreetHighlighting, selectedSchoolId]);
 
-  // Clear school info tooltip when a stop is selected
-  useEffect(() => {
-    if (selectedStop) {
-      setShowSchoolInfo(false);
-    }
-  }, [selectedStop]);
-
-  // Clear everything when school changes
-  useEffect(() => {
-    setShowSchoolInfo(false);
-  }, [selectedSchoolId]);
 
   // Get selected routes, filtered by direction
   const selectedRoutes = routes.filter(route => {
@@ -241,52 +307,6 @@ export function MapView({
 
   const activeSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
   const schoolHasNoRoutes = !!activeSchool && !isLoading && routes.length === 0;
-
-  // Zoom to home address
-  useEffect(() => {
-    const prevCoords = previousHomeAddressRef.current?.coordinates;
-    const currentCoords = homeAddress?.coordinates;
-    const coordinatesChanged = prevCoords && currentCoords && 
-      (prevCoords[0] !== currentCoords[0] || prevCoords[1] !== currentCoords[1]);
-    const wasJustAdded = !previousHomeAddressRef.current && homeAddress;
-    
-    if (coordinatesChanged) {
-      hasZoomedToAddressRef.current = false;
-    }
-    
-    if ((wasJustAdded || coordinatesChanged) && map && homeAddress && !hasZoomedToAddressRef.current) {
-      if (validateLngLat(homeAddress.coordinates)) {
-        const position = toLeafletPosition(homeAddress.coordinates);
-        map.setView(position, 16, { animate: true });
-        hasZoomedToAddressRef.current = true;
-        lastAddressZoomTimeRef.current = Date.now();
-      }
-    }
-    previousHomeAddressRef.current = homeAddress;
-    if (!homeAddress) hasZoomedToAddressRef.current = false;
-  }, [homeAddress, map]);
-
-  // Zoom to lookup address
-  useEffect(() => {
-    if (lookupAddress && map) {
-      if (!validateLngLat(lookupAddress.coordinates)) return;
-      const prevCoords = previousLookupAddressRef.current?.coordinates;
-      const currentCoords = lookupAddress.coordinates;
-      const isNewAddress = !prevCoords || prevCoords[0] !== currentCoords[0] || prevCoords[1] !== currentCoords[1];
-      
-      if (isNewAddress) hasZoomedToLookupAddressRef.current = false;
-      if (isNewAddress && !hasZoomedToLookupAddressRef.current) {
-        const position = toLeafletPosition(lookupAddress.coordinates);
-        map.setView(position, 16, { animate: true });
-        hasZoomedToLookupAddressRef.current = true;
-        lastAddressZoomTimeRef.current = Date.now();
-      }
-      previousLookupAddressRef.current = lookupAddress;
-    } else {
-      hasZoomedToLookupAddressRef.current = false;
-      previousLookupAddressRef.current = null;
-    }
-  }, [lookupAddress, map]);
 
   // Function to recalculate route geometry
   const recalculateRouteGeometry = async (routeId: string) => {
@@ -421,56 +441,8 @@ export function MapView({
   }, [selectedRoutes.map(r => r.id).join(',')]); // Re-fetch when selected routes change
 
   // Calculate bounds to fit all routes when coordinates are available
-  // Only auto-fit if no stop is selected (to allow manual zooming)
-  // Don't auto-fit if we just zoomed to an address (within last 2 seconds)
+  // Zoom to selected stop when it changes (non-movement logic)
   useEffect(() => {
-    // Don't fit bounds if we just zoomed to an address (give address zoom priority)
-    const timeSinceAddressZoom = Date.now() - lastAddressZoomTimeRef.current;
-    if (timeSinceAddressZoom < 2000) {
-      return;
-    }
-    
-    if (map && !selectedStop) {
-      if (selectedRoutes.length > 0) {
-        const allCoordinates: [number, number][] = [];
-
-        selectedRoutes.forEach(route => {
-          route.stops.forEach(stop => {
-            if (stop.coordinates) {
-              if (!validateLngLat(stop.coordinates)) {
-                console.warn('[MapView] Invalid stop coordinates, skipping:', stop.coordinates);
-                return;
-              }
-              // Convert [lng, lat] to [lat, lng] for Leaflet
-              allCoordinates.push(toLeafletPosition(stop.coordinates));
-            }
-          });
-        });
-
-        // Don't include home address in bounds - let routes control the view
-        if (allCoordinates.length > 0) {
-          const bounds = L.latLngBounds(allCoordinates);
-          map.fitBounds(bounds, { padding: [50, 50] });
-        }
-      } else if (activeSchool && activeSchool.coordinates && validateLngLat(activeSchool.coordinates)) {
-        // If no routes but school is selected, zoom to school
-        const position = toLeafletPosition(activeSchool.coordinates);
-        map.setView(position, 15, { animate: true });
-      }
-    }
-  }, [selectedRoutes, routes, selectedStop, activeSchool?.id, map]); // Added map to dependencies
-
-  // Zoom to selected stop when it changes
-  useEffect(() => {
-    if (map && selectedStop && selectedStop.stop.coordinates) {
-      if (!validateLngLat(selectedStop.stop.coordinates)) {
-        console.error('[MapView] Invalid selected stop coordinates:', selectedStop.stop.coordinates);
-        return;
-      }
-      const position = toLeafletPosition(selectedStop.stop.coordinates);
-      map.setView(position, 18, { animate: true });
-    }
-    
     // Clear undo history when a different stop is selected
     // (only keep history for the currently selected stop)
     if (selectedStop) {
@@ -490,18 +462,7 @@ export function MapView({
     setStreetError(null);
     // Clear street markers when stop changes
     setStreetMarkers([]);
-  }, [selectedStop?.route.id, selectedStop?.stop.id, map]); // Added map to dependencies
-
-  // Zoom to highlighted street bounds (only if feature is enabled)
-  useEffect(() => {
-    if (enableStreetHighlighting && map && highlightedStreet) {
-      const bounds = L.latLngBounds(
-        [highlightedStreet.bounds.south, highlightedStreet.bounds.west],
-        [highlightedStreet.bounds.north, highlightedStreet.bounds.east]
-      );
-      map.fitBounds(bounds, { padding: [50, 50], animate: true });
-    }
-  }, [highlightedStreet, enableStreetHighlighting, map]); // Added map to dependencies
+  }, [selectedStop?.route.id, selectedStop?.stop.id]);
 
   // Function to create a simple pin icon for street markers
   const createStreetPinIcon = (color: string = '#FF6B6B'): L.DivIcon => {
@@ -721,8 +682,8 @@ export function MapView({
   const defaultCenter: [number, number] = [45.5152, -122.6784];
 
   // Improved Stop/School info overlay using MapInfoPanel
-  const isPanelOpen = !!selectedStop || showSchoolInfo || (viewMode === 'schools' && !!selectedSchoolId);
-  const displaySchool = showSchoolInfo ? activeSchool : (viewMode === 'schools' ? schools.find(s => s.id === selectedSchoolId) : null);
+  const isPanelOpen = isStopInfoFocused || isSchoolInfoFocused || isHomeInfoFocused || (viewMode === 'schools' && !!selectedSchoolId);
+  const displaySchool = isSchoolInfoFocused ? activeSchool || schools.find(s => s.id === currentUrlState.schoolId) : (viewMode === 'schools' ? schools.find(s => s.id === selectedSchoolId) : null);
 
   return (
     <div style={{ position: 'relative', height: '100%', width: '100%' }}>
@@ -741,6 +702,13 @@ export function MapView({
         <Marker 
           position={[homeAddress.coordinates[1], homeAddress.coordinates[0]]} 
           icon={homeIcon}
+          eventHandlers={{
+            click: () => {
+              const urlState = parseUrlPath(location.pathname, basePath);
+              const newState = { ...urlState, focus: 'home' };
+              navigate(buildUrlPath(basePath, newState));
+            }
+          }}
         />
       )}
 
@@ -755,6 +723,11 @@ export function MapView({
           <Marker 
             position={position} 
             icon={defaultMarkerIcon}
+            eventHandlers={{
+              click: () => {
+                zoomToPoint(position, 18);
+              }
+            }}
           >
             <Popup>{lookupAddress.address}</Popup>
           </Marker>
@@ -777,7 +750,11 @@ export function MapView({
                 position={position}
                 icon={icon}
                 eventHandlers={{
-                  click: () => onSelectSchool?.(isSelected ? null : school.id)
+                  click: () => {
+                    const urlState = parseUrlPath(location.pathname, basePath);
+                    const newState = { ...urlState, schoolId: school.id, focus: 'school-info' };
+                    navigate(buildUrlPath(basePath, newState));
+                  }
                 }}
                 zIndexOffset={isSelected ? 1000 : 0}
               />
@@ -817,19 +794,20 @@ export function MapView({
               position={position} 
               icon={createSchoolIcon(schoolColor)}
               zIndexOffset={100}
-              eventHandlers={{
-                click: () => {
-                  clearSelectedStop();
-                  setShowSchoolInfo(true);
-                }
-              }}
+                eventHandlers={{
+                  click: () => {
+                    const urlState = parseUrlPath(location.pathname, basePath);
+                    const newState = { ...urlState, schoolId: activeSchool.id, focus: 'school-info' };
+                    navigate(buildUrlPath(basePath, newState));
+                  }
+                }}
             />
           );
         }
       })()}
 
-      {/* Route lines and stop dots */}
-      {selectedRoutes.map((route) => {
+      {/* Route lines and stop dots - ONLY show in routes view */}
+      {viewMode === 'routes' && selectedRoutes.map((route) => {
         // Get stops with coordinates in order, excluding skipped stops (e.g., CAB LOAD ZONE)
         const stopsWithCoords = route.stops.filter(stop => stop.coordinates && !stop.skipGeocoding);
         
@@ -913,7 +891,14 @@ export function MapView({
               draggable={editingMode}
               eventHandlers={{
                 click: () => {
-                  selectStop(route, stop, stopNumber);
+                  const urlState = parseUrlPath(location.pathname, basePath);
+                  const stopId = stop.id.match(/stop-(\d+)/) ? stop.id.match(/stop-(\d+)/)![1] : stop.id;
+                  const formattedStopId = route.name.endsWith('-upcoming') 
+                    ? `${route.name.replace('-upcoming', '')}-${stopId}-upcoming`
+                    : `${route.name}-${stopId}`;
+                  
+                  const newState = { ...urlState, stopId: formattedStopId, focus: undefined };
+                  navigate(buildUrlPath(basePath, newState));
                 },
                 ...(editingMode ? {
                   dragend: async (e) => {
@@ -1056,7 +1041,7 @@ export function MapView({
             color: '#f44', 
             fontSize: '14px', 
             padding: '8px 20px', 
-            borderRadius: '999px',
+            borderRadius: '999px', 
             fontWeight: '700',
             textTransform: 'uppercase',
             border: '1px solid rgba(244, 67, 54, 0.3)',
@@ -1107,16 +1092,20 @@ export function MapView({
       </div>
     )}
 
-      {/* Improved Stop/School info overlay using MapInfoPanel */}
+      {/* Unified Info overlay using MapInfoPanel */}
       <MapInfoPanel 
         isOpen={isPanelOpen} 
         onClose={() => {
-          clearSelectedStop();
-          setShowSchoolInfo(false);
-          if (viewMode === 'schools') onSelectSchool?.(null);
+          const urlState = parseUrlPath(location.pathname, basePath);
+          const newState = { ...urlState, stopId: undefined, focus: undefined };
+          // If we are in schools mode, closing the panel should clear school selection
+          if (viewMode === 'schools') {
+            newState.schoolId = undefined;
+          }
+          navigate(buildUrlPath(basePath, newState));
         }}
       >
-        {selectedStop ? (
+        {isStopInfoFocused && selectedStop ? (
           <StopInfoTooltip
             route={selectedStop.route}
             stop={selectedStop.stop}
@@ -1127,7 +1116,9 @@ export function MapView({
             streetError={streetError || undefined}
             onStreetClick={handleStreetClick}
             onClose={() => {
-              clearSelectedStop();
+              const urlState = parseUrlPath(location.pathname, basePath);
+              const newState = { ...urlState, stopId: undefined, focus: undefined };
+              navigate(buildUrlPath(basePath, newState));
             }}
             enableStreetPins={enableStreetPins}
             loadingStreetPins={loadingStreetPins}
@@ -1136,21 +1127,48 @@ export function MapView({
             undoHistoryCount={undoHistory.length}
             onUndo={handleUndo}
           />
-        ) : isPanelOpen && displaySchool ? (
+        ) : isHomeInfoFocused && homeAddress ? (
+          <HomeInfoTooltip
+            address={homeAddress}
+            onClose={() => {
+              const urlState = parseUrlPath(location.pathname, basePath);
+              const newState = { ...urlState, focus: undefined };
+              navigate(buildUrlPath(basePath, newState));
+            }}
+            onClear={() => {
+              useStore.getState().clearHomeAddress();
+              const urlState = parseUrlPath(location.pathname, basePath);
+              const newState = { ...urlState, focus: undefined };
+              navigate(buildUrlPath(basePath, newState));
+            }}
+          />
+        ) : isSchoolInfoFocused && displaySchool ? (
           <SchoolInfoTooltip 
             school={displaySchool} 
-            showRoutesButton={viewMode === 'schools'}
+            showRoutesButton={true} // Always show routes button in dialog if accessible
             onClose={() => {
-              setShowSchoolInfo(false);
-              if (viewMode === 'schools') onSelectSchool?.(null);
+              const urlState = parseUrlPath(location.pathname, basePath);
+              const newState = { ...urlState, focus: undefined };
+              // On schools tab, closing the dialog should clear the school selection entirely
+              if (viewMode === 'schools') {
+                newState.schoolId = undefined;
+              }
+              navigate(buildUrlPath(basePath, newState));
             }}
             onViewRoutes={() => {
-              setShowSchoolInfo(false);
-              if (viewMode === 'schools') {
-                setSelectedSchool(displaySchool.id);
-                // Dispatch event to change tab
-                window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
-              }
+              // This is now handled by SchoolInfoTooltip using buildUrlPath internally
+              // but we can ensure it switches tab if needed.
+              // useUrlState will handle the tab switch if the URL changes to /routes.
+            }}
+          />
+        ) : (viewMode === 'schools' && !!selectedSchoolId) ? (
+          <SchoolInfoTooltip 
+            school={schools.find(s => s.id === selectedSchoolId)!} 
+            showRoutesButton={true}
+            onClose={() => {
+              const urlState = parseUrlPath(location.pathname, basePath);
+              const newState = { ...urlState, schoolId: undefined, focus: undefined };
+              navigate(buildUrlPath(basePath, newState));
             }}
           />
         ) : null}

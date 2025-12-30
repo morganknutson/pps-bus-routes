@@ -32,6 +32,7 @@ export interface Route {
 export interface HomeAddress {
   address: string;
   coordinates: [number, number];
+  neighborhood?: string; // Neighborhood name from reverse geocoding
 }
 
 export interface School {
@@ -72,6 +73,21 @@ export interface Neighborhood {
     stopAddress: string;
     coordinates: [number, number];
   }>;
+}
+
+export type MapIntentType = 
+  | 'FIT_SCHOOLS' 
+  | 'ZOOM_SCHOOL' 
+  | 'FIT_ROUTES' 
+  | 'ZOOM_STOP' 
+  | 'FIT_HOME' 
+  | 'DOUBLE_FIT' 
+  | 'MANUAL' 
+  | 'STREET_HIGHLIGHT';
+
+export interface MapIntent {
+  type: MapIntentType;
+  data?: any;
 }
 
 

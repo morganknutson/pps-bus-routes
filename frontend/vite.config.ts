@@ -9,7 +9,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:3005',
+        target: 'http://127.0.0.1:3001',
         changeOrigin: true,
         secure: false,
         ws: true, // Enable websocket proxying

@@ -51,6 +51,7 @@ const sections: Section[] = [
       { id: 'pdf-processing', title: '2. PDF Processing & Extraction' },
       { id: 'geocoding-logic', title: '3. Address Geocoding' },
       { id: 'url-state', title: '4. URL Deep Linking & State' },
+      { id: 'performance-optimization', title: '5. Performance & Loading State' },
     ],
   },
   {
@@ -875,6 +876,21 @@ export function TechPage() {
                   <ul>
                     <li><strong>useUrlState</strong> - A custom hook that listens to URL changes and updates the Zustand store automatically.</li>
                     <li><strong>Schema</strong> - The URL follows a strict hierarchy: <code>/explorer/:schoolId/routes/:direction/:routeId/stops/:stopId</code>.</li>
+                  </ul>
+                </div>
+              </SectionContent>
+            </div>
+
+            <div id="performance-optimization" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                5. Performance & Loading State
+              </h3>
+              <SectionContent>
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
+                  <ul>
+                    <li><strong>Loading Counter</strong> - The store uses a <code>loadingCount</code> to handle multiple concurrent API requests (e.g., schools and routes), ensuring the global <code>isLoading</code> state remains true until all tasks complete.</li>
+                    <li><strong>Route Stats Optimization</strong> - The <code>/api/schools</code> endpoint uses directory metadata and filename parsing to quickly count routes without expensive per-file <code>stat</code> calls.</li>
                   </ul>
                 </div>
               </SectionContent>
