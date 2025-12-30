@@ -106,6 +106,7 @@ export function MapView({
   const [streetError, setStreetError] = useState<string | null>(null);
   const [streetMarkers, setStreetMarkers] = useState<StreetMarker[]>([]);
   const [loadingStreetPins, setLoadingStreetPins] = useState<boolean>(false);
+  const [isFlying, setIsFlying] = useState<boolean>(false);
 
   // Derive info panel state from URL to avoid redundant/stale local state
   const currentUrlState = useMemo(() => parseUrlPath(location.pathname, basePath), [location.pathname, basePath]);
@@ -148,19 +149,34 @@ export function MapView({
     checkReady();
   }, [map]);
 
+  // Helper to manage flyTo animation state
+  const executeFlyTo = (callback: () => void) => {
+    setIsFlying(true);
+    callback();
+    // Fade back in after animation completes (duration is 0.6s)
+    setTimeout(() => {
+      setIsFlying(false);
+    }, 650); // Slightly longer than animation duration for smooth fade-in
+  };
+
   // Helper to zoom to a point with mobile-aware centering
   const zoomToPoint = (position: L.LatLngExpression, zoom: number = 18) => {
     if (!map) return;
     
-    if (isMobile) {
-      // Offset to account for bottom panel on mobile
-      const targetPoint = map.project(position, zoom).add([0, 100]);
-      const targetLatLng = map.unproject(targetPoint, zoom);
-      map.setView(targetLatLng, zoom, { animate: true });
-    } else {
-      // Direct center on desktop
-      map.setView(position, zoom, { animate: true });
-    }
+    // Use flyTo for snappy, fluid animation
+    const flyOptions = { duration: 0.6, easeLinearity: 0.25 };
+    
+    executeFlyTo(() => {
+      if (isMobile) {
+        // Offset to account for bottom panel on mobile
+        const targetPoint = map.project(position, zoom).add([0, 100]);
+        const targetLatLng = map.unproject(targetPoint, zoom);
+        map.flyTo(targetLatLng, zoom, flyOptions);
+      } else {
+        // Direct center on desktop
+        map.flyTo(position, zoom, flyOptions);
+      }
+    });
     
     lastAddressZoomTimeRef.current = Date.now();
   };
@@ -183,14 +199,18 @@ export function MapView({
           
           // Fit to bounds with padding (extra bottom padding on mobile for the panel)
           const padding: L.PointExpression = isMobile ? [50, 150] : [100, 100];
-          map.fitBounds(bounds, { padding, animate: true });
           
-          // After fitting, zoom out one more step as requested
-          // We use once('zoomend') to ensure the fitBounds animation finished
-          const handleZoomEnd = () => {
-            map.setZoom(map.getZoom() - 1, { animate: true });
+          // Use flyToBounds for snappy transition
+          executeFlyTo(() => {
+            map.flyToBounds(bounds, { padding, duration: 0.6 });
+          });
+          
+          // After fitting, zoom out two more steps as requested
+          // We use once('moveend') to ensure the cinematic fly finished
+          const handleMoveEnd = () => {
+            map.setZoom(map.getZoom() - 2, { animate: true });
           };
-          map.once('zoomend', handleZoomEnd);
+          map.once('moveend', handleMoveEnd);
           
           lastAddressZoomTimeRef.current = Date.now();
         }
@@ -228,7 +248,9 @@ export function MapView({
 
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
-          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+          executeFlyTo(() => {
+            map.flyToBounds(bounds, { padding: [50, 50], duration: 0.6 });
+          });
         }
         break;
       }
@@ -249,13 +271,15 @@ export function MapView({
           allCoords.push(homePos);
           if (mapIntent.data?.showInfo) {
             zoomToPoint(homePos, 18);
-            return; // Don't do fitBounds if we are zooming to home
+            return; // zoomToPoint already uses flyTo
           }
         }
 
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
-          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+          executeFlyTo(() => {
+            map.flyToBounds(bounds, { padding: [50, 50], duration: 0.6 });
+          });
         }
         break;
       }
@@ -268,7 +292,9 @@ export function MapView({
         
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
-          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+          executeFlyTo(() => {
+            map.flyToBounds(bounds, { padding: [50, 50], duration: 0.6 });
+          });
         }
         break;
       }
@@ -276,7 +302,9 @@ export function MapView({
       case 'MANUAL': {
         if (mapIntent.data) {
           const { lat, lng, zoom } = mapIntent.data;
-          map.setView([lat, lng], zoom, { animate: true });
+          executeFlyTo(() => {
+            map.flyTo([lat, lng], zoom, { duration: 0.6 });
+          });
         }
         break;
       }
@@ -287,7 +315,9 @@ export function MapView({
             [highlightedStreet.bounds.south, highlightedStreet.bounds.west],
             [highlightedStreet.bounds.north, highlightedStreet.bounds.east]
           );
-          map.fitBounds(bounds, { padding: [50, 50], animate: true });
+          executeFlyTo(() => {
+            map.flyToBounds(bounds, { padding: [50, 50], duration: 0.6 });
+          });
         }
         break;
       }
@@ -555,7 +585,9 @@ export function MapView({
             return toLeafletPosition(marker.coordinates);
           })
         );
-        map.fitBounds(bounds, { padding: [50, 50], animate: true });
+        executeFlyTo(() => {
+          map.flyToBounds(bounds, { padding: [50, 50], duration: 0.6 });
+        });
       }
     } catch (error) {
       console.error('[MapView] Error dropping street pins:', error);
@@ -838,6 +870,8 @@ export function MapView({
           });
         }
 
+        const routeOpacity = isFlying ? 0 : (routeGeometry === null ? 0.4 : 0.8);
+        
         return (
           <React.Fragment key={route.id}>
             {/* Route polyline - follows streets when available */}
@@ -846,7 +880,7 @@ export function MapView({
                 positions={routeCoordinates}
                 color={route.color}
                 weight={3}
-                opacity={routeGeometry === null ? 0.4 : 0.8}
+                opacity={routeOpacity}
               />
             )}
 
@@ -1174,10 +1208,14 @@ export function MapView({
         ) : null}
       </MapInfoPanel>
 
-      {/* Loading spinner animation */}
+      {/* Loading spinner animation and route opacity transitions */}
       <style>{`
         @keyframes spin {
           to { transform: rotate(360deg); }
+        }
+        /* Smooth opacity transitions for route polylines during flyTo animations */
+        .leaflet-container svg path.leaflet-interactive {
+          transition: opacity 0.2s ease-in-out;
         }
       `}</style>
     </div>

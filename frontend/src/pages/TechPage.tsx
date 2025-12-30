@@ -98,7 +98,7 @@ const MapPinPreview = ({ type, color = '#3b82f6', isSelected = false, isHover = 
 
   useEffect(() => {
     if (map) {
-      map.setView(L.latLng(center[0], center[1]), 15);
+      map.flyTo(L.latLng(center[0], center[1]), 15, { duration: 1 });
     }
   }, [map, isSelected]);
 
@@ -173,7 +173,7 @@ const FullRoutePreview = ({ route }: { route: Route }) => {
   useEffect(() => {
     if (map && stopsWithCoords.length > 0) {
       const bounds = L.latLngBounds(stopsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]]));
-      map.fitBounds(bounds, { padding: [20, 20] });
+      map.flyToBounds(bounds, { padding: [20, 20], duration: 1 });
     }
   }, [map, route]);
 

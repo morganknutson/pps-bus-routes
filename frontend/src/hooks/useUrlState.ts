@@ -161,6 +161,53 @@ export function useUrlState({
     const isFirstRoutesLoad = previousRoutesRef.current.length === 0 && routes.length > 0;
     previousRoutesRef.current = routes;
 
+    // 5. Sync Map Intent
+    const focusKeywords = ['school-info', 'home', 'my-stop'];
+    const isCoords = (s: string) => /^-?\d+\.?\d*,-?\d+\.?\d*,\d+$/.test(s || '');
+    
+    let intent: MapIntent | null = null;
+    
+    if (urlState.focus === 'school-info') {
+      intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId, showInfo: true } };
+    } else if (urlState.focus === 'home') {
+      intent = { type: 'FIT_HOME', data: { showInfo: true } };
+    } else if (urlState.focus === 'my-stop') {
+      intent = { type: 'DOUBLE_FIT' };
+    } else if (urlState.stopId) {
+      intent = { type: 'ZOOM_STOP', data: { stopId: urlState.stopId, showInfo: true } };
+    } else if (urlState.focus && isCoords(urlState.focus)) {
+      const parts = urlState.focus.split(',');
+      if (parts.length === 3) {
+        const [lat, lng, zoom] = parts.map(Number);
+        if (!isNaN(lat) && !isNaN(lng) && !isNaN(zoom)) {
+          intent = { type: 'MANUAL', data: { lat, lng, zoom } };
+        }
+      }
+    } else if (urlState.show === 'routes' && urlState.schoolId) {
+      if (urlState.routeNames && urlState.routeNames.length > 0) {
+        intent = { type: 'FIT_ROUTES' };
+      } else if (routes.length > 0) {
+        intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId } };
+      }
+    } else if (urlState.schoolId && urlState.show === 'schools') {
+      intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId } };
+    } else if (urlState.show === 'schools' || !urlState.schoolId) {
+      intent = { type: 'FIT_SCHOOLS' };
+    }
+
+    if (intent) {
+      const currentIntent = useStore.getState().mapIntent;
+      if (JSON.stringify(intent) !== JSON.stringify(currentIntent)) {
+        console.log('[useUrlState] Derived map intent from URL:', intent);
+        setMapIntent(intent);
+      }
+    } else {
+      const currentIntent = useStore.getState().mapIntent;
+      if (currentIntent !== null) {
+        setMapIntent(null);
+      }
+    }
+
     // If we just navigated from state, ignore this URL change
     if (isNavigatingRef.current) {
       console.log('[useUrlState] Ignoring URL change: just navigated from state');
@@ -311,53 +358,6 @@ export function useUrlState({
           console.log('[useUrlState] URL changed to schools tab, clearing route selection');
           setSelectedRoutes([]);
           clearSelectedStop();
-        }
-      }
-
-      // 5. Sync Map Intent
-      const focusKeywords = ['school-info', 'home', 'my-stop'];
-      const isCoords = (s: string) => /^-?\d+\.?\d*,-?\d+\.?\d*,\d+$/.test(s || '');
-      
-      let intent: MapIntent | null = null;
-      
-      if (urlState.focus === 'school-info') {
-        intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId, showInfo: true } };
-      } else if (urlState.focus === 'home') {
-        intent = { type: 'FIT_HOME', data: { showInfo: true } };
-      } else if (urlState.focus === 'my-stop') {
-        intent = { type: 'DOUBLE_FIT' };
-      } else if (urlState.stopId) {
-        intent = { type: 'ZOOM_STOP', data: { stopId: urlState.stopId, showInfo: true } };
-      } else if (urlState.focus && isCoords(urlState.focus)) {
-        const parts = urlState.focus.split(',');
-        if (parts.length === 3) {
-          const [lat, lng, zoom] = parts.map(Number);
-          if (!isNaN(lat) && !isNaN(lng) && !isNaN(zoom)) {
-            intent = { type: 'MANUAL', data: { lat, lng, zoom } };
-          }
-        }
-      } else if (urlState.show === 'routes' && urlState.schoolId) {
-        if (urlState.routeNames && urlState.routeNames.length > 0) {
-          intent = { type: 'FIT_ROUTES' };
-        } else if (routes.length > 0) {
-          intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId } };
-        }
-      } else if (urlState.schoolId && urlState.show === 'schools') {
-        intent = { type: 'ZOOM_SCHOOL', data: { schoolId: urlState.schoolId } };
-      } else if (urlState.show === 'schools' || !urlState.schoolId) {
-        intent = { type: 'FIT_SCHOOLS' };
-      }
-
-      if (intent) {
-        const currentIntent = useStore.getState().mapIntent;
-        if (JSON.stringify(intent) !== JSON.stringify(currentIntent)) {
-          console.log('[useUrlState] Derived map intent from URL:', intent);
-          setMapIntent(intent);
-        }
-      } else {
-        const currentIntent = useStore.getState().mapIntent;
-        if (currentIntent !== null) {
-          setMapIntent(null);
         }
       }
 

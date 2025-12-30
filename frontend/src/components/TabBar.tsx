@@ -33,9 +33,9 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
         newState.focus = undefined;
       }
     } else if (tab === 'routes') {
-      // If switching to routes, we can keep the school, but clear specific pin focus (home/my-stop)
-      // to avoid overlapping dialogs or weird zooms
-      if (urlState.focus === 'home' || urlState.focus === 'my-stop') {
+      // If switching to routes, we can keep the school, but clear specific pin focus (home/my-stop/school-info)
+      // to ensure we see the routes map instead of a specific pin dialog
+      if (urlState.focus === 'home' || urlState.focus === 'my-stop' || urlState.focus === 'school-info') {
         newState.focus = undefined;
       }
     }

@@ -6,6 +6,8 @@ vi.mock('react-leaflet', () => {
   const mockMap = {
     setView: vi.fn(),
     fitBounds: vi.fn(),
+    flyToBounds: vi.fn(),
+    flyTo: vi.fn(),
     project: vi.fn(() => ({ add: vi.fn(() => ({ lat: 0, lng: 0 })) })),
     unproject: vi.fn(() => ({ lat: 0, lng: 0 })),
     getContainer: vi.fn(() => ({})),

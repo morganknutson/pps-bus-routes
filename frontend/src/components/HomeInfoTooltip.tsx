@@ -157,4 +157,3 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
   );
 };
 
-

@@ -44,7 +44,7 @@ function FitBounds({ schools, selectedSchool }: { schools: School[]; selectedSch
 
       const timer = setTimeout(() => {
         try {
-          map.setView([lat, lng], 16, { animate: true });
+          map.flyTo([lat, lng], 16, { duration: 1.5 });
         } catch (error) {
           console.error('[FitBounds] Error setting view:', error);
         }
@@ -62,7 +62,7 @@ function FitBounds({ schools, selectedSchool }: { schools: School[]; selectedSch
             const bounds = L.latLngBounds(
               schoolsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]] as [number, number])
             );
-            map.fitBounds(bounds, { padding: [50, 50], animate: true });
+            map.flyToBounds(bounds, { padding: [50, 50], duration: 1.5 });
           } catch (error) {
             console.error('[FitBounds] Error fitting bounds:', error);
           }
