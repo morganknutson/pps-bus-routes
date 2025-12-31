@@ -43,12 +43,12 @@ export function AddressInput() {
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  const handleFindClosestStop = () => {
+  const handleFindClosestStop = async () => {
     if (!homeAddress || !routes || routes.length === 0) return;
 
     console.log(`[AddressInput] Finding closest stop for school ${selectedSchoolId} among ${routes.length} routes`);
 
-    const result = findClosestStop(homeAddress, routes);
+    const result = await findClosestStop(homeAddress, routes);
 
     if (result) {
       const { route, stop, stopNumber, distance } = result;

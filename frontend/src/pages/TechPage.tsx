@@ -982,7 +982,8 @@ export function TechPage() {
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                   <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
                   <ul>
-                    <li><strong>React Helmet</strong> - Manages dynamic meta tags for every school and route page.</li>
+                    <li><strong>React Helmet</strong> - Manages dynamic meta tags for every school and route page, including Open Graph and Twitter cards.</li>
+                    <li><strong>JSON-LD Structured Data</strong> - Implements <code>WebSite</code> and <code>Organization</code> schema to define the site name (Portland Public Schools Bus Route Map) for Google search results.</li>
                     <li><strong>Sitemap Generator</strong> - A daily script that generates <code>sitemap.xml</code> based on the latest school and route data.</li>
                   </ul>
                 </div>

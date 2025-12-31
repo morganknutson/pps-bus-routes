@@ -50,7 +50,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
               >
                 <img 
                   src="/logo.svg" 
-                  alt="PPS Bus Routes" 
+                  alt="Portland Public Schools (PPS) Bus Route Map" 
                   className="header-logo"
                   style={{ 
                     height: '13px',
@@ -72,7 +72,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
               >
                 <img 
                   src="/logo.svg" 
-                  alt="PPS Bus Routes" 
+                  alt="Portland Public Schools (PPS) Bus Route Map" 
                   className="header-logo"
                   style={{ 
                     height: '13px',

@@ -410,55 +410,20 @@ export function HomePage() {
         return;
       }
 
-      // Find candidate closest stops using straight-line distance
-      const candidates = findClosestStops(selectedAddress, routes, { limit: 5 });
+      // Find closest stop using refined walking distance logic
+      const closestStop = await findClosestStop(selectedAddress, routes);
 
-      if (candidates.length === 0) {
+      if (!closestStop) {
         setError('No stops with coordinates found for this school');
         setIsFinding(false);
         return;
-      }
-
-      let closestStop = candidates[0];
-
-      // If we have multiple close candidates, use walking distance to pick the best one
-      // Only do this if we have multiple candidates and the difference between the top 2 is small (< 500m)
-      if (candidates.length > 1 && (candidates[1].distance - candidates[0].distance) < 0.5) {
-        try {
-          console.log('[HomePage] Multiple close stops found, calculating walking distances...');
-          const stopCoords = candidates.map(c => [c.stop.coordinates![1], c.stop.coordinates![0]] as [number, number]);
-          const homeCoords = [selectedAddress.coordinates![1], selectedAddress.coordinates![0]] as [number, number];
-          
-          const walkingResults = await calculateWalkingDistances(homeCoords, stopCoords);
-          
-          if (walkingResults.results && walkingResults.results.length > 0) {
-            let minWalkingDistance = Infinity;
-            let bestIndex = 0;
-            
-            walkingResults.results.forEach((res: any, idx: number) => {
-              if (res.success && res.distance < minWalkingDistance) {
-                minWalkingDistance = res.distance;
-                bestIndex = idx;
-              }
-            });
-            
-            closestStop = candidates[bestIndex];
-            console.log('[HomePage] Best stop by walking distance:', {
-              route: closestStop.route.name,
-              stop: closestStop.stop.address,
-              walkingDistance: minWalkingDistance + 'm'
-            });
-          }
-        } catch (walkError) {
-          console.warn('[HomePage] Failed to calculate walking distances, falling back to straight-line:', walkError);
-          // Fall back to candidates[0] which is already set
-        }
       }
 
       console.log('[HomePage] Found closest stop:', {
         route: closestStop.route.name,
         stop: closestStop.stop.address,
         distance: formatDistance(closestStop.distance, true),
+        walkingDistance: closestStop.walkingDistance ? `${closestStop.walkingDistance}m` : 'N/A'
       });
 
       // Update store
@@ -516,8 +481,8 @@ export function HomePage() {
       flexDirection: 'column',
     }}>
       <SEO 
-        title="Find Your Stop" 
-        description="Find your closest Portland Public Schools bus stop. Enter your address and school to see your bus route and stop location."
+        title="" 
+        description="Interactive bus route maps for Portland Public Schools. Find your school, view routes, and locate bus stops."
         faqItems={faqItems}
       />
 

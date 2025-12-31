@@ -47,10 +47,10 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     return formatStreetName(streetPart);
   };
 
-  const handleFindClosestStop = () => {
+  const handleFindClosestStop = async () => {
     if (!lookupAddress || !routes || routes.length === 0) return;
 
-    const result = findClosestStop(lookupAddress, routes);
+    const result = await findClosestStop(lookupAddress, routes);
 
     if (result) {
       const { route, stop, stopNumber, distance } = result;

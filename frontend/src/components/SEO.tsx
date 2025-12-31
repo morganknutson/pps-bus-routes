@@ -38,7 +38,7 @@ export const SEO: React.FC<SEOProps> = ({
   const isDarkMode = useStore(state => state.isDarkMode);
   const themeColor = isDarkMode ? '#3A3A3A' : '#ffffff';
   
-  const siteTitle = 'PPS Bus Routes';
+  const siteTitle = 'Portland Public Schools (PPS) Bus Route Map';
   const url = window.location.href;
   const origin = window.location.origin;
 
@@ -73,7 +73,7 @@ export const SEO: React.FC<SEOProps> = ({
     if (manualTitle) {
       fullTitle = `${manualTitle} | ${siteTitle}`;
     } else {
-      fullTitle = `${siteTitle} | Portland Public Schools`;
+      fullTitle = siteTitle;
     }
   }
 
@@ -97,17 +97,26 @@ export const SEO: React.FC<SEOProps> = ({
   // Generate JSON-LD Structured Data
   const structuredData = [];
 
-  // 1. Organization Schema (Base)
+  // 1. WebSite Schema (Crucial for Google Site Name)
+  structuredData.push({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Portland Public Schools (PPS) Bus Route Map",
+    "alternateName": ["PPS Bus Maps", "PPS Bus Routes"],
+    "url": "https://ppsbus.com"
+  });
+
+  // 2. Organization Schema (Base)
   structuredData.push({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Portland Public Schools Bus Maps",
-    "url": "https://pps-bus-maps.vercel.app",
-    "logo": "https://pps-bus-maps.vercel.app/school-bus-front.svg",
+    "url": "https://ppsbus.com",
+    "logo": "https://ppsbus.com/school-bus-front.svg",
     "description": "Providing bus route and stop information for PPS students and families."
   });
 
-  // 2. School Specific Schema
+  // 3. School Specific Schema
   if (school) {
     const schoolSchema: any = {
       "@context": "https://schema.org",
@@ -165,6 +174,7 @@ export const SEO: React.FC<SEOProps> = ({
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={url} />
+      <meta property="og:site_name" content="Portland Public Schools (PPS) Bus Route Map" />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={absoluteOgImage} />
