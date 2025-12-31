@@ -2,472 +2,550 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Static Pages -->
   <url>
-    <loc>https://pps-bus-maps.vercel.app/</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/schools</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/schools</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/neighborhood-directory</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/neighborhood-directory</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/explore</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/explore</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/neighborhoods</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/neighborhoods</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/tech</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/tech</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- School Pages (Dynamic) -->
   <url>
-    <loc>https://pps-bus-maps.vercel.app/abernethy</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/abernethy</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/access</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/access</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/ainsworth</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/ainsworth</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/alameda</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/alameda</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/arleta</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/alliance-high-school</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/astor</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/arleta</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/atkinson</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/astor</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/beach</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/atkinson</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/beaumont</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/beach</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/benson</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/beaumont</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/beverly-cleary</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/benson</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/boise-eliot</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/beverly-cleary</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bridger</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/boise-eliot</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/bridlemile</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/bridger</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/buckman</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/bridlemile</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/capitol</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/buckman</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/cesar-chavez</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/capitol</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/chapman</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/cesar-chavez</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/chief-joseph</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/chapman</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/clark</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/chief-joseph</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/creston</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/clark</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/davinci</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/cleveland-high-school</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/duniway</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/creative-science-school</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/faubion</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/creston</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/forest-park</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/darnell-wright-heights</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/franklin</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/davinci</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/george</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/dr-martin-luther-king</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/glencoe</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/duniway</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/gray</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/faubion</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/grout</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/forest-park</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/harrison-park</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/franklin</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/hayhurst</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/george</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/hosford</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/glencoe</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/irvington</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/grant-high-school</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/jackson</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/gray</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/james-john</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/grout</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/kelly</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/harrison-park</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/kellogg</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/hayhurst</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/lane</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/hosford</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/lee</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/ida-b-wells-barnett-high-school</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/lent</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/irvington</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/leodis-v-mcdaniel</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/jackson</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/lewis</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/james-john</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/lincoln</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/jefferson-high-school</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/llewellyn</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/kellogg</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/dr-martin-luther-king</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/kelly</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/maplewood</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/lane</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/markham</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/lee</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/marysville</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/lent</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/mt-tabor</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/leodis-v-mcdaniel</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/ockley-green</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/lewis</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/peninsula</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/lincoln</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/richmond</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/llewellyn</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/rieke</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/maplewood</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/rigler</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/markham</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/rosa-parks</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/marysville</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/rose-city-park</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/metropolitan-learning-center</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/roseway-heights</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/mt-tabor</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/sabin</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/ockley-green</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/scott</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/odyssey-program</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/sellwood</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/peninsula</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/sitton</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/pioneer-program</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/skyline</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/richmond</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/stephenson</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/rieke</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/tubman</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/rigler</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/vernon</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/roosevelt-high-school</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/vestal</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/rosa-parks</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/west-sylvan</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/rose-city-park</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/whitman</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/roseway-heights</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/woodlawn</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/sabin</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/woodmere</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/scott</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pps-bus-maps.vercel.app/woodstock</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://ppsbus.com/sellwood</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/sitton</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/skyline</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/stephenson</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/sunnyside-environmental-school</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/tubman</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/vernon</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/vestal</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/west-sylvan</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/whitman</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/winterhaven-school</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/woodlawn</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/woodmere</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ppsbus.com/woodstock</loc>
+    <lastmod>2025-12-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

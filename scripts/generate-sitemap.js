@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BASE_URL = 'https://pps-bus-maps.vercel.app'; // Replace with actual production URL
+const BASE_URL = 'https://ppsbus.com'; // Replace with actual production URL
 const SCHOOLS_DATA_PATH = path.join(__dirname, '../data/schools.json');
 const SITEMAP_PATH = path.join(__dirname, '../frontend/public/sitemap.xml');
 

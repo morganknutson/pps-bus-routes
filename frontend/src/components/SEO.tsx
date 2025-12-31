@@ -178,9 +178,12 @@ export const SEO: React.FC<SEOProps> = ({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={absoluteOgImage} />
+      <meta property="og:image:secure_url" content={absoluteOgImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:alt" content="Portland Public Schools Bus Map Preview" />
+      <meta itemProp="image" content={absoluteOgImage} />
 
       {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />

@@ -3,5 +3,5 @@ Allow: /
 Allow: /explore
 
 # Sitemaps
-Sitemap: https://pps-bus-maps.vercel.app/sitemap.xml
+Sitemap: https://ppsbus.com/sitemap.xml
 
