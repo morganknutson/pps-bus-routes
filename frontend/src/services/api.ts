@@ -122,6 +122,20 @@ export async function reverseGeocode(lat: number, lng: number) {
   return response.json();
 }
 
+export async function calculateWalkingDistances(home: [number, number], stops: [number, number][]) {
+  const response = await fetch(`${API_BASE}/routes/calculate-walking`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ home, stops }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to calculate walking distances');
+  }
+  return response.json();
+}
+
 // Neighborhood API methods
 export async function getNeighborhoodFromCoordinates(coordinates: [number, number]) {
   const response = await fetch(`${API_BASE}/neighborhoods/from-coordinates`, {

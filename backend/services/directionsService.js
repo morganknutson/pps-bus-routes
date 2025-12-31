@@ -205,8 +205,10 @@ class DirectionsService {
   /**
    * Get route using Google Directions API
    * Supports up to 25 waypoints per request
+   * @param {Array<[number, number]>} waypoints Array of [lat, lng] coordinates
+   * @param {'driving'|'walking'|'bicycling'|'transit'} [mode='driving'] Travel mode
    */
-  async getRouteWithGoogle(waypoints) {
+  async getRouteWithGoogle(waypoints, mode = 'driving') {
     const startTime = Date.now();
     this.stats.googleRequests++;
     this.stats.totalWaypoints += waypoints.length;
@@ -226,7 +228,7 @@ class DirectionsService {
     // If we have more, we need to batch the requests
     if (waypoints.length > 25) {
       console.log(`[DirectionsService] 📦 Batching ${waypoints.length} waypoints (max 25 per request)`);
-      return await this.getRouteBatched(waypoints);
+      return await this.getRouteBatched(waypoints, mode);
     }
 
     const origin = `${waypoints[0][0]},${waypoints[0][1]}`;
@@ -237,7 +239,7 @@ class DirectionsService {
       .map(wp => `${wp[0]},${wp[1]}`)
       .join('|');
 
-    let url = `${GOOGLE_DIRECTIONS_URL}?origin=${origin}&destination=${destination}`;
+    let url = `${GOOGLE_DIRECTIONS_URL}?origin=${origin}&destination=${destination}&mode=${mode}`;
     if (intermediateWaypoints) {
       url += `&waypoints=${intermediateWaypoints}`;
     }
@@ -306,7 +308,7 @@ class DirectionsService {
   /**
    * Batch route requests for more than 25 waypoints
    */
-  async getRouteBatched(waypoints) {
+  async getRouteBatched(waypoints, mode = 'driving') {
     const allCoordinates = [];
     const batchCount = Math.ceil((waypoints.length - 1) / 24);
     console.log(`[DirectionsService] 📦 Processing ${waypoints.length} waypoints in ${batchCount} batches`);
@@ -317,7 +319,7 @@ class DirectionsService {
       const batchNum = Math.floor(i / 24) + 1;
       console.log(`[DirectionsService] 📦 Batch ${batchNum}/${batchCount}: waypoints ${i} to ${Math.min(i + 24, waypoints.length - 1)}`);
       
-      const result = await this.getRouteWithGoogle(batch);
+      const result = await this.getRouteWithGoogle(batch, mode);
       
       if (result.success) {
         if (i === 0) {
@@ -351,16 +353,17 @@ class DirectionsService {
    * Get route through waypoints
    * Uses Google Directions API
    * @param waypoints Array of [lat, lng] coordinates
+   * @param {'driving'|'walking'|'bicycling'|'transit'} [mode='driving'] Travel mode
    * @returns Promise with route coordinates [lat, lng][]
    */
-  async getRoute(waypoints) {
+  async getRoute(waypoints, mode = 'driving') {
     const validation = this.validateWaypoints(waypoints);
     if (!validation.valid) {
       throw new Error(validation.error);
     }
 
     if (this.useGoogle) {
-      return await this.getRouteWithGoogle(waypoints);
+      return await this.getRouteWithGoogle(waypoints, mode);
     } else {
       return {
         success: false,

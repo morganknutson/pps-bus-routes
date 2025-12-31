@@ -96,8 +96,10 @@ class AutocompleteService {
 
   /**
    * Get place details from Google Place ID
+   * @param {string} placeId Google Place ID
+   * @param {boolean} shouldSnap Whether to snap coordinates to nearest street (default: false)
    */
-  async getPlaceDetails(placeId) {
+  async getPlaceDetails(placeId, shouldSnap = false) {
     if (!this.apiKey) {
       return null;
     }
@@ -128,7 +130,7 @@ class AutocompleteService {
                        data.types?.includes('street_address') ||
                        data.types?.includes('premise');
         
-        if (isHouse) {
+        if (isHouse && shouldSnap) {
           console.log(`[AutocompleteService] Snapping house address to street: ${data.formattedAddress}`);
           finalCoordinates = await geocodingService.snapHouseAddressToStreet(coordinates);
         }

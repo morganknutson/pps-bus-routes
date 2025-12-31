@@ -13,6 +13,10 @@ vi.mock('react-leaflet', () => {
     getContainer: vi.fn(() => ({})),
     whenReady: vi.fn((cb: any) => cb()),
     invalidateSize: vi.fn(),
+    eachLayer: vi.fn((cb: any) => {
+      // In tests, we don't typically have layers to iterate over,
+      // but we need the function to exist.
+    }),
   };
 
   return {
@@ -37,28 +41,48 @@ vi.mock('react-leaflet', () => {
   };
 });
 
-vi.mock('leaflet', () => ({
-  default: {
-    Icon: {
-      Default: {
-        prototype: {
-          _getIconUrl: vi.fn(),
+vi.mock('leaflet', () => {
+  const Polyline = class {
+    options = { color: '#000' };
+    setStyle = vi.fn();
+    getElement = vi.fn(() => ({ 
+      style: { transition: '' }, 
+      setAttribute: vi.fn() 
+    }));
+  };
+
+  return {
+    default: {
+      Icon: {
+        Default: {
+          prototype: {
+            _getIconUrl: vi.fn(),
+          },
         },
       },
+      latLngBounds: vi.fn(() => ({
+        extend: vi.fn(),
+        getCenter: vi.fn(),
+        contains: vi.fn(() => true),
+      })),
+      Marker: {
+        prototype: {
+          options: {
+            icon: {},
+          },
+        },
+      },
+      divIcon: vi.fn(() => ({})),
+      latLng: vi.fn((lat, lng) => ({ lat, lng })),
+      Polyline: Polyline,
     },
+    Polyline: Polyline,
+    latLng: vi.fn((lat, lng) => ({ lat, lng })),
     latLngBounds: vi.fn(() => ({
       extend: vi.fn(),
       getCenter: vi.fn(),
+      contains: vi.fn(() => true),
     })),
-    Marker: {
-      prototype: {
-        options: {
-          icon: {},
-        },
-      },
-    },
-    divIcon: vi.fn(() => ({})),
-    latLng: vi.fn((lat, lng) => ({ lat, lng })),
-  },
-}));
+  };
+});
 

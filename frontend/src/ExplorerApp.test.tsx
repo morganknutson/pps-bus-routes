@@ -50,31 +50,34 @@ const mockRoutes: Route[] = [
 // Mock fetch
 globalThis.fetch = vi.fn((url: string | URL | Request) => {
   const urlString = url.toString();
-  if (urlString.includes('/api/schools')) {
-    return Promise.resolve({
-      ok: true,
-      json: () => Promise.resolve({ schools: mockSchools }),
-      headers: new Headers(),
-      redirected: false,
-      status: 200,
-      statusText: 'OK',
-      type: 'basic',
-      url: urlString,
-      clone: () => ({} as Response),
-      body: null,
-      bodyUsed: false,
-      arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
-      blob: () => Promise.resolve(new Blob()),
-      formData: () => Promise.resolve(new FormData()),
-      text: () => Promise.resolve(JSON.stringify({ schools: mockSchools })),
-    } as Response);
-  }
-  return Promise.resolve({
-    ok: false,
-    status: 404,
-    statusText: 'Not Found',
-    json: () => Promise.resolve({}),
+  
+  const createResponse = (ok: boolean, status: number, data: any) => ({
+    ok,
+    status,
+    statusText: ok ? 'OK' : 'Not Found',
+    json: () => Promise.resolve(data),
+    text: () => Promise.resolve(JSON.stringify(data)),
+    headers: new Headers(),
+    redirected: false,
+    type: 'basic',
+    url: urlString,
+    clone: () => ({} as Response),
+    body: null,
+    bodyUsed: false,
+    arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+    blob: () => Promise.resolve(new Blob()),
+    formData: () => Promise.resolve(new FormData()),
   } as Response);
+
+  if (urlString.includes('/api/schools')) {
+    return Promise.resolve(createResponse(true, 200, { schools: mockSchools }));
+  }
+  
+  if (urlString.includes('/api/routes/calculate')) {
+    return Promise.resolve(createResponse(true, 200, { coordinates: [[45.5, -122.6], [45.51, -122.61]] }));
+  }
+
+  return Promise.resolve(createResponse(false, 404, {}));
 }) as unknown as typeof fetch;
 
 // Mock localRoutes service

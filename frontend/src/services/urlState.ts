@@ -34,7 +34,7 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
   // List of keywords that should NOT be treated as school IDs
   const reservedKeywords = ['schools', 'schools-directory', 'routes', 'morning', 'afternoon', 'both', 'explore', 'map', 'neighborhoods'];
   const focusKeywords = ['school-info', 'home', 'my-stop'];
-  const isCoords = (s: string) => /^-?\d+\.?\d*,-?\d+\.?\d*,\d+$/.test(s);
+  const isCoords = (s: string) => /^-?\d+\.\d+,-?\d+\.\d+,\d+$/.test(s);
 
   let currentIdx = 0;
 

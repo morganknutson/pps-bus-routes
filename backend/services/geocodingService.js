@@ -257,6 +257,17 @@ class GeocodingService {
     // Use Google Maps API only - no fallback
     const result = await this.geocodeWithGoogle(address, city, state);
     
+    // If it's a house address, snap it to the street for better "closest stop" calculations
+    if (result.success && result.coordinates && !address.includes('&') && !address.includes(' AND ')) {
+      if (this.isHouseAddress(result)) {
+        console.log(`[GeocodingService] Snapping house address to street: ${address}`);
+        const snappedCoordinates = await this.snapHouseAddressToStreet(result.coordinates);
+        if (snappedCoordinates) {
+          result.coordinates = snappedCoordinates;
+        }
+      }
+    }
+    
     // Validate coordinates are within Portland bounds
     if (result.success && result.coordinates) {
       if (!this.isWithinPortlandBounds(result.coordinates)) {
@@ -681,6 +692,9 @@ class GeocodingService {
 
 // Export singleton instance
 export const geocodingService = new GeocodingService();
+
+// Register with streetGeometryService to break circularity
+streetGeometryService.setGeocodingService(geocodingService);
 
 // Also export class for testing or custom instances
 export { GeocodingService };

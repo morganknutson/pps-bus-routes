@@ -41,6 +41,7 @@ const sections: Section[] = [
       { id: 'stop-pins', title: '2. Stop Pins & Numbering' },
       { id: 'route-lines', title: '3. Route Polylines (Street Geometry)' },
       { id: 'info-dialogs', title: '4. Tooltips & Info Panels' },
+      { id: 'advanced-map-interactions', title: '5. Advanced Interactions (Undo & Pins)' },
     ],
   },
   {
@@ -66,12 +67,13 @@ const sections: Section[] = [
   },
   {
     id: 'engineering-ops',
-    title: 'Deployment & Maintenance',
+    title: 'Operations & Reliability',
     subsections: [
-      { id: 'deployment', title: '1. Deployment Pipeline' },
-      { id: 'testing', title: '2. Testing Infrastructure' },
-      { id: 'file-structure', title: '3. Project Organization' },
-      { id: 'maintenance', title: '4. Maintenance & Jobs' },
+      { id: 'autocomplete-geocoding', title: '1. Autocomplete & Geocoding' },
+      { id: 'deployment', title: '2. Deployment Pipeline' },
+      { id: 'testing', title: '3. Testing Infrastructure' },
+      { id: 'file-structure', title: '4. Project Organization' },
+      { id: 'maintenance', title: '5. Maintenance & Jobs' },
     ],
   },
   {
@@ -808,6 +810,26 @@ export function TechPage() {
                 </div>
               </SectionContent>
             </div>
+
+            <div id="advanced-map-interactions" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                5. Advanced Interactions (Undo & Pins)
+              </h3>
+              <SectionContent>
+                <p>
+                  Specialized interactions for improved UX and administrative data correction.
+                </p>
+
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>Key Features:</strong>
+                  <ul>
+                    <li><strong>Undo History</strong> - When editing stop coordinates (admin mode), the app maintains a local undo history (5 steps) for immediate correction.</li>
+                    <li><strong>Street Pins (Drop Pins)</strong> - Admins can drop pins at street intersections to verify geocoding accuracy and street connectivity.</li>
+                    <li><strong>Kinetic FlyTo</strong> - Uses <code>flyTo</code> animations with opacity transitions for routes, creating a fluid "flying" effect when changing perspectives.</li>
+                  </ul>
+                </div>
+              </SectionContent>
+            </div>
           </section>
 
           <section id="data-pipeline" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
@@ -978,9 +1000,28 @@ export function TechPage() {
               </p>
             </SectionContent>
 
+            <div id="autocomplete-geocoding" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                1. Autocomplete & Geocoding
+              </h3>
+              <SectionContent>
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>Architecture & Performance:</strong>
+                  <ul>
+                    <li><strong>Google Places V1</strong> - Uses the latest Google Places API for high-quality address suggestions with low latency.</li>
+                    <li><strong>Parallel Place Details</strong> - Fetches coordinates for all suggestions in parallel to provide instant visual feedback on the map.</li>
+                    <li><strong>Performance Optimization</strong> - Address snapping (moving house pins to the street) is deferred until a selection is made, keeping autocomplete extremely responsive.</li>
+                    <li><strong>Walking Distance Logic</strong> - When multiple bus stops are geographically close, the system calculates actual walking paths to ensure the truly "closest" stop is identified, even in hilly or cul-de-sac areas.</li>
+                    <li><strong>Decoupled Services</strong> - Uses a lazy-loading dependency pattern between <code>GeocodingService</code> and <code>StreetGeometryService</code> to ensure high reliability and zero-deadlock initialization.</li>
+                    <li><strong>Nominatim Fallback</strong> - Automatically falls back to OpenStreetMap (Nominatim) if Google API quotas are exceeded or the service is unavailable.</li>
+                  </ul>
+                </div>
+              </SectionContent>
+            </div>
+
             <div id="deployment" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                1. Deployment Pipeline
+                2. Deployment Pipeline
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -995,7 +1036,7 @@ export function TechPage() {
 
             <div id="testing" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                2. Testing Infrastructure
+                3. Testing Infrastructure
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -1011,7 +1052,7 @@ export function TechPage() {
 
             <div id="file-structure" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                3. Project Organization
+                4. Project Organization
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -1027,7 +1068,7 @@ export function TechPage() {
 
             <div id="maintenance" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                4. Maintenance & Jobs
+                5. Maintenance & Jobs
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>

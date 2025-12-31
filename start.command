@@ -15,7 +15,7 @@ fi
 echo "🚀 Starting PPS Bus Maps..."
 echo ""
 echo "✅ Open your browser to:"
-echo "   👉 http://localhost:5173  (Frontend - USE THIS!)"
+echo "   👉 http://localhost:3000  (Frontend - USE THIS!)"
 echo ""
 echo "   Backend API: http://localhost:3001 (API only, not a webpage)"
 echo ""

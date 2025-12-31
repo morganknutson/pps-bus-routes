@@ -51,6 +51,7 @@ export function useUrlState({
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastUrlStateRef = useRef<UrlState>({});
   const previousRoutesRef = useRef<Route[]>([]);
+  const previousSelectedRouteIdsRef = useRef<string[]>([]);
   const isNavigatingRef = useRef(false);
   const hasSyncedFromUrlRef = useRef(false);
 
@@ -99,33 +100,64 @@ export function useUrlState({
             .map(r => r.name)
             .filter((name): name is string => !!name);
           
+          // Check if route selection changed from what's in the current URL
+          // This check is used both for stopId and focus preservation
+          const currentUrlState = parseUrlPath(window.location.pathname, basePath);
+          const urlRouteNames = currentUrlState.routeNames || [];
+          const routeSelectionChanged = JSON.stringify(urlRouteNames.sort()) !== JSON.stringify(selectedRouteNames.sort());
+          
           if (selectedRouteNames.length > 0) {
             urlState.routeNames = selectedRouteNames;
             
-            if (currentSelectedStop) {
+            // Only preserve stopId if:
+            // 1. There's a selected stop
+            // 2. Route selection hasn't changed (user isn't browsing/toggling routes)
+            // 3. The selected stop's route is still in the selected routes
+            if (currentSelectedStop && !routeSelectionChanged) {
               const routeName = currentSelectedStop.route.name;
-              const stopId = currentSelectedStop.stop.id;
-              const stopMatch = stopId.match(/stop-(\d+)/);
-              const stopNumber = stopMatch ? stopMatch[1] : stopId;
+              const stopRouteIsSelected = selectedRouteNames.includes(routeName);
               
-              if (routeName.endsWith('-upcoming')) {
-                const baseName = routeName.replace('-upcoming', '');
-                urlState.stopId = `${baseName}-${stopNumber}-upcoming`;
-              } else {
-                urlState.stopId = `${routeName}-${stopNumber}`;
+              if (stopRouteIsSelected) {
+                const stopId = currentSelectedStop.stop.id;
+                const stopMatch = stopId.match(/stop-(\d+)/);
+                const stopNumber = stopMatch ? stopMatch[1] : stopId;
+                
+                if (routeName.endsWith('-upcoming')) {
+                  const baseName = routeName.replace('-upcoming', '');
+                  urlState.stopId = `${baseName}-${stopNumber}-upcoming`;
+                } else {
+                  urlState.stopId = `${routeName}-${stopNumber}`;
+                }
               }
+              // If the stop's route is no longer selected, don't include stopId
             }
+            // If route selection changed, don't include stopId even if there's a selected stop
           }
         }
       }
 
       // Handle focus/intent in URL
       if (currentMapIntent) {
+        // Reuse route selection change check if we're on routes tab
+        let routeSelectionChanged = false;
+        if (currentActiveTab === 'routes') {
+          const currentUrlState = parseUrlPath(window.location.pathname, basePath);
+          const urlRouteNames = currentUrlState.routeNames || [];
+          const currentRouteNames = currentRoutes
+            .filter(r => r.isSelected && (currentDirectionFilter === 'Both' || r.direction === currentDirectionFilter))
+            .map(r => r.name)
+            .sort();
+          routeSelectionChanged = JSON.stringify(urlRouteNames.sort()) !== JSON.stringify(currentRouteNames);
+        }
+        
         if (currentMapIntent.type === 'ZOOM_SCHOOL' && currentMapIntent.data?.showInfo) {
           urlState.focus = 'school-info';
         } else if (currentMapIntent.type === 'FIT_HOME') {
           urlState.focus = 'home';
-        } else if (currentMapIntent.type === 'DOUBLE_FIT') {
+        } else if (currentMapIntent.type === 'DOUBLE_FIT' && currentSelectedStop && !routeSelectionChanged) {
+          // Only preserve 'my-stop' focus if:
+          // 1. There's actually a selected stop
+          // 2. Route selection hasn't changed (user isn't browsing/toggling routes)
           urlState.focus = 'my-stop';
         } else if (currentMapIntent.type === 'MANUAL' && currentMapIntent.data) {
           urlState.focus = `${currentMapIntent.data.lat},${currentMapIntent.data.lng},${currentMapIntent.data.zoom}`;
@@ -378,6 +410,32 @@ export function useUrlState({
 
   // Update URL when state changes
   useEffect(() => {
+    // Check if route selection changed (user toggled routes)
+    const currentSelectedRouteIds = routes.filter(r => r.isSelected).map(r => r.id).sort();
+    const previousSelectedRouteIds = previousSelectedRouteIdsRef.current;
+    const routeSelectionChanged = JSON.stringify(currentSelectedRouteIds) !== JSON.stringify(previousSelectedRouteIds);
+    
+    // Clear DOUBLE_FIT mapIntent when route selection changes (user is browsing, not in "Find My Stop" mode)
+    // This prevents 'my-stop' focus from persisting when routes are toggled
+    // Only do this if we're not in the middle of syncing from URL (to avoid clearing during URL sync)
+    if (routeSelectionChanged && hasSyncedFromUrlRef.current && !isNavigatingRef.current) {
+      const currentMapIntent = useStore.getState().mapIntent;
+      if (currentMapIntent?.type === 'DOUBLE_FIT') {
+        console.log('[useUrlState] Clearing DOUBLE_FIT mapIntent: route selection changed (user action)');
+        setMapIntent(null);
+      }
+    }
+    
+    // Update the previous route IDs after checking
+    previousSelectedRouteIdsRef.current = currentSelectedRouteIds;
+    
+    // Also clear if no selected stop (regardless of route selection change)
+    const currentMapIntent = useStore.getState().mapIntent;
+    if (currentMapIntent?.type === 'DOUBLE_FIT' && !selectedStop && hasSyncedFromUrlRef.current) {
+      console.log('[useUrlState] Clearing DOUBLE_FIT mapIntent: no selected stop');
+      setMapIntent(null);
+    }
+    
     // We always want the URL to reflect the latest state.
     // If it's a structural change (school or tab), we do it immediately.
     // Otherwise (routes/stops), we debounce to avoid spamming the history.
@@ -395,7 +453,7 @@ export function useUrlState({
     return () => {
       cancelPendingUrlUpdate();
     };
-  }, [updateUrlFromState, cancelPendingUrlUpdate, selectedSchoolId, activeTab, routes, selectedStop, directionFilter, basePath, mapIntent]);
+  }, [updateUrlFromState, cancelPendingUrlUpdate, selectedSchoolId, activeTab, routes, selectedStop, directionFilter, basePath, mapIntent, setMapIntent]);
 
   const markRouteToggle = useCallback(() => {
     // This is called when a route is toggled in the UI.

@@ -167,5 +167,53 @@ router.post('/calculate', async (req, res) => {
   }
 });
 
+/**
+ * Calculate walking distances for multiple candidate stops
+ * POST /api/routes/calculate-walking
+ * Body: { home: [lat, lng], stops: [[lat, lng], ...] }
+ */
+router.post('/calculate-walking', async (req, res) => {
+  const startTime = Date.now();
+  
+  try {
+    const { home, stops } = req.body;
+
+    if (!Array.isArray(home) || home.length !== 2 || !Array.isArray(stops) || stops.length === 0) {
+      return res.status(400).json({ error: 'Valid home [lat, lng] and stops array are required' });
+    }
+
+    console.log(`[Routes] 🚶 Calculating walking distances for ${stops.length} candidates`);
+    
+    // We'll use the Matrix API if we had it, but since we have DirectionsService,
+    // we'll just call it for each stop. We limit to top 5 for performance.
+    const candidates = stops.slice(0, 5);
+    const results = await Promise.all(candidates.map(async (stop, index) => {
+      try {
+        const result = await directionsService.getRoute([home, stop], 'walking');
+        if (result.success) {
+          return {
+            index,
+            distance: result.distance, // meters
+            duration: result.duration, // seconds
+            success: true
+          };
+        }
+        return { index, success: false, error: result.error };
+      } catch (error) {
+        return { index, success: false, error: error.message };
+      }
+    }));
+
+    const responseTime = Date.now() - startTime;
+    res.json({
+      results,
+      responseTime
+    });
+  } catch (error) {
+    console.error('[Routes] Error in calculate-walking:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export { router as routesRouter };
 

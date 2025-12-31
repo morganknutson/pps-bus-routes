@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { analyticsService } from '../services/analytics';
-import { autocompleteAddress, geocodeAddress } from '../services/api';
+import { autocompleteAddress, geocodeAddress, calculateWalkingDistances } from '../services/api';
 import { loadLocalRoutes } from '../services/localRoutes';
-import { findClosestStop } from '../utils/findClosestStop';
+import { findClosestStop, findClosestStops, ClosestStopResult } from '../utils/findClosestStop';
 import { formatDistance, calculateDistance } from '../utils/distance';
 import { buildUrlPath, UrlState } from '../services/urlState';
 import { School, HomeAddress } from '../types';
@@ -35,6 +35,7 @@ export function HomePage() {
   const schools = useStore(state => state.schools);
   const setSchools = useStore(state => state.setSchools);
   const selectStop = useStore(state => state.selectStop);
+  const setDirectionFilter = useStore(state => state.setDirectionFilter);
 
   // Address state
   const [addressQuery, setAddressQuery] = useState('');
@@ -258,31 +259,42 @@ export function HomePage() {
 
   const handleSelectAddress = async (suggestion: AutocompleteSuggestion) => {
     analyticsService.trackAddressSearch('homepage', suggestion.address);
-    if (!suggestion.coordinates) {
-      try {
-        setAddressLoading(true);
-        const geocodeResult = await geocodeAddress(suggestion.address);
-        if (geocodeResult.coordinates) {
-          const address: HomeAddress = {
-            address: suggestion.address,
-            coordinates: geocodeResult.coordinates,
-          };
-          setSelectedAddress(address);
-        } else {
-          setError('Failed to geocode selected address');
-        }
-      } catch (error) {
-        console.error('[HomePage] Geocoding error:', error);
-        setError('Failed to geocode address');
-      } finally {
-        setAddressLoading(false);
+    
+    // Always perform a fresh geocode on selection to get high-quality snapped coordinates
+    // and ensure the best results for finding the closest stop.
+    try {
+      setAddressLoading(true);
+      const geocodeResult = await geocodeAddress(suggestion.address);
+      
+      if (geocodeResult.coordinates) {
+        const address: HomeAddress = {
+          address: suggestion.displayName || suggestion.address,
+          coordinates: geocodeResult.coordinates,
+        };
+        setSelectedAddress(address);
+      } else if (suggestion.coordinates) {
+        // Fallback to suggestion coordinates if geocode fails
+        const address: HomeAddress = {
+          address: suggestion.address,
+          coordinates: suggestion.coordinates,
+        };
+        setSelectedAddress(address);
+      } else {
+        setError('Failed to geocode selected address');
       }
-    } else {
-      const address: HomeAddress = {
-        address: suggestion.address,
-        coordinates: suggestion.coordinates,
-      };
-      setSelectedAddress(address);
+    } catch (error) {
+      console.error('[HomePage] Geocoding error:', error);
+      if (suggestion.coordinates) {
+        const address: HomeAddress = {
+          address: suggestion.address,
+          coordinates: suggestion.coordinates,
+        };
+        setSelectedAddress(address);
+      } else {
+        setError('Failed to geocode address');
+      }
+    } finally {
+      setAddressLoading(false);
     }
     
     setAddressQuery('');
@@ -398,13 +410,49 @@ export function HomePage() {
         return;
       }
 
-      // Find the closest stop
-      const closestStop = findClosestStop(selectedAddress, routes);
+      // Find candidate closest stops using straight-line distance
+      const candidates = findClosestStops(selectedAddress, routes, { limit: 5 });
 
-      if (!closestStop) {
+      if (candidates.length === 0) {
         setError('No stops with coordinates found for this school');
         setIsFinding(false);
         return;
+      }
+
+      let closestStop = candidates[0];
+
+      // If we have multiple close candidates, use walking distance to pick the best one
+      // Only do this if we have multiple candidates and the difference between the top 2 is small (< 500m)
+      if (candidates.length > 1 && (candidates[1].distance - candidates[0].distance) < 0.5) {
+        try {
+          console.log('[HomePage] Multiple close stops found, calculating walking distances...');
+          const stopCoords = candidates.map(c => [c.stop.coordinates![1], c.stop.coordinates![0]] as [number, number]);
+          const homeCoords = [selectedAddress.coordinates![1], selectedAddress.coordinates![0]] as [number, number];
+          
+          const walkingResults = await calculateWalkingDistances(homeCoords, stopCoords);
+          
+          if (walkingResults.results && walkingResults.results.length > 0) {
+            let minWalkingDistance = Infinity;
+            let bestIndex = 0;
+            
+            walkingResults.results.forEach((res: any, idx: number) => {
+              if (res.success && res.distance < minWalkingDistance) {
+                minWalkingDistance = res.distance;
+                bestIndex = idx;
+              }
+            });
+            
+            closestStop = candidates[bestIndex];
+            console.log('[HomePage] Best stop by walking distance:', {
+              route: closestStop.route.name,
+              stop: closestStop.stop.address,
+              walkingDistance: minWalkingDistance + 'm'
+            });
+          }
+        } catch (walkError) {
+          console.warn('[HomePage] Failed to calculate walking distances, falling back to straight-line:', walkError);
+          // Fall back to candidates[0] which is already set
+        }
       }
 
       console.log('[HomePage] Found closest stop:', {
@@ -414,19 +462,14 @@ export function HomePage() {
       });
 
       // Update store
-      setSelectedSchool(selectedSchoolLocal.id);
+      // We set the home address and map intent, but let the URL transition
+      // handle route loading and selection to avoid race conditions.
       setHomeAddress(selectedAddress);
-      
-      // Select the closest stop so it's highlighted on the map
-      selectStop(closestStop.route, closestStop.stop, closestStop.stopNumber);
-      
-      // Explicitly set the Map Intent to DOUBLE_FIT
-      useStore.getState().setMapIntent({ type: 'DOUBLE_FIT' });
       
       // Build the URL state for navigation
       const stopId = closestStop.stop.id;
       const stopMatch = stopId.match(/stop-(\d+)/);
-      const stopNumber = stopMatch ? stopMatch[1] : stopId;
+      const stopNumberStr = stopMatch ? stopMatch[1] : stopId;
       const routeName = closestStop.route.name;
       
       const urlState: UrlState = {
@@ -435,8 +478,8 @@ export function HomePage() {
         direction: closestStop.route.direction?.toLowerCase() as 'morning' | 'afternoon' | 'both' || 'both',
         routeNames: [routeName],
         stopId: routeName.endsWith('-upcoming') 
-          ? `${routeName.replace('-upcoming', '')}-${stopNumber}-upcoming`
-          : `${routeName}-${stopNumber}`,
+          ? `${routeName.replace('-upcoming', '')}-${stopNumberStr}-upcoming`
+          : `${routeName}-${stopNumberStr}`,
         focus: 'my-stop'
       };
 
@@ -444,7 +487,7 @@ export function HomePage() {
       console.log('[HomePage] Navigating to:', explorerPath);
 
       // Navigate to explorer page with full state in URL
-      navigate(explorerPath);
+      navigate(explorerPath, { replace: false });
     } catch (error: any) {
       console.error('[HomePage] Error finding stop:', error);
       setError(error.message || 'Failed to find closest stop');

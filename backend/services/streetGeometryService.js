@@ -7,7 +7,7 @@
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { geocodingService } from './geocodingService.js';
+// import { geocodingService } from './geocodingService.js'; // Removed to fix circular dependency
 import { directionsService } from './directionsService.js';
 import { expandAddressForGeocoding } from '../utils/formatAddress.js';
 
@@ -27,11 +27,31 @@ const GOOGLE_GEOCODING_REVERSE_URL = 'https://maps.googleapis.com/maps/api/geoco
 class StreetGeometryService {
   constructor() {
     this.apiKey = GOOGLE_API_KEY;
+    this.geocodingService = null; // Will be set later to avoid circular dependency
     if (!this.apiKey) {
       console.warn('[StreetGeometryService] No Google Maps API key found. Roads API features will not work.');
     } else {
       console.log('[StreetGeometryService] Initialized with Roads API support');
     }
+  }
+
+  /**
+   * Set the geocoding service instance (to avoid circular dependency)
+   */
+  setGeocodingService(service) {
+    this.geocodingService = service;
+  }
+
+  /**
+   * Get geocoding service, with lazy loading fallback
+   */
+  async getGeocodingService() {
+    if (this.geocodingService) return this.geocodingService;
+    
+    // Dynamic import to break circularity
+    const { geocodingService } = await import('./geocodingService.js');
+    this.geocodingService = geocodingService;
+    return geocodingService;
   }
 
   /**
@@ -50,7 +70,8 @@ class StreetGeometryService {
     const query = `${address}, ${city}, ${state}`;
     
     try {
-      const result = await geocodingService.geocodeAddress(query, city, state);
+      const geocoder = await this.getGeocodingService();
+      const result = await geocoder.geocodeAddress(query, city, state);
       if (result.success) {
         return {
           coordinates: result.coordinates, // [lng, lat]
@@ -353,12 +374,14 @@ class StreetGeometryService {
       
       console.log(`[StreetGeometryService] Finding points along "${streetName}" by geocoding addresses...`);
       
+      const geocoder = await this.getGeocodingService();
+      
       for (const num of addressNumbers) {
         if (searchPoints.length >= maxPoints) break;
         
         // Try geocoding addresses on the street
         const testAddress = `${num} ${formattedStreet}`;
-        const geocodeResult = await geocodingService.geocodeAddress(
+        const geocodeResult = await geocoder.geocodeAddress(
           `${testAddress}, ${city}, ${state}`
         );
         
@@ -407,7 +430,8 @@ class StreetGeometryService {
       
       // If we only have the stop point, try searching with just the street name
       if (searchPoints.length < 3) {
-        const streetOnlyResult = await geocodingService.geocodeAddress(
+        const geocoder = await this.getGeocodingService();
+        const streetOnlyResult = await geocoder.geocodeAddress(
           `${formattedStreet}, ${city}, ${state}`
         );
         

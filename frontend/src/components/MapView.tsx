@@ -149,10 +149,58 @@ export function MapView({
     checkReady();
   }, [map]);
 
+  // Update polyline opacities when isFlying changes
+  useEffect(() => {
+    if (!map || !isMapReady) return;
+    
+    // Small delay to ensure DOM is ready for transitions
+    const timeoutId = setTimeout(() => {
+      map.eachLayer((layer) => {
+        if (layer instanceof L.Polyline && layer.options.color) {
+          // This is a route polyline - apply opacity with transition
+          const pathElement = layer.getElement() as HTMLElement | SVGElement | null;
+          if (pathElement) {
+            if (isFlying) {
+              // Fade out - quick 0.2s transition
+              pathElement.style.transition = 'opacity 0.2s ease-in-out, fill-opacity 0.2s ease-in-out';
+              layer.setStyle({ 
+                opacity: 0,
+                fillOpacity: 0
+              });
+              pathElement.style.opacity = '0';
+              pathElement.setAttribute('fill-opacity', '0');
+            } else {
+              // Fade in - longer 1s transition
+              pathElement.style.transition = 'opacity 1s ease-in-out, fill-opacity 1s ease-in-out';
+              // Restore opacity - find matching route by color and determine correct opacity
+              const routeColor = layer.options.color;
+              const matchingRoute = routes.find(r => r.color === routeColor);
+              if (matchingRoute) {
+                const routeGeometry = routeGeometries[matchingRoute.id];
+                const targetOpacity = routeGeometry === null ? 0.4 : 0.8;
+                layer.setStyle({ 
+                  opacity: targetOpacity,
+                  fillOpacity: targetOpacity
+                });
+                pathElement.style.opacity = String(targetOpacity);
+                pathElement.setAttribute('fill-opacity', String(targetOpacity));
+              }
+            }
+          }
+        }
+      });
+    }, 10);
+
+    return () => clearTimeout(timeoutId);
+  }, [isFlying, map, isMapReady, routes, routeGeometries]);
+
   // Helper to manage flyTo animation state
   const executeFlyTo = (callback: () => void) => {
+    // Fade out immediately
     setIsFlying(true);
+    
     callback();
+    
     // Fade back in after animation completes (duration is 0.6s)
     setTimeout(() => {
       setIsFlying(false);
@@ -870,7 +918,9 @@ export function MapView({
           });
         }
 
-        const routeOpacity = isFlying ? 0 : (routeGeometry === null ? 0.4 : 0.8);
+        // Opacity is managed by the useEffect that watches isFlying
+        // We still set initial opacity here for when not flying
+        const routeOpacity = routeGeometry === null ? 0.4 : 0.8;
         
         return (
           <React.Fragment key={route.id}>
@@ -881,6 +931,17 @@ export function MapView({
                 color={route.color}
                 weight={3}
                 opacity={routeOpacity}
+                eventHandlers={{
+                  add: (e) => {
+                    // Store reference to the layer for opacity updates
+                    const layer = e.target as L.Polyline;
+                    // Apply transition style via DOM manipulation
+                    const element = layer.getElement() as HTMLElement | SVGElement | null;
+                    if (element) {
+                      element.style.transition = 'opacity 0.2s ease-in-out, fill-opacity 0.2s ease-in-out';
+                    }
+                  }
+                }}
               />
             )}
 
@@ -1208,14 +1269,14 @@ export function MapView({
         ) : null}
       </MapInfoPanel>
 
-      {/* Loading spinner animation and route opacity transitions */}
+      {/* Loading spinner animation */}
       <style>{`
         @keyframes spin {
           to { transform: rotate(360deg); }
         }
         /* Smooth opacity transitions for route polylines during flyTo animations */
         .leaflet-container svg path.leaflet-interactive {
-          transition: opacity 0.2s ease-in-out;
+          transition: opacity 0.2s ease-in-out, fill-opacity 0.2s ease-in-out;
         }
       `}</style>
     </div>
