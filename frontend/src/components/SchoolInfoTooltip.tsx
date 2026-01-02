@@ -26,6 +26,11 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
   onClose,
   message
 }) => {
+  // Safety check: return null if school is undefined
+  if (!school) {
+    return null;
+  }
+
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const location = useLocation();

@@ -1256,17 +1256,20 @@ export function MapView({
               // useUrlState will handle the tab switch if the URL changes to /routes.
             }}
           />
-        ) : (viewMode === 'schools' && !!selectedSchoolId) ? (
-          <SchoolInfoTooltip 
-            school={schools.find(s => s.id === selectedSchoolId)!} 
-            showRoutesButton={true}
-            onClose={() => {
-              const urlState = parseUrlPath(location.pathname, basePath);
-              const newState = { ...urlState, schoolId: undefined, focus: undefined };
-              navigate(buildUrlPath(basePath, newState));
-            }}
-          />
-        ) : null}
+        ) : (viewMode === 'schools' && !!selectedSchoolId) ? (() => {
+          const school = schools.find(s => s.id === selectedSchoolId);
+          return school ? (
+            <SchoolInfoTooltip 
+              school={school} 
+              showRoutesButton={true}
+              onClose={() => {
+                const urlState = parseUrlPath(location.pathname, basePath);
+                const newState = { ...urlState, schoolId: undefined, focus: undefined };
+                navigate(buildUrlPath(basePath, newState));
+              }}
+            />
+          ) : null;
+        })() : null}
       </MapInfoPanel>
 
       {/* Loading spinner animation */}

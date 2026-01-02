@@ -16078,5 +16078,5765 @@
         }
       }
     ]
+  },
+  {
+    "id": "job_1767321816354_g5gnqwjwj",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "abernethy"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "abernethy",
+      "schoolName": "Abernethy",
+      "driveLink": "https://drive.google.com/drive/folders/1vlOsEIniONTUG3vHRLRsqfzyINHscKt3",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-07-31T19:53:25.595Z",
+      "localLastModified": "2025-07-31T19:53:25.595Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.354Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:49:17.848Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.354Z",
+        "data": {
+          "id": "job_1767321816354_g5gnqwjwj",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "abernethy"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:17.384Z",
+        "data": {
+          "id": "job_1767321816354_g5gnqwjwj",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:17.834Z",
+        "data": {
+          "id": "job_1767321816354_g5gnqwjwj",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:17.843Z",
+        "data": {
+          "id": "job_1767321816354_g5gnqwjwj",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:49:17.848Z",
+        "data": {
+          "id": "job_1767321816354_g5gnqwjwj",
+          "result": {
+            "schoolId": "abernethy",
+            "schoolName": "Abernethy",
+            "driveLink": "https://drive.google.com/drive/folders/1vlOsEIniONTUG3vHRLRsqfzyINHscKt3",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-07-31T19:53:25.595Z",
+            "localLastModified": "2025-07-31T19:53:25.595Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816433_5qxvzucj4",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "arleta"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "arleta",
+      "schoolName": "Arleta",
+      "driveLink": "https://drive.google.com/drive/folders/174oj5f1dyPJk7im2dNEigf9boalKkvLh",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-11-25T18:53:46.041Z",
+      "localLastModified": "2025-11-25T18:53:46.041Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.433Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:49:12.382Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.433Z",
+        "data": {
+          "id": "job_1767321816433_5qxvzucj4",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "arleta"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:12.060Z",
+        "data": {
+          "id": "job_1767321816433_5qxvzucj4",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:12.362Z",
+        "data": {
+          "id": "job_1767321816433_5qxvzucj4",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:12.381Z",
+        "data": {
+          "id": "job_1767321816433_5qxvzucj4",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:49:12.382Z",
+        "data": {
+          "id": "job_1767321816433_5qxvzucj4",
+          "result": {
+            "schoolId": "arleta",
+            "schoolName": "Arleta",
+            "driveLink": "https://drive.google.com/drive/folders/174oj5f1dyPJk7im2dNEigf9boalKkvLh",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-11-25T18:53:46.041Z",
+            "localLastModified": "2025-11-25T18:53:46.041Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816447_s5f9pfngz",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "astor"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "astor",
+      "schoolName": "Astor",
+      "driveLink": "https://drive.google.com/drive/folders/1B8kNwlF2YAF7_IBIkHOhO7u88v05DSec",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-08-02T20:12:11.315Z",
+      "localLastModified": "2025-08-02T20:12:11.315Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.447Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:49:07.055Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.447Z",
+        "data": {
+          "id": "job_1767321816447_s5f9pfngz",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "astor"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:06.750Z",
+        "data": {
+          "id": "job_1767321816447_s5f9pfngz",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:07.038Z",
+        "data": {
+          "id": "job_1767321816447_s5f9pfngz",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:07.048Z",
+        "data": {
+          "id": "job_1767321816447_s5f9pfngz",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:49:07.055Z",
+        "data": {
+          "id": "job_1767321816447_s5f9pfngz",
+          "result": {
+            "schoolId": "astor",
+            "schoolName": "Astor",
+            "driveLink": "https://drive.google.com/drive/folders/1B8kNwlF2YAF7_IBIkHOhO7u88v05DSec",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-08-02T20:12:11.315Z",
+            "localLastModified": "2025-08-02T20:12:11.315Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816461_fsvsv69af",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "atkinson"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "atkinson",
+      "schoolName": "Atkinson",
+      "driveLink": "https://drive.google.com/drive/folders/1eQCHoeSM-XkpkxglEji_YFawcR6avllW",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-12-17T14:40:06.663Z",
+      "localLastModified": "2025-12-17T14:40:06.663Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.461Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:49:01.744Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.461Z",
+        "data": {
+          "id": "job_1767321816461_fsvsv69af",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "atkinson"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:01.440Z",
+        "data": {
+          "id": "job_1767321816461_fsvsv69af",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:01.724Z",
+        "data": {
+          "id": "job_1767321816461_fsvsv69af",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:49:01.738Z",
+        "data": {
+          "id": "job_1767321816461_fsvsv69af",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:49:01.744Z",
+        "data": {
+          "id": "job_1767321816461_fsvsv69af",
+          "result": {
+            "schoolId": "atkinson",
+            "schoolName": "Atkinson",
+            "driveLink": "https://drive.google.com/drive/folders/1eQCHoeSM-XkpkxglEji_YFawcR6avllW",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-12-17T14:40:06.663Z",
+            "localLastModified": "2025-12-17T14:40:06.663Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816474_e9viiph05",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "beach"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "beach",
+      "schoolName": "Beach",
+      "driveLink": "https://drive.google.com/drive/folders/12S12txWvx0zrHuf4z_J7CdLb5MoM3cqw",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-08-02T18:07:39.351Z",
+      "localLastModified": "2025-08-02T18:07:39.351Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.474Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:56.432Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.474Z",
+        "data": {
+          "id": "job_1767321816474_e9viiph05",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "beach"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:56.124Z",
+        "data": {
+          "id": "job_1767321816474_e9viiph05",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:56.417Z",
+        "data": {
+          "id": "job_1767321816474_e9viiph05",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:56.430Z",
+        "data": {
+          "id": "job_1767321816474_e9viiph05",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:56.432Z",
+        "data": {
+          "id": "job_1767321816474_e9viiph05",
+          "result": {
+            "schoolId": "beach",
+            "schoolName": "Beach",
+            "driveLink": "https://drive.google.com/drive/folders/12S12txWvx0zrHuf4z_J7CdLb5MoM3cqw",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-08-02T18:07:39.351Z",
+            "localLastModified": "2025-08-02T18:07:39.351Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816489_a0f9pgakq",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "beaumont"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "beaumont",
+      "schoolName": "Beaumont",
+      "driveLink": "https://drive.google.com/drive/folders/119XhRyxm5aHx0Q9BQrrKqlvei-9Xrnaz",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-10-02T13:17:48.160Z",
+      "localLastModified": "2025-10-02T13:17:48.160Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.489Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:51.118Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.489Z",
+        "data": {
+          "id": "job_1767321816489_a0f9pgakq",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "beaumont"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:50.761Z",
+        "data": {
+          "id": "job_1767321816489_a0f9pgakq",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:51.105Z",
+        "data": {
+          "id": "job_1767321816489_a0f9pgakq",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:51.113Z",
+        "data": {
+          "id": "job_1767321816489_a0f9pgakq",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:51.118Z",
+        "data": {
+          "id": "job_1767321816489_a0f9pgakq",
+          "result": {
+            "schoolId": "beaumont",
+            "schoolName": "Beaumont",
+            "driveLink": "https://drive.google.com/drive/folders/119XhRyxm5aHx0Q9BQrrKqlvei-9Xrnaz",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-10-02T13:17:48.160Z",
+            "localLastModified": "2025-10-02T13:17:48.160Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816502_a0g9rft11",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "beverly-cleary"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "beverly-cleary",
+      "schoolName": "Beverly Cleary",
+      "driveLink": "https://drive.google.com/drive/folders/17BsOjpaibLV_eMCn9DVg3ds5Gptnn7eF",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2024-07-31T15:21:35.419Z",
+      "localLastModified": "2024-07-31T15:21:35.419Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.502Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:45.755Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.502Z",
+        "data": {
+          "id": "job_1767321816502_a0g9rft11",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "beverly-cleary"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:45.431Z",
+        "data": {
+          "id": "job_1767321816502_a0g9rft11",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:45.738Z",
+        "data": {
+          "id": "job_1767321816502_a0g9rft11",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:45.750Z",
+        "data": {
+          "id": "job_1767321816502_a0g9rft11",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:45.755Z",
+        "data": {
+          "id": "job_1767321816502_a0g9rft11",
+          "result": {
+            "schoolId": "beverly-cleary",
+            "schoolName": "Beverly Cleary",
+            "driveLink": "https://drive.google.com/drive/folders/17BsOjpaibLV_eMCn9DVg3ds5Gptnn7eF",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2024-07-31T15:21:35.419Z",
+            "localLastModified": "2024-07-31T15:21:35.419Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816517_2fzg81hxy",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "boise-eliot"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "boise-eliot",
+      "schoolName": "Boise-Eliot",
+      "driveLink": "https://drive.google.com/drive/folders/11BNiRr5bKqLvuyTXa82_6a7PE64271of",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-09-17T22:02:37.308Z",
+      "localLastModified": "2025-09-17T22:02:37.308Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.517Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:40.425Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.517Z",
+        "data": {
+          "id": "job_1767321816517_2fzg81hxy",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "boise-eliot"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:40.066Z",
+        "data": {
+          "id": "job_1767321816517_2fzg81hxy",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:40.406Z",
+        "data": {
+          "id": "job_1767321816517_2fzg81hxy",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:40.422Z",
+        "data": {
+          "id": "job_1767321816517_2fzg81hxy",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:40.425Z",
+        "data": {
+          "id": "job_1767321816517_2fzg81hxy",
+          "result": {
+            "schoolId": "boise-eliot",
+            "schoolName": "Boise-Eliot",
+            "driveLink": "https://drive.google.com/drive/folders/11BNiRr5bKqLvuyTXa82_6a7PE64271of",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-09-17T22:02:37.308Z",
+            "localLastModified": "2025-09-17T22:02:37.308Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816530_00lijh58z",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "bridger"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "bridger",
+      "schoolName": "Bridger",
+      "driveLink": "https://drive.google.com/drive/folders/11VTzWHqVisITHhZT0t2ZtxPv4PrHjG5i",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-12-11T17:12:24.583Z",
+      "localLastModified": "2025-12-11T17:12:24.583Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.530Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:35.059Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.530Z",
+        "data": {
+          "id": "job_1767321816530_00lijh58z",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "bridger"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:34.712Z",
+        "data": {
+          "id": "job_1767321816530_00lijh58z",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:35.038Z",
+        "data": {
+          "id": "job_1767321816530_00lijh58z",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:35.055Z",
+        "data": {
+          "id": "job_1767321816530_00lijh58z",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:35.059Z",
+        "data": {
+          "id": "job_1767321816530_00lijh58z",
+          "result": {
+            "schoolId": "bridger",
+            "schoolName": "Bridger",
+            "driveLink": "https://drive.google.com/drive/folders/11VTzWHqVisITHhZT0t2ZtxPv4PrHjG5i",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-12-11T17:12:24.583Z",
+            "localLastModified": "2025-12-11T17:12:24.583Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816546_4tgcs6x03",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "bridlemile"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "bridlemile",
+      "schoolName": "Bridlemile",
+      "driveLink": "https://drive.google.com/drive/folders/1hGPmN8bkUgi0iR3Qffm95w3p0roM6TXL",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 12,
+      "localPdfCount": 10,
+      "driveLastModified": "2025-12-17T14:11:23.678Z",
+      "localLastModified": "2025-12-17T14:11:23.678Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.546Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:43:37.319Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.546Z",
+        "data": {
+          "id": "job_1767321816546_4tgcs6x03",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "bridlemile"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:36.549Z",
+        "data": {
+          "id": "job_1767321816546_4tgcs6x03",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:37.305Z",
+        "data": {
+          "id": "job_1767321816546_4tgcs6x03",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:37.317Z",
+        "data": {
+          "id": "job_1767321816546_4tgcs6x03",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:43:37.319Z",
+        "data": {
+          "id": "job_1767321816546_4tgcs6x03",
+          "result": {
+            "schoolId": "bridlemile",
+            "schoolName": "Bridlemile",
+            "driveLink": "https://drive.google.com/drive/folders/1hGPmN8bkUgi0iR3Qffm95w3p0roM6TXL",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 12,
+            "localPdfCount": 10,
+            "driveLastModified": "2025-12-17T14:11:23.678Z",
+            "localLastModified": "2025-12-17T14:11:23.678Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816580_a2p67llbn",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "capitol"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "capitol",
+      "schoolName": "Capitol",
+      "driveLink": "https://drive.google.com/drive/folders/11qRhkwmwOqKBMCgqzT6R0ay6t-ZFoIwj",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 10,
+      "localPdfCount": 10,
+      "driveLastModified": "2025-10-23T16:06:19.000Z",
+      "localLastModified": "2025-10-23T16:06:19.000Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.580Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:29.705Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.580Z",
+        "data": {
+          "id": "job_1767321816580_a2p67llbn",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "capitol"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:29.373Z",
+        "data": {
+          "id": "job_1767321816580_a2p67llbn",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:29.683Z",
+        "data": {
+          "id": "job_1767321816580_a2p67llbn",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:29.699Z",
+        "data": {
+          "id": "job_1767321816580_a2p67llbn",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:29.705Z",
+        "data": {
+          "id": "job_1767321816580_a2p67llbn",
+          "result": {
+            "schoolId": "capitol",
+            "schoolName": "Capitol",
+            "driveLink": "https://drive.google.com/drive/folders/11qRhkwmwOqKBMCgqzT6R0ay6t-ZFoIwj",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 10,
+            "localPdfCount": 10,
+            "driveLastModified": "2025-10-23T16:06:19.000Z",
+            "localLastModified": "2025-10-23T16:06:19.000Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816591_bbv4uba6d",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "cesar-chavez"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "cesar-chavez",
+      "schoolName": "Cesar Chavez",
+      "driveLink": "https://drive.google.com/drive/folders/11lPFRRdpe1reRM8MpaBQH6DLQ8JRana-",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-10-22T15:46:47.863Z",
+      "localLastModified": "2025-10-22T15:46:47.863Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.591Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:24.370Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.591Z",
+        "data": {
+          "id": "job_1767321816591_bbv4uba6d",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "cesar-chavez"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:24.021Z",
+        "data": {
+          "id": "job_1767321816591_bbv4uba6d",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:24.350Z",
+        "data": {
+          "id": "job_1767321816591_bbv4uba6d",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:24.364Z",
+        "data": {
+          "id": "job_1767321816591_bbv4uba6d",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:24.370Z",
+        "data": {
+          "id": "job_1767321816591_bbv4uba6d",
+          "result": {
+            "schoolId": "cesar-chavez",
+            "schoolName": "Cesar Chavez",
+            "driveLink": "https://drive.google.com/drive/folders/11lPFRRdpe1reRM8MpaBQH6DLQ8JRana-",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-10-22T15:46:47.863Z",
+            "localLastModified": "2025-10-22T15:46:47.863Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816605_7jq0etenb",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "chapman"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "chapman",
+      "schoolName": "Chapman",
+      "driveLink": "https://drive.google.com/drive/folders/11kY3J5_a-i3NTtzVby9_-IM14B4ZzInF",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 12,
+      "localPdfCount": 12,
+      "driveLastModified": "2025-12-18T15:06:02.373Z",
+      "localLastModified": "2025-12-18T15:06:02.373Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.605Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:19.010Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.605Z",
+        "data": {
+          "id": "job_1767321816605_7jq0etenb",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "chapman"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:18.672Z",
+        "data": {
+          "id": "job_1767321816605_7jq0etenb",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:18.996Z",
+        "data": {
+          "id": "job_1767321816605_7jq0etenb",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:19.005Z",
+        "data": {
+          "id": "job_1767321816605_7jq0etenb",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:19.010Z",
+        "data": {
+          "id": "job_1767321816605_7jq0etenb",
+          "result": {
+            "schoolId": "chapman",
+            "schoolName": "Chapman",
+            "driveLink": "https://drive.google.com/drive/folders/11kY3J5_a-i3NTtzVby9_-IM14B4ZzInF",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 12,
+            "localPdfCount": 12,
+            "driveLastModified": "2025-12-18T15:06:02.373Z",
+            "localLastModified": "2025-12-18T15:06:02.373Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816619_7gaug3wyo",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "chief-joseph"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "chief-joseph",
+      "schoolName": "Chief Joseph",
+      "driveLink": "https://drive.google.com/drive/folders/11kPBCJaocfRQnGu6L9H-JXOUSf6GlzL7",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-08-02T16:56:58.677Z",
+      "localLastModified": "2025-08-02T16:56:58.677Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.619Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:13.668Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.619Z",
+        "data": {
+          "id": "job_1767321816619_7gaug3wyo",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "chief-joseph"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:13.342Z",
+        "data": {
+          "id": "job_1767321816619_7gaug3wyo",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:13.651Z",
+        "data": {
+          "id": "job_1767321816619_7gaug3wyo",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:13.663Z",
+        "data": {
+          "id": "job_1767321816619_7gaug3wyo",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:13.668Z",
+        "data": {
+          "id": "job_1767321816619_7gaug3wyo",
+          "result": {
+            "schoolId": "chief-joseph",
+            "schoolName": "Chief Joseph",
+            "driveLink": "https://drive.google.com/drive/folders/11kPBCJaocfRQnGu6L9H-JXOUSf6GlzL7",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-08-02T16:56:58.677Z",
+            "localLastModified": "2025-08-02T16:56:58.677Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816629_dvcdkzprc",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "clark"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "clark",
+      "schoolName": "Clark",
+      "driveLink": "https://drive.google.com/drive/folders/1R2m9GbogxmX5pDk5-Bwpbd9GxWdpZ-j0",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-09-11T17:55:39.729Z",
+      "localLastModified": "2025-09-11T17:55:39.729Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.629Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:08.335Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.629Z",
+        "data": {
+          "id": "job_1767321816629_dvcdkzprc",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "clark"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:08.004Z",
+        "data": {
+          "id": "job_1767321816629_dvcdkzprc",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:08.310Z",
+        "data": {
+          "id": "job_1767321816629_dvcdkzprc",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:08.327Z",
+        "data": {
+          "id": "job_1767321816629_dvcdkzprc",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:08.335Z",
+        "data": {
+          "id": "job_1767321816629_dvcdkzprc",
+          "result": {
+            "schoolId": "clark",
+            "schoolName": "Clark",
+            "driveLink": "https://drive.google.com/drive/folders/1R2m9GbogxmX5pDk5-Bwpbd9GxWdpZ-j0",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-09-11T17:55:39.729Z",
+            "localLastModified": "2025-09-11T17:55:39.729Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816644_t4xszf1v9",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "creston"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "creston",
+      "schoolName": "Creston",
+      "driveLink": "https://drive.google.com/drive/folders/13hfTFsHIdNaaFJD53hKEV-8esBBBwV4t",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-08-02T17:52:47.282Z",
+      "localLastModified": "2025-08-02T17:52:47.282Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.644Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:48:02.996Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.644Z",
+        "data": {
+          "id": "job_1767321816644_t4xszf1v9",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "creston"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:02.611Z",
+        "data": {
+          "id": "job_1767321816644_t4xszf1v9",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:02.974Z",
+        "data": {
+          "id": "job_1767321816644_t4xszf1v9",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:48:02.992Z",
+        "data": {
+          "id": "job_1767321816644_t4xszf1v9",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:48:02.996Z",
+        "data": {
+          "id": "job_1767321816644_t4xszf1v9",
+          "result": {
+            "schoolId": "creston",
+            "schoolName": "Creston",
+            "driveLink": "https://drive.google.com/drive/folders/13hfTFsHIdNaaFJD53hKEV-8esBBBwV4t",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-08-02T17:52:47.282Z",
+            "localLastModified": "2025-08-02T17:52:47.282Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816654_u3kizcjc1",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "dr-martin-luther-king"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "dr-martin-luther-king",
+      "schoolName": "Dr Martin Luther King",
+      "driveLink": "https://drive.google.com/drive/folders/1A10dKprzg68PukybKhQwiZG3k5bqtjl6",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-12-17T15:24:53.154Z",
+      "localLastModified": "2025-12-17T15:24:53.154Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.654Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:57.607Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.654Z",
+        "data": {
+          "id": "job_1767321816654_u3kizcjc1",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "dr-martin-luther-king"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:57.267Z",
+        "data": {
+          "id": "job_1767321816654_u3kizcjc1",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:57.592Z",
+        "data": {
+          "id": "job_1767321816654_u3kizcjc1",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:57.603Z",
+        "data": {
+          "id": "job_1767321816654_u3kizcjc1",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:57.607Z",
+        "data": {
+          "id": "job_1767321816654_u3kizcjc1",
+          "result": {
+            "schoolId": "dr-martin-luther-king",
+            "schoolName": "Dr Martin Luther King",
+            "driveLink": "https://drive.google.com/drive/folders/1A10dKprzg68PukybKhQwiZG3k5bqtjl6",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-12-17T15:24:53.154Z",
+            "localLastModified": "2025-12-17T15:24:53.154Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816668_7osdmjxfr",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "duniway"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "duniway",
+      "schoolName": "Duniway",
+      "driveLink": "https://drive.google.com/drive/folders/13iFn1YSr3n6L2ZWgzaN7yWgtfdr86rYV",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-09-17T22:06:04.762Z",
+      "localLastModified": "2025-09-17T22:06:04.762Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.668Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:52.262Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.668Z",
+        "data": {
+          "id": "job_1767321816668_7osdmjxfr",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "duniway"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:51.888Z",
+        "data": {
+          "id": "job_1767321816668_7osdmjxfr",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:52.249Z",
+        "data": {
+          "id": "job_1767321816668_7osdmjxfr",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:52.257Z",
+        "data": {
+          "id": "job_1767321816668_7osdmjxfr",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:52.262Z",
+        "data": {
+          "id": "job_1767321816668_7osdmjxfr",
+          "result": {
+            "schoolId": "duniway",
+            "schoolName": "Duniway",
+            "driveLink": "https://drive.google.com/drive/folders/13iFn1YSr3n6L2ZWgzaN7yWgtfdr86rYV",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-09-17T22:06:04.762Z",
+            "localLastModified": "2025-09-17T22:06:04.762Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816679_qutx497h3",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "faubion"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "faubion",
+      "schoolName": "Faubion",
+      "driveLink": "https://drive.google.com/drive/folders/13ssiWde0efQyZKNHY4ret4Oj4tncIgep",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 11,
+      "localPdfCount": 11,
+      "driveLastModified": "2025-08-26T18:21:57.035Z",
+      "localLastModified": "2025-08-26T18:21:57.035Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.679Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:46.881Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.679Z",
+        "data": {
+          "id": "job_1767321816679_qutx497h3",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "faubion"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:46.501Z",
+        "data": {
+          "id": "job_1767321816679_qutx497h3",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:46.856Z",
+        "data": {
+          "id": "job_1767321816679_qutx497h3",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:46.879Z",
+        "data": {
+          "id": "job_1767321816679_qutx497h3",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:46.881Z",
+        "data": {
+          "id": "job_1767321816679_qutx497h3",
+          "result": {
+            "schoolId": "faubion",
+            "schoolName": "Faubion",
+            "driveLink": "https://drive.google.com/drive/folders/13ssiWde0efQyZKNHY4ret4Oj4tncIgep",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 11,
+            "localPdfCount": 11,
+            "driveLastModified": "2025-08-26T18:21:57.035Z",
+            "localLastModified": "2025-08-26T18:21:57.035Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816694_avta2u1jd",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "forest-park"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "forest-park",
+      "schoolName": "Forest Park",
+      "driveLink": "https://drive.google.com/drive/folders/13jLo3ZSWGdrlLOJw49i8TmF8f9edu5PX",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-08-02T18:13:11.462Z",
+      "localLastModified": "2025-08-02T18:13:11.462Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.694Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:41.497Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.694Z",
+        "data": {
+          "id": "job_1767321816694_avta2u1jd",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "forest-park"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:41.100Z",
+        "data": {
+          "id": "job_1767321816694_avta2u1jd",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:41.478Z",
+        "data": {
+          "id": "job_1767321816694_avta2u1jd",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:41.491Z",
+        "data": {
+          "id": "job_1767321816694_avta2u1jd",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:41.497Z",
+        "data": {
+          "id": "job_1767321816694_avta2u1jd",
+          "result": {
+            "schoolId": "forest-park",
+            "schoolName": "Forest Park",
+            "driveLink": "https://drive.google.com/drive/folders/13jLo3ZSWGdrlLOJw49i8TmF8f9edu5PX",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-08-02T18:13:11.462Z",
+            "localLastModified": "2025-08-02T18:13:11.462Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816704_i8uzn3da3",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "george"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "george",
+      "schoolName": "George",
+      "driveLink": "https://drive.google.com/drive/folders/144Qc44e_rhIOekAsszbtU0Fcvhssjd5p",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-08-02T18:49:07.245Z",
+      "localLastModified": "2025-08-02T18:49:07.245Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.704Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:36.095Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.704Z",
+        "data": {
+          "id": "job_1767321816704_i8uzn3da3",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "george"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:35.729Z",
+        "data": {
+          "id": "job_1767321816704_i8uzn3da3",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:36.077Z",
+        "data": {
+          "id": "job_1767321816704_i8uzn3da3",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:36.090Z",
+        "data": {
+          "id": "job_1767321816704_i8uzn3da3",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:36.095Z",
+        "data": {
+          "id": "job_1767321816704_i8uzn3da3",
+          "result": {
+            "schoolId": "george",
+            "schoolName": "George",
+            "driveLink": "https://drive.google.com/drive/folders/144Qc44e_rhIOekAsszbtU0Fcvhssjd5p",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-08-02T18:49:07.245Z",
+            "localLastModified": "2025-08-02T18:49:07.245Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816747_d5iwa0kj1",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "glencoe"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "glencoe",
+      "schoolName": "Glencoe",
+      "driveLink": "https://drive.google.com/drive/folders/13vLMjrSmPaPdegR-8l8an_5Z0mui2yF9",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-10-23T16:24:14.000Z",
+      "localLastModified": "2025-10-23T16:24:14.000Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.747Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:30.723Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.747Z",
+        "data": {
+          "id": "job_1767321816747_d5iwa0kj1",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "glencoe"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:30.386Z",
+        "data": {
+          "id": "job_1767321816747_d5iwa0kj1",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:30.710Z",
+        "data": {
+          "id": "job_1767321816747_d5iwa0kj1",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:30.718Z",
+        "data": {
+          "id": "job_1767321816747_d5iwa0kj1",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:30.723Z",
+        "data": {
+          "id": "job_1767321816747_d5iwa0kj1",
+          "result": {
+            "schoolId": "glencoe",
+            "schoolName": "Glencoe",
+            "driveLink": "https://drive.google.com/drive/folders/13vLMjrSmPaPdegR-8l8an_5Z0mui2yF9",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-10-23T16:24:14.000Z",
+            "localLastModified": "2025-10-23T16:24:14.000Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816756_1ax4cmlzd",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "gray"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "gray",
+      "schoolName": "Gray",
+      "driveLink": "https://drive.google.com/drive/folders/149Nfaud8gFSZVCEHE0W0PmvzEgnIwFxu",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 16,
+      "localPdfCount": 16,
+      "driveLastModified": "2025-10-22T15:42:19.193Z",
+      "localLastModified": "2025-10-22T15:42:19.193Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.756Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:25.376Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.756Z",
+        "data": {
+          "id": "job_1767321816756_1ax4cmlzd",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "gray"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:24.860Z",
+        "data": {
+          "id": "job_1767321816756_1ax4cmlzd",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:25.348Z",
+        "data": {
+          "id": "job_1767321816756_1ax4cmlzd",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:25.366Z",
+        "data": {
+          "id": "job_1767321816756_1ax4cmlzd",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:25.376Z",
+        "data": {
+          "id": "job_1767321816756_1ax4cmlzd",
+          "result": {
+            "schoolId": "gray",
+            "schoolName": "Gray",
+            "driveLink": "https://drive.google.com/drive/folders/149Nfaud8gFSZVCEHE0W0PmvzEgnIwFxu",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 16,
+            "localPdfCount": 16,
+            "driveLastModified": "2025-10-22T15:42:19.193Z",
+            "localLastModified": "2025-10-22T15:42:19.193Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816766_tbx7kpmod",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "grout"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "grout",
+      "schoolName": "Grout",
+      "driveLink": "https://drive.google.com/drive/folders/14MHMWkq5O-M9V0JQI5749LvIAWcJBgnI",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-09-17T14:34:46.318Z",
+      "localLastModified": "2025-09-17T14:34:46.318Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.766Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:19.853Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.766Z",
+        "data": {
+          "id": "job_1767321816766_tbx7kpmod",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "grout"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:19.347Z",
+        "data": {
+          "id": "job_1767321816766_tbx7kpmod",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:19.836Z",
+        "data": {
+          "id": "job_1767321816766_tbx7kpmod",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:19.848Z",
+        "data": {
+          "id": "job_1767321816766_tbx7kpmod",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:19.853Z",
+        "data": {
+          "id": "job_1767321816766_tbx7kpmod",
+          "result": {
+            "schoolId": "grout",
+            "schoolName": "Grout",
+            "driveLink": "https://drive.google.com/drive/folders/14MHMWkq5O-M9V0JQI5749LvIAWcJBgnI",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-09-17T14:34:46.318Z",
+            "localLastModified": "2025-09-17T14:34:46.318Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816779_1erzzlgvn",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "harrison-park"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "harrison-park",
+      "schoolName": "Harrison Park",
+      "driveLink": "https://drive.google.com/drive/folders/14NQ8nZ6U891axUun-1KfqG82U8f26nFb",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 11,
+      "localPdfCount": 11,
+      "driveLastModified": "2025-12-17T14:54:59.403Z",
+      "localLastModified": "2025-12-17T14:54:59.403Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.779Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:14.342Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.779Z",
+        "data": {
+          "id": "job_1767321816779_1erzzlgvn",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "harrison-park"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:13.965Z",
+        "data": {
+          "id": "job_1767321816779_1erzzlgvn",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:14.320Z",
+        "data": {
+          "id": "job_1767321816779_1erzzlgvn",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:14.336Z",
+        "data": {
+          "id": "job_1767321816779_1erzzlgvn",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:14.342Z",
+        "data": {
+          "id": "job_1767321816779_1erzzlgvn",
+          "result": {
+            "schoolId": "harrison-park",
+            "schoolName": "Harrison Park",
+            "driveLink": "https://drive.google.com/drive/folders/14NQ8nZ6U891axUun-1KfqG82U8f26nFb",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 11,
+            "localPdfCount": 11,
+            "driveLastModified": "2025-12-17T14:54:59.403Z",
+            "localLastModified": "2025-12-17T14:54:59.403Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816789_d8helcia9",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "hayhurst"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "hayhurst",
+      "schoolName": "Hayhurst",
+      "driveLink": "https://drive.google.com/drive/folders/14RnZsukacVSJ8Od67K2x2M6cBCKPnxjP",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2025-10-29T15:00:41.751Z",
+      "localLastModified": "2025-10-29T15:00:41.751Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.789Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:08.960Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.789Z",
+        "data": {
+          "id": "job_1767321816789_d8helcia9",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "hayhurst"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:08.536Z",
+        "data": {
+          "id": "job_1767321816789_d8helcia9",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:08.943Z",
+        "data": {
+          "id": "job_1767321816789_d8helcia9",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:08.954Z",
+        "data": {
+          "id": "job_1767321816789_d8helcia9",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:08.960Z",
+        "data": {
+          "id": "job_1767321816789_d8helcia9",
+          "result": {
+            "schoolId": "hayhurst",
+            "schoolName": "Hayhurst",
+            "driveLink": "https://drive.google.com/drive/folders/14RnZsukacVSJ8Od67K2x2M6cBCKPnxjP",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 8,
+            "localPdfCount": 8,
+            "driveLastModified": "2025-10-29T15:00:41.751Z",
+            "localLastModified": "2025-10-29T15:00:41.751Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816803_gs3dncqzu",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "hosford"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "hosford",
+      "schoolName": "Hosford",
+      "driveLink": "https://drive.google.com/drive/folders/14iie5UThX6R9K5cUNO5l6sheIoOkw9un",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2025-10-01T20:40:47.265Z",
+      "localLastModified": "2025-10-01T20:40:47.265Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.803Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:47:03.533Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.803Z",
+        "data": {
+          "id": "job_1767321816803_gs3dncqzu",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "hosford"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:02.848Z",
+        "data": {
+          "id": "job_1767321816803_gs3dncqzu",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:03.518Z",
+        "data": {
+          "id": "job_1767321816803_gs3dncqzu",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:47:03.528Z",
+        "data": {
+          "id": "job_1767321816803_gs3dncqzu",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:47:03.533Z",
+        "data": {
+          "id": "job_1767321816803_gs3dncqzu",
+          "result": {
+            "schoolId": "hosford",
+            "schoolName": "Hosford",
+            "driveLink": "https://drive.google.com/drive/folders/14iie5UThX6R9K5cUNO5l6sheIoOkw9un",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 8,
+            "localPdfCount": 8,
+            "driveLastModified": "2025-10-01T20:40:47.265Z",
+            "localLastModified": "2025-10-01T20:40:47.265Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816817_dtcj8vzf8",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "irvington"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "irvington",
+      "schoolName": "Irvington",
+      "driveLink": "https://drive.google.com/drive/folders/1xQ3FN_vR8_p_xkxSDvVYM2w9YcB5r_3P",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-08-26T20:05:36.664Z",
+      "localLastModified": "2025-08-26T20:05:36.664Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.818Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:57.843Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.818Z",
+        "data": {
+          "id": "job_1767321816817_dtcj8vzf8",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "irvington"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:57.316Z",
+        "data": {
+          "id": "job_1767321816817_dtcj8vzf8",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:57.824Z",
+        "data": {
+          "id": "job_1767321816817_dtcj8vzf8",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:57.837Z",
+        "data": {
+          "id": "job_1767321816817_dtcj8vzf8",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:57.843Z",
+        "data": {
+          "id": "job_1767321816817_dtcj8vzf8",
+          "result": {
+            "schoolId": "irvington",
+            "schoolName": "Irvington",
+            "driveLink": "https://drive.google.com/drive/folders/1xQ3FN_vR8_p_xkxSDvVYM2w9YcB5r_3P",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-08-26T20:05:36.664Z",
+            "localLastModified": "2025-08-26T20:05:36.664Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816830_phkkrkbkl",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "jackson"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "jackson",
+      "schoolName": "Jackson",
+      "driveLink": "https://drive.google.com/drive/folders/14q4zv3lBYQCJXswEtgk06YUtmzOGJ1lf",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 32,
+      "localPdfCount": 32,
+      "driveLastModified": "2025-12-17T14:14:57.470Z",
+      "localLastModified": "2025-12-17T14:14:57.470Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.830Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:52.310Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.830Z",
+        "data": {
+          "id": "job_1767321816830_phkkrkbkl",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "jackson"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:51.910Z",
+        "data": {
+          "id": "job_1767321816830_phkkrkbkl",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:52.289Z",
+        "data": {
+          "id": "job_1767321816830_phkkrkbkl",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:52.304Z",
+        "data": {
+          "id": "job_1767321816830_phkkrkbkl",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:52.310Z",
+        "data": {
+          "id": "job_1767321816830_phkkrkbkl",
+          "result": {
+            "schoolId": "jackson",
+            "schoolName": "Jackson",
+            "driveLink": "https://drive.google.com/drive/folders/14q4zv3lBYQCJXswEtgk06YUtmzOGJ1lf",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 32,
+            "localPdfCount": 32,
+            "driveLastModified": "2025-12-17T14:14:57.470Z",
+            "localLastModified": "2025-12-17T14:14:57.470Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816839_6umzwedzh",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "james-john"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "james-john",
+      "schoolName": "James John",
+      "driveLink": "https://drive.google.com/drive/folders/14nIblPsK6LnoMd81z2joGpRF7QnbOvSU",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-09-10T12:56:14.627Z",
+      "localLastModified": "2025-09-10T12:56:14.627Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.839Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:46.907Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.839Z",
+        "data": {
+          "id": "job_1767321816839_6umzwedzh",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "james-john"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:46.575Z",
+        "data": {
+          "id": "job_1767321816839_6umzwedzh",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:46.891Z",
+        "data": {
+          "id": "job_1767321816839_6umzwedzh",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:46.903Z",
+        "data": {
+          "id": "job_1767321816839_6umzwedzh",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:46.907Z",
+        "data": {
+          "id": "job_1767321816839_6umzwedzh",
+          "result": {
+            "schoolId": "james-john",
+            "schoolName": "James John",
+            "driveLink": "https://drive.google.com/drive/folders/14nIblPsK6LnoMd81z2joGpRF7QnbOvSU",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-09-10T12:56:14.627Z",
+            "localLastModified": "2025-09-10T12:56:14.627Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816856_zorvvvmfm",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "kellogg"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "kellogg",
+      "schoolName": "Kellogg",
+      "driveLink": "https://drive.google.com/drive/folders/1lMUDd4OOpBHoYM09qfhDFdIAIv7raKMm",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 13,
+      "localPdfCount": 13,
+      "driveLastModified": "2025-12-17T14:56:00.417Z",
+      "localLastModified": "2025-12-17T14:56:00.417Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.857Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:41.570Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.857Z",
+        "data": {
+          "id": "job_1767321816856_zorvvvmfm",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "kellogg"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:41.191Z",
+        "data": {
+          "id": "job_1767321816856_zorvvvmfm",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:41.556Z",
+        "data": {
+          "id": "job_1767321816856_zorvvvmfm",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:41.565Z",
+        "data": {
+          "id": "job_1767321816856_zorvvvmfm",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:41.570Z",
+        "data": {
+          "id": "job_1767321816856_zorvvvmfm",
+          "result": {
+            "schoolId": "kellogg",
+            "schoolName": "Kellogg",
+            "driveLink": "https://drive.google.com/drive/folders/1lMUDd4OOpBHoYM09qfhDFdIAIv7raKMm",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 13,
+            "localPdfCount": 13,
+            "driveLastModified": "2025-12-17T14:56:00.417Z",
+            "localLastModified": "2025-12-17T14:56:00.417Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816866_67wfght8j",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "kelly"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "kelly",
+      "schoolName": "Kelly",
+      "driveLink": "https://drive.google.com/drive/folders/14rEePEkr5kKUA6v6u6DGS9SkPcfiwJQh",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-10-24T13:39:02.047Z",
+      "localLastModified": "2025-10-24T13:39:02.047Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.866Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:36.187Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.866Z",
+        "data": {
+          "id": "job_1767321816866_67wfght8j",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "kelly"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:35.814Z",
+        "data": {
+          "id": "job_1767321816866_67wfght8j",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:36.173Z",
+        "data": {
+          "id": "job_1767321816866_67wfght8j",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:36.182Z",
+        "data": {
+          "id": "job_1767321816866_67wfght8j",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:36.187Z",
+        "data": {
+          "id": "job_1767321816866_67wfght8j",
+          "result": {
+            "schoolId": "kelly",
+            "schoolName": "Kelly",
+            "driveLink": "https://drive.google.com/drive/folders/14rEePEkr5kKUA6v6u6DGS9SkPcfiwJQh",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-10-24T13:39:02.047Z",
+            "localLastModified": "2025-10-24T13:39:02.047Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816880_a51lwzozq",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "lane"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "lane",
+      "schoolName": "Lane",
+      "driveLink": "https://drive.google.com/drive/folders/1ATZt9Nb_Vpz1iL2tLEHcSkWyvlYQRa3k",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2025-09-24T17:45:49.367Z",
+      "localLastModified": "2025-09-24T17:45:49.367Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.880Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:30.808Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.880Z",
+        "data": {
+          "id": "job_1767321816880_a51lwzozq",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "lane"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:30.443Z",
+        "data": {
+          "id": "job_1767321816880_a51lwzozq",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:30.791Z",
+        "data": {
+          "id": "job_1767321816880_a51lwzozq",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:30.802Z",
+        "data": {
+          "id": "job_1767321816880_a51lwzozq",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:30.808Z",
+        "data": {
+          "id": "job_1767321816880_a51lwzozq",
+          "result": {
+            "schoolId": "lane",
+            "schoolName": "Lane",
+            "driveLink": "https://drive.google.com/drive/folders/1ATZt9Nb_Vpz1iL2tLEHcSkWyvlYQRa3k",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 8,
+            "localPdfCount": 8,
+            "driveLastModified": "2025-09-24T17:45:49.367Z",
+            "localLastModified": "2025-09-24T17:45:49.367Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816892_lqfrwssvg",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "lee"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "lee",
+      "schoolName": "Lee",
+      "driveLink": "https://drive.google.com/drive/folders/1C51RI0VAln6_ihZB50MPuj2Mn74rhnCO",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-11-06T15:53:47.664Z",
+      "localLastModified": "2025-11-06T15:53:47.664Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.892Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:25.440Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.892Z",
+        "data": {
+          "id": "job_1767321816892_lqfrwssvg",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "lee"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:24.965Z",
+        "data": {
+          "id": "job_1767321816892_lqfrwssvg",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:25.416Z",
+        "data": {
+          "id": "job_1767321816892_lqfrwssvg",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:25.435Z",
+        "data": {
+          "id": "job_1767321816892_lqfrwssvg",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:25.440Z",
+        "data": {
+          "id": "job_1767321816892_lqfrwssvg",
+          "result": {
+            "schoolId": "lee",
+            "schoolName": "Lee",
+            "driveLink": "https://drive.google.com/drive/folders/1C51RI0VAln6_ihZB50MPuj2Mn74rhnCO",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-11-06T15:53:47.664Z",
+            "localLastModified": "2025-11-06T15:53:47.664Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816905_qmquihc0z",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "lent"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "lent",
+      "schoolName": "Lent",
+      "driveLink": "https://drive.google.com/drive/folders/1ALsgIQwiUbUnzE6tb4fAGy5TCmMva8fv",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-10-29T13:27:30.247Z",
+      "localLastModified": "2025-10-29T13:27:30.247Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.905Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:19.960Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.905Z",
+        "data": {
+          "id": "job_1767321816905_qmquihc0z",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "lent"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:19.502Z",
+        "data": {
+          "id": "job_1767321816905_qmquihc0z",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:19.942Z",
+        "data": {
+          "id": "job_1767321816905_qmquihc0z",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:19.955Z",
+        "data": {
+          "id": "job_1767321816905_qmquihc0z",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:19.960Z",
+        "data": {
+          "id": "job_1767321816905_qmquihc0z",
+          "result": {
+            "schoolId": "lent",
+            "schoolName": "Lent",
+            "driveLink": "https://drive.google.com/drive/folders/1ALsgIQwiUbUnzE6tb4fAGy5TCmMva8fv",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-10-29T13:27:30.247Z",
+            "localLastModified": "2025-10-29T13:27:30.247Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816914_1excocppe",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "lewis"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "lewis",
+      "schoolName": "Lewis",
+      "driveLink": "https://drive.google.com/drive/folders/1aJuVbCBjjWw570K8yn6Bs1h5zf_2NJ-t",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-08-01T16:46:16.105Z",
+      "localLastModified": "2025-08-01T16:46:16.105Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.914Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:14.500Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.914Z",
+        "data": {
+          "id": "job_1767321816914_1excocppe",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "lewis"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:14.192Z",
+        "data": {
+          "id": "job_1767321816914_1excocppe",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:14.480Z",
+        "data": {
+          "id": "job_1767321816914_1excocppe",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:14.494Z",
+        "data": {
+          "id": "job_1767321816914_1excocppe",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:14.500Z",
+        "data": {
+          "id": "job_1767321816914_1excocppe",
+          "result": {
+            "schoolId": "lewis",
+            "schoolName": "Lewis",
+            "driveLink": "https://drive.google.com/drive/folders/1aJuVbCBjjWw570K8yn6Bs1h5zf_2NJ-t",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-08-01T16:46:16.105Z",
+            "localLastModified": "2025-08-01T16:46:16.105Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816930_3uvyjtjsp",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "lincoln"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "lincoln",
+      "schoolName": "Lincoln",
+      "driveLink": "https://drive.google.com/drive/folders/126UZiZumw3ZBB-Vz8m9kD7TvmJHyGTRu",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 16,
+      "localPdfCount": 16,
+      "driveLastModified": "2025-12-10T18:00:56.435Z",
+      "localLastModified": "2025-12-10T18:00:56.435Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.930Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:09.186Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.930Z",
+        "data": {
+          "id": "job_1767321816930_3uvyjtjsp",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "lincoln"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:08.686Z",
+        "data": {
+          "id": "job_1767321816930_3uvyjtjsp",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:09.172Z",
+        "data": {
+          "id": "job_1767321816930_3uvyjtjsp",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:09.181Z",
+        "data": {
+          "id": "job_1767321816930_3uvyjtjsp",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:09.186Z",
+        "data": {
+          "id": "job_1767321816930_3uvyjtjsp",
+          "result": {
+            "schoolId": "lincoln",
+            "schoolName": "Lincoln",
+            "driveLink": "https://drive.google.com/drive/folders/126UZiZumw3ZBB-Vz8m9kD7TvmJHyGTRu",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 16,
+            "localPdfCount": 16,
+            "driveLastModified": "2025-12-10T18:00:56.435Z",
+            "localLastModified": "2025-12-10T18:00:56.435Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816941_8q4dspvej",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "llewellyn"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "llewellyn",
+      "schoolName": "Llewellyn",
+      "driveLink": "https://drive.google.com/drive/folders/1AartjV_mS-jBL4UTm0Wos6o3wDVi80f7",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 3,
+      "localPdfCount": 3,
+      "driveLastModified": "2025-09-03T22:22:48.238Z",
+      "localLastModified": "2025-09-03T22:22:48.238Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.941Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:46:03.682Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.941Z",
+        "data": {
+          "id": "job_1767321816941_8q4dspvej",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "llewellyn"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:02.539Z",
+        "data": {
+          "id": "job_1767321816941_8q4dspvej",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:03.663Z",
+        "data": {
+          "id": "job_1767321816941_8q4dspvej",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:46:03.677Z",
+        "data": {
+          "id": "job_1767321816941_8q4dspvej",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:46:03.682Z",
+        "data": {
+          "id": "job_1767321816941_8q4dspvej",
+          "result": {
+            "schoolId": "llewellyn",
+            "schoolName": "Llewellyn",
+            "driveLink": "https://drive.google.com/drive/folders/1AartjV_mS-jBL4UTm0Wos6o3wDVi80f7",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 3,
+            "localPdfCount": 3,
+            "driveLastModified": "2025-09-03T22:22:48.238Z",
+            "localLastModified": "2025-09-03T22:22:48.238Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816952_ilpy9xmt0",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "maplewood"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "maplewood",
+      "schoolName": "Maplewood",
+      "driveLink": "https://drive.google.com/drive/folders/1BbtthEMT4kPU2jgCUXQ0BLNKRJkqD3Zd",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2025-09-10T14:31:56.158Z",
+      "localLastModified": "2025-09-10T14:31:56.158Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.952Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:57.533Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.952Z",
+        "data": {
+          "id": "job_1767321816952_ilpy9xmt0",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "maplewood"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:57.126Z",
+        "data": {
+          "id": "job_1767321816952_ilpy9xmt0",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:57.519Z",
+        "data": {
+          "id": "job_1767321816952_ilpy9xmt0",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:57.529Z",
+        "data": {
+          "id": "job_1767321816952_ilpy9xmt0",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:57.533Z",
+        "data": {
+          "id": "job_1767321816952_ilpy9xmt0",
+          "result": {
+            "schoolId": "maplewood",
+            "schoolName": "Maplewood",
+            "driveLink": "https://drive.google.com/drive/folders/1BbtthEMT4kPU2jgCUXQ0BLNKRJkqD3Zd",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 8,
+            "localPdfCount": 8,
+            "driveLastModified": "2025-09-10T14:31:56.158Z",
+            "localLastModified": "2025-09-10T14:31:56.158Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816967_zulukj9r5",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "markham"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "markham",
+      "schoolName": "Markham",
+      "driveLink": "https://drive.google.com/drive/folders/1AXiHUdEFRiy_XMZr4WiICEaQ9uHjEllC",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 10,
+      "localPdfCount": 10,
+      "driveLastModified": "2025-09-25T15:18:50.046Z",
+      "localLastModified": "2025-09-25T15:18:50.046Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.967Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:52.121Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.967Z",
+        "data": {
+          "id": "job_1767321816967_zulukj9r5",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "markham"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:51.770Z",
+        "data": {
+          "id": "job_1767321816967_zulukj9r5",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:52.108Z",
+        "data": {
+          "id": "job_1767321816967_zulukj9r5",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:52.117Z",
+        "data": {
+          "id": "job_1767321816967_zulukj9r5",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:52.121Z",
+        "data": {
+          "id": "job_1767321816967_zulukj9r5",
+          "result": {
+            "schoolId": "markham",
+            "schoolName": "Markham",
+            "driveLink": "https://drive.google.com/drive/folders/1AXiHUdEFRiy_XMZr4WiICEaQ9uHjEllC",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 10,
+            "localPdfCount": 10,
+            "driveLastModified": "2025-09-25T15:18:50.046Z",
+            "localLastModified": "2025-09-25T15:18:50.046Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816982_bhljsw1l3",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "marysville"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "marysville",
+      "schoolName": "Marysville",
+      "driveLink": "https://drive.google.com/drive/folders/1GwDuLb77MIb0_Mt9biwqQow9OzWV8JsK",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-09-24T13:06:25.950Z",
+      "localLastModified": "2025-09-24T13:06:25.950Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.983Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:46.766Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.983Z",
+        "data": {
+          "id": "job_1767321816982_bhljsw1l3",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "marysville"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:46.454Z",
+        "data": {
+          "id": "job_1767321816982_bhljsw1l3",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:46.753Z",
+        "data": {
+          "id": "job_1767321816982_bhljsw1l3",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:46.763Z",
+        "data": {
+          "id": "job_1767321816982_bhljsw1l3",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:46.766Z",
+        "data": {
+          "id": "job_1767321816982_bhljsw1l3",
+          "result": {
+            "schoolId": "marysville",
+            "schoolName": "Marysville",
+            "driveLink": "https://drive.google.com/drive/folders/1GwDuLb77MIb0_Mt9biwqQow9OzWV8JsK",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-09-24T13:06:25.950Z",
+            "localLastModified": "2025-09-24T13:06:25.950Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321816990_l30ix32q5",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "mt-tabor"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "mt-tabor",
+      "schoolName": "Mt Tabor",
+      "driveLink": "https://drive.google.com/drive/folders/1AVph0mS-EheR_hUlddk6SujWoJjnUhyX",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 13,
+      "localPdfCount": 13,
+      "driveLastModified": "2025-12-18T18:05:39.067Z",
+      "localLastModified": "2025-12-18T18:05:39.067Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:36.990Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:41.450Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:36.990Z",
+        "data": {
+          "id": "job_1767321816990_l30ix32q5",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "mt-tabor"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:41.084Z",
+        "data": {
+          "id": "job_1767321816990_l30ix32q5",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:41.432Z",
+        "data": {
+          "id": "job_1767321816990_l30ix32q5",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:41.446Z",
+        "data": {
+          "id": "job_1767321816990_l30ix32q5",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:41.450Z",
+        "data": {
+          "id": "job_1767321816990_l30ix32q5",
+          "result": {
+            "schoolId": "mt-tabor",
+            "schoolName": "Mt Tabor",
+            "driveLink": "https://drive.google.com/drive/folders/1AVph0mS-EheR_hUlddk6SujWoJjnUhyX",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 13,
+            "localPdfCount": 13,
+            "driveLastModified": "2025-12-18T18:05:39.067Z",
+            "localLastModified": "2025-12-18T18:05:39.067Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817007_gn2kthjkr",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "ockley-green"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "ockley-green",
+      "schoolName": "Ockley Green",
+      "driveLink": "https://drive.google.com/drive/folders/1AcGj_k1He8ovVY884Ddg_NU86y_9ntUs",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2025-12-17T15:23:06.292Z",
+      "localLastModified": "2025-12-17T15:23:06.292Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.007Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:36.082Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.007Z",
+        "data": {
+          "id": "job_1767321817007_gn2kthjkr",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "ockley-green"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:35.733Z",
+        "data": {
+          "id": "job_1767321817007_gn2kthjkr",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:36.065Z",
+        "data": {
+          "id": "job_1767321817007_gn2kthjkr",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:36.078Z",
+        "data": {
+          "id": "job_1767321817007_gn2kthjkr",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:36.082Z",
+        "data": {
+          "id": "job_1767321817007_gn2kthjkr",
+          "result": {
+            "schoolId": "ockley-green",
+            "schoolName": "Ockley Green",
+            "driveLink": "https://drive.google.com/drive/folders/1AcGj_k1He8ovVY884Ddg_NU86y_9ntUs",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 8,
+            "localPdfCount": 8,
+            "driveLastModified": "2025-12-17T15:23:06.292Z",
+            "localLastModified": "2025-12-17T15:23:06.292Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817014_18w8t4q9k",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "peninsula"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "peninsula",
+      "schoolName": "Peninsula",
+      "driveLink": "https://drive.google.com/drive/folders/1AhUH6ELeKD5JXdspsRtlIxcFvjiALYsF",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-08-03T18:36:16.048Z",
+      "localLastModified": "2025-08-03T18:36:16.048Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.014Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:30.728Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.014Z",
+        "data": {
+          "id": "job_1767321817014_18w8t4q9k",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "peninsula"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:30.360Z",
+        "data": {
+          "id": "job_1767321817014_18w8t4q9k",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:30.714Z",
+        "data": {
+          "id": "job_1767321817014_18w8t4q9k",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:30.725Z",
+        "data": {
+          "id": "job_1767321817014_18w8t4q9k",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:30.728Z",
+        "data": {
+          "id": "job_1767321817014_18w8t4q9k",
+          "result": {
+            "schoolId": "peninsula",
+            "schoolName": "Peninsula",
+            "driveLink": "https://drive.google.com/drive/folders/1AhUH6ELeKD5JXdspsRtlIxcFvjiALYsF",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-08-03T18:36:16.048Z",
+            "localLastModified": "2025-08-03T18:36:16.048Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817030_h7ahftg6o",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "richmond"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "richmond",
+      "schoolName": "Richmond",
+      "driveLink": "https://drive.google.com/drive/folders/10mkJy_ZfQKFsmI84JMn-8TBSW7qQwgKc",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2025-11-25T18:03:29.830Z",
+      "localLastModified": "2025-11-25T18:03:29.830Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.030Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:25.356Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.030Z",
+        "data": {
+          "id": "job_1767321817030_h7ahftg6o",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "richmond"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:24.982Z",
+        "data": {
+          "id": "job_1767321817030_h7ahftg6o",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:25.335Z",
+        "data": {
+          "id": "job_1767321817030_h7ahftg6o",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:25.349Z",
+        "data": {
+          "id": "job_1767321817030_h7ahftg6o",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:25.356Z",
+        "data": {
+          "id": "job_1767321817030_h7ahftg6o",
+          "result": {
+            "schoolId": "richmond",
+            "schoolName": "Richmond",
+            "driveLink": "https://drive.google.com/drive/folders/10mkJy_ZfQKFsmI84JMn-8TBSW7qQwgKc",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 8,
+            "localPdfCount": 8,
+            "driveLastModified": "2025-11-25T18:03:29.830Z",
+            "localLastModified": "2025-11-25T18:03:29.830Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817039_y28gbmcb0",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "rieke"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "rieke",
+      "schoolName": "Rieke",
+      "driveLink": "https://drive.google.com/drive/folders/1B1m6oVpHRY7jxTumGmgbN8ESBnaJ7CZs",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-11-13T16:37:47.340Z",
+      "localLastModified": "2025-11-13T16:37:47.340Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.039Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:19.979Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.039Z",
+        "data": {
+          "id": "job_1767321817039_y28gbmcb0",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "rieke"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:19.610Z",
+        "data": {
+          "id": "job_1767321817039_y28gbmcb0",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:19.975Z",
+        "data": {
+          "id": "job_1767321817039_y28gbmcb0",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:19.977Z",
+        "data": {
+          "id": "job_1767321817039_y28gbmcb0",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:19.979Z",
+        "data": {
+          "id": "job_1767321817039_y28gbmcb0",
+          "result": {
+            "schoolId": "rieke",
+            "schoolName": "Rieke",
+            "driveLink": "https://drive.google.com/drive/folders/1B1m6oVpHRY7jxTumGmgbN8ESBnaJ7CZs",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-11-13T16:37:47.340Z",
+            "localLastModified": "2025-11-13T16:37:47.340Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817064_k3sfl7o70",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "rigler"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "rigler",
+      "schoolName": "Rigler",
+      "driveLink": "https://drive.google.com/drive/folders/1B1SaKRoFPndCFsrye60jBU9RCeu4VvVz",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 12,
+      "localPdfCount": 12,
+      "driveLastModified": "2025-12-17T15:52:36.160Z",
+      "localLastModified": "2025-12-17T15:52:36.160Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.064Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:14.606Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.064Z",
+        "data": {
+          "id": "job_1767321817064_k3sfl7o70",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "rigler"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:14.222Z",
+        "data": {
+          "id": "job_1767321817064_k3sfl7o70",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:14.602Z",
+        "data": {
+          "id": "job_1767321817064_k3sfl7o70",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:14.605Z",
+        "data": {
+          "id": "job_1767321817064_k3sfl7o70",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:14.606Z",
+        "data": {
+          "id": "job_1767321817064_k3sfl7o70",
+          "result": {
+            "schoolId": "rigler",
+            "schoolName": "Rigler",
+            "driveLink": "https://drive.google.com/drive/folders/1B1SaKRoFPndCFsrye60jBU9RCeu4VvVz",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 12,
+            "localPdfCount": 12,
+            "driveLastModified": "2025-12-17T15:52:36.160Z",
+            "localLastModified": "2025-12-17T15:52:36.160Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817087_wy4bi3q83",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "rosa-parks"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "rosa-parks",
+      "schoolName": "Rosa Parks",
+      "driveLink": "https://drive.google.com/drive/folders/1QCa27KupgwYuTFtnHFbMuF5zJK-_Ve3h",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2025-06-26T19:17:01.950Z",
+      "localLastModified": "2025-06-26T19:17:01.950Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.088Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:09.214Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.088Z",
+        "data": {
+          "id": "job_1767321817087_wy4bi3q83",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "rosa-parks"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:08.848Z",
+        "data": {
+          "id": "job_1767321817087_wy4bi3q83",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:09.198Z",
+        "data": {
+          "id": "job_1767321817087_wy4bi3q83",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:09.207Z",
+        "data": {
+          "id": "job_1767321817087_wy4bi3q83",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:09.214Z",
+        "data": {
+          "id": "job_1767321817087_wy4bi3q83",
+          "result": {
+            "schoolId": "rosa-parks",
+            "schoolName": "Rosa Parks",
+            "driveLink": "https://drive.google.com/drive/folders/1QCa27KupgwYuTFtnHFbMuF5zJK-_Ve3h",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 8,
+            "localPdfCount": 8,
+            "driveLastModified": "2025-06-26T19:17:01.950Z",
+            "localLastModified": "2025-06-26T19:17:01.950Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817093_ixgnhmwhf",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "rose-city-park"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "rose-city-park",
+      "schoolName": "Rose City Park",
+      "driveLink": "https://drive.google.com/drive/folders/1AnNjcE6mcwNfqhwKOKVxmyPr5s016jyx",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-10-15T17:31:54.806Z",
+      "localLastModified": "2025-10-15T17:31:54.806Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.093Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:45:03.844Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.093Z",
+        "data": {
+          "id": "job_1767321817093_ixgnhmwhf",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "rose-city-park"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:03.479Z",
+        "data": {
+          "id": "job_1767321817093_ixgnhmwhf",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:03.814Z",
+        "data": {
+          "id": "job_1767321817093_ixgnhmwhf",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:45:03.842Z",
+        "data": {
+          "id": "job_1767321817093_ixgnhmwhf",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:45:03.844Z",
+        "data": {
+          "id": "job_1767321817093_ixgnhmwhf",
+          "result": {
+            "schoolId": "rose-city-park",
+            "schoolName": "Rose City Park",
+            "driveLink": "https://drive.google.com/drive/folders/1AnNjcE6mcwNfqhwKOKVxmyPr5s016jyx",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-10-15T17:31:54.806Z",
+            "localLastModified": "2025-10-15T17:31:54.806Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817106_7pypktx5v",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "roseway-heights"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "roseway-heights",
+      "schoolName": "Roseway Heights",
+      "driveLink": "https://drive.google.com/drive/folders/1AWiPKBp1aG0m_EPtCsHK6qr7NBB3dufz",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 11,
+      "localPdfCount": 11,
+      "driveLastModified": "2025-12-17T14:16:01.322Z",
+      "localLastModified": "2025-12-17T14:16:01.322Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.106Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:58.472Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.106Z",
+        "data": {
+          "id": "job_1767321817106_7pypktx5v",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "roseway-heights"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:58.094Z",
+        "data": {
+          "id": "job_1767321817106_7pypktx5v",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:58.456Z",
+        "data": {
+          "id": "job_1767321817106_7pypktx5v",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:58.467Z",
+        "data": {
+          "id": "job_1767321817106_7pypktx5v",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:58.472Z",
+        "data": {
+          "id": "job_1767321817106_7pypktx5v",
+          "result": {
+            "schoolId": "roseway-heights",
+            "schoolName": "Roseway Heights",
+            "driveLink": "https://drive.google.com/drive/folders/1AWiPKBp1aG0m_EPtCsHK6qr7NBB3dufz",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 11,
+            "localPdfCount": 11,
+            "driveLastModified": "2025-12-17T14:16:01.322Z",
+            "localLastModified": "2025-12-17T14:16:01.322Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817116_n7klzvxuh",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "sabin"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "sabin",
+      "schoolName": "Sabin",
+      "driveLink": "https://drive.google.com/drive/folders/102-R5wgIGE07ltMsuOkHsRwClw8xu3Av",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 5,
+      "localPdfCount": 5,
+      "driveLastModified": "2022-07-05T16:17:29.329Z",
+      "localLastModified": "2022-07-05T16:17:29.329Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.117Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:53.089Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.117Z",
+        "data": {
+          "id": "job_1767321817116_n7klzvxuh",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "sabin"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:52.660Z",
+        "data": {
+          "id": "job_1767321817116_n7klzvxuh",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:53.072Z",
+        "data": {
+          "id": "job_1767321817116_n7klzvxuh",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:53.084Z",
+        "data": {
+          "id": "job_1767321817116_n7klzvxuh",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:53.089Z",
+        "data": {
+          "id": "job_1767321817116_n7klzvxuh",
+          "result": {
+            "schoolId": "sabin",
+            "schoolName": "Sabin",
+            "driveLink": "https://drive.google.com/drive/folders/102-R5wgIGE07ltMsuOkHsRwClw8xu3Av",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 5,
+            "localPdfCount": 5,
+            "driveLastModified": "2022-07-05T16:17:29.329Z",
+            "localLastModified": "2022-07-05T16:17:29.329Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817127_94enluow9",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "scott"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "scott",
+      "schoolName": "Scott",
+      "driveLink": "https://drive.google.com/drive/folders/1Akemk1ysTHW4NQPTSC22fzACYPYcmOlV",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-12-11T18:02:58.542Z",
+      "localLastModified": "2025-12-11T18:02:58.542Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.127Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:47.657Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.127Z",
+        "data": {
+          "id": "job_1767321817127_94enluow9",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "scott"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:47.177Z",
+        "data": {
+          "id": "job_1767321817127_94enluow9",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:47.639Z",
+        "data": {
+          "id": "job_1767321817127_94enluow9",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:47.652Z",
+        "data": {
+          "id": "job_1767321817127_94enluow9",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:47.657Z",
+        "data": {
+          "id": "job_1767321817127_94enluow9",
+          "result": {
+            "schoolId": "scott",
+            "schoolName": "Scott",
+            "driveLink": "https://drive.google.com/drive/folders/1Akemk1ysTHW4NQPTSC22fzACYPYcmOlV",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-12-11T18:02:58.542Z",
+            "localLastModified": "2025-12-11T18:02:58.542Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817138_jrruauwj0",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "sellwood"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "sellwood",
+      "schoolName": "Sellwood",
+      "driveLink": "https://drive.google.com/drive/folders/1B-AiQE6i3izdPgn0RRBto4as2mExvoD2",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 12,
+      "localPdfCount": 12,
+      "driveLastModified": "2025-10-17T13:53:10.641Z",
+      "localLastModified": "2025-10-17T13:53:10.641Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.138Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:42.172Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.138Z",
+        "data": {
+          "id": "job_1767321817138_jrruauwj0",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "sellwood"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:41.757Z",
+        "data": {
+          "id": "job_1767321817138_jrruauwj0",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:42.149Z",
+        "data": {
+          "id": "job_1767321817138_jrruauwj0",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:42.165Z",
+        "data": {
+          "id": "job_1767321817138_jrruauwj0",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:42.172Z",
+        "data": {
+          "id": "job_1767321817138_jrruauwj0",
+          "result": {
+            "schoolId": "sellwood",
+            "schoolName": "Sellwood",
+            "driveLink": "https://drive.google.com/drive/folders/1B-AiQE6i3izdPgn0RRBto4as2mExvoD2",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 12,
+            "localPdfCount": 12,
+            "driveLastModified": "2025-10-17T13:53:10.641Z",
+            "localLastModified": "2025-10-17T13:53:10.641Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817153_e4dlfw40j",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "sitton"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "sitton",
+      "schoolName": "Sitton",
+      "driveLink": "https://drive.google.com/drive/folders/1B62x5JjJAZWDZ4-rMNCHMk1jXPV--mM2",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-08-05T20:17:37.891Z",
+      "localLastModified": "2025-08-05T20:17:37.891Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.153Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:36.751Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.153Z",
+        "data": {
+          "id": "job_1767321817153_e4dlfw40j",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "sitton"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:36.405Z",
+        "data": {
+          "id": "job_1767321817153_e4dlfw40j",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:36.731Z",
+        "data": {
+          "id": "job_1767321817153_e4dlfw40j",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:36.747Z",
+        "data": {
+          "id": "job_1767321817153_e4dlfw40j",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:36.751Z",
+        "data": {
+          "id": "job_1767321817153_e4dlfw40j",
+          "result": {
+            "schoolId": "sitton",
+            "schoolName": "Sitton",
+            "driveLink": "https://drive.google.com/drive/folders/1B62x5JjJAZWDZ4-rMNCHMk1jXPV--mM2",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-08-05T20:17:37.891Z",
+            "localLastModified": "2025-08-05T20:17:37.891Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817168_wkkpsrdk9",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "skyline"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "skyline",
+      "schoolName": "Skyline",
+      "driveLink": "https://drive.google.com/drive/folders/11yS4mKChoAblrlWy8DK8P_V4n-PxWooe",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 10,
+      "localPdfCount": 10,
+      "driveLastModified": "2025-12-10T16:20:50.273Z",
+      "localLastModified": "2025-12-10T16:20:50.273Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.168Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:31.401Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.168Z",
+        "data": {
+          "id": "job_1767321817168_wkkpsrdk9",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "skyline"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:31.078Z",
+        "data": {
+          "id": "job_1767321817168_wkkpsrdk9",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:31.384Z",
+        "data": {
+          "id": "job_1767321817168_wkkpsrdk9",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:31.395Z",
+        "data": {
+          "id": "job_1767321817168_wkkpsrdk9",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:31.401Z",
+        "data": {
+          "id": "job_1767321817168_wkkpsrdk9",
+          "result": {
+            "schoolId": "skyline",
+            "schoolName": "Skyline",
+            "driveLink": "https://drive.google.com/drive/folders/11yS4mKChoAblrlWy8DK8P_V4n-PxWooe",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 10,
+            "localPdfCount": 10,
+            "driveLastModified": "2025-12-10T16:20:50.273Z",
+            "localLastModified": "2025-12-10T16:20:50.273Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817177_g90hpvsel",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "stephenson"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "stephenson",
+      "schoolName": "Stephenson",
+      "driveLink": "https://drive.google.com/drive/folders/1B5SEBPRkbdfjeRs_PL4zBI1kV3j4XqvK",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-10-07T18:52:37.050Z",
+      "localLastModified": "2025-10-07T18:52:37.050Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.177Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:26.072Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.177Z",
+        "data": {
+          "id": "job_1767321817177_g90hpvsel",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "stephenson"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:25.693Z",
+        "data": {
+          "id": "job_1767321817177_g90hpvsel",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:26.057Z",
+        "data": {
+          "id": "job_1767321817177_g90hpvsel",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:26.068Z",
+        "data": {
+          "id": "job_1767321817177_g90hpvsel",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:26.072Z",
+        "data": {
+          "id": "job_1767321817177_g90hpvsel",
+          "result": {
+            "schoolId": "stephenson",
+            "schoolName": "Stephenson",
+            "driveLink": "https://drive.google.com/drive/folders/1B5SEBPRkbdfjeRs_PL4zBI1kV3j4XqvK",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-10-07T18:52:37.050Z",
+            "localLastModified": "2025-10-07T18:52:37.050Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817189_xjoal6k4g",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "tubman"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "tubman",
+      "schoolName": "Tubman",
+      "driveLink": "https://drive.google.com/drive/folders/1B9aLGpw1wbfKr3ZJRQo_ZTyaaUnkCsp0",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2025-12-11T22:58:15.905Z",
+      "localLastModified": "2025-12-11T22:58:15.905Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.189Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:20.688Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.189Z",
+        "data": {
+          "id": "job_1767321817189_xjoal6k4g",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "tubman"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:20.207Z",
+        "data": {
+          "id": "job_1767321817189_xjoal6k4g",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:20.672Z",
+        "data": {
+          "id": "job_1767321817189_xjoal6k4g",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:20.684Z",
+        "data": {
+          "id": "job_1767321817189_xjoal6k4g",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:20.688Z",
+        "data": {
+          "id": "job_1767321817189_xjoal6k4g",
+          "result": {
+            "schoolId": "tubman",
+            "schoolName": "Tubman",
+            "driveLink": "https://drive.google.com/drive/folders/1B9aLGpw1wbfKr3ZJRQo_ZTyaaUnkCsp0",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 6,
+            "localPdfCount": 6,
+            "driveLastModified": "2025-12-11T22:58:15.905Z",
+            "localLastModified": "2025-12-11T22:58:15.905Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817201_ragccsa3a",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "vernon"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "vernon",
+      "schoolName": "Vernon",
+      "driveLink": "https://drive.google.com/drive/folders/1BFFcmCQLESn5a6F0kC_4wR1_sbhK_X6o",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-08-05T18:50:03.793Z",
+      "localLastModified": "2025-08-05T18:50:03.793Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.202Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:15.202Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.202Z",
+        "data": {
+          "id": "job_1767321817201_ragccsa3a",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "vernon"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:14.858Z",
+        "data": {
+          "id": "job_1767321817201_ragccsa3a",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:15.181Z",
+        "data": {
+          "id": "job_1767321817201_ragccsa3a",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:15.198Z",
+        "data": {
+          "id": "job_1767321817201_ragccsa3a",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:15.202Z",
+        "data": {
+          "id": "job_1767321817201_ragccsa3a",
+          "result": {
+            "schoolId": "vernon",
+            "schoolName": "Vernon",
+            "driveLink": "https://drive.google.com/drive/folders/1BFFcmCQLESn5a6F0kC_4wR1_sbhK_X6o",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-08-05T18:50:03.793Z",
+            "localLastModified": "2025-08-05T18:50:03.793Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817213_qfeutpij6",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "vestal"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "vestal",
+      "schoolName": "Vestal",
+      "driveLink": "https://drive.google.com/drive/folders/1Bw3LiMIPKIFIUJhIev21bDfUPDDUojxR",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-08-03T16:11:16.563Z",
+      "localLastModified": "2025-08-03T16:11:16.563Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.213Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:09.854Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.213Z",
+        "data": {
+          "id": "job_1767321817213_qfeutpij6",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "vestal"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:09.497Z",
+        "data": {
+          "id": "job_1767321817213_qfeutpij6",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:09.838Z",
+        "data": {
+          "id": "job_1767321817213_qfeutpij6",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:09.850Z",
+        "data": {
+          "id": "job_1767321817213_qfeutpij6",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:09.854Z",
+        "data": {
+          "id": "job_1767321817213_qfeutpij6",
+          "result": {
+            "schoolId": "vestal",
+            "schoolName": "Vestal",
+            "driveLink": "https://drive.google.com/drive/folders/1Bw3LiMIPKIFIUJhIev21bDfUPDDUojxR",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-08-03T16:11:16.563Z",
+            "localLastModified": "2025-08-03T16:11:16.563Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817223_xmgvw7r7z",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "west-sylvan"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "west-sylvan",
+      "schoolName": "West Sylvan",
+      "driveLink": "https://drive.google.com/drive/folders/1BC03MH02DFuUL6teeq4jkcT2THRGgzxj",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 38,
+      "localPdfCount": 38,
+      "driveLastModified": "2025-11-25T17:01:16.141Z",
+      "localLastModified": "2025-11-25T17:01:16.141Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.223Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:44:04.493Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.223Z",
+        "data": {
+          "id": "job_1767321817223_xmgvw7r7z",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "west-sylvan"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:03.953Z",
+        "data": {
+          "id": "job_1767321817223_xmgvw7r7z",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:04.475Z",
+        "data": {
+          "id": "job_1767321817223_xmgvw7r7z",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:44:04.488Z",
+        "data": {
+          "id": "job_1767321817223_xmgvw7r7z",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:44:04.493Z",
+        "data": {
+          "id": "job_1767321817223_xmgvw7r7z",
+          "result": {
+            "schoolId": "west-sylvan",
+            "schoolName": "West Sylvan",
+            "driveLink": "https://drive.google.com/drive/folders/1BC03MH02DFuUL6teeq4jkcT2THRGgzxj",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 38,
+            "localPdfCount": 38,
+            "driveLastModified": "2025-11-25T17:01:16.141Z",
+            "localLastModified": "2025-11-25T17:01:16.141Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817238_rzmk0hkf9",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "whitman"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "whitman",
+      "schoolName": "Whitman",
+      "driveLink": "https://drive.google.com/drive/folders/1BOpempBoVyZNwDHyg4R-iKpMFrvtkUL0",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2025-10-22T17:04:56.941Z",
+      "localLastModified": "2025-10-22T17:04:56.941Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.239Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:43:58.950Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.239Z",
+        "data": {
+          "id": "job_1767321817238_rzmk0hkf9",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "whitman"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:58.614Z",
+        "data": {
+          "id": "job_1767321817238_rzmk0hkf9",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:58.931Z",
+        "data": {
+          "id": "job_1767321817238_rzmk0hkf9",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:58.945Z",
+        "data": {
+          "id": "job_1767321817238_rzmk0hkf9",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:43:58.950Z",
+        "data": {
+          "id": "job_1767321817238_rzmk0hkf9",
+          "result": {
+            "schoolId": "whitman",
+            "schoolName": "Whitman",
+            "driveLink": "https://drive.google.com/drive/folders/1BOpempBoVyZNwDHyg4R-iKpMFrvtkUL0",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 2,
+            "localPdfCount": 2,
+            "driveLastModified": "2025-10-22T17:04:56.941Z",
+            "localLastModified": "2025-10-22T17:04:56.941Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817246_ia4swrv08",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "woodlawn"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "woodlawn",
+      "schoolName": "Woodlawn",
+      "driveLink": "https://drive.google.com/drive/folders/1BL75PyGGfT3JfrcLXelVbr4A_dg0A-1_",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 3,
+      "localPdfCount": 3,
+      "driveLastModified": "2025-08-05T16:58:07.814Z",
+      "localLastModified": "2025-08-05T16:58:07.814Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.247Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:43:53.610Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.247Z",
+        "data": {
+          "id": "job_1767321817246_ia4swrv08",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "woodlawn"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:53.248Z",
+        "data": {
+          "id": "job_1767321817246_ia4swrv08",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:53.596Z",
+        "data": {
+          "id": "job_1767321817246_ia4swrv08",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:53.606Z",
+        "data": {
+          "id": "job_1767321817246_ia4swrv08",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:43:53.610Z",
+        "data": {
+          "id": "job_1767321817246_ia4swrv08",
+          "result": {
+            "schoolId": "woodlawn",
+            "schoolName": "Woodlawn",
+            "driveLink": "https://drive.google.com/drive/folders/1BL75PyGGfT3JfrcLXelVbr4A_dg0A-1_",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 3,
+            "localPdfCount": 3,
+            "driveLastModified": "2025-08-05T16:58:07.814Z",
+            "localLastModified": "2025-08-05T16:58:07.814Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817262_am38q18l3",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "woodmere"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "woodmere",
+      "schoolName": "Woodmere",
+      "driveLink": "https://drive.google.com/drive/folders/1BZ-1EgJe6bT4ALAjJuS8ws7Gmeeu-3H1",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-08-04T21:08:36.312Z",
+      "localLastModified": "2025-08-04T21:08:36.312Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.262Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:43:48.243Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.262Z",
+        "data": {
+          "id": "job_1767321817262_am38q18l3",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "woodmere"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:47.788Z",
+        "data": {
+          "id": "job_1767321817262_am38q18l3",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:48.228Z",
+        "data": {
+          "id": "job_1767321817262_am38q18l3",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:48.237Z",
+        "data": {
+          "id": "job_1767321817262_am38q18l3",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:43:48.243Z",
+        "data": {
+          "id": "job_1767321817262_am38q18l3",
+          "result": {
+            "schoolId": "woodmere",
+            "schoolName": "Woodmere",
+            "driveLink": "https://drive.google.com/drive/folders/1BZ-1EgJe6bT4ALAjJuS8ws7Gmeeu-3H1",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-08-04T21:08:36.312Z",
+            "localLastModified": "2025-08-04T21:08:36.312Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job_1767321817271_d9mnhd18w",
+    "name": "drive-check",
+    "data": {
+      "schoolId": "woodstock"
+    },
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "woodstock",
+      "schoolName": "Woodstock",
+      "driveLink": "https://drive.google.com/drive/folders/1BS3K6V0MKOrCtK9wf2bSNUvGPkCjHGjB",
+      "hasDriveLink": true,
+      "accessible": true,
+      "hasPdfs": true,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2025-10-24T13:39:59.549Z",
+      "localLastModified": "2025-10-24T13:39:59.549Z",
+      "matches": true,
+      "needsUpdate": false,
+      "error": null
+    },
+    "error": null,
+    "createdAt": "2026-01-02T02:43:37.271Z",
+    "processedAt": null,
+    "finishedAt": "2026-01-02T02:43:42.781Z",
+    "attemptsMade": 0,
+    "attemptsTotal": 3,
+    "events": [
+      {
+        "event": "created",
+        "timestamp": "2026-01-02T02:43:37.271Z",
+        "data": {
+          "id": "job_1767321817271_d9mnhd18w",
+          "name": "drive-check",
+          "data": {
+            "schoolId": "woodstock"
+          },
+          "attempts": 3
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:42.324Z",
+        "data": {
+          "id": "job_1767321817271_d9mnhd18w",
+          "progress": 20
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:42.766Z",
+        "data": {
+          "id": "job_1767321817271_d9mnhd18w",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-02T02:43:42.777Z",
+        "data": {
+          "id": "job_1767321817271_d9mnhd18w",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-02T02:43:42.781Z",
+        "data": {
+          "id": "job_1767321817271_d9mnhd18w",
+          "result": {
+            "schoolId": "woodstock",
+            "schoolName": "Woodstock",
+            "driveLink": "https://drive.google.com/drive/folders/1BS3K6V0MKOrCtK9wf2bSNUvGPkCjHGjB",
+            "hasDriveLink": true,
+            "accessible": true,
+            "hasPdfs": true,
+            "pdfCount": 4,
+            "localPdfCount": 4,
+            "driveLastModified": "2025-10-24T13:39:59.549Z",
+            "localLastModified": "2025-10-24T13:39:59.549Z",
+            "matches": true,
+            "needsUpdate": false,
+            "error": null
+          }
+        }
+      }
+    ]
   }
 ]
