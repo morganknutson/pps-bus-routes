@@ -13,7 +13,7 @@
  *   node scripts/trigger-pdf-fetch.js --all
  */
 
-const API_BASE = process.env.API_BASE || 'http://localhost:3001/api';
+const API_BASE = process.env.API_BASE || 'http://localhost:3005/api';
 const POLL_INTERVAL = 2000; // 2 seconds
 const MAX_WAIT_TIME = 5 * 60 * 1000; // 5 minutes per job
 const JOB_STATUS_TIMEOUT = 5000; // 5 seconds for status check

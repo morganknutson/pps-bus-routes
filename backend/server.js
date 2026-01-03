@@ -28,7 +28,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3005;
 
 // Track server start time for uptime calculation
 const serverStartTime = Date.now();
@@ -46,6 +46,12 @@ if (process.env.NODE_ENV === 'production' && !process.env.FRONTEND_URL) {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`[Server] ${req.method} ${req.url}`);
+  next();
+});
 
 // Routes
 app.use('/api/drive', driveRouter);

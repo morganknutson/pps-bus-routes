@@ -70,10 +70,11 @@ const sections: Section[] = [
     title: 'Operations & Reliability',
     subsections: [
       { id: 'autocomplete-geocoding', title: '1. Autocomplete & Geocoding' },
-      { id: 'deployment', title: '2. Deployment Pipeline' },
-      { id: 'testing', title: '3. Testing Infrastructure' },
-      { id: 'file-structure', title: '4. Project Organization' },
-      { id: 'maintenance', title: '5. Maintenance & Jobs' },
+      { id: 'backend-performance', title: '2. Backend Performance & Stability', isHighlighted: true },
+      { id: 'deployment', title: '3. Deployment Pipeline' },
+      { id: 'testing', title: '4. Testing Infrastructure' },
+      { id: 'file-structure', title: '5. Project Organization' },
+      { id: 'maintenance', title: '6. Maintenance & Jobs' },
     ],
   },
   {
@@ -1020,9 +1021,25 @@ export function TechPage() {
               </SectionContent>
             </div>
 
+            <div id="backend-performance" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                2. Backend Performance & Stability
+              </h3>
+              <SectionContent>
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>Service Reliability:</strong>
+                  <ul>
+                    <li><strong>Port Configuration</strong> - The backend uses port <code>3005</code> by default to avoid conflicts with system services or IDE plugins (like Cursor extension host) which often claim port <code>3001</code>.</li>
+                    <li><strong>I/O Chunking</strong> - Heavy endpoints like <code>/api/schools</code> use chunked processing (20 schools at a time) instead of full parallelism to prevent event loop blocking and file descriptor exhaustion.</li>
+                    <li><strong>Request Logging</strong> - Real-time request logging in the backend provides visibility into throughput and potential bottlenecks.</li>
+                  </ul>
+                </div>
+              </SectionContent>
+            </div>
+
             <div id="deployment" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                2. Deployment Pipeline
+                3. Deployment Pipeline
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>

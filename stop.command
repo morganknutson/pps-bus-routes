@@ -7,9 +7,9 @@ cd "$(dirname "$0")"
 
 echo "🛑 Stopping PPS Bus Maps..."
 
-# Kill processes by port (3000 for frontend, 3001 for backend)
-echo "   Checking ports 3000 and 3001..."
-PIDS=$(lsof -ti :3000,3001 || true)
+# Kill processes by port (3000 for frontend, 3005 for backend)
+echo "   Checking ports 3000 and 3005..."
+PIDS=$(lsof -ti :3000,3005 || true)
 if [ -n "$PIDS" ]; then
     echo "   Stopping processes: $PIDS"
     echo "$PIDS" | xargs kill -9 2>/dev/null || true
