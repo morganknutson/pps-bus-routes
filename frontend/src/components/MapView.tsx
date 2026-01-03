@@ -13,6 +13,7 @@ import { geocodeAddress } from '../services/api';
 import { toLeafletPosition, validateLngLat, formatCoordinates } from '../utils/coordinates';
 import { DarkModeTileLayer } from './DarkModeTileLayer';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { analyticsService } from '../services/analytics';
 import { MapInfoPanel } from './MapInfoPanel';
 import { StopInfoTooltip } from './StopInfoTooltip';
 import { SchoolInfoTooltip } from './SchoolInfoTooltip';
@@ -136,17 +137,56 @@ export function MapView({
   // Track if we have successfully fitted the map to the initial set of schools
   const hasInitiallyFittedRef = useRef<boolean>(false);
 
-  // Mark map as ready
+  // Mark map as ready and attach listeners
   useEffect(() => {
-    if (!map) return;
+    if (!map || typeof map.on !== 'function') return;
     const checkReady = () => {
       if (map.getContainer()) {
         console.log('[MapView] Map container ready');
         setIsMapReady(true);
       }
     };
-    map.whenReady(checkReady);
+
+    // Attach map interaction listeners
+    const onZoomEnd = () => {
+      analyticsService.trackMapInteraction(`zoom_${map.getZoom()}`);
+    };
+
+    const onMoveEnd = () => {
+      const center = map.getCenter();
+      analyticsService.trackAction('map_move', { 
+        lat: center.lat.toFixed(4), 
+        lng: center.lng.toFixed(4),
+        zoom: map.getZoom()
+      });
+    };
+
+    const onClick = (e: L.LeafletMouseEvent) => {
+      // Only track clicks that aren't on markers (which are handled by marker click handlers)
+      if (e.originalEvent.target === map.getContainer() || (e.originalEvent.target as HTMLElement).classList.contains('leaflet-zoom-animated')) {
+        analyticsService.trackAction('map_click', { 
+          lat: e.latlng.lat.toFixed(4), 
+          lng: e.latlng.lng.toFixed(4) 
+        });
+      }
+    };
+
+    map.on('zoomend', onZoomEnd);
+    map.on('moveend', onMoveEnd);
+    map.on('click', onClick);
+
+    if (typeof map.whenReady === 'function') {
+      map.whenReady(checkReady);
+    }
     checkReady();
+
+    return () => {
+      if (typeof map.off === 'function') {
+        map.off('zoomend', onZoomEnd);
+        map.off('moveend', onMoveEnd);
+        map.off('click', onClick);
+      }
+    };
   }, [map]);
 
   // Update polyline opacities when isFlying changes
@@ -234,6 +274,7 @@ export function MapView({
     if (!map || !isMapReady || !mapIntent) return;
 
     console.log('[MapView] Executing map intent:', mapIntent.type, mapIntent.data);
+    analyticsService.trackAction('map_intent_execution', { type: mapIntent.type });
 
     switch (mapIntent.type) {
       case 'DOUBLE_FIT': {
@@ -386,6 +427,13 @@ export function MapView({
   const activeSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
   const schoolHasNoRoutes = !!activeSchool && !isLoading && routes.length === 0;
 
+  // Track "No Routes" state
+  useEffect(() => {
+    if (schoolHasNoRoutes && activeSchool) {
+      analyticsService.trackAction('school_no_routes_viewed', { schoolName: activeSchool.name });
+    }
+  }, [schoolHasNoRoutes, activeSchool?.id]);
+
   // Function to recalculate route geometry
   const recalculateRouteGeometry = async (routeId: string) => {
     const route = routes.find(r => r.id === routeId);
@@ -455,8 +503,9 @@ export function MapView({
       } else {
         throw new Error('Route calculation returned empty coordinates');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(`[MapView] ❌ Error fetching route for ${route.name}:`, error);
+      analyticsService.trackError(`Route geometry fetch failed: ${route.name} - ${error.message}`);
         // Fallback to straight line
         const fallbackCoordinates = stopsWithCoords.map(stop => {
           if (!validateLngLat(stop.coordinates)) {
@@ -1159,7 +1208,10 @@ export function MapView({
             Route information not provided on the web by school district.
           </p>
           <button
-            onClick={() => setSelectedSchool(null)}
+            onClick={() => {
+              analyticsService.trackAction('no_routes_select_different_school');
+              setSelectedSchool(null);
+            }}
             style={{
               padding: '0.75rem 1.5rem',
               backgroundColor: 'var(--bg-primary)',

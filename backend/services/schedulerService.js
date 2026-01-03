@@ -222,9 +222,10 @@ function startScheduler() {
     return;
   }
   
-  // Disable scheduler in production
-  if (process.env.NODE_ENV === 'production') {
-    console.log('[Scheduler] 🚫 Scheduler is DISABLED in production mode');
+  // Disable scheduler in production OR if explicitly requested via environment variable
+  if (process.env.NODE_ENV === 'production' || process.env.ENABLE_SCHEDULER !== 'true') {
+    const reason = process.env.NODE_ENV === 'production' ? 'production mode' : 'ENABLE_SCHEDULER is not true';
+    console.log(`[Scheduler] 🚫 Scheduler is DISABLED (${reason})`);
     return;
   }
 

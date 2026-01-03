@@ -6,6 +6,7 @@ import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useStore } from '../store/useStore';
+import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
@@ -198,7 +199,10 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
                   <MapPinIcon width={isMobile ? 11 : 9} height={isMobile ? 15 : 13} style={{ flexShrink: 0, color: 'var(--text-tertiary)', marginTop: isMobile ? '4px' : '2px' }} />
                   <a
                     href="#"
-                    onClick={(e) => handleMapLinkClick(e, school.address!, school.coordinates)}
+                    onClick={(e) => {
+                      analyticsService.trackOutboundLink(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(school.address!)}`, 'maps');
+                      handleMapLinkClick(e, school.address!, school.coordinates);
+                    }}
                     style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500', display: 'block' }}
                   >
                     {school.address}
@@ -231,6 +235,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
                 href={school.schoolPageLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => analyticsService.trackOutboundLink(school.schoolPageLink!, 'website')}
                 style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               >
                 <i className="fas fa-link"></i>
@@ -242,6 +247,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
                 href={school.driveLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => analyticsService.trackOutboundLink(school.driveLink!, 'pdf')}
                 style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', marginLeft: 'auto' }}
               >
                 <i className="fas fa-folder-open"></i>

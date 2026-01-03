@@ -42,9 +42,15 @@ export class WorkerService {
       return;
     }
 
-    // Disable jobs and polling in production
+    // Disable jobs and polling in production - ONLY restricted to dev for now
     if (process.env.NODE_ENV === 'production') {
       console.log('[WorkerService] 🚫 Background jobs and polling are DISABLED in production mode');
+      return;
+    }
+    
+    // Explicitly disable polling if requested via environment variable
+    if (process.env.DISABLE_POLLING === 'true') {
+      console.log('[WorkerService] 🚫 Background polling is EXPLICITLY DISABLED via environment variable');
       return;
     }
 

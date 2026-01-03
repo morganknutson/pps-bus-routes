@@ -11,6 +11,26 @@ echo ""
 
 # Step 1: Stop servers
 echo "1️⃣  Stopping servers..."
+
+# Try to kill processes by port first (more reliable)
+PORT=3001
+echo "   Checking for processes on port $PORT..."
+PORT_PIDS=$(lsof -t -i :$PORT || true)
+if [ -n "$PORT_PIDS" ]; then
+    echo "   Found processes on port $PORT: $PORT_PIDS"
+    echo "$PORT_PIDS" | xargs kill 2>/dev/null || true
+    sleep 2
+    
+    # Force kill if still running
+    REMAINING_PORT=$(lsof -t -i :$PORT || true)
+    if [ -n "$REMAINING_PORT" ]; then
+        echo "   Force killing remaining port processes..."
+        echo "$REMAINING_PORT" | xargs kill -9 2>/dev/null || true
+        sleep 1
+    fi
+fi
+
+# Fallback: Find server processes by name
 SERVER_PIDS=$(ps aux | grep "node.*server.js" | grep -v grep | awk '{print $2}' || true)
 if [ -n "$SERVER_PIDS" ]; then
     echo "   Found server processes: $SERVER_PIDS"
@@ -70,7 +90,7 @@ echo "   Clearing previous build artifacts..."
 rm -rf dist
 rm -rf node_modules/.vite 2>/dev/null || true
 
-if npm run build 2>&1 | tee ../logs/build.log | tail -20; then
+if npm run build 2>&1 | tee -a ../logs/build.log | tail -20; then
     echo "   ✅ Frontend build successful"
 else
     echo "   ❌ Frontend build failed! Check logs/build.log for details"
@@ -90,7 +110,8 @@ echo ""
 
 # Step 4: Start servers
 echo "4️⃣  Starting servers..."
-npm run start:production > logs/server.log 2>&1 &
+# Append to logs instead of overwriting, and ensure NODE_ENV is set
+npm run start:production >> logs/server.log 2>&1 &
 SERVER_PID=$!
 echo "   Started server process (PID: $SERVER_PID)"
 
