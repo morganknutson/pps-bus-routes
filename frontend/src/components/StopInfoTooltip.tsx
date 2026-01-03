@@ -4,6 +4,7 @@ import { formatStreetName, extractStreetNames } from '../utils/formatAddress';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { formatEffectiveDate } from '../utils/dateUtils';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { analyticsService } from '../services/analytics';
 import { MapPinIcon } from './MapPinIcon';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
 import { XIcon } from './XIcon';
@@ -98,6 +99,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
     e.stopPropagation();
     navigator.clipboard.writeText(stop.address);
     setCopied(true);
+    analyticsService.trackAction('copy_address', { address: stop.address, context: 'stop_tooltip' });
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -195,7 +197,12 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                         <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                           {index > 0 && <span style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>&</span>}
                           <span
-                            onClick={() => !isLoading && onStreetClick?.(streetName)}
+                            onClick={() => {
+                              if (!isLoading) {
+                                analyticsService.trackAction('street_highlight_click', { street: streetName });
+                                onStreetClick?.(streetName);
+                              }
+                            }}
                             style={{
                               cursor: isLoading ? 'not-allowed' : 'pointer',
                               color: isHighlighted ? '#FFD700' : isLoading ? 'var(--text-tertiary)' : 'var(--text-primary)',
@@ -250,7 +257,10 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         {/* Action Row */}
         <div style={{ display: 'flex', gap: '10px', marginTop: '1.5rem' }}>
           <button
-            onClick={(e) => handleMapLinkClick(e, stop.address, stop.coordinates)}
+            onClick={(e) => {
+              analyticsService.trackOutboundLink(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.address)}`, 'maps');
+              handleMapLinkClick(e, stop.address, stop.coordinates);
+            }}
             style={{
               flex: 1,
               display: 'flex',
@@ -323,7 +333,10 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
           
           {enableStreetPins && !stop.isSchoolStop && streets.length > 0 && (
             <button
-              onClick={onDropStreetPins}
+              onClick={() => {
+                analyticsService.trackAdminAction('drop_street_pins', stop.address);
+                onDropStreetPins?.();
+              }}
               disabled={loadingStreetPins}
               style={{
                 width: '100%',
@@ -350,7 +363,10 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
 
           {editingMode && undoHistoryCount > 0 && (
             <button
-              onClick={onUndo}
+              onClick={() => {
+                analyticsService.trackAdminAction('undo_coordinate_change', stop.id);
+                onUndo?.();
+              }}
               style={{
                 width: '100%',
                 background: 'var(--bg-primary)',

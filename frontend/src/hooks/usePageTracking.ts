@@ -13,6 +13,13 @@ export function usePageTracking() {
     // Track page view on initial mount and whenever the path changes
     const currentPath = location.pathname + location.search;
     analyticsService.trackPageView(currentPath);
+
+    // Capture referral context from URL if present
+    const params = new URLSearchParams(location.search);
+    const ref = params.get('ref') || params.get('source') || params.get('utm_source');
+    if (ref) {
+      analyticsService.setUserProperty('referral_source', ref);
+    }
   }, [location]);
 }
 

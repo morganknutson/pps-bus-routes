@@ -28,10 +28,13 @@ if (!fs.existsSync(JOBS_HISTORY_DIR)) {
 export class JobHistoryService {
   constructor() {
     this.historyFile = JOBS_HISTORY_FILE;
-    this.maxHistorySize = 10000; // Keep last 10,000 jobs
+    this.maxHistorySize = 1000; // Reduced from 10,000 to 1,000 for better performance
     this.history = [];
     this.isSaving = false;
     this.needsSave = false;
+    this.saveInterval = 5000; // Save at most once every 5 seconds
+    this.lastSaveTime = 0;
+    this.saveTimeout = null;
     
     // Initial load
     this.init();
@@ -42,6 +45,11 @@ export class JobHistoryService {
    */
   async init() {
     this.history = await this.loadHistory();
+    // Immediately trim if oversized
+    if (this.history.length > this.maxHistorySize) {
+      this.history = this.history.slice(-this.maxHistorySize);
+      await this.saveHistory();
+    }
   }
 
   /**
@@ -54,6 +62,7 @@ export class JobHistoryService {
 
     try {
       const data = await fsPromises.readFile(this.historyFile, 'utf8');
+      if (!data || data.trim() === '') return [];
       const parsed = JSON.parse(data);
       return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
@@ -63,8 +72,33 @@ export class JobHistoryService {
   }
 
   /**
+   * Request a save - throttled to prevent event loop blocking
+   */
+  requestSave() {
+    const now = Date.now();
+    const timeSinceLastSave = now - this.lastSaveTime;
+
+    if (this.saveTimeout) {
+      // Already have a pending save
+      return;
+    }
+
+    if (timeSinceLastSave >= this.saveInterval) {
+      // Can save immediately
+      this.saveHistory();
+    } else {
+      // Schedule save for later
+      const delay = this.saveInterval - timeSinceLastSave;
+      this.saveTimeout = setTimeout(() => {
+        this.saveTimeout = null;
+        this.saveHistory();
+      }, delay);
+    }
+  }
+
+  /**
    * Save job history to file
-   * Implements a simple queue and atomic write to prevent corruption
+   * Implements atomic write to prevent corruption
    */
   async saveHistory() {
     if (this.isSaving) {
@@ -74,12 +108,16 @@ export class JobHistoryService {
 
     this.isSaving = true;
     this.needsSave = false;
+    this.lastSaveTime = Date.now();
 
     try {
       // Keep only the most recent jobs
       const trimmed = this.history.slice(-this.maxHistorySize);
       const tempFile = `${this.historyFile}.tmp`;
       
+      // Use synchronous write for temp file to ensure it's complete before renaming,
+      // but wrap in try/catch to handle errors. 
+      // Actually, async writeFile is fine and better for event loop.
       await fsPromises.writeFile(tempFile, JSON.stringify(trimmed, null, 2), 'utf8');
       await fsPromises.rename(tempFile, this.historyFile);
       
@@ -124,6 +162,11 @@ export class JobHistoryService {
         events: [],
       };
       this.history.push(job);
+      
+      // If history is too large, remove oldest
+      if (this.history.length > this.maxHistorySize + 100) { // Add buffer to avoid frequent trimming
+        this.history = this.history.slice(-this.maxHistorySize);
+      }
     }
 
     // Update job based on event
@@ -170,13 +213,13 @@ export class JobHistoryService {
       data: jobData,
     });
 
-    // Keep only last 50 events per job
-    if (job.events.length > 50) {
-      job.events = job.events.slice(-50);
+    // Keep only last 20 events per job (reduced from 50)
+    if (job.events.length > 20) {
+      job.events = job.events.slice(-20);
     }
 
-    // Trigger save (non-blocking)
-    this.saveHistory();
+    // Trigger throttled save
+    this.requestSave();
   }
 
   /**

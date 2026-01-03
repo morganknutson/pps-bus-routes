@@ -461,6 +461,9 @@ function App() {
       document.documentElement.classList.remove('dark-mode');
       document.body.classList.remove('dark-mode');
     }
+
+    // Update analytics user property
+    analyticsService.setUserProperty('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
   // Initialize store and analytics
@@ -479,8 +482,18 @@ function App() {
     const trackingId = import.meta.env.VITE_GA_TRACKING_ID;
     if (trackingId) {
       analyticsService.init(trackingId);
+      
+      // Track initial theme
+      analyticsService.setUserProperty('theme', isDarkMode ? 'dark' : 'light');
+      
+      // Track user persona based on path
+      const persona = window.location.pathname.startsWith('/admin') ? 'admin' : 'public';
+      analyticsService.setUserProperty('user_persona', persona);
+      
+      // Track if it's a mobile device
+      analyticsService.setUserProperty('is_mobile', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
     }
-  }, [initializeStore]);
+  }, [initializeStore]); // isDarkMode is used for the user property but we only set it on mount here, we'll handle updates below
 
   return (
     <HelmetProvider>

@@ -83,15 +83,17 @@ export class PdfSyncJobQueue extends JobQueue {
   async enqueueBulkSyncJobs(schoolIds, options = {}) {
     const jobIds = [];
     
-    for (const schoolId of schoolIds) {
-      // Check if job already exists for this school (deduplication)
-      const existingJobs = await this.getJobs(JOB_TYPES.PDF_SYNC, null, 100);
-      const hasActiveJob = existingJobs.some(
-        job => job.data.schoolId === schoolId && 
-        (job.status === 'waiting' || job.status === 'active')
-      );
+    // Optimization: Get active jobs once instead of in every iteration
+    const existingJobs = await this.getJobs(JOB_TYPES.PDF_SYNC, null, 1000);
+    const activeSchoolIds = new Set(
+      existingJobs
+        .filter(job => job.status === 'waiting' || job.status === 'active')
+        .map(job => job.data && job.data.schoolId)
+        .filter(id => !!id)
+    );
 
-      if (!hasActiveJob) {
+    for (const schoolId of schoolIds) {
+      if (!activeSchoolIds.has(schoolId)) {
         const jobId = await this.enqueueSyncJob(schoolId, {
           priority: options.priority || JOB_PRIORITY.LOW,
           ...options,

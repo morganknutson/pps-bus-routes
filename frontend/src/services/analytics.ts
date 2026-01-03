@@ -135,6 +135,40 @@ class AnalyticsService {
     ReactGA.event(action, properties);
     console.log(`[AnalyticsService] Action tracked: ${action}`, properties);
   }
+
+  /**
+   * Set a persistent user property
+   * @param name Property name
+   * @param value Property value
+   */
+  setUserProperty(name: string, value: any) {
+    if (!this.isInitialized) return;
+    ReactGA.set({ [name]: value });
+    console.log(`[AnalyticsService] User Property set: ${name} = ${value}`);
+  }
+
+  /**
+   * Track outbound link clicks
+   * @param url The destination URL
+   * @param type The type of link
+   */
+  trackOutboundLink(url: string, type: 'website' | 'pdf' | 'maps' | 'external') {
+    this.trackEvent('Navigation', 'outbound_click', `${type}: ${url}`);
+  }
+
+  /**
+   * Track application errors
+   * @param description Error description
+   * @param fatal Whether the error was fatal
+   */
+  trackError(description: string, fatal = false) {
+    if (!this.isInitialized) return;
+    ReactGA.gtag('event', 'exception', {
+      description,
+      fatal,
+    });
+    console.error(`[AnalyticsService] Error tracked: ${description}${fatal ? ' (FATAL)' : ''}`);
+  }
 }
 
 export const analyticsService = new AnalyticsService();

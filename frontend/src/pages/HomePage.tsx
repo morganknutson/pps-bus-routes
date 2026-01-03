@@ -143,12 +143,17 @@ export function HomePage() {
         if (!abortController.signal.aborted) {
           setAddressSuggestions(result.suggestions || []);
           setShowAddressSuggestions(true);
+          
+          if (!result.suggestions || result.suggestions.length === 0) {
+            analyticsService.trackAction('search_empty_results', { query: addressQuery, type: 'address' });
+          }
         }
       } catch (error: any) {
         if (error.name === 'AbortError') {
           return;
         }
         console.error('[HomePage] Address autocomplete error:', error);
+        analyticsService.trackError(`Address autocomplete failed: ${error.message}`);
         if (!abortController.signal.aborted) {
           setAddressSuggestions([]);
         }
@@ -329,7 +334,20 @@ export function HomePage() {
   };
 
   const handleSelectSchool = (school: School) => {
+    // Calculate distance if address is selected
+    const distance = selectedAddress && selectedAddress.coordinates && school.coordinates
+      ? calculateDistance(selectedAddress.coordinates, school.coordinates)
+      : null;
+
     analyticsService.trackSchoolSelect(school.name, 'homepage');
+    if (distance !== null) {
+      analyticsService.trackAction('school_select_distance', { 
+        schoolName: school.name, 
+        distance_meters: Math.round(distance),
+        distance_miles: (distance / 1609.34).toFixed(2)
+      });
+    }
+
     setSelectedSchoolLocal(school);
     setSchoolQuery('');
     setSchoolSuggestions([]);
@@ -406,6 +424,7 @@ export function HomePage() {
 
       if (routes.length === 0) {
         setError('No routes found for this school');
+        analyticsService.trackAction('find_stop_no_routes', { schoolName: selectedSchoolLocal.name });
         setIsFinding(false);
         return;
       }
@@ -415,6 +434,7 @@ export function HomePage() {
 
       if (!closestStop) {
         setError('No stops with coordinates found for this school');
+        analyticsService.trackAction('find_stop_no_coordinates', { schoolName: selectedSchoolLocal.name });
         setIsFinding(false);
         return;
       }
@@ -424,6 +444,13 @@ export function HomePage() {
         stop: closestStop.stop.address,
         distance: formatDistance(closestStop.distance, true),
         walkingDistance: closestStop.walkingDistance ? `${closestStop.walkingDistance}m` : 'N/A'
+      });
+
+      analyticsService.trackAction('find_stop_success', {
+        schoolName: selectedSchoolLocal.name,
+        routeName: closestStop.route.name,
+        distance_meters: Math.round(closestStop.distance),
+        walking_distance_meters: closestStop.walkingDistance || null
       });
 
       // Update store
