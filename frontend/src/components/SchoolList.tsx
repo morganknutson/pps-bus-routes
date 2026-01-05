@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useIsMobile } from '../hooks/useMediaQuery';
 import { School } from '../types';
 import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
@@ -12,42 +13,42 @@ import { parseUrlPath, buildUrlPath } from '../services/urlState';
 // Infer school type(s) from name - returns array to support hybrid schools
 function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
   const name = schoolName.toLowerCase();
-  
+
   // Hybrid schools - schools that serve multiple grade levels
   // Check these FIRST before other type checks
   const hybridSchools = ['access'];
-  
+
   if (hybridSchools.some(key => name.includes(key))) {
     return ['Hybrid'];
   }
-  
+
   // Check for explicit type in name
   const hasElementary = name.includes('elementary');
   const hasMiddle = name.includes('middle');
   const hasHigh = name.includes('high');
-  
+
   // Known high schools in Portland
   const highSchools = [
-    'lincoln', 'franklin', 'benson', 'grant', 'cleveland', 'jefferson', 
+    'lincoln', 'franklin', 'benson', 'grant', 'cleveland', 'jefferson',
     'roosevelt', 'wilson', 'madison', 'marshall', 'da vinci', 'davinci'
   ];
   const isHighSchool = highSchools.some(hs => name.includes(hs)) || hasHigh;
-  
+
   // Known middle schools in Portland
   const middleSchools = [
-    'beaumont', 'hosford', 'west sylvan', 'george', 'harrison park', 
+    'beaumont', 'hosford', 'west sylvan', 'george', 'harrison park',
     'lane', 'gray', 'kelly', 'kellogg', 'mt tabor', 'mt. tabor', 'roseway heights'
   ];
   const isMiddleSchool = middleSchools.some(ms => name.includes(ms)) || hasMiddle;
-  
+
   // Default to elementary if no match
   const isElementary = hasElementary || (!isMiddleSchool && !isHighSchool);
-  
+
   const types: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] = [];
   if (isElementary) types.push('Elementary School');
   if (isMiddleSchool) types.push('Middle School');
   if (isHighSchool) types.push('High School');
-  
+
   return types.length > 0 ? types : ['Elementary School'];
 }
 
@@ -68,7 +69,7 @@ function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'H
         return '#FFFFFF'; // Default teal
     }
   }
-  
+
   return '#FFFFFF'; // Default teal
 }
 
@@ -83,20 +84,23 @@ interface SchoolListProps {
   onSearchChange?: (term: string) => void;
   schoolTypeFilters?: SchoolTypeFilters;
   onFiltersChange?: (filters: SchoolTypeFilters) => void;
+  onMobileClose?: () => void;
 }
 
-export function SchoolList({ 
-  schools, 
-  selectedSchoolId, 
-  onSelectSchool, 
-  enableEditing = false, 
+export function SchoolList({
+  schools,
+  selectedSchoolId,
+  onSelectSchool,
+  enableEditing = false,
   onUpdateSchool,
   onAddSchool,
   searchTerm: externalSearchTerm,
   onSearchChange: externalOnSearchChange,
   schoolTypeFilters: externalFilters,
   onFiltersChange: externalOnFiltersChange,
+  onMobileClose,
 }: SchoolListProps) {
+  const isMobile = useIsMobile();
   const [internalSearchTerm, setInternalSearchTerm] = useState('');
   const [internalFilters, setInternalFilters] = useState<SchoolTypeFilters>({
     elementary: true,
@@ -105,7 +109,7 @@ export function SchoolList({
     hybrid: true,
     noRoutes: true,
   });
-  
+
   // Use external state if provided, otherwise use internal state
   const searchTerm = externalSearchTerm !== undefined ? externalSearchTerm : internalSearchTerm;
   const setSearchTerm = externalOnSearchChange || setInternalSearchTerm;
@@ -129,12 +133,12 @@ export function SchoolList({
 
   const filteredSchools = schools.filter(school => {
     // Search filter
-    const matchesSearch = 
+    const matchesSearch =
       school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+
     if (!matchesSearch) return false;
-    
+
     // School type filter
     const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
     const isHybrid = schoolTypes.includes('Hybrid');
@@ -146,7 +150,7 @@ export function SchoolList({
     if (hasNoRoutes) {
       return schoolTypeFilters.noRoutes;
     }
-    
+
     // If it's a hybrid school, check hybrid filter
     if (isHybrid) {
       if (schoolTypeFilters.hybrid) {
@@ -155,13 +159,13 @@ export function SchoolList({
       // If hybrid filter is disabled, don't show hybrid schools
       return false;
     }
-    
+
     // For non-hybrid schools, check individual type filters
-    const matchesFilter = 
+    const matchesFilter =
       (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
       (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
       (schoolTypes.includes('High School') && schoolTypeFilters.high);
-    
+
     return matchesFilter;
   });
 
@@ -268,9 +272,9 @@ export function SchoolList({
 
       {/* Add School Form */}
       {isAddingSchool && enableEditing && (
-        <div style={{ 
-          padding: '1rem', 
-          backgroundColor: 'var(--bg-secondary)', 
+        <div style={{
+          padding: '1rem',
+          backgroundColor: 'var(--bg-secondary)',
           borderBottom: '1px solid var(--border-color)',
           transition: 'background-color 0.3s ease, border-color 0.3s ease'
         }}>
@@ -413,7 +417,7 @@ export function SchoolList({
               const schoolColor = getSchoolColor(schoolTypes);
               const isSelected = school.id === selectedSchoolId;
               const isEditing = editingSchoolId === school.id;
-              
+
               return (
                 <div
                   key={school.id}
@@ -433,7 +437,15 @@ export function SchoolList({
                           navigate('/schools');
                         } else {
                           analyticsService.trackSchoolSelect(school.name, enableEditing ? 'admin_list' : 'explorer_list');
-                          navigate(`/${school.id}/school-info`);
+
+                          if (isMobile) {
+                            // On mobile, show routes immediately and close sidebar
+                            navigate(`/${school.id}/routes`);
+                            if (onMobileClose) onMobileClose();
+                          } else {
+                            // On desktop, show school info (standard behavior)
+                            navigate(`/${school.id}/school-info`);
+                          }
                         }
                       }
                     }}
@@ -498,11 +510,11 @@ export function SchoolList({
                         </div>
                       )}
                       {school.routeCount !== undefined && (
-                        <div style={{ 
-                          fontSize: '12px', 
-                          color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)', 
-                          display: 'flex', 
-                          alignItems: 'center', 
+                        <div style={{
+                          fontSize: '12px',
+                          color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)',
+                          display: 'flex',
+                          alignItems: 'center',
                           gap: '0.375rem',
                           fontWeight: school.routeCount === 0 ? '600' : '400'
                         }}>
@@ -525,7 +537,7 @@ export function SchoolList({
                       )}
                     </div>
                   </div>
-                  
+
                   {isEditing && enableEditing && onUpdateSchool && (
                     <div style={{ padding: '0 1rem 1rem 1rem', backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'background-color 0.3s ease, border-color 0.3s ease' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.75rem' }}>
@@ -757,12 +769,12 @@ export function SchoolList({
                         </div>
                       )}
                       {school.routeCount !== undefined && (
-                        <div style={{ 
-                          fontSize: '12px', 
-                          color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)', 
+                        <div style={{
+                          fontSize: '12px',
+                          color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)',
                           marginTop: '0.25rem',
-                          display: 'flex', 
-                          alignItems: 'center', 
+                          display: 'flex',
+                          alignItems: 'center',
                           gap: '0.375rem',
                           fontWeight: school.routeCount === 0 ? '600' : '400'
                         }}>
@@ -813,29 +825,29 @@ export function SchoolList({
                               <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
                                 Address
                               </label>
-                            <input
-                              type="text"
-                              value={editingAddress}
-                              onChange={(e) => setEditingAddress(e.target.value)}
-                              placeholder="School physical address..."
-                              style={{
-                                width: '100%',
-                                padding: '0.5rem',
-                                fontSize: '12px',
-                                border: '1px solid var(--border-color)',
-                                borderRadius: '4px',
-                                boxSizing: 'border-box',
-                                backgroundColor: 'var(--bg-secondary)',
-                                color: 'var(--text-primary)',
-                                transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
-                              }}
-                              onClick={(e) => e.stopPropagation()}
-                            />
-                          </div>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                              Page Link
-                            </label>
+                              <input
+                                type="text"
+                                value={editingAddress}
+                                onChange={(e) => setEditingAddress(e.target.value)}
+                                placeholder="School physical address..."
+                                style={{
+                                  width: '100%',
+                                  padding: '0.5rem',
+                                  fontSize: '12px',
+                                  border: '1px solid var(--border-color)',
+                                  borderRadius: '4px',
+                                  boxSizing: 'border-box',
+                                  backgroundColor: 'var(--bg-secondary)',
+                                  color: 'var(--text-primary)',
+                                  transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                                Page Link
+                              </label>
                               <input
                                 type="text"
                                 value={editingPageLink}
@@ -941,7 +953,7 @@ export function SchoolList({
       </div>
 
       {/* School Type Filters */}
-      <SchoolTypeFilter 
+      <SchoolTypeFilter
         filters={schoolTypeFilters}
         onChange={setSchoolTypeFilters}
       />

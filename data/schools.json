@@ -109,7 +109,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.65115,
+      45.50561
+    ]
   },
   {
     "id": "access",
@@ -221,7 +225,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.67551,
+      45.4787
+    ]
   },
   {
     "id": "ainsworth",
@@ -333,7 +341,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.69937,
+      45.51014
+    ]
   },
   {
     "id": "alameda",
@@ -445,7 +457,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.63792,
+      45.54747
+    ]
   },
   {
     "id": "alliance-high-school",
@@ -571,7 +587,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.59572,
+      45.48623
+    ]
   },
   {
     "id": "astor",
@@ -683,7 +703,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.73021,
+      45.57882
+    ]
   },
   {
     "id": "atkinson",
@@ -795,7 +819,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.60491,
+      45.50535
+    ]
   },
   {
     "id": "beach",
@@ -907,7 +935,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.68551,
+      45.55779
+    ]
   },
   {
     "id": "beaumont",
@@ -1019,7 +1051,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.6217722,
+      45.5489184
+    ]
   },
   {
     "id": "benson",
@@ -1355,7 +1391,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.6729,
+      45.54759
+    ]
   },
   {
     "id": "bridger",
@@ -1467,7 +1507,11 @@
         "subpremise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.58207,
+      45.51083
+    ]
   },
   {
     "id": "bridlemile",
@@ -1579,7 +1623,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.72472,
+      45.49177
+    ]
   },
   {
     "id": "buckman",
@@ -1691,7 +1739,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.64959,
+      45.52044
+    ]
   },
   {
     "id": "capitol",
@@ -1803,7 +1855,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.69598,
+      45.46458
+    ]
   },
   {
     "id": "cesar-chavez",
@@ -1915,7 +1971,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.71934,
+      45.58475
+    ]
   },
   {
     "id": "chapman",
@@ -2027,7 +2087,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.70623,
+      45.53349
+    ]
   },
   {
     "id": "chief-joseph",
@@ -2139,7 +2203,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.69125,
+      45.57353
+    ]
   },
   {
     "id": "clark",
@@ -2251,7 +2319,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.56975,
+      45.51385
+    ]
   },
   {
     "id": "cleveland-high-school",
@@ -2391,7 +2463,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.61413,
+      45.49518
+    ]
   },
   {
     "id": "darnell-wright-heights",
@@ -2629,7 +2705,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.65854,
+      45.55809
+    ]
   },
   {
     "id": "duniway",
@@ -2749,7 +2829,11 @@
         "subpremise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.62887,
+      45.46888
+    ]
   },
   {
     "id": "faubion",
@@ -2853,7 +2937,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.6345,
+      45.571
+    ]
   },
   {
     "id": "forest-park",
@@ -2965,7 +3053,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.77786,
+      45.54235
+    ]
   },
   {
     "id": "franklin",
@@ -3189,7 +3281,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.73664,
+      45.59575
+    ]
   },
   {
     "id": "glencoe",
@@ -3301,7 +3397,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.61258,
+      45.51714
+    ]
   },
   {
     "id": "grant-high-school",
@@ -3427,7 +3527,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.7008,
+      45.48248
+    ]
   },
   {
     "id": "grout",
@@ -3539,7 +3643,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.63369,
+      45.49108
+    ]
   },
   {
     "id": "harrison-park",
@@ -3651,7 +3759,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.57441,
+      45.50698
+    ]
   },
   {
     "id": "hayhurst",
@@ -3763,7 +3875,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.72871,
+      45.48015
+    ]
   },
   {
     "id": "hosford",
@@ -3875,7 +3991,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.63673,
+      45.50619
+    ]
   },
   {
     "id": "ida-b-wells-barnett-high-school",
@@ -4001,7 +4121,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.65197,
+      45.54054
+    ]
   },
   {
     "id": "jackson",
@@ -4121,7 +4245,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.71317,
+      45.45067
+    ]
   },
   {
     "id": "james-john",
@@ -4233,7 +4361,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.75208,
+      45.59091
+    ]
   },
   {
     "id": "jefferson-high-school",
@@ -4351,7 +4483,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.59207,
+      45.49889
+    ]
   },
   {
     "id": "kelly",
@@ -4463,7 +4599,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.57078,
+      45.47302
+    ]
   },
   {
     "id": "lane",
@@ -4575,7 +4715,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.60156,
+      45.4708
+    ]
   },
   {
     "id": "lee",
@@ -4687,7 +4831,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.56766,
+      45.53834
+    ]
   },
   {
     "id": "lent",
@@ -4799,7 +4947,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.56348,
+      45.48713
+    ]
   },
   {
     "id": "leodis-v-mcdaniel",
@@ -5056,7 +5208,11 @@
         "subpremise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.61827,
+      45.47392
+    ]
   },
   {
     "id": "lincoln",
@@ -5160,7 +5316,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.69194,
+      45.51925
+    ]
   },
   {
     "id": "llewellyn",
@@ -5272,7 +5432,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.65177,
+      45.47718
+    ]
   },
   {
     "id": "maplewood",
@@ -5393,7 +5557,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.73061,
+      45.47086
+    ]
   },
   {
     "id": "markham",
@@ -5505,7 +5673,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.72651,
+      45.44859
+    ]
   },
   {
     "id": "marysville",
@@ -5617,7 +5789,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.58387,
+      45.48658
+    ]
   },
   {
     "id": "metropolitan-learning-center",
@@ -5743,7 +5919,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.60467,
+      45.52106
+    ]
   },
   {
     "id": "ockley-green",
@@ -5855,7 +6035,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.68017,
+      45.56699
+    ]
   },
   {
     "id": "odyssey-program",
@@ -5981,7 +6165,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.70079,
+      45.58171
+    ]
   },
   {
     "id": "pioneer-program",
@@ -6107,7 +6295,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.61996,
+      45.50673
+    ]
   },
   {
     "id": "rieke",
@@ -6211,7 +6403,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.69477,
+      45.47665
+    ]
   },
   {
     "id": "rigler",
@@ -6323,7 +6519,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.6084,
+      45.55599
+    ]
   },
   {
     "id": "roosevelt-high-school",
@@ -6610,7 +6810,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.6037,
+      45.53976
+    ]
   },
   {
     "id": "roseway-heights",
@@ -6722,7 +6926,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.5873,
+      45.54378
+    ]
   },
   {
     "id": "sabin",
@@ -6946,7 +7154,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.59444,
+      45.555
+    ]
   },
   {
     "id": "sellwood",
@@ -7058,7 +7270,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.65016,
+      45.46255
+    ]
   },
   {
     "id": "sitton",
@@ -7170,7 +7386,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.75869,
+      45.5999
+    ]
   },
   {
     "id": "skyline",
@@ -7273,7 +7493,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.85613,
+      45.60782
+    ]
   },
   {
     "id": "stephenson",
@@ -7385,7 +7609,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.7036,
+      45.44077
+    ]
   },
   {
     "id": "sunnyside-environmental-school",
@@ -7503,7 +7731,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.66957,
+      45.53959
+    ]
   },
   {
     "id": "vernon",
@@ -7615,7 +7847,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.64387,
+      45.56208
+    ]
   },
   {
     "id": "vestal",
@@ -7727,7 +7963,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.58011,
+      45.5246
+    ]
   },
   {
     "id": "west-sylvan",
@@ -7835,7 +8075,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.76158,
+      45.50438
+    ]
   },
   {
     "id": "whitman",
@@ -7947,7 +8191,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.58778,
+      45.46866
+    ]
   },
   {
     "id": "winterhaven-school",
@@ -8073,7 +8321,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.6527,
+      45.575
+    ]
   },
   {
     "id": "woodmere",
@@ -8185,7 +8437,11 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.58245,
+      45.47491
+    ]
   },
   {
     "id": "woodstock",
@@ -8297,6 +8553,10 @@
         "premise",
         "street_address"
       ]
-    }
+    },
+    "curbCoordinates": [
+      -122.61251,
+      45.48209
+    ]
   }
 ]

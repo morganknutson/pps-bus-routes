@@ -40,6 +40,7 @@ export interface School {
   name: string;
   address?: string; // Physical address of the school
   coordinates?: [number, number]; // [lng, lat] geocoded coordinates
+  curbCoordinates?: [number, number]; // [lng, lat] specific curb drop-off point from route geometry
   schoolPageLink: string | null; // Link to school's page on PPS website
   driveLink: string | null; // Link to Google Drive folder with PDFs
   createdAt: string;
@@ -48,6 +49,20 @@ export interface School {
   routeCount?: number; // Number of routes available for this school
   routesUpdatedAt?: string | null; // Latest modifiedTime from all routes for this school
   neighborhood?: string; // Neighborhood name from reverse geocoding
+}
+
+export interface AssignedSchool {
+  name: string;
+  district?: string;
+  type?: string;
+  website?: string;
+}
+
+export interface AssignedSchools {
+  elementary: AssignedSchool | null;
+  middle: AssignedSchool | null;
+  high: AssignedSchool | null;
+  k8: AssignedSchool | null;
 }
 
 export interface AppState {
@@ -59,6 +74,7 @@ export interface AppState {
   error?: string;
   selectedSchoolId: string | null;
   schools: School[];
+  assignedSchools: AssignedSchools | null;
   isDarkMode: boolean;
 }
 
@@ -75,19 +91,20 @@ export interface Neighborhood {
   }>;
 }
 
-export type MapIntentType = 
-  | 'FIT_SCHOOLS' 
-  | 'ZOOM_SCHOOL' 
-  | 'FIT_ROUTES' 
-  | 'ZOOM_STOP' 
-  | 'FIT_HOME' 
-  | 'DOUBLE_FIT' 
-  | 'MANUAL' 
+export type MapIntentType =
+  | 'FIT_SCHOOLS'
+  | 'ZOOM_SCHOOL'
+  | 'FIT_ROUTES'
+  | 'ZOOM_STOP'
+  | 'FIT_HOME'
+  | 'DOUBLE_FIT'
+  | 'MANUAL'
   | 'STREET_HIGHLIGHT';
 
 export interface MapIntent {
   type: MapIntentType;
   data?: any;
 }
+
 
 

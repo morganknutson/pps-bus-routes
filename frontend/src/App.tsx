@@ -53,17 +53,17 @@ L.Marker.prototype.options.icon = defaultIcon;
 // Header, Sidebar, and Map unification logic
 export function ExplorerApp() {
   console.log('[ExplorerApp] Rendering...');
-  const { 
-    isLoading, 
-    selectedSchoolId, 
-    setSelectedSchool, 
-    schools, 
-    setSchools, 
-    setRoutes, 
-    setLoading, 
-    setLoadingProgress, 
-    routes, 
-    directionFilter, 
+  const {
+    isLoading,
+    selectedSchoolId,
+    setSelectedSchool,
+    schools,
+    setSchools,
+    setRoutes,
+    setLoading,
+    setLoadingProgress,
+    routes,
+    directionFilter,
     selectedStop,
     activeTab,
     setActiveTab
@@ -95,7 +95,7 @@ export function ExplorerApp() {
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
     return schools.filter(school => {
-      const matchesSearch = 
+      const matchesSearch =
         school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase()));
       if (!matchesSearch) return false;
@@ -103,8 +103,8 @@ export function ExplorerApp() {
       if (school.routeCount === 0) return schoolTypeFilters.noRoutes;
       if (schoolTypes.includes('Hybrid')) return schoolTypeFilters.hybrid;
       return (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
-             (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
-             (schoolTypes.includes('High School') && schoolTypeFilters.high);
+        (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
+        (schoolTypes.includes('High School') && schoolTypeFilters.high);
     });
   }, [schools, searchTerm, schoolTypeFilters]);
 
@@ -227,7 +227,16 @@ export function ExplorerApp() {
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         <Sidebar header={null} tabs={<TabBar activeTab={activeTab} onTabChange={handleTabChange} />} isOpen={!isMobile || sidebarOpen} onClose={() => setSidebarOpen(false)} persistenceKey="sidebar-width-explorer">
           {activeTab === 'schools' ? (
-            <SchoolList schools={schools} selectedSchoolId={selectedSchoolId} searchTerm={searchTerm} onSearchChange={setSearchTerm} schoolTypeFilters={schoolTypeFilters} onFiltersChange={setSchoolTypeFilters} onSelectSchool={setSelectedSchool} />
+            <SchoolList
+              schools={schools}
+              selectedSchoolId={selectedSchoolId}
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+              schoolTypeFilters={schoolTypeFilters}
+              onFiltersChange={setSchoolTypeFilters}
+              onSelectSchool={setSelectedSchool}
+              onMobileClose={() => setSidebarOpen(false)}
+            />
           ) : activeTab === 'neighborhoods' ? (
             <div style={{ padding: '1rem', color: 'var(--text-secondary)' }}>Neighborhoods coming soon...</div>
           ) : (
@@ -239,12 +248,12 @@ export function ExplorerApp() {
           <AddressInput />
           <div style={{ flex: 1, position: 'relative' }}>
             {/* UNIFIED MAP: Stays mounted! */}
-            <MapView 
-              viewMode={activeTab as 'schools' | 'routes'} 
+            <MapView
+              viewMode={activeTab as 'schools' | 'routes'}
               onSelectSchool={setSelectedSchool}
               schools={filteredSchools}
             />
-            
+
             {/* Overlay for mobile when no school is selected on routes tab */}
             {isMobile && activeTab === 'routes' && !selectedSchoolId && (
               <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1rem', textAlign: 'center', width: 'calc(100% - 2rem)', maxWidth: '320px' }}>
@@ -278,18 +287,18 @@ export function ExplorerApp() {
 }
 
 function AdminApp() {
-  const { 
-    isLoading, 
-    loadingProgress, 
-    selectedSchoolId, 
-    setSelectedSchool, 
-    schools, 
-    setSchools, 
-    setRoutes, 
-    setLoading, 
-    setLoadingProgress, 
-    routes, 
-    directionFilter, 
+  const {
+    isLoading,
+    loadingProgress,
+    selectedSchoolId,
+    setSelectedSchool,
+    schools,
+    setSchools,
+    setRoutes,
+    setLoading,
+    setLoadingProgress,
+    routes,
+    directionFilter,
     selectedStop,
     activeTab,
     setActiveTab
@@ -297,7 +306,7 @@ function AdminApp() {
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   // Listen for tab change events
   useEffect(() => {
     const handleTabChangeEvent = (e: any) => {
@@ -316,7 +325,7 @@ function AdminApp() {
     elementary: true, middle: true, high: true, hybrid: true, noRoutes: true,
   });
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
     setActiveTab(tab);
   };
@@ -346,7 +355,7 @@ function AdminApp() {
   // Filter schools based on search and type filters
   const filteredSchools = useMemo(() => {
     return schools.filter(school => {
-      const matchesSearch = 
+      const matchesSearch =
         school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase()));
       if (!matchesSearch) return false;
@@ -354,8 +363,8 @@ function AdminApp() {
       if (school.routeCount === 0) return schoolTypeFilters.noRoutes;
       if (schoolTypes.includes('Hybrid')) return schoolTypeFilters.hybrid;
       return (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
-             (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
-             (schoolTypes.includes('High School') && schoolTypeFilters.high);
+        (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
+        (schoolTypes.includes('High School') && schoolTypeFilters.high);
     });
   }, [schools, searchTerm, schoolTypeFilters]);
 
@@ -420,12 +429,12 @@ function AdminApp() {
         </Sidebar>
 
         <div style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
-          <AddressLookup onAddressSelect={() => {}} />
+          <AddressLookup onAddressSelect={() => { }} />
           <div style={{ flex: 1, position: 'relative' }}>
             {/* UNIFIED MAP: Stays mounted! */}
-            <MapView 
-              viewMode={activeTab as 'schools' | 'routes'} 
-              editingMode={true} 
+            <MapView
+              viewMode={activeTab as 'schools' | 'routes'}
+              editingMode={true}
               enableStreetHighlighting={true}
               enableStreetPins={true}
               onSelectSchool={setSelectedSchool}
@@ -452,7 +461,7 @@ function App() {
   // Apply dark mode class to document root
   useEffect(() => {
     console.log('[App] Dark mode changed:', isDarkMode);
-    
+
     // Update body classes
     if (isDarkMode) {
       document.documentElement.classList.add('dark-mode');
@@ -469,27 +478,27 @@ function App() {
   // Initialize store and analytics
   useEffect(() => {
     console.log('[App] Initializing store...');
-    
+
     // Don't restore school selection if on a clean explorer path
     // This prevents race conditions where the store restores a school from localStorage
     // while the URL is /schools, triggering a redirect to the school URL.
-    const isCleanPath = window.location.pathname === '/schools' || 
-                       window.location.pathname === '/explore' || 
-                       window.location.pathname === '/';
-                       
+    const isCleanPath = window.location.pathname === '/schools' ||
+      window.location.pathname === '/explore' ||
+      window.location.pathname === '/';
+
     initializeStore({ skipSchoolSelection: isCleanPath });
 
     const trackingId = import.meta.env.VITE_GA_TRACKING_ID;
     if (trackingId) {
       analyticsService.init(trackingId);
-      
+
       // Track initial theme
       analyticsService.setUserProperty('theme', isDarkMode ? 'dark' : 'light');
-      
+
       // Track user persona based on path
       const persona = window.location.pathname.startsWith('/admin') ? 'admin' : 'public';
       analyticsService.setUserProperty('user_persona', persona);
-      
+
       // Track if it's a mobile device
       analyticsService.setUserProperty('is_mobile', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
     }
@@ -510,84 +519,84 @@ function AppContent() {
 
   return (
     <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/school-directory" element={<SchoolDirectory />} />
-        <Route path="/neighborhood-directory" element={<NeighborhoodDirectory />} />
-        
-        {/* Redirects for legacy routes */}
-        <Route path="/schools-directory" element={<Navigate to="/school-directory" replace />} />
-        <Route path="/bus-route-explorer" element={<Navigate to="/explore" replace />} />
-        
-        {/* Admin and system routes */}
-        <Route 
-          path="/neighborhoods" 
-          element={
-            <AdminPasswordProtection>
-              <Neighborhoods />
-            </AdminPasswordProtection>
-          } 
-        />
-        <Route 
-          path="/tech" 
-          element={
-            <AdminPasswordProtection>
-              <TechPage />
-            </AdminPasswordProtection>
-          } 
-        />
-        <Route 
-          path="/verification" 
-          element={
-            <AdminPasswordProtection>
-              <VerificationPage />
-            </AdminPasswordProtection>
-          }
-        />
-        <Route path="/data" element={<DataPage />} />
-        <Route 
-          path="/jobs" 
-          element={
-            <AdminPasswordProtection>
-              <JobsPage />
-            </AdminPasswordProtection>
-          } 
-        />
-        <Route 
-          path="/servers" 
-          element={
-            <AdminPasswordProtection>
-              <ServersPage />
-            </AdminPasswordProtection>
-          } 
-        />
-        <Route 
-          path="/architecture" 
-          element={
-            <AdminPasswordProtection>
-              <ArchitecturePage />
-            </AdminPasswordProtection>
-          } 
-        />
-        {/* Deprecated: Schools List page - kept for backward compatibility but no longer linked */}
-        <Route path="/data/schools" element={<SchoolsList />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/school-directory" element={<SchoolDirectory />} />
+      <Route path="/neighborhood-directory" element={<NeighborhoodDirectory />} />
 
-        {/* Path-based routing for admin - catch-all to handle all segments */}
-        <Route 
-          path="/admin/*" 
-          element={
-            <AdminPasswordProtection>
-              <AdminApp />
-            </AdminPasswordProtection>
-          } 
-        />
+      {/* Redirects for legacy routes */}
+      <Route path="/schools-directory" element={<Navigate to="/school-directory" replace />} />
+      <Route path="/bus-route-explorer" element={<Navigate to="/explore" replace />} />
 
-        {/* Explorer Map (Catch-all handles both /schools, /explore, and /{schoolId}) */}
-        <Route path="/schools" element={<ExplorerApp />} />
-        <Route path="/explore" element={<ExplorerApp />} />
-        <Route path="/*" element={<ExplorerApp />} />
-      </Routes>
+      {/* Admin and system routes */}
+      <Route
+        path="/neighborhoods"
+        element={
+          <AdminPasswordProtection>
+            <Neighborhoods />
+          </AdminPasswordProtection>
+        }
+      />
+      <Route
+        path="/tech"
+        element={
+          <AdminPasswordProtection>
+            <TechPage />
+          </AdminPasswordProtection>
+        }
+      />
+      <Route
+        path="/verification"
+        element={
+          <AdminPasswordProtection>
+            <VerificationPage />
+          </AdminPasswordProtection>
+        }
+      />
+      <Route path="/data" element={<DataPage />} />
+      <Route
+        path="/jobs"
+        element={
+          <AdminPasswordProtection>
+            <JobsPage />
+          </AdminPasswordProtection>
+        }
+      />
+      <Route
+        path="/servers"
+        element={
+          <AdminPasswordProtection>
+            <ServersPage />
+          </AdminPasswordProtection>
+        }
+      />
+      <Route
+        path="/architecture"
+        element={
+          <AdminPasswordProtection>
+            <ArchitecturePage />
+          </AdminPasswordProtection>
+        }
+      />
+      {/* Deprecated: Schools List page - kept for backward compatibility but no longer linked */}
+      <Route path="/data/schools" element={<SchoolsList />} />
+
+      {/* Path-based routing for admin - catch-all to handle all segments */}
+      <Route
+        path="/admin/*"
+        element={
+          <AdminPasswordProtection>
+            <AdminApp />
+          </AdminPasswordProtection>
+        }
+      />
+
+      {/* Explorer Map (Catch-all handles both /schools, /explore, and /{schoolId}) */}
+      <Route path="/schools" element={<ExplorerApp />} />
+      <Route path="/explore" element={<ExplorerApp />} />
+      <Route path="/*" element={<ExplorerApp />} />
+    </Routes>
   );
 }
 

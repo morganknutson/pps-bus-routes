@@ -11,6 +11,8 @@
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { JsonCache } from '../utils/jsonCache.js';
+import crypto from 'crypto';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -19,6 +21,7 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 
 const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_API_KEY;
 const ROUTES_MATRIX_URL = 'https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix';
+const CACHE_FILE = join(__dirname, '..', '..', 'data', 'cache', 'routes-matrix-cache.json');
 
 /**
  * RoutesService class for matrix-based distance calculations.
@@ -28,11 +31,28 @@ class RoutesService {
     this.apiKey = apiKey || GOOGLE_API_KEY;
     this.useGoogle = !!this.apiKey;
     
+    // Initialize Cache
+    this.cache = new JsonCache(CACHE_FILE);
+    this.cache.init();
+    
     if (!this.useGoogle) {
       console.warn('[RoutesService] ⚠️ No Google Maps API key found.');
     } else {
       console.log('[RoutesService] ✅ Google Routes API configured');
     }
+  }
+
+  /**
+   * Generate a cache key for matrix requests
+   */
+  getCacheKey(origin, destinations) {
+    // Create a stable hash of the request
+    // Round coordinates to ~1m precision to improve cache hits
+    const data = JSON.stringify({
+      origin: [Math.round(origin[0]*100000)/100000, Math.round(origin[1]*100000)/100000],
+      destinations: destinations.map(d => [Math.round(d[0]*100000)/100000, Math.round(d[1]*100000)/100000])
+    });
+    return crypto.createHash('md5').update(data).digest('hex');
   }
 
   /**
@@ -44,6 +64,14 @@ class RoutesService {
   async getWalkingMatrix(origin, destinations) {
     if (!this.useGoogle) {
       throw new Error('Google API key not configured');
+    }
+
+    // Check Cache
+    const cacheKey = this.getCacheKey(origin, destinations);
+    const cached = this.cache.get(cacheKey);
+    if (cached) {
+      console.log(`[RoutesService] Cache hit for matrix (${destinations.length} dests)`);
+      return { ...cached, responseTime: 0, fromCache: true };
     }
 
     const startTime = Date.now();
@@ -121,9 +149,16 @@ class RoutesService {
         });
       }
 
-      return {
+      const result = {
         success: true,
         results: normalizedResults,
+      };
+
+      // Save to Cache
+      this.cache.set(cacheKey, result);
+
+      return {
+        ...result,
         responseTime
       };
     } catch (error) {
@@ -137,4 +172,3 @@ class RoutesService {
 }
 
 export const routesService = new RoutesService();
-

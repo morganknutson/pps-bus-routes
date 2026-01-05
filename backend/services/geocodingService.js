@@ -18,21 +18,7 @@
  * @requires ../utils/formatAddress.js
  * @requires ./neighborhoodService.js
  * @requires ./streetGeometryService.js
- * 
- * @example
- * // Geocode a single address
- * import { geocodingService } from './geocodingService.js';
- * 
- * const result = await geocodingService.geocodeAddress('SW Patton Rd & SW Vista Ave');
- * if (result.success) {
- *   console.log(result.coordinates); // [-122.7234, 45.5123] (lng, lat)
- * }
- * 
- * @example
- * // Geocode all stops in a route
- * const geocodedStops = await geocodingService.geocodeStops(route.stops);
- * 
- * @see {@link https://developers.google.com/maps/documentation/geocoding|Google Geocoding API}
+ * @requires ../utils/jsonCache.js
  */
 
 import dotenv from 'dotenv';
@@ -41,6 +27,7 @@ import { dirname, join } from 'path';
 import { expandAddressForGeocoding } from '../utils/formatAddress.js';
 import { neighborhoodService } from './neighborhoodService.js';
 import { streetGeometryService } from './streetGeometryService.js';
+import { JsonCache } from '../utils/jsonCache.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -50,50 +37,28 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_API_KEY;
 const GOOGLE_GEOCODING_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
+// Cache file paths
+const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
+const CACHE_FILE = join(CACHE_DIR, 'geocoding-cache.json');
+
 // TEMPORARILY DISABLED: Nominatim fallback
 const ENABLE_NOMINATIM_FALLBACK = false;
 
 /**
  * GeocodingService class for converting addresses to coordinates.
- * 
- * This class provides comprehensive geocoding functionality optimized for
- * Portland, Oregon bus stop addresses. It handles:
- * - Standard addresses (e.g., "1234 SW Main St")
- * - Intersections (e.g., "SW Patton & Vista")
- * - Multiple intersection formats
- * - Portland bounds validation
- * - House address snapping to streets
- * 
- * @class
- * @example
- * // Create custom instance with specific API key
- * const customGeocoder = new GeocodingService('your-api-key');
- * 
- * @example
- * // Use singleton instance (recommended)
- * import { geocodingService } from './geocodingService.js';
- * const result = await geocodingService.geocodeAddress('123 Main St');
  */
 class GeocodingService {
   /**
    * Creates a new GeocodingService instance.
-   * 
-   * @param {string|null} [apiKey=null] - Google Maps API key. If not provided,
-   *   falls back to GOOGLE_MAPS_API_KEY or GOOGLE_API_KEY environment variables.
-   * @throws {Error} If no API key is found and Nominatim fallback is disabled
-   * 
-   * @example
-   * // Using environment variable (default)
-   * const service = new GeocodingService();
-   * 
-   * @example
-   * // Using explicit API key
-   * const service = new GeocodingService('AIza...');
    */
   constructor(apiKey = null) {
     this.apiKey = apiKey || GOOGLE_API_KEY;
     this.useGoogle = !!this.apiKey;
-    
+
+    // Use shared JsonCache utility
+    this.cache = new JsonCache(CACHE_FILE);
+    this.cache.init();
+
     if (!this.useGoogle) {
       if (ENABLE_NOMINATIM_FALLBACK) {
         console.warn('[GeocodingService] No Google Maps API key found, will use Nominatim fallback');
@@ -106,29 +71,59 @@ class GeocodingService {
   }
 
   /**
+   * Get cache key from address
+   */
+  getCacheKey(address, city, state) {
+    // Normalize the address for consistent cache key
+    const normalizedAddress = address.toLowerCase().trim()
+      .replace(/\s+/g, ' ')  // Normalize whitespace
+      .replace(/[()\[\]]/g, '');  // Remove brackets/parens
+    return `${normalizedAddress}|${city.toLowerCase()}|${state.toLowerCase()}`;
+  }
+
+  /**
+   * Get cached geocoding result
+   */
+  getCached(address, city, state) {
+    const key = this.getCacheKey(address, city, state);
+    return this.cache.get(key);
+  }
+
+  /**
+   * Store geocoding result in cache
+   */
+  setCache(address, city, state, result) {
+    const key = this.getCacheKey(address, city, state);
+    this.cache.set(key, {
+      ...result,
+      cachedAt: new Date().toISOString()
+    });
+  }
+
+  /**
    * Format address for geocoding
    * Strips parenthetical content, expands abbreviations, and removes direction brackets
    */
   formatAddressForGeocoding(address) {
     if (!address) return '';
-    
+
     // Keep a copy of original to fall back to if cleaning removes everything
     const originalAddress = address;
-    
+
     // First remove parenthetical content (descriptive notes, not part of address)
     // e.g., "(wee Village Dc)" should be removed to prevent misinterpretation
     // This must be done BEFORE expansion to avoid processing parenthetical content
     let addressWithoutParentheses = address.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
-    
+
     // Then expand abbreviations for better geocoding
     let expanded = expandAddressForGeocoding(addressWithoutParentheses);
-    
+
     // Remove direction brackets and normalize whitespace
     let cleaned = expanded
       .replace(/\s*\[([NWES]+)\]\s*/g, '') // Remove direction brackets
       .replace(/\s+/g, ' ') // Normalize whitespace
       .trim();
-      
+
     // If the cleaned address is empty or too short, it likely means the 
     // important part was in parentheses or brackets (e.g., "(chapman School) [E]")
     if (!cleaned || cleaned.length < 2) {
@@ -137,11 +132,11 @@ class GeocodingService {
         .replace(/[()\[\]]/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
-        
+
       // Also expand this fallback version
       cleaned = expandAddressForGeocoding(cleaned);
     }
-    
+
     return cleaned;
   }
 
@@ -151,12 +146,12 @@ class GeocodingService {
   async geocodeWithGoogle(address, city = 'Portland', state = 'OR') {
     const formattedAddress = this.formatAddressForGeocoding(address);
     const query = `${formattedAddress}, ${city}, ${state}`;
-    
+
     const url = `${GOOGLE_GEOCODING_URL}?address=${encodeURIComponent(query)}&key=${this.apiKey}`;
-    
+
     try {
       const response = await fetch(url);
-      
+
       if (!response.ok) {
         throw new Error(`Google Geocoding API error: ${response.status}`);
       }
@@ -166,7 +161,7 @@ class GeocodingService {
       if (data.status === 'OK' && data.results && data.results.length > 0) {
         const result = data.results[0];
         const location = result.geometry.location;
-        
+
         return {
           success: true,
           coordinates: [location.lng, location.lat], // [lng, lat] - GeoJSON format (internal standard)
@@ -218,15 +213,15 @@ class GeocodingService {
       }
 
       const data = await response.json();
-      
+
       if (data.length > 0) {
         const lon = parseFloat(data[0].lon);
         const lat = parseFloat(data[0].lat);
-        
+
         if (isNaN(lon) || isNaN(lat)) {
           return { success: false, error: 'Invalid coordinates returned' };
         }
-        
+
         return {
           success: true,
           coordinates: [lon, lat],
@@ -244,6 +239,7 @@ class GeocodingService {
    * Geocode a single address
    * Uses Google Maps API only (Nominatim fallback disabled)
    * Validates coordinates are within Portland bounds and retries without parenthetical content if needed
+   * Implements caching to minimize API calls
    */
   async geocodeAddress(address, city = 'Portland', state = 'OR') {
     if (!this.useGoogle) {
@@ -253,10 +249,25 @@ class GeocodingService {
         throw new Error('[GeocodingService] Google Maps API key is required');
       }
     }
-    
+
+    // Check cache first
+    const cached = this.getCached(address, city, state);
+    if (cached) {
+      console.log(`[GeocodingService] Cache hit for: "${address}"`);
+      return {
+        success: true,
+        coordinates: cached.coordinates,
+        displayName: cached.displayName,
+        placeId: cached.placeId,
+        locationType: cached.locationType,
+        addressComponents: cached.addressComponents || [],
+        fromCache: true,
+      };
+    }
+
     // Use Google Maps API only - no fallback
     const result = await this.geocodeWithGoogle(address, city, state);
-    
+
     // If it's a house address, snap it to the street for better "closest stop" calculations
     if (result.success && result.coordinates && !address.includes('&') && !address.includes(' AND ')) {
       if (this.isHouseAddress(result)) {
@@ -267,27 +278,30 @@ class GeocodingService {
         }
       }
     }
-    
+
     // Validate coordinates are within Portland bounds
     if (result.success && result.coordinates) {
       if (!this.isWithinPortlandBounds(result.coordinates)) {
         console.warn(`[GeocodingService] Geocoded coordinates [${result.coordinates[0]}, ${result.coordinates[1]}] are outside Portland bounds for address: "${address}"`);
         console.warn(`[GeocodingService] Display name: "${result.displayName}"`);
-        
+
         // Try again without parenthetical content if original address had parentheses
         if (address.includes('(') && address.includes(')')) {
           const addressWithoutParentheses = address.replace(/\s*\([^)]*\)\s*/g, '').trim();
           if (addressWithoutParentheses !== address) {
             console.warn(`[GeocodingService] Retrying geocoding without parenthetical content: "${addressWithoutParentheses}"`);
             const retryResult = await this.geocodeWithGoogle(addressWithoutParentheses, city, state);
-            
+
             // Only use retry result if it's within bounds
             if (retryResult.success && retryResult.coordinates && this.isWithinPortlandBounds(retryResult.coordinates)) {
               console.log(`[GeocodingService] Retry successful - coordinates [${retryResult.coordinates[0]}, ${retryResult.coordinates[1]}] are within Portland bounds`);
-              return {
+              const finalResult = {
                 ...retryResult,
                 geocodeWarning: 'Geocoded without parenthetical content due to initial out-of-bounds result',
               };
+              // Cache the successful retry result
+              this.setCache(address, city, state, finalResult);
+              return finalResult;
             } else {
               console.warn(`[GeocodingService] Retry also failed or out of bounds for "${address}"`);
               return {
@@ -306,13 +320,12 @@ class GeocodingService {
         }
       }
     }
-    
-    // TEMPORARILY DISABLED: Nominatim fallback
-    // if (!result.success && result.error !== 'Address not found' && ENABLE_NOMINATIM_FALLBACK) {
-    //   console.warn(`[GeocodingService] Google failed for "${address}", trying Nominatim fallback`);
-    //   return await this.geocodeWithNominatim(address, city, state);
-    // }
-    
+
+    // Cache successful results
+    if (result.success && result.coordinates) {
+      this.setCache(address, city, state, result);
+    }
+
     return result;
   }
 
@@ -324,16 +337,16 @@ class GeocodingService {
     // Extract the two streets (after removing parenthetical content for splitting)
     const addressForSplitting = address.replace(/\s*\([^)]*\)\s*/g, '').trim();
     const streets = addressForSplitting.split(/\s+&\s+|\s+AND\s+/i).map(s => s.trim()).filter(s => s);
-    
+
     if (streets.length < 2) {
       // Not an intersection, just try the address as-is (which will handle validation)
       return await this.geocodeAddress(address, city, state);
     }
-    
+
     // Expand each street for better geocoding
     const street1 = this.formatAddressForGeocoding(streets[0]);
     const street2 = this.formatAddressForGeocoding(streets[1]);
-    
+
     // Try multiple formats for intersections
     const formats = [
       `${street1} & ${street2}`,                    // Original format
@@ -344,7 +357,7 @@ class GeocodingService {
       `intersection ${street1} ${street2}`,         // Intersection keyword
       `${street1} / ${street2}`,                    // Slash format
     ];
-    
+
     // Try each format
     for (const format of formats) {
       const result = await this.geocodeAddress(format, city, state);
@@ -367,7 +380,7 @@ class GeocodingService {
         await new Promise(resolve => setTimeout(resolve, 500));
       }
     }
-    
+
     // If all intersection formats fail, try geocoding both streets separately
     // and use the midpoint (this is a fallback strategy)
     const result1 = await this.geocodeAddress(street1, city, state);
@@ -375,18 +388,18 @@ class GeocodingService {
       await new Promise(resolve => setTimeout(resolve, 500));
     }
     const result2 = await this.geocodeAddress(street2, city, state);
-    
+
     if (result1.success && result2.success) {
       // Calculate midpoint between the two streets
       const midLon = (result1.coordinates[0] + result2.coordinates[0]) / 2;
       const midLat = (result1.coordinates[1] + result2.coordinates[1]) / 2;
       const midpoint = [midLon, midLat];
-      
+
       // Validate midpoint is within Portland bounds
       if (!this.isWithinPortlandBounds(midpoint)) {
         console.warn(`[GeocodingService] Calculated midpoint [${midLon}, ${midLat}] is outside Portland bounds for intersection: "${address}"`);
       }
-      
+
       return {
         success: true,
         coordinates: midpoint,
@@ -396,7 +409,7 @@ class GeocodingService {
         geocodeWarning: 'Intersection not found, using approximate location',
       };
     }
-    
+
     // If we got one result, use it
     if (result1.success) {
       return {
@@ -412,31 +425,26 @@ class GeocodingService {
         geocodeWarning: 'Intersection not found, using second street location',
       };
     }
-    
+
     return { success: false, error: 'Address not found' };
   }
 
   /**
    * Check if coordinates are within reasonable bounds for Portland, Oregon
-   * Portland approximate bounds:
-   * - Latitude: 45.4 to 45.7 (roughly)
-   * - Longitude: -122.8 to -122.4 (roughly)
-   * @param coordinates [lng, lat] coordinates to validate
-   * @returns true if coordinates are within Portland bounds
    */
   isWithinPortlandBounds(coordinates) {
     if (!coordinates || coordinates.length !== 2) {
       return false;
     }
-    
+
     const [lng, lat] = coordinates;
-    
+
     // Portland bounds with reasonable buffer
     const PORTLAND_LAT_MIN = 45.3;
     const PORTLAND_LAT_MAX = 45.8;
     const PORTLAND_LNG_MIN = -123.0;
     const PORTLAND_LNG_MAX = -122.3;
-    
+
     return (
       lat >= PORTLAND_LAT_MIN &&
       lat <= PORTLAND_LAT_MAX &&
@@ -447,8 +455,6 @@ class GeocodingService {
 
   /**
    * Check if geocoded result represents a house address (not an intersection or street)
-   * @param result Geocoding result with locationType and addressComponents
-   * @returns true if this is a house address
    */
   isHouseAddress(result) {
     // Check if location type indicates a precise house location
@@ -456,7 +462,7 @@ class GeocodingService {
       console.log(`[GeocodingService] Detected house address: locationType=ROOFTOP`);
       return true;
     }
-    
+
     // Check if address components include a street number (indicates specific house)
     if (result.addressComponents && Array.isArray(result.addressComponents)) {
       const hasStreetNumber = result.addressComponents.some(
@@ -467,38 +473,35 @@ class GeocodingService {
         return true;
       }
     }
-    
+
     return false;
   }
 
   /**
    * Snap house address coordinates to the nearest point on the street
-   * Uses Google Roads API to move the pin from the house to the street in front of it
-   * @param coordinates [lng, lat] coordinates of the house
-   * @returns Promise with snapped coordinates [lng, lat] or original coordinates if snapping fails
    */
   async snapHouseAddressToStreet(coordinates) {
     if (!this.useGoogle || !streetGeometryService.apiKey) {
       // Can't snap without Google API
       return coordinates;
     }
-    
+
     try {
       // Convert [lng, lat] to {lat, lng} format for Roads API
       const [lng, lat] = coordinates;
       const point = { lat, lng };
-      
+
       // Snap to roads (expects array of {lat, lng} objects)
       const snappedPoints = await streetGeometryService.snapToRoads([point]);
-      
+
       if (snappedPoints && snappedPoints.length > 0) {
         const snapped = snappedPoints[0];
         // Convert back to [lng, lat] format
         const snappedCoords = [snapped.location.longitude, snapped.location.latitude];
-        
+
         // Calculate distance moved (in meters, approximate)
         const distanceMoved = this.calculateDistance(coordinates, snappedCoords);
-        
+
         // Only use snapped coordinates if movement is reasonable (< 100 meters)
         // This prevents snapping to a completely different street
         if (distanceMoved < 100) {
@@ -509,7 +512,7 @@ class GeocodingService {
           return coordinates;
         }
       }
-      
+
       // If snapping failed, return original coordinates
       return coordinates;
     } catch (error) {
@@ -522,18 +525,15 @@ class GeocodingService {
   /**
    * Calculate approximate distance between two coordinates in meters
    * Uses Haversine formula for great-circle distance
-   * @param coord1 [lng, lat]
-   * @param coord2 [lng, lat]
-   * @returns distance in meters
    */
   calculateDistance(coord1, coord2) {
     const [lng1, lat1] = coord1;
     const [lng2, lat2] = coord2;
-    
+
     const R = 6371000; // Earth radius in meters
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLng = (lng2 - lng1) * Math.PI / 180;
-    const a = 
+    const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
       Math.sin(dLng / 2) * Math.sin(dLng / 2);
@@ -547,13 +547,13 @@ class GeocodingService {
   async geocodeStops(stops, city = 'Portland', state = 'OR') {
     const CONCURRENCY = 3; // Process 3 stops at a time to be respectful of rate limits
     const geocodedStops = new Array(stops.length);
-    
+
     // Process stops in chunks
     for (let i = 0; i < stops.length; i += CONCURRENCY) {
       const chunk = stops.slice(i, i + CONCURRENCY);
       const chunkPromises = chunk.map(async (stop, index) => {
         const actualIndex = i + index;
-        
+
         // Skip geocoding for stops marked to skip (e.g., LOADING ZONE, CAB LOAD ZONE)
         if (stop.skipGeocoding) {
           geocodedStops[actualIndex] = {
@@ -563,14 +563,38 @@ class GeocodingService {
           };
           return;
         }
-        
-        // Skip geocoding for school stops that already have coordinates from schools.json
+
+        // Skip geocoding for any stop that already has valid coordinates AND placeId
+        if (stop.coordinates && Array.isArray(stop.coordinates) && stop.coordinates.length === 2 && stop.placeId) {
+          console.log(`[GeocodingService] Skipping already geocoded stop: "${stop.address}" (placeId: ${stop.placeId.substring(0, 20)}...)`);
+          const existingStopData = {
+            ...stop,
+            skipGeocoding: false,
+          };
+
+          // Ensure neighborhood is populated
+          if (!stop.neighborhood) {
+            try {
+              const neighborhoodResult = await neighborhoodService.getNeighborhood(stop.coordinates);
+              if (neighborhoodResult.success && neighborhoodResult.neighborhood) {
+                existingStopData.neighborhood = neighborhoodResult.neighborhood;
+              }
+            } catch (error) {
+              console.warn(`[GeocodingService] Failed to get neighborhood for existing stop "${stop.address}":`, error.message);
+            }
+          }
+
+          geocodedStops[actualIndex] = existingStopData;
+          return;
+        }
+
+        // Skip geocoding for school stops that already have coordinates
         if (stop.isSchoolStop && stop.coordinates && Array.isArray(stop.coordinates) && stop.coordinates.length === 2) {
           const schoolStopData = {
             ...stop,
             skipGeocoding: false,
           };
-          
+
           if (!stop.neighborhood) {
             try {
               const neighborhoodResult = await neighborhoodService.getNeighborhood(stop.coordinates);
@@ -581,40 +605,40 @@ class GeocodingService {
               console.warn(`[GeocodingService] Failed to get neighborhood for school stop "${stop.address}":`, error.message);
             }
           }
-          
+
           geocodedStops[actualIndex] = schoolStopData;
           return;
         }
-        
+
         const address = stop.address;
         const isIntersection = address.includes('&') || address.includes(' AND ');
-        
+
         let result;
         if (isIntersection) {
           result = await this.geocodeIntersection(address, city, state);
         } else {
           result = await this.geocodeAddress(address, city, state);
         }
-        
+
         if (result.success) {
           let finalCoordinates = result.coordinates;
-          
+
           if (!isIntersection && this.isHouseAddress(result)) {
             finalCoordinates = await this.snapHouseAddressToStreet(result.coordinates);
           }
-          
+
           const stopData = {
             ...stop,
             coordinates: finalCoordinates,
             displayName: result.displayName,
             placeId: result.placeId || null,
           };
-          
+
           if (result.isApproximate) {
             stopData.isApproximate = true;
             stopData.geocodeWarning = result.geocodeWarning || 'Intersection not found, using approximate location';
           }
-          
+
           if (stopData.coordinates) {
             try {
               const neighborhoodResult = await neighborhoodService.getNeighborhood(stopData.coordinates);
@@ -625,7 +649,7 @@ class GeocodingService {
               console.warn(`[GeocodingService] Failed to get neighborhood for stop "${stop.address}":`, error.message);
             }
           }
-          
+
           geocodedStops[actualIndex] = stopData;
         } else {
           geocodedStops[actualIndex] = {
@@ -635,15 +659,15 @@ class GeocodingService {
           };
         }
       });
-      
+
       await Promise.all(chunkPromises);
-      
+
       // Small delay between chunks to avoid hitting rate limits too fast
       if (i + CONCURRENCY < stops.length) {
         await new Promise(resolve => setTimeout(resolve, this.useGoogle ? 100 : 1000));
       }
     }
-    
+
     // Check for duplicate coordinates and warn
     const coordinateMap = new Map();
     geocodedStops.forEach((stop, index) => {
@@ -656,7 +680,7 @@ class GeocodingService {
         }
       }
     });
-    
+
     return geocodedStops;
   }
 
@@ -666,7 +690,7 @@ class GeocodingService {
   async batchGeocode(addresses, city = 'Portland', state = 'OR') {
     const CONCURRENCY = 3;
     const results = new Array(addresses.length);
-    
+
     for (let i = 0; i < addresses.length; i += CONCURRENCY) {
       const chunk = addresses.slice(i, i + CONCURRENCY);
       const chunkPromises = chunk.map(async (address, index) => {
@@ -677,15 +701,15 @@ class GeocodingService {
           ...result,
         };
       });
-      
+
       await Promise.all(chunkPromises);
-      
+
       // Rate limiting
       if (i + CONCURRENCY < addresses.length) {
         await new Promise(resolve => setTimeout(resolve, this.useGoogle ? 100 : 1000));
       }
     }
-    
+
     return results;
   }
 }
@@ -698,4 +722,3 @@ streetGeometryService.setGeocodingService(geocodingService);
 
 // Also export class for testing or custom instances
 export { GeocodingService };
-

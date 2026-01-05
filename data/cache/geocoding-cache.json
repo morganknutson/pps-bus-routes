@@ -1,0 +1,217 @@
+{
+  "sw council crest dr & sw fairview blvd|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.7022712,
+      45.4945007
+    ],
+    "displayName": "SW Council Crest Dr, Portland, OR 97239, USA",
+    "placeId": "ChIJq9y7E0sKlVQRrlFyVti1E-Y",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest Council Crest Drive",
+        "short_name": "SW Council Crest Dr",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97239",
+        "short_name": "97239",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-05T08:14:28.863Z"
+  },
+  "southwest broadway & southwest jefferson|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6817906,
+      45.5153495
+    ],
+    "displayName": "SW Jefferson St & SW Broadway, Portland, OR 97204, USA",
+    "placeId": "EjZTVyBKZWZmZXJzb24gU3QgJiBTVyBCcm9hZHdheSwgUG9ydGxhbmQsIE9SIDk3MjA0LCBVU0EiZiJkChQKEgmH7A95EAqVVBEkjdQnseZU7RIUChIJh-wPeRAKlVQRJI3UJ7HmVO0aFAoSCdWt1NIbCpVUEdatcACbExCnGhQKEgnvw5qKEAqVVBFzKvFVc1M8SSIKDVcXIRsVjj7gtg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest Jefferson Street & Southwest Broadway",
+        "short_name": "SW Jefferson St & SW Broadway",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97204",
+        "short_name": "97204",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-05T08:18:40.566Z"
+  },
+  "8708 northwest terraceview court, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.76574149999999,
+      45.537997999999995
+    ],
+    "displayName": "8708 NW Terraceview Ct, Portland, OR 97229, USA",
+    "placeId": "ChIJo9Fc4gAJlVQR4fWfXSRpnfM",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "8708",
+        "short_name": "8708",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Terraceview Court",
+        "short_name": "NW Terraceview Ct",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Northwest Portland",
+        "short_name": "Northwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97229",
+        "short_name": "97229",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "8026",
+        "short_name": "8026",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-05T09:10:33.525Z"
+  }
+}

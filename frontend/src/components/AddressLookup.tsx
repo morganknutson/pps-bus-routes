@@ -24,9 +24,9 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { 
-    lookupAddress, 
-    setLookupAddress, 
+  const {
+    lookupAddress,
+    setLookupAddress,
     clearLookupAddress,
     selectedSchoolId,
     routes,
@@ -37,11 +37,12 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const sessionTokenRef = useRef<string>(crypto.randomUUID());
 
   // Extract street name from full address (e.g., "123 Main St" from "123 Main St, Portland, OR")
   const getDisplayAddress = (address: string): string => {
     if (!address) return address;
-    
+
     // Extract street part (everything before the first comma)
     const streetPart = address.split(',')[0].trim();
     return formatStreetName(streetPart);
@@ -54,24 +55,24 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
 
     if (result) {
       const { route, stop, stopNumber, distance } = result;
-      
+
       // Update direction filter if the route has a specific direction
       if (route.direction) {
         setDirectionFilter(route.direction);
       }
-      
+
       selectStop(route, stop, stopNumber);
-      
+
       // Explicitly set the Map Intent to DOUBLE_FIT
       useStore.getState().setMapIntent({ type: 'DOUBLE_FIT' });
-      
+
       // signal to MapView to perform a "double-fit" (Home + Stop)
       // This is now redundant since we use setMapIntent, but kept for compatibility
       window.dispatchEvent(new CustomEvent('find-my-stop-executed'));
-      
+
       // Automatically switch to routes tab to show the found stop
       window.dispatchEvent(new CustomEvent('change-tab', { detail: 'routes' }));
-      
+
       analyticsService.trackAction('find_my_stop_admin', {
         schoolId: selectedSchoolId,
         distance
@@ -103,8 +104,14 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     const timeoutId = setTimeout(async () => {
       setIsLoading(true);
       try {
-        const result = await autocompleteAddress(query, 'Portland', 'OR', abortController.signal);
-        
+        const result = await autocompleteAddress(
+          query,
+          'Portland',
+          'OR',
+          abortController.signal,
+          sessionTokenRef.current // Pass current session token
+        );
+
         // Only update if this request wasn't cancelled
         if (!abortController.signal.aborted) {
           setSuggestions(result.suggestions || []);
@@ -194,10 +201,12 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
       setLookupAddress(addressData);
       onAddressSelect(suggestion.address, suggestion.coordinates);
     }
-    
+
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
+    // Reset session token for next search
+    sessionTokenRef.current = crypto.randomUUID();
   };
 
   // Call onAddressSelect when lookupAddress is loaded from store (e.g., from localStorage)
@@ -209,7 +218,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   }, []); // Only on mount - when component first loads with saved address
 
   return (
-    <div style={{ 
+    <div style={{
       position: 'absolute',
       top: '1.2rem',
       left: '1.25rem',
@@ -219,7 +228,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
       gap: '0.75rem',
       alignItems: 'center',
     }}>
-      <div style={{ 
+      <div style={{
         flex: 1,
         padding: '0 0.75rem 0 1.25rem',
         height: '40px',
@@ -231,7 +240,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
       }}>
         {lookupAddress ? (
-          <div style={{ 
+          <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
@@ -270,13 +279,13 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
                 e.currentTarget.style.backgroundColor = 'transparent';
                 e.currentTarget.style.color = 'var(--text-tertiary)';
               }}
-            aria-label="Clear address"
-          >
-            <XIcon />
-          </button>
-        </div>
+              aria-label="Clear address"
+            >
+              <XIcon />
+            </button>
+          </div>
         ) : (
-          <div style={{ 
+          <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
@@ -284,89 +293,89 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             height: '100%',
           }}>
             <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onFocus={() => {
-                if (suggestions.length > 0) {
-                  setShowSuggestions(true);
-                }
-              }}
-              placeholder="Search for an address..."
-              style={{
-                width: '100%',
-                height: '100%',
-              padding: '0 0.5rem',
-              border: 'none',
-              borderRadius: '9999px',
-              fontSize: '14px',
-                boxSizing: 'border-box',
-                backgroundColor: 'transparent',
-                color: 'var(--text-primary)',
-                outline: 'none',
-                transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
-              }}
-            />
-            {isLoading && (
-              <div
-                style={{
-                  position: 'absolute',
-                  right: '8px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  fontSize: '12px',
-                  color: 'var(--text-tertiary)',
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => {
+                  if (suggestions.length > 0) {
+                    setShowSuggestions(true);
+                  }
                 }}
-              >
-                Searching...
-              </div>
-            )}
-            {showSuggestions && suggestions.length > 0 && (
-              <div
-                ref={suggestionsRef}
+                placeholder="Search for an address..."
                 style={{
-                  position: 'absolute',
-                  top: '100%',
-                  left: 0,
-                  right: 0,
-                  marginTop: '4px',
-                  backgroundColor: 'var(--bg-primary)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '16px',
-                  boxShadow: '0 2px 8px var(--shadow-hover)',
-                  maxHeight: '200px',
-                  overflowY: 'auto',
-                  zIndex: 1000,
-                  transition: 'background-color 0.3s ease, border-color 0.3s ease',
+                  width: '100%',
+                  height: '100%',
+                  padding: '0 0.5rem',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  fontSize: '14px',
+                  boxSizing: 'border-box',
+                  backgroundColor: 'transparent',
+                  color: 'var(--text-primary)',
+                  outline: 'none',
+                  transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
                 }}
-              >
-                {suggestions.map((suggestion, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleSelectSuggestion(suggestion)}
-                    style={{
-                      padding: '0.75rem',
-                      cursor: 'pointer',
-                      borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
-                      fontSize: '14px',
-                      color: 'var(--text-primary)',
-                      transition: 'background-color 0.2s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
-                    }}
-                  >
-                    {suggestion.displayName}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+              />
+              {isLoading && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: '8px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    fontSize: '12px',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  Searching...
+                </div>
+              )}
+              {showSuggestions && suggestions.length > 0 && (
+                <div
+                  ref={suggestionsRef}
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    marginTop: '4px',
+                    backgroundColor: 'var(--bg-primary)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '16px',
+                    boxShadow: '0 2px 8px var(--shadow-hover)',
+                    maxHeight: '200px',
+                    overflowY: 'auto',
+                    zIndex: 1000,
+                    transition: 'background-color 0.3s ease, border-color 0.3s ease',
+                  }}
+                >
+                  {suggestions.map((suggestion, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleSelectSuggestion(suggestion)}
+                      style={{
+                        padding: '0.75rem',
+                        cursor: 'pointer',
+                        borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
+                        fontSize: '14px',
+                        color: 'var(--text-primary)',
+                        transition: 'background-color 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+                      }}
+                    >
+                      {suggestion.displayName}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -389,24 +398,24 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             justifyContent: 'center',
             flexShrink: 0,
             boxShadow: '0 4px 12px var(--shadow-large)',
-          transition: 'all 0.2s ease',
-        }}
-        title="Find the closest bus stop to your address"
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-          e.currentTarget.style.transform = 'translateY(-1px)';
-          e.currentTarget.style.boxShadow = '0 6px 16px var(--shadow-large)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = isDarkMode ? '#3A3A3A' : 'var(--bg-primary)';
-          e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = '0 4px 12px var(--shadow-large)';
-        }}
-      >
-        <MapPinIcon style={{ marginRight: '0.5rem', flexShrink: 0 }} />
-        <span>Find My Stop</span>
-      </button>
-    )}
+            transition: 'all 0.2s ease',
+          }}
+          title="Find the closest bus stop to your address"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+            e.currentTarget.style.transform = 'translateY(-1px)';
+            e.currentTarget.style.boxShadow = '0 6px 16px var(--shadow-large)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = isDarkMode ? '#3A3A3A' : 'var(--bg-primary)';
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 12px var(--shadow-large)';
+          }}
+        >
+          <MapPinIcon style={{ marginRight: '0.5rem', flexShrink: 0 }} />
+          <span>Find My Stop</span>
+        </button>
+      )}
     </div>
   );
 }

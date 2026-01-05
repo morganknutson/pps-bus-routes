@@ -12,81 +12,51 @@
  * 
  * @module services/directionsService
  * @requires dotenv
- * 
- * @example
- * // Calculate route through stops
- * import { directionsService } from './directionsService.js';
- * 
- * const waypoints = [
- *   [45.5, -122.7],   // [lat, lng] - Note: Leaflet format!
- *   [45.51, -122.71],
- *   [45.52, -122.72]
- * ];
- * 
- * const result = await directionsService.getRoute(waypoints);
- * if (result.success) {
- *   console.log(result.coordinates); // [[lat, lng], [lat, lng], ...]
- *   console.log(result.provider);    // 'google'
- * }
- * 
- * @see {@link https://developers.google.com/maps/documentation/directions|Google Directions API}
  */
 
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import crypto from 'crypto';
+import { JsonCache } from '../utils/jsonCache.js';
 
-dotenv.config();
+// Load .env from backend directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '..', '.env') });
 
 const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_API_KEY;
 const GOOGLE_DIRECTIONS_URL = 'https://maps.googleapis.com/maps/api/directions/json';
 
+// Cache file paths
+const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
+const CACHE_FILE = join(CACHE_DIR, 'directions-cache.json');
+
 /**
  * DirectionsService class for calculating route geometry.
- * 
- * Calculates street-following paths between waypoints using Google Maps
- * Directions API.
- * 
- * @class
- * @example
- * // Use singleton instance (recommended)
- * import { directionsService } from './directionsService.js';
- * const result = await directionsService.getRoute(waypoints);
- * 
- * @example
- * // Check service statistics
- * const stats = directionsService.getStats();
- * console.log(stats.googleSuccessRate); // "95.50%"
  */
 class DirectionsService {
-  /**
-   * Creates a new DirectionsService instance.
-   * 
-   * @param {string|null} [apiKey=null] - Google Maps API key. Falls back to
-   *   GOOGLE_MAPS_API_KEY or GOOGLE_API_KEY environment variables.
-   * 
-   * @example
-   * // Using environment variable (default)
-   * const service = new DirectionsService();
-   * 
-   * @example
-   * // Using explicit API key
-   * const service = new DirectionsService('AIza...');
-   */
   constructor(apiKey = null) {
     this.apiKey = apiKey || GOOGLE_API_KEY;
     this.useGoogle = !!this.apiKey;
-    
+
+    // Use shared JsonCache utility
+    this.cache = new JsonCache(CACHE_FILE);
+    this.cache.init();
+
     // Statistics tracking
     this.stats = {
       googleRequests: 0,
       googleSuccesses: 0,
       googleFailures: 0,
+      cacheHits: 0,
       straightLineFallbacks: 0,
       totalRoutes: 0,
       totalWaypoints: 0,
       averageResponseTime: 0,
       lastRequestTime: null,
     };
-    
+
     if (!this.useGoogle) {
       console.warn('[DirectionsService] ⚠️  No Google Maps API key found.');
       console.warn('[DirectionsService] 💡 Set GOOGLE_MAPS_API_KEY in backend/.env for routing accuracy');
@@ -99,12 +69,49 @@ class DirectionsService {
   }
 
   /**
+   * Create a hash from waypoints for cache key
+   * Rounds coordinates to 5 decimal places (~1m precision) for reasonable cache hits
+   */
+  getCacheKey(waypoints, mode) {
+    // Round coordinates and stringify
+    const normalizedWaypoints = waypoints.map(wp => [
+      Math.round(wp[0] * 100000) / 100000,
+      Math.round(wp[1] * 100000) / 100000
+    ]);
+    const waypointsStr = JSON.stringify(normalizedWaypoints);
+    // Create a short hash
+    const hash = crypto.createHash('md5').update(waypointsStr).digest('hex').substring(0, 16);
+    return `${hash}|${mode}|${waypoints.length}pts`;
+  }
+
+  /**
+   * Get cached directions result
+   */
+  getCached(waypoints, mode) {
+    const key = this.getCacheKey(waypoints, mode);
+    return this.cache.get(key);
+  }
+
+  /**
+   * Store directions result in cache
+   */
+  setCache(waypoints, mode, result) {
+    const key = this.getCacheKey(waypoints, mode);
+    this.cache.set(key, {
+      coordinates: result.coordinates,
+      distance: result.distance,
+      duration: result.duration,
+      cachedAt: new Date().toISOString()
+    });
+  }
+
+  /**
    * Get service statistics
    */
   getStats() {
     return {
       ...this.stats,
-      googleSuccessRate: this.stats.googleRequests > 0 
+      googleSuccessRate: this.stats.googleRequests > 0
         ? (this.stats.googleSuccesses / this.stats.googleRequests * 100).toFixed(2) + '%'
         : 'N/A',
       usingGoogle: this.useGoogle,
@@ -184,16 +191,16 @@ class DirectionsService {
       if (!Array.isArray(wp) || wp.length !== 2) {
         return { valid: false, error: `Waypoint ${i} must be [lat, lng] array` };
       }
-      
+
       const [lat, lng] = wp;
       if (typeof lat !== 'number' || typeof lng !== 'number') {
         return { valid: false, error: `Waypoint ${i} coordinates must be numbers` };
       }
-      
+
       if (lat < -90 || lat > 90) {
         return { valid: false, error: `Waypoint ${i} latitude out of range: ${lat}` };
       }
-      
+
       if (lng < -180 || lng > 180) {
         return { valid: false, error: `Waypoint ${i} longitude out of range: ${lng}` };
       }
@@ -205,8 +212,6 @@ class DirectionsService {
   /**
    * Get route using Google Directions API
    * Supports up to 25 waypoints per request
-   * @param {Array<[number, number]>} waypoints Array of [lat, lng] coordinates
-   * @param {'driving'|'walking'|'bicycling'|'transit'} [mode='driving'] Travel mode
    */
   async getRouteWithGoogle(waypoints, mode = 'driving') {
     const startTime = Date.now();
@@ -233,7 +238,7 @@ class DirectionsService {
 
     const origin = `${waypoints[0][0]},${waypoints[0][1]}`;
     const destination = `${waypoints[waypoints.length - 1][0]},${waypoints[waypoints.length - 1][1]}`;
-    
+
     // Build waypoints string (exclude origin and destination)
     const intermediateWaypoints = waypoints.slice(1, -1)
       .map(wp => `${wp[0]},${wp[1]}`)
@@ -248,7 +253,7 @@ class DirectionsService {
     try {
       console.log(`[DirectionsService] 🗺️  Requesting route with ${waypoints.length} waypoints via Google Directions API`);
       const response = await fetch(url);
-      
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error(`[DirectionsService] ❌ Google API HTTP error: ${response.status}`, errorText);
@@ -268,15 +273,15 @@ class DirectionsService {
         const coordinates = this.decodePolyline(polyline);
         const distance = route.legs.reduce((sum, leg) => sum + leg.distance.value, 0);
         const duration = route.legs.reduce((sum, leg) => sum + leg.duration.value, 0);
-        
+
         // Update statistics
         this.stats.googleSuccesses++;
         this.stats.totalRoutes++;
-        this.stats.averageResponseTime = 
+        this.stats.averageResponseTime =
           (this.stats.averageResponseTime * (this.stats.googleSuccesses - 1) + responseTime) / this.stats.googleSuccesses;
 
         console.log(`[DirectionsService] ✅ Route calculated: ${coordinates.length} points, ${(distance / 1000).toFixed(2)}km, ${(duration / 60).toFixed(1)}min (${responseTime}ms)`);
-        
+
         return {
           success: true,
           coordinates, // [lat, lng][] format for Leaflet
@@ -312,15 +317,15 @@ class DirectionsService {
     const allCoordinates = [];
     const batchCount = Math.ceil((waypoints.length - 1) / 24);
     console.log(`[DirectionsService] 📦 Processing ${waypoints.length} waypoints in ${batchCount} batches`);
-    
+
     // Process in batches of 25 waypoints
     for (let i = 0; i < waypoints.length - 1; i += 24) {
       const batch = waypoints.slice(i, Math.min(i + 25, waypoints.length));
       const batchNum = Math.floor(i / 24) + 1;
       console.log(`[DirectionsService] 📦 Batch ${batchNum}/${batchCount}: waypoints ${i} to ${Math.min(i + 24, waypoints.length - 1)}`);
-      
+
       const result = await this.getRouteWithGoogle(batch, mode);
-      
+
       if (result.success) {
         if (i === 0) {
           allCoordinates.push(...result.coordinates);
@@ -333,13 +338,13 @@ class DirectionsService {
         console.error(`[DirectionsService] ❌ Batch ${batchNum} failed: ${result.error}`);
         throw new Error(`Failed to get route for batch ${batchNum} (waypoints ${i}-${Math.min(i + 24, waypoints.length - 1)}): ${result.error}`);
       }
-      
+
       // Small delay between batches to avoid rate limiting
       if (i + 24 < waypoints.length - 1) {
         await new Promise(resolve => setTimeout(resolve, 200));
       }
     }
-    
+
     console.log(`[DirectionsService] ✅ All batches completed: ${allCoordinates.length} total points`);
     return {
       success: true,
@@ -352,9 +357,6 @@ class DirectionsService {
   /**
    * Get route through waypoints
    * Uses Google Directions API
-   * @param waypoints Array of [lat, lng] coordinates
-   * @param {'driving'|'walking'|'bicycling'|'transit'} [mode='driving'] Travel mode
-   * @returns Promise with route coordinates [lat, lng][]
    */
   async getRoute(waypoints, mode = 'driving') {
     const validation = this.validateWaypoints(waypoints);
@@ -362,8 +364,30 @@ class DirectionsService {
       throw new Error(validation.error);
     }
 
+    // Check cache first
+    const cached = this.getCached(waypoints, mode);
+    if (cached) {
+      console.log(`[DirectionsService] Cache hit for ${waypoints.length} waypoints`);
+      this.stats.cacheHits++;
+      return {
+        success: true,
+        coordinates: cached.coordinates,
+        distance: cached.distance,
+        duration: cached.duration,
+        provider: 'cache',
+        fromCache: true,
+      };
+    }
+
     if (this.useGoogle) {
-      return await this.getRouteWithGoogle(waypoints, mode);
+      const result = await this.getRouteWithGoogle(waypoints, mode);
+
+      // Cache successful results
+      if (result.success && result.coordinates) {
+        this.setCache(waypoints, mode, result);
+      }
+
+      return result;
     } else {
       return {
         success: false,
@@ -378,4 +402,3 @@ export const directionsService = new DirectionsService();
 
 // Also export class for testing or custom instances
 export { DirectionsService };
-

@@ -1,24 +1,39 @@
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import fs from 'fs';
 import dotenv from 'dotenv';
-dotenv.config();
+import { JsonCache } from '../utils/jsonCache.js';
+
+// Load .env from backend directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '..', '.env') });
 
 const API_KEY = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
+
+// Cache file paths
+const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
+const CACHE_FILE = join(CACHE_DIR, 'autocomplete-cache.json');
 
 import { geocodingService } from './geocodingService.js';
 
 /**
  * AutocompleteService class for address autocomplete
  * Uses Google Places Autocomplete API with Nominatim fallback
- * Includes in-memory caching for performance
+ * Includes persistent file-based caching for performance and cost savings
  */
 class AutocompleteService {
   constructor(apiKey = API_KEY) {
     this.apiKey = apiKey;
     this.useGoogle = !!this.apiKey;
+
+    // Use shared JsonCache utility
+    this.cache = new JsonCache(CACHE_FILE);
+    this.cache.init();
     
-    // In-memory cache: Map<query, { suggestions, timestamp }>
-    this.cache = new Map();
-    this.cacheTTL = 1000 * 60 * 60; // 1 hour TTL
-    
+    // 30 days TTL (addresses are stable)
+    this.cacheTTL = 1000 * 60 * 60 * 24 * 30;
+
     // Portland, OR location bias (center and approximate bounds)
     this.portlandLocationBias = {
       circle: {
@@ -29,7 +44,7 @@ class AutocompleteService {
         radius: 15000 // 15km in meters - covers Portland metro area
       }
     };
-    
+
     if (!this.useGoogle) {
       console.warn('[AutocompleteService] No Google API key found, will use Nominatim fallback');
     } else {
@@ -50,15 +65,16 @@ class AutocompleteService {
   getCached(query, city, state) {
     const key = this.getCacheKey(query, city, state);
     const cached = this.cache.get(key);
-    
+
     if (!cached) return null;
-    
+
+    // Check TTL
     const age = Date.now() - cached.timestamp;
     if (age > this.cacheTTL) {
       this.cache.delete(key);
       return null;
     }
-    
+
     return cached.suggestions;
   }
 
@@ -71,31 +87,11 @@ class AutocompleteService {
       suggestions,
       timestamp: Date.now()
     });
-    
-    // Clean up old cache entries periodically (keep cache size reasonable)
-    if (this.cache.size > 1000) {
-      const now = Date.now();
-      for (const [key, value] of this.cache.entries()) {
-        if (now - value.timestamp > this.cacheTTL) {
-          this.cache.delete(key);
-        }
-      }
-    }
-  }
-
-  /**
-   * Format address from Google Places Autocomplete result
-   */
-  formatAddressFromGoogle(place) {
-    // Use structured address if available, otherwise use description
-    if (place.structured_formatting) {
-      return place.structured_formatting.main_text || place.description;
-    }
-    return place.description;
   }
 
   /**
    * Get place details from Google Place ID
+   * Note: This is now only called when explicitly needed, not during autocomplete
    * @param {string} placeId Google Place ID
    * @param {boolean} shouldSnap Whether to snap coordinates to nearest street (default: false)
    */
@@ -106,7 +102,7 @@ class AutocompleteService {
 
     try {
       const url = `https://places.googleapis.com/v1/places/${placeId}`;
-      
+
       const response = await fetch(url, {
         headers: {
           'X-Goog-Api-Key': this.apiKey,
@@ -119,17 +115,17 @@ class AutocompleteService {
       }
 
       const data = await response.json();
-      
+
       if (data.location) {
         const coordinates = [data.location.longitude, data.location.latitude]; // [lng, lat]
-        
+
         // Snap house addresses to nearest street for better "closest stop" calculations
         // Cul-de-sacs often have houses physically closer to back streets than front streets
         let finalCoordinates = coordinates;
-        const isHouse = data.addressComponents?.some(c => c.types.includes('street_number')) || 
-                       data.types?.includes('street_address') ||
-                       data.types?.includes('premise');
-        
+        const isHouse = data.addressComponents?.some(c => c.types.includes('street_number')) ||
+          data.types?.includes('street_address') ||
+          data.types?.includes('premise');
+
         if (isHouse && shouldSnap) {
           console.log(`[AutocompleteService] Snapping house address to street: ${data.formattedAddress}`);
           finalCoordinates = await geocodingService.snapHouseAddressToStreet(coordinates);
@@ -141,7 +137,7 @@ class AutocompleteService {
           displayName: data.formattedAddress || data.displayName?.text || null
         };
       }
-      
+
       return null;
     } catch (error) {
       console.error('[AutocompleteService] Error getting place details:', error);
@@ -151,6 +147,8 @@ class AutocompleteService {
 
   /**
    * Autocomplete using Google Places Autocomplete API
+   * OPTIMIZED: Does NOT fetch place details for every suggestion.
+   * Only returns placeId and text. Frontend resolves details on selection.
    */
   async autocompleteWithGoogle(input, city = 'Portland', state = 'OR') {
     if (!this.apiKey) {
@@ -159,7 +157,7 @@ class AutocompleteService {
 
     try {
       const url = 'https://places.googleapis.com/v1/places:autocomplete';
-      
+
       const requestBody = {
         input,
         locationBias: this.portlandLocationBias,
@@ -172,6 +170,7 @@ class AutocompleteService {
         headers: {
           'Content-Type': 'application/json',
           'X-Goog-Api-Key': this.apiKey,
+          // Only fetch minimal fields needed for list display
           'X-Goog-FieldMask': 'suggestions.placePrediction.placeId,suggestions.placePrediction.structuredFormat,suggestions.placePrediction.text'
         },
         body: JSON.stringify(requestBody)
@@ -184,55 +183,36 @@ class AutocompleteService {
       }
 
       const data = await response.json();
-      
+
       if (!data.suggestions || data.suggestions.length === 0) {
         return [];
       }
 
       // Limit to top 8 results for performance
       const suggestions = data.suggestions.slice(0, 8);
-      
-      // Fetch place details in parallel for better performance
-      const placeDetailPromises = suggestions
-        .filter(s => s.placePrediction?.placeId)
-        .map(suggestion => 
-          this.getPlaceDetails(suggestion.placePrediction.placeId)
-            .then(placeDetails => ({
-              suggestion,
-              placeDetails
-            }))
-            .catch(() => ({ suggestion, placeDetails: null }))
-        );
 
-      const placeDetailsResults = await Promise.all(placeDetailPromises);
-      
-      // Map results with place details
-      // Note: Some suggestions may not have coordinates if place details fail
-      // The frontend can geocode on selection if needed
-      const results = placeDetailsResults
-        .map(({ suggestion, placeDetails }) => {
-          const displayText = suggestion.placePrediction.structuredFormat?.mainText?.text || 
-                             suggestion.placePrediction.text?.text;
-          const addressText = suggestion.placePrediction.text?.text || displayText;
-          
-          if (!displayText) return null;
-          
-          if (placeDetails && placeDetails.coordinates) {
-            return {
-              displayName: displayText || placeDetails.displayName,
-              address: placeDetails.address || placeDetails.displayName || addressText,
-              coordinates: placeDetails.coordinates
-            };
-          } else {
-            // No coordinates from place details - frontend will geocode on selection if needed
-            return {
-              displayName: displayText,
-              address: addressText,
-              coordinates: null
-            };
-          }
-        })
-        .filter(result => result !== null); // Filter out invalid results
+      // COST SAVING: Do NOT fetch details for all suggestions.
+      // Just map the available text and placeId.
+      // The frontend will call geocodeAddress or getPlaceDetails when user selects one.
+      const results = suggestions.map(s => {
+        const pred = s.placePrediction;
+        const mainText = pred.structuredFormat?.mainText?.text;
+        const secondaryText = pred.structuredFormat?.secondaryText?.text;
+        const fullText = pred.text?.text;
+        
+        // Construct a display name and address
+        // Ideally: Main Text (e.g. "123 Main St")
+        // Address: Full Text (e.g. "123 Main St, Portland, OR")
+        const displayName = mainText || fullText;
+        const address = fullText || (mainText + (secondaryText ? `, ${secondaryText}` : ''));
+
+        return {
+          displayName,
+          address,
+          placeId: pred.placeId,
+          coordinates: null // Explicitly null to trigger frontend geocode on select
+        };
+      });
 
       return results;
     } catch (error) {
@@ -250,7 +230,7 @@ class AutocompleteService {
       const encodedQuery = encodeURIComponent(query);
 
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${encodedQuery}&format=json&limit=10&addressdetails=1`,
+        `https://nominatim.openstreetmap.org/search?q=${encodedQuery}&format=json&limit=8&addressdetails=1`,
         {
           headers: {
             'User-Agent': 'PPS-Bus-Maps/1.0', // Required by Nominatim
@@ -293,7 +273,7 @@ class AutocompleteService {
         const conciseAddress = formatConciseAddress(result);
         return {
           displayName: conciseAddress,
-          address: conciseAddress,
+          address: conciseAddress, // Nominatim gives us full text in display_name but we use concise for display
           coordinates: [parseFloat(result.lon), parseFloat(result.lat)], // [lng, lat]
         };
       });
@@ -325,7 +305,7 @@ class AutocompleteService {
     // Try Google Places API first
     if (this.useGoogle) {
       suggestions = await this.autocompleteWithGoogle(trimmedInput, city, state);
-      
+
       if (suggestions === null) {
         // Google API failed, try Nominatim fallback
         console.log(`[AutocompleteService] Google API failed, using Nominatim fallback for: "${trimmedInput}"`);
@@ -343,16 +323,15 @@ class AutocompleteService {
       suggestions = await this.autocompleteWithNominatim(trimmedInput, city, state);
     }
 
-    // Cache the results
-    if (suggestions.length > 0) {
+    // Cache the results (only if we got something)
+    if (suggestions && suggestions.length > 0) {
       this.setCache(trimmedInput, city, state, suggestions);
     }
 
-    return suggestions;
+    return suggestions || [];
   }
 }
 
 // Export singleton instance
 export const autocompleteService = new AutocompleteService();
 export { AutocompleteService };
-

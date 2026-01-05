@@ -39,7 +39,7 @@ export async function batchGeocode(addresses: string[], city = 'Portland', state
     console.log(`[API] Calling batchGeocode with ${addresses.length} addresses`);
     const url = `${API_BASE}/geocode/batch`;
     console.log(`[API] URL: ${url}`);
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -47,40 +47,41 @@ export async function batchGeocode(addresses: string[], city = 'Portland', state
       },
       body: JSON.stringify({ addresses, city, state }),
     });
-    
+
     if (!response.ok) {
       const errorText = await response.text();
       console.error(`[API] Geocoding failed with status ${response.status}:`, errorText);
-      
+
       // Check if backend is not running
       if (response.status === 0 || response.status === 500) {
         console.error('[API] Backend may not be running! Make sure the backend server is started on port 3005');
       }
-      
+
       throw new Error(`Failed to geocode addresses: ${response.status} ${errorText}`);
     }
-    
+
     const data = await response.json();
     console.log(`[API] Received geocoding response with ${data.results?.length || 0} results`);
     return data;
   } catch (error: any) {
     console.error('[API] Error in batchGeocode:', error);
-    
+
     // Check if it's a network error (backend not running)
     if (error.message?.includes('Failed to fetch') || error.message?.includes('NetworkError')) {
       console.error('[API] Network error - backend server may not be running on port 3005');
       console.error('[API] Please start the backend with: cd backend && npm run dev');
     }
-    
+
     throw error;
   }
 }
 
 export async function autocompleteAddress(
-  query: string, 
-  city = 'Portland', 
+  query: string,
+  city = 'Portland',
   state = 'OR',
-  signal?: AbortSignal
+  signal?: AbortSignal,
+  sessionToken?: string
 ) {
   // Check cache first
   const cached = autocompleteCache.get(query, city, state);
@@ -90,21 +91,25 @@ export async function autocompleteAddress(
   }
 
   const params = new URLSearchParams({ q: query, city, state });
+  if (sessionToken) {
+    params.append('sessionToken', sessionToken);
+  }
+
   const response = await fetch(`${API_BASE}/geocode/autocomplete?${params}`, {
     signal // Support request cancellation
   });
-  
+
   if (!response.ok) {
     throw new Error('Failed to fetch autocomplete suggestions');
   }
-  
+
   const data = await response.json();
-  
+
   // Cache the results
   if (data.suggestions && data.suggestions.length > 0) {
     autocompleteCache.set(query, data.suggestions, city, state);
   }
-  
+
   return data;
 }
 

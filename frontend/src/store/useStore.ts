@@ -37,11 +37,13 @@ interface Store extends AppState {
   currentGeocodingRouteId: string | null;
   selectedStop: { route: Route; stop: Stop; stopNumber: number } | null;
   directionFilter: 'Morning' | 'Afternoon' | 'Both';
-    lookupAddress: HomeAddress | undefined;
-    shouldZoomToHomeAddress: boolean;
-    loadingCount: number;
-    loadingProgress: number | null; // 0-100 or null for indeterminate
-  }
+  lookupAddress: HomeAddress | undefined;
+  shouldZoomToHomeAddress: boolean;
+  loadingCount: number;
+  loadingProgress: number | null; // 0-100 or null for indeterminate
+  assignedSchools: import('../types').AssignedSchools | null;
+  fetchAssignedSchools: (lat: number, lng: number) => Promise<void>;
+}
 
 export const useStore = create<Store>((set, get) => {
   // Create a debounced function for saving to cache to prevent race conditions
@@ -68,6 +70,7 @@ export const useStore = create<Store>((set, get) => {
     activeTab: 'schools',
     mapIntent: null,
     shouldZoomToHomeAddress: false,
+    assignedSchools: null,
     isDarkMode: (() => {
       if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('darkMode');
@@ -123,15 +126,15 @@ export const useStore = create<Store>((set, get) => {
     setRoutes: (routes) => {
       // Merge with cached coordinates first
       const routesWithCache = mergeCachedCoordinates(routes);
-      
+
       // Assign unique colors to all routes, ensuring no color reuse
       const colorMap = assignUniqueColors(routesWithCache.map(r => ({ id: r.id || '' })));
-      
+
       // Assign colors and calculate geocoding progress
       const routesWithColors = routesWithCache.map((route) => {
         const totalStops = route.stops.length;
         const geocodedStops = route.stops.filter(s => s.coordinates).length;
-        
+
         return {
           ...route,
           // Preserve existing color if it's already set, otherwise assign a new one
@@ -145,11 +148,11 @@ export const useStore = create<Store>((set, get) => {
           },
         };
       });
-      
+
       // Update routes and clear selectedStop if there are no routes to show
       set((state) => {
         const shouldClearSelectedStop = routesWithColors.length === 0 && state.selectedStop;
-        
+
         // Update selectedStop's route if it exists and matches one of the new routes
         // This ensures the selected stop always has the latest route data (including colors)
         let updatedSelectedStop = state.selectedStop;
@@ -162,13 +165,13 @@ export const useStore = create<Store>((set, get) => {
             };
           }
         }
-        
+
         return {
           routes: routesWithColors,
           selectedStop: shouldClearSelectedStop ? null : updatedSelectedStop,
         };
       });
-      
+
       // Save to cache using debounced function to handle potential rapid updates
       debouncedSaveToCache();
     },
@@ -180,20 +183,32 @@ export const useStore = create<Store>((set, get) => {
             ? { ...route, isSelected: !route.isSelected }
             : route
         );
-        
+
         let updatedSelectedStop = state.selectedStop;
         const routeBeingToggled = state.routes.find((route) => route.id === routeId);
-        const isCurrentlySelected = routeBeingToggled?.isSelected;
-        
+        const isCurrentlySelected = routeBeingToggled?.isSelected; // State before toggle
+        const isTurningOn = !isCurrentlySelected; // If it wasn't selected, we are turning it ON
+
         // If the route is currently selected and is being turned off, clear the selected stop for that route
         if (isCurrentlySelected && state.selectedStop && state.selectedStop.route.id === routeId) {
           console.log('[useStore] Route deselected, clearing selected stop');
           updatedSelectedStop = null;
         }
-        
+
+        // Fix for "My Stop" state persistence:
+        // If we are turning a route ON, and we constitute a "My Stop" view (DOUBLE_FIT),
+        // we should clear the specific stop focus so the map can show the new route(s).
+        let newMapIntent = state.mapIntent;
+        if (isTurningOn && state.mapIntent?.type === 'DOUBLE_FIT') {
+          console.log('[useStore] Route selected while in DOUBLE_FIT, clearing selected stop and fitting routes');
+          updatedSelectedStop = null;
+          newMapIntent = { type: 'FIT_ROUTES' };
+        }
+
         return {
           routes: updatedRoutes,
           selectedStop: updatedSelectedStop,
+          mapIntent: newMapIntent
         };
       }),
 
@@ -221,16 +236,16 @@ export const useStore = create<Store>((set, get) => {
 
     setLoading: (loading) => set((state) => {
       const newCount = loading ? state.loadingCount + 1 : Math.max(0, state.loadingCount - 1);
-      return { 
+      return {
         loadingCount: newCount,
         isLoading: newCount > 0,
-        loadingProgress: newCount === 0 ? null : state.loadingProgress 
+        loadingProgress: newCount === 0 ? null : state.loadingProgress
       };
     }),
 
-    setLoadingProgress: (progress) => set((state) => ({ 
-      loadingProgress: progress, 
-      isLoading: progress !== null && progress < 100 || state.loadingCount > 0 
+    setLoadingProgress: (progress) => set((state) => ({
+      loadingProgress: progress,
+      isLoading: progress !== null && progress < 100 || state.loadingCount > 0
     })),
 
     setError: (error) => set({ error }),
@@ -241,7 +256,7 @@ export const useStore = create<Store>((set, get) => {
         console.error('[useStore] Invalid coordinates format:', coordinates);
         throw new Error(`Invalid coordinates format. Expected [lng, lat], got ${JSON.stringify(coordinates)}`);
       }
-      
+
       set((state) => {
         const updatedRoutes = state.routes.map((route) => {
           if (route.id === routeId) {
@@ -252,11 +267,11 @@ export const useStore = create<Store>((set, get) => {
             );
             const geocodedCount = updatedStops.filter(s => {
               const coords = s.coordinates;
-              return coords && Array.isArray(coords) && coords.length === 2 && 
-                     typeof coords[0] === 'number' && typeof coords[1] === 'number' &&
-                     !isNaN(coords[0]) && !isNaN(coords[1]);
+              return coords && Array.isArray(coords) && coords.length === 2 &&
+                typeof coords[0] === 'number' && typeof coords[1] === 'number' &&
+                !isNaN(coords[0]) && !isNaN(coords[1]);
             }).length;
-            
+
             return {
               ...route,
               stops: updatedStops,
@@ -269,11 +284,11 @@ export const useStore = create<Store>((set, get) => {
           }
           return route;
         });
-        
+
         // Save to cache whenever coordinates are updated using debounced function
         // This prevents race conditions and redundant writes during bulk geocoding
         debouncedSaveToCache();
-        
+
         return { routes: updatedRoutes };
       });
     },
@@ -300,7 +315,7 @@ export const useStore = create<Store>((set, get) => {
         }
 
         console.log('[useStore] School changing to:', schoolId, 'clearing previous routes and stops');
-        
+
         return {
           selectedSchoolId: schoolId,
           selectedStop: null,
@@ -342,19 +357,19 @@ export const useStore = create<Store>((set, get) => {
     selectStop: (route, stop, stopNumber) => set((state) => {
       // Ensure we use the route object from the store that has the color assigned
       const routeWithColor = state.routes.find(r => r.id === route.id) || route;
-      
+
       // Auto-select the route when a stop is selected so it appears on the map
-      const updatedRoutes = state.routes.map(r => 
+      const updatedRoutes = state.routes.map(r =>
         r.id === route.id ? { ...r, isSelected: true } : r
       );
 
-      return { 
+      return {
         routes: updatedRoutes,
-        selectedStop: { 
-          route: routeWithColor, 
-          stop, 
-          stopNumber 
-        } 
+        selectedStop: {
+          route: routeWithColor,
+          stop,
+          stopNumber
+        }
       };
     }),
 
@@ -377,7 +392,7 @@ export const useStore = create<Store>((set, get) => {
         // Ensure the selection in the NEW context exactly matches the names from the OLD context.
         const updatedRoutes = state.routes.map(r => {
           const isCurrentContext = newDirection === 'Both' || r.direction === newDirection;
-          
+
           if (isCurrentContext) {
             const shouldBeSelected = selectedNames.includes(r.name);
             if (r.isSelected !== shouldBeSelected) {
@@ -394,8 +409,8 @@ export const useStore = create<Store>((set, get) => {
           const currentRouteName = state.selectedStop.route.name;
 
           // Look for the same route in the NEW direction
-          const newTargetRoute = updatedRoutes.find(r => 
-            r.name === currentRouteName && 
+          const newTargetRoute = updatedRoutes.find(r =>
+            r.name === currentRouteName &&
             (newDirection === 'Both' || r.direction === newDirection)
           );
 
@@ -418,8 +433,8 @@ export const useStore = create<Store>((set, get) => {
             updatedSelectedStop = null;
           }
         }
-        
-        return { 
+
+        return {
           directionFilter: direction,
           routes: updatedRoutes,
           selectedStop: updatedSelectedStop
@@ -443,6 +458,18 @@ export const useStore = create<Store>((set, get) => {
     setIsDarkMode: (isDark) => {
       localStorage.setItem('darkMode', String(isDark));
       set({ isDarkMode: isDark });
+    },
+
+    fetchAssignedSchools: async (lat, lng) => {
+      try {
+        const response = await fetch(`http://localhost:3005/api/schools/assigned?lat=${lat}&lng=${lng}`);
+        if (!response.ok) throw new Error('Failed to fetch assigned schools');
+        const data = await response.json();
+        set({ assignedSchools: data.assigned });
+      } catch (error) {
+        console.error('Error fetching assigned schools:', error);
+        set({ assignedSchools: null });
+      }
     },
   };
 });

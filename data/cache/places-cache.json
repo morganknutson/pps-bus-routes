@@ -1,0 +1,20 @@
+{
+  "5bc81eb69a273a523ca7fad331643f08": {
+    "data": {
+      "place": {
+        "id": "ChIJUfF-dBwKlVQRtOyDOhKPtYs",
+        "name": "Lincoln High School",
+        "address": "1750 SW Salmon St, Portland, OR 97205, USA",
+        "location": {
+          "lat": 45.5196845,
+          "lng": -122.6911184
+        },
+        "coordinates": [
+          -122.6911184,
+          45.5196845
+        ]
+      }
+    },
+    "cachedAt": "2026-01-05T08:48:03.560Z"
+  }
+}

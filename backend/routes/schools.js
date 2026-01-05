@@ -4,6 +4,7 @@ import fsSync from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { searchSchool, getSchoolTypes } from '../services/placesService.js';
+import { schoolBoundaryService } from '../services/schoolBoundaryService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,12 +49,12 @@ function extractNeighborhood(placesData) {
   if (!placesData || !placesData.addressComponents || !Array.isArray(placesData.addressComponents)) {
     return null;
   }
-  
+
   // Find the address component with type "neighborhood"
-  const neighborhoodComponent = placesData.addressComponents.find(component => 
+  const neighborhoodComponent = placesData.addressComponents.find(component =>
     component.types && Array.isArray(component.types) && component.types.includes('neighborhood')
   );
-  
+
   return neighborhoodComponent ? neighborhoodComponent.longText : null;
 }
 
@@ -61,7 +62,7 @@ function extractNeighborhood(placesData) {
 async function hasPdfs(schoolId) {
   try {
     const schoolPdfsDir = path.join(DATA_DIR, 'schools', schoolId, 'pdfs');
-    
+
     // Check if directory exists
     try {
       await fs.access(schoolPdfsDir);
@@ -73,11 +74,11 @@ async function hasPdfs(schoolId) {
     // Check if directory has any PDF files
     const files = await fs.readdir(schoolPdfsDir);
     const pdfFiles = files.filter(f => f.toLowerCase().endsWith('.pdf'));
-    
+
     if (pdfFiles.length === 0) {
       // console.log(`[hasPdfs] No PDFs found in ${schoolPdfsDir}`);
     }
-    
+
     return pdfFiles.length > 0;
   } catch (error) {
     console.error(`Error checking PDFs for school ${schoolId}:`, error);
@@ -100,7 +101,7 @@ async function getRouteStats(schoolId) {
 
   try {
     const schoolRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
-    
+
     try {
       await fs.access(schoolRoutesDir);
     } catch {
@@ -113,11 +114,11 @@ async function getRouteStats(schoolId) {
       setCachedStats(schoolId, stats);
       return stats;
     }
-    
+
     // Track unique route names
     const uniqueRouteNames = new Set();
     let latestTime = 0;
-    
+
     // Check directory stat for latest update time as a shortcut
     try {
       const dirStats = await fs.stat(schoolRoutesDir);
@@ -138,7 +139,7 @@ async function getRouteStats(schoolId) {
 
     stats.routeCount = uniqueRouteNames.size;
     stats.routesUpdatedAt = latestTime > 0 ? new Date(latestTime).toISOString() : null;
-    
+
     // Cache the result
     setCachedStats(schoolId, stats);
     // console.log(`[getRouteStats] ${schoolId}: ${stats.routeCount} routes (${Date.now() - startTime}ms)`);
@@ -151,13 +152,40 @@ async function getRouteStats(schoolId) {
 }
 
 /**
+ * Get assigned schools by location
+ * GET /api/schools/assigned?lat=45.5&lng=-122.6
+ */
+router.get('/assigned', async (req, res) => {
+  try {
+    const { lat, lng } = req.query;
+
+    if (!lat || !lng) {
+      return res.status(400).json({ error: 'Missing lat or lng query parameters' });
+    }
+
+    const latitude = parseFloat(lat);
+    const longitude = parseFloat(lng);
+
+    if (isNaN(latitude) || isNaN(longitude)) {
+      return res.status(400).json({ error: 'Invalid lat/lng coordinates' });
+    }
+
+    const assigned = schoolBoundaryService.getAssignedSchools(latitude, longitude);
+    res.json({ assigned });
+  } catch (error) {
+    console.error('Error getting assigned schools:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
  * Get all schools
  */
 router.get('/', async (req, res) => {
   const startTime = Date.now();
   try {
     console.log(`[GET /api/schools] Request started`);
-    
+
     // Check if file exists
     try {
       await fs.access(SCHOOLS_FILE);
@@ -178,17 +206,17 @@ router.get('/', async (req, res) => {
 
     const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
-    
+
     if (!Array.isArray(schools)) {
       throw new Error('Invalid schools data format: not an array');
     }
-    
+
     console.log(`[GET /api/schools] Processing ${schools.length} schools`);
-    
+
     // Process schools in chunks to avoid overwhelming the file system
     const schoolsWithCounts = [];
     const CHUNK_SIZE = 20;
-    
+
     for (let i = 0; i < schools.length; i += CHUNK_SIZE) {
       const chunk = schools.slice(i, i + CHUNK_SIZE);
       const chunkResults = await Promise.all(chunk.map(async (school) => {
@@ -196,7 +224,7 @@ router.get('/', async (req, res) => {
           const stats = await getRouteStats(school.id);
           const { placesData, placeId, ...schoolData } = school;
           const neighborhood = extractNeighborhood(placesData);
-          
+
           return {
             ...schoolData,
             ...(neighborhood && { neighborhood }),
@@ -208,10 +236,10 @@ router.get('/', async (req, res) => {
           return null;
         }
       }));
-      
+
       schoolsWithCounts.push(...chunkResults.filter(s => s !== null));
     }
-    
+
     const duration = Date.now() - startTime;
     console.log(`[GET /api/schools] Success: Returning ${schoolsWithCounts.length} schools (${duration}ms)`);
     res.json({ schools: schoolsWithCounts });
@@ -367,28 +395,28 @@ router.post('/:schoolId/update-address', async (req, res) => {
     }
 
     const school = schools[schoolIndex];
-    
+
     // Search for the school using Places API
     console.log(`[Places API] Searching for: ${school.name}`);
     const searchResult = await searchSchool(school.name);
 
     if (!searchResult.success) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Failed to find school address',
-        details: searchResult.error 
+        details: searchResult.error
       });
     }
 
     const place = searchResult.place;
-    
+
     // Get school types for this school
     const schoolTypes = getSchoolTypes(school.name);
-    
+
     // Update school with new address, coordinates, and school types
     // Note: placesData is not updated here, so we extract neighborhood from existing placesData if available
     const { placesData, placeId, ...schoolDataWithoutPlaces } = school;
     const neighborhood = extractNeighborhood(placesData);
-    
+
     const updatedSchool = {
       ...schoolDataWithoutPlaces,
       address: place.address,
@@ -407,7 +435,7 @@ router.post('/:schoolId/update-address', async (req, res) => {
 
     console.log(`[Places API] Updated ${school.name}: ${place.address}`);
 
-    res.json({ 
+    res.json({
       school: updatedSchool, // Exclude placesData/placeId from response
       place: {
         name: place.name,
@@ -428,7 +456,7 @@ router.post('/batch-update-addresses', async (req, res) => {
   try {
     const content = await fs.readFile(SCHOOLS_FILE, 'utf8');
     const schools = JSON.parse(content);
-    
+
     const results = [];
     const updatedSchools = [...schools];
 
@@ -437,20 +465,20 @@ router.post('/batch-update-addresses', async (req, res) => {
     // Process each school with rate limiting (1 request per second)
     for (let i = 0; i < schools.length; i++) {
       const school = schools[i];
-      
+
       try {
         console.log(`[${i + 1}/${schools.length}] Processing: ${school.name}`);
-        
+
         const searchResult = await searchSchool(school.name);
 
         if (searchResult.success && searchResult.place) {
           const place = searchResult.place;
           const schoolIndex = updatedSchools.findIndex((s) => s.id === school.id);
-          
+
           if (schoolIndex !== -1) {
             // Get school types for this school
             const schoolTypes = getSchoolTypes(school.name);
-            
+
             updatedSchools[schoolIndex] = {
               ...updatedSchools[schoolIndex],
               address: place.address,
