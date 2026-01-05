@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { useStore } from '../store/useStore';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { School } from '../types';
@@ -169,8 +170,338 @@ export function SchoolList({
     return matchesFilter;
   });
 
-  const schoolsWithCoords = filteredSchools.filter(s => s.coordinates && s.coordinates.length === 2);
-  const schoolsWithoutCoords = filteredSchools.filter(s => !s.coordinates || s.coordinates.length !== 2);
+  const assignedSchoolsData = useStore(state => state.assignedSchools);
+
+  // Split into assigned and other schools
+  const { assigned, others } = useMemo(() => {
+    if (!assignedSchoolsData || searchTerm) {
+      return { assigned: [], others: filteredSchools };
+    }
+
+    const assignedNames = [
+      assignedSchoolsData.elementary?.name,
+      assignedSchoolsData.middle?.name,
+      assignedSchoolsData.high?.name,
+      assignedSchoolsData.k8?.name
+    ].filter(Boolean).map(n => n!.toLowerCase().trim());
+
+    const assigned: School[] = [];
+    const others: School[] = [];
+
+    filteredSchools.forEach(school => {
+      const schoolNameLower = school.name.toLowerCase().trim();
+
+      const isAssigned = assignedNames.some(assignedName => {
+        if (!assignedName) return false;
+
+        // Exact or substring match
+        if (schoolNameLower === assignedName ||
+          schoolNameLower.includes(assignedName) ||
+          assignedName.includes(schoolNameLower)) {
+          return true;
+        }
+
+        // Handle specific PPS naming patterns (remove non-alphanumeric)
+        const normalizedSchool = schoolNameLower.replace(/[^a-z0-9]/g, '');
+        const normalizedAssigned = assignedName.replace(/[^a-z0-9]/g, '');
+        return normalizedSchool.includes(normalizedAssigned) || normalizedAssigned.includes(normalizedSchool);
+      });
+
+      if (isAssigned) {
+        assigned.push(school)
+      } else {
+        others.push(school);
+      }
+    });
+
+    return { assigned, others };
+  }, [filteredSchools, assignedSchoolsData, searchTerm]);
+
+  // Helper to render a school item
+  const renderSchoolItem = (school: School) => {
+    const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
+    const schoolColor = getSchoolColor(schoolTypes);
+    const isSelected = school.id === selectedSchoolId;
+    const isEditing = editingSchoolId === school.id;
+
+    return (
+      <div
+        key={school.id}
+        data-testid="school-list-item"
+        className={`school-list-item ${isSelected ? 'selected' : ''}`}
+        style={{
+          borderBottom: '1px solid var(--border-color)',
+          borderLeft: `4px solid ${schoolColor}`,
+          transition: 'background-color 0.3s ease, border-color 0.3s ease',
+        }}
+      >
+        <div
+          onClick={() => {
+            if (!isEditing) {
+              // Toggle selection: if already selected, deselect; otherwise select
+              if (isSelected) {
+                navigate('/schools');
+              } else {
+                analyticsService.trackSchoolSelect(school.name, enableEditing ? 'admin_list' : 'explorer_list');
+
+                if (isMobile) {
+                  // On mobile, show routes immediately and close sidebar
+                  navigate(`/${school.id}/routes`);
+                  if (onMobileClose) onMobileClose();
+                } else {
+                  // On desktop, show school info (standard behavior)
+                  navigate(`/${school.id}/school-info`);
+                }
+              }
+            }
+          }}
+          style={{
+            padding: '1rem 1rem 1rem 1.5rem',
+            cursor: isEditing ? 'default' : 'pointer',
+            transition: 'background-color 0.2s',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            gap: '0.5rem',
+          }}
+        >
+          <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.1rem' }}>
+              <div style={{ fontWeight: '500', fontSize: '16px', color: 'var(--text-secondary)' }}>
+                {getSchoolDisplayName(school.name)}
+              </div>
+              {enableEditing && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setEditingSchoolId(school.id);
+                    setEditingName(school.name);
+                    setEditingPageLink(school.schoolPageLink || '');
+                    setEditingDriveLink(school.driveLink || '');
+                    setEditingAddress(school.address || '');
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0.25rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: 'var(--text-tertiary)',
+                    transition: 'color 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#FFFFFF';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--text-tertiary)';
+                  }}
+                >
+                  <i className="fas fa-edit" style={{ fontSize: '14px' }}></i>
+                </button>
+              )}
+            </div>
+            <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.75rem', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+              <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <i className="fas fa-graduation-cap" style={{ fontSize: '11px' }}></i>
+              </div>
+              <span>{schoolTypes.join(' & ')}</span>
+            </div>
+            {school.address && (
+              <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <MapPinIcon width={10} height={13} style={{ color: 'var(--text-tertiary)' }} />
+                </div>
+                <span>{school.address.split(',')[0]}</span>
+              </div>
+            )}
+            {school.routeCount !== undefined && (
+              <div style={{
+                fontSize: '12px',
+                color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.375rem',
+                fontWeight: school.routeCount === 0 ? '600' : '400'
+              }}>
+                {school.routeCount === 0 ? (
+                  <>
+                    <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <i className="fas fa-exclamation-circle" style={{ fontSize: '12px' }}></i>
+                    </div>
+                    <span>Routes not provided by district</span>
+                  </>
+                ) : (
+                  <>
+                    <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <RouteIcon size={10} color="var(--text-tertiary)" />
+                    </div>
+                    <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'}</span>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {isEditing && enableEditing && onUpdateSchool && (
+          <div style={{ padding: '0 1rem 1rem 1rem', backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'background-color 0.3s ease, border-color 0.3s ease' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.75rem' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                  School Name
+                </label>
+                <input
+                  type="text"
+                  value={editingName}
+                  onChange={(e) => setEditingName(e.target.value)}
+                  placeholder="School name..."
+                  style={{
+                    width: '100%',
+                    padding: '0.5rem',
+                    fontSize: '12px',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '8px',
+                    boxSizing: 'border-box',
+                    backgroundColor: 'var(--bg-primary)',
+                    color: 'var(--text-primary)',
+                    transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                  Address
+                </label>
+                <input
+                  type="text"
+                  value={editingAddress}
+                  onChange={(e) => setEditingAddress(e.target.value)}
+                  placeholder="School physical address..."
+                  style={{
+                    width: '100%',
+                    padding: '0.5rem',
+                    fontSize: '12px',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '8px',
+                    boxSizing: 'border-box',
+                    backgroundColor: 'var(--bg-primary)',
+                    color: 'var(--text-primary)',
+                    transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                  Page Link
+                </label>
+                <input
+                  type="text"
+                  value={editingPageLink}
+                  onChange={(e) => setEditingPageLink(e.target.value)}
+                  placeholder="School page URL..."
+                  style={{
+                    width: '100%',
+                    padding: '0.5rem',
+                    fontSize: '12px',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '8px',
+                    boxSizing: 'border-box',
+                    backgroundColor: 'var(--bg-primary)',
+                    color: 'var(--text-primary)',
+                    transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+                  Drive Link
+                </label>
+                <input
+                  type="text"
+                  value={editingDriveLink}
+                  onChange={(e) => setEditingDriveLink(e.target.value)}
+                  placeholder="Google Drive folder URL..."
+                  style={{
+                    width: '100%',
+                    padding: '0.5rem',
+                    fontSize: '12px',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '8px',
+                    boxSizing: 'border-box',
+                    backgroundColor: 'var(--bg-primary)',
+                    color: 'var(--text-primary)',
+                    transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <button
+                  onClick={async (e) => {
+                    e.stopPropagation();
+                    if (onUpdateSchool) {
+                      await onUpdateSchool(school.id, {
+                        name: editingName,
+                        schoolPageLink: editingPageLink || null,
+                        driveLink: editingDriveLink || null,
+                        address: editingAddress || null,
+                      });
+                      setEditingSchoolId(null);
+                      setEditingName('');
+                      setEditingPageLink('');
+                      setEditingDriveLink('');
+                      setEditingAddress('');
+                    }
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: '0.5rem',
+                    fontSize: '12px',
+                    backgroundColor: '#FFFFFF',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '9999px',
+                    cursor: 'pointer',
+                    fontWeight: '500',
+                  }}
+                >
+                  Save
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setEditingSchoolId(null);
+                    setEditingPageLink('');
+                    setEditingDriveLink('');
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: '0.5rem',
+                    fontSize: '12px',
+                    backgroundColor: '#ccc',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '9999px',
+                    cursor: 'pointer',
+                    fontWeight: '500',
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const schoolsWithCoords = others.filter(s => s.coordinates && s.coordinates.length === 2);
+  const schoolsWithoutCoords = others.filter(s => !s.coordinates || s.coordinates.length !== 2);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -412,287 +743,45 @@ export function SchoolList({
           </div>
         ) : (
           <div>
-            {schoolsWithCoords.map((school) => {
-              const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-              const schoolColor = getSchoolColor(schoolTypes);
-              const isSelected = school.id === selectedSchoolId;
-              const isEditing = editingSchoolId === school.id;
-
-              return (
-                <div
-                  key={school.id}
-                  data-testid="school-list-item"
-                  className={`school-list-item ${isSelected ? 'selected' : ''}`}
-                  style={{
-                    borderBottom: '1px solid var(--border-color)',
-                    borderLeft: `4px solid ${schoolColor}`,
-                    transition: 'background-color 0.3s ease, border-color 0.3s ease',
-                  }}
-                >
-                  <div
-                    onClick={() => {
-                      if (!isEditing) {
-                        // Toggle selection: if already selected, deselect; otherwise select
-                        if (isSelected) {
-                          navigate('/schools');
-                        } else {
-                          analyticsService.trackSchoolSelect(school.name, enableEditing ? 'admin_list' : 'explorer_list');
-
-                          if (isMobile) {
-                            // On mobile, show routes immediately and close sidebar
-                            navigate(`/${school.id}/routes`);
-                            if (onMobileClose) onMobileClose();
-                          } else {
-                            // On desktop, show school info (standard behavior)
-                            navigate(`/${school.id}/school-info`);
-                          }
-                        }
-                      }
-                    }}
-                    style={{
-                      padding: '1rem 1rem 1rem 1.5rem',
-                      cursor: isEditing ? 'default' : 'pointer',
-                      transition: 'background-color 0.2s',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'flex-start',
-                      gap: '0.5rem',
-                    }}
-                  >
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.1rem' }}>
-                        <div style={{ fontWeight: '500', fontSize: '16px', color: 'var(--text-secondary)' }}>
-                          {getSchoolDisplayName(school.name)}
-                        </div>
-                        {enableEditing && (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setEditingSchoolId(school.id);
-                              setEditingName(school.name);
-                              setEditingPageLink(school.schoolPageLink || '');
-                              setEditingDriveLink(school.driveLink || '');
-                              setEditingAddress(school.address || '');
-                            }}
-                            style={{
-                              background: 'none',
-                              border: 'none',
-                              cursor: 'pointer',
-                              padding: '0.25rem',
-                              display: 'flex',
-                              alignItems: 'center',
-                              color: 'var(--text-tertiary)',
-                              transition: 'color 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.color = '#FFFFFF';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.color = 'var(--text-tertiary)';
-                            }}
-                          >
-                            <i className="fas fa-edit" style={{ fontSize: '14px' }}></i>
-                          </button>
-                        )}
-                      </div>
-                      <div style={{ fontSize: '12px', color: schoolColor, marginBottom: '0.75rem', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                        <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <i className="fas fa-graduation-cap" style={{ fontSize: '11px' }}></i>
-                        </div>
-                        <span>{schoolTypes.join(' & ')}</span>
-                      </div>
-                      {school.address && (
-                        <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <MapPinIcon width={10} height={13} style={{ color: 'var(--text-tertiary)' }} />
-                          </div>
-                          <span>{school.address.split(',')[0]}</span>
-                        </div>
-                      )}
-                      {school.routeCount !== undefined && (
-                        <div style={{
-                          fontSize: '12px',
-                          color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.375rem',
-                          fontWeight: school.routeCount === 0 ? '600' : '400'
-                        }}>
-                          {school.routeCount === 0 ? (
-                            <>
-                              <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <i className="fas fa-exclamation-circle" style={{ fontSize: '12px' }}></i>
-                              </div>
-                              <span>Routes not provided by district</span>
-                            </>
-                          ) : (
-                            <>
-                              <div style={{ width: '12px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <RouteIcon size={10} color="var(--text-tertiary)" />
-                              </div>
-                              <span>{school.routeCount} {school.routeCount === 1 ? 'route' : 'routes'}</span>
-                            </>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {isEditing && enableEditing && onUpdateSchool && (
-                    <div style={{ padding: '0 1rem 1rem 1rem', backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', transition: 'background-color 0.3s ease, border-color 0.3s ease' }}>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.75rem' }}>
-                        <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                            School Name
-                          </label>
-                          <input
-                            type="text"
-                            value={editingName}
-                            onChange={(e) => setEditingName(e.target.value)}
-                            placeholder="School name..."
-                            style={{
-                              width: '100%',
-                              padding: '0.5rem',
-                              fontSize: '12px',
-                              border: '1px solid var(--border-color)',
-                              borderRadius: '8px',
-                              boxSizing: 'border-box',
-                              backgroundColor: 'var(--bg-primary)',
-                              color: 'var(--text-primary)',
-                              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
-                            }}
-                            onClick={(e) => e.stopPropagation()}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                            Address
-                          </label>
-                          <input
-                            type="text"
-                            value={editingAddress}
-                            onChange={(e) => setEditingAddress(e.target.value)}
-                            placeholder="School physical address..."
-                            style={{
-                              width: '100%',
-                              padding: '0.5rem',
-                              fontSize: '12px',
-                              border: '1px solid var(--border-color)',
-                              borderRadius: '8px',
-                              boxSizing: 'border-box',
-                              backgroundColor: 'var(--bg-primary)',
-                              color: 'var(--text-primary)',
-                              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
-                            }}
-                            onClick={(e) => e.stopPropagation()}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                            Page Link
-                          </label>
-                          <input
-                            type="text"
-                            value={editingPageLink}
-                            onChange={(e) => setEditingPageLink(e.target.value)}
-                            placeholder="School page URL..."
-                            style={{
-                              width: '100%',
-                              padding: '0.5rem',
-                              fontSize: '12px',
-                              border: '1px solid var(--border-color)',
-                              borderRadius: '8px',
-                              boxSizing: 'border-box',
-                              backgroundColor: 'var(--bg-primary)',
-                              color: 'var(--text-primary)',
-                              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
-                            }}
-                            onClick={(e) => e.stopPropagation()}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: '500', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
-                            Drive Link
-                          </label>
-                          <input
-                            type="text"
-                            value={editingDriveLink}
-                            onChange={(e) => setEditingDriveLink(e.target.value)}
-                            placeholder="Google Drive folder URL..."
-                            style={{
-                              width: '100%',
-                              padding: '0.5rem',
-                              fontSize: '12px',
-                              border: '1px solid var(--border-color)',
-                              borderRadius: '8px',
-                              boxSizing: 'border-box',
-                              backgroundColor: 'var(--bg-primary)',
-                              color: 'var(--text-primary)',
-                              transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
-                            }}
-                            onClick={(e) => e.stopPropagation()}
-                          />
-                        </div>
-                        <div style={{ display: 'flex', gap: '0.5rem' }}>
-                          <button
-                            onClick={async (e) => {
-                              e.stopPropagation();
-                              if (onUpdateSchool) {
-                                await onUpdateSchool(school.id, {
-                                  name: editingName,
-                                  schoolPageLink: editingPageLink || null,
-                                  driveLink: editingDriveLink || null,
-                                  address: editingAddress || null,
-                                });
-                                setEditingSchoolId(null);
-                                setEditingName('');
-                                setEditingPageLink('');
-                                setEditingDriveLink('');
-                                setEditingAddress('');
-                              }
-                            }}
-                            style={{
-                              flex: 1,
-                              padding: '0.5rem',
-                              fontSize: '12px',
-                              backgroundColor: '#FFFFFF',
-                              color: 'white',
-                              border: 'none',
-                              borderRadius: '9999px',
-                              cursor: 'pointer',
-                              fontWeight: '500',
-                            }}
-                          >
-                            Save
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setEditingSchoolId(null);
-                              setEditingPageLink('');
-                              setEditingDriveLink('');
-                            }}
-                            style={{
-                              flex: 1,
-                              padding: '0.5rem',
-                              fontSize: '12px',
-                              backgroundColor: '#ccc',
-                              color: 'white',
-                              border: 'none',
-                              borderRadius: '9999px',
-                              cursor: 'pointer',
-                              fontWeight: '500',
-                            }}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+            {/* Assigned Schools Section */}
+            {assigned.length > 0 && (
+              <div style={{ backgroundColor: 'var(--bg-secondary)', transition: 'background-color 0.3s ease' }}>
+                <div style={{
+                  padding: '0.75rem 1.5rem',
+                  fontSize: '13px',
+                  fontWeight: '700',
+                  color: 'var(--text-primary)',
+                  letterSpacing: '0.02em',
+                  textTransform: 'uppercase',
+                  borderBottom: '1px solid var(--border-color)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}>
+                  <i className="fas fa-home" style={{ fontSize: '12px', color: '#4CAF50' }}></i>
+                  Your Assigned Schools
                 </div>
-              );
-            })}
+                {assigned.map(school => renderSchoolItem(school))}
+              </div>
+            )}
+
+            {/* Other Schools Header */}
+            {assigned.length > 0 && others.length > 0 && (
+              <div style={{
+                padding: '0.75rem 1.5rem',
+                fontSize: '13px',
+                fontWeight: '700',
+                color: 'var(--text-primary)',
+                letterSpacing: '0.02em',
+                textTransform: 'uppercase',
+                borderBottom: '1px solid var(--border-color)',
+                backgroundColor: 'var(--bg-secondary)',
+              }}>
+                All other schools
+              </div>
+            )}
+
+            {schoolsWithCoords.map((school) => renderSchoolItem(school))}
             {schoolsWithoutCoords.length > 0 && (
               <div style={{ padding: '1rem', backgroundColor: 'var(--bg-secondary)', borderTop: '2px solid #ffd700', transition: 'background-color 0.3s ease' }}>
                 <div style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>

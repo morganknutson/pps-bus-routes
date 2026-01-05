@@ -21,7 +21,8 @@
     "process-pdf": "node scripts/process-single-pdf.js",
     "discover-links": "node scripts/discover-school-links.js",
     "verify-links": "node scripts/verify-school-links.js",
-    "download-pdfs": "node scripts/download-all-school-pdfs.js"
+    "download-pdfs": "node scripts/download-all-school-pdfs.js",
+    "fetch-boundaries": "node scripts/fetch-boundaries.js"
   },
   "keywords": [
     "bus",

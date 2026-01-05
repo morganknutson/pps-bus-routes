@@ -38,51 +38,27 @@ export function Header({ rightContent }: HeaderProps = {}) {
       <header className={`app-header ${isAdminPage ? 'sticky-header' : ''}`}>
         <div className="header-content">
           <div className="logo-container" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingLeft: isMobile ? '15px' : '0' }}>
-            {isAdminPage ? (
-              <Link
-                to="/admin"
-                style={{
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  display: 'flex',
-                  alignItems: 'center',
+            <Link
+              to="/"
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <img 
+                src="/logo.svg" 
+                alt="Portland Public Schools (PPS) Bus Route Map" 
+                className="header-logo"
+                style={{ 
+                  height: '13px',
+                  width: 'auto',
+                  display: 'block',
+                  paddingLeft: '5px',
                 }}
-              >
-                <img 
-                  src="/logo.svg" 
-                  alt="Portland Public Schools (PPS) Bus Route Map" 
-                  className="header-logo"
-                  style={{ 
-                    height: '13px',
-                    width: 'auto',
-                    display: 'block',
-                    paddingLeft: '5px',
-                  }}
-                />
-              </Link>
-            ) : (
-              <Link
-                to="/schools"
-                style={{
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <img 
-                  src="/logo.svg" 
-                  alt="Portland Public Schools (PPS) Bus Route Map" 
-                  className="header-logo"
-                  style={{ 
-                    height: '13px',
-                    width: 'auto',
-                    display: 'block',
-                    paddingLeft: '5px',
-                  }}
-                />
-              </Link>
-            )}
+              />
+            </Link>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', paddingRight: '12px' }}>
             <div style={{ margin: 0, padding: 0 }}>

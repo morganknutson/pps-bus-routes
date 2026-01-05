@@ -103,3 +103,4 @@ This commit includes multiple improvements across the codebase, with the primary
 - ✅ Added convenience script for stopping the application
 
 
+

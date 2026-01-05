@@ -8,8 +8,8 @@ const __dirname = path.dirname(__filename);
 // Correct FeatureServer URL for Attendance Zones (Layer 2)
 const LAYER_URL = 'https://services.arcgis.com/10N2YvfR3dqhPYAK/arcgis/rest/services/Schools_51e5ab7b167e457ebc668581dda23731/FeatureServer/2';
 
-// Output path: backend/data/attendance-boundaries.geojson
-const DATA_DIR = path.join(__dirname, '..', 'backend', 'data');
+// Output path: data/attendance-boundaries.geojson
+const DATA_DIR = path.join(__dirname, '..', 'data');
 const OUTPUT_FILE = path.join(DATA_DIR, 'attendance-boundaries.geojson');
 
 async function fetchBoundaries() {

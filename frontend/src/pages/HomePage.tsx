@@ -11,10 +11,11 @@ import { School, HomeAddress } from '../types';
 import { ProgressBar } from '../components/ProgressBar';
 import { SEO } from '../components/SEO';
 import { useDarkMode } from '../hooks/useDarkMode';
+import { DarkModeToggle } from '../components/DarkModeToggle';
 import { MapPinIcon } from '../components/MapPinIcon';
 import { Footer } from '../components/Footer';
 import { WhoSection } from '../components/WhoSection';
-import { getSchoolDisplayName } from '../utils/schoolUtils';
+import { getSchoolDisplayName, getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
 import { XIcon } from '../components/XIcon';
 
 interface AutocompleteSuggestion {
@@ -36,6 +37,11 @@ export function HomePage() {
   const setSchools = useStore(state => state.setSchools);
   const selectStop = useStore(state => state.selectStop);
   const setDirectionFilter = useStore(state => state.setDirectionFilter);
+  const fetchAssignedSchools = useStore(state => state.fetchAssignedSchools);
+  const assignedSchools = useStore(state => state.assignedSchools);
+  const homeAddress = useStore(state => state.homeAddress);
+  const selectedSchoolId = useStore(state => state.selectedSchoolId);
+  const clearHomeAddress = useStore(state => state.clearHomeAddress);
 
   // Address state
   const [addressQuery, setAddressQuery] = useState('');
@@ -117,6 +123,31 @@ export function HomePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Sync local state with global store on mount/update
+  useEffect(() => {
+    if (homeAddress) {
+      setSelectedAddress(homeAddress);
+    }
+  }, [homeAddress]);
+
+  useEffect(() => {
+    if (selectedSchoolId && schools.length > 0) {
+      const school = schools.find(s => s.id === selectedSchoolId);
+      if (school) {
+        setSelectedSchoolLocal(school);
+      }
+    } else if (schools.length > 0) {
+      // Fallback to localStorage if store is empty (e.g. initial load or after unmount)
+      const savedId = localStorage.getItem('selectedSchoolId');
+      if (savedId) {
+        const school = schools.find(s => s.id === savedId);
+        if (school) {
+          setSelectedSchoolLocal(school);
+        }
+      }
+    }
+  }, [selectedSchoolId, schools]);
+
   // Address autocomplete
   useEffect(() => {
     if (addressQuery.trim().length < 3) {
@@ -173,8 +204,42 @@ export function HomePage() {
     };
   }, [addressQuery]);
 
+  // Fetch assigned schools when address is selected
+  useEffect(() => {
+    if (selectedAddress && selectedAddress.coordinates) {
+      // coordinates are [lng, lat], backend expects (lat, lng)
+      fetchAssignedSchools(selectedAddress.coordinates[1], selectedAddress.coordinates[0]);
+    }
+  }, [selectedAddress, fetchAssignedSchools]);
+
   // School autocomplete - filter and sort schools based on query and address
   useEffect(() => {
+    // Get assigned school names for prioritization
+    const assignedNames = new Set<string>();
+    if (assignedSchools) {
+      Object.values(assignedSchools).forEach(school => {
+        if (school && school.name) {
+          assignedNames.add(school.name.toLowerCase());
+        }
+      });
+    }
+
+    // Helper to calculate score for sorting
+    const getScore = (school: School) => {
+      let score = 0;
+      // Priority 1: Assigned (large negative score to put at top)
+      if (assignedNames.has(school.name.toLowerCase())) {
+        score -= 1000000;
+      }
+      
+      // Priority 2: Distance (if address selected)
+      if (selectedAddress && selectedAddress.coordinates && school.coordinates) {
+        score += calculateDistance(selectedAddress.coordinates, school.coordinates);
+      }
+      
+      return score;
+    };
+
     // If there's a query, filter by name
     if (schoolQuery.trim()) {
       const query = schoolQuery.toLowerCase();
@@ -182,39 +247,33 @@ export function HomePage() {
         school.name.toLowerCase().includes(query)
       );
       
-      // If we have an address, sort filtered results by distance
-      if (selectedAddress && selectedAddress.coordinates) {
-        const sorted = filtered
-          .map(school => ({
-            school,
-            distance: school.coordinates 
-              ? calculateDistance(selectedAddress.coordinates, school.coordinates)
-              : Infinity
-          }))
-          .sort((a, b) => a.distance - b.distance)
-          .map(item => item.school);
-        
-        setSchoolSuggestions(sorted.slice(0, 10));
-      } else {
-        setSchoolSuggestions(filtered.slice(0, 10));
-      }
+      // Sort filtered results
+      const sorted = filtered
+        .map(school => ({
+          school,
+          score: getScore(school)
+        }))
+        .sort((a, b) => a.score - b.score)
+        .map(item => item.school);
       
+      setSchoolSuggestions(sorted.slice(0, 10));
       setShowSchoolSuggestions(true);
       return;
     }
 
-    // If no query but field is focused and we have an address, show all schools sorted by distance
-    if (!schoolQuery.trim() && isSchoolFocused && selectedAddress && selectedAddress.coordinates) {
+    // If no query but field is focused, show suggestions
+    if (!schoolQuery.trim() && isSchoolFocused) {
+      // Sort all schools
       const sorted = schools
         .filter(school => school.coordinates) // Only show schools with coordinates
         .map(school => ({
           school,
-          distance: calculateDistance(selectedAddress.coordinates, school.coordinates!)
+          score: getScore(school)
         }))
-        .sort((a, b) => a.distance - b.distance)
+        .sort((a, b) => a.score - b.score)
         .map(item => item.school);
       
-      setSchoolSuggestions(sorted);
+      setSchoolSuggestions(sorted.slice(0, 10)); // Show top 10
       setShowSchoolSuggestions(true);
       return;
     }
@@ -224,7 +283,7 @@ export function HomePage() {
       setSchoolSuggestions([]);
       setShowSchoolSuggestions(false);
     }
-  }, [schoolQuery, schools, selectedAddress, isSchoolFocused]);
+  }, [schoolQuery, schools, selectedAddress, isSchoolFocused, assignedSchools]);
 
   // Reset highlighted index when suggestions change
   useEffect(() => {
@@ -271,12 +330,13 @@ export function HomePage() {
       setAddressLoading(true);
       const geocodeResult = await geocodeAddress(suggestion.address);
       
-      if (geocodeResult.coordinates) {
+        if (geocodeResult.coordinates) {
         const address: HomeAddress = {
           address: suggestion.displayName || suggestion.address,
           coordinates: geocodeResult.coordinates,
         };
         setSelectedAddress(address);
+        setHomeAddress(address);
       } else if (suggestion.coordinates) {
         // Fallback to suggestion coordinates if geocode fails
         const address: HomeAddress = {
@@ -284,6 +344,7 @@ export function HomePage() {
           coordinates: suggestion.coordinates,
         };
         setSelectedAddress(address);
+        setHomeAddress(address);
       } else {
         setError('Failed to geocode selected address');
       }
@@ -295,6 +356,7 @@ export function HomePage() {
           coordinates: suggestion.coordinates,
         };
         setSelectedAddress(address);
+        setHomeAddress(address);
       } else {
         setError('Failed to geocode address');
       }
@@ -349,6 +411,9 @@ export function HomePage() {
     }
 
     setSelectedSchoolLocal(school);
+    // Don't set store immediately to avoid clearing routes which causes a race condition
+    // with the "Find My Stop" navigation. Persistence is handled via localStorage.
+    localStorage.setItem('selectedSchoolId', school.id);
     setSchoolQuery('');
     setSchoolSuggestions([]);
     setShowSchoolSuggestions(false);
@@ -506,7 +571,17 @@ export function HomePage() {
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
+      position: 'relative',
     }}>
+      <div style={{
+        position: 'absolute',
+        top: '1rem',
+        right: '12px',
+        zIndex: 100,
+      }}>
+        <DarkModeToggle />
+      </div>
+
       <SEO 
         title="" 
         description="Interactive bus route maps for Portland Public Schools. Find your school, view routes, and locate bus stops."
@@ -558,7 +633,7 @@ export function HomePage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                padding: '0.75rem',
+                padding: '0.75rem 0.75rem 0.75rem 1rem',
                 backgroundColor: 'var(--bg-primary)',
                 borderRadius: '12px',
                 border: '1px solid var(--border-color)',
@@ -573,6 +648,7 @@ export function HomePage() {
                   onClick={() => {
                     setSelectedAddress(null);
                     setAddressQuery('');
+                    clearHomeAddress();
                   }}
                   style={{
                     background: 'none',
@@ -612,7 +688,7 @@ export function HomePage() {
                   placeholder="Enter your address..."
                   style={{
                     width: '100%',
-                    padding: '0.75rem',
+                    padding: '0.75rem 0.75rem 0.75rem 1rem',
                     border: '1px solid var(--border-color)',
                     borderRadius: '12px',
                     fontSize: '14px',
@@ -685,7 +761,7 @@ export function HomePage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                padding: '0.75rem',
+                padding: '0.75rem 0.75rem 0.75rem 1rem',
                 backgroundColor: 'var(--bg-primary)',
                 borderRadius: '12px',
                 border: '1px solid var(--border-color)',
@@ -700,6 +776,7 @@ export function HomePage() {
                   onClick={() => {
                     setSelectedSchoolLocal(null);
                     setSchoolQuery('');
+                    localStorage.removeItem('selectedSchoolId');
                   }}
                   style={{
                     background: 'none',
@@ -755,7 +832,7 @@ export function HomePage() {
                   placeholder="Enter your school..."
                   style={{
                     width: '100%',
-                    padding: '0.75rem',
+                    padding: '0.75rem 0.75rem 0.75rem 1rem',
                     border: '1px solid var(--border-color)',
                     borderRadius: '12px',
                     fontSize: '14px',
@@ -791,6 +868,13 @@ export function HomePage() {
                         ? calculateDistance(selectedAddress.coordinates, school.coordinates)
                         : null;
                       
+                      const isAssigned = assignedSchools && Object.values(assignedSchools).some(
+                        s => s && s.name && s.name.toLowerCase() === school.name.toLowerCase()
+                      );
+
+                      const schoolTypes = getSchoolTypes(school.name);
+                      const schoolColor = getSchoolColor(schoolTypes);
+
                       return (
                         <div
                           key={school.id}
@@ -799,17 +883,39 @@ export function HomePage() {
                           style={{
                             padding: '0.75rem',
                             cursor: 'pointer',
-                            borderBottom: index < schoolSuggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
+                            borderBottom: index < schoolSuggestions.length - 1 
+                              ? `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}` 
+                              : 'none',
                             fontSize: '14px',
                             color: 'var(--text-primary)',
-                            backgroundColor: highlightedSchoolIndex === index ? 'rgba(78, 205, 196, 0.2)' : 'var(--bg-primary)',
+                            backgroundColor: highlightedSchoolIndex === index 
+                              ? (isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)') 
+                              : 'var(--bg-primary)',
                             transition: 'background-color 0.2s ease',
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
                           }}
                         >
-                          <span>{getSchoolDisplayName(school.name)}</span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            {isAssigned && (
+                              <div style={{
+                                width: '20px',
+                                height: '20px',
+                                borderRadius: '50%',
+                                backgroundColor: schoolColor,
+                                border: '1.5px solid white',
+                                boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flexShrink: 0,
+                              }}>
+                                <i className="fas fa-graduation-cap" style={{ color: 'white', fontSize: '10px' }}></i>
+                              </div>
+                            )}
+                            {getSchoolDisplayName(school.name)}
+                          </span>
                           {distance !== null && (
                             <span style={{
                               fontSize: '12px',

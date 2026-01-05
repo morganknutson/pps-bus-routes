@@ -27,15 +27,16 @@ export function AddressInput() {
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const navigate = useNavigate();
   const location = useLocation();
-  const { 
-    setHomeAddress, 
-    homeAddress, 
-    clearHomeAddress, 
+  const {
+    setHomeAddress,
+    homeAddress,
+    clearHomeAddress,
     triggerZoomToHomeAddress,
-    selectedSchoolId, 
+    selectedSchoolId,
     routes,
     selectStop,
-    setDirectionFilter
+    setDirectionFilter,
+    fetchAssignedSchools
   } = useStore();
   const isMobile = useIsMobile();
   const { isDarkMode } = useDarkMode();
@@ -53,11 +54,11 @@ export function AddressInput() {
     if (result) {
       const { route, stop, stopNumber, distance } = result;
       console.log(`[AddressInput] Found closest stop: ${stop.address} at ${formatDistance(distance, true)}`);
-      
+
       const urlState = parseUrlPath(location.pathname, '');
       const stopMatch = stop.id.match(/stop-(\d+)/);
       const stopNumberStr = stopMatch ? stopMatch[1] : stop.id;
-      
+
       let finalStopId = `${route.name}-${stopNumberStr}`;
       if (route.name.endsWith('-upcoming')) {
         const baseName = route.name.replace('-upcoming', '');
@@ -75,7 +76,7 @@ export function AddressInput() {
       };
 
       navigate(buildUrlPath('', newState));
-      
+
       analyticsService.trackAction('find_my_stop', {
         schoolId: selectedSchoolId,
         distance,
@@ -89,7 +90,7 @@ export function AddressInput() {
   // Extract street name from full address (e.g., "123 Main St" from "123 Main St, Portland, OR")
   const getDisplayAddress = (address: string): string => {
     if (!address) return address;
-    
+
     // Extract street part (everything before the first comma)
     const streetPart = address.split(',')[0].trim();
     return formatStreetName(streetPart);
@@ -120,7 +121,7 @@ export function AddressInput() {
       setIsLoading(true);
       try {
         const result = await autocompleteAddress(query, 'Portland', 'OR', abortController.signal);
-        
+
         // Only update if this request wasn't cancelled
         if (!abortController.signal.aborted) {
           setSuggestions(result.suggestions || []);
@@ -185,6 +186,7 @@ export function AddressInput() {
             address: suggestion.address,
             coordinates: geocodeResult.coordinates,
           });
+          fetchAssignedSchools(geocodeResult.coordinates[1], geocodeResult.coordinates[0]);
         } else {
           console.error('[AddressInput] Failed to geocode selected address');
           setHomeAddress({
@@ -206,8 +208,9 @@ export function AddressInput() {
         address: suggestion.address,
         coordinates: suggestion.coordinates,
       });
+      fetchAssignedSchools(suggestion.coordinates[1], suggestion.coordinates[0]);
     }
-    
+
     // Explicitly trigger zoom when an address is selected
     const urlState = parseUrlPath(location.pathname, '');
     const newState = {
@@ -215,7 +218,7 @@ export function AddressInput() {
       focus: 'home'
     };
     navigate(buildUrlPath('', newState));
-    
+
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
@@ -229,7 +232,7 @@ export function AddressInput() {
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setHighlightedIndex(prev => 
+      setHighlightedIndex(prev =>
         prev < suggestions.length - 1 ? prev + 1 : prev
       );
     } else if (e.key === 'ArrowUp') {
@@ -248,7 +251,7 @@ export function AddressInput() {
   };
 
   return (
-    <div style={{ 
+    <div style={{
       position: 'absolute',
       top: '1.2rem',
       left: '1.25rem',
@@ -258,7 +261,7 @@ export function AddressInput() {
       gap: '0.75rem',
       alignItems: 'center',
     }}>
-      <div style={{ 
+      <div style={{
         flex: 1,
         padding: '0 0.75rem 0 1.25rem',
         height: '40px',
@@ -270,14 +273,14 @@ export function AddressInput() {
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
       }}>
         {homeAddress ? (
-          <div style={{ 
+          <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
             width: '100%',
           }}>
             <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: '12px', flexShrink: 0 }}></i>
-            <div 
+            <div
               onClick={() => {
                 console.log('[AddressInput] Clicked address to zoom:', homeAddress.address);
                 const urlState = parseUrlPath(location.pathname, '');
@@ -287,10 +290,10 @@ export function AddressInput() {
                 };
                 navigate(buildUrlPath('', newState));
               }}
-              style={{ 
-                fontSize: '12px', 
-                fontWeight: '500', 
-                flex: 1, 
+              style={{
+                fontSize: '12px',
+                fontWeight: '500',
+                flex: 1,
                 color: 'var(--text-primary)',
                 cursor: 'pointer',
                 textDecoration: 'underline',
@@ -310,7 +313,7 @@ export function AddressInput() {
             >
               {getDisplayAddress(homeAddress.address)}
             </div>
-            
+
             <button
               onClick={clearHomeAddress}
               style={{
@@ -340,13 +343,13 @@ export function AddressInput() {
                 e.currentTarget.style.color = 'var(--text-tertiary)';
                 e.currentTarget.style.borderRadius = '4px';
               }}
-            aria-label="Clear address"
-          >
-            <XIcon />
-          </button>
-        </div>
+              aria-label="Clear address"
+            >
+              <XIcon />
+            </button>
+          </div>
         ) : (
-          <div style={{ 
+          <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
@@ -354,9 +357,9 @@ export function AddressInput() {
             height: '100%',
           }}>
             <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
-              <i 
-                className="fas fa-house" 
-                style={{ 
+              <i
+                className="fas fa-house"
+                style={{
                   position: 'absolute',
                   left: '4px',
                   top: '50%',
@@ -382,10 +385,10 @@ export function AddressInput() {
                 style={{
                   width: '100%',
                   height: '100%',
-                padding: '0 0.5rem 0 1.5rem',
-                border: 'none',
-                borderRadius: '9999px',
-                fontSize: '12px',
+                  padding: '0 0.5rem 0 1.5rem',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  fontSize: '12px',
                   boxSizing: 'border-box',
                   backgroundColor: 'transparent',
                   color: 'var(--text-primary)',
@@ -393,59 +396,59 @@ export function AddressInput() {
                   transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease',
                 }}
               />
-            {isLoading && (
-              <div
-                style={{
-                  position: 'absolute',
-                  right: '8px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  fontSize: '12px',
-                  color: 'var(--text-tertiary)',
-                }}
-              >
-                Searching...
-              </div>
-            )}
-            {showSuggestions && suggestions.length > 0 && (
-              <div
-                ref={suggestionsRef}
-                style={{
-                  position: 'absolute',
-                  top: '100%',
-                  left: 0,
-                  right: 0,
-                  marginTop: '4px',
-                  backgroundColor: 'var(--bg-primary)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '16px',
-                  boxShadow: '0 2px 8px var(--shadow-hover)',
-                  maxHeight: '200px',
-                  overflowY: 'auto',
-                  zIndex: 1000,
-                  transition: 'background-color 0.3s ease, border-color 0.3s ease',
-                }}
-              >
-                {suggestions.map((suggestion, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleSelectSuggestion(suggestion)}
-                    onMouseEnter={() => setHighlightedIndex(index)}
-                    style={{
-                      padding: '0.75rem',
-                      cursor: 'pointer',
-                      borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
-                      fontSize: '12px',
-                      color: 'var(--text-primary)',
-                      backgroundColor: highlightedIndex === index ? 'rgba(78, 205, 196, 0.2)' : 'var(--bg-primary)',
-                      transition: 'background-color 0.2s ease',
-                    }}
-                  >
-                    {suggestion.displayName}
-                  </div>
-                ))}
-              </div>
-            )}
+              {isLoading && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: '8px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    fontSize: '12px',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  Searching...
+                </div>
+              )}
+              {showSuggestions && suggestions.length > 0 && (
+                <div
+                  ref={suggestionsRef}
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    marginTop: '4px',
+                    backgroundColor: 'var(--bg-primary)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '16px',
+                    boxShadow: '0 2px 8px var(--shadow-hover)',
+                    maxHeight: '200px',
+                    overflowY: 'auto',
+                    zIndex: 1000,
+                    transition: 'background-color 0.3s ease, border-color 0.3s ease',
+                  }}
+                >
+                  {suggestions.map((suggestion, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleSelectSuggestion(suggestion)}
+                      onMouseEnter={() => setHighlightedIndex(index)}
+                      style={{
+                        padding: '0.75rem',
+                        cursor: 'pointer',
+                        borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
+                        fontSize: '12px',
+                        color: 'var(--text-primary)',
+                        backgroundColor: highlightedIndex === index ? 'rgba(78, 205, 196, 0.2)' : 'var(--bg-primary)',
+                        transition: 'background-color 0.2s ease',
+                      }}
+                    >
+                      {suggestion.displayName}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -470,24 +473,24 @@ export function AddressInput() {
             justifyContent: 'center',
             flexShrink: 0,
             boxShadow: '0 4px 12px var(--shadow-large)',
-          transition: 'all 0.2s ease',
-        }}
-        title="Find the closest bus stop to your address"
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-          e.currentTarget.style.transform = 'translateY(-1px)';
-          e.currentTarget.style.boxShadow = '0 6px 16px var(--shadow-large)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = isDarkMode ? '#3A3A3A' : 'var(--bg-primary)';
-          e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = '0 4px 12px var(--shadow-large)';
-        }}
-      >
-        <MapPinIcon style={{ marginRight: '0.5rem', flexShrink: 0 }} />
-        <span>Find My Stop</span>
-      </button>
-    )}
+            transition: 'all 0.2s ease',
+          }}
+          title="Find the closest bus stop to your address"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+            e.currentTarget.style.transform = 'translateY(-1px)';
+            e.currentTarget.style.boxShadow = '0 6px 16px var(--shadow-large)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = isDarkMode ? '#3A3A3A' : 'var(--bg-primary)';
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 12px var(--shadow-large)';
+          }}
+        >
+          <MapPinIcon style={{ marginRight: '0.5rem', flexShrink: 0 }} />
+          <span>Find My Stop</span>
+        </button>
+      )}
     </div>
   );
 }

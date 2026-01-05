@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useStore } from '../store/useStore';
 import { loadLocalRoutes } from '../services/localRoutes';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
+import { calculateDistance, validateLngLat } from '../utils/coordinates';
 
 export function SchoolSelector() {
   const { 
@@ -11,7 +12,9 @@ export function SchoolSelector() {
     setSchools, 
     setRoutes, 
     setLoading,
-    setLoadingProgress
+    setLoadingProgress,
+    assignedSchools,
+    homeAddress
   } = useStore();
 
   // Load schools on mount
@@ -72,6 +75,52 @@ export function SchoolSelector() {
     loadRoutes();
   }, [selectedSchoolId, setRoutes, setLoading, setLoadingProgress]);
 
+  // Sort schools: Assigned -> Distance -> Alphabetical
+  const sortedSchools = useMemo(() => {
+    if (!schools) return [];
+
+    // Get assigned school names for quick lookup
+    const assignedNames = new Set<string>();
+    if (assignedSchools) {
+      Object.values(assignedSchools).forEach(school => {
+        if (school && school.name) {
+          assignedNames.add(school.name.toLowerCase());
+        }
+      });
+    }
+
+    return [...schools].sort((a, b) => {
+      // 1. Assigned Schools First
+      const isAssignedA = assignedNames.has(a.name.toLowerCase());
+      const isAssignedB = assignedNames.has(b.name.toLowerCase());
+
+      if (isAssignedA && !isAssignedB) return -1;
+      if (!isAssignedA && isAssignedB) return 1;
+
+      // 2. Distance (if home address available)
+      if (homeAddress && validateLngLat(homeAddress.coordinates)) {
+        const coordsA = a.coordinates && validateLngLat(a.coordinates) ? a.coordinates : null;
+        const coordsB = b.coordinates && validateLngLat(b.coordinates) ? b.coordinates : null;
+
+        if (coordsA && coordsB) {
+          const distA = calculateDistance(homeAddress.coordinates, coordsA);
+          const distB = calculateDistance(homeAddress.coordinates, coordsB);
+          // Sort by distance ascending
+          if (Math.abs(distA - distB) > 100) { // Only differentiate if > 100m difference
+            return distA - distB;
+          }
+        } else if (coordsA) {
+          return -1; // A has coords, B doesn't -> A comes first
+        } else if (coordsB) {
+          return 1; // B has coords, A doesn't -> B comes first
+        }
+      }
+
+      // 3. Alphabetical
+      return a.name.localeCompare(b.name);
+    });
+  }, [schools, assignedSchools, homeAddress]);
+
   return (
     <div style={{ marginBottom: '1rem' }}>
       <label style={{ 
@@ -97,11 +146,21 @@ export function SchoolSelector() {
         }}
       >
         <option value="">Select a school...</option>
-        {schools.map((school) => (
-          <option key={school.id} value={school.id}>
-            {getSchoolDisplayName(school.name)}
-          </option>
-        ))}
+        {sortedSchools.map((school) => {
+          // Check if assigned to add visual indicator
+          let isAssigned = false;
+          if (assignedSchools) {
+            isAssigned = Object.values(assignedSchools).some(s => 
+              s && s.name && s.name.toLowerCase() === school.name.toLowerCase()
+            );
+          }
+          
+          return (
+            <option key={school.id} value={school.id}>
+              {isAssigned ? '★ ' : ''}{getSchoolDisplayName(school.name)}
+            </option>
+          );
+        })}
       </select>
     </div>
   );

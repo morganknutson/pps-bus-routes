@@ -48,6 +48,14 @@ class SchoolBoundaryService {
     }
 
     /**
+     * Get all boundaries
+     * @returns {Array} GeoJSON features
+     */
+    getBoundaries() {
+        return this.boundaries || [];
+    }
+
+    /**
      * Find assigned schools for a given lat/lng
      * @param {number} lat 
      * @param {number} lng 
@@ -71,7 +79,10 @@ class SchoolBoundaryService {
                 // feature.geometry can be Polygon or MultiPolygon
                 if (turf.booleanPointInPolygon(point, feature)) {
                     const props = feature.properties;
-                    const { zonetype, name, districtname, link, website } = props;
+                    const { zonetype: rawZonetype, name, districtname, link, website } = props;
+                    
+                    // Normalize zonetype (trim whitespace)
+                    const zonetype = rawZonetype ? rawZonetype.trim() : '';
 
                     // Helper to normalize school object
                     const schoolData = {
@@ -83,18 +94,14 @@ class SchoolBoundaryService {
 
                     // Map zonetype to output keys
                     // zonetypes from ArcGIS: "Elementary School", "Middle School", "High School", "K5", "K8", "MS", "HS"
-                    // We need to handle the specific codes found in metadata earlier (K5, K8, MS, HS, EL, SP, CH) 
-                    // OR the friendly names found in the `zonetype` field.
-                    // Let's assume the field `zonetype` contains the friendly name or code. 
-                    // The metadata said domain values were "K5", "K8", "MS", "HS".
-
-                    if (zonetype === 'K5' || zonetype === 'Elementary School' || zonetype?.includes('Elementary')) {
+                    
+                    if (zonetype === 'K5' || zonetype === 'Elementary School' || zonetype.includes('Elementary')) {
                         assigned.elementary = schoolData;
-                    } else if (zonetype === 'MS' || zonetype === 'Middle School' || zonetype?.includes('Middle')) {
+                    } else if (zonetype === 'MS' || zonetype === 'Middle School' || zonetype.includes('Middle')) {
                         assigned.middle = schoolData;
-                    } else if (zonetype === 'HS' || zonetype === 'High School' || zonetype?.includes('High')) {
+                    } else if (zonetype === 'HS' || zonetype === 'High School' || zonetype.includes('High')) {
                         assigned.high = schoolData;
-                    } else if (zonetype === 'K8' || zonetype?.includes('K8')) {
+                    } else if (zonetype === 'K8' || zonetype.includes('K8')) {
                         // K8 is often mostly Elementary but covers Middle too. 
                         // Usually replaces both Elementary and Middle, or just Elementary.
                         // For now, put it in k8 field.

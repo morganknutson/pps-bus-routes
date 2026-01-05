@@ -213,5 +213,367 @@
       }
     ],
     "cachedAt": "2026-01-05T09:10:33.525Z"
+  },
+  "7825 sw canyon ln, portland, or 97225, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.75757840276566,
+      45.50146325889882
+    ],
+    "displayName": "7825 SW Canyon Ln, Portland, OR 97225, USA",
+    "placeId": "Eio3ODI1IFNXIENhbnlvbiBMbiwgUG9ydGxhbmQsIE9SIDk3MjI1LCBVU0EiMRIvChQKEglVOETV4QuVVBFh-p9aSnlA0xCRPSoUChIJHQwl0uELlVQRFKn15aU_DQE",
+    "locationType": "RANGE_INTERPOLATED",
+    "addressComponents": [
+      {
+        "long_name": "7825",
+        "short_name": "7825",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest Canyon Lane",
+        "short_name": "SW Canyon Ln",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Washington County",
+        "short_name": "Washington County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97225",
+        "short_name": "97225",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-05T10:20:14.577Z"
+  },
+  "501 se 14th ave, portland, or 97214, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.65197586354368,
+      45.519341589401016
+    ],
+    "displayName": "501 SE 14th Ave, Portland, OR 97214, USA",
+    "placeId": "ChIJ6Rcmm6OglVQRxspdvme3U-s",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "501",
+        "short_name": "501",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southeast 14th Avenue",
+        "short_name": "SE 14th Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southeast Portland",
+        "short_name": "Southeast Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97214",
+        "short_name": "97214",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-05T10:27:05.548Z"
+  },
+  "123 sw main st, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.67549466079878,
+      45.515183120476784
+    ],
+    "displayName": "123 SW Main St, Portland, OR 97123, USA",
+    "placeId": "ChIJraHXtQ8KlVQRLFNmoddZC1U",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "123",
+        "short_name": "123",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest Main Street",
+        "short_name": "SW Main St",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97123",
+        "short_name": "97123",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-05T16:20:53.766Z"
+  },
+  "8708 nw terrace st, vancouver, wa, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6891992,
+      45.6939523
+    ],
+    "displayName": "NW Terrace St, Vancouver, WA 98685, USA",
+    "placeId": "EidOVyBUZXJyYWNlIFN0LCBWYW5jb3V2ZXIsIFdBIDk4Njg1LCBVU0EiLiosChQKEgkhjhjbJ6yVVBFfITTHnSFw1BIUChIJ-RRZyGOvlVQR8-ORLBHVVoQ",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northwest Terrace Street",
+        "short_name": "NW Terrace St",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Felida-Starcrest",
+        "short_name": "Felida-Starcrest",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Vancouver",
+        "short_name": "Vancouver",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Clark County",
+        "short_name": "Clark County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Washington",
+        "short_name": "WA",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "98685",
+        "short_name": "98685",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-05T16:29:02.034Z"
+  },
+  "8708 nw terraceview ct, portland, or 97229|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.76574149999999,
+      45.537997999999995
+    ],
+    "displayName": "8708 NW Terraceview Ct, Portland, OR 97229, USA",
+    "placeId": "ChIJo9Fc4gAJlVQR4fWfXSRpnfM",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "8708",
+        "short_name": "8708",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Terraceview Court",
+        "short_name": "NW Terraceview Ct",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Northwest Portland",
+        "short_name": "Northwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97229",
+        "short_name": "97229",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "8026",
+        "short_name": "8026",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-05T18:29:32.951Z"
   }
 }

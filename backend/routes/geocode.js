@@ -33,13 +33,13 @@ router.post('/address', async (req, res) => {
 // Autocomplete addresses using Google Places API (with Nominatim fallback)
 router.get('/autocomplete', async (req, res) => {
   try {
-    const { q, city = 'Portland', state = 'OR', sessionToken } = req.query;
+    const { q, city = 'Portland', state = 'OR' } = req.query;
 
     if (!q || q.trim().length < 3) {
       return res.json({ suggestions: [] });
     }
 
-    const suggestions = await autocompleteService.autocomplete(q, city, state, sessionToken);
+    const suggestions = await autocompleteService.autocomplete(q, city, state);
     res.json({ suggestions });
   } catch (error) {
     console.error('[Geocode] Autocomplete error:', error);
@@ -79,7 +79,7 @@ router.post('/reverse', async (req, res) => {
     // Extract street name from address components
     // Try different possible fields for street name
     const address = data.address;
-    const streetName =
+    const streetName = 
       address.road ||
       address.street ||
       address.pedestrian ||
@@ -92,13 +92,13 @@ router.post('/reverse', async (req, res) => {
     let formattedStreetName = null;
     if (streetName) {
       // Combine with direction if available
-      const direction = address.city_district ||
-        (address.suburb && address.suburb.match(/^(North|South|East|West|Northeast|Northwest|Southeast|Southwest)/i)?.[0]) ||
-        null;
-
+      const direction = address.city_district || 
+                       (address.suburb && address.suburb.match(/^(North|South|East|West|Northeast|Northwest|Southeast|Southwest)/i)?.[0]) ||
+                       null;
+      
       // Combine with street type if not already included
       const streetType = address.road_type || null;
-
+      
       // Build formatted name
       if (direction && !streetName.toUpperCase().includes(direction.toUpperCase().substring(0, 2))) {
         formattedStreetName = `${direction} ${streetName}`;

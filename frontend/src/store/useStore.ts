@@ -43,6 +43,10 @@ interface Store extends AppState {
   loadingProgress: number | null; // 0-100 or null for indeterminate
   assignedSchools: import('../types').AssignedSchools | null;
   fetchAssignedSchools: (lat: number, lng: number) => Promise<void>;
+  boundaries: any[] | null;
+  showBoundaries: boolean;
+  fetchBoundaries: () => Promise<void>;
+  toggleBoundaries: () => void;
 }
 
 export const useStore = create<Store>((set, get) => {
@@ -71,6 +75,8 @@ export const useStore = create<Store>((set, get) => {
     mapIntent: null,
     shouldZoomToHomeAddress: false,
     assignedSchools: null,
+    boundaries: null,
+    showBoundaries: false,
     isDarkMode: (() => {
       if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('darkMode');
@@ -462,7 +468,7 @@ export const useStore = create<Store>((set, get) => {
 
     fetchAssignedSchools: async (lat, lng) => {
       try {
-        const response = await fetch(`http://localhost:3005/api/schools/assigned?lat=${lat}&lng=${lng}`);
+        const response = await fetch(`/api/schools/assigned?lat=${lat}&lng=${lng}`);
         if (!response.ok) throw new Error('Failed to fetch assigned schools');
         const data = await response.json();
         set({ assignedSchools: data.assigned });
@@ -470,6 +476,26 @@ export const useStore = create<Store>((set, get) => {
         console.error('Error fetching assigned schools:', error);
         set({ assignedSchools: null });
       }
+    },
+
+    fetchBoundaries: async () => {
+      try {
+        const response = await fetch('/api/schools/boundaries');
+        if (!response.ok) throw new Error('Failed to fetch boundaries');
+        const data = await response.json();
+        set({ boundaries: data.boundaries });
+      } catch (error) {
+        console.error('Error fetching boundaries:', error);
+        set({ boundaries: null });
+      }
+    },
+
+    toggleBoundaries: () => {
+      const { showBoundaries, boundaries, fetchBoundaries } = get();
+      if (!showBoundaries && !boundaries) {
+        fetchBoundaries();
+      }
+      set({ showBoundaries: !showBoundaries });
     },
   };
 });

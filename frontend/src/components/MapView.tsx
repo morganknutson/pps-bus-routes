@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { MapContainer, Polyline, Marker, Popup, ZoomControl } from 'react-leaflet';
+import { MapContainer, Polyline, Marker, Popup, ZoomControl, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '../store/useStore';
@@ -81,7 +81,11 @@ export function MapView({
     directionFilter,
     isLoading,
     mapIntent,
-    setMapIntent
+    setMapIntent,
+    boundaries,
+    showBoundaries,
+    toggleBoundaries,
+    assignedSchools
   } = useStore();
 
   const navigate = useNavigate();
@@ -136,6 +140,60 @@ export function MapView({
 
   // Track if we have successfully fitted the map to the initial set of schools
   const hasInitiallyFittedRef = useRef<boolean>(false);
+
+  // Filter boundaries based on assigned schools if home address is set
+  const displayedBoundaries = useMemo(() => {
+    if (!boundaries) return null;
+    
+    // If no home address or no assigned schools, show all boundaries
+    if (!homeAddress || !assignedSchools) {
+      return boundaries;
+    }
+
+    // Get assigned school names for filtering
+    const assignedNames = new Set<string>();
+    Object.values(assignedSchools).forEach(school => {
+      if (school && school.name) {
+        assignedNames.add(school.name.toLowerCase());
+      }
+    });
+
+    if (assignedNames.size === 0) return boundaries;
+
+    // Filter features that match assigned schools
+    return boundaries.filter((feature: any) => 
+      feature.properties && 
+      feature.properties.name && 
+      assignedNames.has(feature.properties.name.toLowerCase())
+    );
+  }, [boundaries, homeAddress, assignedSchools]);
+
+  // Style function for boundaries based on school type
+  const getBoundaryStyle = (feature: any) => {
+    const rawType = feature?.properties?.zonetype;
+    const type = rawType ? rawType.trim() : '';
+    let color = '#3388ff'; // Default blue
+
+    // Determine color based on school type
+    if (type === 'HS' || type === 'High School' || type.includes('High')) {
+      color = '#FF9800'; // Orange for High School
+    } else if (type === 'MS' || type === 'Middle School' || type.includes('Middle')) {
+      color = '#4CAF50'; // Green for Middle School
+    } else if (type === 'K5' || type === 'Elementary School' || type.includes('Elementary')) {
+      color = '#2196F3'; // Blue for Elementary
+    } else if (type === 'K8' || type.includes('K8')) {
+      color = '#9C27B0'; // Purple for K-8/Hybrid
+    }
+
+    return {
+      color: color,
+      weight: 2,
+      opacity: 0.6,
+      fillColor: color,
+      fillOpacity: 0.1,
+      dashArray: '5, 5'
+    };
+  };
 
   // Mark map as ready and attach listeners
   useEffect(() => {
@@ -210,8 +268,8 @@ export function MapView({
               pathElement.style.opacity = '0';
               pathElement.setAttribute('fill-opacity', '0');
             } else {
-              // Fade in - longer 1s transition
-              pathElement.style.transition = 'opacity 1s ease-in-out, fill-opacity 1s ease-in-out';
+              // Fade in - shorter 0.5s transition
+              pathElement.style.transition = 'opacity 0.5s ease-in-out, fill-opacity 0.5s ease-in-out';
               // Restore opacity - find matching route by color and determine correct opacity
               const routeColor = layer.options.color;
               const matchingRoute = routes.find(r => r.color === routeColor);
@@ -235,16 +293,16 @@ export function MapView({
   }, [isFlying, map, isMapReady, routes, routeGeometries]);
 
   // Helper to manage flyTo animation state
-  const executeFlyTo = (callback: () => void) => {
+  const executeFlyTo = (callback: () => void, durationSeconds: number = 0.4) => {
     // Fade out immediately
     setIsFlying(true);
 
     callback();
 
-    // Fade back in after animation completes (duration is 0.6s)
+    // Fade back in after animation completes
     setTimeout(() => {
       setIsFlying(false);
-    }, 650); // Slightly longer than animation duration for smooth fade-in
+    }, (durationSeconds * 1000) + 50); // Slightly longer than animation duration for smooth fade-in
   };
 
   // Constants for mobile map centering
@@ -256,7 +314,8 @@ export function MapView({
     if (!map) return;
 
     // Use flyTo for snappy, fluid animation
-    const flyOptions = { duration: 0.6, easeLinearity: 0.25 };
+    const duration = 0.4;
+    const flyOptions = { duration, easeLinearity: 0.25 };
 
     executeFlyTo(() => {
       if (isMobile) {
@@ -268,7 +327,7 @@ export function MapView({
         // Direct center on desktop
         map.flyTo(position, zoom, flyOptions);
       }
-    });
+    }, duration);
 
     lastAddressZoomTimeRef.current = Date.now();
   };
@@ -302,17 +361,18 @@ export function MapView({
           const targetZoom = fitZoom - 2;
 
           // Single, smooth flyTo operation
+          const duration = 1.0;
           executeFlyTo(() => {
             if (isMobile) {
               // For manual flyTo, we need to apply the offset manually since flyTo doesn't accept padding
               // We project the center, add the offset, and unproject
               const targetPoint = map.project(center, targetZoom).add([0, MOBILE_BOTTOM_OFFSET_PX]);
               const targetLatLng = map.unproject(targetPoint, targetZoom);
-              map.flyTo(targetLatLng, targetZoom, { duration: 1.5 });
+              map.flyTo(targetLatLng, targetZoom, { duration });
             } else {
-              map.flyTo(center, targetZoom, { duration: 1.5 }); // Slightly longer duration for drama/clarity
+              map.flyTo(center, targetZoom, { duration }); // Slightly longer duration for drama/clarity
             }
-          });
+          }, duration);
 
           // No need for a secondary moveend listener anymore
 
@@ -352,13 +412,14 @@ export function MapView({
 
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
+          const duration = 0.4;
           executeFlyTo(() => {
             map.flyToBounds(bounds, {
               paddingTopLeft: [50, 50],
               paddingBottomRight: isMobile ? [50, MOBILE_PADDING_BOTTOM] : [50, 50],
-              duration: 0.6
+              duration
             });
-          });
+          }, duration);
         }
         break;
       }
@@ -385,13 +446,14 @@ export function MapView({
 
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
+          const duration = 0.4;
           executeFlyTo(() => {
             map.flyToBounds(bounds, {
               paddingTopLeft: [50, 50],
               paddingBottomRight: isMobile ? [50, MOBILE_PADDING_BOTTOM] : [50, 50],
-              duration: 0.6
+              duration
             });
-          });
+          }, duration);
         }
         break;
       }
@@ -404,13 +466,14 @@ export function MapView({
 
         if (allCoords.length > 0) {
           const bounds = L.latLngBounds(allCoords);
+          const duration = 0.4;
           executeFlyTo(() => {
             map.flyToBounds(bounds, {
               paddingTopLeft: [50, 50],
               paddingBottomRight: isMobile ? [50, MOBILE_PADDING_BOTTOM] : [50, 50],
-              duration: 0.6
+              duration
             });
-          });
+          }, duration);
         }
         break;
       }
@@ -418,16 +481,17 @@ export function MapView({
       case 'MANUAL': {
         if (mapIntent.data) {
           const { lat, lng, zoom } = mapIntent.data;
+          const duration = 0.4;
           executeFlyTo(() => {
             // For manual flyTo, we need to apply the offset manually since flyTo doesn't accept padding
             if (isMobile) {
               const targetPoint = map.project([lat, lng], zoom).add([0, MOBILE_BOTTOM_OFFSET_PX]);
               const targetLatLng = map.unproject(targetPoint, zoom);
-              map.flyTo(targetLatLng, zoom, { duration: 0.6 });
+              map.flyTo(targetLatLng, zoom, { duration });
             } else {
-              map.flyTo([lat, lng], zoom, { duration: 0.6 });
+              map.flyTo([lat, lng], zoom, { duration });
             }
-          });
+          }, duration);
         }
         break;
       }
@@ -438,13 +502,14 @@ export function MapView({
             [highlightedStreet.bounds.south, highlightedStreet.bounds.west],
             [highlightedStreet.bounds.north, highlightedStreet.bounds.east]
           );
+          const duration = 0.4;
           executeFlyTo(() => {
             map.flyToBounds(bounds, {
               paddingTopLeft: [50, 50],
               paddingBottomRight: isMobile ? [50, MOBILE_PADDING_BOTTOM] : [50, 50],
-              duration: 0.6
+              duration
             });
-          });
+          }, duration);
         }
         break;
       }
@@ -863,6 +928,24 @@ export function MapView({
       >
         <DarkModeTileLayer />
         <ZoomControl position="bottomleft" />
+
+        {/* Attendance Boundaries Layer */}
+        {showBoundaries && displayedBoundaries && (
+          <GeoJSON 
+            key={`boundaries-${homeAddress ? 'filtered' : 'all'}-${displayedBoundaries.length}`} // Force re-render when filtering changes
+            data={displayedBoundaries as any} 
+            style={getBoundaryStyle}
+            onEachFeature={(feature, layer) => {
+              if (feature.properties && feature.properties.name) {
+                layer.bindPopup(`
+                  <div style="font-weight: bold;">${feature.properties.name}</div>
+                  <div>${feature.properties.zonetype || ''}</div>
+                  <div>${feature.properties.districtname || ''}</div>
+                `);
+              }
+            }}
+          />
+        )}
 
         {/* Home address marker */}
         {homeAddress && (
@@ -1361,6 +1444,32 @@ export function MapView({
           ) : null;
         })() : null}
       </MapInfoPanel>
+
+      {/* Boundary Toggle Button */}
+      <button
+        onClick={toggleBoundaries}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          zIndex: 1000,
+          backgroundColor: showBoundaries ? 'var(--bg-secondary)' : 'var(--bg-primary)',
+          color: 'var(--text-primary)',
+          border: '1px solid var(--border-color)',
+          borderRadius: '8px',
+          padding: '8px 12px',
+          cursor: 'pointer',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          fontWeight: 600,
+          fontSize: '12px',
+        }}
+      >
+        <i className={`fas fa-map${showBoundaries ? '' : '-o'}`}></i>
+        {showBoundaries ? 'Hide Boundaries' : (homeAddress ? 'Show My Boundaries' : 'Show Boundaries')}
+      </button>
 
       {/* Loading spinner animation */}
       <style>{`

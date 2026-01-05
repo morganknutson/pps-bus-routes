@@ -34,7 +34,7 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
   // List of keywords that should NOT be treated as school IDs
   const reservedKeywords = ['schools', 'schools-directory', 'routes', 'morning', 'afternoon', 'both', 'explore', 'map', 'neighborhoods'];
   const focusKeywords = ['school-info', 'home', 'my-stop'];
-  const isCoords = (s: string) => /^-?\d+\.\d+,-?\d+\.\d+,\d+$/.test(s);
+  const isCoords = (s: string) => /^-?\d+\.?\d*,-?\d+\.?\d*,\d+$/.test(s);
 
   let currentIdx = 0;
 
@@ -77,9 +77,31 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
     } else if (focusKeywords.includes(segmentLower) || isCoords(segment)) {
       state.focus = segmentLower;
     } else if (state.show === 'routes' && !state.routeNames) {
-      state.routeNames = segment.split(',').filter(Boolean);
+      // Check if this looks like route names (comma-separated numbers or single number)
+      // Single numbers are treated as route names too
+      if (segment.includes(',')) {
+        // Comma-separated route names (e.g., "238,248")
+        const looksLikeRouteNames = /^[\d,]+(-upcoming)?$/.test(segment);
+        if (looksLikeRouteNames) {
+          state.routeNames = segment.split(',').filter(Boolean);
+        }
+      } else if (/^\d+(-upcoming)?$/.test(segment)) {
+        // Single route name (e.g., "238")
+        state.routeNames = [segment];
+      }
     } else if (state.show === 'routes' && state.routeNames && !state.stopId) {
-      state.stopId = segment;
+      // Only set stopId if it matches the format: route-stop (e.g., "126-5" or "126-5-upcoming")
+      // Must have a dash with numbers on both sides to distinguish from route names
+      // This prevents "238,248" from being treated as stopId
+      const looksLikeStopId = /^[\d]+-[\d]+(-upcoming)?$/.test(segment);
+      if (looksLikeStopId) {
+        state.stopId = segment;
+      } else if (focusKeywords.includes(segmentLower) || isCoords(segment)) {
+        // If it's not a stopId and looks like a focus keyword or coords, handle it as focus
+        state.focus = segmentLower;
+      }
+      // If it's comma-separated numbers or anything else that doesn't match stopId format, ignore it
+      // This prevents duplicate route names from being set as stopId
     }
     
     currentIdx++;
@@ -108,8 +130,14 @@ export function buildUrlPath(basePath: string, state: UrlState): string {
       if (state.routeNames && state.routeNames.length > 0) {
         parts.push(state.routeNames.join(','));
         
+        // Only add stopId if it's a valid stop ID format (not route names)
         if (state.stopId) {
-          parts.push(state.stopId);
+          // Validate that stopId looks like a stop ID (e.g., "126-5" or "126-5-upcoming")
+          // and not like route names (e.g., "126,127,132")
+          const isValidStopId = /^[\d]+-[\d]+(-upcoming)?$/.test(state.stopId);
+          if (isValidStopId) {
+            parts.push(state.stopId);
+          }
         }
       }
     } else if (state.show === 'neighborhoods') {

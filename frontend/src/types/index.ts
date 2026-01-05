@@ -53,16 +53,16 @@ export interface School {
 
 export interface AssignedSchool {
   name: string;
-  district?: string;
-  type?: string;
-  website?: string;
+  district: string;
+  type: string;
+  website: string | null;
 }
 
 export interface AssignedSchools {
-  elementary: AssignedSchool | null;
-  middle: AssignedSchool | null;
-  high: AssignedSchool | null;
-  k8: AssignedSchool | null;
+  elementary?: AssignedSchool;
+  middle?: AssignedSchool;
+  high?: AssignedSchool;
+  k8?: AssignedSchool;
 }
 
 export interface AppState {

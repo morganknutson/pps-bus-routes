@@ -179,6 +179,19 @@ router.get('/assigned', async (req, res) => {
 });
 
 /**
+ * Get school boundaries (GeoJSON)
+ */
+router.get('/boundaries', async (req, res) => {
+  try {
+    const boundaries = schoolBoundaryService.getBoundaries();
+    res.json({ boundaries });
+  } catch (error) {
+    console.error('Error getting boundaries:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
  * Get all schools
  */
 router.get('/', async (req, res) => {
