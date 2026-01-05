@@ -52,7 +52,8 @@ const sections: Section[] = [
       { id: 'pdf-processing', title: '2. PDF Processing & Extraction' },
       { id: 'geocoding-logic', title: '3. Address Geocoding' },
       { id: 'url-state', title: '4. URL Deep Linking & State' },
-      { id: 'performance-optimization', title: '5. Performance & Loading State' },
+      { id: 'walking-distance-matrix', title: '5. Walking Distance Matrix' },
+      { id: 'performance-optimization', title: '6. Performance & Loading State' },
     ],
   },
   {
@@ -70,10 +71,11 @@ const sections: Section[] = [
     title: 'Operations & Reliability',
     subsections: [
       { id: 'autocomplete-geocoding', title: '1. Autocomplete & Geocoding' },
-      { id: 'deployment', title: '2. Deployment Pipeline' },
-      { id: 'testing', title: '3. Testing Infrastructure' },
-      { id: 'file-structure', title: '4. Project Organization' },
-      { id: 'maintenance', title: '5. Maintenance & Jobs' },
+      { id: 'backend-performance', title: '2. Backend Performance & Stability', isHighlighted: true },
+      { id: 'deployment', title: '3. Deployment Pipeline' },
+      { id: 'testing', title: '4. Testing Infrastructure' },
+      { id: 'file-structure', title: '5. Project Organization' },
+      { id: 'maintenance', title: '6. Maintenance & Jobs' },
     ],
   },
   {
@@ -903,9 +905,24 @@ export function TechPage() {
               </SectionContent>
             </div>
 
+            <div id="walking-distance-matrix" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                5. Walking Distance Matrix
+              </h3>
+              <SectionContent>
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
+                  <ul>
+                    <li><strong>RoutesService</strong> - Uses the modern Google Routes API v2 (specifically <code>computeRouteMatrix</code>) to calculate walking distances from a home address to multiple stop candidates in a single request.</li>
+                    <li><strong>Efficiency</strong> - Replacing multiple individual Directions API calls with a single matrix request reduces latency, minimizes API overhead, and ensures the user always gets the mathematically closest stop by street distance.</li>
+                  </ul>
+                </div>
+              </SectionContent>
+            </div>
+
             <div id="performance-optimization" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                5. Performance & Loading State
+                6. Performance & Loading State
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -1012,7 +1029,7 @@ export function TechPage() {
                     <li><strong>Google Places V1</strong> - Uses the latest Google Places API for high-quality address suggestions with low latency.</li>
                     <li><strong>Parallel Place Details</strong> - Fetches coordinates for all suggestions in parallel to provide instant visual feedback on the map.</li>
                     <li><strong>Performance Optimization</strong> - Address snapping (moving house pins to the street) is deferred until a selection is made, keeping autocomplete extremely responsive.</li>
-                    <li><strong>Walking Distance Logic</strong> - When multiple bus stops are geographically close, the system calculates actual walking paths to ensure the truly "closest" stop is identified, even in hilly or cul-de-sac areas.</li>
+                    <li><strong>Walking Distance Logic</strong> - When multiple bus stops are geographically close, the system calculates actual walking paths using the <code>RoutesService</code> (Google Routes Matrix API v2). This identifies the truly "closest" stop by street distance in a single efficient API call, even in areas with complex street geometry.</li>
                     <li><strong>Decoupled Services</strong> - Uses a lazy-loading dependency pattern between <code>GeocodingService</code> and <code>StreetGeometryService</code> to ensure high reliability and zero-deadlock initialization.</li>
                     <li><strong>Nominatim Fallback</strong> - Automatically falls back to OpenStreetMap (Nominatim) if Google API quotas are exceeded or the service is unavailable.</li>
                   </ul>
@@ -1020,9 +1037,25 @@ export function TechPage() {
               </SectionContent>
             </div>
 
+            <div id="backend-performance" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                2. Backend Performance & Stability
+              </h3>
+              <SectionContent>
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>Service Reliability:</strong>
+                  <ul>
+                    <li><strong>Port Configuration</strong> - The backend uses port <code>3005</code> by default to avoid conflicts with system services or IDE plugins (like Cursor extension host) which often claim port <code>3001</code>.</li>
+                    <li><strong>I/O Chunking</strong> - Heavy endpoints like <code>/api/schools</code> use chunked processing (20 schools at a time) instead of full parallelism to prevent event loop blocking and file descriptor exhaustion.</li>
+                    <li><strong>Request Logging</strong> - Real-time request logging in the backend provides visibility into throughput and potential bottlenecks.</li>
+                  </ul>
+                </div>
+              </SectionContent>
+            </div>
+
             <div id="deployment" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                2. Deployment Pipeline
+                3. Deployment Pipeline
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>

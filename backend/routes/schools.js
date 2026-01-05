@@ -89,6 +89,7 @@ async function hasPdfs(schoolId) {
 // Counts unique routes (morning and afternoon versions of the same route count as 1)
 // Returns both count and latest update time in one pass
 async function getRouteStats(schoolId) {
+  const startTime = Date.now();
   // Check cache first
   const cached = getCachedStats(schoolId);
   if (cached) {
@@ -140,6 +141,7 @@ async function getRouteStats(schoolId) {
     
     // Cache the result
     setCachedStats(schoolId, stats);
+    // console.log(`[getRouteStats] ${schoolId}: ${stats.routeCount} routes (${Date.now() - startTime}ms)`);
     return stats;
   } catch (error) {
     console.error(`Error getting route stats for school ${schoolId}:`, error);
@@ -183,27 +185,32 @@ router.get('/', async (req, res) => {
     
     console.log(`[GET /api/schools] Processing ${schools.length} schools`);
     
-    // Process all schools in parallel for better performance
-    const statsPromises = schools.map(async (school) => {
-      try {
-        const stats = await getRouteStats(school.id);
-        const { placesData, placeId, ...schoolData } = school;
-        const neighborhood = extractNeighborhood(placesData);
-        
-        return {
-          ...schoolData,
-          ...(neighborhood && { neighborhood }),
-          routeCount: stats.routeCount,
-          routesUpdatedAt: stats.routesUpdatedAt,
-        };
-      } catch (err) {
-        console.error(`[GET /api/schools] Error processing school ${school.id}:`, err.message);
-        return null;
-      }
-    });
+    // Process schools in chunks to avoid overwhelming the file system
+    const schoolsWithCounts = [];
+    const CHUNK_SIZE = 20;
     
-    const results = await Promise.all(statsPromises);
-    const schoolsWithCounts = results.filter(s => s !== null);
+    for (let i = 0; i < schools.length; i += CHUNK_SIZE) {
+      const chunk = schools.slice(i, i + CHUNK_SIZE);
+      const chunkResults = await Promise.all(chunk.map(async (school) => {
+        try {
+          const stats = await getRouteStats(school.id);
+          const { placesData, placeId, ...schoolData } = school;
+          const neighborhood = extractNeighborhood(placesData);
+          
+          return {
+            ...schoolData,
+            ...(neighborhood && { neighborhood }),
+            routeCount: stats.routeCount,
+            routesUpdatedAt: stats.routesUpdatedAt,
+          };
+        } catch (err) {
+          console.error(`[GET /api/schools] Error processing school ${school.id}:`, err.message);
+          return null;
+        }
+      }));
+      
+      schoolsWithCounts.push(...chunkResults.filter(s => s !== null));
+    }
     
     const duration = Date.now() - startTime;
     console.log(`[GET /api/schools] Success: Returning ${schoolsWithCounts.length} schools (${duration}ms)`);

@@ -23,7 +23,7 @@ npm run dev
 On first run, the app will automatically install all dependencies. This may take a minute.
 
 ## What Happens
-- Backend server starts on port 3001
+- Backend server starts on port 3005
 - Frontend server starts on port 3000
 - Browser should open automatically (or go to http://localhost:3000)
 
