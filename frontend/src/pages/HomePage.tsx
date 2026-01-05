@@ -330,13 +330,15 @@ export function HomePage() {
       setAddressLoading(true);
       const geocodeResult = await geocodeAddress(suggestion.address);
       
-        if (geocodeResult.coordinates) {
+      if (geocodeResult.coordinates) {
         const address: HomeAddress = {
           address: suggestion.displayName || suggestion.address,
           coordinates: geocodeResult.coordinates,
         };
         setSelectedAddress(address);
-        setHomeAddress(address);
+        // Persist to localStorage only. We sync to store during "Find My Stop" navigation
+        // to avoid race conditions with global state sync.
+        localStorage.setItem('homeAddress', JSON.stringify(address));
       } else if (suggestion.coordinates) {
         // Fallback to suggestion coordinates if geocode fails
         const address: HomeAddress = {
@@ -344,7 +346,7 @@ export function HomePage() {
           coordinates: suggestion.coordinates,
         };
         setSelectedAddress(address);
-        setHomeAddress(address);
+        localStorage.setItem('homeAddress', JSON.stringify(address));
       } else {
         setError('Failed to geocode selected address');
       }
@@ -356,7 +358,7 @@ export function HomePage() {
           coordinates: suggestion.coordinates,
         };
         setSelectedAddress(address);
-        setHomeAddress(address);
+        localStorage.setItem('homeAddress', JSON.stringify(address));
       } else {
         setError('Failed to geocode address');
       }
@@ -648,7 +650,7 @@ export function HomePage() {
                   onClick={() => {
                     setSelectedAddress(null);
                     setAddressQuery('');
-                    clearHomeAddress();
+                    localStorage.removeItem('homeAddress');
                   }}
                   style={{
                     background: 'none',
@@ -1009,9 +1011,11 @@ export function HomePage() {
             textAlign: 'center',
           }}>
             <Link
-              to="/schools"
+              to={selectedSchoolLocal ? `/${selectedSchoolLocal.id}/school-info` : "/schools"}
               onClick={() => {
-                setSelectedSchool(null);
+                if (!selectedSchoolLocal) {
+                  setSelectedSchool(null);
+                }
                 setRoutes([]);
               }}
               style={{

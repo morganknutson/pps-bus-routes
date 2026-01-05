@@ -34,7 +34,7 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
   // List of keywords that should NOT be treated as school IDs
   const reservedKeywords = ['schools', 'schools-directory', 'routes', 'morning', 'afternoon', 'both', 'explore', 'map', 'neighborhoods'];
   const focusKeywords = ['school-info', 'home', 'my-stop'];
-  const isCoords = (s: string) => /^-?\d+\.?\d*,-?\d+\.?\d*,\d+$/.test(s);
+  const isCoords = (s: string) => /^-?\d+(\.\d+)?,-?\d+(\.\d+)?,\d+$/.test(s) && s.includes('.');
 
   let currentIdx = 0;
 
@@ -74,21 +74,11 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
       state.show = 'routes';
     } else if (['morning', 'afternoon', 'both'].includes(segmentLower)) {
       state.direction = segmentLower as any;
+    } else if (state.show === 'routes' && !state.routeNames && /^[\d,]+(-upcoming)?$/.test(segment)) {
+      // Priority: route names in routes mode
+      state.routeNames = segment.split(',').filter(Boolean);
     } else if (focusKeywords.includes(segmentLower) || isCoords(segment)) {
       state.focus = segmentLower;
-    } else if (state.show === 'routes' && !state.routeNames) {
-      // Check if this looks like route names (comma-separated numbers or single number)
-      // Single numbers are treated as route names too
-      if (segment.includes(',')) {
-        // Comma-separated route names (e.g., "238,248")
-        const looksLikeRouteNames = /^[\d,]+(-upcoming)?$/.test(segment);
-        if (looksLikeRouteNames) {
-          state.routeNames = segment.split(',').filter(Boolean);
-        }
-      } else if (/^\d+(-upcoming)?$/.test(segment)) {
-        // Single route name (e.g., "238")
-        state.routeNames = [segment];
-      }
     } else if (state.show === 'routes' && state.routeNames && !state.stopId) {
       // Only set stopId if it matches the format: route-stop (e.g., "126-5" or "126-5-upcoming")
       // Must have a dash with numbers on both sides to distinguish from route names
