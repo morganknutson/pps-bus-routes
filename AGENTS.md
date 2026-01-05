@@ -22,7 +22,7 @@ PDFs (Google Drive) → Parse stops → Geocode addresses → Display on Leaflet
 | Maps | Leaflet + react-leaflet |
 | Backend | Node.js + Express (ES Modules) |
 | Geocoding | Google Maps Geocoding API |
-| Routing | Google Maps Directions API |
+| Routing | Google Maps Directions API & Routes API |
 | Icons | **Font Awesome ONLY** (no react-icons) |
 | Testing | Vitest (Frontend), Node --test (Backend) |
 
@@ -58,6 +58,7 @@ backend/
     pdfParser.js            # Extract stops from PDFs
     geocodingService.js     # Google Maps geocoding
     directionsService.js    # Google Maps routing
+    routesService.js        # Google Maps Routes API (Matrix)
     routeProcessor.js       # Full PDF→JSON pipeline
     neighborhoodService.js  # Reverse geocoding for neighborhoods
 
@@ -179,6 +180,6 @@ PORT=3005                  # Backend port
 
 ---
 
-*Last updated: December 20, 2025*
+*Last updated: January 4, 2026*
 
 

@@ -3,6 +3,7 @@
  */
 import express from 'express';
 import { directionsService } from '../services/directionsService.js';
+import { routesService } from '../services/routesService.js';
 
 const router = express.Router();
 
@@ -182,33 +183,28 @@ router.post('/calculate-walking', async (req, res) => {
       return res.status(400).json({ error: 'Valid home [lat, lng] and stops array are required' });
     }
 
-    console.log(`[Routes] 🚶 Calculating walking distances for ${stops.length} candidates`);
+    console.log(`[Routes] 🚶 Calculating walking distances for ${stops.length} candidates using Routes Matrix API`);
     
-    // We'll use the Matrix API if we had it, but since we have DirectionsService,
-    // we'll just call it for each stop. We limit to top 5 for performance.
+    // We use the modern Google Routes Matrix API (v2) for efficiency.
+    // We still limit to top 5 candidates to keep costs predictable.
     const candidates = stops.slice(0, 5);
-    const results = await Promise.all(candidates.map(async (stop, index) => {
-      try {
-        const result = await directionsService.getRoute([home, stop], 'walking');
-        if (result.success) {
-          return {
-            index,
-            distance: result.distance, // meters
-            duration: result.duration, // seconds
-            success: true
-          };
-        }
-        return { index, success: false, error: result.error };
-      } catch (error) {
-        return { index, success: false, error: error.message };
-      }
-    }));
-
-    const responseTime = Date.now() - startTime;
-    res.json({
-      results,
-      responseTime
-    });
+    const matrixResult = await routesService.getWalkingMatrix(home, candidates);
+    
+    if (matrixResult.success) {
+      const responseTime = Date.now() - startTime;
+      res.json({
+        results: matrixResult.results.map((res, index) => ({
+          index,
+          distance: res?.distance || 0,
+          duration: res?.duration || 0,
+          success: !!res,
+          error: res?.error || (res ? null : 'Failed to calculate matrix element')
+        })),
+        responseTime
+      });
+    } else {
+      throw new Error(matrixResult.error || 'Matrix calculation failed');
+    }
   } catch (error) {
     console.error('[Routes] Error in calculate-walking:', error);
     res.status(500).json({ error: error.message });

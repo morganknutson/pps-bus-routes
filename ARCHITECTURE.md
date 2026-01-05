@@ -32,7 +32,7 @@ PPS Bus Maps is a web application that:
 1. **Fetches** bus route PDFs from Google Drive folders
 2. **Parses** stop locations (cross-street intersections) from PDFs
 3. **Geocodes** addresses to GPS coordinates using Google Maps API
-4. **Calculates** street-following route geometry using Google Directions API
+4. **Calculates** street-following route geometry using Google Directions API and walking distances using Routes API
 5. **Visualizes** routes on an interactive Leaflet map
 6. **Manages** school and route data through an admin interface
 
@@ -80,6 +80,7 @@ PPS Bus Maps is a web application that:
 |---------|---------|----------|
 | Google Maps Geocoding API | Address → coordinates | Yes |
 | Google Maps Directions API | Route geometry | Yes |
+| Google Maps Routes API | Walking distance matrix | Yes |
 | Google Drive API | PDF access | Optional (public folders work without) |
 
 ---
@@ -104,6 +105,7 @@ pps-bus-maps/
 │   │   ├── pdfParser.js        # PDF text parsing
 │   │   ├── geocodingService.js # Google Maps geocoding
 │   │   ├── directionsService.js# Google Maps directions
+│   │   ├── routesService.js    # Google Maps Routes API (Matrix)
 │   │   ├── routeProcessor.js   # Full processing pipeline
 │   │   ├── neighborhoodService.js # Neighborhood lookup
 │   │   ├── schedulerService.js # Cron job management
@@ -325,6 +327,22 @@ Output: { address: "SW Patton & Vista & Georgian [NW]", time: "8:35 am" }
 - Supports up to 25 waypoints per request (batches larger routes)
 - Returns `[lat, lng][]` format for Leaflet
 - Tracks statistics (success rate, response time)
+
+---
+
+### RoutesService (`routesService.js`)
+
+**Purpose**: Calculate efficient distance matrices (walking refinement)
+
+**Class**: `RoutesService`
+
+**Key Methods**:
+- `getWalkingMatrix(origin, destinations)` - Calculate walking distances to multiple stops
+
+**Features**:
+- Uses modern Google Routes API v2
+- Single request for one-to-many calculations
+- Reduces latency and cost for "Find My Stop" refinement
 
 ---
 
@@ -606,6 +624,14 @@ interface Stop {
 
 **Cost**: $5 per 1,000 requests
 
+### Google Maps Routes API
+
+**Endpoint**: `https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix`
+
+**Usage**: Efficient one-to-many distance calculations (walking refinement)
+
+**Cost**: $5 per 1,000 elements
+
 ### Google Drive API (Optional)
 
 **Endpoint**: `https://www.googleapis.com/drive/v3`
@@ -785,6 +811,6 @@ The deployment process is automated through a shell script that handles stopping
 
 ---
 
-*Last updated: December 2024*
+*Last updated: January 2026*
 
 
