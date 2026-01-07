@@ -1480,7 +1480,7 @@ export function MapView({
       {/* Boundary Toggle Redesign in Bottom Left */}
       <div className="leaflet-bottom leaflet-left" style={{ bottom: '110px', left: '10px', pointerEvents: 'auto', zIndex: 1000 }}>
         <div style={{
-          display: 'flex',
+          display: 'none',
           flexDirection: 'column',
           alignItems: 'center',
           gap: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '6px' : '0',
