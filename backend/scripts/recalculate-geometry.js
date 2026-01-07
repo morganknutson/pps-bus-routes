@@ -44,9 +44,10 @@ async function recalculateGeometry() {
         try {
           // Convert [lng, lat] to [lat, lng] for Directions API
           const waypoints = stopsWithCoords.map(s => [s.coordinates[1], s.coordinates[0]]);
-          const geometry = await directionsService.getRouteGeometry(waypoints);
+          const routeResult = await directionsService.getRoute(waypoints);
           
-          if (geometry) {
+          if (routeResult.success && routeResult.coordinates) {
+            const geometry = routeResult.coordinates;
             route.geometry = geometry;
             route.geometryUpdatedAt = new Date().toISOString();
             fs.writeFileSync(routePath, JSON.stringify(route, null, 2));

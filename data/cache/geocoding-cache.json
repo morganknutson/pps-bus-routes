@@ -575,5 +575,1537 @@
       }
     ],
     "cachedAt": "2026-01-05T18:29:32.951Z"
+  },
+  "northeast 28th avenue & northeast weidler street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6367227,
+      45.5345322
+    ],
+    "displayName": "NE Weidler St & NE 28th Ave, Portland, OR 97232, USA",
+    "placeId": "EjRORSBXZWlkbGVyIFN0ICYgTkUgMjh0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIzMiwgVVNBImYiZAoUChIJHyTpl86glVQRux-Xx6pqYzsSFAoSCR8k6ZfOoJVUEbsfl8eqamM7GhQKEgkzBCLJy6CVVBFhCqqcgsFWbhoUChIJJytHqM2glVQRzLF0tQNb9HoiCg2qBCQbFQUf57Y",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northeast Weidler Street & Northeast 28th Avenue",
+        "short_name": "NE Weidler St & NE 28th Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Sullivan's Gulch",
+        "short_name": "Sullivan's Gulch",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97232",
+        "short_name": "97232",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-06T05:59:51.208Z"
+  },
+  "northeast 15th avenue & northeast halsey street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6504539,
+      45.5336276
+    ],
+    "displayName": "NE Halsey St & NE 15th Ave, Portland, OR 97232, USA",
+    "placeId": "EjNORSBIYWxzZXkgU3QgJiBORSAxNXRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjMyLCBVU0EiZiJkChQKEgnrpc4HtaCVVBFk1K3WGE8gChIUChIJ66XOB7WglVQRZNSt1hhPIAoaFAoSCflaUt-TopVUETM_V1Bq0U__GhQKEglReLxHIqeVVBEZ-BGkHh7hhiIKDVThIxsVpQbltg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northeast Halsey Street & Northeast 15th Avenue",
+        "short_name": "NE Halsey St & NE 15th Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Sullivan's Gulch",
+        "short_name": "Sullivan's Gulch",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97232",
+        "short_name": "97232",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-06T05:59:51.209Z"
+  },
+  "1126 ne 21st ave. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.64488411973751,
+      45.53125104224003
+    ],
+    "displayName": "1126 NE 21st Ave, Portland, OR 97232, USA",
+    "placeId": "ChIJWTIzIraglVQR94MRZO2zA0w",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "1126",
+        "short_name": "1126",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast 21st Avenue",
+        "short_name": "NE 21st Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Sullivan's Gulch",
+        "short_name": "Sullivan's Gulch",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97232",
+        "short_name": "97232",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2114",
+        "short_name": "2114",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-06T05:59:51.543Z"
+  },
+  "1126 ne 21st ave. e|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.64488411973751,
+      45.53125104224003
+    ],
+    "displayName": "1126 NE 21st Ave, Portland, OR 97232, USA",
+    "placeId": "ChIJWTIzIraglVQR94MRZO2zA0w",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "1126",
+        "short_name": "1126",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast 21st Avenue",
+        "short_name": "NE 21st Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Sullivan's Gulch",
+        "short_name": "Sullivan's Gulch",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97232",
+        "short_name": "97232",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2114",
+        "short_name": "2114",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-06T06:00:05.372Z"
+  },
+  "nw st. helens rd. & nw 107th ave. e|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.7858254,
+      45.5987015
+    ],
+    "displayName": "NW 107th Ave & NW St Helens Rd, Portland, OR 97231, USA",
+    "placeId": "EjdOVyAxMDd0aCBBdmUgJiBOVyBTdCBIZWxlbnMgUmQsIFBvcnRsYW5kLCBPUiA5NzIzMSwgVVNBImYiZAoUChIJTzvjpZIHlVQRs8gGtQYSiqcSFAoSCU8746WSB5VUEbPIBrUGEoqnGhQKEgnnpba6kgeVVBFNOaPaiGNWFBoUChIJl6aWsduplVQR3OuXr20YvpsiCg1Hzy0bFbJe0LY",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northwest 107th Avenue & Northwest Saint Helens Road",
+        "short_name": "NW 107th Ave & NW St Helens Rd",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Northwest Portland",
+        "short_name": "Northwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:37:25.194Z"
+  },
+  "12305 nw mcnamee rd. ne|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8349038,
+      45.6122614
+    ],
+    "displayName": "12305 NW McNamee Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJLXdYtA8HlVQRxAdTbTCTTvM",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "12305",
+        "short_name": "12305",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest McNamee Road",
+        "short_name": "NW McNamee Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2127",
+        "short_name": "2127",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:56.392Z"
+  },
+  "15710 nw mcnamee rd. e|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8521651,
+      45.63648389999999
+    ],
+    "displayName": "15710 NW McNamee Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJvWcliDUHlVQRVXzw05rPeO8",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "15710",
+        "short_name": "15710",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest McNamee Road",
+        "short_name": "NW McNamee Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2146",
+        "short_name": "2146",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:56.634Z"
+  },
+  "16223/16238 nw mcnamee rd. ne|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8537429404017,
+      45.640160111643475
+    ],
+    "displayName": "16223 NW McNamee Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJKzjjN7UAlVQRG4AGSBWJ1h4",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "16223",
+        "short_name": "16223",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest McNamee Road",
+        "short_name": "NW McNamee Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2149",
+        "short_name": "2149",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:56.983Z"
+  },
+  "nw st. helens rd. & nw king rd. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.868679,
+      45.6686261
+    ],
+    "displayName": "NW St Helens Rd & NW King Rd, Oregon 97231, USA",
+    "placeId": "Ei9OVyBTdCBIZWxlbnMgUmQgJiBOVyBLaW5nIFJkLCBPcmVnb24gOTcyMzEsIFVTQSJmImQKFAoSCTmjWfOEAJVUEe3dG41W2hanEhQKEgk5o1nzhACVVBHt3RuNVtoWpxoUChIJl6aWsduplVQR3OuXr20YvpsaFAoSCZleBE6EAJVUEZIY5iJ6Hb2QIgoNtXo4GxU6usO2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northwest Saint Helens Road & Northwest King Road",
+        "short_name": "NW St Helens Rd & NW King Rd",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:57.114Z"
+  },
+  "18445 nw logie trl. rd. nw|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.86689530813112,
+      45.66138771331462
+    ],
+    "displayName": "18445 NW Logie Trail Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJ9RhJU5cAlVQRpBn154bBpG4",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "18445",
+        "short_name": "18445",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Logie Trail Road",
+        "short_name": "NW Logie Trail Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "1915",
+        "short_name": "1915",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:57.343Z"
+  },
+  "18830 nw logie trl. rd. n|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.87175296393347,
+      45.65995833861255
+    ],
+    "displayName": "18830 NW Logie Trail Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJl1HUsZYAlVQRmtnfS6mQrOc",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "18830",
+        "short_name": "18830",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Logie Trail Road",
+        "short_name": "NW Logie Trail Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "1919",
+        "short_name": "1919",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:57.688Z"
+  },
+  "18912 nw logie trl. rd. n|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.87247022358085,
+      45.65994306857957
+    ],
+    "displayName": "18912 NW Logie Trail Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJIcm6rJYAlVQRpQyvngsmKzo",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "18912",
+        "short_name": "18912",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Logie Trail Road",
+        "short_name": "NW Logie Trail Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "1905",
+        "short_name": "1905",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:57.927Z"
+  },
+  "19335 nw logie trl. rd. nw|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.87630060785618,
+      45.658768026609856
+    ],
+    "displayName": "19335 NW Logie Trail Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJXfRFgpMAlVQRa0Mag9vRdGs",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "19335",
+        "short_name": "19335",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Logie Trail Road",
+        "short_name": "NW Logie Trail Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "1922",
+        "short_name": "1922",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:58.144Z"
+  },
+  "nw st. helens rd. & nw chestnut ln. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8602033,
+      45.6590284
+    ],
+    "displayName": "NW Chestnut Ln & NW St Helens Rd, Oregon 97231, USA",
+    "placeId": "EjNOVyBDaGVzdG51dCBMbiAmIE5XIFN0IEhlbGVucyBSZCwgT3JlZ29uIDk3MjMxLCBVU0EiZiJkChQKEglp5ClymACVVBE9n_bKvSjVOhIUChIJaeQpcpgAlVQRPZ_2yr0o1ToaFAoSCV19BaO9AJVUEaDjY3RM62xjGhQKEgmXppax26mVVBHc65evbRi-myIKDcwDNxsVTwXFtg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northwest Chestnut Lane & Northwest Saint Helens Road",
+        "short_name": "NW Chestnut Ln & NW St Helens Rd",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:58.306Z"
+  },
+  "16230 nw sheltered nook rd. se|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.86457886072998,
+      45.64009120652266
+    ],
+    "displayName": "16230 NW Sheltered Nook Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJW0Nm7MsAlVQRPEb-E1OOLHI",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "16230",
+        "short_name": "16230",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Sheltered Nook Road",
+        "short_name": "NW Sheltered Nook Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2010",
+        "short_name": "2010",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:58.541Z"
+  },
+  "15725 nw sheltered nook rd. nw|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.86768389999999,
+      45.6367333
+    ],
+    "displayName": "15725 NW Sheltered Nook Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJv_6iFc0AlVQRbxqnMDcJS3k",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "15725",
+        "short_name": "15725",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Sheltered Nook Road",
+        "short_name": "NW Sheltered Nook Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2002",
+        "short_name": "2002",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:58.746Z"
+  },
+  "14049 nw cornelius pass rd. sw|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8658875,
+      45.62434340000001
+    ],
+    "displayName": "14049 NW Cornelius Pass Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJEbxcAyYHlVQR7BrUCdPdAb4",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "14049",
+        "short_name": "14049",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Cornelius Pass Road",
+        "short_name": "NW Cornelius Pass Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2024",
+        "short_name": "2024",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:58.937Z"
+  },
+  "15124 nw cornelius pass rd. se|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.86591865871067,
+      45.63283119097402
+    ],
+    "displayName": "15124 NW Cornelius Pass Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJLZjbgC0HlVQRfecPLkTk-fE",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "15124",
+        "short_name": "15124",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Cornelius Pass Road",
+        "short_name": "NW Cornelius Pass Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2035",
+        "short_name": "2035",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:59.199Z"
+  },
+  "15230 nw cornelius pass rd. se|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8648936787068,
+      45.63325928615279
+    ],
+    "displayName": "15230 NW Cornelius Pass Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJTYJeYzIHlVQRpP_XPE88-RE",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "15230",
+        "short_name": "15230",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Cornelius Pass Road",
+        "short_name": "NW Cornelius Pass Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2003",
+        "short_name": "2003",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:59.419Z"
+  },
+  "15446 nw cornelius pass rd. e|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.86341657304745,
+      45.634615514154234
+    ],
+    "displayName": "15446 NW Cornelius Pass Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJYxZOGzMHlVQRfD6pIlhY-k8",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "15446",
+        "short_name": "15446",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Cornelius Pass Road",
+        "short_name": "NW Cornelius Pass Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2037",
+        "short_name": "2037",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:59.615Z"
+  },
+  "nw st. helens rd. & nw burlington dr. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8415134,
+      45.6460032
+    ],
+    "displayName": "NW Burlington Dr & NW St Helens Rd, Oregon 97231, USA",
+    "placeId": "EjVOVyBCdXJsaW5ndG9uIERyICYgTlcgU3QgSGVsZW5zIFJkLCBPcmVnb24gOTcyMzEsIFVTQSJmImQKFAoSCRmSO1WsAJVUEWrpihHcr08VEhQKEgkZkjtVrACVVBFq6YoR3K9PFRoUChIJrWK_D60AlVQRMAs_MJ7RG5IaFAoSCZemlrHbqZVUEdzrl69tGL6bIgoNAAc1GxVi38e2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northwest Burlington Drive & Northwest Saint Helens Road",
+        "short_name": "NW Burlington Dr & NW St Helens Rd",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:59.735Z"
+  },
+  "nw st. helens rd. & nw harbor blvd. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.7781686,
+      45.59011719999999
+    ],
+    "displayName": "NW Harbor Blvd & NW St Helens Rd, Portland, OR 97231, USA",
+    "placeId": "EjlOVyBIYXJib3IgQmx2ZCAmIE5XIFN0IEhlbGVucyBSZCwgUG9ydGxhbmQsIE9SIDk3MjMxLCBVU0EiZiJkChQKEglNnUmB7weVVBGKKOyVMCrxZxIUChIJTZ1Jge8HlVQRiijslTAq8WcaFAoSCRt2P33vB5VUEUkJ2KxkjNrJGhQKEgmXppax26mVVBHc65evbRi-myIKDfR_LBsVyonRtg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northwest Harbor Boulevard & Northwest Saint Helens Road",
+        "short_name": "NW Harbor Blvd & NW St Helens Rd",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Northwest Portland",
+        "short_name": "Northwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-07T05:34:59.868Z"
   }
 }

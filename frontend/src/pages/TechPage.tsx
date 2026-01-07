@@ -30,7 +30,8 @@ const sections: Section[] = [
       { id: 'school-explorer', title: '1. School Explorer (Discovery)' },
       { id: 'route-explorer', title: '2. Route Explorer (Detail)' },
       { id: 'address-lookup', title: '3. Address Search & Autocomplete' },
-      { id: 'neighborhood-explorer', title: '4. Neighborhood Directory' },
+      { id: 'assigned-schools', title: '4. Assigned Schools Lookup' },
+      { id: 'neighborhood-explorer', title: '5. Neighborhood Directory' },
     ],
   },
   {
@@ -670,9 +671,36 @@ export function TechPage() {
               </SectionContent>
             </div>
 
+            <div id="assigned-schools" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
+              <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
+                4. Assigned Schools Lookup
+              </h3>
+              <SectionContent>
+                <p>
+                  Automatically identifies which PPS schools are assigned to a specific home address based on official attendance boundaries.
+                </p>
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>Key Features:</strong>
+                  <ul>
+                    <li><strong>Automatic Sorting</strong> - Assigned schools are automatically moved to the top of the school list for easy access.</li>
+                    <li><strong>Grade Level Detection</strong> - Identifies the assigned elementary, middle, and high school for any location in Portland.</li>
+                    <li><strong>State Persistence</strong> - Assigned schools are refetched on page load if a home address is saved, ensuring the list is always personalized.</li>
+                  </ul>
+                </div>
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
+                  <ul>
+                    <li><strong>Service</strong> - Uses <code>SchoolBoundaryService</code> on the backend which queries local GeoJSON boundary data (no external API calls required).</li>
+                    <li><strong>Endpoint</strong> - Powered by <code>GET /api/schools/assigned</code>.</li>
+                    <li><strong>Standardized</strong> - Matches schools by name using fuzzy matching to account for naming variations between datasets.</li>
+                  </ul>
+                </div>
+              </SectionContent>
+            </div>
+
             <div id="neighborhood-explorer" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                4. Neighborhood Directory
+                5. Neighborhood Directory
               </h3>
               <SectionContent>
                 <p>
@@ -868,8 +896,8 @@ export function TechPage() {
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                   <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
                   <ul>
-                    <li><strong>PdfParser</strong> - Uses regular expressions to extract stop addresses, times, and route IDs from the semi-structured text of bus schedules.</li>
-                    <li><strong>RouteProcessor</strong> - The orchestrator that coordinates between parsing text, geocoding addresses, and saving the final JSON.</li>
+                    <li><strong>PdfParser</strong> - Uses regular expressions to extract stop addresses, times, and route IDs from the semi-structured text of bus schedules. It uses stop order numbering (e.g., "(1)", "(2)") to distinguish student stops from transitional "deadhead" movements to other schools.</li>
+                    <li><strong>RouteProcessor</strong> - The orchestrator that coordinates between parsing text, geocoding addresses, and saving the final JSON. It automatically filters out loading zones and non-student stops.</li>
                   </ul>
                 </div>
               </SectionContent>

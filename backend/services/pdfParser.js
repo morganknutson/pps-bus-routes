@@ -193,7 +193,7 @@ function parseStops(text, anchorName = null) {
   // Pattern to match stop lines: time + address + optional direction + route info
   // Format: "8:33 amADDRESS[DIRECTION]ROUTE(ORDER)Stop Order #:"
   // Supports any school code (not just SYL)
-  const stopPattern = /^(\d{1,2}:\d{2}\s*(?:am|pm))(.+?)(?:\[([NWES]+)\])?(?:\d+[A-Z]{2,}-[AP](?:\(\d+\))?)?(?:Stop Order #:)?$/i;
+  const stopPattern = /^(\d{1,2}:\d{2}\s*(?:am|pm))(.+?)(?:\[([NWES]+)\])?(?:\d+[A-Z]{2,}-[AP](\((\d+)\))?)?(?:Stop Order #:)?$/i;
   
   for (const line of lines) {
     // Skip header lines
@@ -218,6 +218,7 @@ function parseStops(text, anchorName = null) {
       const time = match[1].trim();
       let address = match[2].trim();
       const direction = match[3] || '';
+      const stopOrder = match[5] || null;
       
       // Clean up the address
       // Remove route numbers and stop order info that might be at the end
@@ -259,6 +260,7 @@ function parseStops(text, anchorName = null) {
         if (normalizedAddress === normalizedAnchorName || 
             normalizedAddress.includes(normalizedAnchorName) ||
             normalizedAnchorName.includes(normalizedAddress)) {
+          isSchoolLoadingZone = true;
           continue; // Skip this stop as it's the school loading zone (we'll add it separately)
         }
       }
@@ -272,8 +274,9 @@ function parseStops(text, anchorName = null) {
         normalizedAddress.includes('fwy') || // Highway stops like "I5 Fwy"
         normalizedAddress.includes('no intersection') || // Non-intersection driver notes
         normalizedAddress.includes('bus yard') ||
-        normalizedAddress.includes('bus garage')
-      ) && !isSchoolLoadingZone;
+        normalizedAddress.includes('bus garage') ||
+        (!stopOrder && !isSchoolLoadingZone) // If no stop order is found, it's likely a transition stop/loading zone
+      );
       
       // Add direction to address if present
       if (direction) {

@@ -4,6 +4,7 @@ import { assignUniqueColors } from '../utils/colorGenerator';
 import { saveRoutesToCache, mergeCachedCoordinates } from '../services/routeCache';
 import { validateLngLat } from '../utils/coordinates';
 import { debounce } from '../utils/debounce';
+import { assignedSchoolsService } from '../services/assignedSchoolsService';
 
 interface Store extends AppState {
   initialize: (options?: { skipSchoolSelection?: boolean }) => void;
@@ -45,8 +46,13 @@ interface Store extends AppState {
   fetchAssignedSchools: (lat: number, lng: number) => Promise<void>;
   boundaries: any[] | null;
   showBoundaries: boolean;
+  showElementaryBoundaries: boolean;
+  showMiddleBoundaries: boolean;
+  showHighBoundaries: boolean;
   fetchBoundaries: () => Promise<void>;
   toggleBoundaries: () => void;
+  toggleBoundaryType: (type: 'elementary' | 'middle' | 'high') => void;
+  toggleAllBoundaries: (show: boolean) => void;
 }
 
 export const useStore = create<Store>((set, get) => {
@@ -77,6 +83,9 @@ export const useStore = create<Store>((set, get) => {
     assignedSchools: null,
     boundaries: null,
     showBoundaries: false,
+    showElementaryBoundaries: false,
+    showMiddleBoundaries: false,
+    showHighBoundaries: false,
     isDarkMode: (() => {
       if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('darkMode');
@@ -99,6 +108,17 @@ export const useStore = create<Store>((set, get) => {
           set({ homeAddress: address });
           // Trigger zoom on initial load if address is present
           set({ shouldZoomToHomeAddress: true });
+
+          // Load assigned schools from cache first for immediate display
+          const savedAssigned = localStorage.getItem('assignedSchools');
+          if (savedAssigned) {
+            set({ assignedSchools: JSON.parse(savedAssigned) });
+          }
+
+          // Fetch fresh assigned schools if we have coordinates
+          if (address.coordinates && Array.isArray(address.coordinates) && address.coordinates.length === 2) {
+            get().fetchAssignedSchools(address.coordinates[1], address.coordinates[0]);
+          }
         } catch (e) {
           console.error('[useStore] Failed to load saved home address:', e);
         }
@@ -110,6 +130,17 @@ export const useStore = create<Store>((set, get) => {
         try {
           const address = JSON.parse(savedLookupAddress);
           set({ lookupAddress: address });
+
+          // Also fetch assigned schools for lookup address if no home address is set
+          // This helps in the Admin view
+          if (!get().homeAddress && address.coordinates && Array.isArray(address.coordinates) && address.coordinates.length === 2) {
+            // Check cache for lookup address assigned schools too
+            const savedAssigned = localStorage.getItem('assignedSchools');
+            if (savedAssigned && !get().assignedSchools) {
+              set({ assignedSchools: JSON.parse(savedAssigned) });
+            }
+            get().fetchAssignedSchools(address.coordinates[1], address.coordinates[0]);
+          }
         } catch (e) {
           console.error('[useStore] Failed to load saved lookup address:', e);
         }
@@ -190,31 +221,11 @@ export const useStore = create<Store>((set, get) => {
             : route
         );
 
-        let updatedSelectedStop = state.selectedStop;
-        const routeBeingToggled = state.routes.find((route) => route.id === routeId);
-        const isCurrentlySelected = routeBeingToggled?.isSelected; // State before toggle
-        const isTurningOn = !isCurrentlySelected; // If it wasn't selected, we are turning it ON
-
-        // If the route is currently selected and is being turned off, clear the selected stop for that route
-        if (isCurrentlySelected && state.selectedStop && state.selectedStop.route.id === routeId) {
-          console.log('[useStore] Route deselected, clearing selected stop');
-          updatedSelectedStop = null;
-        }
-
-        // Fix for "My Stop" state persistence:
-        // If we are turning a route ON, and we constitute a "My Stop" view (DOUBLE_FIT),
-        // we should clear the specific stop focus so the map can show the new route(s).
-        let newMapIntent = state.mapIntent;
-        if (isTurningOn && state.mapIntent?.type === 'DOUBLE_FIT') {
-          console.log('[useStore] Route selected while in DOUBLE_FIT, clearing selected stop and fitting routes');
-          updatedSelectedStop = null;
-          newMapIntent = { type: 'FIT_ROUTES' };
-        }
-
+        // Requirement: any route toggle clears the selected stop and fits all routes
         return {
           routes: updatedRoutes,
-          selectedStop: updatedSelectedStop,
-          mapIntent: newMapIntent
+          selectedStop: null,
+          mapIntent: { type: 'FIT_ROUTES' }
         };
       }),
 
@@ -222,22 +233,38 @@ export const useStore = create<Store>((set, get) => {
       set({ homeAddress: address });
       // Save to localStorage
       localStorage.setItem('homeAddress', JSON.stringify(address));
+
+      // Fetch assigned schools if we have coordinates
+      if (address.coordinates && Array.isArray(address.coordinates) && address.coordinates.length === 2) {
+        get().fetchAssignedSchools(address.coordinates[1], address.coordinates[0]);
+      }
     },
 
     clearHomeAddress: () => {
-      set({ homeAddress: undefined });
+      set({ homeAddress: undefined, assignedSchools: null });
       localStorage.removeItem('homeAddress');
+      localStorage.removeItem('assignedSchools');
     },
 
     setLookupAddress: (address) => {
       set({ lookupAddress: address });
       // Save to localStorage
       localStorage.setItem('lookupAddress', JSON.stringify(address));
+
+      // Fetch assigned schools for lookup address only if no home address is set
+      if (!get().homeAddress && address.coordinates && Array.isArray(address.coordinates) && address.coordinates.length === 2) {
+        get().fetchAssignedSchools(address.coordinates[1], address.coordinates[0]);
+      }
     },
 
     clearLookupAddress: () => {
       set({ lookupAddress: undefined });
       localStorage.removeItem('lookupAddress');
+      // Only clear assigned schools and its cache if no home address is set
+      if (!get().homeAddress) {
+        set({ assignedSchools: null });
+        localStorage.removeItem('assignedSchools');
+      }
     },
 
     setLoading: (loading) => set((state) => {
@@ -347,16 +374,11 @@ export const useStore = create<Store>((set, get) => {
           return route.isSelected === isSelected ? route : { ...route, isSelected };
         });
 
-        // Clear selected stop if its route is no longer selected
-        let updatedSelectedStop = state.selectedStop;
-        if (state.selectedStop && !routeIds.includes(state.selectedStop.route.id)) {
-          console.log('[useStore] Clearing selected stop because its route was deselected');
-          updatedSelectedStop = null;
-        }
-
+        // Requirement: any route selection change clears the selected stop and fits all routes
         return {
           routes: updatedRoutes,
-          selectedStop: updatedSelectedStop,
+          selectedStop: null,
+          mapIntent: { type: 'FIT_ROUTES' }
         };
       }),
 
@@ -451,7 +473,25 @@ export const useStore = create<Store>((set, get) => {
     triggerZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: true }),
     clearZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: false }),
 
-    setActiveTab: (tab) => set({ activeTab: tab }),
+    setActiveTab: (tab) => set((state) => {
+      if (state.activeTab === tab) return state;
+      if (tab === 'schools') {
+        return {
+          activeTab: tab,
+          selectedStop: null,
+          mapIntent: state.selectedSchoolId
+            ? { type: 'ZOOM_SCHOOL', data: { schoolId: state.selectedSchoolId, showInfo: true } }
+            : null,
+        };
+      }
+      if (tab === 'routes') {
+        return {
+          activeTab: tab,
+          mapIntent: { type: 'FIT_ROUTES' }
+        };
+      }
+      return { activeTab: tab };
+    }),
 
     setMapIntent: (intent) => set({ mapIntent: intent }),
 
@@ -468,13 +508,16 @@ export const useStore = create<Store>((set, get) => {
 
     fetchAssignedSchools: async (lat, lng) => {
       try {
-        const response = await fetch(`/api/schools/assigned?lat=${lat}&lng=${lng}`);
-        if (!response.ok) throw new Error('Failed to fetch assigned schools');
-        const data = await response.json();
-        set({ assignedSchools: data.assigned });
+        const assigned = await assignedSchoolsService.fetchAssignedSchools(lat, lng);
+        if (assigned) {
+          set({ assignedSchools: assigned });
+          // Cache the result for persistence across refreshes
+          localStorage.setItem('assignedSchools', JSON.stringify(assigned));
+        }
       } catch (error) {
-        console.error('Error fetching assigned schools:', error);
-        set({ assignedSchools: null });
+        console.error('[useStore] Error fetching assigned schools:', error);
+        // Don't clear assignedSchools on fetch error if we already have cached ones
+        // set({ assignedSchools: null });
       }
     },
 
@@ -496,6 +539,27 @@ export const useStore = create<Store>((set, get) => {
         fetchBoundaries();
       }
       set({ showBoundaries: !showBoundaries });
+    },
+
+    toggleBoundaryType: (type) => {
+      const key = `show${type.charAt(0).toUpperCase() + type.slice(1)}Boundaries` as keyof Store;
+      const { boundaries, fetchBoundaries } = get();
+      if (!boundaries) {
+        fetchBoundaries();
+      }
+      set({ [key]: !get()[key] } as any);
+    },
+
+    toggleAllBoundaries: (show) => {
+      const { boundaries, fetchBoundaries } = get();
+      if (show && !boundaries) {
+        fetchBoundaries();
+      }
+      set({
+        showElementaryBoundaries: show,
+        showMiddleBoundaries: show,
+        showHighBoundaries: show
+      });
     },
   };
 });

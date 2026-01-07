@@ -31,8 +31,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     selectedSchoolId,
     routes,
     selectStop,
-    setDirectionFilter,
-    fetchAssignedSchools
+    setDirectionFilter
   } = useStore();
   const { isDarkMode } = useDarkMode();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -174,7 +173,6 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
           };
           setLookupAddress(addressData);
           onAddressSelect(suggestion.address, geocodeResult.coordinates);
-          fetchAssignedSchools(geocodeResult.coordinates[1], geocodeResult.coordinates[0]);
         } else {
           console.error('[AddressLookup] Failed to geocode selected address');
           const addressData = {
@@ -202,7 +200,6 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
       };
       setLookupAddress(addressData);
       onAddressSelect(suggestion.address, suggestion.coordinates);
-      fetchAssignedSchools(suggestion.coordinates[1], suggestion.coordinates[0]);
     }
 
     setQuery('');
@@ -217,7 +214,6 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   useEffect(() => {
     if (lookupAddress && onAddressSelect) {
       onAddressSelect(lookupAddress.address, lookupAddress.coordinates);
-      fetchAssignedSchools(lookupAddress.coordinates[1], lookupAddress.coordinates[0]);
     }
   }, []); // Only on mount - when component first loads with saved address
 

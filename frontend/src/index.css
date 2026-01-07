@@ -253,16 +253,39 @@ body {
   display: none !important;
 }
 
+.leaflet-bottom.leaflet-left .leaflet-control-zoom {
+  padding: 0 0 0 14px!important;
+  overflow: visible !important;
+  background-color: none !important;
+  background: none !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.leaflet-control-zoom-in::after{
+  display: none !important;
+}
+
 /* Dark mode styles for Leaflet zoom controls */
 .theme-dark .leaflet-control-zoom a,
 .theme-blue .leaflet-control-zoom a,
 .theme-green .leaflet-control-zoom a,
 .theme-purple .leaflet-control-zoom a,
 .theme-orange .leaflet-control-zoom a,
-.dark-mode .leaflet-control-zoom a {
-  background-color: var(--bg-secondary) !important;
+.dark-mode .leaflet-control-zoom a,
+.leaflet-control-zoom a {
   color: var(--text-primary) !important;
-  border: 1px solid var(--border-color) !important;
+  border: 0 !important;
+  padding: 0 0 3px !important;
+  width: 36px !important;
+  height: 36px !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border-radius: 50px !important;
+  margin-bottom: 10px !important;
+  background-color: var(--bg-primary) !important;
+
 }
 
 .theme-dark .leaflet-control-zoom a:hover,
@@ -270,7 +293,8 @@ body {
 .theme-green .leaflet-control-zoom a:hover,
 .theme-purple .leaflet-control-zoom a:hover,
 .theme-orange .leaflet-control-zoom a:hover,
-.dark-mode .leaflet-control-zoom a:hover {
+.dark-mode .leaflet-control-zoom a:hover,
+.leaflet-control-zoom a:hover  {
   background-color: var(--bg-tertiary) !important;
   color: var(--text-primary) !important;
 }

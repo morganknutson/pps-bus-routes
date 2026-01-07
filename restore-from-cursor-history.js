@@ -6,13 +6,23 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Target time: 3:04am Pacific on Dec 30, 2025
-// Convert to Unix timestamp in milliseconds
-const targetTime = new Date('2025-12-30T11:04:00Z').getTime(); // 3:04am PST = 11:04am UTC
-console.log(`Target time: ${new Date(targetTime).toISOString()} (3:04am Pacific)`);
+// Target time: 10pm Pacific on January 6th, 2026
+// Create date string for 10pm Pacific on Jan 6, 2026: "2026-01-06T22:00:00-08:00" (PST)
+const pacificTimeString = '2026-01-06T22:00:00-08:00';
+const targetTime = new Date(pacificTimeString).getTime();
+console.log(`Target time: ${new Date(targetTime).toISOString()} (10pm Pacific on January 6th, 2026)`);
 
 const historyDir = path.join(process.env.HOME, 'Library/Application Support/Cursor/User/History');
 const workspaceRoot = path.join(__dirname);
+
+// Files to restore (relative to workspace root)
+const filesToRestore = [
+  'frontend/src/services/urlState.ts',
+  'frontend/src/hooks/useUrlState.ts',
+  'frontend/src/components/MapView.tsx',
+  'frontend/src/pages/TechPage.tsx',
+  'frontend/src/utils/markerIcons.ts'
+].map(f => path.join(workspaceRoot, f));
 
 // Function to find all entries.json files and restore files
 function restoreFiles() {
@@ -56,6 +66,11 @@ function restoreFiles() {
       
       // Check if file is in our workspace
       if (!filePath.startsWith(workspaceRoot)) {
+        continue;
+      }
+
+      // Check if this is one of the files we want to restore
+      if (!filesToRestore.includes(filePath)) {
         continue;
       }
 

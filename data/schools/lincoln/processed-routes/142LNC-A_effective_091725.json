@@ -29,8 +29,8 @@
       "originalLine": "6:48 am12305 NW McNamee Rd [NE]142LNC-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.8349038,
-        45.6122614
+        -122.834170460701,
+        45.613054287685934
       ],
       "displayName": "12305 NW McNamee Rd, Portland, OR 97231, USA",
       "placeId": "ChIJLXdYtA8HlVQRxAdTbTCTTvM"
@@ -43,8 +43,8 @@
       "originalLine": "6:56 am15710 NW McNamee Rd [E]142LNC-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.8521651,
-        45.63648389999999
+        -122.85340189933778,
+        45.63660699062749
       ],
       "displayName": "15710 NW McNamee Rd, Portland, OR 97231, USA",
       "placeId": "ChIJvWcliDUHlVQRVXzw05rPeO8"
@@ -57,8 +57,8 @@
       "originalLine": "6:57 am16223/16238 NW MCNAMEE RD [NE]142LNC-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.8542731,
-        45.6398777
+        -122.8537429404017,
+        45.64016011164348
       ],
       "displayName": "16223 NW McNamee Rd, Portland, OR 97231, USA",
       "placeId": "ChIJKzjjN7UAlVQRG4AGSBWJ1h4"
@@ -86,7 +86,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.86689530813112,
-        45.66138771331462
+        45.661387713314625
       ],
       "displayName": "18445 NW Logie Trail Rd, Portland, OR 97231, USA",
       "placeId": "ChIJ9RhJU5cAlVQRpBn154bBpG4"
@@ -100,7 +100,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.87175296393347,
-        45.65995833861255
+        45.65995833861254
       ],
       "displayName": "18830 NW Logie Trail Rd, Portland, OR 97231, USA",
       "placeId": "ChIJl1HUsZYAlVQRmtnfS6mQrOc"
@@ -128,7 +128,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.87630060785618,
-        45.658768026609856
+        45.65876802660985
       ],
       "displayName": "19335 NW Logie Trail Rd, Portland, OR 97231, USA",
       "placeId": "ChIJXfRFgpMAlVQRa0Mag9vRdGs"
@@ -155,8 +155,8 @@
       "originalLine": "7:28 am16230 NW SHELTERED NOOK RD [SE]142LNC-A(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.86457886072998,
-        45.64009120652266
+        -122.86463499069215,
+        45.640188925563336
       ],
       "displayName": "16230 NW Sheltered Nook Rd, Portland, OR 97231, USA",
       "placeId": "ChIJW0Nm7MsAlVQRPEb-E1OOLHI"
@@ -183,8 +183,8 @@
       "originalLine": "7:33 am14049 NW Cornelius Pass Rd [SW]142LNC-A(13)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.865521,
-        45.6247602
+        -122.8658875,
+        45.62434340000001
       ],
       "displayName": "14049 NW Cornelius Pass Rd, Portland, OR 97231, USA",
       "placeId": "ChIJEbxcAyYHlVQR7BrUCdPdAb4"
@@ -198,7 +198,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.86591865871067,
-        45.63283119097402
+        45.632831190974
       ],
       "displayName": "15124 NW Cornelius Pass Rd, Portland, OR 97231, USA",
       "placeId": "ChIJLZjbgC0HlVQRfecPLkTk-fE"
@@ -279,7 +279,7 @@
   "neighborhoods": [
     "Northwest Portland"
   ],
-  "processedAt": "2025-12-17T09:03:53.405Z",
+  "processedAt": "2026-01-07T07:34:12.331Z",
   "stats": {
     "totalStops": 19,
     "geocodedStops": 19,
@@ -1650,11 +1650,5 @@
       45.51925,
       -122.69194
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 18,
-    "errors": 0,
-    "total": 19
-  }
+  ]
 }

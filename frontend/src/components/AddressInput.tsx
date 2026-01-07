@@ -35,8 +35,7 @@ export function AddressInput() {
     selectedSchoolId,
     routes,
     selectStop,
-    setDirectionFilter,
-    fetchAssignedSchools
+    setDirectionFilter
   } = useStore();
   const isMobile = useIsMobile();
   const { isDarkMode } = useDarkMode();
@@ -186,7 +185,6 @@ export function AddressInput() {
             address: suggestion.address,
             coordinates: geocodeResult.coordinates,
           });
-          fetchAssignedSchools(geocodeResult.coordinates[1], geocodeResult.coordinates[0]);
         } else {
           console.error('[AddressInput] Failed to geocode selected address');
           setHomeAddress({
@@ -208,7 +206,6 @@ export function AddressInput() {
         address: suggestion.address,
         coordinates: suggestion.coordinates,
       });
-      fetchAssignedSchools(suggestion.coordinates[1], suggestion.coordinates[0]);
     }
 
     // Explicitly trigger zoom when an address is selected

@@ -46,7 +46,7 @@ const STREET_TYPES = new Set(Object.keys(STREET_TYPE_MAP));
 const DIRECTIONS = new Set(['N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW', 'NORTH', 'SOUTH', 'EAST', 'WEST']);
 
 // Special words that should stay uppercase
-const SPECIAL_WORDS = new Set(['LOAD', 'ZONE', 'CAB']);
+const SPECIAL_WORDS = new Set(['LOAD', 'ZONE', 'CAB', 'LOADING']);
 
 /**
  * Format a single word to Title Case, respecting special cases

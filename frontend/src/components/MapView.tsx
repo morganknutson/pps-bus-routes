@@ -83,8 +83,11 @@ export function MapView({
     mapIntent,
     setMapIntent,
     boundaries,
-    showBoundaries,
-    toggleBoundaries,
+    showElementaryBoundaries,
+    showMiddleBoundaries,
+    showHighBoundaries,
+    toggleBoundaryType,
+    toggleAllBoundaries,
     assignedSchools
   } = useStore();
 
@@ -141,59 +144,78 @@ export function MapView({
   // Track if we have successfully fitted the map to the initial set of schools
   const hasInitiallyFittedRef = useRef<boolean>(false);
 
-  // Filter boundaries based on assigned schools if home address is set
+  // Return all boundaries for stable GeoJSON mounting (fading handled by style)
   const displayedBoundaries = useMemo(() => {
-    if (!boundaries) return null;
-    
-    // If no home address or no assigned schools, show all boundaries
-    if (!homeAddress || !assignedSchools) {
-      return boundaries;
-    }
-
-    // Get assigned school names for filtering
-    const assignedNames = new Set<string>();
-    Object.values(assignedSchools).forEach(school => {
-      if (school && school.name) {
-        assignedNames.add(school.name.toLowerCase());
-      }
-    });
-
-    if (assignedNames.size === 0) return boundaries;
-
-    // Filter features that match assigned schools
-    return boundaries.filter((feature: any) => 
-      feature.properties && 
-      feature.properties.name && 
-      assignedNames.has(feature.properties.name.toLowerCase())
-    );
-  }, [boundaries, homeAddress, assignedSchools]);
+    return boundaries || null;
+  }, [boundaries]);
 
   // Style function for boundaries based on school type
   const getBoundaryStyle = (feature: any) => {
     const rawType = feature?.properties?.zonetype;
-    const type = rawType ? rawType.trim() : '';
+    const type = rawType ? rawType.trim().toLowerCase() : '';
     let color = '#3388ff'; // Default blue
 
     // Determine color based on school type
-    if (type === 'HS' || type === 'High School' || type.includes('High')) {
-      color = '#FF9800'; // Orange for High School
-    } else if (type === 'MS' || type === 'Middle School' || type.includes('Middle')) {
-      color = '#4CAF50'; // Green for Middle School
-    } else if (type === 'K5' || type === 'Elementary School' || type.includes('Elementary')) {
-      color = '#2196F3'; // Blue for Elementary
-    } else if (type === 'K8' || type.includes('K8')) {
-      color = '#9C27B0'; // Purple for K-8/Hybrid
+    if (type === 'hs' || type.includes('high')) {
+      color = '#FF9100'; // Orange for High School
+    } else if (type === 'ms' || type.includes('middle')) {
+      color = '#00B242'; // Green for Middle School
+    } else if (type === 'k5' || type.includes('elementary') || type.includes('k8')) {
+      color = '#0099FA'; // Blue for Elementary / K-8
     }
+
+    // Determine visibility based on toggles
+    const isHigh = type === 'hs' || type === 'high school' || type.includes('high');
+    const isMiddle = type === 'ms' || type === 'middle school' || type.includes('middle');
+    const isElem = type === 'k5' || type === 'elementary school' || type.includes('elementary') || type === 'k8' || type.includes('k8');
+
+    let isVisible = (isHigh && showHighBoundaries) ||
+      (isMiddle && showMiddleBoundaries) ||
+      (isElem && showElementaryBoundaries);
+
+    // Apply assigned schools filter if home address is set
+    if (isVisible && homeAddress && assignedSchools) {
+      const assignedNames = new Set<string>();
+      Object.values(assignedSchools).forEach(school => {
+        if (school && school.name) assignedNames.add(school.name.toLowerCase());
+      });
+      if (assignedNames.size > 0 && feature.properties?.name) {
+        if (!assignedNames.has(feature.properties.name.toLowerCase())) {
+          isVisible = false;
+        }
+      }
+    }
+
+    const opacity = isVisible ? 0.6 : 0;
+    const fillOpacity = isVisible ? 0.1 : 0;
 
     return {
       color: color,
       weight: 2,
-      opacity: 0.6,
+      opacity: opacity,
       fillColor: color,
-      fillOpacity: 0.1,
-      dashArray: '5, 5'
+      fillOpacity: fillOpacity,
+      isBoundary: true as any // Custom flag to identify boundaries in layer iteration
     };
   };
+
+  // Auto-fit when the set of schools rendered on the map changes in schools view.
+  useEffect(() => {
+    if (!map || !isMapReady) return;
+    if (viewMode !== 'schools') return;
+    if (schoolsWithCoords.length === 0) return;
+
+    const coords: [number, number][] = schoolsWithCoords.map((s: School) => [s.coordinates![1], s.coordinates![0]] as [number, number]);
+    const bounds = L.latLngBounds(coords);
+    const duration = 0.4;
+    executeFlyTo(() => {
+      map.flyToBounds(bounds, {
+        paddingTopLeft: [50, 50],
+        paddingBottomRight: isMobile ? [50, MOBILE_PADDING_BOTTOM] : [50, 50],
+        duration
+      });
+    }, duration);
+  }, [map, isMapReady, viewMode, schoolsKey, schoolsWithCoords, isMobile]);
 
   // Mark map as ready and attach listeners
   useEffect(() => {
@@ -254,7 +276,7 @@ export function MapView({
     // Small delay to ensure DOM is ready for transitions
     const timeoutId = setTimeout(() => {
       map.eachLayer((layer) => {
-        if (layer instanceof L.Polyline && layer.options.color) {
+        if (layer instanceof L.Polyline && layer.options.color && !(layer.options as any).isBoundary) {
           // This is a route polyline - apply opacity with transition
           const pathElement = layer.getElement() as HTMLElement | SVGElement | null;
           if (pathElement) {
@@ -343,8 +365,8 @@ export function MapView({
       case 'DOUBLE_FIT': {
         const activeHome = homeAddress || lookupAddress;
         if (selectedStop && activeHome &&
-          validateLngLat(selectedStop.stop.coordinates) &&
-          validateLngLat(activeHome.coordinates)) {
+            validateLngLat(selectedStop.stop.coordinates) &&
+            validateLngLat(activeHome.coordinates)) {
           const stopPos = toLeafletPosition(selectedStop.stop.coordinates);
           const homePos = toLeafletPosition(activeHome.coordinates);
           const bounds = L.latLngBounds([stopPos, homePos]);
@@ -377,6 +399,9 @@ export function MapView({
           // No need for a secondary moveend listener anymore
 
           lastAddressZoomTimeRef.current = Date.now();
+        } else {
+          // Wait for required data
+          return;
         }
         break;
       }
@@ -385,6 +410,8 @@ export function MapView({
         if (selectedStop && validateLngLat(selectedStop.stop.coordinates)) {
           const position = toLeafletPosition(selectedStop.stop.coordinates);
           zoomToPoint(position, 18);
+        } else {
+          return;
         }
         break;
       }
@@ -395,6 +422,8 @@ export function MapView({
         if (targetSchool && targetSchool.coordinates) {
           const position = toLeafletPosition(targetSchool.coordinates);
           zoomToPoint(position, 18);
+        } else {
+          return;
         }
         break;
       }
@@ -420,6 +449,8 @@ export function MapView({
               duration
             });
           }, duration);
+        } else {
+          return;
         }
         break;
       }
@@ -440,20 +471,19 @@ export function MapView({
           allCoords.push(homePos);
           if (mapIntent.data?.showInfo) {
             zoomToPoint(homePos, 18);
-            return; // zoomToPoint already uses flyTo
+          } else if (allCoords.length > 0) {
+            const bounds = L.latLngBounds(allCoords);
+            const duration = 0.4;
+            executeFlyTo(() => {
+              map.flyToBounds(bounds, {
+                paddingTopLeft: [50, 50],
+                paddingBottomRight: isMobile ? [50, MOBILE_PADDING_BOTTOM] : [50, 50],
+                duration
+              });
+            }, duration);
           }
-        }
-
-        if (allCoords.length > 0) {
-          const bounds = L.latLngBounds(allCoords);
-          const duration = 0.4;
-          executeFlyTo(() => {
-            map.flyToBounds(bounds, {
-              paddingTopLeft: [50, 50],
-              paddingBottomRight: isMobile ? [50, MOBILE_PADDING_BOTTOM] : [50, 50],
-              duration
-            });
-          }, duration);
+        } else {
+          return;
         }
         break;
       }
@@ -474,6 +504,8 @@ export function MapView({
               duration
             });
           }, duration);
+        } else {
+          return;
         }
         break;
       }
@@ -517,7 +549,16 @@ export function MapView({
 
     // Reset initial load ref after first intent execution
     isInitialLoadRef.current = false;
-  }, [map, isMapReady, mapIntent, schoolsWithCoords, selectedStop, homeAddress, routes, directionFilter, highlightedStreet, enableStreetHighlighting, selectedSchoolId]);
+
+    // Requirement: Clear map intent after it has been handled to prevent redundant executions
+    // and ensure URL focus segments are correctly managed.
+    // Use a small timeout to ensure the state update doesn't interfere with the current effect execution
+    const timeoutId = setTimeout(() => {
+      setMapIntent(null);
+    }, 100);
+
+    return () => clearTimeout(timeoutId);
+  }, [map, isMapReady, mapIntent, schoolsWithCoords, selectedStop, homeAddress, routes, directionFilter, highlightedStreet, enableStreetHighlighting, selectedSchoolId, setMapIntent]);
 
 
   // Get selected routes, filtered by direction
@@ -930,20 +971,11 @@ export function MapView({
         <ZoomControl position="bottomleft" />
 
         {/* Attendance Boundaries Layer */}
-        {showBoundaries && displayedBoundaries && (
-          <GeoJSON 
-            key={`boundaries-${homeAddress ? 'filtered' : 'all'}-${displayedBoundaries.length}`} // Force re-render when filtering changes
-            data={displayedBoundaries as any} 
+        {displayedBoundaries && displayedBoundaries.length > 0 && (
+          <GeoJSON
+            key={`boundaries-stable-${boundaries ? 'loaded' : 'none'}`} // Stable key for transitions
+            data={displayedBoundaries as any}
             style={getBoundaryStyle}
-            onEachFeature={(feature, layer) => {
-              if (feature.properties && feature.properties.name) {
-                layer.bindPopup(`
-                  <div style="font-weight: bold;">${feature.properties.name}</div>
-                  <div>${feature.properties.zonetype || ''}</div>
-                  <div>${feature.properties.districtname || ''}</div>
-                `);
-              }
-            }}
           />
         )}
 
@@ -1445,31 +1477,118 @@ export function MapView({
         })() : null}
       </MapInfoPanel>
 
-      {/* Boundary Toggle Button */}
-      <button
-        onClick={toggleBoundaries}
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          zIndex: 1000,
-          backgroundColor: showBoundaries ? 'var(--bg-secondary)' : 'var(--bg-primary)',
-          color: 'var(--text-primary)',
-          border: '1px solid var(--border-color)',
-          borderRadius: '8px',
-          padding: '8px 12px',
-          cursor: 'pointer',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-          display: 'flex',
+      {/* Boundary Toggle Redesign in Bottom Left */}
+      <div className="leaflet-bottom leaflet-left" style={{ bottom: '110px', left: '10px', pointerEvents: 'auto', zIndex: 1000 }}>
+        <div style={{
+          display: 'none',
+          flexDirection: 'column',
           alignItems: 'center',
-          gap: '6px',
-          fontWeight: 600,
-          fontSize: '12px',
-        }}
-      >
-        <i className={`fas fa-map${showBoundaries ? '' : '-o'}`}></i>
-        {showBoundaries ? 'Hide Boundaries' : (homeAddress ? 'Show My Boundaries' : 'Show Boundaries')}
-      </button>
+          gap: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '16px' : '0',
+          padding: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '16px 0 0' : '0',
+          width: '38px',
+          height: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '160px' : '38px',
+          justifyContent: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? 'flex-start' : 'center',
+          backgroundColor: 'rgba(28, 28, 30, 0.6)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          borderRadius: '999px',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          boxSizing: 'border-box',
+        }}>
+          {/* Individual Dots Container (Animated) */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px',
+            overflow: 'hidden',
+            maxHeight: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '120px' : '0px',
+            opacity: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? 1 : 0,
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            marginBottom: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '8px' : '0px',
+          }}>
+            <button
+              onClick={() => toggleBoundaryType('high')}
+              title="Toggle High School Boundaries"
+              style={{
+                width: '9.27px',
+                height: '9.27px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 145, 0, 0.7)',
+                border: '1.54545px solid rgba(255, 145, 0, 0.7)',
+                boxSizing: 'border-box',
+                padding: 0,
+                cursor: 'pointer',
+                opacity: showHighBoundaries ? 1 : 0.3,
+                transition: 'opacity 0.2s ease',
+              }}
+            />
+            <button
+              onClick={() => toggleBoundaryType('middle')}
+              title="Toggle Middle School Boundaries"
+              style={{
+                width: '9.27px',
+                height: '9.27px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(0, 178, 66, 0.7)',
+                border: '1.54545px solid rgba(0, 178, 66, 0.7)',
+                boxSizing: 'border-box',
+                padding: 0,
+                cursor: 'pointer',
+                opacity: showMiddleBoundaries ? 1 : 0.3,
+                transition: 'opacity 0.2s ease',
+              }}
+            />
+            <button
+              onClick={() => toggleBoundaryType('elementary')}
+              title="Toggle Elementary Boundaries"
+              style={{
+                width: '9.27px',
+                height: '9.27px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(0, 153, 250, 0.7)',
+                border: '1.54545px solid rgba(0, 153, 250, 0.7)',
+                boxSizing: 'border-box',
+                padding: 0,
+                cursor: 'pointer',
+                opacity: showElementaryBoundaries ? 1 : 0.3,
+                transition: 'opacity 0.2s ease',
+              }}
+            />
+          </div>
+
+          {/* Master Toggle (Cluster Icon) */}
+          <button
+            onClick={() => toggleAllBoundaries(!(showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries))}
+            title={showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries ? "Turn Off All Boundaries" : "Turn On All Boundaries"}
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '0px 0px 12px' : '0',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '50%',
+              transition: 'all 0.2s ease',
+              width: '100%',
+              height: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '40px' : '38px',
+              marginTop: 'auto'
+            }}
+          >
+            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="7.50001" cy="4.63636" r="4.63636" fill="#FF9100" fillOpacity={showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries ? "0.7" : "0.3"} />
+              <circle cx="7.50001" cy="4.63636" r="3.86364" stroke="#FF9100" strokeOpacity={showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries ? "0.7" : "0.3"} strokeWidth="1.54545" />
+              <circle cx="4.63636" cy="9.09091" r="4.63636" fill="#00B242" fillOpacity={showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries ? "0.7" : "0.3"} />
+              <circle cx="4.63636" cy="9.09091" r="3.86364" stroke="#00B242" strokeOpacity={showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries ? "0.7" : "0.3"} strokeWidth="1.54545" />
+              <circle cx="10.3637" cy="9.09091" r="4.63636" fill="#0099FA" fillOpacity={showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries ? "0.7" : "0.3"} />
+              <circle cx="10.3637" cy="9.09091" r="3.86364" stroke="#0099FA" strokeOpacity={showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries ? "0.7" : "0.3"} strokeWidth="1.54545" />
+            </svg>
+          </button>
+        </div>
+      </div>
 
       {/* Loading spinner animation */}
       <style>{`
@@ -1479,6 +1598,63 @@ export function MapView({
         /* Smooth opacity transitions for route polylines during flyTo animations */
         .leaflet-container svg path.leaflet-interactive {
           transition: opacity 0.2s ease-in-out, fill-opacity 0.2s ease-in-out;
+        }
+
+        /* Style Zoom Control to match boundary control */
+        .leaflet-control-zoom {
+          border: none !important;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+          background-color: rgba(28, 28, 30, 0.6) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          border-radius: 999px !important;
+          overflow: hidden !important;
+          display: flex !important;
+          flex-direction: column !important;
+          width: 38px !important;
+        }
+
+        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+          background-color: transparent !important;
+          color: rgba(255, 255, 255, 0.8) !important;
+          border: none !important;
+          width: 38px !important;
+          height: 38px !important;
+          line-height: 38px !important;
+          font-size: 16px !important;
+          transition: all 0.2s ease !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          text-decoration: none !important;
+        }
+
+        /* Border between the zoom buttons - using a pseudo element for precision */
+        .leaflet-control-zoom-in {
+          position: relative;
+        }
+        .leaflet-control-zoom-in::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 6px;
+          right: 6px;
+          height: 1px;
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .leaflet-control-zoom-out {
+          border-bottom: none !important;
+        }
+
+        .leaflet-control-zoom-out {
+          border-bottom: none !important;
+        }
+
+        .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          color: #FFFFFF !important;
         }
       `}</style>
     </div>

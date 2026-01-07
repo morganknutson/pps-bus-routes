@@ -76,6 +76,9 @@ export interface AppState {
   schools: School[];
   assignedSchools: AssignedSchools | null;
   isDarkMode: boolean;
+  showElementaryBoundaries: boolean;
+  showMiddleBoundaries: boolean;
+  showHighBoundaries: boolean;
 }
 
 export interface Neighborhood {

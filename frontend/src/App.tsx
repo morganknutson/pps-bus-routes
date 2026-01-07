@@ -144,9 +144,12 @@ export function ExplorerApp() {
       try {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
         console.log('[ExplorerApp] Loaded routes:', loadedRoutes.length);
-        // We set the routes without selection initially. 
-        // useUrlState hook will handle syncing selection from URL once routes are loaded.
-        setRoutes(loadedRoutes);
+
+        // Apply URL state to routes before setting them in the store.
+        // This ensures the initial selection state matches the URL immediately,
+        // avoiding UI flicker and ensuring robust state synchronization.
+        const routesWithSelection = applyUrlStateToRoutes(loadedRoutes, urlState, directionFilter);
+        setRoutes(routesWithSelection);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[ExplorerApp] Failed to load routes:', error);
@@ -379,9 +382,12 @@ function AdminApp() {
       setLoadingProgress(0);
       try {
         const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
-        // We set the routes without selection initially. 
-        // useUrlState hook will handle syncing selection from URL once routes are loaded.
-        setRoutes(loadedRoutes);
+
+        // Apply URL state to routes before setting them in the store.
+        // This ensures the initial selection state matches the URL immediately,
+        // avoiding UI flicker and ensuring robust state synchronization.
+        const routesWithSelection = applyUrlStateToRoutes(loadedRoutes, urlState, directionFilter);
+        setRoutes(routesWithSelection);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[AdminApp] Failed to load routes:', error);

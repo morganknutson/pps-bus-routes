@@ -108,6 +108,7 @@ pps-bus-maps/
 │   │   ├── routesService.js    # Google Maps Routes API (Matrix)
 │   │   ├── routeProcessor.js   # Full processing pipeline
 │   │   ├── neighborhoodService.js # Neighborhood lookup
+│   │   ├── schoolBoundaryService.js # Assigned schools lookup
 │   │   ├── schedulerService.js # Cron job management
 │   │   └── jobQueue/           # Background job system
 │   │       ├── JobQueue.js
@@ -555,6 +556,7 @@ interface Stop {
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/api/schools` | GET | List all schools |
+| `/api/schools/assigned` | GET | Get assigned schools by location |
 | `/api/schools/:id` | GET | Get single school |
 | `/api/schools/:id` | PUT | Update school |
 | `/api/schools/:id/routes` | GET | Get school's routes |

@@ -37,7 +37,6 @@ export function HomePage() {
   const setSchools = useStore(state => state.setSchools);
   const selectStop = useStore(state => state.selectStop);
   const setDirectionFilter = useStore(state => state.setDirectionFilter);
-  const fetchAssignedSchools = useStore(state => state.fetchAssignedSchools);
   const assignedSchools = useStore(state => state.assignedSchools);
   const homeAddress = useStore(state => state.homeAddress);
   const selectedSchoolId = useStore(state => state.selectedSchoolId);
@@ -205,12 +204,7 @@ export function HomePage() {
   }, [addressQuery]);
 
   // Fetch assigned schools when address is selected
-  useEffect(() => {
-    if (selectedAddress && selectedAddress.coordinates) {
-      // coordinates are [lng, lat], backend expects (lat, lng)
-      fetchAssignedSchools(selectedAddress.coordinates[1], selectedAddress.coordinates[0]);
-    }
-  }, [selectedAddress, fetchAssignedSchools]);
+  // (This is now handled by setHomeAddress in useStore)
 
   // School autocomplete - filter and sort schools based on query and address
   useEffect(() => {
@@ -336,9 +330,8 @@ export function HomePage() {
           coordinates: geocodeResult.coordinates,
         };
         setSelectedAddress(address);
-        // Persist to localStorage only. We sync to store during "Find My Stop" navigation
-        // to avoid race conditions with global state sync.
-        localStorage.setItem('homeAddress', JSON.stringify(address));
+        // Call setHomeAddress immediately to trigger assigned schools lookup
+        setHomeAddress(address);
       } else if (suggestion.coordinates) {
         // Fallback to suggestion coordinates if geocode fails
         const address: HomeAddress = {
@@ -346,7 +339,7 @@ export function HomePage() {
           coordinates: suggestion.coordinates,
         };
         setSelectedAddress(address);
-        localStorage.setItem('homeAddress', JSON.stringify(address));
+        setHomeAddress(address);
       } else {
         setError('Failed to geocode selected address');
       }
@@ -358,7 +351,7 @@ export function HomePage() {
           coordinates: suggestion.coordinates,
         };
         setSelectedAddress(address);
-        localStorage.setItem('homeAddress', JSON.stringify(address));
+        setHomeAddress(address);
       } else {
         setError('Failed to geocode address');
       }

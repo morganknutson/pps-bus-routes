@@ -1,381 +1,41 @@
-# PPS Bus Maps - Cursor Rules
+# PPS Bus Maps - Cursor Rules (Compressed)
 
-## Project Overview
-This is a bus route mapping application for Portland Public Schools (PPS) that:
-- Fetches bus route PDFs from Google Drive
-- Parses stop locations from PDFs
-- Geocodes addresses to coordinates
-- Visualizes routes on an interactive Leaflet map
-- Manages school and route data
+**Project**: PDF routes -> JSON -> Leaflet Map.
+**Stack**: Node/Express (ESM), React 18+ (TS), Zustand, Leaflet, FontAwesome.
 
-## Tech Stack
+### ⚠️ CRITICAL RULES
+- **NO PAID API CALLS ON LOAD**: Never in `useEffect` or on mount. **EXCEPT**: Debounced address autocomplete. Always check cache first.
+- **URL/UI SYNC**: Maintain bidirectional sync between `useStore` and `useUrlState`. `setSelectedSchool` MUST clear routes/stops/`/my-stop`. Route toggles MUST clear `selectedStop`.
+- **ICONS**: FontAwesome ONLY (`<i className="fas fa-icon">`). NEVER use `react-icons`.
+- **COORDS**: Internal/GeoJSON = `[lng, lat]`. Leaflet = `[lat, lng]`.
+- **DATA**: Use `/admin` page. `/data` is DEPRECATED.
+- **DOCS**: Update `TechPage.tsx` whenever logic/stack changes.
 
-### Frontend
-- **Framework**: React 18+ with TypeScript
-- **Build Tool**: Vite
-- **State Management**: Zustand
-- **Routing**: React Router v7
-- **Maps**: Leaflet + react-leaflet
-- **Icons**: Font Awesome only (via CDN, no react-icons or other icon libraries)
-- **Styling**: Inline styles (CSS-in-JS approach) with CSS variables for theming
+### DEVELOPMENT CONVENTIONS
+- **OOP Services**: Backend services MUST be classes with DI. No loose function modules for business logic.
+- **React**: Functional components, hooks, Zustand for global state. Inline styles with CSS vars.
+- **Types**: Always use `src/types/index.ts`. No `any`.
+- **API**: Routes in `backend/routes/` (thin), logic in `backend/services/`.
+- **Data**: PDFs in `data/schools/{id}/pdfs/`, JSON in `data/schools/{id}/processed-routes/`.
 
-### Backend
-- **Runtime**: Node.js 18+
-- **Framework**: Express
-- **Module System**: ES Modules (type: "module")
-- **Key Libraries**: pdf-parse, node-cron, cors, dotenv
+### COMMON PATTERNS
+- **Map**: Use `DarkModeTileLayer`, `useMap` hook, `FitSchoolBounds`.
+- **Geocoding**: Server-side only during processing. Client-side disabled.
+- **Errors**: Handle all async with try/catch. Return proper HTTP codes.
+- **Logging**: Prefix with component/class: `[Name] message`.
 
-## Core Principles
+### REFACTORING
+- **3+ related functions** -> Class.
+- **Shared state** -> Class.
+- **Duplicate logic** -> Reusable hook or utility class.
 
-### ⚠️ CRITICAL: NO PAID API CALLS ON PAGE LOAD ⚠️
-**HARD RULE - NEVER VIOLATE THIS:**
-- **NEVER make calls to paid or external APIs on page load, component mount, or in useEffect hooks that run automatically**
-- **ALWAYS use cached data first** - check for cached/stored data before making any API calls
-- **ONLY make API calls when explicitly requested by user action** (button clicks, form submissions, typing in search boxes, etc.)
-- **FAVOR DATA RETENTION** - When collecting lots of data from APIs:
-  - Save all API responses to local files/cache
-  - Use cached data for display
-  - Only refresh when user explicitly requests it
-  - Cache expiration should be reasonable (hours/days, not seconds)
-- **✅ EXCEPTION: Address Autocomplete is ALLOWED** - Google Places Autocomplete API calls are explicitly allowed for:
-  - Address search/autocomplete on HomePage (`/`)
-  - Address search/autocomplete on Explorer page (`/bus-route-explorer`)
-  - Address search/autocomplete on Admin page (`/admin`)
-  - These are user-initiated actions (typing in search box) and are properly debounced and cached
-- **Examples of what NOT to do:**
-  - ❌ `useEffect(() => { fetch('/api/external-service') }, [])` on page load
-  - ❌ Loading page that automatically calls Google Drive API
-  - ❌ Component that geocodes addresses on mount
-  - ❌ Automatically fetching data when component mounts without user interaction
-- **Examples of what TO do:**
-  - ✅ Load cached data on page load
-  - ✅ Show "Refresh" button for user to explicitly request fresh data
-  - ✅ Make API calls only in button click handlers
-  - ✅ **Address autocomplete when user types** (debounced, user-initiated)
-  - ✅ Save all API responses to cache/files for future use
-- **If you see code making API calls on page load, FIX IT IMMEDIATELY**
+### DEPLOYMENT
+- Source of truth: `./deploy.sh`.
+- Run `npm run start:production` for backend.
+- Logs: `logs/server.log` (runtime), `logs/build.log` (build).
 
-### Prioritize Reusable Code
-- **DRY (Don't Repeat Yourself)**: Extract common logic into reusable functions, classes, or utilities
-- **Single Responsibility**: Each class/function should have one clear purpose
-- **Composition over Duplication**: Build complex functionality by composing smaller, reusable pieces
-- **Abstract Common Patterns**: Identify repeated patterns and create abstractions (base classes, utility functions, hooks)
-- **Refactor Early**: When you see similar code in multiple places, extract it into a reusable module
-
-### Object-Oriented Programming
-- **Use Classes for Services**: Backend services should be implemented as classes with clear interfaces
-- **Encapsulation**: Group related data and methods together in classes
-- **Inheritance for Shared Behavior**: Create base classes for common functionality (e.g., `BaseService`, `BaseParser`)
-- **Polymorphism**: Use interfaces and abstract classes to define contracts
-- **Dependency Injection**: Pass dependencies through constructors for better testability and flexibility
-- **Service Layer Pattern**: Encapsulate business logic in service classes, not in route handlers
-
-### Code Reusability Guidelines
-- Before writing new code, check if similar functionality already exists
-- Create utility classes/functions for common operations (e.g., `AddressFormatter`, `CoordinateConverter`)
-- Use composition to build complex components from simpler, reusable ones
-- Create base classes for similar services (e.g., `BaseGeocodingService`, `BasePdfParser`)
-- Extract shared logic into custom hooks (React) or utility classes (backend)
-- Prefer configuration objects over hardcoded values to make code more flexible
-
-## Code Style & Conventions
-
-### TypeScript
-- Use strict mode (enabled in tsconfig.json)
-- Prefer explicit types over `any`
-- Use TypeScript interfaces/types from `src/types/index.ts`
-- Enable `noUnusedLocals` and `noUnusedParameters` - clean up unused code
-- **Use Classes for Business Logic**: Services, parsers, and utilities should be classes when they maintain state or have multiple related methods
-- **Use Interfaces for Contracts**: Define interfaces for service contracts and data structures
-
-### React
-- Use functional components with hooks (React best practice)
-- Prefer named exports for components
-- Use `useEffect` for side effects, `useState` for local state
-- Use Zustand store (`useStore`) for global state
-- Add console.log statements for debugging (prefix with component name, e.g., `[ComponentName]`)
-- Use `useRef` for DOM references and map instances
-- **Create Reusable Components**: Extract common UI patterns into reusable components
-- **Custom Hooks for Logic**: Extract complex logic into custom hooks for reusability
-- **Icons - Font Awesome Only**: 
-  - **ALWAYS** use Font Awesome for icons - never use react-icons or any other icon library
-  - Use inline icons: `<i className="fas fa-icon-name"></i>` (e.g., `fas fa-graduation-cap`, `fas fa-map-marker-alt`)
-  - For Leaflet markers, use utility functions from `utils/fontAwesomeIcons.ts`:
-    - `createFontAwesomeIcon()` - Creates Font Awesome icon HTML string
-    - `createDefaultMarkerIcon()` - Creates default Leaflet marker icon
-    - `createHomeIcon()` - Creates home marker icon
-    - `createSchoolIconHTML()` - Creates school icon HTML
-  - Font Awesome is loaded via CDN in `index.html` - no additional imports needed
-  - Icon classes use `fas` prefix (Font Awesome Solid style)
-  - **Never import or use react-icons** or any other icon library
-
-### Styling
-- Use inline styles (object syntax) for component styling
-- Use CSS variables for theming (dark mode support):
-  - `var(--bg-primary)`, `var(--bg-secondary)`
-  - `var(--text-primary)`, `var(--text-secondary)`, `var(--text-tertiary)`
-  - `var(--shadow-large)`, `var(--shadow-hover)`
-- For animations, use inline `<style>` tags when needed
-- Keep styles co-located with components
-
-### File Organization
-- Components in `frontend/src/components/`
-- Pages in `frontend/src/pages/`
-- Services/utilities in `frontend/src/services/` and `frontend/src/utils/`
-- Types in `frontend/src/types/index.ts`
-- Backend routes in `backend/routes/`
-- Backend services in `backend/services/`
-- Backend utilities in `backend/utils/`
-- Scripts in `scripts/` (root level)
-
-### Naming Conventions
-- Components: PascalCase (e.g., `MapView.tsx`, `RouteList.tsx`)
-- Files: Match component/function name
-- Functions: camelCase
-- Constants: UPPER_SNAKE_CASE or camelCase depending on context
-- Types/Interfaces: PascalCase
-
-### API & Data
-- API routes prefixed with `/api/`
-- Use async/await for async operations
-- Handle errors gracefully with try/catch
-- Return appropriate HTTP status codes
-- Data files stored in `data/` directory
-- Processed routes in `data/processed-routes/` and `data/schools/`
-
-## Key Patterns
-
-### Map Components
-- Use `MapContainer` from react-leaflet
-- Use `DarkModeTileLayer` component for map tiles
-- Use `useMap` hook for map instance access
-- Coordinates format: `[lng, lat]` arrays (longitude first)
-- Leaflet expects `[lat, lng]` - convert when needed
-
-### State Management
-- Global state via Zustand store (`useStore`)
-- Local component state via `useState`
-- Store structure defined in `frontend/src/store/useStore.ts`
-
-### Geocoding
-- Geocoding is done server-side when processing PDFs
-- Routes should already have coordinates in processed JSON files
-- Client-side geocoding is disabled (see commented code in App.tsx)
-
-### Route Loading
-- Routes loaded from local JSON files via `loadLocalRoutes()` service
-- Routes are school-specific
-- Loading state managed in Zustand store
-
-## Development Guidelines
-
-### When Adding Features
-1. **Check for Existing Solutions First**: Look for similar functionality that can be reused or extended
-2. **Create Reusable Abstractions**: If adding similar functionality, consider creating a base class or utility
-3. Follow the established file structure
-4. Use TypeScript types from `src/types/index.ts`
-5. Update types if adding new data structures
-6. Add console.log for debugging (with component prefix)
-7. Handle loading and error states
-8. **Refactor Similar Code**: If you notice duplication, extract common logic before adding new features
-
-### When Modifying Backend
-1. Use ES module syntax (`import`/`export`)
-2. Routes should be in `backend/routes/` - keep them thin, delegate to services
-3. **Business logic in `backend/services/` as classes**:
-   - Convert service modules to classes when they have state or multiple related methods
-   - Use dependency injection for testability
-   - Create base service classes for common patterns
-4. Use environment variables via `dotenv` for configuration
-5. Add error handling and appropriate HTTP responses
-6. **Service Pattern**: Services should be instantiable classes, not just exported functions
-   - Example: `class DriveService`, `class PdfParser`, `class GeocodingService`
-   - Use constructor injection for dependencies
-   - Export singleton instances when appropriate: `export const driveService = new DriveService()`
-
-### When Working with Maps
-1. Remember coordinate order: internal `[lng, lat]`, Leaflet `[lat, lng]`
-2. Use `DarkModeTileLayer` for consistent tile rendering
-3. Use `FitSchoolBounds` pattern for auto-zooming
-4. Create custom icons via utility functions in `utils/markerIcons.ts` or `utils/fontAwesomeIcons.ts`
-5. **Always use Font Awesome icons** - see Icons section in React guidelines
-
-### When Processing Data
-1. PDFs stored in `data/schools/{school-id}/pdfs/`
-2. Processed routes in `data/schools/{school-id}/processed-routes/`
-3. Use scripts in `scripts/` for batch operations
-4. Preserve original data - don't modify source PDFs
-5. **Create Parser Classes**: PDF parsers, data processors should be classes with clear interfaces
-6. **Reusable Data Processors**: Create base classes for common data processing patterns
-
-## Common Tasks
-
-### Adding a New Component
-1. **Check for Reusable Components First**: Look for existing components that can be extended or composed
-2. Create file in appropriate directory (`components/` or `pages/`)
-3. Use TypeScript with proper types
-4. Use inline styles with CSS variables
-5. Export as named export
-6. Import and use in parent component
-7. **Make it Reusable**: Design components to accept props for flexibility, avoid hardcoding values
-
-### Adding a New API Endpoint
-1. Create route handler in `backend/routes/` (keep it thin)
-2. Add route to `backend/server.js`
-3. Use Express router pattern
-4. **Delegate to Service Classes**: Business logic should be in service classes, not route handlers
-5. Return JSON responses
-6. Handle errors appropriately
-7. **Reuse Existing Services**: Check if existing service classes can handle the logic
-
-### Creating a New Service
-1. **Create as a Class**: Use class-based approach for services
-2. **Define Interface**: Create TypeScript interface for the service contract
-3. **Use Dependency Injection**: Accept dependencies via constructor
-4. **Inherit from Base Classes**: If common patterns exist, create/extend base service classes
-5. **Export Singleton Instance**: Export a default instance for convenience: `export const service = new ServiceClass()`
-6. Example structure:
-```typescript
-interface IGeocodingService {
-  geocode(address: string): Promise<Coordinates>;
-}
-
-class GeocodingService implements IGeocodingService {
-  constructor(private apiKey?: string) {}
-  
-  async geocode(address: string): Promise<Coordinates> {
-    // Implementation
-  }
-}
-
-export const geocodingService = new GeocodingService();
-```
-
-### Creating Reusable Utilities
-1. **Create Utility Classes**: For complex utilities, use classes instead of loose functions
-2. **Group Related Functions**: Put related utility functions in the same class/module
-3. **Use Static Methods**: For stateless utilities, use static methods
-4. **Create Base Classes**: For utilities with shared behavior, use inheritance
-5. Example:
-```typescript
-class AddressFormatter {
-  static format(address: string): string { }
-  static normalize(address: string): string { }
-  static validate(address: string): boolean { }
-}
-```
-
-### Debugging
-- Use console.log with component/function prefix: `[ComponentName] message`
-- Check browser console for frontend issues
-- Check server logs for backend issues
-- Verify data structure matches TypeScript types
-
-### Deployment
-- **Deployment Script**: `./deploy.sh` is the source of truth for the deployment process.
-- **Process**: Deployment involves stopping servers, pulling the latest code from GitHub (`main` branch), rebuilding the frontend, and restarting the production server.
-- **"Deploy" Command**: When the user says "deploy", it means executing `./deploy.sh`.
-- **Server Management**: Use `npm run start:production` for the backend. Logs are stored in `logs/server.log`.
-- **Frontend Build**: Use `npm run build` in the `frontend` directory. Logs are stored in `logs/build.log`.
-
-## Important Notes
-- The app works without Google Drive API key (uses public folder parsing)
-- Geocoding uses OpenStreetMap Nominatim (rate limited: 1 req/sec)
-- PDF parsing relies on consistent formatting
-- Dark mode is supported via CSS variables
-- Routes are school-specific and loaded dynamically
-- Admin route available at `/admin` with editing capabilities
-- **Data Management Page is DEPRECATED**: The `/data` route and `DataManagement.tsx` page are deprecated in favor of the `/admin` route. Do not add new features or make improvements to the data management page. All data management functionality should be implemented in the admin page instead.
-
-## Documentation Maintenance
-
-### Tech Page Auto-Update Rule
-**MANDATORY**: The Tech Page (`frontend/src/pages/TechPage.tsx`) **MUST** be updated whenever functionality or tech stack changes. This is a critical documentation requirement.
-
-#### When to Update Tech Page:
-1. **New Services Added**: 
-   - Add new service to appropriate section (Backend Services or Frontend Services)
-   - Document APIs used, endpoints, data formats, and storage locations
-   - Update the sections array with new subsection
-
-2. **Service Modifications**:
-   - Update existing service documentation when:
-     - APIs or endpoints change
-     - Data formats or structures change
-     - Storage locations change
-     - New methods or functionality added
-     - Rate limiting or behavior changes
-
-3. **Tech Stack Changes**:
-   - Update "Tech Stack" section in `.cursorrules` AND Tech Page when:
-     - New libraries/frameworks added
-     - Major version upgrades
-     - API providers change (e.g., switching geocoding services)
-     - New build tools or dependencies
-
-4. **Functionality Changes**:
-   - Update "Functionality and Interactions" section when:
-     - New workflows added
-     - Existing workflows modified
-     - New features change how the app processes data
-     - User-facing behavior changes significantly
-
-5. **API Endpoint Changes**:
-   - Update frontend/backend service documentation
-   - Update API Service section with new/removed endpoints
-   - Update example data structures if response formats change
-
-6. **Data Structure Changes**:
-   - Update "Complete Data Entry Examples" section
-   - Update service documentation if data formats change
-   - Ensure examples match current implementation
-
-#### How to Update:
-- **Check Tech Page First**: Before making changes, review `TechPage.tsx` to see what needs updating
-- **Update During Implementation**: Update Tech Page as part of the same change, not as a separate task
-- **Verify Accuracy**: After making changes, verify that Tech Page documentation matches actual implementation:
-  - Service classes and their methods
-  - API endpoints and their request/response formats
-  - Data file locations and formats
-  - Technology versions and libraries
-- **Update Examples**: Keep code examples and data examples current and accurate
-- **Update Navigation**: Add new sections to the `sections` array for proper navigation
-
-#### Checklist for Tech Stack/Functionality Changes:
-- [ ] Tech Stack section updated (both `.cursorrules` and Tech Page)
-- [ ] Service documentation updated (if services changed)
-- [ ] API endpoints documented (if endpoints changed)
-- [ ] Data examples updated (if data structures changed)
-- [ ] Navigation sections array updated (if new sections added)
-- [ ] Code examples match actual implementation
-- [ ] File paths and locations are accurate
-
-## Refactoring Opportunities
-
-### When to Refactor to OOP
-- **Multiple Related Functions**: If you have 3+ related functions, consider a class
-- **Shared State**: If functions share state or configuration, use a class
-- **Similar Services**: If you have similar services (e.g., multiple parsers), create a base class
-- **Repeated Patterns**: If you see the same pattern in multiple places, create an abstraction
-
-### Example Refactoring Patterns
-- **Service Functions → Service Classes**: Convert `driveService.js` functions to `DriveService` class
-- **Parser Functions → Parser Classes**: Convert `pdfParser.js` to `PdfParser` class with methods
-- **Utility Functions → Utility Classes**: Group related utilities into classes (e.g., `AddressUtils`, `CoordinateUtils`)
-- **Create Base Classes**: For common patterns, create base classes (e.g., `BaseParser`, `BaseService`)
-
-## Avoid
-- Don't use `any` types without good reason
-- Don't mix coordinate order (remember `[lng, lat]` vs `[lat, lng]`)
-- Don't hardcode API keys or sensitive data
-- Don't modify source PDFs in `data/schools/`
-- Don't skip error handling
-- Don't forget to handle loading states
-- **🚫 NEVER Make Paid/External API Calls on Page Load**: This is a CRITICAL rule. See "CRITICAL: NO PAID API CALLS ON PAGE LOAD" section above. If you see code doing this, FIX IT IMMEDIATELY. **EXCEPTION: Address autocomplete is allowed** - Google Places API calls for address autocomplete are explicitly allowed when triggered by user typing (not on page load).
-- **🚫 NEVER Skip Data Caching**: Always cache API responses. When collecting lots of data, save it to files and reuse cached data. Only refresh when user explicitly requests it.
-- **Don't Duplicate Code**: If you're copying code, extract it into a reusable function/class
-- **Don't Put Business Logic in Routes**: Keep route handlers thin, delegate to service classes
-- **Don't Create One-Off Solutions**: If you need something similar in multiple places, create a reusable abstraction
-- **Don't Work on Data Management Page**: The data management page (`/data` route, `DataManagement.tsx`, and related components like `DataPageHeader.tsx`, `DataRouteList.tsx`) is deprecated. All data management work should be done in the admin page (`/admin` route) instead. Do not add features, fix bugs, or make improvements to the deprecated data management page.
-- **Don't Use Non-Font Awesome Icons**: Never use react-icons, Material Icons, or any other icon library. Always use Font Awesome only.
-
+### DO NOT
+- Skip data caching.
+- Hardcode keys.
+- Modify source PDFs.
+- Work on deprecated `/data` page.
