@@ -1480,29 +1480,31 @@ export function MapView({
       {/* Boundary Toggle Redesign in Bottom Left */}
       <div className="leaflet-bottom leaflet-left" style={{ bottom: '110px', left: '10px', pointerEvents: 'auto', zIndex: 1000 }}>
         <div style={{
-          display: 'none',
+          display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '16px' : '0',
-          padding: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '16px 0 0' : '0',
+          gap: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '6px' : '0',
+          padding: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '14px 0 0' : '0',
           width: '38px',
-          height: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '160px' : '38px',
+          height: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '120px' : '38px',
           justifyContent: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? 'flex-start' : 'center',
           backgroundColor: 'rgba(28, 28, 30, 0.6)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
           borderRadius: '999px',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.01)',
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           boxSizing: 'border-box',
+          marginBottom: '10px',
+          marginLeft: '14px',
         }}>
           {/* Individual Dots Container (Animated) */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '16px',
+            gap: '14px',
             overflow: 'hidden',
             maxHeight: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? '120px' : '0px',
             opacity: (showHighBoundaries || showMiddleBoundaries || showElementaryBoundaries) ? 1 : 0,
