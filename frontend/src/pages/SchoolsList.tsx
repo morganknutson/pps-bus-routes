@@ -224,27 +224,25 @@ export function SchoolsList() {
       const isHybrid = schoolTypes.includes('Hybrid');
       const hasNoRoutes = school.routeCount === 0;
 
-      // "School without route data" filter overrides type filters
-      if (hasNoRoutes) {
-        return schoolTypeFilters.noRoutes;
+      // 1. Check School Type Filter first (PRIORITY)
+      let matchesType = false;
+      if (isHybrid) {
+        matchesType = schoolTypeFilters.hybrid;
+      } else {
+        matchesType = 
+          (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
+          (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
+          (schoolTypes.includes('High School') && schoolTypeFilters.high);
       }
       
-      // If it's a hybrid school, check hybrid filter
-      if (isHybrid) {
-        if (schoolTypeFilters.hybrid) {
-          return true; // Show hybrid schools if hybrid filter is enabled
-        }
-        // If hybrid filter is disabled, don't show hybrid schools
+      if (!matchesType) return false;
+
+      // 2. Then check Route Status Filter
+      if (hasNoRoutes && !schoolTypeFilters.noRoutes) {
         return false;
       }
       
-      // For non-hybrid schools, check individual type filters
-      const matchesFilter = 
-        (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
-        (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
-        (schoolTypes.includes('High School') && schoolTypeFilters.high);
-      
-      return matchesFilter;
+      return true;
     });
     return filtered;
   }, [schools, searchTerm, schoolTypeFilters.elementary, schoolTypeFilters.middle, schoolTypeFilters.high, schoolTypeFilters.hybrid, schoolTypeFilters.noRoutes]);

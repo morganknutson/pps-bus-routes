@@ -10,7 +10,7 @@ import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
-import { parseUrlPath, buildUrlPath } from '../services/urlState';
+import { useUrlState } from '../hooks/useUrlState';
 
 interface SchoolInfoTooltipProps {
   school: School;
@@ -27,29 +27,23 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
   onClose,
   message
 }) => {
-  // Safety check: return null if school is undefined
-  if (!school) {
-    return null;
-  }
+  if (!school) return null;
 
   const isMobile = useIsMobile();
-  const navigate = useNavigate();
   const location = useLocation();
   const isDarkMode = useStore(state => state.isDarkMode);
+  
+  const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
+  const { setActiveTab, setFocus, setSelectedSchool, schoolId, viewSchoolRoutes } = useUrlState({ basePath });
+
   const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
   const schoolColor = getSchoolColor(schoolTypes);
 
   const handleViewRoutes = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
-    const urlState = parseUrlPath(location.pathname, basePath);
-    const newState = {
-      ...urlState,
-      schoolId: school.id,
-      show: 'routes' as const,
-      focus: undefined // Clear school-info focus when exploring routes
-    };
-    navigate(buildUrlPath(basePath, newState));
+    // Use the unified action to avoid multiple URL updates and race conditions
+    viewSchoolRoutes(school.id);
+    // If a callback was provided, call it but it should not trigger another navigation
     if (onViewRoutes) onViewRoutes();
   };
 
@@ -66,34 +60,13 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         boxShadow: isMobile ? 'none' : '0 4px 12px var(--shadow-hover)',
         border: isMobile ? 'none' : '1px solid var(--border-color)',
         padding: '0.5rem 1rem',
-        pointerEvents: 'auto', // Allow clicks inside tooltip
+        pointerEvents: 'auto',
       }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.75rem',
-          minWidth: isMobile ? 'auto' : '200px',
-        }}>
-          <div style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '16px',
-            backgroundColor: 'var(--bg-tertiary)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-          }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: isMobile ? 'auto' : '200px' }}>
+          <div style={{ width: '32px', height: '32px', borderRadius: '16px', backgroundColor: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <RouteIcon size={14} color="var(--text-tertiary)" />
           </div>
-          <div style={{ 
-            fontSize: '13px', 
-            color: 'var(--text-primary)', 
-            lineHeight: '1.4',
-            fontWeight: '600'
-          }}>
-            {message}
-          </div>
+          <div style={{ fontSize: '13px', color: 'var(--text-primary)', lineHeight: '1.4', fontWeight: '600' }}>{message}</div>
         </div>
       </div>
     );
@@ -113,7 +86,6 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
       pointerEvents: 'auto',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      {/* Header with School Name & Type */}
       <div style={{ 
         padding: isMobile ? '8px 2rem 12px 2rem' : '12px 1.25rem',
         backgroundColor: 'var(--bg-secondary)', 
@@ -125,25 +97,10 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         gap: '1rem'
       }}>
         <div style={{ flex: 1 }}>
-          <h3 style={{ 
-            margin: '0 0 0.25rem 0', 
-            fontSize: isMobile ? '26px' : '18px', 
-            fontWeight: '600',
-            lineHeight: '1.2',
-            color: 'var(--text-primary)' 
-          }}>
+          <h3 style={{ margin: '0 0 0.25rem 0', fontSize: isMobile ? '26px' : '18px', fontWeight: '600', lineHeight: '1.2', color: 'var(--text-primary)' }}>
             {getSchoolDisplayName(school.name)}
           </h3>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '0.375rem',
-            color: schoolColor,
-            fontSize: '12px',
-            fontWeight: '500',
-            marginTop: '0.2rem',
-            marginBottom: isMobile ? '14px' : '0'
-          }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: schoolColor, fontSize: '12px', fontWeight: '500', marginTop: '0.2rem', marginBottom: isMobile ? '14px' : '0' }}>
             <i className="fas fa-graduation-cap" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
             <span>{schoolTypes.join(' & ')}</span>
           </div>
@@ -152,24 +109,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         {onClose && (
           <button
             onClick={(e) => { e.stopPropagation(); onClose(); }}
-            style={{
-              background: 'none',
-              border: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'var(--text-tertiary)',
-              cursor: 'pointer',
-              padding: '4px',
-              position: 'absolute',
-              top: isMobile ? '3px' : '14px',
-              right: isMobile ? '22px' : '18px',
-              transition: 'color 0.2s ease',
-              zIndex: 10,
-              lineHeight: 1
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}
+            style={{ background: 'none', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '4px', position: 'absolute', top: isMobile ? '3px' : '14px', right: isMobile ? '22px' : '18px', transition: 'color 0.2s ease', zIndex: 10, lineHeight: 1 }}
             aria-label="Close dialog"
           >
             <XIcon />
@@ -178,9 +118,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
       </div>
 
       <div style={{ padding: isMobile ? '1.5rem 2rem' : '1.25rem' }}>
-        {/* Details Grid */}
         <div style={{ display: 'grid', gap: '1rem' }}>
-          {/* Neighborhood & Address */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {school.neighborhood && (
               <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
@@ -220,36 +158,16 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
           </div>
         </div>
 
-        {/* Action Links */}
         {(school.schoolPageLink || school.driveLink) && (
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between',
-            gap: '1rem', 
-            marginTop: '1.25rem',
-            paddingTop: '1rem',
-            borderTop: '1px solid var(--border-color)'
-          }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
             {school.schoolPageLink && (
-              <a
-                href={school.schoolPageLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => analyticsService.trackOutboundLink(school.schoolPageLink!, 'website')}
-                style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
-              >
+              <a href={school.schoolPageLink} target="_blank" rel="noopener noreferrer" onClick={() => analyticsService.trackOutboundLink(school.schoolPageLink!, 'website')} style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <i className="fas fa-link"></i>
                 <span>Website</span>
               </a>
             )}
             {school.driveLink && (
-              <a
-                href={school.driveLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => analyticsService.trackOutboundLink(school.driveLink!, 'pdf')}
-                style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', marginLeft: 'auto' }}
-              >
+              <a href={school.driveLink} target="_blank" rel="noopener noreferrer" onClick={() => analyticsService.trackOutboundLink(school.driveLink!, 'pdf')} style={{ fontSize: '12px', color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem', marginLeft: 'auto' }}>
                 <i className="fas fa-folder-open"></i>
                 <span>Files</span>
               </a>
@@ -257,86 +175,26 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
           </div>
         )}
 
-        {/* Unified Routes Action Button */}
         {school.routeCount !== undefined && showRoutesButton && (
           <button
             onClick={handleViewRoutes}
             style={{ 
-              display: 'flex', 
-              gap: '0.75rem', 
-              padding: '8px 16px 8px 8px',
-              backgroundColor: school.routeCount === 0 
-                ? (isDarkMode ? 'rgba(244, 67, 54, 0.1)' : 'rgba(244, 67, 54, 0.05)')
-                : (isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)'),
-              borderRadius: '9999px',
-              border: school.routeCount === 0
-                ? `1px solid ${isDarkMode ? 'rgba(244, 67, 54, 0.3)' : 'rgba(244, 67, 54, 0.2)'}`
-                : (isDarkMode ? '1px solid var(--border-color)' : 'none'),
-              textAlign: 'left',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              width: '100%',
-              alignItems: 'center',
-              marginTop: '1.25rem',
+              display: 'flex', gap: '0.75rem', padding: '8px 16px 8px 8px',
+              backgroundColor: school.routeCount === 0 ? (isDarkMode ? 'rgba(244, 67, 54, 0.1)' : 'rgba(244, 67, 54, 0.05)') : (isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)'),
+              borderRadius: '9999px', border: school.routeCount === 0 ? `1px solid ${isDarkMode ? 'rgba(244, 67, 54, 0.3)' : 'rgba(244, 67, 54, 0.2)'}` : (isDarkMode ? '1px solid var(--border-color)' : 'none'),
+              textAlign: 'left', cursor: 'pointer', transition: 'all 0.2s ease', width: '100%', alignItems: 'center', marginTop: '1.25rem',
               boxShadow: school.routeCount === 0 ? 'none' : (isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)')
             }}
-            onMouseEnter={(e) => {
-              if (school.routeCount! > 0) {
-                e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-secondary)' : '#1a4b7c';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-                e.currentTarget.style.boxShadow = isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '0 4px 12px rgba(19, 58, 96, 0.3)';
-              } else {
-                e.currentTarget.style.backgroundColor = isDarkMode ? 'rgba(244, 67, 54, 0.15)' : 'rgba(244, 67, 54, 0.1)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (school.routeCount! > 0) {
-                e.currentTarget.style.backgroundColor = isDarkMode ? 'var(--bg-tertiary)' : 'var(--brand-primary)';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = isDarkMode ? '0 1px 3px var(--shadow-large)' : '0 2px 8px rgba(19, 58, 96, 0.2)';
-              } else {
-                e.currentTarget.style.backgroundColor = isDarkMode ? 'rgba(244, 67, 54, 0.1)' : 'rgba(244, 67, 54, 0.05)';
-              }
-            }}
           >
-            <div style={{ 
-              width: '28px', 
-              height: '28px', 
-              backgroundColor: school.routeCount === 0
-                ? 'rgba(244, 67, 54, 0.2)'
-                : (isDarkMode ? 'var(--bg-primary)' : 'rgba(255, 255, 255, 0.2)'), 
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-              boxShadow: isDarkMode ? '0 2px 4px rgba(0,0,0,0.05)' : 'none'
-            }}>
+            <div style={{ width: '28px', height: '28px', backgroundColor: school.routeCount === 0 ? 'rgba(244, 67, 54, 0.2)' : (isDarkMode ? 'var(--bg-primary)' : 'rgba(255, 255, 255, 0.2)'), borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <RouteIcon size={13} color={school.routeCount === 0 ? '#f44' : (isDarkMode ? schoolColor : '#ffffff')} />
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ 
-                fontSize: '13px', 
-                fontWeight: '700', 
-                color: school.routeCount === 0 ? '#f44' : (isDarkMode ? 'var(--text-primary)' : '#ffffff'),
-                lineHeight: '1.2'
-              }}>
-                {school.routeCount === 0 
-                  ? 'Route information not provided on the web' 
-                  : `Explore ${school.routeCount} ${school.routeCount === 1 ? 'Route' : 'Routes'}`}
+              <div style={{ fontSize: '13px', fontWeight: '700', color: school.routeCount === 0 ? '#f44' : (isDarkMode ? 'var(--text-primary)' : '#ffffff'), lineHeight: '1.2' }}>
+                {school.routeCount === 0 ? 'Route information not provided on the web' : `Explore ${school.routeCount} ${school.routeCount === 1 ? 'Route' : 'Routes'}`}
               </div>
               {school.routeCount! > 0 && (
-                <svg 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="1.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  style={{ opacity: 0.6, marginLeft: '0.5rem' }}
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6, marginLeft: '0.5rem' }}>
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               )}

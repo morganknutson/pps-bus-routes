@@ -4,141 +4,93 @@ import { RouteListBase, RouteListConfig } from './RouteListBase';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { analyticsService } from '../services/analytics';
 import { XIcon } from './XIcon';
-import { parseUrlPath, buildUrlPath } from '../services/urlState';
+import { useUrlState } from '../hooks/useUrlState';
 
 interface RouteListProps {
   showBothOption?: boolean;
   onClearSchool?: () => void;
   onViewSchools?: () => void;
-  onRouteToggle?: () => void;  // Called when user explicitly toggles a route (for URL sync)
+  onRouteToggle?: () => void;
 }
 
 /**
  * Route list component for the main page
- * Uses the store directly and shows route selection checkboxes
+ * Uses the URL as source of truth for selection
  */
 export function RouteList({ showBothOption = false, onClearSchool, onViewSchools, onRouteToggle }: RouteListProps = {}) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { routes, toggleRouteSelection, isLoading, error, selectStop, selectedStop, clearSelectedStop, selectedSchoolId, schools, directionFilter, setDirectionFilter, setSelectedSchool } = useStore();
+  const { routes, isLoading, error, schools } = useStore();
   const { isDarkMode } = useDarkMode();
 
-  const selectedSchool = selectedSchoolId ? schools.find(s => s.id === selectedSchoolId) : null;
+  const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
+  const {
+    schoolId,
+    directionFilter,
+    selectedRouteNames,
+    selectedStopId,
+    setSelectedSchool,
+    setDirectionFilter,
+    toggleRouteSelection,
+    selectStop,
+    clearSelectedStop,
+  } = useUrlState({ basePath });
+
+  const selectedSchool = schoolId ? schools.find(s => s.id === schoolId) : null;
 
   const config: RouteListConfig = {
     directionFilter: directionFilter,
     showRouteSelection: true,
     onRouteSelectionChange: (routeId: string, checked: boolean) => {
-      // Mark that user is toggling a route (for URL sync to not override)
       onRouteToggle?.();
-      
       const route = routes.find(r => r.id === routeId);
-      if (route && selectedSchool) {
-        analyticsService.trackRouteToggle(route.name, selectedSchool.name, checked);
-      }
-      
-      if (checked) {
-        // Route is being selected - ensure it's selected in store
-        if (!routes.find(r => r.id === routeId)?.isSelected) {
-          toggleRouteSelection(routeId);
+      if (route) {
+        if (selectedSchool) {
+          analyticsService.trackRouteToggle(route.name, selectedSchool.name, checked);
         }
-      } else {
-        // Route is being deselected
-        if (routes.find(r => r.id === routeId)?.isSelected) {
-          toggleRouteSelection(routeId);
-        }
+        toggleRouteSelection(route.name);
       }
     },
     onStopClick: (route, stop, stopNumber) => {
-      const urlState = parseUrlPath(location.pathname, '');
-      const stopMatch = stop.id.match(/stop-(\d+)/);
-      const stopNumberStr = stopMatch ? stopMatch[1] : stop.id;
-      
-      let finalStopId = `${route.name}-${stopNumberStr}`;
-      if (route.name.endsWith('-upcoming')) {
-        const baseName = route.name.replace('-upcoming', '');
-        finalStopId = `${baseName}-${stopNumberStr}-upcoming`;
-      }
-
-      // If clicking the same stop that's already selected, deselect it
-      if (selectedStop?.route.id === route.id && selectedStop?.stop.id === stop.id) {
-        const newState = { ...urlState, stopId: undefined, focus: undefined };
-        navigate(buildUrlPath('', newState));
+      if (selectedStopId === `${route.name}-${stop.id.replace('stop-', '')}`) {
+        clearSelectedStop();
       } else {
-        // Navigate to the stop URL
-        const currentSelectedRoutes = routes.filter(r => r.isSelected).map(r => r.name);
-        if (!currentSelectedRoutes.includes(route.name)) {
-          currentSelectedRoutes.push(route.name);
-        }
-
-        const newState = {
-          ...urlState,
-          show: 'routes' as const,
-          direction: (route.direction?.toLowerCase() || 'morning') as any,
-          routeNames: currentSelectedRoutes,
-          stopId: finalStopId,
-          focus: undefined // Focus is implied by stopId
-        };
-        navigate(buildUrlPath('', newState));
+        selectStop(route.name, stop.id);
       }
     },
-    isRouteSelected: (route) => route.isSelected,
+    isRouteSelected: (route) => {
+      // Scenario 1: if no route names in URL, all routes for the current direction are implicitly selected
+      if (selectedRouteNames.length === 0) {
+        return directionFilter === 'Both' || route.direction === directionFilter;
+      }
+      return selectedRouteNames.includes(route.name);
+    },
     isStopSelected: (route, stop) => {
-      return selectedStop?.route.id === route.id && selectedStop?.stop.id === stop.id;
+      const formattedStopId = route.name.endsWith('-upcoming')
+        ? `${route.name.replace('-upcoming', '')}-${stop.id.replace('stop-', '')}-upcoming`
+        : `${route.name}-${stop.id.replace('stop-', '')}`;
+      return selectedStopId === formattedStopId;
     },
   };
 
-  // Show prompt when no school is selected
-  if (!selectedSchoolId) {
+  if (!schoolId) {
     return (
       <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-        padding: '2rem',
-        textAlign: 'center',
-        color: 'var(--text-secondary)',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        height: '100%', padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)',
         backgroundColor: 'var(--bg-primary)'
       }}>
-        <i 
-          className="fas fa-graduation-cap" 
-          style={{ 
-            fontSize: '48px',
-            color: 'var(--text-tertiary)',
-            marginBottom: '1rem',
-            opacity: 0.6
-          }}
-        />
-        <p style={{ 
-          fontSize: '16px',
-          fontWeight: '500',
-          margin: 0,
-          marginBottom: '1rem',
-          color: 'var(--text-secondary)'
-        }}>
+        <i className="fas fa-graduation-cap" style={{ fontSize: '48px', color: 'var(--text-tertiary)', marginBottom: '1rem', opacity: 0.6 }} />
+        <p style={{ fontSize: '16px', fontWeight: '500', margin: 0, marginBottom: '1rem', color: 'var(--text-secondary)' }}>
           Please select a school to view routes
         </p>
         {onViewSchools && (
           <button
             onClick={onViewSchools}
             style={{
-              padding: '0.5rem 1rem',
-              backgroundColor: 'var(--bg-primary)',
-              color: 'var(--text-primary)',
-              border: '1px solid var(--border-color)',
-              borderRadius: '9999px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: '500',
-              transition: 'background-color 0.2s ease, border-color 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+              padding: '0.5rem 1rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)',
+              border: '1px solid var(--border-color)', borderRadius: '9999px', cursor: 'pointer',
+              fontSize: '14px', fontWeight: '500', transition: 'background-color 0.2s ease, border-color 0.2s ease',
             }}
           >
             View Schools
@@ -155,198 +107,58 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
           <div style={{ position: 'relative' }}>
             <div
               style={{
-                width: '100%',
-                padding: '0.75rem',
-                paddingLeft: '1rem',
-                paddingRight: '2.5rem',
-                borderRadius: '12px',
-                fontSize: '14px',
-                fontWeight: '600',
-                height: '40px',
-                boxSizing: 'border-box',
-                backgroundColor: 'var(--bg-tertiary)',
-                color: 'var(--text-primary)',
-                transition: 'background-color 0.3s ease, color 0.3s ease',
-                boxShadow: '0 1px 3px var(--shadow-large)',
-                display: 'flex',
-                alignItems: 'center',
+                width: '100%', padding: '0.75rem', paddingLeft: '1rem', paddingRight: '2.5rem',
+                borderRadius: '12px', fontSize: '14px', fontWeight: '600', height: '40px',
+                boxSizing: 'border-box', backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)',
+                transition: 'background-color 0.3s ease, color 0.3s ease', boxShadow: '0 1px 3px var(--shadow-large)',
+                display: 'flex', alignItems: 'center',
               }}
             >
               {selectedSchool.name}
             </div>
             <button
               onClick={() => {
-                navigate('/schools');
-                if (onClearSchool) {
-                  onClearSchool();
-                }
+                setSelectedSchool(null);
+                if (onClearSchool) onClearSchool();
               }}
               style={{
-                position: 'absolute',
-                right: '10px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '20px',
-                height: '20px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '14px',
-                lineHeight: '1',
-                backgroundColor: 'transparent',
-                color: 'var(--text-tertiary)',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                padding: 0,
-                flexShrink: 0,
-                transition: 'background-color 0.2s ease, color 0.2s ease',
+                position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
+                width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backgroundColor: 'transparent', color: 'var(--text-tertiary)', border: 'none',
+                borderRadius: '4px', cursor: 'pointer', padding: 0, flexShrink: 0,
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                e.currentTarget.style.color = 'var(--text-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.color = 'var(--text-tertiary)';
-              }}
-            aria-label="Clear school selection"
-          >
-            <XIcon />
-          </button>
+              aria-label="Clear school selection"
+            >
+              <XIcon />
+            </button>
           </div>
         </div>
       )}
-      {/* Direction filter toggle */}
-      <div style={{
-        padding: '0.75rem 0.75rem 0.5rem 0.75rem', // Reduced bottom padding to reduce space
-        borderBottom: 'none',
-        backgroundColor: 'var(--bg-route-list)',
-        flexShrink: 0,
-        transition: 'background-color 0.3s ease, border-color 0.3s ease',
-      }}>
-        <div
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '2.5rem',
-            backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(0, 0, 0, 0.05)',
-            borderRadius: '9999px',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Labels positioned on top */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            display: 'flex',
-            zIndex: 2,
-          }}>
-            <div
-              onClick={() => setDirectionFilter('Morning')}
-              style={{
-                flex: 1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '12px',
-                fontWeight: '500',
-                color: directionFilter === 'Morning' ? 'var(--text-primary)' : 'var(--text-secondary)',
-                transition: 'color 0.2s ease',
-                cursor: 'pointer',
-              }}
-            >
-              Morning
-            </div>
-            <div
-              onClick={() => setDirectionFilter('Afternoon')}
-              style={{
-                flex: 1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '12px',
-                fontWeight: '500',
-                color: directionFilter === 'Afternoon' ? 'var(--text-primary)' : 'var(--text-secondary)',
-                transition: 'color 0.2s ease',
-                cursor: 'pointer',
-              }}
-            >
-              Afternoon
-            </div>
-            {showBothOption && (
-              <div
-                onClick={() => setDirectionFilter('Both')}
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '12px',
-                  fontWeight: '500',
-                  color: directionFilter === 'Both' ? 'var(--text-primary)' : 'var(--text-secondary)',
-                  transition: 'color 0.2s ease',
-                  cursor: 'pointer',
-                }}
-              >
-                Both
-              </div>
-            )}
+      
+      <div style={{ padding: '0.75rem 0.75rem 0.5rem 0.75rem', backgroundColor: 'var(--bg-route-list)', flexShrink: 0 }}>
+        <div style={{ position: 'relative', width: '100%', height: '2.5rem', backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(0, 0, 0, 0.05)', borderRadius: '9999px', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', zIndex: 2 }}>
+            <div onClick={() => setDirectionFilter('Morning')} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '500', color: directionFilter === 'Morning' ? 'var(--text-primary)' : 'var(--text-secondary)', cursor: 'pointer' }}>Morning</div>
+            <div onClick={() => setDirectionFilter('Afternoon')} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '500', color: directionFilter === 'Afternoon' ? 'var(--text-primary)' : 'var(--text-secondary)', cursor: 'pointer' }}>Afternoon</div>
+            {showBothOption && <div onClick={() => setDirectionFilter('Both')} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '500', color: directionFilter === 'Both' ? 'var(--text-primary)' : 'var(--text-secondary)', cursor: 'pointer' }}>Both</div>}
           </div>
-          {/* Sliding button beneath labels - uses theme colors */}
           <div
             style={{
-              position: 'absolute',
-              top: '0.25rem',
-              bottom: '0.25rem',
+              position: 'absolute', top: '0.25rem', bottom: '0.25rem',
               left: showBothOption
-                ? directionFilter === 'Morning'
-                  ? '0.25rem'
-                  : directionFilter === 'Afternoon'
-                  ? 'calc(33.333% + 0.25rem)'
-                  : 'calc(66.666% + 0.25rem)'
-                : directionFilter === 'Morning'
-                ? '0.25rem'
-                : 'calc(50% + 0.25rem)',
+                ? directionFilter === 'Morning' ? '0.25rem' : directionFilter === 'Afternoon' ? 'calc(33.333% + 0.25rem)' : 'calc(66.666% + 0.25rem)'
+                : directionFilter === 'Morning' ? '0.25rem' : 'calc(50% + 0.25rem)',
               width: showBothOption ? 'calc(33.333% - 0.5rem)' : 'calc(50% - 0.5rem)',
-              backgroundColor: 'var(--bg-tertiary)',
-              borderRadius: '9999px',
-              transition: 'left 0.3s ease',
-              zIndex: 1,
-              boxShadow: '0 1px 3px var(--shadow-large)',
+              backgroundColor: 'var(--bg-tertiary)', borderRadius: '9999px', transition: 'left 0.3s ease', zIndex: 1, boxShadow: '0 1px 3px var(--shadow-large)',
             }}
           />
         </div>
       </div>
+
       <div style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--bg-route-list)' }}>
         {!isLoading && routes.length === 0 ? (
-          <div style={{
-            padding: '2rem',
-            textAlign: 'center',
-            color: 'var(--text-secondary)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-            gap: '1rem'
-          }}>
-            <div style={{ 
-              backgroundColor: 'rgba(244, 67, 54, 0.1)', 
-              color: '#f44', 
-              fontSize: '14px', 
-              padding: '8px 20px', 
-              borderRadius: '999px',
-              fontWeight: '700',
-              textTransform: 'uppercase',
-              border: '1px solid rgba(244, 67, 54, 0.3)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px'
-            }}>
+          <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: '1rem' }}>
+            <div style={{ backgroundColor: 'rgba(244, 67, 54, 0.1)', color: '#f44', fontSize: '14px', padding: '8px 20px', borderRadius: '999px', fontWeight: '700', textTransform: 'uppercase', border: '1px solid rgba(244, 67, 54, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <i className="fas fa-exclamation-triangle" style={{ fontSize: '14px' }}></i>
               NO ROUTES
             </div>
@@ -360,7 +172,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
             config={config}
             loading={isLoading}
             error={error}
-            emptyMessage="No routes found. Make sure routes.json exists in the public folder."
+            emptyMessage="No routes found."
           />
         )}
       </div>

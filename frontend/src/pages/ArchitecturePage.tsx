@@ -79,7 +79,7 @@ const frontendFiles: FileNode[] = [
     'useStore', 'autocompleteAddress', 'geocodeAddress', 'useIsMobile'
   ], dependents: ['App'] },
   { id: 'Header', name: 'Header.tsx', path: 'frontend/src/components/Header.tsx', type: 'component', dependencies: [
-    'ThemePicker', 'DarkModeToggle'
+    'DarkModeToggle'
   ], dependents: ['App', 'TechPage', 'VerificationPage', 'JobsPage', 'ServersPage', 'Neighborhoods', 'SchoolsList'] },
   { id: 'Sidebar', name: 'Sidebar.tsx', path: 'frontend/src/components/Sidebar.tsx', type: 'component', dependencies: [], dependents: ['App', 'TechPage', 'VerificationPage', 'JobsPage', 'ServersPage', 'Neighborhoods', 'SchoolsList'] },
   { id: 'TabBar', name: 'TabBar.tsx', path: 'frontend/src/components/TabBar.tsx', type: 'component', dependencies: [], dependents: ['App'] },

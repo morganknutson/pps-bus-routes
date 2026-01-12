@@ -120,7 +120,7 @@ export function Sidebar({
         style={{
           width: `${sidebarWidth}px`,
           position: 'relative',
-          borderRight: '1px solid var(--border-color)',
+          borderRight: '1px solid var(--border-color-darker)',
           display: 'flex',
           flexDirection: 'column',
           backgroundColor: backgroundColor || 'var(--bg-secondary)',

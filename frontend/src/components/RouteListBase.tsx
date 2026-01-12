@@ -4,6 +4,7 @@ import { getSchoolTypes } from '../utils/schoolUtils';
 import { formatEffectiveDate } from '../utils/dateUtils';
 import { RouteIcon } from './RouteIcon';
 import { ChevronIcon } from './ChevronIcon';
+import { calculateStopNumber, getDisplayStops } from '../utils/routeUtils';
 import type { Route, Stop } from '../types';
 
 /**
@@ -46,33 +47,6 @@ export interface RouteListBaseProps {
   emptyMessage?: string;
 }
 
-/**
- * Calculate stop number for a stop, excluding school stops and skipped stops
- */
-function calculateStopNumber(
-  stop: Stop,
-  allStops: Stop[],
-  stopIndex: number
-): number {
-  if (stop.isSchoolStop) {
-    return 0; // School stop is always 0 (but won't be displayed)
-  }
-  
-  // Count how many regular (non-school, non-skipped) stops come before this one
-  const displayStops = allStops.filter(s => !s.skipGeocoding);
-  let regularStopCount = 0;
-  for (let i = 0; i < stopIndex; i++) {
-    const s = displayStops[i];
-    if (!s.isSchoolStop) {
-      regularStopCount++;
-    }
-  }
-  return regularStopCount + 1; // Number starts at 1
-}
-
-/**
- * Render a single stop item
- */
 function renderStopItem(
   stop: Stop,
   route: Route,
@@ -80,7 +54,7 @@ function renderStopItem(
   allStops: Stop[],
   config: RouteListConfig
 ) {
-  const stopNumber = calculateStopNumber(stop, allStops, stopIndex);
+  const stopNumber = calculateStopNumber(route, stop.id);
   const hasCoordinates = stop.coordinates && stop.coordinates.length === 2;
   const hasError = config.showStopErrors && (!hasCoordinates || stop.geocodeError);
   const isClickable = hasCoordinates;
@@ -257,8 +231,8 @@ export function RouteListBase({
             style={{
               width: '24px',
               height: '24px',
-              border: '3px solid #FFFFFF',
-              borderTopColor: 'transparent',
+              border: '3px solid var(--border-color)',
+              borderTopColor: 'var(--text-primary)',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite',
               margin: '0 auto',
@@ -387,7 +361,7 @@ export function RouteListBase({
     const isExpanded = expandedRoutes.has(route.id);
     const routeColor = config.getRouteColor?.(route) || route.color;
     const isRouteSelected = config.isRouteSelected?.(route) || false;
-    const displayStops = route.stops.filter(stop => !stop.skipGeocoding);
+    const displayStops = getDisplayStops(route);
     // Count only non-school stops for the display count
     const regularStopCount = displayStops.filter(stop => !stop.isSchoolStop).length;
 
@@ -395,7 +369,7 @@ export function RouteListBase({
       <div
         key={route.id}
         style={{
-          border: isRouteSelected ? '0px solid rgba(0, 0, 0, 0)' : '1px solid var(--border-color)',
+          border: isRouteSelected ? '1px solid transparent' : '1px solid var(--border-color-darker)',
           borderRadius: '12px',
           backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'transparent',
           boxShadow: isRouteSelected ? '0 1px 3px var(--shadow-large)' : 'none',
@@ -436,7 +410,7 @@ export function RouteListBase({
               }}
               onClick={() => {
                 if (config.showRouteSelection && config.onRouteSelectionChange) {
-                  config.onRouteSelectionChange(route.id, !route.isSelected);
+                  config.onRouteSelectionChange(route.id, !isRouteSelected);
                 }
               }}
             >
@@ -444,7 +418,7 @@ export function RouteListBase({
                 <div style={{ flexShrink: 0 }}>
                   <input
                     type="checkbox"
-                    checked={route.isSelected}
+                    checked={isRouteSelected}
                     onChange={(e) => {
                       if (config.onRouteSelectionChange) {
                         config.onRouteSelectionChange(route.id, e.target.checked);
@@ -458,15 +432,16 @@ export function RouteListBase({
                       width: '16px',
                       height: '16px',
                       borderRadius: '50%',
-                      border: `1px solid ${route.isSelected ? routeColor : 'var(--border-color)'}`,
-                      backgroundColor: route.isSelected ? routeColor : 'transparent',
+                      border: `1px solid ${isRouteSelected ? 'transparent' : 'var(--border-color-darker)'}`,
+                      backgroundColor: isRouteSelected ? routeColor : 'transparent',
+                      boxShadow: isRouteSelected ? 'inset 0px 0px 1px rgba(255, 255, 255, .8)' : 'none',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
                     }}
                   >
-                    {route.isSelected && (
+                    {isRouteSelected && (
                       <i className="fas fa-check" style={{ fontSize: '8px', color: 'white', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}></i>
                     )}
                   </div>
@@ -531,7 +506,7 @@ export function RouteListBase({
             style={{
               background: 'none',
               border: 'none',
-              borderLeft: '1px solid var(--border-color)',
+              borderLeft: '1px solid var(--border-color-darker)',
               padding: '0.5rem 0.75rem',
               cursor: 'pointer',
               color: 'var(--text-tertiary)',
@@ -549,7 +524,7 @@ export function RouteListBase({
         {/* Expanded stops list */}
         {isExpanded && (
           <div style={{ 
-            borderTop: '1px solid var(--border-color)',
+            borderTop: '1px solid var(--border-color-darker)',
             backgroundColor: 'var(--bg-secondary)',
             maxHeight: '400px',
             overflowY: 'auto',

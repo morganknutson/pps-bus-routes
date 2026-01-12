@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchRouteForStops } from '../services/routing';
 import { generateRouteColor } from '../utils/colorGenerator';
 import { formatStreetName } from '../utils/formatAddress';
@@ -11,10 +12,12 @@ import { TabBar } from '../components/TabBar';
 import { DataPageHeader } from '../components/DataPageHeader';
 import { useStore } from '../store/useStore';
 import { School } from '../types';
+import { useIsMobile } from '../hooks/useMediaQuery';
 import { getSchoolTypes, getSchoolColor, createSchoolIcon } from '../utils/schoolUtils';
 import { handleMapLinkClick } from '../utils/mapLinks';
 import { createDefaultMarkerIcon } from '../utils/fontAwesomeIcons';
 import { createSchoolIcon as createSharedSchoolIcon, createNumberedIcon as createSharedNumberedIcon } from '../utils/markerIcons';
+import { useUrlState } from '../hooks/useUrlState';
 import 'leaflet/dist/leaflet.css';
 
 // Set default marker icon to use Font Awesome
@@ -98,14 +101,26 @@ function FitSchoolBounds({ schools, selectedSchoolId }: { schools: School[]; sel
 }
 
 export function DataManagement() {
-  const { selectedSchoolId, schools, setSchools, setSelectedSchool } = useStore();
-  const [activeTab, setActiveTab] = useState<'schools' | 'routes'>('routes');
+  const { schools, setSchools } = useStore();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const basePath = '/admin';
+  
+  // Use URL as source of truth for selection
+  const {
+    schoolId: selectedSchoolId,
+    activeTab: urlActiveTab,
+    setSelectedSchool,
+    setActiveTab,
+    viewSchoolRoutes,
+  } = useUrlState({ basePath });
+
+  const isMobile = useIsMobile();
+  const activeTab = urlActiveTab === 'schools' ? 'schools' : 'routes';
   
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
-    if (tab === 'schools' || tab === 'routes') {
-      setActiveTab(tab);
-    }
+    setActiveTab(tab as any);
   };
   const [routes, setRoutes] = useState<ProcessedRoute[]>([]);
   const [selectedStop, setSelectedStop] = useState<{ route: ProcessedRoute; stop: ProcessedStop } | null>(null);
@@ -630,6 +645,11 @@ export function DataManagement() {
             schools={schools}
             selectedSchoolId={selectedSchoolId}
             onSelectSchool={(schoolId) => {
+              if (isMobile && schoolId) {
+                viewSchoolRoutes(schoolId);
+                return;
+              }
+              
               if (schoolId) {
                 setSelectedSchool(schoolId);
                 // When a school is selected, also update selectedSchoolForMap to show info dialog

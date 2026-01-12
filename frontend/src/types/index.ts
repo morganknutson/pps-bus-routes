@@ -72,13 +72,14 @@ export interface AppState {
   homeAddress?: HomeAddress;
   isLoading: boolean;
   error?: string;
-  selectedSchoolId: string | null;
   schools: School[];
   assignedSchools: AssignedSchools | null;
   isDarkMode: boolean;
   showElementaryBoundaries: boolean;
   showMiddleBoundaries: boolean;
   showHighBoundaries: boolean;
+  showSchoolClosestModal: boolean;
+  schoolClosestModalData: { schoolName: string; schoolId: string } | null;
 }
 
 export interface Neighborhood {

@@ -1,7 +1,7 @@
 .app-header {
   width: 100%;
   background-color: var(--bg-header);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color-darker);
   box-shadow: 0 2px 4px var(--shadow);
   z-index: 1002;
   transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -12,7 +12,7 @@
 .theme-dark .app-header,
 .dark-mode .app-header {
   background-color: var(--bg-header);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color-darker);
 }
 
 .app-header.sticky-header {
@@ -49,14 +49,14 @@
 
 /* Logo styling - invert in light mode since logo is white */
 .header-logo {
-  filter: brightness(0);
+  filter: invert(1);
   transition: filter 0.3s ease;
 }
 
 /* Keep logo white in dark mode */
 .theme-dark .header-logo,
 .dark-mode .header-logo {
-  filter: brightness(0) invert(1);
+  filter: invert(0);
 }
 
 /* Header text colors - dark text for white background */

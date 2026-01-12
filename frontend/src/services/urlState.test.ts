@@ -10,7 +10,8 @@ describe('URL State Service', () => {
     it('parses school selection', () => {
       expect(parseUrlPath('/west-sylvan', '')).toEqual({
         schoolId: 'west-sylvan',
-        show: 'schools'
+        show: 'schools',
+        focus: 'school-info'
       });
     });
 
@@ -80,7 +81,8 @@ describe('URL State Service', () => {
     it('handles explicit /schools prefix', () => {
       expect(parseUrlPath('/schools/west-sylvan', '')).toEqual({
         schoolId: 'west-sylvan',
-        show: 'schools'
+        show: 'schools',
+        focus: 'school-info'
       });
     });
 

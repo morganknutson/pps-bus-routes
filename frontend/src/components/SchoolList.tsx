@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useStore } from '../store/useStore';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useMediaQuery';
-import { School } from '../types';
+import { School, AssignedSchools } from '../types';
 import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
@@ -86,6 +86,7 @@ interface SchoolListProps {
   schoolTypeFilters?: SchoolTypeFilters;
   onFiltersChange?: (filters: SchoolTypeFilters) => void;
   onMobileClose?: () => void;
+  assignedSchools?: AssignedSchools | null;
 }
 
 export function SchoolList({
@@ -100,6 +101,7 @@ export function SchoolList({
   schoolTypeFilters: externalFilters,
   onFiltersChange: externalOnFiltersChange,
   onMobileClose,
+  assignedSchools: externalAssignedSchools,
 }: SchoolListProps) {
   const isMobile = useIsMobile();
   const [internalSearchTerm, setInternalSearchTerm] = useState('');
@@ -145,32 +147,29 @@ export function SchoolList({
     const isHybrid = schoolTypes.includes('Hybrid');
     const hasNoRoutes = school.routeCount === 0;
 
-    // "School without route data" filter overrides type filters
-    // If a school has no routes, it is ONLY shown if the noRoutes filter is enabled
-    // regardless of its type.
-    if (hasNoRoutes) {
-      return schoolTypeFilters.noRoutes;
+    // 1. Check School Type Filter first (PRIORITY)
+    let matchesType = false;
+    if (isHybrid) {
+      matchesType = schoolTypeFilters.hybrid;
+    } else {
+      matchesType =
+        (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
+        (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
+        (schoolTypes.includes('High School') && schoolTypeFilters.high);
     }
 
-    // If it's a hybrid school, check hybrid filter
-    if (isHybrid) {
-      if (schoolTypeFilters.hybrid) {
-        return true; // Show hybrid schools if hybrid filter is enabled
-      }
-      // If hybrid filter is disabled, don't show hybrid schools
+    if (!matchesType) return false;
+
+    // 2. Then check Route Status Filter
+    if (hasNoRoutes && !schoolTypeFilters.noRoutes) {
       return false;
     }
 
-    // For non-hybrid schools, check individual type filters
-    const matchesFilter =
-      (schoolTypes.includes('Elementary School') && schoolTypeFilters.elementary) ||
-      (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
-      (schoolTypes.includes('High School') && schoolTypeFilters.high);
-
-    return matchesFilter;
+    return true;
   });
 
-  const assignedSchoolsData = useStore(state => state.assignedSchools);
+  const storeAssignedSchools = useStore(state => state.assignedSchools);
+  const assignedSchoolsData = externalAssignedSchools !== undefined ? externalAssignedSchools : storeAssignedSchools;
 
   // Split into assigned and other schools
   const { assigned, others } = useMemo(() => {
@@ -230,7 +229,7 @@ export function SchoolList({
         data-testid="school-list-item"
         className={`school-list-item ${isSelected ? 'selected' : ''}`}
         style={{
-          borderBottom: '1px solid var(--border-color)',
+          borderBottom: '1px solid var(--border-color-darker)',
           borderLeft: `4px solid ${schoolColor}`,
           transition: 'background-color 0.3s ease, border-color 0.3s ease',
         }}
@@ -240,18 +239,10 @@ export function SchoolList({
             if (!isEditing) {
               // Toggle selection: if already selected, deselect; otherwise select
               if (isSelected) {
-                navigate('/schools');
+                onSelectSchool(null);
               } else {
                 analyticsService.trackSchoolSelect(school.name, enableEditing ? 'admin_list' : 'explorer_list');
-
-                if (isMobile) {
-                  // On mobile, show routes immediately and close sidebar
-                  navigate(`/${school.id}/routes`);
-                  if (onMobileClose) onMobileClose();
-                } else {
-                  // On desktop, show school info (standard behavior)
-                  navigate(`/${school.id}/school-info`);
-                }
+                onSelectSchool(school.id);
               }
             }
           }}
@@ -291,7 +282,7 @@ export function SchoolList({
                     transition: 'color 0.2s ease',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#FFFFFF';
+                    e.currentTarget.style.color = 'var(--text-primary)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = 'var(--text-tertiary)';
@@ -461,8 +452,8 @@ export function SchoolList({
                     flex: 1,
                     padding: '0.5rem',
                     fontSize: '12px',
-                    backgroundColor: '#FFFFFF',
-                    color: 'white',
+                    backgroundColor: 'var(--text-primary)',
+                    color: 'var(--bg-primary)',
                     border: 'none',
                     borderRadius: '9999px',
                     cursor: 'pointer',
@@ -482,9 +473,9 @@ export function SchoolList({
                     flex: 1,
                     padding: '0.5rem',
                     fontSize: '12px',
-                    backgroundColor: '#ccc',
-                    color: 'white',
-                    border: 'none',
+                    backgroundColor: 'var(--bg-tertiary)',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '9999px',
                     cursor: 'pointer',
                     fontWeight: '500',
@@ -580,8 +571,8 @@ export function SchoolList({
             <button
               onClick={() => setIsAddingSchool(!isAddingSchool)}
               style={{
-                backgroundColor: isAddingSchool ? 'var(--text-tertiary)' : '#FFFFFF',
-                color: 'white',
+                backgroundColor: isAddingSchool ? 'var(--text-tertiary)' : 'var(--text-primary)',
+                color: 'var(--bg-primary)',
                 border: 'none',
                 borderRadius: '12px',
                 width: '38px',
@@ -595,7 +586,7 @@ export function SchoolList({
               }}
               title={isAddingSchool ? "Cancel adding school" : "Add new school"}
             >
-              {isAddingSchool ? <XIcon color="white" /> : <i className="fas fa-plus"></i>}
+              {isAddingSchool ? <XIcon color="var(--bg-primary)" /> : <i className="fas fa-plus"></i>}
             </button>
           )}
         </div>
@@ -720,8 +711,8 @@ export function SchoolList({
                   flex: 1,
                   padding: '0.6rem',
                   fontSize: '12px',
-                  backgroundColor: newSchoolName ? '#FFFFFF' : 'var(--text-tertiary)',
-                  color: 'white',
+                  backgroundColor: newSchoolName ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  color: 'var(--bg-primary)',
                   border: 'none',
                   borderRadius: '9999px',
                   cursor: newSchoolName ? 'pointer' : 'not-allowed',
@@ -997,8 +988,8 @@ export function SchoolList({
                                   flex: 1,
                                   padding: '0.5rem',
                                   fontSize: '12px',
-                                  backgroundColor: '#FFFFFF',
-                                  color: 'white',
+                                  backgroundColor: 'var(--text-primary)',
+                                  color: 'var(--bg-primary)',
                                   border: 'none',
                                   borderRadius: '4px',
                                   cursor: 'pointer',
@@ -1018,9 +1009,9 @@ export function SchoolList({
                                   flex: 1,
                                   padding: '0.5rem',
                                   fontSize: '12px',
-                                  backgroundColor: '#ccc',
-                                  color: 'white',
-                                  border: 'none',
+                                  backgroundColor: 'var(--bg-tertiary)',
+                                  color: 'var(--text-primary)',
+                                  border: '1px solid var(--border-color)',
                                   borderRadius: '4px',
                                   cursor: 'pointer',
                                   fontWeight: '500',

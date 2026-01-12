@@ -7,6 +7,7 @@ import { RouteListBase } from '../components/RouteListBase';
 import { SchoolList } from '../components/SchoolList';
 import { RouteIcon } from '../components/RouteIcon';
 import { Route, School, Stop } from '../types';
+import { exampleSchool, exampleSchools, exampleStop, exampleRoute } from '../utils/dummyData';
 import { MapContainer, Marker, Polyline } from 'react-leaflet';
 import { DarkModeTileLayer } from '../components/DarkModeTileLayer';
 import { createSchoolIcon, createNumberedIcon } from '../utils/markerIcons';
@@ -61,7 +62,7 @@ const sections: Section[] = [
     id: 'design-ops',
     title: 'Design System & Operations',
     subsections: [
-      { id: 'themes', title: '1. Themes (Dark/Light/Colors)' },
+      { id: 'themes', title: '1. Themes (Dark/Light)' },
       { id: 'icons-typography', title: '2. Icons & Typography' },
       { id: 'analytics', title: '3. Analytics & Usage' },
       { id: 'seo', title: '4. SEO & Discovery' },
@@ -318,89 +319,6 @@ const SectionContent = ({ children }: { children: React.ReactNode }) => (
     {children}
   </div>
 );
-
-// Example data for UI components
-const exampleSchool: School = {
-  id: 'west-sylvan',
-  name: 'West Sylvan',
-  address: '1301 SW 25th Ave, Portland, OR 97201',
-  coordinates: [-122.6984, 45.5123],
-  schoolPageLink: 'https://www.pps.net/westsylvan',
-  driveLink: 'https://drive.google.com/drive/folders/1BC03MH02DFuUL6teeq4jkcT2THRGgzxj',
-  createdAt: '2024-01-15T10:00:00.000Z',
-  schoolTypes: ['Middle School'],
-  routeCount: 12,
-};
-
-const exampleSchools: School[] = [
-  exampleSchool,
-  {
-    id: 'lincoln',
-    name: 'Lincoln High School',
-    address: '1600 SW Salmon St, Portland, OR 97205',
-    coordinates: [-122.6900, 45.5200],
-    schoolPageLink: 'https://www.pps.net/lincoln',
-    driveLink: null,
-    createdAt: '2024-01-15T10:00:00.000Z',
-    schoolTypes: ['High School'],
-    routeCount: 8,
-  },
-];
-
-const exampleStop: Stop = {
-  id: 'stop-1',
-  address: 'SW Patton Rd & SW Montgomery Dr [NE]',
-  coordinates: [-122.6784, 45.5152],
-  neighborhood: 'Sylvan-Highlands',
-  time: '8:36 am',
-  direction: 'NE',
-};
-
-const exampleRoute: Route = {
-  id: 'route-example-1',
-  name: '100',
-  direction: 'Morning',
-  filename: '100SYL-A_effective_082625.pdf',
-  stops: [
-    {
-      id: 'stop-1',
-      address: 'SW Patton Rd & SW Montgomery Dr [NE]',
-      coordinates: [-122.6784, 45.5152],
-      neighborhood: 'Sylvan-Highlands',
-      time: '8:36 am',
-      direction: 'NE',
-    },
-    {
-      id: 'stop-2',
-      address: '3737 SW Humphrey Blvd [NE]',
-      coordinates: [-122.6821, 45.5123],
-      neighborhood: 'Sylvan-Highlands',
-      time: '8:54 am',
-      direction: 'NE',
-    },
-    {
-      id: 'stop-school',
-      address: '1301 SW 25th Ave, Portland, OR 97201',
-      coordinates: [-122.6984, 45.5123],
-      isSchoolStop: true,
-      schoolName: 'West Sylvan',
-      time: '9:10 am'
-    }
-  ],
-  geometry: [
-    [45.5152, -122.6784],
-    [45.5140, -122.6800],
-    [45.5123, -122.6821],
-    [45.5123, -122.6984]
-  ],
-  color: '#3b82f6',
-  isSelected: true,
-  geocodingProgress: {
-    total: 3,
-    geocoded: 3,
-    isGeocoding: false,
-  },
-};
 
 export function TechPage() {
   const [activeSection, setActiveSection] = useState<string>('');
@@ -829,6 +747,19 @@ export function TechPage() {
                       </div>
                     </div>
                   </div>
+
+                  <div style={{ border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', backgroundColor: 'var(--bg-secondary)' }}>
+                    <div style={{ marginBottom: '10px', fontSize: '11px', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>Specialized Modals (Compound System)</div>
+                    <div style={{ padding: '0', backgroundColor: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+                      <div style={{ padding: '20px 24px 0', color: 'var(--text-primary)', fontSize: '16px' }}>Modal Title Pattern</div>
+                      <div style={{ padding: '16px 24px 20px', fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                        The Modal system uses a compound pattern (Modal.Title, Modal.Description) to enforce high-fidelity typography.
+                      </div>
+                      <div style={{ padding: '0 20px 20px' }}>
+                        <div style={{ width: '100%', padding: '10px', backgroundColor: 'var(--bg-tertiary)', borderRadius: '46px', color: 'var(--text-primary)', textAlign: 'center', fontSize: '13px', border: '1px solid var(--border-color)' }}>Button Component</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
@@ -836,6 +767,8 @@ export function TechPage() {
                   <ul>
                     <li><strong>Stop Overlays</strong> - Desktop users see a floating bottom-right panel; mobile users see a bottom sheet.</li>
                     <li><strong>School Tooltips</strong> - Hovering or clicking a school pin shows its name, address, and a "View Routes" CTA.</li>
+                    <li><strong>Compound Modal System</strong> - Specialized <code>Modal.Title</code> and <code>Modal.Description</code> components ensure consistent typography across all alerts.</li>
+                    <li><strong>Pill Buttons</strong> - The <code>Button</code> component implements the high-fidelity rounded design seen in Figma.</li>
                   </ul>
                 </div>
               </SectionContent>
@@ -924,10 +857,26 @@ export function TechPage() {
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
-                  <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
+                  <strong style={{ color: 'var(--text-primary)' }}>Architecture & Synchronization:</strong>
                   <ul>
-                    <li><strong>useUrlState</strong> - A custom hook that listens to URL changes and updates the Zustand store automatically.</li>
-                    <li><strong>Schema</strong> - The URL follows a strict hierarchy: <code>/explorer/:schoolId/routes/:direction/:routeId/stops/:stopId</code>.</li>
+                    <li><strong>Single Source of Truth</strong> - The URL is the primary source of truth for all selection state (school, tab, direction, routes, stops, and map focus).</li>
+                    <li><strong>useUrlState Hook</strong> - A custom hook that derives application state from the current URL path and provides actions that update the URL, ensuring bidirectional sync is actually a unidirectional flow from URL to UI.</li>
+                    <li><strong>Map Intent System</strong> - Changes in the URL trigger "Map Intents" (e.g., <code>ZOOM_STOP</code>, <code>FIT_ROUTES</code>) which are dispatched to the store and then handled by the <code>MapView</code> to ensure the map always reflects the current URL state.</li>
+                    <li><strong>Persistence</strong> - Selection state is naturally persisted in the browser history, allowing for seamless back/forward navigation and easy sharing of specific views.</li>
+                  </ul>
+                </div>
+                <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
+                  <strong style={{ color: 'var(--text-primary)' }}>URL Schema:</strong>
+                  <p style={{ marginTop: '8px', fontFamily: 'monospace', fontSize: '11px' }}>
+                    /:schoolId/:tab/:direction/:routeNames/stops/:stopId/focus/:focus
+                  </p>
+                  <ul>
+                    <li><strong>schoolId</strong> - The unique identifier for the selected school (e.g., <code>west-sylvan</code>).</li>
+                    <li><strong>tab</strong> - The active sidebar tab (<code>schools</code>, <code>routes</code>, or <code>neighborhoods</code>).</li>
+                    <li><strong>direction</strong> - The route direction filter (<code>morning</code>, <code>afternoon</code>, or <code>both</code>).</li>
+                    <li><strong>routeNames</strong> - Comma-separated list of selected route numbers.</li>
+                    <li><strong>stopId</strong> - The ID of the currently focused bus stop.</li>
+                    <li><strong>focus</strong> - Specialized map focus targets (<code>school-info</code>, <code>home</code>, <code>my-stop</code>, or specific coordinates).</li>
                   </ul>
                 </div>
               </SectionContent>
@@ -957,6 +906,7 @@ export function TechPage() {
                   <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
                   <ul>
                     <li><strong>Loading Counter</strong> - The store uses a <code>loadingCount</code> to handle multiple concurrent API requests (e.g., schools and routes), ensuring the global <code>isLoading</code> state remains true until all tasks complete.</li>
+                    <li><strong>Clean Loading</strong> - To prevent selection artifacts, the application explicitly clears route state immediately upon school selection changes, ensuring that the UI never displays routes from a previously viewed school while the new ones are loading.</li>
                     <li><strong>Route Stats Optimization</strong> - The <code>/api/schools</code> endpoint uses directory metadata and filename parsing to quickly count routes without expensive per-file <code>stat</code> calls.</li>
                   </ul>
                 </div>
@@ -976,7 +926,7 @@ export function TechPage() {
 
             <div id="themes" style={{ marginBottom: '40px', scrollMarginTop: '80px' }}>
               <h3 style={{ color: 'var(--text-primary)', marginBottom: '15px', fontSize: '18px' }}>
-                1. Themes (Dark/Light/Colors)
+                1. Themes (Dark/Light)
               </h3>
               <SectionContent>
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>

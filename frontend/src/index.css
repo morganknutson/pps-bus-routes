@@ -15,6 +15,13 @@
   --shadow-hover: rgba(0, 0, 0, 0.15);
   --shadow-large: rgba(0, 0, 0, 0.2);
   --active-marker-lens-bg: rgba(0, 0, 0, 0.15);
+
+  /* Component specific */
+  --btn-primary-bg: #717171;
+  --btn-primary-text: #ffffff;
+  --btn-primary-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.5);
+  --modal-bg: #ffffff;
+  --modal-backdrop: rgba(255, 255, 255, 0.79);
   --app-height: 100vh;
   --bg-header: #ffffff;
 
@@ -36,7 +43,7 @@
 }
 
 /* Light theme (default) */
-.theme-light {
+:root {
   --bg-primary: #ffffff;
   --bg-secondary: #fafafa;
   --bg-tertiary: #ffffff;
@@ -53,92 +60,6 @@
 }
 
 /* Dark theme */
-.theme-dark {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d2d2d;
-  --bg-tertiary: #3a3a3a;
-  --bg-route-list: #2d2d2d;
-  --text-primary: #ffffff;
-  --text-secondary: #e0e0e0;
-  --text-tertiary: #b0b0b0;
-  --border-color: #404040;
-  --border-color-darker: #555555;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-hover: rgba(0, 0, 0, 0.4);
-  --shadow-large: rgba(0, 0, 0, 0.5);
-  --active-marker-lens-bg: rgba(255, 255, 255, 0.15);
-  --bg-header: #3A3A3A;
-}
-
-/* Blue theme */
-.theme-blue {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --text-primary: #e0e7ff;
-  --text-secondary: #c7d2fe;
-  --text-tertiary: #a5b4fc;
-  --border-color: #475569;
-  --border-color-darker: #64748b;
-  --border-color-darkest: #334155;
-  --shadow: rgba(37, 99, 235, 0.2);
-  --shadow-hover: rgba(37, 99, 235, 0.3);
-  --shadow-large: rgba(37, 99, 235, 0.4);
-  --active-marker-lens-bg: rgba(255, 255, 255, 0.15);
-}
-
-/* Green theme */
-.theme-green {
-  --bg-primary: #052e16;
-  --bg-secondary: #14532d;
-  --bg-tertiary: #166534;
-  --text-primary: #dcfce7;
-  --text-secondary: #bbf7d0;
-  --text-tertiary: #86efac;
-  --border-color: #22c55e;
-  --border-color-darker: #16a34a;
-  --border-color-darkest: #15803d;
-  --shadow: rgba(22, 163, 74, 0.2);
-  --shadow-hover: rgba(22, 163, 74, 0.3);
-  --shadow-large: rgba(22, 163, 74, 0.4);
-  --active-marker-lens-bg: rgba(255, 255, 255, 0.15);
-}
-
-/* Purple theme */
-.theme-purple {
-  --bg-primary: #1e1b4b;
-  --bg-secondary: #312e81;
-  --bg-tertiary: #4338ca;
-  --text-primary: #ede9fe;
-  --text-secondary: #ddd6fe;
-  --text-tertiary: #c4b5fd;
-  --border-color: #7c3aed;
-  --border-color-darker: #9333ea;
-  --border-color-darkest: #6d28d9;
-  --shadow: rgba(147, 51, 234, 0.2);
-  --shadow-hover: rgba(147, 51, 234, 0.3);
-  --shadow-large: rgba(147, 51, 234, 0.4);
-  --active-marker-lens-bg: rgba(255, 255, 255, 0.15);
-}
-
-/* Orange theme */
-.theme-orange {
-  --bg-primary: #431407;
-  --bg-secondary: #7c2d12;
-  --bg-tertiary: #9a3412;
-  --text-primary: #fff7ed;
-  --text-secondary: #ffedd5;
-  --text-tertiary: #fed7aa;
-  --border-color: #ea580c;
-  --border-color-darker: #c2410c;
-  --border-color-darkest: #9a3412;
-  --shadow: rgba(234, 88, 12, 0.2);
-  --shadow-hover: rgba(234, 88, 12, 0.3);
-  --shadow-large: rgba(234, 88, 12, 0.4);
-  --active-marker-lens-bg: rgba(255, 255, 255, 0.15);
-}
-
-/* Backward compatibility: dark-mode class */
 .dark-mode {
   --bg-primary: #1a1a1a;
   --bg-secondary: #2d2d2d;
@@ -155,6 +76,13 @@
   --shadow-large: rgba(0, 0, 0, 0.5);
   --active-marker-lens-bg: rgba(255, 255, 255, 0.15);
   --bg-header: #3A3A3A;
+
+  /* Component specific overrides */
+  --btn-primary-bg: #1c1c1c;
+  --btn-primary-text: #ffffff;
+  --btn-primary-shadow: inset 0px 0px 1px 0px rgba(255,255,255,0.25);
+  --modal-bg: #1c1c1c;
+  --modal-backdrop: rgba(0, 0, 0, 0.79);
 }
 
 * {
@@ -208,20 +136,10 @@ body {
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-color: var(--bg-primary) !important;
-}
-
-/* Light mode: white background */
-.theme-light .leaflet-container {
   background-color: #ffffff !important;
 }
 
-/* Dark mode and color themes: black background to prevent white flash while loading tiles */
-.theme-dark .leaflet-container,
-.theme-blue .leaflet-container,
-.theme-green .leaflet-container,
-.theme-purple .leaflet-container,
-.theme-orange .leaflet-container,
+/* Dark mode: black background to prevent white flash while loading tiles */
 .dark-mode .leaflet-container {
   background-color: #000000 !important;
 }
@@ -256,11 +174,11 @@ body {
 .leaflet-bottom.leaflet-left .leaflet-control-zoom {
   padding: 0 0 0 14px!important;
   overflow: visible !important;
-  background-color: none !important;
   background: none !important;
   border: none !important;
-  backdrop-filter: none !important;
   box-shadow: none !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .leaflet-control-zoom-in::after{
@@ -268,75 +186,37 @@ body {
 }
 
 /* Dark mode styles for Leaflet zoom controls */
-.theme-dark .leaflet-control-zoom a,
-.theme-blue .leaflet-control-zoom a,
-.theme-green .leaflet-control-zoom a,
-.theme-purple .leaflet-control-zoom a,
-.theme-orange .leaflet-control-zoom a,
 .dark-mode .leaflet-control-zoom a,
 .leaflet-control-zoom a {
   color: var(--text-primary) !important;
   border: 0 !important;
-  padding: 0 0 3px !important;
+  padding: 0 !important;
   width: 36px !important;
   height: 36px !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  border-radius: 50px !important;
-  margin-bottom: 10px !important;
+  box-shadow: 0 2px 4px var(--shadow) !important;
+  border-radius: 50% !important;
+  margin-bottom: 8px !important;
   background-color: var(--bg-primary) !important;
-
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.theme-dark .leaflet-control-zoom a:hover,
-.theme-blue .leaflet-control-zoom a:hover,
-.theme-green .leaflet-control-zoom a:hover,
-.theme-purple .leaflet-control-zoom a:hover,
-.theme-orange .leaflet-control-zoom a:hover,
 .dark-mode .leaflet-control-zoom a:hover,
 .leaflet-control-zoom a:hover  {
   background-color: var(--bg-tertiary) !important;
   color: var(--text-primary) !important;
+  text-decoration: none !important;
 }
 
-.theme-dark .leaflet-control-zoom-in,
-.theme-dark .leaflet-control-zoom-out,
-.theme-blue .leaflet-control-zoom-in,
-.theme-blue .leaflet-control-zoom-out,
-.theme-green .leaflet-control-zoom-in,
-.theme-green .leaflet-control-zoom-out,
-.theme-purple .leaflet-control-zoom-in,
-.theme-purple .leaflet-control-zoom-out,
-.theme-orange .leaflet-control-zoom-in,
-.theme-orange .leaflet-control-zoom-out,
-.dark-mode .leaflet-control-zoom-in,
-.dark-mode .leaflet-control-zoom-out {
-  background-color: var(--bg-secondary) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--border-color) !important;
-}
-
-.theme-dark .leaflet-control-zoom-in:hover,
-.theme-dark .leaflet-control-zoom-out:hover,
-.theme-blue .leaflet-control-zoom-in:hover,
-.theme-blue .leaflet-control-zoom-out:hover,
-.theme-green .leaflet-control-zoom-in:hover,
-.theme-green .leaflet-control-zoom-out:hover,
-.theme-purple .leaflet-control-zoom-in:hover,
-.theme-purple .leaflet-control-zoom-out:hover,
-.theme-orange .leaflet-control-zoom-in:hover,
-.theme-orange .leaflet-control-zoom-out:hover,
-.dark-mode .leaflet-control-zoom-in:hover,
-.dark-mode .leaflet-control-zoom-out:hover {
-  background-color: var(--bg-tertiary) !important;
+.leaflet-control-zoom a:active {
+  transform: scale(0.95);
 }
 
 /* Dark mode styles for Leaflet attribution control */
-.theme-dark .leaflet-control-attribution,
-.theme-blue .leaflet-control-attribution,
-.theme-green .leaflet-control-attribution,
-.theme-purple .leaflet-control-attribution,
-.theme-orange .leaflet-control-attribution,
 .dark-mode .leaflet-control-attribution {
   background-color: transparent !important;
   background: transparent !important;
@@ -345,11 +225,6 @@ body {
   box-shadow: none !important;
 }
 
-.theme-dark .leaflet-control-attribution a,
-.theme-blue .leaflet-control-attribution a,
-.theme-green .leaflet-control-attribution a,
-.theme-purple .leaflet-control-attribution a,
-.theme-orange .leaflet-control-attribution a,
 .dark-mode .leaflet-control-attribution a {
   color: var(--text-primary) !important;
 }

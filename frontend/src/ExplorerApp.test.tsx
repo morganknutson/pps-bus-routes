@@ -102,6 +102,13 @@ vi.mock('./services/analytics', () => ({
     trackSchoolSelect: vi.fn(),
     trackTabChange: vi.fn(),
     trackPageView: vi.fn(),
+    trackAction: vi.fn(),
+    trackMapInteraction: vi.fn(),
+    trackRouteToggle: vi.fn(),
+    trackError: vi.fn(),
+    trackOutboundLink: vi.fn(),
+    setUserProperty: vi.fn(),
+    init: vi.fn(),
   }
 }));
 
@@ -115,11 +122,9 @@ describe('ExplorerApp Integration', () => {
     vi.clearAllMocks();
     // Reset store to initial state
     useStore.setState({
-      selectedSchoolId: null,
       schools: [],
       routes: [],
       isLoading: false,
-      activeTab: 'schools',
     });
   });
 
@@ -161,30 +166,21 @@ describe('ExplorerApp Integration', () => {
       expect(screen.queryAllByTestId('school-list-item').length).toBeGreaterThan(0);
     });
 
-    // Click on a school - find the clickable element within the school list item
+    // Click on a school
     const westSylvanText = screen.getByText(/West Sylvan/i);
-    const schoolItem = westSylvanText.closest('[data-testid="school-list-item"]');
+    fireEvent.click(westSylvanText);
     
-    if (schoolItem) {
-      // Find the clickable div within the school item
-      const clickableDiv = schoolItem.querySelector('div[onclick]') || schoolItem;
-      fireEvent.click(clickableDiv);
-      
-      // Wait for navigation/state update - navigation might happen via URL change
-      await waitFor(() => {
-        const state = useStore.getState();
-        // Check if either the school is selected OR the URL has changed (both indicate success)
-        return state.selectedSchoolId === 'west-sylvan' || state.selectedSchoolId !== null;
-      }, { timeout: 3000 });
-    }
+    // On desktop, it should show school info
+    await waitFor(() => {
+      // The tooltip should appear with the school name and route info
+      expect(screen.getByText(/Explore 1 Route/i)).toBeInTheDocument();
+    }, { timeout: 5000 });
   });
 
   it('displays routes when school is selected', async () => {
     useStore.setState({ 
       schools: mockSchools,
-      selectedSchoolId: 'west-sylvan',
       routes: mockRoutes,
-      activeTab: 'routes'
     });
 
     render(
@@ -204,7 +200,6 @@ describe('ExplorerApp Integration', () => {
   it('handles tab switching', async () => {
     useStore.setState({ 
       schools: mockSchools,
-      activeTab: 'schools'
     });
 
     render(
@@ -220,8 +215,9 @@ describe('ExplorerApp Integration', () => {
     if (routesTab) {
       fireEvent.click(routesTab);
       
+      // Wait for empty routes message or routes list
       await waitFor(() => {
-        expect(useStore.getState().activeTab).toBe('routes');
+        expect(screen.getByText(/Please select a school to view routes/i)).toBeInTheDocument();
       }, { timeout: 2000 });
     }
   });

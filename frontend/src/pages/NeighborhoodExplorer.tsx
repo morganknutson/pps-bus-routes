@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
 import { SchoolList } from '../components/SchoolList';
@@ -6,20 +7,38 @@ import { RouteList } from '../components/RouteList';
 import { MapView } from '../components/MapView';
 import { TabBar } from '../components/TabBar';
 import { useStore } from '../store/useStore';
+import { useIsMobile } from '../hooks/useMediaQuery';
 import { loadLocalRoutes } from '../services/localRoutes';
 import { getNeighborhoodsFromRoutes } from '../services/api';
 import { Neighborhood } from '../types';
 import { ProgressBar } from '../components/ProgressBar';
+import { parseUrlPath, buildUrlPath, UrlState } from '../services/urlState';
 
 export function NeighborhoodExplorer() {
-  const { selectedSchoolId, setSelectedSchool, schools, setSchools, routes, setRoutes, setLoading: setStoreLoading, setLoadingProgress, isLoading, loadingProgress, toggleRouteSelection } = useStore();
-  const [activeTab, setActiveTab] = useState<'schools' | 'neighborhoods'>('neighborhoods');
+  const { schools, setSchools, routes, setRoutes, setLoading: setStoreLoading, setLoadingProgress, isLoading, loadingProgress } = useStore();
+  
+  const location = useLocation();
+  const navigate = useNavigate();
+  const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
+  
+  // Use URL as source of truth for selection
+  const {
+    schoolId: selectedSchoolId,
+    activeTab: urlActiveTab,
+    selectedRouteNames,
+    setSelectedSchool,
+    setActiveTab,
+    toggleRouteSelection: toggleRouteSelectionUrl,
+    viewSchoolRoutes,
+  } = useUrlState({ basePath });
+  
+  const isMobile = useIsMobile();
+  
+  const activeTab = urlState.show === 'neighborhoods' ? 'neighborhoods' : 'schools';
   
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
-    if (tab === 'schools' || tab === 'neighborhoods') {
-      setActiveTab(tab === 'neighborhoods' ? 'neighborhoods' : 'schools');
-    }
+    setActiveTab(tab);
   };
   const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
   const [loadingNeighborhoods, setLoadingNeighborhoods] = useState(true);
@@ -54,8 +73,8 @@ export function NeighborhoodExplorer() {
       try {
         setLoadingNeighborhoods(true);
         setError(null);
-        console.log('[NeighborhoodExplorer] Loading neighborhoods for school:', selectedSchoolId || 'all');
-        const data = await getNeighborhoodsFromRoutes(selectedSchoolId || undefined);
+        console.log('[NeighborhoodExplorer] Loading neighborhoods for school:', urlState.schoolId || 'all');
+        const data = await getNeighborhoodsFromRoutes(urlState.schoolId || undefined);
         console.log('[NeighborhoodExplorer] Loaded neighborhoods:', data.neighborhoods?.length || 0);
         if (data.neighborhoods && Array.isArray(data.neighborhoods)) {
           setNeighborhoods(data.neighborhoods);
@@ -73,23 +92,23 @@ export function NeighborhoodExplorer() {
       }
     }
     fetchNeighborhoods();
-  }, [selectedSchoolId, activeTab]);
+  }, [urlState.schoolId, activeTab]);
 
   // Load routes when school is selected and neighborhoods tab is active
   useEffect(() => {
-    if (!selectedSchoolId || activeTab !== 'neighborhoods') {
+    if (!urlState.schoolId || activeTab !== 'neighborhoods') {
       if (activeTab !== 'neighborhoods') {
         setRoutes([]);
       }
       return;
     }
 
-    console.log('[NeighborhoodExplorer] Loading routes for school:', selectedSchoolId);
+    console.log('[NeighborhoodExplorer] Loading routes for school:', urlState.schoolId);
     const loadRoutes = async () => {
       setStoreLoading(true);
       setLoadingProgress(0);
       try {
-        const loadedRoutes = await loadLocalRoutes(selectedSchoolId);
+        const loadedRoutes = await loadLocalRoutes(urlState.schoolId);
         console.log('[NeighborhoodExplorer] Loaded', loadedRoutes.length, 'routes');
         setRoutes(loadedRoutes);
         setLoadingProgress(100);
@@ -103,7 +122,7 @@ export function NeighborhoodExplorer() {
     };
 
     loadRoutes();
-  }, [selectedSchoolId, activeTab, setRoutes, setStoreLoading]);
+  }, [urlState.schoolId, activeTab, setRoutes, setStoreLoading, setLoadingProgress]);
 
   // Filter neighborhoods by search term
   const filteredNeighborhoods = neighborhoods.filter(n =>
@@ -147,11 +166,11 @@ export function NeighborhoodExplorer() {
               schools={schools}
               selectedSchoolId={selectedSchoolId}
               onSelectSchool={(schoolId) => {
-                if (schoolId) {
+                if (isMobile && schoolId) {
+                  viewSchoolRoutes(schoolId);
+                } else {
                   setSelectedSchool(schoolId);
                   setActiveTab('neighborhoods');
-                } else {
-                  setSelectedSchool(null);
                 }
               }}
             />
@@ -317,7 +336,7 @@ export function NeighborhoodExplorer() {
                               transition: 'background-color 0.3s ease, border-color 0.3s ease',
                             }}>
                               {neighborhoodRoutes.map((route) => {
-                                const isRouteSelected = route.isSelected || false;
+                                const isRouteSelected = selectedRouteNames.includes(route.name);
                                 const routeColor = route.color || '#4ECDC4';
                                 
                                 return (
@@ -333,7 +352,7 @@ export function NeighborhoodExplorer() {
                                       cursor: 'pointer',
                                       transition: 'background-color 0.15s ease',
                                     }}
-                                    onClick={() => toggleRouteSelection(route.id)}
+                                    onClick={() => toggleRouteSelectionUrl(route.name)}
                                     onMouseEnter={(e) => {
                                       e.currentTarget.style.backgroundColor = isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-primary)';
                                     }}
@@ -354,7 +373,7 @@ export function NeighborhoodExplorer() {
                                         type="checkbox"
                                         checked={isRouteSelected}
                                         onChange={(e) => {
-                                          toggleRouteSelection(route.id);
+                                          toggleRouteSelectionUrl(route.name);
                                         }}
                                         style={{ display: 'none' }}
                                       />
@@ -438,7 +457,10 @@ export function NeighborhoodExplorer() {
                 }}>
                   <RouteList 
                     showBothOption={false}
-                    onClearSchool={() => setSelectedSchool(null)}
+                    onClearSchool={() => {
+                      const newUrlState: UrlState = { ...urlState, schoolId: undefined, show: 'schools' };
+                      navigate(buildUrlPath(basePath, newUrlState));
+                    }}
                   />
                 </div>
               )}

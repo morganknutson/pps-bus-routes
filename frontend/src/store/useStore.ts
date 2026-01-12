@@ -10,7 +10,6 @@ interface Store extends AppState {
   initialize: (options?: { skipSchoolSelection?: boolean }) => void;
   setDriveLink: (link: string) => void;
   setRoutes: (routes: Route[]) => void;
-  toggleRouteSelection: (routeId: string) => void;
   setHomeAddress: (address: HomeAddress) => void;
   clearHomeAddress: () => void;
   setLookupAddress: (address: HomeAddress) => void;
@@ -21,25 +20,21 @@ interface Store extends AppState {
   updateStopCoordinates: (routeId: string, stopId: string, coordinates: [number, number]) => void;
   updateRouteGeocodingProgress: (routeId: string, progress: { total: number; geocoded: number; isGeocoding: boolean }) => void;
   setCurrentGeocodingRoute: (routeId: string | null) => void;
-  setSelectedSchool: (schoolId: string | null) => void;
   setSchools: (schools: School[]) => void;
-  setSelectedRoutes: (routeIds: string[]) => void;
-  selectStop: (route: Route, stop: Stop, stopNumber: number) => void;
-  clearSelectedStop: () => void;
-  setDirectionFilter: (direction: 'Morning' | 'Afternoon' | 'Both') => void;
-  triggerZoomToHomeAddress: () => void;
-  clearZoomToHomeAddress: () => void;
   toggleDarkMode: () => void;
   setIsDarkMode: (isDark: boolean) => void;
-  activeTab: 'schools' | 'routes' | 'neighborhoods';
-  setActiveTab: (tab: 'schools' | 'routes' | 'neighborhoods') => void;
   setMapIntent: (intent: MapIntent | null) => void;
   mapIntent: MapIntent | null;
+  lastRouteNames: string[] | null;
+  setLastRouteNames: (names: string[] | null) => void;
+  lastDirection: string | null;
+  setLastDirection: (direction: string | null) => void;
+  lastStopId: string | null;
+  setLastStopId: (stopId: string | null) => void;
+  lastFocus: string | null;
+  setLastFocus: (focus: string | null) => void;
   currentGeocodingRouteId: string | null;
-  selectedStop: { route: Route; stop: Stop; stopNumber: number } | null;
-  directionFilter: 'Morning' | 'Afternoon' | 'Both';
   lookupAddress: HomeAddress | undefined;
-  shouldZoomToHomeAddress: boolean;
   loadingCount: number;
   loadingProgress: number | null; // 0-100 or null for indeterminate
   assignedSchools: import('../types').AssignedSchools | null;
@@ -53,6 +48,7 @@ interface Store extends AppState {
   toggleBoundaries: () => void;
   toggleBoundaryType: (type: 'elementary' | 'middle' | 'high') => void;
   toggleAllBoundaries: (show: boolean) => void;
+  setShowSchoolClosestModal: (show: boolean, data?: { schoolName: string; schoolId: string }) => void;
 }
 
 export const useStore = create<Store>((set, get) => {
@@ -72,20 +68,21 @@ export const useStore = create<Store>((set, get) => {
     loadingCount: 0,
     loadingProgress: null as number | null, // 0-100 or null for indeterminate
     error: undefined,
-    selectedSchoolId: null,
     schools: [],
     currentGeocodingRouteId: null,
-    selectedStop: null,
-    directionFilter: 'Morning',
-    activeTab: 'schools',
     mapIntent: null,
-    shouldZoomToHomeAddress: false,
+    lastRouteNames: null,
+    lastDirection: null,
+    lastStopId: null,
+    lastFocus: null,
     assignedSchools: null,
     boundaries: null,
     showBoundaries: false,
     showElementaryBoundaries: false,
     showMiddleBoundaries: false,
     showHighBoundaries: false,
+    showSchoolClosestModal: false,
+    schoolClosestModalData: null,
     isDarkMode: (() => {
       if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('darkMode');
@@ -106,8 +103,6 @@ export const useStore = create<Store>((set, get) => {
         try {
           const address = JSON.parse(savedAddress);
           set({ homeAddress: address });
-          // Trigger zoom on initial load if address is present
-          set({ shouldZoomToHomeAddress: true });
 
           // Load assigned schools from cache first for immediate display
           const savedAssigned = localStorage.getItem('assignedSchools');
@@ -145,17 +140,6 @@ export const useStore = create<Store>((set, get) => {
           console.error('[useStore] Failed to load saved lookup address:', e);
         }
       }
-
-      // Load selected school (but only if not already set by URL logic and not skipped)
-      if (!options?.skipSchoolSelection) {
-        const currentSchoolId = get().selectedSchoolId;
-        if (!currentSchoolId) {
-          const savedSchoolId = localStorage.getItem('selectedSchoolId');
-          if (savedSchoolId) {
-            set({ selectedSchoolId: savedSchoolId });
-          }
-        }
-      }
     },
 
     setDriveLink: (link) => set({ driveLink: link }),
@@ -177,7 +161,7 @@ export const useStore = create<Store>((set, get) => {
           // Preserve existing color if it's already set, otherwise assign a new one
           // This prevents color changes when routes are reloaded
           color: route.color && route.color !== '' ? route.color : (colorMap.get(route.id || '') || '#FF6B6B'),
-          isSelected: route.isSelected ?? false,
+          isSelected: false, // Selection is now derived from URL
           geocodingProgress: {
             total: totalStops,
             geocoded: geocodedStops,
@@ -186,48 +170,12 @@ export const useStore = create<Store>((set, get) => {
         };
       });
 
-      // Update routes and clear selectedStop if there are no routes to show
-      set((state) => {
-        const shouldClearSelectedStop = routesWithColors.length === 0 && state.selectedStop;
-
-        // Update selectedStop's route if it exists and matches one of the new routes
-        // This ensures the selected stop always has the latest route data (including colors)
-        let updatedSelectedStop = state.selectedStop;
-        if (updatedSelectedStop && !shouldClearSelectedStop) {
-          const matchingRoute = routesWithColors.find(r => r.id === updatedSelectedStop!.route.id);
-          if (matchingRoute) {
-            updatedSelectedStop = {
-              ...updatedSelectedStop,
-              route: matchingRoute
-            };
-          }
-        }
-
-        return {
-          routes: routesWithColors,
-          selectedStop: shouldClearSelectedStop ? null : updatedSelectedStop,
-        };
-      });
+      // Update routes
+      set({ routes: routesWithColors });
 
       // Save to cache using debounced function to handle potential rapid updates
       debouncedSaveToCache();
     },
-
-    toggleRouteSelection: (routeId) =>
-      set((state) => {
-        const updatedRoutes = state.routes.map((route) =>
-          route.id === routeId
-            ? { ...route, isSelected: !route.isSelected }
-            : route
-        );
-
-        // Requirement: any route toggle clears the selected stop and fits all routes
-        return {
-          routes: updatedRoutes,
-          selectedStop: null,
-          mapIntent: { type: 'FIT_ROUTES' }
-        };
-      }),
 
     setHomeAddress: (address) => {
       set({ homeAddress: address });
@@ -338,162 +286,17 @@ export const useStore = create<Store>((set, get) => {
     setCurrentGeocodingRoute: (routeId) =>
       set({ currentGeocodingRouteId: routeId }),
 
-    setSelectedSchool: (schoolId) => {
-      // When the selected school changes, clear routes and selected stop
-      // to avoid race conditions where old school data is synced to the new school's URL.
-      set((state) => {
-        // Only clear if the school actually changed
-        if (state.selectedSchoolId === schoolId) {
-          return state;
-        }
-
-        console.log('[useStore] School changing to:', schoolId, 'clearing previous routes and stops');
-
-        return {
-          selectedSchoolId: schoolId,
-          selectedStop: null,
-          routes: [], // Clear routes immediately to prevent URL sync issues
-          // Tab switching is now handled by the UI components/URL logic explicitly
-        };
-      });
-      // Save to localStorage
-      if (schoolId) {
-        localStorage.setItem('selectedSchoolId', schoolId);
-      } else {
-        localStorage.removeItem('selectedSchoolId');
-      }
-    },
-
     setSchools: (schools) => set({ schools }),
 
-    setSelectedRoutes: (routeIds) =>
-      set((state) => {
-        console.log('[useStore] Setting selected routes:', routeIds);
-        const updatedRoutes = state.routes.map((route) => {
-          const isSelected = routeIds.includes(route.id);
-          return route.isSelected === isSelected ? route : { ...route, isSelected };
-        });
-
-        // Requirement: any route selection change clears the selected stop and fits all routes
-        return {
-          routes: updatedRoutes,
-          selectedStop: null,
-          mapIntent: { type: 'FIT_ROUTES' }
-        };
-      }),
-
-    selectStop: (route, stop, stopNumber) => set((state) => {
-      // Ensure we use the route object from the store that has the color assigned
-      const routeWithColor = state.routes.find(r => r.id === route.id) || route;
-
-      // Auto-select the route when a stop is selected so it appears on the map
-      const updatedRoutes = state.routes.map(r =>
-        r.id === route.id ? { ...r, isSelected: true } : r
-      );
-
-      return {
-        routes: updatedRoutes,
-        selectedStop: {
-          route: routeWithColor,
-          stop,
-          stopNumber
-        }
-      };
-    }),
-
-    clearSelectedStop: () => set({ selectedStop: null }),
-
-    setDirectionFilter: (direction) => {
-      set((state) => {
-        if (state.directionFilter === direction) return state;
-
-        const oldDirection = state.directionFilter;
-        const newDirection = direction;
-
-        // 1. Carry over route selection (by name) from old direction to new direction
-        // Find names of currently selected routes in the OLD context
-        const selectedNames = state.routes
-          .filter(r => r.isSelected && (oldDirection === 'Both' || r.direction === oldDirection))
-          .map(r => r.name);
-
-        // Update routes: 
-        // Ensure the selection in the NEW context exactly matches the names from the OLD context.
-        const updatedRoutes = state.routes.map(r => {
-          const isCurrentContext = newDirection === 'Both' || r.direction === newDirection;
-
-          if (isCurrentContext) {
-            const shouldBeSelected = selectedNames.includes(r.name);
-            if (r.isSelected !== shouldBeSelected) {
-              return { ...r, isSelected: shouldBeSelected };
-            }
-          }
-          return r;
-        });
-
-        // 2. Try to carry over stop selection if it exists
-        let updatedSelectedStop = state.selectedStop;
-        if (state.selectedStop && oldDirection !== newDirection) {
-          const currentStop = state.selectedStop.stop;
-          const currentRouteName = state.selectedStop.route.name;
-
-          // Look for the same route in the NEW direction
-          const newTargetRoute = updatedRoutes.find(r =>
-            r.name === currentRouteName &&
-            (newDirection === 'Both' || r.direction === newDirection)
-          );
-
-          if (newTargetRoute) {
-            // Try to find the matching stop by address
-            const matchingStopIndex = newTargetRoute.stops.findIndex(s => s.address === currentStop.address);
-            if (matchingStopIndex !== -1) {
-              const matchingStop = newTargetRoute.stops[matchingStopIndex];
-              updatedSelectedStop = {
-                route: newTargetRoute,
-                stop: matchingStop,
-                stopNumber: matchingStopIndex + 1
-              };
-            } else {
-              // If no exact address match, we might want to clear it or keep it?
-              // Usually best to clear if it's not the same physical location
-              updatedSelectedStop = null;
-            }
-          } else {
-            updatedSelectedStop = null;
-          }
-        }
-
-        return {
-          directionFilter: direction,
-          routes: updatedRoutes,
-          selectedStop: updatedSelectedStop
-        };
-      });
-    },
-
-    triggerZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: true }),
-    clearZoomToHomeAddress: () => set({ shouldZoomToHomeAddress: false }),
-
-    setActiveTab: (tab) => set((state) => {
-      if (state.activeTab === tab) return state;
-      if (tab === 'schools') {
-        return {
-          activeTab: tab,
-          selectedStop: null,
-          mapIntent: state.selectedSchoolId
-            ? { type: 'ZOOM_SCHOOL', data: { schoolId: state.selectedSchoolId, showInfo: true } }
-            : null,
-        };
-      }
-      if (tab === 'routes') {
-        return {
-          activeTab: tab,
-          mapIntent: { type: 'FIT_ROUTES' }
-        };
-      }
-      return { activeTab: tab };
-    }),
-
     setMapIntent: (intent) => set({ mapIntent: intent }),
+
+    setLastRouteNames: (names) => set({ lastRouteNames: names }),
+
+    setLastDirection: (direction) => set({ lastDirection: direction }),
+
+    setLastStopId: (stopId) => set({ lastStopId: stopId }),
+
+    setLastFocus: (focus) => set({ lastFocus: focus }),
 
     toggleDarkMode: () => set((state) => {
       const next = !state.isDarkMode;
@@ -561,5 +364,10 @@ export const useStore = create<Store>((set, get) => {
         showHighBoundaries: show
       });
     },
+
+    setShowSchoolClosestModal: (show, data) => set({ 
+      showSchoolClosestModal: show, 
+      schoolClosestModalData: data || null 
+    }),
   };
 });

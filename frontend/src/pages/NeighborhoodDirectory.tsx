@@ -17,8 +17,6 @@ interface NeighborhoodData {
 }
 
 export function NeighborhoodDirectory() {
-  const setSelectedSchool = useStore(state => state.setSelectedSchool);
-  const setRoutes = useStore(state => state.setRoutes);
   const { isDarkMode } = useDarkMode();
   const [neighborhoods, setNeighborhoods] = useState<NeighborhoodData[]>([]);
 
@@ -199,10 +197,6 @@ export function NeighborhoodDirectory() {
                   </span>
                   <Link 
                     to="/schools"
-                    onClick={() => {
-                      setSelectedSchool(null);
-                      setRoutes([]);
-                    }}
                     style={{ 
                       fontSize: '0.875rem', 
                       color: 'var(--text-tertiary)',

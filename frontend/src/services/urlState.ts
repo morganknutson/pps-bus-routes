@@ -63,7 +63,7 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
     currentIdx = 1;
   } else if (!reservedKeywords.includes(segments[0]?.toLowerCase())) {
     state.schoolId = segments[0];
-    state.show = 'schools'; // Default
+    state.show = segments[1] === 'routes' ? 'routes' : 'schools';
     currentIdx = 1;
   } else {
     // Default fallback
@@ -79,11 +79,11 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
       state.show = 'routes';
     } else if (['morning', 'afternoon', 'both'].includes(segmentLower)) {
       state.direction = segmentLower as any;
+    } else if (focusKeywords.includes(segmentLower) || isCoords(segment)) {
+      state.focus = segmentLower;
     } else if (state.show === 'routes' && !state.routeNames && segment.split(',').every(isRouteName)) {
       // Priority: route names in routes mode
       state.routeNames = segment.split(',').filter(Boolean);
-    } else if (focusKeywords.includes(segmentLower) || isCoords(segment)) {
-      state.focus = segmentLower;
     } else if (state.show === 'routes' && state.routeNames && !state.stopId && isStopId(segment)) {
       state.stopId = segment;
     }
@@ -93,6 +93,12 @@ export function parseUrlPath(pathname: string, basePath: string): UrlState {
 
   if (segments.length > 1) {
     console.log('[urlState] Parsed URL path:', pathname, '->', state);
+  }
+
+  // User requirement: if a school is in the URL on /schools/ that means it's selected. 
+  // that means it should be zoomed into it and show dialog.
+  if (state.show === 'schools' && state.schoolId && !state.focus) {
+    state.focus = 'school-info';
   }
 
   return state;
@@ -120,13 +126,9 @@ export function buildUrlPath(basePath: string, state: UrlState): string {
         
         // Only add stopId if it's a valid stop ID format (not route names)
         if (state.stopId) {
-          // Validate that stopId looks like a stop ID (e.g., "126-5" or "126-5-upcoming")
-          // and not like route names (e.g., "126,127,132")
           const isValidStopId = /^[a-zA-Z0-9._-]+-[\d]+(-upcoming)?$/.test(state.stopId);
           if (isValidStopId) {
             parts.push(state.stopId);
-          } else {
-            console.warn('[urlState] Invalid stopId format, skipping from URL:', state.stopId);
           }
         }
       }
@@ -138,6 +140,7 @@ export function buildUrlPath(basePath: string, state: UrlState): string {
       parts.push(state.focus);
     }
   } else {
+    // No schoolId
     if (state.show === 'routes') {
       parts.push('routes');
     } else if (state.show === 'neighborhoods') {
@@ -146,12 +149,17 @@ export function buildUrlPath(basePath: string, state: UrlState): string {
       parts.push('schools');
     }
     
-    if (state.focus) {
-      parts.push(state.focus);
+    // Focus is only valid without schoolId if it's 'home' or coords
+    // 'school-info' focus is INVALID without a schoolId
+    if (state.focus && state.focus !== 'school-info') {
+      const isCoords = /^-?\d+(\.\d+)?,-?\d+(\.\d+)?,\d+$/.test(state.focus);
+      if (state.focus === 'home' || isCoords) {
+        parts.push(state.focus);
+      }
     }
   }
   
-  const path = parts.join('/').replace(/\/+$/g, '');
+  const path = parts.join('/').replace(/\/+$/g, '').replace(/\/+/g, '/');
   if (state.schoolId) {
     console.log('[urlState] Built URL path:', path, 'from state:', state);
   }
