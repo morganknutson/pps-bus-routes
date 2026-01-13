@@ -10,47 +10,12 @@ echo "🚀 Starting deployment process..."
 echo ""
 
 # Step 1: Stop servers
-echo "1️⃣  Stopping servers..."
-
-# Try to kill processes by port first (more reliable)
-PORT=3001
-echo "   Checking for processes on port $PORT..."
-PORT_PIDS=$(lsof -t -i :$PORT || true)
-if [ -n "$PORT_PIDS" ]; then
-    echo "   Found processes on port $PORT: $PORT_PIDS"
-    echo "$PORT_PIDS" | xargs kill 2>/dev/null || true
-    sleep 2
-    
-    # Force kill if still running
-    REMAINING_PORT=$(lsof -t -i :$PORT || true)
-    if [ -n "$REMAINING_PORT" ]; then
-        echo "   Force killing remaining port processes..."
-        echo "$REMAINING_PORT" | xargs kill -9 2>/dev/null || true
-        sleep 1
-    fi
-fi
-
-# Fallback: Find server processes by name
-SERVER_PIDS=$(ps aux | grep "node.*server.js" | grep -v grep | awk '{print $2}' || true)
-if [ -n "$SERVER_PIDS" ]; then
-    echo "   Found server processes: $SERVER_PIDS"
-    echo "$SERVER_PIDS" | xargs kill 2>/dev/null || true
-    sleep 2
-    
-    # Force kill if still running
-    REMAINING=$(ps aux | grep "node.*server.js" | grep -v grep | awk '{print $2}' || true)
-    if [ -n "$REMAINING" ]; then
-        echo "   Force killing remaining processes..."
-        echo "$REMAINING" | xargs kill -9 2>/dev/null || true
-        sleep 1
-    fi
-fi
-
-# Verify servers are stopped
-if ps aux | grep "node.*server.js" | grep -v grep > /dev/null; then
-    echo "   ⚠️  Warning: Some server processes may still be running"
+echo "1️⃣  Stopping servers via PM2..."
+if npm run pm2:status | grep -q "pps-bus-maps"; then
+    npm run pm2:stop || true
+    echo "   ✅ Servers stopped"
 else
-    echo "   ✅ All servers stopped"
+    echo "   ℹ️  No PM2 process found to stop"
 fi
 echo ""
 
@@ -109,30 +74,26 @@ cd ..
 echo ""
 
 # Step 4: Start servers
-echo "4️⃣  Starting servers..."
-# Append to logs instead of overwriting, and ensure NODE_ENV is set
-npm run start:production >> logs/server.log 2>&1 &
-SERVER_PID=$!
-echo "   Started server process (PID: $SERVER_PID)"
+echo "4️⃣  Starting servers via PM2..."
+npm run pm2:start
 
 # Wait a bit for server to start
 sleep 3
 
 # Verify server is running
-if ps -p $SERVER_PID > /dev/null 2>&1; then
-    echo "   ✅ Server process is running (PID: $SERVER_PID)"
+if npm run pm2:status | grep -q "online" || npm run pm2:status | grep -q "launching"; then
+    echo "   ✅ PM2 process is running"
 else
-    echo "   ⚠️  Server process may have exited, checking logs..."
-    tail -20 logs/server.log
+    echo "   ⚠️  PM2 process may have failed, check logs/backend-error.log"
 fi
 
 # Verify server is responding
 sleep 2
-if curl -s http://localhost:3001/api/schools 2>&1 | head -1 | grep -q "schools"; then
+if curl -s http://localhost:3001/api/health 2>&1 | grep -q "ok"; then
     echo "   ✅ Server is responding on port 3001"
 else
     echo "   ⚠️  Server not responding yet (may still be starting)"
-    echo "   Check logs/server.log for details"
+    echo "   Check logs/backend-error.log for details"
 fi
 echo ""
 

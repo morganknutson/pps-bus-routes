@@ -20,6 +20,7 @@ import { jobsRouter } from './routes/jobs.js';
 import { pdfsRouter } from './routes/pdfs.js';
 import { serversRouter } from './routes/servers.js';
 import { workerService } from './services/jobQueue/index.js';
+import logger from './services/logger.js';
 
 dotenv.config();
 
@@ -49,7 +50,7 @@ app.use(express.json());
 
 // Request logging middleware
 app.use((req, res, next) => {
-  console.log(`[Server] ${req.method} ${req.url}`);
+  logger.info(`${req.method} ${req.url}`);
   next();
 });
 
@@ -78,7 +79,7 @@ app.get('/api/health', (req, res) => {
     const uptimeMinutes = Math.floor(uptimeSeconds / 60);
     const uptimeHours = Math.floor(uptimeMinutes / 60);
     const uptimeDays = Math.floor(uptimeHours / 24);
-    
+
     // Format uptime
     let uptimeString = '';
     if (uptimeDays > 0) {
@@ -90,16 +91,16 @@ app.get('/api/health', (req, res) => {
     } else {
       uptimeString = `${uptimeSeconds}s`;
     }
-    
-    res.json({ 
+
+    res.json({
       status: 'ok',
       serverType: 'Backend API Server',
       uptime: uptimeString,
       uptimeMs: uptimeMs
     });
   } catch (error) {
-    console.error('[HealthCheck] Error in health endpoint:', error);
-    res.status(500).json({ 
+    logger.error('Error in health endpoint:', error);
+    res.status(500).json({
       status: 'error',
       error: error.message || 'Internal server error',
       serverType: 'Backend API Server'
@@ -122,7 +123,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     }
   }));
-  
+
   // Serve index.html for all non-API routes (SPA routing)
   app.get('*', (req, res) => {
     // Don't serve index.html for API routes
@@ -141,7 +142,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // Development: helpful message
   app.get('/', (req, res) => {
-    res.json({ 
+    res.json({
       message: 'PPS Bus Maps API Server',
       status: 'running',
       frontend: 'http://localhost:3000',
@@ -157,8 +158,8 @@ if (process.env.NODE_ENV === 'production') {
 
 // Global error handler middleware (must be after all routes)
 app.use((err, req, res, next) => {
-  console.error('[Server] Unhandled error:', err);
-  res.status(500).json({ 
+  logger.error('Unhandled error:', err);
+  res.status(500).json({
     error: 'Internal server error',
     message: err.message || 'An unexpected error occurred'
   });
@@ -168,49 +169,54 @@ app.use((err, req, res, next) => {
 try {
   workerService.start();
 } catch (error) {
-  console.error('[Server] Error starting worker service:', error);
+  logger.error('Error starting worker service:', error);
   // Don't crash the server if worker service fails to start
 }
 
 // Graceful shutdown
 process.on('SIGTERM', async () => {
-  console.log('SIGTERM received, shutting down gracefully...');
+  logger.warn('SIGTERM received, shutting down gracefully...');
   try {
     await workerService.stop();
+    logger.info('Worker service stopped successfully');
   } catch (error) {
-    console.error('[Server] Error stopping worker service:', error);
+    logger.error('Error stopping worker service:', error);
   }
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
-  console.log('SIGINT received, shutting down gracefully...');
+  logger.warn('SIGINT received, shutting down gracefully...');
   try {
     await workerService.stop();
+    logger.info('Worker service stopped successfully');
   } catch (error) {
-    console.error('[Server] Error stopping worker service:', error);
+    logger.error('Error stopping worker service:', error);
   }
   process.exit(0);
 });
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('[Server] Unhandled Rejection at:', promise, 'reason:', reason);
+  logger.error('Unhandled Rejection at:', { promise, reason });
 });
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
-  console.error('[Server] Uncaught Exception:', error);
+  logger.error('Uncaught Exception:', error);
   // Exit if it's a port binding error or other critical startup error
   if (error.code === 'EADDRINUSE' || error.code === 'EACCES') {
-    console.error(`[Server] Critical error ${error.code}. Exiting.`);
+    logger.error(`Critical error ${error.code}. Exiting.`);
     process.exit(1);
   }
-  // For other errors, let the server try to stay alive but log it
+  // For other errors, PM2 will restart the process if we exit
+  // It's often safer to exit on uncaughtException as the process may be in an unstable state
+  logger.error('Exiting due to uncaught exception...');
+  process.exit(1);
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Worker service started with concurrency: ${process.env.WORKER_CONCURRENCY || 2}`);
+  logger.info(`Server running on http://localhost:${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+  logger.info(`Worker service started with concurrency: ${process.env.WORKER_CONCURRENCY || 2}`);
 });
 

@@ -22,7 +22,15 @@
     "discover-links": "node scripts/discover-school-links.js",
     "verify-links": "node scripts/verify-school-links.js",
     "download-pdfs": "node scripts/download-all-school-pdfs.js",
-    "fetch-boundaries": "node scripts/fetch-boundaries.js"
+    "fetch-boundaries": "node scripts/fetch-boundaries.js",
+    "pm2:start": "pm2 start ecosystem.config.production.cjs",
+    "pm2:stop": "pm2 stop pps-bus-maps",
+    "pm2:restart": "pm2 restart pps-bus-maps",
+    "pm2:status": "pm2 status",
+    "pm2:logs": "pm2 logs pps-bus-maps",
+    "pm2:monit": "pm2 monit",
+    "pm2:save": "pm2 save",
+    "pm2:delete": "pm2 delete pps-bus-maps"
   },
   "keywords": [
     "bus",
