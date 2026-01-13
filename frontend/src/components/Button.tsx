@@ -1,88 +1,173 @@
 import React from 'react';
 import { useDarkMode } from '../hooks/useDarkMode';
+import { ChevronIcon } from './ChevronIcon';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'dropdown';
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
+  align?: 'left' | 'center';
+  icon?: React.ReactNode;
+  showChevron?: boolean;
+  chevronDirection?: 'right' | 'down';
 }
 
-export const Button: React.FC<ButtonProps> = ({ 
-  children, 
-  variant = 'primary', 
+export const Button: React.FC<ButtonProps> = ({
+  children,
+  variant = 'primary',
   size = 'medium',
   fullWidth = false,
+  align = 'left',
+  icon,
+  showChevron = false,
+  chevronDirection,
   style,
   onMouseEnter,
   onMouseLeave,
-  ...props 
+  disabled,
+  ...props
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
   const { isDarkMode } = useDarkMode();
 
   const getVariantStyles = () => {
-    // Special styling for all buttons in dark mode
-    if (isDarkMode) {
-      return {
-        backgroundColor: '#1C1C1C',
-        color: 'var(--btn-primary-text)',
-        border: 'none',
-        boxShadow: 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)',
-      };
-    }
-
-    // Standard visual language for all buttons based on Figma "Button Base"
     const baseStyles = {
-      backgroundColor: isHovered ? 'var(--text-tertiary)' : 'var(--btn-primary-bg)',
-      color: 'var(--btn-primary-text)',
+      boxShadow: 'var(--shadow-button)',
       border: 'none',
-      boxShadow: 'var(--btn-primary-shadow)',
+      transition: 'all 0.2s ease',
+      opacity: disabled ? 0.5 : 1,
+      pointerEvents: disabled ? 'none' as const : 'auto' as const,
     };
 
     switch (variant) {
       case 'primary':
+        return {
+          ...baseStyles,
+          backgroundColor: isDarkMode
+            ? (isHovered ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)') // Brighter in dark mode (swapped)
+            : (isHovered ? '#3071da' : 'var(--brand-primary)'),
+          color: isDarkMode ? 'var(--text-primary)' : 'var(--btn-primary-text)',
+          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
+        };
       case 'secondary':
-      case 'outline':
-      case 'ghost':
-        return baseStyles;
+        return {
+          ...baseStyles,
+          backgroundColor: isDarkMode
+            ? (isHovered ? 'var(--bg-tertiary)' : 'var(--bg-secondary)') // Less prominent in dark mode (swapped)
+            : (isHovered ? 'rgba(0,0,0,0.08)' : 'rgba(0,0,0,0.05)'),
+          color: 'var(--text-primary)',
+          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
+        };
+      case 'tertiary':
+      case 'dropdown':
+        return {
+          ...baseStyles,
+          backgroundColor: isHovered
+            ? (isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)') // Reduced opacity
+            : 'transparent',
+          color: 'var(--text-secondary)',
+          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
+        };
       default:
-        return {};
+        return baseStyles;
     }
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setIsHovered(true);
-    if (onMouseEnter) onMouseEnter(e);
+    if (!disabled) {
+      setIsHovered(true);
+      if (onMouseEnter) onMouseEnter(e);
+    }
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setIsHovered(false);
-    if (onMouseLeave) onMouseLeave(e);
+    if (!disabled) {
+      setIsHovered(false);
+      if (onMouseLeave) onMouseLeave(e);
+    }
   };
+
+  const fontSize = size === 'large' ? '14px' : size === 'medium' ? '12px' : '12px';
+  const iconSize = `${parseInt(fontSize) - 2}px`; // Match typeface size - 2px
+
+  // Centralized padding logic
+  const verticalPadding = size === 'large' ? 14 : size === 'medium' ? 10 : 8;
+  const baseHorizontalPadding = size === 'large' ? 34 : size === 'medium' ? 28 : 16;
+
+  let leftPadding = (icon && (size === 'large' || size === 'medium'))
+    ? (size === 'large' ? 23 : 20)
+    : baseHorizontalPadding;
+
+  let rightPadding = baseHorizontalPadding;
+
+  // Specific override for left-aligned chevrons
+  if ((showChevron || variant === 'dropdown') && align === 'left' && (size === 'large' || size === 'medium')) {
+    const isDown = (chevronDirection as string) === 'down' || (variant === 'dropdown' && (!chevronDirection || (chevronDirection as string) === 'down'));
+
+    leftPadding = size === 'large' ? 24 : 20;
+
+    if (isDown) {
+      rightPadding = size === 'large' ? 24 : 20;
+    } else {
+      rightPadding = size === 'large' ? 22 : 18;
+    }
+  }
 
   return (
     <button
       style={{
         width: fullWidth ? '100%' : 'auto',
-        padding: size === 'large' ? '18px 24px' : size === 'medium' ? '14px 20px' : '8px 16px',
-        borderRadius: '46px',
-        fontSize: size === 'large' ? '18px' : size === 'medium' ? '16px' : '14px',
-        fontWeight: '400',
-        cursor: 'pointer',
+        padding: `${verticalPadding}px ${rightPadding}px`, // Using symmetric vertical, asymmetric horizontal
+        paddingLeft: `${leftPadding}px`,
+        paddingRight: `${rightPadding}px`,
+        borderRadius: 'var(--radius-pill)',
+        fontSize: fontSize,
+        fontWeight: '500', // Reduced from 600
+        cursor: disabled ? 'not-allowed' : 'pointer',
         fontFamily: "'Inter', sans-serif",
-        transition: 'all 0.2s ease',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: align === 'left' ? 'flex-start' : 'center',
+        gap: size === 'large' ? '16px' : '12px',
         outline: 'none',
         ...getVariantStyles(),
         ...style,
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      disabled={disabled}
       {...props}
     >
-      {children}
+      {icon && (
+        <div style={{
+          fontSize: iconSize,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'inherit',
+          flexShrink: 0,
+        }}>
+          {typeof icon === 'string' ? <i className={icon} /> : icon}
+        </div>
+      )}
+      <span style={{
+        flex: align === 'left' ? 1 : undefined,
+        textAlign: align === 'left' ? 'left' : 'center'
+      }}>
+        {children}
+      </span>
+      {(showChevron || variant === 'dropdown') && (
+        <ChevronIcon
+          direction={chevronDirection || (variant === 'dropdown' ? 'down' : 'right')}
+          size={size === 'large' ? 12 : 10}
+          color="currentColor"
+          style={{
+            opacity: 0.6,
+            marginLeft: '4px',
+            flexShrink: 0
+          }}
+        />
+      )}
     </button>
   );
 };

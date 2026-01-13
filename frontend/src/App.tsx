@@ -60,6 +60,7 @@ export function ExplorerApp() {
     schools,
     setSchools,
     setRoutes,
+    clearRoutes,
     setLoading,
     setLoadingProgress,
     routes,
@@ -150,33 +151,32 @@ export function ExplorerApp() {
     loadSchools();
   }, [setSchools, setLoading]);
 
-  // Load routes when school changes in URL
   useEffect(() => {
     console.log('[ExplorerApp] schoolId from URL changed:', schoolId);
     if (!schoolId) {
-      setRoutes([]);
+      clearRoutes();
       return;
     }
     const loadRoutes = async () => {
       console.log('[ExplorerApp] Fetching routes for:', schoolId);
       setLoading(true);
-      setRoutes([]); // Clear routes immediately to avoid using previous school's routes
+      clearRoutes(); // Clear immediately to avoid using previous school's routes
       setLoadingProgress(0);
       try {
         const loadedRoutes = await loadLocalRoutes(schoolId);
         console.log('[ExplorerApp] Loaded routes:', loadedRoutes.length);
-        setRoutes(loadedRoutes);
+        setRoutes(loadedRoutes, schoolId);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[ExplorerApp] Failed to load routes:', error);
-        setRoutes([]);
+        clearRoutes();
       } finally {
         setLoading(false);
         setLoadingProgress(null);
       }
     };
     loadRoutes();
-  }, [schoolId, setRoutes, setLoading, setLoadingProgress]);
+  }, [schoolId, setRoutes, clearRoutes, setLoading, setLoadingProgress]);
 
   // Custom Hamburger/Close icon component
   const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => (
@@ -339,6 +339,7 @@ function AdminApp() {
     schools,
     setSchools,
     setRoutes,
+    clearRoutes,
     setLoading,
     setLoadingProgress,
     routes,
@@ -431,30 +432,29 @@ function AdminApp() {
     });
   }, [schools, searchTerm, schoolTypeFilters]);
 
-  // Load routes when school changes
   useEffect(() => {
     if (!schoolId) {
-      setRoutes([]);
+      clearRoutes();
       return;
     }
     const loadRoutes = async () => {
       setLoading(true);
-      setRoutes([]); // Clear routes immediately to avoid using previous school's routes
+      clearRoutes(); // Clear immediately to avoid using previous school's routes
       setLoadingProgress(0);
       try {
         const loadedRoutes = await loadLocalRoutes(schoolId);
-        setRoutes(loadedRoutes);
+        setRoutes(loadedRoutes, schoolId);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[AdminApp] Failed to load routes:', error);
-        setRoutes([]);
+        clearRoutes();
       } finally {
         setLoading(false);
         setLoadingProgress(null);
       }
     };
     loadRoutes();
-  }, [schoolId, setRoutes, setLoading, setLoadingProgress]);
+  }, [schoolId, setRoutes, clearRoutes, setLoading, setLoadingProgress]);
 
   const selectedRoutes = useMemo(() => {
     return routes.filter(r => selectedRouteNames.includes(r.name) && 

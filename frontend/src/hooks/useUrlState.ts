@@ -17,7 +17,7 @@ interface UseUrlStateReturn {
   selectedRouteNames: string[];
   selectedStopId: string | null;
   focus: string | null;
-  
+
   // Actions that update the URL
   setSelectedSchool: (schoolId: string | null) => void;
   setActiveTab: (tab: 'schools' | 'routes' | 'neighborhoods') => void;
@@ -25,8 +25,8 @@ interface UseUrlStateReturn {
   toggleRouteSelection: (routeName: string) => void;
   setSelectedRoutes: (routeNames: string[]) => void;
   viewSchoolRoutes: (schoolId: string) => void;
-  selectStop: (routeName: string, stopId: string, options?: { 
-    doubleFit?: boolean, 
+  selectStop: (routeName: string, stopId: string, options?: {
+    doubleFit?: boolean,
     direction?: 'Morning' | 'Afternoon' | 'Both',
     show?: 'schools' | 'routes' | 'neighborhoods',
     soleRoute?: boolean
@@ -43,12 +43,12 @@ export function useUrlState({
 }: UseUrlStateOptions = {}): UseUrlStateReturn {
   const navigate = useNavigate();
   const location = useLocation();
-  const { 
-    setMapIntent, 
-    routes, 
+  const {
+    setMapIntent,
+    routes,
     homeAddress,
     lookupAddress,
-    lastRouteNames, setLastRouteNames, 
+    lastRouteNames, setLastRouteNames,
     lastDirection, setLastDirection,
     lastStopId, setLastStopId,
     lastFocus, setLastFocus
@@ -60,8 +60,8 @@ export function useUrlState({
 
   const schoolId = urlState.schoolId || null;
   const activeTab = urlState.show || 'schools';
-  const directionFilter = urlState.direction === 'morning' ? 'Morning' : 
-                         urlState.direction === 'afternoon' ? 'Afternoon' : 'Both';
+  const directionFilter = urlState.direction === 'morning' ? 'Morning' :
+    urlState.direction === 'afternoon' ? 'Afternoon' : 'Both';
   const selectedRouteNames = urlState.routeNames || [];
   const selectedStopId = urlState.stopId || null;
   const focus = urlState.focus || null;
@@ -128,7 +128,7 @@ export function useUrlState({
 
   const setActiveTab = useCallback((tab: 'schools' | 'routes' | 'neighborhoods') => {
     const updates: Partial<UrlState> = { show: tab };
-    
+
     if (tab === 'schools') {
       // Scenario 7: tab back to schools -> should be zoomed in on school and showing dialog
       if (schoolId) {
@@ -143,21 +143,21 @@ export function useUrlState({
       // Scenario 7 & 10: click back to routes tab -> should still be showing previously selected route/stop
       if (schoolId) {
         updates.schoolId = schoolId;
-        
+
         // Scenario 3: If switching to routes for first time (no lastRouteNames), select all routes for direction
-        const currentRoutes = routes.filter(r => 
+        const currentRoutes = routes.filter(r =>
           !lastDirection || lastDirection === 'both' || r.direction?.toLowerCase() === lastDirection
         );
-        
+
         // Deduplicate route names (e.g. avoid "100,100" if AM and PM both exist)
         const defaultNames = Array.from(new Set(currentRoutes.map(r => r.name)));
-        
-        updates.routeNames = (lastRouteNames && lastRouteNames.length > 0) 
-          ? lastRouteNames 
+
+        updates.routeNames = (lastRouteNames && lastRouteNames.length > 0)
+          ? lastRouteNames
           : (defaultNames.length > 0 ? defaultNames : undefined);
-          
+
         updates.direction = (lastDirection as any) || 'morning';
-        
+
         if (lastStopId) {
           updates.stopId = lastStopId;
           updates.focus = (lastFocus as any) || 'my-stop';
@@ -166,27 +166,34 @@ export function useUrlState({
         }
       }
     }
-    
+
     updateUrl(updates);
   }, [updateUrl, schoolId, lastRouteNames, lastDirection, lastStopId, lastFocus, routes]);
 
   const setDirectionFilter = useCallback((direction: 'Morning' | 'Afternoon' | 'Both') => {
     const directionLower = direction.toLowerCase();
-    
+
     // Rule: direction changes MUST attempt to carry over route/stop selection by name
-    let updates: Partial<UrlState> = { 
+    let updates: Partial<UrlState> = {
       direction: directionLower as any,
       focus: focus === 'my-stop' ? 'my-stop' : (focus || undefined)
     };
 
     // Scenario 5: carry over stop selection by finding closest in new direction
     if (selectedStopId && direction !== 'Both') {
-      const currentStop = routes.flatMap(r => 
-        r.stops.map((s, i) => ({ route: r, stop: s, stopNumber: i + 1 }))
-      ).find(item => {
-        const stopId = `${item.route.name}-${item.stop.id.replace('stop-', '')}`;
-        return selectedStopId.startsWith(stopId);
-      });
+      // Determine the current direction (before switching) based on directionFilter
+      // We need to filter routes by the CURRENT direction to find the correct stop,
+      // since morning/afternoon routes can share the same name but have different stop positions
+      const currentDirection = directionFilter; // This is the direction before switching
+
+      const currentStop = routes
+        .filter(r => r.direction === currentDirection) // Only look in routes matching current direction
+        .flatMap(r =>
+          r.stops.map((s, i) => ({ route: r, stop: s, stopNumber: i + 1 }))
+        ).find(item => {
+          const stopId = `${item.route.name}-${item.stop.id.replace('stop-', '')}`;
+          return selectedStopId.startsWith(stopId);
+        });
 
       if (currentStop) {
         const result = findClosestStopInDirection(currentStop, direction as any, routes);
@@ -202,9 +209,9 @@ export function useUrlState({
       // Scenario 5: deselect stop if switching to 'Both' or no stop selected
       updates.stopId = undefined;
     }
-    
+
     updateUrl(updates);
-  }, [updateUrl, focus, routes, selectedStopId]);
+  }, [updateUrl, focus, routes, selectedStopId, directionFilter]);
 
   const toggleRouteSelection = useCallback((routeName: string) => {
     let newRouteNames = [...selectedRouteNames];
@@ -213,9 +220,9 @@ export function useUrlState({
     } else {
       newRouteNames.push(routeName);
     }
-    
+
     // Scenario 5 & 6: should zoom to fit routes that are toggled on
-    updateUrl({ 
+    updateUrl({
       routeNames: newRouteNames.length > 0 ? newRouteNames : undefined,
       stopId: undefined,
       focus: focus === 'my-stop' ? undefined : (focus || undefined)
@@ -223,7 +230,7 @@ export function useUrlState({
   }, [selectedRouteNames, updateUrl, focus]);
 
   const setSelectedRoutes = useCallback((routeNames: string[]) => {
-    updateUrl({ 
+    updateUrl({
       routeNames: routeNames.length > 0 ? routeNames : undefined,
       stopId: undefined,
       focus: focus === 'my-stop' ? undefined : (focus || undefined)
@@ -233,12 +240,12 @@ export function useUrlState({
   const viewSchoolRoutes = useCallback((id: string) => {
     // Determine the direction - use current, or last known, or default to morning
     const direction = (id === schoolId ? (urlState.direction || (lastDirection as any)) : null) || 'morning';
-    
+
     // Find routes for this school and direction to pre-populate and avoid duplicates
-    const schoolRoutes = routes.filter(r => 
+    const schoolRoutes = routes.filter(r =>
       r.direction?.toLowerCase() === direction.toLowerCase() || direction.toLowerCase() === 'both'
     );
-    const routeNames = schoolRoutes.length > 0 
+    const routeNames = schoolRoutes.length > 0
       ? Array.from(new Set(schoolRoutes.map(r => r.name)))
       : undefined;
 
@@ -253,10 +260,10 @@ export function useUrlState({
   }, [updateUrl, schoolId, urlState.direction, lastDirection, routes]);
 
   const selectStop = useCallback((
-    routeName: string, 
-    stopId: string, 
-    options?: { 
-      doubleFit?: boolean, 
+    routeName: string,
+    stopId: string,
+    options?: {
+      doubleFit?: boolean,
       direction?: 'Morning' | 'Afternoon' | 'Both',
       show?: 'schools' | 'routes' | 'neighborhoods',
       soleRoute?: boolean
@@ -264,7 +271,7 @@ export function useUrlState({
   ) => {
     // When selecting a stop, determine which routes to show
     let newRouteNames: string[];
-    
+
     if (options?.soleRoute) {
       // If soleRoute is requested, only show the route containing this stop
       newRouteNames = [routeName];
@@ -275,15 +282,15 @@ export function useUrlState({
         newRouteNames.push(routeName);
       }
     }
-    
+
     // Normalize stop ID format (e.g. "148-1")
     const stopMatch = stopId.match(/stop-(\d+)/);
     const stopNumber = stopMatch ? stopMatch[1] : stopId;
-    const finalStopId = routeName.endsWith('-upcoming') 
+    const finalStopId = routeName.endsWith('-upcoming')
       ? `${routeName.replace('-upcoming', '')}-${stopNumber}-upcoming`
       : `${routeName}-${stopNumber}`;
 
-    updateUrl({ 
+    updateUrl({
       routeNames: newRouteNames,
       stopId: finalStopId,
       direction: (options?.direction?.toLowerCase() as any) || urlState.direction,
@@ -295,9 +302,9 @@ export function useUrlState({
 
   const clearSelectedStop = useCallback(() => {
     // Scenario 2: Zoom out to show all current content when closing dialog
-    updateUrl({ 
-      stopId: undefined, 
-      focus: undefined 
+    updateUrl({
+      stopId: undefined,
+      focus: undefined
     });
   }, [updateUrl]);
 
@@ -310,14 +317,14 @@ export function useUrlState({
     if (activeTab === 'routes' && schoolId && routes.length > 0 && selectedRouteNames.length === 0) {
       console.log('[useUrlState] Populating default routes...');
       const directionLower = directionFilter.toLowerCase();
-      
+
       // Deduplicate route names (e.g. avoid "100,100" if AM and PM both exist)
       const defaultNames = Array.from(new Set(
         routes
           .filter(r => directionLower === 'both' || r.direction?.toLowerCase() === directionLower)
           .map(r => r.name)
       ));
-      
+
       if (defaultNames.length > 0) {
         updateUrl({ routeNames: defaultNames }, true); // Use replace to not pollute history
       }
@@ -327,7 +334,7 @@ export function useUrlState({
   // 4. Side effect: Update MapIntent based on URL
   useEffect(() => {
     const activeHome = homeAddress || lookupAddress;
-    
+
     // Create a key representing the current selection state that affects map intent
     const stateKey = JSON.stringify({
       schoolId,
@@ -345,7 +352,7 @@ export function useUrlState({
     if (stateKey === lastProcessedStateRef.current) return;
 
     let intent: MapIntent | null = null;
-    
+
     // Priority 1: Explicit Focus (Stop, School Info, Home)
     if (focus === 'school-info') {
       // Scenario 1: /SCHOOL/school-info -> zoom into school pin and show dialog
@@ -371,7 +378,7 @@ export function useUrlState({
           intent = { type: 'MANUAL', data: { lat, lng, zoom } };
         }
       }
-    } 
+    }
     // Priority 2: Tab-based selection state (No specific pin focused)
     else {
       if (activeTab === 'routes' && schoolId) {
@@ -397,8 +404,8 @@ export function useUrlState({
     if (intent) {
       const currentIntent = useStore.getState().mapIntent;
       // We check type and basic data to avoid redundant fits during minor state changes
-      const isSameIntent = currentIntent && 
-        currentIntent.type === intent.type && 
+      const isSameIntent = currentIntent &&
+        currentIntent.type === intent.type &&
         JSON.stringify(currentIntent.data) === JSON.stringify(intent.data);
 
       if (!isSameIntent) {
@@ -407,8 +414,8 @@ export function useUrlState({
         lastProcessedStateRef.current = stateKey;
       }
     }
-  }, [schoolId, activeTab, directionFilter, selectedRouteNames, selectedStopId, focus, setMapIntent, routes.length, 
-      homeAddress, lookupAddress]);
+  }, [schoolId, activeTab, directionFilter, selectedRouteNames, selectedStopId, focus, setMapIntent, routes.length,
+    homeAddress, lookupAddress]);
 
   return {
     schoolId,

@@ -13,6 +13,7 @@ import { getNeighborhoodsFromRoutes } from '../services/api';
 import { Neighborhood } from '../types';
 import { ProgressBar } from '../components/ProgressBar';
 import { parseUrlPath, buildUrlPath, UrlState } from '../services/urlState';
+import { useUrlState } from '../hooks/useUrlState';
 
 export function NeighborhoodExplorer() {
   const { schools, setSchools, routes, setRoutes, setLoading: setStoreLoading, setLoadingProgress, isLoading, loadingProgress } = useStore();
@@ -23,7 +24,7 @@ export function NeighborhoodExplorer() {
   
   // Use URL as source of truth for selection
   const {
-    schoolId: selectedSchoolId,
+    schoolId: urlSchoolId,
     activeTab: urlActiveTab,
     selectedRouteNames,
     setSelectedSchool,
@@ -32,9 +33,10 @@ export function NeighborhoodExplorer() {
     viewSchoolRoutes,
   } = useUrlState({ basePath });
   
+  const selectedSchoolId = urlSchoolId;
   const isMobile = useIsMobile();
   
-  const activeTab = urlState.show === 'neighborhoods' ? 'neighborhoods' : 'schools';
+  const activeTab = urlActiveTab === 'neighborhoods' ? 'neighborhoods' : 'schools';
   
   // Wrapper to handle TabBar's expected type signature
   const handleTabChange = (tab: 'schools' | 'routes' | 'neighborhoods') => {
@@ -73,8 +75,8 @@ export function NeighborhoodExplorer() {
       try {
         setLoadingNeighborhoods(true);
         setError(null);
-        console.log('[NeighborhoodExplorer] Loading neighborhoods for school:', urlState.schoolId || 'all');
-        const data = await getNeighborhoodsFromRoutes(urlState.schoolId || undefined);
+        console.log('[NeighborhoodExplorer] Loading neighborhoods for school:', urlSchoolId || 'all');
+        const data = await getNeighborhoodsFromRoutes(urlSchoolId || undefined);
         console.log('[NeighborhoodExplorer] Loaded neighborhoods:', data.neighborhoods?.length || 0);
         if (data.neighborhoods && Array.isArray(data.neighborhoods)) {
           setNeighborhoods(data.neighborhoods);
@@ -92,25 +94,25 @@ export function NeighborhoodExplorer() {
       }
     }
     fetchNeighborhoods();
-  }, [urlState.schoolId, activeTab]);
+  }, [urlSchoolId, activeTab]);
 
   // Load routes when school is selected and neighborhoods tab is active
   useEffect(() => {
-    if (!urlState.schoolId || activeTab !== 'neighborhoods') {
+    if (!urlSchoolId || activeTab !== 'neighborhoods') {
       if (activeTab !== 'neighborhoods') {
         setRoutes([]);
       }
       return;
     }
 
-    console.log('[NeighborhoodExplorer] Loading routes for school:', urlState.schoolId);
+    console.log('[NeighborhoodExplorer] Loading routes for school:', urlSchoolId);
     const loadRoutes = async () => {
       setStoreLoading(true);
       setLoadingProgress(0);
       try {
-        const loadedRoutes = await loadLocalRoutes(urlState.schoolId);
+        const loadedRoutes = await loadLocalRoutes(urlSchoolId);
         console.log('[NeighborhoodExplorer] Loaded', loadedRoutes.length, 'routes');
-        setRoutes(loadedRoutes);
+        setRoutes(loadedRoutes, urlSchoolId);
         setLoadingProgress(100);
       } catch (error) {
         console.error('[NeighborhoodExplorer] Failed to load routes:', error);
@@ -122,7 +124,7 @@ export function NeighborhoodExplorer() {
     };
 
     loadRoutes();
-  }, [urlState.schoolId, activeTab, setRoutes, setStoreLoading, setLoadingProgress]);
+  }, [urlSchoolId, activeTab, setRoutes, setStoreLoading, setLoadingProgress]);
 
   // Filter neighborhoods by search term
   const filteredNeighborhoods = neighborhoods.filter(n =>
@@ -458,8 +460,8 @@ export function NeighborhoodExplorer() {
                   <RouteList 
                     showBothOption={false}
                     onClearSchool={() => {
-                      const newUrlState: UrlState = { ...urlState, schoolId: undefined, show: 'schools' };
-                      navigate(buildUrlPath(basePath, newUrlState));
+                      setSelectedSchool(null);
+                      setActiveTab('schools');
                     }}
                   />
                 </div>

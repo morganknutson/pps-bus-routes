@@ -69,6 +69,7 @@ export interface AppState {
   driveLink?: string;
   lastFetchTime?: Date;
   routes: Route[];
+  routesSchoolId: string | null;
   homeAddress?: HomeAddress;
   isLoading: boolean;
   error?: string;

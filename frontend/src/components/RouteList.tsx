@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { RouteListBase, RouteListConfig } from './RouteListBase';
-import { useDarkMode } from '../hooks/useDarkMode';
+import { DirectionToggle } from './DirectionToggle';
 import { analyticsService } from '../services/analytics';
 import { XIcon } from './XIcon';
 import { useUrlState } from '../hooks/useUrlState';
@@ -21,7 +21,6 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
   const navigate = useNavigate();
   const location = useLocation();
   const { routes, isLoading, error, schools } = useStore();
-  const { isDarkMode } = useDarkMode();
 
   const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
   const {
@@ -75,7 +74,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
 
   if (!schoolId) {
     return (
-      <div style={{ 
+      <div style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         height: '100%', padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)',
         backgroundColor: 'var(--bg-primary)'
@@ -134,25 +133,13 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
           </div>
         </div>
       )}
-      
+
       <div style={{ padding: '0.75rem 0.75rem 0.5rem 0.75rem', backgroundColor: 'var(--bg-route-list)', flexShrink: 0 }}>
-        <div style={{ position: 'relative', width: '100%', height: '2.5rem', backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(0, 0, 0, 0.05)', borderRadius: '9999px', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', zIndex: 2 }}>
-            <div onClick={() => setDirectionFilter('Morning')} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '500', color: directionFilter === 'Morning' ? 'var(--text-primary)' : 'var(--text-secondary)', cursor: 'pointer' }}>Morning</div>
-            <div onClick={() => setDirectionFilter('Afternoon')} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '500', color: directionFilter === 'Afternoon' ? 'var(--text-primary)' : 'var(--text-secondary)', cursor: 'pointer' }}>Afternoon</div>
-            {showBothOption && <div onClick={() => setDirectionFilter('Both')} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '500', color: directionFilter === 'Both' ? 'var(--text-primary)' : 'var(--text-secondary)', cursor: 'pointer' }}>Both</div>}
-          </div>
-          <div
-            style={{
-              position: 'absolute', top: '0.25rem', bottom: '0.25rem',
-              left: showBothOption
-                ? directionFilter === 'Morning' ? '0.25rem' : directionFilter === 'Afternoon' ? 'calc(33.333% + 0.25rem)' : 'calc(66.666% + 0.25rem)'
-                : directionFilter === 'Morning' ? '0.25rem' : 'calc(50% + 0.25rem)',
-              width: showBothOption ? 'calc(33.333% - 0.5rem)' : 'calc(50% - 0.5rem)',
-              backgroundColor: 'var(--bg-tertiary)', borderRadius: '9999px', transition: 'left 0.3s ease', zIndex: 1, boxShadow: '0 1px 3px var(--shadow-large)',
-            }}
-          />
-        </div>
+        <DirectionToggle
+          directionFilter={directionFilter}
+          onDirectionChange={setDirectionFilter}
+          showBothOption={showBothOption}
+        />
       </div>
 
       <div style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--bg-route-list)' }}>

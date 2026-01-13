@@ -737,19 +737,8 @@ export function SchoolList({
             {/* Assigned Schools Section */}
             {assigned.length > 0 && (
               <div style={{ backgroundColor: 'var(--bg-secondary)', transition: 'background-color 0.3s ease' }}>
-                <div style={{
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '13px',
-                  fontWeight: '700',
-                  color: 'var(--text-primary)',
-                  letterSpacing: '0.02em',
-                  textTransform: 'uppercase',
-                  borderBottom: '1px solid var(--border-color)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem'
-                }}>
-                  <i className="fas fa-home" style={{ fontSize: '12px', color: '#4CAF50' }}></i>
+                <div className="eyebrow" style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <i className="fas fa-home" style={{ fontSize: '10px' }}></i>
                   Your Assigned Schools
                 </div>
                 {assigned.map(school => renderSchoolItem(school))}
@@ -758,16 +747,7 @@ export function SchoolList({
 
             {/* Other Schools Header */}
             {assigned.length > 0 && others.length > 0 && (
-              <div style={{
-                padding: '0.75rem 1.5rem',
-                fontSize: '13px',
-                fontWeight: '700',
-                color: 'var(--text-primary)',
-                letterSpacing: '0.02em',
-                textTransform: 'uppercase',
-                borderBottom: '1px solid var(--border-color)',
-                backgroundColor: 'var(--bg-secondary)',
-              }}>
+              <div className="eyebrow" style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid var(--border-color)' }}>
                 All other schools
               </div>
             )}
@@ -1037,7 +1017,7 @@ export function SchoolList({
         filters={schoolTypeFilters}
         onChange={setSchoolTypeFilters}
       />
-    </div>
+    </div >
   );
 }
 

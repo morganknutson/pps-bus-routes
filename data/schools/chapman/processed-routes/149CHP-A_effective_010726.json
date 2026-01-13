@@ -1,0 +1,202 @@
+{
+  "id": "11gE201gCpyDmJ3-vbraDJQjgffppoLNk",
+  "name": "149",
+  "direction": "Morning",
+  "filename": "149CHP-A_effective_010726.pdf",
+  "fileId": "11gE201gCpyDmJ3-vbraDJQjgffppoLNk",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NW 13th Ave. & NW Quimby St. [SE]",
+      "time": "7:41 am",
+      "direction": "SE",
+      "originalLine": "7:41 amNW 13TH AV @ NW QUIMBY ST [SE]149CHP-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6845642,
+        45.5336211
+      ],
+      "displayName": "NW Quimby St & NW 13th Ave, Portland, OR 97209, USA",
+      "placeId": "EjNOVyBRdWltYnkgU3QgJiBOVyAxM3RoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEglvDGRw_QmVVBEWYkK8YANDGhIUChIJbwxkcP0JlVQRFmJCvGADQxoaFAoSCdUuxwzlCZVUEWx8nYg2gAFYGhQKEgl3R6LE_gmVVBELQRxrfeKfWCIKDRPhIxsVNtLftg",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "NW Quimby St. & NW 14th Ave. [NE]",
+      "time": "7:42 am",
+      "direction": "NE",
+      "originalLine": "7:42 amNW QUIMBY ST @ NW 14TH AV [NE]149CHP-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6855743,
+        45.5336051
+      ],
+      "displayName": "NW Quimby St & NW 14th Ave, Portland, OR 97209, USA",
+      "placeId": "EjNOVyBRdWltYnkgU3QgJiBOVyAxNHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEgm9RSoT_QmVVBGaM4pYiJkLpxIUChIJvUUqE_0JlVQRmjOKWIiZC6caFAoSCdUuxwzlCZVUEWx8nYg2gAFYGhQKEgm_LLK6_gmVVBEUlLWLyrHQ7yIKDXPgIxsVwarftg",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7058526,
+        45.5332347
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    }
+  ],
+  "neighborhoods": [
+    "Northwest Portland"
+  ],
+  "processedAt": "2026-01-13T05:01:07.597Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.53362,
+      -122.68456
+    ],
+    [
+      45.53361,
+      -122.68557
+    ],
+    [
+      45.53462,
+      -122.68561
+    ],
+    [
+      45.53532,
+      -122.68564
+    ],
+    [
+      45.53545,
+      -122.68566
+    ],
+    [
+      45.53552,
+      -122.68572
+    ],
+    [
+      45.53563,
+      -122.68588
+    ],
+    [
+      45.5359,
+      -122.68626
+    ],
+    [
+      45.53574,
+      -122.68653
+    ],
+    [
+      45.53571,
+      -122.68665
+    ],
+    [
+      45.5357,
+      -122.68768
+    ],
+    [
+      45.53569,
+      -122.6887
+    ],
+    [
+      45.53565,
+      -122.69031
+    ],
+    [
+      45.53562,
+      -122.69071
+    ],
+    [
+      45.5356,
+      -122.69085
+    ],
+    [
+      45.53549,
+      -122.69193
+    ],
+    [
+      45.53548,
+      -122.69209
+    ],
+    [
+      45.53549,
+      -122.69243
+    ],
+    [
+      45.53557,
+      -122.69295
+    ],
+    [
+      45.5356,
+      -122.69325
+    ],
+    [
+      45.5356,
+      -122.6935
+    ],
+    [
+      45.53557,
+      -122.69501
+    ],
+    [
+      45.53551,
+      -122.69829
+    ],
+    [
+      45.53548,
+      -122.69947
+    ],
+    [
+      45.53546,
+      -122.70112
+    ],
+    [
+      45.53544,
+      -122.7023
+    ],
+    [
+      45.53542,
+      -122.70286
+    ],
+    [
+      45.53472,
+      -122.70283
+    ],
+    [
+      45.534,
+      -122.70281
+    ],
+    [
+      45.53399,
+      -122.70331
+    ],
+    [
+      45.53394,
+      -122.70631
+    ],
+    [
+      45.53393,
+      -122.70678
+    ],
+    [
+      45.53349,
+      -122.70676
+    ],
+    [
+      45.53349,
+      -122.70623
+    ]
+  ]
+}

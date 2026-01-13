@@ -9,7 +9,9 @@ import { assignedSchoolsService } from '../services/assignedSchoolsService';
 interface Store extends AppState {
   initialize: (options?: { skipSchoolSelection?: boolean }) => void;
   setDriveLink: (link: string) => void;
-  setRoutes: (routes: Route[]) => void;
+  routesSchoolId: string | null;
+  setRoutes: (routes: Route[], schoolId?: string | null) => void;
+  clearRoutes: () => void;
   setHomeAddress: (address: HomeAddress) => void;
   clearHomeAddress: () => void;
   setLookupAddress: (address: HomeAddress) => void;
@@ -62,6 +64,7 @@ export const useStore = create<Store>((set, get) => {
     driveLink: undefined,
     lastFetchTime: undefined,
     routes: [],
+    routesSchoolId: null,
     homeAddress: undefined,
     lookupAddress: undefined,
     isLoading: false,
@@ -144,7 +147,7 @@ export const useStore = create<Store>((set, get) => {
 
     setDriveLink: (link) => set({ driveLink: link }),
 
-    setRoutes: (routes) => {
+    setRoutes: (routes, schoolId = null) => {
       // Merge with cached coordinates first
       const routesWithCache = mergeCachedCoordinates(routes);
 
@@ -170,12 +173,17 @@ export const useStore = create<Store>((set, get) => {
         };
       });
 
-      // Update routes
-      set({ routes: routesWithColors });
+      // Update routes and the school ID they belong to
+      set({ 
+        routes: routesWithColors,
+        routesSchoolId: schoolId 
+      });
 
       // Save to cache using debounced function to handle potential rapid updates
       debouncedSaveToCache();
     },
+
+    clearRoutes: () => set({ routes: [], routesSchoolId: null }),
 
     setHomeAddress: (address) => {
       set({ homeAddress: address });

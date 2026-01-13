@@ -21,7 +21,7 @@ vi.mock('react-leaflet', () => {
 
   return {
     MapContainer: require('react').forwardRef(({ children }: any, ref: any) => {
-      require('react').useImperativeHandle(ref, () => mockMap);
+      require('react').useImperativeHandle(ref, () => mockMap, []);
       return <div data-testid="map-container">{children}</div>;
     }),
     TileLayer: () => <div data-testid="tile-layer" />,

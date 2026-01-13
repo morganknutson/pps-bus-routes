@@ -31,7 +31,7 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           width: '100%',
           height: '48px',
           backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(0, 0, 0, 0.05)',
-          borderRadius: '9999px',
+          borderRadius: 'var(--radius-pill)',
           overflow: 'hidden',
         }}
       >
@@ -107,10 +107,10 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             left: isSchoolsActive ? '4px' : 'calc(50% + 4px)',
             width: 'calc(50% - 8px)',
             backgroundColor: 'var(--bg-tertiary)',
-            borderRadius: '9999px',
+            borderRadius: 'var(--radius-pill)',
             transition: 'left 0.3s ease',
             zIndex: 1,
-            boxShadow: '0 1px 3px var(--shadow-large)',
+            boxShadow: 'var(--shadow-button)',
           }}
         />
       </div>

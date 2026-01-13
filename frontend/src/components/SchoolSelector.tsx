@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useStore } from '../store/useStore';
+import { useUrlState } from '../hooks/useUrlState';
 import { loadLocalRoutes } from '../services/localRoutes';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
 import { calculateDistance, validateLngLat } from '../utils/coordinates';
@@ -7,8 +8,6 @@ import { calculateDistance, validateLngLat } from '../utils/coordinates';
 export function SchoolSelector() {
   const { 
     schools, 
-    selectedSchoolId, 
-    setSelectedSchool, 
     setSchools, 
     setRoutes, 
     setLoading,
@@ -16,6 +15,11 @@ export function SchoolSelector() {
     assignedSchools,
     homeAddress
   } = useStore();
+
+  const {
+    schoolId: selectedSchoolId,
+    setSelectedSchool
+  } = useUrlState();
 
   // Load schools on mount
   useEffect(() => {

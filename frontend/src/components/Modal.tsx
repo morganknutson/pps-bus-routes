@@ -10,10 +10,10 @@ interface ModalProps {
   preventClickOutsideClose?: boolean;
 }
 
-const ModalBase: React.FC<ModalProps> = ({ 
-  isOpen, 
-  onClose, 
-  children, 
+const ModalBase: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
   maxWidth = '345px', // Exact width from Figma
   preventClickOutsideClose = false
 }) => {
@@ -31,7 +31,7 @@ const ModalBase: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return createPortal(
-    <div 
+    <div
       style={{
         position: 'fixed',
         top: 0,
@@ -46,7 +46,7 @@ const ModalBase: React.FC<ModalProps> = ({
         zIndex: 10000,
         padding: '20px',
         animation: 'modalFadeIn 0.2s ease-out'
-      }} 
+      }}
       onClick={() => !preventClickOutsideClose && onClose()}
     >
       <style>
@@ -58,20 +58,20 @@ const ModalBase: React.FC<ModalProps> = ({
           }
         `}
       </style>
-      <div 
+      <div
         style={{
-          backgroundColor: isDarkMode ? '#151515' : 'var(--modal-bg)', 
-          borderRadius: '24px', // From Figma
+          backgroundColor: isDarkMode ? '#151515' : 'var(--modal-bg)',
+          borderRadius: 'var(--radius-floating)',
           width: '100%',
           maxWidth: maxWidth,
-          boxShadow: isDarkMode ? 'inset 0px 0px 2px rgba(255, 255, 255, 0.18)' : '0 20px 40px var(--shadow-large)',
+          boxShadow: isDarkMode ? 'inset 0px 0px 2px rgba(255, 255, 255, 0.18)' : 'var(--shadow-floating)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
           animation: 'modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           position: 'relative',
-          border: '1px solid var(--border-color)', 
-        }} 
+          border: '1px solid var(--border-color)',
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -83,23 +83,23 @@ const ModalBase: React.FC<ModalProps> = ({
 
 // Compound Components
 export const ModalHeader: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
-  <div style={{ padding: '30px 34px 0', display: 'flex', alignItems: 'flex-start', ...style }}>
+  <div style={{ padding: 'var(--floating-header-padding)', display: 'flex', alignItems: 'flex-start', ...style }}>
     {children}
   </div>
 );
 
 export const ModalContent: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
-  <div style={{ padding: '25px 34px 30px', display: 'flex', flexDirection: 'column', gap: '16px', ...style }}>
+  <div style={{ padding: 'var(--floating-content-padding)', display: 'flex', flexDirection: 'column', gap: '16px', ...style }}>
     {children}
   </div>
 );
 
 export const ModalTitle: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
-  <h2 style={{ 
-    fontSize: '18px', 
-    fontWeight: '400', 
-    margin: 0, 
-    color: 'var(--text-primary)', 
+  <h2 style={{
+    fontSize: '18px',
+    fontWeight: '400',
+    margin: 0,
+    color: 'var(--text-primary)',
     lineHeight: '22px',
     fontFamily: "'Inter', sans-serif",
     ...style
@@ -109,10 +109,10 @@ export const ModalTitle: React.FC<{ children: React.ReactNode; style?: React.CSS
 );
 
 export const ModalDescription: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
-  <p style={{ 
-    fontSize: '14px', 
-    fontWeight: '400', 
-    lineHeight: '18px', 
+  <p style={{
+    fontSize: '14px',
+    fontWeight: '400',
+    lineHeight: '18px',
     color: '#828282',
     margin: 0,
     fontFamily: "'Inter', sans-serif",

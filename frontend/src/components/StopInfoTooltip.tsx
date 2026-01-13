@@ -36,7 +36,7 @@ interface StopPillProps {
 
 const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
   const hasTime = !!time && time.trim().length > 0;
-  
+
   return (
     <div style={{
       display: 'flex',
@@ -44,27 +44,35 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
       gap: '8px',
       height: '24px',
     }}>
+      <span style={{
+        fontSize: '13px',
+        fontWeight: '600',
+        color: 'var(--text-primary)',
+        marginRight: '0'
+      }}>
+        Stop
+      </span>
       <div style={{
         width: '20px',
         height: '20px',
-        backgroundColor: color || '#FFFFFF', // Fallback to brand color if route color is missing
+        backgroundColor: 'transparent',
         borderRadius: '50%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'white',
+        color: 'var(--text-primary)',
         fontSize: '11px',
         fontWeight: 'bold',
-        boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.08)',
+        border: '1px solid var(--border-color-darker)',
       }}>
         {number}
       </div>
       {hasTime && (
-        <span style={{ 
-          whiteSpace: 'nowrap', 
-          fontSize: '13px', 
-          fontWeight: '600', 
-          color: 'var(--text-primary)' 
+        <span style={{
+          whiteSpace: 'nowrap',
+          fontSize: '13px',
+          fontWeight: '600',
+          color: 'var(--text-primary)'
         }}>
           {time}
         </span>
@@ -72,6 +80,8 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
     </div>
   );
 };
+
+import { Button } from './Button';
 
 export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
   route,
@@ -104,36 +114,37 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
   };
 
   return (
-    <div style={{ 
-      minWidth: isMobile ? 'auto' : '280px', 
-      maxWidth: isMobile ? 'none' : '350px', 
+    <div style={{
+      minWidth: isMobile ? 'auto' : '280px',
+      maxWidth: isMobile ? 'none' : '350px',
       width: isMobile ? '100%' : 'auto',
       backgroundColor: 'var(--bg-primary)',
       color: 'var(--text-primary)',
-      borderRadius: isMobile ? '0' : '12px',
+      borderRadius: isMobile ? '0' : 'var(--radius-floating)',
       overflow: 'hidden',
-      boxShadow: isMobile ? 'none' : '0 4px 20px rgba(0,0,0,0.15)',
+      boxShadow: isMobile ? 'none' : 'var(--shadow-floating)',
       border: isMobile ? 'none' : '1px solid var(--border-color-darker)',
       pointerEvents: 'auto',
+      fontFamily: "'Inter', sans-serif"
     }}>
       {/* Header with Route Info */}
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'flex-start', 
-        padding: isMobile ? '8px 2rem 12px 2rem' : '12px 16px',
-        borderBottom: '1px solid var(--border-color)',
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        padding: isMobile ? '8px 2rem 12px 2rem' : 'var(--floating-header-padding)',
         backgroundColor: 'var(--bg-secondary)',
         position: 'relative',
+        borderBottom: 'none'
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
-          <span style={{ fontWeight: '600', fontSize: isMobile ? '26px' : '18px' }}>
+          <span style={{ fontWeight: '400', fontSize: isMobile ? '26px' : '18px', lineHeight: '22px' }}>
             Route {route.name.replace('-upcoming', '')}
             {route.name.includes('-upcoming') && route.effectiveDate && (
-              <span style={{ 
-                fontWeight: 'normal', 
-                fontSize: '13px', 
-                color: 'var(--text-tertiary)', 
+              <span style={{
+                fontWeight: 'normal',
+                fontSize: '13px',
+                color: 'var(--text-tertiary)',
                 marginLeft: '6px',
                 marginTop: '1.5px',
                 display: 'inline-block'
@@ -143,7 +154,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             )}
           </span>
           {stopNumber > 0 && (
-            <div style={{ marginBottom: isMobile ? '14px' : '0px' }}>
+            <div style={{ marginBottom: isMobile ? '14px' : '0px', marginTop: '4px' }}>
               <StopPill number={stopNumber} time={stop.time} color={route.color} />
             </div>
           )}
@@ -160,14 +171,12 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             cursor: 'pointer',
             padding: '4px',
             position: 'absolute',
-            top: isMobile ? '3px' : '14px',
-            right: isMobile ? '22px' : '18px',
+            top: isMobile ? '3px' : '30px',
+            right: isMobile ? '22px' : '34px',
             transition: 'color 0.2s ease',
             zIndex: 10,
             lineHeight: 1
           }}
-          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
-          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}
           aria-label="Close dialog"
         >
           <XIcon />
@@ -175,72 +184,70 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
       </div>
 
       {/* Main Content */}
-      <div style={{ padding: isMobile ? '20px 2rem' : '20px 16px' }}>
+      <div style={{ padding: isMobile ? '20px 2rem' : 'var(--floating-content-padding)' }}>
         {/* Details Grid */}
         <div style={{ display: 'grid', gap: '1rem' }}>
           {/* Address & Neighborhood */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
-              <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '5px' }}>Address</div>
+              <div className="eyebrow">Address</div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                <MapPinIcon width={isMobile ? 11 : 9} height={isMobile ? 15 : 13} style={{ flexShrink: 0, color: 'var(--text-tertiary)', marginTop: isMobile ? '4px' : '3px' }} />
                 <div style={{ color: 'var(--text-primary)', fontWeight: '500', lineHeight: '1.4' }}>
-                {stop.isSchoolStop && stop.schoolName ? (
-                  getSchoolDisplayName(stop.schoolName)
-                ) : enableStreetHighlighting && streets.length > 0 ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                    {streets.map((streetName, index) => {
-                      const isHighlighted = highlightedStreetName === streetName;
-                      const isLoading = loadingStreet === streetName;
-                      
-                      return (
-                        <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          {index > 0 && <span style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>&</span>}
-                          <span
-                            onClick={() => {
-                              if (!isLoading) {
-                                analyticsService.trackAction('street_highlight_click', { street: streetName });
-                                onStreetClick?.(streetName);
-                              }
-                            }}
-                            style={{
-                              cursor: isLoading ? 'not-allowed' : 'pointer',
-                              color: isHighlighted ? '#FFD700' : isLoading ? 'var(--text-tertiary)' : 'var(--text-primary)',
-                              transition: 'color 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => { if (!isLoading) e.currentTarget.style.color = route.color; }}
-                            onMouseLeave={(e) => { if (!isLoading) e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)'; }}
-                          >
-                            {formatStreetName(streetName)}
-                            {isLoading && <i className="fas fa-circle-notch fa-spin" style={{ marginLeft: '6px', fontSize: '10px' }}></i>}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  formattedAddress
-                )}
+                  {stop.isSchoolStop && stop.schoolName ? (
+                    getSchoolDisplayName(stop.schoolName)
+                  ) : enableStreetHighlighting && streets.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      {streets.map((streetName, index) => {
+                        const isHighlighted = highlightedStreetName === streetName;
+                        const isLoading = loadingStreet === streetName;
+
+                        return (
+                          <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            {index > 0 && <span style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>&</span>}
+                            <span
+                              onClick={() => {
+                                if (!isLoading) {
+                                  analyticsService.trackAction('street_highlight_click', { street: streetName });
+                                  onStreetClick?.(streetName);
+                                }
+                              }}
+                              style={{
+                                cursor: isLoading ? 'not-allowed' : 'pointer',
+                                color: isHighlighted ? '#FFD700' : isLoading ? 'var(--text-tertiary)' : 'var(--text-primary)',
+                                transition: 'color 0.2s ease',
+                              }}
+                              onMouseEnter={(e) => { if (!isLoading) e.currentTarget.style.color = route.color; }}
+                              onMouseLeave={(e) => { if (!isLoading) e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)'; }}
+                            >
+                              {formatStreetName(streetName)}
+                              {isLoading && <i className="fas fa-circle-notch fa-spin" style={{ marginLeft: '6px', fontSize: '10px' }}></i>}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    formattedAddress
+                  )}
                 </div>
               </div>
             </div>
 
             {stop.neighborhood && (
               <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
-                <div style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '5px' }}>Neighborhood</div>
+                <div className="eyebrow">Neighborhood</div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                  <i className="fas fa-city" style={{ fontSize: isMobile ? '11px' : '9px', color: 'var(--text-tertiary)', flexShrink: 0, marginTop: isMobile ? '5px' : '4px' }}></i>
                   <div style={{ color: 'var(--text-primary)', fontWeight: '500' }}>{stop.neighborhood}</div>
                 </div>
               </div>
             )}
 
             {stop.isSchoolStop && (
-              <div style={{ 
-                fontSize: '10px', 
-                color: 'var(--text-tertiary)', 
-                display: 'flex', 
-                alignItems: 'center', 
+              <div style={{
+                fontSize: '10px',
+                color: 'var(--text-tertiary)',
+                display: 'flex',
+                alignItems: 'center',
                 gap: '4px',
                 fontWeight: '700',
                 textTransform: 'uppercase',
@@ -256,137 +263,84 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
 
         {/* Action Row */}
         <div style={{ display: 'flex', gap: '10px', marginTop: '1.5rem' }}>
-          <button
+          <Button
+            variant="secondary"
+            size="medium"
+            fullWidth
+            align="center"
             onClick={(e) => {
               analyticsService.trackOutboundLink(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.address)}`, 'maps');
               handleMapLinkClick(e, stop.address, stop.coordinates);
             }}
-            style={{
-              flex: 1,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              padding: '10px',
-              borderRadius: '9999px',
-              backgroundColor: 'var(--bg-tertiary)',
-              border: '1px solid var(--border-color)',
-              color: 'var(--text-primary)',
-              fontSize: '13px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
+            icon={<i className="fas fa-directions" style={{ opacity: 0.7, fontSize: '12px' }}></i>}
           >
-            <i className="fas fa-directions" style={{ opacity: 0.7 }}></i>
             Directions
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="secondary"
+            size="medium"
+            fullWidth
+            align="center"
             onClick={handleCopy}
-            style={{
-              flex: 1,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              padding: '10px',
-              borderRadius: '9999px',
-              backgroundColor: copied ? '#4CAF50' : 'var(--bg-tertiary)',
-              border: '1px solid var(--border-color)',
-              color: copied ? 'white' : 'var(--text-primary)',
-              fontSize: '13px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-            }}
-            onMouseEnter={(e) => !copied && (e.currentTarget.style.backgroundColor = 'var(--bg-secondary)')}
-            onMouseLeave={(e) => !copied && (e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)')}
+            icon={<i className={`fas ${copied ? 'fa-check' : 'fa-copy'}`} style={{ opacity: 0.7, fontSize: '12px', color: copied ? '#4CAF50' : 'inherit' }}></i>}
           >
-            <i className={`fas ${copied ? 'fa-check' : 'fa-copy'}`} style={{ opacity: 0.7 }}></i>
             {copied ? 'Copied' : 'Copy'}
-          </button>
+          </Button>
         </div>
       </div>
 
       {/* Admin Section */}
       {(enableStreetPins || (editingMode && undoHistoryCount > 0)) && (
-        <div style={{ 
-          padding: '16px', 
-          backgroundColor: 'rgba(78, 205, 196, 0.05)', 
-          borderTop: '1px solid var(--border-color-darker)', 
+        <div style={{
+          padding: '24px 34px',
+          backgroundColor: 'rgba(78, 205, 196, 0.05)',
+          borderTop: '1px solid var(--border-color-darker)',
           display: 'flex',
           flexDirection: 'column',
-          gap: '10px'
+          gap: '12px'
         }}>
-          <div style={{ 
-            fontSize: '11px', 
-            fontWeight: '700', 
-            color: '#FFFFFF', 
-            textTransform: 'uppercase', 
-            letterSpacing: '0.08em',
+          <div style={{
+            fontSize: '10px',
+            fontWeight: '700',
+            color: 'var(--text-tertiary)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
             marginBottom: '4px'
           }}>
             Admin Tools
           </div>
-          
+
           {enableStreetPins && !stop.isSchoolStop && streets.length > 0 && (
-            <button
+            <Button
+              variant="primary"
+              size="small"
+              fullWidth
+              align="left"
               onClick={() => {
                 analyticsService.trackAdminAction('drop_street_pins', stop.address);
                 onDropStreetPins?.();
               }}
               disabled={loadingStreetPins}
-              style={{
-                width: '100%',
-                background: loadingStreetPins ? 'var(--bg-tertiary)' : '#FFFFFF',
-                border: 'none',
-                fontSize: '13px',
-                cursor: loadingStreetPins ? 'not-allowed' : 'pointer',
-                color: 'white',
-                padding: '10px',
-                borderRadius: '9999px',
-                fontWeight: '600',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                opacity: loadingStreetPins ? 0.6 : 1,
-                transition: 'all 0.2s ease',
-              }}
+              icon={<i className={`fas ${loadingStreetPins ? 'fa-circle-notch fa-spin' : 'fa-map-marker-alt'}`} style={{ fontSize: '12px' }}></i>}
             >
-              <i className={`fas ${loadingStreetPins ? 'fa-circle-notch fa-spin' : 'fa-map-marker-alt'}`}></i>
-              <span>{loadingStreetPins ? 'Dropping pins...' : 'Drop Pins on Streets'}</span>
-            </button>
+              {loadingStreetPins ? 'Dropping pins...' : 'Drop Pins on Streets'}
+            </Button>
           )}
 
           {editingMode && undoHistoryCount > 0 && (
-            <button
+            <Button
+              variant="secondary"
+              size="small"
+              fullWidth
+              align="left"
               onClick={() => {
                 analyticsService.trackAdminAction('undo_coordinate_change', stop.id);
                 onUndo?.();
               }}
-              style={{
-                width: '100%',
-                background: 'var(--bg-primary)',
-                border: `1px solid var(--border-color)`,
-                fontSize: '13px',
-                cursor: 'pointer',
-                color: 'var(--text-primary)',
-                padding: '10px',
-                borderRadius: '9999px',
-                fontWeight: '600',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                transition: 'all 0.2s ease',
-              }}
+              icon={<i className="fas fa-undo" style={{ fontSize: '12px' }}></i>}
             >
-              <i className="fas fa-undo"></i>
-              <span>Undo Changes ({undoHistoryCount})</span>
-            </button>
+              Undo Changes ({undoHistoryCount})
+            </Button>
           )}
         </div>
       )}

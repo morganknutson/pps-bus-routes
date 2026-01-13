@@ -1,11 +1,25 @@
 {
-  "generatedAt": "2025-12-22T10:11:37.303Z",
+  "generatedAt": "2026-01-13T05:03:04.968Z",
   "summary": {
-    "total": 493,
-    "valid": 493,
-    "invalid": 0,
+    "total": 496,
+    "valid": 495,
+    "invalid": 1,
     "missingSchoolStop": 0,
-    "issues": []
+    "issues": [
+      {
+        "file": "100SYL-A_effective_082625.json",
+        "route": "100 (Morning)",
+        "issue": "SCHOOL_NOT_FOUND",
+        "message": "Could not find matching school in schools.json for \"unknown\""
+      }
+    ]
   },
-  "issues": []
+  "issues": [
+    {
+      "file": "100SYL-A_effective_082625.json",
+      "route": "100 (Morning)",
+      "issue": "SCHOOL_NOT_FOUND",
+      "message": "Could not find matching school in schools.json for \"unknown\""
+    }
+  ]
 }

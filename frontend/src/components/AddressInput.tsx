@@ -27,7 +27,7 @@ export function AddressInput() {
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
   const {
     schoolId: selectedSchoolId,
@@ -46,7 +46,7 @@ export function AddressInput() {
     schools,
     setShowSchoolClosestModal,
   } = useStore();
-  
+
   const isMobile = useIsMobile();
   const { isDarkMode } = useDarkMode();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -73,7 +73,7 @@ export function AddressInput() {
 
       // Elegant School-as-Closest-Stop handling
       if (stop.isSchoolStop) {
-        setShowSchoolClosestModal(true, { 
+        setShowSchoolClosestModal(true, {
           schoolName: selectedSchoolId ? schools.find(s => s.id === selectedSchoolId)?.name || 'the school' : 'the school',
           schoolId: selectedSchoolId || ''
         });
@@ -82,7 +82,7 @@ export function AddressInput() {
       }
 
       // Update direction, tab, and stop in ONE call to avoid URL race conditions
-      selectStop(route.name, stop.id, { 
+      selectStop(route.name, stop.id, {
         doubleFit: true,
         direction: (route.direction as any) || directionFilter,
         show: 'routes',
@@ -154,7 +154,7 @@ export function AddressInput() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node) &&
-          inputRef.current && !inputRef.current.contains(event.target as Node)) {
+        inputRef.current && !inputRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
       }
     };
@@ -269,7 +269,7 @@ export function AddressInput() {
       {homeAddress && selectedSchoolId && routes.length > 0 && (
         <button
           onClick={handleFindClosestStop}
-          style={{ padding: '0 1.25rem', height: '40px', backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)', color: 'var(--text-primary)', border: 'none', borderRadius: '9999px', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px var(--shadow-large)' }}
+          style={{ padding: '0 2rem', height: '40px', fontWeight: '500', backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)', color: 'var(--text-primary)', border: 'none', borderRadius: '9999px', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px var(--shadow-large)' }}
         >
           <MapPinIcon style={{ marginRight: '0.5rem', flexShrink: 0 }} />
           <span>Find My Stop</span>

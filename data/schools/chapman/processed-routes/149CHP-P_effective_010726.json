@@ -1,0 +1,314 @@
+{
+  "id": "14aForZfkpgR5a-C_sxzfpY1NhVqydOFn",
+  "name": "149",
+  "direction": "Afternoon",
+  "filename": "149CHP-P_effective_010726.pdf",
+  "fileId": "14aForZfkpgR5a-C_sxzfpY1NhVqydOFn",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7058526,
+        45.5332347
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    },
+    {
+      "id": "stop-1",
+      "address": "NW Quimby St. & NW 14th Ave. [SW]",
+      "time": "2:40 pm",
+      "direction": "SW",
+      "originalLine": "2:40 pmNW QUIMBY ST @ NW 14TH AV [SW]149CHP-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6855743,
+        45.5336051
+      ],
+      "displayName": "NW Quimby St & NW 14th Ave, Portland, OR 97209, USA",
+      "placeId": "EjNOVyBRdWltYnkgU3QgJiBOVyAxNHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEgm9RSoT_QmVVBGaM4pYiJkLpxIUChIJvUUqE_0JlVQRmjOKWIiZC6caFAoSCdUuxwzlCZVUEWx8nYg2gAFYGhQKEgm_LLK6_gmVVBEUlLWLyrHQ7yIKDXPgIxsVwarftg",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "NW Quimby St. & NW 13th Ave. [SW]",
+      "time": "2:41 pm",
+      "direction": "SW",
+      "originalLine": "2:41 pmNW QUIMBY ST @ NW 13TH AV [SW]149CHP-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6845642,
+        45.5336211
+      ],
+      "displayName": "NW Quimby St & NW 13th Ave, Portland, OR 97209, USA",
+      "placeId": "EjNOVyBRdWltYnkgU3QgJiBOVyAxM3RoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA5LCBVU0EiZiJkChQKEglvDGRw_QmVVBEWYkK8YANDGhIUChIJbwxkcP0JlVQRFmJCvGADQxoaFAoSCdUuxwzlCZVUEWx8nYg2gAFYGhQKEgl3R6LE_gmVVBELQRxrfeKfWCIKDRPhIxsVNtLftg",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "1849 SW Salmon St. (mac) [N]",
+      "time": "2:46 pm",
+      "direction": "N",
+      "originalLine": "2:46 pm1849 SW SALMON ST (MAC) [N]149CHP-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.69305804739557,
+        45.5216444228181
+      ],
+      "displayName": "1849 SW Salmon St, Portland, OR 97205, USA",
+      "placeId": "ChIJAQDAlB0KlVQRc8Pg_3ceBCc",
+      "neighborhood": "Goose Hollow"
+    }
+  ],
+  "neighborhoods": [
+    "Goose Hollow",
+    "Northwest Portland"
+  ],
+  "processedAt": "2026-01-13T05:01:06.918Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.53349,
+      -122.70623
+    ],
+    [
+      45.53349,
+      -122.70676
+    ],
+    [
+      45.53393,
+      -122.70678
+    ],
+    [
+      45.53394,
+      -122.70606
+    ],
+    [
+      45.534,
+      -122.70301
+    ],
+    [
+      45.53407,
+      -122.69924
+    ],
+    [
+      45.53418,
+      -122.69335
+    ],
+    [
+      45.53427,
+      -122.68795
+    ],
+    [
+      45.53428,
+      -122.68763
+    ],
+    [
+      45.53387,
+      -122.68756
+    ],
+    [
+      45.53356,
+      -122.68755
+    ],
+    [
+      45.53357,
+      -122.68745
+    ],
+    [
+      45.53358,
+      -122.68719
+    ],
+    [
+      45.53358,
+      -122.68697
+    ],
+    [
+      45.53361,
+      -122.68528
+    ],
+    [
+      45.53362,
+      -122.68456
+    ],
+    [
+      45.53361,
+      -122.68528
+    ],
+    [
+      45.53359,
+      -122.6866
+    ],
+    [
+      45.53358,
+      -122.68692
+    ],
+    [
+      45.53358,
+      -122.68731
+    ],
+    [
+      45.53356,
+      -122.68755
+    ],
+    [
+      45.53305,
+      -122.68758
+    ],
+    [
+      45.53214,
+      -122.68755
+    ],
+    [
+      45.53072,
+      -122.6875
+    ],
+    [
+      45.52893,
+      -122.68743
+    ],
+    [
+      45.52786,
+      -122.68741
+    ],
+    [
+      45.52678,
+      -122.6874
+    ],
+    [
+      45.52643,
+      -122.68738
+    ],
+    [
+      45.52637,
+      -122.68732
+    ],
+    [
+      45.52606,
+      -122.68732
+    ],
+    [
+      45.52557,
+      -122.68731
+    ],
+    [
+      45.52549,
+      -122.68731
+    ],
+    [
+      45.52527,
+      -122.6873
+    ],
+    [
+      45.52515,
+      -122.6873
+    ],
+    [
+      45.52501,
+      -122.68725
+    ],
+    [
+      45.52493,
+      -122.68728
+    ],
+    [
+      45.52489,
+      -122.68729
+    ],
+    [
+      45.52467,
+      -122.68731
+    ],
+    [
+      45.5243,
+      -122.68729
+    ],
+    [
+      45.52358,
+      -122.68721
+    ],
+    [
+      45.52306,
+      -122.68719
+    ],
+    [
+      45.52289,
+      -122.68719
+    ],
+    [
+      45.52289,
+      -122.68746
+    ],
+    [
+      45.52292,
+      -122.68824
+    ],
+    [
+      45.52294,
+      -122.68858
+    ],
+    [
+      45.523,
+      -122.68974
+    ],
+    [
+      45.52305,
+      -122.69088
+    ],
+    [
+      45.52313,
+      -122.69234
+    ],
+    [
+      45.52316,
+      -122.69305
+    ],
+    [
+      45.52318,
+      -122.69331
+    ],
+    [
+      45.523,
+      -122.69334
+    ],
+    [
+      45.5223,
+      -122.69342
+    ],
+    [
+      45.52227,
+      -122.69339
+    ],
+    [
+      45.5222,
+      -122.69314
+    ],
+    [
+      45.5221,
+      -122.6928
+    ],
+    [
+      45.52194,
+      -122.69289
+    ],
+    [
+      45.52171,
+      -122.69302
+    ],
+    [
+      45.52164,
+      -122.69306
+    ]
+  ]
+}

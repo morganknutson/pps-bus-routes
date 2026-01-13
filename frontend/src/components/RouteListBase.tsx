@@ -71,15 +71,17 @@ function renderStopItem(
       }}
       style={{
         padding: '0.75rem',
-        borderBottom: stopIndex < allStops.length - 1 ? '1px solid var(--border-color)' : 'none',
+        borderBottom: stopIndex < allStops.length - 1
+          ? `1px solid ${config.isRouteSelected?.(route) ? '#2a2a2a' : '#393939'}`
+          : 'none',
         cursor: isClickable ? 'pointer' : 'default',
         backgroundColor: hasError
           ? '#ffe6e6'
           : isSelected
-          ? 'var(--bg-tertiary)'
-          : isClickable
-          ? 'transparent'
-          : 'var(--bg-secondary)',
+            ? 'var(--bg-tertiary)'
+            : isClickable
+              ? 'transparent'
+              : 'var(--bg-secondary)',
         borderLeft: isSelected ? `3px solid ${routeColor}` : hasError ? '3px solid #ff6b6b' : 'none',
         transition: 'background-color 0.15s',
         display: 'flex',
@@ -99,7 +101,7 @@ function renderStopItem(
     >
       {/* Stop icon/number */}
       {stop.isSchoolStop ? (
-        <div style={{ 
+        <div style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -108,18 +110,17 @@ function renderStopItem(
           flexShrink: 0,
         }}>
           {/* School icon */}
-          <div style={{ 
+          <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             width: '16px',
-            height: '16px',
+            height: '13px',
             borderRadius: '50%',
-            backgroundColor: hasError ? '#ff6b6b' : routeColor,
             color: 'white',
             marginTop: '1px',
           }}>
-            <i className="fas fa-graduation-cap" style={{ fontSize: '14px' }}></i>
+            <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
           </div>
           {/* Time below icon */}
           {stop.time && (
@@ -133,7 +134,7 @@ function renderStopItem(
           )}
         </div>
       ) : (
-        <div style={{ 
+        <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -150,43 +151,43 @@ function renderStopItem(
           {stopNumber}
         </div>
       )}
-      
+
       {/* Stop details */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ 
+        <div style={{
           fontSize: '13px',
           fontWeight: '500',
           marginBottom: '0.25rem',
           color: hasError ? '#ff6b6b' : (isClickable ? 'var(--text-secondary)' : 'var(--text-tertiary)'),
         }}>
-          {stop.isSchoolStop && stop.schoolName 
+          {stop.isSchoolStop && stop.schoolName
             ? (() => {
-                const schoolTypes = getSchoolTypes(stop.schoolName);
-                let typeLabel = '';
-                if (schoolTypes.length > 0) {
-                  const type = schoolTypes[0];
-                  if (type === 'High School') {
-                    typeLabel = 'High School';
-                  } else {
-                    typeLabel = type.replace(' School', '');
-                  }
+              const schoolTypes = getSchoolTypes(stop.schoolName);
+              let typeLabel = '';
+              if (schoolTypes.length > 0) {
+                const type = schoolTypes[0];
+                if (type === 'High School') {
+                  typeLabel = 'High School';
+                } else {
+                  typeLabel = type.replace(' School', '');
                 }
-                return `${stop.schoolName}${typeLabel ? ` ${typeLabel}` : ''}`;
-              })()
+              }
+              return `${stop.schoolName}${typeLabel ? ` ${typeLabel}` : ''}`;
+            })()
             : formatStreetName(stop.address)}
         </div>
         {stop.time && !stop.isSchoolStop && (
           <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
             {stop.time}
             {stop.neighborhood && (
-              <span style={{ marginLeft: '0.5rem', opacity: 0.8 }}>
+              <span className="eyebrow">
                 • {stop.neighborhood}
               </span>
             )}
           </div>
         )}
         {!stop.time && stop.neighborhood && !stop.isSchoolStop && (
-          <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+          <div className="eyebrow">
             {stop.neighborhood}
           </div>
         )}
@@ -213,10 +214,10 @@ function renderStopItem(
 /**
  * Base route list component - reusable and configurable
  */
-export function RouteListBase({ 
-  routes, 
-  config = {}, 
-  loading = false, 
+export function RouteListBase({
+  routes,
+  config = {},
+  loading = false,
   error,
   emptyMessage = 'No routes found'
 }: RouteListBaseProps) {
@@ -337,15 +338,7 @@ export function RouteListBase({
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         {neighborhoodNames.map(neighborhood => (
           <div key={neighborhood}>
-            <div style={{ 
-              fontSize: '11px', 
-              fontWeight: '600', 
-              textTransform: 'uppercase', 
-              letterSpacing: '0.05em',
-              color: 'var(--text-tertiary)',
-              marginBottom: '0.75rem',
-              paddingLeft: '0.25rem'
-            }}>
+            <div className="eyebrow" style={{ marginBottom: '.75rem' }}>
               {neighborhood}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -449,19 +442,19 @@ export function RouteListBase({
               )}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ marginBottom: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  <span style={{ 
-                    color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', 
-                    fontSize: '14px', 
+                  <span style={{
+                    color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                    fontSize: '14px',
                     fontWeight: '600',
-                    marginTop: '1px' 
+                    marginTop: '1px'
                   }}>
                     {route.name.replace('-upcoming', '')}
                   </span>
                   {route.name.includes('-upcoming') && route.effectiveDate && (
-                    <span style={{ 
-                      fontWeight: 'normal', 
+                    <span style={{
+                      fontWeight: 'normal',
                       fontSize: '13px',
-                      color: 'var(--text-tertiary)', 
+                      color: 'var(--text-tertiary)',
                       marginLeft: '2px',
                       marginTop: '1.5px'
                     }}>
@@ -486,10 +479,10 @@ export function RouteListBase({
                 )}
               </div>
               {!config.showGeocodingStats && (
-                <div style={{ 
-                  fontSize: '13px', 
-                  color: 'var(--text-tertiary)', 
-                  whiteSpace: 'nowrap', 
+                <div style={{
+                  fontSize: '13px',
+                  color: 'var(--text-tertiary)',
+                  whiteSpace: 'nowrap',
                   flexShrink: 0,
                   opacity: 0.8
                 }}>
@@ -520,17 +513,17 @@ export function RouteListBase({
             <ChevronIcon direction={isExpanded ? 'up' : 'down'} size={10} />
           </button>
         </div>
-        
+
         {/* Expanded stops list */}
         {isExpanded && (
-          <div style={{ 
-            borderTop: '1px solid var(--border-color-darker)',
-            backgroundColor: 'var(--bg-secondary)',
+          <div style={{
+            borderTop: `1px solid ${isRouteSelected ? '#2a2a2a' : 'var(--border-color-darker)'}`,
+            backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
             maxHeight: '400px',
             overflowY: 'auto',
             transition: 'background-color 0.3s ease, border-color 0.3s ease',
           }}>
-            {displayStops.map((stop, index) => 
+            {displayStops.map((stop, index) =>
               renderStopItem(stop, route, index, displayStops, config)
             )}
           </div>
@@ -541,9 +534,9 @@ export function RouteListBase({
 
   const renderSection = (sectionName: string, sectionRoutes: Route[], color?: string) => {
     if (sectionRoutes.length === 0) return null;
-    
+
     const isExpanded = expandedSections.has(sectionName);
-    
+
     return (
       <div key={sectionName}>
         <button
@@ -561,7 +554,7 @@ export function RouteListBase({
             marginBottom: '0.75rem',
           }}
         >
-          <h3 style={{ 
+          <h3 style={{
             margin: 0,
             fontSize: '1rem',
             fontWeight: '600',
@@ -571,8 +564,8 @@ export function RouteListBase({
             gap: '0.5rem',
           }}>
             {sectionName === 'Morning' && (
-              <span style={{ 
-                fontSize: '14px', 
+              <span style={{
+                fontSize: '14px',
                 padding: '4px 10px',
                 borderRadius: '12px',
                 fontWeight: '500',
@@ -584,8 +577,8 @@ export function RouteListBase({
               </span>
             )}
             {sectionName === 'Afternoon' && (
-              <span style={{ 
-                fontSize: '14px', 
+              <span style={{
+                fontSize: '14px',
                 padding: '4px 10px',
                 borderRadius: '12px',
                 fontWeight: '500',
