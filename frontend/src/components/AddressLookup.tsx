@@ -49,7 +49,11 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
-  const sessionTokenRef = useRef<string>(crypto.randomUUID());
+  const sessionTokenRef = useRef<string>(
+    typeof crypto !== 'undefined' && crypto.randomUUID 
+      ? crypto.randomUUID() 
+      : Math.random().toString(36).substring(2, 15)
+  );
 
   const getDisplayAddress = (address: string): string => {
     if (!address) return address;
@@ -180,7 +184,9 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
-    sessionTokenRef.current = crypto.randomUUID();
+    sessionTokenRef.current = typeof crypto !== 'undefined' && crypto.randomUUID 
+      ? crypto.randomUUID() 
+      : Math.random().toString(36).substring(2, 15);
   };
 
   useEffect(() => {
