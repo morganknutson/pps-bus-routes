@@ -42,9 +42,10 @@ export class WorkerService {
       return;
     }
 
-    // Disable jobs and polling in production - ONLY restricted to dev for now
-    if (process.env.NODE_ENV === 'production') {
-      console.log('[WorkerService] 🚫 Background jobs and polling are DISABLED in production mode');
+    // In development, always enable unless explicitly disabled
+    // In production, require ENABLE_WEEKLY_SYNC=true
+    if (process.env.NODE_ENV === 'production' && process.env.ENABLE_WEEKLY_SYNC !== 'true') {
+      console.log('[WorkerService] 🚫 Background jobs are DISABLED in production (use ENABLE_WEEKLY_SYNC=true to enable)');
       return;
     }
 
@@ -54,12 +55,14 @@ export class WorkerService {
       return;
     }
 
-    console.log(`[WorkerService] Starting in development mode (polling worker)`);
+    const modeLabel = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+    console.log(`[WorkerService] Starting in ${modeLabel} mode (polling worker)`);
     console.log(`[WorkerService] Concurrency: ${this.concurrency}`);
 
-    // In this stripped-down version, we only support the polling worker for local development
+    // Start the polling worker
     this.startPollingWorker();
   }
+
 
   /**
    * Start a polling worker for development (when Redis is not available)

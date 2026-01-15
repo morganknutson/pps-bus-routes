@@ -45,6 +45,7 @@ import { getSchoolIdFromFilename, getSchoolPdfDir } from '../utils/schoolUtils.j
 import { pdfSyncJobQueue } from './jobQueue/index.js';
 import { JOB_PRIORITY } from './jobQueue/jobTypes.js';
 import { processSinglePDF } from './routeProcessor.js';
+import { runWeeklySync, getSyncState } from './weeklySyncService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -102,7 +103,7 @@ function fileNeedsUpdate(driveFile, existingRoute) {
   if (!existingRoute) {
     return true; // New file
   }
-  
+
   // Check if modified time is newer than processed time
   if (driveFile.modifiedTime) {
     const modifiedTime = new Date(driveFile.modifiedTime);
@@ -111,7 +112,7 @@ function fileNeedsUpdate(driveFile, existingRoute) {
       return true; // File was modified after processing
     }
   }
-  
+
   return false;
 }
 
@@ -122,39 +123,39 @@ async function processPDFFile(driveFile, apiKey) {
   try {
     // Download PDF
     const { buffer, name } = await downloadFile(driveFile.id, apiKey);
-    
+
     // Determine school from filename
     const schoolId = getSchoolIdFromFilename(name);
     if (!schoolId) {
       return { success: false, error: `Could not determine school from filename: ${name}` };
     }
-    
+
     // Get school-specific PDF directory
     const pdfsDir = getSchoolPdfDir(schoolId, DATA_DIR, path);
     if (!fs.existsSync(pdfsDir)) {
       fs.mkdirSync(pdfsDir, { recursive: true });
     }
-    
+
     // Save PDF locally
     const pdfPath = path.join(pdfsDir, name);
     fs.writeFileSync(pdfPath, buffer);
-    
+
     // Process PDF using shared processor
     const finalRoute = await processSinglePDF(buffer, name, driveFile.id, {
       logPrefix: '[Scheduler]',
       saveToFile: true,
     });
-    
+
     // Add Drive-specific metadata
     finalRoute.fileId = driveFile.id;
     finalRoute.modifiedTime = driveFile.modifiedTime || null;
-    
+
     // Re-save with updated metadata
     const processedRoutesDir = path.join(DATA_DIR, 'schools', schoolId, 'processed-routes');
     const outputFilename = name.replace('.pdf', '.json');
     const outputPath = path.join(processedRoutesDir, outputFilename);
     fs.writeFileSync(outputPath, JSON.stringify(finalRoute, null, 2));
-    
+
     return { success: true, route: finalRoute };
   } catch (error) {
     return { success: false, error: error.message };
@@ -162,56 +163,44 @@ async function processPDFFile(driveFile, apiKey) {
 }
 
 /**
- * Run the check: enqueue PDF sync jobs for all schools with Drive links
+ * Run the weekly sync check using the orchestrated workflow
  */
 async function runCheck() {
-  console.log('[Scheduler] Starting daily check at', new Date().toISOString());
-  
+  console.log('[Scheduler] Starting weekly sync at', new Date().toISOString());
+
   schedulerState.lastRun = new Date().toISOString();
   schedulerState.lastRunStatus = 'running';
   schedulerState.lastRunError = null;
   saveState();
-  
+
   try {
-    // Load schools
-    const schools = JSON.parse(fs.readFileSync(SCHOOLS_FILE, 'utf8'));
-    
-    // Get all schools with Drive links
-    const schoolsWithDriveLinks = schools.filter(s => s.driveLink);
-    console.log(`[Scheduler] Found ${schoolsWithDriveLinks.length} schools with Drive links`);
-    
-    // Enqueue PDF sync jobs for all schools (with low priority for scheduled checks)
-    const schoolIds = schoolsWithDriveLinks.map(s => s.id);
-    const jobIds = await pdfSyncJobQueue.enqueueBulkSyncJobs(schoolIds, {
-      priority: JOB_PRIORITY.LOW,
-      attempts: 2, // Fewer retries for scheduled jobs
-    });
-    
-    schedulerState.lastRunStatus = 'success';
-    schedulerState.lastRunError = null;
-    
-    console.log(`[Scheduler] Enqueued ${jobIds.length} PDF sync jobs`);
-    
+    // Run the full weekly sync workflow
+    const results = await runWeeklySync();
+
+    schedulerState.lastRunStatus = results.errorCount > 0 ? 'completed_with_errors' : 'success';
+    schedulerState.lastRunError = results.errorCount > 0 ? `${results.errorCount} errors occurred` : null;
+
+    console.log(`[Scheduler] Weekly sync completed: ${results.schoolsChecked} schools checked, ${results.pdfsDownloaded} PDFs downloaded, ${results.routesProcessed} routes processed`);
+
     saveState();
-    
+
     return {
-      success: true,
-      jobsEnqueued: jobIds.length,
-      schoolIds: schoolIds,
-      jobIds: jobIds,
+      success: results.errorCount === 0,
+      results,
     };
   } catch (error) {
-    console.error('[Scheduler] Error during check:', error);
+    console.error('[Scheduler] Error during weekly sync:', error);
     schedulerState.lastRunStatus = 'error';
     schedulerState.lastRunError = error.message;
     saveState();
-    
+
     return {
       success: false,
       error: error.message,
     };
   }
 }
+
 
 /**
  * Start the scheduler
@@ -221,27 +210,32 @@ function startScheduler() {
     console.log('[Scheduler] Already running');
     return;
   }
-  
-  // Disable scheduler in production OR if explicitly requested via environment variable
-  if (process.env.NODE_ENV === 'production' || process.env.ENABLE_SCHEDULER !== 'true') {
-    const reason = process.env.NODE_ENV === 'production' ? 'production mode' : 'ENABLE_SCHEDULER is not true';
-    console.log(`[Scheduler] 🚫 Scheduler is DISABLED (${reason})`);
+
+  // In development, require ENABLE_SCHEDULER=true
+  if (process.env.NODE_ENV !== 'production' && process.env.ENABLE_SCHEDULER !== 'true') {
+    console.log('[Scheduler] 🚫 Scheduler is DISABLED in development (use ENABLE_SCHEDULER=true to enable)');
     return;
   }
 
-  // Schedule for 2am daily
-  cronJob = cron.schedule('0 2 * * *', async () => {
+  // In production, require ENABLE_WEEKLY_SYNC=true
+  if (process.env.NODE_ENV === 'production' && process.env.ENABLE_WEEKLY_SYNC !== 'true') {
+    console.log('[Scheduler] 🚫 Scheduler is DISABLED in production (use ENABLE_WEEKLY_SYNC=true to enable)');
+    return;
+  }
+
+  // Schedule for 2am Sunday (weekly)
+  cronJob = cron.schedule('0 2 * * 0', async () => {
     if (schedulerState.enabled) {
       await runCheck();
     }
   }, {
     scheduled: false, // Don't start automatically
-    timezone: 'America/Los_Angeles', // Adjust to your timezone
+    timezone: 'America/Los_Angeles', // Pacific Time
   });
-  
+
   if (schedulerState.enabled) {
     cronJob.start();
-    console.log('[Scheduler] Started - will run daily at 2am');
+    console.log('[Scheduler] Started - will run weekly on Sunday at 2am Pacific');
   }
 }
 
@@ -261,7 +255,7 @@ function stopScheduler() {
  */
 function getStatus() {
   const status = { ...schedulerState };
-  
+
   // Calculate next run time if enabled
   if (status.enabled && cronJob) {
     // Next run is tomorrow at 2am
@@ -273,7 +267,7 @@ function getStatus() {
     }
     status.nextRun = nextRun.toISOString();
   }
-  
+
   return status;
 }
 
@@ -283,7 +277,7 @@ function getStatus() {
 function toggleScheduler(enabled) {
   schedulerState.enabled = enabled;
   saveState();
-  
+
   if (enabled) {
     if (!cronJob) {
       startScheduler();
@@ -295,7 +289,7 @@ function toggleScheduler(enabled) {
     stopScheduler();
     console.log('[Scheduler] Disabled');
   }
-  
+
   return getStatus();
 }
 
