@@ -52,20 +52,20 @@ export const Button: React.FC<ButtonProps> = ({
       case 'secondary':
         return {
           ...baseStyles,
-          backgroundColor: isDarkMode
-            ? (isHovered ? 'var(--bg-tertiary)' : 'var(--bg-secondary)') // Less prominent in dark mode (swapped)
-            : (isHovered ? 'rgba(0,0,0,0.08)' : 'rgba(0,0,0,0.05)'),
-          color: 'var(--text-primary)',
+          backgroundColor: isHovered
+            ? (isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)') // Reduced opacity
+            : 'transparent',
+          color: 'var(--text-secondary)',
           boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
         };
       case 'tertiary':
       case 'dropdown':
         return {
           ...baseStyles,
-          backgroundColor: isHovered
-            ? (isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)') // Reduced opacity
-            : 'transparent',
-          color: 'var(--text-secondary)',
+          backgroundColor: isDarkMode
+            ? (isHovered ? 'var(--bg-tertiary)' : 'var(--bg-secondary)') // Less prominent in dark mode (swapped)
+            : (isHovered ? 'rgba(0,0,0,0.08)' : 'rgba(0,0,0,0.05)'),
+          color: 'var(--text-primary)',
           boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
         };
       default:

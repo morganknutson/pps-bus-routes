@@ -45,6 +45,7 @@ export function AddressInput() {
     routes,
     schools,
     setShowSchoolClosestModal,
+    setIsFindMyStopVisible,
   } = useStore();
 
   const isMobile = useIsMobile();
@@ -52,6 +53,13 @@ export function AddressInput() {
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+
+  const shouldShowButton = homeAddress && selectedSchoolId && routes.length > 0;
+
+  useEffect(() => {
+    setIsFindMyStopVisible(!!shouldShowButton && isMobile);
+    return () => setIsFindMyStopVisible(false);
+  }, [shouldShowButton, isMobile, setIsFindMyStopVisible]);
 
   const handleFindClosestStop = async () => {
     if (!homeAddress || !routes || routes.length === 0) return;
@@ -211,14 +219,33 @@ export function AddressInput() {
   };
 
   return (
-    <div style={{ position: 'absolute', top: '1.2rem', left: '1.25rem', right: '1.25rem', zIndex: 1000, display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-      <div style={{ flex: 1, padding: '0 0.75rem 0 1.25rem', height: '40px', display: 'flex', alignItems: 'center', backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)', borderRadius: '9999px', boxShadow: '0 4px 12px var(--shadow-large)', transition: 'background-color 0.3s ease, box-shadow 0.3s ease' }}>
+    <div style={{
+      position: 'absolute',
+      top: isMobile ? '1.375rem' : '1.2rem',
+      left: isMobile ? '0.75rem' : '1.25rem',
+      right: isMobile ? '0.75rem' : '1.25rem',
+      zIndex: 1000,
+      display: 'flex',
+      gap: isMobile ? '0.5rem' : '0.75rem',
+      alignItems: 'center'
+    }}>
+      <div style={{
+        flex: 1,
+        padding: isMobile ? '0 1.25rem' : '0 0.75rem 0 1.25rem',
+        height: isMobile ? '56px' : '40px',
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
+        borderRadius: '9999px',
+        boxShadow: '0 4px 12px var(--shadow-large)',
+        transition: 'background-color 0.3s ease, box-shadow 0.3s ease'
+      }}>
         {homeAddress ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
-            <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: '12px', flexShrink: 0 }}></i>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
+            <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '16px' : '12px', flexShrink: 0 }}></i>
             <div
               onClick={() => setFocus('home')}
-              style={{ fontSize: '12px', fontWeight: '500', flex: 1, color: 'var(--text-primary)', cursor: 'pointer', textDecoration: 'underline', textDecorationColor: 'transparent', transition: 'text-decoration-color 0.2s ease', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+              style={{ fontSize: isMobile ? '16px' : '12px', fontWeight: '500', flex: 1, color: 'var(--text-primary)', cursor: 'pointer', textDecoration: 'underline', textDecorationColor: 'transparent', transition: 'text-decoration-color 0.2s ease', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
               onMouseEnter={(e) => { e.currentTarget.style.textDecorationColor = 'var(--text-primary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.textDecorationColor = 'transparent'; }}
               title="Click to zoom to address on map"
@@ -235,7 +262,7 @@ export function AddressInput() {
         ) : (
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', height: '100%' }}>
             <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
-              <i className="fas fa-house" style={{ position: 'absolute', left: '4px', top: '50%', transform: 'translateY(-50%)', fontSize: '11px', color: 'var(--text-tertiary)', pointerEvents: 'none', zIndex: 1 }}></i>
+              <i className="fas fa-house" style={{ position: 'absolute', left: isMobile ? '0' : '4px', top: '50%', transform: 'translateY(-50%)', fontSize: isMobile ? '16px' : '11px', color: 'var(--text-tertiary)', pointerEvents: 'none', zIndex: 1 }}></i>
               <input
                 ref={inputRef}
                 type="text"
@@ -244,7 +271,7 @@ export function AddressInput() {
                 onKeyDown={handleKeyDown}
                 onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                 placeholder="Enter your address..."
-                style={{ width: '100%', height: '100%', padding: '0 0.5rem 0 1.5rem', border: 'none', borderRadius: '9999px', fontSize: '12px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
+                style={{ width: '100%', height: '100%', padding: '0 0.5rem 0 1.5rem', border: 'none', borderRadius: '9999px', fontSize: isMobile ? '16px' : '12px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
               />
               {isLoading && <div style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
               {showSuggestions && suggestions.length > 0 && (
@@ -254,7 +281,7 @@ export function AddressInput() {
                       key={index}
                       onClick={() => handleSelectSuggestion(suggestion)}
                       onMouseEnter={() => setHighlightedIndex(index)}
-                      style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none', fontSize: '12px', color: 'var(--text-primary)', backgroundColor: highlightedIndex === index ? 'rgba(78, 205, 196, 0.2)' : 'var(--bg-primary)' }}
+                      style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none', fontSize: isMobile ? '16px' : '12px', color: 'var(--text-primary)', backgroundColor: highlightedIndex === index ? 'rgba(150,150,150, 0.2)' : 'var(--bg-primary)' }}
                     >
                       {suggestion.displayName}
                     </div>
@@ -266,12 +293,49 @@ export function AddressInput() {
         )}
       </div>
 
-      {homeAddress && selectedSchoolId && routes.length > 0 && (
+      {shouldShowButton && (
         <button
           onClick={handleFindClosestStop}
-          style={{ padding: '0 2rem', height: '40px', fontWeight: '500', backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)', color: 'var(--text-primary)', border: 'none', borderRadius: '9999px', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px var(--shadow-large)' }}
+          title="Find My Stop"
+          style={isMobile ? {
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '60px',
+            backgroundColor: 'var(--bg-primary)',
+            color: 'var(--text-primary)',
+            border: 'none',
+            borderTop: '1px solid var(--border-color)',
+            fontSize: '16px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.75rem',
+            boxShadow: '0 -4px 12px rgba(0, 0, 0, 0.1)',
+            zIndex: 800,
+            transition: 'all 0.2s ease',
+          } : {
+            padding: '0 1.5rem',
+            height: '40px',
+            fontWeight: '600',
+            backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
+            color: 'var(--text-primary)',
+            border: 'none',
+            borderRadius: '9999px',
+            fontSize: '12px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            boxShadow: '0 4px 12px var(--shadow-large)',
+            transition: 'all 0.2s ease'
+          }}
         >
-          <MapPinIcon style={{ marginRight: '0.5rem', flexShrink: 0 }} />
+          <MapPinIcon style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
           <span>Find My Stop</span>
         </button>
       )}

@@ -32,7 +32,7 @@ const logger = winston.createLogger({
         logFormat
     ),
     transports: [
-        // Console transport for both dev and prod (PM2 captures console)
+        // Console transport for both dev and prod (container/orchestrator typically captures console)
         new winston.transports.Console({
             format: combine(
                 colorize(),

@@ -55,7 +55,7 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 
 ### 5. Documentation
 
-#### `GOOGLE_MAPS_SETUP.md`
+#### `docs/setup/GOOGLE_MAPS_SETUP.md`
 - Complete setup guide
 - API key configuration
 - Cost information
@@ -78,7 +78,7 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 
 ## Setup Required
 
-1. **Get Google Maps API Key** (see `GOOGLE_MAPS_SETUP.md`)
+1. **Get Google Maps API Key** (see `../setup/GOOGLE_MAPS_SETUP.md`)
 2. **Add to `backend/.env`**:
    ```bash
    GOOGLE_MAPS_API_KEY=your_api_key_here
@@ -147,7 +147,7 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 - `backend/services/geocodingService.js`
 - `backend/services/directionsService.js`
 - `backend/routes/routes.js`
-- `GOOGLE_MAPS_SETUP.md`
+- `docs/setup/GOOGLE_MAPS_SETUP.md`
 - `IMPLEMENTATION_SUMMARY.md`
 
 ### Modified Files
@@ -159,7 +159,7 @@ This implementation adds Google Maps APIs for accurate geocoding and routing, re
 
 ## Questions?
 
-See `GOOGLE_MAPS_SETUP.md` for detailed setup instructions and troubleshooting.
+See `../setup/GOOGLE_MAPS_SETUP.md` for detailed setup instructions and troubleshooting.
 
 
 

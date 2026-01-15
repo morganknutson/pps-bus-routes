@@ -4,12 +4,12 @@ import { useStore } from '../store/useStore';
 import { useDarkMode } from '../hooks/useDarkMode';
 
 export function Footer() {
-  const { isDarkMode } = useDarkMode();
+  useDarkMode();
 
-  // Match header background colors
-  const textColor = isDarkMode ? '#ffffff' : '#000000';
-  const textColorMuted = isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.7)';
-  const textColorTertiary = isDarkMode ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.4)';
+  // Footer background is always dark, so keep content light in both themes
+  const textColor = '#ffffff';
+  const textColorMuted = 'rgba(255, 255, 255, 0.8)';
+  const textColorTertiary = 'rgba(255, 255, 255, 0.4)';
 
   const linkStyle: React.CSSProperties = {
     color: textColorMuted,

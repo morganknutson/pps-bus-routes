@@ -10,6 +10,7 @@ import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
 import { useUrlState } from '../hooks/useUrlState';
 import { useLocation } from 'react-router-dom';
+import { useIsMobile } from '../hooks/useMediaQuery';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -26,7 +27,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const location = useLocation();
   const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
   const {
@@ -42,18 +43,27 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     setLookupAddress,
     clearLookupAddress,
     routes,
-    setMapIntent
+    setMapIntent,
+    setIsFindMyStopVisible,
   } = useStore();
-  
+
   const { isDarkMode } = useDarkMode();
+  const isMobile = useIsMobile();
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const sessionTokenRef = useRef<string>(
-    typeof crypto !== 'undefined' && crypto.randomUUID 
-      ? crypto.randomUUID() 
+    typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
       : Math.random().toString(36).substring(2, 15)
   );
+
+  const shouldShowButton = lookupAddress && selectedSchoolId && routes.length > 0;
+
+  useEffect(() => {
+    setIsFindMyStopVisible(!!shouldShowButton && isMobile);
+    return () => setIsFindMyStopVisible(false);
+  }, [shouldShowButton, isMobile, setIsFindMyStopVisible]);
 
   const getDisplayAddress = (address: string): string => {
     if (!address) return address;
@@ -82,7 +92,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
       }
 
       // Update direction, tab, and stop in ONE call to avoid URL race conditions
-      selectStop(route.name, stop.id, { 
+      selectStop(route.name, stop.id, {
         doubleFit: true,
         direction: (route.direction as any) || directionFilter,
         show: 'routes',
@@ -144,7 +154,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node) &&
-          inputRef.current && !inputRef.current.contains(event.target as Node)) {
+        inputRef.current && !inputRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
       }
     };
@@ -184,8 +194,8 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
-    sessionTokenRef.current = typeof crypto !== 'undefined' && crypto.randomUUID 
-      ? crypto.randomUUID() 
+    sessionTokenRef.current = typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
       : Math.random().toString(36).substring(2, 15);
   };
 
@@ -196,12 +206,31 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   }, []);
 
   return (
-    <div style={{ position: 'absolute', top: '1.2rem', left: '1.25rem', right: '1.25rem', zIndex: 1000, display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-      <div style={{ flex: 1, padding: '0 0.75rem 0 1.25rem', height: '40px', display: 'flex', alignItems: 'center', backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)', borderRadius: '9999px', boxShadow: '0 4px 12px var(--shadow-large)', transition: 'background-color 0.3s ease, box-shadow 0.3s ease' }}>
+    <div style={{
+      position: 'absolute',
+      top: isMobile ? '1.375rem' : '1.2rem',
+      left: isMobile ? '0.75rem' : '1.25rem',
+      right: isMobile ? '0.75rem' : '1.25rem',
+      zIndex: 1000,
+      display: 'flex',
+      gap: isMobile ? '0.5rem' : '0.75rem',
+      alignItems: 'center'
+    }}>
+      <div style={{
+        flex: 1,
+        padding: isMobile ? '0 1.25rem' : '0 0.75rem 0 1.25rem',
+        height: isMobile ? '56px' : '40px',
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
+        borderRadius: '9999px',
+        boxShadow: '0 4px 12px var(--shadow-large)',
+        transition: 'background-color 0.3s ease, box-shadow 0.3s ease'
+      }}>
         {lookupAddress ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
-            <i className="fas fa-map-marker-alt" style={{ color: 'var(--text-primary)', fontSize: '12px', flexShrink: 0 }}></i>
-            <div style={{ fontSize: '14px', fontWeight: '500', flex: 1, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
+            <i className="fas fa-map-marker-alt" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '16px' : '12px', flexShrink: 0 }}></i>
+            <div style={{ fontSize: isMobile ? '16px' : '14px', fontWeight: '500', flex: 1, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
               {getDisplayAddress(lookupAddress.address)}
             </div>
             <button
@@ -221,13 +250,13 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                 placeholder="Search for an address..."
-                style={{ width: '100%', height: '100%', padding: '0 0.5rem', border: 'none', borderRadius: '9999px', fontSize: '14px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
+                style={{ width: '100%', height: '100%', padding: '0 0.5rem', border: 'none', borderRadius: '9999px', fontSize: isMobile ? '16px' : '14px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
               />
               {isLoading && <div style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
               {showSuggestions && suggestions.length > 0 && (
                 <div ref={suggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>
                   {suggestions.map((suggestion, index) => (
-                    <div key={index} onClick={() => handleSelectSuggestion(suggestion)} style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none', fontSize: '14px', color: 'var(--text-primary)' }}>
+                    <div key={index} onClick={() => handleSelectSuggestion(suggestion)} style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none', fontSize: isMobile ? '16px' : '14px', color: 'var(--text-primary)' }}>
                       {suggestion.displayName}
                     </div>
                   ))}
@@ -238,12 +267,50 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
         )}
       </div>
 
-      {lookupAddress && selectedSchoolId && routes.length > 0 && (
+      {shouldShowButton && (
         <button
           onClick={handleFindClosestStop}
-          style={{ padding: '0 1.25rem', height: '40px', backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)', color: 'var(--text-primary)', border: 'none', borderRadius: '9999px', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px var(--shadow-large)' }}
+          title="Find My Stop"
+          style={isMobile ? {
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '60px',
+            backgroundColor: 'var(--bg-primary)',
+            color: 'var(--text-primary)',
+            border: 'none',
+            borderTop: '1px solid var(--border-color)',
+            fontSize: '16px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.75rem',
+            boxShadow: '0 -4px 12px rgba(0, 0, 0, 0.1)',
+            zIndex: 800,
+            transition: 'all 0.2s ease',
+          } : {
+            padding: '0 1.5rem',
+            height: '40px',
+            fontWeight: '600',
+            backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
+            color: 'var(--text-primary)',
+            border: 'none',
+            borderRadius: '9999px',
+            fontSize: '12px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            boxShadow: '0 4px 12px var(--shadow-large)',
+            transition: 'all 0.2s ease',
+            gap: '0.75rem',
+          }}
         >
-          <MapPinIcon style={{ marginRight: '0.5rem', flexShrink: 0 }} />
+          <MapPinIcon style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
           <span>Find My Stop</span>
         </button>
       )}

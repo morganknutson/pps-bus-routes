@@ -29,7 +29,7 @@
 - `Route`: `{ id, name, direction, stops: Stop[], geometry: [lat, lng][] }`
 - `School`: `{ id, name, coordinates: [lng, lat], driveLink }`
 
-**Links**: [ARCHITECTURE.md], [PAGES_INDEX.md], [.cursorrules]
+**Links**: [ARCHITECTURE.md](./ARCHITECTURE.md), [PAGES_INDEX.md](./docs/meta/PAGES_INDEX.md), [.cursorrules](./.cursorrules)
 
 **URL/UI Sync**:
 - **Logic**: Bidirectional sync between Zustand (`useStore.ts`) and URL (`useUrlState.ts`).

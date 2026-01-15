@@ -5,16 +5,17 @@ interface MapInfoPanelProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  isFindMyStopVisible?: boolean;
 }
 
-export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, children }) => {
+export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, children, isFindMyStopVisible = false }) => {
   const isMobile = useIsMobile();
-  
+
   // Refs for direct DOM manipulation to ensure 60fps
   const panelRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  
+
   // Gesture tracking refs
   const dragInfo = useRef({
     startY: 0,
@@ -41,11 +42,11 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
       dragInfo.current.lastTime = dragInfo.current.startTime;
       dragInfo.current.velocity = 0;
       dragInfo.current.isDragging = true;
-      
+
       // Check if we're at the top of the scrollable content when starting the gesture
       const content = contentRef.current;
       dragInfo.current.isAtTopAtStart = content ? content.scrollTop <= 0 : true;
-      
+
       // Disable transition during drag
       panel.style.transition = 'none';
     };
@@ -57,11 +58,11 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
       const deltaY = touch.clientY - dragInfo.current.startY;
       const now = Date.now();
       const dt = now - dragInfo.current.lastTime;
-      
+
       if (dt > 0) {
         dragInfo.current.velocity = (touch.clientY - dragInfo.current.lastY) / dt;
       }
-      
+
       dragInfo.current.lastY = touch.clientY;
       dragInfo.current.lastTime = now;
 
@@ -70,7 +71,7 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
         // Prevent default only when we are actually dragging the panel down
         // to avoid conflicts with pull-to-refresh or other browser gestures
         if (e.cancelable) e.preventDefault();
-        
+
         panel.style.transform = `translateY(${deltaY}px)`;
       } else if (deltaY < 0 && dragInfo.current.isAtTopAtStart) {
         // If they try to swipe up while at top, don't move the panel
@@ -89,8 +90,8 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
       panel.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
 
       // Logic: Close if swiped down > 120px OR if flicked down fast enough
-      const shouldClose = (deltaY > 120 && dragInfo.current.isAtTopAtStart) || 
-                          (v > 0.5 && deltaY > 20 && dragInfo.current.isAtTopAtStart);
+      const shouldClose = (deltaY > 120 && dragInfo.current.isAtTopAtStart) ||
+        (v > 0.5 && deltaY > 20 && dragInfo.current.isAtTopAtStart);
 
       if (shouldClose) {
         panel.style.transform = 'translateY(100%)';
@@ -126,7 +127,7 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
 
   const mobileStyle: React.CSSProperties = {
     position: 'fixed',
-    bottom: 0,
+    bottom: (isMobile && isFindMyStopVisible) ? '60px' : 0,
     left: 0,
     right: 0,
     zIndex: 900, // Lowered to be below header/menu (1000+)
@@ -161,7 +162,7 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
         />
       )}
 
-      <div 
+      <div
         ref={panelRef}
         style={isMobile ? mobileStyle : desktopStyle}
       >
@@ -183,12 +184,12 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
             }} />
           </div>
         )}
-        <div 
+        <div
           ref={contentRef}
-          style={isMobile ? { 
-            maxHeight: '80vh', 
-            overflowY: 'auto', 
-            backgroundColor: 'var(--bg-primary)', 
+          style={isMobile ? {
+            maxHeight: '80vh',
+            overflowY: 'auto',
+            backgroundColor: 'var(--bg-primary)',
             paddingBottom: '24px',
             WebkitOverflowScrolling: 'touch',
             overscrollBehaviorY: 'contain' // Prevent rubber-banding conflicts

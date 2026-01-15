@@ -98,8 +98,8 @@ pps-bus-maps/
 
 Ready to deploy? Check out these guides:
 
-- **[QUICK_DEPLOY.md](./QUICK_DEPLOY.md)**: Quick 5-minute guide to deploy on Railway (easiest option)
-- **[DEPLOYMENT.md](./DEPLOYMENT.md)**: Comprehensive deployment guide with multiple options (Railway, Render, VPS)
+- **[QUICK_DEPLOY.md](./docs/deployment/QUICK_DEPLOY.md)**: Quick guide to deploy (Railway-focused)
+- **[DEPLOYMENT.md](./docs/deployment/DEPLOYMENT.md)**: Comprehensive deployment guide (multiple options)
 
 The app is production-ready and can be deployed to:
 - **Railway** (recommended for beginners) - Free tier available
@@ -111,7 +111,7 @@ The app is production-ready and can be deployed to:
 
 - **[AGENTS.md](./AGENTS.md)**: Quick reference for AI coding assistants - read this first for rapid context
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)**: Comprehensive technical documentation including data flow, services, and API reference
-- **[PAGES_INDEX.md](./PAGES_INDEX.md)**: Comprehensive index of all pages in the application, including routes, purposes, features, and components used
+- **[PAGES_INDEX.md](./docs/meta/PAGES_INDEX.md)**: Comprehensive index of all pages in the application, including routes, purposes, features, and components used
 - **[TechPage](./frontend/src/pages/TechPage.tsx)**: In-app technical documentation (accessible at `/tech`)
 - **[.cursorrules](./.cursorrules)**: Coding conventions and project rules
 

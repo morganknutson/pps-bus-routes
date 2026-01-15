@@ -33,7 +33,8 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
       boxShadow: isMobile ? 'none' : 'var(--shadow-floating)',
       border: isMobile ? 'none' : '1px solid var(--border-color-darker)',
       pointerEvents: 'auto',
-      fontFamily: "'Inter', sans-serif"
+      fontFamily: "'Inter', sans-serif",
+
     }}>
       {/* Header */}
       <div style={{
@@ -44,15 +45,16 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        gap: '1rem'
+        gap: '1rem',
       }}>
         <div style={{ flex: 1 }}>
           <h3 style={{
-            margin: '0 0 0.25rem 0',
+            margin: '0 0 0.75rem 0',
             fontSize: isMobile ? '26px' : '18px',
-            fontWeight: '400',
+            fontWeight: '500',
             lineHeight: '22px',
-            color: 'var(--text-primary)'
+            color: 'var(--text-primary)',
+            letterSpacing: '-0.025em',
           }}>
             Home Location
           </h3>
@@ -64,7 +66,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
             fontSize: '12px',
             fontWeight: '500',
             marginTop: '0.2rem',
-            marginBottom: isMobile ? '14px' : '0'
+            marginBottom: isMobile ? '14px' : '0',
           }}>
             <i className="fas fa-house" style={{ fontSize: '10px', width: '10px', flexShrink: 0 }}></i>
             <span>Your Address</span>

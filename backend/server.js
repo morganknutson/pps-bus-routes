@@ -209,8 +209,8 @@ process.on('uncaughtException', (error) => {
     logger.error(`Critical error ${error.code}. Exiting.`);
     process.exit(1);
   }
-  // For other errors, PM2 will restart the process if we exit
-  // It's often safer to exit on uncaughtException as the process may be in an unstable state
+  // For other errors, a process supervisor (e.g., Docker/Coolify/systemd) can restart the process if we exit.
+  // It's often safer to exit on uncaughtException as the process may be in an unstable state.
   logger.error('Exiting due to uncaught exception...');
   process.exit(1);
 });

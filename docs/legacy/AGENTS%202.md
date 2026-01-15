@@ -130,7 +130,7 @@ interface School {
 ### Add a new page
 1. Create in `frontend/src/pages/`
 2. Add route in `frontend/src/App.tsx`
-3. Update `PAGES_INDEX.md`
+3. Update `docs/meta/PAGES_INDEX.md`
 
 ### Add a new API endpoint
 1. Create route in `backend/routes/`
@@ -147,7 +147,7 @@ interface School {
 ## Quick Links
 
 - **Full architecture**: [ARCHITECTURE.md](./ARCHITECTURE.md)
-- **Page index**: [PAGES_INDEX.md](./PAGES_INDEX.md)
+- **Page index**: [PAGES_INDEX.md](./docs/meta/PAGES_INDEX.md)
 - **Conventions**: [.cursorrules](./.cursorrules)
 - **Types**: [frontend/src/types/index.ts](./frontend/src/types/index.ts)
 

@@ -138,7 +138,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         borderBottom: 'none'
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
-          <span style={{ fontWeight: '400', fontSize: isMobile ? '26px' : '18px', lineHeight: '22px' }}>
+          <span style={{ fontWeight: '500', fontSize: isMobile ? '26px' : '18px', letterSpacing: '-0.025em', lineHeight: '22px' }}>
             Route {route.name.replace('-upcoming', '')}
             {route.name.includes('-upcoming') && route.effectiveDate && (
               <span style={{

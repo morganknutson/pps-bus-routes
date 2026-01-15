@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { ChevronIcon } from './ChevronIcon';
+import React, { useEffect, useState } from 'react';
 
 interface Contact {
   name: string;
@@ -11,7 +10,7 @@ interface Contact {
 }
 
 export function WhoSection({ className, style }: { className?: string; style?: React.CSSProperties }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const ContactCard = ({ contact }: { contact: Contact }) => (
     <div style={{ 
@@ -130,6 +129,29 @@ export function WhoSection({ className, style }: { className?: string; style?: R
     }
   ];
 
+  useEffect(() => {
+    if (!isContactModalOpen) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsContactModalOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isContactModalOpen]);
+
+  const contactCount =
+    operationsLeadership.length +
+    transportationLeadership.length +
+    otherDirectors.length +
+    techLeadership.length;
+
   return (
     <section className={className} style={{ marginBottom: '3rem', ...style }}>
       <h3 style={{ 
@@ -167,150 +189,187 @@ export function WhoSection({ className, style }: { className?: string; style?: R
         fontSize: '15px',
         fontFamily: 'var(--font-family-body)'
       }}>
-        <strong>If you're also unhappy</strong> with the experience provided by the operations and technology teams at PPS, you're always welcome to send them a note.
-      </p>
-      
-      {/* Accordion for Contact Info */}
-      <div style={{
-        border: '1px solid var(--border-color)',
-        borderRadius: '12px',
-        overflow: 'hidden',
-        marginTop: '2rem',
-        transition: 'all 0.3s ease',
-        backgroundColor: 'var(--bg-primary)'
-      }}>
-        <div 
-          onClick={() => setIsExpanded(!isExpanded)}
+        <strong>If you're also unhappy</strong> with the experience provided by the operations and technology teams at PPS, you're always welcome to{' '}
+        <button
+          type="button"
+          onClick={() => setIsContactModalOpen(true)}
           style={{
-            display: 'flex',
-            alignItems: 'stretch',
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            margin: 0,
+            color: 'var(--text-primary)',
+            textDecoration: 'underline',
             cursor: 'pointer',
-            backgroundColor: 'transparent'
+            font: 'inherit',
           }}
-          onMouseEnter={(e) => {
-             e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
-          }}
-          onMouseLeave={(e) => {
-             e.currentTarget.style.backgroundColor = 'transparent';
+          aria-haspopup="dialog"
+        >
+          send them a note
+        </button>
+        .
+      </p>
+
+      {isContactModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="School Administrator Contact Info"
+          onClick={() => setIsContactModalOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '16px',
           }}
         >
-            {/* Main Clickable Area */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.5rem 0.75rem',
-              height: '40px',
-              flex: 1,
-              minWidth: 0,
-            }}>
-                {/* Icon removed */}
-
-                <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{ 
-                            color: 'var(--text-primary)', 
-                            fontSize: '14px', 
-                            fontWeight: '600',
-                            marginTop: '1px',
-                            fontFamily: 'var(--font-family-body)'
-                        }}>
-                            School Administrator Contact Info
-                        </span>
-                        <span style={{ 
-                            fontSize: '13px', 
-                            color: 'var(--text-tertiary)', 
-                            opacity: 0.8,
-                            fontFamily: 'var(--font-family-body)'
-                        }}>
-                            {operationsLeadership.length + transportationLeadership.length + otherDirectors.length + techLeadership.length} contacts
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Chevron Button */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: 'min(980px, 100%)',
+              maxHeight: 'min(80vh, 900px)',
+              overflow: 'auto',
+              backgroundColor: 'var(--bg-primary)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '16px',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
+            }}
+          >
             <div
               style={{
-                background: 'none',
-                border: 'none',
-                borderLeft: '1px solid var(--border-color)',
-                padding: '0.5rem 0.75rem',
-                color: 'var(--text-tertiary)',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                minWidth: '40px',
+                justifyContent: 'space-between',
+                gap: '12px',
+                padding: '14px 16px',
+                borderBottom: '1px solid var(--border-color)',
               }}
             >
-               <ChevronIcon direction={isExpanded ? 'up' : 'down'} size={10} />
-            </div>
-        </div>
+              <div style={{ minWidth: 0 }}>
+                <div
+                  style={{
+                    color: 'var(--text-primary)',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    fontFamily: 'var(--font-family-body)',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  School Administrator Contact Info
+                </div>
+                <div
+                  style={{
+                    color: 'var(--text-tertiary)',
+                    fontSize: '13px',
+                    fontFamily: 'var(--font-family-body)',
+                    marginTop: '2px',
+                  }}
+                >
+                  {contactCount} contacts
+                </div>
+              </div>
 
-        {isExpanded && (
-          <div style={{
-            borderTop: '1px solid var(--border-color)',
-            backgroundColor: 'var(--bg-secondary)',
-            padding: '1.5rem'
-          }}>
-            <h3 style={{ 
-              fontSize: 'var(--font-size-h3)', 
-              marginTop: '0.5rem', 
-              marginBottom: '1rem', 
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-family-heading)',
-              fontWeight: '600'
-            }}>
-              Office of Operations Leadership
-            </h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
-              {operationsLeadership.map((contact, i) => <ContactCard key={i} contact={contact} />)}
-            </div>
-
-            <h3 style={{ 
-              fontSize: 'var(--font-size-h3)', 
-              marginTop: '2rem', 
-              marginBottom: '1rem', 
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-family-heading)',
-              fontWeight: '600'
-            }}>
-              Transportation Leadership
-            </h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
-              {transportationLeadership.map((contact, i) => <ContactCard key={i} contact={contact} />)}
-            </div>
-
-            <h3 style={{ 
-              fontSize: 'var(--font-size-h3)', 
-              marginTop: '2rem', 
-              marginBottom: '1rem', 
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-family-heading)',
-              fontWeight: '600'
-            }}>
-              Other Operations Directors
-            </h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
-              {otherDirectors.map((contact, i) => <ContactCard key={i} contact={contact} />)}
+              <button
+                type="button"
+                onClick={() => setIsContactModalOpen(false)}
+                aria-label="Close"
+                style={{
+                  background: 'none',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '10px',
+                  width: '36px',
+                  height: '36px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                <i className="fas fa-xmark" style={{ fontSize: '14px' }}></i>
+              </button>
             </div>
 
-            <h3 style={{ 
-              fontSize: 'var(--font-size-h3)', 
-              marginTop: '2rem', 
-              marginBottom: '1rem', 
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-family-heading)',
-              fontWeight: '600'
-            }}>
-              Technology Leadership (OTIS)
-            </h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
-              {techLeadership.map((contact, i) => <ContactCard key={i} contact={contact} />)}
+            <div style={{ padding: '16px' }}>
+              <h3
+                style={{
+                  fontSize: 'var(--font-size-h3)',
+                  marginTop: 0,
+                  marginBottom: '1rem',
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-family-heading)',
+                  fontWeight: '600',
+                }}
+              >
+                Office of Operations Leadership
+              </h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
+                {operationsLeadership.map((contact, i) => (
+                  <ContactCard key={i} contact={contact} />
+                ))}
+              </div>
+
+              <h3
+                style={{
+                  fontSize: 'var(--font-size-h3)',
+                  marginTop: '2rem',
+                  marginBottom: '1rem',
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-family-heading)',
+                  fontWeight: '600',
+                }}
+              >
+                Transportation Leadership
+              </h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
+                {transportationLeadership.map((contact, i) => (
+                  <ContactCard key={i} contact={contact} />
+                ))}
+              </div>
+
+              <h3
+                style={{
+                  fontSize: 'var(--font-size-h3)',
+                  marginTop: '2rem',
+                  marginBottom: '1rem',
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-family-heading)',
+                  fontWeight: '600',
+                }}
+              >
+                Other Operations Directors
+              </h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
+                {otherDirectors.map((contact, i) => (
+                  <ContactCard key={i} contact={contact} />
+                ))}
+              </div>
+
+              <h3
+                style={{
+                  fontSize: 'var(--font-size-h3)',
+                  marginTop: '2rem',
+                  marginBottom: '1rem',
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-family-heading)',
+                  fontWeight: '600',
+                }}
+              >
+                Technology Leadership (OTIS)
+              </h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
+                {techLeadership.map((contact, i) => (
+                  <ContactCard key={i} contact={contact} />
+                ))}
+              </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

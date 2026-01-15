@@ -135,7 +135,7 @@ interface School {
 ### Add a new page
 1. Create in `frontend/src/pages/`
 2. Add route in `frontend/src/App.tsx`
-3. Update `PAGES_INDEX.md`
+3. Update `docs/meta/PAGES_INDEX.md`
 
 ### Add a new API endpoint
 1. Create route in `backend/routes/`
@@ -149,7 +149,7 @@ interface School {
 
 ### Deployment
 - **Script**: `./deploy.sh`
-- **What it does**: Stops servers, pulls latest from `main`, rebuilds frontend, and restarts production server
+- **What it does**: Pulls latest from `main` and rebuilds frontend (process restarts are handled by your platform/orchestrator)
 - **When to use**: After merging changes to `main` or when the user says "deploy"
 - **Logs**: `logs/server.log` (runtime) and `logs/build.log` (build process)
 
@@ -165,7 +165,7 @@ interface School {
 ## Quick Links
 
 - **Full architecture**: [ARCHITECTURE.md](./ARCHITECTURE.md)
-- **Page index**: [PAGES_INDEX.md](./PAGES_INDEX.md)
+- **Page index**: [PAGES_INDEX.md](./docs/meta/PAGES_INDEX.md)
 - **Conventions**: [.cursorrules](./.cursorrules)
 - **Types**: [frontend/src/types/index.ts](./frontend/src/types/index.ts)
 

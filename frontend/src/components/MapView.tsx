@@ -84,7 +84,8 @@ export function MapView({
     showHighBoundaries,
     toggleBoundaryType,
     toggleAllBoundaries,
-    assignedSchools
+    assignedSchools,
+    isFindMyStopVisible,
   } = useStore();
 
   const navigate = useNavigate();
@@ -145,7 +146,7 @@ export function MapView({
   // Calculate selected stop based on URL selection
   const selectedStop = useMemo(() => {
     if (!selectedStopId) return null;
-    
+
     // Normalize selectedStopId for comparison
     const normalizedSelectedStopId = selectedStopId.replace('-upcoming', '');
     const segments = normalizedSelectedStopId.split('-');
@@ -166,15 +167,15 @@ export function MapView({
     for (const route of sortedRoutes) {
       // Normalize route name for comparison
       const normalizedRouteName = route.name.replace('-upcoming', '');
-      
+
       const stopIndex = route.stops.findIndex((s) => {
         const stopNumberId = s.id.replace('stop-', '');
         const routeStopId = `${normalizedRouteName}-${stopNumberId}`;
         const isExactMatch = s.id === selectedStopId || routeStopId === normalizedSelectedStopId;
-        
+
         // If we have a route name and stop number from the URL, try matching those
         const isFuzzyMatch = selectedRouteName === normalizedRouteName && selectedStopNumberId === stopNumberId;
-        
+
         return isExactMatch || isFuzzyMatch;
       });
 
@@ -187,7 +188,7 @@ export function MapView({
         };
       }
     }
-    
+
     return null;
   }, [routes, selectedStopId, directionFilter]);
 
@@ -299,7 +300,7 @@ export function MapView({
     // Attach map interaction listeners
     const onZoomEnd = () => {
       analyticsService.trackMapInteraction(`zoom_${map.getZoom()}`);
-      
+
       // If user manually interacts, clear any transient focus like 'my-stop'
       if (!isAutomatedMovingRef.current && focusRef.current === 'my-stop') {
         console.log('[MapView] User zoomed manually, clearing focus');
@@ -329,7 +330,7 @@ export function MapView({
           lat: e.latlng.lat.toFixed(4),
           lng: e.latlng.lng.toFixed(4)
         });
-        
+
         // Clicking empty space on map should also clear temporary focus
         if (!isAutomatedMovingRef.current && focusRef.current === 'my-stop') {
           setFocus(null);
@@ -415,7 +416,7 @@ export function MapView({
       setTimeout(() => {
         isAutomatedMovingRef.current = false;
       }, 200);
-    }, (durationSeconds * 1000) + 50); 
+    }, (durationSeconds * 1000) + 50);
   };
 
   // Constants for mobile map centering
@@ -454,8 +455,8 @@ export function MapView({
       case 'DOUBLE_FIT': {
         const activeHome = homeAddress || lookupAddress;
         if (selectedStop && activeHome &&
-            validateLngLat(selectedStop.stop.coordinates) &&
-            validateLngLat(activeHome.coordinates)) {
+          validateLngLat(selectedStop.stop.coordinates) &&
+          validateLngLat(activeHome.coordinates)) {
           const stopPos = toLeafletPosition(selectedStop.stop.coordinates);
           const homePos = toLeafletPosition(activeHome.coordinates);
           const bounds = L.latLngBounds([stopPos, homePos]);
@@ -1259,6 +1260,7 @@ export function MapView({
       {/* Unified Info overlay using MapInfoPanel */}
       <MapInfoPanel
         isOpen={isPanelOpen}
+        isFindMyStopVisible={isFindMyStopVisible}
         onClose={() => {
           if (viewMode === 'schools') {
             setSelectedSchool(null);
@@ -1326,7 +1328,13 @@ export function MapView({
       </MapInfoPanel>
 
       {/* Boundary Toggles */}
-      <div className="leaflet-bottom leaflet-left" style={{ bottom: '110px', left: '10px', pointerEvents: 'auto', zIndex: 1000 }}>
+      <div className="leaflet-bottom leaflet-left" style={{
+        bottom: isMobile ? (isFindMyStopVisible ? '180px' : '110px') : '110px',
+        left: '10px',
+        pointerEvents: 'auto',
+        zIndex: 1000,
+        transition: 'bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+      }}>
         {/* ... (Boundary toggle UI remains the same, uses toggleBoundaryType and toggleAllBoundaries from store) ... */}
         {/* I'll truncate this for brevity as it doesn't change much but use state from store */}
         <div style={{
@@ -1377,6 +1385,14 @@ export function MapView({
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
         .leaflet-container svg path.leaflet-interactive { transition: opacity 0.2s ease-in-out, fill-opacity 0.2s ease-in-out; }
+        
+        /* Shift zoom controls up on mobile when "Find My Stop" button is visible */
+        @media (max-width: 768px) {
+          .leaflet-bottom.leaflet-left .leaflet-control-zoom {
+            margin-bottom: ${isFindMyStopVisible ? '80px' : '10px'} !important;
+            transition: margin-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+        }
       `}</style>
     </div>
   );

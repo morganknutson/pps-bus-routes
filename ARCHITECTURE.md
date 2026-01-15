@@ -168,7 +168,7 @@ pps-bus-maps/
 │
 ├── AGENTS.md                   # AI agent quick reference
 ├── ARCHITECTURE.md             # This file
-├── PAGES_INDEX.md              # Page documentation
+├── docs/meta/PAGES_INDEX.md    # Page documentation
 ├── README.md                   # Project readme
 └── .cursorrules                # Coding conventions
 ```
@@ -807,7 +807,7 @@ The deployment process is automated through a shell script that handles stopping
 ## See Also
 
 - [AGENTS.md](./AGENTS.md) - Quick reference for AI agents
-- [PAGES_INDEX.md](./PAGES_INDEX.md) - Page documentation
+- [PAGES_INDEX.md](./docs/meta/PAGES_INDEX.md) - Page documentation
 - [.cursorrules](./.cursorrules) - Coding conventions
 - [TechPage](./frontend/src/pages/TechPage.tsx) - In-app documentation
 

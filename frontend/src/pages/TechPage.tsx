@@ -1039,8 +1039,8 @@ export function TechPage() {
                 <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '15px', borderRadius: '8px', marginBottom: '15px' }}>
                   <strong style={{ color: 'var(--text-primary)' }}>Process Detail:</strong>
                   <ul>
-                    <li><strong>deploy.sh</strong> - Pulls the latest code, rebuilds the frontend, restarts the Node.js production server, and updates the sitemap.</li>
-                    <li><strong>Environment</strong> - We use PM2 for process management and automatic restarts if the server crashes.</li>
+                    <li><strong>deploy.sh</strong> - Pulls the latest code and rebuilds the frontend (process restarts are handled by the deployment platform/orchestrator).</li>
+                    <li><strong>Environment</strong> - Process management and restarts are handled by the hosting platform (e.g., Coolify/Docker restart policies + health checks).</li>
                   </ul>
                 </div>
               </SectionContent>

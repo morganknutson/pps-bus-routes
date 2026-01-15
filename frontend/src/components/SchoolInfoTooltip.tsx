@@ -96,7 +96,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         gap: '1rem'
       }}>
         <div style={{ flex: 1 }}>
-          <h3 style={{ margin: '0 0 0.25rem 0', fontSize: isMobile ? '26px' : '18px', fontWeight: '400', lineHeight: '22px', color: 'var(--text-primary)' }}>
+          <h3 style={{ margin: '0 0 0.75rem 0', fontSize: isMobile ? '26px' : '18px', fontWeight: '500', letterSpacing: '-0.025em', lineHeight: '22px', color: 'var(--text-primary)' }}>
             {getSchoolDisplayName(school.name)}
           </h3>
           <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', color: schoolColor, fontSize: '12px', fontWeight: '500', marginTop: '0.2rem', marginBottom: isMobile ? '14px' : '0' }}>

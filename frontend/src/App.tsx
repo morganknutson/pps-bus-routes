@@ -65,7 +65,7 @@ export function ExplorerApp() {
     setLoadingProgress,
     routes,
   } = useStore();
-  
+
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
@@ -120,14 +120,14 @@ export function ExplorerApp() {
           (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
           (schoolTypes.includes('High School') && schoolTypeFilters.high);
       }
-      
+
       if (!matchesType) return false;
 
       // 2. Then check Route Status Filter
       if (hasNoRoutes && !schoolTypeFilters.noRoutes) {
         return false;
       }
-      
+
       return true;
     });
   }, [schools, searchTerm, schoolTypeFilters]);
@@ -181,7 +181,7 @@ export function ExplorerApp() {
   // Custom Hamburger/Close icon component
   const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => (
     <div style={{
-      width: '24px',
+      width: isMobile ? '28px' : '24px',
       height: '18px',
       position: 'relative',
       display: 'flex',
@@ -228,8 +228,8 @@ export function ExplorerApp() {
   const hamburgerButton = isMobile ? (
     <button onClick={() => setSidebarOpen(!sidebarOpen)} style={{
       background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)',
-      padding: '0.5rem 13px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      width: '40px', height: '40px', borderRadius: '9999px',
+      padding: isMobile ? '0.5rem 10px' : '0.5rem 13px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      width: isMobile ? '44px' : '40px', height: '40px', borderRadius: '9999px',
     }} aria-label={sidebarOpen ? "Close menu" : "Open menu"}>
       <HamburgerIcon isOpen={sidebarOpen} />
     </button>
@@ -240,7 +240,7 @@ export function ExplorerApp() {
   };
 
   const selectedRoutes = useMemo(() => {
-    return routes.filter(r => selectedRouteNames.includes(r.name) && 
+    return routes.filter(r => selectedRouteNames.includes(r.name) &&
       (directionFilter === 'Both' || r.direction === directionFilter));
   }, [routes, selectedRouteNames, directionFilter]);
 
@@ -344,7 +344,7 @@ function AdminApp() {
     setLoadingProgress,
     routes,
   } = useStore();
-  
+
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
@@ -420,14 +420,14 @@ function AdminApp() {
           (schoolTypes.includes('Middle School') && schoolTypeFilters.middle) ||
           (schoolTypes.includes('High School') && schoolTypeFilters.high);
       }
-      
+
       if (!matchesType) return false;
 
       // 2. Then check Route Status Filter
       if (hasNoRoutes && !schoolTypeFilters.noRoutes) {
         return false;
       }
-      
+
       return true;
     });
   }, [schools, searchTerm, schoolTypeFilters]);
@@ -457,7 +457,7 @@ function AdminApp() {
   }, [schoolId, setRoutes, clearRoutes, setLoading, setLoadingProgress]);
 
   const selectedRoutes = useMemo(() => {
-    return routes.filter(r => selectedRouteNames.includes(r.name) && 
+    return routes.filter(r => selectedRouteNames.includes(r.name) &&
       (directionFilter === 'Both' || r.direction === directionFilter));
   }, [routes, selectedRouteNames, directionFilter]);
 
@@ -483,14 +483,14 @@ function AdminApp() {
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         <Sidebar header={null} tabs={<TabBar activeTab={activeTab} onTabChange={handleTabChange} />} persistenceKey="sidebar-width-admin">
           {activeTab === 'schools' ? (
-            <SchoolList 
-              schools={schools} 
-              selectedSchoolId={schoolId} 
-              enableEditing={true} 
-              searchTerm={searchTerm} 
-              onSearchChange={setSearchTerm} 
-              schoolTypeFilters={schoolTypeFilters} 
-              onFiltersChange={setSchoolTypeFilters} 
+            <SchoolList
+              schools={schools}
+              selectedSchoolId={schoolId}
+              enableEditing={true}
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+              schoolTypeFilters={schoolTypeFilters}
+              onFiltersChange={setSchoolTypeFilters}
               onSelectSchool={(id) => {
                 if (isMobile && id) {
                   viewSchoolRoutes(id);
@@ -608,84 +608,84 @@ function AppContent() {
     <>
       <SchoolClosestModal />
       <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/school-directory" element={<SchoolDirectory />} />
-      <Route path="/neighborhood-directory" element={<NeighborhoodDirectory />} />
-      <Route path="/design-system" element={<DesignSystemPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/school-directory" element={<SchoolDirectory />} />
+        <Route path="/neighborhood-directory" element={<NeighborhoodDirectory />} />
+        <Route path="/design-system" element={<DesignSystemPage />} />
 
-      {/* Redirects for legacy routes */}
-      <Route path="/schools-directory" element={<Navigate to="/school-directory" replace />} />
-      <Route path="/bus-route-explorer" element={<Navigate to="/explore" replace />} />
+        {/* Redirects for legacy routes */}
+        <Route path="/schools-directory" element={<Navigate to="/school-directory" replace />} />
+        <Route path="/bus-route-explorer" element={<Navigate to="/explore" replace />} />
 
-      {/* Admin and system routes */}
-      <Route
-        path="/neighborhoods"
-        element={
-          <AdminPasswordProtection>
-            <Neighborhoods />
-          </AdminPasswordProtection>
-        }
-      />
-      <Route
-        path="/tech"
-        element={
-          <AdminPasswordProtection>
-            <TechPage />
-          </AdminPasswordProtection>
-        }
-      />
-      <Route
-        path="/verification"
-        element={
-          <AdminPasswordProtection>
-            <VerificationPage />
-          </AdminPasswordProtection>
-        }
-      />
-      <Route path="/data" element={<DataPage />} />
-      <Route
-        path="/jobs"
-        element={
-          <AdminPasswordProtection>
-            <JobsPage />
-          </AdminPasswordProtection>
-        }
-      />
-      <Route
-        path="/servers"
-        element={
-          <AdminPasswordProtection>
-            <ServersPage />
-          </AdminPasswordProtection>
-        }
-      />
-      <Route
-        path="/architecture"
-        element={
-          <AdminPasswordProtection>
-            <ArchitecturePage />
-          </AdminPasswordProtection>
-        }
-      />
-      <Route path="/data/schools" element={<SchoolsList />} />
+        {/* Admin and system routes */}
+        <Route
+          path="/neighborhoods"
+          element={
+            <AdminPasswordProtection>
+              <Neighborhoods />
+            </AdminPasswordProtection>
+          }
+        />
+        <Route
+          path="/tech"
+          element={
+            <AdminPasswordProtection>
+              <TechPage />
+            </AdminPasswordProtection>
+          }
+        />
+        <Route
+          path="/verification"
+          element={
+            <AdminPasswordProtection>
+              <VerificationPage />
+            </AdminPasswordProtection>
+          }
+        />
+        <Route path="/data" element={<DataPage />} />
+        <Route
+          path="/jobs"
+          element={
+            <AdminPasswordProtection>
+              <JobsPage />
+            </AdminPasswordProtection>
+          }
+        />
+        <Route
+          path="/servers"
+          element={
+            <AdminPasswordProtection>
+              <ServersPage />
+            </AdminPasswordProtection>
+          }
+        />
+        <Route
+          path="/architecture"
+          element={
+            <AdminPasswordProtection>
+              <ArchitecturePage />
+            </AdminPasswordProtection>
+          }
+        />
+        <Route path="/data/schools" element={<SchoolsList />} />
 
-      {/* Path-based routing for admin - catch-all to handle all segments */}
-      <Route
-        path="/admin/*"
-        element={
-          <AdminPasswordProtection>
-            <AdminApp />
-          </AdminPasswordProtection>
-        }
-      />
+        {/* Path-based routing for admin - catch-all to handle all segments */}
+        <Route
+          path="/admin/*"
+          element={
+            <AdminPasswordProtection>
+              <AdminApp />
+            </AdminPasswordProtection>
+          }
+        />
 
-      {/* Explorer Map (Catch-all handles both /schools, /explore, and /{schoolId}) */}
-      <Route path="/schools" element={<ExplorerApp />} />
-      <Route path="/explore" element={<ExplorerApp />} />
-      <Route path="/*" element={<ExplorerApp />} />
-    </Routes>
+        {/* Explorer Map (Catch-all handles both /schools, /explore, and /{schoolId}) */}
+        <Route path="/schools" element={<ExplorerApp />} />
+        <Route path="/explore" element={<ExplorerApp />} />
+        <Route path="/*" element={<ExplorerApp />} />
+      </Routes>
     </>
   );
 }

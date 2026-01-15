@@ -9,18 +9,11 @@ cd "$SCRIPT_DIR"
 echo "🚀 Starting deployment process..."
 echo ""
 
-# Step 1: Stop servers
-echo "1️⃣  Stopping servers via PM2..."
-if npm run pm2:status | grep -q "pps-bus-maps"; then
-    npm run pm2:stop || true
-    echo "   ✅ Servers stopped"
-else
-    echo "   ℹ️  No PM2 process found to stop"
-fi
-echo ""
+# Note: Process restarts are intentionally NOT handled here.
+# In containerized deployments (e.g., Coolify/Docker), the platform handles restarts.
 
-# Step 2: Pull latest changes
-echo "2️⃣  Pulling latest changes from GitHub..."
+# Step 1: Pull latest changes
+echo "1️⃣  Pulling latest changes from GitHub..."
 git fetch origin
 
 # Check if there are changes to pull
@@ -46,8 +39,8 @@ else
 fi
 echo ""
 
-# Step 3: Rebuild frontend
-echo "3️⃣  Rebuilding frontend..."
+# Step 2: Rebuild frontend
+echo "2️⃣  Rebuilding frontend..."
 cd frontend
 
 # Clear previous build artifacts and caches for fresh build
@@ -73,37 +66,12 @@ fi
 cd ..
 echo ""
 
-# Step 4: Start servers
-echo "4️⃣  Starting servers via PM2..."
-npm run pm2:start
-
-# Wait a bit for server to start
-sleep 3
-
-# Verify server is running
-if npm run pm2:status | grep -q "online" || npm run pm2:status | grep -q "launching"; then
-    echo "   ✅ PM2 process is running"
-else
-    echo "   ⚠️  PM2 process may have failed, check logs/backend-error.log"
-fi
-
-# Verify server is responding
-sleep 2
-if curl -s http://localhost:3001/api/health 2>&1 | grep -q "ok"; then
-    echo "   ✅ Server is responding on port 3001"
-else
-    echo "   ⚠️  Server not responding yet (may still be starting)"
-    echo "   Check logs/backend-error.log for details"
-fi
-echo ""
-
 echo "✅ Deployment complete!"
 echo ""
 echo "📊 Summary:"
-echo "   - Servers: Stopped and restarted"
+echo "   - Servers: Not restarted by this script (handled by your platform/orchestrator)"
 echo "   - Code: Up to date with GitHub"
 echo "   - Build: Fresh build completed"
-echo "   - Status: Server running on port 3001"
 echo ""
 echo "📝 Logs:"
 echo "   - Server: logs/server.log"

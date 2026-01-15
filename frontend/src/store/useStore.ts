@@ -51,6 +51,8 @@ interface Store extends AppState {
   toggleBoundaryType: (type: 'elementary' | 'middle' | 'high') => void;
   toggleAllBoundaries: (show: boolean) => void;
   setShowSchoolClosestModal: (show: boolean, data?: { schoolName: string; schoolId: string }) => void;
+  isFindMyStopVisible: boolean;
+  setIsFindMyStopVisible: (visible: boolean) => void;
 }
 
 export const useStore = create<Store>((set, get) => {
@@ -377,5 +379,7 @@ export const useStore = create<Store>((set, get) => {
       showSchoolClosestModal: show, 
       schoolClosestModalData: data || null 
     }),
+    isFindMyStopVisible: false,
+    setIsFindMyStopVisible: (visible) => set({ isFindMyStopVisible: visible }),
   };
 });

@@ -46,6 +46,7 @@ export function useUrlState({
   const {
     setMapIntent,
     routes,
+    routesSchoolId,
     homeAddress,
     lookupAddress,
     lastRouteNames, setLastRouteNames,
@@ -241,13 +242,22 @@ export function useUrlState({
     // Determine the direction - use current, or last known, or default to morning
     const direction = (id === schoolId ? (urlState.direction || (lastDirection as any)) : null) || 'morning';
 
-    // Find routes for this school and direction to pre-populate and avoid duplicates
-    const schoolRoutes = routes.filter(r =>
-      r.direction?.toLowerCase() === direction.toLowerCase() || direction.toLowerCase() === 'both'
-    );
-    const routeNames = schoolRoutes.length > 0
-      ? Array.from(new Set(schoolRoutes.map(r => r.name)))
-      : undefined;
+    // IMPORTANT: Only include route names if viewing the same school that's already selected.
+    // If switching to a different school, the routes in the store are from the OLD school,
+    // so we must NOT include them in the URL. The route-population effect will handle
+    // populating the correct route names after the new school's routes are loaded.
+    let routeNames: string[] | undefined = undefined;
+    if (id === schoolId && routes.length > 0) {
+      // Same school - use current routes filtered by direction
+      const schoolRoutes = routes.filter(r =>
+        r.direction?.toLowerCase() === direction.toLowerCase() || direction.toLowerCase() === 'both'
+      );
+      routeNames = schoolRoutes.length > 0
+        ? Array.from(new Set(schoolRoutes.map(r => r.name)))
+        : undefined;
+    }
+    // If id !== schoolId, routeNames stays undefined, and the effect at line 316-332
+    // will populate them correctly after routes are loaded for the new school.
 
     updateUrl({
       schoolId: id,
@@ -314,7 +324,10 @@ export function useUrlState({
 
   // Populate default routes if on routes tab with none specified
   useEffect(() => {
-    if (activeTab === 'routes' && schoolId && routes.length > 0 && selectedRouteNames.length === 0) {
+    // CRITICAL: Only populate routes if the routes in store belong to the CURRENT school.
+    // This prevents populating with stale routes from a previously selected school (race condition).
+    if (activeTab === 'routes' && schoolId && routes.length > 0 &&
+      selectedRouteNames.length === 0 && routesSchoolId === schoolId) {
       console.log('[useUrlState] Populating default routes...');
       const directionLower = directionFilter.toLowerCase();
 
@@ -329,7 +342,7 @@ export function useUrlState({
         updateUrl({ routeNames: defaultNames }, true); // Use replace to not pollute history
       }
     }
-  }, [activeTab, schoolId, routes, selectedRouteNames.length, directionFilter, updateUrl]);
+  }, [activeTab, schoolId, routes, selectedRouteNames.length, directionFilter, updateUrl, routesSchoolId]);
 
   // 4. Side effect: Update MapIntent based on URL
   useEffect(() => {

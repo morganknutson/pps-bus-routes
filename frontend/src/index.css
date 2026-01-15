@@ -139,6 +139,26 @@ body {
   position: relative;
 }
 
+/* Remove yellow autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark-mode input:-webkit-autofill,
+.dark-mode input:-webkit-autofill:hover,
+.dark-mode input:-webkit-autofill:focus,
+.dark-mode input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #3A3A3A inset !important;
+  box-shadow: 0 0 0 1000px #3A3A3A inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
 /* Leaflet map styles */
 .leaflet-container {
   height: 100%;
@@ -198,7 +218,7 @@ body {
 .leaflet-control-zoom a {
   color: var(--text-primary) !important;
   border: 0 !important;
-  padding: 0 !important;
+  padding: 0 0 3px !important;
   width: 36px !important;
   height: 36px !important;
   box-shadow: 0 2px 4px var(--shadow) !important;
