@@ -12,6 +12,7 @@ import { Route, Stop } from '../types';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
 import { useUrlState } from '../hooks/useUrlState';
+import { useIsStandalone } from '../hooks/useIsStandalone';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -50,6 +51,7 @@ export function AddressInput() {
 
   const isMobile = useIsMobile();
   const { isDarkMode } = useDarkMode();
+  const isStandalone = useIsStandalone();
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -302,7 +304,9 @@ export function AddressInput() {
             bottom: 0,
             left: 0,
             right: 0,
-            height: '60px',
+            // Use padding for spacing - env(safe-area-inset-bottom) handles home indicator in PWA mode
+            paddingTop: '18px',
+            paddingBottom: isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 18px)' : '18px',
             backgroundColor: 'var(--bg-header)',
             color: 'var(--text-primary)',
             border: 'none',
