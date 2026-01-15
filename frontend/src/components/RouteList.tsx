@@ -88,7 +88,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
             onClick={onViewSchools}
             style={{
               padding: '0.5rem 1rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)',
-              border: '10px solid var(--border-color)', borderRadius: '9999px', cursor: 'pointer',
+              border: '1px solid var(--border-color)', borderRadius: '9999px', cursor: 'pointer',
               fontSize: '14px', fontWeight: '500', transition: 'background-color 0.2s ease, border-color 0.2s ease',
             }}
           >
