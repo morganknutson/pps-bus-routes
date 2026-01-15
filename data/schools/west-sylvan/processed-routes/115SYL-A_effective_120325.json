@@ -44,11 +44,11 @@
       "originalLine": "8:33 amSW PATTON RD @ SW 55TH AV [NE]115SYL-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7328345,
-        45.497948
+        -122.7336037,
+        45.4979465
       ],
-      "displayName": "SW Patton Rd & SW 55th Dr, Bridlemile, OR 97221, USA",
-      "placeId": "EjRTVyBQYXR0b24gUmQgJiBTVyA1NXRoIERyLCBCcmlkbGVtaWxlLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJRwd1IMULlVQRyD460idNxzcSFAoSCUcHdSDFC5VUEcg-OtInTcc3GhQKEgkXt1_lzQuVVBFLsw7jOi7YoBoUChIJk9J6OcALlVQR6LB5z87vJjAiCg2Ybx4bFad02LY",
+      "displayName": "SW Patton Rd & SW 55th Ave, Bridlemile, OR 97221, USA",
+      "placeId": "EjVTVyBQYXR0b24gUmQgJiBTVyA1NXRoIEF2ZSwgQnJpZGxlbWlsZSwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCQukitvEC5VUEYI7jdXSDHdREhQKEgkLpIrbxAuVVBGCO43V0gx3URoUChIJF7df5c0LlVQRS7MO4zou2KAaFAoSCecCtriCDJVUEcuAlboKNtYvIgoNiW8eGxWbVti2",
       "neighborhood": "Bridlemile"
     },
     {
@@ -191,7 +191,7 @@
     "Bridlemile",
     "Southwest Hills"
   ],
-  "processedAt": "2025-12-20T11:10:07.625Z",
+  "processedAt": "2026-01-15T05:56:49.774Z",
   "stats": {
     "totalStops": 12,
     "geocodedStops": 12,

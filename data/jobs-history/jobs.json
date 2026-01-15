@@ -29049,26 +29049,704 @@
     "data": {
       "schoolId": "west-sylvan"
     },
-    "status": "waiting",
-    "progress": 0,
-    "result": null,
+    "status": "completed",
+    "progress": 100,
+    "result": {
+      "schoolId": "west-sylvan",
+      "schoolName": "West Sylvan",
+      "processed": 42,
+      "errors": 0,
+      "processedDetails": [
+        {
+          "file": "100SYL-A_effective_082625.pdf",
+          "routeName": "100",
+          "stops": 13,
+          "geocoded": 13
+        },
+        {
+          "file": "100SYL-P_effective_082625.pdf",
+          "routeName": "100",
+          "stops": 13,
+          "geocoded": 13
+        },
+        {
+          "file": "101SYL-A_effective_082625.pdf",
+          "routeName": "101",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "101SYL-P_effective_082625.pdf",
+          "routeName": "101",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "103SYL-A_effective_090325.pdf",
+          "routeName": "103",
+          "stops": 9,
+          "geocoded": 9
+        },
+        {
+          "file": "103SYL-P_effective_090325.pdf",
+          "routeName": "103",
+          "stops": 9,
+          "geocoded": 9
+        },
+        {
+          "file": "104SYL-A_effective_090325.pdf",
+          "routeName": "104",
+          "stops": 17,
+          "geocoded": 17
+        },
+        {
+          "file": "104SYL-P_effective_090325.pdf",
+          "routeName": "104",
+          "stops": 16,
+          "geocoded": 16
+        },
+        {
+          "file": "106SYL-A_effective_090325.pdf",
+          "routeName": "106",
+          "stops": 12,
+          "geocoded": 12
+        },
+        {
+          "file": "106SYL-P_effective_110525.pdf",
+          "routeName": "106",
+          "stops": 10,
+          "geocoded": 10
+        },
+        {
+          "file": "111SYL-A_effective_082625.pdf",
+          "routeName": "111",
+          "stops": 14,
+          "geocoded": 14
+        },
+        {
+          "file": "111SYL-P_effective_082625.pdf",
+          "routeName": "111",
+          "stops": 14,
+          "geocoded": 14
+        },
+        {
+          "file": "112SYL-A_effective_011426.pdf",
+          "routeName": "112",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "112SYL-A_effective_082625.pdf",
+          "routeName": "112",
+          "stops": 10,
+          "geocoded": 10
+        },
+        {
+          "file": "112SYL-P_effective_011426.pdf",
+          "routeName": "112",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "112SYL-P_effective_082625.pdf",
+          "routeName": "112",
+          "stops": 10,
+          "geocoded": 10
+        },
+        {
+          "file": "113SYL-A_effective_092425.pdf",
+          "routeName": "113",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "113SYL-P_effective_092425.pdf",
+          "routeName": "113",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "115SYL-A_effective_120325.pdf",
+          "routeName": "115",
+          "stops": 12,
+          "geocoded": 12
+        },
+        {
+          "file": "115SYL-P_effective_120325.pdf",
+          "routeName": "115",
+          "stops": 13,
+          "geocoded": 13
+        },
+        {
+          "file": "116SYL-A_effective_092425.pdf",
+          "routeName": "116",
+          "stops": 9,
+          "geocoded": 9
+        },
+        {
+          "file": "116SYL-P_effective_092425.pdf",
+          "routeName": "116",
+          "stops": 9,
+          "geocoded": 9
+        },
+        {
+          "file": "120SYL-A_effective_082625.pdf",
+          "routeName": "120",
+          "stops": 6,
+          "geocoded": 6
+        },
+        {
+          "file": "120SYL-P_effective_082625.pdf",
+          "routeName": "120",
+          "stops": 6,
+          "geocoded": 6
+        },
+        {
+          "file": "121SYL-A_effective_011426.pdf",
+          "routeName": "121",
+          "stops": 10,
+          "geocoded": 10
+        },
+        {
+          "file": "121SYL-A_effective_092425.pdf",
+          "routeName": "121",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "121SYL-P_effective_011426.pdf",
+          "routeName": "121",
+          "stops": 10,
+          "geocoded": 10
+        },
+        {
+          "file": "121SYL-P_effective_092425.pdf",
+          "routeName": "121",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "122SYL-A_effective_082625.pdf",
+          "routeName": "122",
+          "stops": 8,
+          "geocoded": 8
+        },
+        {
+          "file": "122SYL-P_effective_082625.pdf",
+          "routeName": "122",
+          "stops": 8,
+          "geocoded": 8
+        },
+        {
+          "file": "124SYL-A_effective_100825.pdf",
+          "routeName": "124",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "124SYL-P_effective_100825.pdf",
+          "routeName": "124",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "125SYL-A_effective_082625.pdf",
+          "routeName": "125",
+          "stops": 8,
+          "geocoded": 8
+        },
+        {
+          "file": "125SYL-P_effective_082625.pdf",
+          "routeName": "125",
+          "stops": 8,
+          "geocoded": 8
+        },
+        {
+          "file": "126SYL-A_effective_082625.pdf",
+          "routeName": "126",
+          "stops": 9,
+          "geocoded": 9
+        },
+        {
+          "file": "126SYL-P_effective_082625.pdf",
+          "routeName": "126",
+          "stops": 9,
+          "geocoded": 9
+        },
+        {
+          "file": "127SYL-A_effective_082625.pdf",
+          "routeName": "127",
+          "stops": 4,
+          "geocoded": 4
+        },
+        {
+          "file": "127SYL-P_effective_082625.pdf",
+          "routeName": "127",
+          "stops": 4,
+          "geocoded": 4
+        },
+        {
+          "file": "132SYL-A_effective_082625.pdf",
+          "routeName": "132",
+          "stops": 7,
+          "geocoded": 7
+        },
+        {
+          "file": "132SYL-P_effective_082625.pdf",
+          "routeName": "132",
+          "stops": 8,
+          "geocoded": 8
+        },
+        {
+          "file": "149SYL-A_effective_082625.pdf",
+          "routeName": "149",
+          "stops": 2,
+          "geocoded": 2
+        },
+        {
+          "file": "149SYL-P_effective_082625.pdf",
+          "routeName": "149",
+          "stops": 2,
+          "geocoded": 2
+        }
+      ],
+      "errorDetails": [],
+      "summary": {
+        "totalPdfs": 42,
+        "successful": 42,
+        "failed": 0
+      }
+    },
     "error": null,
     "createdAt": "2026-01-13T05:35:11.580Z",
     "processedAt": null,
-    "finishedAt": null,
+    "finishedAt": "2026-01-15T05:57:03.307Z",
     "attemptsMade": 0,
     "attemptsTotal": 3,
     "events": [
       {
-        "event": "created",
-        "timestamp": "2026-01-13T05:35:11.580Z",
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:53.966Z",
         "data": {
           "id": "job_1768282511580_eg7sp96vg",
-          "name": "pdf-process",
-          "data": {
-            "schoolId": "west-sylvan"
-          },
-          "attempts": 3
+          "progress": 65
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:54.393Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 67
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:54.867Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 69
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:55.207Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 71
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:55.550Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 73
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:56.308Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 75
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:56.724Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 77
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:57.434Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 79
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:57.826Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 80
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:59.037Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 82
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:56:59.576Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 84
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:57:00.370Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 86
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:57:00.785Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 88
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:57:01.365Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 90
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:57:01.610Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 92
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:57:02.382Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 94
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:57:02.695Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 96
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:57:03.122Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 98
+        }
+      },
+      {
+        "event": "progress",
+        "timestamp": "2026-01-15T05:57:03.307Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "progress": 100
+        }
+      },
+      {
+        "event": "completed",
+        "timestamp": "2026-01-15T05:57:03.307Z",
+        "data": {
+          "id": "job_1768282511580_eg7sp96vg",
+          "result": {
+            "schoolId": "west-sylvan",
+            "schoolName": "West Sylvan",
+            "processed": 42,
+            "errors": 0,
+            "processedDetails": [
+              {
+                "file": "100SYL-A_effective_082625.pdf",
+                "routeName": "100",
+                "stops": 13,
+                "geocoded": 13
+              },
+              {
+                "file": "100SYL-P_effective_082625.pdf",
+                "routeName": "100",
+                "stops": 13,
+                "geocoded": 13
+              },
+              {
+                "file": "101SYL-A_effective_082625.pdf",
+                "routeName": "101",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "101SYL-P_effective_082625.pdf",
+                "routeName": "101",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "103SYL-A_effective_090325.pdf",
+                "routeName": "103",
+                "stops": 9,
+                "geocoded": 9
+              },
+              {
+                "file": "103SYL-P_effective_090325.pdf",
+                "routeName": "103",
+                "stops": 9,
+                "geocoded": 9
+              },
+              {
+                "file": "104SYL-A_effective_090325.pdf",
+                "routeName": "104",
+                "stops": 17,
+                "geocoded": 17
+              },
+              {
+                "file": "104SYL-P_effective_090325.pdf",
+                "routeName": "104",
+                "stops": 16,
+                "geocoded": 16
+              },
+              {
+                "file": "106SYL-A_effective_090325.pdf",
+                "routeName": "106",
+                "stops": 12,
+                "geocoded": 12
+              },
+              {
+                "file": "106SYL-P_effective_110525.pdf",
+                "routeName": "106",
+                "stops": 10,
+                "geocoded": 10
+              },
+              {
+                "file": "111SYL-A_effective_082625.pdf",
+                "routeName": "111",
+                "stops": 14,
+                "geocoded": 14
+              },
+              {
+                "file": "111SYL-P_effective_082625.pdf",
+                "routeName": "111",
+                "stops": 14,
+                "geocoded": 14
+              },
+              {
+                "file": "112SYL-A_effective_011426.pdf",
+                "routeName": "112",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "112SYL-A_effective_082625.pdf",
+                "routeName": "112",
+                "stops": 10,
+                "geocoded": 10
+              },
+              {
+                "file": "112SYL-P_effective_011426.pdf",
+                "routeName": "112",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "112SYL-P_effective_082625.pdf",
+                "routeName": "112",
+                "stops": 10,
+                "geocoded": 10
+              },
+              {
+                "file": "113SYL-A_effective_092425.pdf",
+                "routeName": "113",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "113SYL-P_effective_092425.pdf",
+                "routeName": "113",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "115SYL-A_effective_120325.pdf",
+                "routeName": "115",
+                "stops": 12,
+                "geocoded": 12
+              },
+              {
+                "file": "115SYL-P_effective_120325.pdf",
+                "routeName": "115",
+                "stops": 13,
+                "geocoded": 13
+              },
+              {
+                "file": "116SYL-A_effective_092425.pdf",
+                "routeName": "116",
+                "stops": 9,
+                "geocoded": 9
+              },
+              {
+                "file": "116SYL-P_effective_092425.pdf",
+                "routeName": "116",
+                "stops": 9,
+                "geocoded": 9
+              },
+              {
+                "file": "120SYL-A_effective_082625.pdf",
+                "routeName": "120",
+                "stops": 6,
+                "geocoded": 6
+              },
+              {
+                "file": "120SYL-P_effective_082625.pdf",
+                "routeName": "120",
+                "stops": 6,
+                "geocoded": 6
+              },
+              {
+                "file": "121SYL-A_effective_011426.pdf",
+                "routeName": "121",
+                "stops": 10,
+                "geocoded": 10
+              },
+              {
+                "file": "121SYL-A_effective_092425.pdf",
+                "routeName": "121",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "121SYL-P_effective_011426.pdf",
+                "routeName": "121",
+                "stops": 10,
+                "geocoded": 10
+              },
+              {
+                "file": "121SYL-P_effective_092425.pdf",
+                "routeName": "121",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "122SYL-A_effective_082625.pdf",
+                "routeName": "122",
+                "stops": 8,
+                "geocoded": 8
+              },
+              {
+                "file": "122SYL-P_effective_082625.pdf",
+                "routeName": "122",
+                "stops": 8,
+                "geocoded": 8
+              },
+              {
+                "file": "124SYL-A_effective_100825.pdf",
+                "routeName": "124",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "124SYL-P_effective_100825.pdf",
+                "routeName": "124",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "125SYL-A_effective_082625.pdf",
+                "routeName": "125",
+                "stops": 8,
+                "geocoded": 8
+              },
+              {
+                "file": "125SYL-P_effective_082625.pdf",
+                "routeName": "125",
+                "stops": 8,
+                "geocoded": 8
+              },
+              {
+                "file": "126SYL-A_effective_082625.pdf",
+                "routeName": "126",
+                "stops": 9,
+                "geocoded": 9
+              },
+              {
+                "file": "126SYL-P_effective_082625.pdf",
+                "routeName": "126",
+                "stops": 9,
+                "geocoded": 9
+              },
+              {
+                "file": "127SYL-A_effective_082625.pdf",
+                "routeName": "127",
+                "stops": 4,
+                "geocoded": 4
+              },
+              {
+                "file": "127SYL-P_effective_082625.pdf",
+                "routeName": "127",
+                "stops": 4,
+                "geocoded": 4
+              },
+              {
+                "file": "132SYL-A_effective_082625.pdf",
+                "routeName": "132",
+                "stops": 7,
+                "geocoded": 7
+              },
+              {
+                "file": "132SYL-P_effective_082625.pdf",
+                "routeName": "132",
+                "stops": 8,
+                "geocoded": 8
+              },
+              {
+                "file": "149SYL-A_effective_082625.pdf",
+                "routeName": "149",
+                "stops": 2,
+                "geocoded": 2
+              },
+              {
+                "file": "149SYL-P_effective_082625.pdf",
+                "routeName": "149",
+                "stops": 2,
+                "geocoded": 2
+              }
+            ],
+            "errorDetails": [],
+            "summary": {
+              "totalPdfs": 42,
+              "successful": 42,
+              "failed": 0
+            }
+          }
         }
       }
     ]

@@ -288,6 +288,5 @@ input:-webkit-autofill:active {
   font-size: 10px;
   font-weight: 500;
   text-transform: uppercase;
-  margin-bottom: .25rem;
   letter-spacing: .05em;
 }

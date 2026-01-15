@@ -75,7 +75,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.68655714643057,
-        45.50384549732313
+        45.50384549732312
       ],
       "displayName": "835 SW Broadway Dr, Portland, OR 97201, USA",
       "placeId": "ChIJZTp-eT8KlVQRpyCbRvu6-IM",
@@ -104,8 +104,8 @@
       "originalLine": "8:50 am1818 SW BROADWAY DR [N]112SYL-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.69858463966219,
-        45.50587501916491
+        -122.69854409322366,
+        45.5058708512664
       ],
       "displayName": "1818 SW Broadway Dr, Portland, OR 97201, USA",
       "placeId": "ChIJEfiOOjoKlVQRN0VUuaN53x0",
@@ -162,7 +162,7 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-20T11:10:04.739Z",
+  "processedAt": "2026-01-15T05:56:45.434Z",
   "stats": {
     "totalStops": 10,
     "geocodedStops": 10,

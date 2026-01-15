@@ -194,7 +194,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
               <div className="eyebrow">Address</div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                <div style={{ color: 'var(--text-primary)', fontWeight: '500', lineHeight: '1.4' }}>
+                <div style={{ color: 'var(--text-primary)', fontWeight: '600', lineHeight: '1.4' }}>
                   {stop.isSchoolStop && stop.schoolName ? (
                     getSchoolDisplayName(stop.schoolName)
                   ) : enableStreetHighlighting && streets.length > 0 ? (

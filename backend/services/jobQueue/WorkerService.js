@@ -47,7 +47,7 @@ export class WorkerService {
       console.log('[WorkerService] 🚫 Background jobs and polling are DISABLED in production mode');
       return;
     }
-    
+
     // Explicitly disable polling if requested via environment variable
     if (process.env.DISABLE_POLLING === 'true') {
       console.log('[WorkerService] 🚫 Background polling is EXPLICITLY DISABLED via environment variable');
@@ -88,13 +88,19 @@ export class WorkerService {
       try {
         // Get waiting jobs
         // Use the queue instance's getJobs method which handles Redis/No-Redis correctly
-        // Poll for PDF_SYNC jobs first, then DRIVE_CHECK jobs
+        // Check for PDF_SYNC jobs first
         let waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_SYNC, 'waiting', 1);
-        
+
+        // Then check for PDF_PROCESS jobs
+        if (!waitingJobs || waitingJobs.length === 0) {
+          waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_PROCESS, 'waiting', 1);
+        }
+
+        // Finally check for DRIVE_CHECK jobs
         if (!waitingJobs || waitingJobs.length === 0) {
           waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.DRIVE_CHECK, 'waiting', 1);
         }
-        
+
         if (waitingJobs && waitingJobs.length > 0) {
           const job = waitingJobs[0];
           isProcessing = true;
@@ -105,7 +111,7 @@ export class WorkerService {
           try {
             // In development mode (history only), we need to get the "real" job object if possible
             // but since we're using polling, we'll just use the job data from history
-            
+
             // Create a mock job object with updateProgress method
             const mockJob = {
               id: job.id,
@@ -137,7 +143,7 @@ export class WorkerService {
               id: job.id,
               result
             });
-            
+
             console.log(`[WorkerService] Job ${job.id} completed`);
           } catch (error) {
             // Record failure in history
@@ -146,7 +152,7 @@ export class WorkerService {
               id: job.id,
               error: error.message
             });
-            
+
             console.error(`[WorkerService] Job ${job.id} failed:`, error.message);
           }
 
@@ -175,7 +181,7 @@ export class WorkerService {
     }
 
     console.log('[WorkerService] Stopping workers...');
-    
+
     this.isRunning = false;
     this.workers = [];
 
@@ -203,7 +209,7 @@ export class WorkerService {
 
       // Use the verification service logic
       const result = await driveLinkVerificationService.verifySchoolDriveLink(school);
-      
+
       await job.updateProgress(80);
 
       // Save updated cache
@@ -225,15 +231,15 @@ export class WorkerService {
   async updateVerificationCache(schoolId, result) {
     try {
       const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
-      
+
       let cachedResults = {
         timestamp: new Date().toISOString(),
         totalSchools: schools.length,
         results: [],
       };
-      
+
       const DRIVE_VERIFICATION_CACHE_FILE = path.join(DATA_DIR, 'drive-link-verification-results.json');
-      
+
       if (fs.existsSync(DRIVE_VERIFICATION_CACHE_FILE)) {
         try {
           const cacheContent = await fsPromises.readFile(DRIVE_VERIFICATION_CACHE_FILE, 'utf8');
@@ -242,7 +248,7 @@ export class WorkerService {
           console.warn('[WorkerService] Error loading cache for update:', error.message);
         }
       }
-      
+
       // Update or add this school's result
       const existingIndex = cachedResults.results.findIndex(r => r.schoolId === schoolId);
       if (existingIndex >= 0) {
@@ -250,10 +256,10 @@ export class WorkerService {
       } else {
         cachedResults.results.push(result);
       }
-      
+
       // Update the global timestamp to now
       cachedResults.timestamp = new Date().toISOString();
-      
+
       // Save updated cache
       const tempFile = `${DRIVE_VERIFICATION_CACHE_FILE}.tmp`;
       await fsPromises.writeFile(tempFile, JSON.stringify(cachedResults, null, 2), 'utf8');
@@ -299,7 +305,7 @@ export class WorkerService {
       // List files from Drive
       const apiKey = process.env.GOOGLE_API_KEY || null;
       await job.updateProgress(20);
-      
+
       const driveFiles = await listFolderFiles(folderId, apiKey);
       const pdfFiles = driveFiles.filter(f => f.name.endsWith('.pdf'));
 
@@ -339,7 +345,7 @@ export class WorkerService {
       for (const file of pdfFiles) {
         const filePath = path.join(pdfDir, file.name);
         const jsonPath = path.join(processedDir, file.name.replace('.pdf', '.json'));
-        
+
         let needsSync = false;
         if (!fs.existsSync(filePath)) {
           needsSync = true;
@@ -352,13 +358,13 @@ export class WorkerService {
           const localStats = fs.statSync(filePath);
           const driveModified = new Date(file.modifiedTime).getTime();
           const localModified = localStats.mtime.getTime();
-          
+
           if (driveModified > localModified + 1000) { // Add 1s buffer
             needsSync = true;
             console.log(`[WorkerService] Drive version of ${file.name} is newer, will sync`);
           }
         }
-        
+
         if (needsSync) {
           filesToDownload.push(file);
         }
@@ -375,7 +381,7 @@ export class WorkerService {
       const totalFiles = filesToDownload.length;
       for (let i = 0; i < totalFiles; i++) {
         const file = filesToDownload[i];
-        
+
         try {
           const filePath = path.join(pdfDir, file.name);
           let pdfBuffer;
@@ -427,25 +433,25 @@ export class WorkerService {
       const driveFileIds = new Set(pdfFiles.map(f => f.id));
       const currentLocalPdfs = await this.getExistingPdfs(schoolId);
       const orphanedPdfs = currentLocalPdfs.filter(name => !driveFileNames.has(name));
-      
+
       // Also check metadata for orphaned entries by file ID
       const metadata = await pdfMetadataService.loadMetadata(schoolId);
       const metadataFileIds = Object.keys(metadata.files || {});
       const orphanedFileIds = metadataFileIds.filter(id => !driveFileIds.has(id));
 
       let deletedCount = 0;
-      
+
       // Delete files based on names not in Drive
       for (const orphanedPdf of orphanedPdfs) {
         try {
           const pdfPath = path.join(pdfDir, orphanedPdf);
           const jsonPath = path.join(processedDir, orphanedPdf.replace('.pdf', '.json'));
-          
+
           if (fs.existsSync(pdfPath)) {
             await fsPromises.unlink(pdfPath);
             console.log(`[WorkerService] Deleted orphaned PDF: ${orphanedPdf}`);
           }
-          
+
           if (fs.existsSync(jsonPath)) {
             await fsPromises.unlink(jsonPath);
             console.log(`[WorkerService] Deleted orphaned JSON: ${orphanedPdf.replace('.pdf', '.json')}`);

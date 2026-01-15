@@ -90,7 +90,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.72472993346081,
-        45.51588844370395
+        45.51588844370396
       ],
       "displayName": "4616 SW Fairview Blvd, Portland, OR 97221, USA",
       "placeId": "ChIJC_mkMYEJlVQR8HWw0262mK0",
@@ -120,7 +120,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.73174070429866,
-        45.50831389441842
+        45.50831389441843
       ],
       "displayName": "5375 SW Humphrey Blvd, Portland, OR 97221, USA",
       "placeId": "ChIJoaRr2tULlVQRSYcyTOj8kMM",
@@ -146,7 +146,7 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-20T11:10:09.036Z",
+  "processedAt": "2026-01-15T05:56:52.721Z",
   "stats": {
     "totalStops": 9,
     "geocodedStops": 9,

@@ -105,7 +105,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.73148135820018,
-        45.489165434103924
+        45.48916543410392
       ],
       "displayName": "4721 SW 53rd Ave, Portland, OR 97221, USA",
       "placeId": "ChIJqWEseMALlVQRY-TMxwbsabo",
@@ -165,7 +165,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.75443289716686,
-        45.4998674993165
+        45.49986749931651
       ],
       "displayName": "7501 SW Canyon Rd, Portland, OR 97225, USA",
       "placeId": "ChIJT6IxB-ELlVQRLV3M-1yBXC4"
@@ -260,7 +260,7 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-20T11:10:00.743Z",
+  "processedAt": "2026-01-15T05:56:38.315Z",
   "stats": {
     "totalStops": 17,
     "geocodedStops": 17,

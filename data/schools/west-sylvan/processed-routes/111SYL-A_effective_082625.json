@@ -75,7 +75,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.71158310148603,
-        45.51962112254854
+        45.51962112254855
       ],
       "displayName": "2850 SW Fairview Blvd, Portland, OR 97205, USA",
       "placeId": "ChIJWVUjZYkJlVQR1IdKgqkGeEg",
@@ -150,7 +150,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.72432351554048,
-        45.51528697576172
+        45.515286975761704
       ],
       "displayName": "4541 SW Fairhaven Dr, Portland, OR 97221, USA",
       "placeId": "ChIJ_bLiLoEJlVQRKlfuE3cTmUQ",
@@ -180,7 +180,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.72659254001357,
-        45.51419839959853
+        45.514198399598534
       ],
       "displayName": "4810 SW Fairhaven Dr, Portland, OR 97221, USA",
       "placeId": "ChIJ_82jVoAJlVQRdmJRIgcCxdw",
@@ -222,7 +222,7 @@
     "Northwest Portland",
     "Southwest Hills"
   ],
-  "processedAt": "2025-12-20T11:10:03.479Z",
+  "processedAt": "2026-01-15T05:56:42.851Z",
   "stats": {
     "totalStops": 14,
     "geocodedStops": 14,

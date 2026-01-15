@@ -75,7 +75,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.71705425099285,
-        45.48407524712945
+        45.484075247129454
       ],
       "displayName": "3910 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
       "placeId": "ChIJ427nO7sLlVQRg94FFJoz_i8",
@@ -89,7 +89,7 @@
       "originalLine": "8:48 am3278/3262 SW BEAVERTON HILLSDALE HWY [S]101SYL-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71056137230181,
+        -122.7105613723018,
         45.481560474294206
       ],
       "displayName": "3278 SW Beaverton Hillsdale Hwy, Portland, OR 97239, USA",
@@ -117,7 +117,7 @@
     "Southwest Portland",
     "West Portland Park"
   ],
-  "processedAt": "2025-12-20T11:09:57.069Z",
+  "processedAt": "2026-01-15T05:56:33.407Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,

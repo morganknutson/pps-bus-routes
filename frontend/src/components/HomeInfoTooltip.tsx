@@ -51,7 +51,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
           <h3 style={{
             margin: '0 0 0.75rem 0',
             fontSize: isMobile ? '26px' : '18px',
-            fontWeight: '500',
+            fontWeight: '600',
             lineHeight: '22px',
             color: 'var(--text-primary)',
             letterSpacing: '-0.025em',

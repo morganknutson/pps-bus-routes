@@ -229,7 +229,7 @@ export function SchoolList({
         data-testid="school-list-item"
         className={`school-list-item ${isSelected ? 'selected' : ''}`}
         style={{
-          borderBottom: '1px solid var(--border-color-darker)',
+          borderBottom: '1px solid var(--border-color)',
           borderLeft: `4px solid ${schoolColor}`,
           transition: 'background-color 0.3s ease, border-color 0.3s ease',
         }}
@@ -257,8 +257,8 @@ export function SchoolList({
           }}
         >
           <div style={{ flex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.1rem' }}>
-              <div style={{ fontWeight: '500', fontSize: '16px', color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
+              <div style={{ fontWeight: '600', fontSize: '16px', color: 'var(--text-secondary)' }}>
                 {getSchoolDisplayName(school.name)}
               </div>
               {enableEditing && (
@@ -747,7 +747,7 @@ export function SchoolList({
 
             {/* Other Schools Header */}
             {assigned.length > 0 && others.length > 0 && (
-              <div className="eyebrow" style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid var(--border-color)' }}>
+              <div className="eyebrow" style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
                 All other schools
               </div>
             )}
