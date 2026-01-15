@@ -16,7 +16,7 @@
   --shadow-large: rgba(0, 0, 0, 0.2);
   --active-marker-lens-bg: rgba(0, 0, 0, 0.15);
 
-  /* Component specific */
+  /* Component specific (Light Mode) */
   --btn-primary-bg: #242323;
   --btn-primary-text: #ffffff;
   --btn-primary-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
@@ -35,7 +35,7 @@
   --font-size-body: 15px;
   --line-height-body: 1.7;
 
-  /* Unified Styling Tokens */
+  /* Button & Layout Tokens */
   --radius-pill: 9999px;
   --radius-floating: 24px;
   --shadow-button: 0 1px 3px var(--shadow-large);
@@ -282,7 +282,10 @@ input:-webkit-autofill:active {
 }
 
 
-/* Shared Type */
+/* 
+ * Shared typography for section headers / labels.
+ * User updated letter-spacing and margin for a cleaner, more premium look.
+ */
 .eyebrow {
   color: var(--text-tertiary);
   font-size: 10px;

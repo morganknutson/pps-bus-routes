@@ -32,26 +32,32 @@ export const Button: React.FC<ButtonProps> = ({
   const { isDarkMode } = useDarkMode();
   const isMobile = useIsMobile();
 
+  /* 
+   * Dynamic variant styles based on theme and hover state.
+   * This logic centralizes background, text color, and shadow definitions for consistency.
+   */
   const getVariantStyles = () => {
     const baseStyles = {
       boxShadow: 'var(--shadow-button)',
       border: 'none',
       transition: 'all 0.2s ease',
-      opacity: disabled ? 0.5 : 1,
+      opacity: disabled ? 0.5 : 1, // Visual feedback for disabled state
       pointerEvents: disabled ? 'none' as const : 'auto' as const,
     };
 
     switch (variant) {
       case 'primary':
+        /* Primary button: strong color in light mode, subtle glass effect in dark mode */
         return {
           ...baseStyles,
           backgroundColor: isDarkMode
-            ? (isHovered ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)') // Brighter in dark mode (swapped)
+            ? (isHovered ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)')
             : (isHovered ? '#3071da' : 'var(--brand-primary)'),
           color: isDarkMode ? 'var(--text-primary)' : 'var(--btn-primary-text)',
-          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
+          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'inset 0px 0px 1px rgba(0,0,0, 0.3), 0px 2px 8px rgba(0,0,0, 0.08)',
         };
       case 'secondary':
+        /* Secondary button: subtle background that brightens on hover */
         return {
           ...baseStyles,
           backgroundColor: isHovered
@@ -62,10 +68,11 @@ export const Button: React.FC<ButtonProps> = ({
         };
       case 'tertiary':
       case 'dropdown':
+        /* Tertiary/Dropdown: Minimal styling, uses theme-based background variables */
         return {
           ...baseStyles,
           backgroundColor: isDarkMode
-            ? (isHovered ? 'var(--bg-tertiary)' : 'var(--bg-secondary)') // Less prominent in dark mode (swapped)
+            ? (isHovered ? 'var(--bg-tertiary)' : 'var(--bg-secondary)')
             : (isHovered ? 'rgba(0,0,0,0.08)' : 'rgba(0,0,0,0.05)'),
           color: 'var(--text-primary)',
           boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
@@ -89,12 +96,18 @@ export const Button: React.FC<ButtonProps> = ({
     }
   };
 
+  /* 
+   * SIZING LOGIC
+   * We adjust font, icons, and padding dynamically between mobile and desktop
+   * to maintain a premium feel on all screen sizes.
+   */
   const fontSize = isMobile
     ? (size === 'large' ? '16px' : '14px')
     : (size === 'large' ? '14px' : '12px');
+
   const iconSize = isMobile ? fontSize : `${parseInt(fontSize) - 2}px`;
 
-  // Centralized padding logic
+  // Dynamic vertical padding based on size and device
   const verticalPadding = isMobile
     ? (size === 'large' ? 18 : size === 'medium' ? 14 : 10)
     : (size === 'large' ? 14 : size === 'medium' ? 10 : 8);
@@ -102,6 +115,8 @@ export const Button: React.FC<ButtonProps> = ({
   const chevronSize = isMobile
     ? (size === 'large' ? 14 : 12)
     : (size === 'large' ? 12 : 10);
+
+  // Horizontal padding logic - usually symmetric unless an icon is present
   const baseHorizontalPadding = size === 'large' ? 34 : size === 'medium' ? 28 : 16;
 
   let leftPadding = (icon && (size === 'large' || size === 'medium'))
@@ -110,7 +125,10 @@ export const Button: React.FC<ButtonProps> = ({
 
   let rightPadding = baseHorizontalPadding;
 
-  // Specific override for left-aligned chevrons
+  /* 
+   * Specific layout adjustments for dropdown-style buttons or buttons with chevrons.
+   * Ensures the text remains well-balanced when extra visual weight is added to one side.
+   */
   if ((showChevron || variant === 'dropdown') && align === 'left' && (size === 'large' || size === 'medium')) {
     const isDown = (chevronDirection as string) === 'down' || (variant === 'dropdown' && (!chevronDirection || (chevronDirection as string) === 'down'));
 
@@ -127,21 +145,23 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       style={{
         width: fullWidth ? '100%' : 'auto',
-        padding: `${verticalPadding}px ${rightPadding}px`, // Using symmetric vertical, asymmetric horizontal
+        /* Consolidated padding from all the dynamic logic above */
+        padding: `${verticalPadding}px ${rightPadding}px`,
         paddingLeft: `${leftPadding}px`,
         paddingRight: `${rightPadding}px`,
         borderRadius: 'var(--radius-pill)',
         fontSize: fontSize,
-        fontWeight: '500', // Reduced from 600
+        fontWeight: '500',
         cursor: disabled ? 'not-allowed' : 'pointer',
         fontFamily: "'Inter', sans-serif",
         display: 'flex',
         alignItems: 'center',
+        /* Justification depends on alignment prop */
         justifyContent: align === 'left' ? 'flex-start' : 'center',
         gap: size === 'large' ? '16px' : '12px',
         outline: 'none',
-        ...getVariantStyles(),
-        ...style,
+        ...getVariantStyles(), // Merge variant-specific styles (bg, color, shadow)
+        ...style, // Allow consumer to override anything
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
