@@ -191,7 +191,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         <div style={{ display: 'grid', gap: '1rem' }}>
           {/* Address & Neighborhood */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
+            <div style={{ fontSize: isMobile ? '16px' : '13px', marginTop: isMobile ? '16px' : '5px' }}>
               <div className="eyebrow">Address</div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
                 <div style={{ color: 'var(--text-primary)', fontWeight: '600', lineHeight: '1.4' }}>
@@ -264,7 +264,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         </div>
 
         {/* Action Row */}
-        <div style={{ display: 'flex', gap: '10px', marginTop: '1.5rem' }}>
+        <div style={{ display: 'flex', gap: '10px', marginTop: '2.5rem' }}>
           <Button
             variant="secondary"
             size="medium"

@@ -55,10 +55,10 @@ export const Button: React.FC<ButtonProps> = ({
         return {
           ...baseStyles,
           backgroundColor: isHovered
-            ? (isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)') // Reduced opacity
-            : 'transparent',
+            ? (isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)')
+            : (isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)'),
           color: 'var(--text-secondary)',
-          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
+          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'inset 0px 0px 1px rgba(0,0,0, 0.3), 0px 2px 8px rgba(0,0,0, 0.08)',
         };
       case 'tertiary':
       case 'dropdown':

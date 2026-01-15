@@ -14,6 +14,7 @@ import { geocodeAddress } from '../services/api';
 import { toLeafletPosition, validateLngLat, formatCoordinates } from '../utils/coordinates';
 import { DarkModeTileLayer } from './DarkModeTileLayer';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { useIsStandalone } from '../hooks/useIsStandalone';
 import { analyticsService } from '../services/analytics';
 import { MapInfoPanel } from './MapInfoPanel';
 import { StopInfoTooltip } from './StopInfoTooltip';
@@ -94,6 +95,7 @@ export function MapView({
   const schools = schoolsProp || schoolsFromStore;
   const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
   const isMobile = useIsMobile();
+  const isStandalone = useIsStandalone();
   const [map, setMap] = useState<L.Map | null>(null);
   const [routeGeometries, setRouteGeometries] = useState<RouteGeometry>({});
   const [undoHistory, setUndoHistory] = useState<UndoStep[]>([]);
@@ -1360,7 +1362,7 @@ export function MapView({
         /* Shift zoom controls up on mobile when "Find My Stop" button is visible */
         @media (max-width: 768px) {
           .leaflet-bottom.leaflet-left .leaflet-control-zoom {
-            margin-bottom: ${isFindMyStopVisible ? '80px' : '10px'} !important;
+            margin-bottom: ${isFindMyStopVisible ? (isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 80px)' : '100px') : '10px'} !important;
             transition: margin-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           }
         }

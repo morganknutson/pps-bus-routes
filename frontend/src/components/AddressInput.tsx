@@ -37,6 +37,7 @@ export function AddressInput() {
     setDirectionFilter,
     setActiveTab,
     setFocus,
+    focus,
   } = useUrlState({ basePath });
 
   const {
@@ -222,49 +223,110 @@ export function AddressInput() {
 
   return (
     <div style={{
+      /* Position container based on device type */
       position: 'absolute',
-      top: isMobile ? '1.375rem' : '1.2rem',
-      left: isMobile ? '0.75rem' : '1.25rem',
-      right: isMobile ? '0.75rem' : '1.25rem',
+      top: isMobile ? '1.9rem' : '1.2rem',
+      left: isMobile ? '1.9rem' : '1.25rem',
+      right: isMobile ? '1.9rem' : '1.25rem',
       zIndex: 1000,
       display: 'flex',
+      /* Adjust gap between input and button for mobile */
       gap: isMobile ? '0.5rem' : '0.75rem',
       alignItems: 'center'
     }}>
       <div style={{
         flex: 1,
+        /* Dynamic padding and height for mobile/desktop inputs */
         padding: isMobile ? '0 1.25rem' : '0 0.75rem 0 1.25rem',
         height: isMobile ? '56px' : '40px',
         display: 'flex',
         alignItems: 'center',
+        /* Theme-aware background color */
         backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
         borderRadius: '9999px',
         boxShadow: '0 4px 12px var(--shadow-large)',
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease'
       }}>
+        {/* Toggle view between selected address and empty input state */}
         {homeAddress ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
-            <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '16px' : '12px', flexShrink: 0 }}></i>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            position: 'relative'
+          }}>
+            {/* House icon matches the absolute positioning and offsets of the search state */}
+            <i className="fas fa-house" style={{
+              color: 'var(--text-primary)',
+              fontSize: isMobile ? '16px' : '12px',
+              flexShrink: 0,
+              position: 'absolute',
+              left: isMobile ? '6px' : '4px',
+              top: '49%',
+              transform: 'translateY(-50%)',
+              zIndex: 1
+            }}></i>
             <div
               onClick={() => setFocus('home')}
-              style={{ fontSize: isMobile ? '16px' : '12px', fontWeight: '500', flex: 1, color: 'var(--text-primary)', cursor: 'pointer', textDecoration: 'underline', textDecorationColor: 'transparent', transition: 'text-decoration-color 0.2s ease', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+              style={{
+                /* Standardized font size across both input states */
+                fontSize: isMobile ? '16px' : '12px',
+                fontWeight: '500',
+                flex: 1,
+                color: 'var(--text-primary)',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                textDecorationColor: 'transparent',
+                transition: 'text-decoration-color 0.2s ease',
+                /* Ensure long addresses don't break the layout */
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                /* Matching padding to accommodate the absolute house icon */
+                padding: isMobile ? '0 0.5rem 0 2.5rem' : '0 0.5rem 0 1.5rem'
+              }}
               onMouseEnter={(e) => { e.currentTarget.style.textDecorationColor = 'var(--text-primary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.textDecorationColor = 'transparent'; }}
               title="Click to zoom to address on map"
             >
               {getDisplayAddress(homeAddress.address)}
             </div>
+            {/* Clear button to return to search state */}
             <button
               onClick={clearHomeAddress}
-              style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent', color: 'var(--text-tertiary)', border: 'none', borderRadius: '4px', cursor: 'pointer', padding: 0, flexShrink: 0 }}
+              style={{
+                width: '20px',
+                height: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'transparent',
+                color: 'var(--text-tertiary)',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                padding: 0,
+                flexShrink: 0
+              }}
             >
               <XIcon />
             </button>
           </div>
         ) : (
+          /* Empty input state for searching */
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', height: '100%' }}>
             <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
-              <i className="fas fa-house" style={{ position: 'absolute', left: isMobile ? '0' : '4px', top: '50%', transform: 'translateY(-50%)', fontSize: isMobile ? '16px' : '12px', color: 'var(--text-tertiary)', pointerEvents: 'none', zIndex: 1 }}></i>
+              <i className="fas fa-house" style={{
+                position: 'absolute',
+                /* Adjust icon position for mobile/desktop padding */
+                left: isMobile ? '6px' : '4px',
+                top: '49%',
+                transform: 'translateY(-50%)',
+                fontSize: isMobile ? '16px' : '12px',
+                color: 'var(--text-tertiary)',
+                pointerEvents: 'none',
+                zIndex: 1
+              }}></i>
               <input
                 ref={inputRef}
                 type="text"
@@ -273,9 +335,24 @@ export function AddressInput() {
                 onKeyDown={handleKeyDown}
                 onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                 placeholder="Enter your address..."
-                style={{ width: '100%', height: '100%', padding: isMobile ? '0 0.5rem 0 1.8125rem' : '0 0.5rem 0 1.5rem', border: 'none', borderRadius: '9999px', fontSize: isMobile ? '16px' : '12px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  /* Custom padding to accommodate the absolute-positioned house icon */
+                  padding: isMobile ? '0 0.5rem 0 2.5rem' : '0 0.5rem 0 1.5rem',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  fontSize: isMobile ? '16px' : '12px',
+                  boxSizing: 'border-box',
+                  backgroundColor: 'transparent',
+                  color: 'var(--text-primary)',
+                  outline: 'none'
+                }}
               />
+              {/* Conditional loading state */}
               {isLoading && <div style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
+
+              {/* Autocomplete dropdown - visibility controlled by search results and focus */}
               {showSuggestions && suggestions.length > 0 && (
                 <div ref={suggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>
                   {suggestions.map((suggestion, index) => (
@@ -283,7 +360,15 @@ export function AddressInput() {
                       key={index}
                       onClick={() => handleSelectSuggestion(suggestion)}
                       onMouseEnter={() => setHighlightedIndex(index)}
-                      style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none', fontSize: isMobile ? '16px' : '12px', color: 'var(--text-primary)', backgroundColor: highlightedIndex === index ? 'rgba(150,150,150, 0.2)' : 'var(--bg-primary)' }}
+                      style={{
+                        padding: '0.75rem',
+                        cursor: 'pointer',
+                        borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
+                        fontSize: isMobile ? '16px' : '12px',
+                        color: 'var(--text-primary)',
+                        /* Highlight background color for keyboard navigation or hover */
+                        backgroundColor: highlightedIndex === index ? 'rgba(150,150,150, 0.2)' : 'var(--bg-primary)'
+                      }}
                     >
                       {suggestion.displayName}
                     </div>
@@ -298,19 +383,22 @@ export function AddressInput() {
       {shouldShowButton && (
         <button
           onClick={handleFindClosestStop}
-          title="Find My Stop"
+          title={focus === 'my-stop' ? "This is your stop" : "Find My Stop"}
           style={isMobile ? {
             position: 'fixed',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            // Use padding for spacing - env(safe-area-inset-bottom) handles home indicator in PWA mode
-            paddingTop: '18px',
-            paddingBottom: isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 18px)' : '18px',
-            backgroundColor: 'var(--bg-header)',
-            color: 'var(--text-primary)',
-            border: 'none',
-            borderTop: '1px solid rgba(0, 0, 0, 0.13)',
+            bottom: isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 10px)' : '30px',
+            left: '1.9rem',
+            right: '1.9rem',
+            height: '60px',
+            backgroundColor: focus === 'my-stop' ? 'transparent' : 'var(--bg-header)',
+            color: focus === 'my-stop'
+              ? (isDarkMode ? 'rgba(255,255,255, .4)' : 'rgba(0, 0, 0, .4)')
+              : (isDarkMode ? 'rgba(255,255,255, 1)' : 'rgba(0, 0, 0, 1)'),
+            border: focus === 'my-stop'
+              ? (isDarkMode ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)')
+              : 'none',
+            borderTop: 'none',
+            borderRadius: '9999px',
             fontSize: '16px',
             fontWeight: '600',
             cursor: 'pointer',
@@ -318,9 +406,9 @@ export function AddressInput() {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '0.75rem',
-            boxShadow: '0 -2px 4px var(--shadow)',
+            boxShadow: focus === 'my-stop' ? 'none' : '0px 4px 8px rgba(0,0,0, 0.2)',
             zIndex: 800,
-            transition: 'all 0.2s ease',
+            transition: 'all 0.5s ease',
           } : {
             padding: '0 1.5rem',
             height: '40px',
@@ -341,9 +429,10 @@ export function AddressInput() {
           }}
         >
           <MapPinIcon style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
-          <span>Find My Stop</span>
+          <span>{focus === 'my-stop' ? "This is your stop" : "Find My Stop"}</span>
         </button>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }

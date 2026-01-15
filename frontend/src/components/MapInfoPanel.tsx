@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { useIsStandalone } from '../hooks/useIsStandalone';
 
 interface MapInfoPanelProps {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface MapInfoPanelProps {
 
 export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, children, isFindMyStopVisible = false }) => {
   const isMobile = useIsMobile();
+  const isStandalone = useIsStandalone();
 
   // Refs for direct DOM manipulation to ensure 60fps
   const panelRef = useRef<HTMLDivElement>(null);
@@ -127,7 +129,7 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
 
   const mobileStyle: React.CSSProperties = {
     position: 'fixed',
-    bottom: (isMobile && isFindMyStopVisible) ? '60px' : 0,
+    bottom: 0,
     left: 0,
     right: 0,
     zIndex: 900, // Lowered to be below header/menu (1000+)
@@ -190,7 +192,9 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
             maxHeight: '80vh',
             overflowY: 'auto',
             backgroundColor: 'var(--bg-primary)',
-            paddingBottom: '24px',
+            paddingBottom: isFindMyStopVisible
+              ? (isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 84px)' : '100px')
+              : 'calc(24px + env(safe-area-inset-bottom))',
             WebkitOverflowScrolling: 'touch',
             overscrollBehaviorY: 'contain' // Prevent rubber-banding conflicts
           } : undefined}
