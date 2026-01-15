@@ -934,5 +934,40 @@
       }
     ],
     "timestamp": 1768448412644
+  },
+  "870|Portland|OR": {
+    "suggestions": [
+      {
+        "displayName": "870 Northwest 13th Avenue",
+        "address": "870 Northwest 13th Avenue, Portland, OR, USA",
+        "placeId": "ChIJ-fXV6v4JlVQRY-CjqLBSNT0",
+        "coordinates": null
+      },
+      {
+        "displayName": "8700 Northeast Vancouver Mall Drive",
+        "address": "8700 Northeast Vancouver Mall Drive, Vancouver, WA, USA",
+        "placeId": "ChIJER1PC-uvlVQRoUF7DwxcWGU",
+        "coordinates": null
+      },
+      {
+        "displayName": "8701 East Mill Plain Boulevard",
+        "address": "8701 East Mill Plain Boulevard, Vancouver, WA, USA",
+        "placeId": "ChIJWyMiYZ-llVQRH9U2X2Cfz30",
+        "coordinates": null
+      },
+      {
+        "displayName": "8700 Southwest Creekside Place",
+        "address": "8700 Southwest Creekside Place, Beaverton, OR, USA",
+        "placeId": "ChIJG24vkFEMlVQRdIbkXJxwnvM",
+        "coordinates": null
+      },
+      {
+        "displayName": "8700 Northeast Columbia Court",
+        "address": "8700 Northeast Columbia Court, Portland, OR, USA",
+        "placeId": "ChIJPUpbrgGklVQRIY_fWjhZPmo",
+        "coordinates": null
+      }
+    ],
+    "timestamp": 1768467623264
   }
 }

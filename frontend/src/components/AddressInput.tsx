@@ -322,7 +322,7 @@ export function AddressInput() {
                 left: isMobile ? '6px' : '4px',
                 top: '49%',
                 transform: 'translateY(-50%)',
-                fontSize: isMobile ? '16px' : '12px',
+                fontSize: isMobile ? '14px' : '12px',
                 color: 'var(--text-tertiary)',
                 pointerEvents: 'none',
                 zIndex: 1
@@ -408,7 +408,7 @@ export function AddressInput() {
             gap: '0.75rem',
             boxShadow: focus === 'my-stop'
               ? 'none'
-              : (isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.5), 0px 4px 16px rgba(0,0,0, 1)' : 'inset 0px 0px 1px rgba(0,0,0, .5), 0px 4px 16px rgba(0,0,0, .3)'),
+              : (isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.5), 0px 4px 16px rgba(0,0,0, .4)' : 'inset 0px 0px 1px rgba(0,0,0, .5), 0px 4px 16px rgba(0,0,0, .3)'),
             zIndex: 800,
             transition: 'all 0.5s ease',
           } : {

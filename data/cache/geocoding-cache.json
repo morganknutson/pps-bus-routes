@@ -23810,5 +23810,79 @@
       }
     ],
     "cachedAt": "2026-01-15T05:57:02.920Z"
+  },
+  "8708 southwest 26th way, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.70552991501488,
+      45.46201453294101
+    ],
+    "displayName": "8708 SW 26th Way, Portland, OR 97219, USA",
+    "placeId": "ChIJn9lDXmwLlVQR5U47UYbIAeA",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "8708",
+        "short_name": "8708",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest 26th Way",
+        "short_name": "SW 26th Way",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-15T09:00:46.031Z"
   }
 }
