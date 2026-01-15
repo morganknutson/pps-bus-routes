@@ -29,6 +29,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { ServersPage } from './pages/ServersPage';
 import { ArchitecturePage } from './pages/ArchitecturePage';
+import { SyncDashboardPage } from './pages/SyncDashboardPage';
 import { DesignSystemPage } from './pages/DesignSystemPage';
 import { School, Route as BusRoute } from './types';
 import { loadLocalRoutes } from './services/localRoutes';
@@ -672,6 +673,14 @@ function AppContent() {
           element={
             <AdminPasswordProtection>
               <ArchitecturePage />
+            </AdminPasswordProtection>
+          }
+        />
+        <Route
+          path="/sync"
+          element={
+            <AdminPasswordProtection>
+              <SyncDashboardPage />
             </AdminPasswordProtection>
           }
         />
