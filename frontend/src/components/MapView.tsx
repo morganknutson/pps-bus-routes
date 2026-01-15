@@ -1234,8 +1234,10 @@ export function MapView({
           if (viewMode === 'schools') {
             setSelectedSchool(null);
           } else {
+            // clearSelectedStop() already clears both stopId and focus in the URL,
+            // so we don't need to call setFocus(null) separately - doing so causes
+            // a double URL update race condition that breaks the swipe dismiss behavior
             clearSelectedStop();
-            setFocus(null);
           }
         }}
       >
