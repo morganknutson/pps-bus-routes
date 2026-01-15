@@ -159,28 +159,30 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             </div>
           )}
         </div>
-        <button
-          onClick={(e) => { e.stopPropagation(); onClose(); }}
-          style={{
-            background: 'none',
-            border: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--text-tertiary)',
-            cursor: 'pointer',
-            padding: '4px',
-            position: 'absolute',
-            top: isMobile ? '3px' : '30px',
-            right: isMobile ? '22px' : '34px',
-            transition: 'color 0.2s ease',
-            zIndex: 10,
-            lineHeight: 1
-          }}
-          aria-label="Close dialog"
-        >
-          <XIcon />
-        </button>
+        {!isMobile && (
+          <button
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            style={{
+              background: 'none',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--text-tertiary)',
+              cursor: 'pointer',
+              padding: '4px',
+              position: 'absolute',
+              top: isMobile ? '3px' : '30px',
+              right: isMobile ? '22px' : '34px',
+              transition: 'color 0.2s ease',
+              zIndex: 10,
+              lineHeight: 1
+            }}
+            aria-label="Close dialog"
+          >
+            <XIcon />
+          </button>
+        )}
       </div>
 
       {/* Main Content */}
@@ -272,7 +274,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
               analyticsService.trackOutboundLink(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.address)}`, 'maps');
               handleMapLinkClick(e, stop.address, stop.coordinates);
             }}
-            icon={<i className="fas fa-directions" style={{ opacity: 0.7, fontSize: '12px' }}></i>}
+            icon={<i className="fas fa-directions" style={{ opacity: 0.7 }}></i>}
           >
             Directions
           </Button>
@@ -282,7 +284,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             fullWidth
             align="center"
             onClick={handleCopy}
-            icon={<i className={`fas ${copied ? 'fa-check' : 'fa-copy'}`} style={{ opacity: 0.7, fontSize: '12px', color: copied ? '#4CAF50' : 'inherit' }}></i>}
+            icon={<i className={`fas ${copied ? 'fa-check' : 'fa-copy'}`} style={{ opacity: 0.7, color: copied ? '#4CAF50' : 'inherit' }}></i>}
           >
             {copied ? 'Copied' : 'Copy'}
           </Button>
@@ -321,7 +323,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                 onDropStreetPins?.();
               }}
               disabled={loadingStreetPins}
-              icon={<i className={`fas ${loadingStreetPins ? 'fa-circle-notch fa-spin' : 'fa-map-marker-alt'}`} style={{ fontSize: '12px' }}></i>}
+              icon={<i className={`fas ${loadingStreetPins ? 'fa-circle-notch fa-spin' : 'fa-map-marker-alt'}`}></i>}
             >
               {loadingStreetPins ? 'Dropping pins...' : 'Drop Pins on Streets'}
             </Button>
@@ -337,7 +339,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                 analyticsService.trackAdminAction('undo_coordinate_change', stop.id);
                 onUndo?.();
               }}
-              icon={<i className="fas fa-undo" style={{ fontSize: '12px' }}></i>}
+              icon={<i className="fas fa-undo"></i>}
             >
               Undo Changes ({undoHistoryCount})
             </Button>

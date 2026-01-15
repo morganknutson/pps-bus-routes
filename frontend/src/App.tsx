@@ -52,6 +52,51 @@ import 'leaflet/dist/leaflet.css';
 const defaultIcon = createDefaultMarkerIcon();
 L.Marker.prototype.options.icon = defaultIcon;
 
+// Custom Hamburger/Close icon component for animation
+const HamburgerIcon = ({ isOpen, isMobile }: { isOpen: boolean; isMobile: boolean }) => (
+  <div style={{
+    width: isMobile ? '20px' : '22px',
+    height: '20px',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}>
+    <span style={{
+      display: 'block',
+      height: '1.5px',
+      width: '100%',
+      backgroundColor: 'var(--text-primary)',
+      borderRadius: '2px',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      position: 'absolute',
+      transform: isOpen ? 'rotate(45deg)' : 'translateY(-6px)',
+      transformOrigin: 'center',
+    }} />
+    <span style={{
+      display: 'block',
+      height: '1.5px',
+      width: '100%',
+      backgroundColor: 'var(--text-primary)',
+      borderRadius: '2px',
+      transition: 'opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1)',
+      opacity: isOpen ? 0 : 1,
+    }} />
+    <span style={{
+      display: 'block',
+      height: '1.5px',
+      width: '100%',
+      backgroundColor: 'var(--text-primary)',
+      borderRadius: '2px',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      position: 'absolute',
+      transform: isOpen ? 'rotate(-45deg)' : 'translateY(6px)',
+      transformOrigin: 'center',
+    }} />
+  </div>
+);
+
 // Header, Sidebar, and Map unification logic
 export function ExplorerApp() {
   console.log('[ExplorerApp] Rendering...');
@@ -178,52 +223,6 @@ export function ExplorerApp() {
     loadRoutes();
   }, [schoolId, setRoutes, clearRoutes, setLoading, setLoadingProgress]);
 
-  // Custom Hamburger/Close icon component
-  const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => (
-    <div style={{
-      width: isMobile ? '28px' : '24px',
-      height: '18px',
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-      <span style={{
-        display: 'block',
-        height: '1.5px',
-        width: '100%',
-        backgroundColor: 'var(--text-primary)',
-        borderRadius: '2px',
-        transition: 'all 0.3s ease',
-        position: 'absolute',
-        transform: isOpen ? 'rotate(45deg)' : 'translateY(-6px)',
-        transformOrigin: 'center',
-      }} />
-      <span style={{
-        display: 'block',
-        height: '1.5px',
-        width: '100%',
-        backgroundColor: 'var(--text-primary)',
-        borderRadius: '2px',
-        transition: 'all 0.3s ease',
-        opacity: isOpen ? 0 : 1,
-        transform: isOpen ? 'scale(0)' : 'none',
-      }} />
-      <span style={{
-        display: 'block',
-        height: '1.5px',
-        width: '100%',
-        backgroundColor: 'var(--text-primary)',
-        borderRadius: '2px',
-        transition: 'all 0.3s ease',
-        position: 'absolute',
-        transform: isOpen ? 'rotate(-45deg)' : 'translateY(6px)',
-        transformOrigin: 'center',
-      }} />
-    </div>
-  );
-
   // Hamburger button
   const hamburgerButton = isMobile ? (
     <button onClick={() => setSidebarOpen(!sidebarOpen)} style={{
@@ -231,7 +230,7 @@ export function ExplorerApp() {
       padding: isMobile ? '0.5rem 10px' : '0.5rem 13px', display: 'flex', alignItems: 'center', justifyContent: 'center',
       width: isMobile ? '44px' : '40px', height: '40px', borderRadius: '9999px',
     }} aria-label={sidebarOpen ? "Close menu" : "Open menu"}>
-      <HamburgerIcon isOpen={sidebarOpen} />
+      <HamburgerIcon isOpen={sidebarOpen} isMobile={isMobile} />
     </button>
   ) : null;
 
@@ -564,6 +563,13 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark-mode');
       document.body.classList.remove('dark-mode');
+    }
+
+    // Update theme-color meta tag for Safari address bar
+    const themeColor = isDarkMode ? '#3A3A3A' : '#ffffff';
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', themeColor);
     }
 
     // Update analytics user property

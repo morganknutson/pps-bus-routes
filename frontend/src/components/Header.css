@@ -212,7 +212,7 @@
 }
 
 /* Content shifting when menu is open - push content to the right */
-body.menu-open > #root {
+body.menu-open>#root {
   margin-left: 280px;
   transition: margin-left 0.3s ease;
   width: calc(100vw - 280px);
@@ -221,7 +221,8 @@ body.menu-open > #root {
   z-index: 1001;
   background-color: var(--bg-primary);
   min-height: 100vh;
-  isolation: isolate; /* Create new stacking context */
+  isolation: isolate;
+  /* Create new stacking context */
 }
 
 /* Ensure header also shifts and appears above sidebar */
@@ -229,4 +230,3 @@ body.menu-open .app-header {
   position: relative;
   z-index: 1002;
 }
-

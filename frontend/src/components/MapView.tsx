@@ -19,6 +19,7 @@ import { MapInfoPanel } from './MapInfoPanel';
 import { StopInfoTooltip } from './StopInfoTooltip';
 import { SchoolInfoTooltip } from './SchoolInfoTooltip';
 import { HomeInfoTooltip } from './HomeInfoTooltip';
+import { NoRoutesModal } from './NoRoutesModal';
 import { parseUrlPath, buildUrlPath } from '../services/urlState';
 import { useUrlState } from '../hooks/useUrlState';
 import 'leaflet/dist/leaflet.css';
@@ -1215,47 +1216,15 @@ export function MapView({
         })}
       </MapContainer>
 
-      {/* Centered "NO ROUTES" overlay */}
-      {isMobile && schoolHasNoRoutes && (
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-          zIndex: 1000, pointerEvents: 'auto', padding: '2rem', textAlign: 'center',
-          color: 'var(--text-secondary)', backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(4px)',
-        }}>
-          <div style={{
-            backgroundColor: 'var(--bg-primary)', padding: '2rem', borderRadius: '20px',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)', display: 'flex', flexDirection: 'column',
-            alignItems: 'center', maxWidth: '300px', width: '100%',
-          }}>
-            <div style={{
-              backgroundColor: 'rgba(244, 67, 54, 0.1)', color: '#f44', fontSize: '14px',
-              padding: '8px 20px', borderRadius: '999px', fontWeight: '700', textTransform: 'uppercase',
-              border: '1px solid rgba(244, 67, 54, 0.3)', display: 'flex', alignItems: 'center',
-              gap: '8px', marginBottom: '1.5rem'
-            }}>
-              <i className="fas fa-exclamation-triangle" style={{ fontSize: '14px' }}></i>
-              NO ROUTES
-            </div>
-            <p style={{ fontSize: '16px', fontWeight: '500', margin: 0, marginBottom: '1.5rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
-              Route information not provided on the web by school district.
-            </p>
-            <button
-              onClick={() => {
-                analyticsService.trackAction('no_routes_select_different_school');
-                setSelectedSchool(null);
-              }}
-              style={{
-                padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)',
-                border: '1px solid var(--border-color)', borderRadius: '9999px', cursor: 'pointer',
-                fontSize: '14px', fontWeight: '600', transition: 'all 0.2s ease', width: '100%',
-              }}
-            >
-              Select Different School
-            </button>
-          </div>
-        </div>
-      )}
+      <NoRoutesModal
+        isOpen={isMobile && schoolHasNoRoutes}
+        onClose={() => setSelectedSchool(null)}
+        onSelectDifferentSchool={() => {
+          analyticsService.trackAction('no_routes_select_different_school');
+          setSelectedSchool(null);
+        }}
+        schoolName={activeSchool?.name}
+      />
 
       {/* Unified Info overlay using MapInfoPanel */}
       <MapInfoPanel

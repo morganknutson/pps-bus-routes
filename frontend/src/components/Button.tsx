@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDarkMode } from '../hooks/useDarkMode';
+import { useIsMobile } from '../hooks/useMediaQuery';
 import { ChevronIcon } from './ChevronIcon';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -29,6 +30,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
   const { isDarkMode } = useDarkMode();
+  const isMobile = useIsMobile();
 
   const getVariantStyles = () => {
     const baseStyles = {
@@ -87,11 +89,19 @@ export const Button: React.FC<ButtonProps> = ({
     }
   };
 
-  const fontSize = size === 'large' ? '14px' : size === 'medium' ? '12px' : '12px';
-  const iconSize = `${parseInt(fontSize) - 2}px`; // Match typeface size - 2px
+  const fontSize = isMobile
+    ? (size === 'large' ? '16px' : '14px')
+    : (size === 'large' ? '14px' : '12px');
+  const iconSize = isMobile ? fontSize : `${parseInt(fontSize) - 2}px`;
 
   // Centralized padding logic
-  const verticalPadding = size === 'large' ? 14 : size === 'medium' ? 10 : 8;
+  const verticalPadding = isMobile
+    ? (size === 'large' ? 18 : size === 'medium' ? 14 : 10)
+    : (size === 'large' ? 14 : size === 'medium' ? 10 : 8);
+
+  const chevronSize = isMobile
+    ? (size === 'large' ? 14 : 12)
+    : (size === 'large' ? 12 : 10);
   const baseHorizontalPadding = size === 'large' ? 34 : size === 'medium' ? 28 : 16;
 
   let leftPadding = (icon && (size === 'large' || size === 'medium'))
@@ -147,7 +157,21 @@ export const Button: React.FC<ButtonProps> = ({
           color: 'inherit',
           flexShrink: 0,
         }}>
-          {typeof icon === 'string' ? <i className={icon} /> : icon}
+          {typeof icon === 'string' ? (
+            <i className={icon} style={{ fontSize: iconSize }} />
+          ) : React.isValidElement(icon) ? (
+            React.cloneElement(icon as React.ReactElement<any>, {
+              // Priority: if it's mobile, we want our larger size. 
+              // If it's not mobile, we respect the passed size if it exists, otherwise use our default.
+              size: isMobile ? parseInt(iconSize) : ((icon as React.ReactElement<any>).props.size || parseInt(iconSize)),
+              style: {
+                ...(icon as React.ReactElement<any>).props.style,
+                ...(isMobile ? { fontSize: iconSize } : {}),
+              }
+            })
+          ) : (
+            icon
+          )}
         </div>
       )}
       <span style={{
@@ -159,7 +183,7 @@ export const Button: React.FC<ButtonProps> = ({
       {(showChevron || variant === 'dropdown') && (
         <ChevronIcon
           direction={chevronDirection || (variant === 'dropdown' ? 'down' : 'right')}
-          size={size === 'large' ? 12 : 10}
+          size={chevronSize}
           color="currentColor"
           style={{
             opacity: 0.6,

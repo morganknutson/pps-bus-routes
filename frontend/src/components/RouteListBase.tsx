@@ -72,7 +72,7 @@ function renderStopItem(
       style={{
         padding: '0.75rem',
         borderBottom: stopIndex < allStops.length - 1
-          ? `1px solid ${config.isRouteSelected?.(route) ? '#2a2a2a' : '#393939'}`
+          ? `1px solid var(${config.isRouteSelected?.(route) ? '--border-color-divider-selected' : '--border-color-divider-unselected'})`
           : 'none',
         cursor: isClickable ? 'pointer' : 'default',
         backgroundColor: hasError
@@ -499,7 +499,7 @@ export function RouteListBase({
             style={{
               background: 'none',
               border: 'none',
-              borderLeft: '1px solid var(--border-color-darker)',
+              borderLeft: `1px solid var(${isRouteSelected ? '--border-color-divider-selected' : '--border-color-divider-unselected'})`,
               padding: '0.5rem 0.75rem',
               cursor: 'pointer',
               color: 'var(--text-tertiary)',
@@ -517,7 +517,7 @@ export function RouteListBase({
         {/* Expanded stops list */}
         {isExpanded && (
           <div style={{
-            borderTop: `1px solid ${isRouteSelected ? '#2a2a2a' : 'var(--border-color-darker)'}`,
+            borderTop: `1px solid var(${isRouteSelected ? '--border-color-divider-selected' : '--border-color-divider-unselected'})`,
             backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
             maxHeight: '400px',
             overflowY: 'auto',

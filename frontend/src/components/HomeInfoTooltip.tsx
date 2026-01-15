@@ -73,7 +73,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
           </div>
         </div>
 
-        {onClose && (
+        {onClose && !isMobile && (
           <button
             onClick={(e) => { e.stopPropagation(); onClose(); }}
             style={{

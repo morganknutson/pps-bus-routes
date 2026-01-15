@@ -262,7 +262,7 @@ export function AddressInput() {
         ) : (
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', height: '100%' }}>
             <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
-              <i className="fas fa-house" style={{ position: 'absolute', left: isMobile ? '0' : '4px', top: '50%', transform: 'translateY(-50%)', fontSize: isMobile ? '16px' : '11px', color: 'var(--text-tertiary)', pointerEvents: 'none', zIndex: 1 }}></i>
+              <i className="fas fa-house" style={{ position: 'absolute', left: isMobile ? '0' : '4px', top: '50%', transform: 'translateY(-50%)', fontSize: isMobile ? '16px' : '12px', color: 'var(--text-tertiary)', pointerEvents: 'none', zIndex: 1 }}></i>
               <input
                 ref={inputRef}
                 type="text"
@@ -271,7 +271,7 @@ export function AddressInput() {
                 onKeyDown={handleKeyDown}
                 onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                 placeholder="Enter your address..."
-                style={{ width: '100%', height: '100%', padding: '0 0.5rem 0 1.5rem', border: 'none', borderRadius: '9999px', fontSize: isMobile ? '16px' : '12px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
+                style={{ width: '100%', height: '100%', padding: isMobile ? '0 0.5rem 0 1.8125rem' : '0 0.5rem 0 1.5rem', border: 'none', borderRadius: '9999px', fontSize: isMobile ? '16px' : '12px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
               />
               {isLoading && <div style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
               {showSuggestions && suggestions.length > 0 && (
@@ -303,10 +303,10 @@ export function AddressInput() {
             left: 0,
             right: 0,
             height: '60px',
-            backgroundColor: 'var(--bg-primary)',
+            backgroundColor: 'var(--bg-header)',
             color: 'var(--text-primary)',
             border: 'none',
-            borderTop: '1px solid var(--border-color)',
+            borderTop: '1px solid rgba(0, 0, 0, 0.13)',
             fontSize: '16px',
             fontWeight: '600',
             cursor: 'pointer',
@@ -314,7 +314,7 @@ export function AddressInput() {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '0.75rem',
-            boxShadow: '0 -4px 12px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 -2px 4px var(--shadow)',
             zIndex: 800,
             transition: 'all 0.2s ease',
           } : {
@@ -332,7 +332,8 @@ export function AddressInput() {
             justifyContent: 'center',
             flexShrink: 0,
             boxShadow: '0 4px 12px var(--shadow-large)',
-            transition: 'all 0.2s ease'
+            transition: 'all 0.2s ease',
+            gap: '0.75rem',
           }}
         >
           <MapPinIcon style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />

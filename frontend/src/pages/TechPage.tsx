@@ -95,11 +95,11 @@ const sections: Section[] = [
 const MapPinPreview = ({ type, color = '#3b82f6', isSelected = false, isHover = false, state = 'Default' }: { type: 'school' | 'stop', color?: string, isSelected?: boolean, isHover?: boolean, state?: string }) => {
   const [map, setMap] = useState<L.Map | null>(null);
   const center: [number, number] = [45.5152, -122.6784];
-  
+
   // Use a predictable ID for the preview markers to target them with CSS
   const previewId = `preview-${type}-${state.replace(/\s+/g, '-').toLowerCase()}`;
-  const icon = type === 'school' 
-    ? createSchoolIcon(color) 
+  const icon = type === 'school'
+    ? createSchoolIcon(color)
     : createNumberedIcon(5, color, '8:30 am', isSelected, false, previewId);
 
   useEffect(() => {
@@ -109,19 +109,19 @@ const MapPinPreview = ({ type, color = '#3b82f6', isSelected = false, isHover = 
   }, [map, isSelected]);
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
       gap: '8px',
       width: '140px'
     }}>
-      <div 
-        style={{ 
-          width: '140px', 
-          height: '140px', 
-          borderRadius: '16px', 
-          overflow: 'hidden', 
+      <div
+        style={{
+          width: '140px',
+          height: '140px',
+          borderRadius: '16px',
+          overflow: 'hidden',
           border: '1px solid var(--border-color)',
           position: 'relative',
           backgroundColor: 'var(--bg-secondary)',
@@ -143,7 +143,7 @@ const MapPinPreview = ({ type, color = '#3b82f6', isSelected = false, isHover = 
           <DarkModeTileLayer />
           <Marker position={center} icon={icon} />
         </MapContainer>
-        
+
         {/* Force hover state visuals for the "Hover State" preview */}
         {isHover && (
           <style>{`
@@ -175,7 +175,7 @@ const MapPinPreview = ({ type, color = '#3b82f6', isSelected = false, isHover = 
 const FullRoutePreview = ({ route }: { route: Route }) => {
   const [map, setMap] = useState<L.Map | null>(null);
   const stopsWithCoords = route.stops.filter(s => s.coordinates);
-  
+
   useEffect(() => {
     if (map && stopsWithCoords.length > 0) {
       const bounds = L.latLngBounds(stopsWithCoords.map(s => [s.coordinates![1], s.coordinates![0]]));
@@ -184,11 +184,11 @@ const FullRoutePreview = ({ route }: { route: Route }) => {
   }, [map, route]);
 
   return (
-    <div style={{ 
-      width: '100%', 
-      height: '300px', 
-      borderRadius: '16px', 
-      overflow: 'hidden', 
+    <div style={{
+      width: '100%',
+      height: '300px',
+      borderRadius: '16px',
+      overflow: 'hidden',
       border: '1px solid var(--border-color)',
       position: 'relative',
       marginBottom: '20px',
@@ -204,23 +204,23 @@ const FullRoutePreview = ({ route }: { route: Route }) => {
       >
         <DarkModeTileLayer />
         {route.geometry && (
-          <Polyline 
-            positions={route.geometry} 
-            color={route.color} 
-            weight={4} 
-            opacity={0.8} 
+          <Polyline
+            positions={route.geometry}
+            color={route.color}
+            weight={4}
+            opacity={0.8}
           />
         )}
         {stopsWithCoords.map((stop, i) => {
           const isSchool = stop.isSchoolStop;
-          const icon = isSchool 
-            ? createSchoolIcon(route.color) 
+          const icon = isSchool
+            ? createSchoolIcon(route.color)
             : createNumberedIcon(i + 1, route.color, stop.time, false, false, `full-route-stop-${i}`);
           return (
-            <Marker 
-              key={stop.id} 
-              position={[stop.coordinates![1], stop.coordinates![0]]} 
-              icon={icon} 
+            <Marker
+              key={stop.id}
+              position={[stop.coordinates![1], stop.coordinates![0]]}
+              icon={icon}
             />
           );
         })}
@@ -232,12 +232,12 @@ const FullRoutePreview = ({ route }: { route: Route }) => {
 // Replicate Actual Address Input UI
 const AddressInputUIPreview = () => (
   <div style={{ marginBottom: '20px', maxWidth: '100%', position: 'relative' }}>
-    <div style={{ 
+    <div style={{
       display: 'flex',
       gap: '0.75rem',
       alignItems: 'center',
     }}>
-      <div style={{ 
+      <div style={{
         flex: 1,
         padding: '0 0.75rem 0 1.25rem',
         height: '40px',
@@ -268,11 +268,11 @@ const AddressInputUIPreview = () => (
         boxShadow: '0 4px 12px var(--shadow-large)',
         border: '1px solid var(--border-color)'
       }}>
-        <MapPinIcon style={{ marginRight: '0.5rem' }} />
+        <MapPinIcon style={{ marginRight: '0.75rem' }} />
         <span>Find My Stop</span>
       </div>
     </div>
-    
+
     {/* Autocomplete Dropdown Preview */}
     <div style={{
       marginTop: '8px',
@@ -287,8 +287,8 @@ const AddressInputUIPreview = () => (
         { name: '123 SW Main St', sub: 'Portland, OR 97204' },
         { name: '1234 NE Glisan St', sub: 'Portland, OR 97232' }
       ].map((item, i) => (
-        <div key={i} style={{ 
-          padding: '12px 16px', 
+        <div key={i} style={{
+          padding: '12px 16px',
           borderBottom: i === 0 ? '1px solid var(--border-color)' : 'none',
           backgroundColor: i === 0 ? 'var(--bg-tertiary)' : 'transparent',
           display: 'flex',
@@ -330,7 +330,7 @@ export function TechPage() {
 
     const handleScroll = () => {
       const scrollPosition = contentContainer.scrollTop + 100;
-      
+
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         const element = document.getElementById(section.id);
@@ -346,20 +346,20 @@ export function TechPage() {
 
     contentContainer.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
-    
+
     return () => contentContainer.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     const contentContainer = contentRef.current;
-    
+
     if (element && contentContainer) {
       const headerOffset = 80;
       const containerRect = contentContainer.getBoundingClientRect();
       const elementRect = element.getBoundingClientRect();
       const scrollTop = elementRect.top - containerRect.top + contentContainer.scrollTop;
-      
+
       contentContainer.scrollTo({
         top: Math.max(0, scrollTop - headerOffset),
         behavior: 'smooth',
@@ -368,40 +368,40 @@ export function TechPage() {
   };
 
   return (
-    <div style={{ 
-      height: '100vh', 
-      width: '100vw', 
-      backgroundColor: 'var(--bg-primary)', 
+    <div style={{
+      height: '100vh',
+      width: '100vw',
+      backgroundColor: 'var(--bg-primary)',
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden'
     }}>
-      <SEO 
-        title="Technical Documentation" 
+      <SEO
+        title="Technical Documentation"
         description="Comprehensive technical documentation for the PPS Bus Maps application, including backend services, frontend architecture, and data processing."
       />
       <Header />
-      <div style={{ 
-        display: 'flex', 
-        flex: 1, 
-        overflow: 'hidden' 
+      <div style={{
+        display: 'flex',
+        flex: 1,
+        overflow: 'hidden'
       }}>
         <Sidebar
           persistenceKey="sidebar-width-tech"
           header={
             <div>
-              <h2 style={{ 
-                color: 'var(--text-primary)', 
-                fontSize: '18px', 
+              <h2 style={{
+                color: 'var(--text-primary)',
+                fontSize: '18px',
                 fontWeight: 600,
-                margin: 0 
+                margin: 0
               }}>
                 Technical Documentation
               </h2>
-              <p style={{ 
-                color: 'var(--text-secondary)', 
-                fontSize: '14px', 
-                margin: '8px 0 0 0' 
+              <p style={{
+                color: 'var(--text-secondary)',
+                fontSize: '14px',
+                margin: '8px 0 0 0'
               }}>
                 Services, APIs & Data
               </p>
@@ -417,11 +417,11 @@ export function TechPage() {
                     padding: '8px 12px',
                     borderRadius: '6px',
                     cursor: 'pointer',
-                    backgroundColor: activeSection === section.id 
-                      ? 'var(--bg-tertiary)' 
+                    backgroundColor: activeSection === section.id
+                      ? 'var(--bg-tertiary)'
                       : 'transparent',
-                    color: activeSection === section.id 
-                      ? 'var(--text-primary)' 
+                    color: activeSection === section.id
+                      ? 'var(--text-primary)'
                       : 'var(--text-secondary)',
                     fontWeight: activeSection === section.id ? 600 : 500,
                     fontSize: '15px',
@@ -477,12 +477,12 @@ export function TechPage() {
           </div>
         </Sidebar>
 
-        <div 
+        <div
           id="tech-content-area"
           ref={contentRef}
-          style={{ 
-            flex: 1, 
-            overflowY: 'auto', 
+          style={{
+            flex: 1,
+            overflowY: 'auto',
             overflowX: 'hidden',
             padding: '20px 40px',
             paddingBottom: '60px'
@@ -536,24 +536,24 @@ export function TechPage() {
                 <p>
                   Once a school is selected, users can explore specific morning and afternoon routes.
                 </p>
-                
-                <div style={{ 
-                  backgroundColor: 'var(--bg-secondary)', 
-                  borderRadius: '12px', 
+
+                <div style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderRadius: '12px',
                   border: '1px solid var(--border-color)',
                   overflow: 'hidden',
                   marginBottom: '20px',
                   maxWidth: '400px'
                 }}>
-                  <RouteListBase 
+                  <RouteListBase
                     routes={[
                       { ...exampleRoute, isSelected: true },
                       { ...exampleRoute, id: 'route-2', name: '104', color: '#10b981', isSelected: false }
-                    ]} 
-                    config={{ 
+                    ]}
+                    config={{
                       showRouteSelection: true,
                       directionFilter: 'Morning'
-                    }} 
+                    }}
                   />
                 </div>
 
@@ -654,7 +654,7 @@ export function TechPage() {
                 <p>
                   Schools are represented by large, high-contrast icons that help users orient themselves.
                 </p>
-                
+
                 <div style={{ display: 'flex', gap: '15px', marginBottom: '20px', flexWrap: 'wrap' }}>
                   <MapPinPreview type="school" color="#3b82f6" state="Elementary" />
                   <MapPinPreview type="school" color="#10b981" state="Middle" />
@@ -728,7 +728,7 @@ export function TechPage() {
                 <p>
                   Contextual information appears when users interact with the map elements.
                 </p>
-                
+
                 <div style={{ display: 'flex', gap: '20px', flexDirection: 'column', marginBottom: '20px' }}>
                   <div style={{ border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', backgroundColor: 'var(--bg-secondary)' }}>
                     <div style={{ marginBottom: '10px', fontSize: '11px', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>School Info Dialog</div>
@@ -743,7 +743,7 @@ export function TechPage() {
                     <div style={{ marginBottom: '10px', fontSize: '11px', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>Stop Info Dialog</div>
                     <div style={{ position: 'relative', height: '180px', width: '100%', border: '1px dashed var(--border-color)', borderRadius: '8px', overflow: 'hidden' }}>
                       <div style={{ position: 'absolute', bottom: '10px', right: '10px', width: '300px', pointerEvents: 'none' }}>
-                        <StopInfoTooltip route={exampleRoute} stop={exampleStop} stopNumber={1} onClose={() => {}} />
+                        <StopInfoTooltip route={exampleRoute} stop={exampleStop} stopNumber={1} onClose={() => { }} />
                       </div>
                     </div>
                   </div>
@@ -1119,15 +1119,15 @@ export function TechPage() {
                     <li><code>schoolName</code> - Name of school (only present on school stops)</li>
                   </ul>
                 </div>
-                <pre style={{ 
-                  backgroundColor: '#1e1e1e', 
-                  padding: '15px', 
-                  borderRadius: '4px', 
+                <pre style={{
+                  backgroundColor: '#1e1e1e',
+                  padding: '15px',
+                  borderRadius: '4px',
                   overflow: 'auto',
                   color: '#d4d4d4',
                   fontSize: '11px'
                 }}>
-{`{
+                  {`{
   "id": "1a2b3c4d5e6f7g8h9i0j",
   "name": "100",
   "direction": "Morning",
@@ -1200,15 +1200,15 @@ export function TechPage() {
                 School Entry Example
               </h3>
               <SectionContent>
-                <pre style={{ 
-                  backgroundColor: '#1e1e1e', 
-                  padding: '15px', 
-                  borderRadius: '4px', 
+                <pre style={{
+                  backgroundColor: '#1e1e1e',
+                  padding: '15px',
+                  borderRadius: '4px',
                   overflow: 'auto',
                   color: '#d4d4d4',
                   fontSize: '11px'
                 }}>
-{`{
+                  {`{
   "id": "west-sylvan",
   "name": "West Sylvan",
   "address": "1301 SW 25th Ave, Portland, OR 97201",
@@ -1229,15 +1229,15 @@ export function TechPage() {
                 Neighborhood Data Example
               </h3>
               <SectionContent>
-                <pre style={{ 
-                  backgroundColor: '#1e1e1e', 
-                  padding: '15px', 
-                  borderRadius: '4px', 
+                <pre style={{
+                  backgroundColor: '#1e1e1e',
+                  padding: '15px',
+                  borderRadius: '4px',
                   overflow: 'auto',
                   color: '#d4d4d4',
                   fontSize: '11px'
                 }}>
-{`{
+                  {`{
   "name": "Sylvan-Highlands",
   "count": 8,
   "routes": ["100", "101", "102"],

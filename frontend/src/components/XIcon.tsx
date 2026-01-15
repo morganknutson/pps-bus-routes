@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIsMobile } from '../hooks/useMediaQuery';
 
 interface XIconProps {
   size?: number | string;
@@ -12,8 +13,13 @@ interface XIconProps {
  * This uses a custom pixelated X SVG design
  */
 export function XIcon({ size = 10, color = '#777777', style, className }: XIconProps) {
-  const sizeValue = typeof size === 'number' ? `${size}px` : size;
-  
+  const isMobile = useIsMobile();
+
+  // Parse the size to a number for calculation
+  const baseSize = typeof size === 'number' ? size : parseFloat(String(size));
+  const finalSize = isMobile ? baseSize + 2 : baseSize;
+  const sizeValue = `${finalSize}px`;
+
   return (
     <svg
       width={sizeValue}
@@ -44,4 +50,5 @@ export function XIcon({ size = 10, color = '#777777', style, className }: XIconP
  * Usage: <XIcon /> or <XIcon size={8.5} color="#777777" />
  */
 export default XIcon;
+
 

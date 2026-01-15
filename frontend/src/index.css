@@ -62,6 +62,8 @@
   --border-color: #e8e8e8;
   --border-color-darker: #d0d0d0;
   --border-color-darkest: #b0b0b0;
+  --border-color-divider-selected: rgba(0, 0, 0, 0.13);
+  --border-color-divider-unselected: rgba(0, 0, 0, 0.13);
   --shadow: rgba(0, 0, 0, 0.05);
   --shadow-hover: rgba(0, 0, 0, 0.15);
   --shadow-large: rgba(0, 0, 0, 0.2);
@@ -79,6 +81,8 @@
   --border-color: #404040;
   --border-color-darker: #3c3c3c;
   --border-color-darkest: #2a2a2a;
+  --border-color-divider-selected: #2a2a2a;
+  --border-color-divider-unselected: #393939;
   --shadow: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
   --shadow-large: rgba(0, 0, 0, 0.5);

@@ -6,10 +6,10 @@ import { getSchoolDisplayName } from '../utils/schoolUtils';
 import { calculateDistance, validateLngLat } from '../utils/coordinates';
 
 export function SchoolSelector() {
-  const { 
-    schools, 
-    setSchools, 
-    setRoutes, 
+  const {
+    schools,
+    setSchools,
+    setRoutes,
     setLoading,
     setLoadingProgress,
     assignedSchools,
@@ -31,7 +31,7 @@ export function SchoolSelector() {
           const data = await response.json();
           console.log('[SchoolSelector] Loaded schools:', data.schools);
           setSchools(data.schools || []);
-          
+
           // If no school is selected but schools exist, select the first one
           if (!selectedSchoolId && data.schools && data.schools.length > 0) {
             console.log('[SchoolSelector] Auto-selecting first school:', data.schools[0].id);
@@ -127,10 +127,10 @@ export function SchoolSelector() {
 
   return (
     <div style={{ marginBottom: '1rem' }}>
-      <label style={{ 
-        display: 'block', 
-        fontSize: '12px', 
-        fontWeight: '500', 
+      <label style={{
+        display: 'block',
+        fontSize: '12px',
+        fontWeight: '500',
         color: '#666',
         marginBottom: '0.5rem'
       }}>
@@ -154,11 +154,11 @@ export function SchoolSelector() {
           // Check if assigned to add visual indicator
           let isAssigned = false;
           if (assignedSchools) {
-            isAssigned = Object.values(assignedSchools).some(s => 
+            isAssigned = Object.values(assignedSchools).some(s =>
               s && s.name && s.name.toLowerCase() === school.name.toLowerCase()
             );
           }
-          
+
           return (
             <option key={school.id} value={school.id}>
               {isAssigned ? '★ ' : ''}{getSchoolDisplayName(school.name)}

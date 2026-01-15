@@ -241,8 +241,9 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             </button>
           </div>
         ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', height: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', height: '100%' }}>
             <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
+              <i className="fas fa-map-marker-alt" style={{ position: 'absolute', left: isMobile ? '0' : '4px', top: '50%', transform: 'translateY(-50%)', fontSize: isMobile ? '16px' : '12px', color: 'var(--text-tertiary)', pointerEvents: 'none', zIndex: 1 }}></i>
               <input
                 ref={inputRef}
                 type="text"
@@ -250,7 +251,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                 placeholder="Search for an address..."
-                style={{ width: '100%', height: '100%', padding: '0 0.5rem', border: 'none', borderRadius: '9999px', fontSize: isMobile ? '16px' : '14px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
+                style={{ width: '100%', height: '100%', padding: isMobile ? '0 0.5rem 0 1.8125rem' : '0 0.5rem 0 1.5rem', border: 'none', borderRadius: '9999px', fontSize: isMobile ? '16px' : '14px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
               />
               {isLoading && <div style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
               {showSuggestions && suggestions.length > 0 && (
@@ -277,7 +278,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             left: 0,
             right: 0,
             height: '60px',
-            backgroundColor: 'var(--bg-primary)',
+            backgroundColor: 'var(--bg-header)',
             color: 'var(--text-primary)',
             border: 'none',
             borderTop: '1px solid var(--border-color)',
@@ -288,7 +289,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '0.75rem',
-            boxShadow: '0 -4px 12px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 -2px 4px var(--shadow)',
             zIndex: 800,
             transition: 'all 0.2s ease',
           } : {

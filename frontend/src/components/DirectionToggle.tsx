@@ -101,6 +101,6 @@ export function DirectionToggle({
                     boxShadow: 'var(--shadow-button)',
                 }}
             />
-        </div>
+        </div >
     );
 }

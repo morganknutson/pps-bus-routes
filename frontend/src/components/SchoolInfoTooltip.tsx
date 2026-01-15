@@ -105,7 +105,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
           </div>
         </div>
 
-        {onClose && (
+        {onClose && !isMobile && (
           <button
             onClick={(e) => { e.stopPropagation(); onClose(); }}
             style={{ background: 'none', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '4px', position: 'absolute', top: isMobile ? '3px' : '30px', right: isMobile ? '22px' : '34px', transition: 'color 0.2s ease', zIndex: 10, lineHeight: 1 }}
@@ -163,7 +163,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
               fullWidth
               align="left"
               onClick={handleViewRoutes}
-              icon={<RouteIcon size={12} color={school.routeCount === 0 ? '#f44' : 'currentColor'} />}
+              icon={<RouteIcon color={school.routeCount === 0 ? '#f44' : 'currentColor'} />}
               showChevron={school.routeCount! > 0}
             >
               {school.routeCount === 0 ? 'Route information not provided' : `Explore ${school.routeCount} ${school.routeCount === 1 ? 'Route' : 'Routes'}`}
