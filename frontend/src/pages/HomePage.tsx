@@ -399,15 +399,15 @@ export function HomePage() {
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '1rem',
-                padding: isMobile ? '0 1.5rem' : '0.75rem 0.75rem 0.75rem 1rem',
-                backgroundColor: 'var(--bg-secondary)',
+                gap: '.8rem',
+                padding: isMobile ? '0 1.5rem' : '0.75rem 1rem 0.75rem 1.25rem',
+                backgroundColor: 'rgba(0,0,0, .01)',
                 borderRadius: '9999px', // Pill shape for selected state
                 border: `1px solid ${borderColor}`,
                 height: isMobile ? '56px' : '46px',
                 boxSizing: 'border-box'
               }}>
-                <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '14px' }}></i>
+                <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px' }}></i>
                 <div style={{
                   flex: 1,
                   /* Larger text on mobile for better readability */
@@ -435,11 +435,11 @@ export function HomePage() {
                   style={{
                     width: '100%',
                     /* Mobile uses extra padding-left so text doesn't hit the left edge */
-                    padding: isMobile ? '0 0.5rem 0 1.25rem' : '0 0.75rem 0.75rem 1rem',
-                    border: `1px solid ${borderColor}`,
+                    padding: isMobile ? '0 0.5rem 0 1.25rem' : '0.75rem 0.75rem 0.75rem 1.5rem',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.15)',
                     borderRadius: '9999px', // Unified pill shape
                     fontSize: isMobile ? '16px' : '14px',
-                    backgroundColor: 'var(--bg-primary)',
+                    backgroundColor: 'rgba(0,0,0, .06)',
                     color: 'var(--text-primary)',
                     boxSizing: 'border-box',
                     height: isMobile ? '56px' : '46px',
@@ -449,7 +449,7 @@ export function HomePage() {
                 {addressLoading && <div style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
                 {/* Autocomplete Suggestions Dropdown */}
                 {showAddressSuggestions && addressSuggestions.length > 0 && (
-                  <div ref={addressSuggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>
+                  <div ref={addressSuggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'rgba(255,255,255, .2)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>
                     {addressSuggestions.map((suggestion, index) => (
                       <div key={index} onClick={() => handleSelectAddress(suggestion)} onMouseEnter={() => setHighlightedAddressIndex(index)} style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < addressSuggestions.length - 1 ? '1px solid var(--border-color)' : 'none', fontSize: isMobile ? '16px' : '14px', color: 'var(--text-primary)', backgroundColor: highlightedAddressIndex === index ? (isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(150,150,150, 0.2)') : 'var(--bg-primary)' }}>{suggestion.displayName}</div>
                     ))}
@@ -466,15 +466,15 @@ export function HomePage() {
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '1rem',
-                padding: isMobile ? '0 1.5rem' : '0.75rem 0.75rem 0.75rem 1rem',
-                backgroundColor: 'var(--bg-secondary)',
+                gap: '.75rem',
+                padding: isMobile ? '0 1.5rem' : '0.75rem 1rem 0.75rem 1.3rem',
+                backgroundColor: 'rgba(0,0,0, .01)',
                 borderRadius: '9999px', // Pill shape for selected state
                 border: `1px solid ${borderColor}`,
                 height: isMobile ? '56px' : '46px',
                 boxSizing: 'border-box'
               }}>
-                <i className="fas fa-graduation-cap" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '14px' }}></i>
+                <i className="fas fa-graduation-cap" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px' }}></i>
                 <div style={{
                   flex: 1,
                   fontSize: isMobile ? '16px' : '14px',
@@ -501,11 +501,11 @@ export function HomePage() {
                   placeholder="Enter your school..."
                   style={{
                     width: '100%',
-                    padding: isMobile ? '0 0.5rem 0 1.25rem' : '0.75rem 0.75rem 0.75rem 1rem',
-                    border: `1px solid ${borderColor}`,
+                    padding: isMobile ? '0 0.5rem 0 1.25rem' : '0.75rem 0.75rem 0.75rem 1.5rem',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.15)',
                     borderRadius: '9999px', // Unified pill shape
                     fontSize: isMobile ? '16px' : '14px',
-                    backgroundColor: 'var(--bg-primary)',
+                    backgroundColor: 'rgba(0,0,0, .06)',
                     color: 'var(--text-primary)',
                     boxSizing: 'border-box',
                     height: isMobile ? '56px' : '46px',
@@ -539,7 +539,7 @@ export function HomePage() {
           {error && <div style={{ padding: '0.75rem', marginBottom: '1rem', backgroundColor: '#fee', color: '#c33', borderRadius: '12px', fontSize: '14px' }}>{error}</div>}
 
           {/* Main Action Button - Find My Stop */}
-          <button onClick={handleFindStop} disabled={!selectedAddress || !selectedSchoolLocal || isFinding} style={{ width: '100%', maxWidth: '370px', margin: '0 auto', padding: '1rem 0', fontSize: '16px', fontWeight: '600', color: (!selectedAddress || !selectedSchoolLocal || isFinding) ? textColorSecondary : (isDarkMode ? '#3A3A3A' : 'white'), backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? (isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)') : (isDarkMode ? 'white' : '#333333'), border: (!selectedAddress || !selectedSchoolLocal || isFinding) ? `1px solid ${borderColor}` : `1px solid ${isDarkMode ? 'white' : '#333333'}`, borderRadius: '9999px', cursor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
+          <button onClick={handleFindStop} disabled={!selectedAddress || !selectedSchoolLocal || isFinding} style={{ width: '100%', maxWidth: '380px', margin: '0 auto', padding: '1rem 0', fontSize: '16px', fontWeight: '600', color: (!selectedAddress || !selectedSchoolLocal || isFinding) ? textColorSecondary : (isDarkMode ? '#3A3A3A' : 'white'), backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? (isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)') : (isDarkMode ? 'white' : '#333333'), border: (!selectedAddress || !selectedSchoolLocal || isFinding) ? `1px solid ${borderColor}` : `1px solid ${isDarkMode ? 'white' : '#333333'}`, borderRadius: '9999px', cursor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', boxSizing: 'border-box' }}>
             {isFinding ? <>{/* Progress Bar while finding */}<div style={{ width: '60px', height: '4px', marginRight: '0.5rem' }}><ProgressBar height={4} color={isDarkMode ? '#3A3A3A' : 'white'} containerStyle={{ margin: 0 }} /></div>Finding...</> : <><MapPinIcon width={12} height={15} style={{ flexShrink: 0 }} />Find My Stop</>}
           </button>
 

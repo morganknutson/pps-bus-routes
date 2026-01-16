@@ -969,5 +969,145 @@
       }
     ],
     "timestamp": 1768467623264
+  },
+  "9834|Portland|OR": {
+    "suggestions": [
+      {
+        "displayName": "9834 Southeast Clinton Street",
+        "address": "9834 Southeast Clinton Street, Portland, OR, USA",
+        "placeId": "ChIJLTKSCrahlVQR22R2AX4sK1E",
+        "coordinates": null
+      },
+      {
+        "displayName": "9834 Southwest Kable Street",
+        "address": "9834 Southwest Kable Street, Tigard, OR, USA",
+        "placeId": "ChIJSz14d7VylVQRvGGO_nuMLEE",
+        "coordinates": null
+      },
+      {
+        "displayName": "9834 Southwest Davies Road",
+        "address": "9834 Southwest Davies Road, Beaverton, OR, USA",
+        "placeId": "ChIJLXazXKMNlVQR-L0rZk3F5lA",
+        "coordinates": null
+      },
+      {
+        "displayName": "9834 Southeast Boise Street",
+        "address": "9834 Southeast Boise Street, Portland, OR, USA",
+        "placeId": "ChIJwzHZbjKglVQRruyyAD-5iOY",
+        "coordinates": null
+      },
+      {
+        "displayName": "9834 SE Talbert St",
+        "address": "9834 SE Talbert St, Clackamas, OR, USA",
+        "placeId": "ChIJd2P9mY91lVQR9awnkLJRDsI",
+        "coordinates": null
+      }
+    ],
+    "timestamp": 1768525885702
+  },
+  "34345|Portland|OR": {
+    "suggestions": [
+      {
+        "displayName": "34345 Northeast Egret Lane",
+        "address": "34345 Northeast Egret Lane, Scappoose, OR, USA",
+        "placeId": "ChIJ8VKNyvJUlFQRy9RM6spndTA",
+        "coordinates": null
+      },
+      {
+        "displayName": "34345 NE Sunset Loop",
+        "address": "34345 NE Sunset Loop, Scappoose, OR, USA",
+        "placeId": "ChIJUyfJH_NUlFQRuWXWx8OwksQ",
+        "coordinates": null
+      },
+      {
+        "displayName": "34345 SE Rainbow Rd",
+        "address": "34345 SE Rainbow Rd, Estacada, OR, USA",
+        "placeId": "ChIJ21d5HEuHlVQRWqz2oXzHKbY",
+        "coordinates": null
+      },
+      {
+        "displayName": "34345 Bennett Road",
+        "address": "34345 Bennett Road, Warren, OR, USA",
+        "placeId": "ChIJizEJjgtRlFQR1yXEAOw17_4",
+        "coordinates": null
+      },
+      {
+        "displayName": "34345 Sea Swallow Drive",
+        "address": "34345 Sea Swallow Drive, Cloverdale, OR, USA",
+        "placeId": "ChIJ9zTE4D3d6lQRXO8U7RU9sFo",
+        "coordinates": null
+      }
+    ],
+    "timestamp": 1768525925537
+  },
+  "345|Portland|OR": {
+    "suggestions": [
+      {
+        "displayName": "345 Southeast Taylor Street",
+        "address": "345 Southeast Taylor Street, Portland, OR, USA",
+        "placeId": "ChIJ_VTjFQoKlVQRDsEGjjm0cV8",
+        "coordinates": null
+      },
+      {
+        "displayName": "3458 Southeast Cora Drive",
+        "address": "3458 Southeast Cora Drive, Portland, OR, USA",
+        "placeId": "ChIJy7PnPXiglVQR7WS1FccByFg",
+        "coordinates": null
+      },
+      {
+        "displayName": "3457 North Willamette Boulevard",
+        "address": "3457 North Willamette Boulevard, Portland, OR, USA",
+        "placeId": "ChIJjQjWn5enlVQR6bSkBKTkXcQ",
+        "coordinates": null
+      },
+      {
+        "displayName": "3450 North Williams Avenue",
+        "address": "3450 North Williams Avenue, Portland, OR, USA",
+        "placeId": "ChIJheo3o0CnlVQRStAno2_DKQw",
+        "coordinates": null
+      },
+      {
+        "displayName": "345 Northeast Holman Street",
+        "address": "345 Northeast Holman Street, Portland, OR, USA",
+        "placeId": "ChIJLcfTlQOnlVQRuNgVrePVL3Y",
+        "coordinates": null
+      }
+    ],
+    "timestamp": 1768525937799
+  },
+  "34523|Portland|OR": {
+    "suggestions": [
+      {
+        "displayName": "34523 Southeast Hurlburt Road",
+        "address": "34523 Southeast Hurlburt Road, Corbett, OR, USA",
+        "placeId": "ChIJScBtbAWXlVQRa7OQ8lN4M04",
+        "coordinates": null
+      },
+      {
+        "displayName": "34523 Northeast Shamrock Slope Drive",
+        "address": "34523 Northeast Shamrock Slope Drive, Battle Ground, WA, USA",
+        "placeId": "ChIJaznjAn9KlFQRxBfdsCjSHoA",
+        "coordinates": null
+      },
+      {
+        "displayName": "34523 Spicer Drive Southeast",
+        "address": "34523 Spicer Drive Southeast, Albany, OR, USA",
+        "placeId": "ChIJu9JjBlBswFQRoFC7lY3DTNU",
+        "coordinates": null
+      },
+      {
+        "displayName": "34523 53rd Ave S",
+        "address": "34523 53rd Ave S, Auburn, WA, USA",
+        "placeId": "ChIJpf02DvlXkFQRae6v01PbhfA",
+        "coordinates": null
+      },
+      {
+        "displayName": "34523 Torrey Pine Lane",
+        "address": "34523 Torrey Pine Lane, Union City, CA, USA",
+        "placeId": "ChIJqZSkh-K_j4ARGcn9X3oCMWI",
+        "coordinates": null
+      }
+    ],
+    "timestamp": 1768525938041
   }
 }
