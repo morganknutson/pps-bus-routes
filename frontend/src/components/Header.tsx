@@ -17,7 +17,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isHomePage = location.pathname === '/';
-  const adminPaths = ['/admin', '/neighborhoods', '/tech', '/verification', '/jobs', '/servers', '/architecture'];
+  const adminPaths = ['/admin', '/neighborhoods', '/tech', '/verification', '/jobs', '/servers', '/architecture', '/sync'];
   const isAdminPage = adminPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
   const isExplorerPage = !isAdminPage && !isHomePage;
 
@@ -200,6 +200,32 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   Jobs
                 </Link>
                 <Link
+                  to="/sync"
+                  className="admin-link"
+                  style={{
+                    fontSize: '12px',
+                    color: location.pathname.startsWith('/sync') ? 'var(--header-text-color)' : 'var(--header-text-color-muted)',
+                    textDecoration: location.pathname.startsWith('/sync') ? 'underline' : 'none',
+                    fontWeight: location.pathname.startsWith('/sync') ? '600' : '400',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!location.pathname.startsWith('/sync')) {
+                      e.currentTarget.style.textDecoration = 'underline';
+                      e.currentTarget.style.color = 'var(--header-text-color)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!location.pathname.startsWith('/sync')) {
+                      e.currentTarget.style.textDecoration = 'none';
+                      e.currentTarget.style.color = 'var(--header-text-color-muted)';
+                    }
+                  }}
+                >
+                  Sync
+                </Link>
+                <Link
                   to="/schools"
                   className="admin-link"
                   style={{
@@ -354,6 +380,19 @@ export function Header({ rightContent }: HeaderProps = {}) {
               }}
             >
               Jobs
+            </Link>
+            <Link
+              to="/sync"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                padding: '0.75rem 1rem',
+                color: location.pathname.startsWith('/sync') ? 'white' : 'rgba(255, 255, 255, 0.8)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                fontWeight: location.pathname.startsWith('/sync') ? '600' : '400',
+              }}
+            >
+              Sync
             </Link>
             <Link
               to="/schools"
