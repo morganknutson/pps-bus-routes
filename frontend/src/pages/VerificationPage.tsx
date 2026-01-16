@@ -60,6 +60,8 @@ export function VerificationPage() {
   const [activeJobs, setActiveJobs] = useState<any[]>([]);
   const [fetchMessages, setFetchMessages] = useState<Record<string, { type: 'info' | 'success' | 'error'; message: string }>>({});
   const [activeTab, setActiveTab] = useState<'attention' | 'all'>('attention');
+  const [schedulerStatus, setSchedulerStatus] = useState<{ enabled: boolean; lastRun: string | null; nextRun: string | null } | null>(null);
+  const [togglingScheduler, setTogglingScheduler] = useState(false);
 
   // Define all functions before useEffects
   const loadJobQueueStats = async () => {
@@ -78,6 +80,38 @@ export function VerificationPage() {
       if (err.name !== 'AbortError') {
         console.warn('[VerificationPage] Error loading job stats (non-fatal):', err.message || err);
       }
+    }
+  };
+
+  const loadSchedulerStatus = async () => {
+    try {
+      const response = await fetch('/api/scheduler/status');
+      if (response.ok) {
+        const data = await response.json();
+        setSchedulerStatus(data);
+      }
+    } catch (err) {
+      console.warn('[VerificationPage] Error loading scheduler status:', err);
+    }
+  };
+
+  const handleToggleScheduler = async () => {
+    if (!schedulerStatus) return;
+    setTogglingScheduler(true);
+    try {
+      const response = await fetch('/api/scheduler/toggle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ enabled: !schedulerStatus.enabled }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSchedulerStatus(data);
+      }
+    } catch (err) {
+      console.error('[VerificationPage] Error toggling scheduler:', err);
+    } finally {
+      setTogglingScheduler(false);
     }
   };
 
@@ -623,6 +657,11 @@ export function VerificationPage() {
           await loadPdfFetchInfo();
         } catch (err) {
           console.error('[VerificationPage] Error loading PDF fetch info (non-fatal):', err);
+        }
+        try {
+          await loadSchedulerStatus();
+        } catch (err) {
+          console.error('[VerificationPage] Error loading scheduler status (non-fatal):', err);
         }
         try {
           await loadDriveLinkResults();
@@ -1378,7 +1417,49 @@ export function VerificationPage() {
           }}>
             Verification & Status
           </h1>
-          <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', flexWrap: 'wrap', width: isMobile ? '100%' : 'auto' }}>
+          <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', flexWrap: 'wrap', width: isMobile ? '100%' : 'auto', alignItems: 'center' }}>
+            {/* Weekly Sync Toggle */}
+            {schedulerStatus && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.5rem 1rem',
+                backgroundColor: 'var(--bg-secondary)',
+                borderRadius: '999px',
+                border: '1px solid var(--border-color)',
+              }}>
+                <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Weekly Sync</span>
+                <button
+                  onClick={handleToggleScheduler}
+                  disabled={togglingScheduler}
+                  style={{
+                    position: 'relative',
+                    width: '44px',
+                    height: '24px',
+                    borderRadius: '12px',
+                    border: 'none',
+                    backgroundColor: schedulerStatus.enabled ? '#22c55e' : 'var(--border-color)',
+                    cursor: togglingScheduler ? 'wait' : 'pointer',
+                    transition: 'background-color 0.2s',
+                    padding: 0,
+                  }}
+                  title={schedulerStatus.enabled ? 'Click to pause weekly sync' : 'Click to enable weekly sync'}
+                >
+                  <span style={{
+                    position: 'absolute',
+                    top: '2px',
+                    left: schedulerStatus.enabled ? '22px' : '2px',
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    transition: 'left 0.2s',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+                  }} />
+                </button>
+              </div>
+            )}
             <button
               onClick={handleCheckDriveLinks}
               disabled={checkingDriveLinks}
