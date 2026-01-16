@@ -35,7 +35,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
     <>
       <header className={`app-header ${isAdminPage ? 'sticky-header' : ''}`}>
         <div className="header-content">
-          <div className="logo-container" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingLeft: isMobile ? '15px' : '0' }}>
+          <div className="logo-container" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingLeft: isMobile ? '15px' : '10px' }}>
             <Link
               to="/"
               style={{
