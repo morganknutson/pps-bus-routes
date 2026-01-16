@@ -592,11 +592,27 @@ function App() {
     if (trackingId) {
       analyticsService.init(trackingId);
       analyticsService.setUserProperty('theme', isDarkMode ? 'dark' : 'light');
+
+      // Check for internal user flag in URL or LocalStorage
+      const searchParams = new URLSearchParams(window.location.search);
+      const isInternalUrl = searchParams.get('internal') === 'true';
+      if (isInternalUrl) {
+        localStorage.setItem('is_internal_user', 'true');
+        console.log('[App] Marked as internal user');
+      }
+
+      const isInternalUser = localStorage.getItem('is_internal_user') === 'true';
+      if (isInternalUser) {
+        analyticsService.setUserProperty('traffic_type', 'internal');
+      } else {
+        analyticsService.setUserProperty('traffic_type', 'external');
+      }
+
       const persona = window.location.pathname.startsWith('/admin') ? 'admin' : 'public';
       analyticsService.setUserProperty('user_persona', persona);
       analyticsService.setUserProperty('is_mobile', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
     }
-  }, [initializeStore]);
+  }, [initializeStore, isDarkMode]);
 
   return (
     <HelmetProvider>
