@@ -339,7 +339,7 @@ export function AddressInput() {
                   width: '100%',
                   height: '100%',
                   /* Custom padding to accommodate the absolute-positioned house icon */
-                  padding: isMobile ? '0 0.5rem 0 2.5rem' : '0 0.5rem 0 1.75rem',
+                  padding: isMobile ? '0 0.5rem 0 2.5rem' : '0 0.5rem 0 1.5rem',
                   border: 'none',
                   borderRadius: '9999px',
                   fontSize: isMobile ? '16px' : '12px',
@@ -367,7 +367,7 @@ export function AddressInput() {
                         fontSize: isMobile ? '16px' : '12px',
                         color: 'var(--text-primary)',
                         /* Highlight background color for keyboard navigation or hover */
-                        backgroundColor: highlightedIndex === index ? 'rgba(150,150,150, 0.2)' : 'var(--bg-primary)'
+                        backgroundColor: highlightedIndex === index ? 'rgba(150,150,150, 1)' : 'var(--bg-primary)'
                       }}
                     >
                       {suggestion.displayName}
