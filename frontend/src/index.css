@@ -67,6 +67,7 @@
   --shadow: rgba(0, 0, 0, 0.05);
   --shadow-hover: rgba(0, 0, 0, 0.15);
   --shadow-large: rgba(0, 0, 0, 0.2);
+  --bg-hover: rgba(0, 0, 0, 0.05);
 }
 
 /* Dark theme */
@@ -86,6 +87,7 @@
   --shadow: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
   --shadow-large: rgba(0, 0, 0, 0.5);
+  --bg-hover: rgba(255, 255, 255, 0.05);
   --active-marker-lens-bg: rgba(255, 255, 255, 0.15);
   --bg-header: #3A3A3A;
 

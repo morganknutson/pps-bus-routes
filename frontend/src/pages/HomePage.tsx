@@ -616,7 +616,7 @@ export function HomePage() {
 
           {/* Main Action Button - Find My Stop */}
           <button onClick={handleFindStop} disabled={!selectedAddress || !selectedSchoolLocal || isFinding} style={{ width: '100%', maxWidth: '380px', margin: '0 auto', padding: '1rem 0', fontSize: '16px', fontWeight: '600', color: (!selectedAddress || !selectedSchoolLocal || isFinding) ? textColorSecondary : (isDarkMode ? '#3A3A3A' : 'white'), backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? (isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)') : (isDarkMode ? 'white' : '#333333'), border: (!selectedAddress || !selectedSchoolLocal || isFinding) ? `1px solid ${borderColor}` : `1px solid ${isDarkMode ? 'white' : '#333333'}`, borderRadius: '9999px', cursor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', boxSizing: 'border-box' }}>
-            {isFinding ? <>{/* Progress Bar while finding */}<div style={{ width: '60px', height: '4px', marginRight: '0.5rem' }}><ProgressBar height={4} color={isDarkMode ? '#3A3A3A' : 'white'} containerStyle={{ margin: 0 }} /></div>Finding...</> : <><MapPinIcon width={12} height={15} style={{ flexShrink: 0 }} />Find My Stop</>}
+            {isFinding ? <>{/* Progress Bar while finding */}<div style={{ width: '60px', height: '4px', marginRight: '0.5rem' }}><ProgressBar height={4} color={isDarkMode ? '#3A3A3A' : 'white'} containerStyle={{ margin: 0 }} /></div>Finding...</> : <><MapPinIcon filled width={12} height={15} style={{ flexShrink: 0 }} />Find My Stop</>}
           </button>
 
           <div style={{ marginTop: '4.5rem', textAlign: 'center' }}>

@@ -303,13 +303,13 @@ export function AddressInput() {
             width: '100%',
             position: 'relative'
           }}>
-            {/* House icon matches the absolute positioning and offsets of the search state */}
+            {/* Home icon style (Entered state) */}
             <i className="fas fa-house" style={{
               color: 'var(--text-primary)',
               fontSize: isMobile ? '16px' : '12px',
               flexShrink: 0,
               position: 'absolute',
-              left: isMobile ? '6px' : '4px',
+              left: isMobile ? '6px' : '0px',
               top: '49%',
               transform: 'translateY(-50%)',
               zIndex: 1
@@ -330,7 +330,7 @@ export function AddressInput() {
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
-                /* Matching padding to accommodate the absolute house icon */
+                /* Padding for the entered address text */
                 padding: isMobile ? '0 0.5rem 0 2.5rem' : '0 0.5rem 0 1.5rem'
               }}
               onMouseEnter={(e) => { e.currentTarget.style.textDecorationColor = 'var(--text-primary)'; }}
@@ -364,10 +364,11 @@ export function AddressInput() {
           /* Empty input state for searching */
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', height: '100%' }}>
             <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
+              {/* Home icon style (Not entered state) */}
               <i className="fas fa-house" style={{
                 position: 'absolute',
                 /* Adjust icon position for mobile/desktop padding */
-                left: isMobile ? '6px' : '4px',
+                left: isMobile ? '6px' : '0px',
                 top: '49%',
                 transform: 'translateY(-50%)',
                 fontSize: isMobile ? '14px' : '12px',
@@ -397,8 +398,8 @@ export function AddressInput() {
                   outline: 'none'
                 }}
               />
-              {/* Location button and loading indicator container */}
-              <div style={{ position: 'absolute', right: isMobile ? '12px' : '8px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {/* Location icon no address is entered */}
+              <div style={{ position: 'absolute', right: isMobile ? '8px' : '8px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 {isLoading && <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</span>}
                 <button
                   onClick={handleGetLocation}
@@ -407,7 +408,7 @@ export function AddressInput() {
                   style={{
                     background: 'none',
                     border: 'none',
-                    padding: '4px',
+                    padding: isMobile ? '4px 0px' : '4px 0px',
                     cursor: isGeolocating ? 'wait' : 'pointer',
                     color: 'var(--text-tertiary)',
                     display: 'flex',
@@ -419,9 +420,9 @@ export function AddressInput() {
                   onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-tertiary)'; }}
                 >
                   {isGeolocating ? (
-                    <i className="fas fa-spinner fa-spin" style={{ fontSize: isMobile ? '16px' : '14px' }}></i>
+                    <i className="fas fa-spinner fa-spin" style={{ fontSize: isMobile ? '18px' : '16px' }}></i>
                   ) : (
-                    <LocationArrowIcon size={isMobile ? 18 : 15} />
+                    <LocationArrowIcon size={isMobile ? 14 : 12} />
                   )}
                 </button>
               </div>
@@ -504,7 +505,7 @@ export function AddressInput() {
             gap: '0.75rem',
           }}
         >
-          <MapPinIcon style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
+          <MapPinIcon filled style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
           <span>{focus === 'my-stop' ? "This is your stop" : "Find My Stop"}</span>
         </button>
       )

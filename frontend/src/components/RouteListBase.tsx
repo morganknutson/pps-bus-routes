@@ -90,7 +90,7 @@ function renderStopItem(
       }}
       onMouseEnter={(e) => {
         if (isClickable && !isSelected) {
-          e.currentTarget.style.backgroundColor = hasError ? '#ffcccc' : 'rgba(255, 255, 255, 0.05)';
+          e.currentTarget.style.backgroundColor = hasError ? '#ffcccc' : 'var(--bg-hover)';
         }
       }}
       onMouseLeave={(e) => {
@@ -117,7 +117,7 @@ function renderStopItem(
             width: '16px',
             height: '13px',
             borderRadius: '50%',
-            color: 'white',
+            color: 'var(--text-primary)',
             marginTop: '1px',
           }}>
             <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>

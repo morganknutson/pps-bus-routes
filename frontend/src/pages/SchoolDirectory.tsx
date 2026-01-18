@@ -28,7 +28,7 @@ export function SchoolDirectory() {
     }
     document.body.style.overflow = 'auto';
     document.documentElement.style.overflow = 'auto';
-    
+
     return () => {
       if (rootElement) {
         rootElement.style.overflow = 'hidden';
@@ -47,12 +47,12 @@ export function SchoolDirectory() {
           fetch('/api/schools?includeStats=true'),
           fetch('/api/neighborhoods/data')
         ]);
-        
+
         if (schoolsRes.ok) {
           const data = await schoolsRes.json();
           setSchools(data.schools || []);
         }
-        
+
         if (neighborhoodsRes.ok) {
           const data = await neighborhoodsRes.json();
           setNeighborhoods(data);
@@ -92,17 +92,17 @@ export function SchoolDirectory() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
-      <SEO 
-        title="School Directory" 
+      <SEO
+        title="School Directory"
         description="Browse all Portland Public Schools to find bus routes, stop locations, and schedules for your school."
       />
       <Header />
-      
-      <main style={{ 
-        flex: 1, 
-        width: '100%', 
-        maxWidth: '1200px', 
-        margin: '0 auto', 
+
+      <main style={{
+        flex: 1,
+        width: '100%',
+        maxWidth: '1200px',
+        margin: '0 auto',
         padding: isMobile ? '1rem' : '2rem',
         boxSizing: 'border-box'
       }}>
@@ -112,11 +112,11 @@ export function SchoolDirectory() {
             <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
               Select a school to view its interactive bus route maps and stop schedules.
             </p>
-            <Link 
-              to="/neighborhood-directory" 
-              style={{ 
-                color: 'var(--text-primary)', 
-                textDecoration: 'none', 
+            <Link
+              to="/neighborhood-directory"
+              style={{
+                color: 'var(--text-primary)',
+                textDecoration: 'none',
                 fontSize: '0.875rem',
                 fontWeight: '600',
                 display: 'flex',
@@ -140,7 +140,7 @@ export function SchoolDirectory() {
               <i className="fas fa-city"></i> Browse by Neighborhood
             </Link>
           </div>
-          
+
           <div style={{ position: 'relative', width: '100%' }}>
             <input
               type="text"
@@ -160,10 +160,10 @@ export function SchoolDirectory() {
                 boxSizing: 'border-box'
               }}
             />
-            <i className="fas fa-search" style={{ 
-              position: 'absolute', 
-              left: '1rem', 
-              top: '50%', 
+            <i className="fas fa-search" style={{
+              position: 'absolute',
+              left: '1rem',
+              top: '50%',
               transform: 'translateY(-50%)',
               color: 'var(--text-tertiary)'
             }}></i>
@@ -176,21 +176,21 @@ export function SchoolDirectory() {
             <p>Loading schools...</p>
           </div>
         ) : (
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))', 
-            gap: '1.5rem' 
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))',
+            gap: '1.5rem'
           }}>
             {filteredSchools.map(school => {
               const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
               const schoolColor = getSchoolColor(schoolTypes);
               const neighborhood = schoolToNeighborhood.get(school.id);
-              
+
               return (
-                <Link 
+                <Link
                   key={school.id}
-                  to={`/${school.id}`}
-                  style={{ 
+                  to={school.routeCount === 0 ? `/${school.id}` : `/${school.id}/routes`}
+                  style={{
                     textDecoration: 'none',
                     display: 'flex',
                     flexDirection: 'column',
@@ -211,16 +211,16 @@ export function SchoolDirectory() {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                    <h2 style={{ 
-                      margin: 0, 
-                      fontSize: '1.25rem', 
-                      color: 'var(--text-primary)' 
+                    <h2 style={{
+                      margin: 0,
+                      fontSize: '1.25rem',
+                      color: 'var(--text-primary)'
                     }}>{getSchoolDisplayName(school.name)} Bus Routes & Stops</h2>
                   </div>
-                  
-                  <div style={{ 
-                    fontSize: '0.875rem', 
-                    color: schoolColor, 
+
+                  <div style={{
+                    fontSize: '0.875rem',
+                    color: schoolColor,
                     fontWeight: '600',
                     marginBottom: '0.75rem',
                     display: 'flex',
@@ -232,8 +232,8 @@ export function SchoolDirectory() {
                       {schoolTypes.join(' & ')}
                     </span>
                     {neighborhood && (
-                      <span style={{ 
-                        fontSize: '0.75rem', 
+                      <span style={{
+                        fontSize: '0.75rem',
                         color: 'var(--text-tertiary)',
                         fontWeight: 'normal',
                         padding: '0.125rem 0.5rem',
@@ -244,10 +244,10 @@ export function SchoolDirectory() {
                       </span>
                     )}
                   </div>
-                  
+
                   {school.address && (
-                    <div style={{ 
-                      fontSize: '0.875rem', 
+                    <div style={{
+                      fontSize: '0.875rem',
                       color: 'var(--text-secondary)',
                       display: 'flex',
                       alignItems: 'center',
@@ -257,10 +257,10 @@ export function SchoolDirectory() {
                       <span>{school.address.split(',')[0]}</span>
                     </div>
                   )}
-                  
+
                   <div style={{ marginTop: 'auto', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ 
-                      fontSize: '0.8125rem', 
+                    <span style={{
+                      fontSize: '0.8125rem',
                       color: school.routeCount === 0 ? '#f44' : 'var(--text-tertiary)',
                       fontWeight: school.routeCount === 0 ? '600' : 'normal',
                       display: 'flex',
@@ -277,8 +277,8 @@ export function SchoolDirectory() {
                         </>
                       )}
                     </span>
-                    <span style={{ 
-                      fontSize: '0.875rem', 
+                    <span style={{
+                      fontSize: '0.875rem',
                       color: 'var(--text-tertiary)',
                       display: 'flex',
                       alignItems: 'center',

@@ -311,7 +311,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             gap: '0.75rem',
           }}
         >
-          <MapPinIcon style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
+          <MapPinIcon filled style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
           <span>Find My Stop</span>
         </button>
       )}
