@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { analyticsService } from '../services/analytics';
-import { autocompleteAddress, geocodeAddress } from '../services/api';
+import { autocompleteAddress, geocodeAddress, reverseGeocode } from '../services/api';
 import { loadLocalRoutes } from '../services/localRoutes';
 import { findClosestStop } from '../utils/findClosestStop';
 import { formatDistance, calculateDistance } from '../utils/distance';
@@ -17,6 +17,7 @@ import { Footer } from '../components/Footer';
 import { WhoSection } from '../components/WhoSection';
 import { getSchoolDisplayName, getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
 import { XIcon } from '../components/XIcon';
+import { LocationArrowIcon } from '../components/LocationArrowIcon';
 import { useIsMobile } from '../hooks/useMediaQuery';
 
 interface AutocompleteSuggestion {
@@ -60,6 +61,54 @@ export function HomePage() {
 
   const [isFinding, setIsFinding] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isGeolocating, setIsGeolocating] = useState(false);
+
+  const handleGetLocation = async () => {
+    if (!navigator.geolocation) {
+      console.warn('[HomePage] Geolocation not supported');
+      return;
+    }
+
+    setIsGeolocating(true);
+
+    try {
+      const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        });
+      });
+
+      const { latitude, longitude } = position.coords;
+      console.log(`[HomePage] Got location: ${latitude}, ${longitude}`);
+
+      const result = await reverseGeocode(latitude, longitude);
+
+      if (result.fullAddress) {
+        // Extract just the street address part (before the city)
+        const addressParts = result.fullAddress.split(',');
+        const streetAddress = addressParts.slice(0, 2).join(',').trim();
+
+        const address = {
+          address: streetAddress,
+          coordinates: [longitude, latitude] as [number, number]
+        };
+        setSelectedAddress(address);
+        setHomeAddress(address);
+        setAddressQuery('');
+        analyticsService.trackAction('location_autofill', { page: 'homepage', success: true });
+      } else {
+        console.warn('[HomePage] No address found for location');
+        analyticsService.trackAction('location_autofill', { page: 'homepage', success: false, reason: 'no_address' });
+      }
+    } catch (error: any) {
+      console.error('[HomePage] Geolocation error:', error);
+      analyticsService.trackAction('location_autofill', { page: 'homepage', success: false, reason: error.code || 'error' });
+    } finally {
+      setIsGeolocating(false);
+    }
+  };
 
   useEffect(() => {
     document.body.style.overflow = 'auto';
@@ -434,8 +483,8 @@ export function HomePage() {
                   placeholder="Enter your address..."
                   style={{
                     width: '100%',
-                    /* Mobile uses extra padding-left so text doesn't hit the left edge */
-                    padding: isMobile ? '0 0.5rem 0 1.25rem' : '0.75rem 0.75rem 0.75rem 1.5rem',
+                    /* Mobile uses extra padding-left so text doesn't hit the left edge, right padding for location button */
+                    padding: isMobile ? '0 3rem 0 1.25rem' : '0.75rem 2.5rem 0.75rem 1.5rem',
                     border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.15)',
                     borderRadius: '9999px', // Unified pill shape
                     fontSize: isMobile ? '16px' : '14px',
@@ -446,7 +495,34 @@ export function HomePage() {
                     outline: 'none'
                   }}
                 />
-                {addressLoading && <div style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
+                {/* Location button and loading indicator container */}
+                <div style={{ position: 'absolute', right: isMobile ? '14px' : '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {addressLoading && <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</span>}
+                  <button
+                    onClick={handleGetLocation}
+                    disabled={isGeolocating}
+                    title="Use my location"
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: isMobile ? '4px 14px' : '4px 10px',
+                      cursor: isGeolocating ? 'wait' : 'pointer',
+                      color: 'var(--text-tertiary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      transition: 'color 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => { if (!isGeolocating) e.currentTarget.style.color = 'var(--text-primary)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-tertiary)'; }}
+                  >
+                    {isGeolocating ? (
+                      <i className="fas fa-spinner fa-spin" style={{ fontSize: isMobile ? '18px' : '16px' }}></i>
+                    ) : (
+                      <LocationArrowIcon size={isMobile ? 14 : 12} />
+                    )}
+                  </button>
+                </div>
                 {/* Autocomplete Suggestions Dropdown */}
                 {showAddressSuggestions && addressSuggestions.length > 0 && (
                   <div ref={addressSuggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'rgba(255,255,255, .2)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>

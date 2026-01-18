@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import { autocompleteAddress, geocodeAddress } from '../services/api';
+import { autocompleteAddress, geocodeAddress, reverseGeocode } from '../services/api';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { analyticsService } from '../services/analytics';
@@ -11,6 +11,7 @@ import { formatDistance } from '../utils/distance';
 import { Route, Stop } from '../types';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
+import { LocationArrowIcon } from './LocationArrowIcon';
 import { useUrlState } from '../hooks/useUrlState';
 import { useIsStandalone } from '../hooks/useIsStandalone';
 
@@ -56,6 +57,53 @@ export function AddressInput() {
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const [isGeolocating, setIsGeolocating] = useState(false);
+
+  const handleGetLocation = async () => {
+    if (!navigator.geolocation) {
+      console.warn('[AddressInput] Geolocation not supported');
+      return;
+    }
+
+    setIsGeolocating(true);
+
+    try {
+      const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        });
+      });
+
+      const { latitude, longitude } = position.coords;
+      console.log(`[AddressInput] Got location: ${latitude}, ${longitude}`);
+
+      const result = await reverseGeocode(latitude, longitude);
+
+      if (result.fullAddress) {
+        // Extract just the street address part (before the city)
+        const addressParts = result.fullAddress.split(',');
+        const streetAddress = addressParts.slice(0, 2).join(',').trim();
+
+        setHomeAddress({
+          address: streetAddress,
+          coordinates: [longitude, latitude] // [lng, lat] format
+        });
+        setFocus('home');
+        setQuery('');
+        analyticsService.trackAction('location_autofill', { success: true });
+      } else {
+        console.warn('[AddressInput] No address found for location');
+        analyticsService.trackAction('location_autofill', { success: false, reason: 'no_address' });
+      }
+    } catch (error: any) {
+      console.error('[AddressInput] Geolocation error:', error);
+      analyticsService.trackAction('location_autofill', { success: false, reason: error.code || 'error' });
+    } finally {
+      setIsGeolocating(false);
+    }
+  };
 
   const shouldShowButton = homeAddress && selectedSchoolId && routes.length > 0;
 
@@ -338,8 +386,8 @@ export function AddressInput() {
                 style={{
                   width: '100%',
                   height: '100%',
-                  /* Custom padding to accommodate the absolute-positioned house icon */
-                  padding: isMobile ? '0 0.5rem 0 2.5rem' : '0 0.5rem 0 1.5rem',
+                  /* Custom padding to accommodate the absolute-positioned house icon and location button */
+                  padding: isMobile ? '0 2.5rem 0 2.5rem' : '0 2rem 0 1.5rem',
                   border: 'none',
                   borderRadius: '9999px',
                   fontSize: isMobile ? '16px' : '12px',
@@ -349,8 +397,34 @@ export function AddressInput() {
                   outline: 'none'
                 }}
               />
-              {/* Conditional loading state */}
-              {isLoading && <div style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
+              {/* Location button and loading indicator container */}
+              <div style={{ position: 'absolute', right: isMobile ? '12px' : '8px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {isLoading && <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</span>}
+                <button
+                  onClick={handleGetLocation}
+                  disabled={isGeolocating}
+                  title="Use my location"
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: '4px',
+                    cursor: isGeolocating ? 'wait' : 'pointer',
+                    color: 'var(--text-tertiary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'color 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => { if (!isGeolocating) e.currentTarget.style.color = 'var(--text-primary)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-tertiary)'; }}
+                >
+                  {isGeolocating ? (
+                    <i className="fas fa-spinner fa-spin" style={{ fontSize: isMobile ? '16px' : '14px' }}></i>
+                  ) : (
+                    <LocationArrowIcon size={isMobile ? 18 : 15} />
+                  )}
+                </button>
+              </div>
 
               {/* Autocomplete dropdown - visibility controlled by search results and focus */}
               {showSuggestions && suggestions.length > 0 && (
