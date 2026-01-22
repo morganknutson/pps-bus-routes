@@ -54,112 +54,67 @@ function renderStopItem(
   allStops: Stop[],
   config: RouteListConfig
 ) {
+  // --- STATE: Stop Selection & Error Handling ---
   const stopNumber = calculateStopNumber(route, stop.id);
   const hasCoordinates = stop.coordinates && stop.coordinates.length === 2;
-  const hasError = config.showStopErrors && (!hasCoordinates || stop.geocodeError);
+  /**
+   * isClickable State: Determines if a stop can be interacted with.
+   * Based on whether the stop has valid coordinates.
+   * Impact: Cursor style, hover effects, and text color.
+   */
   const isClickable = hasCoordinates;
+  /**
+   * hasError State: Indicates if a stop failed geocoding.
+   * Impact: Background colors (#ffe6e6), border color (#ff6b6b), and text colors.
+   */
+  const hasError = config.showStopErrors && (!hasCoordinates || stop.geocodeError);
+  /**
+   * isSelected State (Stop): True if the current stop is the one being viewed on the map.
+   * Impact: var(--bg-primary) background, 3px solid side border with route color.
+   */
   const isSelected = config.isStopSelected?.(route, stop) || false;
   const routeColor = config.getRouteColor?.(route) || route.color;
 
   return (
     <div
       key={stop.id}
+      className={`stop-item ${isClickable ? 'clickable' : ''} ${isSelected ? 'selected' : ''} ${hasError ? 'has-error' : ''}`}
       onClick={() => {
         if (isClickable && config.onStopClick) {
           config.onStopClick(route, stop, stopNumber);
         }
       }}
       style={{
-        padding: '0.75rem',
         borderBottom: stopIndex < allStops.length - 1
           ? `1px solid var(${config.isRouteSelected?.(route) ? '--border-color-divider-selected' : '--border-color-divider-unselected'})`
           : 'none',
-        cursor: isClickable ? 'pointer' : 'default',
-        backgroundColor: hasError
-          ? '#ffe6e6'
-          : isSelected
-            ? 'var(--bg-tertiary)'
-            : isClickable
-              ? 'transparent'
-              : 'var(--bg-secondary)',
-        borderLeft: isSelected ? `3px solid ${routeColor}` : hasError ? '3px solid #ff6b6b' : 'none',
-        transition: 'background-color 0.15s',
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: '0.5rem',
-      }}
-      onMouseEnter={(e) => {
-        if (isClickable && !isSelected) {
-          e.currentTarget.style.backgroundColor = hasError ? '#ffcccc' : 'var(--bg-hover)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!isSelected && isClickable) {
-          e.currentTarget.style.backgroundColor = hasError ? '#ffe6e6' : 'transparent';
-        }
-      }}
+        // --- STYLES: Selection Border Color ---
+        '--route-color': routeColor,
+      } as React.CSSProperties}
     >
       {/* Stop icon/number */}
       {stop.isSchoolStop ? (
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          gap: '0.25rem',
-          flexShrink: 0,
-        }}>
+        <div className="stop-icon-school-container">
           {/* School icon */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '16px',
-            height: '13px',
-            borderRadius: '50%',
-            color: 'var(--text-primary)',
-            marginTop: '1px',
-          }}>
+          <div className="stop-icon-school">
             <i className="fas fa-graduation-cap" style={{ fontSize: '12px' }}></i>
           </div>
           {/* Time below icon */}
           {stop.time && (
-            <div style={{
-              fontSize: '9px',
-              color: 'var(--text-tertiary)',
-              textAlign: 'center',
-            }}>
+            <div className="stop-icon-school-time">
               {stop.time}
             </div>
           )}
         </div>
       ) : (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '16px',
-          height: '16px',
-          borderRadius: '50%',
-          backgroundColor: hasError ? '#ff6b6b' : routeColor,
-          color: 'white',
-          fontSize: '9px',
-          fontWeight: 'bold',
-          flexShrink: 0,
-          marginTop: '1px',
-        }}>
+        <div className="stop-icon-regular" style={{ backgroundColor: hasError ? '#ff6b6b' : routeColor }}>
           {stopNumber}
         </div>
       )}
 
       {/* Stop details */}
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{
-          fontSize: '13px',
-          fontWeight: '500',
-          marginBottom: '0.25rem',
-          color: hasError ? '#ff6b6b' : (isClickable ? 'var(--text-secondary)' : 'var(--text-tertiary)'),
-        }}>
+      <div className="stop-details">
+        <div className="stop-name" style={{ color: hasError ? '#ff6b6b' : (isClickable ? 'var(--text-secondary)' : 'var(--text-tertiary)') }}>
           {stop.isSchoolStop && stop.schoolName
             ? (() => {
               const schoolTypes = getSchoolTypes(stop.schoolName);
@@ -177,7 +132,7 @@ function renderStopItem(
             : formatStreetName(stop.address)}
         </div>
         {stop.time && !stop.isSchoolStop && (
-          <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginBottom: '0.25rem' }}>
+          <div className="stop-time-neighborhood">
             {stop.time}
             {stop.neighborhood && (
               <span className="eyebrow">
@@ -187,22 +142,22 @@ function renderStopItem(
           </div>
         )}
         {!stop.time && stop.neighborhood && !stop.isSchoolStop && (
-          <div className="eyebrow">
+          <div className="eyebrow stop-neighborhood-only">
             {stop.neighborhood}
           </div>
         )}
         {config.showStopErrors && hasError && (
-          <div style={{ fontSize: '10px', color: '#ff6b6b', fontStyle: 'italic' }}>
+          <div className="stop-error-message">
             ✗ {stop.geocodeError || 'No coordinates'}
           </div>
         )}
         {config.showStopErrors && !hasError && !stop.isSchoolStop && (
-          <div style={{ fontSize: '10px', color: '#4caf50' }}>
+          <div className="stop-geocoded-message">
             ✓ Geocoded
           </div>
         )}
         {!hasCoordinates && !stop.isSchoolStop && !config.showStopErrors && (
-          <div style={{ fontSize: '10px', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
+          <div className="stop-no-coordinates-message">
             No coordinates
           </div>
         )}
@@ -221,6 +176,7 @@ export function RouteListBase({
   error,
   emptyMessage = 'No routes found'
 }: RouteListBaseProps) {
+  // --- STATE: UI Interaction ---
   const [expandedRoutes, setExpandedRoutes] = useState<Set<string>>(new Set());
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['Morning', 'Afternoon', 'Other']));
 
@@ -351,8 +307,16 @@ export function RouteListBase({
   };
 
   const renderRoute = (route: Route) => {
+    /**
+     * isExpanded State (Route): True if the route stop list is currently open.
+     * Impact: Chevron direction and visibility of stop list.
+     */
     const isExpanded = expandedRoutes.has(route.id);
     const routeColor = config.getRouteColor?.(route) || route.color;
+    /**
+     * isRouteSelected State: True if this route is currently highlighted/selected (e.g., in School View).
+     * Impact: Border (1px transparent vs border-color-darker), background (var(--bg-tertiary)), box-shadow.
+     */
     const isRouteSelected = config.isRouteSelected?.(route) || false;
     const displayStops = getDisplayStops(route);
     // Count only non-school stops for the display count
@@ -361,14 +325,7 @@ export function RouteListBase({
     return (
       <div
         key={route.id}
-        style={{
-          border: isRouteSelected ? '1px solid transparent' : '1px solid var(--border-color-darker)',
-          borderRadius: '12px',
-          backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'transparent',
-          boxShadow: isRouteSelected ? '0 1px 3px var(--shadow-large)' : 'none',
-          overflow: 'hidden',
-          transition: 'background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
-        }}
+        className={`route-item ${isRouteSelected ? 'selected' : ''}`}
         onMouseDown={(e) => {
           if (config.showRouteSelection) {
             e.currentTarget.style.filter = 'brightness(0.9)';
@@ -425,9 +382,10 @@ export function RouteListBase({
                       width: '16px',
                       height: '16px',
                       borderRadius: '50%',
+                      // --- STYLES: Checkbox Background State ---
                       border: `1px solid ${isRouteSelected ? 'transparent' : 'var(--border-color-darker)'}`,
                       backgroundColor: isRouteSelected ? routeColor : 'transparent',
-                      boxShadow: isRouteSelected ? 'inset 0px 0px 1px rgba(255, 255, 255, .8)' : 'none',
+                      boxShadow: isRouteSelected ? 'none' : 'none',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -443,6 +401,7 @@ export function RouteListBase({
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ marginBottom: '0.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                   <span style={{
+                    // --- STYLES: Route Name State ---
                     color: isRouteSelected ? 'var(--text-primary)' : 'var(--text-tertiary)',
                     fontSize: '14px',
                     fontWeight: '600',
@@ -499,6 +458,7 @@ export function RouteListBase({
             style={{
               background: 'none',
               border: 'none',
+              // --- STYLES: Border color Divider State ---
               borderLeft: `1px solid var(${isRouteSelected ? '--border-color-divider-selected' : '--border-color-divider-unselected'})`,
               padding: '0.5rem 0.75rem',
               cursor: 'pointer',
@@ -510,19 +470,16 @@ export function RouteListBase({
             }}
             title={isExpanded ? 'Collapse' : 'Expand'}
           >
+            {/* --- STYLES: Chevron State --- */}
             <ChevronIcon direction={isExpanded ? 'up' : 'down'} size={10} />
           </button>
         </div>
 
-        {/* Expanded stops list */}
+        {/* --- STATE: EXPANDED STOPS LIST --- */}
+        {/* Only rendered when a route is manually expanded by the user */}
+        {/* --- STATE: Expanded stops visibility --- */}
         {isExpanded && (
-          <div style={{
-            borderTop: `1px solid var(${isRouteSelected ? '--border-color-divider-selected' : '--border-color-divider-unselected'})`,
-            backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'var(--bg-secondary)',
-            maxHeight: '400px',
-            overflowY: 'auto',
-            transition: 'background-color 0.3s ease, border-color 0.3s ease',
-          }}>
+          <div className="stop-list">
             {displayStops.map((stop, index) =>
               renderStopItem(stop, route, index, displayStops, config)
             )}
@@ -535,6 +492,9 @@ export function RouteListBase({
   const renderSection = (sectionName: string, sectionRoutes: Route[], color?: string) => {
     if (sectionRoutes.length === 0) return null;
 
+    /**
+     * isExpanded State (Section): True if the Morning/Afternoon section is open.
+     */
     const isExpanded = expandedSections.has(sectionName);
 
     return (
@@ -628,4 +588,3 @@ export function RouteListBase({
     </div>
   );
 }
-

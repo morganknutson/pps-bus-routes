@@ -13,7 +13,7 @@ export function WhoSection({ className, style }: { className?: string; style?: R
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const ContactCard = ({ contact }: { contact: Contact }) => (
-    <div style={{ 
+    <div style={{
       flex: '1 1 300px', // Allow wrapping
       minWidth: '250px',
       padding: '1.5rem',
@@ -22,19 +22,19 @@ export function WhoSection({ className, style }: { className?: string; style?: R
       backgroundColor: 'var(--bg-secondary)',
       marginBottom: '1rem'
     }}>
-      <div style={{ 
-        fontWeight: 'bold', 
-        fontSize: '1.1rem', 
-        color: 'var(--text-primary)', 
+      <div style={{
+        fontWeight: 'bold',
+        fontSize: '1.1rem',
+        color: 'var(--text-primary)',
         marginBottom: '0.25rem',
         fontFamily: 'var(--font-family-heading)'
       }}>
         {contact.name}
       </div>
-      <div style={{ 
-        color: 'var(--text-secondary)', 
-        fontSize: '0.9rem', 
-        marginBottom: '1rem', 
+      <div style={{
+        color: 'var(--text-secondary)',
+        fontSize: '0.9rem',
+        marginBottom: '1rem',
         minHeight: '2.7em',
         fontFamily: 'var(--font-family-body)'
       }}>
@@ -55,7 +55,7 @@ export function WhoSection({ className, style }: { className?: string; style?: R
         {contact.phone && (
           <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '0.25rem' }}>
             {/\d/.test(contact.phone) ? (
-              <a 
+              <a
                 href={`tel:${contact.phone.split(' x')[0].replace(/[^\d]/g, '')}`}
                 style={{ color: 'inherit', textDecoration: 'underline' }}
               >
@@ -154,9 +154,9 @@ export function WhoSection({ className, style }: { className?: string; style?: R
 
   return (
     <section className={className} style={{ marginBottom: '3rem', ...style }}>
-      <h3 style={{ 
-        fontSize: '18px', 
-        marginBottom: '1rem', 
+      <h3 style={{
+        fontSize: '18px',
+        marginBottom: '1rem',
         color: 'var(--text-primary)',
         fontFamily: 'var(--font-family-heading)',
         fontWeight: '600',
@@ -164,27 +164,27 @@ export function WhoSection({ className, style }: { className?: string; style?: R
       }}>
         Who made this?
       </h3>
-      <p style={{ 
-        lineHeight: '1.7', 
-        color: 'var(--text-secondary)', 
+      <p style={{
+        lineHeight: '1.4',
+        color: 'var(--text-secondary)',
         marginBottom: '1.5rem',
         fontSize: '15px',
         fontFamily: 'var(--font-family-body)'
       }}>
-        <strong>This platform was built by a father of two students</strong> in the Portland Public Schools District. He spent almost two weeks designing and building this system because the current method of delivering bus routes to parents and students is the opposite of user-friendly; in fact, it's practically hostile.
+        <strong>This platform was built by Morgan Knutson. He is a father of two students</strong> in the Portland Public Schools District. He spent a few weeks designing and building this system because the current method of delivering bus routes to parents and students is the opposite of user-friendly; in fact, it's a realtively hostile user experience.
       </p>
-      <p style={{ 
-        lineHeight: '1.7', 
-        color: 'var(--text-secondary)', 
+      <p style={{
+        lineHeight: '1.4',
+        color: 'var(--text-secondary)',
         marginBottom: '1.5rem',
         fontSize: '15px',
         fontFamily: 'var(--font-family-body)'
       }}>
-        Nobody should need to spend 30 minutes solving a puzzle of poorly displayed and poorly entered data just to find their closest bus stop. He also thinks it's a travesty that the technology in the PPS district is in such disrepair, and hopes for change.
+        Nobody should need to spend 30 minutes solving a puzzle of poorly displayed and poorly entered data just to find their closest bus stop.
       </p>
-      <p style={{ 
-        lineHeight: '1.7', 
-        color: 'var(--text-secondary)', 
+      <p style={{
+        lineHeight: '1.4',
+        color: 'var(--text-secondary)',
         marginBottom: '1.5rem',
         fontSize: '15px',
         fontFamily: 'var(--font-family-body)'

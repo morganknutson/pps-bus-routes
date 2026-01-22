@@ -21,9 +21,10 @@ export function DirectionToggle({
             position: 'relative',
             width: '100%',
             height: '40px',
-            backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(0, 0, 0, 0.05)',
+            backgroundColor: 'var(--bg-quaternary)',
             borderRadius: 'var(--radius-pill)',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            boxShadow: 'var(--edge-outer-tertiary), var(--inset-shadow-quaternary)',
         }}>
             <div style={{
                 position: 'absolute',
@@ -94,11 +95,11 @@ export function DirectionToggle({
                         ? directionFilter === 'Morning' ? '4px' : directionFilter === 'Afternoon' ? 'calc(33.333% + 4px)' : 'calc(66.666% + 4px)'
                         : directionFilter === 'Morning' ? '4px' : 'calc(50% + 4px)',
                     width: showBothOption ? 'calc(33.333% - 8px)' : 'calc(50% - 8px)',
-                    backgroundColor: 'var(--bg-tertiary)',
+                    backgroundColor: 'var(--bg-primary)',
                     borderRadius: 'var(--radius-pill)',
                     transition: 'left 0.3s ease',
                     zIndex: 1,
-                    boxShadow: 'var(--shadow-button)',
+                    boxShadow: 'var(--drop-shadow-tertiary)',
                 }}
             />
         </div >

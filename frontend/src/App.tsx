@@ -31,6 +31,7 @@ import { ServersPage } from './pages/ServersPage';
 import { ArchitecturePage } from './pages/ArchitecturePage';
 import { SyncDashboardPage } from './pages/SyncDashboardPage';
 import { DesignSystemPage } from './pages/DesignSystemPage';
+import LogoTestPage from './pages/LogoTestPage';
 import { School, Route as BusRoute } from './types';
 import { loadLocalRoutes } from './services/localRoutes';
 import { getSchoolTypes, getSchoolColor, createSchoolIcon } from './utils/schoolUtils';
@@ -486,7 +487,6 @@ function AdminApp() {
             <SchoolList
               schools={schools}
               selectedSchoolId={schoolId}
-              enableEditing={true}
               searchTerm={searchTerm}
               onSearchChange={setSearchTerm}
               schoolTypeFilters={schoolTypeFilters}
@@ -497,24 +497,6 @@ function AdminApp() {
                 } else {
                   setSelectedSchool(id);
                 }
-              }}
-              onAddSchool={async (newSchool) => {
-                try {
-                  const response = await fetch('/api/schools', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newSchool) });
-                  if (response.ok) {
-                    const data = await response.json();
-                    setSchools([...schools, data.school]);
-                  }
-                } catch (error) { console.error(error); }
-              }}
-              onUpdateSchool={async (schoolId, updates) => {
-                try {
-                  const response = await fetch(`/api/schools/${schoolId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updates) });
-                  if (response.ok) {
-                    const data = await response.json();
-                    setSchools(schools.map(s => s.id === schoolId ? { ...s, ...data.school } : s));
-                  }
-                } catch (error) { console.error(error); }
               }}
             />
           ) : activeTab === 'neighborhoods' ? (
@@ -637,6 +619,7 @@ function AppContent() {
         <Route path="/school-directory" element={<SchoolDirectory />} />
         <Route path="/neighborhood-directory" element={<NeighborhoodDirectory />} />
         <Route path="/design-system" element={<DesignSystemPage />} />
+        <Route path="/logo-test" element={<LogoTestPage />} />
 
         {/* Redirects for legacy routes */}
         <Route path="/schools-directory" element={<Navigate to="/school-directory" replace />} />

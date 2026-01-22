@@ -72,6 +72,8 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
     },
   };
 
+  // --- STATE: NO SCHOOL SELECTED ---
+  // This state is shown when the user hasn't chosen a school yet.
   if (!schoolId) {
     return (
       <div style={{
@@ -101,16 +103,28 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'var(--bg-secondary)' }}>
+      {/* --- STATE: SCHOOL SELECTED HEADER --- */}
+      {/* Shows the currently active school with a clear button */}
       {selectedSchool && (
-        <div style={{ padding: '0.5rem 1rem 1rem 1rem', borderBottom: '1px solid var(--border-color)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
+        <div style={{ padding: '0.5rem 1rem 1rem 1rem', borderBottom: '1px solid var(--border-color-darker)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
           <div style={{ position: 'relative' }}>
             <div
               style={{
-                width: '100%', padding: '0.75rem', paddingLeft: '1rem', paddingRight: '2.5rem',
-                borderRadius: '12px', fontSize: '14px', fontWeight: '600', height: '40px',
-                boxSizing: 'border-box', backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)',
-                transition: 'background-color 0.3s ease, color 0.3s ease', boxShadow: '0 1px 3px var(--shadow-large)',
-                display: 'flex', alignItems: 'center',
+                width: '100%',
+                padding: '0.75rem',
+                paddingLeft: '1rem',
+                paddingRight: '2.5rem',
+                borderRadius: '9999px',
+                fontSize: '12px',
+                fontWeight: '600',
+                height: '40px',
+                boxSizing: 'border-box',
+                backgroundColor: 'var(--bg-secondary)',
+                color: 'var(--text-primary)',
+                transition: 'background-color 0.3s ease, color 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                border: '1px solid var(--border-color-darker)',
               }}
             >
               {selectedSchool.name}
@@ -134,7 +148,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
         </div>
       )}
 
-      <div style={{ padding: '0.75rem 0.75rem 0.5rem 0.75rem', backgroundColor: 'var(--bg-route-list)', flexShrink: 0 }}>
+      <div style={{ padding: '0.75rem 1rem', backgroundColor: 'var(--bg-tertiary)', flexShrink: 0 }}>
         <DirectionToggle
           directionFilter={directionFilter}
           onDirectionChange={setDirectionFilter}
@@ -142,10 +156,12 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
         />
       </div>
 
-      <div style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--bg-route-list)' }}>
+      <div style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--bg-tertiary)' }}>
+        {/* --- STATE: NO ROUTES FOUND --- */}
+        {/* Shown when a school is selected but has no bus routes available */}
         {!isLoading && routes.length === 0 ? (
           <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: '1rem' }}>
-            <div style={{ backgroundColor: 'rgba(244, 67, 54, 0.1)', color: '#f44', fontSize: '14px', padding: '8px 20px', borderRadius: '999px', fontWeight: '700', textTransform: 'uppercase', border: '1px solid rgba(244, 67, 54, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ backgroundColor: 'var(--bg-primary)', color: '#f44', fontSize: '14px', padding: '8px 20px', borderRadius: '999px', fontWeight: '700', textTransform: 'uppercase', border: '1px solid rgba(244, 67, 54, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <i className="fas fa-exclamation-triangle" style={{ fontSize: '14px' }}></i>
               NO ROUTES
             </div>
@@ -154,6 +170,8 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
             </p>
           </div>
         ) : (
+          /* --- STATE: ROUTES LIST --- */
+          /* The default state showing the list of routes via RouteListBase */
           <RouteListBase
             routes={routes}
             config={config}

@@ -30,9 +30,10 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
           position: 'relative',
           width: '100%',
           height: '48px',
-          backgroundColor: isDarkMode ? 'var(--bg-primary)' : 'rgba(0, 0, 0, 0.05)',
+          backgroundColor: 'var(--bg-tertiary)',
           borderRadius: 'var(--radius-pill)',
           overflow: 'hidden',
+          boxShadow: 'var(--edge-outer-secondary), var(--inset-shadow-secondary)',
         }}
       >
         {/* Labels positioned on top */}
@@ -106,11 +107,11 @@ export function TabBar({ activeTab, onTabChange }: TabBarProps) {
             bottom: '4px',
             left: isSchoolsActive ? '4px' : 'calc(50% + 4px)',
             width: 'calc(50% - 8px)',
-            backgroundColor: 'var(--bg-tertiary)',
+            backgroundColor: 'var(--bg-primary)',
             borderRadius: 'var(--radius-pill)',
             transition: 'left 0.3s ease',
             zIndex: 1,
-            boxShadow: 'var(--shadow-button)',
+            boxShadow: 'var(--drop-shadow-tertiary), var(--edge-inner-primary)',
           }}
         />
       </div>

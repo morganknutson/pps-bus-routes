@@ -416,7 +416,20 @@ export function HomePage() {
       <div style={{ position: 'absolute', top: '1rem', right: '24px', zIndex: 100 }}><DarkModeToggle /></div>
       <SEO title="Portland Public School Bus Maps" description="Interactive bus route maps for Portland Public Schools." />
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', width: '100%', padding: '2rem', boxSizing: 'border-box' }}>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        width: '100%',
+        padding: '2rem',
+        boxSizing: 'border-box',
+        backgroundImage: isDarkMode ? 'url(/bg-dark.png)' : 'url(/bg-light.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
         <div style={{ width: '100%', maxWidth: '380px' }}>
           <div style={{ margin: '0 0 1rem 0', width: '100%' }}>
             <svg width="153" height="52" viewBox="0 0 153 52" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxHeight: '60px', display: 'block', width: '100%', height: 'auto' }}>
@@ -449,6 +462,7 @@ export function HomePage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '.8rem',
+                /* CSS: Address Filled State - Field Container */
                 padding: isMobile ? '0 1.5rem' : '0.75rem 1rem 0.75rem 1.25rem',
                 backgroundColor: 'rgba(0,0,0, .01)',
                 borderRadius: '9999px', // Pill shape for selected state
@@ -459,7 +473,7 @@ export function HomePage() {
                 <i className="fas fa-house" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px' }}></i>
                 <div style={{
                   flex: 1,
-                  /* Larger text on mobile for better readability */
+                  /* CSS: Address Filled State - Text Style */
                   fontSize: isMobile ? '16px' : '14px',
                   color: 'var(--text-primary)',
                   whiteSpace: 'nowrap',
@@ -481,15 +495,16 @@ export function HomePage() {
                   onKeyDown={handleAddressKeyDown}
                   onFocus={() => { if (addressSuggestions.length > 0) setShowAddressSuggestions(true); }}
                   placeholder="Enter your address..."
+                  className="home-input"
                   style={{
                     width: '100%',
-                    /* Mobile uses extra padding-left so text doesn't hit the left edge, right padding for location button */
-                    padding: isMobile ? '0 3rem 0 1.25rem' : '0.75rem 2.5rem 0.75rem 1.5rem',
+                    /* CSS: Address Empty State - Input Field */
+                    padding: isMobile ? '0 3rem 0 1.5rem' : '0.75rem 2.5rem 0.75rem 1.5rem',
                     border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.15)',
-                    borderRadius: '9999px', // Unified pill shape
+                    borderRadius: '9999px',
                     fontSize: isMobile ? '16px' : '14px',
                     backgroundColor: 'rgba(0,0,0, .06)',
-                    color: 'var(--text-primary)',
+                    color: isDarkMode ? '#ffffff' : '#000000',
                     boxSizing: 'border-box',
                     height: isMobile ? '56px' : '46px',
                     outline: 'none'
@@ -525,9 +540,38 @@ export function HomePage() {
                 </div>
                 {/* Autocomplete Suggestions Dropdown */}
                 {showAddressSuggestions && addressSuggestions.length > 0 && (
-                  <div ref={addressSuggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'rgba(255,255,255, .2)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>
+                  /* CSS: Address Dropdown Container                                                                                                               Hover State                                                                                                               */
+                  <div
+                    ref={addressSuggestionsRef}
+                    style={{
+                      position: 'absolute',
+                      top: '100%', left: 0,
+                      right: 0,
+                      marginTop: '4px',
+                      backgroundColor: isDarkMode ? 'rgba(10,10,10, 1)' : 'rgba(150,150,150, 1)',
+                      border: isDarkMode ? '1px solid rgba(10,10,10, 1)' : 'none !important',
+                      borderRadius: '16px',
+                      boxShadow: isDarkMode ? '0 10px 38px rgba(0,0,0, .8)' : '0 10px 38px rgba(0,0,0, .4)',
+                      maxHeight: '200px',
+                      overflowY: 'auto',
+                      zIndex: 1000
+                    }}>
                     {addressSuggestions.map((suggestion, index) => (
-                      <div key={index} onClick={() => handleSelectAddress(suggestion)} onMouseEnter={() => setHighlightedAddressIndex(index)} style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < addressSuggestions.length - 1 ? '1px solid var(--border-color)' : 'none', fontSize: isMobile ? '16px' : '14px', color: 'var(--text-primary)', backgroundColor: highlightedAddressIndex === index ? (isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(150,150,150, 0.2)') : 'var(--bg-primary)' }}>{suggestion.displayName}</div>
+                      <div
+                        key={index}
+                        onClick={() => handleSelectAddress(suggestion)}
+                        onMouseEnter={() => setHighlightedAddressIndex(index)}
+                        style={{
+                          padding: '0.75rem',
+                          cursor: 'pointer',
+                          borderBottom: index < addressSuggestions.length - 1 ? (isDarkMode ? '1px solid rgba(10,10,10, .5)' : '1px solid rgba(236, 236, 236, 1)') : 'none',
+                          fontSize: isMobile ? '16px' : '14px',
+                          color: highlightedAddressIndex === index ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                          /* CSS: Address Dropdown Item & Hover State */
+                          backgroundColor: highlightedAddressIndex === index ? (isDarkMode ? 'rgba(255,255,255, .1)' : '#f8f8f8ec') : 'var(--bg-primary)'
+                        }}>
+                        {suggestion.displayName}
+                      </div>
                     ))}
                   </div>
                 )}
@@ -543,6 +587,7 @@ export function HomePage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '.75rem',
+                /* CSS: School Filled State - Field Container */
                 padding: isMobile ? '0 1.5rem' : '0.75rem 1rem 0.75rem 1.3rem',
                 backgroundColor: 'rgba(0,0,0, .01)',
                 borderRadius: '9999px', // Pill shape for selected state
@@ -553,6 +598,7 @@ export function HomePage() {
                 <i className="fas fa-graduation-cap" style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px' }}></i>
                 <div style={{
                   flex: 1,
+                  /* CSS: School Filled State - Text Style */
                   fontSize: isMobile ? '16px' : '14px',
                   color: 'var(--text-primary)',
                   whiteSpace: 'nowrap',
@@ -575,28 +621,60 @@ export function HomePage() {
                   onFocus={() => { setIsSchoolFocused(true); if (selectedAddress && selectedAddress.coordinates) { const sorted = schools.filter(school => school.coordinates).map(school => ({ school, distance: calculateDistance(selectedAddress.coordinates, school.coordinates!) })).sort((a, b) => a.distance - b.distance).map(item => item.school); setSchoolSuggestions(sorted); setShowSchoolSuggestions(true); } else if (schoolSuggestions.length > 0) { setShowSchoolSuggestions(true); } }}
                   onBlur={() => setTimeout(() => setIsSchoolFocused(false), 200)}
                   placeholder="Enter your school..."
+                  className="home-input"
                   style={{
                     width: '100%',
-                    padding: isMobile ? '0 0.5rem 0 1.25rem' : '0.75rem 0.75rem 0.75rem 1.5rem',
+                    /* CSS: School Empty State - Input Field */
+                    padding: isMobile ? '0 0.5rem 0 1.5rem' : '0.75rem 0.75rem 0.75rem 1.5rem',
                     border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.15)',
                     borderRadius: '9999px', // Unified pill shape
                     fontSize: isMobile ? '16px' : '14px',
                     backgroundColor: 'rgba(0,0,0, .06)',
-                    color: 'var(--text-primary)',
+                    color: isDarkMode ? '#ffffff' : '#000000',
                     boxSizing: 'border-box',
                     height: isMobile ? '56px' : '46px',
                     outline: 'none'
                   }}
                 />
                 {showSchoolSuggestions && schoolSuggestions.length > 0 && (
-                  <div ref={schoolSuggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>
+                  /* CSS: School Dropdown Container */
+                  <div
+                    ref={schoolSuggestionsRef}
+                    style={{
+                      position: 'absolute',
+                      top: '100%', left: 0,
+                      right: 0,
+                      marginTop: '4px',
+                      backgroundColor: isDarkMode ? 'rgba(10,10,10, 1)' : 'rgba(150,150,150, 1)',
+                      border: isDarkMode ? '1px solid rgba(10,10,10, 1)' : 'none !important',
+                      borderRadius: '16px',
+                      boxShadow: isDarkMode ? '0 10px 38px rgba(0,0,0, .8)' : '0 10px 38px rgba(0,0,0, .4)',
+                      maxHeight: '200px',
+                      overflowY: 'auto',
+                      zIndex: 1000
+                    }}>
                     {schoolSuggestions.map((school, index) => {
                       const distance = selectedAddress && selectedAddress.coordinates && school.coordinates ? calculateDistance(selectedAddress.coordinates, school.coordinates) : null;
                       const isAssigned = assignedSchools && Object.values(assignedSchools).some(s => s && s.name && s.name.toLowerCase() === school.name.toLowerCase());
                       const schoolTypes = getSchoolTypes(school.name);
                       const schoolColor = getSchoolColor(schoolTypes);
                       return (
-                        <div key={school.id} onClick={() => handleSelectSchool(school)} onMouseEnter={() => setHighlightedSchoolIndex(index)} style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < schoolSuggestions.length - 1 ? `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}` : 'none', fontSize: isMobile ? '16px' : '14px', color: 'var(--text-primary)', backgroundColor: highlightedSchoolIndex === index ? (isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)') : 'var(--bg-primary)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        /* CSS: School Dropdown Item & Hover State */
+                        <div
+                          key={school.id}
+                          onClick={() => handleSelectSchool(school)}
+                          onMouseEnter={() => setHighlightedSchoolIndex(index)}
+                          style={{
+                            padding: '0.75rem',
+                            cursor: 'pointer',
+                            borderBottom: index < schoolSuggestions.length - 1 ? (isDarkMode ? '1px solid rgba(10,10,10, .5)' : '1px solid rgba(236, 236, 236, 1)') : 'none',
+                            fontSize: isMobile ? '16px' : '14px',
+                            color: highlightedSchoolIndex === index ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                            backgroundColor: highlightedSchoolIndex === index ? (isDarkMode ? 'rgba(255,255,255, .1)' : '#f8f8f8ec') : 'var(--bg-primary)',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
+                          }}>
                           <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             {isAssigned && <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: schoolColor, border: '1.5px solid white', boxShadow: '0 1px 2px rgba(0,0,0,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="fas fa-graduation-cap" style={{ color: 'white', fontSize: '10px' }}></i></div>}
                             {getSchoolDisplayName(school.name)}
@@ -615,7 +693,7 @@ export function HomePage() {
           {error && <div style={{ padding: '0.75rem', marginBottom: '1rem', backgroundColor: '#fee', color: '#c33', borderRadius: '12px', fontSize: '14px' }}>{error}</div>}
 
           {/* Main Action Button - Find My Stop */}
-          <button onClick={handleFindStop} disabled={!selectedAddress || !selectedSchoolLocal || isFinding} style={{ width: '100%', maxWidth: '380px', margin: '0 auto', padding: '1rem 0', fontSize: '16px', fontWeight: '600', color: (!selectedAddress || !selectedSchoolLocal || isFinding) ? textColorSecondary : (isDarkMode ? '#3A3A3A' : 'white'), backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? (isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)') : (isDarkMode ? 'white' : '#333333'), border: (!selectedAddress || !selectedSchoolLocal || isFinding) ? `1px solid ${borderColor}` : `1px solid ${isDarkMode ? 'white' : '#333333'}`, borderRadius: '9999px', cursor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', boxSizing: 'border-box' }}>
+          <button onClick={handleFindStop} disabled={!selectedAddress || !selectedSchoolLocal || isFinding} style={{ width: '100%', maxWidth: '380px', margin: '0 auto', padding: '1rem 0', fontSize: '16px', fontWeight: '500', color: (!selectedAddress || !selectedSchoolLocal || isFinding) ? textColorSecondary : (isDarkMode ? '#3A3A3A' : 'white'), backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? (isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)') : (isDarkMode ? 'white' : '#333333'), border: (!selectedAddress || !selectedSchoolLocal || isFinding) ? `1px solid ${borderColor}` : `1px solid ${isDarkMode ? 'white' : '#333333'}`, borderRadius: '9999px', cursor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', boxSizing: 'border-box' }}>
             {isFinding ? <>{/* Progress Bar while finding */}<div style={{ width: '60px', height: '4px', marginRight: '0.5rem' }}><ProgressBar height={4} color={isDarkMode ? '#3A3A3A' : 'white'} containerStyle={{ margin: 0 }} /></div>Finding...</> : <><MapPinIcon filled width={12} height={15} style={{ flexShrink: 0 }} />Find My Stop</>}
           </button>
 
@@ -636,7 +714,8 @@ export function HomePage() {
             {faqItems.map((item, index) => (
               <div key={index}>
                 <h3 style={{ color: textColor, fontSize: '18px', fontWeight: '600', marginBottom: '1rem', lineHeight: '1.4' }}>{item.question}</h3>
-                <p style={{ color: textColorSecondary, fontSize: '15px', lineHeight: '1.7', margin: 0 }}>{item.answer}</p>
+                {/* Line-height for the answers */}
+                <p style={{ color: textColorSecondary, fontSize: '15px', lineHeight: '1.4', margin: 0 }}>{item.answer}</p>
               </div>
             ))}
           </div>
