@@ -47,7 +47,7 @@ export function AboutPage() {
       <main style={{
         flex: 1,
         width: '100%',
-        maxWidth: '1000px', // Increased max-width for better grid layout
+        maxWidth: '800px',
         margin: '0 auto',
         padding: '4rem 2rem',
         boxSizing: 'border-box',
@@ -74,7 +74,7 @@ export function AboutPage() {
             What
           </h3>
           <p style={{ 
-            lineHeight: '1.7', 
+            lineHeight: '1.4', 
             color: 'var(--text-secondary)', 
             marginBottom: '1.5rem',
             fontSize: '15px',
@@ -96,7 +96,7 @@ export function AboutPage() {
             Why
           </h3>
           <p style={{ 
-            lineHeight: '1.7', 
+            lineHeight: '1.4', 
             color: 'var(--text-secondary)', 
             marginBottom: '1.5rem',
             fontSize: '15px',
@@ -118,7 +118,7 @@ export function AboutPage() {
             How
           </h3>
           <p style={{ 
-            lineHeight: '1.7', 
+            lineHeight: '1.4', 
             color: 'var(--text-secondary)', 
             marginBottom: '1.5rem',
             fontSize: '15px',

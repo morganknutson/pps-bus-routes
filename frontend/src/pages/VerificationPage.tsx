@@ -1427,7 +1427,7 @@ export function VerificationPage() {
                 padding: '0.5rem 1rem',
                 backgroundColor: 'var(--bg-secondary)',
                 borderRadius: '999px',
-                border: '1px solid var(--border-color)',
+                border: '1px solid var(--border-color-primary)',
               }}>
                 <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Weekly Sync</span>
                 <button
@@ -1439,7 +1439,7 @@ export function VerificationPage() {
                     height: '24px',
                     borderRadius: '12px',
                     border: 'none',
-                    backgroundColor: schedulerStatus.enabled ? '#22c55e' : 'var(--border-color)',
+                    backgroundColor: schedulerStatus.enabled ? '#22c55e' : 'var(--border-color-primary)',
                     cursor: togglingScheduler ? 'wait' : 'pointer',
                     transition: 'background-color 0.2s',
                     padding: 0,
@@ -2003,7 +2003,7 @@ export function VerificationPage() {
                             padding: '0.75rem',
                             backgroundColor: 'var(--bg-primary)',
                             borderRadius: '6px',
-                            border: '1px solid var(--border-color)',
+                            border: '1px solid var(--border-color-primary)',
                           }}>
                             <div style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '0.25rem' }}>
                               {result.schoolName}
@@ -3070,7 +3070,7 @@ export function VerificationPage() {
                     borderRadius: '8px',
                     boxShadow: 'var(--shadow-large)',
                     padding: '1rem',
-                    border: '1px solid var(--border-color)',
+                    border: '1px solid var(--border-color-primary)',
                   }}
                 >
                   {/* School Header */}
@@ -3107,7 +3107,7 @@ export function VerificationPage() {
                       padding: '0.75rem',
                       backgroundColor: 'var(--bg-primary)',
                       borderRadius: '6px',
-                      border: '1px solid var(--border-color)',
+                      border: '1px solid var(--border-color-primary)',
                     }}>
                       <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                         <span style={{ fontWeight: '600' }}>Local PDFs</span>{' '}
@@ -3134,7 +3134,7 @@ export function VerificationPage() {
                       padding: '0.75rem',
                       backgroundColor: 'var(--bg-primary)',
                       borderRadius: '6px',
-                      border: '1px solid var(--border-color)',
+                      border: '1px solid var(--border-color-primary)',
                     }}>
                       <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                         <span style={{ fontWeight: '600' }}>Drive PDFs</span>{' '}
@@ -3168,7 +3168,7 @@ export function VerificationPage() {
                         padding: '0.75rem',
                         backgroundColor: 'var(--bg-primary)',
                         borderRadius: '6px',
-                        border: '1px solid var(--border-color)',
+                        border: '1px solid var(--border-color-primary)',
                       }}>
                         <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
                           <span style={{ fontWeight: '600' }}>Match Status</span>{' '}
@@ -3198,7 +3198,7 @@ export function VerificationPage() {
                       padding: '0.75rem',
                       backgroundColor: 'var(--bg-primary)',
                       borderRadius: '6px',
-                      border: '1px solid var(--border-color)',
+                      border: '1px solid var(--border-color-primary)',
                     }}>
                       <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                         <span style={{ fontWeight: '600' }}>Processed</span>{' '}
@@ -3300,7 +3300,7 @@ export function VerificationPage() {
 
                   {/* Expanded Content */}
                   {isExpanded && (
-                    <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
+                    <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color-primary)' }}>
                       {/* Additional Timestamps */}
                       {(pdfFetchInfo[school.schoolId]?.lastFetchTime || syncStatus[school.schoolId]?.lastChecked) && (
                         <div style={{

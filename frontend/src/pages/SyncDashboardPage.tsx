@@ -190,7 +190,7 @@ export function SyncDashboardPage() {
                 ) : (
                     <>
                         {/* Scheduler Status */}
-                        <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '12px', padding: '1.5rem', marginBottom: '1.5rem', border: '1px solid var(--border-color)' }}>
+                        <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '12px', padding: '1.5rem', marginBottom: '1.5rem', border: '1px solid var(--border-color-primary)' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                                 <h2 style={{ fontSize: '16px', fontWeight: '600', margin: 0, color: 'var(--text-primary)' }}>
                                     Scheduler
@@ -251,7 +251,7 @@ export function SyncDashboardPage() {
                         </div>
 
                         {/* Last Sync Results */}
-                        <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '12px', padding: '1.5rem', marginBottom: '1.5rem', border: '1px solid var(--border-color)' }}>
+                        <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '12px', padding: '1.5rem', marginBottom: '1.5rem', border: '1px solid var(--border-color-primary)' }}>
                             <h2 style={{ fontSize: '16px', fontWeight: '600', margin: '0 0 1rem 0', color: 'var(--text-primary)' }}>
                                 Last Sync
                             </h2>
@@ -330,7 +330,7 @@ export function SyncDashboardPage() {
                         </div>
 
                         {/* Email Test */}
-                        <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '12px', padding: '1.5rem', border: '1px solid var(--border-color)' }}>
+                        <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '12px', padding: '1.5rem', border: '1px solid var(--border-color-primary)' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <div>
                                     <h2 style={{ fontSize: '16px', fontWeight: '600', margin: '0 0 0.25rem 0', color: 'var(--text-primary)' }}>
@@ -346,7 +346,7 @@ export function SyncDashboardPage() {
                                         padding: '0.5rem 1rem',
                                         backgroundColor: 'var(--bg-secondary)',
                                         color: 'var(--text-primary)',
-                                        border: '1px solid var(--border-color)',
+                                        border: '1px solid var(--border-color-primary)',
                                         borderRadius: '6px',
                                         cursor: 'pointer',
                                         fontSize: '13px',

@@ -44,8 +44,9 @@
 
   --bg-primary: #ffffff;
   --bg-secondary: #f8f8f8;
-  --bg-tertiary: #e5e5e5;
+  --bg-tertiary: #ebebeb;
   --bg-quaternary: #dcdcdc;
+  --bg-quinary: #dbdbdb;
 
   --bg-route-list: #f0f0f0;
 
@@ -55,11 +56,11 @@
 
   --edge-outer-primary: 0px 0px 2px 0px rgba(255, 255, 255, 1);
   --edge-outer-secondary: 0px 0px 2px 0px rgba(255, 255, 255, 1);
-  --edge-outer-tertiary: 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
-  --edge-outer-quaternary: 0px 0px 2px 0px rgba(255, 255, 255, 0.15);
+  --edge-outer-tertiary: 0px 0px 2px 0px rgba(255, 255, 255, 0.901);
+  --edge-outer-quaternary: 0px 0px 2px 0px rgba(255, 255, 255, 0.749);
   --edge-outer-quinary: 0px 0px 2px 0px rgba(255, 255, 255, 0.2);
 
-  --edge-inner-primary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.01);
+  --edge-inner-primary: inset 0px 0px 0px 1px rgba(255, 255, 255, 1);
   --edge-inner-secondary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.05);
   --edge-inner-tertiary: inset 0px 0px 1px 0px rgba(255, 255, 255, 1);
   --edge-inner-quaternary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.15);
@@ -77,18 +78,29 @@
   --drop-shadow-quaternary: 0 1px 3px 0px rgba(0, 0, 0, 0.25);
   --drop-shadow-quinary: 0 1px 3px 0px rgba(0, 0, 0, 0.3);
 
+  --drop-shadow-floating: 0 10px 38px rgba(0,0,0, .2);
 
   --faux-border: 0 0px 0px 1px rgba(0, 0, 0, 0.1);
 
-  --border-color: #e8e8e8;
-  --border-color-darker: #d0d0d0;
-  --border-color-darkest: #b0b0b0;
+  --border-color-primary: #e8e8e8;
+  --border-color-secondary: #dfdfdf;
+  --border-color-tertiary: #d6d6d6;
+  --border-color-quaternary: #b0b0b0;
+  --border-color-quinary: #999999;
+
+
+  --border-color-divider-selected: rgba(0, 0, 0, 0.04);
+  --border-color-divider-unselected: rgba(0, 0, 0, 0.05);
+
 
   --shadow: rgba(0, 0, 0, 0.05);
   --shadow-hover: rgba(0, 0, 0, 0.15);
   --shadow-large: rgba(0, 0, 0, 0.2);
 
   --active-marker-lens-bg: rgba(0, 0, 0, 0.15);
+
+  /* School Type Colors */
+  --color-k8: #9C27B0;
 
 }
 
@@ -102,7 +114,8 @@
   --bg-primary: #3a3a3a;
   --bg-secondary: #2d2d2d;
   --bg-tertiary: #212121;
-  --bg-quaternary: #000000;
+  --bg-quaternary: #1c1c1c;
+  --bg-quinary: #1d1d1d;
 
   --bg-route-list: #2d2d2d;
 
@@ -113,10 +126,10 @@
   --edge-outer-primary: 0px 0px 2px 0px rgba(255, 255, 255, 0.01);
   --edge-outer-secondary: 0px 0px 2px 0px rgba(255, 255, 255, 0.08);
   --edge-outer-tertiary: 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
-  --edge-outer-quaternary: 0px 0px 2px 0px rgba(255, 255, 255, 0.15);
+  --edge-outer-quaternary: 0px 0px 2px 0px rgba(255, 255, 255, 0.049);
   --edge-outer-quinary: 0px 0px 2px 0px rgba(255, 255, 255, 0.2);
 
-  --edge-inner-primary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.01);
+  --edge-inner-primary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.157);
   --edge-inner-secondary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.05);
   --edge-inner-tertiary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
   --edge-inner-quaternary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.15);
@@ -134,11 +147,16 @@
   --drop-shadow-quaternary: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
   --drop-shadow-quinary: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
 
+  --drop-shadow-floating: 0 10px 38px rgba(0,0,0, .8);
+
   --faux-border: 0 0px 0px 1px rgba(255, 255, 255, 0.1);
 
-  --border-color: #404040b5;
-  --border-color-darker: #242424;
-  --border-color-darkest: #2a2a2a;
+  --border-color-primary: #404040;
+  --border-color-secondary: #333333;
+  --border-color-tertiary: #242424;
+  --border-color-quaternary: #2a2a2a;
+  --border-color-quinary: #242424;
+
   --border-color-divider-selected: #2a2a2a;
   --border-color-divider-unselected: #393939;
 
@@ -156,6 +174,9 @@
   --btn-primary-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.25);
   --modal-bg: #1c1c1c;
   --modal-backdrop: rgba(0, 0, 0, 0.79);
+
+  /* School Type Colors - Brightened for Dark Mode */
+  --color-k8: #d557eb;
 }
 
 .inset-primary {
@@ -418,7 +439,15 @@ input:-webkit-autofill:active {
   color: #ffffff;
 }
 
-/* School List Components */
+
+
+
+
+/* 
+
+School List  
+
+*/
 .school-list-container {
   display: flex;
   flex-direction: column;
@@ -428,7 +457,7 @@ input:-webkit-autofill:active {
 
 .school-search-section {
   padding: 0.5rem 1rem 1rem 1rem;
-  border-bottom: 1px solid var(--border-color-darker);
+  border-bottom: 1px solid var(--border-color-darkest);
   flex-shrink: 0;
   transition: border-color 0.3s ease;
   background-color: var(--bg-secondary);
@@ -443,11 +472,25 @@ input:-webkit-autofill:active {
 .school-search-input-wrapper {
   position: relative;
   flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.school-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .school-search-input {
   width: 100%;
-  padding: 0.85rem 1rem;
+  padding: 0.85rem 1rem 0.85rem 2.25rem;
   border-radius: 9999px;
   font-size: 12px;
   height: 40px;
@@ -458,6 +501,15 @@ input:-webkit-autofill:active {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, padding-right 0.2s ease;
   border: none;
   ;
+}
+
+.school-search-input::placeholder {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.school-search-input:focus::placeholder {
+  color: var(--text-tertiary);
 }
 
 .school-search-input:focus {
@@ -475,7 +527,7 @@ input:-webkit-autofill:active {
 
 .school-search-clear {
   position: absolute;
-  right: 8px;
+  right: 9px;
   top: 50%;
   transform: translateY(-50%);
   width: 24px;
@@ -483,10 +535,9 @@ input:-webkit-autofill:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
   line-height: 1;
   background-color: transparent;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   border: none;
   border-radius: 9999px;
   cursor: pointer;
@@ -496,39 +547,59 @@ input:-webkit-autofill:active {
 }
 
 .school-search-clear:hover {
-  background-color: var(--bg-secondary);
   color: var(--text-primary);
 }
+
+.school-search-clear path{
+  fill: var(--text-primary);
+}
+
+
+/* 
+
+School List Container
+
+*/
 
 .school-list-scroll {
   flex: 1;
   overflow: auto;
-  background-color: var(--bg-tertiary);
+  background-color: var(--bg-quinary);
+  border-top: 1px solid var(--border-color-secondary);
 }
 
 .school-no-results {
   padding: 2rem;
   text-align: center;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
 }
 
+
+/* 
+
+School List Items
+
+*/
+
 .school-list-item {
-  border: 1px solid var(--border-color);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-  background-color: var(--bg-secondary);
+  transition: background-color 0.3s ease;
+  background-color: var(--bg-tertiary);
   margin: 1rem;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: var(--outset-tertiary), var(--edge-inner-tertiary);
+  box-shadow: var(--drop-shadow-tertiary), var(--edge-inner-tertiary);
+
 }
 
 .school-list-item:hover {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-secondary);
+  box-shadow: var(--drop-shadow-quaternary), var(--edge-inner-tertiary);
+
 }
 
 .school-list-item.selected {
   background-color: var(--bg-primary);
-  box-shadow: var(--outset-tertiary);
+  box-shadow: var(--drop-shadow-quinary), var(--edge-inner-primary);
 }
 
 /* Route and Stop List Items */
@@ -568,12 +639,15 @@ input:-webkit-autofill:active {
   border-top: 1px solid var(--border-color-divider-unselected);
 }
 
-.route-item.selected .stop-list {}
+.route-item.selected .stop-list {
+  border-top: 1px solid var(--border-color-divider-selected);
+
+}
 
 .route-item:not(.selected):active .stop-list {}
 
 .stop-item {
-  padding: 0.75rem;
+  padding: 0.75rem 0.75rem 0.75rem .55rem;
   cursor: default;
   background-color: transparent;
   transition: background-color 0.15s;

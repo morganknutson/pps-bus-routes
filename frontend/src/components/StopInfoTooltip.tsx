@@ -63,7 +63,7 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
         color: 'var(--text-primary)',
         fontSize: '11px',
         fontWeight: 'bold',
-        border: '1px solid var(--border-color-darker)',
+        border: '1px solid var(--border-color-tertiary)',
       }}>
         {number}
       </div>
@@ -123,7 +123,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
       borderRadius: isMobile ? '0' : 'var(--radius-floating)',
       overflow: 'hidden',
       boxShadow: isMobile ? 'none' : 'var(--shadow-floating)',
-      border: isMobile ? 'none' : '1px solid var(--border-color-darker)',
+      border: isMobile ? 'none' : 'none',
       pointerEvents: 'auto',
       fontFamily: "'Inter', sans-serif"
     }}>
@@ -296,7 +296,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         <div style={{
           padding: '24px 34px',
           backgroundColor: 'rgba(78, 205, 196, 0.05)',
-          borderTop: '1px solid var(--border-color-darker)',
+          borderTop: '1px solid var(--border-color-tertiary)',
           display: 'flex',
           flexDirection: 'column',
           gap: '12px'

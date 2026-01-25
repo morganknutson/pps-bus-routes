@@ -246,11 +246,15 @@ export function MapView({
       (isMiddle && showMiddleBoundaries) ||
       (isElem && showElementaryBoundaries);
 
-    // Apply assigned schools filter if home address is set
+    // Apply assigned schools filter if home address is set (handling arrays)
     if (isVisible && homeAddress && assignedSchools) {
       const assignedNames = new Set<string>();
-      Object.values(assignedSchools).forEach(school => {
-        if (school && school.name) assignedNames.add(school.name.toLowerCase());
+      Object.values(assignedSchools).forEach(schoolArray => {
+        if (Array.isArray(schoolArray)) {
+          schoolArray.forEach(school => {
+            if (school && school.name) assignedNames.add(school.name.toLowerCase());
+          });
+        }
       });
       if (assignedNames.size > 0 && feature.properties?.name) {
         if (!assignedNames.has(feature.properties.name.toLowerCase())) {

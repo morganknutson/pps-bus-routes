@@ -13,7 +13,7 @@ export function ExpandableExample({ title, children, defaultExpanded = false }: 
   return (
     <div style={{
       marginTop: '15px',
-      border: '1px solid var(--border-color)',
+      border: '1px solid var(--border-color-primary)',
       borderRadius: '8px',
       overflow: 'hidden',
       transition: 'border-color 0.3s ease',
@@ -25,7 +25,7 @@ export function ExpandableExample({ title, children, defaultExpanded = false }: 
           padding: '12px 16px',
           backgroundColor: 'var(--bg-secondary)',
           border: 'none',
-          borderBottom: isExpanded ? '1px solid var(--border-color)' : 'none',
+          borderBottom: isExpanded ? '1px solid var(--border-color-primary)' : 'none',
           color: 'var(--text-primary)',
           fontSize: '14px',
           fontWeight: '600',

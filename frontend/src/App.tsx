@@ -40,6 +40,7 @@ import { createDefaultMarkerIcon, createHomeIcon } from './utils/fontAwesomeIcon
 import { handleMapLinkClick } from './utils/mapLinks';
 import { SchoolTypeFilters } from './components/SchoolTypeFilter';
 import { ProgressBar } from './components/ProgressBar';
+import LogoSpinner from './components/LogoSpinner';
 import { AdminPasswordProtection } from './components/AdminPasswordProtection';
 import { SchoolClosestModal } from './components/SchoolClosestModal';
 import { useIsMobile } from './hooks/useMediaQuery';
@@ -155,7 +156,7 @@ export function ExplorerApp() {
         (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase()));
       if (!matchesSearch) return false;
       const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-      const isHybrid = schoolTypes.includes('Hybrid');
+      const isHybrid = schoolTypes.includes('K-8');
       const hasNoRoutes = school.routeCount === 0;
 
       // 1. Check School Type Filter first (PRIORITY)
@@ -304,10 +305,10 @@ export function ExplorerApp() {
             {/* Overlay for mobile when no school is selected on routes tab */}
             {isMobile && activeTab === 'routes' && !schoolId && (
               <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1rem', textAlign: 'center', width: 'calc(100% - 2rem)', maxWidth: '320px' }}>
-                <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '16px', padding: '2rem 1.5rem', boxShadow: '0 4px 16px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem', width: '100%', border: '1px solid var(--border-color)' }}>
+                <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '16px', padding: '2rem 1.5rem', boxShadow: '0 4px 16px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem', width: '100%', border: '1px solid var(--border-color-primary)' }}>
                   <i className="fas fa-graduation-cap" style={{ fontSize: '48px', color: 'var(--text-tertiary)', opacity: 0.6 }} />
                   <p style={{ fontSize: '16px', fontWeight: '500', margin: 0, color: 'var(--text-secondary)', lineHeight: '1.4' }}>Please select a school to view routes</p>
-                  <button onClick={() => { setSelectedSchool(null); if (isMobile) setSidebarOpen(true); }} style={{ padding: '0.875rem 1.5rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: '9999px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', width: '100%' }}>View Schools</button>
+                  <button onClick={() => { setSelectedSchool(null); if (isMobile) setSidebarOpen(true); }} style={{ padding: '0.875rem 1.5rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-color-primary)', borderRadius: '9999px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', width: '100%' }}>View Schools</button>
                 </div>
               </div>
             )}
@@ -315,15 +316,16 @@ export function ExplorerApp() {
             {/* Loading Indicator for Schools */}
             {isLoading && schools.length === 0 && (
               <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: '0 4px 12px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: '40px', height: '40px', border: '3px solid var(--border-color)', borderTopColor: 'var(--text-primary)', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+                <div style={{ width: '40px', height: '40px', border: '3px solid var(--border-color-primary)', borderTopColor: 'var(--text-primary)', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
                 <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Loading schools...</div>
               </div>
             )}
 
             {/* Loading Indicator for Routes */}
             {isLoading && activeTab === 'routes' && schoolId && (
-              <div style={{ position: 'absolute', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: '0 2px 8px var(--shadow-large)', width: '200px' }}>
-                <ProgressBar label="Loading routes..." />
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: '0 2px 8px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                <LogoSpinner size={22} color="var(--text-primary)" />
+                <span style={{ fontSize: '14px' }}>Loading routes...</span>
               </div>
             )}
           </div>
@@ -409,7 +411,7 @@ function AdminApp() {
         (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase()));
       if (!matchesSearch) return false;
       const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-      const isHybrid = schoolTypes.includes('Hybrid');
+      const isHybrid = schoolTypes.includes('K-8');
       const hasNoRoutes = school.routeCount === 0;
 
       // 1. Check School Type Filter first (PRIORITY)
@@ -520,8 +522,9 @@ function AdminApp() {
 
             {/* Loading Indicator */}
             {isLoading && activeTab === 'routes' && schoolId && (
-              <div style={{ position: 'absolute', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: '0 2px 8px var(--shadow-large)', width: '200px' }}>
-                <ProgressBar label="Loading routes..." progress={loadingProgress ?? undefined} showPercentage={loadingProgress !== null} />
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: '0 2px 8px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                <LogoSpinner size={22} color="var(--text-primary)" />
+                <span style={{ fontSize: '14px' }}>Loading routes...</span>
               </div>
             )}
           </div>

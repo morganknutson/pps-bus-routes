@@ -577,7 +577,7 @@ export function ArchitecturePage() {
             zIndex: 1001,
             padding: '0.5rem',
             backgroundColor: 'var(--bg-secondary)',
-            border: '1px solid var(--border-color)',
+            border: '1px solid var(--border-color-primary)',
             borderRadius: '0 4px 4px 0',
             cursor: 'pointer',
             fontSize: '16px',
@@ -841,7 +841,7 @@ export function ArchitecturePage() {
                 style={{
                   padding: '0.5rem 0.75rem',
                   backgroundColor: 'var(--bg-secondary)',
-                  border: '1px solid var(--border-color)',
+                  border: '1px solid var(--border-color-primary)',
                   borderRadius: '4px',
                   cursor: 'pointer',
                   fontSize: '18px',
@@ -856,7 +856,7 @@ export function ArchitecturePage() {
                 style={{
                   padding: '0.5rem 0.75rem',
                   backgroundColor: 'var(--bg-secondary)',
-                  border: '1px solid var(--border-color)',
+                  border: '1px solid var(--border-color-primary)',
                   borderRadius: '4px',
                   cursor: 'pointer',
                   fontSize: '18px',
@@ -874,7 +874,7 @@ export function ArchitecturePage() {
                 style={{
                   padding: '0.5rem 0.75rem',
                   backgroundColor: 'var(--bg-secondary)',
-                  border: '1px solid var(--border-color)',
+                  border: '1px solid var(--border-color-primary)',
                   borderRadius: '4px',
                   cursor: 'pointer',
                   fontSize: '12px',

@@ -27,6 +27,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   const location = useLocation();
   const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
@@ -152,6 +153,10 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
   }, [query]);
 
   useEffect(() => {
+    setHighlightedIndex(-1);
+  }, [suggestions]);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node) &&
         inputRef.current && !inputRef.current.contains(event.target as Node)) {
@@ -205,6 +210,26 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
     }
   }, []);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showSuggestions || suggestions.length === 0) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setHighlightedIndex(prev => prev < suggestions.length - 1 ? prev + 1 : prev);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setHighlightedIndex(prev => (prev > 0 ? prev - 1 : -1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
+        handleSelectSuggestion(suggestions[highlightedIndex]);
+      }
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setShowSuggestions(false);
+      setHighlightedIndex(-1);
+    }
+  };
+
   return (
     <div style={{
       position: 'absolute',
@@ -249,15 +274,42 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
                 onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                 placeholder="Search for an address..."
                 style={{ width: '100%', height: '100%', padding: isMobile ? '0 0.5rem 0 1.8125rem' : '0 0.5rem 0 1.5rem', border: 'none', borderRadius: '9999px', fontSize: isMobile ? '16px' : '14px', boxSizing: 'border-box', backgroundColor: 'transparent', color: 'var(--text-primary)', outline: 'none' }}
               />
               {isLoading && <div style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: 'var(--text-tertiary)' }}>Searching...</div>}
               {showSuggestions && suggestions.length > 0 && (
-                <div ref={suggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>
+                <div
+                  ref={suggestionsRef}
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    marginTop: '4px',
+                    backgroundColor: isDarkMode ? 'rgba(10,10,10, 1)' : 'rgba(150,150,150, 1)',
+                    border: isDarkMode ? '1px solid rgba(10,10,10, 1)' : 'none',
+                    borderRadius: '16px',
+                    boxShadow: isDarkMode ? '0 10px 38px rgba(0,0,0, .8)' : '0 10px 38px rgba(0,0,0, .4)',
+                    maxHeight: '200px',
+                    overflowY: 'auto',
+                    zIndex: 1000
+                  }}>
                   {suggestions.map((suggestion, index) => (
-                    <div key={index} onClick={() => handleSelectSuggestion(suggestion)} style={{ padding: '0.75rem', cursor: 'pointer', borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none', fontSize: isMobile ? '16px' : '14px', color: 'var(--text-primary)' }}>
+                    <div
+                      key={index}
+                      onClick={() => handleSelectSuggestion(suggestion)}
+                      onMouseEnter={() => setHighlightedIndex(index)}
+                      style={{
+                        padding: '0.75rem',
+                        cursor: 'pointer',
+                        borderBottom: index < suggestions.length - 1 ? (isDarkMode ? '1px solid rgba(10,10,10, .5)' : '1px solid rgba(236, 236, 236, 1)') : 'none',
+                        fontSize: isMobile ? '16px' : '14px',
+                        color: highlightedIndex === index ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                        backgroundColor: highlightedIndex === index ? (isDarkMode ? 'rgba(255,255,255, .1)' : '#f8f8f8ec') : 'var(--bg-primary)'
+                      }}>
                       {suggestion.displayName}
                     </div>
                   ))}
@@ -281,7 +333,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             backgroundColor: 'var(--bg-header)',
             color: 'var(--text-primary)',
             border: 'none',
-            borderTop: '1px solid var(--border-color)',
+            borderTop: '1px solid var(--border-color-primary)',
             fontSize: '16px',
             fontWeight: '600',
             cursor: 'pointer',

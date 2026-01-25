@@ -122,7 +122,7 @@ const MapPinPreview = ({ type, color = '#3b82f6', isSelected = false, isHover = 
           height: '140px',
           borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid var(--border-color)',
+          border: '1px solid var(--border-color-primary)',
           position: 'relative',
           backgroundColor: 'var(--bg-secondary)',
           boxShadow: 'var(--shadow-large)'
@@ -189,7 +189,7 @@ const FullRoutePreview = ({ route }: { route: Route }) => {
       height: '300px',
       borderRadius: '16px',
       overflow: 'hidden',
-      border: '1px solid var(--border-color)',
+      border: '1px solid var(--border-color-primary)',
       position: 'relative',
       marginBottom: '20px',
       boxShadow: 'var(--shadow-large)'
@@ -246,7 +246,7 @@ const AddressInputUIPreview = () => (
         backgroundColor: 'var(--bg-tertiary)',
         borderRadius: '9999px',
         boxShadow: '0 4px 12px var(--shadow-large)',
-        border: '1px solid var(--border-color)'
+        border: '1px solid var(--border-color-primary)'
       }}>
         <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
           <i className="fas fa-house" style={{ position: 'absolute', left: '4px', top: '50%', transform: 'translateY(-50%)', fontSize: '11px', color: 'var(--text-tertiary)' }}></i>
@@ -266,7 +266,7 @@ const AddressInputUIPreview = () => (
         alignItems: 'center',
         justifyContent: 'center',
         boxShadow: '0 4px 12px var(--shadow-large)',
-        border: '1px solid var(--border-color)'
+        border: '1px solid var(--border-color-primary)'
       }}>
         <MapPinIcon style={{ marginRight: '0.75rem' }} />
         <span>Find My Stop</span>
@@ -277,7 +277,7 @@ const AddressInputUIPreview = () => (
     <div style={{
       marginTop: '8px',
       backgroundColor: 'var(--bg-primary)',
-      border: '1px solid var(--border-color)',
+      border: '1px solid var(--border-color-primary)',
       borderRadius: '16px',
       boxShadow: '0 4px 16px var(--shadow-hover)',
       overflow: 'hidden',
@@ -289,7 +289,7 @@ const AddressInputUIPreview = () => (
       ].map((item, i) => (
         <div key={i} style={{
           padding: '12px 16px',
-          borderBottom: i === 0 ? '1px solid var(--border-color)' : 'none',
+          borderBottom: i === 0 ? '1px solid var(--border-color-primary)' : 'none',
           backgroundColor: i === 0 ? 'var(--bg-tertiary)' : 'transparent',
           display: 'flex',
           alignItems: 'center',
@@ -540,7 +540,7 @@ export function TechPage() {
                 <div style={{
                   backgroundColor: 'var(--bg-secondary)',
                   borderRadius: '12px',
-                  border: '1px solid var(--border-color)',
+                  border: '1px solid var(--border-color-primary)',
                   overflow: 'hidden',
                   marginBottom: '20px',
                   maxWidth: '400px'
@@ -730,33 +730,33 @@ export function TechPage() {
                 </p>
 
                 <div style={{ display: 'flex', gap: '20px', flexDirection: 'column', marginBottom: '20px' }}>
-                  <div style={{ border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', backgroundColor: 'var(--bg-secondary)' }}>
+                  <div style={{ border: '1px solid var(--border-color-primary)', borderRadius: '12px', padding: '20px', backgroundColor: 'var(--bg-secondary)' }}>
                     <div style={{ marginBottom: '10px', fontSize: '11px', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>School Info Dialog</div>
-                    <div style={{ position: 'relative', height: '180px', width: '100%', border: '1px dashed var(--border-color)', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div style={{ position: 'relative', height: '180px', width: '100%', border: '1px dashed var(--border-color-primary)', borderRadius: '8px', overflow: 'hidden' }}>
                       <div style={{ position: 'absolute', bottom: '10px', right: '10px', width: '300px', pointerEvents: 'none' }}>
                         <SchoolInfoTooltip school={exampleSchool} />
                       </div>
                     </div>
                   </div>
 
-                  <div style={{ border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', backgroundColor: 'var(--bg-secondary)' }}>
+                  <div style={{ border: '1px solid var(--border-color-primary)', borderRadius: '12px', padding: '20px', backgroundColor: 'var(--bg-secondary)' }}>
                     <div style={{ marginBottom: '10px', fontSize: '11px', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>Stop Info Dialog</div>
-                    <div style={{ position: 'relative', height: '180px', width: '100%', border: '1px dashed var(--border-color)', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div style={{ position: 'relative', height: '180px', width: '100%', border: '1px dashed var(--border-color-primary)', borderRadius: '8px', overflow: 'hidden' }}>
                       <div style={{ position: 'absolute', bottom: '10px', right: '10px', width: '300px', pointerEvents: 'none' }}>
                         <StopInfoTooltip route={exampleRoute} stop={exampleStop} stopNumber={1} onClose={() => { }} />
                       </div>
                     </div>
                   </div>
 
-                  <div style={{ border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', backgroundColor: 'var(--bg-secondary)' }}>
+                  <div style={{ border: '1px solid var(--border-color-primary)', borderRadius: '12px', padding: '20px', backgroundColor: 'var(--bg-secondary)' }}>
                     <div style={{ marginBottom: '10px', fontSize: '11px', fontWeight: 600, color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>Specialized Modals (Compound System)</div>
-                    <div style={{ padding: '0', backgroundColor: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+                    <div style={{ padding: '0', backgroundColor: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border-color-primary)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                       <div style={{ padding: '20px 24px 0', color: 'var(--text-primary)', fontSize: '16px' }}>Modal Title Pattern</div>
                       <div style={{ padding: '16px 24px 20px', fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                         The Modal system uses a compound pattern (Modal.Title, Modal.Description) to enforce high-fidelity typography.
                       </div>
                       <div style={{ padding: '0 20px 20px' }}>
-                        <div style={{ width: '100%', padding: '10px', backgroundColor: 'var(--bg-tertiary)', borderRadius: '46px', color: 'var(--text-primary)', textAlign: 'center', fontSize: '13px', border: '1px solid var(--border-color)' }}>Button Component</div>
+                        <div style={{ width: '100%', padding: '10px', backgroundColor: 'var(--bg-tertiary)', borderRadius: '46px', color: 'var(--text-primary)', textAlign: 'center', fontSize: '13px', border: '1px solid var(--border-color-primary)' }}>Button Component</div>
                       </div>
                     </div>
                   </div>

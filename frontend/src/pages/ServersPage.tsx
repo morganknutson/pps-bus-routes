@@ -352,7 +352,7 @@ export function ServersPage() {
           padding: '1.5rem',
           backgroundColor: 'var(--bg-primary)',
           borderRadius: '8px',
-          border: '1px solid var(--border-color)',
+          border: '1px solid var(--border-color-primary)',
         }}>
           <div style={{
             display: 'flex',
@@ -502,7 +502,7 @@ export function ServersPage() {
           padding: '1.5rem',
           backgroundColor: 'var(--bg-primary)',
           borderRadius: '8px',
-          border: '1px solid var(--border-color)',
+          border: '1px solid var(--border-color-primary)',
         }}>
           <div style={{
             display: 'flex',

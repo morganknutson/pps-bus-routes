@@ -70,7 +70,7 @@ const ModalBase: React.FC<ModalProps> = ({
           overflow: 'hidden',
           animation: 'modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           position: 'relative',
-          border: '1px solid var(--border-color)',
+          border: '1px solid var(--border-color-primary)',
         }}
         onClick={(e) => e.stopPropagation()}
       >

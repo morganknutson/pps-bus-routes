@@ -65,7 +65,7 @@ export function ContactPage() {
           fontSize: 'var(--font-size-body)',
           fontFamily: 'var(--font-family-body)'
         }}>
-          For technical issues with this website or data corrections, please contact the development team.
+          For technical issues with this website or data corrections, please <a href="mailto:admin@ppsbus.com" style={{ color: 'var(--text-primary)', textDecoration: 'underline' }}>email the admin</a>.
         </p>
         <p style={{ 
           lineHeight: 'var(--line-height-body)', 
@@ -81,7 +81,7 @@ export function ContactPage() {
           backgroundColor: 'var(--bg-secondary)',
           padding: '2rem',
           borderRadius: '16px',
-          border: '1px solid var(--border-color)',
+          border: '1px solid var(--border-color-primary)',
         }}>
           <p style={{ 
             marginBottom: '1.5rem', 

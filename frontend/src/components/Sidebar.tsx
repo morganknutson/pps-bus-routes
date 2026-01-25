@@ -120,13 +120,13 @@ export function Sidebar({
         style={{
           width: `${sidebarWidth}px`,
           position: 'relative',
-          borderRight: '1px solid var(--border-color-darker)',
           display: 'flex',
           flexDirection: 'column',
           backgroundColor: backgroundColor || 'var(--bg-secondary)',
           overflow: 'hidden',
           transition: isResizing ? 'none' : 'background-color 0.3s ease, border-color 0.3s ease, width 0.1s ease',
           flexShrink: 0,
+          borderRight: '1px solid var(--border-color-secondary)',
         }}
       >
         {/* Resize Handle */}
@@ -156,7 +156,7 @@ export function Sidebar({
         {/* Fixed Header Section */}
         {header && (
           <div style={{ 
-            borderBottom: '1px solid var(--border-color)', 
+            borderBottom: '1px solid var(--border-color-primary)', 
             padding: '1rem', 
             backgroundColor: 'var(--bg-primary)',
             flexShrink: 0,
@@ -210,7 +210,6 @@ export function Sidebar({
           left: shouldShow ? 0 : '-100%',
           width: '100%',
           height: 'var(--app-height)',
-          borderRight: '1px solid var(--border-color)',
           display: 'flex',
           flexDirection: 'column',
           backgroundColor: backgroundColor || 'var(--bg-secondary)',
@@ -224,7 +223,7 @@ export function Sidebar({
         {/* Fixed Header Section */}
         {header && (
           <div style={{ 
-            borderBottom: '1px solid var(--border-color)', 
+            borderBottom: '1px solid var(--border-color-primary)', 
             padding: '1rem', 
             backgroundColor: 'var(--bg-primary)',
             flexShrink: 0,

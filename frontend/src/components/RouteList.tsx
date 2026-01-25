@@ -90,7 +90,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
             onClick={onViewSchools}
             style={{
               padding: '0.5rem 1rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)',
-              border: '1px solid var(--border-color)', borderRadius: '9999px', cursor: 'pointer',
+              border: '1px solid var(--border-color-primary)', borderRadius: '9999px', cursor: 'pointer',
               fontSize: '14px', fontWeight: '500', transition: 'background-color 0.2s ease, border-color 0.2s ease',
             }}
           >
@@ -106,7 +106,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
       {/* --- STATE: SCHOOL SELECTED HEADER --- */}
       {/* Shows the currently active school with a clear button */}
       {selectedSchool && (
-        <div style={{ padding: '0.5rem 1rem 1rem 1rem', borderBottom: '1px solid var(--border-color-darker)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
+        <div style={{ padding: '0.5rem 1rem 1rem 1rem', borderBottom: '1px solid var(--border-color-tertiary)', flexShrink: 0, transition: 'border-color 0.3s ease' }}>
           <div style={{ position: 'relative' }}>
             <div
               style={{
@@ -124,7 +124,8 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 transition: 'background-color 0.3s ease, color 0.3s ease',
                 display: 'flex',
                 alignItems: 'center',
-                border: '1px solid var(--border-color-darker)',
+                border: 'none)',
+                boxShadow: 'var(--faux-border)',
               }}
             >
               {selectedSchool.name}
@@ -134,12 +135,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 setSelectedSchool(null);
                 if (onClearSchool) onClearSchool();
               }}
-              style={{
-                position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
-                width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                backgroundColor: 'transparent', color: 'var(--text-tertiary)', border: 'none',
-                borderRadius: '4px', cursor: 'pointer', padding: 0, flexShrink: 0,
-              }}
+              className="school-search-clear"
               aria-label="Clear school selection"
             >
               <XIcon />

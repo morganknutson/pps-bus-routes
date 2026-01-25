@@ -6,72 +6,9 @@ import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
 import { SchoolTypeFilter, SchoolTypeFilters } from './SchoolTypeFilter';
 import { MapPinIcon } from './MapPinIcon';
-import { getSchoolDisplayName } from '../utils/schoolUtils';
+import { getSchoolDisplayName, getSchoolTypes, getSchoolColor } from '../utils/schoolUtils';
 import { XIcon } from './XIcon';
-
-
-// Infer school type(s) from name - returns array to support hybrid schools
-function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
-  const name = schoolName.toLowerCase();
-
-  // Hybrid schools - schools that serve multiple grade levels
-  // Check these FIRST before other type checks
-  const hybridSchools = ['access'];
-
-  if (hybridSchools.some(key => name.includes(key))) {
-    return ['Hybrid'];
-  }
-
-  // Check for explicit type in name
-  const hasElementary = name.includes('elementary');
-  const hasMiddle = name.includes('middle');
-  const hasHigh = name.includes('high');
-
-  // Known high schools in Portland
-  const highSchools = [
-    'lincoln', 'franklin', 'benson', 'grant', 'cleveland', 'jefferson',
-    'roosevelt', 'wilson', 'madison', 'marshall', 'da vinci', 'davinci'
-  ];
-  const isHighSchool = highSchools.some(hs => name.includes(hs)) || hasHigh;
-
-  // Known middle schools in Portland
-  const middleSchools = [
-    'beaumont', 'hosford', 'west sylvan', 'george', 'harrison park',
-    'lane', 'gray', 'kelly', 'kellogg', 'mt tabor', 'mt. tabor', 'roseway heights'
-  ];
-  const isMiddleSchool = middleSchools.some(ms => name.includes(ms)) || hasMiddle;
-
-  // Default to elementary if no match
-  const isElementary = hasElementary || (!isMiddleSchool && !isHighSchool);
-
-  const types: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] = [];
-  if (isElementary) types.push('Elementary School');
-  if (isMiddleSchool) types.push('Middle School');
-  if (isHighSchool) types.push('High School');
-
-  return types.length > 0 ? types : ['Elementary School'];
-}
-
-// Get color for school type(s)
-function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[]): string {
-  if (schoolTypes.includes('Hybrid')) {
-    return '#9C27B0'; // Purple for hybrid schools
-  }
-  if (schoolTypes.length === 1) {
-    switch (schoolTypes[0]) {
-      case 'Elementary School':
-        return '#2196F3'; // Blue
-      case 'Middle School':
-        return '#4CAF50'; // Green
-      case 'High School':
-        return '#FF9800'; // Orange
-      default:
-        return '#FFFFFF'; // Default teal
-    }
-  }
-
-  return '#FFFFFF'; // Default teal
-}
+import { SearchIcon } from './SearchIcon';
 
 interface SchoolListProps {
   schools: School[];
@@ -87,7 +24,7 @@ interface SchoolListProps {
 
 export function SchoolList({
   schools,
-  selectedSchoolId,
+  selectedSchoolId, // STATE: Selected School ID - Currently selected school (null if none selected)
   onSelectSchool,
   searchTerm: externalSearchTerm,
   onSearchChange: externalOnSearchChange,
@@ -96,8 +33,13 @@ export function SchoolList({
   onMobileClose,
   assignedSchools: externalAssignedSchools,
 }: SchoolListProps) {
+  // STATE: Mobile Detection - Determines if component is rendered on mobile device
   const isMobile = useIsMobile();
+  
+  // STATE: Internal Search - Local search term state (used when no external state provided)
   const [internalSearchTerm, setInternalSearchTerm] = useState('');
+  
+  // STATE: Internal Filters - Local filter state (used when no external state provided)
   const [internalFilters, setInternalFilters] = useState<SchoolTypeFilters>({
     elementary: true,
     middle: true,
@@ -106,16 +48,18 @@ export function SchoolList({
     noRoutes: true,
   });
 
-  // Use external state if provided, otherwise use internal state
+  // STATE: Resolved Search - Uses external search term if provided, otherwise internal state
   const searchTerm = externalSearchTerm !== undefined ? externalSearchTerm : internalSearchTerm;
   const setSearchTerm = externalOnSearchChange || setInternalSearchTerm;
+  
+  // STATE: Resolved Filters - Uses external filters if provided, otherwise internal state
   const schoolTypeFilters = externalFilters !== undefined ? externalFilters : internalFilters;
   const setSchoolTypeFilters = (filters: SchoolTypeFilters) => {
     if (externalOnFiltersChange) externalOnFiltersChange(filters);
     else setInternalFilters(filters);
   };
 
-
+  // STATE: Filtered Schools - Schools filtered by search term and school type filters
   const filteredSchools = schools.filter(school => {
     // Search filter
     const matchesSearch =
@@ -126,7 +70,7 @@ export function SchoolList({
 
     // School type filter
     const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-    const isHybrid = schoolTypes.includes('Hybrid');
+    const isHybrid = schoolTypes.includes('K-8');
     const hasNoRoutes = school.routeCount === 0;
 
     // 1. Check School Type Filter first (PRIORITY)
@@ -150,21 +94,34 @@ export function SchoolList({
     return true;
   });
 
+  // STATE: Assigned Schools Data - Uses external assigned schools if provided, otherwise from Zustand store
   const storeAssignedSchools = useStore(state => state.assignedSchools);
   const assignedSchoolsData = externalAssignedSchools !== undefined ? externalAssignedSchools : storeAssignedSchools;
 
-  // Split into assigned and other schools
+  // STATE: Assigned/Others Split - Separates filtered schools into assigned (user's home schools) and others
   const { assigned, others } = useMemo(() => {
     if (!assignedSchoolsData || searchTerm) {
       return { assigned: [], others: filteredSchools };
     }
 
-    const assignedNames = [
-      assignedSchoolsData.elementary?.name,
-      assignedSchoolsData.middle?.name,
-      assignedSchoolsData.high?.name,
-      assignedSchoolsData.k8?.name
-    ].filter(Boolean).map(n => n!.toLowerCase().trim());
+    // Build list of assigned school names from arrays
+    const assignedNames: string[] = [];
+    const schoolArrays = [
+      assignedSchoolsData.elementary,
+      assignedSchoolsData.middle,
+      assignedSchoolsData.high,
+      assignedSchoolsData.k8
+    ];
+    
+    schoolArrays.forEach(schoolArray => {
+      if (Array.isArray(schoolArray)) {
+        schoolArray.forEach(school => {
+          if (school && school.name) {
+            assignedNames.push(school.name.toLowerCase().trim());
+          }
+        });
+      }
+    });
 
     const assigned: School[] = [];
     const others: School[] = [];
@@ -199,13 +156,16 @@ export function SchoolList({
   }, [filteredSchools, assignedSchoolsData, searchTerm]);
 
   /* 
-   * Assigned State: Determined in the useMemo hook above. Styled with distinct bg-secondary background.
+   * STATE: Assigned Schools - Determined in the useMemo hook above. 
+   * Styled with distinct bg-secondary background. Only shown when no search term is active.
    */
 
   // Helper to render a school item
   const renderSchoolItem = (school: School) => {
     const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
     const schoolColor = getSchoolColor(schoolTypes);
+    
+    // STATE: Individual School Selection - Whether this specific school is currently selected
     const isSelected = school.id === selectedSchoolId;
 
     return (
@@ -273,7 +233,10 @@ export function SchoolList({
     );
   };
 
+  // STATE: Schools with Coordinates - Other schools that have valid coordinate data (for map display)
   const schoolsWithCoords = others.filter(s => s.coordinates && s.coordinates.length === 2);
+  
+  // STATE: Schools without Coordinates - Other schools missing coordinate data (shown in separate section)
   const schoolsWithoutCoords = others.filter(s => !s.coordinates || s.coordinates.length !== 2);
 
   return (
@@ -282,6 +245,9 @@ export function SchoolList({
       <div className="school-search-section">
         <div className="school-search-container">
           <div className="school-search-input-wrapper">
+            <div className="school-search-icon">
+              <SearchIcon size={11} color="var(--text-primary)" />
+            </div>
             <input
               type="text"
               className={`school-search-input ${searchTerm ? 'has-clear' : ''}`}
@@ -304,15 +270,16 @@ export function SchoolList({
 
 
 
-      {/* School list */}
+      {/* Main School list */}
       <div className="school-list-scroll">
+        {/* STATE: Empty Results - No schools match current search/filter criteria */}
         {filteredSchools.length === 0 ? (
           <div className="school-no-results">
             No schools found
           </div>
         ) : (
           <div>
-            {/* STATE: Assigned Schools (Home Location) */}
+            {/* STATE: Assigned Schools Section - User's home location schools (only shown when no search active) */}
             {assigned.length > 0 && (
               <div className="school-assigned-section">
                 <div className="eyebrow school-section-header">
@@ -323,14 +290,17 @@ export function SchoolList({
               </div>
             )}
 
-            {/* Other Schools Header */}
+            {/* STATE: Other Schools Header - Separator between assigned and other schools */}
             {assigned.length > 0 && others.length > 0 && (
               <div className="eyebrow school-section-header">
                 All other schools
               </div>
             )}
 
+            {/* STATE: Schools with Coordinates - Rendered with full school item component */}
             {schoolsWithCoords.map((school) => renderSchoolItem(school))}
+            
+            {/* STATE: Schools without Coordinates Section - Special section for schools missing coordinate data */}
             {schoolsWithoutCoords.length > 0 && (
               <div className="school-no-coords-section">
                 <div className="school-no-coords-header">

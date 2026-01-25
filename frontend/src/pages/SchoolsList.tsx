@@ -221,7 +221,7 @@ export function SchoolsList() {
       
       // School type filter
       const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
-      const isHybrid = schoolTypes.includes('Hybrid');
+      const isHybrid = schoolTypes.includes('K-8');
       const hasNoRoutes = school.routeCount === 0;
 
       // 1. Check School Type Filter first (PRIORITY)

@@ -12,7 +12,6 @@ import { BackendStatus } from '../components/BackendStatus';
 import { ExpandableExample } from '../components/ExpandableExample';
 import { Modal } from '../components/Modal';
 import { Button } from '../components/Button';
-import { SchoolBusFront } from '../components/SchoolBusFront';
 import { RouteListBase } from '../components/RouteListBase';
 import { SchoolList } from '../components/SchoolList';
 import { AddressInput } from '../components/AddressInput';
@@ -53,7 +52,7 @@ const StaticModal = ({ children, maxWidth = '345px' }: { children: React.ReactNo
     flexDirection: 'column',
     overflow: 'hidden',
     position: 'relative',
-    border: '1px solid var(--border-color)',
+    border: '1px solid var(--border-color-primary)',
   }}>
     {children}
   </div>
@@ -129,7 +128,7 @@ export function DesignSystemPage() {
       left: 0,
       top: '60px',
       padding: '2rem 1.5rem',
-      borderRight: '1px solid var(--border-color)',
+      borderRight: '1px solid var(--border-color-primary)',
       backgroundColor: 'var(--bg-secondary)',
       display: 'flex',
       flexDirection: 'column',
@@ -218,7 +217,7 @@ export function DesignSystemPage() {
       {/* Buttons Section */}
       <section id="buttons" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem', margin: 0 }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem', margin: 0 }}>
             Buttons
           </h2>
           <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
@@ -534,7 +533,7 @@ export function DesignSystemPage() {
 
       {/* Controls Section */}
       <section id="controls" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Controls
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
@@ -579,7 +578,7 @@ export function DesignSystemPage() {
 
       {/* Progress & Loading Section */}
       <section id="progress" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Progress & Loading
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
@@ -595,7 +594,7 @@ export function DesignSystemPage() {
 
       {/* Form Elements Section */}
       <section id="forms" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Form Elements
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '2rem' }}>
@@ -628,7 +627,7 @@ export function DesignSystemPage() {
 
       {/* Interactive Components Section */}
       <section id="interactive" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Interactive Components
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '2rem' }}>
@@ -645,7 +644,7 @@ export function DesignSystemPage() {
 
       {/* Lists Section */}
       <section id="lists" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Lists & Data Display
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(450px, 1fr))', gap: '3rem' }}>
@@ -690,7 +689,7 @@ export function DesignSystemPage() {
 
       {/* Modals & Tooltips Section */}
       <section id="modals" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Modals & Tooltips
         </h2>
 
@@ -698,7 +697,7 @@ export function DesignSystemPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
           <div>
             <h3 style={{ fontSize: '1rem', fontWeight: '500', marginBottom: '1rem' }}>Compound Modal</h3>
-            <div style={{ padding: '2rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ padding: '2rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', border: '1px solid var(--border-color-primary)', display: 'flex', justifyContent: 'center' }}>
               <StaticModal>
                 <Modal.Header><RouteIcon size={24} color="var(--text-primary)" /></Modal.Header>
                 <Modal.Content>
@@ -711,7 +710,7 @@ export function DesignSystemPage() {
           </div>
           <div>
             <h3 style={{ fontSize: '1rem', fontWeight: '500', marginBottom: '1rem' }}>School Closest Modal</h3>
-            <div style={{ padding: '2rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ padding: '2rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', border: '1px solid var(--border-color-primary)', display: 'flex', justifyContent: 'center' }}>
               <StaticModal>
                 <Modal.Header>
                   <div style={{ display: 'flex', alignItems: 'flex-start' }}>
@@ -755,17 +754,18 @@ export function DesignSystemPage() {
 
       {/* Graphics Section */}
       <section id="graphics" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Graphics
         </h2>
         <div style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '12px', display: 'flex', justifyContent: 'center' }}>
-          <SchoolBusFront width={300} height={220} />
+          {/* <SchoolBusFront width={300} height={220} /> */}
+          <p style={{ color: 'var(--text-secondary)' }}>School bus graphic placeholder</p>
         </div>
       </section>
 
       {/* Layout Section */}
       <section id="layout" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Layout Components
         </h2>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Header and Footer are consistent across all views.</p>
@@ -773,10 +773,10 @@ export function DesignSystemPage() {
 
       {/* Complex Components Section */}
       <section id="complex" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Complex Components
         </h2>
-        <div style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+        <div style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '12px', border: '1px solid var(--border-color-primary)' }}>
           <ul style={{ color: 'var(--text-secondary)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', paddingLeft: '1.5rem' }}>
             <li>MapView</li><li>SchoolList</li><li>RouteListBase</li><li>SchoolInfoTooltip</li>
             <li>StopInfoTooltip</li><li>HomeInfoTooltip</li><li>Sidebar</li><li>JobList</li>
@@ -791,7 +791,7 @@ export function DesignSystemPage() {
   const iconsContent = (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
       <section>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Custom SVG Icons
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
@@ -829,7 +829,7 @@ export function DesignSystemPage() {
       </section>
 
       <section>
-        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '2rem', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem' }}>
           Font Awesome Icons
         </h2>
         <div style={{

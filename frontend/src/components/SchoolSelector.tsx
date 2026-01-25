@@ -83,20 +83,34 @@ export function SchoolSelector() {
   const sortedSchools = useMemo(() => {
     if (!schools) return [];
 
-    // Get assigned school names for quick lookup
-    const assignedNames = new Set<string>();
+    // Get assigned school names for substring matching (handling arrays)
+    const assignedNamesList: string[] = [];
     if (assignedSchools) {
-      Object.values(assignedSchools).forEach(school => {
-        if (school && school.name) {
-          assignedNames.add(school.name.toLowerCase());
+      Object.values(assignedSchools).forEach(schoolArray => {
+        if (Array.isArray(schoolArray)) {
+          schoolArray.forEach(school => {
+            if (school && school.name) {
+              assignedNamesList.push(school.name.toLowerCase());
+            }
+          });
         }
       });
     }
 
+    // Helper function for substring matching
+    const isSchoolAssigned = (schoolName: string): boolean => {
+      const schoolNameLower = schoolName.toLowerCase();
+      return assignedNamesList.some(assignedName => 
+        schoolNameLower === assignedName ||
+        schoolNameLower.includes(assignedName) ||
+        assignedName.includes(schoolNameLower)
+      );
+    };
+
     return [...schools].sort((a, b) => {
       // 1. Assigned Schools First
-      const isAssignedA = assignedNames.has(a.name.toLowerCase());
-      const isAssignedB = assignedNames.has(b.name.toLowerCase());
+      const isAssignedA = isSchoolAssigned(a.name);
+      const isAssignedB = isSchoolAssigned(b.name);
 
       if (isAssignedA && !isAssignedB) return -1;
       if (!isAssignedA && isAssignedB) return 1;
@@ -151,11 +165,19 @@ export function SchoolSelector() {
       >
         <option value="">Select a school...</option>
         {sortedSchools.map((school) => {
-          // Check if assigned to add visual indicator
+          // Check if assigned to add visual indicator (handling arrays with substring matching)
+          const schoolNameLower = school.name.toLowerCase();
           let isAssigned = false;
           if (assignedSchools) {
-            isAssigned = Object.values(assignedSchools).some(s =>
-              s && s.name && s.name.toLowerCase() === school.name.toLowerCase()
+            isAssigned = Object.values(assignedSchools).some(schoolArray =>
+              Array.isArray(schoolArray) && schoolArray.some(s => {
+                if (!s || !s.name) return false;
+                const assignedName = s.name.toLowerCase();
+                // Substring match for name variations
+                return schoolNameLower === assignedName ||
+                  schoolNameLower.includes(assignedName) ||
+                  assignedName.includes(schoolNameLower);
+              })
             );
           }
 

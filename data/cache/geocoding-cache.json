@@ -23884,5 +23884,970 @@
       }
     ],
     "cachedAt": "2026-01-15T09:00:46.031Z"
+  },
+  "8708 northwest kaiser road, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.84139502152647,
+      45.58726669222471
+    ],
+    "displayName": "8708 NW Kaiser Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJ2_BhMU8GlVQRNewhBl1NyLM",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "8708",
+        "short_name": "8708",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Kaiser Road",
+        "short_name": "NW Kaiser Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Forest Park",
+        "short_name": "Forest Park",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2703",
+        "short_name": "2703",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-20T02:34:17.420Z"
+  },
+  "501 southeast 14th avenue, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.65197586354368,
+      45.519341589401016
+    ],
+    "displayName": "501 SE 14th Ave, Portland, OR 97214, USA",
+    "placeId": "ChIJ6Rcmm6OglVQRxspdvme3U-s",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "501",
+        "short_name": "501",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southeast 14th Avenue",
+        "short_name": "SE 14th Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southeast Portland",
+        "short_name": "Southeast Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97214",
+        "short_name": "97214",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-20T03:02:01.392Z"
+  },
+  "2323 se 55th ave, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.60606819296784,
+      45.5062952937447
+    ],
+    "displayName": "2323 SE 55th Ave, Portland, OR 97215, USA",
+    "placeId": "ChIJpS3fD1-glVQR6q-jNkGIWxw",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "2323",
+        "short_name": "2323",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southeast 55th Avenue",
+        "short_name": "SE 55th Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southeast Portland",
+        "short_name": "Southeast Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97215",
+        "short_name": "97215",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "3929",
+        "short_name": "3929",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-20T20:39:11.166Z"
+  },
+  "8708 southeast 17th avenue, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.64681845541647,
+      45.46004070078608
+    ],
+    "displayName": "8708 SE 17th Ave, Portland, OR 97202, USA",
+    "placeId": "ChIJY0fiotEKlVQR-tkqgeysNsc",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "8708",
+        "short_name": "8708",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southeast 17th Avenue",
+        "short_name": "SE 17th Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southeast Portland",
+        "short_name": "Southeast Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97202",
+        "short_name": "97202",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "7331",
+        "short_name": "7331",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-24T22:41:20.461Z"
+  },
+  "2605 northeast 9th avenue, portland, or 97212, united states|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.65655025581216,
+      45.54138190533867
+    ],
+    "displayName": "2605 NE 9th Ave, Portland, OR 97212, USA",
+    "placeId": "ChIJN3sWKDanlVQRyCQLZpzPvd8",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "2605",
+        "short_name": "2605",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast 9th Avenue",
+        "short_name": "NE 9th Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Irvington",
+        "short_name": "Irvington",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97212",
+        "short_name": "97212",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "4116",
+        "short_name": "4116",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-24T22:48:53.995Z"
+  },
+  "2605 ne 9th ave, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.65655025581216,
+      45.54138190533867
+    ],
+    "displayName": "2605 NE 9th Ave, Portland, OR 97212, USA",
+    "placeId": "ChIJN3sWKDanlVQRyCQLZpzPvd8",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "2605",
+        "short_name": "2605",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast 9th Avenue",
+        "short_name": "NE 9th Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Irvington",
+        "short_name": "Irvington",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97212",
+        "short_name": "97212",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "4116",
+        "short_name": "4116",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-24T22:50:26.867Z"
+  },
+  "902 se mill st, portland, or 97214, united states|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.65650590000001,
+      45.50968069999999
+    ],
+    "displayName": "902 SE Mill St, Portland, OR 97214, USA",
+    "placeId": "ChIJcUB4sHUKlVQRtkbDzyPPuWk",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "902",
+        "short_name": "902",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southeast Mill Street",
+        "short_name": "SE Mill St",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Hosford-Abernethy",
+        "short_name": "Hosford-Abernethy",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97214",
+        "short_name": "97214",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "3559",
+        "short_name": "3559",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-24T22:54:29.542Z"
+  },
+  "543 ne brazee st, portland, or 97212, united states|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.65966880090363,
+      45.54042113280266
+    ],
+    "displayName": "543 NE Brazee St, Portland, OR 97212, USA",
+    "placeId": "ChIJb7_-rkmnlVQR02Lf85iAn28",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "543",
+        "short_name": "543",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast Brazee Street",
+        "short_name": "NE Brazee St",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Eliot",
+        "short_name": "Eliot",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97212",
+        "short_name": "97212",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "3820",
+        "short_name": "3820",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-24T22:58:47.769Z"
+  },
+  "2605 northeast 9th avenue, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.65655025581216,
+      45.54138190533867
+    ],
+    "displayName": "2605 NE 9th Ave, Portland, OR 97212, USA",
+    "placeId": "ChIJN3sWKDanlVQRyCQLZpzPvd8",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "2605",
+        "short_name": "2605",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast 9th Avenue",
+        "short_name": "NE 9th Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Irvington",
+        "short_name": "Irvington",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97212",
+        "short_name": "97212",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "4116",
+        "short_name": "4116",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-24T23:07:41.955Z"
+  },
+  "2006 ne 16th ave, portland, or 97212, united states|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.64919742875627,
+      45.537038198554555
+    ],
+    "displayName": "2006 NE 16th Ave, Portland, OR 97212, USA",
+    "placeId": "ChIJh7gwSDWnlVQRhl6hPlumzIk",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "2006",
+        "short_name": "2006",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast 16th Avenue",
+        "short_name": "NE 16th Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Irvington",
+        "short_name": "Irvington",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97212",
+        "short_name": "97212",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "4469",
+        "short_name": "4469",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-25T00:18:34.409Z"
+  },
+  "1905 ne 41st ave, portland, or 97212, united states|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.62095288929093,
+      45.53661197522228
+    ],
+    "displayName": "1905 NE 41st Ave, Portland, OR 97212, USA",
+    "placeId": "ChIJkzAPF9eglVQRLeljCf0o-gQ",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "1905",
+        "short_name": "1905",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast 41st Avenue",
+        "short_name": "NE 41st Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Hollywood",
+        "short_name": "Hollywood",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97212",
+        "short_name": "97212",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "5350",
+        "short_name": "5350",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-25T00:46:32.294Z"
+  },
+  "1905 northeast 41st avenue, portland, or, usa|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.62095288929093,
+      45.53661197522228
+    ],
+    "displayName": "1905 NE 41st Ave, Portland, OR 97212, USA",
+    "placeId": "ChIJkzAPF9eglVQRLeljCf0o-gQ",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "1905",
+        "short_name": "1905",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northeast 41st Avenue",
+        "short_name": "NE 41st Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Hollywood",
+        "short_name": "Hollywood",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97212",
+        "short_name": "97212",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "5350",
+        "short_name": "5350",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-01-25T00:49:23.023Z"
   }
 }

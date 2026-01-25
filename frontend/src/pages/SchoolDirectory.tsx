@@ -125,7 +125,7 @@ export function SchoolDirectory() {
                 padding: '0.25rem 0.75rem',
                 backgroundColor: 'var(--bg-tertiary)',
                 borderRadius: '999px',
-                border: '1px solid var(--border-color)',
+                border: '1px solid var(--border-color-primary)',
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
@@ -134,7 +134,7 @@ export function SchoolDirectory() {
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
-                e.currentTarget.style.borderColor = 'var(--border-color)';
+                e.currentTarget.style.borderColor = 'var(--border-color-primary)';
               }}
             >
               <i className="fas fa-city"></i> Browse by Neighborhood
@@ -152,7 +152,7 @@ export function SchoolDirectory() {
                 padding: '0.875rem 1rem',
                 paddingLeft: '2.5rem',
                 borderRadius: '12px',
-                border: '1px solid var(--border-color)',
+                border: '1px solid var(--border-color-primary)',
                 backgroundColor: 'var(--bg-secondary)',
                 color: 'var(--text-primary)',
                 fontSize: '16px',

@@ -19,6 +19,7 @@ import { getSchoolDisplayName, getSchoolTypes, getSchoolColor } from '../utils/s
 import { XIcon } from '../components/XIcon';
 import { LocationArrowIcon } from '../components/LocationArrowIcon';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import LogoSpinner from '../components/LogoSpinner';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -62,6 +63,8 @@ export function HomePage() {
   const [isFinding, setIsFinding] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isGeolocating, setIsGeolocating] = useState(false);
+  const [noRoutesTooltipIndex, setNoRoutesTooltipIndex] = useState<number | null>(null);
+  const [tooltipPosition, setTooltipPosition] = useState<{ top: number; left: number } | null>(null);
 
   const handleGetLocation = async () => {
     if (!navigator.geolocation) {
@@ -187,35 +190,79 @@ export function HomePage() {
   }, [addressQuery]);
 
   useEffect(() => {
-    const assignedNames = new Set<string>();
+    // Build list of assigned school names from arrays (for substring matching)
+    const assignedNamesList: string[] = [];
     if (assignedSchools) {
-      Object.values(assignedSchools).forEach(school => {
-        if (school && school.name) assignedNames.add(school.name.toLowerCase());
+      Object.values(assignedSchools).forEach(schoolArray => {
+        if (Array.isArray(schoolArray)) {
+          schoolArray.forEach(school => {
+            if (school && school.name) assignedNamesList.push(school.name.toLowerCase());
+          });
+        }
       });
     }
 
+    // Helper function for substring matching (handles "Tubman" vs "Harriet Tubman", etc.)
+    const isSchoolAssigned = (schoolName: string): boolean => {
+      const schoolNameLower = schoolName.toLowerCase();
+      return assignedNamesList.some(assignedName => 
+        schoolNameLower === assignedName ||
+        schoolNameLower.includes(assignedName) ||
+        assignedName.includes(schoolNameLower)
+      );
+    };
+
     const getScore = (school: School) => {
       let score = 0;
-      if (assignedNames.has(school.name.toLowerCase())) score -= 1000000;
       if (selectedAddress && selectedAddress.coordinates && school.coordinates) {
         score += calculateDistance(selectedAddress.coordinates, school.coordinates);
+      } else {
+        score += 999999; // Schools without coordinates go to the end
       }
       return score;
     };
 
+    // Always find assigned schools from the full list (don't filter by coordinates)
+    const assignedSchoolsList = schools.filter(school => isSchoolAssigned(school.name));
+
     if (schoolQuery.trim()) {
       const query = schoolQuery.toLowerCase();
       const filtered = schools.filter(school => school.name.toLowerCase().includes(query));
-      const sorted = filtered.map(school => ({ school, score: getScore(school) })).sort((a, b) => a.score - b.score).map(item => item.school);
-      setSchoolSuggestions(sorted.slice(0, 10));
+      // When searching, put assigned schools first, then sort rest by distance
+      const sorted = filtered
+        .map(school => ({ 
+          school, 
+          isAssigned: isSchoolAssigned(school.name),
+          score: getScore(school) 
+        }))
+        .sort((a, b) => {
+          if (a.isAssigned && !b.isAssigned) return -1;
+          if (!a.isAssigned && b.isAssigned) return 1;
+          return a.score - b.score;
+        })
+        .map(item => item.school);
+      // Show all matching schools (no limit) so users can always find their school
+      setSchoolSuggestions(sorted);
       setShowSchoolSuggestions(true);
     } else if (isSchoolFocused) {
-      const sorted = schools.filter(school => school.coordinates).map(school => ({ school, score: getScore(school) })).sort((a, b) => a.score - b.score).map(item => item.school);
-      setSchoolSuggestions(sorted.slice(0, 10));
+      // Get non-assigned schools with coordinates, sorted by distance
+      const otherSchools = schools
+        .filter(school => school.coordinates && !isSchoolAssigned(school.name))
+        .map(school => ({ school, score: getScore(school) }))
+        .sort((a, b) => a.score - b.score)
+        .map(item => item.school);
+      
+      // Show ALL assigned schools first, then ALL other schools sorted by distance
+      // No limit - let users scroll through all schools
+      const combined = [...assignedSchoolsList, ...otherSchools];
+      
+      setSchoolSuggestions(combined);
       setShowSchoolSuggestions(true);
     } else {
       setSchoolSuggestions([]);
       setShowSchoolSuggestions(false);
+      setNoRoutesTooltipIndex(null);
+      setTooltipPosition(null);
     }
   }, [schoolQuery, schools, selectedAddress, isSchoolFocused, assignedSchools]);
 
@@ -232,6 +279,8 @@ export function HomePage() {
         schoolInputRef.current && !schoolInputRef.current.contains(event.target as Node)) {
         setShowSchoolSuggestions(false);
         setIsSchoolFocused(false);
+        setNoRoutesTooltipIndex(null);
+        setTooltipPosition(null);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -274,6 +323,8 @@ export function HomePage() {
     setSchoolSuggestions([]);
     setShowSchoolSuggestions(false);
     setHighlightedSchoolIndex(-1);
+    setNoRoutesTooltipIndex(null);
+    setTooltipPosition(null);
   };
 
   const handleAddressKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -315,6 +366,8 @@ export function HomePage() {
       }
     } else if (e.key === 'Escape') {
       setShowSchoolSuggestions(false);
+      setNoRoutesTooltipIndex(null);
+      setTooltipPosition(null);
     }
   };
 
@@ -412,7 +465,7 @@ export function HomePage() {
   const sectionBgColor = isDarkMode ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.02)';
 
   return (
-    <div style={{ backgroundColor: headerBgColor, minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+    <div id="top" style={{ backgroundColor: headerBgColor, minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       <div style={{ position: 'absolute', top: '1rem', right: '24px', zIndex: 100 }}><DarkModeToggle /></div>
       <SEO title="Portland Public School Bus Maps" description="Interactive bus route maps for Portland Public Schools." />
 
@@ -618,7 +671,7 @@ export function HomePage() {
                   value={schoolQuery}
                   onChange={(e) => setSchoolQuery(e.target.value)}
                   onKeyDown={handleSchoolKeyDown}
-                  onFocus={() => { setIsSchoolFocused(true); if (selectedAddress && selectedAddress.coordinates) { const sorted = schools.filter(school => school.coordinates).map(school => ({ school, distance: calculateDistance(selectedAddress.coordinates, school.coordinates!) })).sort((a, b) => a.distance - b.distance).map(item => item.school); setSchoolSuggestions(sorted); setShowSchoolSuggestions(true); } else if (schoolSuggestions.length > 0) { setShowSchoolSuggestions(true); } }}
+                  onFocus={() => { setIsSchoolFocused(true); setShowSchoolSuggestions(true); }}
                   onBlur={() => setTimeout(() => setIsSchoolFocused(false), 200)}
                   placeholder="Enter your school..."
                   className="home-input"
@@ -649,13 +702,25 @@ export function HomePage() {
                       border: isDarkMode ? '1px solid rgba(10,10,10, 1)' : 'none !important',
                       borderRadius: '16px',
                       boxShadow: isDarkMode ? '0 10px 38px rgba(0,0,0, .8)' : '0 10px 38px rgba(0,0,0, .4)',
-                      maxHeight: '200px',
+                      maxHeight: '350px',
                       overflowY: 'auto',
                       zIndex: 1000
                     }}>
                     {schoolSuggestions.map((school, index) => {
                       const distance = selectedAddress && selectedAddress.coordinates && school.coordinates ? calculateDistance(selectedAddress.coordinates, school.coordinates) : null;
-                      const isAssigned = assignedSchools && Object.values(assignedSchools).some(s => s && s.name && s.name.toLowerCase() === school.name.toLowerCase());
+                      // Check if assigned (handling arrays) - use substring matching for name variations
+                      const schoolNameLower = school.name.toLowerCase();
+                      const isAssigned = assignedSchools && Object.values(assignedSchools).some(schoolArray => 
+                        Array.isArray(schoolArray) && schoolArray.some(s => {
+                          if (!s || !s.name) return false;
+                          const assignedName = s.name.toLowerCase();
+                          // Exact or substring match (handles "Tubman" vs "Harriet Tubman", "Jefferson" vs "Jefferson High School")
+                          return schoolNameLower === assignedName ||
+                            schoolNameLower.includes(assignedName) ||
+                            assignedName.includes(schoolNameLower);
+                        })
+                      );
+                      const hasNoRoutes = school.routeCount === 0;
                       const schoolTypes = getSchoolTypes(school.name);
                       const schoolColor = getSchoolColor(schoolTypes);
                       return (
@@ -679,7 +744,25 @@ export function HomePage() {
                             {isAssigned && <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: schoolColor, border: '1.5px solid white', boxShadow: '0 1px 2px rgba(0,0,0,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="fas fa-graduation-cap" style={{ color: 'white', fontSize: '10px' }}></i></div>}
                             {getSchoolDisplayName(school.name)}
                           </span>
-                          {distance !== null && <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginLeft: '0.5rem' }}>{formatDistance(distance, true)}</span>}
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            {hasNoRoutes && (
+                              <span
+                                onMouseEnter={(e) => {
+                                  const rect = e.currentTarget.getBoundingClientRect();
+                                  setTooltipPosition({ top: rect.top - 8, left: rect.left + rect.width / 2 });
+                                  setNoRoutesTooltipIndex(index);
+                                }}
+                                onMouseLeave={() => {
+                                  setNoRoutesTooltipIndex(null);
+                                  setTooltipPosition(null);
+                                }}
+                                style={{ position: 'relative', display: 'inline-flex', cursor: 'help' }}
+                              >
+                                <i className="fas fa-exclamation-circle" style={{ color: '#dc3545', fontSize: '14px' }}></i>
+                              </span>
+                            )}
+                            {distance !== null && <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>{formatDistance(distance, true)}</span>}
+                          </span>
                         </div>
                       );
                     })}
@@ -689,12 +772,53 @@ export function HomePage() {
             )}
           </div>
 
+          {/* Fixed-position No Routes Tooltip */}
+          {noRoutesTooltipIndex !== null && tooltipPosition && (
+            <div style={{
+              position: 'fixed',
+              top: tooltipPosition.top,
+              left: tooltipPosition.left,
+              transform: 'translate(-50%, -100%)',
+              backgroundColor: 'var(--bg-primary)',
+              borderRadius: '12px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+              padding: '16px',
+              width: '220px',
+              zIndex: 9999,
+              textAlign: 'center',
+              pointerEvents: 'none'
+            }}>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                backgroundColor: 'rgba(220, 53, 69, 0.15)',
+                color: '#dc3545',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: '600',
+                marginBottom: '10px'
+              }}>
+                <i className="fas fa-exclamation-triangle" style={{ fontSize: '11px' }}></i>
+                NO ROUTES
+              </div>
+              <div style={{
+                fontSize: '13px',
+                color: 'var(--text-secondary)',
+                lineHeight: '1.4'
+              }}>
+                Route information not provided on the web by school district.
+              </div>
+            </div>
+          )}
+
           {/* Error Message Display */}
           {error && <div style={{ padding: '0.75rem', marginBottom: '1rem', backgroundColor: '#fee', color: '#c33', borderRadius: '12px', fontSize: '14px' }}>{error}</div>}
 
           {/* Main Action Button - Find My Stop */}
           <button onClick={handleFindStop} disabled={!selectedAddress || !selectedSchoolLocal || isFinding} style={{ width: '100%', maxWidth: '380px', margin: '0 auto', padding: '1rem 0', fontSize: '16px', fontWeight: '500', color: (!selectedAddress || !selectedSchoolLocal || isFinding) ? textColorSecondary : (isDarkMode ? '#3A3A3A' : 'white'), backgroundColor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? (isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)') : (isDarkMode ? 'white' : '#333333'), border: (!selectedAddress || !selectedSchoolLocal || isFinding) ? `1px solid ${borderColor}` : `1px solid ${isDarkMode ? 'white' : '#333333'}`, borderRadius: '9999px', cursor: (!selectedAddress || !selectedSchoolLocal || isFinding) ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', boxSizing: 'border-box' }}>
-            {isFinding ? <>{/* Progress Bar while finding */}<div style={{ width: '60px', height: '4px', marginRight: '0.5rem' }}><ProgressBar height={4} color={isDarkMode ? '#3A3A3A' : 'white'} containerStyle={{ margin: 0 }} /></div>Finding...</> : <><MapPinIcon filled width={12} height={15} style={{ flexShrink: 0 }} />Find My Stop</>}
+            {isFinding ? <><LogoSpinner size={16} color={textColorSecondary} />Finding...</> : <><MapPinIcon filled width={12} height={15} style={{ flexShrink: 0 }} />Find My Stop</>}
           </button>
 
           <div style={{ marginTop: '4.5rem', textAlign: 'center' }}>

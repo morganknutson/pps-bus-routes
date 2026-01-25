@@ -75,6 +75,11 @@ export function Footer() {
             style={linkStyle}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onClick={() => {
+              if (window.location.pathname === '/') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
           >
             <i className="fas fa-search-location" style={{ width: '16px' }}></i>
             Find My Stop

@@ -17,8 +17,8 @@ describe('School Utils', () => {
       expect(getSchoolTypes('Franklin')).toContain('High School');
     });
 
-    it('identifies hybrid schools', () => {
-      expect(getSchoolTypes('Access Academy')).toContain('Hybrid');
+    it('identifies K-8 schools', () => {
+      expect(getSchoolTypes('Access Academy')).toContain('K-8');
     });
 
     it('defaults to elementary when type cannot be determined', () => {
@@ -58,9 +58,10 @@ describe('School Utils', () => {
       expect(elementaryColor).not.toBe(highColor);
     });
 
-    it('handles hybrid schools', () => {
-      const color = getSchoolColor(['Hybrid']);
-      expect(color).toMatch(/^#[0-9A-F]{6}$/i);
+    it('handles K-8 schools', () => {
+      const color = getSchoolColor(['K-8']);
+      // K-8 schools use CSS variable for dark mode support
+      expect(color).toMatch(/^(var\(--color-k8\)|#[0-9A-F]{6})$/i);
     });
   });
 

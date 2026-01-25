@@ -56,8 +56,8 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         backgroundColor: 'var(--bg-primary)',
         color: 'var(--text-primary)',
         borderRadius: isMobile ? '0' : 'var(--radius-floating)',
-        boxShadow: isMobile ? 'none' : 'var(--shadow-floating)',
-        border: isMobile ? 'none' : '1px solid var(--border-color)',
+        boxShadow: isMobile ? 'none' : 'var(--drop-shadow-quinary)',
+        border: isMobile ? 'none' : 'none',
         padding: 'var(--floating-content-padding)',
         pointerEvents: 'auto',
       }}>
@@ -80,8 +80,8 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
       color: 'var(--text-primary)',
       borderRadius: isMobile ? '0' : 'var(--radius-floating)',
       overflow: 'hidden',
-      boxShadow: isMobile ? 'none' : 'var(--shadow-floating)',
-      border: isMobile ? 'none' : '1px solid var(--border-color-darker)',
+      boxShadow: isMobile ? 'none' : 'var(--drop-shadow-floating)',
+      border: isMobile ? 'none' : 'none',
       pointerEvents: 'auto',
       fontFamily: "'Inter', sans-serif"
     }}>

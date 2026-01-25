@@ -59,10 +59,10 @@ export interface AssignedSchool {
 }
 
 export interface AssignedSchools {
-  elementary?: AssignedSchool;
-  middle?: AssignedSchool;
-  high?: AssignedSchool;
-  k8?: AssignedSchool;
+  elementary?: AssignedSchool[];
+  middle?: AssignedSchool[];
+  high?: AssignedSchool[];
+  k8?: AssignedSchool[];
 }
 
 export interface AppState {

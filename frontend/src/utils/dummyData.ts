@@ -109,23 +109,23 @@ export const exampleRoutes: Route[] = [
 ];
 
 export const exampleAssignedSchools = {
-  elementary: {
+  elementary: [{
     name: 'Glencoe',
     district: 'Portland Public Schools',
     type: 'Elementary',
     website: 'https://www.pps.net/glencoe'
-  },
-  middle: {
+  }],
+  middle: [{
     name: 'Mt. Tabor',
     district: 'Portland Public Schools',
     type: 'Middle',
     website: 'https://www.pps.net/mttabor'
-  },
-  high: {
+  }],
+  high: [{
     name: 'Franklin',
     district: 'Portland Public Schools',
     type: 'High',
     website: 'https://www.pps.net/franklin'
-  }
+  }]
 };
 

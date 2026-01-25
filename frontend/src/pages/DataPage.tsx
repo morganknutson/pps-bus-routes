@@ -317,7 +317,7 @@ export function DataPage() {
             padding: '1rem',
             backgroundColor: 'var(--bg-secondary)',
             borderRadius: '8px',
-            border: '1px solid var(--border-color)',
+            border: '1px solid var(--border-color-primary)',
           }}>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Total Schools</div>
             <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-primary)' }}>
@@ -328,7 +328,7 @@ export function DataPage() {
             padding: '1rem',
             backgroundColor: 'var(--bg-secondary)',
             borderRadius: '8px',
-            border: '1px solid var(--border-color)',
+            border: '1px solid var(--border-color-primary)',
           }}>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Schools with PDFs</div>
             <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FFFFFF' }}>
@@ -339,7 +339,7 @@ export function DataPage() {
             padding: '1rem',
             backgroundColor: 'var(--bg-secondary)',
             borderRadius: '8px',
-            border: '1px solid var(--border-color)',
+            border: '1px solid var(--border-color-primary)',
           }}>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Total PDFs</div>
             <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-primary)' }}>
@@ -350,7 +350,7 @@ export function DataPage() {
             padding: '1rem',
             backgroundColor: 'var(--bg-secondary)',
             borderRadius: '8px',
-            border: '1px solid var(--border-color)',
+            border: '1px solid var(--border-color-primary)',
           }}>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Schools Processed</div>
             <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FFFFFF' }}>
@@ -483,7 +483,7 @@ export function DataPage() {
                                     backgroundColor: 'var(--bg-secondary)', 
                                     padding: '1rem', 
                                     borderRadius: '4px',
-                                    border: '1px solid var(--border-color)',
+                                    border: '1px solid var(--border-color-primary)',
                                   }}>
                                     {school.pdfFiles.map((file: string, i: number) => {
                                       const pdfUrl = `/api/pdfs/${school.schoolId}/${encodeURIComponent(file)}`;
@@ -509,7 +509,7 @@ export function DataPage() {
                                             padding: '0.75rem',
                                             backgroundColor: 'var(--bg-primary)',
                                             borderRadius: '4px',
-                                            border: '1px solid var(--border-color)',
+                                            border: '1px solid var(--border-color-primary)',
                                           }}
                                         >
                                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: route ? '0.75rem' : '0' }}>
@@ -649,7 +649,7 @@ export function DataPage() {
                   padding: '1rem',
                   backgroundColor: 'var(--bg-secondary)',
                   borderRadius: '8px',
-                  border: '1px solid var(--border-color)',
+                  border: '1px solid var(--border-color-primary)',
                 }}
               >
                 <div
@@ -674,7 +674,7 @@ export function DataPage() {
                     padding: '0.75rem',
                     backgroundColor: 'var(--bg-primary)',
                     borderRadius: '6px',
-                    border: '1px solid var(--border-color)',
+                    border: '1px solid var(--border-color-primary)',
                   }}>
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                       <span style={{ fontWeight: '600' }}>PDFs</span>{' '}
@@ -696,7 +696,7 @@ export function DataPage() {
                     padding: '0.75rem',
                     backgroundColor: 'var(--bg-primary)',
                     borderRadius: '6px',
-                    border: '1px solid var(--border-color)',
+                    border: '1px solid var(--border-color-primary)',
                   }}>
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                       <span style={{ fontWeight: '600' }}>Last Checked</span>

@@ -17,7 +17,7 @@ export function WhoSection({ className, style }: { className?: string; style?: R
       flex: '1 1 300px', // Allow wrapping
       minWidth: '250px',
       padding: '1.5rem',
-      border: '1px solid var(--border-color)',
+      border: '1px solid var(--border-color-primary)',
       borderRadius: '12px',
       backgroundColor: 'var(--bg-secondary)',
       marginBottom: '1rem'
@@ -171,7 +171,7 @@ export function WhoSection({ className, style }: { className?: string; style?: R
         fontSize: '15px',
         fontFamily: 'var(--font-family-body)'
       }}>
-        <strong>This platform was built by Morgan Knutson. He is a father of two students</strong> in the Portland Public Schools District. He spent a few weeks designing and building this system because the current method of delivering bus routes to parents and students is the opposite of user-friendly; in fact, it's a realtively hostile user experience.
+        <strong>This platform was built by a father of two students</strong> in the Portland Public Schools District. He spent a few weeks designing and building this system because the current method of delivering bus routes to parents and students is the opposite of user-friendly; in fact, it's a realtively hostile user experience.
       </p>
       <p style={{
         lineHeight: '1.4',
@@ -234,7 +234,7 @@ export function WhoSection({ className, style }: { className?: string; style?: R
               maxHeight: 'min(80vh, 900px)',
               overflow: 'auto',
               backgroundColor: 'var(--bg-primary)',
-              border: '1px solid var(--border-color)',
+              border: '1px solid var(--border-color-primary)',
               borderRadius: '16px',
               boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
             }}
@@ -246,7 +246,7 @@ export function WhoSection({ className, style }: { className?: string; style?: R
                 justifyContent: 'space-between',
                 gap: '12px',
                 padding: '14px 16px',
-                borderBottom: '1px solid var(--border-color)',
+                borderBottom: '1px solid var(--border-color-primary)',
               }}
             >
               <div style={{ minWidth: 0 }}>
@@ -279,7 +279,7 @@ export function WhoSection({ className, style }: { className?: string; style?: R
                 aria-label="Close"
                 style={{
                   background: 'none',
-                  border: '1px solid var(--border-color)',
+                  border: '1px solid var(--border-color-primary)',
                   borderRadius: '10px',
                   width: '36px',
                   height: '36px',

@@ -33,7 +33,7 @@ const LogoSpinner: React.FC<LogoSpinnerProps> = ({
                     width="50.283"
                     height="23.6322"
                     rx="11.8161"
-                    stroke="white"
+                    stroke={color}
                     stroke-width="9.11382"
                 />
 

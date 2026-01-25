@@ -14,6 +14,7 @@ import { Neighborhood } from '../types';
 import { ProgressBar } from '../components/ProgressBar';
 import { parseUrlPath, buildUrlPath, UrlState } from '../services/urlState';
 import { useUrlState } from '../hooks/useUrlState';
+import LogoSpinner from '../components/LogoSpinner';
 
 export function NeighborhoodExplorer() {
   const { schools, setSchools, routes, setRoutes, setLoading: setStoreLoading, setLoadingProgress, isLoading, loadingProgress } = useStore();
@@ -181,7 +182,7 @@ export function NeighborhoodExplorer() {
               {/* Search */}
               <div style={{ 
                 padding: '1rem', 
-                borderBottom: '1px solid var(--border-color)',
+                borderBottom: '1px solid var(--border-color-primary)',
                 backgroundColor: 'var(--bg-primary)',
                 flexShrink: 0,
                 transition: 'background-color 0.3s ease, border-color 0.3s ease',
@@ -196,7 +197,7 @@ export function NeighborhoodExplorer() {
                     padding: '0.75rem',
                     backgroundColor: 'var(--bg-secondary)',
                     color: 'var(--text-primary)',
-                    border: '1px solid var(--border-color)',
+                    border: '1px solid var(--border-color-primary)',
                     borderRadius: '4px',
                     fontSize: '14px',
                     transition: 'background-color 0.3s ease, border-color 0.3s ease',
@@ -249,7 +250,7 @@ export function NeighborhoodExplorer() {
                         <div
                           key={neighborhood.name}
                           style={{
-                            border: '1px solid var(--border-color)',
+                            border: '1px solid var(--border-color-primary)',
                             borderRadius: '4px',
                             backgroundColor: 'var(--bg-primary)',
                             overflow: 'hidden',
@@ -305,7 +306,7 @@ export function NeighborhoodExplorer() {
                               style={{
                                 background: 'none',
                                 border: 'none',
-                                borderLeft: '1px solid var(--border-color)',
+                                borderLeft: '1px solid var(--border-color-primary)',
                                 padding: '0.75rem',
                                 cursor: 'pointer',
                                 color: 'var(--text-tertiary)',
@@ -331,7 +332,7 @@ export function NeighborhoodExplorer() {
                           {/* Expanded routes list */}
                           {isExpanded && neighborhoodRoutes.length > 0 && (
                             <div style={{ 
-                              borderTop: '1px solid var(--border-color)',
+                              borderTop: '1px solid var(--border-color-primary)',
                               backgroundColor: 'var(--bg-secondary)',
                               maxHeight: '400px',
                               overflowY: 'auto',
@@ -346,7 +347,7 @@ export function NeighborhoodExplorer() {
                                     key={route.id}
                                     style={{
                                       padding: '0.75rem',
-                                      borderBottom: '1px solid var(--border-color)',
+                                      borderBottom: '1px solid var(--border-color-primary)',
                                       backgroundColor: isRouteSelected ? 'var(--bg-tertiary)' : 'transparent',
                                       display: 'flex',
                                       alignItems: 'center',
@@ -413,7 +414,7 @@ export function NeighborhoodExplorer() {
                           )}
                           {isExpanded && neighborhoodRoutes.length === 0 && (
                             <div style={{ 
-                              borderTop: '1px solid var(--border-color)',
+                              borderTop: '1px solid var(--border-color-primary)',
                               backgroundColor: 'var(--bg-secondary)',
                               padding: '1rem',
                               color: 'var(--text-tertiary)',
@@ -434,7 +435,7 @@ export function NeighborhoodExplorer() {
               {!loadingNeighborhoods && neighborhoods.length > 0 && (
                 <div style={{
                   padding: '1rem',
-                  borderTop: '1px solid var(--border-color)',
+                  borderTop: '1px solid var(--border-color-primary)',
                   backgroundColor: 'var(--bg-primary)',
                   fontSize: '12px',
                   color: 'var(--text-secondary)',
@@ -448,7 +449,7 @@ export function NeighborhoodExplorer() {
               {/* Routes section */}
               {activeTab === 'neighborhoods' && (
                 <div style={{
-                  borderTop: '2px solid var(--border-color)',
+                  borderTop: '2px solid var(--border-color-primary)',
                   flexShrink: 0,
                   maxHeight: '50%',
                   minHeight: '200px', // Ensure enough space for the "Please select a school" message
@@ -479,24 +480,23 @@ export function NeighborhoodExplorer() {
                   <div
                     style={{
                       position: 'absolute',
-                      top: '1rem',
+                      top: '50%',
                       left: '50%',
-                      transform: 'translateX(-50%)',
+                      transform: 'translate(-50%, -50%)',
                       zIndex: 1000,
                       padding: '0.75rem 1.5rem',
                       backgroundColor: 'var(--bg-primary)',
                       color: 'var(--text-primary)',
                       borderRadius: '8px',
                       boxShadow: '0 2px 8px var(--shadow-large)',
-                      width: '200px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '0.5rem',
                     }}
                   >
-                    <ProgressBar 
-                      label="Loading routes..." 
-                      height={8}
-                      progress={loadingProgress ?? undefined}
-                      showPercentage={loadingProgress !== null}
-                    />
+                    <LogoSpinner size={22} color="var(--text-primary)" />
+                    <span style={{ fontSize: '14px' }}>Loading routes...</span>
                   </div>
                 )}
                 <MapView viewMode="routes" />

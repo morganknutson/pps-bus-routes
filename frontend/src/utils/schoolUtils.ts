@@ -2,16 +2,21 @@ import L from 'leaflet';
 import { createSchoolIconHTML } from './fontAwesomeIcons';
 
 // Infer school type(s) from name - returns array to support hybrid schools
-export function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] {
+export function getSchoolTypes(schoolName: string): ('Elementary School' | 'Middle School' | 'High School' | 'K-8')[] {
   const name = schoolName.toLowerCase();
-  const types: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[] = [];
+  const types: ('Elementary School' | 'Middle School' | 'High School' | 'K-8')[] = [];
   
-  // Hybrid schools - schools that serve multiple grade levels
+  // Hybrid schools - K-8 schools that serve multiple grade levels (Elementary + Middle)
   // Check these FIRST before other type checks
-  const hybridSchools = ['access'];
+  const hybridSchools = [
+    'access', 
+    // K-8 schools
+    'astor', 'beverly cleary', 'bridger', 'cesar chavez', 'césar chávez',
+    'faubion', 'laurelhurst', 'skyline', 'sunnyside', 'vernon'
+  ];
   
   if (hybridSchools.some(key => name.includes(key))) {
-    return ['Hybrid'];
+    return ['K-8'];
   }
   
   // Check for explicit type in name
@@ -31,7 +36,8 @@ export function getSchoolTypes(schoolName: string): ('Elementary School' | 'Midd
   // Known middle schools in Portland
   const middleSchools = [
     'beaumont', 'hosford', 'west sylvan', 'george', 'harrison park', 
-    'lane', 'gray', 'kelly', 'kellogg', 'mt tabor', 'mt. tabor', 'roseway heights'
+    'lane', 'gray', 'kelly', 'kellogg', 'mt tabor', 'mt. tabor', 'roseway heights',
+    'tubman', 'harriet tubman', 'jackson', 'ockley green', 'sellwood'
   ];
   if (middleSchools.some(ms => name.includes(ms)) && !types.includes('Middle School')) {
     types.push('Middle School');
@@ -124,9 +130,9 @@ export function getSchoolDisplayName(name: string): string {
   return displayName.replace(/( Elementary( School)?| Middle School| High School| K-8( School)?| PK-8( School)?)$/i, '');
 }
 
-export function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'High School' | 'Hybrid')[]): string {
-  if (schoolTypes.includes('Hybrid')) {
-    return '#9C27B0'; // Purple for hybrid schools
+export function getSchoolColor(schoolTypes: ('Elementary School' | 'Middle School' | 'High School' | 'K-8')[]): string {
+  if (schoolTypes.includes('K-8')) {
+    return 'var(--color-k8)'; // Purple for K-8 schools (brighter in dark mode)
   }
   if (schoolTypes.length === 1) {
     switch (schoolTypes[0]) {

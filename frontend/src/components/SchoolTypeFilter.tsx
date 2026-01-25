@@ -74,7 +74,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
   );
 
   return (
-    <div style={{ padding: '0.75rem 1rem', borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--bg-route-list)' }}>
+    <div style={{ padding: '0.75rem 1rem', borderTop: '1px solid var(--border-color-primary)', backgroundColor: 'var(--bg-route-list)' }}>
       <div style={{ position: 'relative', width: '100%' }}>
         <button
           ref={buttonRef}
@@ -134,7 +134,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
               left: 0,
               right: 0,
               backgroundColor: 'var(--bg-primary)',
-              border: '1px solid var(--border-color)',
+              border: '1px solid var(--border-color-primary)',
               borderRadius: '12px',
               boxShadow: '0 4px 20px var(--shadow-large)',
               padding: '0.5rem',
@@ -239,10 +239,10 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
                   style={{ display: 'none' }}
                 />
                 <CustomCheckbox checked={filters.hybrid} color={FILTER_COLORS.hybrid} />
-                <span style={{ flex: 1 }}>Hybrid Schools</span>
+                <span style={{ flex: 1 }}>K-8 Schools</span>
               </label>
 
-              <div style={{ height: '1px', backgroundColor: 'var(--border-color)', margin: '0.25rem 0' }}></div>
+              <div style={{ height: '1px', backgroundColor: 'var(--border-color-primary)', margin: '0.25rem 0' }}></div>
 
               <label 
                 style={{ 

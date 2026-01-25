@@ -292,7 +292,7 @@ export function AddressInput() {
         /* Theme-aware background color */
         backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
         borderRadius: '9999px',
-        boxShadow: '0 4px 12px var(--shadow-large)',
+        boxShadow: '0 4px 12px var(--shadow-large), var(--edge-inner-primary)',
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease'
       }}>
         {/* Toggle view between selected address and empty input state */}
@@ -429,7 +429,22 @@ export function AddressInput() {
 
               {/* Autocomplete dropdown - visibility controlled by search results and focus */}
               {showSuggestions && suggestions.length > 0 && (
-                <div ref={suggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '4px', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '16px', boxShadow: '0 2px 8px var(--shadow-hover)', maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}>
+                <div
+                  ref={suggestionsRef}
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    marginTop: '4px',
+                    backgroundColor: isDarkMode ? 'rgba(10,10,10, 1)' : 'rgba(150,150,150, 1)',
+                    border: isDarkMode ? '1px solid rgba(10,10,10, 1)' : 'none',
+                    borderRadius: '16px',
+                    boxShadow: isDarkMode ? '0 10px 38px rgba(0,0,0, .8)' : '0 10px 38px rgba(0,0,0, .4)',
+                    maxHeight: '200px',
+                    overflowY: 'auto',
+                    zIndex: 1000
+                  }}>
                   {suggestions.map((suggestion, index) => (
                     <div
                       key={index}
@@ -438,11 +453,11 @@ export function AddressInput() {
                       style={{
                         padding: '0.75rem',
                         cursor: 'pointer',
-                        borderBottom: index < suggestions.length - 1 ? '1px solid var(--border-color)' : 'none',
+                        borderBottom: index < suggestions.length - 1 ? (isDarkMode ? '1px solid rgba(10,10,10, .5)' : '1px solid rgba(236, 236, 236, 1)') : 'none',
                         fontSize: isMobile ? '16px' : '12px',
-                        color: 'var(--text-primary)',
+                        color: highlightedIndex === index ? 'var(--text-primary)' : 'var(--text-tertiary)',
                         /* Highlight background color for keyboard navigation or hover */
-                        backgroundColor: highlightedIndex === index ? 'rgba(150,150,150, 1)' : 'var(--bg-primary)'
+                        backgroundColor: highlightedIndex === index ? (isDarkMode ? 'rgba(255,255,255, .1)' : '#f8f8f8ec') : 'var(--bg-primary)'
                       }}
                     >
                       {suggestion.displayName}
@@ -483,13 +498,13 @@ export function AddressInput() {
             gap: '0.75rem',
             boxShadow: focus === 'my-stop'
               ? 'none'
-              : (isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.5), 0px 4px 16px rgba(0,0,0, .4)' : 'inset 0px 0px 1px rgba(0,0,0, .5), 0px 4px 16px rgba(0,0,0, .3)'),
+              : (isDarkMode ? 'inset 0px 4px 16px rgba(255, 255, 255, 0.5), 0px 4px 16px rgba(0,0,0, .4)' : 'inset 0px 0px 1px rgba(0,0,0, .5), 0px 4px 16px rgba(0,0,0, .3)'),
             zIndex: 800,
             transition: 'all 0.5s ease',
           } : {
             padding: '0 1.5rem',
             height: '40px',
-            fontWeight: '600',
+            fontWeight: '500',
             backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
             color: 'var(--text-primary)',
             border: 'none',
@@ -500,9 +515,9 @@ export function AddressInput() {
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
-            boxShadow: '0 4px 12px var(--shadow-large)',
+            boxShadow: '0 4px 12px var(--shadow-large), var(--edge-inner-primary)',
             transition: 'all 0.2s ease',
-            gap: '0.75rem',
+            gap: '0.5rem',
           }}
         >
           <MapPinIcon filled style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />

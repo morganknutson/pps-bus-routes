@@ -59,7 +59,7 @@ class SchoolBoundaryService {
      * Find assigned schools for a given lat/lng
      * @param {number} lat 
      * @param {number} lng 
-     * @returns {object} Assigned schools by type (elementary, middle, high)
+     * @returns {object} Assigned schools by type (elementary, middle, high) - each is an array
      */
     getAssignedSchools(lat, lng) {
         if (!this.boundaries || this.boundaries.length === 0) {
@@ -68,10 +68,18 @@ class SchoolBoundaryService {
 
         const point = turf.point([lng, lat]); // Turf uses [lng, lat]
         const assigned = {
-            elementary: null,
-            middle: null,
-            high: null,
-            k8: null
+            elementary: [],
+            middle: [],
+            high: [],
+            k8: []
+        };
+
+        // Track school names to avoid duplicates
+        const seenSchools = {
+            elementary: new Set(),
+            middle: new Set(),
+            high: new Set(),
+            k8: new Set()
         };
 
         try {
@@ -96,26 +104,37 @@ class SchoolBoundaryService {
                     // zonetypes from ArcGIS: "Elementary School", "Middle School", "High School", "K5", "K8", "MS", "HS"
                     
                     if (zonetype === 'K5' || zonetype === 'Elementary School' || zonetype.includes('Elementary')) {
-                        assigned.elementary = schoolData;
+                        if (!seenSchools.elementary.has(name)) {
+                            seenSchools.elementary.add(name);
+                            assigned.elementary.push(schoolData);
+                        }
                     } else if (zonetype === 'MS' || zonetype === 'Middle School' || zonetype.includes('Middle')) {
-                        assigned.middle = schoolData;
+                        if (!seenSchools.middle.has(name)) {
+                            seenSchools.middle.add(name);
+                            assigned.middle.push(schoolData);
+                        }
                     } else if (zonetype === 'HS' || zonetype === 'High School' || zonetype.includes('High')) {
-                        assigned.high = schoolData;
+                        if (!seenSchools.high.has(name)) {
+                            seenSchools.high.add(name);
+                            assigned.high.push(schoolData);
+                        }
                     } else if (zonetype === 'K8' || zonetype.includes('K8')) {
                         // K8 is often mostly Elementary but covers Middle too. 
                         // Usually replaces both Elementary and Middle, or just Elementary.
-                        // For now, put it in k8 field.
-                        assigned.k8 = schoolData;
+                        if (!seenSchools.k8.has(name)) {
+                            seenSchools.k8.add(name);
+                            assigned.k8.push(schoolData);
+                        }
                     }
                 }
             }
 
-            // Logic to fallback K8 -> Elementary if Elementary is missing
-            if (assigned.k8 && !assigned.elementary) {
-                assigned.elementary = { ...assigned.k8, type: 'K-8 School (Elementary)' };
+            // Logic to fallback K8 -> Elementary/Middle if those are empty
+            if (assigned.k8.length > 0 && assigned.elementary.length === 0) {
+                assigned.elementary = assigned.k8.map(school => ({ ...school, type: 'K-8 School (Elementary)' }));
             }
-            if (assigned.k8 && !assigned.middle) {
-                assigned.middle = { ...assigned.k8, type: 'K-8 School (Middle)' };
+            if (assigned.k8.length > 0 && assigned.middle.length === 0) {
+                assigned.middle = assigned.k8.map(school => ({ ...school, type: 'K-8 School (Middle)' }));
             }
 
         } catch (error) {

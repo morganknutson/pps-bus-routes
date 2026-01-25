@@ -24,7 +24,7 @@ export function DirectionToggle({
             backgroundColor: 'var(--bg-quaternary)',
             borderRadius: 'var(--radius-pill)',
             overflow: 'hidden',
-            boxShadow: 'var(--edge-outer-tertiary), var(--inset-shadow-quaternary)',
+            boxShadow: 'var(--edge-outer-quaternary), var(--inset-shadow-quaternary)',
         }}>
             <div style={{
                 position: 'absolute',
@@ -99,7 +99,7 @@ export function DirectionToggle({
                     borderRadius: 'var(--radius-pill)',
                     transition: 'left 0.3s ease',
                     zIndex: 1,
-                    boxShadow: 'var(--drop-shadow-tertiary)',
+                    boxShadow: 'var(--drop-shadow-tertiary), var(--edge-inner-primary)',
                 }}
             />
         </div >

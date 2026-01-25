@@ -6,6 +6,7 @@ import { RouteIcon } from './RouteIcon';
 import { ChevronIcon } from './ChevronIcon';
 import { calculateStopNumber, getDisplayStops } from '../utils/routeUtils';
 import type { Route, Stop } from '../types';
+import LogoSpinner from './LogoSpinner';
 
 /**
  * Configuration for route list display options
@@ -79,7 +80,8 @@ function renderStopItem(
     <div
       key={stop.id}
       className={`stop-item ${isClickable ? 'clickable' : ''} ${isSelected ? 'selected' : ''} ${hasError ? 'has-error' : ''}`}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent click from bubbling to route header
         if (isClickable && config.onStopClick) {
           config.onStopClick(route, stop, stopNumber);
         }
@@ -182,19 +184,16 @@ export function RouteListBase({
 
   if (loading && routes.length === 0) {
     return (
-      <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-tertiary)' }}>
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        height: '100%',
+        color: 'var(--text-tertiary)' 
+      }}>
         <div style={{ marginBottom: '0.5rem' }}>
-          <div
-            style={{
-              width: '24px',
-              height: '24px',
-              border: '3px solid var(--border-color)',
-              borderTopColor: 'var(--text-primary)',
-              borderRadius: '50%',
-              animation: 'spin 1s linear infinite',
-              margin: '0 auto',
-            }}
-          />
+          <LogoSpinner size={22} color="var(--text-tertiary)" />
         </div>
         <p>Loading routes...</p>
       </div>
@@ -326,21 +325,6 @@ export function RouteListBase({
       <div
         key={route.id}
         className={`route-item ${isRouteSelected ? 'selected' : ''}`}
-        onMouseDown={(e) => {
-          if (config.showRouteSelection) {
-            e.currentTarget.style.filter = 'brightness(0.9)';
-          }
-        }}
-        onMouseUp={(e) => {
-          if (config.showRouteSelection) {
-            e.currentTarget.style.filter = 'none';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (config.showRouteSelection) {
-            e.currentTarget.style.filter = 'none';
-          }
-        }}
       >
         <div style={{ display: 'flex', alignItems: 'stretch' }}>
           {/* Route header - can be customized via config */}
@@ -357,6 +341,21 @@ export function RouteListBase({
                 flex: 1,
                 minWidth: 0,
                 cursor: config.showRouteSelection ? 'pointer' : 'default',
+              }}
+              onMouseDown={(e) => {
+                if (config.showRouteSelection) {
+                  e.currentTarget.style.filter = 'brightness(0.9)';
+                }
+              }}
+              onMouseUp={(e) => {
+                if (config.showRouteSelection) {
+                  e.currentTarget.style.filter = 'none';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (config.showRouteSelection) {
+                  e.currentTarget.style.filter = 'none';
+                }
               }}
               onClick={() => {
                 if (config.showRouteSelection && config.onRouteSelectionChange) {
@@ -383,7 +382,7 @@ export function RouteListBase({
                       height: '16px',
                       borderRadius: '50%',
                       // --- STYLES: Checkbox Background State ---
-                      border: `1px solid ${isRouteSelected ? 'transparent' : 'var(--border-color-darker)'}`,
+                      border: `1px solid ${isRouteSelected ? 'transparent' : 'var(--border-color-tertiary)'}`,
                       backgroundColor: isRouteSelected ? routeColor : 'transparent',
                       boxShadow: isRouteSelected ? 'none' : 'none',
                       display: 'flex',

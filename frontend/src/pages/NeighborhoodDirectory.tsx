@@ -102,7 +102,7 @@ export function NeighborhoodDirectory() {
                 padding: '0.875rem 1rem',
                 paddingLeft: '2.5rem',
                 borderRadius: '12px',
-                border: '1px solid var(--border-color)',
+                border: '1px solid var(--border-color-primary)',
                 backgroundColor: 'var(--bg-secondary)',
                 color: 'var(--text-primary)',
                 fontSize: '16px',
@@ -173,7 +173,7 @@ export function NeighborhoodDirectory() {
                           padding: '0.25rem 0.75rem',
                           backgroundColor: 'var(--bg-primary)',
                           borderRadius: '999px',
-                          border: '1px solid var(--border-color)',
+                          border: '1px solid var(--border-color-primary)',
                           transition: 'all 0.2s ease'
                         }}
                         onMouseEnter={(e) => {
@@ -182,7 +182,7 @@ export function NeighborhoodDirectory() {
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
-                          e.currentTarget.style.borderColor = 'var(--border-color)';
+                          e.currentTarget.style.borderColor = 'var(--border-color-primary)';
                         }}
                       >
                         {school.name}
@@ -191,7 +191,7 @@ export function NeighborhoodDirectory() {
                   </div>
                 </div>
                 
-                <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border-color-primary)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
                     {neighborhood.routeCount} Active Routes
                   </span>
