@@ -43,11 +43,11 @@ const FA_ICONS = [
 
 const StaticModal = ({ children, maxWidth = '345px' }: { children: React.ReactNode, maxWidth?: string }) => (
   <div style={{
-    backgroundColor: 'var(--modal-bg)',
+    backgroundColor: 'var(--bg-primary)',
     borderRadius: '24px',
     width: '100%',
     maxWidth: maxWidth,
-    boxShadow: '0 20px 40px var(--shadow-large)',
+    boxShadow: 'var(--drop-shadow-floating-primary)',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
@@ -780,8 +780,8 @@ export function DesignSystemPage() {
           <ul style={{ color: 'var(--text-secondary)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', paddingLeft: '1.5rem' }}>
             <li>MapView</li><li>SchoolList</li><li>RouteListBase</li><li>SchoolInfoTooltip</li>
             <li>StopInfoTooltip</li><li>HomeInfoTooltip</li><li>Sidebar</li><li>JobList</li>
-            <li>DataRouteList</li><li>DataPageHeader</li><li>AdminPasswordProtection</li>
-            <li>SchoolClosestModal</li><li>SEO</li><li>WhoSection</li><li>DarkModeTileLayer</li>
+            <li>AdminPasswordProtection</li><li>SchoolClosestModal</li><li>SEO</li>
+            <li>WhoSection</li><li>DarkModeTileLayer</li>
           </ul>
         </div>
       </section>

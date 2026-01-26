@@ -1478,7 +1478,7 @@ export function VerificationPage() {
                 gap: '0.5rem',
                 opacity: checkingDriveLinks ? 0.6 : 1,
                 transition: 'all 0.2s',
-                boxShadow: checkingDriveLinks ? 'none' : 'var(--shadow-hover)',
+                boxShadow: checkingDriveLinks ? 'none' : 'var(--drop-shadow-floating-primary)',
                 flex: isMobile ? '1 1 auto' : 'none',
               }}
               onMouseEnter={(e) => {
@@ -1520,7 +1520,7 @@ export function VerificationPage() {
                 gap: '0.5rem',
                 opacity: fetchingAll ? 0.6 : 1,
                 transition: 'all 0.2s',
-                boxShadow: fetchingAll ? 'none' : 'var(--shadow-hover)',
+                boxShadow: fetchingAll ? 'none' : 'var(--drop-shadow-floating-primary)',
                 flex: isMobile ? '1 1 auto' : 'none',
               }}
               onMouseEnter={(e) => {
@@ -1563,7 +1563,7 @@ export function VerificationPage() {
                 gap: '0.5rem',
                 opacity: findingStrangeStops ? 0.6 : 1,
                 transition: 'all 0.2s',
-                boxShadow: 'var(--shadow-hover)',
+                boxShadow: 'var(--drop-shadow-floating-primary)',
                 flex: isMobile ? '1 1 auto' : 'none',
               }}
               title="Scan all routes for stops with incorrect coordinates or missing data"
@@ -1590,7 +1590,7 @@ export function VerificationPage() {
                 gap: '0.5rem',
                 opacity: verifyingSchoolStops ? 0.6 : 1,
                 transition: 'all 0.2s',
-                boxShadow: 'var(--shadow-hover)',
+                boxShadow: 'var(--drop-shadow-floating-primary)',
                 flex: isMobile ? '1 1 auto' : 'none',
               }}
               title="Verify that all routes have correct school stops with matching addresses"
@@ -1617,7 +1617,7 @@ export function VerificationPage() {
                 gap: '0.5rem',
                 opacity: fixingStops ? 0.6 : 1,
                 transition: 'all 0.2s',
-                boxShadow: 'var(--shadow-hover)',
+                boxShadow: 'var(--drop-shadow-floating-primary)',
                 flex: isMobile ? '1 1 auto' : 'none',
               }}
               title="Automatically fix common stop errors (Loading Zones, I-5 errors)"
@@ -1885,7 +1885,7 @@ export function VerificationPage() {
               marginBottom: '2rem',
               backgroundColor: 'var(--bg-secondary)',
               borderRadius: '8px',
-              boxShadow: 'var(--shadow-large)',
+              boxShadow: 'var(--drop-shadow-floating-primary)',
               padding: isMobile ? '1rem' : '1.5rem'
             }}>
               <div style={{
@@ -2179,13 +2179,13 @@ export function VerificationPage() {
           gap: isMobile ? '0.75rem' : '1rem',
           marginBottom: '2rem'
         }}>
-          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
               {pdfStatus.totalSchools}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '12px' : '14px' }}>Total Schools</div>
           </div>
-          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#FFFFFF', marginBottom: '0.5rem' }}>
               {pdfStatus.summary.schoolsWithPdfs}
             </div>
@@ -2194,7 +2194,7 @@ export function VerificationPage() {
               <span>With PDFs</span>
             </div>
           </div>
-          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#FFFFFF', marginBottom: '0.5rem' }}>
               {pdfStatus.summary.totalPdfs}
             </div>
@@ -2203,7 +2203,7 @@ export function VerificationPage() {
               <span>Total PDFs</span>
             </div>
           </div>
-          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#FFFFFF', marginBottom: '0.5rem' }}>
               {Object.values(processingStatus).filter(status => {
                 if (typeof status === 'object' && status !== null) {
@@ -2217,7 +2217,7 @@ export function VerificationPage() {
               <span>Processed</span>
             </div>
           </div>
-          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: isMobile ? '1rem' : '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: isMobile ? '1.75rem' : '2.5rem', fontWeight: 'bold', color: '#f44', marginBottom: '0.5rem' }}>
               {pdfStatus.summary.schoolsWithoutPdfs}
             </div>
@@ -2347,7 +2347,7 @@ export function VerificationPage() {
 
         {/* Schools Table - Desktop */}
         {!isMobile && (
-          <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', overflow: 'hidden' }}>
+            <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', overflow: 'hidden' }}>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
@@ -3068,7 +3068,7 @@ export function VerificationPage() {
                   style={{
                     backgroundColor: 'var(--bg-secondary)',
                     borderRadius: '8px',
-                    boxShadow: 'var(--shadow-large)',
+                    boxShadow: 'var(--drop-shadow-floating-primary)',
                     padding: '1rem',
                     border: '1px solid var(--border-color-primary)',
                   }}
@@ -3352,7 +3352,7 @@ export function VerificationPage() {
         {pdfStatus.schools.some((s: any) => !s.hasPdfs) && (
           <div style={{ marginTop: '3rem' }}>
             <h2 style={{ marginBottom: '1rem', fontSize: isMobile ? '1.25rem' : '1.5rem' }}>Schools Without Route Data</h2>
-            <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', padding: isMobile ? '1rem' : '1.5rem' }}>
+            <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', padding: isMobile ? '1rem' : '1.5rem' }}>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: isMobile ? '12px' : '14px' }}>
                 The following schools do not have publicly available route information at this time:
               </p>

@@ -126,7 +126,7 @@ export function Sidebar({
           overflow: 'hidden',
           transition: isResizing ? 'none' : 'background-color 0.3s ease, border-color 0.3s ease, width 0.1s ease',
           flexShrink: 0,
-          borderRight: '1px solid var(--border-color-secondary)',
+          borderRight: 'none',
         }}
       >
         {/* Resize Handle */}

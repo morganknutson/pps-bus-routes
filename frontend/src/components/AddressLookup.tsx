@@ -249,7 +249,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
         alignItems: 'center',
         backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
         borderRadius: '9999px',
-        boxShadow: '0 4px 12px var(--shadow-large)',
+        boxShadow: 'var(--drop-shadow-floating-primary)',
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease'
       }}>
         {lookupAddress ? (
@@ -330,7 +330,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             left: 0,
             right: 0,
             height: '60px',
-            backgroundColor: 'var(--bg-header)',
+            backgroundColor: 'var(--bg-primary)',
             color: 'var(--text-primary)',
             border: 'none',
             borderTop: '1px solid var(--border-color-primary)',
@@ -341,7 +341,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '0.75rem',
-            boxShadow: '0 -2px 4px var(--shadow)',
+            boxShadow: 'var(--drop-shadow-primary)',
             zIndex: 800,
             transition: 'all 0.2s ease',
           } : {
@@ -358,7 +358,7 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
-            boxShadow: '0 4px 12px var(--shadow-large)',
+            boxShadow: 'var(--drop-shadow-floating-primary)',
             transition: 'all 0.2s ease',
             gap: '0.75rem',
           }}

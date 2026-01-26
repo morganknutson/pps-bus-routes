@@ -38,7 +38,6 @@ export const Button: React.FC<ButtonProps> = ({
    */
   const getVariantStyles = () => {
     const baseStyles = {
-      boxShadow: 'var(--shadow-button)',
       border: 'none',
       transition: 'all 0.2s ease',
       opacity: disabled ? 0.5 : 1, // Visual feedback for disabled state
@@ -50,32 +49,35 @@ export const Button: React.FC<ButtonProps> = ({
         /* Primary button: strong color in light mode, subtle glass effect in dark mode */
         return {
           ...baseStyles,
-          backgroundColor: isDarkMode
-            ? (isHovered ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)')
-            : (isHovered ? '#3071da' : 'var(--brand-primary)'),
-          color: isDarkMode ? 'var(--text-primary)' : 'var(--btn-primary-text)',
-          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'inset 0px 0px 1px rgba(0,0,0, 0.3), 0px 2px 8px rgba(0,0,0, 0.08)',
+          backgroundColor: 
+            isDarkMode ? (
+              isHovered ? 'var(--bg-hover)' : 'var(--bg-primary)') : (
+              isHovered ? 'var(--bg-hover)' : 'var(--bg-primary)'),
+          color: 'var(--text-primary)',
+          boxShadow: 'var(--edge-inner-primary), var(--drop-shadow-primary)', 
         };
       case 'secondary':
         /* Secondary button: subtle background that brightens on hover */
         return {
           ...baseStyles,
-          backgroundColor: isHovered
-            ? (isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)')
-            : (isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)'),
-          color: 'var(--text-secondary)',
-          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'inset 0px 0px 1px rgba(0,0,0, 0.3), 0px 2px 8px rgba(0,0,0, 0.08)',
+          backgroundColor: (isHovered ? 'var(--bg-primary)' : 'var(--bg-secondary)'),
+          color: 'var(--text-primary)',
+          boxShadow: 'var(--edge-inner-secondary), var(--drop-shadow-secondary)',
         };
       case 'tertiary':
+        return {
+          ...baseStyles,
+          backgroundColor: (isHovered ? 'var(--bg-secondary)' : 'var(--bg-tertiary)'),
+          color: 'var(--text-primary)',
+          boxShadow: (
+            isHovered ? 'var(--edge-inner-secondary), var(--drop-shadow-secondary)' 
+                      : 'var(--edge-inner-tertiary), var(--drop-shadow-tertiary)'),
+        };
       case 'dropdown':
         /* Tertiary/Dropdown: Minimal styling, uses theme-based background variables */
         return {
           ...baseStyles,
-          backgroundColor: isDarkMode
-            ? (isHovered ? 'var(--bg-tertiary)' : 'var(--bg-secondary)')
-            : (isHovered ? 'rgba(0,0,0,0.08)' : 'rgba(0,0,0,0.05)'),
-          color: 'var(--text-primary)',
-          boxShadow: isDarkMode ? 'inset 0px 0px 1px rgba(255, 255, 255, 0.25)' : 'var(--shadow-button)',
+          padding: '',
         };
       default:
         return baseStyles;

@@ -60,17 +60,17 @@ const ModalBase: React.FC<ModalProps> = ({
       </style>
       <div
         style={{
-          backgroundColor: isDarkMode ? '#151515' : 'var(--modal-bg)',
+          backgroundColor: 'var(--bg-secondary)',
           borderRadius: 'var(--radius-floating)',
           width: '100%',
           maxWidth: maxWidth,
-          boxShadow: isDarkMode ? 'inset 0px 0px 2px rgba(255, 255, 255, 0.18)' : 'var(--shadow-floating)',
+          boxShadow: 'var(--edge-inner-secondary)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
           animation: 'modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           position: 'relative',
-          border: '1px solid var(--border-color-primary)',
+          border: 'none',
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -123,7 +123,7 @@ export const ModalDescription: React.FC<{ children: React.ReactNode; style?: Rea
 );
 
 export const ModalFooter: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
-  <div style={{ padding: '0 30px 24px', width: '100%', boxSizing: 'border-box', ...style }}>
+  <div style={{ padding: '10px 30px 30px', width: '100%', boxSizing: 'border-box', ...style }}>
     {children}
   </div>
 );

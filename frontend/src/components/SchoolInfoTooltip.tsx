@@ -76,18 +76,18 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
       minWidth: isMobile ? 'auto' : '280px',
       maxWidth: isMobile ? 'none' : '345px',
       width: isMobile ? '100%' : 'auto',
-      backgroundColor: 'var(--bg-primary)',
+      backgroundColor: 'var(--bg-secondary)',
       color: 'var(--text-primary)',
       borderRadius: isMobile ? '0' : 'var(--radius-floating)',
       overflow: 'hidden',
-      boxShadow: isMobile ? 'none' : 'var(--drop-shadow-floating)',
+      boxShadow: isMobile ? 'none' : 'var(--drop-shadow-floating-primary)',
       border: isMobile ? 'none' : 'none',
       pointerEvents: 'auto',
       fontFamily: "'Inter', sans-serif"
     }}>
       <div style={{
         padding: isMobile ? '8px 2rem 12px 2rem' : 'var(--floating-header-padding)',
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-primary)',
         borderBottom: 'none',
         position: 'relative',
         display: 'flex',

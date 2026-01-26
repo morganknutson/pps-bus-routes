@@ -59,7 +59,7 @@ export const SchoolClosestModal: React.FC = () => {
       </Modal.Content>
 
       <Modal.Footer>
-        <Button onClick={handleClose} fullWidth size="large" variant="secondary" align="center">
+        <Button onClick={handleClose} fullWidth size="large" variant="primary" align="center">
           Okay
         </Button>
       </Modal.Footer>

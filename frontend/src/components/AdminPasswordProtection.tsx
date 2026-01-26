@@ -82,7 +82,7 @@ export function AdminPasswordProtection({ children }: AdminPasswordProtectionPro
         backgroundColor: 'var(--bg-secondary)',
         padding: '2rem',
         borderRadius: '12px',
-        boxShadow: '0 4px 12px var(--shadow-large)',
+        boxShadow: 'var(--drop-shadow-floating-primary)',
         width: '100%',
         maxWidth: '400px',
       }}>

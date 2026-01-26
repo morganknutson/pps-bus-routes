@@ -74,7 +74,11 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
   );
 
   return (
-    <div style={{ padding: '0.75rem 1rem', borderTop: '1px solid var(--border-color-primary)', backgroundColor: 'var(--bg-route-list)' }}>
+    <div style={{ 
+        padding: '0.75rem 1rem', 
+        borderTop: '1px solid var(--border-color-primary)', 
+        backgroundColor: 'var(--bg-route-list)' 
+        }}>
       <div style={{ position: 'relative', width: '100%' }}>
         <button
           ref={buttonRef}
@@ -84,7 +88,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
             display: 'flex',
             alignItems: 'center',
             padding: '0 1.25rem',
-            backgroundColor: 'var(--bg-tertiary)',
+            backgroundColor: 'var(--bg-primary)',
             color: 'var(--text-primary)',
             border: 'none',
             borderRadius: '9999px',
@@ -93,7 +97,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
             fontWeight: '500',
             height: '44px',
             boxSizing: 'border-box',
-            boxShadow: '0 1px 3px var(--shadow-large)',
+            boxShadow: 'var(--drop-shadow-primary)',
             transition: 'background-color 0.2s, transform 0.1s',
             overflow: 'hidden',
           }}
@@ -121,7 +125,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
             justifyContent: 'center',
             color: 'var(--text-tertiary)',
           }}>
-            <ChevronIcon direction={isOpen ? 'up' : 'down'} size={10} />
+            <ChevronIcon direction={isOpen ? 'down' : 'up'} size={10} />
           </div>
         </button>
 
@@ -136,7 +140,7 @@ export function SchoolTypeFilter({ filters, onChange }: SchoolTypeFilterProps) {
               backgroundColor: 'var(--bg-primary)',
               border: '1px solid var(--border-color-primary)',
               borderRadius: '12px',
-              boxShadow: '0 4px 20px var(--shadow-large)',
+              boxShadow: 'var(--drop-shadow-primary)',
               padding: '0.5rem',
               zIndex: 1000,
             }}

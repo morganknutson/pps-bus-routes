@@ -157,7 +157,7 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
         {/* Shown when a school is selected but has no bus routes available */}
         {!isLoading && routes.length === 0 ? (
           <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: '1rem' }}>
-            <div style={{ backgroundColor: 'var(--bg-primary)', color: '#f44', fontSize: '14px', padding: '8px 20px', borderRadius: '999px', fontWeight: '700', textTransform: 'uppercase', border: '1px solid rgba(244, 67, 54, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{backgroundColor: 'rgba(244, 67, 54, 0.1)', color: '#f44', fontSize: '14px', padding: '8px 20px', borderRadius: '999px', fontWeight: '700', textTransform: 'uppercase', border: '1px solid rgba(244, 67, 54, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <i className="fas fa-exclamation-triangle" style={{ fontSize: '14px' }}></i>
               NO ROUTES
             </div>

@@ -107,7 +107,7 @@ This allows for discussion and refinement before committing to code changes.
 - Use CSS variables for theming (dark mode support):
   - `var(--bg-primary)`, `var(--bg-secondary)`
   - `var(--text-primary)`, `var(--text-secondary)`, `var(--text-tertiary)`
-  - `var(--shadow-large)`, `var(--shadow-hover)`
+  - `var(--drop-shadow-primary)`, `var(--drop-shadow-floating-primary)`
 - For animations, use inline `<style>` tags when needed
 - Keep styles co-located with components
 

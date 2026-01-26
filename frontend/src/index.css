@@ -13,10 +13,8 @@
   --btn-primary-text: #ffffff;
   --btn-primary-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
 
-  --modal-bg: #ffffff;
   --modal-backdrop: rgba(255, 255, 255, 0.79);
   --app-height: 100vh;
-  --bg-header: #ffffff;
 
   /* Typography Variables */
   --font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -26,76 +24,75 @@
   --font-size-h2: 32px;
   --font-size-h3: 18px;
   --font-size-body: 15px;
-  --line-height-body: 1.7;
+  --line-height-body: 1.4;
 
   /* Button & Layout Tokens */
   --radius-pill: 9999px;
   --radius-floating: 24px;
-  --shadow-button: 0 1px 3px var(--shadow-large);
-  --shadow-floating: 0 20px 40px var(--shadow-large);
+
   --floating-header-padding: 30px 34px 24px;
   --floating-content-padding: 25px 34px 30px;
 
 
 
   /* Light mode color tokens */
-  --brand-primary: #133A60;
-  --brand-secondary: #002C4B;
+  --bg-brand-primary:   #133A60;
+  --bg-brand-secondary: #002C4B;
 
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f8f8;
-  --bg-tertiary: #ebebeb;
+  --bg-hover:      #ffffff;
+  --bg-primary:    #ffffff;
+  --bg-secondary:  #f3f3f3;
+  --bg-tertiary:   #ebebeb;
   --bg-quaternary: #dcdcdc;
-  --bg-quinary: #dbdbdb;
+  --bg-quinary:    #dbdbdb;
 
   --bg-route-list: #f0f0f0;
 
-  --text-primary: #000000;
+  --text-primary:   #000000;
   --text-secondary: #333333;
-  --text-tertiary: #666666;
+  --text-tertiary:  #666666;
 
-  --edge-outer-primary: 0px 0px 2px 0px rgba(255, 255, 255, 1);
-  --edge-outer-secondary: 0px 0px 2px 0px rgba(255, 255, 255, 1);
-  --edge-outer-tertiary: 0px 0px 2px 0px rgba(255, 255, 255, 0.901);
+  --edge-outer-primary:    0px 0px 2px 0px rgba(255, 255, 255, 1);
+  --edge-outer-secondary:  0px 0px 2px 0px rgba(255, 255, 255, 1);
+  --edge-outer-tertiary:   0px 0px 2px 0px rgba(255, 255, 255, 0.901);
   --edge-outer-quaternary: 0px 0px 2px 0px rgba(255, 255, 255, 0.749);
-  --edge-outer-quinary: 0px 0px 2px 0px rgba(255, 255, 255, 0.2);
+  --edge-outer-quinary:    0px 0px 2px 0px rgba(255, 255, 255, 0.2);
 
-  --edge-inner-primary: inset 0px 0px 0px 1px rgba(255, 255, 255, 1);
-  --edge-inner-secondary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.05);
-  --edge-inner-tertiary: inset 0px 0px 1px 0px rgba(255, 255, 255, 1);
+  --edge-inner-primary:    inset 0px 0px 0px 1px rgba(255, 255, 255, 1);
+  --edge-inner-secondary:  inset 0px 0px 2px 0px rgba(255, 255, 255, 1);
+  --edge-inner-tertiary:   inset 0px 0px 1px 0px rgba(255, 255, 255, 1);
   --edge-inner-quaternary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.15);
-  --edge-inner-quinary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.2);
+  --edge-inner-quinary:    inset 0px 0px 2px 0px rgba(255, 255, 255, 0.2);
 
-  --inset-shadow-primary: inset 0 1px 3px 0px rgba(0, 0, 0, 0.01);
-  --inset-shadow-secondary: inset 0 1px 3px 0px rgba(0, 0, 0, .2);
-  --inset-shadow-tertiary: inset 0 1px 3px 0px rgba(0, 0, 0, 0.1);
+  --inset-shadow-primary:    inset 0 1px 3px 0px rgba(0, 0, 0, 0.01);
+  --inset-shadow-secondary:  inset 0 1px 3px 0px rgba(0, 0, 0, .2);
+  --inset-shadow-tertiary:   inset 0 1px 3px 0px rgba(0, 0, 0, 0.1);
   --inset-shadow-quaternary: inset 0 1px 3px 0px rgba(0, 0, 0, 0.15);
-  --inset-shadow-quinary: inset 0 1px 3px 0px rgba(0, 0, 0, 0.2);
+  --inset-shadow-quinary:    inset 0 1px 3px 0px rgba(0, 0, 0, 0.2);
 
-  --drop-shadow-primary: 0 1px 3px 0px rgba(0, 0, 0, 0.5);
-  --drop-shadow-secondary: 0 1px 3px 0px rgba(0, 0, 0, .1);
-  --drop-shadow-tertiary: 0 1px 3px 0px rgba(0, 0, 0, .2);
-  --drop-shadow-quaternary: 0 1px 3px 0px rgba(0, 0, 0, 0.25);
-  --drop-shadow-quinary: 0 1px 3px 0px rgba(0, 0, 0, 0.3);
+  --drop-shadow-primary:    0 1px 3px 0px rgba(0, 0, 0, .2), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-secondary:  0 1px 3px 0px rgba(0, 0, 0, .2), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-tertiary:   0 1px 3px 0px rgba(0, 0, 0, .3), 0 0px 0px 1px rgba(0,0,0, .05);
+  --drop-shadow-quaternary: 0 1px 3px 0px rgba(0, 0, 0, .3), 0 0px 0px 1px rgba(0,0,0, .05);
+  --drop-shadow-quinary:    0 1px 3px 0px rgba(0, 0, 0, .4), 0 0px 0px 1px rgba(0,0,0, .06);
 
-  --drop-shadow-floating: 0 10px 38px rgba(0,0,0, .2);
-
+  --drop-shadow-floating-primary:    0 10px 38px rgba(0,0,0, .2), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-floating-secondary:  0 10px 38px rgba(0,0,0, .3), 0 0px 0px 1px rgba(0,0,0, .05);
+  --drop-shadow-floating-tertiary:   0 10px 38px rgba(0,0,0, .4), 0 0px 0px 1px rgba(0,0,0, .06);
+  --drop-shadow-floating-quaternary: 0 10px 38px rgba(0,0,0, .5), 0 0px 0px 1px rgba(0,0,0, .07);
+  --drop-shadow-floating-quinary:    0 10px 38px rgba(0,0,0, .6), 0 0px 0px 1px rgba(0,0,0, .08);
+  
   --faux-border: 0 0px 0px 1px rgba(0, 0, 0, 0.1);
 
-  --border-color-primary: #e8e8e8;
-  --border-color-secondary: #dfdfdf;
-  --border-color-tertiary: #d6d6d6;
+  --border-color-primary:    #e8e8e8;
+  --border-color-secondary:  #dfdfdf;
+  --border-color-tertiary:   #d6d6d6;
   --border-color-quaternary: #b0b0b0;
-  --border-color-quinary: #999999;
+  --border-color-quinary:    #999999;
 
 
-  --border-color-divider-selected: rgba(0, 0, 0, 0.04);
+  --border-color-divider-selected:   rgba(0, 0, 0, 0.04);
   --border-color-divider-unselected: rgba(0, 0, 0, 0.05);
-
-
-  --shadow: rgba(0, 0, 0, 0.05);
-  --shadow-hover: rgba(0, 0, 0, 0.15);
-  --shadow-large: rgba(0, 0, 0, 0.2);
 
   --active-marker-lens-bg: rgba(0, 0, 0, 0.15);
 
@@ -108,71 +105,65 @@
 
 /* Dark mode color tokens */
 .dark-mode {
-  --brand-primary: #133A60;
-  --brand-secondary: #002C4B;
+  --brand-primary:  #133A60;
+  --brand-secondary:#002C4B;
 
-  --bg-primary: #3a3a3a;
-  --bg-secondary: #2d2d2d;
-  --bg-tertiary: #212121;
-  --bg-quaternary: #1c1c1c;
-  --bg-quinary: #1d1d1d;
+  --bg-hover:       #444444;
+  --bg-primary:     #3a3a3a;
+  --bg-secondary:   #2d2d2d;
+  --bg-tertiary:    #212121;
+  --bg-quaternary:  #1c1c1c;
+  --bg-quinary:     #1d1d1d;
 
-  --bg-route-list: #2d2d2d;
+  --bg-route-list:  #2d2d2d;
 
-  --text-primary: #ffffff;
+  --text-primary:   #ffffff;
   --text-secondary: #e0e0e0;
-  --text-tertiary: #b0b0b0;
+  --text-tertiary:  #b0b0b0;
 
-  --edge-outer-primary: 0px 0px 2px 0px rgba(255, 255, 255, 0.01);
-  --edge-outer-secondary: 0px 0px 2px 0px rgba(255, 255, 255, 0.08);
-  --edge-outer-tertiary: 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
+  --edge-outer-primary:    0px 0px 2px 0px rgba(255, 255, 255, 0.01);
+  --edge-outer-secondary:  0px 0px 2px 0px rgba(255, 255, 255, 0.08);
+  --edge-outer-tertiary:   0px 0px 2px 0px rgba(255, 255, 255, 0.1);
   --edge-outer-quaternary: 0px 0px 2px 0px rgba(255, 255, 255, 0.049);
-  --edge-outer-quinary: 0px 0px 2px 0px rgba(255, 255, 255, 0.2);
+  --edge-outer-quinary:    0px 0px 2px 0px rgba(255, 255, 255, 0.2);
 
-  --edge-inner-primary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.157);
-  --edge-inner-secondary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.05);
-  --edge-inner-tertiary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
-  --edge-inner-quaternary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.15);
-  --edge-inner-quinary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.2);
+  --edge-inner-primary:    inset 0px 0px 2px 0px rgba(255, 255, 255, 0.157);
+  --edge-inner-secondary:  inset 0px 0px 2px 0px rgba(255, 255, 255, 0.13);
+  --edge-inner-tertiary:   inset 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
+  --edge-inner-quaternary: inset 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
+  --edge-inner-quinary:    inset 0px 0px 2px 0px rgba(255, 255, 255, 0.09);
 
-  --inset-shadow-primary: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.01);
-  --inset-shadow-secondary: inset 0px 1px 2px 1px rgba(0, 0, 0, .1);
-  --inset-shadow-tertiary: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+  --inset-shadow-primary:    inset 0px 0px 2px 0px rgba(0, 0, 0, 0.01);
+  --inset-shadow-secondary:  inset 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  --inset-shadow-tertiary:   inset 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
   --inset-shadow-quaternary: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
-  --inset-shadow-quinary: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+  --inset-shadow-quinary:    inset 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
 
-  --drop-shadow-primary: 0px 0px 2px 0px rgba(0, 0, 0, 0.01);
-  --drop-shadow-secondary: 0px 1px 2px 1px rgba(0, 0, 0, .1);
-  --drop-shadow-tertiary: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
-  --drop-shadow-quaternary: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
-  --drop-shadow-quinary: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+  --drop-shadow-primary:    0px 1px 3px rgba(0, 0, 0, 0.4), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-secondary:  0px 1px 3px rgba(0, 0, 0, 0.5), 0 0px 0px 1px rgba(0,0,0, .1);
+  --drop-shadow-tertiary:   0px 1px 3px rgba(0, 0, 0, 0.9), 0 0px 0px 1px rgba(0,0,0, .25);
+  --drop-shadow-quaternary: 0px 1px 3px rgba(0, 0, 0, 0.4), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-quinary:    0px 1px 3px rgba(0, 0, 0, 0.4), 0 0px 0px 1px rgba(0,0,0, .04);
 
-  --drop-shadow-floating: 0 10px 38px rgba(0,0,0, .8);
+  --drop-shadow-floating-primary:    0 10px 38px rgba(0,0,0, .4), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-floating-secondary:  0 10px 38px rgba(0,0,0, .5), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-floating-tertiary:   0 10px 38px rgba(0,0,0, .6), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-floating-quaternary: 0 10px 38px rgba(0,0,0, .7), 0 0px 0px 1px rgba(0,0,0, .04);
+  --drop-shadow-floating-quinary:    0 10px 38px rgba(0,0,0, .8), 0 0px 0px 1px rgba(0,0,0, .04);
 
   --faux-border: 0 0px 0px 1px rgba(255, 255, 255, 0.1);
 
-  --border-color-primary: #404040;
-  --border-color-secondary: #333333;
-  --border-color-tertiary: #242424;
+  --border-color-primary:    #404040;
+  --border-color-secondary:  #333333;
+  --border-color-tertiary:   #242424;
   --border-color-quaternary: #2a2a2a;
-  --border-color-quinary: #242424;
+  --border-color-quinary:    #242424;
 
-  --border-color-divider-selected: #2a2a2a;
+  --border-color-divider-selected:   #2a2a2a;
   --border-color-divider-unselected: #393939;
 
-  --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-hover: rgba(0, 0, 0, 0.4);
-  --shadow-large: rgba(0, 0, 0, 0.2);
-
-  --bg-hover: rgba(255, 255, 255, 0.05);
   --active-marker-lens-bg: rgba(255, 255, 255, 0.15);
-  --bg-header: #3A3A3A;
 
-  /* Component specific overrides */
-  --btn-primary-bg: #1c1c1c;
-  --btn-primary-text: #ffffff;
-  --btn-primary-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.25);
-  --modal-bg: #1c1c1c;
   --modal-backdrop: rgba(0, 0, 0, 0.79);
 
   /* School Type Colors - Brightened for Dark Mode */
@@ -303,12 +294,34 @@ input:-webkit-autofill:active {
   width: 100%;
   z-index: 1;
   background-color: #ffffff !important;
+  position: relative;
 }
+
+/* Inner shadow overlay that persists on top of map tiles */
+.leaflet-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2), inset 1px 0px 0px 0px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Stronger inner shadow for dark mode */
+.dark-mode .leaflet-container::after {
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), inset 1px 0px 0px 0px rgba(0, 0, 0, 0.15);
+}
+
 
 /* Dark mode: black background to prevent white flash while loading tiles */
 .dark-mode .leaflet-container {
   background-color: #000000 !important;
 }
+
+
 
 /* Style for numbered markers */
 .leaflet-marker-icon.numbered-marker {
@@ -359,7 +372,7 @@ input:-webkit-autofill:active {
   padding: 0 0 3px !important;
   width: 36px !important;
   height: 36px !important;
-  box-shadow: 0 2px 4px var(--shadow) !important;
+  box-shadow: var(--drop-shadow-primary) !important;
   border-radius: 50% !important;
   margin-bottom: 8px !important;
   background-color: var(--bg-primary) !important;
@@ -369,6 +382,7 @@ input:-webkit-autofill:active {
   font-size: 18px !important;
   line-height: 1 !important;
   transition: background-color 0.2s ease, transform 0.1s ease;
+  cursor: pointer !important;
 }
 
 .dark-mode .leaflet-control-zoom a:hover,
@@ -457,7 +471,7 @@ School List
 
 .school-search-section {
   padding: 0.5rem 1rem 1rem 1rem;
-  border-bottom: 1px solid var(--border-color-darkest);
+  border-bottom: 1px solid var(--border-color-secondary);
   flex-shrink: 0;
   transition: border-color 0.3s ease;
   background-color: var(--bg-secondary);
@@ -514,7 +528,7 @@ School List
 
 .school-search-input:focus {
   outline: none;
-  border-color: var(--border-color-darkest);
+  border-color: var(--border-color-secondary);
 }
 
 .school-search-input.has-clear {
@@ -565,7 +579,6 @@ School List Container
   flex: 1;
   overflow: auto;
   background-color: var(--bg-quinary);
-  border-top: 1px solid var(--border-color-secondary);
 }
 
 .school-no-results {
@@ -599,7 +612,7 @@ School List Items
 
 .school-list-item.selected {
   background-color: var(--bg-primary);
-  box-shadow: var(--drop-shadow-quinary), var(--edge-inner-primary);
+  box-shadow: var(--drop-shadow-quaternary), var(--edge-inner-primary);
 }
 
 /* Route and Stop List Items */
@@ -641,10 +654,7 @@ School List Items
 
 .route-item.selected .stop-list {
   border-top: 1px solid var(--border-color-divider-selected);
-
 }
-
-.route-item:not(.selected):active .stop-list {}
 
 .stop-item {
   padding: 0.75rem 0.75rem 0.75rem .55rem;
@@ -741,10 +751,6 @@ School List Items
   margin-bottom: 0.25rem;
 }
 
-.stop-neighborhood-only {
-  /* Inherits from .eyebrow */
-}
-
 .stop-error-message {
   font-size: 10px;
   color: #ff6b6b;
@@ -839,8 +845,7 @@ School List Items
 }
 
 .school-section-header {
-  padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid var(--border-color-darker);
+  padding: 1rem 2rem;
   background-color: var(--bg-tertiary);
   display: flex;
   align-items: center;
@@ -884,10 +889,6 @@ School List Items
   justify-content: center;
 }
 
-.logo-spinner-svg {
-  /* Static container */
-}
-
 /* The route stroke that animates along the path */
 .logo-route-line {
   stroke-dasharray: 300;
@@ -908,4 +909,239 @@ School List Items
   100% {
     stroke-dashoffset: -300;
   }
+}
+
+/* 
+
+Header Styles
+
+*/
+
+.app-header {
+  width: 100%;
+  background-color: var(--bg-primary);
+  box-shadow: var(--drop-shadow-primary);
+  z-index: 1002;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+
+/* Dark gray header in dark mode */
+.theme-dark .app-header,
+.dark-mode .app-header {
+  background-color: var(--bg-primary);
+}
+
+.app-header.sticky-header {
+  position: sticky;
+  top: 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  padding-right: 0;
+  max-width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mock-logo {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.logo-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+/* Logo styling - invert in light mode since logo is white */
+.header-logo {
+  filter: brightness(0);
+  transition: filter 0.3s ease;
+}
+
+/* Keep logo white in dark mode */
+.theme-dark .header-logo,
+.dark-mode .header-logo {
+  filter: brightness(0) invert(1);
+}
+
+/* Header text colors - dark text for white background */
+.app-header {
+  --header-text-color: #000000;
+  --header-text-color-muted: rgba(0, 0, 0, 0.7);
+  --header-border-color: rgba(0, 0, 0, 0.2);
+  --header-border-color-hover: rgba(0, 0, 0, 0.4);
+  --header-bg-hover: rgba(0, 0, 0, 0.05);
+  color: var(--header-text-color);
+}
+
+.app-header a,
+.app-header button,
+.app-header .admin-link {
+  color: var(--header-text-color);
+}
+
+.app-header a:hover,
+.app-header button:hover {
+  color: var(--header-text-color);
+}
+
+/* Dark mode - use light text on dark gray background */
+.theme-dark .app-header,
+.dark-mode .app-header {
+  --header-text-color: #ffffff;
+  --header-text-color-muted: rgba(255, 255, 255, 0.8);
+  --header-border-color: rgba(255, 255, 255, 0.3);
+  --header-border-color-hover: rgba(255, 255, 255, 0.6);
+  --header-bg-hover: rgba(255, 255, 255, 0.1);
+  color: var(--header-text-color);
+}
+
+.theme-dark .app-header a,
+.theme-dark .app-header button,
+.theme-dark .app-header .admin-link,
+.dark-mode .app-header a,
+.dark-mode .app-header button,
+.dark-mode .app-header .admin-link {
+  color: var(--header-text-color);
+}
+
+.theme-dark .app-header a:hover,
+.theme-dark .app-header button:hover,
+.dark-mode .app-header a:hover,
+.dark-mode .app-header button:hover {
+  color: var(--header-text-color);
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: text-decoration 0.2s ease, color 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.nav-link-active {
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.dark-mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.admin-link {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+/* Sidebar menu */
+.sidebar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  background-color: var(--bg-primary);
+  border-right: 1px solid var(--border-color-primary);
+  box-shadow: var(--drop-shadow-primary);
+  z-index: 999;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-menu.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sidebar-content {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+  display: block;
+  transition: background-color 0.2s ease, color 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav-link:hover {
+  background-color: var(--bg-secondary);
+  text-decoration: none;
+}
+
+.sidebar-nav-link-active {
+  color: var(--text-secondary);
+  font-weight: 600;
+  background-color: var(--bg-secondary);
+  border-left-color: var(--text-secondary);
+}
+
+/* Content shifting when menu is open - push content to the right */
+body.menu-open > #root {
+  margin-left: 280px;
+  transition: margin-left 0.3s ease;
+  width: calc(100vw - 280px);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1001;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+  isolation: isolate; /* Create new stacking context */
+}
+
+/* Ensure header also shifts and appears above sidebar */
+body.menu-open .app-header {
+  position: relative;
+  z-index: 1002;
 }

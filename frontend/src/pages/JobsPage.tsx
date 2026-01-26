@@ -192,7 +192,7 @@ export function JobsPage() {
               backgroundColor: 'var(--bg-secondary)',
               border: '1px solid var(--bg-primary)',
               borderRadius: '8px',
-              boxShadow: 'var(--shadow-large)',
+              boxShadow: 'var(--drop-shadow-floating-primary)',
               marginBottom: '1rem',
             }}>
               <p style={{ margin: 0, fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
@@ -218,31 +218,31 @@ export function JobsPage() {
       {/* Statistics Cards */}
       {stats && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#888', marginBottom: '0.5rem' }}>
               {stats.waiting}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>⏳ Waiting</div>
           </div>
-          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#ffa500', marginBottom: '0.5rem' }}>
               {stats.active}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>🔄 Active</div>
           </div>
-          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#FFFFFF', marginBottom: '0.5rem' }}>
               {stats.completed}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>✅ Completed</div>
           </div>
-          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#f44', marginBottom: '0.5rem' }}>
               {stats.failed}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>❌ Failed</div>
           </div>
-          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', textAlign: 'center' }}>
+          <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', textAlign: 'center' }}>
             <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
               {stats.total}
             </div>

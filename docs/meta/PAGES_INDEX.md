@@ -180,14 +180,13 @@ This document provides a comprehensive index of all pages in the application to 
 
 ## Deprecated Pages
 
-### 8. Schools List (`/data/schools`) - **DEPRECATED**
-- **File**: `frontend/src/pages/SchoolsList.tsx`
-- **Status**: ⚠️ **DEPRECATED** - Part of deprecated data management
-- **Purpose**: Old schools list page
+### 8. Schools List (`/data/schools`) - **REMOVED**
+- **File**: ~~`frontend/src/pages/SchoolsList.tsx`~~ (deleted)
+- **Status**: ✅ **REMOVED** - Deprecated data management page has been deleted
 - **Replacement**: Use `/admin` instead
 - **Special Notes**: 
-  - Part of deprecated data management system
-  - **DO NOT** work on this page
+  - This page and its associated components have been completely removed
+  - Related components also removed: `DataPageHeader.tsx`, `DataRouteList.tsx`
 
 ---
 
@@ -202,7 +201,6 @@ This document provides a comprehensive index of all pages in the application to 
 | TechPage | `/tech` | Documentation | ❌ | ❌ | ❌ | ❌ | ❌ |
 | VerificationPage | `/verification` | Data verification | ❌ | ❌ | ❌ | ❌ | ❌ |
 | JobsPage | `/jobs` | Job management | ❌ | ❌ | ❌ | ❌ | ❌ |
-| SchoolsList | `/data/schools` | **DEPRECATED** | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -221,8 +219,6 @@ This document provides a comprehensive index of all pages in the application to 
 ### Page-Specific Components
 - `AddressInput` - Simple address input (ExplorerApp)
 - `AddressLookup` - Advanced address lookup with autocomplete (AdminApp)
-- `DataRouteList` - Route list component (used by deprecated SchoolsList page)
-- `DataPageHeader` - Header component (used by deprecated SchoolsList page)
 
 ---
 
@@ -256,10 +252,9 @@ This document provides a comprehensive index of all pages in the application to 
 2. **Admin vs Explorer**: 
    - `/admin` = Admin interface with editing
    - `/*` = User-facing Explorer page
-3. **Deprecated Pages**: Do not work on `/data/schools` - use `/admin` instead
-4. **Tech Page Updates**: Must update `TechPage.tsx` when functionality changes
-5. **Component Reuse**: Many components are shared - check if changes affect multiple pages
-6. **State Management**: Changes to store structure may affect multiple pages
+3. **Tech Page Updates**: Must update `TechPage.tsx` when functionality changes
+4. **Component Reuse**: Many components are shared - check if changes affect multiple pages
+5. **State Management**: Changes to store structure may affect multiple pages
 
 ---
 
@@ -267,8 +262,7 @@ This document provides a comprehensive index of all pages in the application to 
 
 - **User-facing pages**: `/` (HomePage), `/explore` (Explorer), `/neighborhoods` (Neighborhoods)
 - **Admin pages**: `/admin`
-- **Utility pages**: `/tech`, `/verification`, `/jobs`
-- **Deprecated pages**: `/data/schools` (do not modify)
+- **Utility pages**: `/tech`, `/verification`, `/jobs`, `/data` (read-only)
 
 ---
 

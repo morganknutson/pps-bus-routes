@@ -34,6 +34,10 @@ interface StopPillProps {
   color: string;
 }
 
+/* ========================================
+ * STOP PILL COMPONENT
+ * Displays: "Stop" label + numbered circle + optional time
+ * ======================================== */
 const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
   const hasTime = !!time && time.trim().length > 0;
 
@@ -44,6 +48,7 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
       gap: '8px',
       height: '24px',
     }}>
+      {/* --- "Stop" Label --- */}
       <span style={{
         fontSize: '13px',
         fontWeight: '600',
@@ -52,6 +57,10 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
       }}>
         Stop
       </span>
+      
+      {/* --- Stop Number Circle --- 
+       * Style: Transparent with border, primary text
+       */}
       <div style={{
         width: '20px',
         height: '20px',
@@ -63,10 +72,14 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
         color: 'var(--text-primary)',
         fontSize: '11px',
         fontWeight: 'bold',
-        border: '1px solid var(--border-color-tertiary)',
+        border: '1px solid var(--text-tertiary)',
       }}>
         {number}
       </div>
+      
+      {/* --- Time Display (conditional) --- 
+       * Only shown when time is provided and not empty
+       */}
       {hasTime && (
         <span style={{
           whiteSpace: 'nowrap',
@@ -114,32 +127,44 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
   };
 
   return (
+    /* ========================================
+     * MAIN CONTAINER
+     * ======================================== */
     <div style={{
+      /* --- Mobile State --- */
       minWidth: isMobile ? 'auto' : '280px',
       maxWidth: isMobile ? 'none' : '350px',
       width: isMobile ? '100%' : 'auto',
-      backgroundColor: 'var(--bg-primary)',
-      color: 'var(--text-primary)',
       borderRadius: isMobile ? '0' : 'var(--radius-floating)',
-      overflow: 'hidden',
-      boxShadow: isMobile ? 'none' : 'var(--shadow-floating)',
+      boxShadow: isMobile ? 'none' : 'var(--drop-shadow-floating-primary)',
       border: isMobile ? 'none' : 'none',
+      
+      /* --- Common Styles --- */
+      backgroundColor: 'var(--bg-secondary)',
+      color: 'var(--text-primary)',
+      overflow: 'hidden',
       pointerEvents: 'auto',
       fontFamily: "'Inter', sans-serif"
     }}>
-      {/* Header with Route Info */}
+      {/* ========================================
+       * HEADER SECTION
+       * Contains: Route name, effective date, stop pill, close button
+       * ======================================== */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         padding: isMobile ? '8px 2rem 12px 2rem' : 'var(--floating-header-padding)',
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-primary)',
         position: 'relative',
         borderBottom: 'none'
       }}>
+        {/* --- Route Name & Stop Info --- */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
+          {/* Route Name (responsive sizing) */}
           <span style={{ fontWeight: '500', fontSize: isMobile ? '26px' : '18px', letterSpacing: '-0.025em', lineHeight: '22px' }}>
             Route {route.name.replace('-upcoming', '')}
+            {/* Effective Date Badge (only shown for upcoming routes) */}
             {route.name.includes('-upcoming') && route.effectiveDate && (
               <span style={{
                 fontWeight: 'normal',
@@ -153,16 +178,23 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
               </span>
             )}
           </span>
+          {/* Stop Pill (only shown for numbered stops) */}
           {stopNumber > 0 && (
             <div style={{ marginBottom: isMobile ? '14px' : '0px', marginTop: '4px' }}>
               <StopPill number={stopNumber} time={stop.time} color={route.color} />
             </div>
           )}
         </div>
+        
+        {/* --- Close Button (desktop only) --- */}
         {!isMobile && (
           <button
             onClick={(e) => { e.stopPropagation(); onClose(); }}
             style={{
+              /* CLOSE BUTTON STATES:
+               * Default: color = var(--text-tertiary)
+               * Hover: (handled by :hover CSS in index.css)
+               */
               background: 'none',
               border: 'none',
               display: 'flex',
@@ -185,19 +217,31 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         )}
       </div>
 
-      {/* Main Content */}
+      {/* ========================================
+       * MAIN CONTENT SECTION
+       * Contains: Address, Neighborhood
+       * Note: School stops don't use this tooltip (they show SchoolInfoTooltip)
+       * ======================================== */}
       <div style={{ padding: isMobile ? '20px 2rem' : 'var(--floating-content-padding)' }}>
-        {/* Details Grid */}
         <div style={{ display: 'grid', gap: '1rem' }}>
-          {/* Address & Neighborhood */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            
+            {/* --- ADDRESS SECTION --- */}
             <div style={{ fontSize: isMobile ? '16px' : '13px', marginTop: isMobile ? '16px' : '5px' }}>
               <div className="eyebrow">Address</div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                <div style={{ color: 'var(--text-primary)', fontWeight: '600', lineHeight: '1.4' }}>
+                <div style={{ color: 'var(--text-primary)', fontWeight: '500', lineHeight: '1.4' }}>
+                  
+                  {/* ADDRESS DISPLAY STATES:
+                   * 1. School Stop: Shows school name (NOTE: Never happens - school stops use SchoolInfoTooltip)
+                   * 2. Street Highlighting Enabled: Shows interactive street names
+                   * 3. Default: Shows formatted address
+                   */}
                   {stop.isSchoolStop && stop.schoolName ? (
+                    /* State 1: School Stop - Bold school name (defensive code, shouldn't reach here) */
                     getSchoolDisplayName(stop.schoolName)
                   ) : enableStreetHighlighting && streets.length > 0 ? (
+                    /* State 2: Interactive Street Names */
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                       {streets.map((streetName, index) => {
                         const isHighlighted = highlightedStreetName === streetName;
@@ -205,7 +249,17 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
 
                         return (
                           <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            {/* Ampersand separator between streets */}
                             {index > 0 && <span style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>&</span>}
+                            
+                            {/* STREET NAME STATES:
+                             * - Default: var(--text-primary)
+                             * - Hover: route.color
+                             * - Highlighted: #FFD700 (gold)
+                             * - Loading: var(--text-tertiary) + spinner
+                             * - Loading cursor: not-allowed
+                             * - Interactive cursor: pointer
+                             */}
                             <span
                               onClick={() => {
                                 if (!isLoading) {
@@ -222,6 +276,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                               onMouseLeave={(e) => { if (!isLoading) e.currentTarget.style.color = isHighlighted ? '#FFD700' : 'var(--text-primary)'; }}
                             >
                               {formatStreetName(streetName)}
+                              {/* Loading spinner */}
                               {isLoading && <i className="fas fa-circle-notch fa-spin" style={{ marginLeft: '6px', fontSize: '10px' }}></i>}
                             </span>
                           </div>
@@ -229,12 +284,14 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                       })}
                     </div>
                   ) : (
+                    /* State 3: Default formatted address */
                     formattedAddress
                   )}
                 </div>
               </div>
             </div>
 
+            {/* --- NEIGHBORHOOD SECTION (conditional) --- */}
             {stop.neighborhood && (
               <div style={{ fontSize: isMobile ? '16px' : '13px' }}>
                 <div className="eyebrow">Neighborhood</div>
@@ -243,30 +300,24 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                 </div>
               </div>
             )}
-
-            {stop.isSchoolStop && (
-              <div style={{
-                fontSize: '10px',
-                color: 'var(--text-tertiary)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontWeight: '700',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                marginTop: '4px'
-              }}>
-                <i className="fas fa-school" style={{ fontSize: '9px' }}></i>
-                <span>School Zone</span>
-              </div>
-            )}
           </div>
         </div>
-
-        {/* Action Row */}
-        <div style={{ display: 'flex', gap: '10px', marginTop: '2.5rem' }}>
+        </div>
+        {/* ========================================
+         * ACTION BUTTONS
+         * Contains: Directions button, Copy address button
+         * ======================================== */}
+        <div style={{ 
+            display: 'flex', 
+            gap: '10px', 
+            marginTop: '0rem', 
+            backgroundColor: 'var(--bg-secondary)', 
+            padding: '0 24px 24px' 
+            }}>
+          
+          {/* --- Directions Button (opens Google Maps) --- */}
           <Button
-            variant="secondary"
+            variant="primary" 
             size="medium"
             fullWidth
             align="center"
@@ -278,8 +329,14 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
           >
             Directions
           </Button>
+          
+          {/* --- Copy Address Button --- 
+           * BUTTON STATES:
+           * - Default: "Copy" text, fa-copy icon
+           * - Copied: "Copied" text, fa-check icon (green), auto-resets after 2s
+           */}
           <Button
-            variant="secondary"
+            variant="primary"
             size="medium"
             fullWidth
             align="center"
@@ -289,18 +346,23 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             {copied ? 'Copied' : 'Copy'}
           </Button>
         </div>
-      </div>
+      
 
-      {/* Admin Section */}
+      {/* ========================================
+       * ADMIN TOOLS SECTION (conditional)
+       * Shows when: enableStreetPins OR (editingMode + undoHistory)
+       * Contains: Drop Street Pins button, Undo Changes button
+       * ======================================== */}
       {(enableStreetPins || (editingMode && undoHistoryCount > 0)) && (
         <div style={{
           padding: '24px 34px',
-          backgroundColor: 'rgba(78, 205, 196, 0.05)',
+          backgroundColor: 'rgba(78, 205, 196, 0.05)', // Light teal tint
           borderTop: '1px solid var(--border-color-tertiary)',
           display: 'flex',
           flexDirection: 'column',
           gap: '12px'
         }}>
+          {/* --- Admin Section Header --- */}
           <div style={{
             fontSize: '10px',
             fontWeight: '700',
@@ -312,6 +374,12 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             Admin Tools
           </div>
 
+          {/* --- Drop Street Pins Button ---
+           * BUTTON STATES:
+           * - Default: "Drop Pins on Streets", fa-map-marker-alt icon
+           * - Loading: "Dropping pins...", fa-circle-notch fa-spin icon, disabled
+           * Only shown for: non-school stops with street names
+           */}
           {enableStreetPins && !stop.isSchoolStop && streets.length > 0 && (
             <Button
               variant="primary"
@@ -329,9 +397,13 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             </Button>
           )}
 
+          {/* --- Undo Changes Button ---
+           * Shows count of undo operations available
+           * Only shown when: in editing mode with undo history
+           */}
           {editingMode && undoHistoryCount > 0 && (
             <Button
-              variant="secondary"
+              variant="primary"
               size="small"
               fullWidth
               align="left"

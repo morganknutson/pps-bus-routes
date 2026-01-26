@@ -329,7 +329,7 @@ export function ServersPage() {
         backgroundColor: 'var(--bg-secondary)',
         padding: '2rem',
         borderRadius: '12px',
-        boxShadow: '0 4px 12px var(--shadow-large)',
+        boxShadow: 'var(--drop-shadow-floating-primary)',
       }}>
         <h1 style={{
           margin: '0 0 2rem 0',

@@ -16,7 +16,6 @@ import { MapInfoPanel } from './components/MapInfoPanel';
 import { DarkModeTileLayer } from './components/DarkModeTileLayer';
 import { SEO } from './components/SEO';
 import { useStore } from './store/useStore';
-import { SchoolsList } from './pages/SchoolsList';
 import { SchoolDirectory } from './pages/SchoolDirectory';
 import { NeighborhoodDirectory } from './pages/NeighborhoodDirectory';
 import { Neighborhoods } from './pages/Neighborhoods';
@@ -28,7 +27,6 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { ServersPage } from './pages/ServersPage';
-import { ArchitecturePage } from './pages/ArchitecturePage';
 import { SyncDashboardPage } from './pages/SyncDashboardPage';
 import { DesignSystemPage } from './pages/DesignSystemPage';
 import LogoTestPage from './pages/LogoTestPage';
@@ -305,7 +303,7 @@ export function ExplorerApp() {
             {/* Overlay for mobile when no school is selected on routes tab */}
             {isMobile && activeTab === 'routes' && !schoolId && (
               <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1rem', textAlign: 'center', width: 'calc(100% - 2rem)', maxWidth: '320px' }}>
-                <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '16px', padding: '2rem 1.5rem', boxShadow: '0 4px 16px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem', width: '100%', border: '1px solid var(--border-color-primary)' }}>
+                <div style={{ backgroundColor: 'var(--bg-primary)', borderRadius: '16px', padding: '2rem 1.5rem', boxShadow: 'var(--drop-shadow-primary)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem', width: '100%', border: '1px solid var(--border-color-primary)' }}>
                   <i className="fas fa-graduation-cap" style={{ fontSize: '48px', color: 'var(--text-tertiary)', opacity: 0.6 }} />
                   <p style={{ fontSize: '16px', fontWeight: '500', margin: 0, color: 'var(--text-secondary)', lineHeight: '1.4' }}>Please select a school to view routes</p>
                   <button onClick={() => { setSelectedSchool(null); if (isMobile) setSidebarOpen(true); }} style={{ padding: '0.875rem 1.5rem', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-color-primary)', borderRadius: '9999px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', width: '100%' }}>View Schools</button>
@@ -315,7 +313,7 @@ export function ExplorerApp() {
 
             {/* Loading Indicator for Schools */}
             {isLoading && schools.length === 0 && (
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: '0 4px 12px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: 'var(--drop-shadow-primary)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
                 <div style={{ width: '40px', height: '40px', border: '3px solid var(--border-color-primary)', borderTopColor: 'var(--text-primary)', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
                 <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Loading schools...</div>
               </div>
@@ -323,7 +321,7 @@ export function ExplorerApp() {
 
             {/* Loading Indicator for Routes */}
             {isLoading && activeTab === 'routes' && schoolId && (
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: '0 2px 8px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: 'var(--drop-shadow-primary)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
                 <LogoSpinner size={22} color="var(--text-primary)" />
                 <span style={{ fontSize: '14px' }}>Loading routes...</span>
               </div>
@@ -522,7 +520,7 @@ function AdminApp() {
 
             {/* Loading Indicator */}
             {isLoading && activeTab === 'routes' && schoolId && (
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: '0 2px 8px var(--shadow-large)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1000, padding: '0.75rem 1.5rem', backgroundColor: 'var(--bg-primary)', borderRadius: '12px', boxShadow: 'var(--drop-shadow-primary)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
                 <LogoSpinner size={22} color="var(--text-primary)" />
                 <span style={{ fontSize: '14px' }}>Loading routes...</span>
               </div>
@@ -671,14 +669,6 @@ function AppContent() {
           }
         />
         <Route
-          path="/architecture"
-          element={
-            <AdminPasswordProtection>
-              <ArchitecturePage />
-            </AdminPasswordProtection>
-          }
-        />
-        <Route
           path="/sync"
           element={
             <AdminPasswordProtection>
@@ -686,7 +676,6 @@ function AppContent() {
             </AdminPasswordProtection>
           }
         />
-        <Route path="/data/schools" element={<SchoolsList />} />
 
         {/* Path-based routing for admin - catch-all to handle all segments */}
         <Route

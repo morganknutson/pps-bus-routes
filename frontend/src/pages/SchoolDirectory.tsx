@@ -198,16 +198,16 @@ export function SchoolDirectory() {
                     backgroundColor: 'var(--bg-secondary)',
                     borderRadius: '16px',
                     borderLeft: `2px solid ${schoolColor}`,
-                    boxShadow: '0 2px 8px var(--shadow-large)',
+                    boxShadow: 'var(--drop-shadow-floating-primary)',
                     transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px var(--shadow-hover)';
+                    e.currentTarget.style.boxShadow = 'var(--drop-shadow-floating-primary)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px var(--shadow-large)';
+                    e.currentTarget.style.boxShadow = 'var(--drop-shadow-floating-primary)';
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>

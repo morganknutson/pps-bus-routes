@@ -50,7 +50,7 @@ export const NoRoutesModal: React.FC<NoRoutesModalProps> = ({
             </Modal.Content>
 
             <Modal.Footer>
-                <Button onClick={onSelectDifferentSchool} fullWidth size="large" variant="secondary" align="center">
+                <Button onClick={onSelectDifferentSchool} fullWidth size="large" variant="primary" align="center">
                     Select Different School
                 </Button>
             </Modal.Footer>

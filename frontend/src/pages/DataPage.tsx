@@ -371,7 +371,7 @@ export function DataPage() {
 
       {/* Schools Table - Desktop */}
       {!isMobile && (
-        <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', overflow: 'hidden' }}>
+        <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', overflow: 'hidden' }}>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
@@ -867,7 +867,7 @@ export function DataPage() {
       {pdfStatus.schools.some((s: any) => !s.hasPdfs) && (
         <div style={{ marginTop: '3rem' }}>
           <h2 style={{ marginBottom: '1rem', fontSize: isMobile ? '1.25rem' : '1.5rem', color: 'var(--text-primary)' }}>Schools Without Route Data</h2>
-          <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--shadow-large)', padding: isMobile ? '1rem' : '1.5rem' }}>
+          <div style={{ backgroundColor: 'var(--bg-secondary)', borderRadius: '8px', boxShadow: 'var(--drop-shadow-floating-primary)', padding: isMobile ? '1rem' : '1.5rem' }}>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: isMobile ? '12px' : '14px' }}>
               The following schools do not have publicly available route information at this time:
             </p>

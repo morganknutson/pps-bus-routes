@@ -292,7 +292,7 @@ export function AddressInput() {
         /* Theme-aware background color */
         backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
         borderRadius: '9999px',
-        boxShadow: '0 4px 12px var(--shadow-large), var(--edge-inner-primary)',
+        boxShadow: 'var(--drop-shadow-floating-primary), var(--edge-inner-primary)',
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease'
       }}>
         {/* Toggle view between selected address and empty input state */}
@@ -480,7 +480,7 @@ export function AddressInput() {
             left: '1.9rem',
             right: '1.9rem',
             height: '60px',
-            backgroundColor: focus === 'my-stop' ? 'transparent' : 'var(--bg-header)',
+            backgroundColor: focus === 'my-stop' ? 'transparent' : 'var(--bg-primary)',
             color: focus === 'my-stop'
               ? (isDarkMode ? 'rgba(255,255,255, .4)' : 'rgba(0, 0, 0, .4)')
               : (isDarkMode ? 'rgba(255,255,255, 1)' : 'rgba(0, 0, 0, 1)'),
@@ -498,7 +498,7 @@ export function AddressInput() {
             gap: '0.75rem',
             boxShadow: focus === 'my-stop'
               ? 'none'
-              : (isDarkMode ? 'inset 0px 4px 16px rgba(255, 255, 255, 0.5), 0px 4px 16px rgba(0,0,0, .4)' : 'inset 0px 0px 1px rgba(0,0,0, .5), 0px 4px 16px rgba(0,0,0, .3)'),
+              : 'var(--edge-inner-primary), var(--drop-shadow-floating-primary)',
             zIndex: 800,
             transition: 'all 0.5s ease',
           } : {
@@ -515,7 +515,7 @@ export function AddressInput() {
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
-            boxShadow: '0 4px 12px var(--shadow-large), var(--edge-inner-primary)',
+            boxShadow: 'var(--drop-shadow-floating-primary), var(--edge-inner-primary)',
             transition: 'all 0.2s ease',
             gap: '0.5rem',
           }}

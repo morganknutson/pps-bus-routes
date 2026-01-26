@@ -125,7 +125,7 @@ const MapPinPreview = ({ type, color = '#3b82f6', isSelected = false, isHover = 
           border: '1px solid var(--border-color-primary)',
           position: 'relative',
           backgroundColor: 'var(--bg-secondary)',
-          boxShadow: 'var(--shadow-large)'
+          boxShadow: 'var(--drop-shadow-floating-primary)'
         }}
       >
         <MapContainer
@@ -192,7 +192,7 @@ const FullRoutePreview = ({ route }: { route: Route }) => {
       border: '1px solid var(--border-color-primary)',
       position: 'relative',
       marginBottom: '20px',
-      boxShadow: 'var(--shadow-large)'
+      boxShadow: 'var(--drop-shadow-floating-primary)'
     }}>
       <MapContainer
         center={[45.5152, -122.6784]}
@@ -245,7 +245,7 @@ const AddressInputUIPreview = () => (
         alignItems: 'center',
         backgroundColor: 'var(--bg-tertiary)',
         borderRadius: '9999px',
-        boxShadow: '0 4px 12px var(--shadow-large)',
+        boxShadow: 'var(--drop-shadow-floating-primary)',
         border: '1px solid var(--border-color-primary)'
       }}>
         <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
@@ -265,7 +265,7 @@ const AddressInputUIPreview = () => (
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0 4px 12px var(--shadow-large)',
+        boxShadow: 'var(--drop-shadow-floating-primary)',
         border: '1px solid var(--border-color-primary)'
       }}>
         <MapPinIcon style={{ marginRight: '0.75rem' }} />
@@ -279,7 +279,7 @@ const AddressInputUIPreview = () => (
       backgroundColor: 'var(--bg-primary)',
       border: '1px solid var(--border-color-primary)',
       borderRadius: '16px',
-      boxShadow: '0 4px 16px var(--shadow-hover)',
+      boxShadow: 'var(--drop-shadow-floating-primary)',
       overflow: 'hidden',
       maxWidth: '400px'
     }}>

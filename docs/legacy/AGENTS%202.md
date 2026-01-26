@@ -32,7 +32,6 @@ PDFs (Google Drive) → Parse stops → Geocode addresses → Display on Leaflet
 2. **🚫 NO react-icons** - Use Font Awesome exclusively (`<i className="fas fa-icon">`)
 3. **📍 Coordinate order**: Internal = `[lng, lat]`, Leaflet = `[lat, lng]`
 4. **📝 Update TechPage.tsx** when changing functionality
-5. **🗂️ Data Management page is DEPRECATED** - Use `/admin` instead
 
 ---
 

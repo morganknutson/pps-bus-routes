@@ -124,7 +124,7 @@ export function UsagePage() {
     borderRadius: '8px',
     padding: '1.5rem',
     marginBottom: '1.5rem',
-    boxShadow: 'var(--shadow-large)',
+    boxShadow: 'var(--drop-shadow-floating-primary)',
   };
 
   const gridStyle: React.CSSProperties = {
@@ -138,7 +138,7 @@ export function UsagePage() {
     background: 'var(--bg-secondary)',
     borderRadius: '8px',
     padding: '1.5rem',
-    boxShadow: 'var(--shadow-large)',
+    boxShadow: 'var(--drop-shadow-floating-primary)',
   };
 
   const statLabelStyle: React.CSSProperties = {

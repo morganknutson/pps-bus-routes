@@ -140,7 +140,7 @@ export function NeighborhoodDirectory() {
                   padding: '1.5rem',
                   backgroundColor: 'var(--bg-secondary)',
                   borderRadius: '16px',
-                  boxShadow: '0 2px 8px var(--shadow-large)',
+                  boxShadow: 'var(--drop-shadow-floating-primary)',
                 }}
               >
                 <h2 style={{ 

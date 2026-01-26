@@ -30,7 +30,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
       color: 'var(--text-primary)',
       borderRadius: isMobile ? '0' : 'var(--radius-floating)',
       overflow: 'hidden',
-      boxShadow: isMobile ? 'none' : 'var(--drop-shadow-floating)',
+      boxShadow: isMobile ? 'none' : 'var(--drop-shadow-floating-primary)',
       border: isMobile ? 'none' : 'none',
       pointerEvents: 'auto',
       fontFamily: "'Inter', sans-serif",

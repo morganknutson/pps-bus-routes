@@ -4,7 +4,6 @@ import { DarkModeToggle } from './DarkModeToggle';
 import { useStore } from '../store/useStore';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { XIcon } from './XIcon';
-import './Header.css';
 
 interface HeaderProps {
   rightContent?: ReactNode;
@@ -17,7 +16,7 @@ export function Header({ rightContent }: HeaderProps = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isHomePage = location.pathname === '/';
-  const adminPaths = ['/admin', '/neighborhoods', '/tech', '/verification', '/jobs', '/servers', '/architecture', '/sync'];
+  const adminPaths = ['/admin', '/neighborhoods', '/tech', '/verification', '/jobs', '/servers', '/sync'];
   const isAdminPage = adminPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
   const isExplorerPage = !isAdminPage && !isHomePage;
 
@@ -94,32 +93,6 @@ export function Header({ rightContent }: HeaderProps = {}) {
                   }}
                 >
                   Tech
-                </Link>
-                <Link
-                  to="/architecture"
-                  className="admin-link"
-                  style={{
-                    fontSize: '12px',
-                    color: location.pathname.startsWith('/architecture') ? 'var(--header-text-color)' : 'var(--header-text-color-muted)',
-                    textDecoration: location.pathname.startsWith('/architecture') ? 'underline' : 'none',
-                    fontWeight: location.pathname.startsWith('/architecture') ? '600' : '400',
-                    transition: 'all 0.2s',
-                    cursor: 'pointer',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!location.pathname.startsWith('/architecture')) {
-                      e.currentTarget.style.textDecoration = 'underline';
-                      e.currentTarget.style.color = 'var(--header-text-color)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!location.pathname.startsWith('/architecture')) {
-                      e.currentTarget.style.textDecoration = 'none';
-                      e.currentTarget.style.color = 'var(--header-text-color-muted)';
-                    }
-                  }}
-                >
-                  Architecture
                 </Link>
                 <Link
                   to="/servers"
@@ -328,19 +301,6 @@ export function Header({ rightContent }: HeaderProps = {}) {
               }}
             >
               Tech
-            </Link>
-            <Link
-              to="/architecture"
-              onClick={() => setMenuOpen(false)}
-              style={{
-                padding: '0.75rem 1rem',
-                color: location.pathname.startsWith('/architecture') ? 'white' : 'rgba(255, 255, 255, 0.8)',
-                textDecoration: 'none',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                fontWeight: location.pathname.startsWith('/architecture') ? '600' : '400',
-              }}
-            >
-              Architecture
             </Link>
             <Link
               to="/servers"
