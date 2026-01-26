@@ -112,11 +112,11 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
               style={{
                 width: '100%',
                 padding: '0.75rem',
-                paddingLeft: '1rem',
+                paddingLeft: '1.1rem',
                 paddingRight: '2.5rem',
                 borderRadius: '9999px',
                 fontSize: '12px',
-                fontWeight: '600',
+                fontWeight: '500',
                 height: '40px',
                 boxSizing: 'border-box',
                 backgroundColor: 'var(--bg-secondary)',
@@ -124,10 +124,12 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
                 transition: 'background-color 0.3s ease, color 0.3s ease',
                 display: 'flex',
                 alignItems: 'center',
+                gap: '0.5rem',
                 border: 'none)',
                 boxShadow: 'var(--faux-border)',
               }}
             >
+              <i className="fas fa-graduation-cap" style={{ fontSize: '11px', opacity: 0.7 }}></i>
               {selectedSchool.name}
             </div>
             <button
