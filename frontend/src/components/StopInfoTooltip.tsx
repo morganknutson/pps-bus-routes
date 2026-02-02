@@ -317,7 +317,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             gap: '10px',
             marginTop: '0rem',
             backgroundColor: 'var(--bg-secondary)',
-            padding: '0 30px 4px'
+            padding: isMobile ? '0 30px 4px' : '0 24px 24px'
             }}>
 
           {/* --- Directions Button (opens Google Maps) --- */}
