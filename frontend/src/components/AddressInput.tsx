@@ -301,8 +301,8 @@ export function AddressInput() {
             bottom: isStandalone
               ? (isAnySheetOpen ? 'calc(env(safe-area-inset-bottom, 20px) + 10px)' : 'calc(env(safe-area-inset-bottom, 20px) + 30px)')
               : (isAnySheetOpen ? '16px' : '36px'),
-            left: isAnySheetOpen ? '23px' : '30px',
-            right: isAnySheetOpen ? '23px' : '30px',
+            left: isAnySheetOpen ? '30px' : '30px',
+            right: isAnySheetOpen ? '30px' : '30px',
             width: 'auto',
             height: '56px',
             backgroundColor: focus === 'my-stop' ? 'transparent' : 'var(--bg-primary)',

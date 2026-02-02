@@ -1236,6 +1236,17 @@ export function MapView({
       <MapInfoPanel
         isOpen={isPanelOpen}
         isFindMyStopVisible={isFindMyStopVisible}
+        contentKey={
+          isStopInfoFocused && selectedStop
+            ? `stop-${selectedStop.route.name}-${selectedStop.stop.id}`
+            : isHomeInfoFocused
+            ? 'home'
+            : isSchoolInfoFocused && displaySchool
+            ? `school-${displaySchool.id}`
+            : (viewMode === 'schools' && selectedSchoolId)
+            ? `school-${selectedSchoolId}`
+            : undefined
+        }
         onClose={() => {
           if (viewMode === 'schools') {
             setSelectedSchool(null);

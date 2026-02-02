@@ -4,6 +4,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { useStore } from '../store/useStore';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
+import { CollapsibleBody } from './MapInfoPanel';
 
 interface HomeInfoTooltipProps {
   address: HomeAddress;
@@ -99,6 +100,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
         )}
       </div>
 
+      <CollapsibleBody>
       <div style={{ padding: isMobile ? '1.5rem 2rem' : 'var(--floating-content-padding)' }}>
         <div style={{ display: 'grid', gap: '1rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -134,6 +136,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
           </div>
         )}
       </div>
+      </CollapsibleBody>
     </div>
   );
 };

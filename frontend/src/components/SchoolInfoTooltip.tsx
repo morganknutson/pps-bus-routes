@@ -38,6 +38,7 @@ import { analyticsService } from '../services/analytics';
 import { RouteIcon } from './RouteIcon';
 import { XIcon } from './XIcon';
 import { Button } from './Button';
+import { CollapsibleBody } from './MapInfoPanel';
 
 /*--------------------------------
    Component Props Interface
@@ -315,28 +316,29 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         )}
       </div>
 
+      <CollapsibleBody>
       {/*--------------------------------
          Container: Content Section
          Main content area with school details
       ----------------------------------*/}
-      <div style={{ 
-        padding: isMobile ? '1.5rem 2rem' : 'var(--floating-content-padding)',
+      <div style={{
+        padding: isMobile ? '1.5rem 2rem 4px' : 'var(--floating-content-padding)',
         }}>
         {/*--------------------------------
            Container: Content Grid
            Grid layout for organizing content sections
         ----------------------------------*/}
-        <div style={{ 
-          display: 'grid', 
+        <div style={{
+          display: 'grid',
           gap: '1rem',
           }}>
           {/*--------------------------------
              Container: Details Column
              Vertical flex container for school details
           ----------------------------------*/}
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
             gap: '1.5rem',
             }}>
             {/*--------------------------------
@@ -354,18 +356,18 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
                    Container: Neighborhood Content
                    Flex container for neighborhood value
                 ----------------------------------*/}
-                <div style={{ 
-                  display: 'flex', 
-                  alignItems: 'flex-start', 
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
                   gap: '0.5rem',
-                  
+
                   }}>
                   {/*--------------------------------
                      Element: Neighborhood Text
                      Displays school neighborhood name
                   ----------------------------------*/}
-                  <div style={{ 
-                    color: 'var(--text-primary)', 
+                  <div style={{
+                    color: 'var(--text-primary)',
                     fontWeight: '500',
                     }}>{school.neighborhood}</div>
                 </div>
@@ -377,8 +379,8 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
                Displays address as clickable link if available
             ----------------------------------*/}
             {school.address && (
-              <div style={{ 
-                fontSize: isMobile ? '16px' : '13px' 
+              <div style={{
+                fontSize: isMobile ? '16px' : '13px'
                 }}>
                 {/*--------------------------------
                    Element: Address Label
@@ -400,11 +402,11 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
                       analyticsService.trackOutboundLink(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(school.address!)}`, 'maps');
                       handleMapLinkClick(e, school.address!, school.coordinates);
                     }}
-                    style={{ 
-                      color: 'var(--text-primary)', 
-                      textDecoration: 'none', 
-                      fontWeight: '500', 
-                      display: 'block' 
+                    style={{
+                      color: 'var(--text-primary)',
+                      textDecoration: 'none',
+                      fontWeight: '500',
+                      display: 'block'
                     }}
                   >
                     {school.address}
@@ -419,12 +421,12 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
             ----------------------------------*/}
             {/* HIDDEN: Update badge
             {school.routesUpdatedAt && (
-              <div style={{ 
-                fontSize: '11px', 
-                color: 'var(--text-tertiary)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '.5em' 
+              <div style={{
+                fontSize: '11px',
+                color: 'var(--text-tertiary)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '.5em'
                 }}>
                 <i className="fas fa-clock" style={{ fontSize: '12px', opacity: 0.7 }}></i>
                 <span>Updated {formatDate(school.routesUpdatedAt)}</span>
@@ -439,7 +441,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
            Shows button to view routes if routeCount is defined and showRoutesButton is true
         ----------------------------------*/}
         {school.routeCount !== undefined && showRoutesButton && (
-          <div style={{ marginLeft: '-10px', marginRight: '-10px', marginTop: '2em' }}>
+          <div style={{ marginLeft: '0px', marginRight: '0px', marginTop: '2em', marginBottom: '0' }}>
             {/*--------------------------------
                Component: Routes Button
                Primary button to navigate to routes view
@@ -464,12 +466,12 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         ----------------------------------*/}
         {/* HIDDEN: School Website and PDF links
         {(school.schoolPageLink || school.driveLink) && (
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            gap: '1rem', 
-            marginTop: '1rem', 
-            paddingTop: '1rem' 
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: '1rem',
+            marginTop: '1rem',
+            paddingTop: '1rem'
             }}>
             {school.schoolPageLink && (
               <a href={school.schoolPageLink} target="_blank" rel="noopener noreferrer" onClick={() => analyticsService.trackOutboundLink(school.schoolPageLink!, 'website')} style={{ fontSize: '11px', color: 'var(--text-tertiary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5em' }}>
@@ -489,6 +491,7 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
 
 
       </div>
+      </CollapsibleBody>
       {/*--------------------------------
          End: Tooltip Root Container
       ----------------------------------*/}

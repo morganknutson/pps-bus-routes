@@ -8,6 +8,7 @@ import { analyticsService } from '../services/analytics';
 import { MapPinIcon } from './MapPinIcon';
 import { getSchoolDisplayName } from '../utils/schoolUtils';
 import { XIcon } from './XIcon';
+import { CollapsibleBody } from './MapInfoPanel';
 
 interface StopInfoTooltipProps {
   route: Route;
@@ -217,24 +218,25 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         )}
       </div>
 
+      <CollapsibleBody>
       {/* ========================================
        * MAIN CONTENT SECTION
        * Contains: Address, Neighborhood
        * Note: School stops don't use this tooltip (they show SchoolInfoTooltip)
        * ======================================== */}
-      <div style={{ 
+      <div style={{
         padding: isMobile ? '20px 2rem' : 'var(--floating-content-padding)',
         backgroundColor: 'var(--bg-secondary)',
         }}>
         <div style={{ display: 'grid', gap: '1rem', backgroundColor: 'var(--bg-secondary)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            
+
             {/* --- ADDRESS SECTION --- */}
             <div style={{ fontSize: isMobile ? '16px' : '13px', marginTop: isMobile ? '16px' : '5px' }}>
               <div className="eyebrow">Address</div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
                 <div style={{ color: 'var(--text-primary)', fontWeight: '500', lineHeight: '1.4' }}>
-                  
+
                   {/* ADDRESS DISPLAY STATES:
                    * 1. School Stop: Shows school name (NOTE: Never happens - school stops use SchoolInfoTooltip)
                    * 2. Street Highlighting Enabled: Shows interactive street names
@@ -254,7 +256,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
                           <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             {/* Ampersand separator between streets */}
                             {index > 0 && <span style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>&</span>}
-                            
+
                             {/* STREET NAME STATES:
                              * - Default: var(--text-primary)
                              * - Hover: route.color
@@ -310,17 +312,17 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
          * ACTION BUTTONS
          * Contains: Directions button, Copy address button
          * ======================================== */}
-        <div style={{ 
-            display: 'flex', 
-            gap: '10px', 
-            marginTop: '0rem', 
-            backgroundColor: 'var(--bg-secondary)', 
-            padding: '0 24px 24px' 
+        <div style={{
+            display: 'flex',
+            gap: '10px',
+            marginTop: '0rem',
+            backgroundColor: 'var(--bg-secondary)',
+            padding: '0 30px 4px'
             }}>
-          
+
           {/* --- Directions Button (opens Google Maps) --- */}
           <Button
-            variant="primary" 
+            variant="primary"
             size="medium"
             fullWidth
             align="center"
@@ -332,8 +334,8 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
           >
             Directions
           </Button>
-          
-          {/* --- Copy Address Button --- 
+
+          {/* --- Copy Address Button ---
            * BUTTON STATES:
            * - Default: "Copy" text, fa-copy icon
            * - Copied: "Copied" text, fa-check icon (green), auto-resets after 2s
@@ -349,7 +351,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
             {copied ? 'Copied' : 'Copy'}
           </Button>
         </div>
-      
+
 
       {/* ========================================
        * ADMIN TOOLS SECTION (conditional)
@@ -421,6 +423,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
           )}
         </div>
       )}
+      </CollapsibleBody>
     </div>
   );
 };

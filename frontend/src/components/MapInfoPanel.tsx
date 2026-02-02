@@ -1,17 +1,41 @@
-import React, { useEffect, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useIsStandalone } from '../hooks/useIsStandalone';
+
+// --- Sheet Stage Context ---
+type SheetStage = 'full' | 'minimized';
+
+const SheetStageContext = createContext<{ minimized: boolean }>({ minimized: false });
+
+export const useSheetStage = () => useContext(SheetStageContext);
+
+export const CollapsibleBody: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { minimized } = useSheetStage();
+  return (
+    <div style={{
+      display: 'grid',
+      gridTemplateRows: minimized ? '0fr' : '1fr',
+      transition: 'grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    }}>
+      <div style={{ overflow: 'hidden' }}>
+        {children}
+      </div>
+    </div>
+  );
+};
 
 interface MapInfoPanelProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
   isFindMyStopVisible?: boolean;
+  contentKey?: string;
 }
 
-export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, children, isFindMyStopVisible = false }) => {
+export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, children, isFindMyStopVisible = false, contentKey }) => {
   const isMobile = useIsMobile();
   const isStandalone = useIsStandalone();
+  const [stage, setStage] = useState<SheetStage>('full');
 
   // Refs for direct DOM manipulation to ensure 60fps
   const panelRef = useRef<HTMLDivElement>(null);
@@ -30,6 +54,30 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
     isAtTopAtStart: false
   });
 
+  // Track stage in a ref so the touch handler closure always sees the latest value
+  const stageRef = useRef<SheetStage>(stage);
+  useEffect(() => {
+    stageRef.current = stage;
+  }, [stage]);
+
+  // Reset stage to 'full' when contentKey or isOpen changes
+  useEffect(() => {
+    setStage('full');
+  }, [contentKey, isOpen]);
+
+  // Defer overflow change so it doesn't cause a layout shift during collapse
+  useEffect(() => {
+    if (!contentRef.current) return;
+    if (stage === 'minimized') {
+      const id = setTimeout(() => {
+        if (contentRef.current) contentRef.current.style.overflowY = 'hidden';
+      }, 310); // just after the 300ms collapse finishes
+      return () => clearTimeout(id);
+    } else {
+      contentRef.current.style.overflowY = 'auto';
+    }
+  }, [stage]);
+
   useEffect(() => {
     if (!isMobile || !isOpen) return;
 
@@ -47,7 +95,8 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
 
       // Check if we're at the top of the scrollable content when starting the gesture
       const content = contentRef.current;
-      dragInfo.current.isAtTopAtStart = content ? content.scrollTop <= 0 : true;
+      // When minimized, treat as always at top (no scrollable content)
+      dragInfo.current.isAtTopAtStart = stageRef.current === 'minimized' ? true : (content ? content.scrollTop <= 0 : true);
 
       // Disable transition during drag
       panel.style.transition = 'none';
@@ -71,13 +120,17 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
       // Only drag down, and only if we started at the top of the content
       if (deltaY > 0 && dragInfo.current.isAtTopAtStart) {
         // Prevent default only when we are actually dragging the panel down
-        // to avoid conflicts with pull-to-refresh or other browser gestures
         if (e.cancelable) e.preventDefault();
-
         panel.style.transform = `translateY(${deltaY}px)`;
       } else if (deltaY < 0 && dragInfo.current.isAtTopAtStart) {
-        // If they try to swipe up while at top, don't move the panel
-        panel.style.transform = `translateY(0px)`;
+        // When minimized, allow upward drag with dampening for visual feedback
+        if (stageRef.current === 'minimized') {
+          if (e.cancelable) e.preventDefault();
+          const dampened = deltaY * 0.3;
+          panel.style.transform = `translateY(${dampened}px)`;
+        } else {
+          panel.style.transform = `translateY(0px)`;
+        }
       }
     };
 
@@ -87,21 +140,48 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
 
       const deltaY = dragInfo.current.lastY - dragInfo.current.startY;
       const v = dragInfo.current.velocity;
+      const currentStage = stageRef.current;
 
       // Re-enable transition for snapping
       panel.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
 
-      // Logic: Close if swiped down > 120px OR if flicked down fast enough
-      const shouldClose = (deltaY > 120 && dragInfo.current.isAtTopAtStart) ||
-        (v > 0.5 && deltaY > 20 && dragInfo.current.isAtTopAtStart);
+      if (currentStage === 'full') {
+        // Full → Minimized: swipe down past 80px or velocity > 0.5
+        const shouldMinimize = (deltaY > 80 && dragInfo.current.isAtTopAtStart) ||
+          (v > 0.5 && deltaY > 20 && dragInfo.current.isAtTopAtStart);
 
-      if (shouldClose) {
-        panel.style.transform = 'translateY(100%)';
-        // Small delay to allow animation to complete before calling onClose
-        setTimeout(onClose, 300);
-      } else {
-        // Snap back
-        panel.style.transform = 'translateY(0px)';
+        if (shouldMinimize) {
+          // Keep the panel at its current drag offset while the body collapses.
+          // The panel is bottom-anchored, so as its height shrinks the top edge
+          // moves down naturally — no upward jump. After the collapse finishes,
+          // smoothly settle the transform back to 0.
+          panel.style.transition = 'none';
+          setStage('minimized');
+          setTimeout(() => {
+            panel.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            panel.style.transform = 'translateY(0px)';
+          }, 300);
+        } else {
+          panel.style.transform = 'translateY(0px)';
+        }
+      } else if (currentStage === 'minimized') {
+        // Minimized → Full: swipe up past 60px or velocity < -0.5
+        const shouldExpand = (deltaY < -60 && dragInfo.current.isAtTopAtStart) ||
+          (v < -0.5 && deltaY < -20);
+
+        // Minimized → Closed: swipe down past 80px or velocity > 0.5
+        const shouldClose = (deltaY > 80 && dragInfo.current.isAtTopAtStart) ||
+          (v > 0.5 && deltaY > 20 && dragInfo.current.isAtTopAtStart);
+
+        if (shouldExpand) {
+          setStage('full');
+          panel.style.transform = 'translateY(0px)';
+        } else if (shouldClose) {
+          panel.style.transform = 'translateY(100%)';
+          setTimeout(onClose, 300);
+        } else {
+          panel.style.transform = 'translateY(0px)';
+        }
       }
     };
 
@@ -176,7 +256,7 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'grab',
-            backgroundColor: 'var(--bg-primary)', 
+            backgroundColor: 'var(--bg-primary)',
             marginTop: '-8px',
             paddingBottom: '18px',
             borderRadius: '20px 20px 0 0',
@@ -197,13 +277,15 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
             overflowY: 'auto',
             backgroundColor: 'var(--bg-secondary)',
             paddingBottom: isFindMyStopVisible
-              ? (isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 84px)' : '74px')
+              ? (isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 114px)' : '104px')
               : 'calc(24px + env(safe-area-inset-bottom))',
             WebkitOverflowScrolling: 'touch',
             overscrollBehaviorY: 'contain' // Prevent rubber-banding conflicts
           } : undefined}
         >
-          {children}
+          <SheetStageContext.Provider value={{ minimized: stage === 'minimized' }}>
+            {children}
+          </SheetStageContext.Provider>
         </div>
       </div>
 
