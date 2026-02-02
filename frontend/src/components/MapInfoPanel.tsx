@@ -171,11 +171,15 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
         {isMobile && (
           <div style={{
             width: '100%',
-            height: '24px',
+            height: '44px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            cursor: 'grab'
+            cursor: 'grab',
+            backgroundColor: 'var(--bg-primary)', 
+            marginTop: '-8px',
+            paddingBottom: '18px',
+            borderRadius: '20px 20px 0 0',
           }}>
             <div style={{
               width: '40px',
@@ -191,9 +195,9 @@ export const MapInfoPanel: React.FC<MapInfoPanelProps> = ({ isOpen, onClose, chi
           style={isMobile ? {
             maxHeight: '80vh',
             overflowY: 'auto',
-            backgroundColor: 'var(--bg-primary)',
+            backgroundColor: 'var(--bg-secondary)',
             paddingBottom: isFindMyStopVisible
-              ? (isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 84px)' : '100px')
+              ? (isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 84px)' : '74px')
               : 'calc(24px + env(safe-area-inset-bottom))',
             WebkitOverflowScrolling: 'touch',
             overscrollBehaviorY: 'contain' // Prevent rubber-banding conflicts

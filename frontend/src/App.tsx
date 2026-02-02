@@ -536,7 +536,7 @@ function App() {
   const initializeStore = useStore(state => state.initialize);
   const isDarkMode = useStore(state => state.isDarkMode);
 
-  // Apply dark mode class to document root
+  // Apply dark mode class to document root and update theme-color for iOS Safari
   useEffect(() => {
     console.log('[App] Dark mode changed:', isDarkMode);
 
@@ -549,11 +549,18 @@ function App() {
       document.body.classList.remove('dark-mode');
     }
 
-    // Update theme-color meta tag for Safari address bar
+    // Directly update theme-color meta tag for immediate iOS Safari status bar update
+    // This supplements SEO.tsx Helmet which may have a slight delay
     const themeColor = isDarkMode ? '#3A3A3A' : '#ffffff';
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', themeColor);
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', themeColor);
+    } else {
+      // If it doesn't exist for some reason, create it
+      const meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      meta.content = themeColor;
+      document.getElementsByTagName('head')[0].appendChild(meta);
     }
 
     // Update analytics user property

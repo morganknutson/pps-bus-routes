@@ -12,6 +12,7 @@ import { Route, Stop } from '../types';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
 import { LocationArrowIcon } from './LocationArrowIcon';
+import { ChevronIcon } from './ChevronIcon';
 import { useUrlState } from '../hooks/useUrlState';
 import { useIsStandalone } from '../hooks/useIsStandalone';
 
@@ -282,6 +283,76 @@ export function AddressInput() {
       gap: isMobile ? '0.5rem' : '0.75rem',
       alignItems: 'center'
     }}>
+      {shouldShowButton && (
+        <button
+          onClick={handleFindClosestStop}
+          title={focus === 'my-stop' ? "This is your stop" : "Find My Stop"}
+          style={isMobile ? {
+            position: 'fixed',
+            bottom: isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 10px)' : '16px',
+            left: isDarkMode ? '1.9rem' : '22px',
+            right: isDarkMode ? '1.9rem' : '22px',
+            padding: '0 22px 0 23px',
+            height: '56px',
+            backgroundColor: focus === 'my-stop' ? 'transparent' : 'var(--bg-primary)',
+            color: focus === 'my-stop'
+              ? (isDarkMode ? 'rgba(255,255,255, .4)' : 'rgba(0, 0, 0, .4)')
+              : (isDarkMode ? 'rgba(255,255,255, 1)' : 'rgba(0, 0, 0, 1)'),
+            border: focus === 'my-stop'
+              ? (isDarkMode ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)')
+              : 'none',
+            borderTop: 'none',
+            borderRadius: '9999px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: isMobile ? 'center' : 'center',
+            gap: '0.75rem',
+            boxShadow: focus === 'my-stop'
+              ? 'none'
+              : isMobile 
+                ? 'var(--drop-shadow-primary)' 
+                : 'var(--edge-inner-primary), var(--drop-shadow-floating-primary)',
+            zIndex: 800,
+            transition: 'all 0.5s ease',
+          } : {
+            padding: '0 1.5rem',
+            height: '40px',
+            fontWeight: '500',
+            backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
+            color: 'var(--text-primary)',
+            border: 'none',
+            borderRadius: '9999px',
+            fontSize: '12px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            boxShadow: 'var(--drop-shadow-floating-primary), var(--edge-inner-primary)',
+            transition: 'all 0.2s ease',
+            gap: '0.5rem',
+          }}
+        >
+          <MapPinIcon filled style={{ width: isMobile ? 24 : 10, height: isMobile ? 19 : 13, flexShrink: 0 }} />
+          <span style={{ flex: 1, textAlign: 'left' }}>{focus === 'my-stop' ? "This is your stop" : "Find My Stop"}</span>
+          {isMobile && (
+            <ChevronIcon
+              direction="right"
+              size={14}
+              color="currentColor"
+              style={{
+                opacity: 0.6,
+                marginLeft: '4px',
+                flexShrink: 0
+              }}
+            />
+          )}
+        </button>
+      )}
+
       <div style={{
         flex: 1,
         /* Dynamic padding and height for mobile/desktop inputs */
@@ -469,62 +540,6 @@ export function AddressInput() {
           </div>
         )}
       </div>
-
-      {shouldShowButton && (
-        <button
-          onClick={handleFindClosestStop}
-          title={focus === 'my-stop' ? "This is your stop" : "Find My Stop"}
-          style={isMobile ? {
-            position: 'fixed',
-            bottom: isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 10px)' : '30px',
-            left: '1.9rem',
-            right: '1.9rem',
-            height: '60px',
-            backgroundColor: focus === 'my-stop' ? 'transparent' : 'var(--bg-primary)',
-            color: focus === 'my-stop'
-              ? (isDarkMode ? 'rgba(255,255,255, .4)' : 'rgba(0, 0, 0, .4)')
-              : (isDarkMode ? 'rgba(255,255,255, 1)' : 'rgba(0, 0, 0, 1)'),
-            border: focus === 'my-stop'
-              ? (isDarkMode ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)')
-              : 'none',
-            borderTop: 'none',
-            borderRadius: '9999px',
-            fontSize: '16px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.75rem',
-            boxShadow: focus === 'my-stop'
-              ? 'none'
-              : 'var(--edge-inner-primary), var(--drop-shadow-floating-primary)',
-            zIndex: 800,
-            transition: 'all 0.5s ease',
-          } : {
-            padding: '0 1.5rem',
-            height: '40px',
-            fontWeight: '500',
-            backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
-            color: 'var(--text-primary)',
-            border: 'none',
-            borderRadius: '9999px',
-            fontSize: '12px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            boxShadow: 'var(--drop-shadow-floating-primary), var(--edge-inner-primary)',
-            transition: 'all 0.2s ease',
-            gap: '0.5rem',
-          }}
-        >
-          <MapPinIcon filled style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
-          <span>{focus === 'my-stop' ? "This is your stop" : "Find My Stop"}</span>
-        </button>
-      )
-      }
-    </div >
+    </div>
   );
 }

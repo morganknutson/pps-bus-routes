@@ -18,11 +18,17 @@ export const NoRoutesModal: React.FC<NoRoutesModalProps> = ({
 }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <Modal.Header style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                    <RouteIcon size={25} color="var(--text-primary)" />
-                </div>
+            <Modal.Header 
+                icon={<RouteIcon size={25} color="var(--text-primary)" />}
+                style={{ position: 'relative' }}
+            >
+                <Modal.Title>
+                    {schoolName ? `${schoolName} has no routes provided` : 'No routes provided for this school'}
+                </Modal.Title>
                 <div style={{
+                    position: 'absolute',
+                    top: '34px',
+                    right: '34px',
                     backgroundColor: 'rgba(244, 67, 54, 0.1)',
                     color: '#f44',
                     fontSize: '11px',
@@ -41,9 +47,6 @@ export const NoRoutesModal: React.FC<NoRoutesModalProps> = ({
             </Modal.Header>
 
             <Modal.Content>
-                <Modal.Title>
-                    {schoolName ? `${schoolName} has no routes provided` : 'No routes provided for this school'}
-                </Modal.Title>
                 <Modal.Description>
                     Route information not provided on the web by school district.
                 </Modal.Description>

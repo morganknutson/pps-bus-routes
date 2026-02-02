@@ -26,7 +26,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
       minWidth: isMobile ? 'auto' : '280px',
       maxWidth: isMobile ? 'none' : '320px',
       width: isMobile ? '100%' : 'auto',
-      backgroundColor: 'var(--bg-primary)',
+      backgroundColor: 'var(--bg-secondary)',
       color: 'var(--text-primary)',
       borderRadius: isMobile ? '0' : 'var(--radius-floating)',
       overflow: 'hidden',
@@ -39,7 +39,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
       {/* Header */}
       <div style={{
         padding: isMobile ? '8px 2rem 12px 2rem' : 'var(--floating-header-padding)',
-        backgroundColor: 'var(--bg-secondary)',
+        backgroundColor: 'var(--bg-primary)',
         borderBottom: 'none',
         position: 'relative',
         display: 'flex',
@@ -123,7 +123,7 @@ export const HomeInfoTooltip: React.FC<HomeInfoTooltipProps> = ({
         {onClear && (
           <div style={{ marginTop: '1.5rem' }}>
             <Button
-              variant="secondary"
+              variant="primary"
               size="large"
               fullWidth
               align="center"

@@ -144,8 +144,15 @@ class GeocodingService {
    * Geocode using Google Maps Geocoding API
    */
   async geocodeWithGoogle(address, city = 'Portland', state = 'OR') {
+    console.log(`[GeocodingService] geocodeWithGoogle called with: address="${address}", city="${city}", state="${state}"`);
     const formattedAddress = this.formatAddressForGeocoding(address);
-    const query = `${formattedAddress}, ${city}, ${state}`;
+    
+    // Construct query, filtering out empty/null city and state
+    let query = formattedAddress;
+    if (city) query += `, ${city}`;
+    if (state) query += `, ${state}`;
+
+    console.log(`[GeocodingService] Google API Query: "${query}"`);
 
     const url = `${GOOGLE_GEOCODING_URL}?address=${encodeURIComponent(query)}&key=${this.apiKey}`;
 
@@ -153,10 +160,12 @@ class GeocodingService {
       const response = await fetch(url);
 
       if (!response.ok) {
+        console.error(`[GeocodingService] Google API HTTP Error: ${response.status}`);
         throw new Error(`Google Geocoding API error: ${response.status}`);
       }
 
       const data = await response.json();
+      console.log(`[GeocodingService] Google API Status: ${data.status}`);
 
       if (data.status === 'OK' && data.results && data.results.length > 0) {
         const result = data.results[0];
@@ -304,18 +313,22 @@ class GeocodingService {
               return finalResult;
             } else {
               console.warn(`[GeocodingService] Retry also failed or out of bounds for "${address}"`);
+              // Return the out-of-bounds result anyway so frontend can handle it
               return {
-                success: false,
-                error: `Coordinates [${result.coordinates[0]}, ${result.coordinates[1]}] are outside Portland bounds and likely incorrect.`,
+                ...result,
+                isOutOfBounds: true,
+                geocodeWarning: 'Coordinates are outside Portland bounds',
               };
             }
           }
         } else {
           // No parentheses to remove, but coordinates are still out of bounds
           console.warn(`[GeocodingService] Coordinates are outside Portland bounds for "${address}"`);
+          // Return the out-of-bounds result anyway so frontend can handle it
           return {
-            success: false,
-            error: `Coordinates [${result.coordinates[0]}, ${result.coordinates[1]}] are outside Portland bounds and likely incorrect.`,
+            ...result,
+            isOutOfBounds: true,
+            geocodeWarning: 'Coordinates are outside Portland bounds',
           };
         }
       }

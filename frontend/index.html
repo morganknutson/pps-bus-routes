@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="PPS Bus Map" />
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
@@ -16,16 +16,23 @@
     content="Interactive bus route maps for Portland Public Schools. Find your school, view routes, and locate bus stops." />
   <meta name="referrer" content="no-referrer-when-downgrade" />
 
-  <!-- Theme color - set synchronously before React loads -->
-  <meta name="theme-color" content="#ffffff" />
+  <!-- Theme color - set to transparent for Safari mobile address bar -->
+  <meta name="theme-color" id="theme-color-meta" content="transparent" />
   <script>
     (function () {
       var savedDarkMode = localStorage.getItem('darkMode');
       var isDark = savedDarkMode === 'true' ||
         (savedDarkMode === null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      
+      // Set dark-mode class on HTML element immediately
       if (isDark) {
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#3A3A3A');
         document.documentElement.classList.add('dark-mode');
+      }
+      
+      // Keep theme-color transparent for Safari mobile address bar
+      var themeColorMeta = document.getElementById('theme-color-meta');
+      if (themeColorMeta) {
+        themeColorMeta.setAttribute('content', 'transparent');
       }
     })();
   </script>

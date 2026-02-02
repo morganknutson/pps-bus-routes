@@ -20,6 +20,8 @@ import { XIcon } from '../components/XIcon';
 import { LocationArrowIcon } from '../components/LocationArrowIcon';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import LogoSpinner from '../components/LogoSpinner';
+import { Modal } from '../components/Modal';
+import { Button } from '../components/Button';
 
 interface AutocompleteSuggestion {
   displayName: string;
@@ -63,8 +65,26 @@ export function HomePage() {
   const [isFinding, setIsFinding] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isGeolocating, setIsGeolocating] = useState(false);
+  const [showOutsidePortlandModal, setShowOutsidePortlandModal] = useState(false);
   const [noRoutesTooltipIndex, setNoRoutesTooltipIndex] = useState<number | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState<{ top: number; left: number } | null>(null);
+
+  // Helper to check bounds (matches backend logic)
+  const isWithinPortlandBounds = (coordinates: [number, number]) => {
+    const [lng, lat] = coordinates;
+    // Portland bounds with reasonable buffer
+    const PORTLAND_LAT_MIN = 45.3;
+    const PORTLAND_LAT_MAX = 45.8;
+    const PORTLAND_LNG_MIN = -123.0;
+    const PORTLAND_LNG_MAX = -122.3;
+
+    return (
+      lat >= PORTLAND_LAT_MIN &&
+      lat <= PORTLAND_LAT_MAX &&
+      lng >= PORTLAND_LNG_MIN &&
+      lng <= PORTLAND_LNG_MAX
+    );
+  };
 
   const handleGetLocation = async () => {
     if (!navigator.geolocation) {
@@ -291,7 +311,18 @@ export function HomePage() {
     analyticsService.trackAddressSearch('homepage', suggestion.address);
     try {
       setAddressLoading(true);
-      const geocodeResult = await geocodeAddress(suggestion.address);
+      
+      // First try standard geocode (biased to Portland)
+      let geocodeResult = await geocodeAddress(suggestion.address);
+      
+      // If that fails, and address looks complete (has commas), try without Portland bias
+      // This handles addresses outside Portland (e.g. "San Francisco, CA")
+      if (!geocodeResult.coordinates && suggestion.address.includes(',')) {
+        console.log('[HomePage] Standard geocode failed, trying without Portland bias...');
+        // Pass empty strings to override defaults and avoid appending "Portland, OR"
+        geocodeResult = await geocodeAddress(suggestion.address, '', '');
+      }
+
       if (geocodeResult.coordinates) {
         const address = { address: suggestion.displayName || suggestion.address, coordinates: geocodeResult.coordinates };
         setSelectedAddress(address);
@@ -303,6 +334,20 @@ export function HomePage() {
       }
     } catch (error) {
       console.error('[HomePage] Geocoding error:', error);
+      
+      // Try one more time without bias if error occurred
+      try {
+         if (suggestion.address.includes(',')) {
+            const retryResult = await geocodeAddress(suggestion.address, '', '');
+            if (retryResult.coordinates) {
+                const address = { address: suggestion.displayName || suggestion.address, coordinates: retryResult.coordinates };
+                setSelectedAddress(address);
+                setHomeAddress(address);
+                return;
+            }
+         }
+      } catch (e) { /* ignore retry error */ }
+
       const address = { address: suggestion.address, coordinates: suggestion.coordinates };
       setSelectedAddress(address);
       setHomeAddress(address);
@@ -396,6 +441,18 @@ export function HomePage() {
       return;
     }
 
+    // Check if we have coordinates at all
+    if (!selectedAddress.coordinates) {
+      setError('Could not determine the location of this address. Please try a different address.');
+      return;
+    }
+
+    // Check if address is within Portland bounds
+    if (!isWithinPortlandBounds(selectedAddress.coordinates)) {
+      setShowOutsidePortlandModal(true);
+      return;
+    }
+
     analyticsService.trackEvent('Search', 'find_stop', `${selectedSchoolLocal.name}`);
     setIsFinding(true);
     setError(null);
@@ -468,6 +525,42 @@ export function HomePage() {
     <div id="top" style={{ backgroundColor: headerBgColor, minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       <div style={{ position: 'absolute', top: '1rem', right: '24px', zIndex: 100 }}><DarkModeToggle /></div>
       <SEO title="Portland Public School Bus Maps" description="Interactive bus route maps for Portland Public Schools." />
+
+      {/* Outside Portland Modal */}
+      <Modal 
+        isOpen={showOutsidePortlandModal} 
+        onClose={() => setShowOutsidePortlandModal(false)}
+        maxWidth="400px"
+      >
+        <Modal.Header icon={<i className="fas fa-exclamation-circle" style={{ fontSize: '25px', color: 'var(--text-primary)' }} />}>
+          <Modal.Title>Address Outside Portland</Modal.Title>
+        </Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            The address you selected appears to be outside of the Portland Public Schools service area.
+            <br /><br />
+            Please select an address within Portland to find your bus stop.
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Footer twoButtons>
+          <Button 
+            variant="secondary" 
+            onClick={() => setShowOutsidePortlandModal(false)}
+          >
+            Close
+          </Button>
+          <Button 
+            variant="primary" 
+            onClick={() => {
+              setShowOutsidePortlandModal(false);
+              setRoutes([]);
+              navigate('/schools');
+            }}
+          >
+            Explore
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <div style={{
         display: 'flex',

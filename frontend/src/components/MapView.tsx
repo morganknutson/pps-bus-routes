@@ -1366,7 +1366,7 @@ export function MapView({
         /* Shift zoom controls up on mobile when "Find My Stop" button is visible */
         @media (max-width: 768px) {
           .leaflet-bottom.leaflet-left .leaflet-control-zoom {
-            margin-bottom: ${isFindMyStopVisible ? (isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 80px)' : '100px') : '10px'} !important;
+            margin-bottom: ${isFindMyStopVisible ? (isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 100px)' : '160px') : '60px'} !important;
             transition: margin-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           }
         }

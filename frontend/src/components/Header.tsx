@@ -4,6 +4,7 @@ import { DarkModeToggle } from './DarkModeToggle';
 import { useStore } from '../store/useStore';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { XIcon } from './XIcon';
+import './Header.css';
 
 interface HeaderProps {
   rightContent?: ReactNode;

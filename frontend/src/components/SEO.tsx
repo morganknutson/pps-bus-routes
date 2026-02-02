@@ -35,8 +35,8 @@ export const SEO: React.FC<SEOProps> = ({
   selectedStop,
   faqItems,
 }) => {
-  const isDarkMode = useStore(state => state.isDarkMode);
-  const themeColor = isDarkMode ? '#3A3A3A' : '#ffffff';
+  // Theme color set to transparent for Safari mobile address bar
+  const themeColor = 'transparent';
   
   const siteTitle = 'Portland Public Schools (PPS) Bus Route Map';
   const url = window.location.href;

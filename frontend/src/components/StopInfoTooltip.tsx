@@ -72,7 +72,7 @@ const StopPill: React.FC<StopPillProps> = ({ number, time, color }) => {
         color: 'var(--text-primary)',
         fontSize: '11px',
         fontWeight: 'bold',
-        border: '1px solid var(--text-tertiary)',
+        border: '1px solid var(--text-tertiary  )',
       }}>
         {number}
       </div>
@@ -154,7 +154,7 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
-        padding: isMobile ? '8px 2rem 12px 2rem' : 'var(--floating-header-padding)',
+        padding: isMobile ? '0px 2rem 12px 2rem' : 'var(--floating-header-padding)',
         backgroundColor: 'var(--bg-primary)',
         position: 'relative',
         borderBottom: 'none'
@@ -222,8 +222,11 @@ export const StopInfoTooltip: React.FC<StopInfoTooltipProps> = ({
        * Contains: Address, Neighborhood
        * Note: School stops don't use this tooltip (they show SchoolInfoTooltip)
        * ======================================== */}
-      <div style={{ padding: isMobile ? '20px 2rem' : 'var(--floating-content-padding)' }}>
-        <div style={{ display: 'grid', gap: '1rem' }}>
+      <div style={{ 
+        padding: isMobile ? '20px 2rem' : 'var(--floating-content-padding)',
+        backgroundColor: 'var(--bg-secondary)',
+        }}>
+        <div style={{ display: 'grid', gap: '1rem', backgroundColor: 'var(--bg-secondary)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             
             {/* --- ADDRESS SECTION --- */}

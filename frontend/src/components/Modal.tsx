@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Children, cloneElement, isValidElement } from 'react';
 import { createPortal } from 'react-dom';
 import { useDarkMode } from '../hooks/useDarkMode';
+import { Button } from './Button';
 
 interface ModalProps {
   isOpen: boolean;
@@ -8,6 +9,7 @@ interface ModalProps {
   children: React.ReactNode;
   maxWidth?: string;
   preventClickOutsideClose?: boolean;
+  static?: boolean;
 }
 
 const ModalBase: React.FC<ModalProps> = ({
@@ -15,20 +17,46 @@ const ModalBase: React.FC<ModalProps> = ({
   onClose,
   children,
   maxWidth = '345px', // Exact width from Figma
-  preventClickOutsideClose = false
+  preventClickOutsideClose = false,
+  static: isStatic = false
 }) => {
   const { isDarkMode } = useDarkMode();
   // Prevent scrolling on the body when modal is open
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !isStatic) {
       document.body.style.overflow = 'hidden';
-    } else {
+    } else if (!isStatic) {
       document.body.style.overflow = 'unset';
     }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isOpen]);
+    return () => { if (!isStatic) document.body.style.overflow = 'unset'; };
+  }, [isOpen, isStatic]);
 
   if (!isOpen) return null;
+
+  const modalContent = (
+    <div
+      style={{
+        backgroundColor: 'var(--bg-tertiary)',
+        borderRadius: 'var(--radius-floating)',
+        width: '100%',
+        maxWidth: maxWidth,
+        boxShadow: 'var(--edge-inner-secondary), var(--drop-shadow-floating-primary)',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        animation: isStatic ? 'none' : 'modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+        position: 'relative',
+        border: 'none',
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {children}
+    </div>
+  );
+
+  if (isStatic) {
+    return modalContent;
+  }
 
   return createPortal(
     <div
@@ -58,38 +86,42 @@ const ModalBase: React.FC<ModalProps> = ({
           }
         `}
       </style>
-      <div
-        style={{
-          backgroundColor: 'var(--bg-secondary)',
-          borderRadius: 'var(--radius-floating)',
-          width: '100%',
-          maxWidth: maxWidth,
-          boxShadow: 'var(--edge-inner-secondary)',
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          animation: 'modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-          position: 'relative',
-          border: 'none',
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {children}
-      </div>
+      {modalContent}
     </div>,
     document.body
   );
 };
 
 // Compound Components
-export const ModalHeader: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
-  <div style={{ padding: 'var(--floating-header-padding)', display: 'flex', alignItems: 'flex-start', ...style }}>
+// STRICT: icon is REQUIRED - TypeScript will enforce this for all new modals
+// Layout: Icon top-left, children (title) below the icon with spacing above title
+export const ModalHeader: React.FC<{ 
+  children?: React.ReactNode; // Optional - can be empty if only icon is needed
+  icon: React.ReactNode; // Required prop - agents must provide this
+  style?: React.CSSProperties 
+}> = ({ children, icon, style }) => (
+  <div style={{ 
+    padding: '34px 34px 0', 
+    paddingBottom: 0,
+    display: 'flex', 
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: '36px', // Decides space between icon and title
+    ...style 
+  }}>
+    {icon}
     {children}
   </div>
 );
 
 export const ModalContent: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
-  <div style={{ padding: 'var(--floating-content-padding)', display: 'flex', flexDirection: 'column', gap: '16px', ...style }}>
+  <div style={{ 
+    padding: '0 34px', 
+    display: 'flex', 
+    flexDirection: 'column', 
+    gap: '0px', 
+    ...style 
+    }}>
     {children}
   </div>
 );
@@ -98,10 +130,11 @@ export const ModalTitle: React.FC<{ children: React.ReactNode; style?: React.CSS
   <h2 style={{
     fontSize: '18px',
     fontWeight: '400',
-    margin: 0,
+    margin: '0 0 .5rem',
     color: 'var(--text-primary)',
     lineHeight: '22px',
     fontFamily: "'Inter', sans-serif",
+    padding: '0',
     ...style
   }}>
     {children}
@@ -114,19 +147,59 @@ export const ModalDescription: React.FC<{ children: React.ReactNode; style?: Rea
     fontWeight: '400',
     lineHeight: '18px',
     color: '#828282',
-    margin: 0,
+    margin: '0 0 1.5rem',
     fontFamily: "'Inter', sans-serif",
+    padding: '0',
     ...style
   }}>
     {children}
   </p>
 );
 
-export const ModalFooter: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
-  <div style={{ padding: '10px 30px 30px', width: '100%', boxSizing: 'border-box', ...style }}>
-    {children}
-  </div>
-);
+// STRICT: Automatically enforces size="large" on all Button children
+export const ModalFooter: React.FC<{ 
+  children: React.ReactNode; 
+  twoButtons?: boolean; // When true, arranges buttons side by side with equal width
+  style?: React.CSSProperties 
+}> = ({ children, twoButtons = false, style }) => {
+  // Clone all Button children and enforce size="large"
+  const processedChildren = Children.map(children, (child) => {
+    if (isValidElement(child) && child.type === Button) {
+      // Enforce 'large' size, but allow variant override (default to primary)
+      const props: any = { 
+        size: 'large', 
+        variant: child.props.variant || 'primary',
+        align: 'center'
+      };
+      
+      if (twoButtons) {
+        // Remove fullWidth and add flex: 1 for equal width distribution
+        props.fullWidth = false;
+        props.style = {
+          ...(child.props.style || {}),
+          flex: 1,
+          width: '100%'
+        };
+      }
+      
+      return cloneElement(child as React.ReactElement<any>, props);
+    }
+    return child;
+  });
+
+  return (
+    <div style={{ 
+      padding: '10px 30px 30px', 
+      width: '100%', 
+      boxSizing: 'border-box',
+      display: twoButtons ? 'flex' : 'block',
+      gap: twoButtons ? '12px' : undefined,
+      ...style 
+    }}>
+      {processedChildren}
+    </div>
+  );
+};
 
 // Map compound components to ModalBase
 export const Modal = Object.assign(ModalBase, {
