@@ -79,6 +79,7 @@ export function DesignSystemPage() {
   const [showButtonChevron, setShowButtonChevron] = useState(false);
   const [showButtonDropdown, setShowButtonDropdown] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isButtonFloating, setIsButtonFloating] = useState(false);
 
   const [schoolTypeFilters, setSchoolTypeFilters] = useState<SchoolTypeFilters>({
     elementary: true,
@@ -205,161 +206,9 @@ export function DesignSystemPage() {
     <>
       {/* Buttons Section */}
       <section id="buttons" style={{ marginBottom: '6rem', scrollMarginTop: '100px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem', margin: 0 }}>
-            Buttons
-          </h2>
-          <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
-            <button
-              onClick={() => setButtonAlignment('left')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: buttonAlignment === 'left' ? 'var(--bg-primary)' : 'transparent',
-                color: buttonAlignment === 'left' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: buttonAlignment === 'left' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-              }}
-            >
-              Left Align
-            </button>
-            <button
-              onClick={() => setButtonAlignment('center')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: buttonAlignment === 'center' ? 'var(--bg-primary)' : 'transparent',
-                color: buttonAlignment === 'center' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: buttonAlignment === 'center' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-              }}
-            >
-              Center Align
-            </button>
-          </div>
-
-          <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
-            <button
-              onClick={() => setButtonWidthMode('hug')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: buttonWidthMode === 'hug' ? 'var(--bg-primary)' : 'transparent',
-                color: buttonWidthMode === 'hug' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: buttonWidthMode === 'hug' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-              }}
-            >
-              Hug
-            </button>
-            <button
-              onClick={() => setButtonWidthMode('fill')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: buttonWidthMode === 'fill' ? 'var(--bg-primary)' : 'transparent',
-                color: buttonWidthMode === 'fill' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: buttonWidthMode === 'fill' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-              }}
-            >
-              Fill
-            </button>
-          </div>
-
-          <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
-            <button
-              onClick={() => setShowButtonIcon(!showButtonIcon)}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: showButtonIcon ? 'var(--bg-primary)' : 'transparent',
-                color: showButtonIcon ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: showButtonIcon ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-              }}
-            >
-              Icon
-            </button>
-            <button
-              onClick={() => {
-                setShowButtonChevron(!showButtonChevron);
-                setShowButtonDropdown(false);
-              }}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: showButtonChevron ? 'var(--bg-primary)' : 'transparent',
-                color: showButtonChevron ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: showButtonChevron ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-              }}
-            >
-              Chevron
-            </button>
-            <button
-              onClick={() => {
-                setShowButtonDropdown(!showButtonDropdown);
-                setShowButtonChevron(false);
-              }}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: showButtonDropdown ? 'var(--bg-primary)' : 'transparent',
-                color: showButtonDropdown ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: showButtonDropdown ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-              }}
-            >
-              Dropdown
-            </button>
-            <button
-              onClick={() => setIsButtonDisabled(!isButtonDisabled)}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: isButtonDisabled ? 'var(--bg-primary)' : 'transparent',
-                color: isButtonDisabled ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: isButtonDisabled ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-              }}
-            >
-              Disabled
-            </button>
-          </div>
-        </div>
+        <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)', borderBottom: '2px solid var(--border-color-primary)', paddingBottom: '0.5rem', marginBottom: '2rem' }}>
+          Buttons
+        </h2>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
           {/* Dynamic Matrix */}
@@ -392,6 +241,7 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
@@ -406,6 +256,7 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
@@ -420,6 +271,7 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
@@ -437,6 +289,7 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
@@ -451,6 +304,7 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
@@ -465,6 +319,7 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
@@ -482,6 +337,7 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
@@ -496,6 +352,7 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
@@ -510,11 +367,195 @@ export function DesignSystemPage() {
                   showChevron={showButtonChevron || showButtonDropdown}
                   chevronDirection={showButtonDropdown ? 'down' : 'right'}
                   disabled={isButtonDisabled}
+                  floating={isButtonFloating}
                 >
                   Action
                 </Button>
               </div>
 
+            </div>
+          </div>
+
+          {/* Toggles */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
+              <button
+                onClick={() => setButtonAlignment('left')}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: buttonAlignment === 'left' ? 'var(--bg-primary)' : 'transparent',
+                  color: buttonAlignment === 'left' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: buttonAlignment === 'left' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Left Align
+              </button>
+              <button
+                onClick={() => setButtonAlignment('center')}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: buttonAlignment === 'center' ? 'var(--bg-primary)' : 'transparent',
+                  color: buttonAlignment === 'center' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: buttonAlignment === 'center' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Center Align
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
+              <button
+                onClick={() => setButtonWidthMode('hug')}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: buttonWidthMode === 'hug' ? 'var(--bg-primary)' : 'transparent',
+                  color: buttonWidthMode === 'hug' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: buttonWidthMode === 'hug' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Hug
+              </button>
+              <button
+                onClick={() => setButtonWidthMode('fill')}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: buttonWidthMode === 'fill' ? 'var(--bg-primary)' : 'transparent',
+                  color: buttonWidthMode === 'fill' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: buttonWidthMode === 'fill' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Fill
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
+              <button
+                onClick={() => setShowButtonIcon(!showButtonIcon)}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: showButtonIcon ? 'var(--bg-primary)' : 'transparent',
+                  color: showButtonIcon ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: showButtonIcon ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Icon
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
+              <button
+                onClick={() => {
+                  setShowButtonChevron(!showButtonChevron);
+                  setShowButtonDropdown(false);
+                }}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: showButtonChevron ? 'var(--bg-primary)' : 'transparent',
+                  color: showButtonChevron ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: showButtonChevron ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Chevron
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
+              <button
+                onClick={() => {
+                  setShowButtonDropdown(!showButtonDropdown);
+                  setShowButtonChevron(false);
+                }}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: showButtonDropdown ? 'var(--bg-primary)' : 'transparent',
+                  color: showButtonDropdown ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: showButtonDropdown ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Dropdown
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
+              <button
+                onClick={() => setIsButtonDisabled(!isButtonDisabled)}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: isButtonDisabled ? 'var(--bg-primary)' : 'transparent',
+                  color: isButtonDisabled ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: isButtonDisabled ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Disabled
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', backgroundColor: 'var(--bg-secondary)', padding: '4px', borderRadius: '12px', gap: '4px' }}>
+              <button
+                onClick={() => setIsButtonFloating(!isButtonFloating)}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: isButtonFloating ? 'var(--bg-primary)' : 'transparent',
+                  color: isButtonFloating ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: isButtonFloating ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                }}
+              >
+                Floating
+              </button>
             </div>
           </div>
         </div>

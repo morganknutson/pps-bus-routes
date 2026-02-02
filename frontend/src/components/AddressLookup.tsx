@@ -8,6 +8,7 @@ import { formatStreetName } from '../utils/formatAddress';
 import { Route, Stop } from '../types';
 import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
+import { Button } from './Button';
 import { useUrlState } from '../hooks/useUrlState';
 import { useLocation } from 'react-router-dom';
 import { useIsMobile } from '../hooks/useMediaQuery';
@@ -321,51 +322,27 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
       </div>
 
       {shouldShowButton && (
-        <button
+        <Button
+          variant="primary"
+          size={isMobile ? "large" : "medium"}
+          fullWidth={isMobile}
+          align="left"
           onClick={handleFindClosestStop}
           title="Find My Stop"
+          icon={<MapPinIcon filled style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />}
           style={isMobile ? {
             position: 'fixed',
             bottom: 0,
             left: 0,
             right: 0,
             height: '60px',
-            backgroundColor: 'var(--bg-primary)',
-            color: 'var(--text-primary)',
-            border: 'none',
             borderTop: '1px solid var(--border-color-primary)',
-            fontSize: '16px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.75rem',
-            boxShadow: 'var(--drop-shadow-primary)',
+            borderRadius: 0,
             zIndex: 800,
-            transition: 'all 0.2s ease',
-          } : {
-            padding: '0 1.5rem',
-            height: '40px',
-            fontWeight: '600',
-            backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
-            color: 'var(--text-primary)',
-            border: 'none',
-            borderRadius: '9999px',
-            fontSize: '12px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            boxShadow: 'var(--drop-shadow-floating-primary)',
-            transition: 'all 0.2s ease',
-            gap: '0.75rem',
-          }}
+          } : undefined}
         >
-          <MapPinIcon filled style={{ width: isMobile ? 14 : 10, height: isMobile ? 18 : 13, flexShrink: 0 }} />
-          <span>Find My Stop</span>
-        </button>
+          Find My Stop
+        </Button>
       )}
     </div>
   );

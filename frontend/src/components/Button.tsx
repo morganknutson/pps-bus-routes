@@ -11,6 +11,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
   showChevron?: boolean;
   chevronDirection?: 'right' | 'down';
+  floating?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -22,6 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   icon,
   showChevron = false,
   chevronDirection,
+  floating = false,
   style,
   onMouseEnter,
   onMouseLeave,
@@ -54,7 +56,9 @@ export const Button: React.FC<ButtonProps> = ({
               isHovered ? 'var(--bg-hover)' : 'var(--bg-primary)') : (
               isHovered ? 'var(--bg-hover)' : 'var(--bg-primary)'),
           color: 'var(--text-primary)',
-          boxShadow: 'var(--edge-inner-primary), var(--drop-shadow-primary)', 
+          boxShadow: floating 
+            ? 'var(--edge-inner-primary), var(--drop-shadow-floating-primary)' 
+            : 'var(--edge-inner-primary), var(--drop-shadow-primary)', 
         };
       case 'secondary':
         /* Secondary button: subtle background that brightens on hover */
@@ -62,16 +66,20 @@ export const Button: React.FC<ButtonProps> = ({
           ...baseStyles,
           backgroundColor: (isHovered ? 'var(--bg-primary)' : 'var(--bg-secondary)'),
           color: 'var(--text-primary)',
-          boxShadow: 'var(--edge-inner-secondary), var(--drop-shadow-secondary)',
+          boxShadow: floating
+            ? 'var(--edge-inner-secondary), var(--drop-shadow-floating-secondary)'
+            : 'var(--edge-inner-secondary), var(--drop-shadow-secondary)',
         };
       case 'tertiary':
         return {
           ...baseStyles,
           backgroundColor: (isHovered ? 'var(--bg-secondary)' : 'var(--bg-tertiary)'),
           color: 'var(--text-primary)',
-          boxShadow: (
-            isHovered ? 'var(--edge-inner-secondary), var(--drop-shadow-secondary)' 
-                      : 'var(--edge-inner-tertiary), var(--drop-shadow-tertiary)'),
+          boxShadow: floating
+            ? (isHovered ? 'var(--edge-inner-secondary), var(--drop-shadow-floating-secondary)' 
+                        : 'var(--edge-inner-tertiary), var(--drop-shadow-floating-tertiary)')
+            : (isHovered ? 'var(--edge-inner-secondary), var(--drop-shadow-secondary)' 
+                        : 'var(--edge-inner-tertiary), var(--drop-shadow-tertiary)'),
         };
       case 'dropdown':
         /* Tertiary/Dropdown: Minimal styling, uses theme-based background variables */
@@ -112,7 +120,7 @@ export const Button: React.FC<ButtonProps> = ({
   // Dynamic vertical padding based on size and device
   const verticalPadding = isMobile
     ? (size === 'large' ? 18 : size === 'medium' ? 14 : 10)
-    : (size === 'large' ? 14 : size === 'medium' ? 10 : 8);
+    : (size === 'large' ? 14 : size === 'medium' ? 13 : 8);
 
   const chevronSize = isMobile
     ? (size === 'large' ? 14 : 12)

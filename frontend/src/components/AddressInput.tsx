@@ -13,6 +13,7 @@ import { MapPinIcon } from './MapPinIcon';
 import { XIcon } from './XIcon';
 import { LocationArrowIcon } from './LocationArrowIcon';
 import { ChevronIcon } from './ChevronIcon';
+import { Button } from './Button';
 import { useUrlState } from '../hooks/useUrlState';
 import { useIsStandalone } from '../hooks/useIsStandalone';
 
@@ -34,6 +35,7 @@ export function AddressInput() {
   const basePath = location.pathname.startsWith('/admin') ? '/admin' : '';
   const {
     schoolId: selectedSchoolId,
+    selectedStopId,
     directionFilter,
     selectStop,
     setDirectionFilter,
@@ -107,6 +109,7 @@ export function AddressInput() {
   };
 
   const shouldShowButton = homeAddress && selectedSchoolId && routes.length > 0;
+  const isAnySheetOpen = focus === 'home' || focus === 'school-info' || !!selectedStopId;
 
   useEffect(() => {
     setIsFindMyStopVisible(!!shouldShowButton && isMobile);
@@ -284,73 +287,38 @@ export function AddressInput() {
       alignItems: 'center'
     }}>
       {shouldShowButton && (
-        <button
+        <Button
+          variant="primary"
+          size={isMobile ? "large" : "medium"}
+          align="left"
           onClick={handleFindClosestStop}
           title={focus === 'my-stop' ? "This is your stop" : "Find My Stop"}
+          icon={<MapPinIcon filled style={{ width: isMobile ? 24 : 10, height: isMobile ? 19 : 13, flexShrink: 0 }} />}
+          showChevron={isMobile}
+          floating={isMobile ? !isAnySheetOpen : true}
           style={isMobile ? {
             position: 'fixed',
-            bottom: isStandalone ? 'calc(env(safe-area-inset-bottom, 20px) + 10px)' : '16px',
-            left: isDarkMode ? '1.9rem' : '22px',
-            right: isDarkMode ? '1.9rem' : '22px',
-            padding: '0 22px 0 23px',
+            bottom: isStandalone
+              ? (isAnySheetOpen ? 'calc(env(safe-area-inset-bottom, 20px) + 10px)' : 'calc(env(safe-area-inset-bottom, 20px) + 30px)')
+              : (isAnySheetOpen ? '16px' : '36px'),
+            left: isAnySheetOpen ? '23px' : '30px',
+            right: isAnySheetOpen ? '23px' : '30px',
+            width: 'auto',
             height: '56px',
             backgroundColor: focus === 'my-stop' ? 'transparent' : 'var(--bg-primary)',
             color: focus === 'my-stop'
               ? (isDarkMode ? 'rgba(255,255,255, .4)' : 'rgba(0, 0, 0, .4)')
-              : (isDarkMode ? 'rgba(255,255,255, 1)' : 'rgba(0, 0, 0, 1)'),
+              : 'var(--text-primary)',
             border: focus === 'my-stop'
               ? (isDarkMode ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)')
               : 'none',
-            borderTop: 'none',
-            borderRadius: '9999px',
-            fontSize: '16px',
-            fontWeight: '500',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: isMobile ? 'center' : 'center',
-            gap: '0.75rem',
-            boxShadow: focus === 'my-stop'
-              ? 'none'
-              : isMobile 
-                ? 'var(--drop-shadow-primary)' 
-                : 'var(--edge-inner-primary), var(--drop-shadow-floating-primary)',
+            ...(focus === 'my-stop' ? { boxShadow: 'none' } : {}),
             zIndex: 800,
             transition: 'all 0.5s ease',
-          } : {
-            padding: '0 1.5rem',
-            height: '40px',
-            fontWeight: '500',
-            backgroundColor: isDarkMode ? '#3A3A3A' : 'var(--bg-primary)',
-            color: 'var(--text-primary)',
-            border: 'none',
-            borderRadius: '9999px',
-            fontSize: '12px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            boxShadow: 'var(--drop-shadow-floating-primary), var(--edge-inner-primary)',
-            transition: 'all 0.2s ease',
-            gap: '0.5rem',
-          }}
+          } : undefined}
         >
-          <MapPinIcon filled style={{ width: isMobile ? 24 : 10, height: isMobile ? 19 : 13, flexShrink: 0 }} />
-          <span style={{ flex: 1, textAlign: 'left' }}>{focus === 'my-stop' ? "This is your stop" : "Find My Stop"}</span>
-          {isMobile && (
-            <ChevronIcon
-              direction="right"
-              size={14}
-              color="currentColor"
-              style={{
-                opacity: 0.6,
-                marginLeft: '4px',
-                flexShrink: 0
-              }}
-            />
-          )}
-        </button>
+          {focus === 'my-stop' ? "This is your stop" : "Find My Stop"}
+        </Button>
       )}
 
       <div style={{
