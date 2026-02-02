@@ -221,7 +221,7 @@
     "Hayhurst",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T08:58:28.136Z",
+  "processedAt": "2026-02-02T07:42:58.488Z",
   "stats": {
     "totalStops": 14,
     "geocodedStops": 14,
@@ -680,11 +680,5 @@
       45.48015,
       -122.72871
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 13,
-    "errors": 0,
-    "total": 14
-  }
+  ]
 }
