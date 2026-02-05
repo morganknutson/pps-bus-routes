@@ -580,27 +580,34 @@ function App() {
 
     const trackingId = import.meta.env.VITE_GA_TRACKING_ID;
     if (trackingId) {
+      // Initialize analytics service (works with gtag.js loaded in index.html)
       analyticsService.init(trackingId);
       analyticsService.setUserProperty('theme', isDarkMode ? 'dark' : 'light');
 
       // Check for internal user flag in URL or LocalStorage
+      // Visit with ?internal=true to mark yourself as internal user
       const searchParams = new URLSearchParams(window.location.search);
       const isInternalUrl = searchParams.get('internal') === 'true';
       if (isInternalUrl) {
-        localStorage.setItem('is_internal_user', 'true');
-        console.log('[App] Marked as internal user');
+        analyticsService.markAsInternalUser();
       }
 
-      const isInternalUser = localStorage.getItem('is_internal_user') === 'true';
-      if (isInternalUser) {
+      // Set traffic type based on internal user status
+      if (analyticsService.isInternalUser()) {
         analyticsService.setUserProperty('traffic_type', 'internal');
       } else {
         analyticsService.setUserProperty('traffic_type', 'external');
       }
 
+      // Set user persona and device type
       const persona = window.location.pathname.startsWith('/admin') ? 'admin' : 'public';
       analyticsService.setUserProperty('user_persona', persona);
       analyticsService.setUserProperty('is_mobile', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+      
+      // Log debug info in development
+      if (window.location.hostname === 'localhost') {
+        console.log('[App] Analytics Debug Info:', analyticsService.getDebugInfo());
+      }
     }
   }, [initializeStore, isDarkMode]);
 

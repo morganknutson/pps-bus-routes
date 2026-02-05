@@ -67,6 +67,46 @@
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Portland Public Schools (PPS) Bus Route Map</title>
+
+  <!-- Google Analytics 4 - Load gtag.js BEFORE React for proper referrer tracking -->
+  <script>
+    // Capture referrer immediately before any SPA navigation can clear it
+    window.__INITIAL_REFERRER__ = document.referrer || '';
+    window.__INITIAL_URL__ = window.location.href;
+    window.__LANDING_TIME__ = Date.now();
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYZHYNSPZG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    // Configure GA4 with enhanced settings
+    gtag('config', 'G-ZYZHYNSPZG', {
+      // Send page view on initial load (React will handle subsequent ones)
+      send_page_view: true,
+      // Enable debug mode in development (check console for gtag events)
+      debug_mode: window.location.hostname === 'localhost',
+      // Capture the referrer properly
+      page_referrer: document.referrer,
+      // Custom dimensions for better user identification
+      custom_map: {
+        'dimension1': 'traffic_type',
+        'dimension2': 'user_persona', 
+        'dimension3': 'referral_source'
+      }
+    });
+
+    // Track initial referrer as an event (backup for reports)
+    if (document.referrer && !document.referrer.includes('ppsbus.com')) {
+      gtag('event', 'referral_landing', {
+        'referrer_url': document.referrer,
+        'referrer_domain': new URL(document.referrer).hostname,
+        'landing_page': window.location.pathname
+      });
+    }
+  </script>
+
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",

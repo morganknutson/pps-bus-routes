@@ -63,12 +63,14 @@ export function AddressInput() {
   const [isGeolocating, setIsGeolocating] = useState(false);
 
   const handleGetLocation = async () => {
+    console.log('[AddressInput] handleGetLocation called');
     if (!navigator.geolocation) {
       console.warn('[AddressInput] Geolocation not supported');
       return;
     }
 
     setIsGeolocating(true);
+    console.log('[AddressInput] Starting geolocation...');
 
     try {
       const position = await new Promise<GeolocationPosition>((resolve, reject) => {
@@ -82,12 +84,22 @@ export function AddressInput() {
       const { latitude, longitude } = position.coords;
       console.log(`[AddressInput] Got location: ${latitude}, ${longitude}`);
 
-      const result = await reverseGeocode(latitude, longitude);
+      console.log('[AddressInput] Calling reverseGeocode...');
+      let result;
+      try {
+        result = await reverseGeocode(latitude, longitude);
+        console.log('[AddressInput] reverseGeocode result:', result);
+      } catch (apiError: any) {
+        console.error('[AddressInput] reverseGeocode API error:', apiError);
+        console.error('[AddressInput] API error message:', apiError.message);
+        throw new Error(`Reverse geocode failed: ${apiError.message}`);
+      }
 
-      if (result.fullAddress) {
+      if (result && result.fullAddress) {
         // Extract just the street address part (before the city)
         const addressParts = result.fullAddress.split(',');
         const streetAddress = addressParts.slice(0, 2).join(',').trim();
+        console.log('[AddressInput] Setting home address:', streetAddress);
 
         setHomeAddress({
           address: streetAddress,
@@ -96,15 +108,30 @@ export function AddressInput() {
         setFocus('home');
         setQuery('');
         analyticsService.trackAction('location_autofill', { success: true });
+        console.log('[AddressInput] Location autofill complete');
       } else {
-        console.warn('[AddressInput] No address found for location');
+        console.warn('[AddressInput] No fullAddress in result. Result object:', JSON.stringify(result, null, 2));
         analyticsService.trackAction('location_autofill', { success: false, reason: 'no_address' });
       }
     } catch (error: any) {
       console.error('[AddressInput] Geolocation error:', error);
+      console.error('[AddressInput] Error message:', error.message);
+      console.error('[AddressInput] Error code:', error.code);
+      console.error('[AddressInput] Error stack:', error.stack);
+      
+      // Provide user feedback for common errors
+      if (error.code === 1) {
+        console.warn('[AddressInput] Location permission denied by user');
+      } else if (error.code === 2) {
+        console.warn('[AddressInput] Location position unavailable');
+      } else if (error.code === 3) {
+        console.warn('[AddressInput] Location request timed out');
+      }
+      
       analyticsService.trackAction('location_autofill', { success: false, reason: error.code || 'error' });
     } finally {
       setIsGeolocating(false);
+      console.log('[AddressInput] Geolocation process finished');
     }
   };
 
