@@ -3,6 +3,7 @@ dist/
 build/
 .env
 .env.local
+docker-compose.yml
 *.log
 .DS_Store
 coverage/
