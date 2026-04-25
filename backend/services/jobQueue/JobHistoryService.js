@@ -75,6 +75,11 @@ export class JobHistoryService {
    * Request a save - throttled to prevent event loop blocking
    */
   requestSave() {
+    if (this.isSaving) {
+      this.needsSave = true;
+      return;
+    }
+
     const now = Date.now();
     const timeSinceLastSave = now - this.lastSaveTime;
 
@@ -120,8 +125,10 @@ export class JobHistoryService {
       // Actually, async writeFile is fine and better for event loop.
       await fsPromises.writeFile(tempFile, JSON.stringify(trimmed, null, 2), 'utf8');
       await fsPromises.rename(tempFile, this.historyFile);
-      
-      this.history = trimmed;
+
+      if (this.history.length > this.maxHistorySize) {
+        this.history = this.history.slice(-this.maxHistorySize);
+      }
     } catch (error) {
       console.error('[JobHistoryService] Error saving history:', error);
     } finally {
@@ -316,7 +323,6 @@ export class JobHistoryService {
 
 // Export singleton instance
 export const jobHistoryService = new JobHistoryService();
-
 
 
 

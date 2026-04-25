@@ -45,10 +45,10 @@ router.post('/toggle', (req, res) => {
 });
 
 // Manually trigger the weekly sync
-router.post('/run-now', async (req, res) => {
+router.post('/run-now', (req, res) => {
   try {
-    const result = await runCheck();
-    res.json(result);
+    const result = runCheck();
+    res.status(202).json(result);
   } catch (error) {
     console.error('Error running scheduler check:', error);
     res.status(500).json({ error: error.message });
@@ -67,8 +67,6 @@ router.get('/test-email', async (req, res) => {
 });
 
 export { router as schedulerRouter };
-
-
 
 
 

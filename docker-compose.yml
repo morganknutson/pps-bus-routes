@@ -1,0 +1,36 @@
+name: ppsbus-dev
+services:
+  web:
+    container_name: ppsbus-dev-web
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "127.0.0.1:7780:3005"
+      - "127.0.0.1:7781:3000"
+    volumes:
+      - ./.git:/app/.git
+      - ./data:/app/data
+      - ./scripts:/app/scripts
+      - ./backend/services:/app/backend/services
+      - ./backend/routes:/app/backend/routes
+      - ./backend/utils:/app/backend/utils
+      - ./backend/server.js:/app/backend/server.js
+      - ./backend/.env:/app/backend/.env:ro
+      - ./frontend/src:/app/frontend/src
+    environment:
+      - NODE_ENV=development
+      - PORT=3005
+      - ENABLE_SCHEDULER=true
+      - ENABLE_GIT_PUBLISH=true
+      - GIT_PUBLISH_PUSH=true
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - GIT_AUTHOR_NAME=PPS Bus Routes Bot
+      - GIT_AUTHOR_EMAIL=automation@portlandschoolbuses.com
+      - WORKER_CONCURRENCY=2
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

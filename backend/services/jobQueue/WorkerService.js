@@ -13,6 +13,7 @@ import { processSinglePDF } from '../routeProcessor.js';
 import { pdfMetadataService } from '../pdfMetadataService.js';
 import { driveLinkVerificationService } from '../driveLinkVerificationService.js';
 import { JOB_TYPES } from './jobTypes.js';
+import { jobHistoryService } from './JobHistoryService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,6 +32,7 @@ export class WorkerService {
     this.concurrency = options.concurrency || 2;
     this.workers = [];
     this.isRunning = false;
+    this.verificationCacheUpdate = Promise.resolve();
   }
 
   /**
@@ -70,10 +72,61 @@ export class WorkerService {
    */
   startPollingWorker() {
     this.isRunning = true;
-    let isProcessing = false;
+    let activeCount = 0;
     let lastProcessTime = 0;
-    const minInterval = 2000; // Minimum 2 seconds between jobs (rate limiting)
+    const minInterval = 500; // Small delay between batches to avoid hot polling.
     let pollInterval = null;
+
+    const processJob = async (job) => {
+      activeCount++;
+      lastProcessTime = Date.now();
+      jobHistoryService.recordEvent('started', {
+        id: job.id,
+        name: job.name,
+        data: job.data,
+      });
+
+      console.log(`[WorkerService] Processing job ${job.id} (${job.name}) (development mode)`);
+
+      try {
+        const mockJob = {
+          id: job.id,
+          name: job.name,
+          data: job.data,
+          updateProgress: async (progress) => {
+            jobHistoryService.recordEvent('progress', {
+              id: job.id,
+              progress
+            });
+          },
+        };
+
+        let result;
+        if (job.name === JOB_TYPES.DRIVE_CHECK) {
+          result = await this.processDriveCheckJob(mockJob);
+        } else if (job.name === JOB_TYPES.PDF_PROCESS) {
+          result = await this.processPdfProcessJob(mockJob);
+        } else {
+          result = await this.processPdfSyncJob(mockJob);
+        }
+
+        jobHistoryService.recordEvent('completed', {
+          id: job.id,
+          result
+        });
+
+        console.log(`[WorkerService] Job ${job.id} completed`);
+      } catch (error) {
+        jobHistoryService.recordEvent('failed', {
+          id: job.id,
+          error: error.message
+        });
+
+        console.error(`[WorkerService] Job ${job.id} failed:`, error.message);
+      } finally {
+        activeCount--;
+      }
+    };
 
     const poll = async () => {
       if (!this.isRunning) {
@@ -81,93 +134,41 @@ export class WorkerService {
         return;
       }
 
-      // Don't process if already processing or too soon since last job
+      // Don't start a new batch if all worker slots are busy or too soon since last batch.
       const timeSinceLastProcess = Date.now() - lastProcessTime;
-      if (isProcessing || timeSinceLastProcess < minInterval) {
-        pollInterval = setTimeout(poll, 5000); // Check again in 5 seconds
+      if (activeCount >= this.concurrency || timeSinceLastProcess < minInterval) {
+        pollInterval = setTimeout(poll, 1000);
         return;
       }
 
       try {
+        const availableSlots = Math.max(1, this.concurrency - activeCount);
         // Get waiting jobs
         // Use the queue instance's getJobs method which handles Redis/No-Redis correctly
         // Check for PDF_SYNC jobs first
-        let waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_SYNC, 'waiting', 1);
+        let waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_SYNC, 'waiting', availableSlots);
 
         // Then check for PDF_PROCESS jobs
         if (!waitingJobs || waitingJobs.length === 0) {
-          waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_PROCESS, 'waiting', 1);
+          waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.PDF_PROCESS, 'waiting', availableSlots);
         }
 
         // Finally check for DRIVE_CHECK jobs
         if (!waitingJobs || waitingJobs.length === 0) {
-          waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.DRIVE_CHECK, 'waiting', 1);
+          waitingJobs = await this.pdfSyncQueue.getJobs(JOB_TYPES.DRIVE_CHECK, 'waiting', availableSlots);
         }
 
         if (waitingJobs && waitingJobs.length > 0) {
-          const job = waitingJobs[0];
-          isProcessing = true;
-          lastProcessTime = Date.now();
-
-          console.log(`[WorkerService] Processing job ${job.id} (${job.name}) (development mode)`);
-
-          try {
-            // In development mode (history only), we need to get the "real" job object if possible
-            // but since we're using polling, we'll just use the job data from history
-
-            // Create a mock job object with updateProgress method
-            const mockJob = {
-              id: job.id,
-              name: job.name,
-              data: job.data,
-              updateProgress: async (progress) => {
-                // Update progress in history service
-                const { jobHistoryService } = await import('./JobHistoryService.js');
-                jobHistoryService.recordEvent('progress', {
-                  id: job.id,
-                  progress
-                });
-              },
-            };
-
-            // Process the job
-            let result;
-            if (job.name === JOB_TYPES.DRIVE_CHECK) {
-              result = await this.processDriveCheckJob(mockJob);
-            } else if (job.name === JOB_TYPES.PDF_PROCESS) {
-              result = await this.processPdfProcessJob(mockJob);
-            } else {
-              result = await this.processPdfSyncJob(mockJob);
-            }
-
-            // Record completion in history
-            const { jobHistoryService } = await import('./JobHistoryService.js');
-            jobHistoryService.recordEvent('completed', {
-              id: job.id,
-              result
-            });
-
-            console.log(`[WorkerService] Job ${job.id} completed`);
-          } catch (error) {
-            // Record failure in history
-            const { jobHistoryService } = await import('./JobHistoryService.js');
-            jobHistoryService.recordEvent('failed', {
-              id: job.id,
-              error: error.message
-            });
-
-            console.error(`[WorkerService] Job ${job.id} failed:`, error.message);
-          }
-
-          isProcessing = false;
+          waitingJobs.forEach(job => {
+            processJob(job);
+          });
         }
       } catch (error) {
         console.error('[WorkerService] Error in polling worker:', error);
-        isProcessing = false;
       }
 
       // Continue polling
-      pollInterval = setTimeout(poll, 5000); // Wait 5 seconds between polls
+      pollInterval = setTimeout(poll, activeCount > 0 ? 1000 : 2000);
     };
 
     // Start polling
@@ -232,6 +233,14 @@ export class WorkerService {
    * @param {object} result 
    */
   async updateVerificationCache(schoolId, result) {
+    this.verificationCacheUpdate = this.verificationCacheUpdate
+      .catch(() => {})
+      .then(() => this.writeVerificationCacheUpdate(schoolId, result));
+
+    return this.verificationCacheUpdate;
+  }
+
+  async writeVerificationCacheUpdate(schoolId, result) {
     try {
       const schools = JSON.parse(await fsPromises.readFile(SCHOOLS_FILE, 'utf8'));
 
@@ -264,7 +273,7 @@ export class WorkerService {
       cachedResults.timestamp = new Date().toISOString();
 
       // Save updated cache
-      const tempFile = `${DRIVE_VERIFICATION_CACHE_FILE}.tmp`;
+      const tempFile = `${DRIVE_VERIFICATION_CACHE_FILE}.${process.pid}.${Date.now()}.${Math.random().toString(36).slice(2)}.tmp`;
       await fsPromises.writeFile(tempFile, JSON.stringify(cachedResults, null, 2), 'utf8');
       await fsPromises.rename(tempFile, DRIVE_VERIFICATION_CACHE_FILE);
     } catch (error) {
@@ -306,7 +315,7 @@ export class WorkerService {
       const existingPdfs = await this.getExistingPdfs(schoolId);
 
       // List files from Drive
-      const apiKey = process.env.GOOGLE_API_KEY || null;
+      const apiKey = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY || null;
       await job.updateProgress(20);
 
       const driveFiles = await listFolderFiles(folderId, apiKey);
@@ -394,6 +403,10 @@ export class WorkerService {
             const result = await downloadFile(file.id, apiKey);
             pdfBuffer = result.buffer;
             await fsPromises.writeFile(filePath, pdfBuffer);
+            if (file.modifiedTime) {
+              const modifiedDate = new Date(file.modifiedTime);
+              await fsPromises.utimes(filePath, modifiedDate, modifiedDate);
+            }
             downloaded++;
           } else {
             pdfBuffer = await fsPromises.readFile(filePath);

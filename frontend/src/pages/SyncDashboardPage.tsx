@@ -6,6 +6,7 @@ interface SyncState {
     lastRunStatus: string | null;
     lastRunDuration: string | null;
     lastRunResults: SyncResults | null;
+    running?: boolean;
 }
 
 interface SyncResults {
@@ -23,6 +24,7 @@ interface SyncResults {
         driveCheck: PhaseStatus;
         pdfFetch: PhaseStatus;
         processing: PhaseStatus;
+        publish?: PhaseStatus;
     };
 }
 
@@ -31,6 +33,12 @@ interface PhaseStatus {
     schools?: number;
     downloaded?: number;
     processed?: number;
+    queued?: number;
+    completed?: number;
+    failed?: number;
+    filesChanged?: number;
+    pushed?: boolean;
+    reason?: string;
     duration: string | null;
 }
 
@@ -48,6 +56,11 @@ interface SchedulerStatus {
     lastRunStatus: string | null;
     lastRunError: string | null;
     nextRun: string | null;
+    configured?: boolean;
+    disabledReason?: string | null;
+    running?: boolean;
+    cronRunning?: boolean;
+    schedule?: string;
 }
 
 interface EmailTestResult {
@@ -100,7 +113,11 @@ export function SyncDashboardPage() {
         try {
             const res = await fetch('/api/scheduler/run-now', { method: 'POST' });
             if (res.ok) {
-                // Refresh status after a short delay
+                const data = await res.json();
+                if (data.status) {
+                    setSchedulerStatus(data.status);
+                }
+                await fetchStatus();
                 setTimeout(fetchStatus, 2000);
             } else {
                 const data = await res.json();
@@ -125,6 +142,11 @@ export function SyncDashboardPage() {
             if (res.ok) {
                 const data = await res.json();
                 setSchedulerStatus(data);
+                if (data.disabledReason) {
+                    setError(data.disabledReason);
+                } else {
+                    setError(null);
+                }
             }
         } catch (err) {
             setError('Failed to toggle scheduler');
@@ -162,12 +184,33 @@ export function SyncDashboardPage() {
     const getPhaseStatusIcon = (status: string) => {
         switch (status) {
             case 'completed': return '✅';
+            case 'failed': return '❌';
             case 'running': return '🔄';
             case 'skipped': return '⏭️';
             case 'pending': return '⏳';
             default: return '❓';
         }
     };
+
+    const getPhaseDetail = (phase: PhaseStatus) => {
+        if (phase.queued) return `${phase.completed || 0}/${phase.queued}`;
+        if (typeof phase.filesChanged === 'number' && phase.status === 'completed') {
+            return `${phase.filesChanged} files${phase.pushed ? ', pushed' : ''}`;
+        }
+        return phase.duration || phase.reason || '-';
+    };
+
+    const syncIsRunning = isRunning || !!schedulerStatus?.running || !!syncState?.running || syncState?.lastRunStatus === 'running';
+    const schedulerLabel = schedulerStatus?.configured === false
+        ? 'Not configured'
+        : schedulerStatus?.enabled
+            ? 'Active'
+            : 'Paused';
+    const schedulerDotColor = schedulerStatus?.configured === false
+        ? '#ef4444'
+        : schedulerStatus?.enabled
+            ? '#22c55e'
+            : '#6b7280';
 
     return (
         <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg-secondary)' }}>
@@ -214,19 +257,19 @@ export function SyncDashboardPage() {
                                     </button>
                                     <button
                                         onClick={handleRunSync}
-                                        disabled={isRunning}
+                                        disabled={syncIsRunning}
                                         style={{
                                             padding: '0.5rem 1rem',
                                             backgroundColor: 'var(--text-primary)',
                                             color: 'var(--bg-primary)',
                                             border: 'none',
                                             borderRadius: '6px',
-                                            cursor: isRunning ? 'wait' : 'pointer',
+                                            cursor: syncIsRunning ? 'wait' : 'pointer',
                                             fontSize: '13px',
                                             fontWeight: '500',
                                         }}
                                     >
-                                        {isRunning ? 'Running...' : 'Run Now'}
+                                        {syncIsRunning ? 'Running...' : 'Run Now'}
                                     </button>
                                 </div>
                             </div>
@@ -235,13 +278,16 @@ export function SyncDashboardPage() {
                                 <div>
                                     <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '4px' }}>Status</div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: schedulerStatus?.enabled ? '#22c55e' : '#6b7280' }} />
-                                        <span style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{schedulerStatus?.enabled ? 'Active' : 'Paused'}</span>
+                                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: schedulerDotColor }} />
+                                        <span style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{schedulerLabel}</span>
                                     </div>
+                                    {schedulerStatus?.disabledReason && (
+                                        <div style={{ fontSize: '12px', color: '#ef4444', marginTop: '4px' }}>{schedulerStatus.disabledReason}</div>
+                                    )}
                                 </div>
                                 <div>
                                     <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '4px' }}>Schedule</div>
-                                    <div style={{ fontSize: '14px', color: 'var(--text-primary)' }}>Sundays @ 2am PT</div>
+                                    <div style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{schedulerStatus?.schedule || 'Sundays @ 2am PT'}</div>
                                 </div>
                                 <div>
                                     <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '4px' }}>Next Run</div>
@@ -262,7 +308,7 @@ export function SyncDashboardPage() {
                                         <div>
                                             <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '4px' }}>Status</div>
                                             <div style={{ fontSize: '14px', color: getStatusColor(syncState.lastRunStatus), fontWeight: '500' }}>
-                                                {syncState.lastRunStatus?.replace(/_/g, ' ') || 'Unknown'}
+                                                {syncIsRunning ? 'running' : syncState.lastRunStatus?.replace(/_/g, ' ') || 'Unknown'}
                                             </div>
                                         </div>
                                         <div>
@@ -300,7 +346,9 @@ export function SyncDashboardPage() {
                                                     <span style={{ color: 'var(--text-primary)' }}>
                                                         {getPhaseStatusIcon(phase.status)} {name.charAt(0).toUpperCase() + name.slice(1).replace(/([A-Z])/g, ' $1')}
                                                     </span>
-                                                    <span style={{ color: 'var(--text-tertiary)' }}>{phase.duration || '-'}</span>
+                                                    <span style={{ color: 'var(--text-tertiary)' }}>
+                                                        {getPhaseDetail(phase)}
+                                                    </span>
                                                 </div>
                                             ))}
                                         </div>

@@ -184,7 +184,7 @@ export async function listFolderFilesFromPage(folderId, apiKey = null) {
             files.push({
               id: fileId,
               name: name,
-              modifiedTime: modifiedTime || new Date().toISOString(), // Fallback to current time if API unavailable
+              modifiedTime,
             });
           }
         }
@@ -213,7 +213,7 @@ export async function listFolderFilesFromPage(folderId, apiKey = null) {
     return {
       id: fileId,
       name: name,
-      modifiedTime: modifiedTime || new Date().toISOString(), // Fallback to current time if API unavailable
+      modifiedTime,
     };
   }));
   

@@ -557,7 +557,7 @@ class VerificationService {
 
     // 3. Try to list files in folder
     try {
-      const apiKey = process.env.GOOGLE_API_KEY || null;
+      const apiKey = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY || null;
       const files = await listFolderFiles(folderId, apiKey);
       
       const pdfFiles = files.filter(f => 
@@ -650,7 +650,6 @@ async verifySchoolLinks(school) {
 // Export singleton instance
 export const verificationService = new VerificationService();
 export default VerificationService;
-
 
 
 

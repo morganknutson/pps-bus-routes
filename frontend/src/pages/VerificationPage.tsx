@@ -60,8 +60,16 @@ export function VerificationPage() {
   const [activeJobs, setActiveJobs] = useState<any[]>([]);
   const [fetchMessages, setFetchMessages] = useState<Record<string, { type: 'info' | 'success' | 'error'; message: string }>>({});
   const [activeTab, setActiveTab] = useState<'attention' | 'all'>('attention');
-  const [schedulerStatus, setSchedulerStatus] = useState<{ enabled: boolean; lastRun: string | null; nextRun: string | null } | null>(null);
+  const [schedulerStatus, setSchedulerStatus] = useState<{
+    enabled: boolean;
+    configured?: boolean;
+    disabledReason?: string | null;
+    running?: boolean;
+    lastRun: string | null;
+    nextRun: string | null;
+  } | null>(null);
   const [togglingScheduler, setTogglingScheduler] = useState(false);
+  const [runningScheduledPipeline, setRunningScheduledPipeline] = useState(false);
 
   // Define all functions before useEffects
   const loadJobQueueStats = async () => {
@@ -112,6 +120,50 @@ export function VerificationPage() {
       console.error('[VerificationPage] Error toggling scheduler:', err);
     } finally {
       setTogglingScheduler(false);
+    }
+  };
+
+  const handleRunScheduledPipeline = async () => {
+    analyticsService.trackAdminAction('scheduled_pipeline_run_now');
+    setRunningScheduledPipeline(true);
+    try {
+      const response = await fetch('/api/scheduler/run-now', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to start scheduled pipeline');
+      }
+
+      if (data.status) {
+        setSchedulerStatus(data.status);
+      }
+
+      setSuccessMessages(prev => ({
+        ...prev,
+        _scheduledPipeline: data.alreadyRunning
+          ? 'Scheduled pipeline is already running.'
+          : 'Scheduled pipeline started. This is the same workflow used by the Sunday run.',
+      }));
+
+      await loadJobStatuses();
+      await loadJobQueueStats();
+      await loadSchedulerStatus();
+    } catch (err: any) {
+      setSuccessMessages(prev => ({
+        ...prev,
+        _scheduledPipeline: `Error: ${err.message || 'Failed to start scheduled pipeline'}`,
+      }));
+      setTimeout(() => {
+        setSuccessMessages(prev => {
+          const updated = { ...prev };
+          delete updated._scheduledPipeline;
+          return updated;
+        });
+      }, 7000);
+    } finally {
+      setRunningScheduledPipeline(false);
     }
   };
 
@@ -695,11 +747,13 @@ export function VerificationPage() {
     // Load once immediately
     loadJobStatuses();
     loadJobQueueStats();
+    loadSchedulerStatus();
 
     // Then poll every 3 seconds for more responsive updates
     const interval = setInterval(() => {
       loadJobStatuses();
       loadJobQueueStats();
+      loadSchedulerStatus();
     }, 3000); // Poll every 3 seconds
 
     return () => clearInterval(interval);
@@ -1101,22 +1155,8 @@ export function VerificationPage() {
       let processQueued = 0;
       for (const school of schoolsNeedingFix) {
         try {
-          // Get updated PDF list for this school
-          const schoolData = pdfStatus?.schools?.find((s: any) => s.schoolId === school.schoolId);
-          const pdfFiles = schoolData?.pdfFiles || [];
-
-          if (pdfFiles.length === 0) {
-            console.log(`[VerificationPage] No PDFs to process for ${school.schoolId}`);
-            continue;
-          }
-
-          const response = await fetch('/api/process-pdfs/process', {
+          const response = await fetch(`/api/process-pdfs/process/${school.schoolId}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              schoolId: school.schoolId,
-              pdfFilenames: pdfFiles,
-            }),
           });
 
           if (response.ok) {
@@ -1126,6 +1166,9 @@ export function VerificationPage() {
               processQueued,
               message: `Processing ${school.schoolName || school.schoolId}...`,
             }));
+          } else {
+            const error = await response.json().catch(() => ({ error: response.statusText }));
+            console.error(`[VerificationPage] Error queueing process for ${school.schoolId}:`, error.error || response.statusText);
           }
         } catch (err) {
           console.error(`[VerificationPage] Error processing ${school.schoolId}:`, err);
@@ -1142,8 +1185,31 @@ export function VerificationPage() {
         message: 'Finishing up...',
       }));
 
-      // Give some time for processing to complete
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      let processingComplete = false;
+      pollAttempts = 0;
+
+      while (!processingComplete && pollAttempts < maxPollAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        pollAttempts++;
+
+        try {
+          const statsResponse = await fetch('/api/jobs/stats');
+          if (statsResponse.ok) {
+            const stats = await statsResponse.json();
+            setJobQueueStats(stats);
+            setFixAllStatus(prev => ({
+              ...prev,
+              message: `Processing PDFs... ${stats.active || 0} active, ${stats.waiting || 0} waiting`,
+            }));
+
+            if ((stats.active || 0) === 0 && (stats.waiting || 0) === 0) {
+              processingComplete = true;
+            }
+          }
+        } catch (err) {
+          console.warn('[VerificationPage] Error polling job stats:', err);
+        }
+      }
 
       // Final refresh of all data
       await loadPdfStatus();
@@ -1460,6 +1526,44 @@ export function VerificationPage() {
                 </button>
               </div>
             )}
+            <button
+              onClick={handleRunScheduledPipeline}
+              disabled={runningScheduledPipeline || !!schedulerStatus?.running}
+              style={{
+                padding: isMobile ? '0.5rem 1rem' : '0.75rem 1.5rem',
+                backgroundColor: (runningScheduledPipeline || schedulerStatus?.running) ? 'var(--bg-secondary)' : '#2563eb',
+                color: (runningScheduledPipeline || schedulerStatus?.running) ? 'var(--text-secondary)' : 'white',
+                border: 'none',
+                borderRadius: '999px',
+                cursor: (runningScheduledPipeline || schedulerStatus?.running) ? 'not-allowed' : 'pointer',
+                fontSize: isMobile ? '12px' : '14px',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                opacity: (runningScheduledPipeline || schedulerStatus?.running) ? 0.6 : 1,
+                transition: 'all 0.2s',
+                boxShadow: (runningScheduledPipeline || schedulerStatus?.running) ? 'none' : 'var(--drop-shadow-floating-primary)',
+                flex: isMobile ? '1 1 auto' : 'none',
+              }}
+              onMouseEnter={(e) => {
+                if (!runningScheduledPipeline && !schedulerStatus?.running) {
+                  e.currentTarget.style.backgroundColor = '#1d4ed8';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!runningScheduledPipeline && !schedulerStatus?.running) {
+                  e.currentTarget.style.backgroundColor = '#2563eb';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }
+              }}
+              title="Run the exact Drive check, PDF sync, and processing workflow used by the weekly scheduler"
+            >
+              <i className={`fas ${(runningScheduledPipeline || schedulerStatus?.running) ? 'fa-spinner fa-spin' : 'fa-play'}`}></i>
+              {(runningScheduledPipeline || schedulerStatus?.running) ? 'Pipeline Running...' : 'Run Scheduled Pipeline'}
+            </button>
             <button
               onClick={handleCheckDriveLinks}
               disabled={checkingDriveLinks}
@@ -2232,8 +2336,8 @@ export function VerificationPage() {
         {Object.keys(successMessages).length > 0 && (
           <div style={{ marginBottom: '1.5rem' }}>
             {Object.entries(successMessages).map(([schoolId, message]) => {
-              // Handle refresh message (no school associated)
-              if (schoolId === '_refresh') {
+              // Handle page-level messages (no school associated)
+              if (schoolId.startsWith('_')) {
                 const isError = message.startsWith('Error:');
                 return (
                   <div
@@ -2447,12 +2551,14 @@ export function VerificationPage() {
                               const timestampMatches = diff < 1000; // Within 1 second
                               const needsUpdate = driveTime > localTime;
 
-                              // Both timestamps must match AND counts must match
-                              const fullyMatches = timestampMatches && !hasCountMismatch;
+                              // Local newer is acceptable: it means the local cache has already
+                              // been fetched/processed from a Drive state newer than the current
+                              // folder newest timestamp.
+                              const upToDate = (timestampMatches || localTime > driveTime) && !hasCountMismatch;
 
-                              if (fullyMatches) {
+                              if (upToDate) {
                                 return (
-                                  <i className="fas fa-check-circle" style={{ color: '#FFFFFF', fontSize: '12px' }} title="Dates match"></i>
+                                  <i className="fas fa-check-circle" style={{ color: '#FFFFFF', fontSize: '12px' }} title={timestampMatches ? 'Dates match' : 'Local is newer than Drive'}></i>
                                 );
                               } else if (hasCountMismatch) {
                                 return (
@@ -3049,7 +3155,7 @@ export function VerificationPage() {
               const diff = driveTime && localTime ? Math.abs(driveTime - localTime) : null;
               const timestampMatches = diff !== null && diff < 1000;
               const needsUpdate = driveTime && localTime ? driveTime > localTime : false;
-              const fullyMatches = timestampMatches && !hasCountMismatch;
+              const upToDate = !!driveTime && !!localTime && (timestampMatches || localTime > driveTime) && !hasCountMismatch;
               const jobStatus = getJobStatusForSchool(school.schoolId);
               const isJobActive = jobStatus && (jobStatus.status === 'waiting' || jobStatus.status === 'active');
               const fetchMsg = fetchMessages[school.schoolId];
@@ -3172,9 +3278,9 @@ export function VerificationPage() {
                       }}>
                         <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
                           <span style={{ fontWeight: '600' }}>Match Status</span>{' '}
-                          {fullyMatches ? (
+                          {upToDate ? (
                             <span style={{ color: '#FFFFFF' }}>
-                              <i className="fas fa-check-circle"></i> Matched
+                              <i className="fas fa-check-circle"></i> {timestampMatches ? 'Matched' : 'Local Current'}
                             </span>
                           ) : hasCountMismatch ? (
                             <span style={{ color: '#ffa500' }}>

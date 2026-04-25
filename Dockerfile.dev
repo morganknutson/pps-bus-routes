@@ -1,0 +1,24 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache git openssh-client \
+    && git config --global --add safe.directory /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY frontend/package*.json ./frontend/
+RUN cd frontend && npm install
+
+COPY backend/package*.json ./backend/
+RUN cd backend && npm install
+
+COPY . .
+
+EXPOSE 3005 3000
+
+ENV NODE_ENV=development
+ENV PORT=3005
+
+CMD ["npm", "run", "dev"]

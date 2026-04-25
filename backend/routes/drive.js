@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/folder/:folderId', async (req, res) => {
   try {
     const { folderId } = req.params;
-    const apiKey = process.env.GOOGLE_API_KEY || null; // Optional
+    const apiKey = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY || null; // Optional
 
     const files = await listFolderFiles(folderId, apiKey);
     
@@ -30,7 +30,7 @@ router.get('/folder/:folderId', async (req, res) => {
 router.get('/file/:fileId', async (req, res) => {
   try {
     const { fileId } = req.params;
-    const apiKey = process.env.GOOGLE_API_KEY || null; // Optional
+    const apiKey = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY || null; // Optional
 
     // Download file
     const { buffer, name } = await downloadFile(fileId, apiKey);
@@ -55,7 +55,7 @@ router.get('/file/:fileId', async (req, res) => {
 router.post('/folder/:folderId/parse', async (req, res) => {
   try {
     const { folderId } = req.params;
-    const apiKey = process.env.GOOGLE_API_KEY || null; // Optional
+    const apiKey = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY || null; // Optional
 
     // List files
     const files = await listFolderFiles(folderId, apiKey);
@@ -88,4 +88,3 @@ router.post('/folder/:folderId/parse', async (req, res) => {
 });
 
 export { router as driveRouter };
-

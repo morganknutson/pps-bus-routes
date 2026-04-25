@@ -181,7 +181,7 @@ class DriveLinkVerificationService {
 
     try {
       // List files from Drive
-      const apiKey = process.env.GOOGLE_API_KEY || null;
+      const apiKey = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY || null;
       const driveFiles = await listFolderFiles(folderId, apiKey);
       const pdfFiles = driveFiles.filter(f => f.name && f.name.toLowerCase().endsWith('.pdf'));
 
@@ -228,8 +228,10 @@ class DriveLinkVerificationService {
           // Drive has PDFs but local doesn't
           result.needsUpdate = true;
         } else if (!result.driveLastModified && result.localLastModified) {
-          // Local has PDFs but Drive doesn't (unusual)
-          result.matches = false;
+          // Public page parsing can list PDFs without modifiedTime. In that case
+          // do not fabricate a Drive timestamp or mark everything stale.
+          result.matches = result.localPdfCount === result.pdfCount;
+          result.needsUpdate = false;
         }
       }
     } catch (error) {
@@ -310,4 +312,3 @@ class DriveLinkVerificationService {
 // Export singleton instance
 export const driveLinkVerificationService = new DriveLinkVerificationService();
 export default DriveLinkVerificationService;
-

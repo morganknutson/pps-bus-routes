@@ -212,12 +212,14 @@ router.get('/pdf-fetch-info/:schoolId', async (req, res) => {
       }
     }
     
-    // Also get last modified from local files (prefer metadata)
-    const localLastModified = await pdfMetadataService.getMostRecentModifiedTime(schoolId) 
+    // Also get last modified from local files. Prefer metadata because older
+    // sync-status entries may contain synthetic Drive timestamps.
+    const localLastModified = await pdfMetadataService.getMostRecentModifiedTime(schoolId)
       || pdfFetchTrackingService.getLastModifiedPdfFromLocal(schoolId);
     
     res.json({
       ...fetchInfo,
+      lastModifiedPdf: localLastModified || fetchInfo.lastModifiedPdf,
       localLastModified,
     });
   } catch (error) {
@@ -251,12 +253,16 @@ router.get('/pdf-fetch-info', async (req, res) => {
     // Enhance with local and Drive last modified dates
     const enhanced = {};
     
-    // First, add entries from sync status
+    // First, add entries from sync status, but prefer per-file metadata for
+    // local modified time. Older sync-status files can contain synthetic
+    // timestamps from public Drive page parsing.
     for (const [schoolId, fetchInfo] of Object.entries(allFetchInfo)) {
-      const localLastModified = pdfFetchTrackingService.getLastModifiedPdfFromLocal(schoolId);
+      const metadataLastModified = await pdfMetadataService.getMostRecentModifiedTime(schoolId);
+      const localLastModified = metadataLastModified || pdfFetchTrackingService.getLastModifiedPdfFromLocal(schoolId);
       
       enhanced[schoolId] = {
         ...fetchInfo,
+        lastModifiedPdf: localLastModified || fetchInfo.lastModifiedPdf,
         localLastModified,
         driveLastModified: null,
         driveAccessible: null,
@@ -456,15 +462,11 @@ router.get('/drive-link-results', async (req, res) => {
       for (const result of results.results) {
         const schoolId = result.schoolId;
         
-        // Get current localLastModified from sync status or metadata
-        let currentLocalModified = null;
+        // Prefer metadata over sync status. Sync status may contain synthetic
+        // timestamps from older Drive checks that lacked real modifiedTime.
+        const metadataModified = await pdfMetadataService.getMostRecentModifiedTime(schoolId);
         const syncInfo = allFetchInfo[schoolId];
-        if (syncInfo?.lastModifiedPdf) {
-          currentLocalModified = syncInfo.lastModifiedPdf;
-        } else {
-          // Fall back to metadata
-          currentLocalModified = await pdfMetadataService.getMostRecentModifiedTime(schoolId);
-        }
+        const currentLocalModified = metadataModified || syncInfo?.lastModifiedPdf || null;
         
         // Get current local PDF count from filesystem (more accurate than cached pdf-status.json)
         let localPdfCount = null;
@@ -588,9 +590,6 @@ router.post('/verify-school-stops', async (req, res) => {
 });
 
 export { router as verificationRouter };
-
-
-
 
 
 

@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { processSinglePDF } from '../services/routeProcessor.js';
 import { getSchoolIdFromFilename } from '../utils/schoolUtils.js';
 import { pdfSyncJobQueue } from '../services/jobQueue/index.js';
+import { pdfMetadataService } from '../services/pdfMetadataService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
