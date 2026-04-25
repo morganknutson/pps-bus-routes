@@ -1,9 +1,9 @@
 {
-  "id": "224CLK-A_effective_091725.pdf",
+  "id": "19IgehtynW9U-RWEYxsrRT9fh1ExjPpCt",
   "name": "224",
   "direction": "Morning",
   "filename": "224CLK-A_effective_091725.pdf",
-  "fileId": "224CLK-A_effective_091725.pdf",
+  "fileId": "19IgehtynW9U-RWEYxsrRT9fh1ExjPpCt",
   "modifiedTime": null,
   "stops": [
     {
@@ -75,7 +75,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.56865939511133,
-        45.49946664973941
+        45.499466649739404
       ],
       "displayName": "3145 SE 92nd Ave, Portland, OR 97266, USA",
       "placeId": "ChIJQ4awqEqglVQRssofNb7jaJk",
@@ -109,15 +109,14 @@
         45.5135543
       ],
       "displayName": "1231 SE 92nd Ave, Portland, OR 97216, USA",
-      "schoolName": "Clark",
-      "neighborhood": "Montavilla"
+      "schoolName": "Clark"
     }
   ],
   "neighborhoods": [
     "Montavilla",
     "Powellhurst-Gilbert"
   ],
-  "processedAt": "2025-12-16T09:56:03.114Z",
+  "processedAt": "2026-04-25T03:35:29.444Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -512,11 +511,5 @@
       45.51385,
       -122.56975
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

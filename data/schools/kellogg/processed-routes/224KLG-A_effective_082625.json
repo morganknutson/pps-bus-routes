@@ -1,9 +1,9 @@
 {
-  "id": "224KLG-A_effective_082625.pdf",
+  "id": "1vYflKf1S8e96OhWyBeqEtbCqNJQxATWX",
   "name": "224",
   "direction": "Morning",
   "filename": "224KLG-A_effective_082625.pdf",
-  "fileId": "224KLG-A_effective_082625.pdf",
+  "fileId": "1vYflKf1S8e96OhWyBeqEtbCqNJQxATWX",
   "modifiedTime": null,
   "stops": [
     {
@@ -101,7 +101,7 @@
     "Lents",
     "Mount Scott - Arleta"
   ],
-  "processedAt": "2025-12-17T09:01:48.241Z",
+  "processedAt": "2026-04-25T03:21:38.667Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
@@ -420,11 +420,5 @@
       45.49889,
       -122.59207
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  }
+  ]
 }

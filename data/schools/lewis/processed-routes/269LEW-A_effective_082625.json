@@ -1,9 +1,9 @@
 {
-  "id": "269LEW-A_effective_082625.pdf",
+  "id": "1m-eSvhJi_nBkv7yatvDi7E9mrc7r8fcm",
   "name": "269",
   "direction": "Morning",
   "filename": "269LEW-A_effective_082625.pdf",
-  "fileId": "269LEW-A_effective_082625.pdf",
+  "fileId": "1m-eSvhJi_nBkv7yatvDi7E9mrc7r8fcm",
   "modifiedTime": null,
   "stops": [
     {
@@ -60,17 +60,11 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.6073071380836,
-        45.46292515166676
+        45.46292515166675
       ],
       "displayName": "5410 SE Harney Dr, Portland, OR 97206, USA",
       "placeId": "ChIJBZVrWlJ1lVQRCoaHi0Rqtew",
-      "neighborhood": "Darlington",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.6073097,
-        45.4627687
-      ],
-      "snapDistance": 17.39777893471774
+      "neighborhood": "Darlington"
     },
     {
       "id": "stop-5",
@@ -115,11 +109,15 @@
         45.4738762
       ],
       "displayName": "4401 SE Evergreen St #121, Portland, OR 97206, USA",
-      "schoolName": "Lewis",
-      "neighborhood": "Southeast Portland"
+      "schoolName": "Lewis"
     }
   ],
-  "processedAt": "2025-12-12T22:36:00.558Z",
+  "neighborhoods": [
+    "Brentwood-Darlington",
+    "Darlington",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-04-25T03:18:53.472Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -347,54 +345,44 @@
       -122.61589
     ],
     [
-      45.46461,
-      -122.6159
+      45.46433,
+      -122.61589
     ],
     [
-      45.46639,
-      -122.61595
+      45.46603,
+      -122.61594
     ],
     [
-      45.46839,
-      -122.616
+      45.46822,
+      -122.61599
     ],
     [
-      45.46974,
+      45.46883,
+      -122.61601
+    ],
+    [
+      45.46949,
       -122.61604
     ],
     [
-      45.4712,
-      -122.61604
+      45.47049,
+      -122.61603
     ],
     [
-      45.4728,
+      45.47259,
       -122.61603
     ],
     [
       45.47328,
       -122.61603
-    ],
-    [
-      45.47328,
-      -122.61751
     ],
     [
       45.47327,
       -122.61828
     ],
     [
-      45.4737,
-      -122.61828
-    ],
-    [
       45.47392,
       -122.61827
     ]
-  ],
-  "snapStats": {
-    "snapped": 1,
-    "skipped": 5,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

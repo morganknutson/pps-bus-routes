@@ -1,9 +1,9 @@
 {
-  "id": "220ALA-P_effective_082625.pdf",
+  "id": "1tkMG-jleeAY3vRRYTCOcUwKZ3kvWOJ1f",
   "name": "220",
   "direction": "Afternoon",
   "filename": "220ALA-P_effective_082625.pdf",
-  "fileId": "220ALA-P_effective_082625.pdf",
+  "fileId": "1tkMG-jleeAY3vRRYTCOcUwKZ3kvWOJ1f",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.547482
       ],
       "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Alameda",
-      "neighborhood": "Northeast Portland"
+      "schoolName": "Alameda"
     },
     {
       "id": "stop-1",
@@ -81,37 +80,17 @@
       "displayName": "NE Skidmore St & NE 37th Ave, Portland, OR 97211, USA",
       "placeId": "EjVORSBTa2lkbW9yZSBTdCAmIE5FIDM3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCQdiBbzQppVUEdndrdVIoQ3AEhQKEgkHYgW80KaVVBHZ3a3VSKENwBoUChIJAektBVKhlVQRfR36jGtn9D0aFAoSCeO-GhXDppVUEZwWnyG-svtCIgoN9fAmGxVi0-i2",
       "neighborhood": "Northeast Portland"
-    },
-    {
-      "id": "stop-5",
-      "address": "Tubman Gt. & St. & CAB LOAD ZONE",
-      "time": "2:58 pm",
-      "direction": null,
-      "originalLine": "2:58 pmTUBMAN GT & ST & CAB LOAD ZONE220ALA-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.6695743,
-        45.5394497
-      ],
-      "displayName": "2231 N Flint Ave, Portland, OR 97227, USA",
-      "isSchoolStop": false
     }
   ],
-  "processedAt": "2025-12-12T21:41:39.780Z",
-  "stats": {
-    "totalStops": 5,
-    "geocodedStops": 5,
-    "failedStops": 0
-  },
   "neighborhoods": [
     "Northeast Portland",
     "Rose City Park"
   ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
+  "processedAt": "2026-04-25T03:44:24.224Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
   },
   "geometry": [
     [
@@ -215,52 +194,68 @@
       -122.61415
     ],
     [
-      45.54697,
-      -122.61777
+      45.54696,
+      -122.61574
     ],
     [
-      45.54698,
-      -122.62082
+      45.54696,
+      -122.61674
     ],
     [
-      45.54699,
-      -122.62183
+      45.54809,
+      -122.61675
     ],
     [
-      45.5483,
-      -122.62182
-    ],
-    [
-      45.5483,
-      -122.6227
+      45.54829,
+      -122.61674
     ],
     [
       45.5483,
-      -122.62321
+      -122.61719
     ],
     [
-      45.5493,
-      -122.62321
+      45.5483,
+      -122.61776
     ],
     [
-      45.54948,
-      -122.62323
+      45.54831,
+      -122.61936
     ],
     [
-      45.54967,
-      -122.62331
+      45.5483,
+      -122.62
     ],
     [
-      45.5498,
-      -122.62339
+      45.5483,
+      -122.62036
     ],
     [
-      45.54988,
-      -122.62342
+      45.54846,
+      -122.62036
     ],
     [
-      45.5503,
-      -122.62343
+      45.54968,
+      -122.62037
+    ],
+    [
+      45.55015,
+      -122.62037
+    ],
+    [
+      45.55105,
+      -122.62038
+    ],
+    [
+      45.55185,
+      -122.62039
+    ],
+    [
+      45.55185,
+      -122.62048
+    ],
+    [
+      45.55183,
+      -122.62141
     ],
     [
       45.55182,
@@ -286,6 +281,5 @@
       45.55369,
       -122.62555
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-30T11:44:16.201Z"
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "118GRY-A_effective_102925.pdf",
+  "id": "16BwTzT90NYoIWbUNb2153WBsabKoCHF8",
   "name": "118",
   "direction": "Morning",
   "filename": "118GRY-A_effective_102925.pdf",
-  "fileId": "118GRY-A_effective_102925.pdf",
+  "fileId": "16BwTzT90NYoIWbUNb2153WBsabKoCHF8",
   "modifiedTime": null,
   "stops": [
     {
@@ -109,14 +109,13 @@
         45.4824889
       ],
       "displayName": "5505 SW 23rd Ave, Portland, OR 97239, USA",
-      "schoolName": "Gray",
-      "neighborhood": "Southwest Portland"
+      "schoolName": "Gray"
     }
   ],
   "neighborhoods": [
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T08:43:28.230Z",
+  "processedAt": "2026-04-25T03:31:02.421Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -423,11 +422,5 @@
       45.48248,
       -122.7008
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

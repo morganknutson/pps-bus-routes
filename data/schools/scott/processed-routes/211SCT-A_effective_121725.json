@@ -1,9 +1,9 @@
 {
-  "id": "211SCT-A_effective_121725.pdf",
+  "id": "1k-a1sIRTFQyzWzAG9AfsaqRdRSOFvCHD",
   "name": "211",
   "direction": "Morning",
   "filename": "211SCT-A_effective_121725.pdf",
-  "fileId": "211SCT-A_effective_121725.pdf",
+  "fileId": "1k-a1sIRTFQyzWzAG9AfsaqRdRSOFvCHD",
   "modifiedTime": null,
   "stops": [
     {
@@ -101,7 +101,7 @@
     "Cully",
     "Northeast Portland"
   ],
-  "processedAt": "2025-12-17T09:08:31.217Z",
+  "processedAt": "2026-04-25T03:05:03.818Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
@@ -436,11 +436,5 @@
       45.555,
       -122.59444
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  }
+  ]
 }

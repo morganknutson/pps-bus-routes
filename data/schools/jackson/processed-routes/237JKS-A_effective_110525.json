@@ -1,9 +1,9 @@
 {
-  "id": "237JKS-A_effective_110525.pdf",
+  "id": "1oawGzitsNmAPkvkP3DGwAyWoh3MEE1P9",
   "name": "237",
   "direction": "Morning",
   "filename": "237JKS-A_effective_110525.pdf",
-  "fileId": "237JKS-A_effective_110525.pdf",
+  "fileId": "1oawGzitsNmAPkvkP3DGwAyWoh3MEE1P9",
   "modifiedTime": null,
   "stops": [
     {
@@ -92,8 +92,8 @@
         -122.7025637,
         45.4357391
       ],
-      "displayName": "SW Shelby Ct & Orchard Hill Rd, Portland, OR 97035, USA",
-      "placeId": "EjdTVyBTaGVsYnkgQ3QgJiBPcmNoYXJkIEhpbGwgUmQsIFBvcnRsYW5kLCBPUiA5NzAzNSwgVVNBImYiZAoUChIJhSNfVlULlVQRC_kmSOQa4eASFAoSCYUjX1ZVC5VUEQv5JkjkGuHgGhQKEgm9HFurqgyVVBHBc7DIFxCB_RoUChIJ65dEpKp0lVQRqgEx2W-DkCgiCg2P8RQbFRsT3bY",
+      "displayName": "SW Shelby Ct & SW Orchard Hill Rd, Portland, OR 97035, USA",
+      "placeId": "EjpTVyBTaGVsYnkgQ3QgJiBTVyBPcmNoYXJkIEhpbGwgUmQsIFBvcnRsYW5kLCBPUiA5NzAzNSwgVVNBImYiZAoUChIJhSNfVlULlVQRC_kmSOQa4eASFAoSCYUjX1ZVC5VUEQv5JkjkGuHgGhQKEgm9HFurqgyVVBHBc7DIFxCB_RoUChIJ65dEpKp0lVQRcqZbHlYdvkoiCg2P8RQbFRsT3bY",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -191,7 +191,7 @@
     "Southwest Portland",
     "West Portland Park"
   ],
-  "processedAt": "2025-12-17T09:00:06.724Z",
+  "processedAt": "2026-04-25T03:25:02.039Z",
   "stats": {
     "totalStops": 12,
     "geocodedStops": 12,
@@ -830,11 +830,5 @@
       45.45067,
       -122.71317
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 11,
-    "errors": 0,
-    "total": 12
-  }
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "245WDM-A_effective_082625.pdf",
+  "id": "1mJauvgrCRkQepbLu1z_FoL5s8o5jivTo",
   "name": "245",
   "direction": "Morning",
   "filename": "245WDM-A_effective_082625.pdf",
-  "fileId": "245WDM-A_effective_082625.pdf",
+  "fileId": "1mJauvgrCRkQepbLu1z_FoL5s8o5jivTo",
   "modifiedTime": null,
   "stops": [
     {
@@ -60,7 +60,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.5971423011085,
-        45.47565451411706
+        45.47565451411707
       ],
       "displayName": "6332 SE Duke St, Portland, OR 97206, USA",
       "placeId": "ChIJVV62QQSglVQR-yT3mzg2_DQ",
@@ -86,7 +86,7 @@
     "Brentwood-Darlington",
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-17T08:57:08.605Z",
+  "processedAt": "2026-04-25T02:55:33.046Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -305,11 +305,5 @@
       45.47491,
       -122.58245
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

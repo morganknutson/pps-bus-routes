@@ -1,9 +1,9 @@
 {
-  "id": "254HOS-A_effective_100825.pdf",
+  "id": "1xafdXDA0MmfWblhjtoPF6a_hfafX1j6g",
   "name": "254",
   "direction": "Morning",
   "filename": "254HOS-A_effective_100825.pdf",
-  "fileId": "254HOS-A_effective_100825.pdf",
+  "fileId": "1xafdXDA0MmfWblhjtoPF6a_hfafX1j6g",
   "modifiedTime": null,
   "stops": [
     {
@@ -15,7 +15,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.60853955508634,
-        45.48969821907167
+        45.48969821907168
       ],
       "displayName": "5215 SE Pardee St, Portland, OR 97206, USA",
       "placeId": "ChIJdfcgiW2glVQRbUuQ7hXgF1U",
@@ -87,7 +87,7 @@
     "Reed",
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-17T08:59:15.140Z",
+  "processedAt": "2026-04-25T03:27:15.292Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -290,11 +290,5 @@
       45.50619,
       -122.63673
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

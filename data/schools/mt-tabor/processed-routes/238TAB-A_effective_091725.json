@@ -1,9 +1,9 @@
 {
-  "id": "238TAB-A_effective_091725.pdf",
+  "id": "1bnDtN5MJ9CQumoa3tLPoDUW8uGpiboSP",
   "name": "238",
   "direction": "Morning",
   "filename": "238TAB-A_effective_091725.pdf",
-  "fileId": "238TAB-A_effective_091725.pdf",
+  "fileId": "1bnDtN5MJ9CQumoa3tLPoDUW8uGpiboSP",
   "modifiedTime": null,
   "stops": [
     {
@@ -59,8 +59,8 @@
       "originalLine": "8:56 am2271 SE 41ST AV (RICHMOND SCHOOL) [E]238TAB-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.62036553461002,
-        45.50649091398561
+        -122.62036568978033,
+        45.506497713367125
       ],
       "displayName": "2271 SE 41st Ave, Portland, OR 97214, USA",
       "placeId": "EikyMjcxIFNFIDQxc3QgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTQsIFVTQSIxEi8KFAoSCefaQtKLoJVUEQZpPtE5qR03EN8RKhQKEglX2-CGdqCVVBG0QxiSKvutAQ",
@@ -94,8 +94,7 @@
         45.5210407
       ],
       "displayName": "5800 SE Ash St, Portland, OR 97215, USA",
-      "schoolName": "Mt Tabor",
-      "neighborhood": "Southeast Portland"
+      "schoolName": "Mt Tabor"
     }
   ],
   "neighborhoods": [
@@ -104,7 +103,7 @@
     "Southeast Portland",
     "Sunnyside"
   ],
-  "processedAt": "2025-12-16T11:16:38.112Z",
+  "processedAt": "2026-04-25T03:12:19.971Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
@@ -419,11 +418,5 @@
       45.52106,
       -122.60467
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  }
+  ]
 }

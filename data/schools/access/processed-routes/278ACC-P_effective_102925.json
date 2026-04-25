@@ -105,7 +105,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.65114760898362,
-        45.505606761237296
+        45.5056067612373
       ],
       "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
       "placeId": "ChIJa069o3cKlVQRFWMZ0_zD7hg",
@@ -180,7 +180,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.62036213689862,
-        45.5491659314115
+        45.54916593141151
       ],
       "displayName": "3606 NE 42nd Ave, Portland, OR 97213, USA",
       "placeId": "ChIJ0f2HkNOmlVQRPhd9YunuiDU",
@@ -209,7 +209,7 @@
       "originalLine": "4:34 pm4613 NE KILLINGSWORTH ST [NE]278ACC-P(13)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.61491077192753,
+        -122.61491077192755,
         45.56307192373082
       ],
       "displayName": "4613 NE Killingsworth St, Portland, OR 97218, USA",
@@ -227,7 +227,7 @@
     "Southeast Portland",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-21T08:23:09.620Z",
+  "processedAt": "2026-04-25T02:53:43.801Z",
   "stats": {
     "totalStops": 14,
     "geocodedStops": 14,

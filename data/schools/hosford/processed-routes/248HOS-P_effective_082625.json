@@ -1,9 +1,9 @@
 {
-  "id": "248HOS-P_effective_082625.pdf",
+  "id": "1EQ7sfMj1JPfDcSNIW2ApzHY9Tj1_A85Y",
   "name": "248",
   "direction": "Afternoon",
   "filename": "248HOS-P_effective_082625.pdf",
-  "fileId": "248HOS-P_effective_082625.pdf",
+  "fileId": "1EQ7sfMj1JPfDcSNIW2ApzHY9Tj1_A85Y",
   "modifiedTime": null,
   "stops": [
     {
@@ -133,7 +133,7 @@
     "Reed",
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-17T08:59:12.932Z",
+  "processedAt": "2026-04-25T03:27:16.731Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -480,11 +480,5 @@
       45.4903,
       -122.62253
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 7,
-    "errors": 0,
-    "total": 8
-  }
+  ]
 }

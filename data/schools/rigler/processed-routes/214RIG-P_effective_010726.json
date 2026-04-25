@@ -30,7 +30,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.5939838478728,
-        45.562545109032804
+        45.56254510903281
       ],
       "displayName": "6702 NE Killingsworth St, Portland, OR 97218, USA",
       "placeId": "EjE2NzAyIE5FIEtpbGxpbmdzd29ydGggU3QsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBIjESLwoUChIJR9-nKLCmlVQR-UxqLgEoyaEQrjQqFAoSCbmCIQ64ppVUEU1YsH3WX5Q0",
@@ -120,7 +120,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.62487375731209,
-        45.57293601118286
+        45.57293601118287
       ],
       "displayName": "3707 NE Columbia Blvd, Portland, OR 97211, USA",
       "placeId": "ChIJI4VB1OymlVQRzB08sr52Isw",
@@ -147,7 +147,7 @@
     "Northeast Portland",
     "Sunderland"
   ],
-  "processedAt": "2025-12-21T09:35:07.633Z",
+  "processedAt": "2026-04-25T03:08:42.532Z",
   "stats": {
     "totalStops": 9,
     "geocodedStops": 9,

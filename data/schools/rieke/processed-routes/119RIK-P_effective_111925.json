@@ -1,9 +1,9 @@
 {
-  "id": "119RIK-P_effective_111925.pdf",
+  "id": "1dShAqbte3GOHWlbiZqTl-EbRmK9hjaEb",
   "name": "119",
   "direction": "Afternoon",
   "filename": "119RIK-P_effective_111925.pdf",
-  "fileId": "119RIK-P_effective_111925.pdf",
+  "fileId": "1dShAqbte3GOHWlbiZqTl-EbRmK9hjaEb",
   "modifiedTime": null,
   "stops": [
     {
@@ -30,7 +30,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.70053157539856,
-        45.48482003127611
+        45.4848200312761
       ],
       "displayName": "2233 SW Boundary St, Portland, OR 97239, USA",
       "placeId": "ChIJdfmUOKwLlVQRIVyopFBSMZc",
@@ -236,7 +236,7 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T09:06:22.050Z",
+  "processedAt": "2026-04-25T03:09:26.529Z",
   "stats": {
     "totalStops": 15,
     "geocodedStops": 15,
@@ -1723,11 +1723,5 @@
       45.48096,
       -122.6923
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 14,
-    "errors": 0,
-    "total": 15
-  }
+  ]
 }

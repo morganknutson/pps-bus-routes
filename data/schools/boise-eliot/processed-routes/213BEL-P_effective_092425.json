@@ -1,9 +1,9 @@
 {
-  "id": "213BEL-P_effective_092425.pdf",
+  "id": "1PyF2ZVgEulxVhjlhpYbD8gPQcnnmix1d",
   "name": "213",
   "direction": "Afternoon",
   "filename": "213BEL-P_effective_092425.pdf",
-  "fileId": "213BEL-P_effective_092425.pdf",
+  "fileId": "1PyF2ZVgEulxVhjlhpYbD8gPQcnnmix1d",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.54754459999999
       ],
       "displayName": "620 N Fremont St, Portland, OR 97227, USA",
-      "schoolName": "Boise-Eliot",
-      "neighborhood": "North Portland"
+      "schoolName": "Boise-Eliot"
     },
     {
       "id": "stop-1",
@@ -31,17 +30,11 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.6700866308042,
-        45.56080323513
+        45.560803235129995
       ],
       "displayName": "5221 N Haight Ave, Portland, OR 97217, USA",
       "placeId": "ChIJu_wa3RGnlVQRrFZtHnThnZw",
-      "neighborhood": "North Portland",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.670264,
-        45.5608111
-      ],
-      "snapDistance": 13.836449438972497
+      "neighborhood": "North Portland"
     },
     {
       "id": "stop-2",
@@ -101,59 +94,22 @@
       ],
       "displayName": "9469 N Van Houten Ave, Portland, OR 97203, USA",
       "placeId": "Ei45NDY5IE4gVmFuIEhvdXRlbiBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBIjESLwoUChIJyU00POenlVQR8k8VMIIgl3wQ_UkqFAoSCcMIZYfvp5VUES03A1Mp2_Qd",
-      "neighborhood": "North Portland",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.7237867,
-        45.5910684
-      ],
-      "snapDistance": 3.5630567416744725
-    },
-    {
-      "id": "stop-6",
-      "address": "Clarendon Gt. & St. & CAB Loading ZONE",
-      "time": "3:00 pm",
-      "direction": null,
-      "originalLine": "3:00 pmCLARENDON GT & ST & CAB LOADING ZONE213BEL-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.7193347,
-        45.5844519
-      ],
-      "displayName": "5103 N Willis Blvd, Portland, OR 97203, USA",
-      "isSchoolStop": false
-    },
-    {
-      "id": "stop-7",
-      "address": "Cesar Chavez Gt. Loading ZONE",
-      "time": "3:03 pm",
-      "direction": null,
-      "originalLine": "3:03 pmCESAR CHAVEZ GT LOADING ZONE213BEL-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.7193347,
-        45.5844519
-      ],
-      "displayName": "5103 N Willis Blvd, Portland, OR 97203, USA",
-      "isSchoolStop": false
+      "neighborhood": "North Portland"
     }
   ],
-  "processedAt": "2025-12-12T23:34:25.813Z",
+  "neighborhoods": [
+    "North Portland"
+  ],
+  "processedAt": "2026-04-25T03:40:59.850Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
     "failedStops": 0
   },
-  "snapStats": {
-    "snapped": 2,
-    "skipped": 5,
-    "errors": 0,
-    "total": 8
-  },
   "geometry": [
     [
-      45.54754459999999,
-      -122.6729801
+      45.54759,
+      -122.6729
     ],
     [
       45.5476,
@@ -535,6 +491,5 @@
       45.59104,
       -122.72379
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-22T02:42:16.712Z"
+  ]
 }

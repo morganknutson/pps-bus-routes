@@ -1,9 +1,9 @@
 {
-  "id": "226ALA-P_effective_082625.pdf",
+  "id": "1F_igVMvEIOXD_IWObX_FL_4YV5_RNuY9",
   "name": "226",
   "direction": "Afternoon",
   "filename": "226ALA-P_effective_082625.pdf",
-  "fileId": "226ALA-P_effective_082625.pdf",
+  "fileId": "1F_igVMvEIOXD_IWObX_FL_4YV5_RNuY9",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.547482
       ],
       "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Alameda",
-      "neighborhood": "Northeast Portland"
+      "schoolName": "Alameda"
     },
     {
       "id": "stop-1",
@@ -51,36 +50,16 @@
       "displayName": "NE Klickitat St & NE 56th Ave, Portland, OR 97213, USA",
       "placeId": "EjZORSBLbGlja2l0YXQgU3QgJiBORSA1NnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgkV-hxMMqGVVBEwQqwv9ch9qBIUChIJFfocTDKhlVQRMEKsL_XIfagaFAoSCSEaf7s2oZVUETkgzF9kfcIcGhQKEglt7Im7L6GVVBHx2YeGjxmT0iIKDajoJRsV8N7rtg",
       "neighborhood": "Rose City Park"
-    },
-    {
-      "id": "stop-3",
-      "address": "Mt Tabor Gt. & St. & CAB Loading ZONE",
-      "time": "2:54 pm",
-      "direction": null,
-      "originalLine": "2:54 pmMT TABOR GT & ST & CAB LOADING ZONE226ALA-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.6040112,
-        45.5210407
-      ],
-      "displayName": "5800 SE Ash St, Portland, OR 97215, USA",
-      "isSchoolStop": false
     }
   ],
-  "processedAt": "2025-12-12T21:41:42.882Z",
+  "neighborhoods": [
+    "Rose City Park"
+  ],
+  "processedAt": "2026-04-25T03:44:22.208Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,
     "failedStops": 0
-  },
-  "neighborhoods": [
-    "Rose City Park"
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
   },
   "geometry": [
     [
@@ -180,25 +159,16 @@
       -122.60765
     ],
     [
-      45.54372,
-      -122.60663
+      45.54371,
+      -122.60562
     ],
     [
-      45.54485,
-      -122.60663
-    ],
-    [
-      45.54557,
-      -122.60662
-    ],
-    [
-      45.54693,
-      -122.60661
+      45.54538,
+      -122.60561
     ],
     [
       45.54692,
       -122.6056
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-30T11:44:16.245Z"
+  ]
 }

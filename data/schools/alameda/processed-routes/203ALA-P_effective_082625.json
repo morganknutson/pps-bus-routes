@@ -1,9 +1,9 @@
 {
-  "id": "203ALA-P_effective_082625.pdf",
+  "id": "1Ezmdq9cXdbfM9zacW9HLWibppYHLpcip",
   "name": "203",
   "direction": "Afternoon",
   "filename": "203ALA-P_effective_082625.pdf",
-  "fileId": "203ALA-P_effective_082625.pdf",
+  "fileId": "1Ezmdq9cXdbfM9zacW9HLWibppYHLpcip",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.547482
       ],
       "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Alameda",
-      "neighborhood": "Northeast Portland"
+      "schoolName": "Alameda"
     },
     {
       "id": "stop-1",
@@ -96,36 +95,16 @@
       "displayName": "NE Skidmore St & NE 47th Ave, Portland, OR 97218, USA",
       "placeId": "EjVORSBTa2lkbW9yZSBTdCAmIE5FIDQ3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTgsIFVTQSJmImQKFAoSCdNjU2_OppVUEbh34pwc4UgkEhQKEgnTY1NvzqaVVBG4d-KcHOFIJBoUChIJAektBVKhlVQRfR36jGtn9D0aFAoSCZWH9hfPppVUEeMj5vdygpPcIgoNgfImGxXFceq2",
       "neighborhood": "Northeast Portland"
-    },
-    {
-      "id": "stop-6",
-      "address": "Ockley Green Gt. & St. & CAB Loading ZONE",
-      "time": "2:56 pm",
-      "direction": null,
-      "originalLine": "2:56 pmOCKLEY GREEN GT & ST & CAB LOADING ZONE203ALA-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.6806322,
-        45.5669933
-      ],
-      "displayName": "6031 N Montana Ave, Portland, OR 97217, USA",
-      "isSchoolStop": false
     }
   ],
-  "processedAt": "2025-12-12T21:41:35.835Z",
+  "neighborhoods": [
+    "Northeast Portland"
+  ],
+  "processedAt": "2026-04-25T03:44:26.108Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
     "failedStops": 0
-  },
-  "neighborhoods": [
-    "Northeast Portland"
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
   },
   "geometry": [
     [
@@ -197,75 +176,39 @@
       -122.62498
     ],
     [
-      45.54779,
-      -122.62499
+      45.5483,
+      -122.62252
     ],
     [
-      45.54765,
-      -122.62496
+      45.5483,
+      -122.62136
     ],
     [
-      45.54744,
-      -122.62486
+      45.5483,
+      -122.62077
     ],
     [
-      45.54685,
-      -122.62424
+      45.54799,
+      -122.6208
     ],
     [
-      45.54673,
-      -122.62412
-    ],
-    [
-      45.54644,
-      -122.62393
-    ],
-    [
-      45.54611,
-      -122.62383
-    ],
-    [
-      45.54575,
-      -122.6237
-    ],
-    [
-      45.54563,
-      -122.62358
-    ],
-    [
-      45.54555,
-      -122.62347
-    ],
-    [
-      45.54548,
-      -122.62329
-    ],
-    [
-      45.54544,
-      -122.62305
-    ],
-    [
-      45.54543,
-      -122.62184
-    ],
-    [
-      45.54542,
-      -122.62131
-    ],
-    [
-      45.54542,
-      -122.62083
-    ],
-    [
-      45.5456,
-      -122.62083
-    ],
-    [
-      45.54631,
+      45.54698,
       -122.62082
     ],
     [
-      45.54774,
+      45.54594,
+      -122.62083
+    ],
+    [
+      45.54542,
+      -122.62083
+    ],
+    [
+      45.54594,
+      -122.62083
+    ],
+    [
+      45.54799,
       -122.6208
     ],
     [
@@ -274,40 +217,51 @@
     ],
     [
       45.5483,
-      -122.62
+      -122.62036
     ],
     [
       45.5483,
-      -122.61878
+      -122.6198
+    ],
+    [
+      45.5483,
+      -122.61838
     ],
     [
       45.54829,
-      -122.61562
+      -122.61522
     ],
     [
       45.54829,
       -122.61509
     ],
     [
-      45.54886,
+      45.54872,
+      -122.61507
+    ],
+    [
+      45.54913,
       -122.61506
     ],
     [
-      45.54976,
+      45.54986,
       -122.61504
     ],
     [
-      45.55028,
-      -122.61499
+      45.55022,
+      -122.615
     ],
     [
-      45.55203,
-      -122.61497
+      45.55102,
+      -122.61498
+    ],
+    [
+      45.55222,
+      -122.61496
     ],
     [
       45.55373,
       -122.61494
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-30T11:44:16.220Z"
+  ]
 }

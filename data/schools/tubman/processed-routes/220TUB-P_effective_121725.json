@@ -1,9 +1,9 @@
 {
-  "id": "220TUB-P_effective_121725.pdf",
+  "id": "16FkyWM1VpGgpCweH0YwyE7lQcfvWEEXm",
   "name": "220",
   "direction": "Afternoon",
   "filename": "220TUB-P_effective_121725.pdf",
-  "fileId": "220TUB-P_effective_121725.pdf",
+  "fileId": "16FkyWM1VpGgpCweH0YwyE7lQcfvWEEXm",
   "modifiedTime": null,
   "stops": [
     {
@@ -87,7 +87,7 @@
     "Northeast Portland",
     "Sabin"
   ],
-  "processedAt": "2025-12-17T09:11:02.132Z",
+  "processedAt": "2026-04-25T03:00:30.023Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -183,12 +183,8 @@
       -122.66151
     ],
     [
-      45.55335,
-      -122.6615
-    ],
-    [
-      45.55456,
-      -122.66149
+      45.554,
+      -122.66148
     ],
     [
       45.55532,
@@ -208,19 +204,15 @@
     ],
     [
       45.55549,
-      -122.65804
+      -122.65665
     ],
     [
-      45.55548,
-      -122.6547
+      45.55547,
+      -122.65275
     ],
     [
       45.55545,
-      -122.64829
-    ],
-    [
-      45.55543,
-      -122.64293
+      -122.64723
     ],
     [
       45.55542,
@@ -230,11 +222,5 @@
       45.55435,
       -122.64098
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

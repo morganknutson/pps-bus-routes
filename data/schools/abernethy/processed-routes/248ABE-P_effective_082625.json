@@ -19,8 +19,7 @@
         45.5058868
       ],
       "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
-      "schoolName": "Abernethy",
-      "neighborhood": "Ladd's Addition"
+      "schoolName": "Abernethy"
     },
     {
       "id": "stop-1",
@@ -81,38 +80,22 @@
       "displayName": "SE Brooklyn St & SE 36th Ave, Portland, OR 97202, USA",
       "placeId": "EjVTRSBCcm9va2x5biBTdCAmIFNFIDM2dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCX8tSGZ9oJVUEaZfn6dSeoYEEhQKEgl_LUhmfaCVVBGmX5-nUnqGBBoUChIJE0opOLWhlVQRux8DR6Am5AUaFAoSCZ8fRROjCpVUESdbX5fZyb-bIgoN1u8eGxUvuOi2",
       "neighborhood": "Richmond"
-    },
-    {
-      "id": "stop-5",
-      "address": "Hosford Gt. & St. Loading ZONE On Grant",
-      "time": "2:52 pm",
-      "direction": null,
-      "originalLine": "2:52 pmHOSFORD GT & ST LOADING ZONE ON GRANT248ABE-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.6371059,
-        45.5062214
-      ],
-      "displayName": "2303 SE 28th Pl, Portland, OR 97214, USA",
-      "isSchoolStop": false
     }
   ],
-  "processedAt": "2025-12-12T22:33:38.639Z",
+  "neighborhoods": [
+    "Hosford-Abernethy",
+    "Richmond"
+  ],
+  "processedAt": "2026-04-25T04:16:08.434Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
     "failedStops": 0
   },
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  },
   "geometry": [
     [
-      45.5058868,
-      -122.6516263
+      45.50561,
+      -122.65115
     ],
     [
       45.50485,
@@ -222,6 +205,5 @@
       45.50123,
       -122.62625
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-21T09:23:51.858Z"
+  ]
 }

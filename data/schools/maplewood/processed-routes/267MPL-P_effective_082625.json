@@ -1,9 +1,9 @@
 {
-  "id": "267MPL-P_effective_082625.pdf",
+  "id": "1R0jvyD2QK0Y6C-L1Tk9gKeHdmYjejOiM",
   "name": "267",
   "direction": "Afternoon",
   "filename": "267MPL-P_effective_082625.pdf",
-  "fileId": "267MPL-P_effective_082625.pdf",
+  "fileId": "1R0jvyD2QK0Y6C-L1Tk9gKeHdmYjejOiM",
   "modifiedTime": null,
   "stops": [
     {
@@ -45,7 +45,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.72476525216115,
-        45.46944708590651
+        45.469447085906516
       ],
       "displayName": "4651 SW Maplewood Rd, Portland, OR 97219, USA",
       "placeId": "Ei00NjUxIFNXIE1hcGxld29vZCBSZCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiMRIvChQKEgkFtgzbdwuVVBGSwvv6KT1XBxCrJCoUChIJWYFZ-ncLlVQRno0L77Mszpg",
@@ -224,8 +224,8 @@
       "originalLine": "3:00 pm7039/7036 SW 35th Ave [W]267MPL-P(15)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71288697949277,
-        45.47355956735899
+        -122.71288694835542,
+        45.47355197206306
       ],
       "displayName": "7039 SW 35th Ave, Portland, OR 97219, USA",
       "placeId": "ChIJjW00ogoLlVQRwcZ6uIv2lxs",
@@ -240,7 +240,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.71288447349711,
-        45.47294827645182
+        45.472948276451824
       ],
       "displayName": "7133 SW 35th Ave, Portland, OR 97219, USA",
       "placeId": "ChIJA8bzuQoLlVQRF4ILwJ71RNg",
@@ -284,8 +284,8 @@
       "originalLine": "3:03 pm7328/7325 SW 35th Ave [W]267MPL-P(19)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71287450589062,
-        45.471162597663394
+        -122.71287453235854,
+        45.47116830602863
       ],
       "displayName": "7328 SW 35th Ave, Portland, OR 97219, USA",
       "placeId": "ChIJtVP003QLlVQRKGgfFisIRaY",
@@ -299,8 +299,8 @@
       "originalLine": "3:03 pm7420 SW 35th Ave [W]267MPL-P(20)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71287290542381,
-        45.470817420870716
+        -122.71287290271474,
+        45.47081683659264
       ],
       "displayName": "7420 SW 35th Ave, Portland, OR 97219, USA",
       "placeId": "ChIJ27jez3QLlVQRpkZwy3BmD0g",
@@ -325,7 +325,7 @@
   "neighborhoods": [
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T09:04:59.884Z",
+  "processedAt": "2026-04-25T03:15:07.118Z",
   "stats": {
     "totalStops": 21,
     "geocodedStops": 21,
@@ -976,11 +976,5 @@
       45.469,
       -122.71804
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 20,
-    "errors": 0,
-    "total": 21
-  }
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "270JKS-P_effective_100125.pdf",
+  "id": "1bVUVW4HfNglRdnODAfIIWnRBsBsp_NtX",
   "name": "270",
   "direction": "Afternoon",
   "filename": "270JKS-P_effective_100125.pdf",
-  "fileId": "270JKS-P_effective_100125.pdf",
+  "fileId": "1bVUVW4HfNglRdnODAfIIWnRBsBsp_NtX",
   "modifiedTime": null,
   "stops": [
     {
@@ -120,7 +120,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.68215949211829,
-        45.45904241971936
+        45.45904241971935
       ],
       "displayName": "318 SW Palatine Hill Rd, Portland, OR 97219, USA",
       "placeId": "ChIJaXtYizwLlVQRFhH3o-d0j7I",
@@ -137,8 +137,8 @@
         -122.6808089,
         45.4590301
       ],
-      "displayName": "SW 2nd Ave & SW Palatine Hill Rd, Portland, OR 97219, USA",
-      "placeId": "EjlTVyAybmQgQXZlICYgU1cgUGFsYXRpbmUgSGlsbCBSZCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgmjdneWPAuVVBH_AqkovaYpsxIUChIJo3Z3ljwLlVQR_wKpKL2mKbMaFAoSCRd5_2AYC5VUEYucw745oQLUGhQKEgnlkg36MQuVVBGbnszzTvMVbSIKDV1_GBsV52Tgtg",
+      "displayName": "SW Palatine Hill Rd & SW 2nd Ave, Portland, OR 97219, USA",
+      "placeId": "EjlTVyBQYWxhdGluZSBIaWxsIFJkICYgU1cgMm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgmjdneWPAuVVBH_AqkovaYpsxIUChIJo3Z3ljwLlVQR_wKpKL2mKbMaFAoSCeWSDfoxC5VUEZuezPNO8xVtGhQKEglnKHaWPAuVVBHgThbhYxatGSIKDV1_GBsV52Tgtg",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -152,8 +152,8 @@
         -122.677875,
         45.4590003
       ],
-      "displayName": "S View Point Ter & SW Palatine Hill Rd, Portland, OR 97219, USA",
-      "placeId": "Ej9TIFZpZXcgUG9pbnQgVGVyICYgU1cgUGFsYXRpbmUgSGlsbCBSZCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgkT74pVIwuVVBEC_GwAIZxePhIUChIJE--KVSMLlVQRAvxsACGcXj4aFAoSCVtyMTD9CpVUEQGR5dWij7lsGhQKEgnlkg36MQuVVBGbnszzTvMVbSIKDTN-GBsVgtfgtg",
+      "displayName": "SW Vw Pt Ter & SW Palatine Hill Rd, Portland, OR 97219, USA",
+      "placeId": "EjtTVyBWdyBQdCBUZXIgJiBTVyBQYWxhdGluZSBIaWxsIFJkLCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCRPvilUjC5VUEQL8bAAhnF4-EhQKEgkT74pVIwuVVBEC_GwAIZxePhoUChIJW3IxMP0KlVQRAZHl1aKPuWwaFAoSCeWSDfoxC5VUEZuezPNO8xVtIgoNM34YGxWC1-C2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -194,8 +194,8 @@
       "originalLine": "4:40 pm1235 SW ARNOLD ST [NE]270JKS-P(13)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.69168731838543,
-        45.4455581108915
+        -122.69169005988236,
+        45.4455587934798
       ],
       "displayName": "1235 SW Arnold St, Portland, OR 97219, USA",
       "placeId": "ChIJL4LE7k4LlVQRs91I-OtQO3U",
@@ -236,7 +236,7 @@
     "Markham",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T09:01:05.280Z",
+  "processedAt": "2026-04-25T03:24:40.143Z",
   "stats": {
     "totalStops": 15,
     "geocodedStops": 15,
@@ -1696,12 +1696,16 @@
       -122.70111
     ],
     [
-      45.44472,
-      -122.70091
+      45.44483,
+      -122.70107
     ],
     [
       45.44462,
-      -122.7007
+      -122.70072
+    ],
+    [
+      45.44454,
+      -122.70049
     ],
     [
       45.44447,
@@ -1712,10 +1716,6 @@
       -122.69986
     ],
     [
-      45.44424,
-      -122.69966
-    ],
-    [
       45.44416,
       -122.69952
     ],
@@ -1723,11 +1723,5 @@
       45.44405,
       -122.69937
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 14,
-    "errors": 0,
-    "total": 15
-  }
+  ]
 }

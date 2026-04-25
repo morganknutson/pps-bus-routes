@@ -1,9 +1,9 @@
 {
-  "id": "274JKS-A_effective_092425.pdf",
+  "id": "1m3cCFPvIa7C_toCOxavVJHG05XQlS_97",
   "name": "274",
   "direction": "Morning",
   "filename": "274JKS-A_effective_092425.pdf",
-  "fileId": "274JKS-A_effective_092425.pdf",
+  "fileId": "1m3cCFPvIa7C_toCOxavVJHG05XQlS_97",
   "modifiedTime": null,
   "stops": [
     {
@@ -44,11 +44,11 @@
       "originalLine": "8:48 am11240 SW Barbur Blvd [N]274JKS-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.73679056997787,
-        45.443749449882105
+        -122.73676584561927,
+        45.4437772482817
       ],
       "displayName": "11240 SW Barbur Blvd, Portland, OR 97219, USA",
-      "placeId": "ChIJtYNro70MlVQRo_UlCKe6slQ",
+      "placeId": "ChIJly9ipL0MlVQRmJYg8yduqBc",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -146,7 +146,7 @@
     "Mount Park",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T09:01:08.454Z",
+  "processedAt": "2026-04-25T03:24:37.590Z",
   "stats": {
     "totalStops": 9,
     "geocodedStops": 9,
@@ -250,8 +250,8 @@
       -122.73652
     ],
     [
-      45.44375,
-      -122.73679
+      45.44378,
+      -122.73677
     ],
     [
       45.44406,
@@ -1053,11 +1053,5 @@
       45.45067,
       -122.71317
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 8,
-    "errors": 0,
-    "total": 9
-  }
+  ]
 }

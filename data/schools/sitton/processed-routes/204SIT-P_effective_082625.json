@@ -1,9 +1,9 @@
 {
-  "id": "204SIT-P_effective_082625.pdf",
+  "id": "1tv9VSBzmQ8PIu8FcLcAS9S68QDUR66WK",
   "name": "204",
   "direction": "Afternoon",
   "filename": "204SIT-P_effective_082625.pdf",
-  "fileId": "204SIT-P_effective_082625.pdf",
+  "fileId": "1tv9VSBzmQ8PIu8FcLcAS9S68QDUR66WK",
   "modifiedTime": null,
   "stops": [
     {
@@ -55,7 +55,7 @@
   "neighborhoods": [
     "North Portland"
   ],
-  "processedAt": "2025-12-17T09:09:15.086Z",
+  "processedAt": "2026-04-25T03:03:11.055Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,
@@ -374,11 +374,5 @@
       45.60312,
       -122.75261
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 2,
-    "errors": 0,
-    "total": 3
-  }
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "239LAN-A_effective_082625.pdf",
+  "id": "1jzOLzmg5MVQKfFzIgLJclDHRDGUEko6Z",
   "name": "239",
   "direction": "Morning",
   "filename": "239LAN-A_effective_082625.pdf",
-  "fileId": "239LAN-A_effective_082625.pdf",
+  "fileId": "1jzOLzmg5MVQKfFzIgLJclDHRDGUEko6Z",
   "modifiedTime": null,
   "stops": [
     {
@@ -45,7 +45,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.57021235948663,
-        45.468660234606816
+        45.46866023460682
       ],
       "displayName": "9025 SE Flavel St, Portland, OR 97266, USA",
       "placeId": "ChIJ81YUQvKflVQRZPa2URd3NRk",
@@ -85,7 +85,7 @@
   "neighborhoods": [
     "Lents"
   ],
-  "processedAt": "2025-12-17T09:02:16.500Z",
+  "processedAt": "2026-04-25T03:20:40.597Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -236,11 +236,5 @@
       45.4708,
       -122.60156
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

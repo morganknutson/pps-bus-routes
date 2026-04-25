@@ -1,9 +1,9 @@
 {
-  "id": "127FPK-P_effective_082625.pdf",
+  "id": "1sKgrH9-W4e6P8WJaspI4EB4MzOkBq7fv",
   "name": "127",
   "direction": "Afternoon",
   "filename": "127FPK-P_effective_082625.pdf",
-  "fileId": "127FPK-P_effective_082625.pdf",
+  "fileId": "1sKgrH9-W4e6P8WJaspI4EB4MzOkBq7fv",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.5425414
       ],
       "displayName": "9935 NW Durrett St, Portland, OR 97229, USA",
-      "schoolName": "Forest Park",
-      "neighborhood": "Northwest Portland"
+      "schoolName": "Forest Park"
     },
     {
       "id": "stop-1",
@@ -131,7 +130,7 @@
     "Forest Park",
     "Northwest Portland"
   ],
-  "processedAt": "2025-12-16T09:56:10.462Z",
+  "processedAt": "2026-04-25T03:32:55.228Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -1410,11 +1409,5 @@
       45.52115,
       -122.74234
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 7,
-    "errors": 0,
-    "total": 8
-  }
+  ]
 }

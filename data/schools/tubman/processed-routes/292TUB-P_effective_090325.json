@@ -1,9 +1,9 @@
 {
-  "id": "292TUB-P_effective_090325.pdf",
+  "id": "1ObPmbHF_2MYe2Oh1r00IYGNB96bMykgo",
   "name": "292",
   "direction": "Afternoon",
   "filename": "292TUB-P_effective_090325.pdf",
-  "fileId": "292TUB-P_effective_090325.pdf",
+  "fileId": "1ObPmbHF_2MYe2Oh1r00IYGNB96bMykgo",
   "modifiedTime": null,
   "stops": [
     {
@@ -87,7 +87,7 @@
     "Sabin",
     "Sullivan's Gulch"
   ],
-  "processedAt": "2025-12-17T09:11:05.510Z",
+  "processedAt": "2026-04-25T03:00:28.351Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -466,11 +466,5 @@
       45.53516,
       -122.63914
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

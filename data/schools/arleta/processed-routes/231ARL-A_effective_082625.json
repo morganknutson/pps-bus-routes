@@ -1,9 +1,9 @@
 {
-  "id": "231ARL-A_effective_082625.pdf",
+  "id": "1EG0rf32MQROLSSDQ3ra-ivo4SYSY8Ff5",
   "name": "231",
   "direction": "Morning",
   "filename": "231ARL-A_effective_082625.pdf",
-  "fileId": "231ARL-A_effective_082625.pdf",
+  "fileId": "1EG0rf32MQROLSSDQ3ra-ivo4SYSY8Ff5",
   "modifiedTime": null,
   "stops": [
     {
@@ -94,8 +94,7 @@
         45.4862341
       ],
       "displayName": "5109 SE 66th Ave, Portland, OR 97206, USA",
-      "schoolName": "Arleta",
-      "neighborhood": "Mount Scott - Arleta"
+      "schoolName": "Arleta"
     }
   ],
   "neighborhoods": [
@@ -103,7 +102,7 @@
     "Foster - Powell",
     "South Tabor"
   ],
-  "processedAt": "2025-12-13T05:29:54.425Z",
+  "processedAt": "2026-04-25T03:43:51.784Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
@@ -286,11 +285,5 @@
       45.48623,
       -122.59572
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  }
+  ]
 }

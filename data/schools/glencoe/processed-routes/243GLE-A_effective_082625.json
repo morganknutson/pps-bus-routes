@@ -1,9 +1,9 @@
 {
-  "id": "243GLE-A_effective_082625.pdf",
+  "id": "1v_XuVZ6aM1C4eRryUfxQ6Mtgh87036fG",
   "name": "243",
   "direction": "Morning",
   "filename": "243GLE-A_effective_082625.pdf",
-  "fileId": "243GLE-A_effective_082625.pdf",
+  "fileId": "1v_XuVZ6aM1C4eRryUfxQ6Mtgh87036fG",
   "modifiedTime": null,
   "stops": [
     {
@@ -29,8 +29,8 @@
       "originalLine": "7:35 am651 NE 60th Ave. [W]243GLE-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.60228819614396,
-        45.52723669997307
+        -122.60228819614399,
+        45.52723669997308
       ],
       "displayName": "651 NE 60th Ave, Portland, OR 97213, USA",
       "placeId": "Eig2NTEgTkUgNjB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBIjESLwoUChIJN8k8LB6hlVQRnv7iIkpnoA4QiwUqFAoSCT0EGmgxoZVUEeXiW2Q3-gBO",
@@ -79,15 +79,14 @@
         45.517248
       ],
       "displayName": "825 SE 51st Ave, Portland, OR 97215, USA",
-      "schoolName": "Glencoe",
-      "neighborhood": "Southeast Portland"
+      "schoolName": "Glencoe"
     }
   ],
   "neighborhoods": [
     "North Tabor",
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-16T09:56:20.641Z",
+  "processedAt": "2026-04-25T03:31:54.232Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -246,11 +245,5 @@
       45.51714,
       -122.61258
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

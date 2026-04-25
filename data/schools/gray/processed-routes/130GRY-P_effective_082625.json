@@ -1,9 +1,9 @@
 {
-  "id": "130GRY-P_effective_082625.pdf",
+  "id": "1TRCjyNDQByMt3HvkjKvpPC4zMfnY8Alr",
   "name": "130",
   "direction": "Afternoon",
   "filename": "130GRY-P_effective_082625.pdf",
-  "fileId": "130GRY-P_effective_082625.pdf",
+  "fileId": "1TRCjyNDQByMt3HvkjKvpPC4zMfnY8Alr",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.4824889
       ],
       "displayName": "5505 SW 23rd Ave, Portland, OR 97239, USA",
-      "schoolName": "Gray",
-      "neighborhood": "Southwest Portland"
+      "schoolName": "Gray"
     },
     {
       "id": "stop-1",
@@ -46,7 +45,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.71255756414575,
-        45.47614240133458
+        45.476142401334585
       ],
       "displayName": "6646 SW 35th Ave, Portland, OR 97221, USA",
       "placeId": "ChIJ7ewV5KALlVQRfBlRsTQt-NM",
@@ -76,7 +75,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.71846235921564,
-        45.48118582740553
+        45.48118582740554
       ],
       "displayName": "4025 SW Pendleton St, Portland, OR 97221, USA",
       "placeId": "ChIJ0whUFaMLlVQRlmSO0LJZtI8",
@@ -165,7 +164,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.73002381434287,
-        45.487039670751884
+        45.48703967075189
       ],
       "displayName": "5123 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
       "placeId": "ChIJXYCmtr8LlVQRB3hSGyFAmPc",
@@ -224,7 +223,7 @@
       "originalLine": "4:40 pm3278 SW BEAVERTON HILLSDALE HWY [W]130GRY-P(15)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71056137230181,
+        -122.7105613723018,
         45.481560474294206
       ],
       "displayName": "3278 SW Beaverton Hillsdale Hwy, Portland, OR 97239, USA",
@@ -236,7 +235,7 @@
     "Hayhurst",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T08:43:58.307Z",
+  "processedAt": "2026-04-25T03:30:49.476Z",
   "stats": {
     "totalStops": 15,
     "geocodedStops": 15,
@@ -888,70 +887,72 @@
       -122.72316
     ],
     [
-      45.48556,
-      -122.72065
+      45.48562,
+      -122.72126
     ],
     [
-      45.48551,
-      -122.72012
+      45.4855,
+      -122.71997
     ],
     [
-      45.48545,
-      -122.7197
+      45.48535,
+      -122.71918
     ],
     [
-      45.48528,
-      -122.71884
+      45.48526,
+      -122.71879
     ],
     [
-      45.48517,
-      -122.7184
+      45.48506,
+      -122.71801
     ],
     [
-      45.48497,
-      -122.71775
+      45.48483,
+      -122.71735
     ],
     [
-      45.4848,
-      -122.71728
+      45.48446,
+      -122.71649
     ],
     [
-      45.48425,
-      -122.71602
+      45.48336,
+      -122.714
     ],
     [
-      45.48299,
-      -122.71319
+      45.48232,
+      -122.71167
     ],
     [
-      45.48217,
-      -122.71134
+      45.48207,
+      -122.71112
     ],
     [
-      45.48195,
-      -122.71078
+      45.48191,
+      -122.71064
     ],
     [
       45.48186,
-      -122.71045
+      -122.71043
     ],
     [
       45.48183,
       -122.71029
     ],
     [
-      45.48167,
-      -122.71044
+      45.48177,
+      -122.71035
+    ],
+    [
+      45.48164,
+      -122.71048
+    ],
+    [
+      45.48158,
+      -122.71055
     ],
     [
       45.48156,
       -122.71056
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 14,
-    "errors": 0,
-    "total": 15
-  }
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "236WDS-A_effective_102225.pdf",
+  "id": "11L02_arDgYZdmW2E7JHLYx34sqwAD57L",
   "name": "236",
   "direction": "Morning",
   "filename": "236WDS-A_effective_102225.pdf",
-  "fileId": "236WDS-A_effective_102225.pdf",
+  "fileId": "11L02_arDgYZdmW2E7JHLYx34sqwAD57L",
   "modifiedTime": null,
   "stops": [
     {
@@ -56,7 +56,7 @@
     "Markham",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T08:54:05.883Z",
+  "processedAt": "2026-04-25T02:54:55.807Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,
@@ -975,11 +975,5 @@
       45.48209,
       -122.61251
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 2,
-    "errors": 0,
-    "total": 3
-  }
+  ]
 }

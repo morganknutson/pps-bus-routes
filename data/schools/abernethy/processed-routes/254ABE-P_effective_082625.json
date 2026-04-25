@@ -19,8 +19,7 @@
         45.5058868
       ],
       "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
-      "schoolName": "Abernethy",
-      "neighborhood": "Ladd's Addition"
+      "schoolName": "Abernethy"
     },
     {
       "id": "stop-1",
@@ -50,45 +49,22 @@
       ],
       "displayName": "1765 SE 32nd Pl, Portland, OR 97214, USA",
       "placeId": "EigxNzY1IFNFIDMybmQgUGwsIFBvcnRsYW5kLCBPUiA5NzIxNCwgVVNBIjESLwoUChIJ7bmQ0I-glVQRNCy9BVQ8vIQQ5Q0qFAoSCYXnMNePoJVUEf9pvi4KQsfD",
-      "neighborhood": "Richmond",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.6319731,
-        45.5101305
-      ],
-      "snapDistance": 21.890737340313756
-    },
-    {
-      "id": "stop-3",
-      "address": "Hosford Gt. & St. Loading ZONE On Grant",
-      "time": "2:48 pm",
-      "direction": null,
-      "originalLine": "2:48 pmHOSFORD GT & ST LOADING ZONE ON GRANT254ABE-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.6371059,
-        45.5062214
-      ],
-      "displayName": "2303 SE 28th Pl, Portland, OR 97214, USA",
-      "isSchoolStop": false
+      "neighborhood": "Richmond"
     }
   ],
-  "processedAt": "2025-12-12T22:33:41.858Z",
+  "neighborhoods": [
+    "Richmond"
+  ],
+  "processedAt": "2026-04-25T04:16:08.946Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,
     "failedStops": 0
   },
-  "snapStats": {
-    "snapped": 1,
-    "skipped": 2,
-    "errors": 0,
-    "total": 4
-  },
   "geometry": [
     [
-      45.5058868,
-      -122.6516263
+      45.50561,
+      -122.65115
     ],
     [
       45.50485,
@@ -143,20 +119,12 @@
       -122.62763
     ],
     [
-      45.50883,
-      -122.63161
+      45.50881,
+      -122.6296
     ],
     [
-      45.50971,
-      -122.63161
-    ],
-    [
-      45.5108,
-      -122.63161
-    ],
-    [
-      45.5108,
-      -122.63212
+      45.51079,
+      -122.6296
     ],
     [
       45.5108,
@@ -167,9 +135,12 @@
       -122.63275
     ],
     [
+      45.51032,
+      -122.63265
+    ],
+    [
       45.5103,
       -122.63213
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-21T09:23:51.861Z"
+  ]
 }

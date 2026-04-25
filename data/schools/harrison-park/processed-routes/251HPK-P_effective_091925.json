@@ -1,9 +1,9 @@
 {
-  "id": "251HPK-P_effective_091925.pdf",
+  "id": "1lU9pnBW-jEKQ4wxiH-e8QScpUUSUmCTX",
   "name": "251",
   "direction": "Afternoon",
   "filename": "251HPK-P_effective_091925.pdf",
-  "fileId": "251HPK-P_effective_091925.pdf",
+  "fileId": "1lU9pnBW-jEKQ4wxiH-e8QScpUUSUmCTX",
   "modifiedTime": null,
   "stops": [
     {
@@ -45,10 +45,10 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.56836115995021,
-        45.49965092943079
+        45.4996509294308
       ],
-      "displayName": "3101 SE 92nd Ave, Portland, OR 97266, USA",
-      "placeId": "ChIJlTNtr0qglVQRtnh6yu9D6R8",
+      "displayName": "3101 SE 92nd Ave #9nd, Portland, OR 97266, USA",
+      "placeId": "Ei4zMTAxIFNFIDkybmQgQXZlICM5bmQsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBIh8aHQoWChQKEgmVM22vSqCVVBG2eHrK70PpHxIDOW5k",
       "neighborhood": "Powellhurst-Gilbert"
     },
     {
@@ -117,7 +117,7 @@
     "Powellhurst-Gilbert",
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-17T08:58:16.844Z",
+  "processedAt": "2026-04-25T03:29:13.831Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -578,7 +578,7 @@
     ],
     [
       45.51914,
-      -122.5785
+      -122.57849
     ],
     [
       45.51914,
@@ -629,12 +629,24 @@
       -122.58198
     ],
     [
-      45.53284,
-      -122.58197
+      45.5302,
+      -122.58296
     ],
     [
-      45.53362,
-      -122.58197
+      45.53053,
+      -122.58295
+    ],
+    [
+      45.5316,
+      -122.58295
+    ],
+    [
+      45.53284,
+      -122.58295
+    ],
+    [
+      45.53345,
+      -122.58294
     ],
     [
       45.53361,
@@ -642,13 +654,11 @@
     ],
     [
       45.53361,
+      -122.58392
+    ],
+    [
+      45.53361,
       -122.58419
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

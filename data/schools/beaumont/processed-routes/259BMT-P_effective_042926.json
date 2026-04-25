@@ -1,0 +1,317 @@
+{
+  "id": "1mxkGjV6y16gRpewsrozdax2wXdBi5Wbp",
+  "name": "259",
+  "direction": "Afternoon",
+  "filename": "259BMT-P_effective_042926.pdf",
+  "fileId": "1mxkGjV6y16gRpewsrozdax2wXdBi5Wbp",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "4043 NE Fremont St, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BEAUMONT ST& GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6217722,
+        45.5489184
+      ],
+      "displayName": "4043 NE Fremont St, Portland, OR 97212, USA",
+      "schoolName": "Beaumont"
+    },
+    {
+      "id": "stop-1",
+      "address": "NE Killingsworth St. & NE 55th Ave. [S]",
+      "time": "4:15 pm",
+      "direction": "S",
+      "originalLine": "4:15 pmNE KILLINGSWORTH ST @ NE 55TH AV [S]259BMT-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6060922,
+        45.5627509
+      ],
+      "displayName": "NE 55th Ave & NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "EjpORSA1NXRoIEF2ZSAmIE5FIEtpbGxpbmdzd29ydGggU3QsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBImYiZAoUChIJA9UNsLmmlVQRbNA0UFk6JaESFAoSCQPVDbC5ppVUEWzQNFBZOiWhGhQKEgnFu44tM6GVVBGlSBBQRekIWRoUChIJuYIhDrimlVQRTViwfdZflDQiCg31UigbFYbL67Y",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE 52nd Ave. & NE Ainsworth St. [SE]",
+      "time": "4:17 pm",
+      "direction": "SE",
+      "originalLine": "4:17 pmNE 52ND AVE @ NE AINSWORTH ST [SE]259BMT-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6091976,
+        45.5664417
+      ],
+      "displayName": "NE 52nd Ave & NE Ainsworth St, Portland, OR 97218, USA",
+      "placeId": "EjZORSA1Mm5kIEF2ZSAmIE5FIEFpbnN3b3J0aCBTdCwgUG9ydGxhbmQsIE9SIDk3MjE4LCBVU0EiZiJkChQKEgnlgIqVvqaVVBE-crNx6kIqZxIUChIJ5YCKlb6mlVQRPnKzcepCKmcaFAoSCU8Za4ItoZVUEYXBv8NhaZQdGhQKEgkHFZWg46aVVBGMCCYEDsuY2yIKDSHjKBsVOFLrtg",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 55th Ave. & NE Killingsworth St. [NW]",
+      "time": "4:20 pm",
+      "direction": "NW",
+      "originalLine": "4:20 pmNE 55TH AV @ NE KILLINGSWORTH ST [NW]259BMT-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6060922,
+        45.5627509
+      ],
+      "displayName": "NE 55th Ave & NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "EjpORSA1NXRoIEF2ZSAmIE5FIEtpbGxpbmdzd29ydGggU3QsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBImYiZAoUChIJA9UNsLmmlVQRbNA0UFk6JaESFAoSCQPVDbC5ppVUEWzQNFBZOiWhGhQKEgnFu44tM6GVVBGlSBBQRekIWRoUChIJuYIhDrimlVQRTViwfdZflDQiCg31UigbFYbL67Y",
+      "neighborhood": "Cully"
+    }
+  ],
+  "neighborhoods": [
+    "Cully"
+  ],
+  "processedAt": "2026-04-25T03:41:46.482Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54885,
+      -122.62177
+    ],
+    [
+      45.54886,
+      -122.62149
+    ],
+    [
+      45.54888,
+      -122.62143
+    ],
+    [
+      45.54896,
+      -122.6214
+    ],
+    [
+      45.54926,
+      -122.62138
+    ],
+    [
+      45.54932,
+      -122.62136
+    ],
+    [
+      45.54934,
+      -122.62127
+    ],
+    [
+      45.54936,
+      -122.621
+    ],
+    [
+      45.54941,
+      -122.62075
+    ],
+    [
+      45.54944,
+      -122.6207
+    ],
+    [
+      45.54948,
+      -122.62068
+    ],
+    [
+      45.54954,
+      -122.62068
+    ],
+    [
+      45.54968,
+      -122.62068
+    ],
+    [
+      45.54968,
+      -122.62046
+    ],
+    [
+      45.54968,
+      -122.62037
+    ],
+    [
+      45.55002,
+      -122.62037
+    ],
+    [
+      45.55031,
+      -122.62037
+    ],
+    [
+      45.55285,
+      -122.6204
+    ],
+    [
+      45.55577,
+      -122.62042
+    ],
+    [
+      45.55911,
+      -122.62041
+    ],
+    [
+      45.5615,
+      -122.62041
+    ],
+    [
+      45.56249,
+      -122.62041
+    ],
+    [
+      45.56281,
+      -122.62042
+    ],
+    [
+      45.56281,
+      -122.6198
+    ],
+    [
+      45.5628,
+      -122.61896
+    ],
+    [
+      45.5628,
+      -122.61805
+    ],
+    [
+      45.5628,
+      -122.6175
+    ],
+    [
+      45.5628,
+      -122.61594
+    ],
+    [
+      45.56276,
+      -122.61143
+    ],
+    [
+      45.56275,
+      -122.60912
+    ],
+    [
+      45.56275,
+      -122.60664
+    ],
+    [
+      45.56275,
+      -122.6044
+    ],
+    [
+      45.56275,
+      -122.60225
+    ],
+    [
+      45.56275,
+      -122.60155
+    ],
+    [
+      45.56276,
+      -122.60083
+    ],
+    [
+      45.56339,
+      -122.60083
+    ],
+    [
+      45.56353,
+      -122.60084
+    ],
+    [
+      45.56419,
+      -122.60084
+    ],
+    [
+      45.56565,
+      -122.60085
+    ],
+    [
+      45.56606,
+      -122.60085
+    ],
+    [
+      45.56645,
+      -122.60085
+    ],
+    [
+      45.56645,
+      -122.60114
+    ],
+    [
+      45.56644,
+      -122.60168
+    ],
+    [
+      45.56644,
+      -122.60479
+    ],
+    [
+      45.56644,
+      -122.60791
+    ],
+    [
+      45.56644,
+      -122.6092
+    ],
+    [
+      45.56644,
+      -122.60791
+    ],
+    [
+      45.56644,
+      -122.6066
+    ],
+    [
+      45.56581,
+      -122.60661
+    ],
+    [
+      45.5645,
+      -122.6066
+    ],
+    [
+      45.56441,
+      -122.60656
+    ],
+    [
+      45.56411,
+      -122.60632
+    ],
+    [
+      45.56407,
+      -122.6063
+    ],
+    [
+      45.56401,
+      -122.60626
+    ],
+    [
+      45.56363,
+      -122.60621
+    ],
+    [
+      45.56351,
+      -122.60617
+    ],
+    [
+      45.56342,
+      -122.60611
+    ],
+    [
+      45.56341,
+      -122.6061
+    ],
+    [
+      45.56275,
+      -122.60609
+    ]
+  ]
+}

@@ -1,9 +1,9 @@
 {
-  "id": "218VRN-P_effective_082625.pdf",
+  "id": "140nMIDBjb93Ieh5XwDdztiGRWkA-hq9G",
   "name": "218",
   "direction": "Afternoon",
   "filename": "218VRN-P_effective_082625.pdf",
-  "fileId": "218VRN-P_effective_082625.pdf",
+  "fileId": "140nMIDBjb93Ieh5XwDdztiGRWkA-hq9G",
   "modifiedTime": null,
   "stops": [
     {
@@ -30,7 +30,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.66094549262074,
-        45.56181809547804
+        45.56181809547803
       ],
       "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
       "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
@@ -45,7 +45,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.6350494592141,
-        45.57096424247775
+        45.57096424247776
       ],
       "displayName": "2930 NE Dekum St, Portland, OR 97211, USA",
       "placeId": "ChIJn1TNok-nlVQRklSrYC2t3Lg",
@@ -72,7 +72,7 @@
     "King",
     "Northeast Portland"
   ],
-  "processedAt": "2025-12-17T09:11:12.058Z",
+  "processedAt": "2026-04-25T02:52:21.793Z",
   "stats": {
     "totalStops": 4,
     "geocodedStops": 4,
@@ -372,35 +372,35 @@
       -122.62154
     ],
     [
-      45.57027,
-      -122.62128
+      45.57014,
+      -122.62112
     ],
     [
-      45.57006,
-      -122.62101
+      45.57004,
+      -122.62099
     ],
     [
-      45.56995,
-      -122.62092
+      45.5699,
+      -122.62087
     ],
     [
-      45.56971,
-      -122.62074
+      45.56965,
+      -122.6207
     ],
     [
-      45.56957,
-      -122.62065
+      45.56951,
+      -122.62062
     ],
     [
       45.56946,
       -122.6206
     ],
     [
-      45.56928,
-      -122.62053
+      45.56914,
+      -122.62049
     ],
     [
-      45.56895,
+      45.56887,
       -122.62045
     ],
     [
@@ -408,34 +408,36 @@
       -122.62042
     ],
     [
+      45.56865,
+      -122.62043
+    ],
+    [
       45.56855,
       -122.62046
     ],
     [
-      45.5682,
+      45.56838,
+      -122.62046
+    ],
+    [
+      45.56817,
       -122.62047
     ],
     [
-      45.56645,
+      45.56608,
       -122.62045
     ],
     [
-      45.56365,
+      45.56354,
       -122.62043
     ],
     [
-      45.56198,
+      45.56192,
       -122.62041
     ],
     [
       45.55749,
       -122.62041
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
-  }
+  ]
 }

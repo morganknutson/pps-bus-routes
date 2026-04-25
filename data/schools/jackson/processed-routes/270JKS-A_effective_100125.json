@@ -1,9 +1,9 @@
 {
-  "id": "270JKS-A_effective_100125.pdf",
+  "id": "1TXvT7mQZ9hUJlZ688nwcHP6ONbq7qlkF",
   "name": "270",
   "direction": "Morning",
   "filename": "270JKS-A_effective_100125.pdf",
-  "fileId": "270JKS-A_effective_100125.pdf",
+  "fileId": "1TXvT7mQZ9hUJlZ688nwcHP6ONbq7qlkF",
   "modifiedTime": null,
   "stops": [
     {
@@ -105,7 +105,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.68215949211829,
-        45.45904241971936
+        45.45904241971935
       ],
       "displayName": "318 SW Palatine Hill Rd, Portland, OR 97219, USA",
       "placeId": "ChIJaXtYizwLlVQRFhH3o-d0j7I",
@@ -122,8 +122,8 @@
         -122.6808089,
         45.4590301
       ],
-      "displayName": "SW 2nd Ave & SW Palatine Hill Rd, Portland, OR 97219, USA",
-      "placeId": "EjlTVyAybmQgQXZlICYgU1cgUGFsYXRpbmUgSGlsbCBSZCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgmjdneWPAuVVBH_AqkovaYpsxIUChIJo3Z3ljwLlVQR_wKpKL2mKbMaFAoSCRd5_2AYC5VUEYucw745oQLUGhQKEgnlkg36MQuVVBGbnszzTvMVbSIKDV1_GBsV52Tgtg",
+      "displayName": "SW Palatine Hill Rd & SW 2nd Ave, Portland, OR 97219, USA",
+      "placeId": "EjlTVyBQYWxhdGluZSBIaWxsIFJkICYgU1cgMm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgmjdneWPAuVVBH_AqkovaYpsxIUChIJo3Z3ljwLlVQR_wKpKL2mKbMaFAoSCeWSDfoxC5VUEZuezPNO8xVtGhQKEglnKHaWPAuVVBHgThbhYxatGSIKDV1_GBsV52Tgtg",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -137,8 +137,8 @@
         -122.677875,
         45.4590003
       ],
-      "displayName": "S View Point Ter & SW Palatine Hill Rd, Portland, OR 97219, USA",
-      "placeId": "Ej9TIFZpZXcgUG9pbnQgVGVyICYgU1cgUGFsYXRpbmUgSGlsbCBSZCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgkT74pVIwuVVBEC_GwAIZxePhIUChIJE--KVSMLlVQRAvxsACGcXj4aFAoSCVtyMTD9CpVUEQGR5dWij7lsGhQKEgnlkg36MQuVVBGbnszzTvMVbSIKDTN-GBsVgtfgtg",
+      "displayName": "SW Vw Pt Ter & SW Palatine Hill Rd, Portland, OR 97219, USA",
+      "placeId": "EjtTVyBWdyBQdCBUZXIgJiBTVyBQYWxhdGluZSBIaWxsIFJkLCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCRPvilUjC5VUEQL8bAAhnF4-EhQKEgkT74pVIwuVVBEC_GwAIZxePhoUChIJW3IxMP0KlVQRAZHl1aKPuWwaFAoSCeWSDfoxC5VUEZuezPNO8xVtIgoNM34YGxWC1-C2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -179,8 +179,8 @@
       "originalLine": "8:54 am1235 SW ARNOLD ST [NE]270JKS-A(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.69168731838543,
-        45.4455581108915
+        -122.69169005988236,
+        45.4455587934798
       ],
       "displayName": "1235 SW Arnold St, Portland, OR 97219, USA",
       "placeId": "ChIJL4LE7k4LlVQRs91I-OtQO3U",
@@ -236,7 +236,7 @@
     "Markham",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T09:01:02.369Z",
+  "processedAt": "2026-04-25T03:24:41.413Z",
   "stats": {
     "totalStops": 15,
     "geocodedStops": 15,
@@ -1388,24 +1388,32 @@
       -122.70127
     ],
     [
+      45.44487,
+      -122.70112
+    ],
+    [
       45.44486,
       -122.70111
     ],
     [
-      45.44483,
-      -122.70107
+      45.44472,
+      -122.70091
     ],
     [
       45.44462,
-      -122.70072
+      -122.7007
     ],
     [
-      45.44454,
-      -122.70051
+      45.44448,
+      -122.70027
     ],
     [
       45.44438,
       -122.69997
+    ],
+    [
+      45.44431,
+      -122.6998
     ],
     [
       45.44421,
@@ -1428,10 +1436,6 @@
       -122.69959
     ],
     [
-      45.44431,
-      -122.6998
-    ],
-    [
       45.44438,
       -122.69997
     ],
@@ -1440,16 +1444,12 @@
       -122.70049
     ],
     [
-      45.44462,
-      -122.70072
+      45.44472,
+      -122.70091
     ],
     [
-      45.44483,
-      -122.70107
-    ],
-    [
-      45.44486,
-      -122.70111
+      45.44487,
+      -122.70112
     ],
     [
       45.44501,
@@ -1500,6 +1500,10 @@
       -122.7028
     ],
     [
+      45.44623,
+      -122.70338
+    ],
+    [
       45.44618,
       -122.70379
     ],
@@ -1510,6 +1514,10 @@
     [
       45.44593,
       -122.70482
+    ],
+    [
+      45.44567,
+      -122.70554
     ],
     [
       45.44534,
@@ -1566,10 +1574,6 @@
     [
       45.4447,
       -122.71128
-    ],
-    [
-      45.4447,
-      -122.7119
     ],
     [
       45.44471,
@@ -1635,11 +1639,5 @@
       45.45067,
       -122.71317
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 14,
-    "errors": 0,
-    "total": 15
-  }
+  ]
 }

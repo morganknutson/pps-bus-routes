@@ -1,9 +1,9 @@
 {
-  "id": "148AIN-P_effective_082625.pdf",
+  "id": "1I3bXuWY2TZ96jqexQZFRt68q44JAgVZZ",
   "name": "148",
   "direction": "Afternoon",
   "filename": "148AIN-P_effective_082625.pdf",
-  "fileId": "148AIN-P_effective_082625.pdf",
+  "fileId": "1I3bXuWY2TZ96jqexQZFRt68q44JAgVZZ",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth",
-      "neighborhood": "Southwest Hills"
+      "schoolName": "Ainsworth"
     },
     {
       "id": "stop-1",
@@ -41,7 +40,7 @@
   "neighborhoods": [
     "Goose Hollow"
   ],
-  "processedAt": "2025-12-13T01:14:27.929Z",
+  "processedAt": "2026-04-25T03:45:24.097Z",
   "stats": {
     "totalStops": 2,
     "geocodedStops": 2,
@@ -276,11 +275,5 @@
       45.52004,
       -122.6916
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 1,
-    "errors": 0,
-    "total": 2
-  }
+  ]
 }

@@ -1,40 +1,11 @@
 {
-  "id": "259BMT-A_effective_100825.pdf",
+  "id": "1Rogxit5ngptgQtw0jGsq42JL2BsU9mPV",
   "name": "259",
   "direction": "Morning",
   "filename": "259BMT-A_effective_100825.pdf",
-  "fileId": "259BMT-A_effective_100825.pdf",
+  "fileId": "1Rogxit5ngptgQtw0jGsq42JL2BsU9mPV",
   "modifiedTime": null,
   "stops": [
-    {
-      "id": "stop-1",
-      "address": "Lee Gt. Loading ZONE",
-      "time": "8:29 am",
-      "direction": null,
-      "originalLine": "8:29 amLEE GT LOADING ZONE259BMT-AStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.5676595,
-        45.5381887
-      ],
-      "displayName": "2222 NE 92nd Ave, Portland, OR 97220, USA",
-      "isSchoolStop": false
-    },
-    {
-      "id": "stop-2",
-      "address": "NE Halsey St. No Intersection [N]",
-      "time": "8:37 am",
-      "direction": "N",
-      "originalLine": "8:37 amNE HALSEY ST No Intersection [N]259BMT-AStop Order #:",
-      "skipGeocoding": false,
-      "coordinates": [
-        -122.5788503,
-        45.5345231
-      ],
-      "displayName": "NE Halsey St, Portland, OR, USA",
-      "placeId": "Eh9ORSBIYWxzZXkgU3QsIFBvcnRsYW5kLCBPUiwgVVNBIi4qLAoUChIJ-VpS35OilVQRMz9XUGrRT_8SFAoSCSd0qX0LC5VUEZGF0fbmuTYc",
-      "neighborhood": "Northeast Portland"
-    },
     {
       "id": "stop-3",
       "address": "NE Irving St. & NE 53rd Ave. [NE]",
@@ -108,127 +79,20 @@
         45.5489184
       ],
       "displayName": "4043 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Beaumont",
-      "neighborhood": "Northeast Portland"
+      "schoolName": "Beaumont"
     }
   ],
-  "processedAt": "2025-12-12T22:36:44.275Z",
+  "neighborhoods": [
+    "Cully",
+    "Rose City Park"
+  ],
+  "processedAt": "2026-04-25T03:41:47.239Z",
   "stats": {
-    "totalStops": 6,
-    "geocodedStops": 6,
+    "totalStops": 5,
+    "geocodedStops": 5,
     "failedStops": 0
   },
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  },
   "geometry": [
-    [
-      45.53452,
-      -122.57885
-    ],
-    [
-      45.53444,
-      -122.5792
-    ],
-    [
-      45.53426,
-      -122.57964
-    ],
-    [
-      45.53407,
-      -122.58003
-    ],
-    [
-      45.53373,
-      -122.5807
-    ],
-    [
-      45.53366,
-      -122.58088
-    ],
-    [
-      45.53363,
-      -122.581
-    ],
-    [
-      45.53362,
-      -122.58172
-    ],
-    [
-      45.53362,
-      -122.58204
-    ],
-    [
-      45.53361,
-      -122.58419
-    ],
-    [
-      45.5336,
-      -122.58619
-    ],
-    [
-      45.5336,
-      -122.58825
-    ],
-    [
-      45.53362,
-      -122.58996
-    ],
-    [
-      45.53363,
-      -122.59166
-    ],
-    [
-      45.53364,
-      -122.5928
-    ],
-    [
-      45.53367,
-      -122.59558
-    ],
-    [
-      45.5337,
-      -122.59894
-    ],
-    [
-      45.53371,
-      -122.60022
-    ],
-    [
-      45.53371,
-      -122.60217
-    ],
-    [
-      45.53372,
-      -122.6037
-    ],
-    [
-      45.53372,
-      -122.60454
-    ],
-    [
-      45.5337,
-      -122.60501
-    ],
-    [
-      45.53372,
-      -122.60761
-    ],
-    [
-      45.53373,
-      -122.60878
-    ],
-    [
-      45.53299,
-      -122.60881
-    ],
-    [
-      45.53047,
-      -122.60881
-    ],
     [
       45.52822,
       -122.60885
@@ -574,8 +438,8 @@
       -122.61093
     ],
     [
-      45.5628,
-      -122.61745
+      45.56279,
+      -122.61546
     ],
     [
       45.5628,
@@ -662,9 +526,8 @@
       -122.62155
     ],
     [
-      45.5489184,
-      -122.6217722
+      45.54885,
+      -122.62177
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-21T09:07:42.770Z"
+  ]
 }

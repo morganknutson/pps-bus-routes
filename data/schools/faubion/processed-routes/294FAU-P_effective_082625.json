@@ -1,9 +1,9 @@
 {
-  "id": "294FAU-P_effective_082625.pdf",
+  "id": "12uljZp1zsevXd4o4zGqM42gdJsxOZWpb",
   "name": "294",
   "direction": "Afternoon",
   "filename": "294FAU-P_effective_082625.pdf",
-  "fileId": "294FAU-P_effective_082625.pdf",
+  "fileId": "12uljZp1zsevXd4o4zGqM42gdJsxOZWpb",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.570994
       ],
       "displayName": "2930 NE Dekum St, Portland, OR 97211, USA",
-      "schoolName": "Faubion",
-      "neighborhood": "Concordia"
+      "schoolName": "Faubion"
     },
     {
       "id": "stop-1",
@@ -46,7 +45,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.66094549262074,
-        45.56181809547804
+        45.56181809547803
       ],
       "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
       "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
@@ -57,7 +56,7 @@
     "King",
     "Vernon"
   ],
-  "processedAt": "2025-12-16T09:56:23.621Z",
+  "processedAt": "2026-04-25T03:33:43.171Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,
@@ -208,11 +207,5 @@
       45.56182,
       -122.66095
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 2,
-    "errors": 0,
-    "total": 3
-  }
+  ]
 }

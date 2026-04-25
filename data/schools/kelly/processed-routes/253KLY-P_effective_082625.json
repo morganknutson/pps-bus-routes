@@ -1,9 +1,9 @@
 {
-  "id": "253KLY-P_effective_082625.pdf",
+  "id": "1IlIW5Efb_-RcijRl-hSk9BBcybD0upUP",
   "name": "253",
   "direction": "Afternoon",
   "filename": "253KLY-P_effective_082625.pdf",
-  "fileId": "253KLY-P_effective_082625.pdf",
+  "fileId": "1IlIW5Efb_-RcijRl-hSk9BBcybD0upUP",
   "modifiedTime": null,
   "stops": [
     {
@@ -30,7 +30,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.56985986401764,
-        45.46583519796806
+        45.46583519796807
       ],
       "displayName": "7913 SE 92nd Ave, Portland, OR 97266, USA",
       "placeId": "ChIJsWy9i-2flVQRfQnH17uu1zI",
@@ -59,8 +59,8 @@
       "originalLine": "2:40 pm8625 SE HARNEY ST [N]253KLY-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.5745039142132,
-        45.46345856499359
+        -122.57450376357566,
+        45.463466340680455
       ],
       "displayName": "8625 SE Harney St, Portland, OR 97266, USA",
       "placeId": "ChIJx94vg--flVQRfX9g-JbZQqY",
@@ -75,7 +75,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.57021235948663,
-        45.468660234606816
+        45.46866023460682
       ],
       "displayName": "9025 SE Flavel St, Portland, OR 97266, USA",
       "placeId": "ChIJ81YUQvKflVQRZPa2URd3NRk",
@@ -90,7 +90,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.57330382374234,
-        45.480968639195005
+        45.48096863919501
       ],
       "displayName": "8660 SE Foster Rd, Portland, OR 97266, USA",
       "placeId": "ChIJWy_rbiGglVQR_tDXA3B3_EM",
@@ -160,7 +160,7 @@
   "neighborhoods": [
     "Lents"
   ],
-  "processedAt": "2025-12-17T09:01:34.506Z",
+  "processedAt": "2026-04-25T03:22:26.848Z",
   "stats": {
     "totalStops": 10,
     "geocodedStops": 10,
@@ -324,7 +324,7 @@
       -122.57449
     ],
     [
-      45.46346,
+      45.46347,
       -122.5745
     ],
     [
@@ -696,38 +696,20 @@
       -122.56861
     ],
     [
-      45.49004,
+      45.49003,
       -122.5686
-    ],
-    [
-      45.49003,
-      -122.5681
-    ],
-    [
-      45.49003,
-      -122.56786
     ],
     [
       45.49001,
       -122.56694
     ],
     [
-      45.48998,
-      -122.56601
-    ],
-    [
-      45.48996,
-      -122.56517
+      45.48994,
+      -122.56429
     ],
     [
       45.48992,
       -122.56348
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 9,
-    "errors": 0,
-    "total": 10
-  }
+  ]
 }

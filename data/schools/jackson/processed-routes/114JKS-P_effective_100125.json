@@ -1,9 +1,9 @@
 {
-  "id": "114JKS-P_effective_100125.pdf",
+  "id": "1QRYOECdjW1Jnk5TH8_uKy8dtA_vL5lNw",
   "name": "114",
   "direction": "Afternoon",
   "filename": "114JKS-P_effective_100125.pdf",
-  "fileId": "114JKS-P_effective_100125.pdf",
+  "fileId": "1QRYOECdjW1Jnk5TH8_uKy8dtA_vL5lNw",
   "modifiedTime": null,
   "stops": [
     {
@@ -89,8 +89,8 @@
       "originalLine": "4:29 pm7420 SW 35th Ave [E]114JKS-P(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71287290542381,
-        45.470817420870716
+        -122.71287290271474,
+        45.47081683659264
       ],
       "displayName": "7420 SW 35th Ave, Portland, OR 97219, USA",
       "placeId": "ChIJ27jez3QLlVQRpkZwy3BmD0g",
@@ -206,7 +206,7 @@
     "Hayhurst",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T08:59:50.562Z",
+  "processedAt": "2026-04-25T03:25:08.618Z",
   "stats": {
     "totalStops": 13,
     "geocodedStops": 13,
@@ -825,11 +825,5 @@
       45.47638,
       -122.73711
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 12,
-    "errors": 0,
-    "total": 13
-  }
+  ]
 }

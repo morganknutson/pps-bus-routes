@@ -1,9 +1,9 @@
 {
-  "id": "251LEE-A_effective_082625.pdf",
+  "id": "1cI0Suc_6iw4qK2LmxSWtKFZ9Y6PG9trq",
   "name": "251",
   "direction": "Morning",
   "filename": "251LEE-A_effective_082625.pdf",
-  "fileId": "251LEE-A_effective_082625.pdf",
+  "fileId": "1cI0Suc_6iw4qK2LmxSWtKFZ9Y6PG9trq",
   "modifiedTime": null,
   "stops": [
     {
@@ -29,11 +29,11 @@
       "originalLine": "7:43 am8340 NE BROADWAY (BROADWAY VANTAGE APT) [S]251LEE-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.5770543,
-        45.5348357
+        -122.57703344667482,
+        45.53481335324827
       ],
       "displayName": "8340 NE Broadway, Portland, OR 97220, USA",
-      "placeId": "ChIJJ4QgxxShlVQRCJwSa01___M",
+      "placeId": "ChIJ9fYowRShlVQRpE26pJQnbo8",
       "neighborhood": "Northeast Portland"
     },
     {
@@ -100,7 +100,7 @@
   "neighborhoods": [
     "Northeast Portland"
   ],
-  "processedAt": "2025-12-17T09:02:39.542Z",
+  "processedAt": "2026-04-25T03:19:55.627Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
@@ -188,8 +188,8 @@
       -122.57689
     ],
     [
-      45.53484,
-      -122.57705
+      45.53481,
+      -122.57703
     ],
     [
       45.53465,
@@ -371,11 +371,5 @@
       45.53834,
       -122.56766
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  }
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "205JMJ-P_effective_082625.pdf",
+  "id": "1cueT9ROkKmMzvuPG5WIEsbDtG7lSChf5",
   "name": "205",
   "direction": "Afternoon",
   "filename": "205JMJ-P_effective_082625.pdf",
-  "fileId": "205JMJ-P_effective_082625.pdf",
+  "fileId": "1cueT9ROkKmMzvuPG5WIEsbDtG7lSChf5",
   "modifiedTime": null,
   "stops": [
     {
@@ -74,7 +74,7 @@
       "originalLine": "2:50 pm10232 N Midway Ave [SE]205JMJ-P(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.73460024505835,
+        -122.73460024505837,
         45.597599272632884
       ],
       "displayName": "10232 N Midway Ave, Portland, OR 97203, USA",
@@ -130,7 +130,7 @@
   "neighborhoods": [
     "North Portland"
   ],
-  "processedAt": "2025-12-17T09:01:19.098Z",
+  "processedAt": "2026-04-25T03:23:03.835Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -721,11 +721,5 @@
       45.58171,
       -122.70079
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 7,
-    "errors": 0,
-    "total": 8
-  }
+  ]
 }

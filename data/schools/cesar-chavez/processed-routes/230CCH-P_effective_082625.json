@@ -1,9 +1,9 @@
 {
-  "id": "230CCH-P_effective_082625.pdf",
+  "id": "18q5P7JWPWWf8E3D1k261bxegO24RAJ-O",
   "name": "230",
   "direction": "Afternoon",
   "filename": "230CCH-P_effective_082625.pdf",
-  "fileId": "230CCH-P_effective_082625.pdf",
+  "fileId": "18q5P7JWPWWf8E3D1k261bxegO24RAJ-O",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.5844519
       ],
       "displayName": "5103 N Willis Blvd, Portland, OR 97203, USA",
-      "schoolName": "Cesar Chavez",
-      "neighborhood": "North Portland"
+      "schoolName": "Cesar Chavez"
     },
     {
       "id": "stop-1",
@@ -116,7 +115,7 @@
   "neighborhoods": [
     "North Portland"
   ],
-  "processedAt": "2025-12-16T09:56:08.954Z",
+  "processedAt": "2026-04-25T03:37:15.580Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -563,11 +562,5 @@
       45.60312,
       -122.75261
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

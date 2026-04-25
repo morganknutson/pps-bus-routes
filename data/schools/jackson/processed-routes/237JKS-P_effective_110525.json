@@ -1,9 +1,9 @@
 {
-  "id": "237JKS-P_effective_110525.pdf",
+  "id": "1UtOfDuPFpP3Djs5-Rq55thqWvgZgzrh4",
   "name": "237",
   "direction": "Afternoon",
   "filename": "237JKS-P_effective_110525.pdf",
-  "fileId": "237JKS-P_effective_110525.pdf",
+  "fileId": "1UtOfDuPFpP3Djs5-Rq55thqWvgZgzrh4",
   "modifiedTime": null,
   "stops": [
     {
@@ -92,8 +92,8 @@
         -122.7049001,
         45.4362223
       ],
-      "displayName": "Orchard Hill Pl & SW 27th Pl, Portland, OR 97035, USA",
-      "placeId": "EjVPcmNoYXJkIEhpbGwgUGwgJiBTVyAyN3RoIFBsLCBQb3J0bGFuZCwgT1IgOTcwMzUsIFVTQSJmImQKFAoSCSWHM5GqDJVUEf52VVzgLbnFEhQKEgklhzORqgyVVBH-dlVc4C25xRoUChIJKQp7haoMlVQRqPPfKnZtJoYaFAoSCTHSQbmqDJVUEdcHNGG1mMQcIgoNbwQVGxXXt9y2",
+      "displayName": "SW Orchard Hill Pl & SW 27th Pl, Portland, OR 97035, USA",
+      "placeId": "EjhTVyBPcmNoYXJkIEhpbGwgUGwgJiBTVyAyN3RoIFBsLCBQb3J0bGFuZCwgT1IgOTcwMzUsIFVTQSJmImQKFAoSCSWHM5GqDJVUEf52VVzgLbnFEhQKEgklhzORqgyVVBH-dlVc4C25xRoUChIJbfOgjaoMlVQRsLVJ-u5odacaFAoSCTHSQbmqDJVUEdcHNGG1mMQcIgoNbwQVGxXXt9y2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -107,8 +107,8 @@
         -122.7025637,
         45.4357391
       ],
-      "displayName": "SW Shelby Ct & Orchard Hill Rd, Portland, OR 97035, USA",
-      "placeId": "EjdTVyBTaGVsYnkgQ3QgJiBPcmNoYXJkIEhpbGwgUmQsIFBvcnRsYW5kLCBPUiA5NzAzNSwgVVNBImYiZAoUChIJhSNfVlULlVQRC_kmSOQa4eASFAoSCYUjX1ZVC5VUEQv5JkjkGuHgGhQKEgm9HFurqgyVVBHBc7DIFxCB_RoUChIJ65dEpKp0lVQRqgEx2W-DkCgiCg2P8RQbFRsT3bY",
+      "displayName": "SW Shelby Ct & SW Orchard Hill Rd, Portland, OR 97035, USA",
+      "placeId": "EjpTVyBTaGVsYnkgQ3QgJiBTVyBPcmNoYXJkIEhpbGwgUmQsIFBvcnRsYW5kLCBPUiA5NzAzNSwgVVNBImYiZAoUChIJhSNfVlULlVQRC_kmSOQa4eASFAoSCYUjX1ZVC5VUEQv5JkjkGuHgGhQKEgm9HFurqgyVVBHBc7DIFxCB_RoUChIJ65dEpKp0lVQRcqZbHlYdvkoiCg2P8RQbFRsT3bY",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -191,7 +191,7 @@
     "Southwest Portland",
     "West Portland Park"
   ],
-  "processedAt": "2025-12-17T09:00:09.416Z",
+  "processedAt": "2026-04-25T03:25:00.685Z",
   "stats": {
     "totalStops": 12,
     "geocodedStops": 12,
@@ -858,11 +858,5 @@
       45.46363,
       -122.68445
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 11,
-    "errors": 0,
-    "total": 12
-  }
+  ]
 }

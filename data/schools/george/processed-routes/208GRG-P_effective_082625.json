@@ -1,9 +1,9 @@
 {
-  "id": "208GRG-P_effective_082625.pdf",
+  "id": "1j-HSrw5KF7gs79n8W2ChvCZTSBOzP-N1",
   "name": "208",
   "direction": "Afternoon",
   "filename": "208GRG-P_effective_082625.pdf",
-  "fileId": "208GRG-P_effective_082625.pdf",
+  "fileId": "1j-HSrw5KF7gs79n8W2ChvCZTSBOzP-N1",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.5960566
       ],
       "displayName": "10000 N Burr Ave, Portland, OR 97203, USA",
-      "schoolName": "George",
-      "neighborhood": "North Portland"
+      "schoolName": "George"
     },
     {
       "id": "stop-1",
@@ -72,7 +71,7 @@
     "Cathedral Park",
     "North Portland"
   ],
-  "processedAt": "2025-12-16T09:56:01.978Z",
+  "processedAt": "2026-04-25T03:32:22.787Z",
   "stats": {
     "totalStops": 4,
     "geocodedStops": 4,
@@ -363,11 +362,5 @@
       45.58628,
       -122.75851
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
-  }
+  ]
 }

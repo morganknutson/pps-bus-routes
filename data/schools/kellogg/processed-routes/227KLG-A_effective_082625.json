@@ -1,9 +1,9 @@
 {
-  "id": "227KLG-A_effective_082625.pdf",
+  "id": "17Jugy-sgqyIIUgmpsLqhddANyj_4xRLe",
   "name": "227",
   "direction": "Morning",
   "filename": "227KLG-A_effective_082625.pdf",
-  "fileId": "227KLG-A_effective_082625.pdf",
+  "fileId": "17Jugy-sgqyIIUgmpsLqhddANyj_4xRLe",
   "modifiedTime": null,
   "stops": [
     {
@@ -116,7 +116,7 @@
     "Brentwood-Darlington",
     "Lents"
   ],
-  "processedAt": "2025-12-17T09:01:52.685Z",
+  "processedAt": "2026-04-25T03:21:37.060Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -515,11 +515,5 @@
       45.49889,
       -122.59207
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

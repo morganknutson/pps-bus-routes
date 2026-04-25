@@ -1,9 +1,9 @@
 {
-  "id": "241ALA-P_effective_082625.pdf",
+  "id": "164WuDWTO6hTUX0UmuxZx13sTx5SGedAF",
   "name": "241",
   "direction": "Afternoon",
   "filename": "241ALA-P_effective_082625.pdf",
-  "fileId": "241ALA-P_effective_082625.pdf",
+  "fileId": "164WuDWTO6hTUX0UmuxZx13sTx5SGedAF",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.547482
       ],
       "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Alameda",
-      "neighborhood": "Northeast Portland"
+      "schoolName": "Alameda"
     },
     {
       "id": "stop-1",
@@ -51,37 +50,17 @@
       "displayName": "NE 45th Ave & NE Alameda St, Portland, OR 97213, USA",
       "placeId": "EjRORSA0NXRoIEF2ZSAmIE5FIEFsYW1lZGEgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJd_OQyCuhlVQRsbMKer1sfWASFAoSCXfzkMgroZVUEbGzCnq9bH1gGhQKEgmHulOwLKGVVBGjmHKCm61XHRoUChIJeft12iyhlVQRvlcAiRtSZXQiCg2vRSUbFVIp6rY",
       "neighborhood": "Northeast Portland"
-    },
-    {
-      "id": "stop-3",
-      "address": "Vernon Gt. & St. & CAB Loading ZONE On 20th",
-      "time": "2:51 pm",
-      "direction": null,
-      "originalLine": "2:51 pmVERNON GT & ST & CAB LOADING ZONE ON 20TH241ALA-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.6438366,
-        45.5623398
-      ],
-      "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
-      "isSchoolStop": false
     }
   ],
-  "processedAt": "2025-12-12T21:41:45.929Z",
-  "stats": {
-    "totalStops": 3,
-    "geocodedStops": 3,
-    "failedStops": 0
-  },
   "neighborhoods": [
     "Northeast Portland",
     "Rose City Park"
   ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
+  "processedAt": "2026-04-25T03:44:20.671Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
   },
   "geometry": [
     [
@@ -181,49 +160,20 @@
       -122.61373
     ],
     [
-      45.54452,
-      -122.61373
+      45.54543,
+      -122.61576
     ],
     [
-      45.54322,
-      -122.61374
+      45.54543,
+      -122.61677
     ],
     [
-      45.54232,
-      -122.61375
-    ],
-    [
-      45.54232,
-      -122.61449
-    ],
-    [
-      45.54233,
-      -122.6146
-    ],
-    [
-      45.54238,
-      -122.6149
-    ],
-    [
-      45.54266,
-      -122.6156
-    ],
-    [
-      45.54271,
-      -122.61578
-    ],
-    [
-      45.54273,
-      -122.61596
-    ],
-    [
-      45.54274,
-      -122.61627
+      45.54376,
+      -122.61679
     ],
     [
       45.54275,
       -122.6168
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-30T11:44:16.256Z"
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "262JKS-P_effective_082625.pdf",
+  "id": "1QFJCysBc805YFpL7np1E13xGogDi_rY1",
   "name": "262",
   "direction": "Afternoon",
   "filename": "262JKS-P_effective_082625.pdf",
-  "fileId": "262JKS-P_effective_082625.pdf",
+  "fileId": "1QFJCysBc805YFpL7np1E13xGogDi_rY1",
   "modifiedTime": null,
   "stops": [
     {
@@ -104,8 +104,8 @@
       "originalLine": "4:20 pm1427 SW Taylors Ferry Rd [W]262JKS-P(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.69299558937537,
-        45.45903060603431
+        -122.69305074052338,
+        45.45903092154613
       ],
       "displayName": "1427 SW Taylors Ferry Rd, Portland, OR 97219, USA",
       "placeId": "ChIJyWT6xD8LlVQR-LYSZX0_s-g",
@@ -132,7 +132,7 @@
     "Southwest Portland",
     "West Portland Park"
   ],
-  "processedAt": "2025-12-17T09:00:35.232Z",
+  "processedAt": "2026-04-25T03:24:51.889Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -521,7 +521,7 @@
     ],
     [
       45.45903,
-      -122.693
+      -122.69305
     ],
     [
       45.45903,
@@ -787,11 +787,5 @@
       45.45374,
       -122.71289
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 7,
-    "errors": 0,
-    "total": 8
-  }
+  ]
 }

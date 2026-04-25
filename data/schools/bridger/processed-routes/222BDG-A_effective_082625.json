@@ -1,9 +1,9 @@
 {
-  "id": "222BDG-A_effective_082625.pdf",
+  "id": "1BGaodIkg9R4tJ-kY0aC9raVM6O0J4X1e",
   "name": "222",
   "direction": "Morning",
   "filename": "222BDG-A_effective_082625.pdf",
-  "fileId": "222BDG-A_effective_082625.pdf",
+  "fileId": "1BGaodIkg9R4tJ-kY0aC9raVM6O0J4X1e",
   "modifiedTime": null,
   "stops": [
     {
@@ -79,15 +79,14 @@
         45.5106758
       ],
       "displayName": "7910 SE Market St #3656, Portland, OR 97215, USA",
-      "schoolName": "Bridger",
-      "neighborhood": "Montavilla"
+      "schoolName": "Bridger"
     }
   ],
   "neighborhoods": [
     "Foster - Powell",
     "South Tabor"
   ],
-  "processedAt": "2025-12-13T21:47:16.767Z",
+  "processedAt": "2026-04-25T03:40:29.676Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -222,11 +221,5 @@
       45.51083,
       -122.58207
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

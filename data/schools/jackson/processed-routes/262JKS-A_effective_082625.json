@@ -1,9 +1,9 @@
 {
-  "id": "262JKS-A_effective_082625.pdf",
+  "id": "1Oi4KCmoAJBIpgqrYdasrjWefgws-9Ikb",
   "name": "262",
   "direction": "Morning",
   "filename": "262JKS-A_effective_082625.pdf",
-  "fileId": "262JKS-A_effective_082625.pdf",
+  "fileId": "1Oi4KCmoAJBIpgqrYdasrjWefgws-9Ikb",
   "modifiedTime": null,
   "stops": [
     {
@@ -89,8 +89,8 @@
       "originalLine": "8:57 am1427 SW Taylors Ferry Rd [E]262JKS-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.69299558937537,
-        45.45903060603431
+        -122.69305074052338,
+        45.45903092154613
       ],
       "displayName": "1427 SW Taylors Ferry Rd, Portland, OR 97219, USA",
       "placeId": "ChIJyWT6xD8LlVQR-LYSZX0_s-g",
@@ -105,7 +105,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.71342477802571,
-        45.454022952115885
+        45.45402295211588
       ],
       "displayName": "9863 SW 35th Dr, Portland, OR 97219, USA",
       "placeId": "ChIJXXHXcmcLlVQRU9KBz8jmEvU",
@@ -132,7 +132,7 @@
     "Southwest Portland",
     "West Portland Park"
   ],
-  "processedAt": "2025-12-17T09:00:32.844Z",
+  "processedAt": "2026-04-25T03:24:52.864Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -405,7 +405,7 @@
     ],
     [
       45.45903,
-      -122.693
+      -122.69305
     ],
     [
       45.45903,
@@ -723,11 +723,5 @@
       45.45067,
       -122.71317
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 7,
-    "errors": 0,
-    "total": 8
-  }
+  ]
 }

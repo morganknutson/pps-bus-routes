@@ -1,9 +1,9 @@
 {
-  "id": "114-PM-SAA-Effective-071122.pdf",
+  "id": "11WBoCGScHTLQjVCkdNctG3TPuxjEFWzH",
   "name": "114",
   "direction": "Afternoon",
   "filename": "114-PM-SAA-Effective-071122.pdf",
-  "fileId": "114-PM-SAA-Effective-071122.pdf",
+  "fileId": "11WBoCGScHTLQjVCkdNctG3TPuxjEFWzH",
   "modifiedTime": null,
   "stops": [
     {
@@ -90,7 +90,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.62140988170793,
-        45.5516470091922
+        45.551647009192216
       ],
       "displayName": "3993 NE 41st Ave, Portland, OR 97212, USA",
       "placeId": "ChIJKSI6bNGmlVQR3oaghmNbsj8",
@@ -105,7 +105,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.62036213689862,
-        45.5491659314115
+        45.54916593141151
       ],
       "displayName": "3606 NE 42nd Ave, Portland, OR 97213, USA",
       "placeId": "ChIJ0f2HkNOmlVQRPhd9YunuiDU",
@@ -135,7 +135,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.62711366218092,
-        45.54142024563736
+        45.541420245637354
       ],
       "displayName": "3560 NE Hollyrood Ct, Portland, OR 97212, USA",
       "placeId": "ChIJUzPp9NSglVQRwdlbfCrAggo",
@@ -224,7 +224,7 @@
     "Rose City Park",
     "Sullivan's Gulch"
   ],
-  "processedAt": "2025-12-17T09:08:15.557Z",
+  "processedAt": "2026-04-25T03:05:36.775Z",
   "stats": {
     "totalStops": 14,
     "geocodedStops": 14,
@@ -880,44 +880,68 @@
       -122.60993
     ],
     [
-      45.53778,
-      -122.60993
+      45.53513,
+      -122.61196
     ],
     [
-      45.53904,
-      -122.60993
+      45.53652,
+      -122.61196
     ],
     [
-      45.54002,
-      -122.60992
+      45.53704,
+      -122.61196
     ],
     [
-      45.54002,
-      -122.61031
+      45.53812,
+      -122.61196
+    ],
+    [
+      45.53922,
+      -122.61196
+    ],
+    [
+      45.53947,
+      -122.61196
+    ],
+    [
+      45.53956,
+      -122.6117
+    ],
+    [
+      45.53981,
+      -122.61095
     ],
     [
       45.54011,
       -122.61005
     ],
     [
-      45.54028,
-      -122.60951
+      45.54036,
+      -122.60929
     ],
     [
-      45.54041,
-      -122.60914
+      45.54058,
+      -122.60872
     ],
     [
-      45.54066,
-      -122.60853
+      45.54075,
+      -122.60834
     ],
     [
       45.54104,
       -122.60764
     ],
     [
-      45.54148,
+      45.5413,
       -122.60767
+    ],
+    [
+      45.54202,
+      -122.60767
+    ],
+    [
+      45.54309,
+      -122.60766
     ],
     [
       45.54372,
@@ -925,21 +949,23 @@
     ],
     [
       45.54371,
+      -122.60562
+    ],
+    [
+      45.54371,
       -122.6046
     ],
     [
-      45.54765,
+      45.5467,
+      -122.60458
+    ],
+    [
+      45.54798,
       -122.60458
     ],
     [
       45.54825,
       -122.60458
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 13,
-    "errors": 0,
-    "total": 14
-  }
+  ]
 }

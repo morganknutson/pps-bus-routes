@@ -1,9 +1,9 @@
 {
-  "id": "222SCT-A_effective_082625.pdf",
+  "id": "15NAfKMYs4wJSV5yrZt2FMq_djJFUF_VI",
   "name": "222",
   "direction": "Morning",
   "filename": "222SCT-A_effective_082625.pdf",
-  "fileId": "222SCT-A_effective_082625.pdf",
+  "fileId": "15NAfKMYs4wJSV5yrZt2FMq_djJFUF_VI",
   "modifiedTime": null,
   "stops": [
     {
@@ -30,7 +30,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.5919304585043,
-        45.562013518571646
+        45.56201351857165
       ],
       "displayName": "6850 NE Killingsworth St, Portland, OR 97218, USA",
       "placeId": "ChIJGUm1L66mlVQRfjeNuq-MYIA",
@@ -70,7 +70,7 @@
   "neighborhoods": [
     "Cully"
   ],
-  "processedAt": "2025-12-17T09:08:34.874Z",
+  "processedAt": "2026-04-25T03:05:01.791Z",
   "stats": {
     "totalStops": 4,
     "geocodedStops": 4,
@@ -305,11 +305,5 @@
       45.555,
       -122.59444
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
-  }
+  ]
 }

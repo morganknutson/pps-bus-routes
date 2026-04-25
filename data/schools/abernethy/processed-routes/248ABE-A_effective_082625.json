@@ -79,11 +79,14 @@
         45.5058868
       ],
       "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
-      "schoolName": "Abernethy",
-      "neighborhood": "Ladd's Addition"
+      "schoolName": "Abernethy"
     }
   ],
-  "processedAt": "2025-12-12T22:33:35.380Z",
+  "neighborhoods": [
+    "Hosford-Abernethy",
+    "Richmond"
+  ],
+  "processedAt": "2026-04-25T04:16:08.310Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -222,11 +225,5 @@
       45.50561,
       -122.65115
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

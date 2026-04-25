@@ -1,9 +1,9 @@
 {
-  "id": "128GRY-P_effective_082625.pdf",
+  "id": "1kz73dnZTTKK3ClTtuOZdlnPlTRbKIzkl",
   "name": "128",
   "direction": "Afternoon",
   "filename": "128GRY-P_effective_082625.pdf",
-  "fileId": "128GRY-P_effective_082625.pdf",
+  "fileId": "1kz73dnZTTKK3ClTtuOZdlnPlTRbKIzkl",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.4824889
       ],
       "displayName": "5505 SW 23rd Ave, Portland, OR 97239, USA",
-      "schoolName": "Gray",
-      "neighborhood": "Southwest Portland"
+      "schoolName": "Gray"
     },
     {
       "id": "stop-1",
@@ -30,8 +29,8 @@
       "originalLine": "4:12 pm6010 SW 30TH AV (HERITAGE APTS) [W]128GRY-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.70723430814786,
-        45.48060322386684
+        -122.7072465848756,
+        45.48060318749667
       ],
       "displayName": "6010 SW 30th Ave, Portland, OR 97239, USA",
       "placeId": "ChIJLQgCEKYLlVQRbS3J3TzxWS8",
@@ -222,7 +221,7 @@
     "Hayhurst",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T08:43:45.602Z",
+  "processedAt": "2026-04-25T03:30:54.755Z",
   "stats": {
     "totalStops": 14,
     "geocodedStops": 14,
@@ -593,11 +592,5 @@
       45.48023,
       -122.73532
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 13,
-    "errors": 0,
-    "total": 14
-  }
+  ]
 }

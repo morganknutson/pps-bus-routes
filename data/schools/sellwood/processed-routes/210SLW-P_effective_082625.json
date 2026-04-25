@@ -1,9 +1,9 @@
 {
-  "id": "210SLW-P_effective_082625.pdf",
+  "id": "1vUSxqbK5Gh_a-00ndl223G9GzB83FyjJ",
   "name": "210",
   "direction": "Afternoon",
   "filename": "210SLW-P_effective_082625.pdf",
-  "fileId": "210SLW-P_effective_082625.pdf",
+  "fileId": "1vUSxqbK5Gh_a-00ndl223G9GzB83FyjJ",
   "modifiedTime": null,
   "stops": [
     {
@@ -104,8 +104,8 @@
       "originalLine": "4:30 pm6918 SE 48TH AV [E]210SLW-P(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.61346376089891,
-        45.473005982435005
+        -122.6134637481053,
+        45.47301168076146
       ],
       "displayName": "6918 SE 48th Av, Portland, OR 97206, USA",
       "placeId": "ChIJm6YQx6gKlVQR9Gt5kzt-ZtI",
@@ -131,7 +131,7 @@
     "Brentwood-Darlington",
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-17T09:08:49.184Z",
+  "processedAt": "2026-04-25T03:04:11.472Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -694,11 +694,5 @@
       45.47628,
       -122.61345
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 7,
-    "errors": 0,
-    "total": 8
-  }
+  ]
 }

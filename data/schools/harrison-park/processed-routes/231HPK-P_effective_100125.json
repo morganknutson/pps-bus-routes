@@ -1,9 +1,9 @@
 {
-  "id": "231HPK-P_effective_100125.pdf",
+  "id": "1eRxs6dXYN7TCBHv7uWBXiHhj5r5GArhY",
   "name": "231",
   "direction": "Afternoon",
   "filename": "231HPK-P_effective_100125.pdf",
-  "fileId": "231HPK-P_effective_100125.pdf",
+  "fileId": "1eRxs6dXYN7TCBHv7uWBXiHhj5r5GArhY",
   "modifiedTime": null,
   "stops": [
     {
@@ -118,7 +118,7 @@
     "South Tabor",
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-17T08:58:07.995Z",
+  "processedAt": "2026-04-25T03:29:18.458Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -422,34 +422,16 @@
       -122.60889
     ],
     [
-      45.48847,
-      -122.60943
-    ],
-    [
-      45.48846,
-      -122.60999
-    ],
-    [
       45.48845,
-      -122.61082
+      -122.61042
     ],
     [
       45.48848,
-      -122.61098
-    ],
-    [
-      45.48848,
-      -122.61196
+      -122.61173
     ],
     [
       45.48848,
       -122.61488
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

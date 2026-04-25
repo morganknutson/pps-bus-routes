@@ -1,9 +1,9 @@
 {
-  "id": "233SCT-P_effective_082625.pdf",
+  "id": "1fp2kyAzLLbZn3wSQGpaBKSH-2xtCqNAy",
   "name": "233",
   "direction": "Afternoon",
   "filename": "233SCT-P_effective_082625.pdf",
-  "fileId": "233SCT-P_effective_082625.pdf",
+  "fileId": "1fp2kyAzLLbZn3wSQGpaBKSH-2xtCqNAy",
   "modifiedTime": null,
   "stops": [
     {
@@ -75,7 +75,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.61758624791193,
-        45.56364007177973
+        45.563640071779744
       ],
       "displayName": "4413 NE Killingsworth St, Portland, OR 97218, USA",
       "placeId": "ChIJC3l938CmlVQRh49zw7V5KSw",
@@ -125,32 +125,16 @@
       "displayName": "NE 63rd Ave & NE Columbia Blvd, Portland, OR 97218, USA",
       "placeId": "EjdORSA2M3JkIEF2ZSAmIE5FIENvbHVtYmlhIEJsdmQsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBImYiZAoUChIJqS_0n6SmlVQRzbB-C8bFXP4SFAoSCakv9J-kppVUEc2wfgvGxVz-GhQKEgmrNysyNKGVVBEAuO7_qaknPhoUChIJ31_oq6WmlVQRRzapwb8wj_QiCg39MSkbFWjx7LY",
       "neighborhood": "Cully"
-    },
-    {
-      "id": "stop-8",
-      "address": "Roseway Heights Gt. LOAD On Alameda",
-      "time": "3:14 pm",
-      "direction": null,
-      "originalLine": "3:14 pmROSEWAY HEIGHTS GT LOAD ON ALAMEDA233SCT-PStop Order #:",
-      "skipGeocoding": false,
-      "coordinates": [
-        -122.5873846598679,
-        45.543772679709384
-      ],
-      "displayName": "7334 NE Siskiyou St, Portland, OR 97213, USA",
-      "placeId": "ChIJmUymjUehlVQRxJrN8drv7lA",
-      "neighborhood": "Roseway"
     }
   ],
   "neighborhoods": [
     "Cully",
-    "Rose City Park",
-    "Roseway"
+    "Rose City Park"
   ],
-  "processedAt": "2025-12-17T09:08:41.092Z",
+  "processedAt": "2026-04-25T03:04:58.969Z",
   "stats": {
-    "totalStops": 9,
-    "geocodedStops": 9,
+    "totalStops": 8,
+    "geocodedStops": 8,
     "failedStops": 0
   },
   "geometry": [
@@ -477,248 +461,6 @@
     [
       45.56846,
       -122.59857
-    ],
-    [
-      45.56824,
-      -122.59719
-    ],
-    [
-      45.56797,
-      -122.59544
-    ],
-    [
-      45.56763,
-      -122.59307
-    ],
-    [
-      45.56758,
-      -122.59277
-    ],
-    [
-      45.56646,
-      -122.58755
-    ],
-    [
-      45.56632,
-      -122.58688
-    ],
-    [
-      45.56574,
-      -122.5838
-    ],
-    [
-      45.56501,
-      -122.57966
-    ],
-    [
-      45.56482,
-      -122.57856
-    ],
-    [
-      45.56517,
-      -122.57856
-    ],
-    [
-      45.56549,
-      -122.57857
-    ],
-    [
-      45.56581,
-      -122.57857
-    ],
-    [
-      45.56593,
-      -122.57846
-    ],
-    [
-      45.56599,
-      -122.57841
-    ],
-    [
-      45.56603,
-      -122.57833
-    ],
-    [
-      45.56604,
-      -122.5782
-    ],
-    [
-      45.566,
-      -122.57806
-    ],
-    [
-      45.56595,
-      -122.57799
-    ],
-    [
-      45.56578,
-      -122.57792
-    ],
-    [
-      45.56548,
-      -122.57788
-    ],
-    [
-      45.5653,
-      -122.57784
-    ],
-    [
-      45.56528,
-      -122.57783
-    ],
-    [
-      45.56523,
-      -122.57778
-    ],
-    [
-      45.56495,
-      -122.57779
-    ],
-    [
-      45.56477,
-      -122.5778
-    ],
-    [
-      45.56465,
-      -122.5778
-    ],
-    [
-      45.56447,
-      -122.57775
-    ],
-    [
-      45.5639,
-      -122.57774
-    ],
-    [
-      45.56299,
-      -122.57772
-    ],
-    [
-      45.5624,
-      -122.57773
-    ],
-    [
-      45.56149,
-      -122.57776
-    ],
-    [
-      45.56106,
-      -122.57779
-    ],
-    [
-      45.56084,
-      -122.57788
-    ],
-    [
-      45.56076,
-      -122.57794
-    ],
-    [
-      45.56063,
-      -122.57812
-    ],
-    [
-      45.56043,
-      -122.57838
-    ],
-    [
-      45.56032,
-      -122.57852
-    ],
-    [
-      45.56011,
-      -122.57853
-    ],
-    [
-      45.55978,
-      -122.57854
-    ],
-    [
-      45.55914,
-      -122.57855
-    ],
-    [
-      45.55795,
-      -122.57857
-    ],
-    [
-      45.55628,
-      -122.57859
-    ],
-    [
-      45.55452,
-      -122.57862
-    ],
-    [
-      45.55278,
-      -122.57865
-    ],
-    [
-      45.55244,
-      -122.57867
-    ],
-    [
-      45.55233,
-      -122.5789
-    ],
-    [
-      45.5521,
-      -122.57946
-    ],
-    [
-      45.55142,
-      -122.5812
-    ],
-    [
-      45.55087,
-      -122.58256
-    ],
-    [
-      45.54956,
-      -122.58586
-    ],
-    [
-      45.54833,
-      -122.58587
-    ],
-    [
-      45.54693,
-      -122.58589
-    ],
-    [
-      45.54456,
-      -122.58594
-    ],
-    [
-      45.54457,
-      -122.5866
-    ],
-    [
-      45.5442,
-      -122.58661
-    ],
-    [
-      45.54384,
-      -122.58661
-    ],
-    [
-      45.54381,
-      -122.58666
-    ],
-    [
-      45.5438,
-      -122.58701
-    ],
-    [
-      45.54377,
-      -122.58738
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 8,
-    "errors": 0,
-    "total": 9
-  }
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "249CRE-P_effective_082625.pdf",
+  "id": "1UduGEE4hvIoTK08AedmhhG-0kPWU9Qob",
   "name": "249",
   "direction": "Afternoon",
   "filename": "249CRE-P_effective_082625.pdf",
-  "fileId": "249CRE-P_effective_082625.pdf",
+  "fileId": "1UduGEE4hvIoTK08AedmhhG-0kPWU9Qob",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.49551169999999
       ],
       "displayName": "4701 SE Bush St, Portland, OR 97206, USA",
-      "schoolName": "Creston",
-      "neighborhood": "Creston - Kenilworth"
+      "schoolName": "Creston"
     },
     {
       "id": "stop-1",
@@ -81,33 +80,18 @@
       "displayName": "SE Center St & SE 66th Ave, Portland, OR 97206, USA",
       "placeId": "EjNTRSBDZW50ZXIgU3QgJiBTRSA2NnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgkfe3zQQaCVVBFh2AodAbEVIxIUChIJH3t80EGglVQRYdgKHQGxFSMaFAoSCUVlUo04oJVUETy-mHISpKLCGhQKEgn_4OUAEaCVVBGsrVMf2K2dYSIKDfXSHRsVeXDttg",
       "neighborhood": "Foster - Powell"
-    },
-    {
-      "id": "stop-5",
-      "address": "Ln. Gt. Loading ZONE",
-      "time": "3:01 pm",
-      "direction": null,
-      "originalLine": "3:01 pmLANE GT LOADING ZONE249CRE-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.6014249,
-        45.4708481
-      ],
-      "displayName": "7200 SE 60th Ave, Portland, OR 97206, USA",
-      "isSchoolStop": false
     }
   ],
-  "processedAt": "2025-12-12T22:36:15.851Z",
+  "neighborhoods": [
+    "Foster - Powell",
+    "Richmond",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-04-25T03:35:00.648Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
     "failedStops": 0
-  },
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
   },
   "geometry": [
     [
@@ -376,27 +360,35 @@
     ],
     [
       45.49744,
-      -122.60068
+      -122.60151
+    ],
+    [
+      45.49744,
+      -122.60064
     ],
     [
       45.49747,
-      -122.60058
+      -122.60055
+    ],
+    [
+      45.49747,
+      -122.60044
     ],
     [
       45.49748,
-      -122.59949
+      -122.5996
     ],
     [
       45.49747,
-      -122.59733
+      -122.5994
+    ],
+    [
+      45.49747,
+      -122.59812
     ],
     [
       45.49746,
-      -122.5963
-    ],
-    [
-      45.49745,
-      -122.59589
+      -122.59616
     ],
     [
       45.49745,
@@ -408,24 +400,27 @@
     ],
     [
       45.49724,
-      -122.59537
+      -122.59543
     ],
     [
       45.49723,
-      -122.59535
+      -122.59536
+    ],
+    [
+      45.49722,
+      -122.59533
     ],
     [
       45.4972,
       -122.59531
     ],
     [
-      45.49716,
+      45.4969,
       -122.5953
     ],
     [
       45.49394,
       -122.59532
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-29T19:49:01.247Z"
+  ]
 }

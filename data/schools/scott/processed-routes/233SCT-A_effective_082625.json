@@ -1,9 +1,9 @@
 {
-  "id": "233SCT-A_effective_082625.pdf",
+  "id": "1Bb1VRhqpxb6tqsBEf466tPOCUxdQLUEM",
   "name": "233",
   "direction": "Morning",
   "filename": "233SCT-A_effective_082625.pdf",
-  "fileId": "233SCT-A_effective_082625.pdf",
+  "fileId": "1Bb1VRhqpxb6tqsBEf466tPOCUxdQLUEM",
   "modifiedTime": null,
   "stops": [
     {
@@ -60,7 +60,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.61758624791193,
-        45.56364007177973
+        45.563640071779744
       ],
       "displayName": "4413 NE Killingsworth St, Portland, OR 97218, USA",
       "placeId": "ChIJC3l938CmlVQRh49zw7V5KSw",
@@ -131,7 +131,7 @@
     "Cully",
     "Rose City Park"
   ],
-  "processedAt": "2025-12-17T09:08:39.085Z",
+  "processedAt": "2026-04-25T03:04:59.844Z",
   "stats": {
     "totalStops": 8,
     "geocodedStops": 8,
@@ -466,11 +466,5 @@
       45.555,
       -122.59444
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 7,
-    "errors": 0,
-    "total": 8
-  }
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "117BDL-A_effective_091725.pdf",
+  "id": "1lpu8kguS4qNqpQjmGdU15b7ZpMwspZZK",
   "name": "117",
   "direction": "Morning",
   "filename": "117BDL-A_effective_091725.pdf",
-  "fileId": "117BDL-A_effective_091725.pdf",
+  "fileId": "1lpu8kguS4qNqpQjmGdU15b7ZpMwspZZK",
   "modifiedTime": null,
   "stops": [
     {
@@ -44,11 +44,11 @@
       "originalLine": "7:40 amSW PATTON RD @ SW 55TH AV [S]117BDL-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7328345,
-        45.497948
+        -122.7336037,
+        45.4979465
       ],
-      "displayName": "SW Patton Rd & SW 55th Dr, Bridlemile, OR 97221, USA",
-      "placeId": "EjRTVyBQYXR0b24gUmQgJiBTVyA1NXRoIERyLCBCcmlkbGVtaWxlLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJRwd1IMULlVQRyD460idNxzcSFAoSCUcHdSDFC5VUEcg-OtInTcc3GhQKEgkXt1_lzQuVVBFLsw7jOi7YoBoUChIJk9J6OcALlVQR6LB5z87vJjAiCg2Ybx4bFad02LY",
+      "displayName": "SW Patton Rd & SW 55th Ave, Bridlemile, OR 97221, USA",
+      "placeId": "EjVTVyBQYXR0b24gUmQgJiBTVyA1NXRoIEF2ZSwgQnJpZGxlbWlsZSwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCQukitvEC5VUEYI7jdXSDHdREhQKEgkLpIrbxAuVVBGCO43V0gx3URoUChIJF7df5c0LlVQRS7MO4zou2KAaFAoSCecCtriCDJVUEcuAlboKNtYvIgoNiW8eGxWbVti2",
       "neighborhood": "Bridlemile"
     },
     {
@@ -120,7 +120,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.72745307750702,
-        45.49251373282158
+        45.49251373282157
       ],
       "displayName": "4220 SW Shattuck Rd, Portland, OR 97221, USA",
       "placeId": "ChIJ8W9vG8cLlVQRbecq7XB-rnw",
@@ -169,8 +169,7 @@
         45.4917482
       ],
       "displayName": "4300 SW 47th Dr, Portland, OR 97221, USA",
-      "schoolName": "Bridlemile",
-      "neighborhood": "Southwest Portland"
+      "schoolName": "Bridlemile"
     }
   ],
   "neighborhoods": [
@@ -178,7 +177,7 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-16T09:56:55.168Z",
+  "processedAt": "2026-04-25T03:39:31.689Z",
   "stats": {
     "totalStops": 11,
     "geocodedStops": 11,
@@ -465,11 +464,5 @@
       45.49177,
       -122.72472
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 10,
-    "errors": 0,
-    "total": 11
-  }
+  ]
 }

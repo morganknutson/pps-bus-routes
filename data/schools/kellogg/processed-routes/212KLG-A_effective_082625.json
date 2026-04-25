@@ -1,9 +1,9 @@
 {
-  "id": "212KLG-A_effective_082625.pdf",
+  "id": "1NYUFniC3heBtxjp_-dKWWa-fKEotsQyd",
   "name": "212",
   "direction": "Morning",
   "filename": "212KLG-A_effective_082625.pdf",
-  "fileId": "212KLG-A_effective_082625.pdf",
+  "fileId": "1NYUFniC3heBtxjp_-dKWWa-fKEotsQyd",
   "modifiedTime": null,
   "stops": [
     {
@@ -71,7 +71,7 @@
     "Lents",
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-17T09:01:44.460Z",
+  "processedAt": "2026-04-25T03:21:40.058Z",
   "stats": {
     "totalStops": 4,
     "geocodedStops": 4,
@@ -262,11 +262,5 @@
       45.49889,
       -122.59207
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
-  }
+  ]
 }

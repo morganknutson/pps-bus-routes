@@ -1,9 +1,9 @@
 {
-  "id": "217BMT-P_effective_082625.pdf",
+  "id": "143eVkgSGugunikWNxRgsOJl0b4nOqrPq",
   "name": "217",
   "direction": "Afternoon",
   "filename": "217BMT-P_effective_082625.pdf",
-  "fileId": "217BMT-P_effective_082625.pdf",
+  "fileId": "143eVkgSGugunikWNxRgsOJl0b4nOqrPq",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,8 +19,7 @@
         45.5489184
       ],
       "displayName": "4043 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Beaumont",
-      "neighborhood": "Northeast Portland"
+      "schoolName": "Beaumont"
     },
     {
       "id": "stop-1",
@@ -30,18 +29,12 @@
       "originalLine": "4:17 pm6735 NE KILLINGSWORTH ST [N]217BMT-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.59287470000001,
-        45.563013399999996
+        -122.592863878931,
+        45.56301137846853
       ],
       "displayName": "6735 NE Killingsworth St, Portland, OR 97218, USA",
-      "placeId": "ChIJ59yV2q-mlVQRDADzXIG4R6Q",
-      "neighborhood": "Cully",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.593197,
-        45.5631542
-      ],
-      "snapDistance": 29.575024369024064
+      "placeId": "ChIJQ6tn0K-mlVQR4ZM3nX1AlGQ",
+      "neighborhood": "Cully"
     },
     {
       "id": "stop-2",
@@ -51,18 +44,12 @@
       "originalLine": "4:19 pm6415 NE KILLINGSWORTH ST (ARBOR MHP) [N]217BMT-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.59663222965969,
-        45.56331249875914
+        -122.59775977254488,
+        45.563889712350104
       ],
-      "displayName": "6415 NE Killingsworth St UNIT E10, Portland, OR 97218, USA",
-      "placeId": "ChIJGxHXnbqmlVQRVbK949-kg0Q",
-      "neighborhood": "Cully",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.596629,
-        45.5631844
-      ],
-      "snapDistance": 14.246151020047433
+      "displayName": "6415 NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "ChIJw8PYnbqmlVQRNn-UUFh6zeY",
+      "neighborhood": "Cully"
     },
     {
       "id": "stop-3",
@@ -122,16 +109,14 @@
       ],
       "displayName": "6814 NE 47th Ave, Portland, OR 97218, USA",
       "placeId": "ChIJJdGnkZamlVQRJnCYc6hIsd0",
-      "neighborhood": "Cully",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.6135079,
-        45.5724904
-      ],
-      "snapDistance": 8.010620846391172
+      "neighborhood": "Cully"
     }
   ],
-  "processedAt": "2025-12-12T22:36:40.900Z",
+  "neighborhoods": [
+    "Concordia",
+    "Cully"
+  ],
+  "processedAt": "2026-04-25T03:41:51.367Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -331,44 +316,36 @@
       -122.59646
     ],
     [
-      45.56274,
-      -122.59718
+      45.56275,
+      -122.59809
     ],
     [
-      45.56304,
-      -122.59722
+      45.56379,
+      -122.59813
     ],
     [
-      45.56331,
-      -122.59722
+      45.56386,
+      -122.59809
     ],
     [
-      45.56331,
-      -122.59675
+      45.56388,
+      -122.59787
     ],
     [
-      45.56331,
-      -122.59663
+      45.56389,
+      -122.59776
     ],
     [
-      45.56331,
-      -122.59675
+      45.56388,
+      -122.59787
     ],
     [
-      45.56331,
-      -122.59722
+      45.56386,
+      -122.59809
     ],
     [
-      45.56304,
-      -122.59722
-    ],
-    [
-      45.56274,
-      -122.59718
-    ],
-    [
-      45.56274,
-      -122.59736
+      45.56379,
+      -122.59813
     ],
     [
       45.56275,
@@ -393,6 +370,10 @@
     [
       45.56512,
       -122.60084
+    ],
+    [
+      45.56573,
+      -122.60085
     ],
     [
       45.56645,
@@ -423,8 +404,8 @@
       -122.60656
     ],
     [
-      45.56842,
-      -122.60859
+      45.56886,
+      -122.61127
     ],
     [
       45.56934,
@@ -483,6 +464,10 @@
       -122.62183
     ],
     [
+      45.57004,
+      -122.62454
+    ],
+    [
       45.57002,
       -122.62762
     ],
@@ -519,7 +504,7 @@
       -122.63066
     ],
     [
-      45.57277,
+      45.57246,
       -122.63066
     ],
     [
@@ -575,24 +560,24 @@
       -122.62821
     ],
     [
-      45.57282,
-      -122.62583
+      45.57297,
+      -122.6268
     ],
     [
-      45.57242,
-      -122.62374
+      45.57263,
+      -122.6248
     ],
     [
-      45.57139,
-      -122.61876
+      45.57226,
+      -122.62294
+    ],
+    [
+      45.57172,
+      -122.62039
     ],
     [
       45.57106,
       -122.61712
-    ],
-    [
-      45.57089,
-      -122.61583
     ],
     [
       45.5707,
@@ -615,8 +600,8 @@
       -122.61416
     ],
     [
-      45.57181,
-      -122.61414
+      45.57197,
+      -122.61413
     ],
     [
       45.57244,
@@ -626,11 +611,5 @@
       45.57242,
       -122.61349
     ]
-  ],
-  "snapStats": {
-    "snapped": 3,
-    "skipped": 3,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

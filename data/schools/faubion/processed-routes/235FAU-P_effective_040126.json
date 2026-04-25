@@ -1,0 +1,33 @@
+{
+  "id": "1Xr8LOFACtYaj6pUfN5qRs2VbJWz3eJRI",
+  "name": "235",
+  "direction": "Afternoon",
+  "filename": "235FAU-P_effective_040126.pdf",
+  "fileId": "1Xr8LOFACtYaj6pUfN5qRs2VbJWz3eJRI",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2930 NE Dekum St, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:null",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6343091,
+        45.570994
+      ],
+      "displayName": "2930 NE Dekum St, Portland, OR 97211, USA",
+      "schoolName": "Faubion"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-04-25T03:33:45.318Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}

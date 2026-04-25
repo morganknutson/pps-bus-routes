@@ -1,9 +1,9 @@
 {
-  "id": "226ALA-A_effective_082625.pdf",
+  "id": "1P9gLMqkq3Bi8EjLoRIBWH8joFa65gdg-",
   "name": "226",
   "direction": "Morning",
   "filename": "226ALA-A_effective_082625.pdf",
-  "fileId": "226ALA-A_effective_082625.pdf",
+  "fileId": "1P9gLMqkq3Bi8EjLoRIBWH8joFa65gdg-",
   "modifiedTime": null,
   "stops": [
     {
@@ -49,11 +49,13 @@
         45.547482
       ],
       "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Alameda",
-      "neighborhood": "Northeast Portland"
+      "schoolName": "Alameda"
     }
   ],
-  "processedAt": "2025-12-12T21:41:41.482Z",
+  "neighborhoods": [
+    "Rose City Park"
+  ],
+  "processedAt": "2026-04-25T03:44:23.016Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,
@@ -164,14 +166,5 @@
       45.54747,
       -122.63792
     ]
-  ],
-  "neighborhoods": [
-    "Rose City Park"
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 2,
-    "errors": 0,
-    "total": 3
-  }
+  ]
 }

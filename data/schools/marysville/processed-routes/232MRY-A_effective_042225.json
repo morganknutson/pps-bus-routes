@@ -1,0 +1,297 @@
+{
+  "id": "1RmGBrBnqQ8rDKmfaBT-xGz66ndfWO5A4",
+  "name": "232",
+  "direction": "Morning",
+  "filename": "232MRY-A_effective_042225.pdf",
+  "fileId": "1RmGBrBnqQ8rDKmfaBT-xGz66ndfWO5A4",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE 92nd Ave. & SE Reedway St.",
+      "time": "7:37 am",
+      "direction": null,
+      "originalLine": "7:37 amSE 92ND AV & SE REEDWAY ST232MRY-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686208,
+        45.4813246
+      ],
+      "displayName": "SE Reedway St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjRTRSBSZWVkd2F5IFN0ICYgU0UgOTJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJjZCf5yaglVQRSx59bHKi_h0SFAoSCY2Qn-cmoJVUEUsefWxyov4dGhQKEgnRQo6wGaCVVBGKEk6BbyMTURoUChIJH9e6zyaglVQRMzhsp-U9UsYiCg0-5hsbFUCD8bY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 92nd Ave. & SE Tolman St. [NW]",
+      "time": "7:38 am",
+      "direction": "NW",
+      "originalLine": "7:38 amSE 92ND AVE @ SE TOLMAN ST [NW]232MRY-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686421,
+        45.4774096
+      ],
+      "displayName": "SE Tolman St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBUb2xtYW4gU3QgJiBTRSA5Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEglzm6Vtip-VVBHis2iDnJBjEBIUChIJc5ulbYqflVQR4rNog5yQYxAaFAoSCQXGXe6nCpVUEc-CAnVTeENpGhQKEgkf17rPJqCVVBEzOGyn5T1SxiIKDVBNGxsVa4Lxtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 82nd Ave. & SE Woodstock Blvd. [SE]",
+      "time": "7:42 am",
+      "direction": "SE",
+      "originalLine": "7:42 amSE 82ND AV @ SE WOODSTOCK BLVD [SE]232MRY-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5790271,
+        45.47949149999999
+      ],
+      "displayName": "SE Woodstock Blvd & SE 82nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjhTRSBXb29kc3RvY2sgQmx2ZCAmIFNFIDgybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCR9ziU8foJVUEcuJElxLt-DSEhQKEgkfc4lPH6CVVBHLiRJcS7fg0hoUChIJM-ZGQQWglVQRAUHhMI7BVjIaFAoSCWOAWd31n5VUEfcexQgfBAYZIgoNo54bGxXB7O-2",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "8510 SE Steele St. [NE]",
+      "time": "7:45 am",
+      "direction": "NE",
+      "originalLine": "7:45 am8510 SE STEELE ST [NE]232MRY-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57506936890104,
+        45.48493354925326
+      ],
+      "displayName": "Parking lot, 8510 SE Steele St, Portland, OR 97266, USA",
+      "placeId": "ChIJlYTWnCSglVQRrDeTO2Sdkvs",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-0",
+      "address": "7733 SE Raymond St, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:MARYSVILLE ST & CAB LOADING ZONE ON 77TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5838743,
+        45.4868569
+      ],
+      "displayName": "7733 SE Raymond St, Portland, OR 97206, USA",
+      "schoolName": "Marysville"
+    }
+  ],
+  "neighborhoods": [
+    "Lents",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-04-25T03:13:17.147Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.48132,
+      -122.56862
+    ],
+    [
+      45.48049,
+      -122.56864
+    ],
+    [
+      45.48005,
+      -122.56866
+    ],
+    [
+      45.47955,
+      -122.56863
+    ],
+    [
+      45.47876,
+      -122.56864
+    ],
+    [
+      45.47817,
+      -122.56864
+    ],
+    [
+      45.47741,
+      -122.56864
+    ],
+    [
+      45.47744,
+      -122.56968
+    ],
+    [
+      45.47746,
+      -122.57066
+    ],
+    [
+      45.478,
+      -122.57063
+    ],
+    [
+      45.4789,
+      -122.5706
+    ],
+    [
+      45.47929,
+      -122.57061
+    ],
+    [
+      45.47927,
+      -122.57071
+    ],
+    [
+      45.47926,
+      -122.57085
+    ],
+    [
+      45.47926,
+      -122.57095
+    ],
+    [
+      45.47929,
+      -122.57235
+    ],
+    [
+      45.47931,
+      -122.57346
+    ],
+    [
+      45.47932,
+      -122.57436
+    ],
+    [
+      45.47935,
+      -122.5749
+    ],
+    [
+      45.47941,
+      -122.57643
+    ],
+    [
+      45.47946,
+      -122.57819
+    ],
+    [
+      45.47947,
+      -122.57857
+    ],
+    [
+      45.47949,
+      -122.57903
+    ],
+    [
+      45.47976,
+      -122.57902
+    ],
+    [
+      45.48017,
+      -122.57901
+    ],
+    [
+      45.48052,
+      -122.57899
+    ],
+    [
+      45.48063,
+      -122.579
+    ],
+    [
+      45.48099,
+      -122.579
+    ],
+    [
+      45.48168,
+      -122.57899
+    ],
+    [
+      45.48237,
+      -122.57897
+    ],
+    [
+      45.48307,
+      -122.57897
+    ],
+    [
+      45.48442,
+      -122.57894
+    ],
+    [
+      45.48537,
+      -122.57892
+    ],
+    [
+      45.4858,
+      -122.5789
+    ],
+    [
+      45.4858,
+      -122.57834
+    ],
+    [
+      45.4858,
+      -122.57686
+    ],
+    [
+      45.4858,
+      -122.57591
+    ],
+    [
+      45.48495,
+      -122.57594
+    ],
+    [
+      45.48494,
+      -122.5759
+    ],
+    [
+      45.48493,
+      -122.57507
+    ],
+    [
+      45.48495,
+      -122.57594
+    ],
+    [
+      45.48693,
+      -122.57588
+    ],
+    [
+      45.48693,
+      -122.57822
+    ],
+    [
+      45.48693,
+      -122.57862
+    ],
+    [
+      45.48693,
+      -122.57888
+    ],
+    [
+      45.48658,
+      -122.57889
+    ],
+    [
+      45.48658,
+      -122.57953
+    ],
+    [
+      45.48658,
+      -122.57982
+    ],
+    [
+      45.48658,
+      -122.5828
+    ],
+    [
+      45.48658,
+      -122.58387
+    ]
+  ]
+}

@@ -1,9 +1,9 @@
 {
-  "id": "203ALA-A_effective_082625.pdf",
+  "id": "1meIPgYFztyJpvaWjw0s6kAC5tqK7UW63",
   "name": "203",
   "direction": "Morning",
   "filename": "203ALA-A_effective_082625.pdf",
-  "fileId": "203ALA-A_effective_082625.pdf",
+  "fileId": "1meIPgYFztyJpvaWjw0s6kAC5tqK7UW63",
   "modifiedTime": null,
   "stops": [
     {
@@ -94,11 +94,13 @@
         45.547482
       ],
       "displayName": "2732 NE Fremont St, Portland, OR 97212, USA",
-      "schoolName": "Alameda",
-      "neighborhood": "Northeast Portland"
+      "schoolName": "Alameda"
     }
   ],
-  "processedAt": "2025-12-12T21:41:34.090Z",
+  "neighborhoods": [
+    "Northeast Portland"
+  ],
+  "processedAt": "2026-04-25T03:44:26.834Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
@@ -154,16 +156,12 @@
       -122.62083
     ],
     [
-      45.5456,
-      -122.62083
+      45.54542,
+      -122.62131
     ],
     [
-      45.54631,
-      -122.62082
-    ],
-    [
-      45.54698,
-      -122.62082
+      45.54543,
+      -122.62184
     ],
     [
       45.54699,
@@ -183,23 +181,19 @@
     ],
     [
       45.5483,
-      -122.62333
-    ],
-    [
-      45.5483,
-      -122.62498
+      -122.62385
     ],
     [
       45.54828,
-      -122.63008
+      -122.62956
     ],
     [
       45.54826,
-      -122.63213
+      -122.63305
     ],
     [
       45.54825,
-      -122.63376
+      -122.6357
     ],
     [
       45.54824,
@@ -245,14 +239,5 @@
       45.54747,
       -122.63792
     ]
-  ],
-  "neighborhoods": [
-    "Northeast Portland"
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  }
+  ]
 }

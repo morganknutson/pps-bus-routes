@@ -1,9 +1,9 @@
 {
-  "id": "201HPK-P_effective_091925.pdf",
+  "id": "1FnA0X4vaF1blbcfaMjmFIRVWL7twBLeP",
   "name": "201",
   "direction": "Afternoon",
   "filename": "201HPK-P_effective_091925.pdf",
-  "fileId": "201HPK-P_effective_091925.pdf",
+  "fileId": "1FnA0X4vaF1blbcfaMjmFIRVWL7twBLeP",
   "modifiedTime": null,
   "stops": [
     {
@@ -59,18 +59,18 @@
       "originalLine": "4:25 pmNE HASSALO ST @ NE 90TH AV [SW]201HPK-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.5714754,
-        45.53088830000001
+        -122.5714856,
+        45.5309004
       ],
       "displayName": "NE Hassalo St & NE 90th Ave, Portland, OR 97220, USA",
-      "placeId": "EjRORSBIYXNzYWxvIFN0ICYgTkUgOTB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIyMCwgVVNBImYiZAoUChIJJ2octBKhlVQRagV0b_UOI5wSFAoSCSdqHLQSoZVUEWoFdG_1DiOcGhQKEgk3YUg5cqGVVBGdKfjRx-HBARoUChIJTXzW02mhlVQRNj-OYqLaNfoiCg1TdiMbFb4T8bY",
+      "placeId": "EjRORSBIYXNzYWxvIFN0ICYgTkUgOTB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIyMCwgVVNBImYiZAoUChIJJ2octBKhlVQRagV0b_UOI5wSFAoSCSdqHLQSoZVUEWoFdG_1DiOcGhQKEgk3YUg5cqGVVBGdKfjRx-HBARoUChIJTXzW02mhlVQRNj-OYqLaNfoiCg3MdiMbFVgT8bY",
       "neighborhood": "Montavilla"
     }
   ],
   "neighborhoods": [
     "Montavilla"
   ],
-  "processedAt": "2025-12-17T08:58:03.594Z",
+  "processedAt": "2026-04-25T03:29:20.222Z",
   "stats": {
     "totalStops": 4,
     "geocodedStops": 4,
@@ -315,17 +315,11 @@
     ],
     [
       45.53092,
-      -122.57355
+      -122.57349
     ],
     [
-      45.53089,
-      -122.57148
+      45.5309,
+      -122.57149
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
-  }
+  ]
 }

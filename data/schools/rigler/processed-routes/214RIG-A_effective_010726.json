@@ -15,7 +15,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.62487375731209,
-        45.57293601118286
+        45.57293601118287
       ],
       "displayName": "3707 NE Columbia Blvd, Portland, OR 97211, USA",
       "placeId": "ChIJI4VB1OymlVQRzB08sr52Isw",
@@ -147,7 +147,7 @@
     "Northeast Portland",
     "Sunderland"
   ],
-  "processedAt": "2025-12-21T09:35:08.993Z",
+  "processedAt": "2026-04-25T03:08:43.597Z",
   "stats": {
     "totalStops": 9,
     "geocodedStops": 9,

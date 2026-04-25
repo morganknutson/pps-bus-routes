@@ -1,9 +1,9 @@
 {
-  "id": "109AIN-A_effective_082625.pdf",
+  "id": "1g0-hpKc0N0p_A1oHUHhj_Ds8qku8wQB4",
   "name": "109",
   "direction": "Morning",
   "filename": "109AIN-A_effective_082625.pdf",
-  "fileId": "109AIN-A_effective_082625.pdf",
+  "fileId": "1g0-hpKc0N0p_A1oHUHhj_Ds8qku8wQB4",
   "modifiedTime": null,
   "stops": [
     {
@@ -19,13 +19,7 @@
       ],
       "displayName": "3124 SW Barbur Blvd, Portland, OR 97239, USA",
       "placeId": "ChIJzTOfiEEKlVQRLfTSpzFRmBA",
-      "neighborhood": "Southwest Portland",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.680437,
-        45.5004557
-      ],
-      "snapDistance": 22.477146651684297
+      "neighborhood": "Southwest Portland"
     },
     {
       "id": "stop-2",
@@ -65,18 +59,12 @@
       "originalLine": "7:22 am2818 SW 1ST AV [W]109AIN-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.67869949156615,
-        45.50267315123311
+        -122.6786990628362,
+        45.50270367588047
       ],
       "displayName": "2818 SW 1st Ave, Portland, OR 97201, USA",
       "placeId": "ChIJV8QDb2oKlVQReeVdZwrIDC0",
-      "neighborhood": "Southwest Portland",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.6784602,
-        45.5026715
-      ],
-      "snapDistance": 18.64981807612997
+      "neighborhood": "Southwest Portland"
     },
     {
       "id": "stop-5",
@@ -121,13 +109,7 @@
       ],
       "displayName": "2045 S River Pkwy, Portland, OR 97201, USA",
       "placeId": "ChIJwbLbs2wKlVQRPv_EMFsjqTU",
-      "neighborhood": "Southwest Portland",
-      "snappedFromHouse": true,
-      "originalCoordinates": [
-        -122.6747613,
-        45.5070005
-      ],
-      "snapDistance": 24.89986152614247
+      "neighborhood": "Southwest Portland"
     },
     {
       "id": "stop-8",
@@ -152,11 +134,11 @@
       "originalLine": "7:33 amSW PARK AV @ SW MARKET ST [NW]109AIN-A(9)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6843705,
-        45.513747
+        -122.684399,
+        45.5137569
       ],
       "displayName": "SW Park Ave & SW Market St, Portland, OR 97201, USA",
-      "placeId": "EjNTVyBQYXJrIEF2ZSAmIFNXIE1hcmtldCBTdCwgUG9ydGxhbmQsIE9SIDk3MjAxLCBVU0EiZiJkChQKEgm_lkqxEAqVVBGPt384_2M7PBIUChIJv5ZKsRAKlVQRj7d_OP9jOzwaFAoSCdfyWogaCpVUEYAF7Agu5WrhGhQKEgkfmwytEAqVVBEDTmosMEep6CIKDb7YIBsVx9nftg",
+      "placeId": "EjNTVyBQYXJrIEF2ZSAmIFNXIE1hcmtldCBTdCwgUG9ydGxhbmQsIE9SIDk3MjAxLCBVU0EiZiJkChQKEgm_lkqxEAqVVBGPt384_2M7PBIUChIJv5ZKsRAKlVQRj7d_OP9jOzwaFAoSCdfyWogaCpVUEYAF7Agu5WrhGhQKEgkfmwytEAqVVBEDTmosMEep6CIKDSHZIBsVqtjftg",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -172,14 +154,13 @@
         45.5098062
       ],
       "displayName": "2425 SW Vista Ave, Portland, OR 97201, USA",
-      "schoolName": "Ainsworth",
-      "neighborhood": "Southwest Hills"
+      "schoolName": "Ainsworth"
     }
   ],
   "neighborhoods": [
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-13T01:13:58.742Z",
+  "processedAt": "2026-04-25T03:45:37.908Z",
   "stats": {
     "totalStops": 10,
     "geocodedStops": 10,
@@ -187,7 +168,7 @@
   },
   "geometry": [
     [
-      45.50039,
+      45.50038,
       -122.68071
     ],
     [
@@ -747,51 +728,59 @@
       -122.68402
     ],
     [
-      45.51404,
-      -122.68422
+      45.51418,
+      -122.68416
     ],
     [
-      45.51375,
-      -122.68437
+      45.5139,
+      -122.68432
+    ],
+    [
+      45.51376,
+      -122.6844
     ],
     [
       45.51361,
       -122.68386
     ],
     [
-      45.51365,
-      -122.68384
+      45.5141,
+      -122.68359
     ],
     [
       45.51429,
       -122.68349
     ],
     [
-      45.51452,
-      -122.68439
+      45.51443,
+      -122.68402
     ],
     [
-      45.51484,
-      -122.68559
+      45.51461,
+      -122.68471
+    ],
+    [
+      45.51482,
+      -122.68549
     ],
     [
       45.51522,
-      -122.68701
+      -122.68702
     ],
     [
-      45.51552,
-      -122.68802
+      45.51551,
+      -122.68804
     ],
     [
       45.51483,
-      -122.68839
+      -122.68842
     ],
     [
-      45.51443,
-      -122.6886
+      45.51445,
+      -122.68862
     ],
     [
-      45.51435,
+      45.51439,
       -122.68868
     ],
     [
@@ -1022,11 +1011,5 @@
       45.51014,
       -122.69937
     ]
-  ],
-  "snapStats": {
-    "snapped": 3,
-    "skipped": 6,
-    "errors": 0,
-    "total": 10
-  }
+  ]
 }

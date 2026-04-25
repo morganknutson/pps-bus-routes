@@ -1,9 +1,9 @@
 {
-  "id": "215-PEN-P_effective_082625.pdf",
+  "id": "16VK8mQ3_sFAVjXtHumqO_wIW2NBaq3st",
   "name": "215",
   "direction": "Afternoon",
   "filename": "215-PEN-P_effective_082625.pdf",
-  "fileId": "215-PEN-P_effective_082625.pdf",
+  "fileId": "16VK8mQ3_sFAVjXtHumqO_wIW2NBaq3st",
   "modifiedTime": null,
   "stops": [
     {
@@ -29,8 +29,8 @@
       "originalLine": "2:38 pm2133 N ARGYLE ST [S]215PEN-P(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.68815891610221,
-        45.58453918350572
+        -122.68815881583932,
+        45.58453918337629
       ],
       "displayName": "2133 N Argyle St, Portland, OR 97217, USA",
       "placeId": "ChIJMcTQWLanlVQRC10V8xOiojs",
@@ -100,7 +100,7 @@
   "neighborhoods": [
     "North Portland"
   ],
-  "processedAt": "2025-12-17T09:05:25.264Z",
+  "processedAt": "2026-04-25T03:10:53.957Z",
   "stats": {
     "totalStops": 6,
     "geocodedStops": 6,
@@ -491,11 +491,5 @@
       45.58836,
       -122.71343
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 5,
-    "errors": 0,
-    "total": 6
-  }
+  ]
 }

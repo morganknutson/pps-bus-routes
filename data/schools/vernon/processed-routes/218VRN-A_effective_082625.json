@@ -1,9 +1,9 @@
 {
-  "id": "218VRN-A_effective_082625.pdf",
+  "id": "1x-i5cJC7nuBxMFl5F6hGIdTb1SsUeh81",
   "name": "218",
   "direction": "Morning",
   "filename": "218VRN-A_effective_082625.pdf",
-  "fileId": "218VRN-A_effective_082625.pdf",
+  "fileId": "1x-i5cJC7nuBxMFl5F6hGIdTb1SsUeh81",
   "modifiedTime": null,
   "stops": [
     {
@@ -40,7 +40,7 @@
   "neighborhoods": [
     "Northeast Portland"
   ],
-  "processedAt": "2025-12-17T09:11:10.017Z",
+  "processedAt": "2026-04-25T02:52:22.378Z",
   "stats": {
     "totalStops": 2,
     "geocodedStops": 2,
@@ -119,11 +119,5 @@
       45.56208,
       -122.64387
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 1,
-    "errors": 0,
-    "total": 2
-  }
+  ]
 }

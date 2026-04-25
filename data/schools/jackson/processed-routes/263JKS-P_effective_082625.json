@@ -1,9 +1,9 @@
 {
-  "id": "263JKS-P_effective_082625.pdf",
+  "id": "1qagGQwJ6DFLlO4EM7S5QS0bEBX1Im9YU",
   "name": "263",
   "direction": "Afternoon",
   "filename": "263JKS-P_effective_082625.pdf",
-  "fileId": "263JKS-P_effective_082625.pdf",
+  "fileId": "1qagGQwJ6DFLlO4EM7S5QS0bEBX1Im9YU",
   "modifiedTime": null,
   "stops": [
     {
@@ -86,7 +86,7 @@
     "Markham",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T09:00:39.094Z",
+  "processedAt": "2026-04-25T03:24:49.676Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,
@@ -641,11 +641,5 @@
       45.44536,
       -122.70944
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 4,
-    "errors": 0,
-    "total": 5
-  }
+  ]
 }

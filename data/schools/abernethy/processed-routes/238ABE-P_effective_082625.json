@@ -19,8 +19,7 @@
         45.5058868
       ],
       "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
-      "schoolName": "Abernethy",
-      "neighborhood": "Ladd's Addition"
+      "schoolName": "Abernethy"
     },
     {
       "id": "stop-1",
@@ -45,44 +44,27 @@
       "originalLine": "2:45 pmSE 37TH AV @ SE GRANT ST [SE]238ABE-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6257363,
-        45.5073579
+        -122.6257309,
+        45.5066678
       ],
-      "displayName": "SE 37th Ave & SE Grant St, Portland, OR 97214, USA",
-      "placeId": "EjJTRSAzN3RoIEF2ZSAmIFNFIEdyYW50IFN0LCBQb3J0bGFuZCwgT1IgOTcyMTQsIFVTQSJmImQKFAoSCfEscc2OoJVUEduDc3BMQtQREhQKEgnxLHHNjqCVVBHbg3NwTELUERoUChIJixPbCqMKlVQRo1jDIDE3DrEaFAoSCfkw6ySxoZVUEaypJEwEJ2jPIgoNK98fGxUtzOi2",
+      "displayName": "SE 37th Ave & SE Grant Ct, Portland, OR 97214, USA",
+      "placeId": "EjJTRSAzN3RoIEF2ZSAmIFNFIEdyYW50IEN0LCBQb3J0bGFuZCwgT1IgOTcyMTQsIFVTQSJmImQKFAoSCX_67SiJoJVUEfXEdvqq5QQCEhQKEgl_-u0oiaCVVBH1xHb6quUEAhoUChIJixPbCqMKlVQRo1jDIDE3DrEaFAoSCR9IpTqJoJVUEZ-b9qoo1vD_IgoNNsQfGxVjzOi2",
       "neighborhood": "Richmond"
-    },
-    {
-      "id": "stop-3",
-      "address": "Mt Tabor Gt. & St. & CAB Loading ZONE",
-      "time": "2:54 pm",
-      "direction": null,
-      "originalLine": "2:54 pmMT TABOR GT & ST & CAB LOADING ZONE238ABE-PStop Order #:",
-      "skipGeocoding": true,
-      "coordinates": [
-        -122.6040112,
-        45.5210407
-      ],
-      "displayName": "5800 SE Ash St, Portland, OR 97215, USA",
-      "isSchoolStop": false
     }
   ],
-  "processedAt": "2025-12-12T22:33:33.199Z",
+  "neighborhoods": [
+    "Richmond"
+  ],
+  "processedAt": "2026-04-25T04:16:08.188Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,
     "failedStops": 0
   },
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
-  },
   "geometry": [
     [
-      45.5058868,
-      -122.6516263
+      45.50561,
+      -122.65115
     ],
     [
       45.50485,
@@ -181,9 +163,8 @@
       -122.62573
     ],
     [
-      45.50736,
-      -122.62574
+      45.50667,
+      -122.62573
     ]
-  ],
-  "geometryUpdatedAt": "2025-12-21T09:23:51.875Z"
+  ]
 }

@@ -1,9 +1,9 @@
 {
-  "id": "289SLW-P_effective_102225.pdf",
+  "id": "18PDE8Cyzjtb6yDFs-Fqoy22m1NQUzuDd",
   "name": "289",
   "direction": "Afternoon",
   "filename": "289SLW-P_effective_102225.pdf",
-  "fileId": "289SLW-P_effective_102225.pdf",
+  "fileId": "18PDE8Cyzjtb6yDFs-Fqoy22m1NQUzuDd",
   "modifiedTime": null,
   "stops": [
     {
@@ -70,7 +70,7 @@
   "neighborhoods": [
     "Southeast Portland"
   ],
-  "processedAt": "2025-12-17T09:09:08.437Z",
+  "processedAt": "2026-04-25T03:04:01.173Z",
   "stats": {
     "totalStops": 4,
     "geocodedStops": 4,
@@ -437,11 +437,5 @@
       45.46786,
       -122.61598
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 3,
-    "errors": 0,
-    "total": 4
-  }
+  ]
 }

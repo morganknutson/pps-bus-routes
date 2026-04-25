@@ -1,9 +1,9 @@
 {
-  "id": "206RSP-AM_effective_063025.pdf",
+  "id": "1jsCaxK3rV2pn5XLs-VLxbsCF7iZkfjE5",
   "name": "206",
   "direction": "Morning",
   "filename": "206RSP-AM_effective_063025.pdf",
-  "fileId": "206RSP-AM_effective_063025.pdf",
+  "fileId": "1jsCaxK3rV2pn5XLs-VLxbsCF7iZkfjE5",
   "modifiedTime": null,
   "stops": [
     {
@@ -74,8 +74,8 @@
       "originalLine": "7:31 am7039 N FESSENDEN ST [S]206RSP-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.7363688684092,
-        45.593751111982826
+        -122.7363472189712,
+        45.59374601942441
       ],
       "displayName": "7039 N Fessenden St, Portland, OR 97203, USA",
       "placeId": "ChIJObIdwQmolVQRp1fbiLs4Sh0",
@@ -115,7 +115,7 @@
   "neighborhoods": [
     "North Portland"
   ],
-  "processedAt": "2025-12-17T09:07:09.927Z",
+  "processedAt": "2026-04-25T03:07:56.983Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -550,11 +550,5 @@
       45.58807,
       -122.71291
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

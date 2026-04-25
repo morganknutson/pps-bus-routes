@@ -1,9 +1,9 @@
 {
-  "id": "119GRY-A_effective_091025.pdf",
+  "id": "1LPNuxlUi5skJMBO86rNw17um-T5hczhx",
   "name": "119",
   "direction": "Morning",
   "filename": "119GRY-A_effective_091025.pdf",
-  "fileId": "119GRY-A_effective_091025.pdf",
+  "fileId": "1LPNuxlUi5skJMBO86rNw17um-T5hczhx",
   "modifiedTime": null,
   "stops": [
     {
@@ -15,7 +15,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.73002381434287,
-        45.487039670751884
+        45.48703967075189
       ],
       "displayName": "5123 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
       "placeId": "ChIJXYCmtr8LlVQRB3hSGyFAmPc",
@@ -45,7 +45,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.73713759284348,
-        45.48707379054837
+        45.487073790548365
       ],
       "displayName": "5817 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
       "placeId": "ChIJcy8s1eoLlVQRMBPzjczfo68",
@@ -105,7 +105,7 @@
       "skipGeocoding": false,
       "coordinates": [
         -122.72984037172797,
-        45.489338635018846
+        45.48933863501885
       ],
       "displayName": "4711 SW Shattuck Rd, Portland, OR 97221, USA",
       "placeId": "ChIJJ6cKgsALlVQRQMrw3odWZSo",
@@ -119,7 +119,7 @@
       "originalLine": "8:48 am4635 SW Shattuck Rd [E]119GRY-A(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.72974852421686,
+        -122.72974852421683,
         45.489538398980244
       ],
       "displayName": "4635 SW Shattuck Rd, Portland, OR 97221, USA",
@@ -229,8 +229,7 @@
         45.4824889
       ],
       "displayName": "5505 SW 23rd Ave, Portland, OR 97239, USA",
-      "schoolName": "Gray",
-      "neighborhood": "Southwest Portland"
+      "schoolName": "Gray"
     }
   ],
   "neighborhoods": [
@@ -239,7 +238,7 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T08:43:35.196Z",
+  "processedAt": "2026-04-25T03:31:00.338Z",
   "stats": {
     "totalStops": 15,
     "geocodedStops": 15,
@@ -1086,11 +1085,5 @@
       45.48248,
       -122.7008
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 14,
-    "errors": 0,
-    "total": 15
-  }
+  ]
 }

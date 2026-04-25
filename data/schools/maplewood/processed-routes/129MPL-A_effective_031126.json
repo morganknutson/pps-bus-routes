@@ -179,8 +179,8 @@
       "originalLine": "7:32 am3351 SW SPRING GARDEN ST [N]129MPL-A(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.71174555645433,
-        45.46352819961197
+        -122.71174555559475,
+        45.46352822943824
       ],
       "displayName": "3351 SW Spring Garden St, Portland, OR 97219, USA",
       "placeId": "ChIJb2HyAG4LlVQRTJK8OCQY-OQ",
@@ -280,7 +280,7 @@
   "neighborhoods": [
     "Southwest Portland"
   ],
-  "processedAt": "2026-03-10T15:44:42.870Z",
+  "processedAt": "2026-04-25T03:15:25.656Z",
   "stats": {
     "totalStops": 18,
     "geocodedStops": 18,

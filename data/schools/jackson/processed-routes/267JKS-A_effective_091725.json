@@ -1,26 +1,11 @@
 {
-  "id": "267JKS-A_effective_091725.pdf",
+  "id": "1q0o7jF4WauJ16SIvavVbdta5wHU4AlFT",
   "name": "267",
   "direction": "Morning",
   "filename": "267JKS-A_effective_091725.pdf",
-  "fileId": "267JKS-A_effective_091725.pdf",
+  "fileId": "1q0o7jF4WauJ16SIvavVbdta5wHU4AlFT",
   "modifiedTime": null,
   "stops": [
-    {
-      "id": "stop-2",
-      "address": "SW 52nd Ave. No Intersection [E]",
-      "time": "8:49 am",
-      "direction": "E",
-      "originalLine": "8:49 amSW 52ND AV No Intersection [E]267JKS-AStop Order #:",
-      "skipGeocoding": false,
-      "coordinates": [
-        -122.7306052,
-        45.4722396
-      ],
-      "displayName": "SW 52nd Ave, Portland, OR, USA",
-      "placeId": "ChIJ3RiGyJwLlVQRM79zD-qM54o",
-      "neighborhood": "Southwest Portland"
-    },
     {
       "id": "stop-3",
       "address": "SW 52nd Ave. & SW Nevada Ct. [SE]",
@@ -74,8 +59,8 @@
       "originalLine": "8:55 am4402 SW HUME ST [S]267JKS-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.72249581773065,
-        45.46540811746908
+        -122.72249529966552,
+        45.465408091961095
       ],
       "displayName": "4402 SW Hume St, Portland, OR 97219, USA",
       "placeId": "ChIJa0TXqXALlVQR3p2GnaYLMBI",
@@ -190,17 +175,13 @@
   "neighborhoods": [
     "Southwest Portland"
   ],
-  "processedAt": "2025-12-17T09:00:54.990Z",
+  "processedAt": "2026-04-25T03:24:44.282Z",
   "stats": {
-    "totalStops": 12,
-    "geocodedStops": 12,
+    "totalStops": 11,
+    "geocodedStops": 11,
     "failedStops": 0
   },
   "geometry": [
-    [
-      45.47224,
-      -122.73061
-    ],
     [
       45.4729,
       -122.73058
@@ -210,7 +191,7 @@
       -122.73061
     ],
     [
-      45.47064,
+      45.47132,
       -122.73061
     ],
     [
@@ -220,6 +201,10 @@
     [
       45.46997,
       -122.7306
+    ],
+    [
+      45.46992,
+      -122.73056
     ],
     [
       45.46988,
@@ -320,6 +305,10 @@
     [
       45.46542,
       -122.72266
+    ],
+    [
+      45.4654,
+      -122.72241
     ],
     [
       45.46541,
@@ -582,8 +571,8 @@
       -122.72082
     ],
     [
-      45.45366,
-      -122.72108
+      45.4538,
+      -122.72099
     ],
     [
       45.45336,
@@ -610,8 +599,8 @@
       -122.72056
     ],
     [
-      45.45219,
-      -122.72039
+      45.45218,
+      -122.7201
     ],
     [
       45.45215,
@@ -661,11 +650,5 @@
       45.45067,
       -122.71317
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 11,
-    "errors": 0,
-    "total": 12
-  }
+  ]
 }
