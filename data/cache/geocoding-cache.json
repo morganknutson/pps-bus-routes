@@ -151235,5 +151235,287 @@
       }
     ],
     "cachedAt": "2026-04-25T03:46:48.015Z"
+  },
+  "5221 n haight ave.|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.67008787909054,
+      45.56078943516618
+    ],
+    "displayName": "5221 N Haight Ave, Portland, OR 97217, USA",
+    "placeId": "ChIJu_wa3RGnlVQRrFZtHnThnZw",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "5221",
+        "short_name": "5221",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "North Haight Avenue",
+        "short_name": "N Haight Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "North Portland",
+        "short_name": "North Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97217",
+        "short_name": "97217",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2770",
+        "short_name": "2770",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-05-03T09:00:43.155Z"
+  },
+  "southwest clay street & southwest broadway|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6825152,
+      45.5140235
+    ],
+    "displayName": "SW Broadway & SW Clay St, Portland, OR 97201, USA",
+    "placeId": "EjFTVyBCcm9hZHdheSAmIFNXIENsYXkgU3QsIFBvcnRsYW5kLCBPUiA5NzIwMSwgVVNBImYiZAoUChIJvS-t7BAKlVQRC01e3xWzQVgSFAoSCb0vrewQCpVUEQtNXt8Vs0FYGhQKEgnvw5qKEAqVVBFzKvFVc1M8SRoUChIJD-8KpBAKlVQREunpUExUdqEiCg2L4yAbFUAi4LY",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest Broadway & Southwest Clay Street",
+        "short_name": "SW Broadway & SW Clay St",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97201",
+        "short_name": "97201",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-05-03T09:00:46.751Z"
+  },
+  "southwest broadway & southwest clay street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6825152,
+      45.5140235
+    ],
+    "displayName": "SW Broadway & SW Clay St, Portland, OR 97201, USA",
+    "placeId": "EjFTVyBCcm9hZHdheSAmIFNXIENsYXkgU3QsIFBvcnRsYW5kLCBPUiA5NzIwMSwgVVNBImYiZAoUChIJvS-t7BAKlVQRC01e3xWzQVgSFAoSCb0vrewQCpVUEQtNXt8Vs0FYGhQKEgnvw5qKEAqVVBFzKvFVc1M8SRoUChIJD-8KpBAKlVQREunpUExUdqEiCg2L4yAbFUAi4LY",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest Broadway & Southwest Clay Street",
+        "short_name": "SW Broadway & SW Clay St",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97201",
+        "short_name": "97201",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-05-03T09:00:49.473Z"
+  },
+  "southwest 35th avenue & southwest canby street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.7128695,
+      45.4689433
+    ],
+    "displayName": "SW 35th Ave & SW Canby St, Portland, OR 97219, USA",
+    "placeId": "EjJTVyAzNXRoIEF2ZSAmIFNXIENhbmJ5IFN0LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCV9tVoJ0C5VUEaAkf7MdCvFREhQKEglfbVaCdAuVVBGgJH-zHQrxURoUChIJ5QfrUW4LlVQR4tuXhMLc6dwaFAoSCSE-NJh0C5VUESkDSUF86IMmIgoNmQIaGxWJgNu2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest 35th Avenue & Southwest Canby Street",
+        "short_name": "SW 35th Ave & SW Canby St",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-05-03T09:00:51.940Z"
   }
 }

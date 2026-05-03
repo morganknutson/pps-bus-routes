@@ -1,15 +1,5 @@
 {
   "files": {
-    "1tfXaftDASeutcjWP0GnSVeshsaL1KAm8": {
-      "filename": "221WDS-A_effective_082625.pdf",
-      "modifiedTime": "2026-04-25T02:54:46.172Z",
-      "localPath": "221WDS-A_effective_082625.pdf"
-    },
-    "13LWKcMtlEO_uMim4SRuD_lFK8gEpU8L8": {
-      "filename": "221WDS-P_effective_082625.pdf",
-      "modifiedTime": "2026-04-25T02:54:50.445Z",
-      "localPath": "221WDS-P_effective_082625.pdf"
-    },
     "11L02_arDgYZdmW2E7JHLYx34sqwAD57L": {
       "filename": "236WDS-A_effective_102225.pdf",
       "modifiedTime": "2026-04-25T02:54:52.529Z",
@@ -29,7 +19,12 @@
       "filename": "221WDS-A_effective_042926.pdf",
       "modifiedTime": "2026-04-25T02:54:44.229Z",
       "localPath": "221WDS-A_effective_042926.pdf"
+    },
+    "1KSI5-G6f331nI8_Xt8CNXHlvL02na3uj": {
+      "filename": "221WDS-P_effective_050626.pdf",
+      "modifiedTime": "2026-04-30T16:16:20.344Z",
+      "localPath": "221WDS-P_effective_050626.pdf"
     }
   },
-  "lastSync": "2026-04-25T02:55:03.529Z"
+  "lastSync": "2026-05-03T09:00:53.288Z"
 }
