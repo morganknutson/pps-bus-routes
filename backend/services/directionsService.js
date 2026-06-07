@@ -19,6 +19,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import crypto from 'crypto';
 import { JsonCache } from '../utils/jsonCache.js';
+import { runtimeFileOptions } from '../utils/runtimePaths.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -29,8 +30,7 @@ const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_API
 const GOOGLE_DIRECTIONS_URL = 'https://maps.googleapis.com/maps/api/directions/json';
 
 // Cache file paths
-const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
-const CACHE_FILE = join(CACHE_DIR, 'directions-cache.json');
+const { filePath: CACHE_FILE, seedFilePath: CACHE_SEED_FILE } = runtimeFileOptions('cache', 'directions-cache.json');
 
 /**
  * DirectionsService class for calculating route geometry.
@@ -41,7 +41,7 @@ class DirectionsService {
     this.useGoogle = !!this.apiKey;
 
     // Use shared JsonCache utility
-    this.cache = new JsonCache(CACHE_FILE);
+    this.cache = new JsonCache(CACHE_FILE, 5000, { seedFilePath: CACHE_SEED_FILE });
     this.cache.init();
 
     // Statistics tracking

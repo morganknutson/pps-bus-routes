@@ -6,15 +6,11 @@
 
 import fs from 'fs';
 import fsPromises from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { dataPath, runtimeDataPath } from '../../utils/runtimePaths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const DATA_DIR = path.join(__dirname, '..', '..', '..', 'data');
-const JOBS_HISTORY_DIR = path.join(DATA_DIR, 'jobs-history');
-const JOBS_HISTORY_FILE = path.join(JOBS_HISTORY_DIR, 'jobs.json');
+const JOBS_HISTORY_DIR = runtimeDataPath('jobs-history');
+const JOBS_HISTORY_FILE = runtimeDataPath('jobs-history', 'jobs.json');
+const JOBS_HISTORY_SEED_FILE = dataPath('jobs-history', 'jobs.json');
 
 // Ensure directory exists
 if (!fs.existsSync(JOBS_HISTORY_DIR)) {
@@ -56,12 +52,18 @@ export class JobHistoryService {
    * Load job history from file
    */
   async loadHistory() {
-    if (!fs.existsSync(this.historyFile)) {
+    const sourceFile = fs.existsSync(this.historyFile)
+      ? this.historyFile
+      : this.historyFile !== JOBS_HISTORY_SEED_FILE && fs.existsSync(JOBS_HISTORY_SEED_FILE)
+        ? JOBS_HISTORY_SEED_FILE
+        : null;
+
+    if (!sourceFile) {
       return [];
     }
 
     try {
-      const data = await fsPromises.readFile(this.historyFile, 'utf8');
+      const data = await fsPromises.readFile(sourceFile, 'utf8');
       if (!data || data.trim() === '') return [];
       const parsed = JSON.parse(data);
       return Array.isArray(parsed) ? parsed : [];
@@ -323,8 +325,6 @@ export class JobHistoryService {
 
 // Export singleton instance
 export const jobHistoryService = new JobHistoryService();
-
-
 
 
 

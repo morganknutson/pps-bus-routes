@@ -1,8 +1,8 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs';
 import dotenv from 'dotenv';
 import { JsonCache } from '../utils/jsonCache.js';
+import { runtimeFileOptions } from '../utils/runtimePaths.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -12,8 +12,7 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 const API_KEY = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
 
 // Cache file paths
-const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
-const CACHE_FILE = join(CACHE_DIR, 'autocomplete-cache.json');
+const { filePath: CACHE_FILE, seedFilePath: CACHE_SEED_FILE } = runtimeFileOptions('cache', 'autocomplete-cache.json');
 
 import { geocodingService } from './geocodingService.js';
 
@@ -28,7 +27,7 @@ class AutocompleteService {
     this.useGoogle = !!this.apiKey;
 
     // Use shared JsonCache utility
-    this.cache = new JsonCache(CACHE_FILE);
+    this.cache = new JsonCache(CACHE_FILE, 5000, { seedFilePath: CACHE_SEED_FILE });
     this.cache.init();
     
     // 30 days TTL (addresses are stable)

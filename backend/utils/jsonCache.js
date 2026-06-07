@@ -11,9 +11,10 @@ export class JsonCache {
    * @param {string} filePath - Absolute path to the cache file
    * @param {number} saveDelayMs - Debounce delay in ms (default: 5000ms)
    */
-  constructor(filePath, saveDelayMs = 5000) {
+  constructor(filePath, saveDelayMs = 5000, options = {}) {
     this.filePath = filePath;
     this.saveDelayMs = saveDelayMs;
+    this.seedFilePath = options.seedFilePath || null;
     this.cache = new Map();
     this.isSaving = false;
     this.needsSave = false;
@@ -33,11 +34,20 @@ export class JsonCache {
         await fsPromises.mkdir(dir, { recursive: true });
       }
 
-      if (fs.existsSync(this.filePath)) {
-        const content = await fsPromises.readFile(this.filePath, 'utf8');
-        const data = JSON.parse(content);
-        this.cache = new Map(Object.entries(data));
-        console.log(`[JsonCache] Loaded ${this.cache.size} entries from ${path.basename(this.filePath)}`);
+      const cacheData = {};
+      const sourceFiles = [
+        this.seedFilePath && fs.existsSync(this.seedFilePath) ? this.seedFilePath : null,
+        fs.existsSync(this.filePath) ? this.filePath : null,
+      ].filter(Boolean);
+
+      for (const sourceFile of sourceFiles) {
+        const content = await fsPromises.readFile(sourceFile, 'utf8');
+        Object.assign(cacheData, JSON.parse(content));
+      }
+
+      if (sourceFiles.length > 0) {
+        this.cache = new Map(Object.entries(cacheData));
+        console.log(`[JsonCache] Loaded ${this.cache.size} entries from ${sourceFiles.map(file => path.basename(file)).join(', ')}`);
       }
     } catch (error) {
       console.warn(`[JsonCache] Failed to load cache from ${this.filePath}:`, error.message);
@@ -134,7 +144,5 @@ export class JsonCache {
     return this.cache.size;
   }
 }
-
-
 
 

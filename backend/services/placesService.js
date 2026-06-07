@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import crypto from 'crypto';
 import { JsonCache } from '../utils/jsonCache.js';
+import { runtimeFileOptions } from '../utils/runtimePaths.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -12,8 +13,7 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 const API_KEY = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
 
 // Cache file paths
-const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
-const CACHE_FILE = join(CACHE_DIR, 'places-cache.json');
+const { filePath: CACHE_FILE, seedFilePath: CACHE_SEED_FILE } = runtimeFileOptions('cache', 'places-cache.json');
 
 if (!API_KEY) {
   console.warn('⚠️  GOOGLE_API_KEY not found in environment variables');
@@ -28,7 +28,7 @@ class PlacesService {
     this.apiKey = apiKey || API_KEY;
 
     // Use shared JsonCache utility
-    this.cache = new JsonCache(CACHE_FILE);
+    this.cache = new JsonCache(CACHE_FILE, 5000, { seedFilePath: CACHE_SEED_FILE });
     this.cache.init();
   }
 

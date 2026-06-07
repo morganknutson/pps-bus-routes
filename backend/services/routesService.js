@@ -13,6 +13,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { JsonCache } from '../utils/jsonCache.js';
 import crypto from 'crypto';
+import { runtimeFileOptions } from '../utils/runtimePaths.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -21,7 +22,7 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 
 const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_API_KEY;
 const ROUTES_MATRIX_URL = 'https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix';
-const CACHE_FILE = join(__dirname, '..', '..', 'data', 'cache', 'routes-matrix-cache.json');
+const { filePath: CACHE_FILE, seedFilePath: CACHE_SEED_FILE } = runtimeFileOptions('cache', 'routes-matrix-cache.json');
 
 /**
  * RoutesService class for matrix-based distance calculations.
@@ -32,7 +33,7 @@ class RoutesService {
     this.useGoogle = !!this.apiKey;
     
     // Initialize Cache
-    this.cache = new JsonCache(CACHE_FILE);
+    this.cache = new JsonCache(CACHE_FILE, 5000, { seedFilePath: CACHE_SEED_FILE });
     this.cache.init();
     
     if (!this.useGoogle) {

@@ -28,6 +28,7 @@ import { expandAddressForGeocoding } from '../utils/formatAddress.js';
 import { neighborhoodService } from './neighborhoodService.js';
 import { streetGeometryService } from './streetGeometryService.js';
 import { JsonCache } from '../utils/jsonCache.js';
+import { runtimeFileOptions } from '../utils/runtimePaths.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -38,8 +39,7 @@ const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_API
 const GOOGLE_GEOCODING_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
 // Cache file paths
-const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
-const CACHE_FILE = join(CACHE_DIR, 'geocoding-cache.json');
+const { filePath: CACHE_FILE, seedFilePath: CACHE_SEED_FILE } = runtimeFileOptions('cache', 'geocoding-cache.json');
 
 // TEMPORARILY DISABLED: Nominatim fallback
 const ENABLE_NOMINATIM_FALLBACK = false;
@@ -56,7 +56,7 @@ class GeocodingService {
     this.useGoogle = !!this.apiKey;
 
     // Use shared JsonCache utility
-    this.cache = new JsonCache(CACHE_FILE);
+    this.cache = new JsonCache(CACHE_FILE, 5000, { seedFilePath: CACHE_SEED_FILE });
     this.cache.init();
 
     if (!this.useGoogle) {

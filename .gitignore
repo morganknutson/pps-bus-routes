@@ -30,3 +30,4 @@ data/data/
 data/scheduler-state.json
 data/weekly-sync-state.json
 data/weekly-sync-lock.json
+runtime-data/

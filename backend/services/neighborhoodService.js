@@ -38,6 +38,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
 import fsPromises from 'fs/promises';
+import { dataPath, runtimeDataPath } from '../utils/runtimePaths.js';
 
 // Load .env from backend directory
 const __filename = fileURLToPath(import.meta.url);
@@ -48,8 +49,9 @@ const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_API
 const GOOGLE_REVERSE_GEOCODING_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
 // Cache file path
-const CACHE_DIR = join(__dirname, '..', '..', 'data', 'cache');
-const CACHE_FILE = join(CACHE_DIR, 'neighborhood-cache.json');
+const CACHE_DIR = runtimeDataPath('cache');
+const CACHE_FILE = runtimeDataPath('cache', 'neighborhood-cache.json');
+const CACHE_SEED_FILE = dataPath('cache', 'neighborhood-cache.json');
 
 /**
  * NeighborhoodService class for reverse geocoding coordinates to neighborhoods.
@@ -102,9 +104,18 @@ class NeighborhoodService {
    */
   async loadCache() {
     try {
-      if (fs.existsSync(CACHE_FILE)) {
-        const content = await fsPromises.readFile(CACHE_FILE, 'utf8');
-        const cacheData = JSON.parse(content);
+      const cacheData = {};
+      const sourceFiles = [
+        CACHE_FILE !== CACHE_SEED_FILE && fs.existsSync(CACHE_SEED_FILE) ? CACHE_SEED_FILE : null,
+        fs.existsSync(CACHE_FILE) ? CACHE_FILE : null,
+      ].filter(Boolean);
+
+      for (const sourceFile of sourceFiles) {
+        const content = await fsPromises.readFile(sourceFile, 'utf8');
+        Object.assign(cacheData, JSON.parse(content));
+      }
+
+      if (sourceFiles.length > 0) {
         this.cache = new Map(Object.entries(cacheData));
         console.log(`[NeighborhoodService] Loaded ${this.cache.size} cached neighborhoods`);
       }
