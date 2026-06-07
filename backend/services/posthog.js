@@ -1,9 +1,21 @@
 import { PostHog } from 'posthog-node';
 
-const client = new PostHog(process.env.POSTHOG_API_KEY, {
-  host: process.env.POSTHOG_HOST,
-  enableExceptionAutocapture: true,
-});
+const noopClient = {
+  capture() {},
+  captureException() {},
+  async shutdown() {},
+};
+
+const client = process.env.POSTHOG_API_KEY
+  ? new PostHog(process.env.POSTHOG_API_KEY, {
+      host: process.env.POSTHOG_HOST,
+      enableExceptionAutocapture: true,
+    })
+  : noopClient;
+
+if (!process.env.POSTHOG_API_KEY) {
+  console.warn('[PostHog] POSTHOG_API_KEY is not configured; analytics disabled');
+}
 
 /**
  * Extract a stable distinct ID from an Express request.
