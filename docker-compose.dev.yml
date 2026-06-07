@@ -22,6 +22,7 @@ services:
       - NODE_ENV=development
       - PORT=3005
       - ENABLE_SCHEDULER=true
+      - ENABLE_SCHEDULER_CATCHUP=true
       - ENABLE_GIT_PUBLISH=true
       - GIT_PUBLISH_PUSH=true
       - GITHUB_TOKEN=${GITHUB_TOKEN:-}

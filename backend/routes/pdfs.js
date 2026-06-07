@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { posthog, getDistinctId } from '../services/posthog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,6 +39,15 @@ router.get('/:schoolId/:filename', (req, res) => {
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
     
+    posthog.capture({
+      distinctId: getDistinctId(req),
+      event: 'pdf_served',
+      properties: {
+        school_id: schoolId,
+        filename,
+      },
+    });
+
     // Stream the file
     const fileStream = fs.createReadStream(pdfPath);
     fileStream.pipe(res);

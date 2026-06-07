@@ -28,7 +28,7 @@ export { JobHistoryService, jobHistoryService } from './JobHistoryService.js';
 export { JOB_TYPES, JOB_STATUS, JOB_PRIORITY } from './jobTypes.js';
 
 // Clean up old jobs periodically (every 24 hours)
-setInterval(() => {
+const cleanupInterval = setInterval(() => {
   jobHistoryService.cleanup(30); // Keep 30 days of history
 }, 24 * 60 * 60 * 1000); // 24 hours
-
+cleanupInterval.unref?.();

@@ -1,5 +1,5 @@
 # Stage 1: Build the frontend
-FROM node:18-alpine AS frontend-builder
+FROM node:20-alpine AS frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install
@@ -7,7 +7,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Setup the backend
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /app
 
 # Install production dependencies for the backend
@@ -31,7 +31,7 @@ ENV PORT=3005
 EXPOSE 3005
 
 # Healthcheck (used by Coolify/Docker to detect unhealthy containers)
-# Uses Node's built-in fetch (Node 18+) so we don't need curl/wget in the image.
+# Uses Node's built-in fetch so we don't need curl/wget in the image.
 HEALTHCHECK --interval=30s --timeout=3s --start-period=20s --retries=3 \
   CMD ["node","-e","fetch('http://127.0.0.1:'+(process.env.PORT||3005)+'/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
 

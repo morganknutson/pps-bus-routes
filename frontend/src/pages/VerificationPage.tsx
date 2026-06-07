@@ -65,6 +65,7 @@ export function VerificationPage() {
     configured?: boolean;
     disabledReason?: string | null;
     running?: boolean;
+    stale?: boolean;
     lastRun: string | null;
     nextRun: string | null;
   } | null>(null);
@@ -1495,7 +1496,9 @@ export function VerificationPage() {
                 borderRadius: '999px',
                 border: '1px solid var(--border-color-primary)',
               }}>
-                <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Weekly Sync</span>
+                <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                  {schedulerStatus.stale ? 'Weekly Sync Stale' : 'Weekly Sync'}
+                </span>
                 <button
                   onClick={handleToggleScheduler}
                   disabled={togglingScheduler}
@@ -1505,12 +1508,12 @@ export function VerificationPage() {
                     height: '24px',
                     borderRadius: '12px',
                     border: 'none',
-                    backgroundColor: schedulerStatus.enabled ? '#22c55e' : 'var(--border-color-primary)',
+                    backgroundColor: schedulerStatus.stale ? '#eab308' : schedulerStatus.enabled ? '#22c55e' : 'var(--border-color-primary)',
                     cursor: togglingScheduler ? 'wait' : 'pointer',
                     transition: 'background-color 0.2s',
                     padding: 0,
                   }}
-                  title={schedulerStatus.enabled ? 'Click to pause weekly sync' : 'Click to enable weekly sync'}
+                  title={schedulerStatus.stale ? 'Weekly sync is stale; run scheduled pipeline' : schedulerStatus.enabled ? 'Click to pause weekly sync' : 'Click to enable weekly sync'}
                 >
                   <span style={{
                     position: 'absolute',

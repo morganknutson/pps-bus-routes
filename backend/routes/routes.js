@@ -4,6 +4,7 @@
 import express from 'express';
 import { directionsService } from '../services/directionsService.js';
 import { routesService } from '../services/routesService.js';
+import { posthog, getDistinctId } from '../services/posthog.js';
 
 const router = express.Router();
 
@@ -136,6 +137,18 @@ router.post('/calculate', async (req, res) => {
 
     if (result.success) {
       console.log(`[Routes] ✅ Route calculated successfully (${responseTime}ms)`);
+      posthog.capture({
+        distinctId: getDistinctId(req),
+        event: 'route_calculated',
+        properties: {
+          waypoint_count: waypoints.length,
+          coordinate_count: result.coordinates?.length || 0,
+          provider: result.provider || 'unknown',
+          response_time_ms: responseTime,
+          batched: result.batched || false,
+          failed_segments: result.failedSegments || 0,
+        },
+      });
       res.json({
         coordinates: result.coordinates, // [lat, lng][] format for Leaflet
         distance: result.distance,
@@ -152,7 +165,7 @@ router.post('/calculate', async (req, res) => {
       });
     } else {
       console.error(`[Routes] ❌ Route calculation failed: ${result.error}`);
-      res.status(500).json({ 
+      res.status(500).json({
         error: result.error || 'Failed to calculate route',
         status: result.status,
         responseTime,
@@ -192,6 +205,15 @@ router.post('/calculate-walking', async (req, res) => {
     
     if (matrixResult.success) {
       const responseTime = Date.now() - startTime;
+      posthog.capture({
+        distinctId: getDistinctId(req),
+        event: 'walking_distance_calculated',
+        properties: {
+          stop_count: candidates.length,
+          successful_count: matrixResult.results.filter(r => !!r).length,
+          response_time_ms: responseTime,
+        },
+      });
       res.json({
         results: matrixResult.results.map((res, index) => ({
           index,

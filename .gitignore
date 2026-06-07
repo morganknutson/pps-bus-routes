@@ -11,6 +11,10 @@ coverage/
 logs/
 .pm2/
 
+# Local agent/wizard artifacts
+.claude/
+posthog-setup-report.md
+
 # IDE
 .vscode/
 .idea/
@@ -22,3 +26,7 @@ Thumbs.db
 
 # Data files are now included in repository
 # Only exclude logs (can be large and regenerated)
+data/data/
+data/scheduler-state.json
+data/weekly-sync-state.json
+data/weekly-sync-lock.json

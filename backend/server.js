@@ -21,6 +21,7 @@ import { pdfsRouter } from './routes/pdfs.js';
 import { serversRouter } from './routes/servers.js';
 import { workerService } from './services/jobQueue/index.js';
 import logger from './services/logger.js';
+import { posthog } from './services/posthog.js';
 
 dotenv.config();
 
@@ -159,6 +160,10 @@ if (process.env.NODE_ENV === 'production') {
 // Global error handler middleware (must be after all routes)
 app.use((err, req, res, next) => {
   logger.error('Unhandled error:', err);
+  posthog.captureException(err, req.ip || 'anonymous', {
+    method: req.method,
+    path: req.path,
+  });
   res.status(500).json({
     error: 'Internal server error',
     message: err.message || 'An unexpected error occurred'
@@ -182,6 +187,7 @@ process.on('SIGTERM', async () => {
   } catch (error) {
     logger.error('Error stopping worker service:', error);
   }
+  await posthog.shutdown();
   process.exit(0);
 });
 
@@ -193,6 +199,7 @@ process.on('SIGINT', async () => {
   } catch (error) {
     logger.error('Error stopping worker service:', error);
   }
+  await posthog.shutdown();
   process.exit(0);
 });
 

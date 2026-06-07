@@ -1,6 +1,7 @@
 import express from 'express';
 import { geocodingService } from '../services/geocodingService.js';
 import { autocompleteService } from '../services/autocompleteService.js';
+import { posthog, getDistinctId } from '../services/posthog.js';
 
 const router = express.Router();
 
@@ -16,15 +17,34 @@ router.post('/address', async (req, res) => {
     const result = await geocodingService.geocodeAddress(address, city, state);
 
     if (result.success) {
+      posthog.capture({
+        distinctId: getDistinctId(req),
+        event: 'address_geocoded',
+        properties: {
+          city,
+          state,
+          provider: result.provider || 'unknown',
+        },
+      });
       res.json({
         address,
         coordinates: result.coordinates, // [lng, lat] - GeoJSON format (internal standard)
         displayName: result.displayName,
       });
     } else {
+      posthog.capture({
+        distinctId: getDistinctId(req),
+        event: 'address_geocode_failed',
+        properties: {
+          city,
+          state,
+          error: result.error || 'Address not found',
+        },
+      });
       res.status(404).json({ error: result.error || 'Address not found' });
     }
   } catch (error) {
+    posthog.captureException(error, getDistinctId(req), { endpoint: 'POST /api/geocode/address' });
     console.error('Geocoding error:', error);
     res.status(500).json({ error: error.message });
   }

@@ -6,6 +6,7 @@
 import express from 'express';
 import { pdfSyncJobQueue } from '../services/jobQueue/index.js';
 import { JOB_TYPES, JOB_STATUS } from '../services/jobQueue/jobTypes.js';
+import { posthog, getDistinctId } from '../services/posthog.js';
 
 const router = express.Router();
 
@@ -160,6 +161,13 @@ router.post('/:jobId/cancel', async (req, res) => {
       return res.status(404).json({ error: 'Job not found or cannot be cancelled' });
     }
 
+    posthog.capture({
+      distinctId: getDistinctId(req),
+      event: 'job_cancelled',
+      properties: {
+        job_id: jobId,
+      },
+    });
     res.json({ success: true, message: 'Job cancelled' });
   } catch (error) {
     console.error('Error cancelling job:', error);

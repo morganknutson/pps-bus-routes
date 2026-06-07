@@ -101,6 +101,8 @@ Ready to deploy? Check out these guides:
 - **[QUICK_DEPLOY.md](./docs/deployment/QUICK_DEPLOY.md)**: Quick guide to deploy (Railway-focused)
 - **[DEPLOYMENT.md](./docs/deployment/DEPLOYMENT.md)**: Comprehensive deployment guide (multiple options)
 
+Generated bus route data is refreshed by `.github/workflows/weekly-sync.yml`. The workflow runs the backend weekly sync, commits generated `data/...` changes to `main`, and can call a Makserve deploy hook via the optional `MAKSERVE_DEPLOY_WEBHOOK_URL` secret.
+
 The app is production-ready and can be deployed to:
 - **Railway** (recommended for beginners) - Free tier available
 - **Render** - Free tier available
@@ -219,4 +221,3 @@ sequenceDiagram
 ## License
 
 MIT
-

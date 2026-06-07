@@ -396,15 +396,20 @@ Output: { address: "SW Patton & Vista & Georgian [NW]", time: "8:35 am" }
 
 ### SchedulerService (`schedulerService.js`)
 
-**Purpose**: Automated daily PDF sync
+**Purpose**: Automated weekly PDF sync and manual sync controls
 
 **Key Functions**:
-- `startScheduler()` - Start cron job (2am daily)
+- `startScheduler()` - Start cron job (Sundays at 2am PT)
 - `stopScheduler()` - Stop cron job
 - `toggleScheduler(enabled)` - Enable/disable
 - `runCheck()` - Manual trigger
 
-**Schedule**: Daily at 2am Pacific Time
+**Schedule**: Sundays at 2am Pacific Time
+
+**Reliability**:
+- GitHub Actions workflow `.github/workflows/weekly-sync.yml` is the durable weekly scheduler for generated route data.
+- The in-app scheduler is retained for the admin UI and as a local/dev backup.
+- `ENABLE_SCHEDULER_CATCHUP=true` lets an enabled in-app scheduler run a missed sync after startup when the last successful run is stale.
 
 ---
 
@@ -783,17 +788,15 @@ const PORTLAND_BOUNDS = {
 ## Deployment
 
 ### Overview
-The deployment process is automated through a shell script that handles stopping servers, updating code, rebuilding the frontend, and restarting the production server.
+Generated route data is published by the weekly sync workflow. Makserve or the active deployment platform should deploy from pushes to `main`; an optional `MAKSERVE_DEPLOY_WEBHOOK_URL` secret can trigger Makserve after a generated-data commit.
 
 ### Deployment Script (`deploy.sh`)
 **Purpose**: Centralized deployment orchestration.
 
 **Pipeline Steps**:
-1. **Stop Servers**: Identifies and terminates existing `server.js` processes.
-2. **Pull Changes**: Fetches and pulls the latest code from the `main` branch.
-3. **Build Frontend**: Executes `npm run build` in the `frontend` directory.
-4. **Restart Servers**: Starts the production server using `npm run start:production`.
-5. **Verification**: Checks if the server is running and responding to API requests.
+1. **Pull Changes**: Fetches and pulls the latest code from the `main` branch.
+2. **Build Frontend**: Executes `npm run build` in the `frontend` directory.
+3. **Verification**: Confirms build artifacts exist.
 
 ### Server Management
 - **Production Server**: Started with `npm run start:production`.
@@ -814,5 +817,4 @@ The deployment process is automated through a shell script that handles stopping
 ---
 
 *Last updated: January 2026*
-
 

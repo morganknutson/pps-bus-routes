@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { pdfSyncJobQueue } from '../services/jobQueue/index.js';
 import { JOB_PRIORITY } from '../services/jobQueue/jobTypes.js';
+import { posthog, getDistinctId } from '../services/posthog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -140,6 +141,14 @@ router.post('/fetch/:schoolId', async (req, res) => {
     }
 
     clearTimeout(timeout);
+    posthog.capture({
+      distinctId: getDistinctId(req),
+      event: 'pdf_sync_queued',
+      properties: {
+        school_id: schoolId,
+        job_id: jobId,
+      },
+    });
     res.json({
       jobId,
       schoolId,

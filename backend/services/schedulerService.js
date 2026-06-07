@@ -16,6 +16,9 @@ const SCHEDULER_STATE_FILE = path.join(DATA_DIR, 'scheduler-state.json');
 const CRON_EXPRESSION = '0 2 * * 0';
 const TIMEZONE = 'America/Los_Angeles';
 const SCHEDULE_LABEL = 'Sundays @ 2am PT';
+const DEFAULT_CATCH_UP_AFTER_MS = 8 * 24 * 60 * 60 * 1000;
+const DEFAULT_CATCH_UP_SKIP_WITHIN_MS = 6 * 60 * 60 * 1000;
+const STARTUP_CATCH_UP_DELAY_MS = 5000;
 
 let schedulerState = {
   enabled: false,
@@ -67,6 +70,19 @@ function getSchedulerConfig() {
   return { configured: true, disabledReason: null };
 }
 
+function parsePositiveInteger(value, fallback) {
+  const parsed = parseInt(value || '', 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function getCatchUpConfig() {
+  return {
+    enabled: process.env.ENABLE_SCHEDULER_CATCHUP === 'true',
+    afterMs: parsePositiveInteger(process.env.SCHEDULER_CATCHUP_AFTER_MS, DEFAULT_CATCH_UP_AFTER_MS),
+    skipWithinMs: parsePositiveInteger(process.env.SCHEDULER_CATCHUP_SKIP_WITHIN_MS, DEFAULT_CATCH_UP_SKIP_WITHIN_MS),
+  };
+}
+
 function getTimeZoneParts(date, timeZone) {
   const formatter = new Intl.DateTimeFormat('en-US', {
     timeZone,
@@ -112,8 +128,7 @@ function addDaysToDateParts(parts, days) {
   };
 }
 
-function calculateNextSundayRun() {
-  const now = new Date();
+function calculateNextSundayRun(now = new Date()) {
   const localParts = getTimeZoneParts(now, TIMEZONE);
   const localDayOfWeek = new Date(Date.UTC(localParts.year, localParts.month - 1, localParts.day)).getUTCDay();
   let candidateDate = addDaysToDateParts(localParts, (7 - localDayOfWeek) % 7);
@@ -125,6 +140,58 @@ function calculateNextSundayRun() {
   }
 
   return candidate.toISOString();
+}
+
+function getLastRunAgeMs(now = new Date()) {
+  if (!schedulerState.lastRun) return null;
+  const lastRunTime = new Date(schedulerState.lastRun).getTime();
+  if (!Number.isFinite(lastRunTime)) return null;
+  return now.getTime() - lastRunTime;
+}
+
+function getStaleStatus(now = new Date()) {
+  const catchUpConfig = getCatchUpConfig();
+  const lastRunAgeMs = getLastRunAgeMs(now);
+  const hasSuccessfulRun = schedulerState.lastRunStatus === 'success';
+  const overdue = lastRunAgeMs === null || lastRunAgeMs > catchUpConfig.afterMs;
+  const stale = overdue || !hasSuccessfulRun;
+
+  return {
+    stale,
+    overdue,
+    lastRunAgeMs,
+    staleAfterMs: catchUpConfig.afterMs,
+  };
+}
+
+function getCatchUpDecision(now = new Date()) {
+  const schedulerConfig = getSchedulerConfig();
+  const catchUpConfig = getCatchUpConfig();
+  const staleStatus = getStaleStatus(now);
+  const nextRun = calculateNextSundayRun(now);
+  const nextRunInMs = new Date(nextRun).getTime() - now.getTime();
+
+  if (!catchUpConfig.enabled) {
+    return { shouldRun: false, reason: 'catch-up disabled', nextRun, nextRunInMs };
+  }
+
+  if (!schedulerState.enabled || !schedulerConfig.configured) {
+    return { shouldRun: false, reason: schedulerConfig.disabledReason || 'scheduler disabled', nextRun, nextRunInMs };
+  }
+
+  if (activeRun) {
+    return { shouldRun: false, reason: 'sync already running', nextRun, nextRunInMs };
+  }
+
+  if (!staleStatus.overdue) {
+    return { shouldRun: false, reason: 'last run is recent', nextRun, nextRunInMs };
+  }
+
+  if (nextRunInMs > 0 && nextRunInMs <= catchUpConfig.skipWithinMs) {
+    return { shouldRun: false, reason: 'next scheduled run is soon', nextRun, nextRunInMs };
+  }
+
+  return { shouldRun: true, reason: 'last successful run is stale', nextRun, nextRunInMs };
 }
 
 function startScheduler() {
@@ -139,7 +206,7 @@ function startScheduler() {
   if (!cronJob) {
     cronJob = cron.schedule(CRON_EXPRESSION, () => {
       if (schedulerState.enabled) {
-        runCheck();
+        runCheck('cron');
       }
     }, {
       scheduled: false,
@@ -165,7 +232,7 @@ function updateState(update) {
   saveState();
 }
 
-function runCheck() {
+function runCheck(trigger = 'manual') {
   if (activeRun) {
     return {
       accepted: true,
@@ -179,6 +246,7 @@ function runCheck() {
     lastRun: startedAt,
     lastRunStatus: 'running',
     lastRunError: null,
+    lastRunTrigger: trigger,
   });
 
   activeRun = Promise.resolve()
@@ -203,7 +271,7 @@ function runCheck() {
       activeRun = null;
     });
 
-  console.log('[Scheduler] Weekly sync started at', startedAt);
+  console.log(`[Scheduler] Weekly sync started at ${startedAt} (${trigger})`);
   return {
     accepted: true,
     alreadyRunning: false,
@@ -213,6 +281,9 @@ function runCheck() {
 
 function getStatus() {
   const config = getSchedulerConfig();
+  const catchUpConfig = getCatchUpConfig();
+  const staleStatus = getStaleStatus();
+  const catchUpDecision = getCatchUpDecision();
   const cronRunning = !!cronJob && schedulerState.enabled && config.configured;
 
   return {
@@ -223,6 +294,13 @@ function getStatus() {
     cronRunning,
     schedule: SCHEDULE_LABEL,
     nextRun: cronRunning ? calculateNextSundayRun() : null,
+    stale: staleStatus.stale,
+    overdue: staleStatus.overdue,
+    lastRunAgeMs: staleStatus.lastRunAgeMs,
+    staleAfterMs: staleStatus.staleAfterMs,
+    catchUpEnabled: catchUpConfig.enabled,
+    catchUpSkipWithinMs: catchUpConfig.skipWithinMs,
+    catchUpDecision: catchUpDecision.reason,
   };
 }
 
@@ -230,12 +308,34 @@ function toggleScheduler(enabled) {
   if (enabled) {
     const started = startScheduler();
     updateState({ enabled: started });
+    if (started) {
+      scheduleStartupCatchUp();
+    }
   } else {
     stopScheduler();
     updateState({ enabled: false });
   }
 
   return getStatus();
+}
+
+function scheduleStartupCatchUp() {
+  const decision = getCatchUpDecision();
+  if (!decision.shouldRun) {
+    console.log(`[Scheduler] Startup catch-up skipped: ${decision.reason}`);
+    return;
+  }
+
+  console.log(`[Scheduler] Startup catch-up scheduled: ${decision.reason}`);
+  const timer = setTimeout(() => {
+    const latestDecision = getCatchUpDecision();
+    if (!latestDecision.shouldRun) {
+      console.log(`[Scheduler] Startup catch-up cancelled: ${latestDecision.reason}`);
+      return;
+    }
+    runCheck('startup_catch_up');
+  }, STARTUP_CATCH_UP_DELAY_MS);
+  timer.unref?.();
 }
 
 if (!fs.existsSync(DATA_DIR)) {
@@ -245,6 +345,7 @@ if (!fs.existsSync(DATA_DIR)) {
 loadState();
 if (schedulerState.enabled) {
   startScheduler();
+  scheduleStartupCatchUp();
 }
 
 export {

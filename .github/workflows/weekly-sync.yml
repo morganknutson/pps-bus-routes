@@ -1,0 +1,88 @@
+name: Weekly Route Data Sync
+
+on:
+  schedule:
+    # GitHub cron is UTC. This runs Sunday morning around the existing 2am PT window.
+    - cron: '0 10 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-route-data-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync and publish route data
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      NODE_ENV: production
+      ENABLE_WEEKLY_SYNC: 'true'
+      ENABLE_GIT_PUBLISH: 'true'
+      GIT_PUBLISH_PUSH: 'true'
+      GIT_AUTHOR_NAME: PPS Bus Routes Bot
+      GIT_AUTHOR_EMAIL: automation@portlandschoolbuses.com
+      GIT_COMMITTER_NAME: PPS Bus Routes Bot
+      GIT_COMMITTER_EMAIL: automation@portlandschoolbuses.com
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY || secrets.GOOGLE_MAPS_API_KEY }}
+      GITHUB_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN || github.token }}
+      GH_TOKEN: ${{ secrets.SYNC_GITHUB_TOKEN || github.token }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      SMTP_FROM: ${{ secrets.SMTP_FROM }}
+      ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
+      POSTHOG_HOST: ${{ secrets.POSTHOG_HOST }}
+      MAKSERVE_DEPLOY_WEBHOOK_URL: ${{ secrets.MAKSERVE_DEPLOY_WEBHOOK_URL }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Capture starting commit
+        id: before
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Validate required secrets
+        run: |
+          test -n "$GOOGLE_MAPS_API_KEY" || { echo "::error::GOOGLE_MAPS_API_KEY secret is required"; exit 1; }
+          test -n "$GITHUB_TOKEN" || { echo "::error::GITHUB_TOKEN or SYNC_GITHUB_TOKEN is required"; exit 1; }
+
+      - name: Run weekly sync
+        working-directory: backend
+        run: npm run sync:weekly
+
+      - name: Detect published data commit
+        id: changes
+        run: |
+          after_sha="$(git rev-parse HEAD)"
+          echo "sha=$after_sha" >> "$GITHUB_OUTPUT"
+          if [ "$after_sha" != "${{ steps.before.outputs.sha }}" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Trigger Makserve deploy hook
+        if: ${{ success() && steps.changes.outputs.changed == 'true' && env.MAKSERVE_DEPLOY_WEBHOOK_URL != '' }}
+        run: curl -fsS -X POST "$MAKSERVE_DEPLOY_WEBHOOK_URL"

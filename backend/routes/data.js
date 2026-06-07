@@ -4,6 +4,7 @@ import fsSync from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { invalidateRouteStatsCache } from './schools.js';
+import { posthog, getDistinctId } from '../services/posthog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -157,6 +158,15 @@ router.put('/routes/:routeId/stops/:stopId', async (req, res) => {
       invalidateRouteStatsCache(schoolId);
     }
 
+    posthog.capture({
+      distinctId: getDistinctId(req),
+      event: 'stop_coordinates_updated',
+      properties: {
+        route_id: routeId,
+        stop_id: stopId,
+        school_id: schoolId || null,
+      },
+    });
     const duration = Date.now() - startTime;
     console.log(`[PUT /api/data/routes/${routeId}/stops/${stopId}] Updated stop (${duration}ms)`);
     res.json({ success: true, stop });

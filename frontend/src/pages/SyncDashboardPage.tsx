@@ -61,6 +61,11 @@ interface SchedulerStatus {
     running?: boolean;
     cronRunning?: boolean;
     schedule?: string;
+    stale?: boolean;
+    lastRunAgeMs?: number | null;
+    staleAfterMs?: number;
+    catchUpEnabled?: boolean;
+    catchUpDecision?: string;
 }
 
 interface EmailTestResult {
@@ -203,11 +208,15 @@ export function SyncDashboardPage() {
     const syncIsRunning = isRunning || !!schedulerStatus?.running || !!syncState?.running || syncState?.lastRunStatus === 'running';
     const schedulerLabel = schedulerStatus?.configured === false
         ? 'Not configured'
+        : schedulerStatus?.stale
+            ? 'Stale'
         : schedulerStatus?.enabled
             ? 'Active'
             : 'Paused';
     const schedulerDotColor = schedulerStatus?.configured === false
         ? '#ef4444'
+        : schedulerStatus?.stale
+            ? '#eab308'
         : schedulerStatus?.enabled
             ? '#22c55e'
             : '#6b7280';
@@ -223,6 +232,12 @@ export function SyncDashboardPage() {
                 {error && (
                     <div style={{ padding: '1rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', marginBottom: '1rem', color: '#dc2626' }}>
                         {error}
+                    </div>
+                )}
+
+                {schedulerStatus?.stale && !syncIsRunning && (
+                    <div style={{ padding: '1rem', backgroundColor: '#fefce8', border: '1px solid #fde68a', borderRadius: '8px', marginBottom: '1rem', color: '#854d0e' }}>
+                        Last weekly sync is stale. {schedulerStatus.catchUpEnabled ? `Catch-up status: ${schedulerStatus.catchUpDecision || 'pending'}.` : 'Use Run Now or enable scheduler catch-up.'}
                     </div>
                 )}
 
@@ -292,6 +307,10 @@ export function SyncDashboardPage() {
                                 <div>
                                     <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '4px' }}>Next Run</div>
                                     <div style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{formatDate(schedulerStatus?.nextRun || null)}</div>
+                                </div>
+                                <div>
+                                    <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '4px' }}>Catch-Up</div>
+                                    <div style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{schedulerStatus?.catchUpEnabled ? 'Enabled' : 'Disabled'}</div>
                                 </div>
                             </div>
                         </div>

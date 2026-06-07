@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { searchSchool, getSchoolTypes } from '../services/placesService.js';
 import { schoolBoundaryService } from '../services/schoolBoundaryService.js';
+import { posthog, getDistinctId } from '../services/posthog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -171,6 +172,16 @@ router.get('/assigned', async (req, res) => {
     }
 
     const assigned = schoolBoundaryService.getAssignedSchools(latitude, longitude);
+    posthog.capture({
+      distinctId: getDistinctId(req),
+      event: 'assigned_schools_found',
+      properties: {
+        school_count: assigned.length,
+        has_elementary: assigned.some(s => s.schoolTypes?.includes('elementary')),
+        has_middle: assigned.some(s => s.schoolTypes?.includes('middle')),
+        has_high: assigned.some(s => s.schoolTypes?.includes('high')),
+      },
+    });
     res.json({ assigned });
   } catch (error) {
     console.error('Error getting assigned schools:', error);
@@ -350,6 +361,16 @@ router.post('/', async (req, res) => {
     // Invalidate cache for this school
     routeStatsCache.delete(id);
 
+    posthog.capture({
+      distinctId: getDistinctId(req),
+      event: 'school_created',
+      properties: {
+        school_id: id,
+        school_name: name,
+        has_drive_link: !!driveLink,
+        has_school_page_link: !!schoolPageLink,
+      },
+    });
     res.json({ school: newSchool });
   } catch (error) {
     console.error('Error creating school:', error);
@@ -386,6 +407,16 @@ router.put('/:schoolId', async (req, res) => {
     schools[schoolIndex] = updatedSchool;
     await fs.writeFile(SCHOOLS_FILE, JSON.stringify(schools, null, 2));
 
+    posthog.capture({
+      distinctId: getDistinctId(req),
+      event: 'school_updated',
+      properties: {
+        school_id: schoolId,
+        updated_fields: Object.keys({ name, schoolPageLink, driveLink, address, coordinates }).filter(
+          k => ({ name, schoolPageLink, driveLink, address, coordinates })[k] !== undefined
+        ),
+      },
+    });
     res.json({ school: updatedSchool });
   } catch (error) {
     console.error('Error updating school:', error);
@@ -577,6 +608,13 @@ router.delete('/:schoolId', async (req, res) => {
     // Invalidate cache for this school
     routeStatsCache.delete(schoolId);
 
+    posthog.capture({
+      distinctId: getDistinctId(req),
+      event: 'school_deleted',
+      properties: {
+        school_id: schoolId,
+      },
+    });
     res.json({ success: true });
   } catch (error) {
     console.error('Error deleting school:', error);
