@@ -8,7 +8,7 @@ if (!API_KEY) {
   process.exit(1);
 }
 
-console.log('🔑 API Key found:', API_KEY.substring(0, 10) + '...');
+console.log('🔑 API key configured');
 console.log('\n🧪 Testing Google Places API...\n');
 
 // Test 1: Places API (New) - Text Search
@@ -191,4 +191,3 @@ runTests().then(success => {
   console.error('Fatal error:', error);
   process.exit(1);
 });
-
