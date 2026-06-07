@@ -1,0 +1,33 @@
+{
+  "id": "18yy8RZCwGEiVLmxny6E9FUMPVCz_IpUJ",
+  "name": "250",
+  "direction": "Afternoon",
+  "filename": "250WTM-P_effective_052226.pdf",
+  "fileId": "18yy8RZCwGEiVLmxny6E9FUMPVCz_IpUJ",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "7326 SE Flavel St, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:null",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5877156,
+        45.4683958
+      ],
+      "displayName": "7326 SE Flavel St, Portland, OR 97206, USA",
+      "schoolName": "Whitman"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-06-07T17:28:28.458Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}

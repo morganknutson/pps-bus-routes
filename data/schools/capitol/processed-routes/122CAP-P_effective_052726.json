@@ -1,0 +1,33 @@
+{
+  "id": "11kZIzkFAfSLY8gnVKHbB3d9PDyFmUk3d",
+  "name": "122",
+  "direction": "Afternoon",
+  "filename": "122CAP-P_effective_052726.pdf",
+  "fileId": "11kZIzkFAfSLY8gnVKHbB3d9PDyFmUk3d",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "8401 SW 17th Ave, Portland, OR 97219, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:null",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6959942,
+        45.464172
+      ],
+      "displayName": "8401 SW 17th Ave, Portland, OR 97219, USA",
+      "schoolName": "Capitol"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-06-07T17:28:02.400Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}

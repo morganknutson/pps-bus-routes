@@ -1,0 +1,33 @@
+{
+  "id": "1DC9vIQOMIfrIDeX9mp5WXXSQgNqlWpUK",
+  "name": "146",
+  "direction": "Afternoon",
+  "filename": "146LNC-P_effective_052026.pdf",
+  "fileId": "1DC9vIQOMIfrIDeX9mp5WXXSQgNqlWpUK",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "1750 SW Salmon St, Portland, OR 97205, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:null",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6917196,
+        45.5191852
+      ],
+      "displayName": "1750 SW Salmon St, Portland, OR 97205, USA",
+      "schoolName": "Lincoln"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-06-07T17:28:16.358Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}

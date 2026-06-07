@@ -151517,5 +151517,153 @@
       }
     ],
     "cachedAt": "2026-05-03T09:00:51.940Z"
+  },
+  "north van houten avenue & north fessenden street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.7231425,
+      45.5912356
+    ],
+    "displayName": "N Fessenden St & N Van Houten Ave, Portland, OR 97203, USA",
+    "placeId": "EjpOIEZlc3NlbmRlbiBTdCAmIE4gVmFuIEhvdXRlbiBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBImYiZAoUChIJRWo7SOenlVQRCCd_DyzIZjUSFAoSCUVqO0jnp5VUEQgnfw8syGY1GhQKEgm12fbj4aeVVBFi7wlUvptu2hoUChIJwwhlh--nlVQRLTcDUynb9B0iCg2kqywbFT_v2bY",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "North Fessenden Street & North Van Houten Avenue",
+        "short_name": "N Fessenden St & N Van Houten Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "North Portland",
+        "short_name": "North Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97203",
+        "short_name": "97203",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-06-07T17:27:58.300Z"
+  },
+  "5221 n haight ave. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.67008787909054,
+      45.56078943516618
+    ],
+    "displayName": "5221 N Haight Ave, Portland, OR 97217, USA",
+    "placeId": "ChIJu_wa3RGnlVQRrFZtHnThnZw",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "5221",
+        "short_name": "5221",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "North Haight Avenue",
+        "short_name": "N Haight Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "North Portland",
+        "short_name": "North Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97217",
+        "short_name": "97217",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2770",
+        "short_name": "2770",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-06-07T17:27:58.727Z"
   }
 }

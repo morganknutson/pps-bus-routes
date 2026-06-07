@@ -1,0 +1,33 @@
+{
+  "id": "12EVTnFgKEFgbgPDRK7aPfLhPYzBJ0wx4",
+  "name": "250",
+  "direction": "Afternoon",
+  "filename": "250SLW-P_effective_052026.pdf",
+  "fileId": "12EVTnFgKEFgbgPDRK7aPfLhPYzBJ0wx4",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "8300 SE 15th Ave, Portland, OR 97202, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:null",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6498774,
+        45.4625412
+      ],
+      "displayName": "8300 SE 15th Ave, Portland, OR 97202, USA",
+      "schoolName": "Sellwood"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-06-07T17:28:22.185Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}

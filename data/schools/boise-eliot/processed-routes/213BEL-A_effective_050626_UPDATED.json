@@ -1,0 +1,512 @@
+{
+  "id": "1wJHek5vfE1ySDc-GHmB7zDS8ux7zoe2S",
+  "name": "213",
+  "direction": "Morning",
+  "filename": "213BEL-A_effective_050626_UPDATED.pdf",
+  "fileId": "1wJHek5vfE1ySDc-GHmB7zDS8ux7zoe2S",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "N Van Houten Ave. & N Fessenden St.",
+      "time": "7:25 am",
+      "direction": null,
+      "originalLine": "7:25 amN VAN HOUTEN AV@N FESSENDEN ST213BEL-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7231425,
+        45.5912356
+      ],
+      "displayName": "N Fessenden St & N Van Houten Ave, Portland, OR 97203, USA",
+      "placeId": "EjpOIEZlc3NlbmRlbiBTdCAmIE4gVmFuIEhvdXRlbiBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBImYiZAoUChIJRWo7SOenlVQRCCd_DyzIZjUSFAoSCUVqO0jnp5VUEQgnfw8syGY1GhQKEgm12fbj4aeVVBFi7wlUvptu2hoUChIJwwhlh--nlVQRLTcDUynb9B0iCg2kqywbFT_v2bY",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "N Willis Blvd. & N Druid Ave. [SW]",
+      "time": "7:28 am",
+      "direction": "SW",
+      "originalLine": "7:28 amN WILLIS BLVD @ N DRUID AV [SW]213BEL-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7173997,
+        45.584082
+      ],
+      "displayName": "N Willis Blvd & N Druid Ave, Portland, OR 97203, USA",
+      "placeId": "EjROIFdpbGxpcyBCbHZkICYgTiBEcnVpZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMywgVVNBImYiZAoUChIJe3UCcumnlVQRYsbmETJP0AYSFAoSCXt1AnLpp5VUEWLG5hEyT9AGGhQKEgmRG7sQwaeVVBFKRs5hTKhU2RoUChIJXZvTC-mnlVQRj4z8A-c8hK4iCg00lCsbFZPP2rY",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "N Rosa Parks Wy & N Albina Ave. [SW]",
+      "time": "7:37 am",
+      "direction": "SW",
+      "originalLine": "7:37 amN ROSA PARKS WY @ N ALBINA AV [SW]213BEL-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.674886,
+        45.5699264
+      ],
+      "displayName": "N Rosa Parks Way & N Albina Ave, Portland, OR 97217, USA",
+      "placeId": "EjhOIFJvc2EgUGFya3MgV2F5ICYgTiBBbGJpbmEgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTcsIFVTQSJmImQKFAoSCcXcfPwHp5VUEXxni5xA-dstEhQKEgnF3Hz8B6eVVBF8Z4ucQPnbLRoUChIJkS-tKKenlVQR4hp9NkBqqGIaFAoSCaV7WnMIp5VUETNDDrTD5JxeIgoNQGspGxVETOG2",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "5221 N Haight Ave. [W]",
+      "time": "7:41 am",
+      "direction": "W",
+      "originalLine": "7:41 am5221 N HAIGHT AV [W]213BEL-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.67008787909054,
+        45.56078943516618
+      ],
+      "displayName": "5221 N Haight Ave, Portland, OR 97217, USA",
+      "placeId": "ChIJu_wa3RGnlVQRrFZtHnThnZw",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "620 N Fremont St, Portland, OR 97227, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BOISE-ELIOT GT & ST LOADING ZONE ON BORTHWICK",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6729801,
+        45.54754459999999
+      ],
+      "displayName": "620 N Fremont St, Portland, OR 97227, USA",
+      "schoolName": "Boise-Eliot"
+    }
+  ],
+  "neighborhoods": [
+    "North Portland"
+  ],
+  "processedAt": "2026-06-07T17:27:58.967Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.59124,
+      -122.72314
+    ],
+    [
+      45.59123,
+      -122.72212
+    ],
+    [
+      45.59123,
+      -122.72107
+    ],
+    [
+      45.59088,
+      -122.72106
+    ],
+    [
+      45.59017,
+      -122.72107
+    ],
+    [
+      45.58969,
+      -122.72107
+    ],
+    [
+      45.58883,
+      -122.72105
+    ],
+    [
+      45.58662,
+      -122.72102
+    ],
+    [
+      45.58652,
+      -122.72107
+    ],
+    [
+      45.58498,
+      -122.72223
+    ],
+    [
+      45.58444,
+      -122.72261
+    ],
+    [
+      45.58403,
+      -122.72149
+    ],
+    [
+      45.58402,
+      -122.72141
+    ],
+    [
+      45.58406,
+      -122.72018
+    ],
+    [
+      45.58407,
+      -122.71855
+    ],
+    [
+      45.58408,
+      -122.71537
+    ],
+    [
+      45.58405,
+      -122.71454
+    ],
+    [
+      45.58404,
+      -122.71347
+    ],
+    [
+      45.58181,
+      -122.71348
+    ],
+    [
+      45.5795,
+      -122.71349
+    ],
+    [
+      45.57711,
+      -122.71352
+    ],
+    [
+      45.5755,
+      -122.71351
+    ],
+    [
+      45.57531,
+      -122.71351
+    ],
+    [
+      45.5753,
+      -122.71337
+    ],
+    [
+      45.57529,
+      -122.71248
+    ],
+    [
+      45.57523,
+      -122.71109
+    ],
+    [
+      45.57512,
+      -122.70902
+    ],
+    [
+      45.57504,
+      -122.70841
+    ],
+    [
+      45.57497,
+      -122.70797
+    ],
+    [
+      45.57469,
+      -122.70687
+    ],
+    [
+      45.57462,
+      -122.70661
+    ],
+    [
+      45.57407,
+      -122.7046
+    ],
+    [
+      45.57388,
+      -122.70407
+    ],
+    [
+      45.57359,
+      -122.70351
+    ],
+    [
+      45.57324,
+      -122.70286
+    ],
+    [
+      45.57296,
+      -122.70246
+    ],
+    [
+      45.57244,
+      -122.70185
+    ],
+    [
+      45.57175,
+      -122.7012
+    ],
+    [
+      45.57132,
+      -122.7008
+    ],
+    [
+      45.57112,
+      -122.70065
+    ],
+    [
+      45.57023,
+      -122.70013
+    ],
+    [
+      45.57009,
+      -122.70011
+    ],
+    [
+      45.57003,
+      -122.70007
+    ],
+    [
+      45.56993,
+      -122.69993
+    ],
+    [
+      45.56991,
+      -122.69982
+    ],
+    [
+      45.5699,
+      -122.69932
+    ],
+    [
+      45.56994,
+      -122.69916
+    ],
+    [
+      45.56994,
+      -122.69823
+    ],
+    [
+      45.56994,
+      -122.69758
+    ],
+    [
+      45.56994,
+      -122.69715
+    ],
+    [
+      45.56995,
+      -122.69658
+    ],
+    [
+      45.56995,
+      -122.69455
+    ],
+    [
+      45.56995,
+      -122.69139
+    ],
+    [
+      45.56992,
+      -122.6899
+    ],
+    [
+      45.56991,
+      -122.68789
+    ],
+    [
+      45.5699,
+      -122.68745
+    ],
+    [
+      45.56992,
+      -122.68737
+    ],
+    [
+      45.56992,
+      -122.68691
+    ],
+    [
+      45.56991,
+      -122.68565
+    ],
+    [
+      45.5699,
+      -122.68404
+    ],
+    [
+      45.56989,
+      -122.68211
+    ],
+    [
+      45.56992,
+      -122.67858
+    ],
+    [
+      45.56993,
+      -122.67532
+    ],
+    [
+      45.56993,
+      -122.67489
+    ],
+    [
+      45.56973,
+      -122.67489
+    ],
+    [
+      45.56868,
+      -122.67492
+    ],
+    [
+      45.56641,
+      -122.67493
+    ],
+    [
+      45.56314,
+      -122.67497
+    ],
+    [
+      45.56304,
+      -122.67497
+    ],
+    [
+      45.56269,
+      -122.67498
+    ],
+    [
+      45.56269,
+      -122.67454
+    ],
+    [
+      45.56269,
+      -122.67432
+    ],
+    [
+      45.56269,
+      -122.67337
+    ],
+    [
+      45.5627,
+      -122.67157
+    ],
+    [
+      45.56271,
+      -122.67059
+    ],
+    [
+      45.56271,
+      -122.67021
+    ],
+    [
+      45.56271,
+      -122.67004
+    ],
+    [
+      45.56243,
+      -122.67006
+    ],
+    [
+      45.56165,
+      -122.67007
+    ],
+    [
+      45.56079,
+      -122.67009
+    ],
+    [
+      45.5607,
+      -122.67009
+    ],
+    [
+      45.56061,
+      -122.67004
+    ],
+    [
+      45.56054,
+      -122.66993
+    ],
+    [
+      45.56053,
+      -122.66896
+    ],
+    [
+      45.56053,
+      -122.66841
+    ],
+    [
+      45.55995,
+      -122.66836
+    ],
+    [
+      45.55943,
+      -122.66831
+    ],
+    [
+      45.559,
+      -122.66828
+    ],
+    [
+      45.55709,
+      -122.66813
+    ],
+    [
+      45.55641,
+      -122.66808
+    ],
+    [
+      45.55457,
+      -122.66799
+    ],
+    [
+      45.55142,
+      -122.66797
+    ],
+    [
+      45.54952,
+      -122.66796
+    ],
+    [
+      45.54896,
+      -122.66796
+    ],
+    [
+      45.5487,
+      -122.66797
+    ],
+    [
+      45.54827,
+      -122.66797
+    ],
+    [
+      45.54827,
+      -122.66857
+    ],
+    [
+      45.54826,
+      -122.66906
+    ],
+    [
+      45.54827,
+      -122.67043
+    ],
+    [
+      45.54826,
+      -122.67204
+    ],
+    [
+      45.54764,
+      -122.67203
+    ],
+    [
+      45.5476,
+      -122.67203
+    ],
+    [
+      45.5476,
+      -122.67242
+    ],
+    [
+      45.54759,
+      -122.6729
+    ]
+  ]
+}

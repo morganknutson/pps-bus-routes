@@ -1,0 +1,33 @@
+{
+  "id": "1SzRLb8N4sX6mxTyPvu0geeygj8xD4mOK",
+  "name": "120",
+  "direction": "Afternoon",
+  "filename": "120HAY-P_effective_052726.pdf",
+  "fileId": "1SzRLb8N4sX6mxTyPvu0geeygj8xD4mOK",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "5037 SW Iowa St, Portland, OR 97221, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:null",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7289138,
+        45.4801718
+      ],
+      "displayName": "5037 SW Iowa St, Portland, OR 97221, USA",
+      "schoolName": "Hayhurst"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-06-07T17:28:05.111Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}

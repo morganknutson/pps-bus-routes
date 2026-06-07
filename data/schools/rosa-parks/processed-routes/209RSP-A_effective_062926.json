@@ -1,0 +1,33 @@
+{
+  "id": "15YXBYUp6mvZcxahaUZ9VLUweOlPsPdIp",
+  "name": "209",
+  "direction": "Morning",
+  "filename": "209RSP-A_effective_062926.pdf",
+  "fileId": "15YXBYUp6mvZcxahaUZ9VLUweOlPsPdIp",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "8960 N Woolsey Ave, Portland, OR 97203, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:null",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7129162,
+        45.5879512
+      ],
+      "displayName": "8960 N Woolsey Ave, Portland, OR 97203, USA",
+      "schoolName": "Rosa Parks"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-06-07T17:28:22.027Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}

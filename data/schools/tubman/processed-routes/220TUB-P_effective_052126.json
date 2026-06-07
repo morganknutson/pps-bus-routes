@@ -1,0 +1,33 @@
+{
+  "id": "1hDqeE84VxzB4Wlu8PGh-4T0JpXO-IZ8A",
+  "name": "220",
+  "direction": "Afternoon",
+  "filename": "220TUB-P_effective_052126.pdf",
+  "fileId": "1hDqeE84VxzB4Wlu8PGh-4T0JpXO-IZ8A",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2231 N Flint Ave, Portland, OR 97227, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:null",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6695743,
+        45.5394497
+      ],
+      "displayName": "2231 N Flint Ave, Portland, OR 97227, USA",
+      "schoolName": "Tubman"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-06-07T17:28:25.282Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}
