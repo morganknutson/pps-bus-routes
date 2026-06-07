@@ -62,9 +62,6 @@ class DirectionsService {
       console.warn('[DirectionsService] 💡 Set GOOGLE_MAPS_API_KEY in backend/.env for routing accuracy');
     } else {
       console.log('[DirectionsService] ✅ Google Maps API key configured');
-      // Mask API key in logs (show first 10 chars)
-      const maskedKey = this.apiKey.substring(0, 10) + '...';
-      console.log(`[DirectionsService] 🔑 API Key: ${maskedKey}`);
     }
   }
 
