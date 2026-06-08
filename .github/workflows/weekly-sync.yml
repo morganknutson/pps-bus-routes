@@ -2,8 +2,8 @@ name: Weekly Route Data Sync
 
 on:
   schedule:
-    # GitHub cron is UTC. This runs Sunday morning around the existing 2am PT window.
-    - cron: '0 10 * * 0'
+    # GitHub cron is UTC. This runs Sunday at 5pm Pacific during PDT.
+    - cron: '0 0 * * 1'
   workflow_dispatch:
 
 permissions:
