@@ -1,6 +1,10 @@
 # Stage 1: Build the frontend
 FROM node:20-alpine AS frontend-builder
 WORKDIR /app/frontend
+ARG VITE_POSTHOG_PROJECT_TOKEN
+ARG VITE_POSTHOG_HOST=https://us.i.posthog.com
+ENV VITE_POSTHOG_PROJECT_TOKEN=$VITE_POSTHOG_PROJECT_TOKEN
+ENV VITE_POSTHOG_HOST=$VITE_POSTHOG_HOST
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/ ./

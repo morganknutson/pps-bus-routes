@@ -963,7 +963,7 @@ export function TechPage() {
                   <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
                   <ul>
                     <li><strong>Google Analytics 4</strong> - Tracks page views and selection events.</li>
-                    <li><strong>PostHog</strong> - Backend event capture reads <code>POSTHOG_API_KEY</code> and <code>POSTHOG_HOST</code> from <code>backend/.env</code>; when the key is absent, analytics safely run in no-op mode.</li>
+                    <li><strong>PostHog</strong> - Browser analytics use <code>posthog-js</code> through <code>@posthog/react</code> with <code>VITE_POSTHOG_PROJECT_TOKEN</code> and <code>VITE_POSTHOG_HOST</code>. Backend event capture separately reads <code>POSTHOG_API_KEY</code> and <code>POSTHOG_HOST</code>; missing keys disable capture safely.</li>
                     <li><strong>ApiUsageService</strong> - A backend service that monitors API quotas (like Google Maps) to prevent service interruptions.</li>
                   </ul>
                 </div>

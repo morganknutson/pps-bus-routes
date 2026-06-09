@@ -29,6 +29,8 @@ services:
       - GIT_AUTHOR_NAME=PPS Bus Routes Bot
       - GIT_AUTHOR_EMAIL=automation@portlandschoolbuses.com
       - WORKER_CONCURRENCY=2
+      - VITE_POSTHOG_PROJECT_TOKEN=${VITE_POSTHOG_PROJECT_TOKEN:-}
+      - VITE_POSTHOG_HOST=${VITE_POSTHOG_HOST:-https://us.i.posthog.com}
     restart: unless-stopped
     logging:
       driver: json-file
