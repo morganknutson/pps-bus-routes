@@ -963,7 +963,9 @@ export function TechPage() {
                   <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
                   <ul>
                     <li><strong>Google Analytics 4</strong> - Tracks page views and selection events.</li>
-                    <li><strong>PostHog</strong> - Browser analytics use <code>posthog-js</code> through <code>@posthog/react</code> with <code>VITE_POSTHOG_PROJECT_TOKEN</code> and <code>VITE_POSTHOG_HOST</code>. Backend event capture separately reads <code>POSTHOG_API_KEY</code> and <code>POSTHOG_HOST</code>; missing keys disable capture safely.</li>
+                    <li><strong>PostHog</strong> - Browser analytics use <code>posthog-js</code> through <code>@posthog/react</code> with <code>VITE_POSTHOG_PROJECT_TOKEN</code>, <code>VITE_POSTHOG_HOST</code>, and optional <code>VITE_POSTHOG_UI_HOST</code>. Backend event capture separately reads <code>POSTHOG_API_KEY</code> and <code>POSTHOG_HOST</code>; missing keys disable capture safely.</li>
+                    <li><strong>Custom Events</strong> - Product events capture address search selection, school selection, route toggles, stop selection, find-my-stop completion, tab changes, outbound links, admin actions, and coarse map interactions.</li>
+                    <li><strong>Privacy Guardrails</strong> - PostHog custom event properties are sanitized centrally: full addresses, exact coordinates, and URL query strings are not sent to PostHog.</li>
                     <li><strong>ApiUsageService</strong> - A backend service that monitors API quotas (like Google Maps) to prevent service interruptions.</li>
                   </ul>
                 </div>

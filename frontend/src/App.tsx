@@ -578,31 +578,26 @@ function App() {
 
     initializeStore({ skipSchoolSelection: isCleanPath });
 
+    const searchParams = new URLSearchParams(window.location.search);
+    const isInternalUrl = searchParams.get('internal') === 'true';
+    if (isInternalUrl) {
+      analyticsService.markAsInternalUser();
+    }
+
+    const applyAnalyticsContext = () => {
+      analyticsService.setUserProperty('theme', isDarkMode ? 'dark' : 'light');
+      analyticsService.setUserProperty('traffic_type', analyticsService.isInternalUser() ? 'internal' : 'external');
+      analyticsService.setUserProperty('user_persona', window.location.pathname.startsWith('/admin') ? 'admin' : 'public');
+      analyticsService.setUserProperty('is_mobile', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+
+    applyAnalyticsContext();
+
     const trackingId = import.meta.env.VITE_GA_TRACKING_ID;
     if (trackingId) {
       // Initialize analytics service (works with gtag.js loaded in index.html)
       analyticsService.init(trackingId);
-      analyticsService.setUserProperty('theme', isDarkMode ? 'dark' : 'light');
-
-      // Check for internal user flag in URL or LocalStorage
-      // Visit with ?internal=true to mark yourself as internal user
-      const searchParams = new URLSearchParams(window.location.search);
-      const isInternalUrl = searchParams.get('internal') === 'true';
-      if (isInternalUrl) {
-        analyticsService.markAsInternalUser();
-      }
-
-      // Set traffic type based on internal user status
-      if (analyticsService.isInternalUser()) {
-        analyticsService.setUserProperty('traffic_type', 'internal');
-      } else {
-        analyticsService.setUserProperty('traffic_type', 'external');
-      }
-
-      // Set user persona and device type
-      const persona = window.location.pathname.startsWith('/admin') ? 'admin' : 'public';
-      analyticsService.setUserProperty('user_persona', persona);
-      analyticsService.setUserProperty('is_mobile', /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+      applyAnalyticsContext();
       
       // Log debug info in development
       if (window.location.hostname === 'localhost') {

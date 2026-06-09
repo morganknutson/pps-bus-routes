@@ -1,4 +1,5 @@
 import ReactGA from 'react-ga4';
+import { capturePostHogEvent, setPostHogPersonProperties } from './posthog';
 
 /**
  * Analytics Service for Google Analytics 4
@@ -25,6 +26,42 @@ class AnalyticsService {
   private isDebugMode = false;
   private sessionId: string | null = null;
   private isFirstVisit = false;
+  private postHogActionDenyList = new Set(['map_move', 'map_click']);
+
+  private trackGaEvent(category: string, action: string, label?: string, value?: number, nonInteraction = false) {
+    if (!this.isInitialized) return;
+
+    ReactGA.event({
+      category,
+      action,
+      label,
+      value,
+      nonInteraction,
+    });
+
+    if (this.isDebugMode) {
+      console.log(`[Analytics] Event: [${category}] ${action}${label ? ` (${label})` : ''}`);
+    }
+  }
+
+  private trackGaAction(action: string, properties?: Record<string, any>) {
+    if (!this.isInitialized) return;
+
+    const enrichedProperties = {
+      ...properties,
+      session_id: this.sessionId,
+    };
+
+    ReactGA.event(action, enrichedProperties);
+
+    if (this.isDebugMode) {
+      console.log(`[Analytics] Action: ${action}`, enrichedProperties);
+    }
+  }
+
+  private shouldCapturePostHogAction(action: string) {
+    return !this.postHogActionDenyList.has(action);
+  }
 
   /**
    * Initialize GA4 with the provided tracking ID
@@ -193,19 +230,13 @@ class AnalyticsService {
    * @param nonInteraction If true, this event doesn't impact bounce rate
    */
   trackEvent(category: string, action: string, label?: string, value?: number, nonInteraction = false) {
-    if (!this.isInitialized) return;
-
-    ReactGA.event({
+    capturePostHogEvent(action, {
       category,
-      action,
       label,
       value,
-      nonInteraction,
+      non_interaction: nonInteraction,
     });
-    
-    if (this.isDebugMode) {
-      console.log(`[Analytics] Event: [${category}] ${action}${label ? ` (${label})` : ''}`);
-    }
+    this.trackGaEvent(category, action, label, value, nonInteraction);
   }
 
   // --- Convenience Methods for PPS Bus Maps ---
@@ -216,9 +247,13 @@ class AnalyticsService {
    * @param address The address searched (anonymized or full depending on privacy)
    */
   trackAddressSearch(source: string, address?: string) {
-    this.trackEvent('Search', 'address_search', source, undefined, false);
+    capturePostHogEvent('address_searched', {
+      source,
+      address,
+    });
+    this.trackGaEvent('Search', 'address_search', source, undefined, false);
     if (address) {
-      this.trackAction('address_search_detail', { source, address });
+      this.trackGaAction('address_search_detail', { source, address });
     }
   }
 
@@ -228,7 +263,11 @@ class AnalyticsService {
    * @param source Where it was selected ('map', 'list')
    */
   trackSchoolSelect(schoolName: string, source: string) {
-    this.trackEvent('Selection', 'school_select', `${schoolName} (${source})`);
+    capturePostHogEvent('school_selected', {
+      school_name: schoolName,
+      source,
+    });
+    this.trackGaEvent('Selection', 'school_select', `${schoolName} (${source})`);
   }
 
   /**
@@ -237,7 +276,11 @@ class AnalyticsService {
    * @param schoolName Name of the school the route belongs to
    */
   trackRouteToggle(routeName: string, schoolName: string, isSelected: boolean) {
-    this.trackEvent('Selection', isSelected ? 'route_select' : 'route_deselect', `${routeName} - ${schoolName}`);
+    capturePostHogEvent(isSelected ? 'route_selected' : 'route_deselected', {
+      route_name: routeName,
+      school_name: schoolName,
+    });
+    this.trackGaEvent('Selection', isSelected ? 'route_select' : 'route_deselect', `${routeName} - ${schoolName}`);
   }
 
   /**
@@ -245,7 +288,8 @@ class AnalyticsService {
    * @param tabName Name of the tab ('schools', 'routes')
    */
   trackTabChange(tabName: string) {
-    this.trackEvent('Navigation', 'tab_change', tabName);
+    capturePostHogEvent('tab_changed', { tab_name: tabName });
+    this.trackGaEvent('Navigation', 'tab_change', tabName);
   }
 
   /**
@@ -254,7 +298,12 @@ class AnalyticsService {
    * @param label Optional label
    */
   trackAdminAction(action: string, label?: string) {
-    this.trackEvent('Admin', action, label);
+    const labelProperty = action.includes('street') || action.includes('pin') ? 'address' : 'target';
+    capturePostHogEvent('admin_action', {
+      action,
+      [labelProperty]: label,
+    });
+    this.trackGaEvent('Admin', action, label);
   }
 
   /**
@@ -262,7 +311,8 @@ class AnalyticsService {
    * @param action Action (e.g., 'zoom_in', 'zoom_out', 'pan')
    */
   trackMapInteraction(action: string) {
-    this.trackEvent('Map', action);
+    capturePostHogEvent('map_interaction', { action });
+    this.trackGaEvent('Map', action);
   }
 
   /**
@@ -271,20 +321,11 @@ class AnalyticsService {
    * @param properties Optional properties
    */
   trackAction(action: string, properties?: Record<string, any>) {
-    if (!this.isInitialized) return;
-    
-    // Add session context to all actions
-    const enrichedProperties = {
-      ...properties,
-      session_id: this.sessionId,
-    };
-    
-    // In GA4, we can send custom parameters with events
-    ReactGA.event(action, enrichedProperties);
-    
-    if (this.isDebugMode) {
-      console.log(`[Analytics] Action: ${action}`, enrichedProperties);
+    if (this.shouldCapturePostHogAction(action)) {
+      capturePostHogEvent(action, properties);
     }
+
+    this.trackGaAction(action, properties);
   }
 
   /**
@@ -293,6 +334,8 @@ class AnalyticsService {
    * @param value Property value
    */
   setUserProperty(name: string, value: any) {
+    setPostHogPersonProperties({ [name]: value });
+
     if (!this.isInitialized) return;
     ReactGA.set({ [name]: value });
     
@@ -312,7 +355,11 @@ class AnalyticsService {
    * @param type The type of link
    */
   trackOutboundLink(url: string, type: 'website' | 'pdf' | 'maps' | 'external') {
-    this.trackEvent('Navigation', 'outbound_click', `${type}: ${url}`);
+    capturePostHogEvent('outbound_link_clicked', {
+      type,
+      url,
+    });
+    this.trackGaEvent('Navigation', 'outbound_click', `${type}: ${url}`);
   }
 
   /**
@@ -321,6 +368,11 @@ class AnalyticsService {
    * @param fatal Whether the error was fatal
    */
   trackError(description: string, fatal = false) {
+    capturePostHogEvent('application_error', {
+      description,
+      fatal,
+    });
+
     if (!this.isInitialized) return;
     ReactGA.gtag('event', 'exception', {
       description,

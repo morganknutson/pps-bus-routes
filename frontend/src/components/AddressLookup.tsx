@@ -102,8 +102,12 @@ export function AddressLookup({ onAddressSelect }: AddressLookupProps) {
       });
 
       analyticsService.trackAction('find_my_stop_admin', {
+        source: 'admin_lookup',
         schoolId: selectedSchoolId,
-        distance
+        distance,
+        route_name: route.name,
+        route_direction: route.direction,
+        stop_id: stop.id,
       });
     }
   };

@@ -1041,6 +1041,7 @@ export function MapView({
                   icon={icon}
                   eventHandlers={{
                     click: () => {
+                      analyticsService.trackSchoolSelect(school.name, 'map_marker');
                       setSelectedSchool(school.id);
                       setFocus('school-info');
                     }
@@ -1077,7 +1078,14 @@ export function MapView({
                 icon={createSchoolIcon(schoolColor)}
                 zIndexOffset={100}
                 eventHandlers={{
-                  click: () => setFocus('school-info')
+                  click: () => {
+                    analyticsService.trackAction('school_info_opened', {
+                      source: 'active_school_marker',
+                      schoolId: activeSchool.id,
+                      school_name: activeSchool.name,
+                    });
+                    setFocus('school-info');
+                  }
                 }}
               />
             );
@@ -1139,7 +1147,17 @@ export function MapView({
                     icon={icon}
                     draggable={editingMode}
                     eventHandlers={{
-                      click: () => selectStop(route.name, stop.id),
+                      click: () => {
+                        analyticsService.trackAction('stop_selected', {
+                          source: 'map_marker',
+                          schoolId: selectedSchoolId,
+                          route_name: route.name,
+                          route_direction: route.direction,
+                          stop_number: calculateStopNumber(route, stop.id),
+                          is_school_stop: stop.isSchoolStop,
+                        });
+                        selectStop(route.name, stop.id);
+                      },
                       ...(editingMode ? {
                         dragend: async (e) => {
                           const marker = e.target;
@@ -1297,6 +1315,12 @@ export function MapView({
               }
             }}
             onViewRoutes={() => {
+              analyticsService.trackAction('school_routes_viewed', {
+                source: 'school_info_panel',
+                schoolId: displaySchool.id,
+                school_name: displaySchool.name,
+                route_count: displaySchool.routeCount,
+              });
               viewSchoolRoutes(displaySchool.id);
             }}
           />
@@ -1308,6 +1332,12 @@ export function MapView({
               showRoutesButton={true}
               onClose={() => setSelectedSchool(null)}
               onViewRoutes={() => {
+                analyticsService.trackAction('school_routes_viewed', {
+                  source: 'school_info_panel',
+                  schoolId: school.id,
+                  school_name: school.name,
+                  route_count: school.routeCount,
+                });
                 viewSchoolRoutes(school.id);
               }}
             />

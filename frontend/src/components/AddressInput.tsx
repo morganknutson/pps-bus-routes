@@ -180,9 +180,12 @@ export function AddressInput() {
       });
 
       analyticsService.trackAction('find_my_stop', {
+        source: 'explorer',
         schoolId: selectedSchoolId,
         distance,
-        stopAddress: stop.address
+        route_name: route.name,
+        route_direction: route.direction,
+        stop_id: stop.id,
       });
     } else {
       console.warn('[AddressInput] No stops with coordinates found in current routes');

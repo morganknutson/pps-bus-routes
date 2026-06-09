@@ -51,7 +51,17 @@ export function RouteList({ showBothOption = false, onClearSchool, onViewSchools
       }
     },
     onStopClick: (route, stop, stopNumber) => {
-      if (selectedStopId === `${route.name}-${stop.id.replace('stop-', '')}`) {
+      const isSameStop = selectedStopId === `${route.name}-${stop.id.replace('stop-', '')}`;
+      analyticsService.trackAction(isSameStop ? 'stop_deselected' : 'stop_selected', {
+        source: 'route_list',
+        schoolId,
+        route_name: route.name,
+        route_direction: route.direction,
+        stop_number: stopNumber,
+        is_school_stop: stop.isSchoolStop,
+      });
+
+      if (isSameStop) {
         clearSelectedStop();
       } else {
         selectStop(route.name, stop.id);

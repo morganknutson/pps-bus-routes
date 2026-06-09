@@ -475,6 +475,12 @@ export function HomePage() {
 
       // Elegant School-as-Closest-Stop handling
       if (closestStop.stop.isSchoolStop) {
+        analyticsService.trackAction('school_closest_stop', {
+          source: 'homepage',
+          schoolId: selectedSchoolLocal.id,
+          school_name: selectedSchoolLocal.name,
+          distance: closestStop.distance,
+        });
         setShowSchoolClosestModal(true, {
           schoolName: getSchoolDisplayName(selectedSchoolLocal.name),
           schoolId: selectedSchoolLocal.id
@@ -489,6 +495,16 @@ export function HomePage() {
       const stopMatch = stopId.match(/stop-(\d+)/);
       const stopNumberStr = stopMatch ? stopMatch[1] : stopId;
       const routeName = closestStop.route.name;
+
+      analyticsService.trackAction('find_my_stop', {
+        source: 'homepage',
+        schoolId: selectedSchoolLocal.id,
+        school_name: selectedSchoolLocal.name,
+        distance: closestStop.distance,
+        route_name: routeName,
+        route_direction: closestStop.route.direction,
+        stop_id: stopId,
+      });
 
       const urlState: UrlState = {
         show: 'routes',
