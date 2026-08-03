@@ -1,9 +1,9 @@
 {
-  "id": "1ZJZCCQ6G49rdfV7JgzD54eTAjrp9WfaJ",
+  "id": "1Pu3KB5k-TU7XYE6WvKGwz03iUdz61eLM",
   "name": "220",
   "direction": "Morning",
-  "filename": "220ALA-A_effective_082625.pdf",
-  "fileId": "1ZJZCCQ6G49rdfV7JgzD54eTAjrp9WfaJ",
+  "filename": "220ALA-A_Effective_082626.pdf",
+  "fileId": "1Pu3KB5k-TU7XYE6WvKGwz03iUdz61eLM",
   "modifiedTime": null,
   "stops": [
     {
@@ -38,21 +38,6 @@
     },
     {
       "id": "stop-3",
-      "address": "NE Skidmore St. & NE 37th ( & Bethany Lutheran) [NE]",
-      "time": "7:36 am",
-      "direction": "NE",
-      "originalLine": "7:36 amNE SKIDMORE ST @NE 37TH  (@ BETHANY LUTHERAN) [NE]220ALA-A(3)Stop Order #:",
-      "skipGeocoding": false,
-      "coordinates": [
-        -122.6255518,
-        45.5536885
-      ],
-      "displayName": "NE Skidmore St & NE 37th Ave, Portland, OR 97211, USA",
-      "placeId": "EjVORSBTa2lkbW9yZSBTdCAmIE5FIDM3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCQdiBbzQppVUEdndrdVIoQ3AEhQKEgkHYgW80KaVVBHZ3a3VSKENwBoUChIJAektBVKhlVQRfR36jGtn9D0aFAoSCeO-GhXDppVUEZwWnyG-svtCIgoN9fAmGxVi0-i2",
-      "neighborhood": "Northeast Portland"
-    },
-    {
-      "id": "stop-4",
       "address": "NE Shaver St. & NE Cesar E Chavez Blvd. [SW]",
       "time": "7:38 am",
       "direction": "SW",
@@ -86,10 +71,10 @@
     "Northeast Portland",
     "Rose City Park"
   ],
-  "processedAt": "2026-04-25T03:44:24.944Z",
+  "processedAt": "2026-08-03T03:16:15.764Z",
   "stats": {
-    "totalStops": 5,
-    "geocodedStops": 5,
+    "totalStops": 4,
+    "geocodedStops": 4,
     "failedStops": 0
   },
   "geometry": [
@@ -98,20 +83,16 @@
       -122.61169
     ],
     [
-      45.54696,
-      -122.61473
+      45.54698,
+      -122.61879
     ],
     [
-      45.54696,
-      -122.61674
+      45.54698,
+      -122.61981
     ],
     [
-      45.54829,
-      -122.61674
-    ],
-    [
-      45.5483,
-      -122.61838
+      45.54783,
+      -122.6198
     ],
     [
       45.5483,
@@ -119,63 +100,47 @@
     ],
     [
       45.5483,
-      -122.62036
+      -122.62136
     ],
     [
-      45.54873,
-      -122.62036
+      45.5483,
+      -122.62283
     ],
     [
-      45.55031,
-      -122.62037
+      45.5483,
+      -122.62321
     ],
     [
-      45.55285,
-      -122.6204
+      45.54898,
+      -122.62321
     ],
     [
-      45.55374,
-      -122.62041
+      45.54937,
+      -122.62321
     ],
     [
-      45.55371,
-      -122.62244
+      45.5495,
+      -122.62323
     ],
     [
-      45.5537,
-      -122.62501
+      45.54958,
+      -122.62327
     ],
     [
-      45.55369,
-      -122.62555
+      45.54976,
+      -122.62338
     ],
     [
-      45.55363,
-      -122.62556
+      45.5499,
+      -122.62342
     ],
     [
-      45.55351,
-      -122.62556
+      45.55074,
+      -122.62343
     ],
     [
-      45.55317,
-      -122.62556
-    ],
-    [
-      45.55275,
-      -122.62556
-    ],
-    [
-      45.55194,
-      -122.62556
-    ],
-    [
-      45.55181,
-      -122.62555
-    ],
-    [
-      45.55181,
-      -122.62445
+      45.55092,
+      -122.62344
     ],
     [
       45.55182,
@@ -230,12 +195,12 @@
       -122.62708
     ],
     [
-      45.54828,
-      -122.62956
+      45.54827,
+      -122.63061
     ],
     [
-      45.54826,
-      -122.63188
+      45.54825,
+      -122.63447
     ],
     [
       45.54825,

@@ -1,9 +1,9 @@
 {
-  "id": "1P9gLMqkq3Bi8EjLoRIBWH8joFa65gdg-",
+  "id": "1PPB4t3aCaJKC1qKE_gsJqRzOtuFLgy60",
   "name": "226",
   "direction": "Morning",
-  "filename": "226ALA-A_effective_082625.pdf",
-  "fileId": "1P9gLMqkq3Bi8EjLoRIBWH8joFa65gdg-",
+  "filename": "226ALA-A_Effective_082626.pdf",
+  "fileId": "1PPB4t3aCaJKC1qKE_gsJqRzOtuFLgy60",
   "modifiedTime": null,
   "stops": [
     {
@@ -55,7 +55,7 @@
   "neighborhoods": [
     "Rose City Park"
   ],
-  "processedAt": "2026-04-25T03:44:23.016Z",
+  "processedAt": "2026-08-03T03:16:13.177Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,

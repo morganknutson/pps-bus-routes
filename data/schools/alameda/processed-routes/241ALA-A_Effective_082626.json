@@ -1,9 +1,9 @@
 {
-  "id": "13R9Zwj-8f0M6KYa9t4wltuzlfOjf5wM4",
+  "id": "1Uuq2glCvF4cW3qtKii1NXODaH1zIJ2Yl",
   "name": "241",
   "direction": "Morning",
-  "filename": "241ALA-A_effective_111925.pdf",
-  "fileId": "13R9Zwj-8f0M6KYa9t4wltuzlfOjf5wM4",
+  "filename": "241ALA-A_Effective_082626.pdf",
+  "fileId": "1Uuq2glCvF4cW3qtKii1NXODaH1zIJ2Yl",
   "modifiedTime": null,
   "stops": [
     {
@@ -56,7 +56,7 @@
     "Northeast Portland",
     "Rose City Park"
   ],
-  "processedAt": "2026-04-25T03:44:21.428Z",
+  "processedAt": "2026-08-03T03:16:11.087Z",
   "stats": {
     "totalStops": 3,
     "geocodedStops": 3,
