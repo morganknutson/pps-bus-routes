@@ -1,0 +1,485 @@
+{
+  "id": "1z8Tl3Fxev9g_uwwsVMth18Ao9eCSLxBD",
+  "name": "211",
+  "direction": "Afternoon",
+  "filename": "211SCT-P_Effective_082626.pdf",
+  "fileId": "1z8Tl3Fxev9g_uwwsVMth18Ao9eCSLxBD",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "6700 NE Prescott St, Portland, OR 97218, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:SCOTT GT LOADING ZONE ON 68TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5944324,
+        45.555031
+      ],
+      "displayName": "6700 NE Prescott St, Portland, OR 97218, USA",
+      "schoolName": "Scott"
+    },
+    {
+      "id": "stop-1",
+      "address": "5300 NE Cully Blvd. (villa De Clara Vista Apt) [NW]",
+      "time": "2:41 pm",
+      "direction": "NW",
+      "originalLine": "2:41 pm5300 NE CULLY BLVD (VILLA DE CLARA VISTA APT) [NW]211SCT-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.59433310000001,
+        45.5616608
+      ],
+      "displayName": "5300 NE Cully Blvd, Portland, OR 97218, USA",
+      "placeId": "ChIJdXpGyrGmlVQRSrPudq6k5GY",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-2",
+      "address": "4911 NE 82nd Ave. (studio 6) [NW]",
+      "time": "2:45 pm",
+      "direction": "NW",
+      "originalLine": "2:45 pm4911 NE 82ND AV  (STUDIO 6) [NW]211SCT-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57891556734614,
+        45.55864724771026
+      ],
+      "displayName": "4911 NE 82nd Ave, Portland, OR 97220, USA",
+      "placeId": "ChIJrfWoq1ShlVQRs54Xep7zb0E",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 42nd Ave. & NE Holman St. [NW]",
+      "time": "2:52 pm",
+      "direction": "NW",
+      "originalLine": "2:52 pmNE 42ND AV@ NE HOLMAN ST [NW]211SCT-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6204283,
+        45.5686484
+      ],
+      "displayName": "NE Holman St & NE 42nd Ave, Portland, OR 97211, USA",
+      "placeId": "EjNORSBIb2xtYW4gU3QgJiBORSA0Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEglDL3vF6qaVVBE5ympF5vYVJxIUChIJQy97xeqmlVQROcpqReb2FScaFAoSCXenYU_vppVUEYWdXEFxoES9GhQKEgmti4bn0aaVVBHoX32KtKRetSIKDVQ5KRsVhZvptg",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE 42nd Ave. & NE Simpson St. [W]",
+      "time": "2:53 pm",
+      "direction": "W",
+      "originalLine": "2:53 pmNE 42ND AV @ NE SIMPSON ST [W]211SCT-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6204395,
+        45.565119
+      ],
+      "displayName": "NE Simpson St & NE 42nd Ave, Portland, OR 97211, USA",
+      "placeId": "EjRORSBTaW1wc29uIFN0ICYgTkUgNDJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMSwgVVNBImYiZAoUChIJr-oFusGmlVQRAn8_BkkDxKISFAoSCa_qBbrBppVUEQJ_PwZJA8SiGhQKEgmNJu8pv6aVVBFvWo6Pw_nZRBoUChIJrYuG59GmlVQR6F99irSkXrUiCg12rygbFRWb6bY",
+      "neighborhood": "Northeast Portland"
+    }
+  ],
+  "neighborhoods": [
+    "Cully",
+    "Northeast Portland"
+  ],
+  "processedAt": "2026-08-10T02:08:12.683Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.555,
+      -122.59444
+    ],
+    [
+      45.55499,
+      -122.595
+    ],
+    [
+      45.55496,
+      -122.59514
+    ],
+    [
+      45.55496,
+      -122.59526
+    ],
+    [
+      45.55527,
+      -122.59526
+    ],
+    [
+      45.55546,
+      -122.59526
+    ],
+    [
+      45.55546,
+      -122.59595
+    ],
+    [
+      45.55546,
+      -122.59831
+    ],
+    [
+      45.55547,
+      -122.60019
+    ],
+    [
+      45.55547,
+      -122.60088
+    ],
+    [
+      45.55587,
+      -122.60056
+    ],
+    [
+      45.55636,
+      -122.60014
+    ],
+    [
+      45.55822,
+      -122.59856
+    ],
+    [
+      45.55931,
+      -122.59762
+    ],
+    [
+      45.55967,
+      -122.59726
+    ],
+    [
+      45.56058,
+      -122.59635
+    ],
+    [
+      45.56135,
+      -122.59556
+    ],
+    [
+      45.56134,
+      -122.59486
+    ],
+    [
+      45.56134,
+      -122.59434
+    ],
+    [
+      45.56166,
+      -122.59433
+    ],
+    [
+      45.56134,
+      -122.59434
+    ],
+    [
+      45.56134,
+      -122.59481
+    ],
+    [
+      45.56135,
+      -122.59556
+    ],
+    [
+      45.56218,
+      -122.59473
+    ],
+    [
+      45.56242,
+      -122.59448
+    ],
+    [
+      45.56273,
+      -122.59419
+    ],
+    [
+      45.56271,
+      -122.59381
+    ],
+    [
+      45.56272,
+      -122.59359
+    ],
+    [
+      45.56271,
+      -122.592
+    ],
+    [
+      45.56271,
+      -122.59134
+    ],
+    [
+      45.56272,
+      -122.59123
+    ],
+    [
+      45.56275,
+      -122.59116
+    ],
+    [
+      45.56276,
+      -122.59112
+    ],
+    [
+      45.56293,
+      -122.59098
+    ],
+    [
+      45.56281,
+      -122.59032
+    ],
+    [
+      45.56273,
+      -122.58977
+    ],
+    [
+      45.56268,
+      -122.58912
+    ],
+    [
+      45.56267,
+      -122.58775
+    ],
+    [
+      45.56267,
+      -122.58661
+    ],
+    [
+      45.56267,
+      -122.58367
+    ],
+    [
+      45.56267,
+      -122.57979
+    ],
+    [
+      45.56267,
+      -122.57907
+    ],
+    [
+      45.56252,
+      -122.57866
+    ],
+    [
+      45.56248,
+      -122.57862
+    ],
+    [
+      45.56236,
+      -122.57849
+    ],
+    [
+      45.56221,
+      -122.5785
+    ],
+    [
+      45.56105,
+      -122.57852
+    ],
+    [
+      45.55988,
+      -122.57854
+    ],
+    [
+      45.55879,
+      -122.57855
+    ],
+    [
+      45.55885,
+      -122.57871
+    ],
+    [
+      45.55882,
+      -122.57876
+    ],
+    [
+      45.55879,
+      -122.57881
+    ],
+    [
+      45.55875,
+      -122.57875
+    ],
+    [
+      45.55864,
+      -122.57893
+    ],
+    [
+      45.55875,
+      -122.57875
+    ],
+    [
+      45.55879,
+      -122.57881
+    ],
+    [
+      45.55882,
+      -122.57876
+    ],
+    [
+      45.55885,
+      -122.57871
+    ],
+    [
+      45.55879,
+      -122.57855
+    ],
+    [
+      45.55924,
+      -122.57855
+    ],
+    [
+      45.56032,
+      -122.57852
+    ],
+    [
+      45.56146,
+      -122.57852
+    ],
+    [
+      45.56267,
+      -122.57848
+    ],
+    [
+      45.56267,
+      -122.58092
+    ],
+    [
+      45.56267,
+      -122.58748
+    ],
+    [
+      45.56268,
+      -122.5889
+    ],
+    [
+      45.56272,
+      -122.58964
+    ],
+    [
+      45.56278,
+      -122.59016
+    ],
+    [
+      45.56288,
+      -122.59072
+    ],
+    [
+      45.56297,
+      -122.59112
+    ],
+    [
+      45.56314,
+      -122.59167
+    ],
+    [
+      45.56337,
+      -122.59228
+    ],
+    [
+      45.5638,
+      -122.59323
+    ],
+    [
+      45.56404,
+      -122.59374
+    ],
+    [
+      45.56519,
+      -122.59606
+    ],
+    [
+      45.56596,
+      -122.59761
+    ],
+    [
+      45.56646,
+      -122.59865
+    ],
+    [
+      45.56666,
+      -122.59917
+    ],
+    [
+      45.56687,
+      -122.5998
+    ],
+    [
+      45.56701,
+      -122.60031
+    ],
+    [
+      45.56711,
+      -122.60084
+    ],
+    [
+      45.56752,
+      -122.60325
+    ],
+    [
+      45.56833,
+      -122.60808
+    ],
+    [
+      45.56924,
+      -122.61355
+    ],
+    [
+      45.56976,
+      -122.61664
+    ],
+    [
+      45.56953,
+      -122.61666
+    ],
+    [
+      45.56922,
+      -122.61669
+    ],
+    [
+      45.56879,
+      -122.61669
+    ],
+    [
+      45.56862,
+      -122.61671
+    ],
+    [
+      45.56862,
+      -122.61723
+    ],
+    [
+      45.56863,
+      -122.61826
+    ],
+    [
+      45.56864,
+      -122.61984
+    ],
+    [
+      45.56865,
+      -122.62043
+    ],
+    [
+      45.56855,
+      -122.62046
+    ],
+    [
+      45.5682,
+      -122.62047
+    ],
+    [
+      45.56645,
+      -122.62045
+    ],
+    [
+      45.56512,
+      -122.62044
+    ]
+  ]
+}

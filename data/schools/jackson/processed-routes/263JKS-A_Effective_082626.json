@@ -1,0 +1,363 @@
+{
+  "id": "1twbA-GmpkliFurkIx520L7jGlKlpO4cd",
+  "name": "263",
+  "direction": "Morning",
+  "filename": "263JKS-A_Effective_082626.pdf",
+  "fileId": "1twbA-GmpkliFurkIx520L7jGlKlpO4cd",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "SW Lancaster Rd. & SW Broadleaf Dr. [E]",
+      "time": "8:59 am",
+      "direction": "E",
+      "originalLine": "8:59 amSW LANCASTER RD @ SW BROADLEAF DR [E]263JKS-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.699749,
+        45.45288
+      ],
+      "displayName": "SW Lancaster Rd & SW Broadleaf Dr, Portland, OR 97219, USA",
+      "placeId": "EjpTVyBMYW5jYXN0ZXIgUmQgJiBTVyBCcm9hZGxlYWYgRHIsIFBvcnRsYW5kLCBPUiA5NzIxOSwgVVNBImYiZAoUChIJK16U7EMLlVQRhgThP-zNTToSFAoSCStelOxDC5VUEYYE4T_szU06GhQKEgn7w5QORQuVVBHBZQ83ygOOcxoUChIJK49RWkELlVQRQ8FfZJh5zk8iCg0gjxcbFQ6B3bY",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SW Lancaster Rd. & SW Quail Post Rd. [E]",
+      "time": "9:00 am",
+      "direction": "E",
+      "originalLine": "9:00 amSW LANCASTER RD @ SW QUAIL POST RD [E]263JKS-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7023495,
+        45.4557875
+      ],
+      "displayName": "SW Quail Post Rd & SW Lancaster Rd, Portland, OR 97219, USA",
+      "placeId": "EjtTVyBRdWFpbCBQb3N0IFJkICYgU1cgTGFuY2FzdGVyIFJkLCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCfU3OQVCC5VUEcPep3T3IyfxEhQKEgn1NzkFQguVVBHD3qd09yMn8RoUChIJJbzz-kILlVQRetv7XBXqNCkaFAoSCfvDlA5FC5VUEcFlDzfKA45zIgoNswAYGxV5G922",
+      "neighborhood": "Markham"
+    },
+    {
+      "id": "stop-0",
+      "address": "10625 SW 35th Ave, Portland, OR 97219, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:JACKSON",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7131363,
+        45.4506715
+      ],
+      "displayName": "10625 SW 35th Ave, Portland, OR 97219, USA",
+      "schoolName": "Jackson"
+    }
+  ],
+  "neighborhoods": [
+    "Markham",
+    "Southwest Portland"
+  ],
+  "processedAt": "2026-08-10T02:00:12.629Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.45288,
+      -122.69975
+    ],
+    [
+      45.4531,
+      -122.70071
+    ],
+    [
+      45.45314,
+      -122.70083
+    ],
+    [
+      45.45323,
+      -122.70096
+    ],
+    [
+      45.45332,
+      -122.70102
+    ],
+    [
+      45.45339,
+      -122.70105
+    ],
+    [
+      45.45346,
+      -122.70105
+    ],
+    [
+      45.45357,
+      -122.70102
+    ],
+    [
+      45.45384,
+      -122.70069
+    ],
+    [
+      45.45417,
+      -122.70028
+    ],
+    [
+      45.45443,
+      -122.70011
+    ],
+    [
+      45.4546,
+      -122.70007
+    ],
+    [
+      45.45472,
+      -122.70008
+    ],
+    [
+      45.45491,
+      -122.70019
+    ],
+    [
+      45.45507,
+      -122.70045
+    ],
+    [
+      45.45513,
+      -122.70056
+    ],
+    [
+      45.45528,
+      -122.70126
+    ],
+    [
+      45.45542,
+      -122.70203
+    ],
+    [
+      45.45547,
+      -122.70219
+    ],
+    [
+      45.45551,
+      -122.70228
+    ],
+    [
+      45.45565,
+      -122.7024
+    ],
+    [
+      45.45579,
+      -122.70235
+    ],
+    [
+      45.45588,
+      -122.70227
+    ],
+    [
+      45.45598,
+      -122.70201
+    ],
+    [
+      45.45622,
+      -122.70117
+    ],
+    [
+      45.45627,
+      -122.70107
+    ],
+    [
+      45.45638,
+      -122.70094
+    ],
+    [
+      45.45651,
+      -122.7009
+    ],
+    [
+      45.45658,
+      -122.7009
+    ],
+    [
+      45.4567,
+      -122.70097
+    ],
+    [
+      45.45673,
+      -122.701
+    ],
+    [
+      45.45681,
+      -122.70113
+    ],
+    [
+      45.45699,
+      -122.70161
+    ],
+    [
+      45.45715,
+      -122.70206
+    ],
+    [
+      45.4572,
+      -122.70214
+    ],
+    [
+      45.45731,
+      -122.70226
+    ],
+    [
+      45.4574,
+      -122.70232
+    ],
+    [
+      45.45756,
+      -122.70236
+    ],
+    [
+      45.4577,
+      -122.70237
+    ],
+    [
+      45.45806,
+      -122.70241
+    ],
+    [
+      45.45807,
+      -122.70256
+    ],
+    [
+      45.4581,
+      -122.7029
+    ],
+    [
+      45.4581,
+      -122.70299
+    ],
+    [
+      45.45811,
+      -122.70397
+    ],
+    [
+      45.4581,
+      -122.70486
+    ],
+    [
+      45.45803,
+      -122.70534
+    ],
+    [
+      45.45755,
+      -122.70772
+    ],
+    [
+      45.45725,
+      -122.70928
+    ],
+    [
+      45.45711,
+      -122.70986
+    ],
+    [
+      45.45701,
+      -122.71007
+    ],
+    [
+      45.4569,
+      -122.71006
+    ],
+    [
+      45.4567,
+      -122.71011
+    ],
+    [
+      45.45662,
+      -122.71012
+    ],
+    [
+      45.45657,
+      -122.71015
+    ],
+    [
+      45.45651,
+      -122.71021
+    ],
+    [
+      45.45639,
+      -122.71046
+    ],
+    [
+      45.45608,
+      -122.71115
+    ],
+    [
+      45.45601,
+      -122.71125
+    ],
+    [
+      45.45585,
+      -122.7114
+    ],
+    [
+      45.45547,
+      -122.71157
+    ],
+    [
+      45.45522,
+      -122.71168
+    ],
+    [
+      45.45487,
+      -122.71188
+    ],
+    [
+      45.45475,
+      -122.71199
+    ],
+    [
+      45.45451,
+      -122.71221
+    ],
+    [
+      45.45425,
+      -122.71246
+    ],
+    [
+      45.454,
+      -122.71264
+    ],
+    [
+      45.45372,
+      -122.71276
+    ],
+    [
+      45.45343,
+      -122.71282
+    ],
+    [
+      45.45315,
+      -122.71285
+    ],
+    [
+      45.45252,
+      -122.71284
+    ],
+    [
+      45.45176,
+      -122.71284
+    ],
+    [
+      45.45089,
+      -122.71284
+    ],
+    [
+      45.4509,
+      -122.71316
+    ],
+    [
+      45.45067,
+      -122.71317
+    ]
+  ]
+}

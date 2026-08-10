@@ -1,0 +1,431 @@
+{
+  "id": "1jZj0kZ2j-mliQfG34j4hk1_inmTyR_iB",
+  "name": "233",
+  "direction": "Afternoon",
+  "filename": "233RWH-P_Effective_082626.pdf",
+  "fileId": "1jZj0kZ2j-mliQfG34j4hk1_inmTyR_iB",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ROSEWAY HEIGHTS GT LOAD ON ALAMEDA",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5873484,
+        45.5440613
+      ],
+      "displayName": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "schoolName": "Roseway Heights"
+    },
+    {
+      "id": "stop-1",
+      "address": "NE Fremont St. & NE Fremont Dr. [SW]",
+      "time": "4:13 pm",
+      "direction": "SW",
+      "originalLine": "4:13 pmNE FREMONT ST @ NE FREMONT DR [SW]233RWH-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5770753,
+        45.5481466
+      ],
+      "displayName": "NE Fremont St & NE Fremont Dr, Portland, OR 97220, USA",
+      "placeId": "EjZORSBGcmVtb250IFN0ICYgTkUgRnJlbW9udCBEciwgUG9ydGxhbmQsIE9SIDk3MjIwLCBVU0EiZiJkChQKEgkrGRpCRaGVVBEHoakZWa1-ARIUChIJKxkaQkWhlVQRB6GpGVmtfgEaFAoSCe-KqYFPoZVUEUIhf49hw6K9GhQKEglRj-RkQ6GVVBEccsbBPOGr0SIKDXoYJhsV_zjwtg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE Fremont St. & NE 92nd Ave. [S]",
+      "time": "4:15 pm",
+      "direction": "S",
+      "originalLine": "4:15 pmNE FREMONT ST @ NE 92ND AV [S]233RWH-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5690618,
+        45.5487195
+      ],
+      "displayName": "NE 92nd Ave & NE Fremont St, Portland, OR 97220, USA",
+      "placeId": "EjRORSA5Mm5kIEF2ZSAmIE5FIEZyZW1vbnQgU3QsIFBvcnRsYW5kLCBPUiA5NzIyMCwgVVNBImYiZAoUChIJBabUtVuhlVQROEZ4FuI5z8oSFAoSCQWm1LVboZVUEThGeBbiOc_KGhQKEgm_RI24QqGVVBF00airIJm_vRoUChIJ74qpgU-hlVQRQiF_j2HDor0iCg3bLiYbFQZy8bY",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 92nd Ave. & NE Tillamook St. [NW]",
+      "time": "4:18 pm",
+      "direction": "NW",
+      "originalLine": "4:18 pmNE 92ND AV @ NE TILLAMOOK ST [NW]233RWH-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5684837,
+        45.5371216
+      ],
+      "displayName": "NE 92nd Ave & NE Tillamook St, Portland, OR 97220, USA",
+      "placeId": "EjZORSA5Mm5kIEF2ZSAmIE5FIFRpbGxhbW9vayBTdCwgUG9ydGxhbmQsIE9SIDk3MjIwLCBVU0EiZiJkChQKEgmZPg1DaaGVVBEFAat1rFMyDxIUChIJmT4NQ2mhlVQRBQGrdaxTMg8aFAoSCb9EjbhCoZVUEXTRqKsgmb-9GhQKEgnLCZEBQKGVVBHDQE8bGdm0WSIKDdBpJBsVm4jxtg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Halsey St. & NE 88th Ave. [N]",
+      "time": "4:20 pm",
+      "direction": "N",
+      "originalLine": "4:20 pmNE HALSEY ST @ NE 88TH AV [N]233RWH-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5725754,
+        45.533529
+      ],
+      "displayName": "NE Halsey St & NE 88th Ave, Portland, OR 97220, USA",
+      "placeId": "EjNORSBIYWxzZXkgU3QgJiBORSA4OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjIwLCBVU0EiZiJkChQKEgnh4jW_bKGVVBHtU12dEkZXfhIUChIJ4eI1v2yhlVQR7VNdnRJGV34aFAoSCflaUt-TopVUETM_V1Bq0U__GhQKEglxuQxRQ6GVVBFCCoD7lcEuCiIKDXrdIxsVxujwtg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE 82nd Ave. & NE Russell St. [SE]",
+      "time": "4:23 pm",
+      "direction": "SE",
+      "originalLine": "4:23 pmNE 82ND AV @ NE RUSSELL ST [SE]233RWH-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5789087,
+        45.5408757
+      ],
+      "displayName": "NE 82nd Ave & NE Russell St, Portland, OR 97213, USA",
+      "placeId": "EjRORSA4Mm5kIEF2ZSAmIE5FIFJ1c3NlbGwgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJFcieAUGhlVQRXWU8NsRGHDgSFAoSCRXIngFBoZVUEV1lPDbERhw4GhQKEgk5ulQ4UKGVVBEHF5m7FZ1R4hoUChIJVSU_fdCjlVQR_UHb77WgrlQiCg11_CQbFWHx77Y",
+      "neighborhood": "Northeast Portland"
+    }
+  ],
+  "neighborhoods": [
+    "Northeast Portland"
+  ],
+  "processedAt": "2026-08-10T02:07:57.363Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54378,
+      -122.5873
+    ],
+    [
+      45.5438,
+      -122.58674
+    ],
+    [
+      45.54382,
+      -122.58662
+    ],
+    [
+      45.54457,
+      -122.5866
+    ],
+    [
+      45.54456,
+      -122.58594
+    ],
+    [
+      45.54567,
+      -122.58592
+    ],
+    [
+      45.54764,
+      -122.58588
+    ],
+    [
+      45.54819,
+      -122.58587
+    ],
+    [
+      45.54819,
+      -122.58568
+    ],
+    [
+      45.54818,
+      -122.58383
+    ],
+    [
+      45.54816,
+      -122.58106
+    ],
+    [
+      45.54815,
+      -122.57877
+    ],
+    [
+      45.54815,
+      -122.57617
+    ],
+    [
+      45.54813,
+      -122.57094
+    ],
+    [
+      45.54814,
+      -122.57031
+    ],
+    [
+      45.54815,
+      -122.56995
+    ],
+    [
+      45.54823,
+      -122.56966
+    ],
+    [
+      45.54838,
+      -122.56938
+    ],
+    [
+      45.54852,
+      -122.56922
+    ],
+    [
+      45.54872,
+      -122.56906
+    ],
+    [
+      45.54822,
+      -122.56908
+    ],
+    [
+      45.54797,
+      -122.56916
+    ],
+    [
+      45.54746,
+      -122.56949
+    ],
+    [
+      45.54729,
+      -122.56961
+    ],
+    [
+      45.54705,
+      -122.56977
+    ],
+    [
+      45.54682,
+      -122.56988
+    ],
+    [
+      45.54666,
+      -122.56992
+    ],
+    [
+      45.54644,
+      -122.56996
+    ],
+    [
+      45.54556,
+      -122.56997
+    ],
+    [
+      45.54536,
+      -122.56998
+    ],
+    [
+      45.54467,
+      -122.56999
+    ],
+    [
+      45.54349,
+      -122.57
+    ],
+    [
+      45.54324,
+      -122.56999
+    ],
+    [
+      45.54292,
+      -122.56992
+    ],
+    [
+      45.54257,
+      -122.56981
+    ],
+    [
+      45.54233,
+      -122.56971
+    ],
+    [
+      45.54203,
+      -122.56954
+    ],
+    [
+      45.54104,
+      -122.56881
+    ],
+    [
+      45.54075,
+      -122.56864
+    ],
+    [
+      45.54045,
+      -122.56851
+    ],
+    [
+      45.54025,
+      -122.56847
+    ],
+    [
+      45.5397,
+      -122.56846
+    ],
+    [
+      45.53893,
+      -122.56848
+    ],
+    [
+      45.53828,
+      -122.56846
+    ],
+    [
+      45.53795,
+      -122.56847
+    ],
+    [
+      45.53647,
+      -122.56852
+    ],
+    [
+      45.5357,
+      -122.56849
+    ],
+    [
+      45.5354,
+      -122.56855
+    ],
+    [
+      45.53472,
+      -122.56855
+    ],
+    [
+      45.53393,
+      -122.56856
+    ],
+    [
+      45.5335,
+      -122.56856
+    ],
+    [
+      45.53347,
+      -122.56865
+    ],
+    [
+      45.53348,
+      -122.56928
+    ],
+    [
+      45.53349,
+      -122.56978
+    ],
+    [
+      45.5335,
+      -122.57096
+    ],
+    [
+      45.53356,
+      -122.57453
+    ],
+    [
+      45.53358,
+      -122.57578
+    ],
+    [
+      45.53358,
+      -122.57585
+    ],
+    [
+      45.53358,
+      -122.57596
+    ],
+    [
+      45.53363,
+      -122.57608
+    ],
+    [
+      45.53369,
+      -122.57621
+    ],
+    [
+      45.53386,
+      -122.57653
+    ],
+    [
+      45.53395,
+      -122.57648
+    ],
+    [
+      45.53428,
+      -122.57648
+    ],
+    [
+      45.5348,
+      -122.57647
+    ],
+    [
+      45.53498,
+      -122.57646
+    ],
+    [
+      45.53499,
+      -122.57731
+    ],
+    [
+      45.53499,
+      -122.57765
+    ],
+    [
+      45.535,
+      -122.57874
+    ],
+    [
+      45.53501,
+      -122.57903
+    ],
+    [
+      45.53535,
+      -122.57902
+    ],
+    [
+      45.53599,
+      -122.579
+    ],
+    [
+      45.53724,
+      -122.57898
+    ],
+    [
+      45.53765,
+      -122.57897
+    ],
+    [
+      45.53794,
+      -122.57895
+    ],
+    [
+      45.53841,
+      -122.57893
+    ],
+    [
+      45.53845,
+      -122.57894
+    ],
+    [
+      45.53873,
+      -122.57894
+    ],
+    [
+      45.53909,
+      -122.57894
+    ],
+    [
+      45.54088,
+      -122.57891
+    ]
+  ]
+}

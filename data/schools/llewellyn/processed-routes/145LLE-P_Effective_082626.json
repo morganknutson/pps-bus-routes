@@ -1,0 +1,33 @@
+{
+  "id": "1Zvb3VdcEOhPvXKISjXAEfGcZWqMpLnNH",
+  "name": "145",
+  "direction": "Afternoon",
+  "filename": "145LLE-P_Effective_082626.pdf",
+  "fileId": "1Zvb3VdcEOhPvXKISjXAEfGcZWqMpLnNH",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "6301 SE 14th Ave, Portland, OR 97202, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:LLEWELLYN GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6521794,
+        45.4771721
+      ],
+      "displayName": "6301 SE 14th Ave, Portland, OR 97202, USA",
+      "schoolName": "Llewellyn"
+    }
+  ],
+  "neighborhoods": [],
+  "processedAt": "2026-08-10T02:00:58.977Z",
+  "stats": {
+    "totalStops": 1,
+    "geocodedStops": 1,
+    "failedStops": 0
+  },
+  "geometry": null
+}

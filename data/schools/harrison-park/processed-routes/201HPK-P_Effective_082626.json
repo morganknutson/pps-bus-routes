@@ -1,0 +1,384 @@
+{
+  "id": "1KdRBDqqW_IcblhiFdeDRfWh0jDvVunsV",
+  "name": "201",
+  "direction": "Afternoon",
+  "filename": "201HPK-P_Effective_082626.pdf",
+  "fileId": "1KdRBDqqW_IcblhiFdeDRfWh0jDvVunsV",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:HARRISON PARK GT LOADING ZONE/2225 SE 87TH AV",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.574816,
+        45.5069498
+      ],
+      "displayName": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "schoolName": "Harrison Park"
+    },
+    {
+      "id": "stop-1",
+      "address": "NE Glisan St. & NE 71st Ave. [NE]",
+      "time": "4:18 pm",
+      "direction": "NE",
+      "originalLine": "4:18 pmNE GLISAN ST @ NE 71ST AV [NE]201HPK-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5898649,
+        45.5264692
+      ],
+      "displayName": "NE 71st Ave & NE Glisan St, Portland, OR 97213, USA",
+      "placeId": "EjNORSA3MXN0IEF2ZSAmIE5FIEdsaXNhbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgktBlAKG6GVVBEsLq7fsTyEZxIUChIJLQZQChuhlVQRLC6u37E8hGcaFAoSCV1RsK4-oZVUEYzfOJwD9kzOGhQKEgnt8e9jgqGVVBFxm3GEgsbHZSIKDbTJIhsVZ0Xutg",
+      "neighborhood": "Montavilla"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE Multnomah St. & NE 77th Ave. [SW]",
+      "time": "4:22 pm",
+      "direction": "SW",
+      "originalLine": "4:22 pmNE MULTNOMAH ST @ NE 77TH AV [SW]201HPK-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5839252,
+        45.531594
+      ],
+      "displayName": "NE Multnomah St & NE 77th Ave, Portland, OR 97213, USA",
+      "placeId": "EjZORSBNdWx0bm9tYWggU3QgJiBORSA3N3RoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgklLOLOFqGVVBGSnyOfIgTswxIUChIJJSzizhahlVQRkp8jnyIE7MMaFAoSCfs0n39toZVUEegXyw0bvMt0GhQKEgnlFZsFR6GVVBFDEe5iPM2gIyIKDeSRIxsVbC3vtg",
+      "neighborhood": "Montavilla"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Pacific St. & NE 87th Ave. [SW]",
+      "time": "4:26 pm",
+      "direction": "SW",
+      "originalLine": "4:26 pmNE PACIFIC ST @ NE 87TH AV [SW]201HPK-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5736153,
+        45.5294683
+      ],
+      "displayName": "NE 87th Ave & Northeast Pacific Street, Portland, OR 97220, USA",
+      "placeId": "Ej9ORSA4N3RoIEF2ZSAmIE5vcnRoZWFzdCBQYWNpZmljIFN0cmVldCwgUG9ydGxhbmQsIE9SIDk3MjIwLCBVU0EiZiJkChQKEgm37KyAEqGVVBGqmW6Uw1OEDhIUChIJt-ysgBKhlVQRqplulMNThA4aFAoSCZdm4J5EoZVUEXRF2KXrb8hQGhQKEgm9g-bvcqGVVBG0ImhsuMDcIiIKDds-IxsVJ8Dwtg",
+      "neighborhood": "Montavilla"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Hassalo St. & NE 90th Ave. [SW]",
+      "time": "4:27 pm",
+      "direction": "SW",
+      "originalLine": "4:27 pmNE HASSALO ST @ NE 90TH AV [SW]201HPK-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5714856,
+        45.5309004
+      ],
+      "displayName": "NE Hassalo St & NE 90th Ave, Portland, OR 97220, USA",
+      "placeId": "EjRORSBIYXNzYWxvIFN0ICYgTkUgOTB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIyMCwgVVNBImYiZAoUChIJJ2octBKhlVQRagV0b_UOI5wSFAoSCSdqHLQSoZVUEWoFdG_1DiOcGhQKEgk3YUg5cqGVVBGdKfjRx-HBARoUChIJTXzW02mhlVQRNj-OYqLaNfoiCg3MdiMbFVgT8bY",
+      "neighborhood": "Montavilla"
+    }
+  ],
+  "neighborhoods": [
+    "Montavilla"
+  ],
+  "processedAt": "2026-08-10T01:59:01.572Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50698,
+      -122.57441
+    ],
+    [
+      45.50692,
+      -122.57439
+    ],
+    [
+      45.5069,
+      -122.57434
+    ],
+    [
+      45.5069,
+      -122.57428
+    ],
+    [
+      45.50735,
+      -122.57428
+    ],
+    [
+      45.50747,
+      -122.57429
+    ],
+    [
+      45.50753,
+      -122.5743
+    ],
+    [
+      45.50766,
+      -122.57437
+    ],
+    [
+      45.50769,
+      -122.57439
+    ],
+    [
+      45.5088,
+      -122.57439
+    ],
+    [
+      45.50935,
+      -122.57438
+    ],
+    [
+      45.50937,
+      -122.57409
+    ],
+    [
+      45.51007,
+      -122.57409
+    ],
+    [
+      45.51007,
+      -122.57463
+    ],
+    [
+      45.51008,
+      -122.57515
+    ],
+    [
+      45.51008,
+      -122.5772
+    ],
+    [
+      45.51008,
+      -122.57849
+    ],
+    [
+      45.51009,
+      -122.57868
+    ],
+    [
+      45.5105,
+      -122.57868
+    ],
+    [
+      45.5113,
+      -122.57868
+    ],
+    [
+      45.51222,
+      -122.57869
+    ],
+    [
+      45.51432,
+      -122.57882
+    ],
+    [
+      45.51549,
+      -122.57889
+    ],
+    [
+      45.51692,
+      -122.57896
+    ],
+    [
+      45.51914,
+      -122.57907
+    ],
+    [
+      45.51995,
+      -122.57908
+    ],
+    [
+      45.52163,
+      -122.57907
+    ],
+    [
+      45.52243,
+      -122.57908
+    ],
+    [
+      45.52278,
+      -122.57907
+    ],
+    [
+      45.52279,
+      -122.57972
+    ],
+    [
+      45.52279,
+      -122.58009
+    ],
+    [
+      45.52279,
+      -122.58037
+    ],
+    [
+      45.52282,
+      -122.58365
+    ],
+    [
+      45.52285,
+      -122.58697
+    ],
+    [
+      45.52285,
+      -122.58721
+    ],
+    [
+      45.52287,
+      -122.58735
+    ],
+    [
+      45.52304,
+      -122.58784
+    ],
+    [
+      45.5231,
+      -122.5881
+    ],
+    [
+      45.52312,
+      -122.58988
+    ],
+    [
+      45.52468,
+      -122.58988
+    ],
+    [
+      45.52618,
+      -122.58987
+    ],
+    [
+      45.52647,
+      -122.58986
+    ],
+    [
+      45.52647,
+      -122.58892
+    ],
+    [
+      45.52647,
+      -122.58869
+    ],
+    [
+      45.52646,
+      -122.58755
+    ],
+    [
+      45.52646,
+      -122.58723
+    ],
+    [
+      45.52646,
+      -122.58682
+    ],
+    [
+      45.52664,
+      -122.58682
+    ],
+    [
+      45.52821,
+      -122.58681
+    ],
+    [
+      45.52861,
+      -122.58681
+    ],
+    [
+      45.53003,
+      -122.5868
+    ],
+    [
+      45.53087,
+      -122.5868
+    ],
+    [
+      45.53158,
+      -122.5868
+    ],
+    [
+      45.53159,
+      -122.58582
+    ],
+    [
+      45.53159,
+      -122.58485
+    ],
+    [
+      45.53159,
+      -122.58393
+    ],
+    [
+      45.5316,
+      -122.58286
+    ],
+    [
+      45.53161,
+      -122.57943
+    ],
+    [
+      45.5316,
+      -122.57907
+    ],
+    [
+      45.53153,
+      -122.57907
+    ],
+    [
+      45.53139,
+      -122.57907
+    ],
+    [
+      45.53075,
+      -122.57907
+    ],
+    [
+      45.52948,
+      -122.57908
+    ],
+    [
+      45.52948,
+      -122.57642
+    ],
+    [
+      45.52947,
+      -122.57518
+    ],
+    [
+      45.52947,
+      -122.57362
+    ],
+    [
+      45.53002,
+      -122.57362
+    ],
+    [
+      45.53064,
+      -122.57362
+    ],
+    [
+      45.53092,
+      -122.57362
+    ],
+    [
+      45.53092,
+      -122.57355
+    ],
+    [
+      45.53091,
+      -122.57274
+    ],
+    [
+      45.5309,
+      -122.57149
+    ]
+  ]
+}

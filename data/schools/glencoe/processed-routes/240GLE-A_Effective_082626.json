@@ -1,0 +1,307 @@
+{
+  "id": "1M67QdWrfYKvuiyowpcNtGXDL3le8dbUg",
+  "name": "240",
+  "direction": "Morning",
+  "filename": "240GLE-A_Effective_082626.pdf",
+  "fileId": "1M67QdWrfYKvuiyowpcNtGXDL3le8dbUg",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE 71st Ave. & SE Morrison St. [NW]",
+      "time": "7:32 am",
+      "direction": "NW",
+      "originalLine": "7:32 amSE 71ST AV @ SE MORRISON ST [NW]240GLE-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5897359,
+        45.51744619999999
+      ],
+      "displayName": "SE Morrison St & SE 71st Ave, Portland, OR 97215, USA",
+      "placeId": "EjVTRSBNb3JyaXNvbiBTdCAmIFNFIDcxc3QgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCbevgOABoZVUEU7NQX3-VEV2EhQKEgm3r4DgAaGVVBFOzUF9_lRFdhoUChIJL5AE4KmhlVQRCtH21GG6w-caFAoSCbkT9knmC5VUEcc6qphOV9E7IgoNPmkhGxVxSu62",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 42nd Ave. & SE Caruthers St. [E]",
+      "time": "7:41 am",
+      "direction": "E",
+      "originalLine": "7:41 amSE 42ND AV @ SE CARUTHERS ST [E]240GLE-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6190688,
+        45.5054897
+      ],
+      "displayName": "SE Caruthers St & SE 42nd Ave, Portland, OR 97214, USA",
+      "placeId": "EjZTRSBDYXJ1dGhlcnMgU3QgJiBTRSA0Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjE0LCBVU0EiZiJkChQKEgmZD5UiiqCVVBGd9UQUa1RkSBIUChIJmQ-VIoqglVQRnfVEFGtUZEgaFAoSCU-H4lSxoZVUEbuLFpCKjT9CGhQKEgnJ0kgAoQqVVBG_69fN9-UASyIKDTGWHxsVoNDptg",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-0",
+      "address": "825 SE 51st Ave, Portland, OR 97215, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:GLENCOE GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6118471,
+        45.517248
+      ],
+      "displayName": "825 SE 51st Ave, Portland, OR 97215, USA",
+      "schoolName": "Glencoe"
+    }
+  ],
+  "neighborhoods": [
+    "Richmond",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-08-10T02:23:13.408Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.51745,
+      -122.58974
+    ],
+    [
+      45.51746,
+      -122.5912
+    ],
+    [
+      45.51746,
+      -122.59224
+    ],
+    [
+      45.51694,
+      -122.59224
+    ],
+    [
+      45.51695,
+      -122.59373
+    ],
+    [
+      45.51695,
+      -122.59472
+    ],
+    [
+      45.51695,
+      -122.59705
+    ],
+    [
+      45.51694,
+      -122.59788
+    ],
+    [
+      45.5169,
+      -122.59817
+    ],
+    [
+      45.5168,
+      -122.59871
+    ],
+    [
+      45.51678,
+      -122.59973
+    ],
+    [
+      45.51678,
+      -122.60026
+    ],
+    [
+      45.51677,
+      -122.60122
+    ],
+    [
+      45.51676,
+      -122.60272
+    ],
+    [
+      45.51674,
+      -122.60623
+    ],
+    [
+      45.51673,
+      -122.60646
+    ],
+    [
+      45.5167,
+      -122.60659
+    ],
+    [
+      45.51657,
+      -122.60707
+    ],
+    [
+      45.51656,
+      -122.60741
+    ],
+    [
+      45.51656,
+      -122.6115
+    ],
+    [
+      45.51657,
+      -122.61444
+    ],
+    [
+      45.51657,
+      -122.61617
+    ],
+    [
+      45.5153,
+      -122.61617
+    ],
+    [
+      45.51205,
+      -122.61619
+    ],
+    [
+      45.50849,
+      -122.61617
+    ],
+    [
+      45.50808,
+      -122.61618
+    ],
+    [
+      45.50615,
+      -122.61618
+    ],
+    [
+      45.50543,
+      -122.61616
+    ],
+    [
+      45.50528,
+      -122.61616
+    ],
+    [
+      45.50527,
+      -122.61714
+    ],
+    [
+      45.50527,
+      -122.61788
+    ],
+    [
+      45.50527,
+      -122.61835
+    ],
+    [
+      45.50524,
+      -122.61862
+    ],
+    [
+      45.50519,
+      -122.61878
+    ],
+    [
+      45.50515,
+      -122.61886
+    ],
+    [
+      45.50518,
+      -122.61894
+    ],
+    [
+      45.50527,
+      -122.61902
+    ],
+    [
+      45.50533,
+      -122.61906
+    ],
+    [
+      45.5054,
+      -122.61908
+    ],
+    [
+      45.50708,
+      -122.61909
+    ],
+    [
+      45.50799,
+      -122.6191
+    ],
+    [
+      45.508,
+      -122.61717
+    ],
+    [
+      45.50801,
+      -122.61603
+    ],
+    [
+      45.50801,
+      -122.61532
+    ],
+    [
+      45.50801,
+      -122.61517
+    ],
+    [
+      45.50806,
+      -122.61516
+    ],
+    [
+      45.50812,
+      -122.61515
+    ],
+    [
+      45.50877,
+      -122.61515
+    ],
+    [
+      45.51204,
+      -122.61515
+    ],
+    [
+      45.51204,
+      -122.61438
+    ],
+    [
+      45.51204,
+      -122.61311
+    ],
+    [
+      45.51203,
+      -122.61269
+    ],
+    [
+      45.51203,
+      -122.61238
+    ],
+    [
+      45.51209,
+      -122.61238
+    ],
+    [
+      45.51243,
+      -122.6124
+    ],
+    [
+      45.51285,
+      -122.61243
+    ],
+    [
+      45.51446,
+      -122.61251
+    ],
+    [
+      45.5153,
+      -122.61257
+    ],
+    [
+      45.51619,
+      -122.61258
+    ],
+    [
+      45.51714,
+      -122.61258
+    ]
+  ]
+}

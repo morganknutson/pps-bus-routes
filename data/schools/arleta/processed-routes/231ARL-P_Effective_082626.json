@@ -1,0 +1,617 @@
+{
+  "id": "1rSy4NdQT4pq0-b5nsV25FZBS7Yf54d6w",
+  "name": "231",
+  "direction": "Afternoon",
+  "filename": "231ARL-P_Effective_082626.pdf",
+  "fileId": "1rSy4NdQT4pq0-b5nsV25FZBS7Yf54d6w",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "5109 SE 66th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ARLETA GT & ST LOADING ZONE ON MITCHELL",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5960967,
+        45.4862341
+      ],
+      "displayName": "5109 SE 66th Ave, Portland, OR 97206, USA",
+      "schoolName": "Arleta"
+    },
+    {
+      "id": "stop-1",
+      "address": "4701 SE Bush St. (creston El) [S]",
+      "time": "2:41 pm",
+      "direction": "S",
+      "originalLine": "2:41 pm4701 SE BUSH ST (CRESTON EL) [S]231ARL-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.61412949999999,
+        45.495183499999996
+      ],
+      "displayName": "4701 SE Bush St, Portland, OR 97206, USA",
+      "placeId": "ChIJVQCwZ2WglVQRVdd8xCPqgRs",
+      "neighborhood": "Creston - Kenilworth"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Center St. & SE 66th Ave. [SW]",
+      "time": "2:45 pm",
+      "direction": "SW",
+      "originalLine": "2:45 pmSE CENTER ST @ SE 66TH AV [SW]231ARL-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5953159,
+        45.4939381
+      ],
+      "displayName": "SE Center St & SE 66th Ave, Portland, OR 97206, USA",
+      "placeId": "EjNTRSBDZW50ZXIgU3QgJiBTRSA2NnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgkfe3zQQaCVVBFh2AodAbEVIxIUChIJH3t80EGglVQRYdgKHQGxFSMaFAoSCUVlUo04oJVUETy-mHISpKLCGhQKEgn_4OUAEaCVVBGsrVMf2K2dYSIKDfXSHRsVeXDttg",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 72nd Ave. & SE Lafayette St. [E]",
+      "time": "2:48 pm",
+      "direction": "E",
+      "originalLine": "2:48 pmSE 72ND AV @ SE LAFAYETTE ST [E]231ARL-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5891482,
+        45.4963234
+      ],
+      "displayName": "SE Lafayette St & SE 72nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjZTRSBMYWZheWV0dGUgU3QgJiBTRSA3Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgn9i7vIRqCVVBFVIaDYGtnOVhIUChIJ_Yu7yEaglVQRVSGg2BrZzlYaFAoSCW31XpploJVUETZZUrRgBC0LGhQKEgkZn9j1GaCVVBEllI2C9NI4qyIKDSIwHhsVZmHutg",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 71st Ave. & SE Woodward St. [SE]",
+      "time": "2:50 pm",
+      "direction": "SE",
+      "originalLine": "2:50 pmSE 71ST AV @ SE WOODWARD ST [SE]231ARL-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5898633,
+        45.5014383
+      ],
+      "displayName": "SE Woodward St & SE 71st Ave, Portland, OR 97206, USA",
+      "placeId": "EjVTRSBXb29kd2FyZCBTdCAmIFNFIDcxc3QgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCa1NL2tFoJVUEfY2RmYDUPJ9EhQKEgmtTS9rRaCVVBH2NkZmA1DyfRoUChIJm0VU8kuglVQRgnj1DEPOIoAaFAoSCbkT9knmC5VUEcc6qphOV9E7IgoN7_ceGxV3Re62",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE Tibbetts St. & SE 79th Ave. [SW]",
+      "time": "2:52 pm",
+      "direction": "SW",
+      "originalLine": "2:52 pmSE TIBBETTS ST @ SE 79TH AV [SW]231ARL-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5819401,
+        45.5000683
+      ],
+      "displayName": "SE 79th Ave & SE Tibbetts St, Portland, OR 97206, USA",
+      "placeId": "EjVTRSA3OXRoIEF2ZSAmIFNFIFRpYmJldHRzIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCf1zgtRIoJVUEW4SI-g7GBcrEhQKEgn9c4LUSKCVVBFuEiPoOxgXKxoUChIJJeGoGj2glVQRu-QHIVjy5bMaFAoSCbN0iGjKoZVUEcu54aXhGNROIgoNa8IeGxX3eu-2",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-6",
+      "address": "9330 SE Harold St. (wattles Boys & Girls Club)",
+      "time": "2:59 pm",
+      "direction": null,
+      "originalLine": "2:59 pm9330 SE HAROLD ST (WATTLES BOYS & GIRLS CLUB)231ARL-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5674637,
+        45.4825329
+      ],
+      "displayName": "9330 SE Harold St, Portland, OR 97266, USA",
+      "placeId": "ChIJGeB_ZyaglVQRuIJE67PR7no",
+      "neighborhood": "Lents"
+    }
+  ],
+  "neighborhoods": [
+    "Creston - Kenilworth",
+    "Foster - Powell",
+    "Lents",
+    "South Tabor"
+  ],
+  "processedAt": "2026-08-10T02:14:52.143Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.48623,
+      -122.59572
+    ],
+    [
+      45.48666,
+      -122.59572
+    ],
+    [
+      45.48666,
+      -122.59594
+    ],
+    [
+      45.48666,
+      -122.59659
+    ],
+    [
+      45.48667,
+      -122.59802
+    ],
+    [
+      45.48665,
+      -122.59951
+    ],
+    [
+      45.48663,
+      -122.60002
+    ],
+    [
+      45.48938,
+      -122.59999
+    ],
+    [
+      45.49027,
+      -122.59998
+    ],
+    [
+      45.49028,
+      -122.60132
+    ],
+    [
+      45.49029,
+      -122.60473
+    ],
+    [
+      45.4903,
+      -122.60829
+    ],
+    [
+      45.4903,
+      -122.60876
+    ],
+    [
+      45.4903,
+      -122.60901
+    ],
+    [
+      45.49052,
+      -122.60901
+    ],
+    [
+      45.49115,
+      -122.60902
+    ],
+    [
+      45.49135,
+      -122.60901
+    ],
+    [
+      45.49275,
+      -122.60903
+    ],
+    [
+      45.49353,
+      -122.60904
+    ],
+    [
+      45.49352,
+      -122.60995
+    ],
+    [
+      45.49352,
+      -122.61222
+    ],
+    [
+      45.49352,
+      -122.61319
+    ],
+    [
+      45.49352,
+      -122.61411
+    ],
+    [
+      45.4942,
+      -122.61411
+    ],
+    [
+      45.49474,
+      -122.61412
+    ],
+    [
+      45.49512,
+      -122.61413
+    ],
+    [
+      45.49518,
+      -122.61413
+    ],
+    [
+      45.49512,
+      -122.61413
+    ],
+    [
+      45.49488,
+      -122.61412
+    ],
+    [
+      45.49488,
+      -122.61318
+    ],
+    [
+      45.49507,
+      -122.61312
+    ],
+    [
+      45.49511,
+      -122.61265
+    ],
+    [
+      45.49615,
+      -122.61265
+    ],
+    [
+      45.49744,
+      -122.61264
+    ],
+    [
+      45.49754,
+      -122.61262
+    ],
+    [
+      45.49754,
+      -122.61246
+    ],
+    [
+      45.49754,
+      -122.61217
+    ],
+    [
+      45.49752,
+      -122.61147
+    ],
+    [
+      45.49745,
+      -122.61135
+    ],
+    [
+      45.49745,
+      -122.6112
+    ],
+    [
+      45.49745,
+      -122.6106
+    ],
+    [
+      45.49744,
+      -122.60869
+    ],
+    [
+      45.49745,
+      -122.60861
+    ],
+    [
+      45.49749,
+      -122.60855
+    ],
+    [
+      45.49749,
+      -122.6084
+    ],
+    [
+      45.49749,
+      -122.60818
+    ],
+    [
+      45.49745,
+      -122.60809
+    ],
+    [
+      45.49745,
+      -122.60797
+    ],
+    [
+      45.49745,
+      -122.60766
+    ],
+    [
+      45.49745,
+      -122.60753
+    ],
+    [
+      45.49745,
+      -122.60607
+    ],
+    [
+      45.49744,
+      -122.60232
+    ],
+    [
+      45.49744,
+      -122.60151
+    ],
+    [
+      45.49744,
+      -122.60064
+    ],
+    [
+      45.49747,
+      -122.60055
+    ],
+    [
+      45.49747,
+      -122.60044
+    ],
+    [
+      45.49748,
+      -122.5996
+    ],
+    [
+      45.49747,
+      -122.5994
+    ],
+    [
+      45.49747,
+      -122.59812
+    ],
+    [
+      45.49746,
+      -122.59616
+    ],
+    [
+      45.49745,
+      -122.59566
+    ],
+    [
+      45.49726,
+      -122.59566
+    ],
+    [
+      45.49724,
+      -122.59543
+    ],
+    [
+      45.49723,
+      -122.59536
+    ],
+    [
+      45.49722,
+      -122.59533
+    ],
+    [
+      45.4972,
+      -122.59531
+    ],
+    [
+      45.4969,
+      -122.5953
+    ],
+    [
+      45.49394,
+      -122.59532
+    ],
+    [
+      45.4969,
+      -122.5953
+    ],
+    [
+      45.4972,
+      -122.59531
+    ],
+    [
+      45.49722,
+      -122.59533
+    ],
+    [
+      45.49724,
+      -122.59543
+    ],
+    [
+      45.49726,
+      -122.59566
+    ],
+    [
+      45.49745,
+      -122.59566
+    ],
+    [
+      45.49745,
+      -122.59473
+    ],
+    [
+      45.49745,
+      -122.59379
+    ],
+    [
+      45.49746,
+      -122.59273
+    ],
+    [
+      45.49745,
+      -122.5917
+    ],
+    [
+      45.49744,
+      -122.59078
+    ],
+    [
+      45.49744,
+      -122.58946
+    ],
+    [
+      45.49744,
+      -122.5893
+    ],
+    [
+      45.49744,
+      -122.58914
+    ],
+    [
+      45.49713,
+      -122.58914
+    ],
+    [
+      45.49632,
+      -122.58915
+    ],
+    [
+      45.49713,
+      -122.58914
+    ],
+    [
+      45.49744,
+      -122.58914
+    ],
+    [
+      45.49744,
+      -122.5893
+    ],
+    [
+      45.49744,
+      -122.58946
+    ],
+    [
+      45.49744,
+      -122.58992
+    ],
+    [
+      45.49885,
+      -122.5899
+    ],
+    [
+      45.50144,
+      -122.58986
+    ],
+    [
+      45.50064,
+      -122.58988
+    ],
+    [
+      45.50006,
+      -122.58988
+    ],
+    [
+      45.50006,
+      -122.58851
+    ],
+    [
+      45.50006,
+      -122.586
+    ],
+    [
+      45.50006,
+      -122.58538
+    ],
+    [
+      45.50007,
+      -122.58194
+    ],
+    [
+      45.50004,
+      -122.57889
+    ],
+    [
+      45.50004,
+      -122.57872
+    ],
+    [
+      45.49979,
+      -122.57873
+    ],
+    [
+      45.49939,
+      -122.57873
+    ],
+    [
+      45.49873,
+      -122.57873
+    ],
+    [
+      45.49728,
+      -122.57874
+    ],
+    [
+      45.49258,
+      -122.57878
+    ],
+    [
+      45.49113,
+      -122.5788
+    ],
+    [
+      45.49051,
+      -122.5788
+    ],
+    [
+      45.49025,
+      -122.57881
+    ],
+    [
+      45.49024,
+      -122.57821
+    ],
+    [
+      45.49024,
+      -122.57722
+    ],
+    [
+      45.49024,
+      -122.57582
+    ],
+    [
+      45.49024,
+      -122.57484
+    ],
+    [
+      45.49016,
+      -122.57408
+    ],
+    [
+      45.49012,
+      -122.57235
+    ],
+    [
+      45.49003,
+      -122.5686
+    ],
+    [
+      45.48893,
+      -122.56861
+    ],
+    [
+      45.48681,
+      -122.56861
+    ],
+    [
+      45.48469,
+      -122.5686
+    ],
+    [
+      45.48391,
+      -122.56862
+    ],
+    [
+      45.48281,
+      -122.56863
+    ],
+    [
+      45.4828,
+      -122.56809
+    ],
+    [
+      45.4828,
+      -122.56756
+    ],
+    [
+      45.48278,
+      -122.56738
+    ]
+  ]
+}

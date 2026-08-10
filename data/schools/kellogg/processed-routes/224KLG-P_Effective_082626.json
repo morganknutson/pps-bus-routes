@@ -1,0 +1,348 @@
+{
+  "id": "17APWa8iR0loYONDn2AkumFgsrH_qI2r1",
+  "name": "224",
+  "direction": "Afternoon",
+  "filename": "224KLG-P_Effective_082626.pdf",
+  "fileId": "17APWa8iR0loYONDn2AkumFgsrH_qI2r1",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:KELLOGG GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5917225,
+        45.49871359999999
+      ],
+      "displayName": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "schoolName": "Kellogg"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE Harold St. & SE 61st Ave. [SW]",
+      "time": "4:16 pm",
+      "direction": "SW",
+      "originalLine": "4:16 pmSE HAROLD ST @ SE 61ST AV [SW]224KLG-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6008745,
+        45.48305149999999
+      ],
+      "displayName": "SE Harold St & SE 61st Ave, Portland, OR 97206, USA",
+      "placeId": "EjNTRSBIYXJvbGQgU3QgJiBTRSA2MXN0IEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgl9kEQDDqCVVBE2YJU8q-VIyRIUChIJfZBEAw6glVQRNmCVPKvlSMkaFAoSCSnCcRcYoJVUET17_w8mj8ioGhQKEgmTa_nKQqCVVBHhn8T4jUVQ2yIKDbMpHBsVV5fstg",
+      "neighborhood": "Mount Scott - Arleta"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Woodstock Blvd. & SE 67th Ave. [SW]",
+      "time": "4:18 pm",
+      "direction": "SW",
+      "originalLine": "4:18 pmSE WOODSTOCK BLVD @ SE 67TH AV [SW]224KLG-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5944706,
+        45.4791676
+      ],
+      "displayName": "SE Woodstock Blvd & SE 67th Ave, Portland, OR 97206, USA",
+      "placeId": "EjhTRSBXb29kc3RvY2sgQmx2ZCAmIFNFIDY3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCfmy27caoJVUEapEMZRP9xeaEhQKEgn5stu3GqCVVBGqRDGUT_cXmhoUChIJM-ZGQQWglVQRAUHhMI7BVjIaFAoSCan9MpcEoJVUEWTK2GTjvc8dIgoN_JEbGxV-ke22",
+      "neighborhood": "Mount Scott - Arleta"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Ellis St. & SE 88th Ave. [SW]",
+      "time": "4:23 pm",
+      "direction": "SW",
+      "originalLine": "4:23 pmSE ELLIS ST @ SE 88TH AV [SW]224KLG-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5720262,
+        45.4822836
+      ],
+      "displayName": "SE Ellis St & SE 88th Ave, Portland, OR 97266, USA",
+      "placeId": "EjJTRSBFbGxpcyBTdCAmIFNFIDg4dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCd0U7aomoJVUEYIgIdps84YLEhQKEgndFO2qJqCVVBGCICHabPOGCxoUChIJZQCaZRiglVQRIb7x3Rm_yIAaFAoSCVkKEs8woJVUEYK44-uCvrknIgoNtAscGxU6_vC2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Steele St. & SE 92nd Ave. [SE]",
+      "time": "4:25 pm",
+      "direction": "SE",
+      "originalLine": "4:25 pmSE STEELE ST & SE 92ND AV [SE]224KLG-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.568605,
+        45.484615
+      ],
+      "displayName": "SE Steele St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBTdGVlbGUgU3QgJiBTRSA5Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgkn9kvAJaCVVBHFV1JR-fprsBIUChIJJ_ZLwCWglVQRxVdSUfn6a7AaFAoSCQm4wGojoJVUEQw6ZUc3pi7BGhQKEgkf17rPJqCVVBEzOGyn5T1SxiIKDcZmHBsV3oPxtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE 92nd Ave. & SE Schiller St. [SE]",
+      "time": "4:26 pm",
+      "direction": "SE",
+      "originalLine": "4:26 pmSE 92ND AVE @ SE SCHILLER ST [SE]224KLG-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686008,
+        45.487867
+      ],
+      "displayName": "SE Schiller St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjVTRSBTY2hpbGxlciBTdCAmIFNFIDkybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCTVzLOkvoJVUEbF0Pr8dwE4DEhQKEgk1cyzpL6CVVBGxdD6_HcBOAxoUChIJQTSsyD2glVQR3oN7AykFHCQaFAoSCR_Xus8moJVUETM4bKflPVLGIgoNzuUcGxUIhPG2",
+      "neighborhood": "Lents"
+    }
+  ],
+  "neighborhoods": [
+    "Lents",
+    "Mount Scott - Arleta"
+  ],
+  "processedAt": "2026-08-10T01:59:52.965Z",
+  "stats": {
+    "totalStops": 6,
+    "geocodedStops": 6,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.49889,
+      -122.59207
+    ],
+    [
+      45.49888,
+      -122.59231
+    ],
+    [
+      45.49888,
+      -122.59332
+    ],
+    [
+      45.49745,
+      -122.5933
+    ],
+    [
+      45.49732,
+      -122.59329
+    ],
+    [
+      45.4973,
+      -122.59332
+    ],
+    [
+      45.49729,
+      -122.59331
+    ],
+    [
+      45.49723,
+      -122.59328
+    ],
+    [
+      45.49719,
+      -122.59325
+    ],
+    [
+      45.49568,
+      -122.59325
+    ],
+    [
+      45.49569,
+      -122.59396
+    ],
+    [
+      45.49569,
+      -122.59428
+    ],
+    [
+      45.49393,
+      -122.59429
+    ],
+    [
+      45.49351,
+      -122.59428
+    ],
+    [
+      45.49278,
+      -122.59429
+    ],
+    [
+      45.49136,
+      -122.59431
+    ],
+    [
+      45.48988,
+      -122.59432
+    ],
+    [
+      45.48884,
+      -122.59435
+    ],
+    [
+      45.48675,
+      -122.59436
+    ],
+    [
+      45.48666,
+      -122.59437
+    ],
+    [
+      45.48651,
+      -122.59443
+    ],
+    [
+      45.48602,
+      -122.59443
+    ],
+    [
+      45.48306,
+      -122.59443
+    ],
+    [
+      45.48305,
+      -122.59829
+    ],
+    [
+      45.48305,
+      -122.60041
+    ],
+    [
+      45.48305,
+      -122.60087
+    ],
+    [
+      45.48305,
+      -122.60041
+    ],
+    [
+      45.48305,
+      -122.59829
+    ],
+    [
+      45.48306,
+      -122.59635
+    ],
+    [
+      45.48306,
+      -122.59443
+    ],
+    [
+      45.48138,
+      -122.59444
+    ],
+    [
+      45.47962,
+      -122.59447
+    ],
+    [
+      45.47917,
+      -122.59447
+    ],
+    [
+      45.47917,
+      -122.59338
+    ],
+    [
+      45.47917,
+      -122.59244
+    ],
+    [
+      45.4792,
+      -122.59212
+    ],
+    [
+      45.4793,
+      -122.59191
+    ],
+    [
+      45.47947,
+      -122.59164
+    ],
+    [
+      45.4795,
+      -122.59155
+    ],
+    [
+      45.47952,
+      -122.5911
+    ],
+    [
+      45.47952,
+      -122.5893
+    ],
+    [
+      45.47955,
+      -122.58911
+    ],
+    [
+      45.47959,
+      -122.58801
+    ],
+    [
+      45.47961,
+      -122.5839
+    ],
+    [
+      45.47961,
+      -122.5819
+    ],
+    [
+      45.47959,
+      -122.58094
+    ],
+    [
+      45.47952,
+      -122.57961
+    ],
+    [
+      45.47946,
+      -122.57819
+    ],
+    [
+      45.47941,
+      -122.57643
+    ],
+    [
+      45.47935,
+      -122.5749
+    ],
+    [
+      45.48177,
+      -122.57486
+    ],
+    [
+      45.48225,
+      -122.57485
+    ],
+    [
+      45.48226,
+      -122.57414
+    ],
+    [
+      45.48228,
+      -122.57231
+    ],
+    [
+      45.48226,
+      -122.57021
+    ],
+    [
+      45.48223,
+      -122.56863
+    ],
+    [
+      45.48357,
+      -122.56862
+    ],
+    [
+      45.48539,
+      -122.56861
+    ],
+    [
+      45.48787,
+      -122.5686
+    ]
+  ]
+}

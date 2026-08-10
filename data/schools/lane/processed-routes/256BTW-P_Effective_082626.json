@@ -1,0 +1,424 @@
+{
+  "id": "1qQ8zVCc6qiZDzDveq5HP_s0g1ayXhOjo",
+  "name": "256",
+  "direction": "Afternoon",
+  "filename": "256BTW-P_Effective_082626.pdf",
+  "fileId": "1qQ8zVCc6qiZDzDveq5HP_s0g1ayXhOjo",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "7200 SE 60th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BRENTWOOD GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6014249,
+        45.4708481
+      ],
+      "displayName": "7200 SE 60th Ave, Portland, OR 97206, USA",
+      "schoolName": "Lane"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE 89th Ave. & SE Harney St. [E]",
+      "time": "4:17 pm",
+      "direction": "E",
+      "originalLine": "4:17 pmSE 89TH AV @ SE HARNEY ST [E]256BTW-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5718689,
+        45.4631949
+      ],
+      "displayName": "SE Harney St & SE 89th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBIYXJuZXkgU3QgJiBTRSA4OXRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgn17vwQ75-VVBHwIcMRi2W9yRIUChIJ9e78EO-flVQR8CHDEYtlvckaFAoSCa9Q1UlWdZVUEZOK2CWOUirDGhQKEgmdu0DZMKCVVBGiPoSSivHLeCIKDQ0iGRsVXwTxtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 89th Ave. & SE Crystal Springs Blvd. [SE]",
+      "time": "4:18 pm",
+      "direction": "SE",
+      "originalLine": "4:18 pmSE 89TH AV @ SE CRYSTAL SPRINGS BLVD [SE]256BTW-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5718709,
+        45.46495849999999
+      ],
+      "displayName": "SE Crystal Springs Blvd & SE 89th Ave, Portland, OR 97266, USA",
+      "placeId": "Ej5TRSBDcnlzdGFsIFNwcmluZ3MgQmx2ZCAmIFNFIDg5dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCTGE107un5VUEai_odNCH5NwEhQKEgkxhNdO7p-VVBGov6HTQh-TcBoUChIJ4Uj-3VR1lVQRz6x9WXAb6cwaFAoSCZ27QNkwoJVUEaI-hJKK8ct4IgoN8WYZGxVLBPG2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 92nd Ave. & SE Harney Ct. [W]",
+      "time": "4:20 pm",
+      "direction": "W",
+      "originalLine": "4:20 pmSE 92ND AVE @ SE HARNEY CT [W]256BTW-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686318,
+        45.4627302
+      ],
+      "displayName": "SE Harney Ct & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBIYXJuZXkgQ3QgJiBTRSA5Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgmf0-7N7p-VVBEaagjb3allLRIUChIJn9Puze6flVQRGmoI292pZS0aFAoSCRMwsjfpn5VUET9SuFhmCuL9GhQKEgkf17rPJqCVVBEzOGyn5T1SxiIKDeYPGRsV0oLxtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "7948 SE Aspen Summit Dr. [E]",
+      "time": "4:23 pm",
+      "direction": "E",
+      "originalLine": "4:23 pm7948 SE ASPEN SUMMIT DR [E]256BTW-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.56333253048238,
+        45.46542759397061
+      ],
+      "displayName": "7948 SE Aspen Summit Dr, Portland, OR 97266, USA",
+      "placeId": "ChIJKRQm5eyflVQRjKv3B0H6Eeg",
+      "neighborhood": "Lents"
+    }
+  ],
+  "neighborhoods": [
+    "Lents"
+  ],
+  "processedAt": "2026-08-10T02:00:23.869Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.4708,
+      -122.60156
+    ],
+    [
+      45.4708,
+      -122.6019
+    ],
+    [
+      45.47079,
+      -122.60192
+    ],
+    [
+      45.4706,
+      -122.60192
+    ],
+    [
+      45.47061,
+      -122.60221
+    ],
+    [
+      45.47018,
+      -122.6022
+    ],
+    [
+      45.46934,
+      -122.60219
+    ],
+    [
+      45.46864,
+      -122.60219
+    ],
+    [
+      45.46864,
+      -122.59812
+    ],
+    [
+      45.46864,
+      -122.59619
+    ],
+    [
+      45.46866,
+      -122.59034
+    ],
+    [
+      45.46867,
+      -122.58937
+    ],
+    [
+      45.46866,
+      -122.5889
+    ],
+    [
+      45.46866,
+      -122.58652
+    ],
+    [
+      45.46867,
+      -122.58298
+    ],
+    [
+      45.46868,
+      -122.57976
+    ],
+    [
+      45.46868,
+      -122.5794
+    ],
+    [
+      45.46867,
+      -122.57906
+    ],
+    [
+      45.46861,
+      -122.57906
+    ],
+    [
+      45.46829,
+      -122.57905
+    ],
+    [
+      45.46799,
+      -122.57905
+    ],
+    [
+      45.46738,
+      -122.57904
+    ],
+    [
+      45.46558,
+      -122.57904
+    ],
+    [
+      45.46428,
+      -122.57905
+    ],
+    [
+      45.46345,
+      -122.57905
+    ],
+    [
+      45.46331,
+      -122.57905
+    ],
+    [
+      45.4633,
+      -122.57835
+    ],
+    [
+      45.46329,
+      -122.57777
+    ],
+    [
+      45.46327,
+      -122.57668
+    ],
+    [
+      45.46323,
+      -122.57381
+    ],
+    [
+      45.46319,
+      -122.57187
+    ],
+    [
+      45.46405,
+      -122.57187
+    ],
+    [
+      45.46496,
+      -122.57187
+    ],
+    [
+      45.46481,
+      -122.57186
+    ],
+    [
+      45.46477,
+      -122.57186
+    ],
+    [
+      45.46476,
+      -122.57126
+    ],
+    [
+      45.46474,
+      -122.57031
+    ],
+    [
+      45.46474,
+      -122.56997
+    ],
+    [
+      45.46473,
+      -122.56927
+    ],
+    [
+      45.46472,
+      -122.56862
+    ],
+    [
+      45.46469,
+      -122.56862
+    ],
+    [
+      45.4643,
+      -122.56863
+    ],
+    [
+      45.46416,
+      -122.56863
+    ],
+    [
+      45.46345,
+      -122.56863
+    ],
+    [
+      45.46273,
+      -122.56863
+    ],
+    [
+      45.46345,
+      -122.56863
+    ],
+    [
+      45.46416,
+      -122.56863
+    ],
+    [
+      45.46592,
+      -122.56864
+    ],
+    [
+      45.46683,
+      -122.56863
+    ],
+    [
+      45.46774,
+      -122.56858
+    ],
+    [
+      45.46826,
+      -122.56858
+    ],
+    [
+      45.46842,
+      -122.56859
+    ],
+    [
+      45.46843,
+      -122.56841
+    ],
+    [
+      45.46842,
+      -122.56811
+    ],
+    [
+      45.46837,
+      -122.5666
+    ],
+    [
+      45.46837,
+      -122.56576
+    ],
+    [
+      45.4683,
+      -122.56521
+    ],
+    [
+      45.4682,
+      -122.56496
+    ],
+    [
+      45.4681,
+      -122.56481
+    ],
+    [
+      45.46794,
+      -122.56462
+    ],
+    [
+      45.46776,
+      -122.56449
+    ],
+    [
+      45.46704,
+      -122.56411
+    ],
+    [
+      45.46698,
+      -122.5644
+    ],
+    [
+      45.4669,
+      -122.56462
+    ],
+    [
+      45.46684,
+      -122.5647
+    ],
+    [
+      45.46671,
+      -122.56476
+    ],
+    [
+      45.46658,
+      -122.56475
+    ],
+    [
+      45.46649,
+      -122.5647
+    ],
+    [
+      45.46614,
+      -122.56431
+    ],
+    [
+      45.46607,
+      -122.5642
+    ],
+    [
+      45.46601,
+      -122.56404
+    ],
+    [
+      45.46598,
+      -122.56388
+    ],
+    [
+      45.46591,
+      -122.56343
+    ],
+    [
+      45.46587,
+      -122.56322
+    ],
+    [
+      45.46582,
+      -122.5631
+    ],
+    [
+      45.46576,
+      -122.56301
+    ],
+    [
+      45.46564,
+      -122.56293
+    ],
+    [
+      45.46555,
+      -122.56291
+    ],
+    [
+      45.46546,
+      -122.56292
+    ],
+    [
+      45.46531,
+      -122.56297
+    ],
+    [
+      45.46538,
+      -122.56318
+    ],
+    [
+      45.46543,
+      -122.56333
+    ]
+  ]
+}

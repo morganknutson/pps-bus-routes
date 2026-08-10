@@ -1,0 +1,249 @@
+{
+  "id": "1B0wh31nOBYzBKrsal5hq5iUjc32Db0HY",
+  "name": "231",
+  "direction": "Morning",
+  "filename": "231ARL-A_Effective_082626.pdf",
+  "fileId": "1B0wh31nOBYzBKrsal5hq5iUjc32Db0HY",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE 71st Ave. & SE Woodward St. [NW]",
+      "time": "7:35 am",
+      "direction": "NW",
+      "originalLine": "7:35 amSE 71ST AV @ SE WOODWARD ST [NW]231ARL-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5898633,
+        45.5014383
+      ],
+      "displayName": "SE Woodward St & SE 71st Ave, Portland, OR 97206, USA",
+      "placeId": "EjVTRSBXb29kd2FyZCBTdCAmIFNFIDcxc3QgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCa1NL2tFoJVUEfY2RmYDUPJ9EhQKEgmtTS9rRaCVVBH2NkZmA1DyfRoUChIJm0VU8kuglVQRgnj1DEPOIoAaFAoSCbkT9knmC5VUEcc6qphOV9E7IgoN7_ceGxV3Re62",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Tibbetts St. & SE 79th Ave. [SW]",
+      "time": "7:38 am",
+      "direction": "SW",
+      "originalLine": "7:38 amSE TIBBETTS ST @ SE 79TH AV [SW]231ARL-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5819401,
+        45.5000683
+      ],
+      "displayName": "SE 79th Ave & SE Tibbetts St, Portland, OR 97206, USA",
+      "placeId": "EjVTRSA3OXRoIEF2ZSAmIFNFIFRpYmJldHRzIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCf1zgtRIoJVUEW4SI-g7GBcrEhQKEgn9c4LUSKCVVBFuEiPoOxgXKxoUChIJJeGoGj2glVQRu-QHIVjy5bMaFAoSCbN0iGjKoZVUEcu54aXhGNROIgoNa8IeGxX3eu-2",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 72nd Ave. & SE Lafayette St. [NW]",
+      "time": "7:42 am",
+      "direction": "NW",
+      "originalLine": "7:42 amSE 72ND AV @ SE LAFAYETTE ST [NW]231ARL-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5891482,
+        45.4963234
+      ],
+      "displayName": "SE Lafayette St & SE 72nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjZTRSBMYWZheWV0dGUgU3QgJiBTRSA3Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgn9i7vIRqCVVBFVIaDYGtnOVhIUChIJ_Yu7yEaglVQRVSGg2BrZzlYaFAoSCW31XpploJVUETZZUrRgBC0LGhQKEgkZn9j1GaCVVBEllI2C9NI4qyIKDSIwHhsVZmHutg",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Center St. & SE 66th Ave. [NE]",
+      "time": "7:45 am",
+      "direction": "NE",
+      "originalLine": "7:45 amSE CENTER ST @ SE 66TH AV [NE]231ARL-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5953159,
+        45.4939381
+      ],
+      "displayName": "SE Center St & SE 66th Ave, Portland, OR 97206, USA",
+      "placeId": "EjNTRSBDZW50ZXIgU3QgJiBTRSA2NnRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgkfe3zQQaCVVBFh2AodAbEVIxIUChIJH3t80EGglVQRYdgKHQGxFSMaFAoSCUVlUo04oJVUETy-mHISpKLCGhQKEgn_4OUAEaCVVBGsrVMf2K2dYSIKDfXSHRsVeXDttg",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-0",
+      "address": "5109 SE 66th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ARLETA GT & ST LOADING ZONE ON MITCHELL",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5960967,
+        45.4862341
+      ],
+      "displayName": "5109 SE 66th Ave, Portland, OR 97206, USA",
+      "schoolName": "Arleta"
+    }
+  ],
+  "neighborhoods": [
+    "Foster - Powell",
+    "South Tabor"
+  ],
+  "processedAt": "2026-08-10T02:14:54.026Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50144,
+      -122.58986
+    ],
+    [
+      45.50064,
+      -122.58988
+    ],
+    [
+      45.50006,
+      -122.58988
+    ],
+    [
+      45.50006,
+      -122.58851
+    ],
+    [
+      45.50006,
+      -122.586
+    ],
+    [
+      45.50006,
+      -122.58538
+    ],
+    [
+      45.50007,
+      -122.58194
+    ],
+    [
+      45.49741,
+      -122.5819
+    ],
+    [
+      45.49742,
+      -122.58258
+    ],
+    [
+      45.49742,
+      -122.58389
+    ],
+    [
+      45.49742,
+      -122.58581
+    ],
+    [
+      45.49744,
+      -122.58844
+    ],
+    [
+      45.49744,
+      -122.58871
+    ],
+    [
+      45.49744,
+      -122.58914
+    ],
+    [
+      45.49713,
+      -122.58914
+    ],
+    [
+      45.49599,
+      -122.58915
+    ],
+    [
+      45.49384,
+      -122.58916
+    ],
+    [
+      45.49384,
+      -122.59019
+    ],
+    [
+      45.49385,
+      -122.59225
+    ],
+    [
+      45.49386,
+      -122.59409
+    ],
+    [
+      45.49386,
+      -122.59428
+    ],
+    [
+      45.49393,
+      -122.59429
+    ],
+    [
+      45.49393,
+      -122.59462
+    ],
+    [
+      45.49394,
+      -122.59532
+    ],
+    [
+      45.49393,
+      -122.59462
+    ],
+    [
+      45.49393,
+      -122.59429
+    ],
+    [
+      45.49351,
+      -122.59428
+    ],
+    [
+      45.49207,
+      -122.5943
+    ],
+    [
+      45.49064,
+      -122.59432
+    ],
+    [
+      45.48988,
+      -122.59432
+    ],
+    [
+      45.48915,
+      -122.59434
+    ],
+    [
+      45.48855,
+      -122.59435
+    ],
+    [
+      45.48735,
+      -122.59435
+    ],
+    [
+      45.48675,
+      -122.59436
+    ],
+    [
+      45.48666,
+      -122.59437
+    ],
+    [
+      45.48666,
+      -122.59492
+    ],
+    [
+      45.48666,
+      -122.59572
+    ],
+    [
+      45.48623,
+      -122.59572
+    ]
+  ]
+}

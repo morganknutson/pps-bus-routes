@@ -1,0 +1,687 @@
+{
+  "id": "12yuSPsXSxwlFBJjd5fWyYgVv_Cpjj7IB",
+  "name": "217",
+  "direction": "Morning",
+  "filename": "217BMT-A_Effective_082626.pdf",
+  "fileId": "12yuSPsXSxwlFBJjd5fWyYgVv_Cpjj7IB",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "6814 NE 47th Ave. [E]",
+      "time": "8:36 am",
+      "direction": "E",
+      "originalLine": "8:36 am6814 NE 47TH AV [E]217BMT-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6135123322122,
+        45.57241842559587
+      ],
+      "displayName": "6814 NE 47th Ave, Portland, OR 97218, USA",
+      "placeId": "ChIJJdGnkZamlVQRJnCYc6hIsd0",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Killingsworth St. & NE 72nd Ave. [NE]",
+      "time": "8:44 am",
+      "direction": "NE",
+      "originalLine": "8:44 amNE KILLINGSWORTH ST @ NE 72ND AV [NE]217BMT-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5889046,
+        45.5626776
+      ],
+      "displayName": "NE 72nd Ave. & NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "EjtORSA3Mm5kIEF2ZS4gJiBORSBLaWxsaW5nc3dvcnRoIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTgsIFVTQSJmImQKFAoSCcm29_WuppVUEaeTMC9BZXcpEhQKEgnJtvf1rqaVVBGnkzAvQWV3KRoUChIJAT9eEjihlVQRyaUt9tEDsLsaFAoSCbmCIQ64ppVUEU1YsH3WX5Q0IgoNGFAoGxXqau62",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-4",
+      "address": "6735/6730 NE Killingsworth St. [N]",
+      "time": "8:45 am",
+      "direction": "N",
+      "originalLine": "8:45 am6735/6730 NE KILLINGSWORTH ST [N]217BMT-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.592863878931,
+        45.56301137846853
+      ],
+      "displayName": "6735 NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "ChIJQ6tn0K-mlVQR4ZM3nX1AlGQ",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-5",
+      "address": "6415 NE Killingsworth St. (arbor Mhp) [N]",
+      "time": "8:47 am",
+      "direction": "N",
+      "originalLine": "8:47 am6415 NE KILLINGSWORTH ST (ARBOR MHP) [N]217BMT-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.59775977254488,
+        45.563889712350104
+      ],
+      "displayName": "6415 NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "ChIJw8PYnbqmlVQRNn-UUFh6zeY",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-6",
+      "address": "NE 60th Ave. & NE Simpson St. [SE]",
+      "time": "8:48 am",
+      "direction": "SE",
+      "originalLine": "8:48 amNE 60TH AV @ NE SIMPSON ST [SE]217BMT-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6008447,
+        45.56511750000001
+      ],
+      "displayName": "NE Simpson St & NE 60th Ave, Portland, OR 97218, USA",
+      "placeId": "EjRORSBTaW1wc29uIFN0ICYgTkUgNjB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBImYiZAoUChIJncHN_7qmlVQRQ4tbRuhzyTQSFAoSCZ3Bzf-6ppVUEUOLW0boc8k0GhQKEgmNJu8pv6aVVBFvWo6Pw_nZRBoUChIJPQQaaDGhlVQR5eJbZDf6AE4iCg1nrygbFYGY7LY",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-7",
+      "address": "NE Holman St. & NE 41st Ave. [NE]",
+      "time": "8:54 am",
+      "direction": "NE",
+      "originalLine": "8:54 amNE HOLMAN ST @ NE 41ST AV [NE]217BMT-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.621727,
+        45.5685735
+      ],
+      "displayName": "NE Holman St & NE 41st Ave, Portland, OR 97211, USA",
+      "placeId": "EjNORSBIb2xtYW4gU3QgJiBORSA0MXN0IEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEgkFYuHm6qaVVBHqX6-tCeV7UBIUChIJBWLh5uqmlVQR6l-vrQnle1AaFAoSCXenYU_vppVUEYWdXEFxoES9GhQKEgm3gf7D1KaVVBHA65TpH5jCdSIKDWc2KRsVymjptg",
+      "neighborhood": "Concordia"
+    },
+    {
+      "id": "stop-0",
+      "address": "4043 NE Fremont St, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BEAUMONT ST& GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6217722,
+        45.5489184
+      ],
+      "displayName": "4043 NE Fremont St, Portland, OR 97212, USA",
+      "schoolName": "Beaumont"
+    }
+  ],
+  "neighborhoods": [
+    "Concordia",
+    "Cully"
+  ],
+  "processedAt": "2026-08-10T02:15:49.556Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.57242,
+      -122.61349
+    ],
+    [
+      45.57244,
+      -122.61412
+    ],
+    [
+      45.57215,
+      -122.61413
+    ],
+    [
+      45.57205,
+      -122.61413
+    ],
+    [
+      45.57189,
+      -122.61414
+    ],
+    [
+      45.57106,
+      -122.61418
+    ],
+    [
+      45.57068,
+      -122.61423
+    ],
+    [
+      45.57041,
+      -122.61217
+    ],
+    [
+      45.56999,
+      -122.60885
+    ],
+    [
+      45.56974,
+      -122.60698
+    ],
+    [
+      45.56953,
+      -122.60558
+    ],
+    [
+      45.56908,
+      -122.60266
+    ],
+    [
+      45.56891,
+      -122.60145
+    ],
+    [
+      45.56878,
+      -122.60058
+    ],
+    [
+      45.56825,
+      -122.60068
+    ],
+    [
+      45.56801,
+      -122.60074
+    ],
+    [
+      45.56781,
+      -122.60079
+    ],
+    [
+      45.56762,
+      -122.60083
+    ],
+    [
+      45.56735,
+      -122.60082
+    ],
+    [
+      45.56711,
+      -122.60084
+    ],
+    [
+      45.56707,
+      -122.60056
+    ],
+    [
+      45.56697,
+      -122.60012
+    ],
+    [
+      45.56678,
+      -122.59951
+    ],
+    [
+      45.56666,
+      -122.59917
+    ],
+    [
+      45.56646,
+      -122.59865
+    ],
+    [
+      45.56559,
+      -122.59685
+    ],
+    [
+      45.56453,
+      -122.59472
+    ],
+    [
+      45.56393,
+      -122.5935
+    ],
+    [
+      45.5638,
+      -122.59323
+    ],
+    [
+      45.56337,
+      -122.59228
+    ],
+    [
+      45.56314,
+      -122.59167
+    ],
+    [
+      45.56297,
+      -122.59112
+    ],
+    [
+      45.56283,
+      -122.59045
+    ],
+    [
+      45.56275,
+      -122.58989
+    ],
+    [
+      45.5627,
+      -122.58937
+    ],
+    [
+      45.56268,
+      -122.5889
+    ],
+    [
+      45.5627,
+      -122.58937
+    ],
+    [
+      45.56275,
+      -122.58989
+    ],
+    [
+      45.56283,
+      -122.59045
+    ],
+    [
+      45.56288,
+      -122.59072
+    ],
+    [
+      45.56293,
+      -122.59098
+    ],
+    [
+      45.56281,
+      -122.59107
+    ],
+    [
+      45.56277,
+      -122.59111
+    ],
+    [
+      45.56276,
+      -122.59113
+    ],
+    [
+      45.56274,
+      -122.59116
+    ],
+    [
+      45.56271,
+      -122.59128
+    ],
+    [
+      45.56271,
+      -122.59232
+    ],
+    [
+      45.56291,
+      -122.59232
+    ],
+    [
+      45.56301,
+      -122.59287
+    ],
+    [
+      45.56291,
+      -122.59232
+    ],
+    [
+      45.56271,
+      -122.59232
+    ],
+    [
+      45.56271,
+      -122.59327
+    ],
+    [
+      45.56272,
+      -122.59365
+    ],
+    [
+      45.56274,
+      -122.59496
+    ],
+    [
+      45.56274,
+      -122.59607
+    ],
+    [
+      45.56274,
+      -122.59736
+    ],
+    [
+      45.56275,
+      -122.59809
+    ],
+    [
+      45.56324,
+      -122.59811
+    ],
+    [
+      45.56379,
+      -122.59813
+    ],
+    [
+      45.56384,
+      -122.59811
+    ],
+    [
+      45.56388,
+      -122.59806
+    ],
+    [
+      45.56389,
+      -122.59776
+    ],
+    [
+      45.56388,
+      -122.59806
+    ],
+    [
+      45.56384,
+      -122.59811
+    ],
+    [
+      45.56379,
+      -122.59813
+    ],
+    [
+      45.56324,
+      -122.59811
+    ],
+    [
+      45.56275,
+      -122.59809
+    ],
+    [
+      45.56275,
+      -122.59928
+    ],
+    [
+      45.56275,
+      -122.60026
+    ],
+    [
+      45.56276,
+      -122.60083
+    ],
+    [
+      45.56339,
+      -122.60083
+    ],
+    [
+      45.56353,
+      -122.60084
+    ],
+    [
+      45.56419,
+      -122.60084
+    ],
+    [
+      45.56565,
+      -122.60085
+    ],
+    [
+      45.56696,
+      -122.60084
+    ],
+    [
+      45.56711,
+      -122.60084
+    ],
+    [
+      45.5672,
+      -122.60132
+    ],
+    [
+      45.56732,
+      -122.60206
+    ],
+    [
+      45.56773,
+      -122.60447
+    ],
+    [
+      45.56853,
+      -122.60926
+    ],
+    [
+      45.56957,
+      -122.61551
+    ],
+    [
+      45.56976,
+      -122.61664
+    ],
+    [
+      45.56958,
+      -122.61666
+    ],
+    [
+      45.56922,
+      -122.61669
+    ],
+    [
+      45.56862,
+      -122.61671
+    ],
+    [
+      45.56863,
+      -122.61808
+    ],
+    [
+      45.56863,
+      -122.61859
+    ],
+    [
+      45.56865,
+      -122.62043
+    ],
+    [
+      45.56855,
+      -122.62046
+    ],
+    [
+      45.56857,
+      -122.62173
+    ],
+    [
+      45.5695,
+      -122.62173
+    ],
+    [
+      45.56967,
+      -122.62173
+    ],
+    [
+      45.57,
+      -122.62173
+    ],
+    [
+      45.57003,
+      -122.62175
+    ],
+    [
+      45.57005,
+      -122.62183
+    ],
+    [
+      45.57006,
+      -122.62242
+    ],
+    [
+      45.57002,
+      -122.62661
+    ],
+    [
+      45.57002,
+      -122.62691
+    ],
+    [
+      45.57038,
+      -122.62692
+    ],
+    [
+      45.57039,
+      -122.62692
+    ],
+    [
+      45.57072,
+      -122.62693
+    ],
+    [
+      45.57144,
+      -122.62694
+    ],
+    [
+      45.57175,
+      -122.62692
+    ],
+    [
+      45.57107,
+      -122.62339
+    ],
+    [
+      45.57082,
+      -122.6221
+    ],
+    [
+      45.57071,
+      -122.62197
+    ],
+    [
+      45.57046,
+      -122.62155
+    ],
+    [
+      45.57037,
+      -122.62141
+    ],
+    [
+      45.57004,
+      -122.62099
+    ],
+    [
+      45.5699,
+      -122.62087
+    ],
+    [
+      45.56965,
+      -122.6207
+    ],
+    [
+      45.56947,
+      -122.62061
+    ],
+    [
+      45.56931,
+      -122.62054
+    ],
+    [
+      45.56914,
+      -122.62049
+    ],
+    [
+      45.56887,
+      -122.62045
+    ],
+    [
+      45.56876,
+      -122.62042
+    ],
+    [
+      45.56865,
+      -122.62043
+    ],
+    [
+      45.56855,
+      -122.62046
+    ],
+    [
+      45.56838,
+      -122.62046
+    ],
+    [
+      45.56817,
+      -122.62047
+    ],
+    [
+      45.56714,
+      -122.62045
+    ],
+    [
+      45.56512,
+      -122.62044
+    ],
+    [
+      45.56369,
+      -122.62043
+    ],
+    [
+      45.56217,
+      -122.62041
+    ],
+    [
+      45.55984,
+      -122.62041
+    ],
+    [
+      45.55889,
+      -122.62041
+    ],
+    [
+      45.5567,
+      -122.62042
+    ],
+    [
+      45.55466,
+      -122.62042
+    ],
+    [
+      45.55015,
+      -122.62037
+    ],
+    [
+      45.54968,
+      -122.62037
+    ],
+    [
+      45.54968,
+      -122.62068
+    ],
+    [
+      45.54946,
+      -122.62069
+    ],
+    [
+      45.5494,
+      -122.62078
+    ],
+    [
+      45.54936,
+      -122.62105
+    ],
+    [
+      45.54933,
+      -122.62134
+    ],
+    [
+      45.5493,
+      -122.62137
+    ],
+    [
+      45.5491,
+      -122.62139
+    ],
+    [
+      45.54893,
+      -122.62141
+    ],
+    [
+      45.54886,
+      -122.62146
+    ],
+    [
+      45.54885,
+      -122.62177
+    ]
+  ]
+}

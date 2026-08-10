@@ -1,0 +1,457 @@
+{
+  "id": "1SKXMpdmu9R7fxxWOTGEFeR2J3G1n4Lfk",
+  "name": "117",
+  "direction": "Morning",
+  "filename": "117BDL-A_Effective_082626.pdf",
+  "fileId": "1SKXMpdmu9R7fxxWOTGEFeR2J3G1n4Lfk",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SW Scholls Ferry Rd. & SW Sweetbriar Ct. [NW]",
+      "time": "7:38 am",
+      "direction": "NW",
+      "originalLine": "7:38 amSW SCHOLLS FERRY RD @ SW SWEETBRIAR CT [NW]117BDL-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7399663,
+        45.4984719
+      ],
+      "displayName": "SW Sweetbriar Ct & SW Scholls Ferry Rd, Southwest Hills, OR 97221, USA",
+      "placeId": "EkZTVyBTd2VldGJyaWFyIEN0ICYgU1cgU2Nob2xscyBGZXJyeSBSZCwgU291dGh3ZXN0IEhpbGxzLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJqYdulNwLlVQRfb94q35HBlUSFAoSCamHbpTcC5VUEX2_eKt-RwZVGhQKEgkr94r63AuVVBEnN-Lo5Ke8fhoUChIJX24Fyr8NlVQR9N0rLtZ9L4giCg0PhB4bFRFe17Y",
+      "neighborhood": "Southwest Hills"
+    },
+    {
+      "id": "stop-2",
+      "address": "SW Patton Rd. & SW 60th Pl. [SW]",
+      "time": "7:39 am",
+      "direction": "SW",
+      "originalLine": "7:39 amSW PATTON RD @ SW 60TH PL [SW]117BDL-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.739016,
+        45.4978827
+      ],
+      "displayName": "SW Patton Rd & SW 60th Pl, Bridlemile, OR 97221, USA",
+      "placeId": "EjRTVyBQYXR0b24gUmQgJiBTVyA2MHRoIFBsLCBCcmlkbGVtaWxlLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJA6UCutwLlVQRNmR23MblicQSFAoSCQOlArrcC5VUETZkdtzG5YnEGhQKEgkXt1_lzQuVVBFLsw7jOi7YoBoUChIJU60sc8ILlVQRc_ADNgRfFVciCg0LbR4bFTCD17Y",
+      "neighborhood": "Southwest Hills"
+    },
+    {
+      "id": "stop-3",
+      "address": "SW Patton Rd. & SW 58th Dr. [SW]",
+      "time": "7:40 am",
+      "direction": "SW",
+      "originalLine": "7:40 amSW PATTON RD @ SW 58TH DR [SW]117BDL-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7373268,
+        45.497963
+      ],
+      "displayName": "SW 58th Dr & SW Patton Rd, Southwest Hills, OR 97221, USA",
+      "placeId": "EjlTVyA1OHRoIERyICYgU1cgUGF0dG9uIFJkLCBTb3V0aHdlc3QgSGlsbHMsIE9SIDk3MjIxLCBVU0EiZiJkChQKEgnLK5RV2wuVVBEVxyU1EZIN8hIUChIJyyuUVdsLlVQRFcclNRGSDfIaFAoSCftz32nDC5VUEUNEfJ2L9BoqGhQKEgkXt1_lzQuVVBFLsw7jOi7YoCIKDS5wHhsVLMXXtg",
+      "neighborhood": "Southwest Hills"
+    },
+    {
+      "id": "stop-4",
+      "address": "SW 55th Dr. & SW Downs View Ct. [NW]",
+      "time": "7:41 am",
+      "direction": "NW",
+      "originalLine": "7:41 amSW 55TH DR @ SW DOWNS VIEW CT [NW]117BDL-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7328528,
+        45.497369
+      ],
+      "displayName": "SW 55th Dr & SW Downs View Ct, Bridlemile, OR 97221, USA",
+      "placeId": "EjhTVyA1NXRoIERyICYgU1cgRG93bnMgVmlldyBDdCwgQnJpZGxlbWlsZSwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCcebX-TEC5VUEbtj1d0ei2rTEhQKEgnHm1_kxAuVVBG7Y9XdHotq0xoUChIJk9J6OcALlVQR6LB5z87vJjAaFAoSCcE91HrPC5VUET8vNA_o0fkoIgoN-lgeGxXwc9i2",
+      "neighborhood": "Bridlemile"
+    },
+    {
+      "id": "stop-5",
+      "address": "SW Shattuck Rd. & SW Windsor Ct. [NW]",
+      "time": "7:44 am",
+      "direction": "NW",
+      "originalLine": "7:44 amSW SHATTUCK RD @ SW WINDSOR CT [NW]117BDL-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7264872,
+        45.49499429999999
+      ],
+      "displayName": "SW Shattuck Rd & SW Windsor Ct, Bridlemile, OR 97221, USA",
+      "placeId": "EjlTVyBTaGF0dHVjayBSZCAmIFNXIFdpbmRzb3IgQ3QsIEJyaWRsZW1pbGUsIE9SIDk3MjIxLCBVU0EiZiJkChQKEgn7FoQTxguVVBH4XVyO9dwj6hIUChIJ-xaEE8YLlVQR-F1cjvXcI-oaFAoSCZtOV1uVC5VUEZeROXH00pfHGhQKEgmzBFsUxAuVVBGjpgMxJGd4RyIKDTf8HRsVmGzZtg",
+      "neighborhood": "Bridlemile"
+    },
+    {
+      "id": "stop-6",
+      "address": "SW Shattuck Rd. & SW Lowell St. [NW]",
+      "time": "7:45 am",
+      "direction": "NW",
+      "originalLine": "7:45 amSW SHATTUCK RD @ SW LOWELL ST [NW]117BDL-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7273357,
+        45.4935418
+      ],
+      "displayName": "SW Shattuck Rd & SW Lowell St, Portland, OR 97221, USA",
+      "placeId": "EjZTVyBTaGF0dHVjayBSZCAmIFNXIExvd2VsbCBTdCwgUG9ydGxhbmQsIE9SIDk3MjIxLCBVU0EiZiJkChQKEglVJvX4xguVVBH4nEhjJDg5_BIUChIJVSb1-MYLlVQR-JxIYyQ4OfwaFAoSCZtOV1uVC5VUEZeROXH00pfHGhQKEglFKRbAxguVVBGzzy-NoTlwhyIKDXrDHRsVc0vZtg",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "4220 SW Shattuck Rd. [NW]",
+      "time": "7:46 am",
+      "direction": "NW",
+      "originalLine": "7:46 am4220 SW Shattuck Rd [NW]117BDL-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.72745307750702,
+        45.49251373282157
+      ],
+      "displayName": "4220 SW Shattuck Rd, Portland, OR 97221, USA",
+      "placeId": "ChIJ8W9vG8cLlVQRbecq7XB-rnw",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-8",
+      "address": "SW Shattuck Rd. & SW Bancroft St. [NW]",
+      "time": "7:46 am",
+      "direction": "NW",
+      "originalLine": "7:46 amSW SHATTUCK RD @ SW BANCROFT ST [NW]117BDL-A(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7280766,
+        45.4922198
+      ],
+      "displayName": "SW Bancroft St & SW Shattuck Rd, Portland, OR 97221, USA",
+      "placeId": "EjhTVyBCYW5jcm9mdCBTdCAmIFNXIFNoYXR0dWNrIFJkLCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCbPOJSPHC5VUEcIOqHisk-HMEhQKEgmzziUjxwuVVBHCDqh4rJPhzBoUChIJ6SSSL8ELlVQRkT7bFd_nvP8aFAoSCZtOV1uVC5VUEZeROXH00pfHIgoN1o8dGxWCLtm2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-9",
+      "address": "SW Hamilton St. & SW 48th Ave. [SW]",
+      "time": "7:48 am",
+      "direction": "SW",
+      "originalLine": "7:48 amSW HAMILTON ST @ SW 48TH AV [SW]117BDL-A(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7267768,
+        45.4907383
+      ],
+      "displayName": "SW 48th Ave & SW Hamilton St, Portland, OR 97221, USA",
+      "placeId": "EjVTVyA0OHRoIEF2ZSAmIFNXIEhhbWlsdG9uIFN0LCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCZ1UV1jHC5VUESmuHyOQgvzDEhQKEgmdVFdYxwuVVBEprh8jkIL8wxoUChIJN2UQbJkLlVQRE0tIsv2EGxoaFAoSCZ8adAK0C5VUEUvr2CfNttIdIgoN91UdGxVIYdm2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "4300 SW 47th Dr, Portland, OR 97221, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BRIDLEMILE GT LOADING ZONE ON 47TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7242829,
+        45.4917482
+      ],
+      "displayName": "4300 SW 47th Dr, Portland, OR 97221, USA",
+      "schoolName": "Bridlemile"
+    }
+  ],
+  "neighborhoods": [
+    "Bridlemile",
+    "Southwest Hills",
+    "Southwest Portland"
+  ],
+  "processedAt": "2026-08-10T02:17:18.158Z",
+  "stats": {
+    "totalStops": 10,
+    "geocodedStops": 10,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.49847,
+      -122.73997
+    ],
+    [
+      45.49816,
+      -122.73986
+    ],
+    [
+      45.49794,
+      -122.73985
+    ],
+    [
+      45.49779,
+      -122.73986
+    ],
+    [
+      45.49788,
+      -122.73902
+    ],
+    [
+      45.49794,
+      -122.73853
+    ],
+    [
+      45.49796,
+      -122.73807
+    ],
+    [
+      45.49796,
+      -122.7364
+    ],
+    [
+      45.49795,
+      -122.73546
+    ],
+    [
+      45.49795,
+      -122.73283
+    ],
+    [
+      45.49755,
+      -122.73285
+    ],
+    [
+      45.49737,
+      -122.73285
+    ],
+    [
+      45.49755,
+      -122.73285
+    ],
+    [
+      45.49795,
+      -122.73283
+    ],
+    [
+      45.49797,
+      -122.73076
+    ],
+    [
+      45.49804,
+      -122.73044
+    ],
+    [
+      45.49821,
+      -122.7301
+    ],
+    [
+      45.49834,
+      -122.72985
+    ],
+    [
+      45.49834,
+      -122.72983
+    ],
+    [
+      45.49833,
+      -122.72976
+    ],
+    [
+      45.4983,
+      -122.72966
+    ],
+    [
+      45.49823,
+      -122.72951
+    ],
+    [
+      45.49803,
+      -122.72921
+    ],
+    [
+      45.49795,
+      -122.729
+    ],
+    [
+      45.49793,
+      -122.7288
+    ],
+    [
+      45.49793,
+      -122.72847
+    ],
+    [
+      45.49795,
+      -122.72804
+    ],
+    [
+      45.49802,
+      -122.72757
+    ],
+    [
+      45.49806,
+      -122.7274
+    ],
+    [
+      45.49811,
+      -122.72722
+    ],
+    [
+      45.49809,
+      -122.727
+    ],
+    [
+      45.49806,
+      -122.72681
+    ],
+    [
+      45.49793,
+      -122.72661
+    ],
+    [
+      45.49766,
+      -122.72618
+    ],
+    [
+      45.49753,
+      -122.72604
+    ],
+    [
+      45.49742,
+      -122.72593
+    ],
+    [
+      45.49734,
+      -122.72587
+    ],
+    [
+      45.4971,
+      -122.72579
+    ],
+    [
+      45.49683,
+      -122.72579
+    ],
+    [
+      45.49654,
+      -122.72581
+    ],
+    [
+      45.49619,
+      -122.72581
+    ],
+    [
+      45.49597,
+      -122.72589
+    ],
+    [
+      45.49552,
+      -122.72616
+    ],
+    [
+      45.49519,
+      -122.72637
+    ],
+    [
+      45.49434,
+      -122.72686
+    ],
+    [
+      45.49285,
+      -122.72772
+    ],
+    [
+      45.49258,
+      -122.72787
+    ],
+    [
+      45.49251,
+      -122.72745
+    ],
+    [
+      45.49258,
+      -122.72787
+    ],
+    [
+      45.49254,
+      -122.7279
+    ],
+    [
+      45.49164,
+      -122.72841
+    ],
+    [
+      45.49124,
+      -122.72866
+    ],
+    [
+      45.491,
+      -122.72885
+    ],
+    [
+      45.49084,
+      -122.72898
+    ],
+    [
+      45.49076,
+      -122.72904
+    ],
+    [
+      45.49076,
+      -122.72894
+    ],
+    [
+      45.49077,
+      -122.72871
+    ],
+    [
+      45.49077,
+      -122.72853
+    ],
+    [
+      45.49076,
+      -122.72817
+    ],
+    [
+      45.49074,
+      -122.72703
+    ],
+    [
+      45.49073,
+      -122.72617
+    ],
+    [
+      45.49073,
+      -122.72567
+    ],
+    [
+      45.49091,
+      -122.72567
+    ],
+    [
+      45.49145,
+      -122.72566
+    ],
+    [
+      45.49163,
+      -122.72567
+    ],
+    [
+      45.4919,
+      -122.72564
+    ],
+    [
+      45.4919,
+      -122.72513
+    ],
+    [
+      45.49179,
+      -122.72511
+    ],
+    [
+      45.49177,
+      -122.7251
+    ],
+    [
+      45.49177,
+      -122.72478
+    ],
+    [
+      45.49177,
+      -122.72472
+    ]
+  ]
+}

@@ -1,0 +1,570 @@
+{
+  "id": "1Qgsbr_x1L5xtWd64cHw8x_hRbD5xwrmk",
+  "name": "209",
+  "direction": "Morning",
+  "filename": "209LNT-A_Effective_082626.pdf",
+  "fileId": "1Qgsbr_x1L5xtWd64cHw8x_hRbD5xwrmk",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "3145 SE 92nd Ave. [NW]",
+      "time": "7:26 am",
+      "direction": "NW",
+      "originalLine": "7:26 am3145 SE 92nd Ave [NW]209LNT-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.56865939511133,
+        45.499466649739404
+      ],
+      "displayName": "3145 SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "ChIJQ4awqEqglVQRssofNb7jaJk",
+      "neighborhood": "Powellhurst-Gilbert"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 74th Ave. & SE Center St. [NW]",
+      "time": "7:31 am",
+      "direction": "NW",
+      "originalLine": "7:31 amSE 74TH AV @ SE CENTER ST [NW]209LNT-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.586924,
+        45.493839
+      ],
+      "displayName": "SE Center St & SE 74th Ave, Portland, OR 97206, USA",
+      "placeId": "EjNTRSBDZW50ZXIgU3QgJiBTRSA3NHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgkLGCZTR6CVVBEqYeqGVCrQXxIUChIJCxgmU0eglVQRKmHqhlQq0F8aFAoSCUVlUo04oJVUETy-mHISpKLCGhQKEgnvWi95F6CVVBGoWOyksW7uESIKDRbPHRsVSLjutg",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-3",
+      "address": "3410 SE 71st Ave. [E]",
+      "time": "7:33 am",
+      "direction": "E",
+      "originalLine": "7:33 am3410 SE 71ST AV [E]209LNT-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.58991295948393,
+        45.497993939546745
+      ],
+      "displayName": "3410 SE 71st Ave, Portland, OR 97206, USA",
+      "placeId": "ChIJYfwWIUSglVQRhY2HUYoWXIA",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 87th Ave. & SE Liebe St. [NW]",
+      "time": "7:40 am",
+      "direction": "NW",
+      "originalLine": "7:40 amSE 87TH AV @ SE LIEBE ST [NW]209LNT-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5733196,
+        45.4869096
+      ],
+      "displayName": "SE 87th Ave & SE Liebe St, Portland, OR 97266, USA",
+      "placeId": "EjJTRSA4N3RoIEF2ZSAmIFNFIExpZWJlIFN0LCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCUdE0isloJVUEZ8wVvxIFZu8EhQKEglHRNIrJaCVVBGfMFb8SBWbvBoUChIJ6cVbtDCglVQR7FoADR9iu2waFAoSCaMn1vI8oJVUETO1QUbpPIXCIgoNaMAcGxW0y_C2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE 88th Ave. & SE Steele St. [NW]",
+      "time": "7:41 am",
+      "direction": "NW",
+      "originalLine": "7:41 amSE 88TH AV & SE STEELE ST [NW]209LNT-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5723067,
+        45.4846613
+      ],
+      "displayName": "SE Steele St & SE 88th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBTdGVlbGUgU3QgJiBTRSA4OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgnHYBVZJKCVVBEJWfemX31USRIUChIJx2AVWSSglVQRCVn3pl99VEkaFAoSCQm4wGojoJVUEQw6ZUc3pi7BGhQKEglZChLPMKCVVBGCuOPrgr65JyIKDZVoHBsVRfPwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE 88th Ave. & SE Ellis St. [NW]",
+      "time": "7:42 am",
+      "direction": "NW",
+      "originalLine": "7:42 amSE 88TH AV @ SE ELLIS ST [NW]209LNT-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5720262,
+        45.4822836
+      ],
+      "displayName": "SE Ellis St & SE 88th Ave, Portland, OR 97266, USA",
+      "placeId": "EjJTRSBFbGxpcyBTdCAmIFNFIDg4dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCd0U7aomoJVUEYIgIdps84YLEhQKEgndFO2qJqCVVBGCICHabPOGCxoUChIJZQCaZRiglVQRIb7x3Rm_yIAaFAoSCVkKEs8woJVUEYK44-uCvrknIgoNtAscGxU6_vC2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-7",
+      "address": "SE 92nd Ave. & SE Reedway St. [SW]",
+      "time": "7:44 am",
+      "direction": "SW",
+      "originalLine": "7:44 amSE 92ND AV & SE REEDWAY ST [SW]209LNT-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686208,
+        45.4813246
+      ],
+      "displayName": "SE Reedway St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjRTRSBSZWVkd2F5IFN0ICYgU0UgOTJuZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJjZCf5yaglVQRSx59bHKi_h0SFAoSCY2Qn-cmoJVUEUsefWxyov4dGhQKEgnRQo6wGaCVVBGKEk6BbyMTURoUChIJH9e6zyaglVQRMzhsp-U9UsYiCg0-5hsbFUCD8bY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-8",
+      "address": "SE 92nd Ave. & SE Schiller St. [SE]",
+      "time": "7:45 am",
+      "direction": "SE",
+      "originalLine": "7:45 amSE 92ND AVE @ SE SCHILLER ST [SE]209LNT-A(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686008,
+        45.487867
+      ],
+      "displayName": "SE Schiller St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjVTRSBTY2hpbGxlciBTdCAmIFNFIDkybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCTVzLOkvoJVUEbF0Pr8dwE4DEhQKEgk1cyzpL6CVVBGxdD6_HcBOAxoUChIJQTSsyD2glVQR3oN7AykFHCQaFAoSCR_Xus8moJVUETM4bKflPVLGIgoNzuUcGxUIhPG2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-9",
+      "address": "SE Holgate Blvd. & SE 99th Ave. [SW]",
+      "time": "7:48 am",
+      "direction": "SW",
+      "originalLine": "7:48 amSE HOLGATE BLVD @ SE 99TH AV [SW]209LNT-A(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5622394,
+        45.4898917
+      ],
+      "displayName": "SE Holgate Blvd & SE 99th Ave, Portland, OR 97266, USA",
+      "placeId": "EjZTRSBIb2xnYXRlIEJsdmQgJiBTRSA5OXRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgkdoo_uLaCVVBF1esjcIpH5RhIUChIJHaKP7i2glVQRdXrI3CKR-UYaFAoSCV2BD1Y-oJVUEX7_A3-ak1ZXGhQKEgnnIE_NLqCVVBEccQIi-6yYkiIKDeU0HRsVhnzytg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-0",
+      "address": "5105 SE 97th Ave, Portland, OR 97266, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:LENT GT & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5642721,
+        45.4871264
+      ],
+      "displayName": "5105 SE 97th Ave, Portland, OR 97266, USA",
+      "schoolName": "Lent"
+    }
+  ],
+  "neighborhoods": [
+    "Foster - Powell",
+    "Lents",
+    "Powellhurst-Gilbert",
+    "South Tabor"
+  ],
+  "processedAt": "2026-08-10T02:00:51.763Z",
+  "stats": {
+    "totalStops": 10,
+    "geocodedStops": 10,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.49947,
+      -122.56866
+    ],
+    [
+      45.49947,
+      -122.56803
+    ],
+    [
+      45.49926,
+      -122.56804
+    ],
+    [
+      45.49889,
+      -122.56818
+    ],
+    [
+      45.4984,
+      -122.56839
+    ],
+    [
+      45.49822,
+      -122.56845
+    ],
+    [
+      45.49803,
+      -122.56847
+    ],
+    [
+      45.49743,
+      -122.56854
+    ],
+    [
+      45.49743,
+      -122.57009
+    ],
+    [
+      45.49743,
+      -122.57095
+    ],
+    [
+      45.49744,
+      -122.57371
+    ],
+    [
+      45.4974,
+      -122.57386
+    ],
+    [
+      45.49737,
+      -122.57391
+    ],
+    [
+      45.49738,
+      -122.57406
+    ],
+    [
+      45.49739,
+      -122.57501
+    ],
+    [
+      45.4974,
+      -122.5763
+    ],
+    [
+      45.4974,
+      -122.57748
+    ],
+    [
+      45.4974,
+      -122.57927
+    ],
+    [
+      45.49742,
+      -122.58079
+    ],
+    [
+      45.4974,
+      -122.58128
+    ],
+    [
+      45.49741,
+      -122.5819
+    ],
+    [
+      45.49742,
+      -122.58324
+    ],
+    [
+      45.49743,
+      -122.5869
+    ],
+    [
+      45.49636,
+      -122.58691
+    ],
+    [
+      45.49411,
+      -122.58692
+    ],
+    [
+      45.49384,
+      -122.58692
+    ],
+    [
+      45.49384,
+      -122.58803
+    ],
+    [
+      45.4964,
+      -122.58803
+    ],
+    [
+      45.49712,
+      -122.58803
+    ],
+    [
+      45.49743,
+      -122.58802
+    ],
+    [
+      45.49744,
+      -122.58829
+    ],
+    [
+      45.49744,
+      -122.58862
+    ],
+    [
+      45.49744,
+      -122.58938
+    ],
+    [
+      45.49744,
+      -122.58982
+    ],
+    [
+      45.49744,
+      -122.58992
+    ],
+    [
+      45.49763,
+      -122.58992
+    ],
+    [
+      45.49799,
+      -122.58991
+    ],
+    [
+      45.49763,
+      -122.58992
+    ],
+    [
+      45.49744,
+      -122.58992
+    ],
+    [
+      45.49744,
+      -122.58982
+    ],
+    [
+      45.49744,
+      -122.58938
+    ],
+    [
+      45.49744,
+      -122.58862
+    ],
+    [
+      45.49744,
+      -122.58829
+    ],
+    [
+      45.49743,
+      -122.58802
+    ],
+    [
+      45.49712,
+      -122.58803
+    ],
+    [
+      45.4964,
+      -122.58803
+    ],
+    [
+      45.49384,
+      -122.58803
+    ],
+    [
+      45.49258,
+      -122.58803
+    ],
+    [
+      45.49051,
+      -122.58803
+    ],
+    [
+      45.49024,
+      -122.58804
+    ],
+    [
+      45.49024,
+      -122.58755
+    ],
+    [
+      45.49024,
+      -122.58693
+    ],
+    [
+      45.49025,
+      -122.58476
+    ],
+    [
+      45.49026,
+      -122.58016
+    ],
+    [
+      45.49024,
+      -122.57726
+    ],
+    [
+      45.49024,
+      -122.57511
+    ],
+    [
+      45.49022,
+      -122.5746
+    ],
+    [
+      45.49017,
+      -122.57423
+    ],
+    [
+      45.49015,
+      -122.57375
+    ],
+    [
+      45.49014,
+      -122.5733
+    ],
+    [
+      45.48744,
+      -122.57332
+    ],
+    [
+      45.48714,
+      -122.57332
+    ],
+    [
+      45.48691,
+      -122.57332
+    ],
+    [
+      45.4869,
+      -122.57308
+    ],
+    [
+      45.4869,
+      -122.57305
+    ],
+    [
+      45.48689,
+      -122.57234
+    ],
+    [
+      45.48668,
+      -122.57233
+    ],
+    [
+      45.48653,
+      -122.5723
+    ],
+    [
+      45.48636,
+      -122.57228
+    ],
+    [
+      45.48598,
+      -122.57229
+    ],
+    [
+      45.48515,
+      -122.5723
+    ],
+    [
+      45.48356,
+      -122.57232
+    ],
+    [
+      45.48241,
+      -122.57231
+    ],
+    [
+      45.48228,
+      -122.57231
+    ],
+    [
+      45.48228,
+      -122.5721
+    ],
+    [
+      45.48228,
+      -122.57177
+    ],
+    [
+      45.48226,
+      -122.57034
+    ],
+    [
+      45.48223,
+      -122.56886
+    ],
+    [
+      45.48223,
+      -122.56863
+    ],
+    [
+      45.48186,
+      -122.56863
+    ],
+    [
+      45.48169,
+      -122.56863
+    ],
+    [
+      45.48132,
+      -122.56862
+    ],
+    [
+      45.48169,
+      -122.56863
+    ],
+    [
+      45.48186,
+      -122.56863
+    ],
+    [
+      45.48281,
+      -122.56863
+    ],
+    [
+      45.48453,
+      -122.56861
+    ],
+    [
+      45.48562,
+      -122.56861
+    ],
+    [
+      45.48787,
+      -122.5686
+    ],
+    [
+      45.48957,
+      -122.56861
+    ],
+    [
+      45.49003,
+      -122.5686
+    ],
+    [
+      45.49002,
+      -122.56811
+    ],
+    [
+      45.49002,
+      -122.56744
+    ],
+    [
+      45.48999,
+      -122.56607
+    ],
+    [
+      45.48996,
+      -122.56518
+    ],
+    [
+      45.48992,
+      -122.56348
+    ],
+    [
+      45.48989,
+      -122.56224
+    ],
+    [
+      45.48992,
+      -122.56348
+    ],
+    [
+      45.48801,
+      -122.56348
+    ],
+    [
+      45.48713,
+      -122.56348
+    ]
+  ]
+}

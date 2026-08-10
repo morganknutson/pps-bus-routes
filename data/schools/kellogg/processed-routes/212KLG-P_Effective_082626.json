@@ -1,0 +1,270 @@
+{
+  "id": "1KSWD3sP_TepfkQEj5O-VT5dSxNcQ0VDl",
+  "name": "212",
+  "direction": "Afternoon",
+  "filename": "212KLG-P_Effective_082626.pdf",
+  "fileId": "1KSWD3sP_TepfkQEj5O-VT5dSxNcQ0VDl",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:KELLOGG GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5917225,
+        45.49871359999999
+      ],
+      "displayName": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "schoolName": "Kellogg"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE 67th Ave. & SE Center St. [NW]",
+      "time": "4:12 pm",
+      "direction": "NW",
+      "originalLine": "4:12 pmSE 67TH AV @ SE CENTER ST [NW]212KLG-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5942817,
+        45.4938555
+      ],
+      "displayName": "SE Center St & SE 67th Ave, Portland, OR 97206, USA",
+      "placeId": "EjNTRSBDZW50ZXIgU3QgJiBTRSA2N3RoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgm505DLQaCVVBEaf33UOs4kHBIUChIJudOQy0GglVQRGn991DrOJBwaFAoSCUVlUo04oJVUETy-mHISpKLCGhQKEgmp_TKXBKCVVBFkythk473PHSIKDbvPHRsV35jttg",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE 88th Ave. & SE Pardee St. [NW]",
+      "time": "4:17 pm",
+      "direction": "NW",
+      "originalLine": "4:17 pmSE 88TH AV @ SE PARDEE ST [NW]212KLG-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5723422,
+        45.4890408
+      ],
+      "displayName": "SE Pardee St & SE 88th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBQYXJkZWUgU3QgJiBTRSA4OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgmRLM6eOqCVVBF9XIec3m_FlRIUChIJkSzOnjqglVQRfVyHnN5vxZUaFAoSCRcZTh0VoJVUEd5w8-mO4LjaGhQKEglZChLPMKCVVBGCuOPrgr65JyIKDagTHRsV4vHwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 88th Ave. & SE Steele St. [NW]",
+      "time": "4:19 pm",
+      "direction": "NW",
+      "originalLine": "4:19 pmSE 88TH AV & SE STEELE ST [NW]212KLG-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5723067,
+        45.4846613
+      ],
+      "displayName": "SE Steele St & SE 88th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBTdGVlbGUgU3QgJiBTRSA4OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgnHYBVZJKCVVBEJWfemX31USRIUChIJx2AVWSSglVQRCVn3pl99VEkaFAoSCQm4wGojoJVUEQw6ZUc3pi7BGhQKEglZChLPMKCVVBGCuOPrgr65JyIKDZVoHBsVRfPwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 82nd Ave. & SE Woodstock Blvd. [NW]",
+      "time": "4:22 pm",
+      "direction": "NW",
+      "originalLine": "4:22 pmSE 82ND AV @ SE WOODSTOCK BLVD [NW]212KLG-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5790271,
+        45.47949149999999
+      ],
+      "displayName": "SE Woodstock Blvd & SE 82nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjhTRSBXb29kc3RvY2sgQmx2ZCAmIFNFIDgybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCR9ziU8foJVUEcuJElxLt-DSEhQKEgkfc4lPH6CVVBHLiRJcS7fg0hoUChIJM-ZGQQWglVQRAUHhMI7BVjIaFAoSCWOAWd31n5VUEfcexQgfBAYZIgoNo54bGxXB7O-2",
+      "neighborhood": "Southeast Portland"
+    }
+  ],
+  "neighborhoods": [
+    "Foster - Powell",
+    "Lents",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-08-10T01:59:55.180Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.49889,
+      -122.59207
+    ],
+    [
+      45.49888,
+      -122.59231
+    ],
+    [
+      45.49889,
+      -122.59469
+    ],
+    [
+      45.49745,
+      -122.59473
+    ],
+    [
+      45.4973,
+      -122.5947
+    ],
+    [
+      45.49728,
+      -122.59468
+    ],
+    [
+      45.49728,
+      -122.59466
+    ],
+    [
+      45.49727,
+      -122.59454
+    ],
+    [
+      45.49726,
+      -122.59427
+    ],
+    [
+      45.49569,
+      -122.59428
+    ],
+    [
+      45.49386,
+      -122.59428
+    ],
+    [
+      45.49242,
+      -122.5943
+    ],
+    [
+      45.491,
+      -122.59431
+    ],
+    [
+      45.49029,
+      -122.59432
+    ],
+    [
+      45.49028,
+      -122.59407
+    ],
+    [
+      45.49026,
+      -122.59124
+    ],
+    [
+      45.49025,
+      -122.58929
+    ],
+    [
+      45.49024,
+      -122.58704
+    ],
+    [
+      45.49025,
+      -122.58587
+    ],
+    [
+      45.49026,
+      -122.58023
+    ],
+    [
+      45.49024,
+      -122.57776
+    ],
+    [
+      45.49024,
+      -122.57519
+    ],
+    [
+      45.49022,
+      -122.57464
+    ],
+    [
+      45.49018,
+      -122.5743
+    ],
+    [
+      45.49015,
+      -122.57382
+    ],
+    [
+      45.49015,
+      -122.57349
+    ],
+    [
+      45.49012,
+      -122.57235
+    ],
+    [
+      45.48992,
+      -122.57235
+    ],
+    [
+      45.4876,
+      -122.57234
+    ],
+    [
+      45.48674,
+      -122.57234
+    ],
+    [
+      45.48657,
+      -122.57231
+    ],
+    [
+      45.48639,
+      -122.57229
+    ],
+    [
+      45.4861,
+      -122.57229
+    ],
+    [
+      45.48526,
+      -122.5723
+    ],
+    [
+      45.4829,
+      -122.57232
+    ],
+    [
+      45.48228,
+      -122.57231
+    ],
+    [
+      45.48227,
+      -122.57328
+    ],
+    [
+      45.48225,
+      -122.57485
+    ],
+    [
+      45.48161,
+      -122.57487
+    ],
+    [
+      45.47935,
+      -122.5749
+    ],
+    [
+      45.47939,
+      -122.57593
+    ],
+    [
+      45.47944,
+      -122.57745
+    ],
+    [
+      45.47949,
+      -122.57903
+    ]
+  ]
+}

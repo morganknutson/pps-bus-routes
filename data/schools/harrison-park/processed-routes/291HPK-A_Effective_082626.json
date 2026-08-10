@@ -1,0 +1,270 @@
+{
+  "id": "1A6tEScRj60B8D4PjWCKlkYtUBHWxORwF",
+  "name": "291",
+  "direction": "Morning",
+  "filename": "291HPK-A_Effective_082626.pdf",
+  "fileId": "1A6tEScRj60B8D4PjWCKlkYtUBHWxORwF",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-3",
+      "address": "SE Division St. & SE 75th Ave. [NE]",
+      "time": "8:49 am",
+      "direction": "NE",
+      "originalLine": "8:49 amSE DIVISION ST @ SE 75TH AV [NE]291HPK-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5863578,
+        45.5054015
+      ],
+      "displayName": "SE Division St & SE 75th Ave, Portland, OR 97215, USA",
+      "placeId": "EjVTRSBEaXZpc2lvbiBTdCAmIFNFIDc1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCVM8Z79RoJVUESVS0gip_G-KEhQKEglTPGe_UaCVVBElUtIIqfxvihoUChIJF3pRRLGhlVQRIlzYWfgkuvAaFAoSCXMmfO49oJVUEe-eajoXNdeWIgoNv5IfGxVmzu62",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Division St. & SE 59th Ave. [NE]",
+      "time": "8:51 am",
+      "direction": "NE",
+      "originalLine": "8:51 amSE DIVISION ST @ SE 59TH AV [NE]291HPK-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6027629,
+        45.50535989999999
+      ],
+      "displayName": "SE 59th Ave & SE Division St, Portland, OR 97215, USA",
+      "placeId": "EjVTRSA1OXRoIEF2ZSAmIFNFIERpdmlzaW9uIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCUEy4bdeoJVUEclJBv30fRw0EhQKEglBMuG3XqCVVBHJSQb99H0cNBoUChIJ35mSAWiglVQRIIPJU5Jnk4waFAoSCRd6UUSxoZVUESJc2Fn4JLrwIgoNH5EfGxWTTey2",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-5",
+      "address": "5626 SE Woodward St. (clinton Park) [S]",
+      "time": "8:56 am",
+      "direction": "S",
+      "originalLine": "8:56 am5626 SE WOODWARD ST (CLINTON PARK) [S]291HPK-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60448102423194,
+        45.501410820029356
+      ],
+      "displayName": "5626 SE Woodward St, Portland, OR 97206, USA",
+      "placeId": "ChIJ9WGnhF2glVQRCtt3jULwap8",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-0",
+      "address": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:HARRISON PARK GT LOADING ZONE/2225 SE 87TH AV",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.574816,
+        45.5069498
+      ],
+      "displayName": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "schoolName": "Harrison Park"
+    }
+  ],
+  "neighborhoods": [
+    "South Tabor",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-08-10T01:59:03.699Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.5054,
+      -122.58636
+    ],
+    [
+      45.50536,
+      -122.5976
+    ],
+    [
+      45.50536,
+      -122.60059
+    ],
+    [
+      45.50536,
+      -122.60229
+    ],
+    [
+      45.50536,
+      -122.60308
+    ],
+    [
+      45.5032,
+      -122.60308
+    ],
+    [
+      45.50231,
+      -122.60308
+    ],
+    [
+      45.50212,
+      -122.60308
+    ],
+    [
+      45.50141,
+      -122.60309
+    ],
+    [
+      45.50141,
+      -122.60368
+    ],
+    [
+      45.50141,
+      -122.60448
+    ],
+    [
+      45.50141,
+      -122.60368
+    ],
+    [
+      45.50141,
+      -122.60309
+    ],
+    [
+      45.50212,
+      -122.60308
+    ],
+    [
+      45.50231,
+      -122.60308
+    ],
+    [
+      45.50302,
+      -122.60308
+    ],
+    [
+      45.50536,
+      -122.60308
+    ],
+    [
+      45.50536,
+      -122.60148
+    ],
+    [
+      45.50536,
+      -122.59884
+    ],
+    [
+      45.50537,
+      -122.5968
+    ],
+    [
+      45.50539,
+      -122.59022
+    ],
+    [
+      45.50541,
+      -122.58413
+    ],
+    [
+      45.50539,
+      -122.58288
+    ],
+    [
+      45.50535,
+      -122.58191
+    ],
+    [
+      45.50519,
+      -122.58085
+    ],
+    [
+      45.50503,
+      -122.57988
+    ],
+    [
+      45.50497,
+      -122.57981
+    ],
+    [
+      45.50494,
+      -122.57964
+    ],
+    [
+      45.50491,
+      -122.57946
+    ],
+    [
+      45.50479,
+      -122.57869
+    ],
+    [
+      45.50469,
+      -122.57795
+    ],
+    [
+      45.50462,
+      -122.57729
+    ],
+    [
+      45.50459,
+      -122.57678
+    ],
+    [
+      45.50458,
+      -122.5763
+    ],
+    [
+      45.50456,
+      -122.57547
+    ],
+    [
+      45.50455,
+      -122.57469
+    ],
+    [
+      45.50454,
+      -122.57451
+    ],
+    [
+      45.50454,
+      -122.57425
+    ],
+    [
+      45.50463,
+      -122.57426
+    ],
+    [
+      45.50538,
+      -122.57427
+    ],
+    [
+      45.50565,
+      -122.57428
+    ],
+    [
+      45.50679,
+      -122.57428
+    ],
+    [
+      45.50735,
+      -122.57428
+    ],
+    [
+      45.5073,
+      -122.57439
+    ],
+    [
+      45.50708,
+      -122.5744
+    ],
+    [
+      45.50699,
+      -122.57441
+    ],
+    [
+      45.50698,
+      -122.57441
+    ]
+  ]
+}

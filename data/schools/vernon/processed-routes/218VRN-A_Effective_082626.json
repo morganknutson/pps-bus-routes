@@ -1,0 +1,167 @@
+{
+  "id": "1wNBR2blzg-jty57tdo4yPDky1pZQbtWY",
+  "name": "218",
+  "direction": "Morning",
+  "filename": "218VRN-A_Effective_082626.pdf",
+  "fileId": "1wNBR2blzg-jty57tdo4yPDky1pZQbtWY",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "NE 42nd Ave. & NE Wygant St. [W]",
+      "time": "8:28 am",
+      "direction": "W",
+      "originalLine": "8:28 amNE 42ND AV @ NE WYGANT ST [W]218VRN-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.620413,
+        45.5574918
+      ],
+      "displayName": "NE Wygant St & NE 42nd Ave, Portland, OR 97211, USA",
+      "placeId": "EjNORSBXeWdhbnQgU3QgJiBORSA0Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEgmxLkBrxaaVVBHyO0uty0ZeWhIUChIJsS5Aa8WmlVQR8jtLrctGXloaFAoSCfVnTCpToZVUEdnZEF9gdMYCGhQKEgmti4bn0aaVVBHoX32KtKRetSIKDYaFJxsVHpzptg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 42nd Ave. & NE Prescott St. [NW]",
+      "time": "8:28 am",
+      "direction": "NW",
+      "originalLine": "8:28 amNE 42ND AV @ NE PRESCOTT ST [NW]218VRN-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6204208,
+        45.55556989999999
+      ],
+      "displayName": "NE Prescott St & NE 42nd Ave, Portland, OR 97211, USA",
+      "placeId": "EjVORSBQcmVzY290dCBTdCAmIE5FIDQybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCcGG2uLPppVUEd5djMSLZx_hEhQKEgnBhtriz6aVVBHeXYzEi2cf4RoUChIJ-QhAYk2hlVQRE3IDaf7wFigaFAoSCa2LhufRppVUEehffYq0pF61IgoNczonGxXQm-m2",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-0",
+      "address": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:VERNON GT & ST & CAB LOADING ZONE ON 20TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6438366,
+        45.5623398
+      ],
+      "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "schoolName": "Vernon"
+    }
+  ],
+  "neighborhoods": [
+    "Cully",
+    "Northeast Portland"
+  ],
+  "processedAt": "2026-08-10T02:11:47.962Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.55749,
+      -122.62041
+    ],
+    [
+      45.55577,
+      -122.62042
+    ],
+    [
+      45.55557,
+      -122.62042
+    ],
+    [
+      45.55577,
+      -122.62042
+    ],
+    [
+      45.55636,
+      -122.62042
+    ],
+    [
+      45.55827,
+      -122.62041
+    ],
+    [
+      45.5596,
+      -122.62041
+    ],
+    [
+      45.56198,
+      -122.62041
+    ],
+    [
+      45.56249,
+      -122.62041
+    ],
+    [
+      45.56281,
+      -122.62042
+    ],
+    [
+      45.56281,
+      -122.62065
+    ],
+    [
+      45.56281,
+      -122.62144
+    ],
+    [
+      45.56279,
+      -122.62246
+    ],
+    [
+      45.56276,
+      -122.62593
+    ],
+    [
+      45.56274,
+      -122.62865
+    ],
+    [
+      45.56272,
+      -122.6312
+    ],
+    [
+      45.56271,
+      -122.63709
+    ],
+    [
+      45.5627,
+      -122.64092
+    ],
+    [
+      45.5627,
+      -122.64264
+    ],
+    [
+      45.5627,
+      -122.64464
+    ],
+    [
+      45.5627,
+      -122.64483
+    ],
+    [
+      45.56221,
+      -122.64483
+    ],
+    [
+      45.56211,
+      -122.64483
+    ],
+    [
+      45.56211,
+      -122.6443
+    ],
+    [
+      45.56208,
+      -122.64387
+    ]
+  ]
+}

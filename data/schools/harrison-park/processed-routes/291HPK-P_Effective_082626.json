@@ -1,0 +1,226 @@
+{
+  "id": "1lJKjRS8a1NeVvdksSdNgpe1qTLgEQsNY",
+  "name": "291",
+  "direction": "Afternoon",
+  "filename": "291HPK-P_Effective_082626.pdf",
+  "fileId": "1lJKjRS8a1NeVvdksSdNgpe1qTLgEQsNY",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:HARRISON PARK GT LOADING ZONE/2225 SE 87TH AV",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.574816,
+        45.5069498
+      ],
+      "displayName": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "schoolName": "Harrison Park"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE Division St. & SE 75th Ave. [NE]",
+      "time": "4:13 pm",
+      "direction": "NE",
+      "originalLine": "4:13 pmSE DIVISION ST @ SE 75TH AV [NE]291HPK-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5863578,
+        45.5054015
+      ],
+      "displayName": "SE Division St & SE 75th Ave, Portland, OR 97215, USA",
+      "placeId": "EjVTRSBEaXZpc2lvbiBTdCAmIFNFIDc1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCVM8Z79RoJVUESVS0gip_G-KEhQKEglTPGe_UaCVVBElUtIIqfxvihoUChIJF3pRRLGhlVQRIlzYWfgkuvAaFAoSCXMmfO49oJVUEe-eajoXNdeWIgoNv5IfGxVmzu62",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Division St. & SE 59th Ave. [NE]",
+      "time": "4:16 pm",
+      "direction": "NE",
+      "originalLine": "4:16 pmSE DIVISION ST @ SE 59TH AV [NE]291HPK-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6027629,
+        45.50535989999999
+      ],
+      "displayName": "SE 59th Ave & SE Division St, Portland, OR 97215, USA",
+      "placeId": "EjVTRSA1OXRoIEF2ZSAmIFNFIERpdmlzaW9uIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCUEy4bdeoJVUEclJBv30fRw0EhQKEglBMuG3XqCVVBHJSQb99H0cNBoUChIJ35mSAWiglVQRIIPJU5Jnk4waFAoSCRd6UUSxoZVUESJc2Fn4JLrwIgoNH5EfGxWTTey2",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-3",
+      "address": "5626 SE Woodward St. (clinton Park) [S]",
+      "time": "4:20 pm",
+      "direction": "S",
+      "originalLine": "4:20 pm5626 SE WOODWARD ST (CLINTON PARK) [S]291HPK-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60448102423194,
+        45.501410820029356
+      ],
+      "displayName": "5626 SE Woodward St, Portland, OR 97206, USA",
+      "placeId": "ChIJ9WGnhF2glVQRCtt3jULwap8",
+      "neighborhood": "South Tabor"
+    }
+  ],
+  "neighborhoods": [
+    "South Tabor",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-08-10T01:58:54.861Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50698,
+      -122.57441
+    ],
+    [
+      45.50692,
+      -122.57439
+    ],
+    [
+      45.5069,
+      -122.57434
+    ],
+    [
+      45.5069,
+      -122.57428
+    ],
+    [
+      45.50679,
+      -122.57428
+    ],
+    [
+      45.50599,
+      -122.57428
+    ],
+    [
+      45.50538,
+      -122.57427
+    ],
+    [
+      45.50463,
+      -122.57426
+    ],
+    [
+      45.50464,
+      -122.57479
+    ],
+    [
+      45.50465,
+      -122.57547
+    ],
+    [
+      45.50467,
+      -122.57617
+    ],
+    [
+      45.50471,
+      -122.57709
+    ],
+    [
+      45.50479,
+      -122.57794
+    ],
+    [
+      45.50484,
+      -122.57834
+    ],
+    [
+      45.50489,
+      -122.57869
+    ],
+    [
+      45.50498,
+      -122.57918
+    ],
+    [
+      45.50504,
+      -122.57962
+    ],
+    [
+      45.50507,
+      -122.57976
+    ],
+    [
+      45.50503,
+      -122.57988
+    ],
+    [
+      45.50519,
+      -122.58085
+    ],
+    [
+      45.50531,
+      -122.5816
+    ],
+    [
+      45.50538,
+      -122.5824
+    ],
+    [
+      45.50541,
+      -122.58372
+    ],
+    [
+      45.5054,
+      -122.58678
+    ],
+    [
+      45.50539,
+      -122.58888
+    ],
+    [
+      45.50537,
+      -122.59557
+    ],
+    [
+      45.50536,
+      -122.59831
+    ],
+    [
+      45.50536,
+      -122.6011
+    ],
+    [
+      45.50536,
+      -122.60258
+    ],
+    [
+      45.50536,
+      -122.60308
+    ],
+    [
+      45.50416,
+      -122.60308
+    ],
+    [
+      45.50304,
+      -122.60308
+    ],
+    [
+      45.50212,
+      -122.60308
+    ],
+    [
+      45.50141,
+      -122.60309
+    ],
+    [
+      45.50141,
+      -122.60368
+    ],
+    [
+      45.50141,
+      -122.60448
+    ]
+  ]
+}

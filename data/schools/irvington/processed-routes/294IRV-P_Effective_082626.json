@@ -1,0 +1,202 @@
+{
+  "id": "1mevVWvvxWiAN30GHQEOh1APCpjEMxmx5",
+  "name": "294",
+  "direction": "Afternoon",
+  "filename": "294IRV-P_Effective_082626.pdf",
+  "fileId": "1mevVWvvxWiAN30GHQEOh1APCpjEMxmx5",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "1320 NE Brazee St, Portland, OR 97212, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:IRVINGTON ST LOADING ZONE ON THOMPSON",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6519732,
+        45.5403663
+      ],
+      "displayName": "1320 NE Brazee St, Portland, OR 97212, USA",
+      "schoolName": "Irvington"
+    },
+    {
+      "id": "stop-1",
+      "address": "1126 NE 21st Ave. [W]",
+      "time": "2:38 pm",
+      "direction": "W",
+      "originalLine": "2:38 pm1126 NE 21ST AV [W]294IRV-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.64488411973751,
+        45.53125104224004
+      ],
+      "displayName": "1126 NE 21st Ave, Portland, OR 97232, USA",
+      "placeId": "ChIJWTIzIraglVQR94MRZO2zA0w",
+      "neighborhood": "Sullivan's Gulch"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE 28th Ave. & NE Weidler St. [SE]",
+      "time": "2:43 pm",
+      "direction": "SE",
+      "originalLine": "2:43 pmNE 28TH AV @ NE WEIDLER ST [SE]294IRV-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6367227,
+        45.5345322
+      ],
+      "displayName": "NE Weidler St & NE 28th Ave, Portland, OR 97232, USA",
+      "placeId": "EjRORSBXZWlkbGVyIFN0ICYgTkUgMjh0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIzMiwgVVNBImYiZAoUChIJHyTpl86glVQRux-Xx6pqYzsSFAoSCR8k6ZfOoJVUEbsfl8eqamM7GhQKEgkzBCLJy6CVVBFhCqqcgsFWbhoUChIJJytHqM2glVQRzLF0tQNb9HoiCg2qBCQbFQUf57Y",
+      "neighborhood": "Sullivan's Gulch"
+    }
+  ],
+  "neighborhoods": [
+    "Sullivan's Gulch"
+  ],
+  "processedAt": "2026-08-10T01:59:22.432Z",
+  "stats": {
+    "totalStops": 3,
+    "geocodedStops": 3,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.54054,
+      -122.65197
+    ],
+    [
+      45.54053,
+      -122.65072
+    ],
+    [
+      45.54053,
+      -122.65047
+    ],
+    [
+      45.5399,
+      -122.65047
+    ],
+    [
+      45.53797,
+      -122.65048
+    ],
+    [
+      45.53647,
+      -122.65049
+    ],
+    [
+      45.53471,
+      -122.6505
+    ],
+    [
+      45.53441,
+      -122.65051
+    ],
+    [
+      45.53433,
+      -122.65057
+    ],
+    [
+      45.53433,
+      -122.65048
+    ],
+    [
+      45.53433,
+      -122.64979
+    ],
+    [
+      45.53433,
+      -122.64949
+    ],
+    [
+      45.53433,
+      -122.64848
+    ],
+    [
+      45.53433,
+      -122.64567
+    ],
+    [
+      45.53432,
+      -122.64486
+    ],
+    [
+      45.53402,
+      -122.64486
+    ],
+    [
+      45.53323,
+      -122.64486
+    ],
+    [
+      45.53146,
+      -122.64488
+    ],
+    [
+      45.53125,
+      -122.64488
+    ],
+    [
+      45.53146,
+      -122.64488
+    ],
+    [
+      45.53217,
+      -122.64486
+    ],
+    [
+      45.53374,
+      -122.64485
+    ],
+    [
+      45.53432,
+      -122.64486
+    ],
+    [
+      45.53431,
+      -122.64302
+    ],
+    [
+      45.5343,
+      -122.64117
+    ],
+    [
+      45.53466,
+      -122.64117
+    ],
+    [
+      45.53499,
+      -122.64116
+    ],
+    [
+      45.53506,
+      -122.6411
+    ],
+    [
+      45.5351,
+      -122.64104
+    ],
+    [
+      45.53513,
+      -122.64093
+    ],
+    [
+      45.53516,
+      -122.64054
+    ],
+    [
+      45.53517,
+      -122.63956
+    ],
+    [
+      45.53516,
+      -122.63672
+    ],
+    [
+      45.53453,
+      -122.63672
+    ]
+  ]
+}

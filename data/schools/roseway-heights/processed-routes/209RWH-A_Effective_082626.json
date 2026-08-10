@@ -1,0 +1,304 @@
+{
+  "id": "1g02OaJrJ6d1ym06g7e6wVv-NOp6VKcnH",
+  "name": "209",
+  "direction": "Morning",
+  "filename": "209RWH-A_Effective_082626.pdf",
+  "fileId": "1g02OaJrJ6d1ym06g7e6wVv-NOp6VKcnH",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "6808 NE Killingsworth St. [N]",
+      "time": "8:52 am",
+      "direction": "N",
+      "originalLine": "8:52 am6808 NE KILLINGSWORTH ST [N]209RWH-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.59312399999999,
+        45.5616571
+      ],
+      "displayName": "6808 NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "ChIJObHv2rGmlVQRW2hoCKnZJ24",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Killingsworth St. & NE 60th Ave. [NE]",
+      "time": "8:54 am",
+      "direction": "NE",
+      "originalLine": "8:54 amNE KILLINGSWORTH ST @ NE 60TH AV [NE]209RWH-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6008264,
+        45.5627573
+      ],
+      "displayName": "NE Killingsworth St & NE 60th Ave, Portland, OR 97218, USA",
+      "placeId": "EjpORSBLaWxsaW5nc3dvcnRoIFN0ICYgTkUgNjB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBImYiZAoUChIJL1PbC7qmlVQR_NF4QTs8Fl8SFAoSCS9T2wu6ppVUEfzReEE7PBZfGhQKEgm5giEOuKaVVBFNWLB91l-UNBoUChIJPQQaaDGhlVQR5eJbZDf6AE4iCg01UygbFTiZ7LY",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Killingsworth St. & NE 57th Ave. [N]",
+      "time": "8:55 am",
+      "direction": "N",
+      "originalLine": "8:55 amNE KILLINGSWORTH ST @ NE 57TH AV [N]209RWH-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6043985,
+        45.5627529
+      ],
+      "displayName": "NE 57th Ave & NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "EjpORSA1N3RoIEF2ZSAmIE5FIEtpbGxpbmdzd29ydGggU3QsIFBvcnRsYW5kLCBPUiA5NzIxOCwgVVNBImYiZAoUChIJJbe6lLmmlVQRXavIt1qI4AoSFAoSCSW3upS5ppVUEV2ryLdaiOAKGhQKEgmLFt2uM6GVVBE-d9A0U1dLNBoUChIJuYIhDrimlVQRTViwfdZflDQiCg0JUygbFa8N7LY",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE 57th Ave. & NE Prescott St. [NW]",
+      "time": "8:58 am",
+      "direction": "NW",
+      "originalLine": "8:58 amNE 57TH AV @ NE PRESCOTT ST [NW]209RWH-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6044797,
+        45.5554946
+      ],
+      "displayName": "NE Prescott St & NE 57th Ave, Portland, OR 97218, USA",
+      "placeId": "EjVORSBQcmVzY290dCBTdCAmIE5FIDU3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTgsIFVTQSJmImQKFAoSCcN8JRjKppVUEZzmqDtYsH5MEhQKEgnDfCUYyqaVVBGc5qg7WLB-TBoUChIJ-QhAYk2hlVQRE3IDaf7wFigaFAoSCYsW3a4zoZVUET530DRTV0s0IgoNgjcnGxWDCuy2",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-0",
+      "address": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ROSEWAY HEIGHTS GT LOAD ON ALAMEDA",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5873484,
+        45.5440613
+      ],
+      "displayName": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "schoolName": "Roseway Heights"
+    }
+  ],
+  "neighborhoods": [
+    "Cully"
+  ],
+  "processedAt": "2026-08-10T02:09:07.816Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.56166,
+      -122.59312
+    ],
+    [
+      45.56133,
+      -122.59313
+    ],
+    [
+      45.56133,
+      -122.59346
+    ],
+    [
+      45.56133,
+      -122.59357
+    ],
+    [
+      45.56134,
+      -122.59479
+    ],
+    [
+      45.56135,
+      -122.59539
+    ],
+    [
+      45.56135,
+      -122.59556
+    ],
+    [
+      45.56165,
+      -122.59526
+    ],
+    [
+      45.56203,
+      -122.59487
+    ],
+    [
+      45.56236,
+      -122.59454
+    ],
+    [
+      45.56273,
+      -122.59419
+    ],
+    [
+      45.56274,
+      -122.59496
+    ],
+    [
+      45.56274,
+      -122.59607
+    ],
+    [
+      45.56274,
+      -122.59736
+    ],
+    [
+      45.56275,
+      -122.60155
+    ],
+    [
+      45.56275,
+      -122.60406
+    ],
+    [
+      45.56275,
+      -122.6044
+    ],
+    [
+      45.56261,
+      -122.60441
+    ],
+    [
+      45.56237,
+      -122.60441
+    ],
+    [
+      45.56191,
+      -122.6044
+    ],
+    [
+      45.56155,
+      -122.60437
+    ],
+    [
+      45.56122,
+      -122.60438
+    ],
+    [
+      45.56085,
+      -122.60439
+    ],
+    [
+      45.56065,
+      -122.6044
+    ],
+    [
+      45.55932,
+      -122.60443
+    ],
+    [
+      45.557,
+      -122.60445
+    ],
+    [
+      45.55605,
+      -122.60446
+    ],
+    [
+      45.55549,
+      -122.60448
+    ],
+    [
+      45.55549,
+      -122.60295
+    ],
+    [
+      45.55548,
+      -122.60176
+    ],
+    [
+      45.55547,
+      -122.60088
+    ],
+    [
+      45.55546,
+      -122.5973
+    ],
+    [
+      45.55545,
+      -122.59255
+    ],
+    [
+      45.55543,
+      -122.58774
+    ],
+    [
+      45.55543,
+      -122.58694
+    ],
+    [
+      45.55545,
+      -122.58573
+    ],
+    [
+      45.55529,
+      -122.58573
+    ],
+    [
+      45.5542,
+      -122.58575
+    ],
+    [
+      45.55361,
+      -122.58576
+    ],
+    [
+      45.55232,
+      -122.58578
+    ],
+    [
+      45.55019,
+      -122.58583
+    ],
+    [
+      45.5497,
+      -122.58584
+    ],
+    [
+      45.54956,
+      -122.58586
+    ],
+    [
+      45.54932,
+      -122.58585
+    ],
+    [
+      45.54764,
+      -122.58588
+    ],
+    [
+      45.54567,
+      -122.58592
+    ],
+    [
+      45.54456,
+      -122.58594
+    ],
+    [
+      45.54457,
+      -122.5866
+    ],
+    [
+      45.54386,
+      -122.58661
+    ],
+    [
+      45.54382,
+      -122.58662
+    ],
+    [
+      45.5438,
+      -122.58674
+    ],
+    [
+      45.54378,
+      -122.5873
+    ]
+  ]
+}

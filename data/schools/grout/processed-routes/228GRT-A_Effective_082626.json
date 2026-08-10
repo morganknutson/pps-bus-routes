@@ -1,0 +1,328 @@
+{
+  "id": "1_bYbIrL_UBq5YaxqcHbMwBeJyDiav59K",
+  "name": "228",
+  "direction": "Morning",
+  "filename": "228GRT-A_Effective_082626.pdf",
+  "fileId": "1_bYbIrL_UBq5YaxqcHbMwBeJyDiav59K",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE 8th Ave. & SE Franklin St. [NW]",
+      "time": "7:25 am",
+      "direction": "NW",
+      "originalLine": "7:25 amSE 8TH AV @ SE FRANKLIN ST [NW]228GRT-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6578288,
+        45.4996994
+      ],
+      "displayName": "SE Franklin St & SE 8th Ave, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBGcmFua2xpbiBTdCAmIFNFIDh0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJ478i1XoKlVQRrd9M91HaK1oSFAoSCeO_ItV6CpVUEa3fTPdR2itaGhQKEgnnVhXoZ6CVVBG_ypAkAkx3vhoUChIJ4VdWP3QKlVQRchCWNa2S5XIiCg0CtB4bFZDm47Y",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-2",
+      "address": "1106 SE Cora St. [S]",
+      "time": "7:27 am",
+      "direction": "S",
+      "originalLine": "7:27 am1106 SE CORA ST [S]228GRT-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.65422314820019,
+        45.491964052082984
+      ],
+      "displayName": "1106 SE Cora St, Portland, OR 97202, USA",
+      "placeId": "ChIJ_4wsxIkKlVQRyID7R9G1YZk",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 10th Ave. & SE Rhone St. [SE]",
+      "time": "7:30 am",
+      "direction": "SE",
+      "originalLine": "7:30 amSE 10TH AV @ SE RHONE ST [SE]228GRT-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6558905,
+        45.4963851
+      ],
+      "displayName": "SE Rhone St & SE 10th Ave, Portland, OR 97202, USA",
+      "placeId": "EjJTRSBSaG9uZSBTdCAmIFNFIDEwdGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCbXSNkBjCpVUEdKwMXQ_L9yzEhQKEgm10jZAYwqVVBHSsDF0Py_csxoUChIJN-flvUeglVQRFUyS6M53xOMaFAoSCRn3mJp2CpVUEdQRoHm5sNuWIgoNizIeGxVHMuS2",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 14th Ave. & SE Lafayette St. [NW]",
+      "time": "7:33 am",
+      "direction": "NW",
+      "originalLine": "7:33 amSE 14TH AV @ SE LAFAYETTE ST [NW]228GRT-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6513542,
+        45.4967756
+      ],
+      "displayName": "SE Lafayette St & SE 14th Ave, Portland, OR 97202, USA",
+      "placeId": "EjZTRSBMYWZheWV0dGUgU3QgJiBTRSAxNHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjAyLCBVU0EiZiJkChQKEgljVhvkfAqVVBE5LCqOJx8NvBIUChIJY1Yb5HwKlVQROSwqjicfDbwaFAoSCW31XpploJVUETZZUrRgBC0LGhQKEgk9ePMAiQqVVBGvCSXthJ9YtSIKDcxBHhsVeuPktg",
+      "neighborhood": "Brooklyn"
+    },
+    {
+      "id": "stop-0",
+      "address": "3119 SE Holgate Blvd, Portland, OR 97202, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:GROUT GT & ST & CAB LOADING ZONE ON 32ND",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6332002,
+        45.4910818
+      ],
+      "displayName": "3119 SE Holgate Blvd, Portland, OR 97202, USA",
+      "schoolName": "Grout"
+    }
+  ],
+  "neighborhoods": [
+    "Brooklyn"
+  ],
+  "processedAt": "2026-08-10T02:23:37.423Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.4997,
+      -122.65783
+    ],
+    [
+      45.49969,
+      -122.65605
+    ],
+    [
+      45.49969,
+      -122.65481
+    ],
+    [
+      45.49969,
+      -122.65423
+    ],
+    [
+      45.4989,
+      -122.65422
+    ],
+    [
+      45.49865,
+      -122.65418
+    ],
+    [
+      45.49823,
+      -122.65406
+    ],
+    [
+      45.49783,
+      -122.65394
+    ],
+    [
+      45.49608,
+      -122.65344
+    ],
+    [
+      45.49498,
+      -122.65312
+    ],
+    [
+      45.494,
+      -122.6528
+    ],
+    [
+      45.49303,
+      -122.65237
+    ],
+    [
+      45.49303,
+      -122.65263
+    ],
+    [
+      45.49303,
+      -122.65289
+    ],
+    [
+      45.49304,
+      -122.65421
+    ],
+    [
+      45.49196,
+      -122.65422
+    ],
+    [
+      45.49304,
+      -122.65421
+    ],
+    [
+      45.49401,
+      -122.65422
+    ],
+    [
+      45.49533,
+      -122.65462
+    ],
+    [
+      45.49594,
+      -122.65477
+    ],
+    [
+      45.49598,
+      -122.65477
+    ],
+    [
+      45.49639,
+      -122.65477
+    ],
+    [
+      45.49639,
+      -122.65502
+    ],
+    [
+      45.49639,
+      -122.65589
+    ],
+    [
+      45.49639,
+      -122.65502
+    ],
+    [
+      45.49638,
+      -122.65425
+    ],
+    [
+      45.49638,
+      -122.65386
+    ],
+    [
+      45.49638,
+      -122.65374
+    ],
+    [
+      45.49638,
+      -122.65353
+    ],
+    [
+      45.4968,
+      -122.65365
+    ],
+    [
+      45.49679,
+      -122.65237
+    ],
+    [
+      45.49675,
+      -122.64831
+    ],
+    [
+      45.49639,
+      -122.64832
+    ],
+    [
+      45.49616,
+      -122.64836
+    ],
+    [
+      45.49536,
+      -122.64852
+    ],
+    [
+      45.49506,
+      -122.64858
+    ],
+    [
+      45.49488,
+      -122.64859
+    ],
+    [
+      45.49398,
+      -122.64859
+    ],
+    [
+      45.49346,
+      -122.64856
+    ],
+    [
+      45.49272,
+      -122.64855
+    ],
+    [
+      45.49234,
+      -122.64855
+    ],
+    [
+      45.492,
+      -122.64858
+    ],
+    [
+      45.49145,
+      -122.64865
+    ],
+    [
+      45.491,
+      -122.64867
+    ],
+    [
+      45.49033,
+      -122.64868
+    ],
+    [
+      45.49033,
+      -122.6485
+    ],
+    [
+      45.49033,
+      -122.64736
+    ],
+    [
+      45.49032,
+      -122.6457
+    ],
+    [
+      45.49032,
+      -122.64386
+    ],
+    [
+      45.49031,
+      -122.64145
+    ],
+    [
+      45.4903,
+      -122.63907
+    ],
+    [
+      45.49031,
+      -122.63718
+    ],
+    [
+      45.49032,
+      -122.63533
+    ],
+    [
+      45.49034,
+      -122.63455
+    ],
+    [
+      45.49038,
+      -122.63434
+    ],
+    [
+      45.49054,
+      -122.63396
+    ],
+    [
+      45.4906,
+      -122.63369
+    ],
+    [
+      45.49108,
+      -122.63369
+    ]
+  ]
+}

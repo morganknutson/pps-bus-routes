@@ -1,0 +1,277 @@
+{
+  "id": "1oALogbHDFGwY0O3yPi7vaku2TxNhCq39",
+  "name": "222",
+  "direction": "Afternoon",
+  "filename": "222SCT-P_Effective_082626.pdf",
+  "fileId": "1oALogbHDFGwY0O3yPi7vaku2TxNhCq39",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "6700 NE Prescott St, Portland, OR 97218, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:SCOTT GT LOADING ZONE ON 68TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5944324,
+        45.555031
+      ],
+      "displayName": "6700 NE Prescott St, Portland, OR 97218, USA",
+      "schoolName": "Scott"
+    },
+    {
+      "id": "stop-1",
+      "address": "6808 NE Killingsworth St. [SW]",
+      "time": "2:39 pm",
+      "direction": "SW",
+      "originalLine": "2:39 pm6808 NE KILLINGSWORTH ST [SW]222SCT-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.59312399999999,
+        45.5616571
+      ],
+      "displayName": "6808 NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "ChIJObHv2rGmlVQRW2hoCKnZJ24",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE Killingsworth St. & NE 72nd Ave. [SW]",
+      "time": "2:40 pm",
+      "direction": "SW",
+      "originalLine": "2:40 pmNE KILLINGSWORTH ST @ NE 72ND AV [SW]222SCT-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5889046,
+        45.5626776
+      ],
+      "displayName": "NE 72nd Ave. & NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "EjtORSA3Mm5kIEF2ZS4gJiBORSBLaWxsaW5nc3dvcnRoIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTgsIFVTQSJmImQKFAoSCcm29_WuppVUEaeTMC9BZXcpEhQKEgnJtvf1rqaVVBGnkzAvQWV3KRoUChIJAT9eEjihlVQRyaUt9tEDsLsaFAoSCbmCIQ64ppVUEU1YsH3WX5Q0IgoNGFAoGxXqau62",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-3",
+      "address": "4840 NE Portland Hwy [SW]",
+      "time": "2:49 pm",
+      "direction": "SW",
+      "originalLine": "2:49 pm4840 NE PORTLAND HWY [SW]222SCT-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.61198664320806,
+        45.56872332402239
+      ],
+      "displayName": "4840 NE Portland Hwy, Portland, OR 97218, USA",
+      "placeId": "ChIJh706Gr6mlVQRBLzijqcxlEk",
+      "neighborhood": "Cully"
+    }
+  ],
+  "neighborhoods": [
+    "Cully"
+  ],
+  "processedAt": "2026-08-10T02:08:00.859Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.555,
+      -122.59444
+    ],
+    [
+      45.55499,
+      -122.595
+    ],
+    [
+      45.55496,
+      -122.59514
+    ],
+    [
+      45.55496,
+      -122.59526
+    ],
+    [
+      45.55527,
+      -122.59526
+    ],
+    [
+      45.55546,
+      -122.59526
+    ],
+    [
+      45.55546,
+      -122.59595
+    ],
+    [
+      45.55546,
+      -122.59831
+    ],
+    [
+      45.55547,
+      -122.60019
+    ],
+    [
+      45.55547,
+      -122.60088
+    ],
+    [
+      45.55587,
+      -122.60056
+    ],
+    [
+      45.55636,
+      -122.60014
+    ],
+    [
+      45.55822,
+      -122.59856
+    ],
+    [
+      45.55931,
+      -122.59762
+    ],
+    [
+      45.55967,
+      -122.59726
+    ],
+    [
+      45.56058,
+      -122.59635
+    ],
+    [
+      45.56135,
+      -122.59556
+    ],
+    [
+      45.56134,
+      -122.59486
+    ],
+    [
+      45.56134,
+      -122.59434
+    ],
+    [
+      45.56133,
+      -122.59352
+    ],
+    [
+      45.56133,
+      -122.59313
+    ],
+    [
+      45.56166,
+      -122.59312
+    ],
+    [
+      45.56133,
+      -122.59313
+    ],
+    [
+      45.56133,
+      -122.59259
+    ],
+    [
+      45.56133,
+      -122.59213
+    ],
+    [
+      45.56133,
+      -122.59117
+    ],
+    [
+      45.56132,
+      -122.5889
+    ],
+    [
+      45.56227,
+      -122.5889
+    ],
+    [
+      45.56268,
+      -122.5889
+    ],
+    [
+      45.5627,
+      -122.58937
+    ],
+    [
+      45.56275,
+      -122.58989
+    ],
+    [
+      45.56283,
+      -122.59045
+    ],
+    [
+      45.56297,
+      -122.59112
+    ],
+    [
+      45.56314,
+      -122.59167
+    ],
+    [
+      45.56337,
+      -122.59228
+    ],
+    [
+      45.5638,
+      -122.59323
+    ],
+    [
+      45.56393,
+      -122.5935
+    ],
+    [
+      45.56453,
+      -122.59472
+    ],
+    [
+      45.56559,
+      -122.59685
+    ],
+    [
+      45.56646,
+      -122.59865
+    ],
+    [
+      45.56666,
+      -122.59917
+    ],
+    [
+      45.56678,
+      -122.59951
+    ],
+    [
+      45.56697,
+      -122.60012
+    ],
+    [
+      45.56707,
+      -122.60056
+    ],
+    [
+      45.56771,
+      -122.60437
+    ],
+    [
+      45.56846,
+      -122.60889
+    ],
+    [
+      45.56897,
+      -122.61195
+    ],
+    [
+      45.56885,
+      -122.61199
+    ],
+    [
+      45.56872,
+      -122.61199
+    ]
+  ]
+}

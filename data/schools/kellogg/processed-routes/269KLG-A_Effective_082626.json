@@ -1,0 +1,414 @@
+{
+  "id": "1L9oLR-ipyoUbeoFk6HlqY3670WXY2ZIj",
+  "name": "269",
+  "direction": "Morning",
+  "filename": "269KLG-A_Effective_082626.pdf",
+  "fileId": "1L9oLR-ipyoUbeoFk6HlqY3670WXY2ZIj",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-3",
+      "address": "SE 58th Ave. & SE Raymond St. [SE]",
+      "time": "8:47 am",
+      "direction": "SE",
+      "originalLine": "8:47 amSE 58TH AV @ SE RAYMOND ST [SE]269KLG-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6040614,
+        45.4866676
+      ],
+      "displayName": "SE 58th Ave & SE Raymond St, Portland, OR 97206, USA",
+      "placeId": "EjRTRSA1OHRoIEF2ZSAmIFNFIFJheW1vbmQgU3QsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJde7rohKglVQRobttNjSdRy8SFAoSCXXu66ISoJVUEaG7bTY0nUcvGhQKEglZkLLnbKCVVBGVzRd98Tqn9BoUChIJK32FvjyglVQRGLnJ0JzOVWoiCg30thwbFdoa7LY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 58th Ave. & SE Holgate Blvd. [SE]",
+      "time": "8:48 am",
+      "direction": "SE",
+      "originalLine": "8:48 amSE 58TH AV @ SE HOLGATE BLVD [SE]269KLG-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6036672,
+        45.4902859
+      ],
+      "displayName": "SE Holgate Blvd & SE 58th Ave, Portland, OR 97206, USA",
+      "placeId": "EjZTRSBIb2xnYXRlIEJsdmQgJiBTRSA1OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgktESnxbKCVVBGIDlP5usgocxIUChIJLREp8WyglVQRiA5T-brIKHMaFAoSCV2BD1Y-oJVUEX7_A3-ak1ZXGhQKEglZkLLnbKCVVBGVzRd98Tqn9CIKDUtEHRsVQCrstg",
+      "neighborhood": "Creston - Kenilworth"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE Cesar E Chavez Blvd. & SE Lafayette Ct. [E]",
+      "time": "8:52 am",
+      "direction": "E",
+      "originalLine": "8:52 amSE CESAR E CHAVEZ BLVD @ SE LAFAYETTE CT [E]269KLG-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6226347,
+        45.4960729
+      ],
+      "displayName": "César E. Chávez Blvd & SE Lafayette Ct, Portland, OR 97202, USA",
+      "placeId": "EkFDw6lzYXIgRS4gQ2jDoXZleiBCbHZkICYgU0UgTGFmYXlldHRlIEN0LCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCcUUVqN7oJVUEa5H-Fseq_NeEhQKEgnFFFaje6CVVBGuR_hbHqvzXhoUChIJcy9N7umglVQRFEWA6m8yKBEaFAoSCfdEcY17oJVUEd2_HWRj13Q9IgoNWSYeGxVVRem2",
+      "neighborhood": "Creston - Kenilworth"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE Harrison St. & SE 43rd Ave. [SW]",
+      "time": "8:56 am",
+      "direction": "SW",
+      "originalLine": "8:56 amSE HARRISON ST @ SE 43RD AV [SW]269KLG-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6181951,
+        45.5087718
+      ],
+      "displayName": "SE Harrison St & SE 43rd Ave, Portland, OR 97215, USA",
+      "placeId": "EjVTRSBIYXJyaXNvbiBTdCAmIFNFIDQzcmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCUul6W6LoJVUEWuX3eDduQRJEhQKEglLpelui6CVVBFrl93g3bkESRoUChIJPT1EHLKhlVQRhBPZsB8-aYgaFAoSCc_bjlF1oJVUEaJrDrq3fmkSIgoNZhYgGxXB8um2",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-0",
+      "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:KELLOGG GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5917225,
+        45.49871359999999
+      ],
+      "displayName": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "schoolName": "Kellogg"
+    }
+  ],
+  "neighborhoods": [
+    "Creston - Kenilworth",
+    "Richmond",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-08-10T02:00:03.870Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.48667,
+      -122.60406
+    ],
+    [
+      45.48969,
+      -122.604
+    ],
+    [
+      45.49029,
+      -122.60399
+    ],
+    [
+      45.49029,
+      -122.60367
+    ],
+    [
+      45.49029,
+      -122.60473
+    ],
+    [
+      45.4903,
+      -122.60829
+    ],
+    [
+      45.49031,
+      -122.6094
+    ],
+    [
+      45.4903,
+      -122.61683
+    ],
+    [
+      45.4903,
+      -122.61973
+    ],
+    [
+      45.4903,
+      -122.62251
+    ],
+    [
+      45.4903,
+      -122.6228
+    ],
+    [
+      45.49048,
+      -122.62276
+    ],
+    [
+      45.49099,
+      -122.62268
+    ],
+    [
+      45.4923,
+      -122.62267
+    ],
+    [
+      45.49476,
+      -122.62265
+    ],
+    [
+      45.49663,
+      -122.62263
+    ],
+    [
+      45.49687,
+      -122.62263
+    ],
+    [
+      45.49727,
+      -122.6226
+    ],
+    [
+      45.49766,
+      -122.62264
+    ],
+    [
+      45.49792,
+      -122.62264
+    ],
+    [
+      45.49844,
+      -122.62264
+    ],
+    [
+      45.4998,
+      -122.62264
+    ],
+    [
+      45.50176,
+      -122.62264
+    ],
+    [
+      45.50408,
+      -122.62264
+    ],
+    [
+      45.50479,
+      -122.62264
+    ],
+    [
+      45.50585,
+      -122.62268
+    ],
+    [
+      45.50764,
+      -122.62274
+    ],
+    [
+      45.5083,
+      -122.62275
+    ],
+    [
+      45.50879,
+      -122.62277
+    ],
+    [
+      45.50879,
+      -122.62239
+    ],
+    [
+      45.50877,
+      -122.62023
+    ],
+    [
+      45.50877,
+      -122.61911
+    ],
+    [
+      45.50877,
+      -122.6182
+    ],
+    [
+      45.50872,
+      -122.61816
+    ],
+    [
+      45.50807,
+      -122.61813
+    ],
+    [
+      45.50792,
+      -122.61811
+    ],
+    [
+      45.50542,
+      -122.61811
+    ],
+    [
+      45.50527,
+      -122.61811
+    ],
+    [
+      45.50527,
+      -122.61799
+    ],
+    [
+      45.50471,
+      -122.61801
+    ],
+    [
+      45.50407,
+      -122.61801
+    ],
+    [
+      45.50336,
+      -122.61801
+    ],
+    [
+      45.50336,
+      -122.61667
+    ],
+    [
+      45.50336,
+      -122.61532
+    ],
+    [
+      45.50336,
+      -122.61381
+    ],
+    [
+      45.50336,
+      -122.61211
+    ],
+    [
+      45.50341,
+      -122.61198
+    ],
+    [
+      45.50344,
+      -122.61152
+    ],
+    [
+      45.50345,
+      -122.61002
+    ],
+    [
+      45.50344,
+      -122.60902
+    ],
+    [
+      45.50309,
+      -122.60902
+    ],
+    [
+      45.50264,
+      -122.60903
+    ],
+    [
+      45.50202,
+      -122.60904
+    ],
+    [
+      45.50029,
+      -122.60905
+    ],
+    [
+      45.49791,
+      -122.60906
+    ],
+    [
+      45.49771,
+      -122.60906
+    ],
+    [
+      45.49744,
+      -122.60905
+    ],
+    [
+      45.49744,
+      -122.60869
+    ],
+    [
+      45.49745,
+      -122.60861
+    ],
+    [
+      45.49749,
+      -122.60855
+    ],
+    [
+      45.49749,
+      -122.6084
+    ],
+    [
+      45.49749,
+      -122.60818
+    ],
+    [
+      45.49745,
+      -122.60809
+    ],
+    [
+      45.49745,
+      -122.60797
+    ],
+    [
+      45.49745,
+      -122.60766
+    ],
+    [
+      45.49745,
+      -122.60722
+    ],
+    [
+      45.49744,
+      -122.6034
+    ],
+    [
+      45.49744,
+      -122.60064
+    ],
+    [
+      45.49747,
+      -122.60055
+    ],
+    [
+      45.49747,
+      -122.60044
+    ],
+    [
+      45.49748,
+      -122.5996
+    ],
+    [
+      45.49747,
+      -122.59899
+    ],
+    [
+      45.49746,
+      -122.59662
+    ],
+    [
+      45.49745,
+      -122.59434
+    ],
+    [
+      45.49746,
+      -122.59273
+    ],
+    [
+      45.49746,
+      -122.59234
+    ],
+    [
+      45.49779,
+      -122.59235
+    ],
+    [
+      45.49888,
+      -122.59231
+    ],
+    [
+      45.49889,
+      -122.59207
+    ]
+  ]
+}

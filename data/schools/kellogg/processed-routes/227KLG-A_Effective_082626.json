@@ -1,0 +1,539 @@
+{
+  "id": "17KKibDwvUb9Z8ufeCLaIPETeArkz8xhm",
+  "name": "227",
+  "direction": "Morning",
+  "filename": "227KLG-A_Effective_082626.pdf",
+  "fileId": "17KKibDwvUb9Z8ufeCLaIPETeArkz8xhm",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "7326 SE Flavel St. (whitman School) [S]",
+      "time": "8:40 am",
+      "direction": "S",
+      "originalLine": "8:40 am7326 SE FLAVEL ST (WHITMAN SCHOOL) [S]227KLG-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.58771676539588,
+        45.468658644016806
+      ],
+      "displayName": "7326 SE Flavel St, Portland, OR 97206, USA",
+      "placeId": "ChIJJxhFa_mflVQRI87QPZ05IaI",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 89th Ave. & SE Crystal Springs Blvd. [SE]",
+      "time": "8:46 am",
+      "direction": "SE",
+      "originalLine": "8:46 amSE 89TH AV @ SE CRYSTAL SPRINGS BLVD [SE]227KLG-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5718709,
+        45.46495849999999
+      ],
+      "displayName": "SE Crystal Springs Blvd & SE 89th Ave, Portland, OR 97266, USA",
+      "placeId": "Ej5TRSBDcnlzdGFsIFNwcmluZ3MgQmx2ZCAmIFNFIDg5dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCTGE107un5VUEai_odNCH5NwEhQKEgkxhNdO7p-VVBGov6HTQh-TcBoUChIJ4Uj-3VR1lVQRz6x9WXAb6cwaFAoSCZ27QNkwoJVUEaI-hJKK8ct4IgoN8WYZGxVLBPG2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Crystal Springs Blvd. & SE 92nd Ave. [SW]",
+      "time": "8:47 am",
+      "direction": "SW",
+      "originalLine": "8:47 amSE CRYSTAL SPRINGS BLVD @ SE 92ND AVE [SW]227KLG-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686224,
+        45.4647191
+      ],
+      "displayName": "SE Crystal Springs Blvd & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "Ej5TRSBDcnlzdGFsIFNwcmluZ3MgQmx2ZCAmIFNFIDkybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCbEjIoTun5VUEWMHDXBxo70hEhQKEgmxIyKE7p-VVBFjBw1wcaO9IRoUChIJ4Uj-3VR1lVQRz6x9WXAb6cwaFAoSCR_Xus8moJVUETM4bKflPVLGIgoNl10ZGxUwg_G2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE 92nd Ave. & SE Tolman St. [E]",
+      "time": "8:51 am",
+      "direction": "E",
+      "originalLine": "8:51 amSE 92ND AVE @ SE TOLMAN ST [E]227KLG-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686421,
+        45.4774096
+      ],
+      "displayName": "SE Tolman St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBUb2xtYW4gU3QgJiBTRSA5Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEglzm6Vtip-VVBHis2iDnJBjEBIUChIJc5ulbYqflVQR4rNog5yQYxAaFAoSCQXGXe6nCpVUEc-CAnVTeENpGhQKEgkf17rPJqCVVBEzOGyn5T1SxiIKDVBNGxsVa4Lxtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE 100th Ave. & SE Steele St. [E]",
+      "time": "8:54 am",
+      "direction": "E",
+      "originalLine": "8:54 amSE 100TH AV @ SE STEELE ST [E]227KLG-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5608713,
+        45.48433259999999
+      ],
+      "displayName": "SE Steele St & SE 100th Ave, Portland, OR 97266, USA",
+      "placeId": "EjRTRSBTdGVlbGUgU3QgJiBTRSAxMDB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJI-C9HimglVQRgDjVmuPJyR4SFAoSCSPgvR4poJVUEYA41ZrjyckeGhQKEgkJuMBqI6CVVBEMOmVHN6YuwRoUChIJdzRzyS2glVQR07h9_klA6WQiCg2-WxwbFfex8rY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-7",
+      "address": "SE 97th Ave. & SE Pardee St. [SE]",
+      "time": "8:56 am",
+      "direction": "SE",
+      "originalLine": "8:56 amSE 97TH AV @ SE PARDEE ST [SE]227KLG-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5634781,
+        45.4888387
+      ],
+      "displayName": "SE Pardee St & SE 97th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBQYXJkZWUgU3QgJiBTRSA5N3RoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgm7IENyLqCVVBGrsWbTXMNaJBIUChIJuyBDci6glVQRq7Fm01zDWiQaFAoSCRcZTh0VoJVUEd5w8-mO4LjaGhQKEglrXuCSjZ-VVBH1BI_vWrjpySIKDcMLHRsVI0zytg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-0",
+      "address": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:KELLOGG GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5917225,
+        45.49871359999999
+      ],
+      "displayName": "3400 SE 69th Ave, Portland, OR 97206, USA",
+      "schoolName": "Kellogg"
+    }
+  ],
+  "neighborhoods": [
+    "Brentwood-Darlington",
+    "Lents"
+  ],
+  "processedAt": "2026-08-10T01:59:57.566Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.46866,
+      -122.58772
+    ],
+    [
+      45.46868,
+      -122.57952
+    ],
+    [
+      45.46867,
+      -122.57906
+    ],
+    [
+      45.46851,
+      -122.57905
+    ],
+    [
+      45.4679,
+      -122.57905
+    ],
+    [
+      45.46654,
+      -122.57904
+    ],
+    [
+      45.46331,
+      -122.57905
+    ],
+    [
+      45.46327,
+      -122.57639
+    ],
+    [
+      45.46323,
+      -122.57353
+    ],
+    [
+      45.46322,
+      -122.57287
+    ],
+    [
+      45.46319,
+      -122.57187
+    ],
+    [
+      45.46337,
+      -122.57187
+    ],
+    [
+      45.46389,
+      -122.57187
+    ],
+    [
+      45.46477,
+      -122.57186
+    ],
+    [
+      45.46488,
+      -122.57187
+    ],
+    [
+      45.46496,
+      -122.57187
+    ],
+    [
+      45.46488,
+      -122.57187
+    ],
+    [
+      45.46477,
+      -122.57186
+    ],
+    [
+      45.46476,
+      -122.57108
+    ],
+    [
+      45.46473,
+      -122.56937
+    ],
+    [
+      45.46472,
+      -122.56862
+    ],
+    [
+      45.46531,
+      -122.56863
+    ],
+    [
+      45.46668,
+      -122.56863
+    ],
+    [
+      45.46741,
+      -122.56859
+    ],
+    [
+      45.46812,
+      -122.56858
+    ],
+    [
+      45.46879,
+      -122.56862
+    ],
+    [
+      45.46946,
+      -122.56863
+    ],
+    [
+      45.47006,
+      -122.56864
+    ],
+    [
+      45.47086,
+      -122.56864
+    ],
+    [
+      45.47334,
+      -122.56865
+    ],
+    [
+      45.47741,
+      -122.56864
+    ],
+    [
+      45.47876,
+      -122.56864
+    ],
+    [
+      45.47955,
+      -122.56863
+    ],
+    [
+      45.48005,
+      -122.56866
+    ],
+    [
+      45.48049,
+      -122.56864
+    ],
+    [
+      45.48132,
+      -122.56862
+    ],
+    [
+      45.48223,
+      -122.56863
+    ],
+    [
+      45.48272,
+      -122.56863
+    ],
+    [
+      45.48281,
+      -122.56863
+    ],
+    [
+      45.4828,
+      -122.56833
+    ],
+    [
+      45.48279,
+      -122.56785
+    ],
+    [
+      45.4828,
+      -122.56756
+    ],
+    [
+      45.48278,
+      -122.56738
+    ],
+    [
+      45.48279,
+      -122.56713
+    ],
+    [
+      45.48277,
+      -122.56687
+    ],
+    [
+      45.48277,
+      -122.56615
+    ],
+    [
+      45.48274,
+      -122.56536
+    ],
+    [
+      45.48269,
+      -122.56389
+    ],
+    [
+      45.48265,
+      -122.56224
+    ],
+    [
+      45.48261,
+      -122.56086
+    ],
+    [
+      45.48279,
+      -122.56087
+    ],
+    [
+      45.48296,
+      -122.56087
+    ],
+    [
+      45.48374,
+      -122.56087
+    ],
+    [
+      45.48407,
+      -122.56086
+    ],
+    [
+      45.48433,
+      -122.56087
+    ],
+    [
+      45.48522,
+      -122.5609
+    ],
+    [
+      45.48692,
+      -122.56092
+    ],
+    [
+      45.48801,
+      -122.5609
+    ],
+    [
+      45.48877,
+      -122.56092
+    ],
+    [
+      45.48881,
+      -122.56223
+    ],
+    [
+      45.48884,
+      -122.56348
+    ],
+    [
+      45.48974,
+      -122.56348
+    ],
+    [
+      45.48992,
+      -122.56348
+    ],
+    [
+      45.48993,
+      -122.56362
+    ],
+    [
+      45.48995,
+      -122.56467
+    ],
+    [
+      45.48998,
+      -122.56573
+    ],
+    [
+      45.48999,
+      -122.56604
+    ],
+    [
+      45.49001,
+      -122.56714
+    ],
+    [
+      45.49002,
+      -122.56797
+    ],
+    [
+      45.49002,
+      -122.56835
+    ],
+    [
+      45.49003,
+      -122.5686
+    ],
+    [
+      45.49034,
+      -122.56859
+    ],
+    [
+      45.4906,
+      -122.56859
+    ],
+    [
+      45.49137,
+      -122.56859
+    ],
+    [
+      45.49374,
+      -122.56856
+    ],
+    [
+      45.49559,
+      -122.56855
+    ],
+    [
+      45.49653,
+      -122.56854
+    ],
+    [
+      45.49733,
+      -122.56854
+    ],
+    [
+      45.49743,
+      -122.56854
+    ],
+    [
+      45.49743,
+      -122.56927
+    ],
+    [
+      45.49743,
+      -122.57015
+    ],
+    [
+      45.49744,
+      -122.57182
+    ],
+    [
+      45.49744,
+      -122.573
+    ],
+    [
+      45.49744,
+      -122.5734
+    ],
+    [
+      45.49744,
+      -122.57371
+    ],
+    [
+      45.49742,
+      -122.57382
+    ],
+    [
+      45.49737,
+      -122.57391
+    ],
+    [
+      45.49739,
+      -122.57467
+    ],
+    [
+      45.4974,
+      -122.5765
+    ],
+    [
+      45.4974,
+      -122.57972
+    ],
+    [
+      45.49741,
+      -122.58001
+    ],
+    [
+      45.49741,
+      -122.58038
+    ],
+    [
+      45.4974,
+      -122.5809
+    ],
+    [
+      45.49741,
+      -122.58221
+    ],
+    [
+      45.49742,
+      -122.58362
+    ],
+    [
+      45.49743,
+      -122.58712
+    ],
+    [
+      45.49745,
+      -122.59119
+    ],
+    [
+      45.49746,
+      -122.59234
+    ],
+    [
+      45.49779,
+      -122.59235
+    ],
+    [
+      45.49821,
+      -122.59233
+    ],
+    [
+      45.49888,
+      -122.59231
+    ],
+    [
+      45.49888,
+      -122.59213
+    ],
+    [
+      45.49889,
+      -122.59207
+    ]
+  ]
+}

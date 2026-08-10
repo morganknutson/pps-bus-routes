@@ -1,0 +1,574 @@
+{
+  "id": "1RurcQRBtSp0w2AqEGxODc84mgljBk9t_",
+  "name": "121",
+  "direction": "Morning",
+  "filename": "121CHP-A_Effective_082626.pdf",
+  "fileId": "1RurcQRBtSp0w2AqEGxODc84mgljBk9t_",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NW 17th Ave. & NW Riverscape St. [S]",
+      "time": "7:26 am",
+      "direction": "S",
+      "originalLine": "7:26 amNW 17TH AV @ NW RIVERSCAPE ST [S]121CHP-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.688221,
+        45.5383044
+      ],
+      "displayName": "NW 17th Ave & NW Riverscape St, Portland, OR 97209, USA",
+      "placeId": "EjdOVyAxN3RoIEF2ZSAmIE5XIFJpdmVyc2NhcGUgU3QsIFBvcnRsYW5kLCBPUiA5NzIwOSwgVVNBImYiZAoUChIJuaLWmVinlVQR0yeCQApvucoSFAoSCbmi1plYp5VUEdMngkAKb7nKGhQKEgln4jj1-wmVVBG49hGVfbqK8hoUChIJqZLTmVinlVQRx5iU31-52JkiCg0EmCQbFV5D37Y",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "1550 NW Naito Pkwy. [SW]",
+      "time": "7:27 am",
+      "direction": "SW",
+      "originalLine": "7:27 am1550 NW NAITO PKWY [SW]121CHP-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.68246666128246,
+        45.53507827870768
+      ],
+      "displayName": "Parking lot, 1550 NW Naito Pkwy, Portland, OR 97209, USA",
+      "placeId": "ChIJReadlVenlVQRhh4kC6bxQfg",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "941 NW Naito Pkwy. [SW]",
+      "time": "7:29 am",
+      "direction": "SW",
+      "originalLine": "7:29 am941 NW NAITO PKWY [SW]121CHP-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.67516372170502,
+        45.529689288767024
+      ],
+      "displayName": "941 NW Naito Pkwy, Portland, OR 97209, USA",
+      "placeId": "ChIJgb_rFVWnlVQRsGKu3Ynf9OQ",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "783/815 NW Naito Pkwy. [SW]",
+      "time": "7:31 am",
+      "direction": "SW",
+      "originalLine": "7:31 am783/815 NW NAITO PKWY [SW]121CHP-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.67413392325689,
+        45.52883485353253
+      ],
+      "displayName": "783 NW Naito Pkwy, Portland, OR 97209, USA",
+      "placeId": "ChIJx7ngNFWnlVQRKvFdvuDROUg",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "NW Flanders St. & NW 4th Ave. [NE]",
+      "time": "7:34 am",
+      "direction": "NE",
+      "originalLine": "7:34 amNW FLANDERS ST @ NW 4TH AV [NE]121CHP-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.674514,
+        45.525956
+      ],
+      "displayName": "NW 4th Ave & NW Flanders St, Portland, OR 97209, USA",
+      "placeId": "EjROVyA0dGggQXZlICYgTlcgRmxhbmRlcnMgU3QsIFBvcnRsYW5kLCBPUiA5NzIwOSwgVVNBImYiZAoUChIJAbnefAAKlVQRr3TKnShQLYISFAoSCQG53nwACpVUEa90yp0oUC2CGhQKEgn5NKONAAqVVBEHNKwWMJxztxoUChIJgybTjfgJlVQRZeUKJFYZCiYiCg2otSIbFcxa4bY",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "NW 10th Ave. & NW Marshall St. [SE]",
+      "time": "7:41 am",
+      "direction": "SE",
+      "originalLine": "7:41 amNW 10TH AV @ NW MARSHALL ST [SE]121CHP-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6814015,
+        45.5308255
+      ],
+      "displayName": "NW 10th Ave & NW Marshall St, Portland, OR 97209, USA",
+      "placeId": "EjVOVyAxMHRoIEF2ZSAmIE5XIE1hcnNoYWxsIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDksIFVTQSJmImQKFAoSCWW1Aw7-CZVUEY2pdMIhfU0bEhQKEglltQMO_gmVVBGNqXTCIX1NGxoUChIJ1UoZbP8JlVQRXDwvDimQ5tsaFAoSCV8Ieqf7CZVUEUxeAWN8vCRrIgoN33MjGxXBTeC2",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:CHAPMAN GT & ST & CAB LOADING ON NW RALEIGH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7058526,
+        45.5332347
+      ],
+      "displayName": "1445 NW 26th Ave, Portland, OR 97210, USA",
+      "schoolName": "Chapman"
+    }
+  ],
+  "neighborhoods": [
+    "Northwest Portland"
+  ],
+  "processedAt": "2026-08-10T02:19:41.372Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.5383,
+      -122.68822
+    ],
+    [
+      45.53817,
+      -122.68838
+    ],
+    [
+      45.538,
+      -122.68865
+    ],
+    [
+      45.53772,
+      -122.68817
+    ],
+    [
+      45.53708,
+      -122.68705
+    ],
+    [
+      45.53645,
+      -122.68596
+    ],
+    [
+      45.53632,
+      -122.68575
+    ],
+    [
+      45.5361,
+      -122.68601
+    ],
+    [
+      45.536,
+      -122.68612
+    ],
+    [
+      45.53575,
+      -122.68649
+    ],
+    [
+      45.53572,
+      -122.68656
+    ],
+    [
+      45.53571,
+      -122.68665
+    ],
+    [
+      45.53528,
+      -122.68664
+    ],
+    [
+      45.53511,
+      -122.68663
+    ],
+    [
+      45.53508,
+      -122.68663
+    ],
+    [
+      45.53502,
+      -122.68663
+    ],
+    [
+      45.53486,
+      -122.68663
+    ],
+    [
+      45.53393,
+      -122.68661
+    ],
+    [
+      45.53359,
+      -122.6866
+    ],
+    [
+      45.53361,
+      -122.68557
+    ],
+    [
+      45.53362,
+      -122.68456
+    ],
+    [
+      45.53366,
+      -122.68262
+    ],
+    [
+      45.53362,
+      -122.68254
+    ],
+    [
+      45.53295,
+      -122.68251
+    ],
+    [
+      45.53224,
+      -122.68248
+    ],
+    [
+      45.53224,
+      -122.68231
+    ],
+    [
+      45.53227,
+      -122.68068
+    ],
+    [
+      45.53228,
+      -122.68044
+    ],
+    [
+      45.53242,
+      -122.68027
+    ],
+    [
+      45.53255,
+      -122.6801
+    ],
+    [
+      45.53272,
+      -122.67994
+    ],
+    [
+      45.5328,
+      -122.67971
+    ],
+    [
+      45.53247,
+      -122.67914
+    ],
+    [
+      45.532,
+      -122.67833
+    ],
+    [
+      45.53112,
+      -122.67681
+    ],
+    [
+      45.53077,
+      -122.67632
+    ],
+    [
+      45.53067,
+      -122.67621
+    ],
+    [
+      45.53033,
+      -122.67579
+    ],
+    [
+      45.53014,
+      -122.67558
+    ],
+    [
+      45.52999,
+      -122.67541
+    ],
+    [
+      45.52987,
+      -122.67538
+    ],
+    [
+      45.52932,
+      -122.67472
+    ],
+    [
+      45.52883,
+      -122.67413
+    ],
+    [
+      45.52805,
+      -122.67319
+    ],
+    [
+      45.52737,
+      -122.67237
+    ],
+    [
+      45.527,
+      -122.67192
+    ],
+    [
+      45.52684,
+      -122.6717
+    ],
+    [
+      45.52645,
+      -122.67127
+    ],
+    [
+      45.52633,
+      -122.67112
+    ],
+    [
+      45.526,
+      -122.67083
+    ],
+    [
+      45.52587,
+      -122.67072
+    ],
+    [
+      45.52532,
+      -122.67036
+    ],
+    [
+      45.52511,
+      -122.67032
+    ],
+    [
+      45.52477,
+      -122.67027
+    ],
+    [
+      45.52461,
+      -122.67028
+    ],
+    [
+      45.5246,
+      -122.67054
+    ],
+    [
+      45.5246,
+      -122.67087
+    ],
+    [
+      45.52459,
+      -122.67148
+    ],
+    [
+      45.52454,
+      -122.67423
+    ],
+    [
+      45.52453,
+      -122.67447
+    ],
+    [
+      45.52465,
+      -122.67447
+    ],
+    [
+      45.52509,
+      -122.67449
+    ],
+    [
+      45.52596,
+      -122.67451
+    ],
+    [
+      45.52592,
+      -122.67637
+    ],
+    [
+      45.52592,
+      -122.67655
+    ],
+    [
+      45.52731,
+      -122.67661
+    ],
+    [
+      45.52806,
+      -122.67663
+    ],
+    [
+      45.52817,
+      -122.67666
+    ],
+    [
+      45.52822,
+      -122.67668
+    ],
+    [
+      45.5283,
+      -122.67675
+    ],
+    [
+      45.52857,
+      -122.67708
+    ],
+    [
+      45.52895,
+      -122.67754
+    ],
+    [
+      45.52904,
+      -122.67759
+    ],
+    [
+      45.52951,
+      -122.67767
+    ],
+    [
+      45.52985,
+      -122.67763
+    ],
+    [
+      45.52991,
+      -122.67766
+    ],
+    [
+      45.53075,
+      -122.67862
+    ],
+    [
+      45.53101,
+      -122.67891
+    ],
+    [
+      45.53106,
+      -122.67898
+    ],
+    [
+      45.53095,
+      -122.67919
+    ],
+    [
+      45.53089,
+      -122.67929
+    ],
+    [
+      45.53088,
+      -122.67934
+    ],
+    [
+      45.53085,
+      -122.6804
+    ],
+    [
+      45.53084,
+      -122.68069
+    ],
+    [
+      45.53083,
+      -122.6814
+    ],
+    [
+      45.53153,
+      -122.68143
+    ],
+    [
+      45.53153,
+      -122.68227
+    ],
+    [
+      45.53148,
+      -122.68446
+    ],
+    [
+      45.53144,
+      -122.68686
+    ],
+    [
+      45.53143,
+      -122.68752
+    ],
+    [
+      45.53139,
+      -122.68955
+    ],
+    [
+      45.53138,
+      -122.69057
+    ],
+    [
+      45.53136,
+      -122.69119
+    ],
+    [
+      45.53133,
+      -122.6926
+    ],
+    [
+      45.5313,
+      -122.69424
+    ],
+    [
+      45.53129,
+      -122.6952
+    ],
+    [
+      45.53123,
+      -122.69809
+    ],
+    [
+      45.53121,
+      -122.69868
+    ],
+    [
+      45.53121,
+      -122.69954
+    ],
+    [
+      45.53119,
+      -122.70071
+    ],
+    [
+      45.53116,
+      -122.70242
+    ],
+    [
+      45.53115,
+      -122.70268
+    ],
+    [
+      45.53186,
+      -122.70273
+    ],
+    [
+      45.53198,
+      -122.70274
+    ],
+    [
+      45.53258,
+      -122.70274
+    ],
+    [
+      45.53323,
+      -122.70278
+    ],
+    [
+      45.534,
+      -122.70281
+    ],
+    [
+      45.53396,
+      -122.70484
+    ],
+    [
+      45.53394,
+      -122.70631
+    ],
+    [
+      45.53393,
+      -122.70678
+    ],
+    [
+      45.53349,
+      -122.70676
+    ],
+    [
+      45.53349,
+      -122.70623
+    ]
+  ]
+}

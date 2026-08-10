@@ -1,0 +1,632 @@
+{
+  "id": "1g9nFUrM2fCnNnVrUyBq7PDUHA7CEEoqG",
+  "name": "128",
+  "direction": "Afternoon",
+  "filename": "128GRY-P_Effective_082626.pdf",
+  "fileId": "1g9nFUrM2fCnNnVrUyBq7PDUHA7CEEoqG",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "5505 SW 23rd Ave, Portland, OR 97239, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:5505 SW 23RD AV",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.701385,
+        45.4824889
+      ],
+      "displayName": "5505 SW 23rd Ave, Portland, OR 97239, USA",
+      "schoolName": "Gray"
+    },
+    {
+      "id": "stop-1",
+      "address": "SW Dosch Rd. & SW Flower Terr. (north) [NW]",
+      "time": "4:14 pm",
+      "direction": "NW",
+      "originalLine": "4:14 pmSW DOSCH Rd @ SW FLOWER TERR (NORTH) [NW]128GRY-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7077346,
+        45.48225900000001
+      ],
+      "displayName": "SW Dosch Rd & SW Flower Terrace, Portland, OR 97239, USA",
+      "placeId": "EjhTVyBEb3NjaCBSZCAmIFNXIEZsb3dlciBUZXJyYWNlLCBQb3J0bGFuZCwgT1IgOTcyMzksIFVTQSJmImQKFAoSCct6oGCvC5VUERgfsZDLIPuaEhQKEgnLeqBgrwuVVBEYH7GQyyD7mhoUChIJn-0CGbQLlVQRwjJSBRaKxRgaFAoSCTV7YoalC5VUEY3E2auEflw_IgoNvgocGxUeSdy2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "6010 SW 30th Ave. (heritage Apts) [W]",
+      "time": "4:16 pm",
+      "direction": "W",
+      "originalLine": "4:16 pm6010 SW 30TH AV (HERITAGE APTS) [W]128GRY-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7072465848756,
+        45.48060318749667
+      ],
+      "displayName": "6010 SW 30th Ave, Portland, OR 97239, USA",
+      "placeId": "ChIJLQgCEKYLlVQRbS3J3TzxWS8",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SW 30th Ave. & SW Bertha Blvd. [NW]",
+      "time": "4:16 pm",
+      "direction": "NW",
+      "originalLine": "4:16 pmSW 30TH AV @ SW BERTHA BLVD [NW]128GRY-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7077404,
+        45.4800231
+      ],
+      "displayName": "SW Bertha Blvd & SW 30th Ave, Portland, OR 97239, USA",
+      "placeId": "EjVTVyBCZXJ0aGEgQmx2ZCAmIFNXIDMwdGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMzksIFVTQSJmImQKFAoSCSX8kGymC5VUET80LvJDOosaEhQKEgkl_JBspguVVBE_NC7yQzqLGhoUChIJ83krBggLlVQR0c52RO_yY_EaFAoSCa1ZXnptC5VUEZLgOdxT_U8WIgoNZ7MbGxXkSNy2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SW 30th Ave. & SW Carolina St. [NW]",
+      "time": "4:17 pm",
+      "direction": "NW",
+      "originalLine": "4:17 pmSW 30TH AV @ SW CAROLINA ST [NW]128GRY-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7077424,
+        45.478268
+      ],
+      "displayName": "SW 30th Ave & SW Carolina St, Portland, OR 97239, USA",
+      "placeId": "EjVTVyAzMHRoIEF2ZSAmIFNXIENhcm9saW5hIFN0LCBQb3J0bGFuZCwgT1IgOTcyMzksIFVTQSJmImQKFAoSCeE-PQCnC5VUEVI-Er_RhSbyEhQKEgnhPj0ApwuVVBFSPhK_0YUm8hoUChIJrVleem0LlVQRkuA53FP9TxYaFAoSCdHOBHT8CpVUEYHFNU4x9Y_9IgoN2G4bGxXQSNy2",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-5",
+      "address": "SW 30th Ave. & SW Nebraska St. [NW]",
+      "time": "4:18 pm",
+      "direction": "NW",
+      "originalLine": "4:18 pmSW 30TH AV @ SW NEBRASKA ST [NW]128GRY-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7077328,
+        45.477531
+      ],
+      "displayName": "SW Nebraska St & SW 30th Ave, Portland, OR 97239, USA",
+      "placeId": "EjVTVyBOZWJyYXNrYSBTdCAmIFNXIDMwdGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMzksIFVTQSJmImQKFAoSCXd02w-nC5VUEe6sKHmlhcPCEhQKEgl3dNsPpwuVVBHurCh5pYXDwhoUChIJn_e5lKcLlVQR-8wEXjDrRlQaFAoSCa1ZXnptC5VUEZLgOdxT_U8WIgoNDlIbGxUwSdy2",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-6",
+      "address": "SW Vermont St. & SW 34th Ave. [NE]",
+      "time": "4:19 pm",
+      "direction": "NE",
+      "originalLine": "4:19 pmSW VERMONT ST @ SW 34TH AV [NE]128GRY-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7115976,
+        45.4761348
+      ],
+      "displayName": "SW 34th Ave & SW Vermont St, Portland, OR 97239, USA",
+      "placeId": "EjRTVyAzNHRoIEF2ZSAmIFNXIFZlcm1vbnQgU3QsIFBvcnRsYW5kLCBPUiA5NzIzOSwgVVNBImYiZAoUChIJDT8GwqALlVQRae1RM7XFHEsSFAoSCQ0_BsKgC5VUEWntUTO1xRxLGhQKEgnLcHqlpguVVBH12hSGtisvwBoUChIJ7b44n4kLlVQR1hOe588BZ0QiCg2EGxsbFTiy27Y",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "SW Vermont St. & SW 35th Ave. [NE]",
+      "time": "4:20 pm",
+      "direction": "NE",
+      "originalLine": "4:20 pmSW VERMONT ST @ SW 35TH AV [NE]128GRY-P(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7128988,
+        45.4761448
+      ],
+      "displayName": "SW 35th Ave & SW Vermont St, Portland, OR 97221, USA",
+      "placeId": "EjRTVyAzNXRoIEF2ZSAmIFNXIFZlcm1vbnQgU3QsIFBvcnRsYW5kLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJRYbb-qALlVQR7yvbANefcacSFAoSCUWG2_qgC5VUEe8r2wDXn3GnGhQKEgnlB-tRbguVVBHi25eEwtzp3BoUChIJ7b44n4kLlVQR1hOe588BZ0QiCg3oGxsbFWR_27Y",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-8",
+      "address": "SW Vermont St. & SW 36th Ave. [NE]",
+      "time": "4:20 pm",
+      "direction": "NE",
+      "originalLine": "4:20 pmSW VERMONT ST @ SW 36TH AV [NE]128GRY-P(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7141983,
+        45.4761595
+      ],
+      "displayName": "SW 36th Ave & SW Vermont St, Portland, OR 97221, USA",
+      "placeId": "EjRTVyAzNnRoIEF2ZSAmIFNXIFZlcm1vbnQgU3QsIFBvcnRsYW5kLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJzewfVaALlVQR6LDPQ3eMRDsSFAoSCc3sH1WgC5VUEeiwz0N3jEQ7GhQKEgknwHT1owuVVBF9nW7iqOhU0xoUChIJ7b44n4kLlVQR1hOe588BZ0QiCg17HBsbFaFM27Y",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-9",
+      "address": "SW Vermont St. & SW 47th Pl. [NE]",
+      "time": "4:23 pm",
+      "direction": "NE",
+      "originalLine": "4:23 pmSW VERMONT ST & SW 47TH PL [NE]128GRY-P(10)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7272572,
+        45.4764551
+      ],
+      "displayName": "SW 47th Pl & SW Vermont St, Portland, OR 97221, USA",
+      "placeId": "EjNTVyA0N3RoIFBsICYgU1cgVmVybW9udCBTdCwgUG9ydGxhbmQsIE9SIDk3MjIxLCBVU0EiZiJkChQKEgn3KmFkmQuVVBFyjkxoMgRObhIUChIJ9yphZJkLlVQRco5MaDIETm4aFAoSCQO8YWSZC5VUETK3GYi5aoZTGhQKEgntvjifiQuVVBHWE57nzwFnRCIKDQcoGxsVhE7Ztg",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-10",
+      "address": "SW 50th Ave. & SW Nebraska St. [E]",
+      "time": "4:24 pm",
+      "direction": "E",
+      "originalLine": "4:24 pmSW 50TH AV @ SW NEBRASKA ST [E]128GRY-P(11)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7283169,
+        45.4770902
+      ],
+      "displayName": "SW Nebraska St & SW 50th Ave, Portland, OR 97221, USA",
+      "placeId": "EjVTVyBOZWJyYXNrYSBTdCAmIFNXIDUwdGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCefEmIGZC5VUEdzG5C5bxzK8EhQKEgnnxJiBmQuVVBHcxuQuW8cyvBoUChIJn_e5lKcLlVQR-8wEXjDrRlQaFAoSCVHGMYCZC5VUEY5IYj7c_HizIgoN1kAbGxUfJdm2",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-11",
+      "address": "Hayhurst School (5037 SW Iowa St) [N]",
+      "time": "4:26 pm",
+      "direction": "N",
+      "originalLine": "4:26 pmHAYHURST SCHOOL (5037 SW IOWA ST) [N]128GRY-P(12)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7283018,
+        45.479824
+      ],
+      "displayName": "Hayhurst, Portland, OR, USA",
+      "placeId": "ChIJE9ctlpcLlVQRCcBkqgVNcA0",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-12",
+      "address": "5935 SW Illinois St. [N]",
+      "time": "4:29 pm",
+      "direction": "N",
+      "originalLine": "4:29 pm5935 SW ILLINOIS ST [N]128GRY-P(13)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.73805812116906,
+        45.47938833417839
+      ],
+      "displayName": "5935 SW Illinois St, Portland, OR 97221, USA",
+      "placeId": "ChIJA8nfsJELlVQR4Eo47YleT_E",
+      "neighborhood": "Hayhurst"
+    },
+    {
+      "id": "stop-13",
+      "address": "6014 SW Shattuck Rd. [E]",
+      "time": "4:30 pm",
+      "direction": "E",
+      "originalLine": "4:30 pm6014 SW Shattuck Rd [E]128GRY-P(14)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7353189,
+        45.4802276
+      ],
+      "displayName": "6014 SW Shattuck Rd, Portland, OR 97221, USA",
+      "placeId": "ChIJnX90G5ELlVQRPZdb-7ZlQAM",
+      "neighborhood": "Hayhurst"
+    }
+  ],
+  "neighborhoods": [
+    "Hayhurst",
+    "Southwest Portland"
+  ],
+  "processedAt": "2026-08-10T02:23:10.847Z",
+  "stats": {
+    "totalStops": 14,
+    "geocodedStops": 14,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.48248,
+      -122.7008
+    ],
+    [
+      45.4817,
+      -122.7008
+    ],
+    [
+      45.48146,
+      -122.70079
+    ],
+    [
+      45.48147,
+      -122.70129
+    ],
+    [
+      45.48147,
+      -122.70138
+    ],
+    [
+      45.48147,
+      -122.70175
+    ],
+    [
+      45.48147,
+      -122.70231
+    ],
+    [
+      45.48146,
+      -122.70243
+    ],
+    [
+      45.48142,
+      -122.70249
+    ],
+    [
+      45.48078,
+      -122.70248
+    ],
+    [
+      45.48046,
+      -122.7025
+    ],
+    [
+      45.48022,
+      -122.7025
+    ],
+    [
+      45.48003,
+      -122.70252
+    ],
+    [
+      45.48018,
+      -122.70332
+    ],
+    [
+      45.48028,
+      -122.70381
+    ],
+    [
+      45.48047,
+      -122.70466
+    ],
+    [
+      45.4808,
+      -122.7057
+    ],
+    [
+      45.48141,
+      -122.70721
+    ],
+    [
+      45.48149,
+      -122.70744
+    ],
+    [
+      45.48157,
+      -122.70775
+    ],
+    [
+      45.48174,
+      -122.70775
+    ],
+    [
+      45.48177,
+      -122.70775
+    ],
+    [
+      45.48192,
+      -122.70774
+    ],
+    [
+      45.48211,
+      -122.70774
+    ],
+    [
+      45.48216,
+      -122.70774
+    ],
+    [
+      45.48226,
+      -122.70773
+    ],
+    [
+      45.48216,
+      -122.70774
+    ],
+    [
+      45.48211,
+      -122.70774
+    ],
+    [
+      45.48195,
+      -122.70774
+    ],
+    [
+      45.48177,
+      -122.70775
+    ],
+    [
+      45.48097,
+      -122.70774
+    ],
+    [
+      45.4806,
+      -122.70774
+    ],
+    [
+      45.4806,
+      -122.70724
+    ],
+    [
+      45.4806,
+      -122.70774
+    ],
+    [
+      45.48037,
+      -122.70774
+    ],
+    [
+      45.48006,
+      -122.70774
+    ],
+    [
+      45.47951,
+      -122.70774
+    ],
+    [
+      45.47863,
+      -122.70774
+    ],
+    [
+      45.47784,
+      -122.70774
+    ],
+    [
+      45.47643,
+      -122.70772
+    ],
+    [
+      45.47609,
+      -122.70773
+    ],
+    [
+      45.4761,
+      -122.70817
+    ],
+    [
+      45.47611,
+      -122.70899
+    ],
+    [
+      45.47613,
+      -122.71093
+    ],
+    [
+      45.47617,
+      -122.7152
+    ],
+    [
+      45.4762,
+      -122.71774
+    ],
+    [
+      45.47622,
+      -122.72127
+    ],
+    [
+      45.47623,
+      -122.72314
+    ],
+    [
+      45.47626,
+      -122.72364
+    ],
+    [
+      45.47624,
+      -122.72372
+    ],
+    [
+      45.47625,
+      -122.72442
+    ],
+    [
+      45.47627,
+      -122.72576
+    ],
+    [
+      45.47627,
+      -122.72628
+    ],
+    [
+      45.4763,
+      -122.72832
+    ],
+    [
+      45.47647,
+      -122.72831
+    ],
+    [
+      45.47646,
+      -122.72803
+    ],
+    [
+      45.47646,
+      -122.72726
+    ],
+    [
+      45.47646,
+      -122.72803
+    ],
+    [
+      45.47647,
+      -122.72831
+    ],
+    [
+      45.47655,
+      -122.72831
+    ],
+    [
+      45.47678,
+      -122.72831
+    ],
+    [
+      45.47728,
+      -122.72832
+    ],
+    [
+      45.47856,
+      -122.72832
+    ],
+    [
+      45.4793,
+      -122.72832
+    ],
+    [
+      45.47984,
+      -122.7283
+    ],
+    [
+      45.4793,
+      -122.72832
+    ],
+    [
+      45.4791,
+      -122.72832
+    ],
+    [
+      45.47911,
+      -122.72844
+    ],
+    [
+      45.47911,
+      -122.72847
+    ],
+    [
+      45.4791,
+      -122.72854
+    ],
+    [
+      45.4791,
+      -122.72903
+    ],
+    [
+      45.47905,
+      -122.72946
+    ],
+    [
+      45.47897,
+      -122.73023
+    ],
+    [
+      45.47896,
+      -122.73073
+    ],
+    [
+      45.47896,
+      -122.73125
+    ],
+    [
+      45.47898,
+      -122.73242
+    ],
+    [
+      45.47898,
+      -122.73303
+    ],
+    [
+      45.47903,
+      -122.7335
+    ],
+    [
+      45.47905,
+      -122.73359
+    ],
+    [
+      45.47938,
+      -122.73485
+    ],
+    [
+      45.47941,
+      -122.73523
+    ],
+    [
+      45.4794,
+      -122.73534
+    ],
+    [
+      45.4794,
+      -122.73628
+    ],
+    [
+      45.47939,
+      -122.73705
+    ],
+    [
+      45.47939,
+      -122.73806
+    ],
+    [
+      45.4794,
+      -122.73845
+    ],
+    [
+      45.47944,
+      -122.73861
+    ],
+    [
+      45.47967,
+      -122.73837
+    ],
+    [
+      45.47989,
+      -122.7382
+    ],
+    [
+      45.48011,
+      -122.73808
+    ],
+    [
+      45.48116,
+      -122.73757
+    ],
+    [
+      45.48127,
+      -122.7375
+    ],
+    [
+      45.48115,
+      -122.73702
+    ],
+    [
+      45.48105,
+      -122.73653
+    ],
+    [
+      45.48095,
+      -122.73635
+    ],
+    [
+      45.48074,
+      -122.73604
+    ],
+    [
+      45.48052,
+      -122.73557
+    ],
+    [
+      45.48047,
+      -122.73543
+    ],
+    [
+      45.4803,
+      -122.73533
+    ],
+    [
+      45.48023,
+      -122.73532
+    ]
+  ]
+}

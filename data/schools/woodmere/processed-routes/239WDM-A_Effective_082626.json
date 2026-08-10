@@ -1,0 +1,181 @@
+{
+  "id": "1r1v5da70F82R4P_uynXfUNSXoK1wZrfx",
+  "name": "239",
+  "direction": "Morning",
+  "filename": "239WDM-A_Effective_082626.pdf",
+  "fileId": "1r1v5da70F82R4P_uynXfUNSXoK1wZrfx",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "9030 SE Cooper St. (kelly School) [N]",
+      "time": "7:44 am",
+      "direction": "N",
+      "originalLine": "7:44 am9030 SE COOPER ST (KELLY SCHOOL) [N]239WDM-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57077803333316,
+        45.47302099106446
+      ],
+      "displayName": "9030 SE Cooper St, Portland, OR 97266, USA",
+      "placeId": "ChIJdzS-o_SflVQRRUixiEUwojU",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Tolman St. & SE 84th Pl. [NE]",
+      "time": "7:47 am",
+      "direction": "NE",
+      "originalLine": "7:47 amSE TOLMAN ST @ SE 84TH PL [NE]239WDM-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5770272,
+        45.4776309
+      ],
+      "displayName": "SE Tolman St & SE 84th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBUb2xtYW4gU3QgJiBTRSA4NHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgkvzyuaH6CVVBHyUDGh1qAxwRIUChIJL88rmh-glVQR8lAxodagMcEaFAoSCQXGXe6nCpVUEc-CAnVTeENpGhQKEgm1G3XFN6CVVBH7Hi6cAg-9_yIKDfVVGxsV4Drwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 84th Ave. & SE Duke St. [NW]",
+      "time": "7:48 am",
+      "direction": "NW",
+      "originalLine": "7:48 amSE 84TH AV @ SE DUKE ST [NW]239WDM-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5770587,
+        45.47582939999999
+      ],
+      "displayName": "SE Duke St & SE 84th Ave, Portland, OR 97266, USA",
+      "placeId": "EjFTRSBEdWtlIFN0ICYgU0UgODR0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJp7AI1B-glVQR1E39DK6_SKYSFAoSCaewCNQfoJVUEdRN_Qyuv0imGhQKEglzrKkxiZ-VVBEwY0us41KM8hoUChIJtRt1xTeglVQR-x4unAIPvf8iCg2WDxsbFaU58LY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-0",
+      "address": "7900 SE Duke St, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:WOODMERE GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5824729,
+        45.4745839
+      ],
+      "displayName": "7900 SE Duke St, Portland, OR 97206, USA",
+      "schoolName": "Woodmere"
+    }
+  ],
+  "neighborhoods": [
+    "Lents"
+  ],
+  "processedAt": "2026-08-10T02:13:46.952Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.47302,
+      -122.57078
+    ],
+    [
+      45.47303,
+      -122.57075
+    ],
+    [
+      45.47308,
+      -122.57072
+    ],
+    [
+      45.4741,
+      -122.57073
+    ],
+    [
+      45.47473,
+      -122.57072
+    ],
+    [
+      45.47476,
+      -122.57072
+    ],
+    [
+      45.47483,
+      -122.57077
+    ],
+    [
+      45.47491,
+      -122.57079
+    ],
+    [
+      45.47564,
+      -122.57075
+    ],
+    [
+      45.47565,
+      -122.57095
+    ],
+    [
+      45.47566,
+      -122.57166
+    ],
+    [
+      45.47572,
+      -122.57361
+    ],
+    [
+      45.47577,
+      -122.57554
+    ],
+    [
+      45.47581,
+      -122.57649
+    ],
+    [
+      45.47583,
+      -122.57706
+    ],
+    [
+      45.47763,
+      -122.57703
+    ],
+    [
+      45.47583,
+      -122.57706
+    ],
+    [
+      45.47584,
+      -122.57756
+    ],
+    [
+      45.47585,
+      -122.57832
+    ],
+    [
+      45.47588,
+      -122.57924
+    ],
+    [
+      45.47588,
+      -122.5811
+    ],
+    [
+      45.47588,
+      -122.58168
+    ],
+    [
+      45.47572,
+      -122.58168
+    ],
+    [
+      45.47492,
+      -122.58168
+    ],
+    [
+      45.47491,
+      -122.58245
+    ]
+  ]
+}

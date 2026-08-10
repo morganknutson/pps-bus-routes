@@ -1,0 +1,591 @@
+{
+  "id": "1u0qHpn0BtDAea8zFmmPDhPVgepmowDZp",
+  "name": "135",
+  "direction": "Morning",
+  "filename": "135JKS-A_Effective_082626.pdf",
+  "fileId": "1u0qHpn0BtDAea8zFmmPDhPVgepmowDZp",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "SW 52nd Ave. & SW Nevada Ct. [SE]",
+      "time": "8:49 am",
+      "direction": "SE",
+      "originalLine": "8:49 amSW 52ND AV @ SW NEVADA CT [SE]135JKS-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7305835,
+        45.4729013
+      ],
+      "displayName": "SW 52nd Ave & SW Nevada Ct, Portland, OR 97219, USA",
+      "placeId": "EjNTVyA1Mm5kIEF2ZSAmIFNXIE5ldmFkYSBDdCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgkb3Ma8nAuVVBGZCvbhdTLuORIUChIJG9zGvJwLlVQRmQr24XUy7jkaFAoSCd0YhsicC5VUETO_cw_qjOeKGhQKEgnBrWPACguVVBFNVqKLJXm37iIKDTWdGhsVlczYtg",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SW Maplewood Rd. & SW 51st Ave. [SW]",
+      "time": "8:52 am",
+      "direction": "SW",
+      "originalLine": "8:52 amSW MAPLEWOOD RD @ SW 51ST AV [SW]135JKS-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7287512,
+        45.4705278
+      ],
+      "displayName": "SW Maplewood Rd & SW 51st Ave, Portland, OR 97219, USA",
+      "placeId": "EjZTVyBNYXBsZXdvb2QgUmQgJiBTVyA1MXN0IEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEglZg7k2nQuVVBGN-2btXGBd2hIUChIJWYO5Np0LlVQRjftm7VxgXdoaFAoSCVmBWfp3C5VUEZ6NC--zLM6YGhQKEgnFtf-bYguVVBFtyIQvfpJZFiIKDX5AGhsVKBTZtg",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "4402 SW Hume St. [S]",
+      "time": "8:55 am",
+      "direction": "S",
+      "originalLine": "8:55 am4402 SW HUME ST [S]135JKS-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.72249529966552,
+        45.465408091961095
+      ],
+      "displayName": "4402 SW Hume St, Portland, OR 97219, USA",
+      "placeId": "ChIJa0TXqXALlVQR3p2GnaYLMBI",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-5",
+      "address": "SW Carson St. & SW 41st Ave. [SW]",
+      "time": "8:56 am",
+      "direction": "SW",
+      "originalLine": "8:56 amSW CARSON ST @ SW 41ST AV [SW]135JKS-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7192753,
+        45.4641534
+      ],
+      "displayName": "SW 41st Ave & SW Carson St, Portland, OR 97219, USA",
+      "placeId": "EjNTVyA0MXN0IEF2ZSAmIFNXIENhcnNvbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgmh82aKcAuVVBHLROsMOnpJchIUChIJofNminALlVQRy0TrDDp6SXIaFAoSCQkTwyp3C5VUEervznbnnlQ9GhQKEgmz6bHWEguVVBFkjx_YGMg9kyIKDX5HGRsVT4batg",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-6",
+      "address": "SW Capitol Hwy & SW Marigold St. [NW]",
+      "time": "8:58 am",
+      "direction": "NW",
+      "originalLine": "8:58 amSW CAPITOL HWY @ SW MARIGOLD ST [NW]135JKS-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.719169,
+        45.460451
+      ],
+      "displayName": "SW Marigold St & SW Capitol Hwy, Portland, OR 97219, USA",
+      "placeId": "EjhTVyBNYXJpZ29sZCBTdCAmIFNXIENhcGl0b2wgSHd5LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCXtEuT5lC5VUERNmfx1Tq4xBEhQKEgl7RLk-ZQuVVBETZn8dU6uMQRoUChIJCYBi5m4LlVQRI3r0mKYJUx4aFAoSCZPFv_VuC5VUEf7LzYmYp-pIIgoN3rYYGxV2itq2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-7",
+      "address": "SW Capitol Hwy & SW Alice St. [NW]",
+      "time": "8:59 am",
+      "direction": "NW",
+      "originalLine": "8:59 amSW CAPITOL HWY @ SW ALICE ST [NW]135JKS-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7190341,
+        45.4583061
+      ],
+      "displayName": "SW Capitol Hwy & SW Alice St, Portland, OR 97219, USA",
+      "placeId": "EjVTVyBDYXBpdG9sIEh3eSAmIFNXIEFsaWNlIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCeX00VFkC5VUEZs3-KVYGkCmEhQKEgnl9NFRZAuVVBGbN_ilWBpAphoUChIJk8W_9W4LlVQR_svNiZin6kgaFAoSCeNkP2JqC5VUEcheU2eG9UJWIgoNFWMYGxW7j9q2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-8",
+      "address": "SW Capitol Hwy & SW Baird St. [W]",
+      "time": "9:00 am",
+      "direction": "W",
+      "originalLine": "9:00 amSW CAPITOL HWY @ SW BAIRD ST [W]135JKS-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7190119,
+        45.4575245
+      ],
+      "displayName": "SW Capitol Hwy & SW Baird St, Portland, OR 97219, USA",
+      "placeId": "EjVTVyBDYXBpdG9sIEh3eSAmIFNXIEJhaXJkIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCRO9Pj9kC5VUEVyZHIk1543ZEhQKEgkTvT4_ZAuVVBFcmRyJNeeN2RoUChIJk8W_9W4LlVQR_svNiZin6kgaFAoSCU-hWJ9jC5VUEbPiOTJ_dY91IgoNjUQYGxWZkNq2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-9",
+      "address": "SW Capitol Hwy & SW 41st Ave. [NW]",
+      "time": "9:01 am",
+      "direction": "NW",
+      "originalLine": "9:01 amSW CAPITOL HWY @ SW 41ST AV [NW]135JKS-A(8)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7191256,
+        45.4617796
+      ],
+      "displayName": "SW 41st Ave & SW Capitol Hwy, Portland, OR 97219, USA",
+      "placeId": "EjVTVyA0MXN0IEF2ZSAmIFNXIENhcGl0b2wgSHd5LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCaPCw616C5VUEeqoxw5Xm2Q2EhQKEgmjwsOteguVVBHqqMcOV5tkNhoUChIJCRPDKncLlVQR6u_OdueeVD0aFAoSCZPFv_VuC5VUEf7LzYmYp-pIIgoNxOoYGxUojNq2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-10",
+      "address": "SW Capitol Hwy & SW 42nd Ave. [N]",
+      "time": "9:01 am",
+      "direction": "N",
+      "originalLine": "9:01 amSW CAPITOL HWY @ SW 42ND AV [N]135JKS-A(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7198945,
+        45.45544169999999
+      ],
+      "displayName": "SW 42nd Ave & SW Capitol Hwy, Portland, OR 97219, USA",
+      "placeId": "EjVTVyA0Mm5kIEF2ZSAmIFNXIENhcGl0b2wgSHd5LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCVnwNVBhC5VUEefyUAqgvqWmEhQKEglZ8DVQYQuVVBHn8lAKoL6lphoUChIJ_Qrz8XYLlVQRQ_OiRVkNeToaFAoSCZPFv_VuC5VUEf7LzYmYp-pIIgoNMfMXGxUfbtq2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "10625 SW 35th Ave, Portland, OR 97219, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:JACKSON GT LOADING ZONE IN DRIVEWAY",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7131363,
+        45.4506715
+      ],
+      "displayName": "10625 SW 35th Ave, Portland, OR 97219, USA",
+      "schoolName": "Jackson"
+    }
+  ],
+  "neighborhoods": [
+    "Southwest Portland"
+  ],
+  "processedAt": "2026-08-10T02:00:31.499Z",
+  "stats": {
+    "totalStops": 10,
+    "geocodedStops": 10,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.4729,
+      -122.73058
+    ],
+    [
+      45.47224,
+      -122.73061
+    ],
+    [
+      45.47132,
+      -122.73061
+    ],
+    [
+      45.47003,
+      -122.73062
+    ],
+    [
+      45.46997,
+      -122.7306
+    ],
+    [
+      45.46992,
+      -122.73056
+    ],
+    [
+      45.46988,
+      -122.73049
+    ],
+    [
+      45.46982,
+      -122.73026
+    ],
+    [
+      45.47022,
+      -122.72963
+    ],
+    [
+      45.47041,
+      -122.72916
+    ],
+    [
+      45.47053,
+      -122.72875
+    ],
+    [
+      45.47061,
+      -122.72828
+    ],
+    [
+      45.47063,
+      -122.72798
+    ],
+    [
+      45.47064,
+      -122.72769
+    ],
+    [
+      45.47061,
+      -122.7272
+    ],
+    [
+      45.47054,
+      -122.72676
+    ],
+    [
+      45.4704,
+      -122.72618
+    ],
+    [
+      45.4702,
+      -122.72573
+    ],
+    [
+      45.46998,
+      -122.72535
+    ],
+    [
+      45.46981,
+      -122.72513
+    ],
+    [
+      45.46951,
+      -122.72482
+    ],
+    [
+      45.46911,
+      -122.72447
+    ],
+    [
+      45.46811,
+      -122.72364
+    ],
+    [
+      45.46774,
+      -122.72336
+    ],
+    [
+      45.46754,
+      -122.72316
+    ],
+    [
+      45.46746,
+      -122.72317
+    ],
+    [
+      45.46707,
+      -122.72317
+    ],
+    [
+      45.46576,
+      -122.72319
+    ],
+    [
+      45.46547,
+      -122.72317
+    ],
+    [
+      45.46543,
+      -122.72293
+    ],
+    [
+      45.46543,
+      -122.72291
+    ],
+    [
+      45.46541,
+      -122.72258
+    ],
+    [
+      45.4654,
+      -122.72232
+    ],
+    [
+      45.46542,
+      -122.72182
+    ],
+    [
+      45.46502,
+      -122.72183
+    ],
+    [
+      45.46452,
+      -122.72183
+    ],
+    [
+      45.46417,
+      -122.72183
+    ],
+    [
+      45.46419,
+      -122.72143
+    ],
+    [
+      45.46419,
+      -122.72007
+    ],
+    [
+      45.46419,
+      -122.71956
+    ],
+    [
+      45.46418,
+      -122.71938
+    ],
+    [
+      45.46411,
+      -122.71902
+    ],
+    [
+      45.4641,
+      -122.71802
+    ],
+    [
+      45.46331,
+      -122.71807
+    ],
+    [
+      45.46315,
+      -122.71811
+    ],
+    [
+      45.46304,
+      -122.71817
+    ],
+    [
+      45.46281,
+      -122.71833
+    ],
+    [
+      45.46248,
+      -122.71862
+    ],
+    [
+      45.46217,
+      -122.71889
+    ],
+    [
+      45.46194,
+      -122.71904
+    ],
+    [
+      45.46178,
+      -122.71913
+    ],
+    [
+      45.4616,
+      -122.71918
+    ],
+    [
+      45.46136,
+      -122.71924
+    ],
+    [
+      45.4612,
+      -122.71925
+    ],
+    [
+      45.46078,
+      -122.71922
+    ],
+    [
+      45.46045,
+      -122.71917
+    ],
+    [
+      45.45949,
+      -122.71904
+    ],
+    [
+      45.45795,
+      -122.71902
+    ],
+    [
+      45.45752,
+      -122.71901
+    ],
+    [
+      45.45795,
+      -122.71902
+    ],
+    [
+      45.45949,
+      -122.71904
+    ],
+    [
+      45.46078,
+      -122.71922
+    ],
+    [
+      45.4612,
+      -122.71925
+    ],
+    [
+      45.46136,
+      -122.71924
+    ],
+    [
+      45.4616,
+      -122.71918
+    ],
+    [
+      45.46178,
+      -122.71913
+    ],
+    [
+      45.4616,
+      -122.71918
+    ],
+    [
+      45.46136,
+      -122.71924
+    ],
+    [
+      45.4612,
+      -122.71925
+    ],
+    [
+      45.46078,
+      -122.71922
+    ],
+    [
+      45.46045,
+      -122.71917
+    ],
+    [
+      45.45949,
+      -122.71904
+    ],
+    [
+      45.45795,
+      -122.71902
+    ],
+    [
+      45.45752,
+      -122.71901
+    ],
+    [
+      45.45673,
+      -122.71901
+    ],
+    [
+      45.45662,
+      -122.71903
+    ],
+    [
+      45.45645,
+      -122.71904
+    ],
+    [
+      45.45624,
+      -122.71909
+    ],
+    [
+      45.45612,
+      -122.71913
+    ],
+    [
+      45.45605,
+      -122.71919
+    ],
+    [
+      45.45596,
+      -122.7193
+    ],
+    [
+      45.45575,
+      -122.71959
+    ],
+    [
+      45.45559,
+      -122.71978
+    ],
+    [
+      45.45465,
+      -122.72043
+    ],
+    [
+      45.45433,
+      -122.72066
+    ],
+    [
+      45.4538,
+      -122.72099
+    ],
+    [
+      45.45336,
+      -122.72127
+    ],
+    [
+      45.45278,
+      -122.72167
+    ],
+    [
+      45.4526,
+      -122.7218
+    ],
+    [
+      45.45242,
+      -122.72125
+    ],
+    [
+      45.45229,
+      -122.72085
+    ],
+    [
+      45.45222,
+      -122.72056
+    ],
+    [
+      45.45218,
+      -122.7201
+    ],
+    [
+      45.45215,
+      -122.71756
+    ],
+    [
+      45.45212,
+      -122.71686
+    ],
+    [
+      45.45207,
+      -122.71642
+    ],
+    [
+      45.45197,
+      -122.71584
+    ],
+    [
+      45.45193,
+      -122.71487
+    ],
+    [
+      45.45189,
+      -122.71305
+    ],
+    [
+      45.45189,
+      -122.71284
+    ],
+    [
+      45.45141,
+      -122.71284
+    ],
+    [
+      45.45107,
+      -122.71284
+    ],
+    [
+      45.45089,
+      -122.71284
+    ],
+    [
+      45.4509,
+      -122.71316
+    ],
+    [
+      45.45067,
+      -122.71317
+    ]
+  ]
+}

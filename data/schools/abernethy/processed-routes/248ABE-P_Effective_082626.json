@@ -1,0 +1,209 @@
+{
+  "id": "1P6kBILo1gmS2cH5fx9EvJZIxR2NtSjge",
+  "name": "248",
+  "direction": "Afternoon",
+  "filename": "248ABE-P_Effective_082626.pdf",
+  "fileId": "1P6kBILo1gmS2cH5fx9EvJZIxR2NtSjge",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2421 SE Orange Ave, Portland, OR 97214, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ABERNETHY GT & ST & CAB LOAD ZONE ON ELLIOTT",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6516263,
+        45.5058868
+      ],
+      "displayName": "2421 SE Orange Ave, Portland, OR 97214, USA",
+      "schoolName": "Abernethy"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE 26th Ave. & SE Tibbetts St. [NW]",
+      "time": "2:39 pm",
+      "direction": "NW",
+      "originalLine": "2:39 pmSE 26TH AVE & SE TIBBETTS ST [NW]248ABE-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6396562,
+        45.5005281
+      ],
+      "displayName": "SE 26th Ave & SE Tibbetts St, Portland, OR 97202, USA",
+      "placeId": "EjVTRSAyNnRoIEF2ZSAmIFNFIFRpYmJldHRzIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCRPhFc6BoJVUEZqxBqUiJhs4EhQKEgkT4RXOgaCVVBGasQalIiYbOBoUChIJberghIGglVQRhsiaisOcc6IaFAoSCbN0iGjKoZVUEcu54aXhGNROIgoNYdQeGxVurOa2",
+      "neighborhood": "Hosford-Abernethy"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Clinton St. & SE 29th Ave. [SW]",
+      "time": "2:41 pm",
+      "direction": "SW",
+      "originalLine": "2:41 pmSE CLINTON ST @ SE 29TH AV [SW]248ABE-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6356212,
+        45.5035457
+      ],
+      "displayName": "SE Clinton St & SE 29th Ave, Portland, OR 97202, USA",
+      "placeId": "EjRTRSBDbGludG9uIFN0ICYgU0UgMjl0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMiwgVVNBImYiZAoUChIJySEvrYaglVQRNHD47v8NqT0SFAoSCckhL62GoJVUETRw-O7_Dak9GhQKEgmdPEzYtaGVVBERz_0MvgqSMhoUChIJsxPTL7wKlVQRjVVH5oZja6YiCg1BSh8bFQxK57Y",
+      "neighborhood": "Hosford-Abernethy"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Woodward St. & SE 31st Ave. [SW]",
+      "time": "2:43 pm",
+      "direction": "SW",
+      "originalLine": "2:43 pmSE WOODWARD ST @ SE 31ST AV [SW]248ABE-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.633583,
+        45.5019469
+      ],
+      "displayName": "SE 31st Ave & SE Woodward St, Portland, OR 97202, USA",
+      "placeId": "EjVTRSAzMXN0IEF2ZSAmIFNFIFdvb2R3YXJkIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCVG70CqHoJVUEYNDAltyR75XEhQKEglRu9Aqh6CVVBGDQwJbcke-VxoUChIJAV8PWrwKlVQRipC6DHJ0H_0aFAoSCZtFVPJLoJVUEYJ49QxDziKAIgoNzQsfGxWqmee2",
+      "neighborhood": "Richmond"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 36th Ave. & SE Brooklyn St. [NW]",
+      "time": "2:45 pm",
+      "direction": "NW",
+      "originalLine": "2:45 pmSE 36TH AV @ SE BROOKLYN ST [NW]248ABE-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6262481,
+        45.501231
+      ],
+      "displayName": "SE Brooklyn St & SE 36th Ave, Portland, OR 97202, USA",
+      "placeId": "EjVTRSBCcm9va2x5biBTdCAmIFNFIDM2dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDIsIFVTQSJmImQKFAoSCX8tSGZ9oJVUEaZfn6dSeoYEEhQKEgl_LUhmfaCVVBGmX5-nUnqGBBoUChIJE0opOLWhlVQRux8DR6Am5AUaFAoSCZ8fRROjCpVUESdbX5fZyb-bIgoN1u8eGxUvuOi2",
+      "neighborhood": "Richmond"
+    }
+  ],
+  "neighborhoods": [
+    "Hosford-Abernethy",
+    "Richmond"
+  ],
+  "processedAt": "2026-08-10T02:23:57.826Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50561,
+      -122.65115
+    ],
+    [
+      45.50485,
+      -122.65203
+    ],
+    [
+      45.50485,
+      -122.65139
+    ],
+    [
+      45.50484,
+      -122.64945
+    ],
+    [
+      45.50483,
+      -122.64584
+    ],
+    [
+      45.50482,
+      -122.64257
+    ],
+    [
+      45.50482,
+      -122.63968
+    ],
+    [
+      45.50278,
+      -122.63966
+    ],
+    [
+      45.50053,
+      -122.63966
+    ],
+    [
+      45.50278,
+      -122.63966
+    ],
+    [
+      45.50348,
+      -122.63967
+    ],
+    [
+      45.50354,
+      -122.63926
+    ],
+    [
+      45.50355,
+      -122.63866
+    ],
+    [
+      45.50355,
+      -122.63685
+    ],
+    [
+      45.50355,
+      -122.63562
+    ],
+    [
+      45.50354,
+      -122.63368
+    ],
+    [
+      45.50353,
+      -122.63368
+    ],
+    [
+      45.50351,
+      -122.63368
+    ],
+    [
+      45.50349,
+      -122.63366
+    ],
+    [
+      45.50348,
+      -122.63362
+    ],
+    [
+      45.50348,
+      -122.6336
+    ],
+    [
+      45.50259,
+      -122.63359
+    ],
+    [
+      45.50195,
+      -122.63358
+    ],
+    [
+      45.50124,
+      -122.63358
+    ],
+    [
+      45.50124,
+      -122.63155
+    ],
+    [
+      45.50123,
+      -122.6286
+    ],
+    [
+      45.50123,
+      -122.62694
+    ],
+    [
+      45.50123,
+      -122.62625
+    ]
+  ]
+}

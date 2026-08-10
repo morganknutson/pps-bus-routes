@@ -1,0 +1,539 @@
+{
+  "id": "1vSq5a6eWyYn2i01jjupOjrlo_2w2yo24",
+  "name": "250",
+  "direction": "Morning",
+  "filename": "250WTM-A_Effective_082626.pdf",
+  "fileId": "1vSq5a6eWyYn2i01jjupOjrlo_2w2yo24",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "9030 SE Cooper St. (kelly School) [N]",
+      "time": "7:24 am",
+      "direction": "N",
+      "originalLine": "7:24 am9030 SE COOPER ST (KELLY SCHOOL) [N]250WTM-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57077803333316,
+        45.47302099106446
+      ],
+      "displayName": "9030 SE Cooper St, Portland, OR 97266, USA",
+      "placeId": "ChIJdzS-o_SflVQRRUixiEUwojU",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-2",
+      "address": "7234 SE 62nd Ave. (brentwood Comm Ctr) [E]",
+      "time": "7:32 am",
+      "direction": "E",
+      "originalLine": "7:32 am7234 SE 62ND AV (BRENTWOOD COMM CTR) [E]250WTM-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.59961184578083,
+        45.470641297918405
+      ],
+      "displayName": "7234 SE 62nd Ave, Portland, OR 97206, USA",
+      "placeId": "ChIJ2_31WQCglVQRxKlbSVBKuEI",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Duke St. & SE 60th Ave. [NE]",
+      "time": "7:35 am",
+      "direction": "NE",
+      "originalLine": "7:35 amSE DUKE ST @ SE 60TH AV [NE]250WTM-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6022597,
+        45.4758236
+      ],
+      "displayName": "SE Duke St & SE 60th Ave, Portland, OR 97206, USA",
+      "placeId": "EjFTRSBEdWtlIFN0ICYgU0UgNjB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJywWoZwaglVQR2vLdBiTu05gSFAoSCcsFqGcGoJVUEdry3QYk7tOYGhQKEglzrKkxiZ-VVBEwY0us41KM8hoUChIJNVlGqg-glVQR6dNMxbBxw8AiCg1cDxsbFTth7LY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE 52nd Ave. & SE Henderson St. [NW]",
+      "time": "7:38 am",
+      "direction": "NW",
+      "originalLine": "7:38 amSE 52ND AV @ SE HENDERSON ST [NW]250WTM-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6100334,
+        45.469337
+      ],
+      "displayName": "SE Henderson St & SE 52nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjZTRSBIZW5kZXJzb24gU3QgJiBTRSA1Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgmD8tgJrAqVVBEBpzaNQqt_5BIUChIJg_LYCawKlVQRAac2jUKrf-QaFAoSCZkeCTT3n5VUEa9VQt6T792sGhQKEgmx4E2OC6CVVBGwr-O06bzTNCIKDfoRGhsVkjHrtg",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE 62nd Ave. & SE Tenino St. [NW]",
+      "time": "7:41 am",
+      "direction": "NW",
+      "originalLine": "7:41 amSE 62ND AV @ SE TENINO ST [NW]250WTM-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5996482,
+        45.4644764
+      ],
+      "displayName": "SE 62nd Ave & SE Tenino St, Portland, OR 97206, USA",
+      "placeId": "EjNTRSA2Mm5kIEF2ZSAmIFNFIFRlbmlubyBTdCwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEgldUk5KVHWVVBFky4WjrB0AHRIUChIJXVJOSlR1lVQRZMuFo6wdAB0aFAoSCU3IX2lroJVUEZ-q1GgoIBoRGhQKEglthzbbsgqVVBFuMQtv0wDFRSIKDRxUGRsVPsfstg",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-6",
+      "address": "6023 SE Flavel Dr. [SW]",
+      "time": "7:43 am",
+      "direction": "SW",
+      "originalLine": "7:43 am6023 SE FLAVEL DR [SW]250WTM-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60165479263848,
+        45.46184472990722
+      ],
+      "displayName": "6023 SE Flavel Dr, Portland, OR 97206, USA",
+      "placeId": "ChIJXaWxUVF1lVQR9SDYxlf9UxM",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-7",
+      "address": "SE Harney St. & SE 75th Pl. [SW]",
+      "time": "7:46 am",
+      "direction": "SW",
+      "originalLine": "7:46 amSE HARNEY ST & SE 75TH PL [SW]250WTM-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5861659,
+        45.4632801
+      ],
+      "displayName": "SE Harney St & SE 75th Pl, Portland, OR 97206, USA",
+      "placeId": "EjJTRSBIYXJuZXkgU3QgJiBTRSA3NXRoIFBsLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCdW8sr_8n5VUEVaE3-4Flz-SEhQKEgnVvLK__J-VVBFWhN_uBZc_khoUChIJr1DVSVZ1lVQRk4rYJY5SKsMaFAoSCafi-oT8n5VUEe5K2hZgawk6IgoNYSUZGxXl1e62",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-0",
+      "address": "7326 SE Flavel St, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:WHITMAN GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5877156,
+        45.4683958
+      ],
+      "displayName": "7326 SE Flavel St, Portland, OR 97206, USA",
+      "schoolName": "Whitman"
+    }
+  ],
+  "neighborhoods": [
+    "Brentwood-Darlington",
+    "Lents",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-08-10T02:12:34.732Z",
+  "stats": {
+    "totalStops": 8,
+    "geocodedStops": 8,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.47302,
+      -122.57078
+    ],
+    [
+      45.47303,
+      -122.57075
+    ],
+    [
+      45.47308,
+      -122.57072
+    ],
+    [
+      45.47339,
+      -122.57073
+    ],
+    [
+      45.47336,
+      -122.56975
+    ],
+    [
+      45.47334,
+      -122.56865
+    ],
+    [
+      45.47299,
+      -122.56865
+    ],
+    [
+      45.47232,
+      -122.56865
+    ],
+    [
+      45.47141,
+      -122.56865
+    ],
+    [
+      45.47068,
+      -122.56864
+    ],
+    [
+      45.46897,
+      -122.56862
+    ],
+    [
+      45.46858,
+      -122.5686
+    ],
+    [
+      45.46842,
+      -122.56859
+    ],
+    [
+      45.46843,
+      -122.569
+    ],
+    [
+      45.46844,
+      -122.56956
+    ],
+    [
+      45.46847,
+      -122.57061
+    ],
+    [
+      45.46851,
+      -122.57205
+    ],
+    [
+      45.46862,
+      -122.57611
+    ],
+    [
+      45.46866,
+      -122.57818
+    ],
+    [
+      45.46868,
+      -122.57976
+    ],
+    [
+      45.46866,
+      -122.5889
+    ],
+    [
+      45.46867,
+      -122.58937
+    ],
+    [
+      45.46866,
+      -122.59034
+    ],
+    [
+      45.46865,
+      -122.59424
+    ],
+    [
+      45.46864,
+      -122.59812
+    ],
+    [
+      45.46863,
+      -122.59958
+    ],
+    [
+      45.46933,
+      -122.59959
+    ],
+    [
+      45.47037,
+      -122.5996
+    ],
+    [
+      45.47059,
+      -122.59961
+    ],
+    [
+      45.47184,
+      -122.59963
+    ],
+    [
+      45.4746,
+      -122.59966
+    ],
+    [
+      45.47539,
+      -122.59968
+    ],
+    [
+      45.47583,
+      -122.59967
+    ],
+    [
+      45.47583,
+      -122.6003
+    ],
+    [
+      45.47583,
+      -122.60097
+    ],
+    [
+      45.47582,
+      -122.60159
+    ],
+    [
+      45.47583,
+      -122.60287
+    ],
+    [
+      45.47583,
+      -122.6056
+    ],
+    [
+      45.47583,
+      -122.60876
+    ],
+    [
+      45.47499,
+      -122.60903
+    ],
+    [
+      45.47397,
+      -122.60939
+    ],
+    [
+      45.4725,
+      -122.60991
+    ],
+    [
+      45.47221,
+      -122.60997
+    ],
+    [
+      45.47198,
+      -122.61
+    ],
+    [
+      45.47118,
+      -122.61002
+    ],
+    [
+      45.47003,
+      -122.61003
+    ],
+    [
+      45.46934,
+      -122.61003
+    ],
+    [
+      45.46889,
+      -122.61003
+    ],
+    [
+      45.46864,
+      -122.61002
+    ],
+    [
+      45.46864,
+      -122.60946
+    ],
+    [
+      45.46864,
+      -122.60918
+    ],
+    [
+      45.46864,
+      -122.60888
+    ],
+    [
+      45.46864,
+      -122.6029
+    ],
+    [
+      45.46864,
+      -122.60063
+    ],
+    [
+      45.46863,
+      -122.59958
+    ],
+    [
+      45.46793,
+      -122.59959
+    ],
+    [
+      45.46724,
+      -122.5996
+    ],
+    [
+      45.46684,
+      -122.59961
+    ],
+    [
+      45.46448,
+      -122.59965
+    ],
+    [
+      45.46247,
+      -122.59969
+    ],
+    [
+      45.4615,
+      -122.59968
+    ],
+    [
+      45.46146,
+      -122.59967
+    ],
+    [
+      45.46145,
+      -122.59967
+    ],
+    [
+      45.46145,
+      -122.60002
+    ],
+    [
+      45.46144,
+      -122.6005
+    ],
+    [
+      45.46144,
+      -122.60062
+    ],
+    [
+      45.46145,
+      -122.60152
+    ],
+    [
+      45.46165,
+      -122.60155
+    ],
+    [
+      45.46184,
+      -122.60165
+    ],
+    [
+      45.46165,
+      -122.60155
+    ],
+    [
+      45.46145,
+      -122.60152
+    ],
+    [
+      45.46144,
+      -122.60062
+    ],
+    [
+      45.46145,
+      -122.60002
+    ],
+    [
+      45.46145,
+      -122.59831
+    ],
+    [
+      45.46145,
+      -122.59661
+    ],
+    [
+      45.46146,
+      -122.59196
+    ],
+    [
+      45.46146,
+      -122.59048
+    ],
+    [
+      45.46146,
+      -122.58962
+    ],
+    [
+      45.46146,
+      -122.58938
+    ],
+    [
+      45.46151,
+      -122.58938
+    ],
+    [
+      45.46237,
+      -122.58938
+    ],
+    [
+      45.46328,
+      -122.58938
+    ],
+    [
+      45.46328,
+      -122.58835
+    ],
+    [
+      45.46328,
+      -122.58744
+    ],
+    [
+      45.46328,
+      -122.58685
+    ],
+    [
+      45.46328,
+      -122.58617
+    ],
+    [
+      45.46328,
+      -122.58685
+    ],
+    [
+      45.46328,
+      -122.58744
+    ],
+    [
+      45.46328,
+      -122.58835
+    ],
+    [
+      45.46328,
+      -122.58938
+    ],
+    [
+      45.46334,
+      -122.58938
+    ],
+    [
+      45.46417,
+      -122.58938
+    ],
+    [
+      45.46486,
+      -122.58938
+    ],
+    [
+      45.4661,
+      -122.58938
+    ],
+    [
+      45.46783,
+      -122.58938
+    ],
+    [
+      45.46823,
+      -122.58938
+    ],
+    [
+      45.46867,
+      -122.58937
+    ],
+    [
+      45.46866,
+      -122.58915
+    ],
+    [
+      45.46866,
+      -122.58778
+    ]
+  ]
+}

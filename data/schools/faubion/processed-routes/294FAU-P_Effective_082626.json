@@ -1,0 +1,203 @@
+{
+  "id": "1lT_i4q93QEpFIe6G1KaW7hC4rtIqLBt2",
+  "name": "294",
+  "direction": "Afternoon",
+  "filename": "294FAU-P_Effective_082626.pdf",
+  "fileId": "1lT_i4q93QEpFIe6G1KaW7hC4rtIqLBt2",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2930 NE Dekum St, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:FAUBION GT & ST LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6343091,
+        45.570994
+      ],
+      "displayName": "2930 NE Dekum St, Portland, OR 97211, USA",
+      "schoolName": "Faubion"
+    },
+    {
+      "id": "stop-1",
+      "address": "5250 NE Martin Luther King Jr Blvd. (blazers)",
+      "time": "3:48 pm",
+      "direction": null,
+      "originalLine": "3:48 pm5250 NE MARTIN LUTHER KING JR BLVD (BLAZERS)294FAU-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.66094549262074,
+        45.56181809547803
+      ],
+      "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
+      "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
+      "neighborhood": "King"
+    }
+  ],
+  "neighborhoods": [
+    "King"
+  ],
+  "processedAt": "2026-08-10T02:20:59.458Z",
+  "stats": {
+    "totalStops": 2,
+    "geocodedStops": 2,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.571,
+      -122.6345
+    ],
+    [
+      45.57097,
+      -122.63469
+    ],
+    [
+      45.57089,
+      -122.63472
+    ],
+    [
+      45.57089,
+      -122.63485
+    ],
+    [
+      45.57099,
+      -122.63512
+    ],
+    [
+      45.57099,
+      -122.63522
+    ],
+    [
+      45.57103,
+      -122.63531
+    ],
+    [
+      45.57109,
+      -122.63535
+    ],
+    [
+      45.57114,
+      -122.63535
+    ],
+    [
+      45.57161,
+      -122.63536
+    ],
+    [
+      45.57189,
+      -122.63534
+    ],
+    [
+      45.57189,
+      -122.63629
+    ],
+    [
+      45.57188,
+      -122.63923
+    ],
+    [
+      45.57188,
+      -122.64132
+    ],
+    [
+      45.57186,
+      -122.64725
+    ],
+    [
+      45.57186,
+      -122.64965
+    ],
+    [
+      45.57186,
+      -122.65008
+    ],
+    [
+      45.57118,
+      -122.65008
+    ],
+    [
+      45.56995,
+      -122.65008
+    ],
+    [
+      45.56913,
+      -122.65007
+    ],
+    [
+      45.56851,
+      -122.65006
+    ],
+    [
+      45.56822,
+      -122.65003
+    ],
+    [
+      45.56703,
+      -122.65004
+    ],
+    [
+      45.56592,
+      -122.65005
+    ],
+    [
+      45.56418,
+      -122.65008
+    ],
+    [
+      45.5631,
+      -122.65009
+    ],
+    [
+      45.56273,
+      -122.65009
+    ],
+    [
+      45.56274,
+      -122.65037
+    ],
+    [
+      45.56274,
+      -122.65086
+    ],
+    [
+      45.56274,
+      -122.65122
+    ],
+    [
+      45.56274,
+      -122.65256
+    ],
+    [
+      45.56274,
+      -122.65794
+    ],
+    [
+      45.5623,
+      -122.65794
+    ],
+    [
+      45.56181,
+      -122.65798
+    ],
+    [
+      45.56181,
+      -122.65912
+    ],
+    [
+      45.56182,
+      -122.65991
+    ],
+    [
+      45.56182,
+      -122.66067
+    ],
+    [
+      45.56182,
+      -122.66095
+    ]
+  ]
+}

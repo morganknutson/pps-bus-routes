@@ -1,0 +1,318 @@
+{
+  "id": "1jBD0qa9PxpeqmiBZr2cP5i_wCCYD_SIS",
+  "name": "234",
+  "direction": "Morning",
+  "filename": "234RWH-A_Effective_082626.pdf",
+  "fileId": "1jBD0qa9PxpeqmiBZr2cP5i_wCCYD_SIS",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "NE 60th Ave. & NE Everett St. [E]",
+      "time": "8:50 am",
+      "direction": "E",
+      "originalLine": "8:50 amNE 60TH AV @ NE EVERETT ST [E]234RWH-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6023006,
+        45.5250408
+      ],
+      "displayName": "NE Everett St & NE 60th Ave, Portland, OR 97213, USA",
+      "placeId": "EjRORSBFdmVyZXR0IFN0ICYgTkUgNjB0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxMywgVVNBImYiZAoUChIJeYYIIeKglVQRPH5xo09DMKwSFAoSCXmGCCHioJVUETx-caNPQzCsGhQKEgkR4Dp2C6GVVBHZEozsLif9aBoUChIJPQQaaDGhlVQR5eJbZDf6AE4iCg3okSIbFaJf7LY",
+      "neighborhood": "North Tabor"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 60th Ave. & NE Wasco St. [SE]",
+      "time": "8:53 am",
+      "direction": "SE",
+      "originalLine": "8:53 amNE 60TH AV @ NE WASCO ST [SE]234RWH-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6021902,
+        45.5323009
+      ],
+      "displayName": "NE Wasco St & NE 60th Ave, Portland, OR 97213, USA",
+      "placeId": "EjJORSBXYXNjbyBTdCAmIE5FIDYwdGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCXuZJ5YhoZVUEQRg8kACjwl6EhQKEgl7mSeWIaGVVBEEYPJAAo8JehoUChIJZ3fOn22hlVQRSQRb6OzykvwaFAoSCT0EGmgxoZVUEeXiW2Q3-gBOIgoNga0jGxXyY-y2",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Halsey St. & NE 62nd Ave. [SW]",
+      "time": "8:54 am",
+      "direction": "SW",
+      "originalLine": "8:54 amNE HALSEY ST @ NE 62ND AV [SW]234RWH-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5995679,
+        45.5337086
+      ],
+      "displayName": "NE 62nd Ave & NE Halsey St, Portland, OR 97213, USA",
+      "placeId": "EjNORSA2Mm5kIEF2ZSAmIE5FIEhhbHNleSBTdCwgUG9ydGxhbmQsIE9SIDk3MjEzLCBVU0EiZiJkChQKEgn75uU1IqGVVBHiIxtKyq6vVhIUChIJ--blNSKhlVQR4iMbSsqur1YaFAoSCYXSF_AwoZVUETtT_bKWRodKGhQKEgn5WlLfk6KVVBEzP1dQatFP_yIKDX7kIxsVYcrstg",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE 82nd Ave. & NE Schuyler St. [SE]",
+      "time": "8:59 am",
+      "direction": "SE",
+      "originalLine": "8:59 amNE 82ND AV @ NE SCHUYLER ST [SE]234RWH-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5790148,
+        45.5356797
+      ],
+      "displayName": "NE 82nd Ave & NE Schuyler St, Portland, OR 97213, USA",
+      "placeId": "EjVORSA4Mm5kIEF2ZSAmIE5FIFNjaHV5bGVyIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCaUi0CMVoZVUESq5tsI9HjnjEhQKEgmlItAjFaGVVBEqubbCPR454xoUChIJObpUOFChlVQRBxeZuxWdUeIaFAoSCdGXY4p9oZVUEdqT1kHPfWRmIgoNfTEkGxU87e-2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ROSEWAY HEIGHTS GT LOAD ON ALAMEDA",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5873484,
+        45.5440613
+      ],
+      "displayName": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "schoolName": "Roseway Heights"
+    }
+  ],
+  "neighborhoods": [
+    "North Tabor",
+    "Northeast Portland",
+    "Rose City Park"
+  ],
+  "processedAt": "2026-08-10T02:08:39.895Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.52504,
+      -122.6023
+    ],
+    [
+      45.52614,
+      -122.60228
+    ],
+    [
+      45.52669,
+      -122.6023
+    ],
+    [
+      45.52701,
+      -122.60229
+    ],
+    [
+      45.52832,
+      -122.60227
+    ],
+    [
+      45.52876,
+      -122.60226
+    ],
+    [
+      45.52931,
+      -122.60225
+    ],
+    [
+      45.53032,
+      -122.60223
+    ],
+    [
+      45.53352,
+      -122.60216
+    ],
+    [
+      45.53371,
+      -122.60217
+    ],
+    [
+      45.5337,
+      -122.60163
+    ],
+    [
+      45.53371,
+      -122.60062
+    ],
+    [
+      45.5337,
+      -122.59915
+    ],
+    [
+      45.53367,
+      -122.59564
+    ],
+    [
+      45.53365,
+      -122.59381
+    ],
+    [
+      45.53363,
+      -122.59192
+    ],
+    [
+      45.53362,
+      -122.59015
+    ],
+    [
+      45.53361,
+      -122.58873
+    ],
+    [
+      45.5336,
+      -122.58777
+    ],
+    [
+      45.5336,
+      -122.58723
+    ],
+    [
+      45.53379,
+      -122.58723
+    ],
+    [
+      45.53414,
+      -122.58722
+    ],
+    [
+      45.53416,
+      -122.58722
+    ],
+    [
+      45.53486,
+      -122.58721
+    ],
+    [
+      45.53522,
+      -122.5872
+    ],
+    [
+      45.53595,
+      -122.58719
+    ],
+    [
+      45.53707,
+      -122.58717
+    ],
+    [
+      45.53727,
+      -122.58717
+    ],
+    [
+      45.53726,
+      -122.5864
+    ],
+    [
+      45.53726,
+      -122.58311
+    ],
+    [
+      45.53725,
+      -122.57994
+    ],
+    [
+      45.53724,
+      -122.57937
+    ],
+    [
+      45.53724,
+      -122.57898
+    ],
+    [
+      45.5368,
+      -122.57898
+    ],
+    [
+      45.53637,
+      -122.57899
+    ],
+    [
+      45.53568,
+      -122.57901
+    ],
+    [
+      45.5368,
+      -122.57898
+    ],
+    [
+      45.53759,
+      -122.57897
+    ],
+    [
+      45.53775,
+      -122.57895
+    ],
+    [
+      45.53838,
+      -122.57893
+    ],
+    [
+      45.53845,
+      -122.57894
+    ],
+    [
+      45.53883,
+      -122.57895
+    ],
+    [
+      45.54063,
+      -122.57891
+    ],
+    [
+      45.54206,
+      -122.57889
+    ],
+    [
+      45.54356,
+      -122.57886
+    ],
+    [
+      45.54412,
+      -122.57885
+    ],
+    [
+      45.54453,
+      -122.57884
+    ],
+    [
+      45.54452,
+      -122.57947
+    ],
+    [
+      45.54454,
+      -122.58266
+    ],
+    [
+      45.54456,
+      -122.58492
+    ],
+    [
+      45.54457,
+      -122.5866
+    ],
+    [
+      45.54386,
+      -122.58661
+    ],
+    [
+      45.54382,
+      -122.58662
+    ],
+    [
+      45.5438,
+      -122.58674
+    ],
+    [
+      45.54378,
+      -122.5873
+    ]
+  ]
+}

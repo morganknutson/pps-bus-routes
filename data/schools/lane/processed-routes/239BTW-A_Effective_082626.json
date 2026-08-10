@@ -1,0 +1,240 @@
+{
+  "id": "1Pka14w5GM2PXunrVGGewMes1EpYLjBkP",
+  "name": "239",
+  "direction": "Morning",
+  "filename": "239BTW-A_Effective_082626.pdf",
+  "fileId": "1Pka14w5GM2PXunrVGGewMes1EpYLjBkP",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "SE Claybourne St. & SE 89th Ave. [SW]",
+      "time": "8:55 am",
+      "direction": "SW",
+      "originalLine": "8:55 amSE CLAYBOURNE ST @ SE 89TH AV [SW]239BTW-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5718044,
+        45.47478539999999
+      ],
+      "displayName": "SE Claybourne St & SE 89th Ave, Portland, OR 97266, USA",
+      "placeId": "EjdTRSBDbGF5Ym91cm5lIFN0ICYgU0UgODl0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJVTk4K_WflVQRxymQ4zCdqDQSFAoSCVU5OCv1n5VUEccpkOMwnag0GhQKEgkXgsmEj5-VVBEJDfFlpcJcfRoUChIJnbtA2TCglVQRoj6Ekorxy3giCg3O5hobFeQG8bY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 92nd Ave. & SE Glenwood St. [W]",
+      "time": "8:56 am",
+      "direction": "W",
+      "originalLine": "8:56 amSE 92ND AVE @ SE GLENWOOD ST [W]239BTW-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5686478,
+        45.47387610000001
+      ],
+      "displayName": "SE Glenwood St & SE 92nd Ave, Portland, OR 97266, USA",
+      "placeId": "EjVTRSBHbGVud29vZCBTdCAmIFNFIDkybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCeHZ2kOLn5VUEZDEkcUIIB8SEhQKEgnh2dpDi5-VVBGQxJHFCCAfEhoUChIJrxEMIx2glVQRsxx5oVWM_k4aFAoSCR_Xus8moJVUETM4bKflPVLGIgoNScMaGxUygvG2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "9025 SE Flavel St. [N]",
+      "time": "8:58 am",
+      "direction": "N",
+      "originalLine": "8:58 am9025 SE Flavel St [N]239BTW-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57021235948663,
+        45.46866023460682
+      ],
+      "displayName": "9025 SE Flavel St, Portland, OR 97266, USA",
+      "placeId": "ChIJ81YUQvKflVQRZPa2URd3NRk",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-5",
+      "address": "8713 SE Flavel St. [N]",
+      "time": "8:59 am",
+      "direction": "N",
+      "originalLine": "8:59 am8713 SE FLAVEL ST [N]239BTW-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57363419439596,
+        45.46855303734442
+      ],
+      "displayName": "8713 SE Flavel St, Portland, OR 97266, USA",
+      "placeId": "Eio4NzEzIFNFIEZsYXZlbCBTdCwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiMRIvChQKEgnPDeeD8Z-VVBHFhDla03pYARCJRCoUChIJw0w_3_iflVQR7V2QcaWjnxg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-0",
+      "address": "7200 SE 60th Ave, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:BRENTWOOD GT LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6014249,
+        45.4708481
+      ],
+      "displayName": "7200 SE 60th Ave, Portland, OR 97206, USA",
+      "schoolName": "Lane"
+    }
+  ],
+  "neighborhoods": [
+    "Lents"
+  ],
+  "processedAt": "2026-08-10T02:00:38.460Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.47479,
+      -122.5718
+    ],
+    [
+      45.47471,
+      -122.56865
+    ],
+    [
+      45.47299,
+      -122.56865
+    ],
+    [
+      45.47068,
+      -122.56864
+    ],
+    [
+      45.46897,
+      -122.56862
+    ],
+    [
+      45.46858,
+      -122.5686
+    ],
+    [
+      45.46842,
+      -122.56859
+    ],
+    [
+      45.46843,
+      -122.569
+    ],
+    [
+      45.46844,
+      -122.56956
+    ],
+    [
+      45.46845,
+      -122.56989
+    ],
+    [
+      45.46846,
+      -122.57022
+    ],
+    [
+      45.46866,
+      -122.57021
+    ],
+    [
+      45.46846,
+      -122.57022
+    ],
+    [
+      45.46847,
+      -122.57061
+    ],
+    [
+      45.4685,
+      -122.57136
+    ],
+    [
+      45.46851,
+      -122.57261
+    ],
+    [
+      45.46856,
+      -122.57391
+    ],
+    [
+      45.46866,
+      -122.57761
+    ],
+    [
+      45.46867,
+      -122.57906
+    ],
+    [
+      45.46866,
+      -122.58683
+    ],
+    [
+      45.46866,
+      -122.58915
+    ],
+    [
+      45.46867,
+      -122.5902
+    ],
+    [
+      45.46865,
+      -122.59131
+    ],
+    [
+      45.46865,
+      -122.59489
+    ],
+    [
+      45.46864,
+      -122.59684
+    ],
+    [
+      45.46864,
+      -122.59857
+    ],
+    [
+      45.46864,
+      -122.60063
+    ],
+    [
+      45.46864,
+      -122.60219
+    ],
+    [
+      45.46899,
+      -122.60219
+    ],
+    [
+      45.47002,
+      -122.6022
+    ],
+    [
+      45.47061,
+      -122.60221
+    ],
+    [
+      45.4706,
+      -122.60192
+    ],
+    [
+      45.47079,
+      -122.60192
+    ],
+    [
+      45.47079,
+      -122.60191
+    ],
+    [
+      45.4708,
+      -122.60158
+    ],
+    [
+      45.4708,
+      -122.60156
+    ]
+  ]
+}
