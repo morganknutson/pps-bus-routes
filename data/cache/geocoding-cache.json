@@ -168003,5 +168003,79 @@
       }
     ],
     "cachedAt": "2026-08-10T02:24:52.139Z"
+  },
+  "10547 sw 14th dr. se|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.69357042459387,
+      45.448760225650716
+    ],
+    "displayName": "10547 SW 14th Dr, Portland, OR 97219, USA",
+    "placeId": "EikxMDU0NyBTVyAxNHRoIERyLCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSIxEi8KFAoSCT9zeAxGC5VUEfH9iC01z0XMELNSKhQKEgl7xqPlRQuVVBEgnc6RCeXLbQ",
+    "locationType": "RANGE_INTERPOLATED",
+    "addressComponents": [
+      {
+        "long_name": "10547",
+        "short_name": "10547",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest 14th Drive",
+        "short_name": "SW 14th Dr",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-08-24T01:25:20.425Z"
   }
 }
