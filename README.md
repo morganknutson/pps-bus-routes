@@ -96,18 +96,18 @@ pps-bus-maps/
 
 ## Deployment
 
-Ready to deploy? Check out these guides:
+This app is self-hosted via **[makserve](https://github.com/morganknutson/makserve)**
+on a Mac Pro that runs both the production and dev sites as separate Docker containers.
+It is not deployed to Railway, Render, or Vercel.
 
-- **[QUICK_DEPLOY.md](./docs/deployment/QUICK_DEPLOY.md)**: Quick guide to deploy (Railway-focused)
-- **[DEPLOYMENT.md](./docs/deployment/DEPLOYMENT.md)**: Comprehensive deployment guide (multiple options)
+- **[QUICK_DEPLOY.md](./docs/deployment/QUICK_DEPLOY.md)**: Command cheat sheet
+- **[DEPLOYMENT.md](./docs/deployment/DEPLOYMENT.md)**: How the makserve setup actually works, including the env-var gotchas
+
+Pushing to `main` auto-deploys **production** via a GitHub webhook. The **dev** site
+does not auto-deploy — run `makserve deploy portlandschoolbuses.com-dev` after pushing
+if you need dev to pick up the change.
 
 Generated bus route data is refreshed by `.github/workflows/weekly-sync.yml`. The workflow runs the backend weekly sync, commits generated `data/...` changes to `main`, and can call a Makserve deploy hook via the optional `MAKSERVE_DEPLOY_WEBHOOK_URL` secret.
-
-The app is production-ready and can be deployed to:
-- **Railway** (recommended for beginners) - Free tier available
-- **Render** - Free tier available
-- **Vercel + Railway/Render** - Separate frontend/backend
-- **VPS** (DigitalOcean, Linode, etc.) - Full control
 
 ## Documentation
 

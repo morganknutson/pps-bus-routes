@@ -1,438 +1,128 @@
 # Deployment Guide for PPS Bus Maps
 
-This guide covers several deployment options, from easiest to most advanced. Choose the one that fits your needs and technical comfort level.
+This app is **not** deployed to Railway, Render, Vercel, GoDaddy, or any third-party
+PaaS. It's self-hosted on a Mac Pro, run by **[makserve](https://github.com/morganknutson/makserve)**
+— a small internal tool that runs a fleet of Dockerized sites on that machine, fronted
+by nginx and a Cloudflare Tunnel.
 
-## Table of Contents
-1. [Quick Overview](#quick-overview)
-2. [Option 1: Railway (Easiest - Recommended)](#option-1-railway-easiest---recommended)
-3. [Option 2: Render](#option-2-render)
-4. [Option 3: Vercel + Railway/Render](#option-3-vercel--railwayrender)
-5. [Option 4: VPS (DigitalOcean, Linode, etc.)](#option-4-vps-digitalocean-linode-etc)
-6. [Pre-Deployment Checklist](#pre-deployment-checklist)
-7. [Post-Deployment Steps](#post-deployment-steps)
+If you're reading an older doc in this repo (or in git history) that mentions Railway,
+Render, Vercel, or a VPS setup guide — it's stale and describes a deployment path that
+was never actually used in production. This is the accurate one.
 
----
+## The two sites
 
-## Quick Overview
+Both live as separate directories on the server (`/Users/morganknutson/Sites/`), each
+with its own git checkout, Docker container, and env files:
 
-Your app has two parts:
-- **Frontend**: React app (needs to be built and served)
-- **Backend**: Node.js/Express API server
+| Site | Directory | Repo branch | Container | Port | Auto-deploy |
+|---|---|---|---|---|---|
+| **Production** | `portlandschoolbuses.com` | `main` | `portlandschoolbusescom-web-1` | 3001→3005 | ✅ GitHub webhook on push to `main` |
+| **Dev** | `portlandschoolbuses.com-dev` | `main` | `ppsbus-dev-web` | 7780→3005, 7781→3000 | ❌ manual only (see below) |
 
-You can deploy them:
-- **Together** on one service (Railway, Render)
-- **Separately** (Frontend on Vercel/Netlify, Backend on Railway/Render)
+Both are checkouts of `https://github.com/morganknutson/pps-bus-routes`. There is no
+separate "dev branch" — dev and prod both track `main`; dev just doesn't redeploy
+automatically when `main` moves.
 
----
+- **Prod** builds with `Dockerfile` (multi-stage: `vite build` the frontend, then a
+  slim Node image serving the built static files + Express backend).
+- **Dev** builds with `Dockerfile.dev` (single stage, runs `npm run dev`, i.e. the Vite
+  dev server + `node --watch` backend) and bind-mounts `frontend/src`, `backend/services`,
+  etc. for live reload.
 
-## Option 1: Railway (Easiest - Recommended)
+## How a deploy actually happens
 
-Railway can deploy both frontend and backend together. It's beginner-friendly and has a free tier.
+`makserve` (CLI + a `com.makserve.api` daemon running on the server) wraps
+`git pull && docker compose up -d --build` per site. Three ways that gets triggered:
 
-### Step 1: Prepare Your Code
+1. **GitHub webhook (prod only).** The `pps-bus-routes` repo has a webhook pointed at
+   `https://deploy.portlandschoolbuses.com/webhook/portlandschoolbuses.com`. Every push
+   to `main` fires it, and the makserve API does the pull + rebuild automatically.
+   Check registered webhooks with `gh api repos/morganknutson/pps-bus-routes/hooks`.
+2. **Weekly sync workflow.** `.github/workflows/weekly-sync.yml` runs the backend's
+   weekly PDF sync, commits any generated `data/...` changes to `main`, and — if the
+   `MAKSERVE_DEPLOY_WEBHOOK_URL` repo secret is set — also POSTs to that webhook
+   directly as a belt-and-suspenders trigger.
+3. **Manual, from any machine on the tailnet:**
+   ```bash
+   makserve deploy portlandschoolbuses.com       # prod
+   makserve deploy portlandschoolbuses.com-dev   # dev — this one you must run yourself
+   ```
 
-1. **Update backend to serve frontend in production:**
+**The dev site has no GitHub webhook registered**, so pushing to `main` updates prod
+automatically but leaves dev on whatever commit it was last manually deployed at. If
+you need dev to reflect the latest `main`, run `makserve deploy portlandschoolbuses.com-dev`
+yourself. (Registering a second webhook for dev is possible but not currently set up —
+ask before adding one, since both sites share the same repo and branch.)
 
-First, we need to modify the backend to serve the built frontend files. The backend already has this capability, but we should verify it works.
+## Environment variables — read this before adding a new `VITE_*` var
 
-2. **Create a `.railwayignore` file** (optional, to exclude unnecessary files):
-```
-node_modules
-.git
-.env
-*.log
-data/backups
-```
+This is the part that's easy to get wrong and will silently produce a broken build.
 
-### Step 2: Deploy to Railway
+Each site directory has up to three separate env-ish locations:
 
-1. **Sign up**: Go to [railway.app](https://railway.app) and sign up with GitHub
-2. **New Project**: Click "New Project" → "Deploy from GitHub repo"
-3. **Select your repository**: Choose your `pps-bus-maps` repo
-4. **Configure the service**:
-   - Railway will auto-detect it's a Node.js project
-   - Set the **Root Directory** to `backend` (since backend has the main server)
-   - Set the **Start Command** to: `node server.js`
-   - Set the **Build Command** to: `cd ../frontend && npm install && npm run build && cd ../backend`
+- **`<site>/.env`** — read by `docker compose` for `${VAR}` substitution in
+  `docker-compose.yml` (build args, `environment:` entries). This is where
+  **frontend `VITE_*` vars must live.**
+- **`<site>/backend/.env`** — bind-mounted read-only into the container at
+  `/app/backend/.env`, read by the Node backend at runtime (`dotenv`). This is where
+  **backend-only secrets** like `GOOGLE_MAPS_API_KEY` or `POSTHOG_API_KEY` live.
+- **`<site>/docker-compose.yml`** — gitignored, per-server, **not** the same file as
+  the tracked `docker-compose.dev.yml` template. Lists which env vars actually get
+  passed into the container, either as build `args:` (prod, baked in at `vite build`
+  time) or as `environment:` entries (dev, read live by the Vite dev server).
 
-5. **Environment Variables** (in Railway dashboard):
-   - `NODE_ENV=production`
-   - `PORT=3001` (Railway will override this, but set it anyway)
-   - `GOOGLE_API_KEY=your_key_here` (optional, if you have one)
+**`makserve env set <site> KEY=VALUE` writes to `backend/.env` if that file exists —
+which it always does here.** That's correct for backend secrets, but wrong for a new
+`VITE_*` var: docker compose never reads `backend/.env` for build-arg substitution, so
+the var would be set but never actually reach the frontend build. Don't use
+`makserve env set` for `VITE_*` vars — edit `<site>/.env` directly instead.
 
-6. **Deploy**: Railway will automatically deploy when you push to your main branch
+### Checklist for adding a new `VITE_*` env var
 
-### Step 3: Configure Backend to Serve Frontend
+1. Add it to `<site>/.env` (root of the site directory) on the server, for **both**
+   `portlandschoolbuses.com` and `portlandschoolbuses.com-dev`.
+2. Add it to `docker-compose.yml`'s `build.args` (prod) or `environment:` (dev) —
+   **in both the tracked template** (`docker-compose.dev.yml`) **and the live,
+   gitignored `docker-compose.yml` in each site directory**, since the live file isn't
+   regenerated from the template on deploy.
+3. If it needs to reach a `vite build` (prod), also add `ARG VITE_FOO` /
+   `ENV VITE_FOO=$VITE_FOO` to `Dockerfile`. Dev doesn't need this — `Dockerfile.dev`
+   runs the Vite dev server, which reads `import.meta.env.VITE_*` straight from the
+   container's process env.
+4. Update `.env.example` at the repo root so local developers know the var exists.
+5. Redeploy: `makserve deploy <site>` for each site you changed. A plain `restart`
+   is **not** enough — it doesn't recreate the container, so it won't pick up new
+   `.env`/`docker-compose.yml` values. You need `up -d` (which `deploy` runs via
+   `--build`).
 
-We need to update the backend to serve the built frontend files. This requires a small code change.
-
-**Note**: You'll need to modify `backend/server.js` to serve static files from `frontend/dist` in production.
-
-### Step 4: Set Up Data Persistence
-
-Railway's free tier has ephemeral storage. For the `data/` directory to persist:
-
-1. **Option A**: Use Railway's volume (paid feature)
-2. **Option B**: Use external storage (S3, Google Cloud Storage)
-3. **Option C**: Store data in a database (PostgreSQL, MongoDB)
-
-For now, the app will work but data won't persist between deployments. This is fine for testing.
-
----
-
-## Option 2: Render
-
-Similar to Railway, but with a slightly different setup.
-
-### Step 1: Prepare Your Code
-
-Same as Railway - ensure backend can serve frontend.
-
-### Step 2: Deploy to Render
-
-1. **Sign up**: Go to [render.com](https://render.com) and sign up
-2. **New Web Service**: Click "New" → "Web Service"
-3. **Connect GitHub**: Select your repository
-4. **Configure**:
-   - **Name**: `pps-bus-maps`
-   - **Environment**: `Node`
-   - **Root Directory**: `backend`
-   - **Build Command**: `cd ../frontend && npm install && npm run build && cd ../backend && npm install`
-   - **Start Command**: `node server.js`
-   - **Plan**: Free (or paid for better performance)
-
-5. **Environment Variables**:
-   - `NODE_ENV=production`
-   - `PORT=3001`
-   - `GOOGLE_API_KEY=your_key_here` (optional)
-
-6. **Deploy**: Render will build and deploy automatically
-
-### Step 3: Persistent Disk (Optional)
-
-Render offers persistent disks on paid plans. For free tier, data is ephemeral.
-
----
-
-## Option 3: Vercel + Railway/Render
-
-Deploy frontend and backend separately for better performance and easier scaling.
-
-### Frontend on Vercel
-
-1. **Sign up**: Go to [vercel.com](https://vercel.com) and sign up
-2. **New Project**: Import your GitHub repository
-3. **Configure**:
-   - **Framework Preset**: Vite
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-   - **Install Command**: `npm install`
-
-4. **Environment Variables**:
-   - `VITE_API_URL=https://your-backend-url.railway.app` (or Render URL)
-
-5. **Update frontend API calls**: Make sure your frontend services use the environment variable for API URL
-
-### Backend on Railway/Render
-
-Follow Option 1 or 2, but:
-- Don't serve frontend files from backend
-- Set CORS to allow your Vercel domain
-- Update backend CORS settings
-
----
-
-## Option 4: VPS (DigitalOcean, Linode, etc.)
-
-For full control, deploy to a Virtual Private Server. More complex but more flexible.
-
-### Step 1: Set Up VPS
-
-1. **Create a VPS**: 
-   - DigitalOcean Droplet (Ubuntu 22.04, $6/month minimum)
-   - Linode (similar pricing)
-   - AWS EC2, Google Cloud Compute, etc.
-
-2. **SSH into server**:
-```bash
-ssh root@your-server-ip
-```
-
-### Step 2: Install Dependencies
+## Useful commands
 
 ```bash
-# Update system
-apt update && apt upgrade -y
-
-# Install Node.js 18+
-curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-apt install -y nodejs
-
-# Install a process manager (optional - you can use systemd, supervisor, or screen/tmux)
-# For systemd, no additional installation needed
-
-# Install Nginx (for reverse proxy)
-apt install -y nginx
+makserve sites                          # list all sites on this server
+makserve inspect portlandschoolbuses.com          # status, deployed commit, env var names
+makserve inspect portlandschoolbuses.com-dev
+makserve logs portlandschoolbuses.com 100 -f      # tail prod logs
+makserve deploy portlandschoolbuses.com           # git pull + rebuild + restart (prod)
+makserve deploy portlandschoolbuses.com-dev       # same, for dev
+makserve shell portlandschoolbuses.com            # ssh + docker exec into the container
 ```
 
-### Step 3: Deploy Your Code
+## Data persistence
 
-```bash
-# Clone your repository
-git clone https://github.com/yourusername/pps-bus-maps.git
-cd pps-bus-maps
-
-# Install dependencies
-npm run install:all
-
-# Build frontend
-cd frontend
-npm run build
-cd ..
-```
-
-### Step 4: Configure Backend to Serve Frontend
-
-Update `backend/server.js` to serve static files in production (see code changes below).
-
-### Step 5: Set Up Process Manager
-
-For production, you'll need a process manager to keep the backend running. Options include:
-
-**Option A: systemd (Linux service)**
-```bash
-# Create a systemd service file
-sudo nano /etc/systemd/system/pps-bus-maps.service
-```
-
-Add this content:
-```ini
-[Unit]
-Description=PPS Bus Maps Backend
-After=network.target
-
-[Service]
-Type=simple
-User=your-username
-WorkingDirectory=/path/to/pps-bus-maps/backend
-ExecStart=/usr/bin/node server.js
-Restart=always
-RestartSec=10
-Environment=NODE_ENV=production
-Environment=PORT=3001
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Then:
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable pps-bus-maps
-sudo systemctl start pps-bus-maps
-```
-
-**Option B: screen/tmux (for development)**
-```bash
-screen -S backend
-cd backend && node server.js
-# Press Ctrl+A then D to detach
-```
-
-### Step 6: Configure Nginx
-
-Create `/etc/nginx/sites-available/pps-bus-maps`:
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-
-    # Serve frontend
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    # Proxy API requests to backend
-    location /api {
-        proxy_pass http://localhost:3001;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-```
-
-Enable the site:
-```bash
-ln -s /etc/nginx/sites-available/pps-bus-maps /etc/nginx/sites-enabled/
-nginx -t  # Test configuration
-systemctl restart nginx
-```
-
-### Step 7: Set Up SSL (Let's Encrypt)
-
-```bash
-apt install -y certbot python3-certbot-nginx
-certbot --nginx -d your-domain.com
-```
-
-### Step 8: Set Up Firewall
-
-```bash
-ufw allow 22/tcp
-ufw allow 80/tcp
-ufw allow 443/tcp
-ufw enable
-```
-
----
-
-## Pre-Deployment Checklist
-
-Before deploying, make sure:
-
-- [ ] **Build works**: Run `npm run build` in frontend directory
-- [ ] **Backend starts**: Test `cd backend && npm start`
-- [ ] **Environment variables**: Document what's needed
-- [ ] **Data directory**: Understand what needs to persist
-- [ ] **API URLs**: Update frontend to use production API URL
-- [ ] **CORS**: Configure backend CORS for production domain
-- [ ] **Error handling**: Test error cases
-- [ ] **Logs**: Ensure logging works in production
-
----
-
-## Post-Deployment Steps
-
-1. **Test the deployment**:
-   - Visit your deployed URL
-   - Test API endpoints
-   - Check browser console for errors
-
-2. **Monitor**:
-   - Check application logs
-   - Monitor error rates
-   - Set up uptime monitoring (UptimeRobot, Pingdom)
-
-3. **Set up backups** (if using VPS):
-   - Backup `data/` directory regularly
-   - Use cron jobs or automated backups
-
-4. **Update documentation**:
-   - Document your deployment URL
-   - Update any hardcoded URLs in code
-
----
-
-## Required Code Changes
-
-### 1. Update Backend to Serve Frontend (for single-service deployment)
-
-You'll need to modify `backend/server.js` to serve the built frontend files in production:
-
-```javascript
-import path from 'path';
-import { fileURLToPath } from 'url';
-import express from 'express';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// ... existing code ...
-
-// Serve static files from frontend/dist in production
-if (process.env.NODE_ENV === 'production') {
-  const frontendPath = path.join(__dirname, '../frontend/dist');
-  app.use(express.static(frontendPath));
-  
-  // Serve index.html for all non-API routes (SPA routing)
-  app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api')) {
-      res.sendFile(path.join(frontendPath, 'index.html'));
-    }
-  });
-}
-```
-
-### 2. Update Frontend API URL (for separate deployment)
-
-If deploying frontend and backend separately, update your frontend services to use an environment variable:
-
-```typescript
-// frontend/src/services/api.ts (or wherever your API base URL is)
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-```
-
-Then set `VITE_API_URL` in your frontend deployment environment.
-
-### 3. Update CORS (for separate deployment)
-
-In `backend/server.js`, update CORS to allow your frontend domain:
-
-```javascript
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
-}));
-```
-
----
+`data/` and `runtime-data/` are bind-mounted from the host into the container (see
+`docker-compose.yml`'s `volumes:`), so generated route/PDF data survives container
+rebuilds. This isn't Railway/Render ephemeral storage — it's a real directory on the
+Mac Pro's disk.
 
 ## Troubleshooting
 
-### Build Fails
-- Check Node.js version (needs 18+)
-- Clear `node_modules` and reinstall
-- Check for TypeScript errors: `cd frontend && npm run build`
-
-### Backend Won't Start
-- Check environment variables are set
-- Check port isn't already in use
-- Check logs: `journalctl -u pps-bus-maps -f` (systemd) or service logs
-
-### Frontend Can't Reach Backend
-- Check CORS settings
-- Verify API URL is correct
-- Check firewall rules (if VPS)
-
-### Data Not Persisting
-- Check if using ephemeral storage (free tiers)
-- Set up persistent storage or database
-- Consider moving data to external storage
-
----
-
-## Recommended Approach for Beginners
-
-**Start with Railway (Option 1)**:
-- Easiest setup
-- Free tier available
-- Automatic deployments
-- Good documentation
-
-Once comfortable, you can:
-- Move to separate deployments (Vercel + Railway) for better performance
-- Move to VPS for full control
-
----
-
-## Need Help?
-
-- Railway: [docs.railway.app](https://docs.railway.app)
-- Render: [render.com/docs](https://render.com/docs)
-- Vercel: [vercel.com/docs](https://vercel.com/docs)
-- systemd: [systemd.io](https://systemd.io)
-
-
-
-
-
+- **Site shows old behavior after a push.** Check `makserve inspect <site>` — compare
+  its reported commit against `git log origin/main`. If prod is behind, the webhook
+  may have failed; check `gh api repos/morganknutson/pps-bus-routes/hooks` for the
+  `last_response` status, or just run `makserve deploy portlandschoolbuses.com` by hand.
+  If it's dev that's behind, that's expected — see "How a deploy actually happens" above.
+- **New env var isn't showing up in the running app.** See the `VITE_*` checklist
+  above — 90% of the time it's `backend/.env` vs `<site>/.env`, or the gitignored
+  `docker-compose.yml` not having been updated to match the tracked template.
+- **Build fails.** `makserve logs <site>` or `makserve deploy <site>` both surface the
+  `docker compose build` output.
