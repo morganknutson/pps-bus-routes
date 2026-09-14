@@ -10,11 +10,6 @@
       "modifiedTime": "2026-08-09T16:08:36.710Z",
       "localPath": "138SKY-P_Effective_082626.pdf"
     },
-    "1VdPBZodlB1kq-rGDasZCQi6REN4fbZPi": {
-      "filename": "136SKY-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T16:08:20.044Z",
-      "localPath": "136SKY-P_Effective_082626.pdf"
-    },
     "18mSyuqhvTXJrqujPAKvG_e6cS2ujCDQq": {
       "filename": "140SKY-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-09T16:08:03.022Z",
@@ -35,11 +30,6 @@
       "modifiedTime": "2026-08-08T16:18:44.983Z",
       "localPath": "138SKY-A_Effective_082626.pdf"
     },
-    "1k5lnGwOCNqPYCibT5lgB9fxB9x_ZDo8f": {
-      "filename": "136SKY-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T16:18:33.070Z",
-      "localPath": "136SKY-A_Effective_082626.pdf"
-    },
     "1oaQ2PygQTyKWmDc26bbhBGUARZtE96xy": {
       "filename": "140SKY-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-08T16:18:07.904Z",
@@ -59,7 +49,17 @@
       "filename": "136SKY-A_Effective_090226.pdf",
       "modifiedTime": "2026-08-26T13:29:14.602Z",
       "localPath": "136SKY-A_Effective_090226.pdf"
+    },
+    "1lVoWnqKQd3_KyQvTvMYH742-nXl3zUWw": {
+      "filename": "140SKY-P_Effective_091626.pdf",
+      "modifiedTime": "2026-09-09T18:51:31.701Z",
+      "localPath": "140SKY-P_Effective_091626.pdf"
+    },
+    "1-k2q2lMJMIVudiZ_9QkWt3_7QpDa35Qr": {
+      "filename": "140SKY-A_Effective_091626.pdf",
+      "modifiedTime": "2026-09-09T18:50:56.158Z",
+      "localPath": "140SKY-A_Effective_091626.pdf"
     }
   },
-  "lastSync": "2026-08-31T04:28:21.312Z"
+  "lastSync": "2026-09-14T03:59:46.753Z"
 }

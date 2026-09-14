@@ -173252,5 +173252,1211 @@
       }
     ],
     "cachedAt": "2026-09-07T03:35:27.101Z"
+  },
+  "southwest stephenson street & southwest 17th avenue|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6955753,
+      45.4400342
+    ],
+    "displayName": "SW Stephenson St & SW 17th Ave, Portland, OR 97219, USA",
+    "placeId": "EjdTVyBTdGVwaGVuc29uIFN0ICYgU1cgMTd0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxOSwgVVNBImYiZAoUChIJRSgCB1MLlVQRmkvge3pwyAcSFAoSCUUoAgdTC5VUEZpL4Ht6cMgHGhQKEglvZ-5VqAyVVBGPj7UUbcFbeBoUChIJCczYTxwKlVQRxOFIK-Nx8bMiCg1WmRUbFRck3rY",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest Stephenson Street & Southwest 17th Avenue",
+        "short_name": "SW Stephenson St & SW 17th Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:58:52.180Z"
+  },
+  "southwest carson street & southwest 45th avenue|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.7231699,
+      45.4641489
+    ],
+    "displayName": "SW 45th Ave & SW Carson St, Portland, OR 97219, USA",
+    "placeId": "EjNTVyA0NXRoIEF2ZSAmIFNXIENhcnNvbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgk5fytreguVVBGhguDDi8vqFRIUChIJOX8ra3oLlVQRoYLgw4vL6hUaFAoSCUdH4HJ3C5VUEax6TMi3mE8gGhQKEgmz6bHWEguVVBFkjx_YGMg9kyIKDVFHGRsVLe7Ztg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest 45th Avenue & Southwest Carson Street",
+        "short_name": "SW 45th Ave & SW Carson St",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:01.538Z"
+  },
+  "southwest 45th avenue & southwest 45th drive|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.723182,
+      45.4628765
+    ],
+    "displayName": "SW 45th Ave & SW 45th Dr, Portland, OR 97219, USA",
+    "placeId": "EjFTVyA0NXRoIEF2ZSAmIFNXIDQ1dGggRHIsIFBvcnRsYW5kLCBPUiA5NzIxOSwgVVNBImYiZAoUChIJESjCV3oLlVQRXktTQZ_AxmgSFAoSCREowld6C5VUEV5LU0GfwMZoGhQKEglHR-BydwuVVBGsekzIt5hPIBoUChIJB45UEnsLlVQRl20toCIeLrUiCg2dFRkbFbTt2bY",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest 45th Avenue & Southwest 45th Drive",
+        "short_name": "SW 45th Ave & SW 45th Dr",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:08.061Z"
+  },
+  "southwest 45th drive & southwest freeman street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.723182,
+      45.4628765
+    ],
+    "displayName": "SW Freeman St & SW 45th Dr, Portland, OR 97219, USA",
+    "placeId": "EjNTVyBGcmVlbWFuIFN0ICYgU1cgNDV0aCBEciwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgkRKMJXeguVVBFeS1NBn8DGaBIUChIJESjCV3oLlVQRXktTQZ_AxmgaFAoSCZG09s9tC5VUEaFBi-hqSnPoGhQKEgkHjlQSewuVVBGXbS2gIh4utSIKDZ0VGRsVtO3Ztg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest Freeman Street & Southwest 45th Drive",
+        "short_name": "SW Freeman St & SW 45th Dr",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:11.434Z"
+  },
+  "southeast boise street & southeast 52nd avenue|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6090279,
+      45.49237429999999
+    ],
+    "displayName": "SE Boise St & SE 52nd Ave, Portland, OR 97206, USA",
+    "placeId": "EjJTRSBCb2lzZSBTdCAmIFNFIDUybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCQuKdW9uoJVUESCP3RovbEEwEhQKEgkLinVvbqCVVBEgj90aL2xBMBoUChIJfWaio2qglVQR31mGMLsDRXIaFAoSCbHgTY4LoJVUEbCv47TpvNM0IgoN35UdGxXZWOu2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southeast Boise Street & Southeast 52nd Avenue",
+        "short_name": "SE Boise St & SE 52nd Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Creston - Kenilworth",
+        "short_name": "Creston - Kenilworth",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97206",
+        "short_name": "97206",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:18.163Z"
+  },
+  "northeast 24th avenue & northeast thompson street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6411861,
+      45.5389661
+    ],
+    "displayName": "NE Thompson St & NE 24th Ave, Portland, OR 97212, USA",
+    "placeId": "EjVORSBUaG9tcHNvbiBTdCAmIE5FIDI0dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTIsIFVTQSJmImQKFAoSCSnR9tLMoJVUESOJmsBwDvlJEhQKEgkp0fbSzKCVVBEjiZrAcA75SRoUChIJDU_Ma0ChlVQR1SobJa-UvwIaFAoSCd3kLoTMoJVUEU9rwR_D-8XaIgoN3bEkGxWrcOa2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northeast Thompson Street & Northeast 24th Avenue",
+        "short_name": "NE Thompson St & NE 24th Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Irvington",
+        "short_name": "Irvington",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97212",
+        "short_name": "97212",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:19.577Z"
+  },
+  "southwest fairmount boulevard & southwest mitchell street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6945853,
+      45.487321
+    ],
+    "displayName": "SW Mitchell St & SW Fairmount Blvd, Portland, OR 97239, USA",
+    "placeId": "EjtTVyBNaXRjaGVsbCBTdCAmIFNXIEZhaXJtb3VudCBCbHZkLCBQb3J0bGFuZCwgT1IgOTcyMzksIFVTQSJmImQKFAoSCSEOqyNTCpVUER2wEbWoMD7OEhQKEgkhDqsjUwqVVBEdsBG1qDA-zhoUChIJ81B93K0LlVQR1XrMtVh4PjIaFAoSCQlPg25LCpVUEW5lLEXQl0X5IgoNetAcGxXDSt62",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest Mitchell Street & Southwest Fairmount Boulevard",
+        "short_name": "SW Mitchell St & SW Fairmount Blvd",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97239",
+        "short_name": "97239",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:27.278Z"
+  },
+  "southeast 79th avenue & southeast ash street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.5824531,
+      45.5211397
+    ],
+    "displayName": "SE 79th Ave & SE Ash St, Portland, OR 97215, USA",
+    "placeId": "EjBTRSA3OXRoIEF2ZSAmIFNFIEFzaCBTdCwgUG9ydGxhbmQsIE9SIDk3MjE1LCBVU0EiZiJkChQKEgnBnZYnBKGVVBETv2HU-NzZTBIUChIJwZ2WJwShlVQRE79h1Pjc2UwaFAoSCSXhqBo9oJVUEbvkByFY8uWzGhQKEglLpStb_aCVVBGBl19RIKL0yiIKDYX5IRsV7Wbvtg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southeast 79th Avenue & Southeast Ash Street",
+        "short_name": "SE 79th Ave & SE Ash St",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Montavilla",
+        "short_name": "Montavilla",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97215",
+        "short_name": "97215",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:33.686Z"
+  },
+  "14190 nw mcnamee rd. ne|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8431716,
+      45.6267781
+    ],
+    "displayName": "14190 NW McNamee Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJ5UOSLT8HlVQRkE4FrcJIoiM",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "14190",
+        "short_name": "14190",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest McNamee Road",
+        "short_name": "NW McNamee Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2137",
+        "short_name": "2137",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:41.393Z"
+  },
+  "southeast 49th avenue & southeast woodstock boulevard|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.612414,
+      45.4791699
+    ],
+    "displayName": "SE Woodstock Blvd & SE 49th Ave, Portland, OR 97206, USA",
+    "placeId": "EjhTRSBXb29kc3RvY2sgQmx2ZCAmIFNFIDQ5dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCRsvY-UJoJVUEarKXsA9HxljEhQKEgkbL2PlCaCVVBGqyl7APR8ZYxoUChIJM-ZGQQWglVQRAUHhMI7BVjIaFAoSCbnEyKp0oJVUERsYHeGxQguxIgoNE5IbGxWU1Oq2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southeast Woodstock Boulevard & Southeast 49th Avenue",
+        "short_name": "SE Woodstock Blvd & SE 49th Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southeast Portland",
+        "short_name": "Southeast Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97206",
+        "short_name": "97206",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:42.053Z"
+  },
+  "6918 se 48th ave. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.61346375952947,
+      45.473006592390284
+    ],
+    "displayName": "6918 SE 48th Av, Portland, OR 97206, USA",
+    "placeId": "ChIJm6YQx6gKlVQR9Gt5kzt-ZtI",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "6918",
+        "short_name": "6918",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southeast 48th Avenue",
+        "short_name": "SE 48th Av",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Brentwood-Darlington",
+        "short_name": "Brentwood-Darlington",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97206",
+        "short_name": "97206",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "7622",
+        "short_name": "7622",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:44.665Z"
+  },
+  "14819 nw mcnamee rd. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.85547607212709,
+      45.627410362352705
+    ],
+    "displayName": "14819 NW McNamee Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJm7nmljoHlVQRBPqpIqGF3CE",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "14819",
+        "short_name": "14819",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest McNamee Road",
+        "short_name": "NW McNamee Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2135",
+        "short_name": "2135",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:45.548Z"
+  },
+  "14190 nw mcnamee rd. sw|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.8431716,
+      45.6267781
+    ],
+    "displayName": "14190 NW McNamee Rd, Portland, OR 97231, USA",
+    "placeId": "ChIJ5UOSLT8HlVQRkE4FrcJIoiM",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "14190",
+        "short_name": "14190",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest McNamee Road",
+        "short_name": "NW McNamee Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97231",
+        "short_name": "97231",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2137",
+        "short_name": "2137",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:45.838Z"
+  },
+  "southwest woods street & southwest 1st avenue|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6787402,
+      45.5008414
+    ],
+    "displayName": "SW Woods St & SW 1st Ave, Portland, OR 97201, USA",
+    "placeId": "EjFTVyBXb29kcyBTdCAmIFNXIDFzdCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwMSwgVVNBImYiZAoUChIJd2Ig-EEKlVQRyc62bdp_PtsSFAoSCXdiIPhBCpVUEcnOtm3afz7bGhQKEgmJINIHOAqVVBHoPtHTRhahnhoUChIJ35csXVkKlVQRvC3y73V53uoiCg2e4B4bFba14LY",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southwest Woods Street & Southwest 1st Avenue",
+        "short_name": "SW Woods St & SW 1st Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97201",
+        "short_name": "97201",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:49.737Z"
+  },
+  "3515 sw barbur blvd. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.67950336148569,
+      45.49746517773068
+    ],
+    "displayName": "3515 SW Barbur Blvd, Portland, OR 97239, USA",
+    "placeId": "ChIJo5aIEkMKlVQRbQ5vOQoiMM4",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "3515",
+        "short_name": "3515",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest Barbur Boulevard",
+        "short_name": "SW Barbur Blvd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97239",
+        "short_name": "97239",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T03:59:50.722Z"
+  },
+  "1258/1255/1266 sw taylors ferry rd. se|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.69060079999998,
+      45.46186709999999
+    ],
+    "displayName": "1258 SW Taylors Ferry Rd, Portland, OR 97219, USA",
+    "placeId": "ChIJqV84dBYLlVQR1aWtANeNg7c",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "1258",
+        "short_name": "1258",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest Taylors Ferry Road",
+        "short_name": "SW Taylors Ferry Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "4365",
+        "short_name": "4365",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T04:00:07.120Z"
+  },
+  "1370/1375 sw taylors ferry rd. se|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.69180327493288,
+      45.460236673383974
+    ],
+    "displayName": "1370 SW Taylors Ferry Rd, Portland, OR 97219, USA",
+    "placeId": "ChIJk93MixULlVQRdMeVMlKl9eE",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "1370",
+        "short_name": "1370",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest Taylors Ferry Road",
+        "short_name": "SW Taylors Ferry Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Portland",
+        "short_name": "Southwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97219",
+        "short_name": "97219",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "4374",
+        "short_name": "4374",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-14T04:00:07.139Z"
   }
 }

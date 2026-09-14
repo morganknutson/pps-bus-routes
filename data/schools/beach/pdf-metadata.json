@@ -1,10 +1,5 @@
 {
   "files": {
-    "1Lq0yJWyJHjhV6JShrM7DmZhiLOfZmtEN": {
-      "filename": "285BCH-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-07T20:05:10.737Z",
-      "localPath": "285BCH-P_Effective_082626.pdf"
-    },
     "1Ma7vWcIjAfFbsWzrzXT4VymnbpSfU9ZA": {
       "filename": "277BCH-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-07T20:04:44.088Z",
@@ -34,7 +29,27 @@
       "filename": "285BCH-P_Effective_090226.pdf",
       "modifiedTime": "2026-08-26T23:16:44.797Z",
       "localPath": "285BCH-P_Effective_090226.pdf"
+    },
+    "1fuhVBjJweoWn-fiK_MwmtSa2I7cH9sM4": {
+      "filename": "285BCH-P_Effective_091626.pdf",
+      "modifiedTime": "2026-09-10T21:06:41.881Z",
+      "localPath": "285BCH-P_Effective_091626.pdf"
+    },
+    "1TFinfqax98VMizdbmBChnTC2vbnf8NEG": {
+      "filename": "285BCH-A_Effective_091626.pdf",
+      "modifiedTime": "2026-09-10T21:06:01.860Z",
+      "localPath": "285BCH-A_Effective_091626.pdf"
+    },
+    "1cirveWSl0DKvv2mCF2q4ld0dj7yfcY19": {
+      "filename": "277BCH-P_Effective_091626.pdf",
+      "modifiedTime": "2026-09-09T22:41:39.460Z",
+      "localPath": "277BCH-P_Effective_091626.pdf"
+    },
+    "1lG_ceB5Mbi_TVmuqhERbC64Aof5O1HHf": {
+      "filename": "277BCH-A_Effective_091626.pdf",
+      "modifiedTime": "2026-09-09T22:41:02.104Z",
+      "localPath": "277BCH-A_Effective_091626.pdf"
     }
   },
-  "lastSync": "2026-08-31T04:26:40.301Z"
+  "lastSync": "2026-09-14T04:00:09.406Z"
 }
