@@ -46,7 +46,7 @@ export async function loadLocalRoutes(schoolId?: string | null): Promise<Route[]
       
       // Check for "upcoming" routes based on filename if not already in name
       if (processedRoute.filename) {
-        const dateMatch = processedRoute.filename.match(/_effective_(\d{6})/);
+        const dateMatch = processedRoute.filename.match(/_effective_(\d{6})/i);
         if (dateMatch) {
           const dateStr = dateMatch[1];
           try {
@@ -132,4 +132,3 @@ export async function loadLocalRoutes(schoolId?: string | null): Promise<Route[]
     return [];
   }
 }
-

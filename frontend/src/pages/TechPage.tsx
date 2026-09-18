@@ -815,7 +815,8 @@ export function TechPage() {
                   <strong style={{ color: 'var(--text-primary)' }}>Tech Detail:</strong>
                   <ul>
                     <li><strong>DriveService</strong> - Handles the recursive fetching of PDF files. It uses the official Google Drive API when available, but can fallback to HTML scraping for public folders.</li>
-                    <li><strong>PDF Sync</strong> - A daily job that checks for new or updated files and downloads them to the local <code>data/schools/{'{schoolId}'}/pdfs/</code> directory.</li>
+                    <li><strong>PDF Sync</strong> - A weekly GitHub Actions job compares each Drive file’s ID, revision timestamp, and content checksum with cached data. Changed PDFs are downloaded even when their filenames stay the same. Route data and per-school check results are published together.</li>
+                    <li><strong>Route Versions</strong> - Effective dates are read regardless of filename capitalization. The map selects the newest currently effective version of each route and shows future versions separately.</li>
                   </ul>
                 </div>
               </SectionContent>
@@ -831,6 +832,7 @@ export function TechPage() {
                   <ul>
                     <li><strong>PdfParser</strong> - Uses regular expressions to extract stop addresses, times, and route IDs from the semi-structured text of bus schedules. It uses stop order numbering (e.g., "(1)", "(2)") to distinguish student stops from transitional "deadhead" movements to other schools.</li>
                     <li><strong>RouteProcessor</strong> - The orchestrator that coordinates between parsing text, geocoding addresses, and saving the final JSON. It automatically filters out loading zones and non-student stops.</li>
+                    <li><strong>Extraction Checks</strong> - Split time/address lines are joined before parsing. Image-only PDFs use local Poppler and Tesseract OCR. A document with no extracted student stops fails processing and preserves the existing route; it cannot silently publish a school-only route.</li>
                   </ul>
                 </div>
               </SectionContent>

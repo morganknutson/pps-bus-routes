@@ -2,7 +2,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache git openssh-client \
+RUN apk add --no-cache git openssh-client poppler-utils tesseract-ocr tesseract-ocr-data-eng \
     && git config --global --add safe.directory /app
 
 COPY package*.json ./

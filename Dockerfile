@@ -17,6 +17,7 @@ RUN npm run build
 # Stage 2: Setup the backend
 FROM node:20-alpine
 WORKDIR /app
+RUN apk add --no-cache poppler-utils tesseract-ocr tesseract-ocr-data-eng
 
 # Install production dependencies for the backend
 COPY backend/package*.json ./backend/

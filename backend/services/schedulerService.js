@@ -36,6 +36,15 @@ function loadState() {
       const data = fs.readFileSync(SCHEDULER_STATE_FILE, 'utf8');
       schedulerState = { ...schedulerState, ...JSON.parse(data) };
     }
+    const publishedPath = path.join(DATA_DIR, 'published-sync-status.json');
+    if (fs.existsSync(publishedPath)) {
+      const published = JSON.parse(fs.readFileSync(publishedPath, 'utf8'));
+      if (!schedulerState.lastRun || published.lastRun > schedulerState.lastRun) {
+        schedulerState.lastRun = published.lastRun;
+        schedulerState.lastRunStatus = published.lastRunStatus;
+        schedulerState.lastRunError = null;
+      }
+    }
   } catch (error) {
     console.error('[Scheduler] Error loading scheduler state:', error);
   }

@@ -49,19 +49,17 @@ import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
 import { parseRouteFromPDF } from './pdfParser.js';
 import { geocodingService } from './geocodingService.js';
 import { directionsService } from './directionsService.js';
 import { getSchoolIdFromFilename } from '../utils/schoolUtils.js';
+import { pdfTextService } from './pdfTextService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const require = createRequire(import.meta.url);
 
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
-const pdfParse = require(path.join(__dirname, '..', 'node_modules', 'pdf-parse'));
 
 /**
  * Matches an anchor name to a school in the schools database.
@@ -187,16 +185,16 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
   console.log(`${logPrefix} 📁 School determined from folder structure: ${schoolIdFromOptions}`);
 
   // Step 2: Parse PDF
-  const pdfData = await pdfParse(pdfBuffer);
-  const route = parseRouteFromPDF(pdfData.text, fileId || filename, filename);
+  const pdfText = await pdfTextService.extract(pdfBuffer);
+  const route = parseRouteFromPDF(pdfText, fileId || filename, filename);
 
-  // Allow processing even if no stops found - we'll save what we can
+  // Invalid extraction must never replace an existing route.
   if (!route) {
     throw new Error('Failed to parse PDF - no route data extracted');
   }
   
-  if (route.stops.length === 0) {
-    console.warn(`${logPrefix} ⚠️  No stops found in PDF, but will continue processing and save route`);
+  if (!route.stops.some(stop => !stop.skipGeocoding)) {
+    throw new Error(`No student stops extracted from ${filename}; existing route has not been replaced`);
   }
 
   // Step 3: Load schools.json and match to school (for adding school stop)
@@ -352,7 +350,6 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
   };
 
   // Step 9: Save to file if requested
-  // ALWAYS save - don't fail if PDF parsing was imperfect
   if (saveToFile) {
     // Use schoolId from options (folder structure) - this is the source of truth
     const finalSchoolId = schoolIdFromOptions;
@@ -373,10 +370,10 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
       throw new Error(`Failed to create processed-routes directory: ${error.message}`);
     }
 
-    // ALWAYS save the route - even if some data is missing
-    const outputFilename = outputPath || path.join(processedRoutesDir, filename.replace('.pdf', '.json'));
+    const outputFilename = outputPath || path.join(processedRoutesDir, filename.replace(/\.pdf$/i, '.json'));
     try {
-      await fsPromises.writeFile(outputFilename, JSON.stringify(finalRoute, null, 2));
+      await fsPromises.writeFile(`${outputFilename}.tmp`, JSON.stringify(finalRoute, null, 2));
+      await fsPromises.rename(`${outputFilename}.tmp`, outputFilename);
       console.log(`${logPrefix} 💾 Saved route to: ${outputFilename}`);
       console.log(`${logPrefix}    Route: ${finalRoute.name}, Stops: ${finalRoute.stops.length}, Geocoded: ${finalRoute.stats.geocodedStops}/${finalRoute.stats.totalStops}`);
     } catch (error) {
@@ -387,7 +384,5 @@ export async function processSinglePDF(pdfBuffer, filename, fileId = null, optio
 
   return finalRoute;
 }
-
-
 
 

@@ -21,6 +21,7 @@ const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
 const SYNC_STATE_FILE = path.join(DATA_DIR, 'weekly-sync-state.json');
 const SYNC_LOCK_FILE = path.join(DATA_DIR, 'weekly-sync-lock.json');
+const PUBLISHED_STATUS_FILE = path.join(DATA_DIR, 'published-sync-status.json');
 
 const LOCK_TTL_MS = parseInt(process.env.WEEKLY_SYNC_LOCK_TTL_MS || '', 10) || 4 * 60 * 60 * 1000;
 const JOB_POLL_MS = parseInt(process.env.WEEKLY_SYNC_JOB_POLL_MS || '', 10) || 2000;
@@ -323,6 +324,22 @@ async function runWeeklySync() {
             await persistRunning(results);
 
             try {
+                // This snapshot describes validated data, not the transient publisher
+                // state. It reaches production only if the following push succeeds.
+                await writeJson(PUBLISHED_STATUS_FILE, {
+                    lastRun: results.startTime,
+                    lastRunStatus: 'success',
+                    lastRunDuration: formatDuration(Date.now() - startTime),
+                    lastRunResults: {
+                        ...results,
+                        duration: formatDuration(Date.now() - startTime),
+                        // Publishing is complete for any reader of this deployed
+                        // snapshot; transient Git status remains in local state.
+                        phases: { ...results.phases, publish: { status: 'completed', duration: null } },
+                        errorCount: 0,
+                        endTime: new Date().toISOString(),
+                    },
+                });
                 const publishResult = await publishGeneratedData({
                     routesProcessed: results.routesProcessed,
                     pdfsDownloaded: results.pdfsDownloaded,
@@ -394,7 +411,9 @@ async function runWeeklySync() {
 }
 
 async function getSyncState() {
-    const state = await loadSyncState();
+    const local = await loadSyncState();
+    const published = await loadJson(PUBLISHED_STATUS_FILE, null);
+    const state = published && (!local.lastRun || published.lastRun > local.lastRun) ? published : local;
     const lock = await readLock();
     return {
         ...state,

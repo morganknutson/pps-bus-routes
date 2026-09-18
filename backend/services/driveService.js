@@ -265,30 +265,33 @@ export async function listFolderFiles(folderId, apiKey = null) {
     });
   }
 
-  // Sort by modifiedTime descending (most recent first)
-  const url = `${API_BASE}/files?q='${folderId}'+in+parents+and+mimeType='application/pdf'&fields=files(id,name,modifiedTime,webContentLink)&orderBy=modifiedTime+desc&key=${apiKey}`;
-  
-  const response = await fetch(url);
-  
-  if (!response.ok) {
-    // If API fails, try page parsing as fallback
-    if (response.status === 403 || response.status === 401) {
-      console.log('API key failed, trying page parsing...');
-      const files = await listFolderFilesFromPage(folderId, apiKey); // Pass apiKey to try fetching metadata
-      // Sort by modifiedTime descending (most recent first)
-      return files.sort((a, b) => {
-        const timeA = new Date(a.modifiedTime || 0).getTime();
-        const timeB = new Date(b.modifiedTime || 0).getTime();
-        return timeB - timeA; // Descending order
-      });
+  const files = [];
+  let pageToken;
+  do {
+    const params = new URLSearchParams({
+      q: `'${folderId}' in parents and mimeType='application/pdf' and trashed=false`,
+      fields: 'nextPageToken,incompleteSearch,files(id,name,modifiedTime,md5Checksum,webContentLink)',
+      orderBy: 'modifiedTime desc',
+      pageSize: '1000',
+      key: apiKey,
+    });
+    if (pageToken) params.set('pageToken', pageToken);
+    const response = await fetch(`${API_BASE}/files?${params}`);
+    if (!response.ok) {
+      // If API fails, try page parsing as fallback.
+      if (response.status === 403 || response.status === 401) {
+        console.log('API key failed, trying page parsing...');
+        const publicFiles = await listFolderFilesFromPage(folderId, apiKey);
+        return publicFiles.sort((a, b) => new Date(b.modifiedTime || 0) - new Date(a.modifiedTime || 0));
+      }
+      const error = await response.json();
+      throw new Error(error.error?.message || 'Failed to list folder files');
     }
-    const error = await response.json();
-    throw new Error(error.error?.message || 'Failed to list folder files');
-  }
-
-  const data = await response.json();
-  // API should return sorted, but ensure it's sorted by modifiedTime descending
-  const files = data.files || [];
+    const data = await response.json();
+    if (data.incompleteSearch) throw new Error('Drive returned an incomplete folder listing');
+    files.push(...(data.files || []));
+    pageToken = data.nextPageToken;
+  } while (pageToken);
   return files.sort((a, b) => {
     const timeA = new Date(a.modifiedTime || 0).getTime();
     const timeB = new Date(b.modifiedTime || 0).getTime();

@@ -9,12 +9,14 @@ import { fileURLToPath } from 'url';
 import { listFolderFiles } from './driveService.js';
 import { pdfFetchTrackingService } from './pdfFetchTrackingService.js';
 import { pdfMetadataService } from './pdfMetadataService.js';
+import { PdfSyncPolicy } from './pdfSyncPolicy.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 const SCHOOLS_FILE = path.join(DATA_DIR, 'schools.json');
+const SYNC_STATUS_FILE = path.join(DATA_DIR, 'pdf-sync-status.json');
 
 class DriveLinkVerificationService {
   /**
@@ -162,6 +164,7 @@ class DriveLinkVerificationService {
       matches: false,
       needsUpdate: false,
       error: null,
+      checkedAt: new Date().toISOString(),
     };
 
     if (!school.driveLink) {
@@ -192,6 +195,12 @@ class DriveLinkVerificationService {
       // Get local PDF count from metadata
       const metadata = await pdfMetadataService.loadMetadata(school.id);
       result.localPdfCount = Object.keys(metadata.files || {}).length;
+      result.countMismatch = result.localPdfCount !== pdfFiles.length;
+      const driveIds = new Set(pdfFiles.map(file => file.id));
+      const removedFiles = Object.keys(metadata.files || {}).some(id => !driveIds.has(id));
+      const changedFiles = pdfFiles.some(file => PdfSyncPolicy.needsSync(
+        file, metadata.files[file.id], path.join(DATA_DIR, 'schools', school.id),
+      ));
 
       if (pdfFiles.length > 0) {
         // Files should already be sorted by modifiedTime descending from listFolderFiles
@@ -234,6 +243,10 @@ class DriveLinkVerificationService {
           result.needsUpdate = false;
         }
       }
+      // Compare every file, not just the newest timestamp in the folder.
+      result.needsUpdate = changedFiles || removedFiles || result.countMismatch
+        || PdfSyncPolicy.orphanedRoutes(pdfFiles, path.join(DATA_DIR, 'schools', school.id)).length > 0;
+      result.matches = !result.needsUpdate;
     } catch (error) {
       result.error = error.message;
       console.error(`[DriveLinkVerificationService] Error verifying ${school.id}:`, error);

@@ -64,6 +64,9 @@ jobs:
         working-directory: backend
         run: npm ci
 
+      - name: Install PDF text and OCR tools
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils tesseract-ocr
+
       - name: Validate required secrets
         run: |
           test -n "$GOOGLE_MAPS_API_KEY" || { echo "::error::GOOGLE_MAPS_API_KEY secret is required"; exit 1; }

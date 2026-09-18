@@ -26,6 +26,9 @@ const DEFAULT_PUBLISH_PATHS = [
     'data/attendance-boundaries.geojson',
     'data/school-photos.json',
     'data/file-ids-found.json',
+    'data/pdf-sync-status.json',
+    'data/drive-link-verification-results.json',
+    'data/published-sync-status.json',
 ];
 
 function isEnabled(value) {

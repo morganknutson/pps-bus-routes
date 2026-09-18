@@ -114,6 +114,18 @@ makserve shell portlandschoolbuses.com            # ssh + docker exec into the c
 rebuilds. This isn't Railway/Render ephemeral storage — it's a real directory on the
 Mac Pro's disk.
 
+The weekly publisher includes `pdf-sync-status.json`, per-school Drive verification
+results, and `published-sync-status.json` with the generated routes. Production's
+status endpoints use this published snapshot even though its local scheduler is
+disabled. Check dates describe when Drive was inspected, not when PPS last edited
+a PDF. Unchanged schools receive fresh check dates on every successful run.
+
+PDF revisions are compared per file using Drive IDs, stored revision timestamps,
+and content checksums; filesystem modification times are not reliable after a Git
+checkout. Image-only PDFs require Poppler and Tesseract, installed in both Docker
+images and the weekly GitHub Actions job. Failed extraction preserves the existing
+route and prevents publishing the batch.
+
 ## Troubleshooting
 
 - **Site shows old behavior after a push.** Check `makserve inspect <site>` — compare

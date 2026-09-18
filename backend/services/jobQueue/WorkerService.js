@@ -14,6 +14,8 @@ import { pdfMetadataService } from '../pdfMetadataService.js';
 import { driveLinkVerificationService } from '../driveLinkVerificationService.js';
 import { JOB_TYPES } from './jobTypes.js';
 import { jobHistoryService } from './JobHistoryService.js';
+import { PdfSyncPolicy } from '../pdfSyncPolicy.js';
+import { createHash } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,6 +35,7 @@ export class WorkerService {
     this.workers = [];
     this.isRunning = false;
     this.verificationCacheUpdate = Promise.resolve();
+    this.syncStatusUpdate = Promise.resolve();
   }
 
   /**
@@ -218,6 +221,7 @@ export class WorkerService {
 
       // Save updated cache
       await this.updateVerificationCache(schoolId, result);
+      if (result.error) throw new Error(result.error);
 
       await job.updateProgress(100);
       return result;
@@ -271,6 +275,13 @@ export class WorkerService {
 
       // Update the global timestamp to now
       cachedResults.timestamp = new Date().toISOString();
+      cachedResults.summary = {
+        accessible: cachedResults.results.filter(item => item.accessible).length,
+        hasPdfs: cachedResults.results.filter(item => item.hasPdfs).length,
+        matches: cachedResults.results.filter(item => item.matches).length,
+        needsUpdate: cachedResults.results.filter(item => item.needsUpdate).length,
+        errors: cachedResults.results.filter(item => item.error).length,
+      };
 
       // Save updated cache
       const tempFile = `${DRIVE_VERIFICATION_CACHE_FILE}.${process.pid}.${Date.now()}.${Math.random().toString(36).slice(2)}.tmp`;
@@ -278,6 +289,7 @@ export class WorkerService {
       await fsPromises.rename(tempFile, DRIVE_VERIFICATION_CACHE_FILE);
     } catch (error) {
       console.warn('[WorkerService] Error updating verification cache:', error.message);
+      throw error;
     }
   }
 
@@ -319,19 +331,9 @@ export class WorkerService {
       await job.updateProgress(20);
 
       const driveFiles = await listFolderFiles(folderId, apiKey);
-      const pdfFiles = driveFiles.filter(f => f.name.endsWith('.pdf'));
-
-      if (pdfFiles.length === 0) {
-        return {
-          schoolId,
-          downloaded: 0,
-          processed: 0,
-          skipped: 0,
-          errors: [],
-          totalInDrive: 0,
-          lastModifiedPdf: null,
-          lastChecked: new Date().toISOString(),
-        };
+      const pdfFiles = driveFiles.filter(f => /\.pdf$/i.test(f.name));
+      if (pdfFiles.length === 0 && existingPdfs.length > 0) {
+        throw new Error('Drive returned no PDFs for a school with existing routes; retaining local data for review');
       }
 
       // Update sync status
@@ -354,31 +356,13 @@ export class WorkerService {
 
       // Determine which files to download or re-process
       const filesToDownload = [];
+      const knownMetadata = await pdfMetadataService.loadMetadata(schoolId);
       for (const file of pdfFiles) {
         const filePath = path.join(pdfDir, file.name);
-        const jsonPath = path.join(processedDir, file.name.replace('.pdf', '.json'));
-
-        let needsSync = false;
-        if (!fs.existsSync(filePath)) {
-          needsSync = true;
-          console.log(`[WorkerService] File ${file.name} missing locally, will download`);
-        } else if (!fs.existsSync(jsonPath)) {
-          needsSync = true;
-          console.log(`[WorkerService] JSON for ${file.name} missing, will process`);
-        } else {
-          // Both exist, check if Drive version is newer
-          const localStats = fs.statSync(filePath);
-          const driveModified = new Date(file.modifiedTime).getTime();
-          const localModified = localStats.mtime.getTime();
-
-          if (driveModified > localModified + 1000) { // Add 1s buffer
-            needsSync = true;
-            console.log(`[WorkerService] Drive version of ${file.name} is newer, will sync`);
-          }
-        }
-
-        if (needsSync) {
-          filesToDownload.push(file);
+        const jsonPath = path.join(processedDir, file.name.replace(/\.pdf$/i, '.json'));
+        const needsDownload = PdfSyncPolicy.needsDownload(file, knownMetadata.files[file.id], filePath);
+        if (needsDownload || PdfSyncPolicy.needsProcessing(jsonPath)) {
+          filesToDownload.push({ ...file, needsDownload });
         }
       }
 
@@ -398,14 +382,12 @@ export class WorkerService {
           const filePath = path.join(pdfDir, file.name);
           let pdfBuffer;
 
-          // Download if doesn't exist
-          if (!fs.existsSync(filePath)) {
+          // A changed revision must be downloaded even when its filename exists.
+          if (file.needsDownload) {
             const result = await downloadFile(file.id, apiKey);
             pdfBuffer = result.buffer;
-            await fsPromises.writeFile(filePath, pdfBuffer);
-            if (file.modifiedTime) {
-              const modifiedDate = new Date(file.modifiedTime);
-              await fsPromises.utimes(filePath, modifiedDate, modifiedDate);
+            if (file.md5Checksum && createHash('md5').update(pdfBuffer).digest('hex') !== file.md5Checksum) {
+              throw new Error('Downloaded PDF checksum differs from Drive listing; retry the sync');
             }
             downloaded++;
           } else {
@@ -422,10 +404,18 @@ export class WorkerService {
           });
           processed++;
 
+          // Commit source bytes and metadata only after parsing succeeds.
+          if (file.needsDownload) {
+            const tempPath = `${filePath}.tmp`;
+            await fsPromises.writeFile(tempPath, pdfBuffer);
+            await fsPromises.rename(tempPath, filePath);
+          }
+
           // Update metadata service
           await pdfMetadataService.updateFileMetadata(schoolId, file.id, {
             filename: file.name,
             modifiedTime: file.modifiedTime,
+            md5Checksum: file.md5Checksum,
             localPath: file.name,
           });
 
@@ -448,12 +438,13 @@ export class WorkerService {
       const driveFileNames = new Set(pdfFiles.map(f => f.name));
       const driveFileIds = new Set(pdfFiles.map(f => f.id));
       const currentLocalPdfs = await this.getExistingPdfs(schoolId);
-      const orphanedPdfs = currentLocalPdfs.filter(name => !driveFileNames.has(name));
+      // Keep prior routes if any replacement could not be parsed/downloaded.
+      const orphanedPdfs = errors.length ? [] : currentLocalPdfs.filter(name => !driveFileNames.has(name));
 
       // Also check metadata for orphaned entries by file ID
       const metadata = await pdfMetadataService.loadMetadata(schoolId);
       const metadataFileIds = Object.keys(metadata.files || {});
-      const orphanedFileIds = metadataFileIds.filter(id => !driveFileIds.has(id));
+      const orphanedFileIds = errors.length ? [] : metadataFileIds.filter(id => !driveFileIds.has(id));
 
       let deletedCount = 0;
 
@@ -475,16 +466,29 @@ export class WorkerService {
           deletedCount++;
         } catch (err) {
           console.error(`[WorkerService] Failed to delete orphaned file ${orphanedPdf}:`, err.message);
+          errors.push({ file: orphanedPdf, error: err.message });
         }
       }
 
       // Clean up metadata for orphaned file IDs
+      if (errors.length === 0) {
+        for (const name of PdfSyncPolicy.orphanedRoutes(pdfFiles, path.join(DATA_DIR, 'schools', schoolId))) {
+          try {
+            await fsPromises.unlink(path.join(processedDir, name));
+            console.log(`[WorkerService] Deleted orphaned JSON without source PDF: ${name}`);
+          } catch (error) {
+            errors.push({ file: name, error: error.message });
+          }
+        }
+      }
+
       for (const orphanedId of orphanedFileIds) {
         try {
           await pdfMetadataService.removeFileMetadata(schoolId, orphanedId);
           console.log(`[WorkerService] Removed orphaned metadata for file ID: ${orphanedId}`);
         } catch (err) {
           console.error(`[WorkerService] Failed to remove orphaned metadata ${orphanedId}:`, err.message);
+          errors.push({ file: orphanedId, error: err.message });
         }
       }
 
@@ -493,14 +497,17 @@ export class WorkerService {
       }
 
       // Update sync status
-      const newStatus = {
-        ...syncStatus,
-        [schoolId]: {
+      this.syncStatusUpdate = this.syncStatusUpdate.catch(() => {}).then(async () => {
+        const latestStatus = await this.loadSyncStatus();
+        latestStatus[schoolId] = {
           lastModifiedPdf: newestModifiedTime > 0 ? new Date(newestModifiedTime).toISOString() : schoolStatus.lastModifiedPdf,
           lastChecked: new Date().toISOString(),
-        },
-      };
-      await this.saveSyncStatus(newStatus);
+          status: errors.length ? 'error' : 'success',
+          errors,
+        };
+        await this.saveSyncStatus(latestStatus);
+      });
+      await this.syncStatusUpdate;
 
       // Perform a final Drive check to update the verification results table
       try {
@@ -508,6 +515,7 @@ export class WorkerService {
         await this.updateVerificationCache(schoolId, driveResult);
       } catch (cacheError) {
         console.warn(`[WorkerService] Failed to update verification cache after sync for ${schoolId}:`, cacheError.message);
+        errors.push({ error: `Failed to refresh Drive verification: ${cacheError.message}` });
       }
 
       await job.updateProgress(100);

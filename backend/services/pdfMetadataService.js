@@ -104,6 +104,7 @@ class PdfMetadataService {
     metadata.files[fileId] = {
       filename: fileData.filename,
       modifiedTime: fileData.modifiedTime,
+      md5Checksum: fileData.md5Checksum || null,
       localPath: fileData.localPath || fileData.filename,
     };
     metadata.lastSync = new Date().toISOString();
@@ -186,6 +187,5 @@ class PdfMetadataService {
 // Export singleton instance
 export const pdfMetadataService = new PdfMetadataService();
 export default PdfMetadataService;
-
 
 

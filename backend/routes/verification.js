@@ -326,7 +326,7 @@ router.get('/pdf-fetch-info', async (req, res) => {
             enhanced[schoolId].driveAccessible = cachedResult.accessible;
             enhanced[schoolId].driveHasPdfs = cachedResult.hasPdfs;
             enhanced[schoolId].drivePdfCount = cachedResult.pdfCount;
-            enhanced[schoolId].driveLastChecked = driveVerificationTimestamp;
+            enhanced[schoolId].driveLastChecked = cachedResult.checkedAt || driveVerificationTimestamp;
             
             // DO NOT overwrite localLastModified from cache - the sync status/metadata has the most
             // up-to-date local information. The cached result's localLastModified is from when the
@@ -590,7 +590,6 @@ router.post('/verify-school-stops', async (req, res) => {
 });
 
 export { router as verificationRouter };
-
 
 
 

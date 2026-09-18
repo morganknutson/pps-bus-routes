@@ -65,10 +65,10 @@ function extractRouteInfoFromFilename(filename, text = null) {
   
   // Pattern: {ROUTE}{CODE}-{DIRECTION}_effective_{DATE}.pdf
   // Example: "100SYL-A_effective_082625.pdf" or "238ABE-A_effective_082625.pdf"
-  const match = filename.match(/(\d+)([A-Z]{2,})-([AP])_effective_(\d{6})/);
+  const match = filename.match(/(\d+)([A-Z]{2,})-([AP])_effective_(\d{6})/i);
   if (match) {
     const routeNum = match[1];
-    const direction = match[3] === 'A' ? 'Morning' : 'Afternoon';
+    const direction = match[3].toUpperCase() === 'A' ? 'Morning' : 'Afternoon';
     const dateStr = match[4]; // MMDDYY
     
     // Check if date is in the future
@@ -94,6 +94,11 @@ function extractRouteInfoFromFilename(filename, text = null) {
     return { name: routeNum, direction, isUpcoming };
   }
   
+  const legacyMatch = filename.match(/^(\d+)-(AM|PM)-/i);
+  if (legacyMatch) {
+    return { name: legacyMatch[1], direction: legacyMatch[2].toUpperCase() === 'AM' ? 'Morning' : 'Afternoon', isUpcoming: false };
+  }
+
   // If filename doesn't match standard pattern, try text search
   if (text) {
     const textMatch = text.match(/(?:route[:\s]*)?(\d+)([A-Z]{2,})-([AP])/i);
@@ -188,12 +193,19 @@ export function extractAnchorName(text) {
  */
 function parseStops(text, anchorName = null) {
   const stops = [];
-  const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+  // PDF text extraction may put the time and address on separate lines.
+  const lines = text.replace(/(\d{1,2}:\d{2}\s*(?:am|pm))\s*\n\s*/gi, '$1 ')
+    .split('\n').map(line => {
+      const trimmed = line.trim();
+      // Poppler/OCR retain visual column order: order, address, time, route.
+      const columns = trimmed.match(/^Stop Order\s*#\s*:?\s*(?:\((\d+)\))?\s*(.+?)\s+(\d{1,2}:\d{2}\s*(?:am|pm))\s+(\d+[A-Z]{2,}-[A-Z])\s*$/i);
+      return columns ? `${columns[3]}${columns[2]}${columns[4]}${columns[1] ? `(${columns[1]})` : ''}Stop Order #:` : trimmed;
+    }).filter(line => line.length > 0);
   
   // Pattern to match stop lines: time + address + optional direction + route info
   // Format: "8:33 amADDRESS[DIRECTION]ROUTE(ORDER)Stop Order #:"
   // Supports any school code (not just SYL)
-  const stopPattern = /^(\d{1,2}:\d{2}\s*(?:am|pm))(.+?)(?:\[([NWES]+)\])?(?:\d+[A-Z]{2,}-[AP](\((\d+)\))?)?(?:Stop Order #:)?$/i;
+  const stopPattern = /^(\d{1,2}:\d{2}\s*(?:am|pm))(.+?)(?:\[([NWES]+)\])?(?:\d+[A-Z]{2,}-[A-Z](\((\d+)\))?)?(?:Stop Order #:)?$/i;
   
   for (const line of lines) {
     // Skip header lines
@@ -224,7 +236,7 @@ function parseStops(text, anchorName = null) {
       // Remove route numbers and stop order info that might be at the end
       // Supports any school code (not just SYL)
       address = address
-        .replace(/\d+[A-Z]{2,}-[AP](?:\(\d+\))?/gi, '') // Remove route numbers like "100SYL-A(1)" or "238ABE-A(1)"
+        .replace(/\d+[A-Z]{2,}-[A-Z](?:\(\d+\))?/gi, '') // Includes legacy summer route suffixes.
         .replace(/Stop Order #:.*$/i, '') // Remove "Stop Order #:" and anything after
         .replace(/\s+/g, ' ') // Normalize whitespace
         .trim();
@@ -253,7 +265,7 @@ function parseStops(text, anchorName = null) {
       // Check if this matches the anchor name (school loading zone) - we'll add it separately
       let isSchoolLoadingZone = false;
       if (anchorName) {
-        const formattedAnchorName = formatStreetName(anchorName);
+        const formattedAnchorName = formatStreetName(anchorName.replace(/\s*@\s*/g, ' & '));
         const normalizedAddress = address.toLowerCase();
         const normalizedAnchorName = formattedAnchorName.toLowerCase();
         // Check if addresses match (allowing for minor variations)
