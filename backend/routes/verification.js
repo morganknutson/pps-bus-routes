@@ -19,6 +19,11 @@ const SCHOOLS_FILE = path.join(__dirname, '..', '..', 'data', 'schools.json');
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 const DRIVE_VERIFICATION_CACHE_FILE = path.join(DATA_DIR, 'drive-link-verification-results.json');
 
+// Compatibility for the public data page; reuse the cached processing-status API.
+router.get('/processing-status', (_req, res) => {
+  res.redirect(307, '/api/process-pdfs/status');
+});
+
 /**
  * Get PDF count for a school
  */
@@ -590,6 +595,5 @@ router.post('/verify-school-stops', async (req, res) => {
 });
 
 export { router as verificationRouter };
-
 
 
