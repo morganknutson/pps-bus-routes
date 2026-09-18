@@ -1,31 +1,43 @@
 {
   "bridlemile": {
-    "lastModifiedPdf": "2026-04-25T03:39:28.498Z",
-    "lastChecked": "2026-04-25T03:39:50.141Z"
+    "lastModifiedPdf": "2026-09-10T18:27:16.497Z",
+    "lastChecked": "2026-09-18T18:08:17.440Z",
+    "status": "success",
+    "errors": []
   },
   "abernethy": {
     "lastModifiedPdf": "2026-04-25T04:15:41.289Z",
     "lastChecked": "2026-04-25T04:15:45.202Z"
   },
   "atkinson": {
-    "lastModifiedPdf": "2026-04-25T03:43:03.897Z",
-    "lastChecked": "2026-04-25T03:43:12.074Z"
+    "lastModifiedPdf": "2026-09-01T14:02:39.276Z",
+    "lastChecked": "2026-09-18T18:05:03.453Z",
+    "status": "success",
+    "errors": []
   },
   "harrison-park": {
-    "lastModifiedPdf": "2026-04-25T03:29:10.429Z",
-    "lastChecked": "2026-04-25T03:29:21.367Z"
+    "lastModifiedPdf": "2026-08-18T18:55:44.045Z",
+    "lastChecked": "2026-09-18T18:03:29.575Z",
+    "status": "success",
+    "errors": []
   },
   "ainsworth": {
-    "lastModifiedPdf": "2026-04-25T03:45:23.700Z",
-    "lastChecked": "2026-04-25T03:45:52.618Z"
+    "lastModifiedPdf": "2026-09-16T13:21:37.956Z",
+    "lastChecked": "2026-09-18T18:08:17.445Z",
+    "status": "success",
+    "errors": []
   },
   "chapman": {
-    "lastModifiedPdf": "2026-04-25T03:36:27.545Z",
-    "lastChecked": "2026-04-25T03:36:35.109Z"
+    "lastModifiedPdf": "2026-09-16T13:55:27.022Z",
+    "lastChecked": "2026-09-18T18:05:29.566Z",
+    "status": "success",
+    "errors": []
   },
   "west-sylvan": {
-    "lastModifiedPdf": "2026-04-25T02:57:51.590Z",
-    "lastChecked": "2026-04-25T02:58:31.888Z"
+    "lastModifiedPdf": "2026-09-16T14:48:42.016Z",
+    "lastChecked": "2026-09-18T18:04:52.764Z",
+    "status": "success",
+    "errors": []
   },
   "roseway-heights": {
     "lastModifiedPdf": "2026-04-25T03:06:17.418Z",
@@ -40,32 +52,44 @@
     "lastChecked": "2026-04-25T03:11:25.329Z"
   },
   "mt-tabor": {
-    "lastModifiedPdf": "2026-04-25T03:12:09.769Z",
-    "lastChecked": "2026-04-25T03:12:22.870Z"
+    "lastModifiedPdf": "2026-09-16T15:15:55.046Z",
+    "lastChecked": "2026-09-18T18:04:06.567Z",
+    "status": "success",
+    "errors": []
   },
   "dr-martin-luther-king": {
-    "lastModifiedPdf": "2026-04-25T03:16:01.389Z",
-    "lastChecked": "2026-04-25T03:16:09.440Z"
+    "lastModifiedPdf": "2026-09-16T15:14:11.182Z",
+    "lastChecked": "2026-09-18T18:05:33.027Z",
+    "status": "success",
+    "errors": []
   },
   "kellogg": {
-    "lastModifiedPdf": "2026-04-25T03:21:30.235Z",
-    "lastChecked": "2026-04-25T03:21:40.566Z"
+    "lastModifiedPdf": "2026-08-26T21:35:50.572Z",
+    "lastChecked": "2026-09-18T18:03:55.097Z",
+    "status": "success",
+    "errors": []
   },
   "jackson": {
-    "lastModifiedPdf": "2026-04-29T13:14:43.624Z",
-    "lastChecked": "2026-05-03T09:00:47.584Z"
+    "lastModifiedPdf": "2026-09-16T15:12:22.319Z",
+    "lastChecked": "2026-09-18T18:03:47.889Z",
+    "status": "success",
+    "errors": []
   },
   "access": {
-    "lastModifiedPdf": "2026-04-25T02:53:20.248Z",
-    "lastChecked": "2026-04-25T02:53:53.900Z"
+    "lastModifiedPdf": "2026-09-14T17:14:23.848Z",
+    "lastChecked": "2026-09-18T18:05:02.565Z",
+    "status": "success",
+    "errors": []
   },
   "tubman": {
     "lastModifiedPdf": "2026-05-21T18:22:51.889Z",
     "lastChecked": "2026-06-07T17:28:25.789Z"
   },
   "skyline": {
-    "lastModifiedPdf": "2026-04-25T03:01:59.219Z",
-    "lastChecked": "2026-04-25T03:02:26.162Z"
+    "lastModifiedPdf": "2026-09-16T16:04:08.228Z",
+    "lastChecked": "2026-09-18T18:04:50.686Z",
+    "status": "success",
+    "errors": []
   },
   "scott": {
     "lastModifiedPdf": "2026-04-25T03:04:57.293Z",
@@ -80,52 +104,72 @@
     "lastChecked": "2026-06-07T17:28:02.647Z"
   },
   "hosford": {
-    "lastModifiedPdf": "2026-04-25T03:27:13.141Z",
-    "lastChecked": "2026-04-25T03:27:21.499Z"
+    "lastModifiedPdf": "2026-08-10T19:47:47.489Z",
+    "lastChecked": "2026-09-18T18:03:43.982Z",
+    "status": "success",
+    "errors": []
   },
   "lent": {
-    "lastModifiedPdf": "2026-04-25T03:19:16.880Z",
-    "lastChecked": "2026-04-25T03:19:23.612Z"
+    "lastModifiedPdf": "2026-09-16T15:48:53.957Z",
+    "lastChecked": "2026-09-18T18:03:59.327Z",
+    "status": "success",
+    "errors": []
   },
   "gray": {
-    "lastModifiedPdf": "2026-04-25T03:30:40.135Z",
-    "lastChecked": "2026-04-25T03:31:04.405Z"
+    "lastModifiedPdf": "2026-09-16T13:26:46.614Z",
+    "lastChecked": "2026-09-18T18:03:35.944Z",
+    "status": "success",
+    "errors": []
   },
   "hayhurst": {
-    "lastModifiedPdf": "2026-05-20T13:03:38.159Z",
-    "lastChecked": "2026-06-07T17:28:08.024Z"
+    "lastModifiedPdf": "2026-09-09T14:24:10.326Z",
+    "lastChecked": "2026-09-18T18:03:37.387Z",
+    "status": "success",
+    "errors": []
   },
   "stephenson": {
-    "lastModifiedPdf": "2026-04-25T03:01:06.122Z",
-    "lastChecked": "2026-04-25T03:01:18.132Z"
+    "lastModifiedPdf": "2026-09-16T17:36:26.499Z",
+    "lastChecked": "2026-09-18T18:04:34.919Z",
+    "status": "success",
+    "errors": []
   },
   "markham": {
-    "lastModifiedPdf": "2026-04-25T03:13:57.880Z",
-    "lastChecked": "2026-04-25T03:14:14.143Z"
+    "lastModifiedPdf": "2026-09-02T17:36:58.901Z",
+    "lastChecked": "2026-09-18T18:04:02.400Z",
+    "status": "success",
+    "errors": []
   },
   "maplewood": {
-    "lastModifiedPdf": "2026-04-30T13:06:25.442Z",
-    "lastChecked": "2026-05-03T09:00:57.278Z"
+    "lastModifiedPdf": "2026-09-16T13:30:11.684Z",
+    "lastChecked": "2026-09-18T18:04:13.335Z",
+    "status": "success",
+    "errors": []
   },
   "grout": {
     "lastModifiedPdf": "2026-04-25T03:29:52.806Z",
     "lastChecked": "2026-04-25T03:29:54.927Z"
   },
   "boise-eliot": {
-    "lastModifiedPdf": "2026-05-04T18:53:39.352Z",
-    "lastChecked": "2026-06-07T17:27:59.497Z"
+    "lastModifiedPdf": "2026-08-19T15:32:25.273Z",
+    "lastChecked": "2026-09-18T18:05:15.433Z",
+    "status": "success",
+    "errors": []
   },
   "vernon": {
     "lastModifiedPdf": "2026-04-25T02:52:19.517Z",
     "lastChecked": "2026-04-25T02:52:22.887Z"
   },
   "woodstock": {
-    "lastModifiedPdf": "2026-04-25T02:54:54.846Z",
-    "lastChecked": "2026-04-25T02:55:04.034Z"
+    "lastModifiedPdf": "2026-09-16T17:14:00.914Z",
+    "lastChecked": "2026-09-18T18:04:56.877Z",
+    "status": "success",
+    "errors": []
   },
   "woodmere": {
-    "lastModifiedPdf": "2026-04-25T02:55:30.990Z",
-    "lastChecked": "2026-04-25T02:55:35.395Z"
+    "lastModifiedPdf": "2026-09-16T18:28:14.064Z",
+    "lastChecked": "2026-09-18T18:04:56.115Z",
+    "status": "success",
+    "errors": []
   },
   "woodlawn": {
     "lastModifiedPdf": "2026-04-25T02:55:56.241Z",
@@ -140,64 +184,88 @@
     "lastChecked": "2026-04-25T03:00:04.556Z"
   },
   "sitton": {
-    "lastModifiedPdf": "2026-04-25T03:03:07.477Z",
-    "lastChecked": "2026-04-25T03:03:16.074Z"
+    "lastModifiedPdf": "2026-09-01T14:56:51.708Z",
+    "lastChecked": "2026-09-18T18:04:30.339Z",
+    "status": "success",
+    "errors": []
   },
   "sellwood": {
     "lastModifiedPdf": "2026-04-25T03:04:00.547Z",
     "lastChecked": "2026-04-25T03:04:13.028Z"
   },
   "sabin": {
-    "lastModifiedPdf": "2026-04-25T03:05:33.385Z",
-    "lastChecked": "2026-04-25T03:05:39.022Z"
+    "lastModifiedPdf": "2022-07-05T16:17:29.329Z",
+    "lastChecked": "2026-09-18T18:04:30.682Z",
+    "status": "success",
+    "errors": []
   },
   "rose-city-park": {
-    "lastModifiedPdf": "2026-04-25T03:07:09.318Z",
-    "lastChecked": "2026-04-25T03:07:17.769Z"
+    "lastModifiedPdf": "2026-09-03T21:54:04.967Z",
+    "lastChecked": "2026-09-18T18:04:21.512Z",
+    "status": "success",
+    "errors": []
   },
   "rosa-parks": {
-    "lastModifiedPdf": "2026-05-29T20:11:07.619Z",
-    "lastChecked": "2026-06-07T17:28:22.571Z"
+    "lastModifiedPdf": "2026-06-16T20:19:09.849Z",
+    "lastChecked": "2026-09-18T18:04:29.385Z",
+    "status": "success",
+    "errors": []
   },
   "rieke": {
-    "lastModifiedPdf": "2026-04-25T03:09:18.986Z",
-    "lastChecked": "2026-04-25T03:09:31.686Z"
+    "lastModifiedPdf": "2026-09-16T13:57:24.744Z",
+    "lastChecked": "2026-09-18T18:04:20.650Z",
+    "status": "success",
+    "errors": []
   },
   "richmond": {
-    "lastModifiedPdf": "2026-04-25T03:10:08.516Z",
-    "lastChecked": "2026-04-25T03:10:24.112Z"
+    "lastModifiedPdf": "2026-09-18T15:50:57.477Z",
+    "lastChecked": "2026-09-18T18:04:12.944Z",
+    "status": "success",
+    "errors": []
   },
   "peninsula": {
     "lastModifiedPdf": "2026-04-25T03:10:53.388Z",
     "lastChecked": "2026-04-25T03:10:55.333Z"
   },
   "marysville": {
-    "lastModifiedPdf": "2026-04-25T03:13:08.633Z",
-    "lastChecked": "2026-04-25T03:13:17.663Z"
+    "lastModifiedPdf": "2026-09-02T18:19:09.475Z",
+    "lastChecked": "2026-09-18T18:04:03.380Z",
+    "status": "success",
+    "errors": []
   },
   "llewellyn": {
-    "lastModifiedPdf": "2026-04-25T03:16:30.744Z",
-    "lastChecked": "2026-04-25T03:16:33.893Z"
+    "lastModifiedPdf": "2026-08-08T17:12:28.822Z",
+    "lastChecked": "2026-09-18T18:04:00.873Z",
+    "status": "success",
+    "errors": []
   },
   "lewis": {
     "lastModifiedPdf": "2026-04-25T03:18:51.958Z",
     "lastChecked": "2026-04-25T03:18:53.981Z"
   },
   "lee": {
-    "lastModifiedPdf": "2026-04-25T03:19:51.327Z",
-    "lastChecked": "2026-04-25T03:19:56.137Z"
+    "lastModifiedPdf": "2026-09-16T16:40:25.898Z",
+    "lastChecked": "2026-09-18T18:03:59.844Z",
+    "status": "success",
+    "errors": []
   },
   "lane": {
-    "lastModifiedPdf": "2026-04-25T03:20:28.255Z",
-    "lastChecked": "2026-04-25T03:20:41.112Z"
+    "lastModifiedPdf": "2026-09-01T16:47:01.555Z",
+    "lastChecked": "2026-09-18T18:03:56.313Z",
+    "status": "success",
+    "errors": []
   },
   "kelly": {
-    "lastModifiedPdf": "2026-04-25T03:22:20.511Z",
-    "lastChecked": "2026-04-25T03:22:28.438Z"
+    "lastModifiedPdf": "2026-08-14T21:36:24.044Z",
+    "lastChecked": "2026-09-18T18:03:56.267Z",
+    "status": "success",
+    "errors": []
   },
   "james-john": {
-    "lastModifiedPdf": "2026-04-25T03:22:55.669Z",
-    "lastChecked": "2026-04-25T03:23:05.440Z"
+    "lastModifiedPdf": "2026-09-15T20:05:05.166Z",
+    "lastChecked": "2026-09-18T18:03:50.326Z",
+    "status": "success",
+    "errors": []
   },
   "irvington": {
     "lastModifiedPdf": "2026-04-25T03:26:43.801Z",
@@ -216,56 +284,74 @@
     "lastChecked": "2026-04-25T03:32:59.182Z"
   },
   "faubion": {
-    "lastModifiedPdf": "2026-04-25T03:33:42.295Z",
-    "lastChecked": "2026-04-25T03:33:57.347Z"
+    "lastModifiedPdf": "2026-08-31T18:36:17.754Z",
+    "lastChecked": "2026-09-18T18:05:39.899Z",
+    "status": "success",
+    "errors": []
   },
   "duniway": {
-    "lastModifiedPdf": "2026-04-25T03:34:35.985Z",
-    "lastChecked": "2026-04-25T03:34:41.457Z"
+    "lastModifiedPdf": "2026-09-16T14:47:17.470Z",
+    "lastChecked": "2026-09-18T18:05:33.109Z",
+    "status": "success",
+    "errors": []
   },
   "creston": {
     "lastModifiedPdf": "2026-04-25T03:35:00.245Z",
     "lastChecked": "2026-04-25T03:35:01.850Z"
   },
   "clark": {
-    "lastModifiedPdf": "2026-04-25T03:35:24.849Z",
-    "lastChecked": "2026-04-25T03:35:31.777Z"
+    "lastModifiedPdf": "2026-09-02T16:20:29.324Z",
+    "lastChecked": "2026-09-18T18:05:29.471Z",
+    "status": "success",
+    "errors": []
   },
   "chief-joseph": {
-    "lastModifiedPdf": "2026-04-25T03:35:55.522Z",
-    "lastChecked": "2026-04-25T03:35:58.077Z"
+    "lastModifiedPdf": "2026-09-16T13:22:54.350Z",
+    "lastChecked": "2026-09-18T18:05:28.795Z",
+    "status": "success",
+    "errors": []
   },
   "cesar-chavez": {
-    "lastModifiedPdf": "2026-04-25T03:37:12.443Z",
-    "lastChecked": "2026-04-25T03:37:20.169Z"
+    "lastModifiedPdf": "2026-09-14T13:21:08.564Z",
+    "lastChecked": "2026-09-18T18:05:25.030Z",
+    "status": "success",
+    "errors": []
   },
   "capitol": {
     "lastModifiedPdf": "2026-04-25T03:38:00.197Z",
     "lastChecked": "2026-04-25T03:38:21.849Z"
   },
   "buckman": {
-    "lastModifiedPdf": "2026-04-25T03:38:53.750Z",
-    "lastChecked": "2026-04-25T03:38:56.475Z"
+    "lastModifiedPdf": "2026-08-17T16:01:12.782Z",
+    "lastChecked": "2026-09-18T18:05:21.843Z",
+    "status": "success",
+    "errors": []
   },
   "beverly-cleary": {
-    "lastModifiedPdf": "2026-04-25T03:41:19.984Z",
-    "lastChecked": "2026-04-25T03:41:19.996Z"
+    "lastModifiedPdf": "2024-07-31T15:21:35.419Z",
+    "lastChecked": "2026-09-18T18:05:12.344Z",
+    "status": "success",
+    "errors": []
   },
   "beaumont": {
     "lastModifiedPdf": "2026-04-25T03:41:43.882Z",
     "lastChecked": "2026-04-25T03:41:52.935Z"
   },
   "beach": {
-    "lastModifiedPdf": "2026-04-25T03:42:25.961Z",
-    "lastChecked": "2026-04-25T03:42:35.321Z"
+    "lastModifiedPdf": "2026-09-10T21:06:41.881Z",
+    "lastChecked": "2026-09-18T18:05:09.803Z",
+    "status": "success",
+    "errors": []
   },
   "astor": {
     "lastModifiedPdf": "2026-04-25T03:43:31.734Z",
     "lastChecked": "2026-04-25T03:43:33.716Z"
   },
   "arleta": {
-    "lastModifiedPdf": "2026-04-25T03:43:49.222Z",
-    "lastChecked": "2026-04-25T03:43:52.294Z"
+    "lastModifiedPdf": "2026-08-04T18:07:50.197Z",
+    "lastChecked": "2026-09-18T18:08:18.412Z",
+    "status": "success",
+    "errors": []
   },
   "alameda": {
     "lastModifiedPdf": "2026-04-25T03:44:20.206Z",

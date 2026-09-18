@@ -23,10 +23,25 @@
     },
     {
       "id": "stop-1",
-      "address": "SE Division St. & SE 75th Ave. [NE]",
-      "time": "4:13 pm",
+      "address": "SE Clinton St. & SE 81st Ave. [NE]",
+      "time": "4:12 pm",
       "direction": "NE",
-      "originalLine": "4:13 pmSE DIVISION ST @ SE 75TH AV [NE]291HPK-P(2)Stop Order #:",
+      "originalLine": "4:12 pmSE CLINTON ST @ SE 81ST AV [NE]291HPK-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5798129,
+        45.5034577
+      ],
+      "displayName": "SE 81st Ave & SE Clinton St, Portland, OR 97206, USA",
+      "placeId": "EjRTRSA4MXN0IEF2ZSAmIFNFIENsaW50b24gU3QsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJC13cMkyglVQRTNXpGVafSNQSFAoSCQtd3DJMoJVUEUzV6RlWn0jUGhQKEgmlNMqmrKGVVBHUejRos-tEUxoUChIJnTxM2LWhlVQREc_9DL4KkjIiCg3RRh8bFQ_O77Y",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Division St. & SE 75th Ave. [NE]",
+      "time": "4:14 pm",
+      "direction": "NE",
+      "originalLine": "4:14 pmSE DIVISION ST @ SE 75TH AV [NE]291HPK-P(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.5863578,
@@ -37,11 +52,11 @@
       "neighborhood": "Southeast Portland"
     },
     {
-      "id": "stop-2",
+      "id": "stop-3",
       "address": "SE Division St. & SE 59th Ave. [NE]",
-      "time": "4:16 pm",
+      "time": "4:17 pm",
       "direction": "NE",
-      "originalLine": "4:16 pmSE DIVISION ST @ SE 59TH AV [NE]291HPK-P(3)Stop Order #:",
+      "originalLine": "4:17 pmSE DIVISION ST @ SE 59TH AV [NE]291HPK-P(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6027629,
@@ -52,11 +67,11 @@
       "neighborhood": "South Tabor"
     },
     {
-      "id": "stop-3",
+      "id": "stop-4",
       "address": "5626 SE Woodward St. (clinton Park) [S]",
-      "time": "4:20 pm",
+      "time": "4:22 pm",
       "direction": "S",
-      "originalLine": "4:20 pm5626 SE WOODWARD ST (CLINTON PARK) [S]291HPK-P(4)Stop Order #:",
+      "originalLine": "4:22 pm5626 SE WOODWARD ST (CLINTON PARK) [S]291HPK-P(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.60448102423194,
@@ -65,16 +80,32 @@
       "displayName": "5626 SE Woodward St, Portland, OR 97206, USA",
       "placeId": "ChIJ9WGnhF2glVQRCtt3jULwap8",
       "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-5",
+      "address": "SE 62nd Ave. & SE Rhone St. [NW]",
+      "time": "4:26 pm",
+      "direction": "NW",
+      "originalLine": "4:26 pmSE 62ND AV @ SE RHONE ST [NW]291HPK-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5994262,
+        45.49571599999999
+      ],
+      "displayName": "SE 62nd Ave & SE Rhone St, Portland, OR 97206, USA",
+      "placeId": "EjJTRSA2Mm5kIEF2ZSAmIFNFIFJob25lIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCakTQeZpoJVUEZN4wtDxngNvEhQKEgmpE0HmaaCVVBGTeMLQ8Z4DbxoUChIJTchfaWuglVQRn6rUaCggGhEaFAoSCTfn5b1HoJVUERVMkujOd8TjIgoNaBgeGxXqz-y2",
+      "neighborhood": "Foster - Powell"
     }
   ],
   "neighborhoods": [
+    "Foster - Powell",
     "South Tabor",
     "Southeast Portland"
   ],
-  "processedAt": "2026-08-10T01:58:54.861Z",
+  "processedAt": "2026-09-18T18:03:21.407Z",
   "stats": {
-    "totalStops": 4,
-    "geocodedStops": 4,
+    "totalStops": 6,
+    "geocodedStops": 6,
     "failedStops": 0
   },
   "geometry": [
@@ -151,48 +182,72 @@
       -122.57976
     ],
     [
-      45.50503,
-      -122.57988
+      45.50497,
+      -122.57981
     ],
     [
-      45.50519,
-      -122.58085
+      45.50429,
+      -122.57981
     ],
     [
-      45.50531,
-      -122.5816
+      45.50409,
+      -122.57981
     ],
     [
-      45.50538,
-      -122.5824
+      45.50346,
+      -122.57981
     ],
     [
-      45.50541,
-      -122.58372
+      45.50346,
+      -122.58086
     ],
     [
-      45.5054,
-      -122.58678
+      45.50346,
+      -122.58192
     ],
     [
-      45.50539,
-      -122.58888
+      45.50507,
+      -122.58191
+    ],
+    [
+      45.50535,
+      -122.58191
     ],
     [
       45.50537,
-      -122.59557
+      -122.58222
+    ],
+    [
+      45.50538,
+      -122.58242
+    ],
+    [
+      45.50541,
+      -122.58407
+    ],
+    [
+      45.5054,
+      -122.58578
+    ],
+    [
+      45.5054,
+      -122.588
+    ],
+    [
+      45.50537,
+      -122.5946
     ],
     [
       45.50536,
-      -122.59831
+      -122.60027
     ],
     [
       45.50536,
-      -122.6011
+      -122.60199
     ],
     [
       45.50536,
-      -122.60258
+      -122.60276
     ],
     [
       45.50536,
@@ -203,11 +258,15 @@
       -122.60308
     ],
     [
-      45.50304,
+      45.50344,
       -122.60308
     ],
     [
-      45.50212,
+      45.50303,
+      -122.60308
+    ],
+    [
+      45.50236,
       -122.60308
     ],
     [
@@ -215,12 +274,60 @@
       -122.60309
     ],
     [
-      45.50141,
-      -122.60368
+      45.5014,
+      -122.60408
     ],
     [
       45.50141,
       -122.60448
+    ],
+    [
+      45.5014,
+      -122.60408
+    ],
+    [
+      45.49963,
+      -122.60409
+    ],
+    [
+      45.49837,
+      -122.60409
+    ],
+    [
+      45.49744,
+      -122.60408
+    ],
+    [
+      45.49744,
+      -122.602
+    ],
+    [
+      45.49744,
+      -122.60064
+    ],
+    [
+      45.49747,
+      -122.60055
+    ],
+    [
+      45.49747,
+      -122.60044
+    ],
+    [
+      45.49748,
+      -122.5996
+    ],
+    [
+      45.49747,
+      -122.5994
+    ],
+    [
+      45.49654,
+      -122.59941
+    ],
+    [
+      45.49572,
+      -122.59943
     ]
   ]
 }

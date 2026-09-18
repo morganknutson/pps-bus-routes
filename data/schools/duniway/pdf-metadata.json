@@ -10,11 +10,6 @@
       "modifiedTime": "2026-08-06T13:38:09.659Z",
       "localPath": "227DUN-P_Effective_082626.pdf"
     },
-    "1bEBwnUuSlOAJP1pEJ4avLKvqwE7wYYcM": {
-      "filename": "289DUN-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-05T14:56:45.840Z",
-      "localPath": "289DUN-A_Effective_082626.pdf"
-    },
     "18f3ISwDptBmH5rORB7nqSIJyefnk72qW": {
       "filename": "227DUN-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-05T14:56:27.398Z",
@@ -24,7 +19,13 @@
       "filename": "289DUN-A_Effective_090926.pdf",
       "modifiedTime": "2026-09-05T16:13:31.600Z",
       "localPath": "289DUN-A_Effective_090926.pdf"
+    },
+    "1VGdX8wasHLak2Q_-xnR24pHDYUBz6YEJ": {
+      "filename": "289DUN-P_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T14:47:17.470Z",
+      "md5Checksum": "5127da6a92d194a6fca66f61e10292e4",
+      "localPath": "289DUN-P_Effective_092326.pdf"
     }
   },
-  "lastSync": "2026-09-07T03:34:29.076Z"
+  "lastSync": "2026-09-18T18:05:33.106Z"
 }

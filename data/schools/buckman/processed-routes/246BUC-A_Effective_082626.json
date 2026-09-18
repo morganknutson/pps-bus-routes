@@ -7,11 +7,26 @@
   "modifiedTime": null,
   "stops": [
     {
+      "id": "stop-1",
+      "address": "465 NE Davis St. [S]",
+      "time": "7:29 am",
+      "direction": "S",
+      "originalLine": "7:29 am465 NE Davis St [S]246BUC-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6609584,
+        45.5247939
+      ],
+      "displayName": "PDX Motor Sports in Portland, OR, USA, 465 NE Davis St, Portland, OR 97232, USA",
+      "placeId": "ChIJpXHjJq-glVQRUktovlZbdLI",
+      "neighborhood": "Kerns"
+    },
+    {
       "id": "stop-2",
-      "address": "NE 6th Ave. & NE Pacific St. [SE]",
+      "address": "NE Pacific St. & NE 6th Ave. [SW]",
       "time": "7:31 am",
-      "direction": "SE",
-      "originalLine": "7:31 amNE 6TH AV @ NE PACIFIC ST [SE]246BUC-A(1)Stop Order #:",
+      "direction": "SW",
+      "originalLine": "7:31 amNE PACIFIC ST @ NE 6TH AV [SW]246BUC-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6596615,
@@ -24,9 +39,9 @@
     {
       "id": "stop-3",
       "address": "NE Wasco St. & NE 3rd Ave. [NE]",
-      "time": "7:33 am",
+      "time": "7:34 am",
       "direction": "NE",
-      "originalLine": "7:33 amNE WASCO ST @ NE 3RD AV [NE]246BUC-A(2)Stop Order #:",
+      "originalLine": "7:34 amNE WASCO ST @ NE 3RD AV [NE]246BUC-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6626957,
@@ -41,7 +56,7 @@
       "address": "1557 NE Weidler St. [S]",
       "time": "7:38 am",
       "direction": "S",
-      "originalLine": "7:38 am1557 NE WEIDLER ST [S]246BUC-A(3)Stop Order #:",
+      "originalLine": "7:38 am1557 NE WEIDLER ST [S]246BUC-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6497588989311,
@@ -54,9 +69,9 @@
     {
       "id": "stop-5",
       "address": "NE 30th Ave. & NE Oregon St. [NW]",
-      "time": "7:44 am",
+      "time": "7:45 am",
       "direction": "NW",
-      "originalLine": "7:44 amNE 30TH AV @ NE OREGON ST [NW]246BUC-A(4)Stop Order #:",
+      "originalLine": "7:45 amNE 30TH AV @ NE OREGON ST [NW]246BUC-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6345011,
@@ -87,13 +102,69 @@
     "Northeast Portland",
     "Sullivan's Gulch"
   ],
-  "processedAt": "2026-08-10T02:17:02.010Z",
+  "processedAt": "2026-09-18T18:05:21.332Z",
   "stats": {
-    "totalStops": 5,
-    "geocodedStops": 5,
+    "totalStops": 6,
+    "geocodedStops": 6,
     "failedStops": 0
   },
   "geometry": [
+    [
+      45.52479,
+      -122.66096
+    ],
+    [
+      45.52478,
+      -122.66093
+    ],
+    [
+      45.52476,
+      -122.66071
+    ],
+    [
+      45.52491,
+      -122.66072
+    ],
+    [
+      45.52508,
+      -122.66072
+    ],
+    [
+      45.52578,
+      -122.66072
+    ],
+    [
+      45.52624,
+      -122.66072
+    ],
+    [
+      45.52728,
+      -122.66068
+    ],
+    [
+      45.52825,
+      -122.66067
+    ],
+    [
+      45.52876,
+      -122.66068
+    ],
+    [
+      45.5291,
+      -122.66068
+    ],
+    [
+      45.52934,
+      -122.66068
+    ],
+    [
+      45.52933,
+      -122.66047
+    ],
+    [
+      45.52933,
+      -122.6601
+    ],
     [
       45.52932,
       -122.65966
@@ -119,7 +190,7 @@
       -122.66068
     ],
     [
-      45.53026,
+      45.5311,
       -122.66067
     ],
     [
@@ -165,6 +236,10 @@
     [
       45.53435,
       -122.66268
+    ],
+    [
+      45.53435,
+      -122.66244
     ],
     [
       45.53435,

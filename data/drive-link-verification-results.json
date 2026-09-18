@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-07T17:28:29.248Z",
+  "timestamp": "2026-09-18T18:08:18.657Z",
   "totalSchools": 72,
   "schoolsWithDriveLinks": 71,
   "results": [
@@ -12,11 +12,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2025-07-31T19:53:25.595Z",
-      "localLastModified": "2026-04-25T04:15:41.289Z",
-      "matches": false,
+      "driveLastModified": "2026-08-03T16:39:55.760Z",
+      "localLastModified": "2026-08-03T16:39:55.760Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:14.144Z",
+      "countMismatch": false
     },
     {
       "schoolId": "ainsworth",
@@ -25,13 +27,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 15,
-      "localPdfCount": 15,
-      "driveLastModified": "2026-05-06T13:35:15.975Z",
-      "localLastModified": "2026-05-06T13:35:15.975Z",
+      "pdfCount": 17,
+      "localPdfCount": 17,
+      "driveLastModified": "2026-09-16T13:21:37.956Z",
+      "localLastModified": "2026-09-16T13:21:37.956Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:17.447Z",
+      "countMismatch": false
     },
     {
       "schoolId": "alameda",
@@ -42,11 +46,13 @@
       "hasPdfs": true,
       "pdfCount": 8,
       "localPdfCount": 8,
-      "driveLastModified": "2025-11-13T18:59:10.608Z",
-      "localLastModified": "2026-04-25T03:44:20.206Z",
-      "matches": false,
+      "driveLastModified": "2026-08-03T20:26:23.450Z",
+      "localLastModified": "2026-08-03T20:26:23.450Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:12.143Z",
+      "countMismatch": false
     },
     {
       "schoolId": "arleta",
@@ -57,11 +63,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2025-11-25T18:53:46.041Z",
-      "localLastModified": "2026-04-25T03:43:49.222Z",
-      "matches": false,
+      "driveLastModified": "2026-08-04T18:07:50.197Z",
+      "localLastModified": "2026-08-04T18:07:50.197Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:18.413Z",
+      "countMismatch": false
     },
     {
       "schoolId": "astor",
@@ -72,11 +80,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2025-08-02T20:12:11.315Z",
-      "localLastModified": "2026-04-25T03:43:31.734Z",
-      "matches": false,
+      "driveLastModified": "2026-08-05T14:40:06.875Z",
+      "localLastModified": "2026-08-05T14:40:06.875Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:13.144Z",
+      "countMismatch": false
     },
     {
       "schoolId": "atkinson",
@@ -87,11 +97,13 @@
       "hasPdfs": true,
       "pdfCount": 4,
       "localPdfCount": 4,
-      "driveLastModified": "2026-03-11T15:41:49.340Z",
-      "localLastModified": "2026-04-25T03:43:03.897Z",
-      "matches": false,
+      "driveLastModified": "2026-09-01T14:02:39.276Z",
+      "localLastModified": "2026-09-01T14:02:39.276Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:13.142Z",
+      "countMismatch": false
     },
     {
       "schoolId": "beach",
@@ -102,11 +114,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2026-04-09T13:32:59.202Z",
-      "localLastModified": "2026-04-25T03:42:25.961Z",
-      "matches": false,
+      "driveLastModified": "2026-09-10T21:06:41.881Z",
+      "localLastModified": "2026-09-10T21:06:41.881Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:07.136Z",
+      "countMismatch": false
     },
     {
       "schoolId": "beaumont",
@@ -116,12 +130,14 @@
       "accessible": true,
       "hasPdfs": true,
       "pdfCount": 4,
-      "localPdfCount": 6,
-      "driveLastModified": "2026-04-22T13:02:40.483Z",
-      "localLastModified": "2026-04-25T03:41:43.882Z",
-      "matches": false,
+      "localPdfCount": 4,
+      "driveLastModified": "2026-08-07T16:05:32.004Z",
+      "localLastModified": "2026-08-07T16:05:32.004Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:07.141Z",
+      "countMismatch": false
     },
     {
       "schoolId": "benson",
@@ -150,7 +166,9 @@
       "localLastModified": "2024-07-31T15:21:35.419Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:08.137Z",
+      "countMismatch": false
     },
     {
       "schoolId": "boise-eliot",
@@ -159,13 +177,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 4,
-      "localPdfCount": 4,
-      "driveLastModified": "2026-05-04T18:53:39.352Z",
-      "localLastModified": "2026-05-04T18:53:39.352Z",
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2026-08-19T15:32:25.273Z",
+      "localLastModified": "2026-08-19T15:32:25.273Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:08.138Z",
+      "countMismatch": false
     },
     {
       "schoolId": "bridger",
@@ -174,13 +194,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 5,
-      "localPdfCount": 5,
-      "driveLastModified": "2026-05-11T20:27:28.238Z",
-      "localLastModified": "2026-05-11T20:27:28.238Z",
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2026-08-06T15:29:07.630Z",
+      "localLastModified": "2026-08-06T15:29:07.630Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:09.138Z",
+      "countMismatch": false
     },
     {
       "schoolId": "bridlemile",
@@ -191,11 +213,13 @@
       "hasPdfs": true,
       "pdfCount": 10,
       "localPdfCount": 10,
-      "driveLastModified": "2026-04-02T22:19:24.629Z",
-      "localLastModified": "2026-04-25T03:39:28.498Z",
-      "matches": false,
+      "driveLastModified": "2026-09-10T18:27:16.497Z",
+      "localLastModified": "2026-09-10T18:27:16.497Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:17.443Z",
+      "countMismatch": false
     },
     {
       "schoolId": "buckman",
@@ -206,11 +230,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2025-08-02T18:46:46.122Z",
-      "localLastModified": "2026-04-25T03:38:53.750Z",
-      "matches": false,
+      "driveLastModified": "2026-08-17T16:01:12.782Z",
+      "localLastModified": "2026-08-17T16:01:12.782Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:10.140Z",
+      "countMismatch": false
     },
     {
       "schoolId": "capitol",
@@ -219,13 +245,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 12,
-      "localPdfCount": 12,
-      "driveLastModified": "2026-05-20T13:32:01.599Z",
-      "localLastModified": "2026-05-20T13:32:01.599Z",
+      "pdfCount": 10,
+      "localPdfCount": 10,
+      "driveLastModified": "2026-09-09T13:46:09.170Z",
+      "localLastModified": "2026-09-09T13:46:09.170Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:01.130Z",
+      "countMismatch": false
     },
     {
       "schoolId": "cesar-chavez",
@@ -234,13 +262,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 6,
-      "localPdfCount": 8,
-      "driveLastModified": "2026-04-29T14:47:33.669Z",
-      "localLastModified": "2026-04-29T14:47:33.669Z",
+      "pdfCount": 7,
+      "localPdfCount": 7,
+      "driveLastModified": "2026-09-14T13:21:08.564Z",
+      "localLastModified": "2026-09-14T13:21:08.564Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:02.130Z",
+      "countMismatch": false
     },
     {
       "schoolId": "chapman",
@@ -249,13 +279,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 8,
-      "localPdfCount": 10,
-      "driveLastModified": "2026-04-30T13:28:27.427Z",
-      "localLastModified": "2026-04-30T13:28:27.427Z",
+      "pdfCount": 12,
+      "localPdfCount": 12,
+      "driveLastModified": "2026-09-16T13:55:27.022Z",
+      "localLastModified": "2026-09-16T13:55:27.022Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:02.131Z",
+      "countMismatch": false
     },
     {
       "schoolId": "chief-joseph",
@@ -264,13 +296,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 2,
-      "localPdfCount": 2,
-      "driveLastModified": "2025-08-02T16:56:58.677Z",
-      "localLastModified": "2026-04-25T03:35:55.522Z",
-      "matches": false,
+      "pdfCount": 3,
+      "localPdfCount": 3,
+      "driveLastModified": "2026-09-16T13:22:54.350Z",
+      "localLastModified": "2026-09-16T13:22:54.350Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:03.132Z",
+      "countMismatch": false
     },
     {
       "schoolId": "clark",
@@ -281,11 +315,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2025-09-11T17:55:39.729Z",
-      "localLastModified": "2026-04-25T03:35:24.849Z",
-      "matches": false,
+      "driveLastModified": "2026-09-02T16:20:29.324Z",
+      "localLastModified": "2026-09-02T16:20:29.324Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:03.133Z",
+      "countMismatch": false
     },
     {
       "schoolId": "creston",
@@ -296,11 +332,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2025-08-02T17:52:47.282Z",
-      "localLastModified": "2026-04-25T03:35:00.245Z",
-      "matches": false,
+      "driveLastModified": "2026-08-08T16:10:13.359Z",
+      "localLastModified": "2026-08-08T16:10:13.359Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:04.132Z",
+      "countMismatch": false
     },
     {
       "schoolId": "davinci",
@@ -324,13 +362,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 4,
-      "localPdfCount": 4,
-      "driveLastModified": "2025-09-17T22:06:04.762Z",
-      "localLastModified": "2026-04-25T03:34:35.985Z",
-      "matches": false,
+      "pdfCount": 5,
+      "localPdfCount": 5,
+      "driveLastModified": "2026-09-16T14:47:17.470Z",
+      "localLastModified": "2026-09-16T14:47:17.470Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:06.137Z",
+      "countMismatch": false
     },
     {
       "schoolId": "faubion",
@@ -341,11 +381,13 @@
       "hasPdfs": true,
       "pdfCount": 11,
       "localPdfCount": 11,
-      "driveLastModified": "2026-03-26T15:10:53.440Z",
-      "localLastModified": "2026-04-25T03:33:42.295Z",
-      "matches": false,
+      "driveLastModified": "2026-08-31T18:36:17.754Z",
+      "localLastModified": "2026-08-31T18:36:17.754Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:06.140Z",
+      "countMismatch": false
     },
     {
       "schoolId": "forest-park",
@@ -356,11 +398,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2025-08-02T18:13:11.462Z",
-      "localLastModified": "2026-04-25T03:32:52.016Z",
-      "matches": false,
+      "driveLastModified": "2026-08-07T21:16:16.042Z",
+      "localLastModified": "2026-08-07T21:16:16.042Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:54.113Z",
+      "countMismatch": false
     },
     {
       "schoolId": "franklin",
@@ -386,11 +430,13 @@
       "hasPdfs": true,
       "pdfCount": 4,
       "localPdfCount": 4,
-      "driveLastModified": "2025-08-02T18:49:07.245Z",
-      "localLastModified": "2026-04-25T03:32:20.362Z",
-      "matches": false,
+      "driveLastModified": "2026-08-05T17:29:56.401Z",
+      "localLastModified": "2026-08-05T17:29:56.401Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:54.115Z",
+      "countMismatch": false
     },
     {
       "schoolId": "glencoe",
@@ -401,11 +447,13 @@
       "hasPdfs": true,
       "pdfCount": 4,
       "localPdfCount": 4,
-      "driveLastModified": "2025-10-23T16:24:14.000Z",
-      "localLastModified": "2026-04-25T03:31:52.038Z",
-      "matches": false,
+      "driveLastModified": "2026-08-07T20:20:52.041Z",
+      "localLastModified": "2026-08-07T20:20:52.041Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:55.115Z",
+      "countMismatch": false
     },
     {
       "schoolId": "gray",
@@ -414,13 +462,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 16,
-      "localPdfCount": 16,
-      "driveLastModified": "2026-02-26T22:07:01.385Z",
-      "localLastModified": "2026-04-25T03:30:40.135Z",
-      "matches": false,
+      "pdfCount": 20,
+      "localPdfCount": 20,
+      "driveLastModified": "2026-09-16T13:26:46.614Z",
+      "localLastModified": "2026-09-16T13:26:46.614Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:55.116Z",
+      "countMismatch": false
     },
     {
       "schoolId": "grout",
@@ -431,11 +481,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2026-02-26T22:08:31.626Z",
-      "localLastModified": "2026-04-25T03:29:52.806Z",
-      "matches": false,
+      "driveLastModified": "2026-08-04T21:02:02.699Z",
+      "localLastModified": "2026-08-04T21:02:02.699Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:56.116Z",
+      "countMismatch": false
     },
     {
       "schoolId": "harrison-park",
@@ -446,11 +498,13 @@
       "hasPdfs": true,
       "pdfCount": 10,
       "localPdfCount": 10,
-      "driveLastModified": "2025-12-17T14:54:59.403Z",
-      "localLastModified": "2026-04-25T03:29:10.429Z",
-      "matches": false,
+      "driveLastModified": "2026-08-18T18:55:44.045Z",
+      "localLastModified": "2026-08-18T18:55:44.045Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:56.118Z",
+      "countMismatch": false
     },
     {
       "schoolId": "hayhurst",
@@ -459,13 +513,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 10,
-      "localPdfCount": 10,
-      "driveLastModified": "2026-05-20T13:03:38.159Z",
-      "localLastModified": "2026-05-20T13:03:38.159Z",
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2026-09-09T14:24:10.326Z",
+      "localLastModified": "2026-09-09T14:24:10.326Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:57.118Z",
+      "countMismatch": false
     },
     {
       "schoolId": "hosford",
@@ -476,11 +532,13 @@
       "hasPdfs": true,
       "pdfCount": 8,
       "localPdfCount": 8,
-      "driveLastModified": "2026-01-15T17:56:40.420Z",
-      "localLastModified": "2026-04-25T03:27:13.141Z",
-      "matches": false,
+      "driveLastModified": "2026-08-10T19:47:47.489Z",
+      "localLastModified": "2026-08-10T19:47:47.489Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:57.119Z",
+      "countMismatch": false
     },
     {
       "schoolId": "irvington",
@@ -491,11 +549,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2025-08-26T20:05:36.664Z",
-      "localLastModified": "2026-04-25T03:26:43.801Z",
-      "matches": false,
+      "driveLastModified": "2026-08-06T15:59:02.861Z",
+      "localLastModified": "2026-08-06T15:59:02.861Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:58.119Z",
+      "countMismatch": false
     },
     {
       "schoolId": "jackson",
@@ -504,13 +564,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 30,
-      "localPdfCount": 32,
-      "driveLastModified": "2026-04-29T13:14:43.624Z",
-      "localLastModified": "2026-04-29T13:14:43.624Z",
+      "pdfCount": 37,
+      "localPdfCount": 37,
+      "driveLastModified": "2026-09-16T15:12:22.319Z",
+      "localLastModified": "2026-09-16T15:12:22.319Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:58.120Z",
+      "countMismatch": false
     },
     {
       "schoolId": "james-john",
@@ -521,11 +583,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2026-03-26T20:32:43.732Z",
-      "localLastModified": "2026-04-25T03:22:55.669Z",
-      "matches": false,
+      "driveLastModified": "2026-09-15T20:05:05.166Z",
+      "localLastModified": "2026-09-15T20:05:05.166Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:59.135Z",
+      "countMismatch": false
     },
     {
       "schoolId": "kelly",
@@ -536,11 +600,13 @@
       "hasPdfs": true,
       "pdfCount": 4,
       "localPdfCount": 4,
-      "driveLastModified": "2026-03-11T15:09:05.657Z",
-      "localLastModified": "2026-04-25T03:22:20.511Z",
-      "matches": false,
+      "driveLastModified": "2026-08-14T21:36:24.044Z",
+      "localLastModified": "2026-08-14T21:36:24.044Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:00.128Z",
+      "countMismatch": false
     },
     {
       "schoolId": "kellogg",
@@ -551,11 +617,13 @@
       "hasPdfs": true,
       "pdfCount": 12,
       "localPdfCount": 12,
-      "driveLastModified": "2026-02-11T14:08:51.409Z",
-      "localLastModified": "2026-04-25T03:21:30.235Z",
-      "matches": false,
+      "driveLastModified": "2026-08-26T21:35:50.572Z",
+      "localLastModified": "2026-08-26T21:35:50.572Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:59.132Z",
+      "countMismatch": false
     },
     {
       "schoolId": "lane",
@@ -566,11 +634,13 @@
       "hasPdfs": true,
       "pdfCount": 8,
       "localPdfCount": 8,
-      "driveLastModified": "2026-03-11T14:34:06.472Z",
-      "localLastModified": "2026-04-25T03:20:28.255Z",
-      "matches": false,
+      "driveLastModified": "2026-09-01T16:47:01.555Z",
+      "localLastModified": "2026-09-01T16:47:01.555Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:00.130Z",
+      "countMismatch": false
     },
     {
       "schoolId": "lee",
@@ -579,13 +649,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 4,
-      "localPdfCount": 4,
-      "driveLastModified": "2025-11-06T15:53:47.664Z",
-      "localLastModified": "2026-04-25T03:19:51.327Z",
-      "matches": false,
+      "pdfCount": 7,
+      "localPdfCount": 7,
+      "driveLastModified": "2026-09-16T16:40:25.898Z",
+      "localLastModified": "2026-09-16T16:40:25.898Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:01.129Z",
+      "countMismatch": false
     },
     {
       "schoolId": "lent",
@@ -594,13 +666,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 6,
-      "localPdfCount": 6,
-      "driveLastModified": "2026-03-04T14:49:19.826Z",
-      "localLastModified": "2026-04-25T03:19:16.880Z",
-      "matches": false,
+      "pdfCount": 7,
+      "localPdfCount": 7,
+      "driveLastModified": "2026-09-16T15:48:53.957Z",
+      "localLastModified": "2026-09-16T15:48:53.957Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:39.082Z",
+      "countMismatch": false
     },
     {
       "schoolId": "leodis-v-mcdaniel",
@@ -626,11 +700,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2025-08-01T16:46:16.105Z",
-      "localLastModified": "2026-04-25T03:18:51.958Z",
-      "matches": false,
+      "driveLastModified": "2026-08-06T17:35:41.766Z",
+      "localLastModified": "2026-08-06T17:35:41.766Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:40.086Z",
+      "countMismatch": false
     },
     {
       "schoolId": "lincoln",
@@ -639,13 +715,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 18,
-      "localPdfCount": 18,
-      "driveLastModified": "2026-05-20T14:27:30.176Z",
-      "localLastModified": "2026-05-20T14:27:30.176Z",
+      "pdfCount": 20,
+      "localPdfCount": 20,
+      "driveLastModified": "2026-09-09T15:46:36.991Z",
+      "localLastModified": "2026-09-09T15:46:36.991Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:40.084Z",
+      "countMismatch": false
     },
     {
       "schoolId": "llewellyn",
@@ -656,11 +734,13 @@
       "hasPdfs": true,
       "pdfCount": 3,
       "localPdfCount": 3,
-      "driveLastModified": "2025-09-03T22:22:48.238Z",
-      "localLastModified": "2026-04-25T03:16:30.744Z",
-      "matches": false,
+      "driveLastModified": "2026-08-08T17:12:28.822Z",
+      "localLastModified": "2026-08-08T17:12:28.822Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:41.085Z",
+      "countMismatch": false
     },
     {
       "schoolId": "dr-martin-luther-king",
@@ -669,13 +749,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 4,
-      "localPdfCount": 4,
-      "driveLastModified": "2026-04-09T13:11:51.707Z",
-      "localLastModified": "2026-04-25T03:16:01.389Z",
-      "matches": false,
+      "pdfCount": 7,
+      "localPdfCount": 7,
+      "driveLastModified": "2026-09-16T15:14:11.182Z",
+      "localLastModified": "2026-09-16T15:14:11.182Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:05.135Z",
+      "countMismatch": false
     },
     {
       "schoolId": "maplewood",
@@ -684,13 +766,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 8,
-      "localPdfCount": 10,
-      "driveLastModified": "2026-04-30T13:06:25.442Z",
-      "localLastModified": "2026-04-30T13:06:25.442Z",
+      "pdfCount": 14,
+      "localPdfCount": 14,
+      "driveLastModified": "2026-09-16T13:30:11.684Z",
+      "localLastModified": "2026-09-16T13:30:11.684Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:41.087Z",
+      "countMismatch": false
     },
     {
       "schoolId": "markham",
@@ -699,13 +783,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 10,
-      "localPdfCount": 10,
-      "driveLastModified": "2026-02-10T22:49:17.115Z",
-      "localLastModified": "2026-04-25T03:13:57.880Z",
-      "matches": false,
+      "pdfCount": 12,
+      "localPdfCount": 12,
+      "driveLastModified": "2026-09-02T17:36:58.901Z",
+      "localLastModified": "2026-09-02T17:36:58.901Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:42.090Z",
+      "countMismatch": false
     },
     {
       "schoolId": "marysville",
@@ -716,11 +802,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2026-04-15T14:14:09.267Z",
-      "localLastModified": "2026-04-25T03:13:08.633Z",
-      "matches": false,
+      "driveLastModified": "2026-09-02T18:19:09.475Z",
+      "localLastModified": "2026-09-02T18:19:09.475Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:42.089Z",
+      "countMismatch": false
     },
     {
       "schoolId": "mt-tabor",
@@ -729,13 +817,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 12,
-      "localPdfCount": 12,
-      "driveLastModified": "2026-01-07T15:59:34.356Z",
-      "localLastModified": "2026-04-25T03:12:09.769Z",
-      "matches": false,
+      "pdfCount": 13,
+      "localPdfCount": 13,
+      "driveLastModified": "2026-09-16T15:15:55.046Z",
+      "localLastModified": "2026-09-16T15:15:55.046Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:43.092Z",
+      "countMismatch": false
     },
     {
       "schoolId": "ockley-green",
@@ -744,13 +834,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 6,
-      "localPdfCount": 6,
-      "driveLastModified": "2026-02-04T14:25:48.892Z",
-      "localLastModified": "2026-04-25T03:11:18.042Z",
-      "matches": false,
+      "pdfCount": 4,
+      "localPdfCount": 4,
+      "driveLastModified": "2026-08-08T15:35:03.965Z",
+      "localLastModified": "2026-08-08T15:35:03.965Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:43.093Z",
+      "countMismatch": false
     },
     {
       "schoolId": "peninsula",
@@ -761,11 +853,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2025-08-03T18:36:16.048Z",
-      "localLastModified": "2026-04-25T03:10:53.388Z",
-      "matches": false,
+      "driveLastModified": "2026-08-08T17:06:18.655Z",
+      "localLastModified": "2026-08-08T17:06:18.655Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:44.094Z",
+      "countMismatch": false
     },
     {
       "schoolId": "richmond",
@@ -774,13 +868,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 8,
-      "localPdfCount": 8,
-      "driveLastModified": "2026-03-26T13:16:05.746Z",
-      "localLastModified": "2026-04-25T03:10:08.516Z",
-      "matches": false,
+      "pdfCount": 13,
+      "localPdfCount": 13,
+      "driveLastModified": "2026-09-18T15:50:57.477Z",
+      "localLastModified": "2026-09-18T15:50:57.477Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:44.096Z",
+      "countMismatch": false
     },
     {
       "schoolId": "rieke",
@@ -789,13 +885,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 6,
-      "localPdfCount": 6,
-      "driveLastModified": "2025-11-13T16:37:47.340Z",
-      "localLastModified": "2026-04-25T03:09:18.986Z",
-      "matches": false,
+      "pdfCount": 10,
+      "localPdfCount": 10,
+      "driveLastModified": "2026-09-16T13:57:24.744Z",
+      "localLastModified": "2026-09-16T13:57:24.744Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:45.097Z",
+      "countMismatch": false
     },
     {
       "schoolId": "rigler",
@@ -806,11 +904,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2026-03-11T15:20:46.534Z",
-      "localLastModified": "2026-04-25T03:08:36.679Z",
-      "matches": false,
+      "driveLastModified": "2026-08-05T18:03:40.836Z",
+      "localLastModified": "2026-08-05T18:03:40.836Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:45.095Z",
+      "countMismatch": false
     },
     {
       "schoolId": "rosa-parks",
@@ -821,11 +921,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2026-05-29T20:11:07.619Z",
-      "localLastModified": "2026-05-29T20:11:07.619Z",
+      "driveLastModified": "2026-06-16T20:19:09.849Z",
+      "localLastModified": "2026-06-16T20:19:09.849Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:46.097Z",
+      "countMismatch": false
     },
     {
       "schoolId": "rose-city-park",
@@ -836,11 +938,13 @@
       "hasPdfs": true,
       "pdfCount": 4,
       "localPdfCount": 4,
-      "driveLastModified": "2026-03-26T12:57:42.109Z",
-      "localLastModified": "2026-04-25T03:07:09.318Z",
-      "matches": false,
+      "driveLastModified": "2026-09-03T21:54:04.967Z",
+      "localLastModified": "2026-09-03T21:54:04.967Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:46.099Z",
+      "countMismatch": false
     },
     {
       "schoolId": "roseway-heights",
@@ -849,13 +953,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 10,
-      "localPdfCount": 10,
-      "driveLastModified": "2026-04-03T15:40:14.711Z",
-      "localLastModified": "2026-04-25T03:06:17.418Z",
-      "matches": false,
+      "pdfCount": 12,
+      "localPdfCount": 12,
+      "driveLastModified": "2026-09-10T15:05:41.304Z",
+      "localLastModified": "2026-09-10T15:05:41.304Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:47.100Z",
+      "countMismatch": false
     },
     {
       "schoolId": "sabin",
@@ -867,10 +973,12 @@
       "pdfCount": 5,
       "localPdfCount": 5,
       "driveLastModified": "2022-07-05T16:17:29.329Z",
-      "localLastModified": "2026-04-25T03:05:29.162Z",
-      "matches": false,
+      "localLastModified": "2022-07-05T16:17:29.329Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:47.098Z",
+      "countMismatch": false
     },
     {
       "schoolId": "scott",
@@ -881,11 +989,13 @@
       "hasPdfs": true,
       "pdfCount": 6,
       "localPdfCount": 6,
-      "driveLastModified": "2025-12-11T18:02:58.542Z",
-      "localLastModified": "2026-04-25T03:04:57.293Z",
-      "matches": false,
+      "driveLastModified": "2026-08-06T20:30:56.878Z",
+      "localLastModified": "2026-08-06T20:30:56.878Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:48.102Z",
+      "countMismatch": false
     },
     {
       "schoolId": "sellwood",
@@ -894,13 +1004,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 12,
-      "localPdfCount": 12,
-      "driveLastModified": "2026-05-13T13:25:02.122Z",
-      "localLastModified": "2026-05-13T13:25:02.122Z",
+      "pdfCount": 16,
+      "localPdfCount": 16,
+      "driveLastModified": "2026-09-09T22:29:54.394Z",
+      "localLastModified": "2026-09-09T22:29:54.394Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:48.100Z",
+      "countMismatch": false
     },
     {
       "schoolId": "sitton",
@@ -910,12 +1022,14 @@
       "accessible": true,
       "hasPdfs": true,
       "pdfCount": 4,
-      "localPdfCount": 6,
-      "driveLastModified": "2026-04-22T13:20:47.179Z",
-      "localLastModified": "2026-04-25T03:03:07.477Z",
-      "matches": false,
+      "localPdfCount": 4,
+      "driveLastModified": "2026-09-01T14:56:51.708Z",
+      "localLastModified": "2026-09-01T14:56:51.708Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:49.102Z",
+      "countMismatch": false
     },
     {
       "schoolId": "skyline",
@@ -924,13 +1038,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 10,
-      "localPdfCount": 10,
-      "driveLastModified": "2026-04-08T13:47:33.077Z",
-      "localLastModified": "2026-04-25T03:01:59.219Z",
-      "matches": false,
+      "pdfCount": 14,
+      "localPdfCount": 14,
+      "driveLastModified": "2026-09-16T16:04:08.228Z",
+      "localLastModified": "2026-09-16T16:04:08.228Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:49.104Z",
+      "countMismatch": false
     },
     {
       "schoolId": "stephenson",
@@ -939,13 +1055,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 6,
-      "localPdfCount": 6,
-      "driveLastModified": "2026-02-18T21:19:08.573Z",
-      "localLastModified": "2026-04-25T03:01:06.122Z",
-      "matches": false,
+      "pdfCount": 7,
+      "localPdfCount": 7,
+      "driveLastModified": "2026-09-16T17:36:26.499Z",
+      "localLastModified": "2026-09-16T17:36:26.499Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:50.103Z",
+      "countMismatch": false
     },
     {
       "schoolId": "tubman",
@@ -954,13 +1072,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 7,
-      "localPdfCount": 7,
-      "driveLastModified": "2026-05-21T18:22:51.889Z",
-      "localLastModified": "2026-05-21T18:22:51.889Z",
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2026-08-06T16:40:07.430Z",
+      "localLastModified": "2026-08-06T16:40:07.430Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:50.105Z",
+      "countMismatch": false
     },
     {
       "schoolId": "vernon",
@@ -971,11 +1091,13 @@
       "hasPdfs": true,
       "pdfCount": 4,
       "localPdfCount": 4,
-      "driveLastModified": "2025-08-05T18:50:03.793Z",
-      "localLastModified": "2026-04-25T02:52:19.517Z",
-      "matches": false,
+      "driveLastModified": "2026-08-26T21:26:53.704Z",
+      "localLastModified": "2026-08-26T21:26:53.704Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:51.108Z",
+      "countMismatch": false
     },
     {
       "schoolId": "vestal",
@@ -986,11 +1108,13 @@
       "hasPdfs": true,
       "pdfCount": 2,
       "localPdfCount": 2,
-      "driveLastModified": "2025-08-03T16:11:16.563Z",
-      "localLastModified": "2026-04-25T03:00:01.097Z",
-      "matches": false,
+      "driveLastModified": "2026-08-08T16:00:45.506Z",
+      "localLastModified": "2026-08-08T16:00:45.506Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:51.107Z",
+      "countMismatch": false
     },
     {
       "schoolId": "west-sylvan",
@@ -999,13 +1123,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 38,
-      "localPdfCount": 38,
-      "driveLastModified": "2026-04-16T14:02:57.192Z",
-      "localLastModified": "2026-04-25T02:57:51.590Z",
-      "matches": false,
+      "pdfCount": 40,
+      "localPdfCount": 40,
+      "driveLastModified": "2026-09-16T14:48:42.016Z",
+      "localLastModified": "2026-09-16T14:48:42.016Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:52.111Z",
+      "countMismatch": false
     },
     {
       "schoolId": "whitman",
@@ -1014,13 +1140,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 3,
-      "localPdfCount": 3,
-      "driveLastModified": "2026-05-22T18:44:11.263Z",
-      "localLastModified": "2026-05-22T18:44:11.263Z",
+      "pdfCount": 2,
+      "localPdfCount": 2,
+      "driveLastModified": "2026-08-08T16:03:48.962Z",
+      "localLastModified": "2026-08-08T16:03:48.962Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:52.109Z",
+      "countMismatch": false
     },
     {
       "schoolId": "woodlawn",
@@ -1031,11 +1159,13 @@
       "hasPdfs": true,
       "pdfCount": 3,
       "localPdfCount": 3,
-      "driveLastModified": "2025-08-05T16:58:07.814Z",
-      "localLastModified": "2026-04-25T02:55:56.241Z",
-      "matches": false,
+      "driveLastModified": "2026-08-08T15:42:17.079Z",
+      "localLastModified": "2026-08-08T15:42:17.079Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:53.110Z",
+      "countMismatch": false
     },
     {
       "schoolId": "woodmere",
@@ -1044,13 +1174,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 4,
-      "localPdfCount": 4,
-      "driveLastModified": "2025-08-04T21:08:36.312Z",
-      "localLastModified": "2026-04-25T02:55:30.990Z",
-      "matches": false,
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2026-09-16T18:28:14.064Z",
+      "localLastModified": "2026-09-16T18:28:14.064Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:53.113Z",
+      "countMismatch": false
     },
     {
       "schoolId": "woodstock",
@@ -1059,13 +1191,15 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 4,
+      "pdfCount": 5,
       "localPdfCount": 5,
-      "driveLastModified": "2026-04-30T16:16:20.344Z",
-      "localLastModified": "2026-04-30T16:16:20.344Z",
+      "driveLastModified": "2026-09-16T17:14:00.914Z",
+      "localLastModified": "2026-09-16T17:14:00.914Z",
       "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:07:39.155Z",
+      "countMismatch": false
     },
     {
       "schoolId": "access",
@@ -1074,20 +1208,22 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 20,
-      "localPdfCount": 20,
-      "driveLastModified": "2026-03-26T14:55:18.631Z",
-      "localLastModified": "2026-04-25T02:53:20.248Z",
-      "matches": false,
+      "pdfCount": 15,
+      "localPdfCount": 15,
+      "driveLastModified": "2026-09-14T17:14:23.848Z",
+      "localLastModified": "2026-09-14T17:14:23.848Z",
+      "matches": true,
       "needsUpdate": false,
-      "error": null
+      "error": null,
+      "checkedAt": "2026-09-18T18:08:11.141Z",
+      "countMismatch": false
     }
   ],
   "summary": {
     "accessible": 71,
     "hasPdfs": 68,
-    "matches": 61,
-    "needsUpdate": 7,
+    "matches": 69,
+    "needsUpdate": 0,
     "errors": 0
   }
 }

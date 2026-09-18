@@ -23,6 +23,21 @@
     },
     {
       "id": "stop-3",
+      "address": "SE Reedway St. & SE 49th Ave. (woodstock School) [N]",
+      "time": "8:18 am",
+      "direction": "N",
+      "originalLine": "8:18 am SE REEDWAY ST@SE 49TH AV (WOODSTOCK SCHOOL) [N]255ACC-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6123978,
+        45.4813432
+      ],
+      "displayName": "SE Reedway St & SE 49th Ave, Portland, OR 97206, USA",
+      "placeId": "EjRTRSBSZWVkd2F5IFN0ICYgU0UgNDl0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIwNiwgVVNBImYiZAoUChIJyRXySQqglVQRgfERrfvsZFMSFAoSCckV8kkKoJVUEYHxEa377GRTGhQKEgnRQo6wGaCVVBGKEk6BbyMTURoUChIJucTIqnSglVQRGxgd4bFCC7EiCg345hsbFTbV6rY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
       "address": "7200 SE 60th Ave. [W]",
       "time": "8:23 am",
       "direction": "W",
@@ -37,7 +52,7 @@
       "neighborhood": "Brentwood-Darlington"
     },
     {
-      "id": "stop-4",
+      "id": "stop-5",
       "address": "1515 SE Umatilla St. (sellwood Ms) [S]",
       "time": "8:37 am",
       "direction": "S",
@@ -72,10 +87,10 @@
     "South Tabor",
     "Southeast Portland"
   ],
-  "processedAt": "2026-09-07T03:34:07.394Z",
+  "processedAt": "2026-09-18T18:08:39.542Z",
   "stats": {
-    "totalStops": 4,
-    "geocodedStops": 4,
+    "totalStops": 5,
+    "geocodedStops": 5,
     "failedStops": 0
   },
   "geometry": [
@@ -181,6 +196,42 @@
     ],
     [
       45.48142,
+      -122.60875
+    ],
+    [
+      45.48133,
+      -122.60875
+    ],
+    [
+      45.48134,
+      -122.60976
+    ],
+    [
+      45.48134,
+      -122.61177
+    ],
+    [
+      45.48134,
+      -122.6124
+    ],
+    [
+      45.48134,
+      -122.61177
+    ],
+    [
+      45.48134,
+      -122.60976
+    ],
+    [
+      45.48133,
+      -122.60875
+    ],
+    [
+      45.48125,
+      -122.60875
+    ],
+    [
+      45.48095,
       -122.60875
     ],
     [
@@ -860,24 +911,36 @@
       -122.67228
     ],
     [
-      45.47869,
-      -122.67252
+      45.4799,
+      -122.67292
     ],
     [
-      45.47867,
-      -122.67264
+      45.47985,
+      -122.67301
     ],
     [
-      45.47868,
-      -122.67291
+      45.47984,
+      -122.67318
     ],
     [
-      45.47868,
-      -122.67308
+      45.47985,
+      -122.67359
+    ],
+    [
+      45.47986,
+      -122.67458
+    ],
+    [
+      45.47986,
+      -122.67485
+    ],
+    [
+      45.47949,
+      -122.67486
     ],
     [
       45.4787,
-      -122.67537
+      -122.67488
     ],
     [
       45.4787,

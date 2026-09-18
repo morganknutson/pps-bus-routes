@@ -9,9 +9,9 @@
     {
       "id": "stop-2",
       "address": "6010 SW 30th Ave. (heritage Apts) [W]",
-      "time": "8:39 am",
+      "time": "8:38 am",
       "direction": "W",
-      "originalLine": "8:39 am6010 SW 30TH AV (HERITAGE APTS) [W]128GRY-A(1)Stop Order #:",
+      "originalLine": "8:38 am6010 SW 30TH AV (HERITAGE APTS) [W]128GRY-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7072465848756,
@@ -38,10 +38,25 @@
     },
     {
       "id": "stop-4",
+      "address": "SW 30th Ave. & SW Illinois St. [NW]",
+      "time": "8:39 am",
+      "direction": "NW",
+      "originalLine": "8:39 amSW 30TH AV @ SW ILLINOIS ST [NW]128GRY-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7077403,
+        45.4789736
+      ],
+      "displayName": "SW Illinois St & SW 30th Ave, Portland, OR 97239, USA",
+      "placeId": "EjVTVyBJbGxpbm9pcyBTdCAmIFNXIDMwdGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMzksIFVTQSJmImQKFAoSCVfzdlqmC5VUEbopWFhsH9OpEhQKEglX83ZapguVVBG6KVhYbB_TqRoUChIJBeCaf5gLlVQRb1hfYXZELCsaFAoSCa1ZXnptC5VUEZLgOdxT_U8WIgoNaIobGxXlSNy2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-5",
       "address": "SW 30th Ave. & SW Carolina St. [NW]",
       "time": "8:40 am",
       "direction": "NW",
-      "originalLine": "8:40 amSW 30TH AV @ SW CAROLINA ST [NW]128GRY-A(3)Stop Order #:",
+      "originalLine": "8:40 amSW 30TH AV @ SW CAROLINA ST [NW]128GRY-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7077424,
@@ -52,11 +67,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-5",
+      "id": "stop-6",
       "address": "SW 30th Ave. & SW Nebraska St. [NW]",
       "time": "8:41 am",
       "direction": "NW",
-      "originalLine": "8:41 amSW 30TH AV @ SW NEBRASKA ST [NW]128GRY-A(4)Stop Order #:",
+      "originalLine": "8:41 amSW 30TH AV @ SW NEBRASKA ST [NW]128GRY-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7077328,
@@ -67,11 +82,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-6",
+      "id": "stop-7",
       "address": "SW Vermont St. & SW 34th Ave. [NE]",
       "time": "8:42 am",
       "direction": "NE",
-      "originalLine": "8:42 amSW VERMONT ST @ SW 34TH AV [NE]128GRY-A(5)Stop Order #:",
+      "originalLine": "8:42 amSW VERMONT ST @ SW 34TH AV [NE]128GRY-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7115976,
@@ -82,11 +97,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-7",
+      "id": "stop-8",
       "address": "SW Vermont St. & SW 35th Ave. [NE]",
       "time": "8:43 am",
       "direction": "NE",
-      "originalLine": "8:43 amSW VERMONT ST @ SW 35TH AV [NE]128GRY-A(6)Stop Order #:",
+      "originalLine": "8:43 amSW VERMONT ST @ SW 35TH AV [NE]128GRY-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7128988,
@@ -97,11 +112,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-8",
+      "id": "stop-9",
       "address": "SW Vermont St. & SW 36th Ave. [NE]",
       "time": "8:43 am",
       "direction": "NE",
-      "originalLine": "8:43 amSW VERMONT ST @ SW 36TH AV [NE]128GRY-A(7)Stop Order #:",
+      "originalLine": "8:43 amSW VERMONT ST @ SW 36TH AV [NE]128GRY-A(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7141983,
@@ -112,11 +127,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-9",
+      "id": "stop-10",
       "address": "SW Vermont St. & SW 47th Pl. [NE]",
       "time": "8:46 am",
       "direction": "NE",
-      "originalLine": "8:46 amSW VERMONT ST & SW 47TH PL [NE]128GRY-A(8)Stop Order #:",
+      "originalLine": "8:46 amSW VERMONT ST & SW 47TH PL [NE]128GRY-A(9)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7272572,
@@ -127,11 +142,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-10",
+      "id": "stop-11",
       "address": "SW 50th Ave. & SW Nebraska St. [E]",
       "time": "8:47 am",
       "direction": "E",
-      "originalLine": "8:47 amSW 50TH AV @ SW NEBRASKA ST [E]128GRY-A(9)Stop Order #:",
+      "originalLine": "8:47 amSW 50TH AV @ SW NEBRASKA ST [E]128GRY-A(10)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7283169,
@@ -142,11 +157,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-11",
+      "id": "stop-12",
       "address": "Hayhurst School (5037 SW Iowa St) [N]",
       "time": "8:49 am",
       "direction": "N",
-      "originalLine": "8:49 amHAYHURST SCHOOL (5037 SW IOWA ST) [N]128GRY-A(10)Stop Order #:",
+      "originalLine": "8:49 amHAYHURST SCHOOL (5037 SW IOWA ST) [N]128GRY-A(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7283018,
@@ -157,11 +172,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-12",
+      "id": "stop-13",
       "address": "5935 SW Illinois St. [N]",
       "time": "8:52 am",
       "direction": "N",
-      "originalLine": "8:52 am5935 SW ILLINOIS ST [N]128GRY-A(11)Stop Order #:",
+      "originalLine": "8:52 am5935 SW ILLINOIS ST [N]128GRY-A(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.73805812116906,
@@ -172,11 +187,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-13",
+      "id": "stop-14",
       "address": "6014 SW Shattuck Rd. [E]",
       "time": "8:53 am",
       "direction": "E",
-      "originalLine": "8:53 am6014 SW Shattuck Rd [E]128GRY-A(12)Stop Order #:",
+      "originalLine": "8:53 am6014 SW Shattuck Rd [E]128GRY-A(13)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7353189,
@@ -187,11 +202,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-14",
+      "id": "stop-15",
       "address": "SW Dosch Rd. & SW Flower Terr. (north) [SE]",
       "time": "8:59 am",
       "direction": "SE",
-      "originalLine": "8:59 amSW DOSCH Rd @ SW FLOWER TERR (NORTH) [SE]128GRY-A(13)Stop Order #:",
+      "originalLine": "8:59 amSW DOSCH Rd @ SW FLOWER TERR (NORTH) [SE]128GRY-A(14)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7077346,
@@ -221,10 +236,10 @@
     "Hayhurst",
     "Southwest Portland"
   ],
-  "processedAt": "2026-08-10T02:24:31.840Z",
+  "processedAt": "2026-09-18T18:03:35.424Z",
   "stats": {
-    "totalStops": 14,
-    "geocodedStops": 14,
+    "totalStops": 15,
+    "geocodedStops": 15,
     "failedStops": 0
   },
   "geometry": [

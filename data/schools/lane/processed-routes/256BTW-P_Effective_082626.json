@@ -80,15 +80,30 @@
       "displayName": "7948 SE Aspen Summit Dr, Portland, OR 97266, USA",
       "placeId": "ChIJKRQm5eyflVQRjKv3B0H6Eeg",
       "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-5",
+      "address": "7828 SE Aspen Summit Dr. (scott Mountain Apts) [NE]",
+      "time": "4:24 pm",
+      "direction": "NE",
+      "originalLine": "4:24 pm 7828 SE ASPEN SUMMIT DR (SCOTT MOUNTAIN APTS) [NE]256BTW-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.56462743433882,
+        45.466070061492104
+      ],
+      "displayName": "7828 SE Aspen Summit Dr, Portland, OR 97266, USA",
+      "placeId": "ChIJb111-eyflVQRDyALWSVznvU",
+      "neighborhood": "Lents"
     }
   ],
   "neighborhoods": [
     "Lents"
   ],
-  "processedAt": "2026-08-10T02:00:23.869Z",
+  "processedAt": "2026-09-18T18:08:49.967Z",
   "stats": {
-    "totalStops": 5,
-    "geocodedStops": 5,
+    "totalStops": 6,
+    "geocodedStops": 6,
     "failedStops": 0
   },
   "geometry": [
@@ -419,6 +434,46 @@
     [
       45.46543,
       -122.56333
+    ],
+    [
+      45.46545,
+      -122.5634
+    ],
+    [
+      45.46547,
+      -122.56358
+    ],
+    [
+      45.46549,
+      -122.56403
+    ],
+    [
+      45.46551,
+      -122.56473
+    ],
+    [
+      45.46552,
+      -122.56487
+    ],
+    [
+      45.4657,
+      -122.56488
+    ],
+    [
+      45.46574,
+      -122.56488
+    ],
+    [
+      45.46588,
+      -122.56487
+    ],
+    [
+      45.46594,
+      -122.56485
+    ],
+    [
+      45.46607,
+      -122.56463
     ]
   ]
 }

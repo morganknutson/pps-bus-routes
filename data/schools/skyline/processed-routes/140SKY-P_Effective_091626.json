@@ -255,6 +255,21 @@
     },
     {
       "id": "stop-17",
+      "address": "10614 NW St. Helens Rd. (linnton Community Cen) [E]",
+      "time": "4:31 pm",
+      "direction": "E",
+      "originalLine": "4:31 pm 10614 NW ST HELENS RD (LINNTON COMMUNITY CEN) [E]140SKY-P(18)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.78444043735675,
+        45.59747858686387
+      ],
+      "displayName": "10614 NW St, Portland, OR 97231, USA",
+      "placeId": "EiQxMDYxNCBOVyBTdCwgUG9ydGxhbmQsIE9SIDk3MjMxLCBVU0EiMRIvChQKEgkv6cZn7QeVVBHU9rroN3FHnhD2UioUChIJzU_uZe0HlVQRe2z7ez94CuQ",
+      "neighborhood": "Northwest Portland"
+    },
+    {
+      "id": "stop-18",
       "address": "17528 NW St. Helens Rd. [NE]",
       "time": "4:39 pm",
       "direction": "NE",
@@ -273,10 +288,10 @@
     "Linnton",
     "Northwest Portland"
   ],
-  "processedAt": "2026-09-14T03:59:42.788Z",
+  "processedAt": "2026-09-18T18:09:04.205Z",
   "stats": {
-    "totalStops": 18,
-    "geocodedStops": 18,
+    "totalStops": 19,
+    "geocodedStops": 19,
     "failedStops": 0
   },
   "geometry": [

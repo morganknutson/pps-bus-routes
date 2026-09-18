@@ -53,6 +53,21 @@
     },
     {
       "id": "stop-4",
+      "address": "SW Talbot Rd. & NORTH Fairmount Intersection [NW]",
+      "time": "7:32 am",
+      "direction": "NW",
+      "originalLine": "7:32 am SW TALBOT RD @ NORTH FAIRMOUNT INTERSECTION [NW]103AIN-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7108681,
+        45.5010749
+      ],
+      "displayName": "SW Talbot Rd & SW Fairmount Blvd, Portland, OR 97239, USA",
+      "placeId": "EjlTVyBUYWxib3QgUmQgJiBTVyBGYWlybW91bnQgQmx2ZCwgUG9ydGxhbmQsIE9SIDk3MjM5LCBVU0EiZiJkChQKEgkhCtpiMwqVVBEpr7iMr0EbNhIUChIJIQraYjMKlVQRKa-4jK9BGzYaFAoSCdNAweAzCpVUEb9wUTukhspkGhQKEgkJT4NuSwqVVBFuZSxF0JdF-SIKDb3pHhsVt87btg",
+      "neighborhood": "Southwest Hills"
+    },
+    {
+      "id": "stop-5",
       "address": "SW Fairmount Blvd. & SW Himes St. [NW]",
       "time": "7:34 am",
       "direction": "NW",
@@ -67,7 +82,7 @@
       "neighborhood": "Southwest Hills"
     },
     {
-      "id": "stop-5",
+      "id": "stop-6",
       "address": "SW Fairmount Blvd. & SW Wapato Ave. [S]",
       "time": "7:35 am",
       "direction": "S",
@@ -82,7 +97,7 @@
       "neighborhood": "Southwest Hills"
     },
     {
-      "id": "stop-6",
+      "id": "stop-7",
       "address": "SW Chehalem Ave. & SW Council Crest Dr. [SW]",
       "time": "7:37 am",
       "direction": "SW",
@@ -97,7 +112,7 @@
       "neighborhood": "Southwest Hills"
     },
     {
-      "id": "stop-7",
+      "id": "stop-8",
       "address": "4163 SW Council Crest Dr. [S]",
       "time": "7:38 am",
       "direction": "S",
@@ -112,7 +127,7 @@
       "neighborhood": "Southwest Hills"
     },
     {
-      "id": "stop-8",
+      "id": "stop-9",
       "address": "SW Council Crest Dr. & SW Bernard Dr. [NW]",
       "time": "7:39 am",
       "direction": "NW",
@@ -127,7 +142,7 @@
       "neighborhood": "Southwest Hills"
     },
     {
-      "id": "stop-9",
+      "id": "stop-10",
       "address": "SW Patrick Pl. & SW Bertha Ave. [NE]",
       "time": "7:40 am",
       "direction": "NE",
@@ -142,7 +157,7 @@
       "neighborhood": "Southwest Hills"
     },
     {
-      "id": "stop-10",
+      "id": "stop-11",
       "address": "SW Mt Adams Dr. & SW Fairmount Blvd. [S]",
       "time": "7:43 am",
       "direction": "S",
@@ -157,7 +172,7 @@
       "neighborhood": "Southwest Hills"
     },
     {
-      "id": "stop-11",
+      "id": "stop-12",
       "address": "SW Greenway Ave. & SW Talbot Rd. [S]",
       "time": "7:45 am",
       "direction": "S",
@@ -191,10 +206,10 @@
     "Bridlemile",
     "Southwest Hills"
   ],
-  "processedAt": "2026-09-07T03:34:06.388Z",
+  "processedAt": "2026-09-18T18:08:40.926Z",
   "stats": {
-    "totalStops": 12,
-    "geocodedStops": 12,
+    "totalStops": 13,
+    "geocodedStops": 13,
     "failedStops": 0
   },
   "geometry": [

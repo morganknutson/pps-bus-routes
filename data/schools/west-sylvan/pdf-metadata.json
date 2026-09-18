@@ -7,7 +7,8 @@
     },
     "1g-NHftZgU9X5Q3XXwEhbhxYLtSugCi2H": {
       "filename": "107SYL-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T15:47:03.467Z",
+      "modifiedTime": "2026-08-17T15:14:52.838Z",
+      "md5Checksum": "294a61e6ff47225fd2a4c857cd0e848d",
       "localPath": "107SYL-P_Effective_082626.pdf"
     },
     "17nFYD7RMPQQtTtJh-Wh8866eOn1d4Oq2": {
@@ -42,7 +43,8 @@
     },
     "1_t76f3vUuubU8yAMHZPakUHwvusvo0uC": {
       "filename": "100SYL-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T15:42:37.048Z",
+      "modifiedTime": "2026-08-13T17:09:15.238Z",
+      "md5Checksum": "55dc70766eed69595d52ffc0bfe49688",
       "localPath": "100SYL-P_Effective_082626.pdf"
     },
     "1wCaF-a0klsyrh_XH_qy4Cd8gM1JN2Zwe": {
@@ -52,7 +54,8 @@
     },
     "1h74ARV6_H7Hw8mN0Yfrea6PYTbI2aycn": {
       "filename": "107SYL-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T17:24:09.853Z",
+      "modifiedTime": "2026-08-17T15:14:15.772Z",
+      "md5Checksum": "d3a218abb4235f293b8b3092e46727b1",
       "localPath": "107SYL-A_Effective_082626.pdf"
     },
     "1AwIOfbLC42LhAi8OCCjcdaipmjpPDtL_": {
@@ -82,7 +85,8 @@
     },
     "1miamTLhZOslMsLqquM6YjyC8XZwp9SiY": {
       "filename": "100SYL-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T17:21:11.579Z",
+      "modifiedTime": "2026-08-13T17:08:33.020Z",
+      "md5Checksum": "4caaf7176a8299b7f9368fe7c63a2115",
       "localPath": "100SYL-A_Effective_082626.pdf"
     },
     "1uBL9zaR7iL9kH9NB9F8by0mRvi5En_8b": {
@@ -189,7 +193,19 @@
       "filename": "106SYL-A_Effective_091626.pdf",
       "modifiedTime": "2026-09-09T13:14:22.792Z",
       "localPath": "106SYL-A_Effective_091626.pdf"
+    },
+    "14hkDFoU2s6T6xRHG4d4c7CWS5w1Igknh": {
+      "filename": "113SYL-A_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T14:48:42.016Z",
+      "md5Checksum": "577bbea3918849de00b5c84798ece790",
+      "localPath": "113SYL-A_Effective_092326.pdf"
+    },
+    "1rHYK7Nk1s-U_FATZnUIuv36cq-7ps_ja": {
+      "filename": "103SYL-P_Effective_091626.pdf",
+      "modifiedTime": "2026-09-16T13:15:38.069Z",
+      "md5Checksum": "7a8252c9a165ee67a8fb90126a53df37",
+      "localPath": "103SYL-P_Effective_091626.pdf"
     }
   },
-  "lastSync": "2026-09-14T03:59:56.999Z"
+  "lastSync": "2026-09-18T18:04:52.258Z"
 }

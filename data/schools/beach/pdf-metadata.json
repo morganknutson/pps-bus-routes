@@ -1,34 +1,16 @@
 {
   "files": {
-    "1Ma7vWcIjAfFbsWzrzXT4VymnbpSfU9ZA": {
-      "filename": "277BCH-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-07T20:04:44.088Z",
-      "localPath": "277BCH-P_Effective_082626.pdf"
-    },
     "1clH0H7ysDVnRcoYrXUSUfj4_TqakRUgP": {
       "filename": "235BCH-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-07T20:04:22.378Z",
+      "modifiedTime": "2026-08-13T20:46:15.637Z",
+      "md5Checksum": "3c2f75d76c8a93313fb0fd7452938e1b",
       "localPath": "235BCH-P_Effective_082626.pdf"
-    },
-    "1kL6re2bTwtaFU4SZpxruSCshgvw4ORHe": {
-      "filename": "285BCH-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T17:05:51.334Z",
-      "localPath": "285BCH-A_Effective_082626.pdf"
-    },
-    "1meWUO1y5TJYn1I_qfVpvqscgW2tMc4Zc": {
-      "filename": "277BCH-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T17:05:33.086Z",
-      "localPath": "277BCH-A_Effective_082626.pdf"
     },
     "1AwLozSU-B_OHm8q2ttKuwP1CjsJIZnCu": {
       "filename": "235BCH-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T17:05:14.147Z",
+      "modifiedTime": "2026-08-13T20:45:40.556Z",
+      "md5Checksum": "7ba97e537247ed757297d454e95561e1",
       "localPath": "235BCH-A_Effective_082626.pdf"
-    },
-    "1pvz1oJi9EGzeVQgMkyQDBjgVz4RuaOqJ": {
-      "filename": "285BCH-P_Effective_090226.pdf",
-      "modifiedTime": "2026-08-26T23:16:44.797Z",
-      "localPath": "285BCH-P_Effective_090226.pdf"
     },
     "1fuhVBjJweoWn-fiK_MwmtSa2I7cH9sM4": {
       "filename": "285BCH-P_Effective_091626.pdf",
@@ -51,5 +33,5 @@
       "localPath": "277BCH-A_Effective_091626.pdf"
     }
   },
-  "lastSync": "2026-09-14T04:00:09.406Z"
+  "lastSync": "2026-09-18T18:05:09.801Z"
 }

@@ -83,10 +83,25 @@
     },
     {
       "id": "stop-5",
+      "address": "SE 103rd Ave. & SE Mt Scott Blvd. [NW]",
+      "time": "2:47 pm",
+      "direction": "NW",
+      "originalLine": "2:47 pmSE 103RD AV @ SE MT SCOTT BLVD [NW]256KLY-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5578085,
+        45.4651316
+      ],
+      "displayName": "SE Mt Scott Blvd & SE 103rd Ave, Portland, OR 97266, USA",
+      "placeId": "EjhTRSBNdCBTY290dCBCbHZkICYgU0UgMTAzcmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCa1qabuUn5VUEQZm-I4eFOmIEhQKEgmtamm7lJ-VVBEGZviOHhTpiBoUChIJFV69UceflVQR85Eauz9tbX8aFAoSCYsVwRXNoZVUEWjBD2cIvUoHIgoNtG0ZGxWbKfO2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-6",
       "address": "SE Mt Scott Blvd. & SE 101st Ave. [NE]",
       "time": "2:48 pm",
       "direction": "NE",
-      "originalLine": "2:48 pmSE MT SCOTT BLVD @ SE 101ST AV [NE]256KLY-P(6)Stop Order #:",
+      "originalLine": "2:48 pmSE MT SCOTT BLVD @ SE 101ST AV [NE]256KLY-P(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.5591252,
@@ -100,10 +115,10 @@
   "neighborhoods": [
     "Lents"
   ],
-  "processedAt": "2026-08-10T02:00:11.887Z",
+  "processedAt": "2026-09-18T18:03:53.495Z",
   "stats": {
-    "totalStops": 6,
-    "geocodedStops": 6,
+    "totalStops": 7,
+    "geocodedStops": 7,
     "failedStops": 0
   },
   "geometry": [
@@ -610,6 +625,38 @@
     [
       45.46576,
       -122.5602
+    ],
+    [
+      45.46562,
+      -122.55913
+    ],
+    [
+      45.46554,
+      -122.55869
+    ],
+    [
+      45.46548,
+      -122.55852
+    ],
+    [
+      45.46533,
+      -122.55815
+    ],
+    [
+      45.46513,
+      -122.55781
+    ],
+    [
+      45.46533,
+      -122.55815
+    ],
+    [
+      45.46548,
+      -122.55852
+    ],
+    [
+      45.46552,
+      -122.55862
     ],
     [
       45.46562,

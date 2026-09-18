@@ -11,7 +11,7 @@
       "address": "8960 N Woolsey Ave, Portland, OR 97203, USA",
       "time": null,
       "direction": null,
-      "originalLine": "Anchor Name:null",
+      "originalLine": "Anchor Name:ROSA PARKS GT & ST & CAB LOADING ZONE/8957 N",
       "isSchoolStop": true,
       "skipGeocoding": false,
       "coordinates": [
@@ -20,14 +20,310 @@
       ],
       "displayName": "8960 N Woolsey Ave, Portland, OR 97203, USA",
       "schoolName": "Rosa Parks"
+    },
+    {
+      "id": "stop-1",
+      "address": "8135 N Emerald Av(peninsula School) [E]",
+      "time": "12:46 pm",
+      "direction": "E",
+      "originalLine": "12:46 pm8135 N EMERALD AV(PENINSULA SCHOOL) [E]209RSP-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7007903,
+        45.581710699999995
+      ],
+      "displayName": "8135 N Emerald Ave, Portland, OR 97217, USA",
+      "placeId": "Eis4MTM1IE4gRW1lcmFsZCBBdmUsIFBvcnRsYW5kLCBPUiA5NzIxNywgVVNBIjESLwoUChIJ94MztLinlVQRubj1GBaEjWIQxz8qFAoSCUFvxt6-p5VUEdBYcpPtHGZP",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-2",
+      "address": "5103 N Willis Blvd. (cesar Chavez) [N]",
+      "time": "12:50 pm",
+      "direction": "N",
+      "originalLine": "12:50 pm5103 N WILLIS BLVD (CESAR CHAVEZ) [N]209RSP-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.71933700307288,
+        45.5847538590517
+      ],
+      "displayName": "5103 N Willis Blvd, Portland, OR 97203, USA",
+      "placeId": "ChIJFSgvI-mnlVQRluNVhqLIOG8",
+      "neighborhood": "North Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "Astor School (5601 N Yale St) [NE]",
+      "time": "12:53 pm",
+      "direction": "NE",
+      "originalLine": "12:53 pm ASTOR SCHOOL (5601 N YALE ST) [NE]209RSP-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.72921009252562,
+        45.57816871475651
+      ],
+      "displayName": "5601 N Yale St, Portland, OR 97203, USA",
+      "placeId": "ChIJGRk67_OnlVQR1-C-6vK7yM0",
+      "neighborhood": "North Portland"
     }
   ],
-  "neighborhoods": [],
-  "processedAt": "2026-06-07T17:28:19.810Z",
+  "neighborhoods": [
+    "North Portland"
+  ],
+  "processedAt": "2026-09-18T18:04:21.699Z",
   "stats": {
-    "totalStops": 1,
-    "geocodedStops": 1,
+    "totalStops": 4,
+    "geocodedStops": 4,
     "failedStops": 0
   },
-  "geometry": null
+  "geometry": [
+    [
+      45.58795,
+      -122.71343
+    ],
+    [
+      45.58708,
+      -122.71343
+    ],
+    [
+      45.58536,
+      -122.71345
+    ],
+    [
+      45.58447,
+      -122.71346
+    ],
+    [
+      45.58404,
+      -122.71347
+    ],
+    [
+      45.58404,
+      -122.7127
+    ],
+    [
+      45.58404,
+      -122.71226
+    ],
+    [
+      45.58404,
+      -122.71181
+    ],
+    [
+      45.58403,
+      -122.7093
+    ],
+    [
+      45.58402,
+      -122.70659
+    ],
+    [
+      45.58401,
+      -122.7007
+    ],
+    [
+      45.58401,
+      -122.69991
+    ],
+    [
+      45.58388,
+      -122.69991
+    ],
+    [
+      45.58265,
+      -122.69992
+    ],
+    [
+      45.58198,
+      -122.69993
+    ],
+    [
+      45.58171,
+      -122.69993
+    ],
+    [
+      45.5817,
+      -122.70032
+    ],
+    [
+      45.58169,
+      -122.70037
+    ],
+    [
+      45.58171,
+      -122.70079
+    ],
+    [
+      45.58166,
+      -122.70039
+    ],
+    [
+      45.58158,
+      -122.70039
+    ],
+    [
+      45.58157,
+      -122.70038
+    ],
+    [
+      45.58157,
+      -122.69993
+    ],
+    [
+      45.58265,
+      -122.69992
+    ],
+    [
+      45.58388,
+      -122.69991
+    ],
+    [
+      45.58401,
+      -122.69991
+    ],
+    [
+      45.58401,
+      -122.7007
+    ],
+    [
+      45.58401,
+      -122.70327
+    ],
+    [
+      45.58403,
+      -122.7093
+    ],
+    [
+      45.58404,
+      -122.7127
+    ],
+    [
+      45.58404,
+      -122.71443
+    ],
+    [
+      45.58408,
+      -122.71528
+    ],
+    [
+      45.58409,
+      -122.71639
+    ],
+    [
+      45.58408,
+      -122.71842
+    ],
+    [
+      45.58407,
+      -122.71945
+    ],
+    [
+      45.58406,
+      -122.72048
+    ],
+    [
+      45.58405,
+      -122.72068
+    ],
+    [
+      45.58404,
+      -122.72095
+    ],
+    [
+      45.58427,
+      -122.72076
+    ],
+    [
+      45.58447,
+      -122.7206
+    ],
+    [
+      45.58476,
+      -122.72043
+    ],
+    [
+      45.58475,
+      -122.72018
+    ],
+    [
+      45.58475,
+      -122.71934
+    ],
+    [
+      45.58475,
+      -122.72018
+    ],
+    [
+      45.58476,
+      -122.72043
+    ],
+    [
+      45.58447,
+      -122.7206
+    ],
+    [
+      45.58427,
+      -122.72076
+    ],
+    [
+      45.58404,
+      -122.72095
+    ],
+    [
+      45.58402,
+      -122.72134
+    ],
+    [
+      45.58402,
+      -122.72143
+    ],
+    [
+      45.58402,
+      -122.72147
+    ],
+    [
+      45.58419,
+      -122.72193
+    ],
+    [
+      45.58444,
+      -122.72261
+    ],
+    [
+      45.58413,
+      -122.72283
+    ],
+    [
+      45.58305,
+      -122.72364
+    ],
+    [
+      45.58275,
+      -122.72386
+    ],
+    [
+      45.58104,
+      -122.72514
+    ],
+    [
+      45.57819,
+      -122.72727
+    ],
+    [
+      45.57748,
+      -122.7278
+    ],
+    [
+      45.57767,
+      -122.72832
+    ],
+    [
+      45.57804,
+      -122.72931
+    ],
+    [
+      45.57817,
+      -122.72921
+    ]
+  ]
 }

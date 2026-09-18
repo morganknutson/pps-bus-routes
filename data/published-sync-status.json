@@ -1,0 +1,47 @@
+{
+  "lastRun": "2026-09-18T18:07:37.073Z",
+  "lastRunStatus": "success",
+  "lastRunDuration": "42s",
+  "lastRunResults": {
+    "startTime": "2026-09-18T18:07:37.073Z",
+    "endTime": "2026-09-18T18:08:19.277Z",
+    "duration": "42s",
+    "totalSchools": 68,
+    "schoolsChecked": 68,
+    "schoolsWithUpdates": 3,
+    "pdfsDownloaded": 0,
+    "routesProcessed": 0,
+    "errorCount": 0,
+    "errors": [],
+    "phases": {
+      "driveCheck": {
+        "status": "completed",
+        "schools": 68,
+        "queued": 68,
+        "completed": 68,
+        "failed": 0,
+        "duration": "38s"
+      },
+      "pdfFetch": {
+        "status": "completed",
+        "downloaded": 0,
+        "queued": 3,
+        "completed": 3,
+        "failed": 0,
+        "duration": "4s"
+      },
+      "processing": {
+        "status": "skipped",
+        "processed": 0,
+        "queued": 0,
+        "completed": 0,
+        "failed": 0,
+        "duration": null
+      },
+      "publish": {
+        "status": "completed",
+        "duration": null
+      }
+    }
+  }
+}

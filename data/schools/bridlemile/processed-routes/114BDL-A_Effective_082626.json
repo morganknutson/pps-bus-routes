@@ -9,9 +9,9 @@
     {
       "id": "stop-1",
       "address": "4616 SW Patton Rd. [SE]",
-      "time": "7:23 am",
+      "time": "7:20 am",
       "direction": "SE",
-      "originalLine": "7:23 am4616 SW PATTON RD [SE]114BDL-A(1)Stop Order #:",
+      "originalLine": "7:20 am4616 SW PATTON RD [SE]114BDL-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.72434131778941,
@@ -24,9 +24,9 @@
     {
       "id": "stop-2",
       "address": "SW Patton Rd. & SW 44th Ave. [S]",
-      "time": "7:23 am",
+      "time": "7:21 am",
       "direction": "S",
-      "originalLine": "7:23 amSW PATTON RD @ SW 44TH AVE [S]114BDL-A(2)Stop Order #:",
+      "originalLine": "7:21 amSW PATTON RD @ SW 44TH AVE [S]114BDL-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7228917,
@@ -39,9 +39,9 @@
     {
       "id": "stop-3",
       "address": "SW Patton Rd. & SW 36th Ave. [SW]",
-      "time": "7:25 am",
+      "time": "7:23 am",
       "direction": "SW",
-      "originalLine": "7:25 amSW PATTON RD @ SW 36TH AV [SW]114BDL-A(3)Stop Order #:",
+      "originalLine": "7:23 amSW PATTON RD @ SW 36TH AV [SW]114BDL-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7142775,
@@ -54,9 +54,9 @@
     {
       "id": "stop-4",
       "address": "SW Dosch Rd. & SW Dosch Ct. [NW]",
-      "time": "7:27 am",
+      "time": "7:25 am",
       "direction": "NW",
-      "originalLine": "7:27 amSW DOSCH RD @ SW DOSCH CT [NW]114BDL-A(4)Stop Order #:",
+      "originalLine": "7:25 amSW DOSCH RD @ SW DOSCH CT [NW]114BDL-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7105763,
@@ -69,9 +69,9 @@
     {
       "id": "stop-5",
       "address": "SW Dosch Rd. & SW Seymour St. [NW]",
-      "time": "7:29 am",
+      "time": "7:27 am",
       "direction": "NW",
-      "originalLine": "7:29 amSW DOSCH RD @ SW SEYMOUR ST [NW]114BDL-A(5)Stop Order #:",
+      "originalLine": "7:27 amSW DOSCH RD @ SW SEYMOUR ST [NW]114BDL-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7103738,
@@ -84,9 +84,9 @@
     {
       "id": "stop-6",
       "address": "SW Dosch Rd. & SW Stonebrook Dr. [NW]",
-      "time": "7:30 am",
+      "time": "7:28 am",
       "direction": "NW",
-      "originalLine": "7:30 amSW DOSCH RD & SW STONEBROOK DR [NW]114BDL-A(6)Stop Order #:",
+      "originalLine": "7:28 amSW DOSCH RD & SW STONEBROOK DR [NW]114BDL-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7103523,
@@ -99,9 +99,9 @@
     {
       "id": "stop-7",
       "address": "3541 SW Beaverton Hillsdale Hwy [NE]",
-      "time": "7:33 am",
+      "time": "7:31 am",
       "direction": "NE",
-      "originalLine": "7:33 am3541 SW Beaverton Hillsdale Hwy [NE]114BDL-A(7)Stop Order #:",
+      "originalLine": "7:31 am3541 SW Beaverton Hillsdale Hwy [NE]114BDL-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.71404569336347,
@@ -114,9 +114,9 @@
     {
       "id": "stop-8",
       "address": "4439 SW Beaverton Hillsdale Hwy [N]",
-      "time": "7:35 am",
+      "time": "7:33 am",
       "direction": "N",
-      "originalLine": "7:35 am4439 SW BEAVERTON HILLSDALE HWY [N]114BDL-A(8)Stop Order #:",
+      "originalLine": "7:33 am4439 SW BEAVERTON HILLSDALE HWY [N]114BDL-A(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7229030762667,
@@ -128,10 +128,40 @@
     },
     {
       "id": "stop-9",
+      "address": "4931 SW Beaverton Hillsdale Hwy [N]",
+      "time": "7:34 am",
+      "direction": "N",
+      "originalLine": "7:34 am4931 SW Beaverton Hillsdale Hwy [N]114BDL-A(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.72796029999999,
+        45.48728409999999
+      ],
+      "displayName": "4931 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "ChIJ-9ys_74LlVQREURuye4ogYE",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-10",
+      "address": "5041 SW Beaverton Hillsdale Hwy [N]",
+      "time": "7:35 am",
+      "direction": "N",
+      "originalLine": "7:35 am5041 SW Beaverton Hillsdale Hwy [N]114BDL-A(10)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.72904519999999,
+        45.4872448
+      ],
+      "displayName": "5041 SW Beaverton Hillsdale Hwy, Portland, OR 97221, USA",
+      "placeId": "ChIJ1W-yrb8LlVQRW_igsb6cwg8",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-11",
       "address": "SW Beaverton Hillsdale Hwy & SW 56th Ave. [NE]",
-      "time": "7:37 am",
+      "time": "7:36 am",
       "direction": "NE",
-      "originalLine": "7:37 amSW BEAVERTON HILLSDALE HWY @ SW 56TH AV [NE]114BDL-A(9)Stop Order #:",
+      "originalLine": "7:36 amSW BEAVERTON HILLSDALE HWY @ SW 56TH AV [NE]114BDL-A(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7348524,
@@ -142,11 +172,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-10",
+      "id": "stop-12",
       "address": "5817 SW Beaverton Hillsdale Hwy [N]",
-      "time": "7:39 am",
+      "time": "7:38 am",
       "direction": "N",
-      "originalLine": "7:39 am5817 SW BEAVERTON HILLSDALE HWY [N]114BDL-A(10)Stop Order #:",
+      "originalLine": "7:38 am5817 SW BEAVERTON HILLSDALE HWY [N]114BDL-A(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.73713759284348,
@@ -157,11 +187,11 @@
       "neighborhood": "Hayhurst"
     },
     {
-      "id": "stop-11",
+      "id": "stop-13",
       "address": "6111 SW Beaverton Hillsdale Hwy [N]",
-      "time": "7:40 am",
+      "time": "7:39 am",
       "direction": "N",
-      "originalLine": "7:40 am6111 SW BEAVERTON HILLSDALE HWY [N]114BDL-A(11)Stop Order #:",
+      "originalLine": "7:39 am6111 SW BEAVERTON HILLSDALE HWY [N]114BDL-A(13)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.74028093235998,
@@ -172,11 +202,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-12",
+      "id": "stop-14",
       "address": "6207/6213 SW Beaverton Hillsdale Hwy [N]",
-      "time": "7:40 am",
+      "time": "7:39 am",
       "direction": "N",
-      "originalLine": "7:40 am6207/6213 SW BEAVERTON HILLSDALE HWY [N]114BDL-A(12)Stop Order #:",
+      "originalLine": "7:39 am6207/6213 SW BEAVERTON HILLSDALE HWY [N]114BDL-A(14)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.74054266093361,
@@ -187,11 +217,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-13",
+      "id": "stop-15",
       "address": "SW Scholls Ferry Rd. & SW Hamilton Wy [SE]",
-      "time": "7:44 am",
+      "time": "7:43 am",
       "direction": "SE",
-      "originalLine": "7:44 amSW SCHOLLS FERRY RD @ SW HAMILTON WY [SE]114BDL-A(13)Stop Order #:",
+      "originalLine": "7:43 amSW SCHOLLS FERRY RD @ SW HAMILTON WY [SE]114BDL-A(15)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7447667,
@@ -199,6 +229,36 @@
       ],
       "displayName": "SW Hamilton St & SW Scholls Ferry Rd, Portland, OR 97225, USA",
       "placeId": "Ej1TVyBIYW1pbHRvbiBTdCAmIFNXIFNjaG9sbHMgRmVycnkgUmQsIFBvcnRsYW5kLCBPUiA5NzIyNSwgVVNBImYiZAoUChIJmeSCROkLlVQRktuVCXZR488SFAoSCZnkgkTpC5VUEZLblQl2UePPGhQKEgmfGnQCtAuVVBFL69gnzbbSHRoUChIJX24Fyr8NlVQR9N0rLtZ9L4giCg0ZWx0bFY2i1rY",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-16",
+      "address": "SW Hamilton St. & SW 63rd Ave. [S]",
+      "time": "7:44 am",
+      "direction": "S",
+      "originalLine": "7:44 amSW HAMILTON ST @ SW 63RD AV [S]114BDL-A(16)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7428547,
+        45.4908335
+      ],
+      "displayName": "SW Hamilton St & SW 63rd Ave, Portland, OR 97221, USA",
+      "placeId": "EjVTVyBIYW1pbHRvbiBTdCAmIFNXIDYzcmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMjEsIFVTQSJmImQKFAoSCaHbEH3pC5VUESsWH3NNxAi5EhQKEgmh2xB96QuVVBErFh9zTcQIuRoUChIJnxp0ArQLlVQRS-vYJ8220h0aFAoSCbPTOGuSC5VUESSQ4VCkfsOSIgoNr1kdGxU97da2",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-17",
+      "address": "SW Hamilton St. & SW 60th Pl. [SW]",
+      "time": "7:45 am",
+      "direction": "SW",
+      "originalLine": "7:45 amSW HAMILTON ST @ SW 60TH PL [SW]114BDL-A(17)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.739687,
+        45.4908078
+      ],
+      "displayName": "SW Hamilton St & SW 60th Pl, Portland, OR 97221, USA",
+      "placeId": "EjRTVyBIYW1pbHRvbiBTdCAmIFNXIDYwdGggUGwsIFBvcnRsYW5kLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJlWeVPeoLlVQREPQbkeVgDvMSFAoSCZVnlT3qC5VUERD0G5HlYA7zGhQKEgmfGnQCtAuVVBFL69gnzbbSHRoUChIJU60sc8ILlVQRc_ADNgRfFVciCg2uWB0bFfpo17Y",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -222,10 +282,10 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2026-08-10T02:17:53.757Z",
+  "processedAt": "2026-09-18T18:05:22.839Z",
   "stats": {
-    "totalStops": 14,
-    "geocodedStops": 14,
+    "totalStops": 18,
+    "geocodedStops": 18,
     "failedStops": 0
   },
   "geometry": [
@@ -918,6 +978,30 @@
       -122.72747
     ],
     [
+      45.48695,
+      -122.72784
+    ],
+    [
+      45.48697,
+      -122.72797
+    ],
+    [
+      45.48715,
+      -122.728
+    ],
+    [
+      45.48728,
+      -122.72796
+    ],
+    [
+      45.48715,
+      -122.728
+    ],
+    [
+      45.48697,
+      -122.72797
+    ],
+    [
       45.48698,
       -122.72802
     ],
@@ -931,7 +1015,31 @@
     ],
     [
       45.48705,
+      -122.72898
+    ],
+    [
+      45.48718,
+      -122.72904
+    ],
+    [
+      45.48724,
+      -122.72905
+    ],
+    [
+      45.48718,
+      -122.72904
+    ],
+    [
+      45.48705,
+      -122.72898
+    ],
+    [
+      45.48705,
       -122.72929
+    ],
+    [
+      45.48704,
+      -122.73028
     ],
     [
       45.48704,
@@ -1091,19 +1199,23 @@
     ],
     [
       45.4908,
-      -122.73912
+      -122.7382
     ],
     [
-      45.49078,
-      -122.73696
+      45.49077,
+      -122.73472
     ],
     [
       45.49076,
-      -122.73224
+      -122.72989
     ],
     [
       45.49077,
       -122.72853
+    ],
+    [
+      45.49074,
+      -122.72737
     ],
     [
       45.49074,

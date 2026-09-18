@@ -68,10 +68,25 @@
     },
     {
       "id": "stop-4",
+      "address": "SW 17th Dr. & SW Miles St. [NW]",
+      "time": "4:17 pm",
+      "direction": "NW",
+      "originalLine": "4:17 pmSW 17TH DR @ SW MILES ST [NW]129GRY-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6958898,
+        45.4711171
+      ],
+      "displayName": "SW Miles St & SW 17th Dr, Portland, OR 97219, USA",
+      "placeId": "EjFTVyBNaWxlcyBTdCAmIFNXIDE3dGggRHIsIFBvcnRsYW5kLCBPUiA5NzIxOSwgVVNBImYiZAoUChIJ_Q9FmA8LlVQRuKQvr7c-fPISFAoSCf0PRZgPC5VUEbikL6-3PnzyGhQKEglHbHwPDAuVVBF0K9oDU5uLqhoUChIJQbac3A8LlVQR-x4EPsXOa2MiCg2DVxobFc4X3rY",
+      "neighborhood": "Southwest Portland"
+    },
+    {
+      "id": "stop-5",
       "address": "SW 17th Dr. & SW Troy St. [NW]",
       "time": "4:18 pm",
       "direction": "NW",
-      "originalLine": "4:18 pmSW 17TH DR @ SW TROY ST [NW]129GRY-P(5)Stop Order #:",
+      "originalLine": "4:18 pmSW 17TH DR @ SW TROY ST [NW]129GRY-P(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6943678,
@@ -82,11 +97,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-5",
+      "id": "stop-6",
       "address": "SW Capitol Hill Rd. & SW Moss St. [SE]",
       "time": "4:20 pm",
       "direction": "SE",
-      "originalLine": "4:20 pmSW CAPITOL HILL RD @ SW MOSS ST [SE]129GRY-P(6)Stop Order #:",
+      "originalLine": "4:20 pmSW CAPITOL HILL RD @ SW MOSS ST [SE]129GRY-P(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6999627,
@@ -97,11 +112,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-6",
+      "id": "stop-7",
       "address": "7704 SW Capitol Hill Rd. [E]",
       "time": "4:21 pm",
       "direction": "E",
-      "originalLine": "4:21 pm7704 SW Capitol Hill Rd [E]129GRY-P(7)Stop Order #:",
+      "originalLine": "4:21 pm7704 SW Capitol Hill Rd [E]129GRY-P(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.69968026469834,
@@ -112,11 +127,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-7",
+      "id": "stop-8",
       "address": "SW Capitol Hill Rd. & SW Canby Ct. [E]",
       "time": "4:22 pm",
       "direction": "E",
-      "originalLine": "4:22 pmSW CAPITOL HILL RD @ SW CANBY CT [E]129GRY-P(8)Stop Order #:",
+      "originalLine": "4:22 pmSW CAPITOL HILL RD @ SW CANBY CT [E]129GRY-P(9)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6999184,
@@ -127,11 +142,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-8",
+      "id": "stop-9",
       "address": "SW Capitol Hill Rd. & SW Miles St. [SE]",
       "time": "4:22 pm",
       "direction": "SE",
-      "originalLine": "4:22 pmSW CAPITOL HILL RD @ SW MILES ST [SE]129GRY-P(9)Stop Order #:",
+      "originalLine": "4:22 pmSW CAPITOL HILL RD @ SW MILES ST [SE]129GRY-P(10)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.699543,
@@ -142,11 +157,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-9",
+      "id": "stop-10",
       "address": "1406 SW Custer Dr. [SW]",
       "time": "4:24 pm",
       "direction": "SW",
-      "originalLine": "4:24 pm1406 SW CUSTER DR [SW]129GRY-P(10)Stop Order #:",
+      "originalLine": "4:24 pm1406 SW CUSTER DR [SW]129GRY-P(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.69334886462457,
@@ -157,11 +172,11 @@
       "neighborhood": "Southwest Portland"
     },
     {
-      "id": "stop-10",
+      "id": "stop-11",
       "address": "SW 13th Ave. & SW Bertha Blvd. [SE]",
       "time": "4:26 pm",
       "direction": "SE",
-      "originalLine": "4:26 pmSW 13TH AV @ SW BERTHA BLVD [SE]129GRY-P(11)Stop Order #:",
+      "originalLine": "4:26 pmSW 13TH AV @ SW BERTHA BLVD [SE]129GRY-P(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.692165,
@@ -175,10 +190,10 @@
   "neighborhoods": [
     "Southwest Portland"
   ],
-  "processedAt": "2026-08-10T02:23:53.613Z",
+  "processedAt": "2026-09-18T18:03:27.503Z",
   "stats": {
-    "totalStops": 11,
-    "geocodedStops": 11,
+    "totalStops": 12,
+    "geocodedStops": 12,
     "failedStops": 0
   },
   "geometry": [
@@ -393,6 +408,38 @@
     [
       45.47128,
       -122.696
+    ],
+    [
+      45.47112,
+      -122.69589
+    ],
+    [
+      45.47069,
+      -122.69541
+    ],
+    [
+      45.4701,
+      -122.69472
+    ],
+    [
+      45.46982,
+      -122.69441
+    ],
+    [
+      45.46971,
+      -122.69425
+    ],
+    [
+      45.46982,
+      -122.69441
+    ],
+    [
+      45.46996,
+      -122.69455
+    ],
+    [
+      45.47069,
+      -122.69541
     ],
     [
       45.47112,

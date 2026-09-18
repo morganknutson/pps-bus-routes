@@ -114,9 +114,9 @@
     {
       "id": "stop-7",
       "address": "SW Hamilton St. & SW Selling Ct. [NE]",
-      "time": "2:44 pm",
+      "time": "2:43 pm",
       "direction": "NE",
-      "originalLine": "2:44 pmSW HAMILTON ST @ SW SELLING CT [NE]116BDL-P(8)Stop Order #:",
+      "originalLine": "2:43 pmSW HAMILTON ST @ SW SELLING CT [NE]116BDL-P(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7403157,
@@ -129,9 +129,9 @@
     {
       "id": "stop-8",
       "address": "SW Hamilton St. & SW 63rd Ave. [NE]",
-      "time": "2:45 pm",
+      "time": "2:44 pm",
       "direction": "NE",
-      "originalLine": "2:45 pmSW HAMILTON ST @ SW 63RD AV [NE]116BDL-P(9)Stop Order #:",
+      "originalLine": "2:44 pmSW HAMILTON ST @ SW 63RD AV [NE]116BDL-P(9)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7428547,
@@ -144,9 +144,9 @@
     {
       "id": "stop-9",
       "address": "SW Canyon Dr. & SW 72nd Ave. [SW]",
-      "time": "2:52 pm",
+      "time": "2:51 pm",
       "direction": "SW",
-      "originalLine": "2:52 pmSW CANYON DR @ SW 72ND AV [SW]116BDL-P(10)Stop Order #:",
+      "originalLine": "2:51 pmSW CANYON DR @ SW 72ND AV [SW]116BDL-P(10)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7505978,
@@ -158,9 +158,9 @@
     {
       "id": "stop-10",
       "address": "7090 SW Canyon Dr. [SE]",
-      "time": "2:53 pm",
+      "time": "2:52 pm",
       "direction": "SE",
-      "originalLine": "2:53 pm7090 SW CANYON DR [SE]116BDL-P(11)Stop Order #:",
+      "originalLine": "2:52 pm7090 SW CANYON DR [SE]116BDL-P(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.74973003477605,
@@ -172,9 +172,9 @@
     {
       "id": "stop-11",
       "address": "SW Canyon Dr. & SW Crestdale Dr. [SE]",
-      "time": "2:53 pm",
+      "time": "2:52 pm",
       "direction": "SE",
-      "originalLine": "2:53 pmSW CANYON DR @ SW CRESTDALE DR [SE]116BDL-P(12)Stop Order #:",
+      "originalLine": "2:52 pmSW CANYON DR @ SW CRESTDALE DR [SE]116BDL-P(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7483515,
@@ -186,9 +186,9 @@
     {
       "id": "stop-12",
       "address": "SW Canyon Dr. & SW Bucharest Ct. [S]",
-      "time": "2:55 pm",
+      "time": "2:54 pm",
       "direction": "S",
-      "originalLine": "2:55 pmSW CANYON DR @ SW BUCHAREST CT [S]116BDL-P(13)Stop Order #:",
+      "originalLine": "2:54 pmSW CANYON DR @ SW BUCHAREST CT [S]116BDL-P(13)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7446927,
@@ -200,9 +200,9 @@
     {
       "id": "stop-13",
       "address": "SW Canyon Dr. & SW Sheridan St. [SE]",
-      "time": "2:56 pm",
+      "time": "2:55 pm",
       "direction": "SE",
-      "originalLine": "2:56 pmSW CANYON DR @ SW SHERIDAN ST [SE]116BDL-P(14)Stop Order #:",
+      "originalLine": "2:55 pmSW CANYON DR @ SW SHERIDAN ST [SE]116BDL-P(14)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7439777,
@@ -214,9 +214,9 @@
     {
       "id": "stop-14",
       "address": "SW Canyon Ln. & SW Canyon Terr. [N]",
-      "time": "2:57 pm",
+      "time": "2:56 pm",
       "direction": "N",
-      "originalLine": "2:57 pmSW CANYON LN @ SW CANYON TERR [N]116BDL-P(15)Stop Order #:",
+      "originalLine": "2:56 pmSW CANYON LN @ SW CANYON TERR [N]116BDL-P(15)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7458698,
@@ -228,9 +228,9 @@
     {
       "id": "stop-15",
       "address": "SW Canyon Rd. & SW Jade Ave. [S]",
-      "time": "3:04 pm",
+      "time": "3:02 pm",
       "direction": "S",
-      "originalLine": "3:04 pmSW CANYON RD @ SW JADE AV [S]116BDL-P(16)Stop Order #:",
+      "originalLine": "3:02 pmSW CANYON RD @ SW JADE AV [S]116BDL-P(16)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7535941,
@@ -242,9 +242,9 @@
     {
       "id": "stop-16",
       "address": "SW Canyon Rd. & SW Crestdale Dr. [S]",
-      "time": "3:05 pm",
+      "time": "3:03 pm",
       "direction": "S",
-      "originalLine": "3:05 pmSW CANYON RD @ SW CRESTDALE DR [S]116BDL-P(17)Stop Order #:",
+      "originalLine": "3:03 pmSW CANYON RD @ SW CRESTDALE DR [S]116BDL-P(17)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7500463,
@@ -256,9 +256,9 @@
     {
       "id": "stop-17",
       "address": "SW Scholls Ferry Rd. & SW Raab Rd. [NW]",
-      "time": "3:08 pm",
+      "time": "3:06 pm",
       "direction": "NW",
-      "originalLine": "3:08 pmSW SCHOLLS FERRY RD @ SW RAAB RD [NW]116BDL-P(18)Stop Order #:",
+      "originalLine": "3:06 pmSW SCHOLLS FERRY RD @ SW RAAB RD [NW]116BDL-P(18)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7379662,
@@ -270,10 +270,25 @@
     },
     {
       "id": "stop-18",
-      "address": "SW Scholls Ferry Rd. & SW Gable Pkwy. [NW]",
-      "time": "3:11 pm",
+      "address": "SW Scholls Ferry Rd. & SW Sweetbriar Ct. [NW]",
+      "time": "3:09 pm",
       "direction": "NW",
-      "originalLine": "3:11 pmSW SCHOLLS FERRY RD @ SW GABLE PKWY [NW]116BDL-P(19)Stop Order #:",
+      "originalLine": "3:09 pmSW SCHOLLS FERRY RD @ SW SWEETBRIAR CT [NW]116BDL-P(19)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.7399663,
+        45.4984719
+      ],
+      "displayName": "SW Sweetbriar Ct & SW Scholls Ferry Rd, Southwest Hills, OR 97221, USA",
+      "placeId": "EkZTVyBTd2VldGJyaWFyIEN0ICYgU1cgU2Nob2xscyBGZXJyeSBSZCwgU291dGh3ZXN0IEhpbGxzLCBPUiA5NzIyMSwgVVNBImYiZAoUChIJqYdulNwLlVQRfb94q35HBlUSFAoSCamHbpTcC5VUEX2_eKt-RwZVGhQKEgkr94r63AuVVBEnN-Lo5Ke8fhoUChIJX24Fyr8NlVQR9N0rLtZ9L4giCg0PhB4bFRFe17Y",
+      "neighborhood": "Southwest Hills"
+    },
+    {
+      "id": "stop-19",
+      "address": "SW Scholls Ferry Rd. & SW Gable Pkwy. [NW]",
+      "time": "3:10 pm",
+      "direction": "NW",
+      "originalLine": "3:10 pmSW SCHOLLS FERRY RD @ SW GABLE PKWY [NW]116BDL-P(20)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7431392,
@@ -288,10 +303,10 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2026-08-10T02:16:34.223Z",
+  "processedAt": "2026-09-18T18:05:16.908Z",
   "stats": {
-    "totalStops": 19,
-    "geocodedStops": 19,
+    "totalStops": 20,
+    "geocodedStops": 20,
     "failedStops": 0
   },
   "geometry": [

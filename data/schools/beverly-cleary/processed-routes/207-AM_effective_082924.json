@@ -1,9 +1,9 @@
 {
-  "id": "207-AM_effective_082924.pdf",
+  "id": "1YxPL4qSQ_4iNx32yjGLNcy_S-izwhPUY",
   "name": "207",
   "direction": "Morning",
   "filename": "207-AM_effective_082924.pdf",
-  "fileId": "207-AM_effective_082924.pdf",
+  "fileId": "1YxPL4qSQ_4iNx32yjGLNcy_S-izwhPUY",
   "modifiedTime": null,
   "stops": [
     {
@@ -109,8 +109,7 @@
         45.5369687
       ],
       "displayName": "1915 NE 33rd Ave, Portland, OR 97212, USA",
-      "schoolName": "Beverly Cleary",
-      "neighborhood": "Grant Park"
+      "schoolName": "Beverly Cleary"
     }
   ],
   "neighborhoods": [
@@ -119,7 +118,7 @@
     "Rose City Park",
     "Sullivan's Gulch"
   ],
-  "processedAt": "2025-12-16T11:25:45.009Z",
+  "processedAt": "2026-09-18T18:05:11.834Z",
   "stats": {
     "totalStops": 7,
     "geocodedStops": 7,
@@ -276,54 +275,50 @@
     ],
     [
       45.54207,
-      -122.63812
+      -122.63911
     ],
     [
-      45.54113,
-      -122.63813
+      45.54144,
+      -122.63912
     ],
     [
-      45.53896,
-      -122.63815
+      45.53742,
+      -122.63913
     ],
     [
-      45.5357,
-      -122.63816
-    ],
-    [
-      45.53516,
-      -122.63816
+      45.53564,
+      -122.63914
     ],
     [
       45.53516,
       -122.63914
     ],
     [
-      45.53516,
-      -122.63816
-    ],
-    [
-      45.5357,
-      -122.63816
+      45.53564,
+      -122.63914
     ],
     [
       45.53644,
-      -122.63816
+      -122.63914
+    ],
+    [
+      45.53643,
+      -122.63672
     ],
     [
       45.53645,
-      -122.63501
+      -122.6334
     ],
     [
       45.53645,
-      -122.63326
+      -122.6321
     ],
     [
       45.53645,
       -122.63202
     ],
     [
-      45.53675,
+      45.53658,
       -122.63202
     ],
     [
@@ -332,17 +327,7 @@
     ],
     [
       45.5369,
-      -122.63191
-    ],
-    [
-      45.5369,
       -122.63172
     ]
-  ],
-  "snapStats": {
-    "snapped": 0,
-    "skipped": 6,
-    "errors": 0,
-    "total": 7
-  }
+  ]
 }

@@ -68,6 +68,21 @@
     },
     {
       "id": "stop-4",
+      "address": "6426 NE Killingsworth St. (villa De Suenos Apt [SW]",
+      "time": "4:25 pm",
+      "direction": "SW",
+      "originalLine": "4:25 pm 6426 NE KILLINGSWORTH ST (VILLA DE SUENOS APT [SW]209RWH-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.59625119999998,
+        45.562294099999995
+      ],
+      "displayName": "6444-6518 NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "ChIJ_VP8RLCmlVQRdNobOXQhcQ0",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-5",
       "address": "6808 NE Killingsworth St. [SW]",
       "time": "4:27 pm",
       "direction": "SW",
@@ -86,10 +101,10 @@
     "Concordia",
     "Cully"
   ],
-  "processedAt": "2026-08-10T02:08:21.121Z",
+  "processedAt": "2026-09-18T18:09:00.036Z",
   "stats": {
-    "totalStops": 5,
-    "geocodedStops": 5,
+    "totalStops": 6,
+    "geocodedStops": 6,
     "failedStops": 0
   },
   "geometry": [
@@ -250,8 +265,24 @@
       -122.59718
     ],
     [
+      45.56274,
+      -122.59625
+    ],
+    [
+      45.56229,
+      -122.59625
+    ],
+    [
+      45.56274,
+      -122.59625
+    ],
+    [
       45.56273,
       -122.59595
+    ],
+    [
+      45.56274,
+      -122.59511
     ],
     [
       45.56274,
@@ -270,8 +301,8 @@
       -122.59455
     ],
     [
-      45.56177,
-      -122.59513
+      45.56218,
+      -122.59473
     ],
     [
       45.56135,
@@ -279,15 +310,7 @@
     ],
     [
       45.56134,
-      -122.59486
-    ],
-    [
-      45.56134,
-      -122.59434
-    ],
-    [
-      45.56133,
-      -122.59352
+      -122.59481
     ],
     [
       45.56133,

@@ -23,6 +23,21 @@
     },
     {
       "id": "stop-3",
+      "address": "NE Alberta St. & NE Martin Luther King Jr Blvd. [NE]",
+      "time": "8:52 am",
+      "direction": "NE",
+      "originalLine": "8:52 am NE ALBERTA ST @ NE MARTIN LUTHER KING JR BLVD [NE]206TUB-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6614507,
+        45.55913470000001
+      ],
+      "displayName": "NE Alberta St & NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
+      "placeId": "EkZORSBBbGJlcnRhIFN0ICYgTkUgTWFydGluIEx1dGhlciBLaW5nIEpyIEJsdmQsIFBvcnRsYW5kLCBPUiA5NzIxMSwgVVNBImYiZAoUChIJR4meABqnlVQRmIFfoNAFeSUSFAoSCUeJngAap5VUEZiBX6DQBXklGhQKEglnDSYNH6eVVBG2JfSjXeBAjRoUChIJ7ZajHg-nlVQRxOJdauFPJhQiCg2zxScbFRVZ47Y",
+      "neighborhood": "King"
+    },
+    {
+      "id": "stop-4",
       "address": "NE Emerson St. & NE Garfield Ave. [NE]",
       "time": "8:53 am",
       "direction": "NE",
@@ -37,7 +52,7 @@
       "neighborhood": "King"
     },
     {
-      "id": "stop-4",
+      "id": "stop-5",
       "address": "N Alberta St. & N Kerby Ave. [NE]",
       "time": "8:57 am",
       "direction": "NE",
@@ -71,10 +86,10 @@
     "King",
     "North Portland"
   ],
-  "processedAt": "2026-08-10T02:11:20.267Z",
+  "processedAt": "2026-09-18T18:09:04.393Z",
   "stats": {
-    "totalStops": 4,
-    "geocodedStops": 4,
+    "totalStops": 5,
+    "geocodedStops": 5,
     "failedStops": 0
   },
   "geometry": [

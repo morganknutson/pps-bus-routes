@@ -2,17 +2,20 @@
   "files": {
     "18KwPWIge1L0xF3NsGj6toZ0wluwm_B5l": {
       "filename": "251HPK-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-05T17:45:25.720Z",
+      "modifiedTime": "2026-08-18T16:01:34.329Z",
+      "md5Checksum": "138bd9e612f1bb232b94cba4e9896543",
       "localPath": "251HPK-P_Effective_082626.pdf"
     },
     "1NNDby2FHQrVv4_BZlW0j41U15tlh0zxJ": {
       "filename": "251HPK-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-05T17:44:28.796Z",
+      "modifiedTime": "2026-08-18T16:00:59.720Z",
+      "md5Checksum": "553c831a90d12e9cb3148f55663fc854",
       "localPath": "251HPK-A_Effective_082626.pdf"
     },
     "1lJKjRS8a1NeVvdksSdNgpe1qTLgEQsNY": {
       "filename": "291HPK-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-05T13:21:51.422Z",
+      "modifiedTime": "2026-08-18T17:51:56.732Z",
+      "md5Checksum": "fd64893ecb640b4fcc4df4f4496be3d2",
       "localPath": "291HPK-P_Effective_082626.pdf"
     },
     "1jv46D1QGAyhH1HYGQA-xre82HfJ0ZGFt": {
@@ -22,7 +25,8 @@
     },
     "1sNbuOZAD5rOgqZUuIRsQ8K_vf3DlEMYr": {
       "filename": "231HPK-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-05T13:19:38.647Z",
+      "modifiedTime": "2026-08-18T18:55:44.045Z",
+      "md5Checksum": "ab443842b6727f7a264525dab869e261",
       "localPath": "231HPK-P_Effective_082626.pdf"
     },
     "1KdRBDqqW_IcblhiFdeDRfWh0jDvVunsV": {
@@ -32,7 +36,8 @@
     },
     "1A6tEScRj60B8D4PjWCKlkYtUBHWxORwF": {
       "filename": "291HPK-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-04T16:46:37.720Z",
+      "modifiedTime": "2026-08-18T17:51:27.583Z",
+      "md5Checksum": "2926cd2a4c7798a4f3433ff796237ed5",
       "localPath": "291HPK-A_Effective_082626.pdf"
     },
     "1jU0KpwQrfnLkIT-7Rjr3lvGSvgL-2A4s": {
@@ -42,7 +47,8 @@
     },
     "1wMQ1-_nUp0CtHMsYUg0dnM932YgV7LcE": {
       "filename": "231HPK-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-04T16:44:44.064Z",
+      "modifiedTime": "2026-08-18T18:55:12.241Z",
+      "md5Checksum": "e2be82060684f78a00ae7e54d9ce2192",
       "localPath": "231HPK-A_Effective_082626.pdf"
     },
     "1PIiCuUEIAbc9Qxm9NEXyrPOhDpF4HIrg": {
@@ -51,5 +57,5 @@
       "localPath": "201HPK-A_Effective_082626.pdf"
     }
   },
-  "lastSync": "2026-08-10T01:59:10.362Z"
+  "lastSync": "2026-09-18T18:03:29.068Z"
 }

@@ -53,10 +53,25 @@
     },
     {
       "id": "stop-3",
+      "address": "SE Alder St. & SE 9th Ave. [NE]",
+      "time": "4:29 pm",
+      "direction": "NE",
+      "originalLine": "4:29 pmSE ALDER ST @ SE 9TH AV [NE]246HOS-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6567004,
+        45.5179337
+      ],
+      "displayName": "SE 9th Ave & SE Alder St, Portland, OR 97214, USA",
+      "placeId": "EjFTRSA5dGggQXZlICYgU0UgQWxkZXIgU3QsIFBvcnRsYW5kLCBPUiA5NzIxNCwgVVNBImYiZAoUChIJKyiLNqGglVQRdfxXRE46rRUSFAoSCSsoizahoJVUEXX8V0ROOq0VGhQKEgnNFACWdgqVVBEH85hIIPLQZhoUChIJuWp92KehlVQROIK8FJpVUHIiCg1JfCEbFaQS5LY",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
       "address": "NE 3rd Ave. & NE Davis St. [SE]",
-      "time": "4:30 pm",
+      "time": "4:32 pm",
       "direction": "SE",
-      "originalLine": "4:30 pmNE 3RD AV @ NE DAVIS ST [SE]246HOS-P(4)Stop Order #:",
+      "originalLine": "4:32 pmNE 3RD AV @ NE DAVIS ST [SE]246HOS-P(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6627331,
@@ -67,11 +82,11 @@
       "neighborhood": "Kerns"
     },
     {
-      "id": "stop-4",
+      "id": "stop-5",
       "address": "NE Davis St. & NE 12th Ave. [SW]",
-      "time": "4:33 pm",
+      "time": "4:34 pm",
       "direction": "SW",
-      "originalLine": "4:33 pmNE DAVIS ST @ NE 12TH AV [SW]246HOS-P(5)Stop Order #:",
+      "originalLine": "4:34 pmNE DAVIS ST @ NE 12TH AV [SW]246HOS-P(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6536299,
@@ -82,11 +97,11 @@
       "neighborhood": "Kerns"
     },
     {
-      "id": "stop-5",
+      "id": "stop-6",
       "address": "NE Everett St. & NE 20th Ave. [SW]",
-      "time": "4:35 pm",
+      "time": "4:37 pm",
       "direction": "SW",
-      "originalLine": "4:35 pmNE EVERETT ST @ NE 20TH AV [SW]246HOS-P(6)Stop Order #:",
+      "originalLine": "4:37 pmNE EVERETT ST @ NE 20TH AV [SW]246HOS-P(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6454984,
@@ -97,11 +112,11 @@
       "neighborhood": "Kerns"
     },
     {
-      "id": "stop-6",
+      "id": "stop-7",
       "address": "NE Multnomah St. & NE 19th Ave. [NE]",
-      "time": "4:38 pm",
+      "time": "4:39 pm",
       "direction": "NE",
-      "originalLine": "4:38 pmNE MULTNOMAH ST @ NE 19TH AV [NE]246HOS-P(7)Stop Order #:",
+      "originalLine": "4:39 pmNE MULTNOMAH ST @ NE 19TH AV [NE]246HOS-P(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6467128,
@@ -112,11 +127,11 @@
       "neighborhood": "Sullivan's Gulch"
     },
     {
-      "id": "stop-7",
+      "id": "stop-8",
       "address": "NE 6th Ave. & NE Clackamas St. [SE]",
-      "time": "4:41 pm",
+      "time": "4:43 pm",
       "direction": "SE",
-      "originalLine": "4:41 pmNE 6TH AV @ NE CLACKAMAS ST [SE]246HOS-P(8)Stop Order #:",
+      "originalLine": "4:43 pmNE 6TH AV @ NE CLACKAMAS ST [SE]246HOS-P(9)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6596474,
@@ -134,10 +149,10 @@
     "Southeast Portland",
     "Sullivan's Gulch"
   ],
-  "processedAt": "2026-08-10T01:59:14.879Z",
+  "processedAt": "2026-09-18T18:03:40.855Z",
   "stats": {
-    "totalStops": 8,
-    "geocodedStops": 8,
+    "totalStops": 9,
+    "geocodedStops": 9,
     "failedStops": 0
   },
   "geometry": [
@@ -350,68 +365,108 @@
       -122.64958
     ],
     [
-      45.52148,
-      -122.65262
-    ],
-    [
       45.52149,
-      -122.65364
+      -122.65439
     ],
     [
-      45.52181,
-      -122.65364
+      45.5215,
+      -122.65465
     ],
     [
-      45.52229,
-      -122.65364
+      45.52141,
+      -122.65465
     ],
     [
-      45.52249,
-      -122.65363
+      45.52078,
+      -122.65465
     ],
     [
-      45.52258,
-      -122.65363
+      45.52006,
+      -122.65466
     ],
     [
-      45.52272,
-      -122.65369
+      45.51895,
+      -122.65467
     ],
     [
-      45.52291,
-      -122.65366
+      45.51792,
+      -122.65467
     ],
     [
-      45.52343,
-      -122.65363
+      45.51793,
+      -122.65542
     ],
     [
-      45.52398,
-      -122.65363
+      45.51793,
+      -122.65596
     ],
     [
-      45.52434,
-      -122.65363
+      45.51793,
+      -122.65651
     ],
     [
-      45.52434,
-      -122.65437
+      45.51793,
+      -122.6567
     ],
     [
-      45.52435,
-      -122.65526
+      45.51865,
+      -122.6567
     ],
     [
-      45.52435,
-      -122.65768
+      45.51936,
+      -122.6567
     ],
     [
-      45.52436,
-      -122.66038
+      45.51936,
+      -122.65779
     ],
     [
-      45.52437,
-      -122.6625
+      45.51936,
+      -122.6587
+    ],
+    [
+      45.51937,
+      -122.66056
+    ],
+    [
+      45.51938,
+      -122.66147
+    ],
+    [
+      45.51938,
+      -122.66255
+    ],
+    [
+      45.51938,
+      -122.66277
+    ],
+    [
+      45.51972,
+      -122.66277
+    ],
+    [
+      45.5208,
+      -122.66277
+    ],
+    [
+      45.52223,
+      -122.66276
+    ],
+    [
+      45.5231,
+      -122.66275
+    ],
+    [
+      45.52327,
+      -122.66273
+    ],
+    [
+      45.5237,
+      -122.66274
+    ],
+    [
+      45.52419,
+      -122.66273
     ],
     [
       45.52437,
@@ -419,47 +474,55 @@
     ],
     [
       45.52437,
-      -122.6625
+      -122.66261
+    ],
+    [
+      45.52437,
+      -122.66242
+    ],
+    [
+      45.52437,
+      -122.66175
     ],
     [
       45.52436,
-      -122.66148
+      -122.66049
     ],
     [
       45.52436,
-      -122.65943
+      -122.6597
+    ],
+    [
+      45.52435,
+      -122.65538
     ],
     [
       45.52433,
-      -122.65079
+      -122.65103
     ],
     [
       45.52431,
-      -122.65035
+      -122.65038
     ],
     [
-      45.52427,
-      -122.65027
+      45.5243,
+      -122.65032
     ],
     [
       45.52423,
       -122.65009
     ],
     [
-      45.52429,
-      -122.64994
+      45.52456,
+      -122.64921
     ],
     [
-      45.5245,
-      -122.64937
+      45.525,
+      -122.64801
     ],
     [
-      45.52466,
-      -122.64893
-    ],
-    [
-      45.52501,
-      -122.64798
+      45.52567,
+      -122.64618
     ],
     [
       45.52574,
@@ -470,55 +533,39 @@
       -122.64549
     ],
     [
-      45.52545,
-      -122.64549
+      45.52517,
+      -122.6455
     ],
     [
       45.52503,
       -122.6455
     ],
     [
-      45.52592,
+      45.52517,
+      -122.6455
+    ],
+    [
+      45.52574,
       -122.64549
     ],
     [
-      45.52672,
+      45.52656,
       -122.64549
     ],
     [
-      45.52919,
+      45.529,
+      -122.64547
+    ],
+    [
+      45.52922,
       -122.64546
     ],
     [
-      45.52928,
-      -122.6454
-    ],
-    [
-      45.52937,
-      -122.64532
-    ],
-    [
-      45.52967,
-      -122.645
+      45.52931,
+      -122.64538
     ],
     [
       45.52978,
-      -122.64489
-    ],
-    [
-      45.52997,
-      -122.64489
-    ],
-    [
-      45.53041,
-      -122.64489
-    ],
-    [
-      45.53072,
-      -122.64489
-    ],
-    [
-      45.5311,
       -122.64489
     ],
     [
@@ -527,51 +574,35 @@
     ],
     [
       45.53146,
-      -122.64513
+      -122.64747
     ],
     [
-      45.53146,
-      -122.64535
-    ],
-    [
-      45.53146,
-      -122.64602
-    ],
-    [
-      45.53146,
-      -122.64758
-    ],
-    [
-      45.53148,
-      -122.64944
-    ],
-    [
-      45.53148,
-      -122.65092
-    ],
-    [
-      45.5315,
-      -122.65525
+      45.53149,
+      -122.6546
     ],
     [
       45.53152,
-      -122.65765
+      -122.65717
     ],
     [
-      45.53153,
-      -122.65862
+      45.53152,
+      -122.65864
     ],
     [
       45.53151,
-      -122.65928
+      -122.65938
     ],
     [
       45.53151,
       -122.65964
     ],
     [
-      45.53195,
+      45.53171,
       -122.65964
+    ],
+    [
+      45.53207,
+      -122.65965
     ],
     [
       45.53293,

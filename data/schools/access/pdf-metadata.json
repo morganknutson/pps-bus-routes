@@ -1,20 +1,5 @@
 {
   "files": {
-    "1n0vPxF1r8VrGORzcURxqxu-3BnFSB-fQ": {
-      "filename": "264ACC-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T15:04:08.136Z",
-      "localPath": "264ACC-P_Effective_082626.pdf"
-    },
-    "1LN5XMkbRnXOfh1ZXBIZu98vrKFAUZvcY": {
-      "filename": "259ACC-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T15:03:45.699Z",
-      "localPath": "259ACC-P_Effective_082626.pdf"
-    },
-    "1IC85m2DaVBldqI2aZuBTjDcjZa2Pwtdr": {
-      "filename": "205ACC-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T15:03:26.593Z",
-      "localPath": "205ACC-P_Effective_082626.pdf"
-    },
     "1LcwEd3oJRLs10zlDb0GLcLByHRJuIC0z": {
       "filename": "127ACC-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-06T15:03:02.815Z",
@@ -25,24 +10,15 @@
       "modifiedTime": "2026-08-06T15:02:42.514Z",
       "localPath": "149ACC-P_Effective_082626.pdf"
     },
-    "1y9tZzyDrxbZyDu3hil5lm6llRV50fInh": {
-      "filename": "264ACC-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T13:10:20.085Z",
-      "localPath": "264ACC-A_Effective_082626.pdf"
-    },
     "1kL6InyP7f1Z-9ue2VpnajxZa3SVFlDH7": {
       "filename": "255ACC-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-06T13:09:59.837Z",
       "localPath": "255ACC-A_Effective_082626.pdf"
     },
-    "1VCJuDUiwuLdvlP6G6Kwg6UjUUCyCcrG-": {
-      "filename": "259ACC-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T13:09:28.322Z",
-      "localPath": "259ACC-A_Effective_082626.pdf"
-    },
     "1ECrlv6YzSOkxeG05PO-6Cv_zhtwx96XD": {
       "filename": "205ACC-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T13:08:55.241Z",
+      "modifiedTime": "2026-08-10T18:21:25.676Z",
+      "md5Checksum": "6f16a7238f5c3cca739023a40713d97a",
       "localPath": "205ACC-A_Effective_082626.pdf"
     },
     "1xFSX9yqa_Vh0MO1V0lQ2k5P29jlHJPqr": {
@@ -94,7 +70,13 @@
       "filename": "205ACC-A_Effective_090926.pdf",
       "modifiedTime": "2026-09-03T19:57:10.017Z",
       "localPath": "205ACC-A_Effective_090926.pdf"
+    },
+    "1sDEOuFbEFNORy0OI-GtmhmyNjMY6E_UG": {
+      "filename": "223ACC-A_Effective_091626.pdf",
+      "modifiedTime": "2026-09-14T17:14:23.848Z",
+      "md5Checksum": "c87a97d797c1cd1fb2549547409db0d9",
+      "localPath": "223ACC-A_Effective_091626.pdf"
     }
   },
-  "lastSync": "2026-09-07T03:34:15.217Z"
+  "lastSync": "2026-09-18T18:05:02.562Z"
 }

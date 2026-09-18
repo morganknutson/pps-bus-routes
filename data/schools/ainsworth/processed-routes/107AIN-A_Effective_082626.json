@@ -9,9 +9,9 @@
     {
       "id": "stop-1",
       "address": "SW Canyon Rd. & SW Camelot Ct. [NW]",
-      "time": "7:03 am",
+      "time": "7:02 am",
       "direction": "NW",
-      "originalLine": "7:03 amSW CANYON RD @ SW CAMELOT CT [NW]107AIN-A(1)Stop Order #:",
+      "originalLine": "7:02 amSW CANYON RD @ SW CAMELOT CT [NW]107AIN-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7469504,
@@ -23,9 +23,9 @@
     {
       "id": "stop-2",
       "address": "SW Canyon Ln. & SW 75th Ave. [NE]",
-      "time": "7:05 am",
+      "time": "7:04 am",
       "direction": "NE",
-      "originalLine": "7:05 amSW CANYON LN @ SW 75TH AV [NE]107AIN-A(2)Stop Order #:",
+      "originalLine": "7:04 amSW CANYON LN @ SW 75TH AV [NE]107AIN-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.754416,
@@ -37,9 +37,9 @@
     {
       "id": "stop-3",
       "address": "SW 84th Ave. & SW Schiller Rd. [NW]",
-      "time": "7:08 am",
+      "time": "7:07 am",
       "direction": "NW",
-      "originalLine": "7:08 amSW 84TH AV @ SW SCHILLER RD [NW]107AIN-A(3)Stop Order #:",
+      "originalLine": "7:07 amSW 84TH AV @ SW SCHILLER RD [NW]107AIN-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7627066,
@@ -51,9 +51,9 @@
     {
       "id": "stop-4",
       "address": "SW Hamilton St. & SW 39th Dr. [SW]",
-      "time": "7:21 am",
+      "time": "7:20 am",
       "direction": "SW",
-      "originalLine": "7:21 amSW HAMILTON ST @ SW 39TH DR [SW]107AIN-A(4)Stop Order #:",
+      "originalLine": "7:20 amSW HAMILTON ST @ SW 39TH DR [SW]107AIN-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7167382,
@@ -66,9 +66,9 @@
     {
       "id": "stop-5",
       "address": "SW Greenleaf Dr. & SW Arthur Wy [E]",
-      "time": "7:27 am",
+      "time": "7:26 am",
       "direction": "E",
-      "originalLine": "7:27 amSW GREENLEAF DR @ SW ARTHUR WY [E]107AIN-A(5)Stop Order #:",
+      "originalLine": "7:26 amSW GREENLEAF DR @ SW ARTHUR WY [E]107AIN-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7197877,
@@ -81,9 +81,9 @@
     {
       "id": "stop-6",
       "address": "SW Greenleaf Dr. & SW Greenhills Wy [SW]",
-      "time": "7:28 am",
+      "time": "7:27 am",
       "direction": "SW",
-      "originalLine": "7:28 amSW GREENLEAF DR @ SW GREENHILLS WY [SW]107AIN-A(6)Stop Order #:",
+      "originalLine": "7:27 amSW GREENLEAF DR @ SW GREENHILLS WY [SW]107AIN-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7184354,
@@ -96,9 +96,9 @@
     {
       "id": "stop-7",
       "address": "3610 SW Greenleaf Dr. [S]",
-      "time": "7:35 am",
+      "time": "7:34 am",
       "direction": "S",
-      "originalLine": "7:35 am3610 SW Greenleaf Dr [S]107AIN-A(7)Stop Order #:",
+      "originalLine": "7:34 am3610 SW Greenleaf Dr [S]107AIN-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.71439875111365,
@@ -111,9 +111,9 @@
     {
       "id": "stop-8",
       "address": "3611 SW Humphrey Blvd. [NE]",
-      "time": "7:36 am",
+      "time": "7:35 am",
       "direction": "NE",
-      "originalLine": "7:36 am3611 SW HUMPHREY BLVD [NE]107AIN-A(8)Stop Order #:",
+      "originalLine": "7:35 am3611 SW HUMPHREY BLVD [NE]107AIN-A(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7141987,
@@ -125,10 +125,25 @@
     },
     {
       "id": "stop-9",
+      "address": "2712 SW Patton Rd. [SE]",
+      "time": "7:45 am",
+      "direction": "SE",
+      "originalLine": "7:45 am2712 SW Patton Rd [SE]107AIN-A(9)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.70587597458541,
+        45.505082937136784
+      ],
+      "displayName": "2712 SW Patton Rd, Portland, OR 97201, USA",
+      "placeId": "ChIJ1dWSATEKlVQRymjeVLEo_Dw",
+      "neighborhood": "Southwest Hills"
+    },
+    {
+      "id": "stop-10",
       "address": "SW Patton Rd. & SW Montgomery Dr. [SW]",
       "time": "7:46 am",
       "direction": "SW",
-      "originalLine": "7:46 amSW PATTON RD @ SW MONTGOMERY DR [SW]107AIN-A(9)Stop Order #:",
+      "originalLine": "7:46 amSW PATTON RD @ SW MONTGOMERY DR [SW]107AIN-A(10)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.7052598,
@@ -158,10 +173,10 @@
     "Southwest Hills",
     "Southwest Portland"
   ],
-  "processedAt": "2026-08-10T02:14:34.233Z",
+  "processedAt": "2026-09-18T18:05:08.094Z",
   "stats": {
-    "totalStops": 10,
-    "geocodedStops": 10,
+    "totalStops": 11,
+    "geocodedStops": 11,
     "failedStops": 0
   },
   "geometry": [
@@ -1650,28 +1665,32 @@
       -122.7062
     ],
     [
-      45.50509,
-      -122.70586
-    ],
-    [
-      45.50515,
-      -122.70572
+      45.50508,
+      -122.70588
     ],
     [
       45.50514,
-      -122.70553
+      -122.70576
+    ],
+    [
+      45.50514,
+      -122.70559
     ],
     [
       45.50511,
-      -122.7051
+      -122.70526
     ],
     [
-      45.50512,
-      -122.70489
+      45.50511,
+      -122.705
     ],
     [
       45.50515,
-      -122.70473
+      -122.70475
+    ],
+    [
+      45.50521,
+      -122.70448
     ],
     [
       45.50527,
@@ -1682,28 +1701,24 @@
       -122.70378
     ],
     [
-      45.50558,
-      -122.70381
+      45.50589,
+      -122.70389
     ],
     [
-      45.50618,
-      -122.70397
+      45.50648,
+      -122.70405
     ],
     [
-      45.50652,
-      -122.70406
+      45.50777,
+      -122.70418
     ],
     [
-      45.50696,
-      -122.70409
+      45.50783,
+      -122.7042
     ],
     [
-      45.5078,
-      -122.70419
-    ],
-    [
-      45.50794,
-      -122.70427
+      45.50791,
+      -122.70426
     ],
     [
       45.5081,
@@ -1711,107 +1726,111 @@
     ],
     [
       45.50811,
-      -122.70416
+      -122.70404
     ],
     [
-      45.50812,
-      -122.70399
+      45.50815,
+      -122.70389
     ],
     [
-      45.50817,
-      -122.70386
+      45.50821,
+      -122.70381
     ],
     [
       45.50847,
       -122.70346
     ],
     [
-      45.50851,
-      -122.70335
+      45.5085,
+      -122.70339
+    ],
+    [
+      45.50852,
+      -122.70333
     ],
     [
       45.50853,
-      -122.70325
+      -122.70328
     ],
     [
-      45.50851,
-      -122.70312
+      45.50852,
+      -122.70316
     ],
     [
       45.50849,
-      -122.70283
+      -122.70293
     ],
     [
       45.50848,
-      -122.70262
+      -122.70271
     ],
     [
-      45.50853,
-      -122.70215
+      45.5085,
+      -122.70234
     ],
     [
-      45.50864,
-      -122.70125
+      45.50862,
+      -122.70141
     ],
     [
-      45.50866,
-      -122.70094
+      45.50865,
+      -122.7011
     ],
     [
       45.50868,
-      -122.70059
+      -122.70063
     ],
     [
       45.50872,
       -122.70038
     ],
     [
-      45.50882,
-      -122.70019
+      45.50878,
+      -122.70025
     ],
     [
-      45.50912,
-      -122.69975
+      45.50907,
+      -122.69983
     ],
     [
       45.50918,
-      -122.69961
+      -122.69963
     ],
     [
       45.50919,
-      -122.69952
+      -122.69953
+    ],
+    [
+      45.50921,
+      -122.69922
     ],
     [
       45.50922,
-      -122.69919
-    ],
-    [
-      45.50923,
-      -122.69914
+      -122.69917
     ],
     [
       45.5093,
       -122.69906
     ],
     [
-      45.50947,
-      -122.699
+      45.50953,
+      -122.69897
     ],
     [
-      45.50964,
-      -122.6989
+      45.50969,
+      -122.69887
     ],
     [
-      45.50981,
-      -122.69881
+      45.50989,
+      -122.69877
     ],
     [
       45.50996,
       -122.69872
     ],
     [
-      45.51005,
-      -122.69905
+      45.51001,
+      -122.69889
     ],
     [
       45.51014,

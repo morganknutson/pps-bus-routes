@@ -1,10 +1,5 @@
 {
   "files": {
-    "1uKF28THs8uBFg0cdbLYpXWdPvUYQQzNb": {
-      "filename": "270STP-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-17T18:35:34.579Z",
-      "localPath": "270STP-P_Effective_082626.pdf"
-    },
     "1lF1s_iuejZSm65P6p0pv4lZlfvx9QQMK": {
       "filename": "263STP-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-17T18:34:57.587Z",
@@ -14,11 +9,6 @@
       "filename": "244STP-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-17T18:34:22.526Z",
       "localPath": "244STP-P_Effective_082626.pdf"
-    },
-    "1Dukbhm2PewUx5zO4ldO5Jm4GE_SP2YUW": {
-      "filename": "270STP-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-17T18:33:37.649Z",
-      "localPath": "270STP-A_Effective_082626.pdf"
     },
     "1E41OrebEJ-GC4t3PIqm_-SFr9jr9uxDR": {
       "filename": "263STP-A_Effective_082626.pdf",
@@ -30,16 +20,6 @@
       "modifiedTime": "2026-08-17T18:32:19.917Z",
       "localPath": "244STP-A_Effective_082626.pdf"
     },
-    "1iPhLOyoIWcCEutGPimkVHr63T6SVUSlN": {
-      "filename": "270STP-P_Effective_090226.pdf",
-      "modifiedTime": "2026-08-26T13:35:34.642Z",
-      "localPath": "270STP-P_Effective_090226.pdf"
-    },
-    "1Byzq2lTD1_3YN1eIkAgykq9NYuBqlREB": {
-      "filename": "270STP-A_Effective_090226.pdf",
-      "modifiedTime": "2026-08-26T13:34:50.626Z",
-      "localPath": "270STP-A_Effective_090226.pdf"
-    },
     "1gHtrkAlaWCwB-Hx3mMZfI_onl9cAntHn": {
       "filename": "270STP-P_Effective_090926.pdf",
       "modifiedTime": "2026-09-01T18:29:26.534Z",
@@ -49,7 +29,13 @@
       "filename": "270STP-A_Effective_090926.pdf",
       "modifiedTime": "2026-09-01T18:28:47.146Z",
       "localPath": "270STP-A_Effective_090926.pdf"
+    },
+    "11cl0saACtVEwbnyxGD6WLzilKegTf5Z9": {
+      "filename": "270STP-P_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T17:36:26.499Z",
+      "md5Checksum": "e8a601a5ded49e17f6eaad7109e989ef",
+      "localPath": "270STP-P_Effective_092326.pdf"
     }
   },
-  "lastSync": "2026-09-07T03:35:23.616Z"
+  "lastSync": "2026-09-18T18:04:34.916Z"
 }

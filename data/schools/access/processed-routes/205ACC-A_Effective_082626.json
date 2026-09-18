@@ -9,9 +9,9 @@
     {
       "id": "stop-2",
       "address": "7439 N Charleston Ave. (james John School)",
-      "time": "8:02 am",
+      "time": "8:01 am",
       "direction": null,
-      "originalLine": "8:02 am7439 N CHARLESTON AV (JAMES JOHN SCHOOL)205ACC-A(1)Stop Order #:",
+      "originalLine": "8:01 am7439 N CHARLESTON AV (JAMES JOHN SCHOOL)205ACC-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.75196018785907,
@@ -24,9 +24,9 @@
     {
       "id": "stop-3",
       "address": "5103 N Willis Blvd. (cesar Chavez) [S]",
-      "time": "8:09 am",
+      "time": "8:08 am",
       "direction": "S",
-      "originalLine": "8:09 am5103 N WILLIS BLVD (CESAR CHAVEZ) [S]205ACC-A(2)Stop Order #:",
+      "originalLine": "8:08 am5103 N WILLIS BLVD (CESAR CHAVEZ) [S]205ACC-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.71933700307288,
@@ -39,9 +39,9 @@
     {
       "id": "stop-4",
       "address": "Chief Joseph School (2409 N Saratoga St) [N]",
-      "time": "8:19 am",
+      "time": "8:18 am",
       "direction": "N",
-      "originalLine": "8:19 amCHIEF JOSEPH SCHOOL (2409 N SARATOGA ST) [N]205ACC-A(3)Stop Order #:",
+      "originalLine": "8:18 amCHIEF JOSEPH SCHOOL (2409 N SARATOGA ST) [N]205ACC-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6918625644027,
@@ -54,9 +54,9 @@
     {
       "id": "stop-5",
       "address": "Beach School (1710 N Humboldt St) [S]",
-      "time": "8:24 am",
+      "time": "8:23 am",
       "direction": "S",
-      "originalLine": "8:24 amBEACH SCHOOL (1710 N HUMBOLDT ST) [S]205ACC-A(4)Stop Order #:",
+      "originalLine": "8:23 amBEACH SCHOOL (1710 N HUMBOLDT ST) [S]205ACC-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.68555128946265,
@@ -86,7 +86,7 @@
     "North Portland",
     "Overlook"
   ],
-  "processedAt": "2026-08-10T02:14:07.807Z",
+  "processedAt": "2026-09-18T18:08:38.664Z",
   "stats": {
     "totalStops": 5,
     "geocodedStops": 5,

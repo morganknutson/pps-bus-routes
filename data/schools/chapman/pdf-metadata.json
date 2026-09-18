@@ -15,11 +15,6 @@
       "modifiedTime": "2026-08-07T20:55:06.911Z",
       "localPath": "149CHP-P_Effective_082626.pdf"
     },
-    "1nZKq5rlSRpv5TRFSIcx89lXpNw2ii9Bd": {
-      "filename": "121CHP-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-07T20:54:49.083Z",
-      "localPath": "121CHP-P_Effective_082626.pdf"
-    },
     "1zfwrB088vxasYpStbXP93T9cF0497Evv": {
       "filename": "125CHP-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-07T15:31:30.815Z",
@@ -34,11 +29,6 @@
       "filename": "149CHP-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-07T15:30:50.632Z",
       "localPath": "149CHP-A_Effective_082626.pdf"
-    },
-    "1RurcQRBtSp0w2AqEGxODc84mgljBk9t_": {
-      "filename": "121CHP-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-07T15:30:31.036Z",
-      "localPath": "121CHP-A_Effective_082626.pdf"
     },
     "1z3cuNvvFxLECzfyhkV5H2m8RqQFo5LIc": {
       "filename": "499CHP-P_Effective_090926.pdf",
@@ -59,7 +49,19 @@
       "filename": "121CHP-A_Effective_090926.pdf",
       "modifiedTime": "2026-09-04T13:39:22.791Z",
       "localPath": "121CHP-A_Effective_090926.pdf"
+    },
+    "1frviZeUQRFApP4K46BArL2ZJwe0JY9US": {
+      "filename": "124CHP-P_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T13:55:27.022Z",
+      "md5Checksum": "ae21bdecaede05a7faef4744802a704e",
+      "localPath": "124CHP-P_Effective_092326.pdf"
+    },
+    "1usLKxgYVEUB147pmh3l2fVI0przgFWi8": {
+      "filename": "124CHP-A_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T13:54:43.564Z",
+      "md5Checksum": "e27afa44d1169e8e729ae6841367c178",
+      "localPath": "124CHP-A_Effective_092326.pdf"
     }
   },
-  "lastSync": "2026-09-07T03:34:25.522Z"
+  "lastSync": "2026-09-18T18:05:29.563Z"
 }

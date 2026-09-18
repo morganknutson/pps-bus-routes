@@ -95,15 +95,31 @@
       "displayName": "NE 6th Ave & NE Morgan St, Portland, OR 97211, USA",
       "placeId": "EjJORSA2dGggQXZlICYgTkUgTW9yZ2FuIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCQHQL5r_ppVUEQBzM6Ri1XeaEhQKEgkB0C-a_6aVVBEAczOkYtV3mhoUChIJ6ztj7kunlVQRJPGoLWXniukaFAoSCVdadC35ppVUEb-vL17VwonVIgoNgxsqGxWnquO2",
       "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-6",
+      "address": "NE Martin Luther King Jr Blvd. & NE Lombard St. [SE]",
+      "time": "4:27 pm",
+      "direction": "SE",
+      "originalLine": "4:27 pm NE MARTIN LUTHER KING JR BLVD @ NE LOMBARD ST [SE]204OCG-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.661364,
+        45.5772257
+      ],
+      "displayName": "NE Lombard St & NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
+      "placeId": "EkZORSBMb21iYXJkIFN0ICYgTkUgTWFydGluIEx1dGhlciBLaW5nIEpyIEJsdmQsIFBvcnRsYW5kLCBPUiA5NzIxMSwgVVNBImYiZAoUChIJd_uIrFWmlVQRTdWVC_oahFMSFAoSCXf7iKxVppVUEU3VlQv6GoRTGhQKEgk142t1-qaVVBGHfWUSzbuNQhoUChIJ7ZajHg-nlVQRxOJdauFPJhQiCg1hiCobFXhc47Y",
+      "neighborhood": "Northeast Portland"
     }
   ],
   "neighborhoods": [
+    "Northeast Portland",
     "Woodlawn"
   ],
-  "processedAt": "2026-08-10T02:04:32.422Z",
+  "processedAt": "2026-09-18T18:08:53.160Z",
   "stats": {
-    "totalStops": 6,
-    "geocodedStops": 6,
+    "totalStops": 7,
+    "geocodedStops": 7,
     "failedStops": 0
   },
   "geometry": [
@@ -280,28 +296,48 @@
       -122.65674
     ],
     [
-      45.5758,
-      -122.65654
+      45.57581,
+      -122.65937
     ],
     [
-      45.57513,
-      -122.65655
-    ],
-    [
-      45.57444,
-      -122.65656
-    ],
-    [
-      45.57444,
-      -122.65755
-    ],
-    [
-      45.57444,
-      -122.65883
+      45.57497,
+      -122.65936
     ],
     [
       45.57444,
       -122.65936
+    ],
+    [
+      45.57444,
+      -122.66038
+    ],
+    [
+      45.57444,
+      -122.66131
+    ],
+    [
+      45.57513,
+      -122.66131
+    ],
+    [
+      45.5758,
+      -122.6613
+    ],
+    [
+      45.5759,
+      -122.66136
+    ],
+    [
+      45.5762,
+      -122.66137
+    ],
+    [
+      45.57686,
+      -122.66136
+    ],
+    [
+      45.57723,
+      -122.66136
     ]
   ]
 }

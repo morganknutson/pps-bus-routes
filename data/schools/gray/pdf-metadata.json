@@ -12,7 +12,8 @@
     },
     "1rm4xkj9pBIdAEsbd7hDOit3ROry5Bvby": {
       "filename": "129GRY-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-07T22:07:08.803Z",
+      "modifiedTime": "2026-08-27T18:25:33.409Z",
+      "md5Checksum": "92f6cfc2962a62bd67c59a94fada246a",
       "localPath": "129GRY-P_Effective_082626.pdf"
     },
     "1bRxdK3uYAbIKhtQnz4wub5moXOqYK6xs": {
@@ -20,14 +21,10 @@
       "modifiedTime": "2026-08-07T22:06:50.402Z",
       "localPath": "109GRY-P_Effective_082626.pdf"
     },
-    "1mk-Mq_9hNp9iCNDhrSRWxSRP8rPNSyMk": {
-      "filename": "130GRY-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-07T22:06:31.058Z",
-      "localPath": "130GRY-P_Effective_082626.pdf"
-    },
     "1qdy6KQqRWZrm7kT2lHddxj0lyGGhwQ34": {
       "filename": "128GRY-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T15:43:14.337Z",
+      "modifiedTime": "2026-08-12T18:38:27.892Z",
+      "md5Checksum": "405881816bc043594cf0fc8128b4ff85",
       "localPath": "128GRY-A_Effective_082626.pdf"
     },
     "1KD4_hHIsCsSsWqaIgK-OKyXM5pGjADqR": {
@@ -37,13 +34,9 @@
     },
     "13IW5HAaYwXDLm8es_Ny0FFrcyfnwrsw9": {
       "filename": "129GRY-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T15:42:05.738Z",
+      "modifiedTime": "2026-08-27T18:24:56.618Z",
+      "md5Checksum": "11e9308b2f09fa298d4b50e4c2a8785f",
       "localPath": "129GRY-A_Effective_082626.pdf"
-    },
-    "1iZMWhtZunt9ammpmgM1lqFhsCurarvIk": {
-      "filename": "130GRY-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T15:41:17.505Z",
-      "localPath": "130GRY-A_Effective_082626.pdf"
     },
     "1oAUrFZ656ScCAaAqXWJnPNroJ46fEnKE": {
       "filename": "119GRY-P_Effective_090226.pdf",
@@ -89,7 +82,31 @@
       "filename": "130GRY-A_Effective_091626.pdf",
       "modifiedTime": "2026-09-09T20:37:37.125Z",
       "localPath": "130GRY-A_Effective_091626.pdf"
+    },
+    "1I1aGqcD1_eB7yUHY6kSykDPm6XoowSRH": {
+      "filename": "130GRY-P_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T13:26:46.614Z",
+      "md5Checksum": "91123933c92b395a2cf99772a823db1f",
+      "localPath": "130GRY-P_Effective_092326.pdf"
+    },
+    "1UzposHf6FiznPCAjkD0f0WdKUsT4v2d1": {
+      "filename": "130GRY-A_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T13:26:02.868Z",
+      "md5Checksum": "655a8109980be89d459cff10c7bf52c1",
+      "localPath": "130GRY-A_Effective_092326.pdf"
+    },
+    "1wJLnd7ANZKNQAok7FqXuq_FYoUstUirg": {
+      "filename": "128GRY-P_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T13:24:54.839Z",
+      "md5Checksum": "bd6c7ce314e290290cd06ad33b172018",
+      "localPath": "128GRY-P_Effective_092326.pdf"
+    },
+    "1yJtTj9ee44krC8fhKiKug1RUa2xDWI7z": {
+      "filename": "128GRY-A_Effective_092326.pdf",
+      "modifiedTime": "2026-09-16T13:24:13.979Z",
+      "md5Checksum": "0e302281175eaf1958d2977d7b463cf2",
+      "localPath": "128GRY-A_Effective_092326.pdf"
     }
   },
-  "lastSync": "2026-09-14T04:00:17.638Z"
+  "lastSync": "2026-09-18T18:03:35.941Z"
 }
