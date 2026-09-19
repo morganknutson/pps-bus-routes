@@ -437,26 +437,31 @@ export const SchoolInfoTooltip: React.FC<SchoolInfoTooltipProps> = ({
         </div>
 
         {/*--------------------------------
-           Conditional Render: Routes Button
-           Shows button to view routes if routeCount is defined and showRoutesButton is true
+           Conditional Render: Route Availability
+           Shows a routes button or a non-interactive notice when routes are unavailable
         ----------------------------------*/}
         {school.routeCount !== undefined && showRoutesButton && (
           <div style={{ marginLeft: '0px', marginRight: '0px', marginTop: '2em', marginBottom: '0' }}>
-            {/*--------------------------------
-               Component: Routes Button
-               Primary button to navigate to routes view
-            ----------------------------------*/}
-            <Button
-              variant="primary"
-              size="large"
-              fullWidth
-              align="left"
-              onClick={handleViewRoutes}
-              icon={<RouteIcon color={school.routeCount === 0 ? '#f44' : 'currentColor'} />}
-              showChevron={school.routeCount! > 0}
-            >
-              {school.routeCount === 0 ? 'Route information not provided' : `Explore ${school.routeCount} ${school.routeCount === 1 ? 'Route' : 'Routes'}`}
-            </Button>
+            {school.routeCount === 0 ? (
+              <div className="school-list-item-meta routes no-routes">
+                <div className="school-list-item-meta-icon routes">
+                  <i className="fas fa-exclamation-circle" aria-hidden="true"></i>
+                </div>
+                <span>Routes not provided by district</span>
+              </div>
+            ) : (
+              <Button
+                variant="primary"
+                size="large"
+                fullWidth
+                align="left"
+                onClick={handleViewRoutes}
+                icon={<RouteIcon color="currentColor" />}
+                showChevron
+              >
+                {`Explore ${school.routeCount} ${school.routeCount === 1 ? 'Route' : 'Routes'}`}
+              </Button>
+            )}
           </div>
         )}
 
