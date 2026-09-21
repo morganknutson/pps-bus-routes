@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-18T18:08:18.657Z",
+  "timestamp": "2026-09-21T03:59:00.287Z",
   "totalSchools": 72,
   "schoolsWithDriveLinks": 71,
   "results": [
@@ -17,7 +17,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:14.144Z",
+      "checkedAt": "2026-09-21T03:58:55.821Z",
       "countMismatch": false
     },
     {
@@ -34,7 +34,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:17.447Z",
+      "checkedAt": "2026-09-21T03:58:51.818Z",
       "countMismatch": false
     },
     {
@@ -51,7 +51,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:12.143Z",
+      "checkedAt": "2026-09-21T03:58:51.819Z",
       "countMismatch": false
     },
     {
@@ -68,7 +68,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:18.413Z",
+      "checkedAt": "2026-09-21T03:58:52.820Z",
       "countMismatch": false
     },
     {
@@ -85,7 +85,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:13.144Z",
+      "checkedAt": "2026-09-21T03:58:52.821Z",
       "countMismatch": false
     },
     {
@@ -102,7 +102,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:13.142Z",
+      "checkedAt": "2026-09-21T03:58:53.821Z",
       "countMismatch": false
     },
     {
@@ -119,7 +119,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:07.136Z",
+      "checkedAt": "2026-09-21T03:58:53.822Z",
       "countMismatch": false
     },
     {
@@ -136,7 +136,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:07.141Z",
+      "checkedAt": "2026-09-21T03:58:54.821Z",
       "countMismatch": false
     },
     {
@@ -167,7 +167,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:08.137Z",
+      "checkedAt": "2026-09-21T03:58:54.822Z",
       "countMismatch": false
     },
     {
@@ -184,7 +184,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:08.138Z",
+      "checkedAt": "2026-09-21T03:58:44.813Z",
       "countMismatch": false
     },
     {
@@ -201,7 +201,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:09.138Z",
+      "checkedAt": "2026-09-21T03:58:44.814Z",
       "countMismatch": false
     },
     {
@@ -218,7 +218,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:17.443Z",
+      "checkedAt": "2026-09-21T03:58:45.815Z",
       "countMismatch": false
     },
     {
@@ -235,7 +235,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:10.140Z",
+      "checkedAt": "2026-09-21T03:58:45.814Z",
       "countMismatch": false
     },
     {
@@ -245,14 +245,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 10,
-      "localPdfCount": 10,
+      "pdfCount": 8,
+      "localPdfCount": 8,
       "driveLastModified": "2026-09-09T13:46:09.170Z",
       "localLastModified": "2026-09-09T13:46:09.170Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:01.130Z",
+      "checkedAt": "2026-09-21T03:58:59.040Z",
       "countMismatch": false
     },
     {
@@ -269,7 +269,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:02.130Z",
+      "checkedAt": "2026-09-21T03:58:46.816Z",
       "countMismatch": false
     },
     {
@@ -286,7 +286,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:02.131Z",
+      "checkedAt": "2026-09-21T03:58:47.815Z",
       "countMismatch": false
     },
     {
@@ -303,7 +303,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:03.132Z",
+      "checkedAt": "2026-09-21T03:58:47.816Z",
       "countMismatch": false
     },
     {
@@ -320,7 +320,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:03.133Z",
+      "checkedAt": "2026-09-21T03:58:48.817Z",
       "countMismatch": false
     },
     {
@@ -337,7 +337,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:04.132Z",
+      "checkedAt": "2026-09-21T03:58:48.816Z",
       "countMismatch": false
     },
     {
@@ -369,7 +369,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:06.137Z",
+      "checkedAt": "2026-09-21T03:58:49.818Z",
       "countMismatch": false
     },
     {
@@ -386,7 +386,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:06.140Z",
+      "checkedAt": "2026-09-21T03:58:50.817Z",
       "countMismatch": false
     },
     {
@@ -403,7 +403,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:54.113Z",
+      "checkedAt": "2026-09-21T03:58:34.806Z",
       "countMismatch": false
     },
     {
@@ -435,7 +435,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:54.115Z",
+      "checkedAt": "2026-09-21T03:58:34.805Z",
       "countMismatch": false
     },
     {
@@ -452,7 +452,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:55.115Z",
+      "checkedAt": "2026-09-21T03:58:35.806Z",
       "countMismatch": false
     },
     {
@@ -469,7 +469,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:55.116Z",
+      "checkedAt": "2026-09-21T03:58:35.807Z",
       "countMismatch": false
     },
     {
@@ -486,7 +486,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:56.116Z",
+      "checkedAt": "2026-09-21T03:58:36.806Z",
       "countMismatch": false
     },
     {
@@ -503,7 +503,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:56.118Z",
+      "checkedAt": "2026-09-21T03:58:36.808Z",
       "countMismatch": false
     },
     {
@@ -520,7 +520,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:57.118Z",
+      "checkedAt": "2026-09-21T03:58:37.807Z",
       "countMismatch": false
     },
     {
@@ -537,7 +537,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:57.119Z",
+      "checkedAt": "2026-09-21T03:58:37.808Z",
       "countMismatch": false
     },
     {
@@ -554,7 +554,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:58.119Z",
+      "checkedAt": "2026-09-21T03:58:38.808Z",
       "countMismatch": false
     },
     {
@@ -564,14 +564,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 37,
-      "localPdfCount": 37,
+      "pdfCount": 30,
+      "localPdfCount": 30,
       "driveLastModified": "2026-09-16T15:12:22.319Z",
       "localLastModified": "2026-09-16T15:12:22.319Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:58.120Z",
+      "checkedAt": "2026-09-21T03:58:59.173Z",
       "countMismatch": false
     },
     {
@@ -588,7 +588,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:59.135Z",
+      "checkedAt": "2026-09-21T03:58:39.808Z",
       "countMismatch": false
     },
     {
@@ -605,7 +605,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:00.128Z",
+      "checkedAt": "2026-09-21T03:58:40.810Z",
       "countMismatch": false
     },
     {
@@ -622,7 +622,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:59.132Z",
+      "checkedAt": "2026-09-21T03:58:39.809Z",
       "countMismatch": false
     },
     {
@@ -639,7 +639,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:00.130Z",
+      "checkedAt": "2026-09-21T03:58:40.808Z",
       "countMismatch": false
     },
     {
@@ -656,7 +656,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:01.129Z",
+      "checkedAt": "2026-09-21T03:58:41.810Z",
       "countMismatch": false
     },
     {
@@ -673,7 +673,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:39.082Z",
+      "checkedAt": "2026-09-21T03:58:41.809Z",
       "countMismatch": false
     },
     {
@@ -705,7 +705,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:40.086Z",
+      "checkedAt": "2026-09-21T03:58:42.811Z",
       "countMismatch": false
     },
     {
@@ -722,7 +722,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:40.084Z",
+      "checkedAt": "2026-09-21T03:58:42.812Z",
       "countMismatch": false
     },
     {
@@ -739,7 +739,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:41.085Z",
+      "checkedAt": "2026-09-21T03:58:43.812Z",
       "countMismatch": false
     },
     {
@@ -756,7 +756,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:05.135Z",
+      "checkedAt": "2026-09-21T03:58:49.817Z",
       "countMismatch": false
     },
     {
@@ -773,7 +773,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:41.087Z",
+      "checkedAt": "2026-09-21T03:58:43.813Z",
       "countMismatch": false
     },
     {
@@ -790,7 +790,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:42.090Z",
+      "checkedAt": "2026-09-21T03:58:20.799Z",
       "countMismatch": false
     },
     {
@@ -807,7 +807,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:42.089Z",
+      "checkedAt": "2026-09-21T03:58:20.850Z",
       "countMismatch": false
     },
     {
@@ -824,7 +824,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:43.092Z",
+      "checkedAt": "2026-09-21T03:58:21.800Z",
       "countMismatch": false
     },
     {
@@ -841,7 +841,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:43.093Z",
+      "checkedAt": "2026-09-21T03:58:22.800Z",
       "countMismatch": false
     },
     {
@@ -858,7 +858,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:44.094Z",
+      "checkedAt": "2026-09-21T03:58:23.800Z",
       "countMismatch": false
     },
     {
@@ -875,7 +875,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:44.096Z",
+      "checkedAt": "2026-09-21T03:58:24.802Z",
       "countMismatch": false
     },
     {
@@ -885,14 +885,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 10,
-      "localPdfCount": 10,
+      "pdfCount": 8,
+      "localPdfCount": 8,
       "driveLastModified": "2026-09-16T13:57:24.744Z",
       "localLastModified": "2026-09-16T13:57:24.744Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:45.097Z",
+      "checkedAt": "2026-09-21T03:59:00.074Z",
       "countMismatch": false
     },
     {
@@ -909,7 +909,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:45.095Z",
+      "checkedAt": "2026-09-21T03:58:25.802Z",
       "countMismatch": false
     },
     {
@@ -926,7 +926,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:46.097Z",
+      "checkedAt": "2026-09-21T03:58:25.803Z",
       "countMismatch": false
     },
     {
@@ -943,7 +943,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:46.099Z",
+      "checkedAt": "2026-09-21T03:58:26.801Z",
       "countMismatch": false
     },
     {
@@ -960,7 +960,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:47.100Z",
+      "checkedAt": "2026-09-21T03:58:26.802Z",
       "countMismatch": false
     },
     {
@@ -977,7 +977,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:47.098Z",
+      "checkedAt": "2026-09-21T03:58:27.803Z",
       "countMismatch": false
     },
     {
@@ -994,7 +994,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:48.102Z",
+      "checkedAt": "2026-09-21T03:58:27.805Z",
       "countMismatch": false
     },
     {
@@ -1011,7 +1011,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:48.100Z",
+      "checkedAt": "2026-09-21T03:58:28.802Z",
       "countMismatch": false
     },
     {
@@ -1028,7 +1028,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:49.102Z",
+      "checkedAt": "2026-09-21T03:58:28.804Z",
       "countMismatch": false
     },
     {
@@ -1045,7 +1045,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:49.104Z",
+      "checkedAt": "2026-09-21T03:58:29.804Z",
       "countMismatch": false
     },
     {
@@ -1062,7 +1062,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:50.103Z",
+      "checkedAt": "2026-09-21T03:58:29.805Z",
       "countMismatch": false
     },
     {
@@ -1079,7 +1079,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:50.105Z",
+      "checkedAt": "2026-09-21T03:58:30.803Z",
       "countMismatch": false
     },
     {
@@ -1096,7 +1096,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:51.108Z",
+      "checkedAt": "2026-09-21T03:58:30.804Z",
       "countMismatch": false
     },
     {
@@ -1113,7 +1113,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:51.107Z",
+      "checkedAt": "2026-09-21T03:58:31.804Z",
       "countMismatch": false
     },
     {
@@ -1130,7 +1130,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:52.111Z",
+      "checkedAt": "2026-09-21T03:58:31.805Z",
       "countMismatch": false
     },
     {
@@ -1147,7 +1147,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:52.109Z",
+      "checkedAt": "2026-09-21T03:58:32.804Z",
       "countMismatch": false
     },
     {
@@ -1164,7 +1164,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:53.110Z",
+      "checkedAt": "2026-09-21T03:58:32.805Z",
       "countMismatch": false
     },
     {
@@ -1181,7 +1181,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:53.113Z",
+      "checkedAt": "2026-09-21T03:58:33.805Z",
       "countMismatch": false
     },
     {
@@ -1198,7 +1198,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:07:39.155Z",
+      "checkedAt": "2026-09-21T03:58:33.806Z",
       "countMismatch": false
     },
     {
@@ -1215,7 +1215,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-18T18:08:11.141Z",
+      "checkedAt": "2026-09-21T03:58:50.819Z",
       "countMismatch": false
     }
   ],
