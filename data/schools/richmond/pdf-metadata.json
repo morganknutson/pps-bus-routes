@@ -5,31 +5,6 @@
       "modifiedTime": "2026-09-01T20:27:52.798Z",
       "localPath": "255RCH-P_Effective_090926.pdf"
     },
-    "1W7eGsLmVkiEFkUaUPVzj6arHqo502bxt": {
-      "filename": "255RCH-A_Effective_090926.pdf",
-      "modifiedTime": "2026-09-01T20:27:01.845Z",
-      "localPath": "255RCH-A_Effective_090926.pdf"
-    },
-    "1WiKGad7_FogTtBoVxs-bOSIa4CDt_BIf": {
-      "filename": "257RCH-P_Effective_090926.pdf",
-      "modifiedTime": "2026-09-01T15:31:53.045Z",
-      "localPath": "257RCH-P_Effective_090926.pdf"
-    },
-    "1Aw3b0F4X2_sSzKd6r73IkrsJNe5VutLM": {
-      "filename": "257RCH-A_Effective_090926.pdf",
-      "modifiedTime": "2026-09-01T15:31:08.586Z",
-      "localPath": "257RCH-A_Effective_090926.pdf"
-    },
-    "1Urp3pdDJrX1AWBAfPTMWk0QLtAsKlo7Q": {
-      "filename": "225RCH-P_Effective_090926.pdf",
-      "modifiedTime": "2026-09-01T13:27:46.614Z",
-      "localPath": "225RCH-P_Effective_090926.pdf"
-    },
-    "1jo3CMCqqsoP1jNFmbti1mQYgDlFSx2ok": {
-      "filename": "225RCH-A_Effective_090926.pdf",
-      "modifiedTime": "2026-09-01T13:27:07.928Z",
-      "localPath": "225RCH-A_Effective_090926.pdf"
-    },
     "1le6ZnXBPaYMOyDlTdSibLkiLd8i6fwLp": {
       "filename": "223RCH-P_Effective_091626.pdf",
       "modifiedTime": "2026-09-09T17:06:35.819Z",
@@ -39,11 +14,6 @@
       "filename": "223RCH-A_Effective_091626.pdf",
       "modifiedTime": "2026-09-09T17:05:45.541Z",
       "localPath": "223RCH-A_Effective_091626.pdf"
-    },
-    "1HEuKcGaNZi2ATUI22Z20mFuC9gHFxl1W": {
-      "filename": "257RCH-P_Effective_091626.pdf",
-      "modifiedTime": "2026-09-09T14:26:50.279Z",
-      "localPath": "257RCH-P_Effective_091626.pdf"
     },
     "1Q5-58_Q-DpO5k7NlgboCt3OC07FoqVdu": {
       "filename": "257RCH-A_Effective_091626.pdf",
@@ -66,7 +36,19 @@
       "modifiedTime": "2026-09-18T15:50:57.477Z",
       "md5Checksum": "f16d8f914f0a2e4b893e3189d25f1f52",
       "localPath": "255RCH-A_Effective_091626.pdf"
+    },
+    "1jHdPfhaRx_XGqzaMgyX9wd3lxjtUFFk8": {
+      "filename": "257RCH-P_Effective_091726.pdf",
+      "modifiedTime": "2026-09-21T20:51:59.014Z",
+      "md5Checksum": "9d88b6bb1a18272930902fffd849be92",
+      "localPath": "257RCH-P_Effective_091726.pdf"
+    },
+    "1XdcaZpxOvZ87_7Akh_ISEAG8ZIYcely8": {
+      "filename": "229RCH-P_Effective_092426.pdf",
+      "modifiedTime": "2026-09-21T20:43:55.766Z",
+      "md5Checksum": "ee1f631d9fec34fe4f012a4ec347d60f",
+      "localPath": "229RCH-P_Effective_092426.pdf"
     }
   },
-  "lastSync": "2026-09-18T18:04:12.438Z"
+  "lastSync": "2026-09-28T04:22:20.468Z"
 }

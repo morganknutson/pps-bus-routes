@@ -15,11 +15,6 @@
       "modifiedTime": "2026-08-06T16:06:36.643Z",
       "localPath": "217LNT-P_Effective_082626.pdf"
     },
-    "1PlwV8IM--oaqHqLWPqqp1htWU8M9HQdU": {
-      "filename": "273LNT-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-05T17:47:36.879Z",
-      "localPath": "273LNT-A_Effective_082626.pdf"
-    },
     "1Qgsbr_x1L5xtWd64cHw8x_hRbD5xwrmk": {
       "filename": "209LNT-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-05T17:47:18.351Z",
@@ -35,7 +30,19 @@
       "modifiedTime": "2026-09-16T15:48:53.957Z",
       "md5Checksum": "f90b6ff9089608b286b300567bab990f",
       "localPath": "273LNT-A_Effective_092326.pdf"
+    },
+    "1w7SoDBv92jwsCx7bqM2ZrtDk3-aQeiFW": {
+      "filename": "273LNT-P_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T21:20:11.543Z",
+      "md5Checksum": "95e1c631fdda8d591cfbea8cbf19fa8c",
+      "localPath": "273LNT-P_Effective_093026.pdf"
+    },
+    "1cLwHlZvkN3sNZYqcL_kll91p-aL9dcz_": {
+      "filename": "273LNT-A_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T21:19:39.244Z",
+      "md5Checksum": "a618a4d844d2f1237adb481bf8479768",
+      "localPath": "273LNT-A_Effective_093026.pdf"
     }
   },
-  "lastSync": "2026-09-18T18:03:58.821Z"
+  "lastSync": "2026-09-28T04:22:13.686Z"
 }

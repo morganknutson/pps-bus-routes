@@ -10,20 +10,10 @@
       "modifiedTime": "2026-08-08T17:08:41.121Z",
       "localPath": "285TAB-P_Effective_082626.pdf"
     },
-    "1_u3AAh_QTP2AvshcAtxd2QqL0gGP2gSS": {
-      "filename": "226TAB-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T17:08:25.113Z",
-      "localPath": "226TAB-P_Effective_082626.pdf"
-    },
     "1Q1vHzW6eJOsyjKrt1fIHs42OaSNJADjm": {
       "filename": "243TAB-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-08T16:47:50.944Z",
       "localPath": "243TAB-A_Effective_082626.pdf"
-    },
-    "191ciDBraMZYKzefV7S8wFnmVcMvTkgZf": {
-      "filename": "226TAB-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T16:46:32.411Z",
-      "localPath": "226TAB-A_Effective_082626.pdf"
     },
     "1__8KnZDTx57gNB_L3UXWJLgYXasg5RBv": {
       "filename": "288TAB-P_Effective_090226.pdf",
@@ -65,7 +55,37 @@
       "modifiedTime": "2026-09-16T15:15:55.046Z",
       "md5Checksum": "b5480b3de09bbdbf9bf59f11f0d008cb",
       "localPath": "243TAB-A_Effective_092326.pdf"
+    },
+    "1Ltqhrl5qhjnFXhiijaoPGpZOk321_Dcd": {
+      "filename": "285TAB-P_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T18:40:48.704Z",
+      "md5Checksum": "73f84eb69f83f7f729a686b419ba6a8d",
+      "localPath": "285TAB-P_Effective_093026.pdf"
+    },
+    "1ZU0SZB6usozBOHsGkY0QgCxEniG0A3f4": {
+      "filename": "285TAB-A_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T18:40:11.207Z",
+      "md5Checksum": "7f09d17dd8b17f82188206042b8c883d",
+      "localPath": "285TAB-A_Effective_093026.pdf"
+    },
+    "1Drmq6YZx6ebmo7Nf6-X2C3CfcbOjXcY6": {
+      "filename": "243TAB-P_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T18:38:37.353Z",
+      "md5Checksum": "0dbe0b47b59907d4f22457074da5989b",
+      "localPath": "243TAB-P_Effective_093026.pdf"
+    },
+    "1zA2C8E3uemfjF4UI6a88G1Sz9h2alIAj": {
+      "filename": "243TAB-A_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T18:38:01.738Z",
+      "md5Checksum": "55168b8da1833469f73b15dd767042a6",
+      "localPath": "243TAB-A_Effective_093026.pdf"
+    },
+    "1nyW4o9-HQ_HgxLhcqYc3r1qTTmOw9DxC": {
+      "filename": "238TAB-A_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T18:36:55.380Z",
+      "md5Checksum": "3a33f9adab62048e9d299cc21da19828",
+      "localPath": "238TAB-A_Effective_093026.pdf"
     }
   },
-  "lastSync": "2026-09-18T18:04:06.063Z"
+  "lastSync": "2026-09-28T04:22:27.541Z"
 }

@@ -177117,5 +177117,227 @@
       }
     ],
     "cachedAt": "2026-09-18T18:09:00.899Z"
+  },
+  "2294 sw humphrey pk. rd. e|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.72418154151599,
+      45.506679982149
+    ],
+    "displayName": "2294 SW Humphrey Park Rd, Portland, OR 97221, USA",
+    "placeId": "ChIJxcvIZ9MLlVQRxg8YlDMoa6s",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "2294",
+        "short_name": "2294",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest Humphrey Park Road",
+        "short_name": "SW Humphrey Park Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Hills",
+        "short_name": "Southwest Hills",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97221",
+        "short_name": "97221",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "2330",
+        "short_name": "2330",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-28T04:21:51.345Z"
+  },
+  "north skidmore street & north borthwick avenue|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6733951,
+      45.55459459999999
+    ],
+    "displayName": "N Skidmore St & N Borthwick Ave, Portland, OR 97217, USA",
+    "placeId": "EjhOIFNraWRtb3JlIFN0ICYgTiBCb3J0aHdpY2sgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTcsIFVTQSJmImQKFAoSCWlgza0Up5VUEVV597kPVHmIEhQKEglpYM2tFKeVVBFVefe5D1R5iBoUChIJ3RI0jmynlVQRiDXvwRZDkR0aFAoSCeNy5MFDp5VUESinYh3dJusWIgoNWhQnGxWBhuG2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "North Skidmore Street & North Borthwick Avenue",
+        "short_name": "N Skidmore St & N Borthwick Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "North Portland",
+        "short_name": "North Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97217",
+        "short_name": "97217",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-28T04:21:58.779Z"
+  },
+  "3145 se 92nd ave. e|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.56865939511133,
+      45.49946664973941
+    ],
+    "displayName": "3145 SE 92nd Ave, Portland, OR 97266, USA",
+    "placeId": "ChIJQ4awqEqglVQRssofNb7jaJk",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "3145",
+        "short_name": "3145",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southeast 92nd Avenue",
+        "short_name": "SE 92nd Ave",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Powellhurst-Gilbert",
+        "short_name": "Powellhurst-Gilbert",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97266",
+        "short_name": "97266",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-09-28T04:22:10.840Z"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-21T03:59:00.287Z",
+  "timestamp": "2026-09-28T04:22:34.093Z",
   "totalSchools": 72,
   "schoolsWithDriveLinks": 71,
   "results": [
@@ -17,7 +17,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:55.821Z",
+      "checkedAt": "2026-09-28T04:21:46.054Z",
       "countMismatch": false
     },
     {
@@ -29,12 +29,12 @@
       "hasPdfs": true,
       "pdfCount": 17,
       "localPdfCount": 17,
-      "driveLastModified": "2026-09-16T13:21:37.956Z",
-      "localLastModified": "2026-09-16T13:21:37.956Z",
+      "driveLastModified": "2026-09-24T13:27:20.107Z",
+      "localLastModified": "2026-09-24T13:27:20.107Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:51.818Z",
+      "checkedAt": "2026-09-28T04:21:55.732Z",
       "countMismatch": false
     },
     {
@@ -51,7 +51,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:51.819Z",
+      "checkedAt": "2026-09-28T04:21:38.044Z",
       "countMismatch": false
     },
     {
@@ -68,7 +68,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:52.820Z",
+      "checkedAt": "2026-09-28T04:21:39.043Z",
       "countMismatch": false
     },
     {
@@ -85,7 +85,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:52.821Z",
+      "checkedAt": "2026-09-28T04:21:39.044Z",
       "countMismatch": false
     },
     {
@@ -102,7 +102,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:53.821Z",
+      "checkedAt": "2026-09-28T04:21:40.045Z",
       "countMismatch": false
     },
     {
@@ -119,7 +119,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:53.822Z",
+      "checkedAt": "2026-09-28T04:21:40.046Z",
       "countMismatch": false
     },
     {
@@ -136,7 +136,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:54.821Z",
+      "checkedAt": "2026-09-28T04:21:41.045Z",
       "countMismatch": false
     },
     {
@@ -167,7 +167,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:54.822Z",
+      "checkedAt": "2026-09-28T04:21:41.048Z",
       "countMismatch": false
     },
     {
@@ -184,7 +184,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:44.813Z",
+      "checkedAt": "2026-09-28T04:21:42.047Z",
       "countMismatch": false
     },
     {
@@ -201,7 +201,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:44.814Z",
+      "checkedAt": "2026-09-28T04:21:42.047Z",
       "countMismatch": false
     },
     {
@@ -218,7 +218,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:45.815Z",
+      "checkedAt": "2026-09-28T04:21:43.047Z",
       "countMismatch": false
     },
     {
@@ -235,7 +235,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:45.814Z",
+      "checkedAt": "2026-09-28T04:21:43.048Z",
       "countMismatch": false
     },
     {
@@ -252,7 +252,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:59.040Z",
+      "checkedAt": "2026-09-28T04:21:44.049Z",
       "countMismatch": false
     },
     {
@@ -262,14 +262,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 7,
-      "localPdfCount": 7,
-      "driveLastModified": "2026-09-14T13:21:08.564Z",
-      "localLastModified": "2026-09-14T13:21:08.564Z",
+      "pdfCount": 10,
+      "localPdfCount": 10,
+      "driveLastModified": "2026-09-23T18:35:06.149Z",
+      "localLastModified": "2026-09-23T18:35:06.149Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:46.816Z",
+      "checkedAt": "2026-09-28T04:21:59.555Z",
       "countMismatch": false
     },
     {
@@ -279,14 +279,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 12,
-      "localPdfCount": 12,
+      "pdfCount": 10,
+      "localPdfCount": 10,
       "driveLastModified": "2026-09-16T13:55:27.022Z",
       "localLastModified": "2026-09-16T13:55:27.022Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:47.815Z",
+      "checkedAt": "2026-09-28T04:21:56.228Z",
       "countMismatch": false
     },
     {
@@ -296,14 +296,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 3,
-      "localPdfCount": 3,
+      "pdfCount": 2,
+      "localPdfCount": 2,
       "driveLastModified": "2026-09-16T13:22:54.350Z",
       "localLastModified": "2026-09-16T13:22:54.350Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:47.816Z",
+      "checkedAt": "2026-09-28T04:21:57.220Z",
       "countMismatch": false
     },
     {
@@ -320,7 +320,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:48.817Z",
+      "checkedAt": "2026-09-28T04:21:17.025Z",
       "countMismatch": false
     },
     {
@@ -337,7 +337,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:48.816Z",
+      "checkedAt": "2026-09-28T04:21:18.025Z",
       "countMismatch": false
     },
     {
@@ -362,14 +362,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 5,
-      "localPdfCount": 5,
+      "pdfCount": 4,
+      "localPdfCount": 4,
       "driveLastModified": "2026-09-16T14:47:17.470Z",
       "localLastModified": "2026-09-16T14:47:17.470Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:49.818Z",
+      "checkedAt": "2026-09-28T04:21:59.241Z",
       "countMismatch": false
     },
     {
@@ -386,7 +386,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:50.817Z",
+      "checkedAt": "2026-09-28T04:21:19.027Z",
       "countMismatch": false
     },
     {
@@ -403,7 +403,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:34.806Z",
+      "checkedAt": "2026-09-28T04:21:20.027Z",
       "countMismatch": false
     },
     {
@@ -435,7 +435,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:34.805Z",
+      "checkedAt": "2026-09-28T04:21:20.028Z",
       "countMismatch": false
     },
     {
@@ -452,7 +452,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:35.806Z",
+      "checkedAt": "2026-09-28T04:21:21.028Z",
       "countMismatch": false
     },
     {
@@ -462,14 +462,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 20,
-      "localPdfCount": 20,
+      "pdfCount": 16,
+      "localPdfCount": 16,
       "driveLastModified": "2026-09-16T13:26:46.614Z",
       "localLastModified": "2026-09-16T13:26:46.614Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:35.807Z",
+      "checkedAt": "2026-09-28T04:22:00.276Z",
       "countMismatch": false
     },
     {
@@ -486,7 +486,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:36.806Z",
+      "checkedAt": "2026-09-28T04:21:22.030Z",
       "countMismatch": false
     },
     {
@@ -496,14 +496,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 10,
-      "localPdfCount": 10,
-      "driveLastModified": "2026-08-18T18:55:44.045Z",
-      "localLastModified": "2026-08-18T18:55:44.045Z",
+      "pdfCount": 16,
+      "localPdfCount": 16,
+      "driveLastModified": "2026-09-23T19:48:22.027Z",
+      "localLastModified": "2026-09-23T19:48:22.027Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:36.808Z",
+      "checkedAt": "2026-09-28T04:22:13.727Z",
       "countMismatch": false
     },
     {
@@ -520,7 +520,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:37.807Z",
+      "checkedAt": "2026-09-28T04:21:23.030Z",
       "countMismatch": false
     },
     {
@@ -537,7 +537,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:37.808Z",
+      "checkedAt": "2026-09-28T04:21:23.029Z",
       "countMismatch": false
     },
     {
@@ -554,7 +554,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:38.808Z",
+      "checkedAt": "2026-09-28T04:21:24.030Z",
       "countMismatch": false
     },
     {
@@ -564,14 +564,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 30,
-      "localPdfCount": 30,
+      "pdfCount": 28,
+      "localPdfCount": 28,
       "driveLastModified": "2026-09-16T15:12:22.319Z",
       "localLastModified": "2026-09-16T15:12:22.319Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:59.173Z",
+      "checkedAt": "2026-09-28T04:22:01.261Z",
       "countMismatch": false
     },
     {
@@ -588,7 +588,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:39.808Z",
+      "checkedAt": "2026-09-28T04:21:25.032Z",
       "countMismatch": false
     },
     {
@@ -605,7 +605,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:40.810Z",
+      "checkedAt": "2026-09-28T04:21:26.033Z",
       "countMismatch": false
     },
     {
@@ -622,7 +622,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:39.809Z",
+      "checkedAt": "2026-09-28T04:21:25.033Z",
       "countMismatch": false
     },
     {
@@ -632,14 +632,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 8,
-      "localPdfCount": 8,
-      "driveLastModified": "2026-09-01T16:47:01.555Z",
-      "localLastModified": "2026-09-01T16:47:01.555Z",
+      "pdfCount": 10,
+      "localPdfCount": 10,
+      "driveLastModified": "2026-09-23T17:34:24.837Z",
+      "localLastModified": "2026-09-23T17:34:24.837Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:40.808Z",
+      "checkedAt": "2026-09-28T04:22:07.005Z",
       "countMismatch": false
     },
     {
@@ -649,14 +649,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 7,
-      "localPdfCount": 7,
+      "pdfCount": 4,
+      "localPdfCount": 4,
       "driveLastModified": "2026-09-16T16:40:25.898Z",
       "localLastModified": "2026-09-16T16:40:25.898Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:41.810Z",
+      "checkedAt": "2026-09-28T04:22:08.238Z",
       "countMismatch": false
     },
     {
@@ -666,14 +666,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 7,
-      "localPdfCount": 7,
-      "driveLastModified": "2026-09-16T15:48:53.957Z",
-      "localLastModified": "2026-09-16T15:48:53.957Z",
+      "pdfCount": 8,
+      "localPdfCount": 8,
+      "driveLastModified": "2026-09-23T21:20:11.543Z",
+      "localLastModified": "2026-09-23T21:20:11.543Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:41.809Z",
+      "checkedAt": "2026-09-28T04:22:13.687Z",
       "countMismatch": false
     },
     {
@@ -705,7 +705,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:42.811Z",
+      "checkedAt": "2026-09-28T04:21:28.035Z",
       "countMismatch": false
     },
     {
@@ -715,14 +715,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 20,
-      "localPdfCount": 20,
+      "pdfCount": 16,
+      "localPdfCount": 16,
       "driveLastModified": "2026-09-09T15:46:36.991Z",
       "localLastModified": "2026-09-09T15:46:36.991Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:42.812Z",
+      "checkedAt": "2026-09-28T04:22:14.276Z",
       "countMismatch": false
     },
     {
@@ -739,7 +739,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:43.812Z",
+      "checkedAt": "2026-09-28T04:21:29.037Z",
       "countMismatch": false
     },
     {
@@ -749,14 +749,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 7,
-      "localPdfCount": 7,
+      "pdfCount": 4,
+      "localPdfCount": 4,
       "driveLastModified": "2026-09-16T15:14:11.182Z",
       "localLastModified": "2026-09-16T15:14:11.182Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:49.817Z",
+      "checkedAt": "2026-09-28T04:21:58.229Z",
       "countMismatch": false
     },
     {
@@ -766,14 +766,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 14,
-      "localPdfCount": 14,
+      "pdfCount": 8,
+      "localPdfCount": 8,
       "driveLastModified": "2026-09-16T13:30:11.684Z",
       "localLastModified": "2026-09-16T13:30:11.684Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:43.813Z",
+      "checkedAt": "2026-09-28T04:22:14.243Z",
       "countMismatch": false
     },
     {
@@ -790,7 +790,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:20.799Z",
+      "checkedAt": "2026-09-28T04:21:30.037Z",
       "countMismatch": false
     },
     {
@@ -807,7 +807,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:20.850Z",
+      "checkedAt": "2026-09-28T04:21:30.037Z",
       "countMismatch": false
     },
     {
@@ -817,14 +817,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 13,
-      "localPdfCount": 13,
-      "driveLastModified": "2026-09-16T15:15:55.046Z",
-      "localLastModified": "2026-09-16T15:15:55.046Z",
+      "pdfCount": 16,
+      "localPdfCount": 16,
+      "driveLastModified": "2026-09-23T18:40:48.704Z",
+      "localLastModified": "2026-09-23T18:40:48.704Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:21.800Z",
+      "checkedAt": "2026-09-28T04:22:27.542Z",
       "countMismatch": false
     },
     {
@@ -841,7 +841,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:22.800Z",
+      "checkedAt": "2026-09-28T04:21:31.039Z",
       "countMismatch": false
     },
     {
@@ -858,7 +858,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:23.800Z",
+      "checkedAt": "2026-09-28T04:21:32.038Z",
       "countMismatch": false
     },
     {
@@ -868,14 +868,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 13,
-      "localPdfCount": 13,
-      "driveLastModified": "2026-09-18T15:50:57.477Z",
-      "localLastModified": "2026-09-18T15:50:57.477Z",
+      "pdfCount": 9,
+      "localPdfCount": 9,
+      "driveLastModified": "2026-09-21T20:51:59.014Z",
+      "localLastModified": "2026-09-21T20:51:59.014Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:24.802Z",
+      "checkedAt": "2026-09-28T04:22:20.469Z",
       "countMismatch": false
     },
     {
@@ -885,14 +885,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 8,
-      "localPdfCount": 8,
+      "pdfCount": 6,
+      "localPdfCount": 6,
       "driveLastModified": "2026-09-16T13:57:24.744Z",
       "localLastModified": "2026-09-16T13:57:24.744Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:59:00.074Z",
+      "checkedAt": "2026-09-28T04:22:21.235Z",
       "countMismatch": false
     },
     {
@@ -909,7 +909,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:25.802Z",
+      "checkedAt": "2026-09-28T04:21:33.041Z",
       "countMismatch": false
     },
     {
@@ -926,7 +926,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:25.803Z",
+      "checkedAt": "2026-09-28T04:21:34.042Z",
       "countMismatch": false
     },
     {
@@ -943,7 +943,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:26.801Z",
+      "checkedAt": "2026-09-28T04:21:34.041Z",
       "countMismatch": false
     },
     {
@@ -953,14 +953,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 12,
-      "localPdfCount": 12,
+      "pdfCount": 10,
+      "localPdfCount": 10,
       "driveLastModified": "2026-09-10T15:05:41.304Z",
       "localLastModified": "2026-09-10T15:05:41.304Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:26.802Z",
+      "checkedAt": "2026-09-28T04:22:22.246Z",
       "countMismatch": false
     },
     {
@@ -977,7 +977,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:27.803Z",
+      "checkedAt": "2026-09-28T04:21:35.042Z",
       "countMismatch": false
     },
     {
@@ -994,7 +994,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:27.805Z",
+      "checkedAt": "2026-09-28T04:21:36.041Z",
       "countMismatch": false
     },
     {
@@ -1004,14 +1004,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 16,
-      "localPdfCount": 16,
+      "pdfCount": 10,
+      "localPdfCount": 10,
       "driveLastModified": "2026-09-09T22:29:54.394Z",
       "localLastModified": "2026-09-09T22:29:54.394Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:28.802Z",
+      "checkedAt": "2026-09-28T04:22:23.297Z",
       "countMismatch": false
     },
     {
@@ -1028,7 +1028,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:28.804Z",
+      "checkedAt": "2026-09-28T04:21:37.043Z",
       "countMismatch": false
     },
     {
@@ -1038,14 +1038,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 14,
-      "localPdfCount": 14,
-      "driveLastModified": "2026-09-16T16:04:08.228Z",
-      "localLastModified": "2026-09-16T16:04:08.228Z",
+      "pdfCount": 12,
+      "localPdfCount": 12,
+      "driveLastModified": "2026-09-23T20:35:31.323Z",
+      "localLastModified": "2026-09-23T20:35:31.323Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:29.804Z",
+      "checkedAt": "2026-09-28T04:22:30.872Z",
       "countMismatch": false
     },
     {
@@ -1055,14 +1055,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 7,
-      "localPdfCount": 7,
-      "driveLastModified": "2026-09-16T17:36:26.499Z",
-      "localLastModified": "2026-09-16T17:36:26.499Z",
+      "pdfCount": 6,
+      "localPdfCount": 6,
+      "driveLastModified": "2026-09-23T17:35:34.754Z",
+      "localLastModified": "2026-09-23T17:35:34.754Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:29.805Z",
+      "checkedAt": "2026-09-28T04:22:31.285Z",
       "countMismatch": false
     },
     {
@@ -1079,7 +1079,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:30.803Z",
+      "checkedAt": "2026-09-28T04:21:13.060Z",
       "countMismatch": false
     },
     {
@@ -1096,7 +1096,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:30.804Z",
+      "checkedAt": "2026-09-28T04:21:14.019Z",
       "countMismatch": false
     },
     {
@@ -1113,7 +1113,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:31.804Z",
+      "checkedAt": "2026-09-28T04:21:14.021Z",
       "countMismatch": false
     },
     {
@@ -1123,14 +1123,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 40,
-      "localPdfCount": 40,
-      "driveLastModified": "2026-09-16T14:48:42.016Z",
-      "localLastModified": "2026-09-16T14:48:42.016Z",
+      "pdfCount": 36,
+      "localPdfCount": 36,
+      "driveLastModified": "2026-09-23T21:42:58.703Z",
+      "localLastModified": "2026-09-23T21:42:58.703Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:31.805Z",
+      "checkedAt": "2026-09-28T04:22:33.859Z",
       "countMismatch": false
     },
     {
@@ -1147,7 +1147,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:32.804Z",
+      "checkedAt": "2026-09-28T04:21:15.022Z",
       "countMismatch": false
     },
     {
@@ -1164,7 +1164,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:32.805Z",
+      "checkedAt": "2026-09-28T04:21:16.023Z",
       "countMismatch": false
     },
     {
@@ -1174,14 +1174,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 6,
-      "localPdfCount": 6,
+      "pdfCount": 4,
+      "localPdfCount": 4,
       "driveLastModified": "2026-09-16T18:28:14.064Z",
       "localLastModified": "2026-09-16T18:28:14.064Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:33.805Z",
+      "checkedAt": "2026-09-28T04:22:32.235Z",
       "countMismatch": false
     },
     {
@@ -1198,7 +1198,7 @@
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:33.806Z",
+      "checkedAt": "2026-09-28T04:21:17.024Z",
       "countMismatch": false
     },
     {
@@ -1208,14 +1208,14 @@
       "hasDriveLink": true,
       "accessible": true,
       "hasPdfs": true,
-      "pdfCount": 15,
-      "localPdfCount": 15,
-      "driveLastModified": "2026-09-14T17:14:23.848Z",
-      "localLastModified": "2026-09-14T17:14:23.848Z",
+      "pdfCount": 13,
+      "localPdfCount": 13,
+      "driveLastModified": "2026-09-21T17:47:19.512Z",
+      "localLastModified": "2026-09-21T17:47:19.512Z",
       "matches": true,
       "needsUpdate": false,
       "error": null,
-      "checkedAt": "2026-09-21T03:58:50.819Z",
+      "checkedAt": "2026-09-28T04:21:51.389Z",
       "countMismatch": false
     }
   ],

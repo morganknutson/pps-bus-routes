@@ -1,43 +1,21 @@
 {
   "files": {
-    "1QbEf0y4VmbJlNe94OXooKOLxHVB1CXHT": {
-      "filename": "137SKY-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T16:08:58.265Z",
-      "localPath": "137SKY-P_Effective_082626.pdf"
-    },
     "1MZnjo3BUzSeHTFjxCA2-rKUlDVVp1w30": {
       "filename": "138SKY-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-18T19:50:59.661Z",
       "md5Checksum": "b7dad10e6a7dc46c5dd03f23cf34a8e2",
       "localPath": "138SKY-P_Effective_082626.pdf"
     },
-    "18mSyuqhvTXJrqujPAKvG_e6cS2ujCDQq": {
-      "filename": "140SKY-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-18T18:35:47.909Z",
-      "md5Checksum": "8a23e9341cea6e68a6c8dfd009227ced",
-      "localPath": "140SKY-P_Effective_082626.pdf"
-    },
     "1WPGNhayCBDD5TRrTxkf1_DDUJfYY7BRO": {
       "filename": "139SKY-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-09T16:07:24.171Z",
       "localPath": "139SKY-P_Effective_082626.pdf"
-    },
-    "1onQjMwrjRAfQp1nI5W8LPlQIc548-xX4": {
-      "filename": "137SKY-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T16:18:55.458Z",
-      "localPath": "137SKY-A_Effective_082626.pdf"
     },
     "1oQO0t-DcUCN78i0VwdsjBd19pUf33ItH": {
       "filename": "138SKY-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-20T14:04:19.026Z",
       "md5Checksum": "edbf013abb3335e945881e77846f1dab",
       "localPath": "138SKY-A_Effective_082626.pdf"
-    },
-    "1oaQ2PygQTyKWmDc26bbhBGUARZtE96xy": {
-      "filename": "140SKY-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-18T18:35:16.912Z",
-      "md5Checksum": "46eaf3e02497a3d4d0a5a9f87c8480e0",
-      "localPath": "140SKY-A_Effective_082626.pdf"
     },
     "1FrmAmN48FQDyAF07_gZqHjjJKaJEv_6I": {
       "filename": "139SKY-A_Effective_082626.pdf",
@@ -75,7 +53,19 @@
       "modifiedTime": "2026-09-16T16:03:35.194Z",
       "md5Checksum": "d4682f015ad0a5d88494c9fe31d6f2a9",
       "localPath": "137SKY-A_Effective_092326.pdf"
+    },
+    "1oGTLIV8dBhD8hN5EqHbYvjPkkMlE26Ax": {
+      "filename": "139SKY-P_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T20:35:31.323Z",
+      "md5Checksum": "5832d4a3a0dd1529096e506bdb71f22a",
+      "localPath": "139SKY-P_Effective_093026.pdf"
+    },
+    "1Gs3anavxHifIzYTfthetuPZvXzub-ZWd": {
+      "filename": "139SKY-A_Effective_093026.pdf",
+      "modifiedTime": "2026-09-23T20:34:52.607Z",
+      "md5Checksum": "44fe28f83b2e870b62192ff9778fa423",
+      "localPath": "139SKY-A_Effective_093026.pdf"
     }
   },
-  "lastSync": "2026-09-18T18:04:50.180Z"
+  "lastSync": "2026-09-28T04:22:30.871Z"
 }
