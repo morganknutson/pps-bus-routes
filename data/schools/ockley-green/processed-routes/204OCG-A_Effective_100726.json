@@ -1,0 +1,335 @@
+{
+  "id": "1YMsLco7Mp8FgVbeGc7dlwmFIJVc7O3J1",
+  "name": "204",
+  "direction": "Morning",
+  "filename": "204OCG-A_Effective_100726.pdf",
+  "fileId": "1YMsLco7Mp8FgVbeGc7dlwmFIJVc7O3J1",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-3",
+      "address": "NE Lombard St. & NE Mallory Ave. [SW]",
+      "time": "8:45 am",
+      "direction": "SW",
+      "originalLine": "8:45 amNE LOMBARD ST @ NE MALLORY AV [SW]204OCG-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6633691,
+        45.577219
+      ],
+      "displayName": "NE Mallory Ave & NE Lombard St, Portland, OR 97211, USA",
+      "placeId": "EjdORSBNYWxsb3J5IEF2ZSAmIE5FIExvbWJhcmQgU3QsIFBvcnRsYW5kLCBPUiA5NzIxMSwgVVNBImYiZAoUChIJVd7i5FSmlVQROvT4Et7ovAcSFAoSCVXe4uRUppVUETr0-BLe6LwHGhQKEgklXQ4KBKeVVBFM17_IWHuDghoUChIJNeNrdfqmlVQRh31lEs27jUIiCg0eiCobFSUO47Y",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Morgan St. & NE 6th Ave. [SW]",
+      "time": "8:48 am",
+      "direction": "SW",
+      "originalLine": "8:48 amNE MORGAN ST @ NE 6TH AV [SW]204OCG-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6593625,
+        45.57443869999999
+      ],
+      "displayName": "NE 6th Ave & NE Morgan St, Portland, OR 97211, USA",
+      "placeId": "EjJORSA2dGggQXZlICYgTkUgTW9yZ2FuIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCQHQL5r_ppVUEQBzM6Ri1XeaEhQKEgkB0C-a_6aVVBEAczOkYtV3mhoUChIJ6ztj7kunlVQRJPGoLWXniukaFAoSCVdadC35ppVUEb-vL17VwonVIgoNgxsqGxWnquO2",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE 8th Ave. & NE Holland St. [E]",
+      "time": "8:49 am",
+      "direction": "E",
+      "originalLine": "8:49 amNE 8TH AV @ NE HOLLAND ST [E]204OCG-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6567575,
+        45.5759373
+      ],
+      "displayName": "NE Holland St & NE 8th Ave, Portland, OR 97211, USA",
+      "placeId": "EjNORSBIb2xsYW5kIFN0ICYgTkUgOHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEgnpJiVX_6aVVBHtwsLQPkOvShIUChIJ6SYlV_-mlVQR7cLC0D5Dr0oaFAoSCW179olVppVUERc7SBdQycxTGhQKEglFCNITPaeVVBEBuw7TkYDuZSIKDQ1WKhsVaRDktg",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-6",
+      "address": "Woodlawn School (7200 NE 11th Av) [W]",
+      "time": "8:51 am",
+      "direction": "W",
+      "originalLine": "8:51 amWOODLAWN SCHOOL (7200 NE 11TH AV) [W]204OCG-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.65269649999999,
+        45.574986599999995
+      ],
+      "displayName": "7200 NE 11th Ave, Portland, OR 97211, USA",
+      "placeId": "ChIJ0fcKJ_mmlVQRGGSHztIm6dw",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-7",
+      "address": "NE Morgan St. & NE 17th Ave. [SW]",
+      "time": "8:53 am",
+      "direction": "SW",
+      "originalLine": "8:53 amNE MORGAN ST @ NE 17TH AV [SW]204OCG-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6483438,
+        45.5741114
+      ],
+      "displayName": "NE 17th Ave & NE Morgan St, Portland, OR 97211, USA",
+      "placeId": "EjNORSAxN3RoIEF2ZSAmIE5FIE1vcmdhbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEgnZO3mE-aaVVBHjJ5d12S4nhxIUChIJ2Tt5hPmmlVQR4yeXddkuJ4caFAoSCXneQFbippVUESb5V5ufwWmNGhQKEglXWnQt-aaVVBG_ry9e1cKJ1SIKDboOKhsVElnltg",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-8",
+      "address": "NE Highland St. & NE 15th Ave. [NE]",
+      "time": "8:56 am",
+      "direction": "NE",
+      "originalLine": "8:56 amNE HIGHLAND ST @ NE 15TH AV [NE]204OCG-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6500715,
+        45.5691266
+      ],
+      "displayName": "NE Highland St & NE 15th Ave, Portland, OR 97211, USA",
+      "placeId": "EjVORSBIaWdobGFuZCBTdCAmIE5FIDE1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTEsIFVTQSJmImQKFAoSCfWPDML8ppVUEeTFdajrB0ymEhQKEgn1jwzC_KaVVBHkxXWo6wdMphoUChIJl8ChGv2mlVQRmr3vzB07Su4aFAoSCVF4vEcip5VUERn4EaQeHuGGIgoNAkwpGxWVFeW2",
+      "neighborhood": "Woodlawn"
+    },
+    {
+      "id": "stop-0",
+      "address": "6031 N Montana Ave, Portland, OR 97217, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:OCKLEY GREEN GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6806322,
+        45.5669933
+      ],
+      "displayName": "6031 N Montana Ave, Portland, OR 97217, USA",
+      "schoolName": "Ockley Green"
+    }
+  ],
+  "neighborhoods": [
+    "Northeast Portland",
+    "Woodlawn"
+  ],
+  "processedAt": "2026-10-05T04:43:03.372Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.57722,
+      -122.66337
+    ],
+    [
+      45.57722,
+      -122.66071
+    ],
+    [
+      45.57722,
+      -122.65935
+    ],
+    [
+      45.5765,
+      -122.65934
+    ],
+    [
+      45.57581,
+      -122.65937
+    ],
+    [
+      45.57513,
+      -122.65936
+    ],
+    [
+      45.57444,
+      -122.65936
+    ],
+    [
+      45.57513,
+      -122.65936
+    ],
+    [
+      45.57581,
+      -122.65937
+    ],
+    [
+      45.5765,
+      -122.65934
+    ],
+    [
+      45.5765,
+      -122.6583
+    ],
+    [
+      45.57649,
+      -122.65676
+    ],
+    [
+      45.57594,
+      -122.65676
+    ],
+    [
+      45.57593,
+      -122.65559
+    ],
+    [
+      45.57592,
+      -122.65368
+    ],
+    [
+      45.57592,
+      -122.65271
+    ],
+    [
+      45.57574,
+      -122.65271
+    ],
+    [
+      45.57549,
+      -122.65271
+    ],
+    [
+      45.57533,
+      -122.65271
+    ],
+    [
+      45.575,
+      -122.6527
+    ],
+    [
+      45.57497,
+      -122.65268
+    ],
+    [
+      45.57494,
+      -122.65259
+    ],
+    [
+      45.57494,
+      -122.65177
+    ],
+    [
+      45.57483,
+      -122.65175
+    ],
+    [
+      45.57411,
+      -122.65176
+    ],
+    [
+      45.57411,
+      -122.64834
+    ],
+    [
+      45.57411,
+      -122.65007
+    ],
+    [
+      45.57366,
+      -122.65007
+    ],
+    [
+      45.57324,
+      -122.65007
+    ],
+    [
+      45.57118,
+      -122.65008
+    ],
+    [
+      45.56851,
+      -122.65006
+    ],
+    [
+      45.56822,
+      -122.65003
+    ],
+    [
+      45.56703,
+      -122.65004
+    ],
+    [
+      45.56641,
+      -122.65004
+    ],
+    [
+      45.56641,
+      -122.65081
+    ],
+    [
+      45.56642,
+      -122.65202
+    ],
+    [
+      45.56643,
+      -122.655
+    ],
+    [
+      45.56645,
+      -122.65837
+    ],
+    [
+      45.56645,
+      -122.65964
+    ],
+    [
+      45.56646,
+      -122.66043
+    ],
+    [
+      45.56643,
+      -122.66056
+    ],
+    [
+      45.5664,
+      -122.66067
+    ],
+    [
+      45.56641,
+      -122.66143
+    ],
+    [
+      45.56642,
+      -122.66186
+    ],
+    [
+      45.56643,
+      -122.66315
+    ],
+    [
+      45.56644,
+      -122.66464
+    ],
+    [
+      45.56644,
+      -122.66783
+    ],
+    [
+      45.56645,
+      -122.67114
+    ],
+    [
+      45.56642,
+      -122.67405
+    ],
+    [
+      45.56639,
+      -122.67847
+    ],
+    [
+      45.56639,
+      -122.68017
+    ],
+    [
+      45.56699,
+      -122.68017
+    ]
+  ]
+}

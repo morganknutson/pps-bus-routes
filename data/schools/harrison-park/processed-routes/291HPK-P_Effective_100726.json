@@ -1,0 +1,409 @@
+{
+  "id": "1GIAoQfvhK_0WonTa7BYtDntLYNpe8Q6F",
+  "name": "291",
+  "direction": "Afternoon",
+  "filename": "291HPK-P_Effective_100726.pdf",
+  "fileId": "1GIAoQfvhK_0WonTa7BYtDntLYNpe8Q6F",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:HARRISON PARK GT LOADING ZONE/2225 SE 87TH AV",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.574816,
+        45.5069498
+      ],
+      "displayName": "2225 SE 87th Ave, Portland, OR 97216, USA",
+      "schoolName": "Harrison Park"
+    },
+    {
+      "id": "stop-1",
+      "address": "SE 85th Ave. & SE Kelly St. [E]",
+      "time": "4:14 pm",
+      "direction": "E",
+      "originalLine": "4:14 pmSE 85TH AV @ SE KELLY ST [E]291HPK-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5750185,
+        45.4991433
+      ],
+      "displayName": "SE 85th Ave & SE Kelly St, Portland, OR 97266, USA",
+      "placeId": "EjJTRSA4NXRoIEF2ZSAmIFNFIEtlbGx5IFN0LCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCVnNXi9KoJVUEWs7GrptSAUlEhQKEglZzV4vSqCVVBFrOxq6bUgFJRoUChIJlViASjaglVQR18gP-lBE0R8aFAoSCcF0_YJjoJVUEaLwckb8yliaIgoNSZ4eGxVXifC2",
+      "neighborhood": "Powellhurst-Gilbert"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Division St. & SE 75th Ave. [NE]",
+      "time": "4:18 pm",
+      "direction": "NE",
+      "originalLine": "4:18 pmSE DIVISION ST @ SE 75TH AV [NE]291HPK-P(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5863578,
+        45.5054015
+      ],
+      "displayName": "SE Division St & SE 75th Ave, Portland, OR 97215, USA",
+      "placeId": "EjVTRSBEaXZpc2lvbiBTdCAmIFNFIDc1dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCVM8Z79RoJVUESVS0gip_G-KEhQKEglTPGe_UaCVVBElUtIIqfxvihoUChIJF3pRRLGhlVQRIlzYWfgkuvAaFAoSCXMmfO49oJVUEe-eajoXNdeWIgoNv5IfGxVmzu62",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Division St. & SE 67th Ave. [N]",
+      "time": "4:20 pm",
+      "direction": "N",
+      "originalLine": "4:20 pmSE DIVISION ST @ SE 67TH AV [N]291HPK-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5946045,
+        45.5053747
+      ],
+      "displayName": "SE Division St & SE 67th Ave, Portland, OR 97206, USA",
+      "placeId": "EjVTRSBEaXZpc2lvbiBTdCAmIFNFIDY3dGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCSEmzBRaoJVUEd0iiv9VM-YmEhQKEgkhJswUWqCVVBHdIor_VTPmJhoUChIJF3pRRLGhlVQRIlzYWfgkuvAaFAoSCan9MpcEoJVUEWTK2GTjvc8dIgoNs5EfGxVDjO22",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Division St. & SE 59th Ave. [NE]",
+      "time": "4:21 pm",
+      "direction": "NE",
+      "originalLine": "4:21 pmSE DIVISION ST @ SE 59TH AV [NE]291HPK-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6027629,
+        45.50535989999999
+      ],
+      "displayName": "SE 59th Ave & SE Division St, Portland, OR 97215, USA",
+      "placeId": "EjVTRSA1OXRoIEF2ZSAmIFNFIERpdmlzaW9uIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTUsIFVTQSJmImQKFAoSCUEy4bdeoJVUEclJBv30fRw0EhQKEglBMuG3XqCVVBHJSQb99H0cNBoUChIJ35mSAWiglVQRIIPJU5Jnk4waFAoSCRd6UUSxoZVUESJc2Fn4JLrwIgoNH5EfGxWTTey2",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-5",
+      "address": "5626 SE Woodward St. (clinton Park) [S]",
+      "time": "4:26 pm",
+      "direction": "S",
+      "originalLine": "4:26 pm5626 SE WOODWARD ST (CLINTON PARK) [S]291HPK-P(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60448102423194,
+        45.501410820029356
+      ],
+      "displayName": "5626 SE Woodward St, Portland, OR 97206, USA",
+      "placeId": "ChIJ9WGnhF2glVQRCtt3jULwap8",
+      "neighborhood": "South Tabor"
+    },
+    {
+      "id": "stop-6",
+      "address": "SE 62nd Ave. & SE Rhone St. [NW]",
+      "time": "4:30 pm",
+      "direction": "NW",
+      "originalLine": "4:30 pmSE 62ND AV @ SE RHONE ST [NW]291HPK-P(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5994262,
+        45.49571599999999
+      ],
+      "displayName": "SE 62nd Ave & SE Rhone St, Portland, OR 97206, USA",
+      "placeId": "EjJTRSA2Mm5kIEF2ZSAmIFNFIFJob25lIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCakTQeZpoJVUEZN4wtDxngNvEhQKEgmpE0HmaaCVVBGTeMLQ8Z4DbxoUChIJTchfaWuglVQRn6rUaCggGhEaFAoSCTfn5b1HoJVUERVMkujOd8TjIgoNaBgeGxXqz-y2",
+      "neighborhood": "Foster - Powell"
+    }
+  ],
+  "neighborhoods": [
+    "Foster - Powell",
+    "Powellhurst-Gilbert",
+    "South Tabor",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-10-05T04:42:38.370Z",
+  "stats": {
+    "totalStops": 7,
+    "geocodedStops": 7,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.50698,
+      -122.57441
+    ],
+    [
+      45.50692,
+      -122.57439
+    ],
+    [
+      45.5069,
+      -122.57434
+    ],
+    [
+      45.5069,
+      -122.57428
+    ],
+    [
+      45.50679,
+      -122.57428
+    ],
+    [
+      45.50599,
+      -122.57428
+    ],
+    [
+      45.50538,
+      -122.57427
+    ],
+    [
+      45.50463,
+      -122.57426
+    ],
+    [
+      45.50464,
+      -122.57479
+    ],
+    [
+      45.50465,
+      -122.57547
+    ],
+    [
+      45.50467,
+      -122.57617
+    ],
+    [
+      45.50471,
+      -122.57709
+    ],
+    [
+      45.50479,
+      -122.57794
+    ],
+    [
+      45.50484,
+      -122.57834
+    ],
+    [
+      45.50489,
+      -122.57869
+    ],
+    [
+      45.5045,
+      -122.57869
+    ],
+    [
+      45.50367,
+      -122.5787
+    ],
+    [
+      45.50252,
+      -122.57871
+    ],
+    [
+      45.50197,
+      -122.57871
+    ],
+    [
+      45.50084,
+      -122.57872
+    ],
+    [
+      45.49918,
+      -122.57873
+    ],
+    [
+      45.49918,
+      -122.57758
+    ],
+    [
+      45.49917,
+      -122.57621
+    ],
+    [
+      45.49914,
+      -122.57502
+    ],
+    [
+      45.49917,
+      -122.57621
+    ],
+    [
+      45.49918,
+      -122.57758
+    ],
+    [
+      45.49919,
+      -122.57805
+    ],
+    [
+      45.49918,
+      -122.57873
+    ],
+    [
+      45.49959,
+      -122.57873
+    ],
+    [
+      45.50038,
+      -122.57872
+    ],
+    [
+      45.50143,
+      -122.57872
+    ],
+    [
+      45.50218,
+      -122.5787
+    ],
+    [
+      45.50329,
+      -122.5787
+    ],
+    [
+      45.50489,
+      -122.57869
+    ],
+    [
+      45.50504,
+      -122.57962
+    ],
+    [
+      45.50507,
+      -122.57976
+    ],
+    [
+      45.50503,
+      -122.57988
+    ],
+    [
+      45.50519,
+      -122.58085
+    ],
+    [
+      45.50535,
+      -122.58191
+    ],
+    [
+      45.50539,
+      -122.58288
+    ],
+    [
+      45.50541,
+      -122.58413
+    ],
+    [
+      45.5054,
+      -122.58636
+    ],
+    [
+      45.5054,
+      -122.58822
+    ],
+    [
+      45.50537,
+      -122.59485
+    ],
+    [
+      45.50536,
+      -122.60059
+    ],
+    [
+      45.50536,
+      -122.60229
+    ],
+    [
+      45.50536,
+      -122.60308
+    ],
+    [
+      45.5032,
+      -122.60308
+    ],
+    [
+      45.50231,
+      -122.60308
+    ],
+    [
+      45.50212,
+      -122.60308
+    ],
+    [
+      45.50141,
+      -122.60309
+    ],
+    [
+      45.50141,
+      -122.60368
+    ],
+    [
+      45.50141,
+      -122.60448
+    ],
+    [
+      45.5014,
+      -122.60408
+    ],
+    [
+      45.50029,
+      -122.60408
+    ],
+    [
+      45.49891,
+      -122.60409
+    ],
+    [
+      45.49837,
+      -122.60409
+    ],
+    [
+      45.49753,
+      -122.60409
+    ],
+    [
+      45.49744,
+      -122.60408
+    ],
+    [
+      45.49744,
+      -122.60372
+    ],
+    [
+      45.49744,
+      -122.60342
+    ],
+    [
+      45.49744,
+      -122.60307
+    ],
+    [
+      45.49744,
+      -122.60164
+    ],
+    [
+      45.49743,
+      -122.60065
+    ],
+    [
+      45.49747,
+      -122.60055
+    ],
+    [
+      45.49748,
+      -122.59949
+    ],
+    [
+      45.49747,
+      -122.5994
+    ],
+    [
+      45.49728,
+      -122.5994
+    ],
+    [
+      45.49586,
+      -122.59942
+    ],
+    [
+      45.49572,
+      -122.59943
+    ]
+  ]
+}
