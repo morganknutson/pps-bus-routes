@@ -149,6 +149,57 @@ export function extractAnchorName(text) {
   return null;
 }
 
+// Driver run sheets ("Bus Stop Locations For ...") list one row per event:
+// time, event type, address, rider count. pdf-parse emits "TIMEADDRESSTYPECOUNT";
+// pdftotext -layout keeps the visual order "TIME TYPE ADDRESS COUNT".
+const RUN_SHEET_EVENT = '(GARAGE|START|STOP|END|DEST|\\(stop\\))';
+const RUN_SHEET_ROWS = [
+  new RegExp(`^(\\d{1,2}:\\d{2}\\s*(?:am|pm))\\s*(.+?)\\s*${RUN_SHEET_EVENT}\\s*\\d*$`, 'i'),
+  new RegExp(`^(\\d{1,2}:\\d{2}\\s*(?:am|pm))\\s+${RUN_SHEET_EVENT}\\s+(.+?)(?:\\s{2,}\\d+)?$`, 'i'),
+];
+
+function isRunSheet(text) {
+  return /Bus Stop Locations For/i.test(text);
+}
+
+function parseRunSheetRows(text) {
+  const rows = [];
+  for (const line of text.split('\n').map(l => l.trim())) {
+    const [pdfParseMatch, layoutMatch] = RUN_SHEET_ROWS.map(pattern => line.match(pattern));
+    if (pdfParseMatch) {
+      rows.push({ time: pdfParseMatch[1], address: pdfParseMatch[2].trim(), event: pdfParseMatch[3].toUpperCase() });
+    } else if (layoutMatch) {
+      rows.push({ time: layoutMatch[1], address: layoutMatch[3].trim(), event: layoutMatch[2].toUpperCase() });
+    }
+  }
+  return rows;
+}
+
+/**
+ * Rewrites a driver run sheet into the "Schedule Change Notice" stop-line format
+ * parsed by parseStops. GARAGE rows are dropped; DEST (the school) has no stop
+ * order so it is treated like a loading zone; every other row is a student stop.
+ *
+ * @private
+ * @param {string} text - The full PDF text content
+ * @returns {string} Stop lines in notice format
+ */
+function runSheetToStopLines(text) {
+  const routeCode = text.match(/Bus Stop Locations For\s+(\d+[A-Z]{2,}-[A-Z])/i)?.[1] || '';
+  let order = 0;
+  return parseRunSheetRows(text)
+    .filter(row => row.event !== 'GARAGE')
+    .map(row => row.event === 'DEST'
+      ? `${row.time}${row.address}`
+      : `${row.time}${row.address}${routeCode}(${++order})Stop Order #:`)
+    .join('\n');
+}
+
+/** Run sheets have no "Anchor Name:" line; the DEST row is the school loading zone. */
+function extractRunSheetAnchorName(text) {
+  return parseRunSheetRows(text).find(row => row.event === 'DEST')?.address || null;
+}
+
 /**
  * Parses bus stop information from PDF text content.
  * 
@@ -378,8 +429,10 @@ function parseStops(text, anchorName = null) {
  */
 export function parseRouteFromPDF(text, fileId, filename = '') {
   const routeInfo = extractRouteInfoFromFilename(filename, text); // Pass text to extract route from PDF content
-  const anchorName = extractAnchorName(text);
-  const stops = parseStops(text, anchorName); // Pass anchor name to filter it out from regular stops
+  const runSheet = isRunSheet(text);
+  const anchorName = extractAnchorName(text) || (runSheet ? extractRunSheetAnchorName(text) : null);
+  // Pass anchor name to filter it out from regular stops
+  const stops = parseStops(runSheet ? runSheetToStopLines(text) : text, anchorName);
   
   return {
     id: fileId || `route-${Date.now()}`,

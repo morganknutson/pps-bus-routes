@@ -199,6 +199,11 @@ async function waitForJobs(jobIds, phaseName, phase, results) {
     return jobs.filter(job => isTerminalStatus(job.status));
 }
 
+/** Per-file processing failures leave the prior route in place and are safe to publish around. */
+function isRecoverableFileError(error) {
+    return error.phase === 'pdfFetch' && !!error.file;
+}
+
 function addJobResultErrors(results, phase, jobResult, school) {
     const nestedErrors = jobResult?.errors || jobResult?.errorDetails || [];
     if (!Array.isArray(nestedErrors)) return;
@@ -318,7 +323,11 @@ async function runWeeklySync() {
             results.phases.processing.status = 'skipped';
         }
 
-        if (results.errors.length === 0) {
+        // A single unparseable PDF must not hold back every other school's
+        // updates. The worker keeps that school's previous routes when any of
+        // its files fail, so only pipeline-level failures block publishing.
+        const blockingErrors = results.errors.filter(error => !isRecoverableFileError(error));
+        if (blockingErrors.length === 0) {
             const publishStart = Date.now();
             results.phases.publish.status = 'running';
             await persistRunning(results);
@@ -336,7 +345,9 @@ async function runWeeklySync() {
                         // Publishing is complete for any reader of this deployed
                         // snapshot; transient Git status remains in local state.
                         phases: { ...results.phases, publish: { status: 'completed', duration: null } },
-                        errorCount: 0,
+                        // Files that failed kept their previously published routes.
+                        errors: results.errors,
+                        errorCount: results.errors.length,
                         endTime: new Date().toISOString(),
                     },
                 });

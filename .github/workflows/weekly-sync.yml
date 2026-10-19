@@ -76,8 +76,11 @@ jobs:
         working-directory: backend
         run: npm run sync:weekly
 
+      # The sync exits non-zero when any PDF failed, but it may still have
+      # published every other school's updates; deploy whatever was pushed.
       - name: Detect published data commit
         id: changes
+        if: ${{ !cancelled() }}
         run: |
           after_sha="$(git rev-parse HEAD)"
           echo "sha=$after_sha" >> "$GITHUB_OUTPUT"
@@ -88,5 +91,5 @@ jobs:
           fi
 
       - name: Trigger Makserve deploy hook
-        if: ${{ success() && steps.changes.outputs.changed == 'true' && env.MAKSERVE_DEPLOY_WEBHOOK_URL != '' }}
+        if: ${{ !cancelled() && steps.changes.outputs.changed == 'true' && env.MAKSERVE_DEPLOY_WEBHOOK_URL != '' }}
         run: curl -fsS -X POST "$MAKSERVE_DEPLOY_WEBHOOK_URL"
