@@ -61,6 +61,25 @@ export function AddressInput() {
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const [isGeolocating, setIsGeolocating] = useState(false);
+  const [showAddressHint, setShowAddressHint] = useState(false);
+
+  const dismissAddressHint = () => {
+    setShowAddressHint(false);
+    sessionStorage.setItem('addressHintDismissed', 'true');
+  };
+
+  // Hint popover for users who enter the explorer without an address.
+  // Shown once per session, after a short delay so the map has settled.
+  useEffect(() => {
+    if (homeAddress || sessionStorage.getItem('addressHintDismissed')) return;
+    const timeoutId = setTimeout(() => setShowAddressHint(true), 1200);
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (homeAddress) setShowAddressHint(false);
+  }, [homeAddress]);
 
   const handleGetLocation = async () => {
     console.log('[AddressInput] handleGetLocation called');
@@ -353,6 +372,7 @@ export function AddressInput() {
 
       <div style={{
         flex: 1,
+        position: 'relative',
         /* Dynamic padding and height for mobile/desktop inputs */
         padding: isMobile ? '0 1.25rem' : '0 0.75rem 0 1.25rem',
         height: isMobile ? '56px' : '40px',
@@ -451,7 +471,7 @@ export function AddressInput() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
+                onFocus={() => { dismissAddressHint(); if (suggestions.length > 0) setShowSuggestions(true); }}
                 placeholder="Enter your address..."
                 style={{
                   width: '100%',
@@ -536,6 +556,70 @@ export function AddressInput() {
               )}
             </div>
           </div>
+        )}
+
+        {/* Hint popover pointing users to the address bar */}
+        {showAddressHint && !homeAddress && (
+          <>
+            <style>{`
+              @keyframes addressHintPopIn {
+                from { opacity: 0; transform: translateY(-6px); }
+                to { opacity: 1; transform: translateY(0); }
+              }
+            `}</style>
+            <div style={{
+              position: 'absolute',
+              top: 'calc(100% + 12px)',
+              left: 0,
+              maxWidth: isMobile ? '100%' : '300px',
+              backgroundColor: 'var(--bg-primary)',
+              border: '1px solid var(--border-color-primary)',
+              borderRadius: '12px',
+              boxShadow: 'var(--drop-shadow-floating-primary)',
+              padding: '0.75rem 1rem',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '0.75rem',
+              zIndex: 999,
+              animation: 'addressHintPopIn 0.3s ease',
+              boxSizing: 'border-box'
+            }}>
+              {/* Arrow pointing up at the address bar */}
+              <div style={{
+                position: 'absolute',
+                top: '-6px',
+                left: '28px',
+                width: '10px',
+                height: '10px',
+                backgroundColor: 'var(--bg-primary)',
+                borderLeft: '1px solid var(--border-color-primary)',
+                borderTop: '1px solid var(--border-color-primary)',
+                transform: 'rotate(45deg)'
+              }} />
+              <i className="fas fa-house" style={{ color: 'var(--text-tertiary)', fontSize: '13px', marginTop: '2px', flexShrink: 0 }}></i>
+              <span style={{ fontSize: isMobile ? '14px' : '13px', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
+                Enter your address here to quickly find your closest stop
+              </span>
+              <button
+                onClick={dismissAddressHint}
+                aria-label="Dismiss hint"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: '0',
+                  marginTop: '1px',
+                  cursor: 'pointer',
+                  color: 'var(--text-tertiary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+              >
+                <XIcon />
+              </button>
+            </div>
+          </>
         )}
       </div>
     </div>

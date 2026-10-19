@@ -9,13 +9,13 @@ import { useDarkMode } from '../hooks/useDarkMode';
 import { MapPinIcon } from '../components/MapPinIcon';
 import { Footer } from '../components/Footer';
 import { ChevronIcon } from '../components/ChevronIcon';
+import { FindMyStopSearch } from '../components/FindMyStopSearch';
 
 export function SchoolDirectory() {
   const [schools, setSchools] = useState<School[]>([]);
   const [neighborhoods, setNeighborhoods] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { isDarkMode } = useDarkMode();
-  const [searchTerm, setSearchTerm] = useState('');
 
   const isMobile = useIsMobile();
 
@@ -79,16 +79,10 @@ export function SchoolDirectory() {
     return map;
   }, [neighborhoods]);
 
-  const filteredSchools = useMemo(() => {
-    return schools.filter(school => {
-      const neighborhood = schoolToNeighborhood.get(school.id) || '';
-      return (
-        school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (school.address && school.address.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        neighborhood.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }).sort((a, b) => a.name.localeCompare(b.name));
-  }, [schools, searchTerm, schoolToNeighborhood]);
+  const sortedSchools = useMemo(
+    () => [...schools].sort((a, b) => a.name.localeCompare(b.name)),
+    [schools]
+  );
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
@@ -106,68 +100,39 @@ export function SchoolDirectory() {
         padding: isMobile ? '1rem' : '2rem',
         boxSizing: 'border-box'
       }}>
-        <div style={{ marginBottom: '2rem' }}>
-          <h1 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>PPS Bus Routes & Stops Directory</h1>
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
-            <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
-              Select a school to view its interactive bus route maps and stop schedules.
-            </p>
-            <Link
-              to="/neighborhood-directory"
-              style={{
-                color: 'var(--text-primary)',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                fontWeight: '600',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.25rem 0.75rem',
-                backgroundColor: 'var(--bg-tertiary)',
-                borderRadius: '999px',
-                border: '1px solid var(--border-color-primary)',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                e.currentTarget.style.borderColor = 'var(--text-tertiary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
-                e.currentTarget.style.borderColor = 'var(--border-color-primary)';
-              }}
-            >
-              <i className="fas fa-city"></i> Browse by Neighborhood
-            </Link>
+        <div style={{ marginBottom: '1.25rem' }}>
+          <h1 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem' }}>PPS Bus Routes & Stops Directory</h1>
+
+          {/* Find My Stop container (same flow as the homepage) */}
+          <div style={{
+            backgroundColor: 'var(--bg-secondary)',
+            borderRadius: '16px',
+            border: '1px solid var(--border-color-primary)',
+            boxShadow: 'var(--drop-shadow-floating-primary)',
+            padding: isMobile ? '1.5rem 1.25rem' : '2rem 2.5rem',
+            boxSizing: 'border-box',
+            marginBottom: '1.5rem'
+          }}>
+            <h2 style={{
+              color: 'var(--text-primary)',
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              margin: '0 0 1.5rem'
+            }}>
+              Find your closest bus stop
+            </h2>
+
+            <FindMyStopSearch source="school_directory" layout="inline" />
           </div>
 
-          <div style={{ position: 'relative', width: '100%' }}>
-            <input
-              type="text"
-              placeholder="Search by school, address, or neighborhood..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '0.875rem 1rem',
-                paddingLeft: '2.5rem',
-                borderRadius: '12px',
-                border: '1px solid var(--border-color-primary)',
-                backgroundColor: 'var(--bg-secondary)',
-                color: 'var(--text-primary)',
-                fontSize: '16px',
-                outline: 'none',
-                boxSizing: 'border-box'
-              }}
-            />
-            <i className="fas fa-search" style={{
-              position: 'absolute',
-              left: '1rem',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              color: 'var(--text-tertiary)'
-            }}></i>
-          </div>
+          <h2 style={{
+            color: 'var(--text-primary)',
+            fontSize: '1.25rem',
+            fontWeight: '600',
+            margin: '2.5rem 0 0'
+          }}>
+            Or browse all bus routes by school
+          </h2>
         </div>
 
         {loading ? (
@@ -181,7 +146,7 @@ export function SchoolDirectory() {
             gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))',
             gap: '1.5rem'
           }}>
-            {filteredSchools.map(school => {
+            {sortedSchools.map(school => {
               const schoolTypes = school.schoolTypes || getSchoolTypes(school.name);
               const schoolColor = getSchoolColor(schoolTypes);
               const neighborhood = schoolToNeighborhood.get(school.id);
@@ -197,7 +162,6 @@ export function SchoolDirectory() {
                     padding: '1.5rem',
                     backgroundColor: 'var(--bg-secondary)',
                     borderRadius: '16px',
-                    borderLeft: `2px solid ${schoolColor}`,
                     boxShadow: 'var(--drop-shadow-floating-primary)',
                     transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                   }}
