@@ -10,12 +10,6 @@
       "modifiedTime": "2026-08-08T15:25:21.355Z",
       "localPath": "253KLG-P_Effective_082626.pdf"
     },
-    "1zw1jiktgnihrKKo5Ogd4w1hZwSlKjNgw": {
-      "filename": "227KLG-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-18T20:17:37.439Z",
-      "md5Checksum": "b0abb2f4ab6c5580f266cb8edfa03d6b",
-      "localPath": "227KLG-P_Effective_082626.pdf"
-    },
     "17APWa8iR0loYONDn2AkumFgsrH_qI2r1": {
       "filename": "224KLG-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-08T15:24:32.639Z",
@@ -25,12 +19,6 @@
       "filename": "212KLG-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-08T15:24:13.589Z",
       "localPath": "212KLG-P_Effective_082626.pdf"
-    },
-    "17KKibDwvUb9Z8ufeCLaIPETeArkz8xhm": {
-      "filename": "227KLG-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-18T20:16:51.668Z",
-      "md5Checksum": "23152fff5ae4946842fdc63b1091133f",
-      "localPath": "227KLG-A_Effective_082626.pdf"
     },
     "1Yv0ODpo9-8UazJNO7U0AQZBOZemNoIXx": {
       "filename": "253KLG-A_Effective_082626.pdf",
@@ -61,7 +49,19 @@
       "filename": "228KLG-A_Effective_090226.pdf",
       "modifiedTime": "2026-08-26T21:35:12.478Z",
       "localPath": "228KLG-A_Effective_090226.pdf"
+    },
+    "1G3KU2JXJmyVpa8lo-ue1I1o41B3GE23c": {
+      "filename": "227KLG-P_Effective_101426.pdf",
+      "modifiedTime": "2026-10-08T20:05:31.284Z",
+      "md5Checksum": "4c9374cea1258cb876495085400d1a11",
+      "localPath": "227KLG-P_Effective_101426.pdf"
+    },
+    "18zr_Pt9n9Llg2v66Sr5pha3p-G_Qyy7y": {
+      "filename": "227KLG-A_Effective_101426.pdf",
+      "modifiedTime": "2026-10-08T20:04:48.194Z",
+      "md5Checksum": "f9f4c51243a28e02d78e9b30dc7b931a",
+      "localPath": "227KLG-A_Effective_101426.pdf"
     }
   },
-  "lastSync": "2026-09-18T18:03:55.094Z"
+  "lastSync": "2026-10-19T04:29:32.643Z"
 }

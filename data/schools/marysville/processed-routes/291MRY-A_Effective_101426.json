@@ -1,0 +1,241 @@
+{
+  "id": "1wxVzD9xKqCngfCerYX4QM6j7zaEIqXFq",
+  "name": "291",
+  "direction": "Morning",
+  "filename": "291MRY-A_Effective_101426.pdf",
+  "fileId": "1wxVzD9xKqCngfCerYX4QM6j7zaEIqXFq",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "7740 SE Powell Blvd. [S]",
+      "time": "7:38 am",
+      "direction": "S",
+      "originalLine": "7:38 am7740 SE POWELL BLVD [S]291MRY-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.58312217259387,
+        45.49707836599418
+      ],
+      "displayName": "7740 SE Powell Blvd, Portland, OR 97206, USA",
+      "placeId": "ChIJT_Bv0keglVQRyDxH3L1JZQ8",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-2",
+      "address": "SE Rhine St. & SE 80th Ave. [SW]",
+      "time": "7:40 am",
+      "direction": "SW",
+      "originalLine": "7:40 amSE RHINE ST @ SE 80TH AV [SW]291MRY-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5809269,
+        45.4968784
+      ],
+      "displayName": "SE 80th Ave & SE Rhine St, Portland, OR 97206, USA",
+      "placeId": "EjJTRSA4MHRoIEF2ZSAmIFNFIFJoaW5lIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCc1zMHJIoJVUETi0EaXmHKYHEhQKEgnNczBySKCVVBE4tBGl5hymBxoUChIJ5Z1w7x6glVQR9g-KLMz3gRUaFAoSCa9xND5IoJVUEU--bKguCBN0IgoN0EUeGxWLou-2",
+      "neighborhood": "Foster - Powell"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 88th Ave. & SE Pardee St. [NW]",
+      "time": "7:44 am",
+      "direction": "NW",
+      "originalLine": "7:44 amSE 88TH AV @ SE PARDEE ST [NW]291MRY-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5723422,
+        45.4890408
+      ],
+      "displayName": "SE Pardee St & SE 88th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBQYXJkZWUgU3QgJiBTRSA4OHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgmRLM6eOqCVVBF9XIec3m_FlRIUChIJkSzOnjqglVQRfVyHnN5vxZUaFAoSCRcZTh0VoJVUEd5w8-mO4LjaGhQKEglZChLPMKCVVBGCuOPrgr65JyIKDagTHRsV4vHwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Schiller St. & SE 83rd Ave. [NE]",
+      "time": "7:46 am",
+      "direction": "NE",
+      "originalLine": "7:46 amSE SCHILLER ST @ SE 83RD AV [NE]291MRY-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5777581,
+        45.4879656
+      ],
+      "displayName": "SE 83rd Ave & SE Schiller St, Portland, OR 97266, USA",
+      "placeId": "EjVTRSA4M3JkIEF2ZSAmIFNFIFNjaGlsbGVyIFN0LCBQb3J0bGFuZCwgT1IgOTcyNjYsIFVTQSJmImQKFAoSCcvW23M7oJVUEUi2yN0GvuCKEhQKEgnL1ttzO6CVVBFItsjdBr7gihoUChIJT-1k0DmglVQRp_MylOuq5jYaFAoSCUE0rMg9oJVUEd6DewMpBRwkIgoNqOkcGxVTHvC2",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-0",
+      "address": "7733 SE Raymond St, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:MARYSVILLE ST & CAB LOADING ZONE ON 77TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5838743,
+        45.4868569
+      ],
+      "displayName": "7733 SE Raymond St, Portland, OR 97206, USA",
+      "schoolName": "Marysville"
+    }
+  ],
+  "neighborhoods": [
+    "Foster - Powell",
+    "Lents"
+  ],
+  "processedAt": "2026-10-19T04:29:49.837Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.49708,
+      -122.58312
+    ],
+    [
+      45.49709,
+      -122.58285
+    ],
+    [
+      45.49711,
+      -122.58284
+    ],
+    [
+      45.49724,
+      -122.58282
+    ],
+    [
+      45.49725,
+      -122.58205
+    ],
+    [
+      45.49727,
+      -122.58196
+    ],
+    [
+      45.49734,
+      -122.58191
+    ],
+    [
+      45.49741,
+      -122.5819
+    ],
+    [
+      45.4974,
+      -122.58174
+    ],
+    [
+      45.4974,
+      -122.5809
+    ],
+    [
+      45.49688,
+      -122.58093
+    ],
+    [
+      45.49619,
+      -122.58094
+    ],
+    [
+      45.49619,
+      -122.57875
+    ],
+    [
+      45.49535,
+      -122.57876
+    ],
+    [
+      45.49258,
+      -122.57878
+    ],
+    [
+      45.49116,
+      -122.5788
+    ],
+    [
+      45.49051,
+      -122.5788
+    ],
+    [
+      45.49025,
+      -122.57881
+    ],
+    [
+      45.49024,
+      -122.57821
+    ],
+    [
+      45.49024,
+      -122.57722
+    ],
+    [
+      45.49024,
+      -122.57582
+    ],
+    [
+      45.49024,
+      -122.57484
+    ],
+    [
+      45.49016,
+      -122.57408
+    ],
+    [
+      45.49012,
+      -122.57235
+    ],
+    [
+      45.48904,
+      -122.57234
+    ],
+    [
+      45.48795,
+      -122.57234
+    ],
+    [
+      45.48796,
+      -122.57253
+    ],
+    [
+      45.48798,
+      -122.57402
+    ],
+    [
+      45.48796,
+      -122.57519
+    ],
+    [
+      45.48796,
+      -122.57586
+    ],
+    [
+      45.48797,
+      -122.57794
+    ],
+    [
+      45.48797,
+      -122.57885
+    ],
+    [
+      45.48738,
+      -122.57887
+    ],
+    [
+      45.48658,
+      -122.57889
+    ],
+    [
+      45.48658,
+      -122.57982
+    ],
+    [
+      45.48658,
+      -122.58387
+    ]
+  ]
+}

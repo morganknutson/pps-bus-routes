@@ -1,15 +1,5 @@
 {
   "files": {
-    "1m3KTITB995AafTDKPRRmqr9GXXQI5UVN": {
-      "filename": "262JKS-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T15:32:09.299Z",
-      "localPath": "262JKS-P_Effective_082626.pdf"
-    },
-    "1bkwc2TD7jRP5HW7__7uhLbnlljImld0o": {
-      "filename": "270JKS-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T15:31:25.094Z",
-      "localPath": "270JKS-P_Effective_082626.pdf"
-    },
     "1VE6pFX6YljfpyBPBdgTbuQSF89UAlDBg": {
       "filename": "263JKS-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-09T15:31:05.777Z",
@@ -25,25 +15,10 @@
       "modifiedTime": "2026-08-09T15:29:50.487Z",
       "localPath": "133JKS-P_Effective_082626.pdf"
     },
-    "1qxEAQqqn7T5tkeUFrTRdNur-LPeLrz6o": {
-      "filename": "134JKS-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T15:29:29.050Z",
-      "localPath": "134JKS-P_Effective_082626.pdf"
-    },
-    "103g9yMeKz3DvImeJes-Jt2QPRBDMhrr8": {
-      "filename": "117JKS-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T15:29:10.517Z",
-      "localPath": "117JKS-P_Effective_082626.pdf"
-    },
     "1xiF0QjqCDNeXbhdjVM399sN5m3ZJzbG-": {
       "filename": "114JKS-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-09T15:28:15.916Z",
       "localPath": "114JKS-P_Effective_082626.pdf"
-    },
-    "10Q_5M7MbAeWIVexwYifcLv8IfakixaNg": {
-      "filename": "262JKS-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T17:01:02.241Z",
-      "localPath": "262JKS-A_Effective_082626.pdf"
     },
     "1twbA-GmpkliFurkIx520L7jGlKlpO4cd": {
       "filename": "263JKS-A_Effective_082626.pdf",
@@ -59,16 +34,6 @@
       "filename": "133JKS-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-08T16:58:58.682Z",
       "localPath": "133JKS-A_Effective_082626.pdf"
-    },
-    "1NY9xHT7b8DC60TY2Bw4zwZ6gdCP31ilY": {
-      "filename": "134JKS-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T16:58:42.171Z",
-      "localPath": "134JKS-A_Effective_082626.pdf"
-    },
-    "19ivPV9b6kXixWnKBtpz8cHNCKYJrsBa4": {
-      "filename": "117JKS-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T16:58:26.665Z",
-      "localPath": "117JKS-A_Effective_082626.pdf"
     },
     "1JugDYe9ij_eFhjomyIAV2YDrYiYaPEtF": {
       "filename": "141JKS-A_Effective_082626.pdf",
@@ -104,16 +69,6 @@
       "filename": "112JKS-A_Effective_090226.pdf",
       "modifiedTime": "2026-08-25T17:27:07.017Z",
       "localPath": "112JKS-A_Effective_090226.pdf"
-    },
-    "18DXnKkqsbgjjuekfcNK_7mbaTRU5P7ot": {
-      "filename": "108JKS-P_Effective_090226.pdf",
-      "modifiedTime": "2026-08-25T17:12:57.703Z",
-      "localPath": "108JKS-P_Effective_090226.pdf"
-    },
-    "1a0uWDJ2ynB0B48rL7V1-HjBG7KRSujmJ": {
-      "filename": "108JKS-A_Effective_090926.pdf",
-      "modifiedTime": "2026-09-01T20:25:40.602Z",
-      "localPath": "108JKS-A_Effective_090926.pdf"
     },
     "1g74hbwbVlOt4VkR_K6ryKB1c4ngUUMry": {
       "filename": "244JKS-P_Effective_091626.pdf",
@@ -171,7 +126,31 @@
       "modifiedTime": "2026-09-30T13:15:54.340Z",
       "md5Checksum": "36cd0f751b057c4d3ee65b7b02d4b4cd",
       "localPath": "117JKS-A_Effective_100726.pdf"
+    },
+    "1gmGlrKyZiDaqpZyyyHRFXicn1Qj3A7Ne": {
+      "filename": "134JKS-P_Effective_101426.pdf",
+      "modifiedTime": "2026-10-08T14:27:55.549Z",
+      "md5Checksum": "dcda285e90169dbfd088b74c1da0e5f8",
+      "localPath": "134JKS-P_Effective_101426.pdf"
+    },
+    "13SsRvoDPhwnRWOepoyPM0XRtJ0nkGJyZ": {
+      "filename": "134JKS-A_Effective_101426.pdf",
+      "modifiedTime": "2026-10-08T14:27:10.471Z",
+      "md5Checksum": "e42cbd13839bd915b86e5b42e641c149",
+      "localPath": "134JKS-A_Effective_101426.pdf"
+    },
+    "1OQ4uGVrvGpNkdVOci1a3mUZB_YzlSdoP": {
+      "filename": "108JKS-P_Effective_101426.pdf",
+      "modifiedTime": "2026-10-07T14:45:36.541Z",
+      "md5Checksum": "1c1d246614d48688f0e43423037ea485",
+      "localPath": "108JKS-P_Effective_101426.pdf"
+    },
+    "1h7chdXGM0_vuklDM_7YadahBiCkRvx21": {
+      "filename": "108JKS-A_Effective_101426.pdf",
+      "modifiedTime": "2026-10-07T14:44:49.304Z",
+      "md5Checksum": "6eda26a976752067c3318e0975c61836",
+      "localPath": "108JKS-A_Effective_101426.pdf"
     }
   },
-  "lastSync": "2026-10-05T04:42:57.205Z"
+  "lastSync": "2026-10-19T04:29:35.248Z"
 }

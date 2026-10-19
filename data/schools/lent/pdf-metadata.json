@@ -1,35 +1,14 @@
 {
   "files": {
-    "1G8BbbQkEv8gPpBQ1ZWMmk_Z8UtxrqFR4": {
-      "filename": "273LNT-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T16:07:08.276Z",
-      "localPath": "273LNT-P_Effective_082626.pdf"
-    },
-    "1W6uqayjRa84jRfOwD6pij6eu18Gt_rgQ": {
-      "filename": "209LNT-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-06T16:06:52.347Z",
-      "localPath": "209LNT-P_Effective_082626.pdf"
-    },
     "1BTCXsZzmy7k6K1IYmwphKvoYoKuxrFcQ": {
       "filename": "217LNT-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-06T16:06:36.643Z",
       "localPath": "217LNT-P_Effective_082626.pdf"
     },
-    "1Qgsbr_x1L5xtWd64cHw8x_hRbD5xwrmk": {
-      "filename": "209LNT-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-05T17:47:18.351Z",
-      "localPath": "209LNT-A_Effective_082626.pdf"
-    },
     "1zPi8r9FL0BjWLWcCRdSfd0ZDRviFhLI2": {
       "filename": "217LNT-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-05T17:47:03.367Z",
       "localPath": "217LNT-A_Effective_082626.pdf"
-    },
-    "1OwB5exVZIEXk6NYKjuDdc62HNsszxxZr": {
-      "filename": "273LNT-A_Effective_092326.pdf",
-      "modifiedTime": "2026-09-16T15:48:53.957Z",
-      "md5Checksum": "f90b6ff9089608b286b300567bab990f",
-      "localPath": "273LNT-A_Effective_092326.pdf"
     },
     "1w7SoDBv92jwsCx7bqM2ZrtDk3-aQeiFW": {
       "filename": "273LNT-P_Effective_093026.pdf",
@@ -42,7 +21,19 @@
       "modifiedTime": "2026-09-23T21:19:39.244Z",
       "md5Checksum": "a618a4d844d2f1237adb481bf8479768",
       "localPath": "273LNT-A_Effective_093026.pdf"
+    },
+    "1l3uDIFtkB353HV_3BmylGnr5aGPXKPRv": {
+      "filename": "209LNT-P_Effective_101426.pdf",
+      "modifiedTime": "2026-10-08T00:50:11.353Z",
+      "md5Checksum": "f8d48b030a2344ce50c18881d9b72141",
+      "localPath": "209LNT-P_Effective_101426.pdf"
+    },
+    "14exLwo7edIz6jN4ysD8zugqoP4bMnuaz": {
+      "filename": "209LNT-A_Effective_101426.pdf",
+      "modifiedTime": "2026-10-08T00:49:35.222Z",
+      "md5Checksum": "e6c161fff686cbf74a06d8d7152e4e2c",
+      "localPath": "209LNT-A_Effective_101426.pdf"
     }
   },
-  "lastSync": "2026-09-28T04:22:13.686Z"
+  "lastSync": "2026-10-19T04:29:43.250Z"
 }

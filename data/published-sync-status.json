@@ -1,16 +1,16 @@
 {
-  "lastRun": "2026-10-05T04:41:36.190Z",
+  "lastRun": "2026-10-19T04:27:40.914Z",
   "lastRunStatus": "success",
-  "lastRunDuration": "1m 44s",
+  "lastRunDuration": "2m 26s",
   "lastRunResults": {
-    "startTime": "2026-10-05T04:41:36.190Z",
-    "endTime": "2026-10-05T04:43:20.328Z",
-    "duration": "1m 44s",
+    "startTime": "2026-10-19T04:27:40.914Z",
+    "endTime": "2026-10-19T04:30:07.088Z",
+    "duration": "2m 26s",
     "totalSchools": 68,
     "schoolsChecked": 68,
-    "schoolsWithUpdates": 19,
-    "pdfsDownloaded": 37,
-    "routesProcessed": 37,
+    "schoolsWithUpdates": 29,
+    "pdfsDownloaded": 54,
+    "routesProcessed": 54,
     "errorCount": 0,
     "errors": [],
     "phases": {
@@ -20,23 +20,23 @@
         "queued": 68,
         "completed": 68,
         "failed": 0,
-        "duration": "36s"
+        "duration": "38s"
       },
       "pdfFetch": {
         "status": "completed",
-        "downloaded": 37,
-        "queued": 19,
-        "completed": 19,
+        "downloaded": 54,
+        "queued": 29,
+        "completed": 29,
         "failed": 0,
-        "duration": "1m 8s"
+        "duration": "1m 48s"
       },
       "processing": {
         "status": "completed",
-        "processed": 37,
+        "processed": 54,
         "queued": 0,
         "completed": 0,
         "failed": 0,
-        "duration": "1m 8s"
+        "duration": "1m 48s"
       },
       "publish": {
         "status": "completed",

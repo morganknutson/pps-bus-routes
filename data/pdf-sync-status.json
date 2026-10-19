@@ -11,53 +11,55 @@
   },
   "atkinson": {
     "lastModifiedPdf": "2026-09-30T13:55:33.417Z",
-    "lastChecked": "2026-10-05T04:42:25.274Z",
+    "lastChecked": "2026-10-19T04:28:57.493Z",
     "status": "success",
     "errors": []
   },
   "harrison-park": {
-    "lastModifiedPdf": "2026-09-30T13:57:23.304Z",
-    "lastChecked": "2026-10-05T04:42:41.321Z",
+    "lastModifiedPdf": "2026-10-07T16:23:38.689Z",
+    "lastChecked": "2026-10-19T04:29:19.761Z",
     "status": "success",
     "errors": []
   },
   "ainsworth": {
-    "lastModifiedPdf": "2026-10-02T16:31:26.979Z",
-    "lastChecked": "2026-10-05T04:42:25.206Z",
+    "lastModifiedPdf": "2026-10-14T21:05:06.627Z",
+    "lastChecked": "2026-10-19T04:29:21.971Z",
     "status": "success",
     "errors": []
   },
   "chapman": {
     "lastModifiedPdf": "2026-09-30T15:27:51.877Z",
-    "lastChecked": "2026-10-05T04:42:28.616Z",
+    "lastChecked": "2026-10-19T04:29:05.193Z",
     "status": "success",
     "errors": []
   },
   "west-sylvan": {
-    "lastModifiedPdf": "2026-09-30T14:46:56.293Z",
-    "lastChecked": "2026-10-05T04:43:13.214Z",
+    "lastModifiedPdf": "2026-10-07T14:19:19.134Z",
+    "lastChecked": "2026-10-19T04:28:51.975Z",
     "status": "success",
     "errors": []
   },
   "roseway-heights": {
-    "lastModifiedPdf": "2026-09-10T15:05:41.304Z",
-    "lastChecked": "2026-09-28T04:22:22.246Z",
+    "lastModifiedPdf": "2026-10-14T15:52:53.357Z",
+    "lastChecked": "2026-10-19T04:28:44.122Z",
     "status": "success",
     "errors": []
   },
   "rigler": {
-    "lastModifiedPdf": "2026-04-25T03:08:36.679Z",
-    "lastChecked": "2026-04-25T03:08:46.864Z"
+    "lastModifiedPdf": "2026-10-15T17:15:17.920Z",
+    "lastChecked": "2026-10-19T04:28:40.696Z",
+    "status": "success",
+    "errors": []
   },
   "ockley-green": {
     "lastModifiedPdf": "2026-09-30T20:03:41.202Z",
-    "lastChecked": "2026-10-05T04:43:03.874Z",
+    "lastChecked": "2026-10-19T04:28:20.217Z",
     "status": "success",
     "errors": []
   },
   "mt-tabor": {
-    "lastModifiedPdf": "2026-10-01T20:27:58.217Z",
-    "lastChecked": "2026-10-05T04:42:57.277Z",
+    "lastModifiedPdf": "2026-10-14T15:53:53.590Z",
+    "lastChecked": "2026-10-19T04:29:57.031Z",
     "status": "success",
     "errors": []
   },
@@ -68,20 +70,20 @@
     "errors": []
   },
   "kellogg": {
-    "lastModifiedPdf": "2026-08-26T21:35:50.572Z",
-    "lastChecked": "2026-09-18T18:03:55.097Z",
+    "lastModifiedPdf": "2026-10-08T20:05:31.284Z",
+    "lastChecked": "2026-10-19T04:29:32.644Z",
     "status": "success",
     "errors": []
   },
   "jackson": {
-    "lastModifiedPdf": "2026-09-30T19:35:56.564Z",
-    "lastChecked": "2026-10-05T04:42:57.707Z",
+    "lastModifiedPdf": "2026-10-08T14:27:55.549Z",
+    "lastChecked": "2026-10-19T04:29:35.249Z",
     "status": "success",
     "errors": []
   },
   "access": {
     "lastModifiedPdf": "2026-09-30T19:31:43.375Z",
-    "lastChecked": "2026-10-05T04:42:17.188Z",
+    "lastChecked": "2026-10-19T04:28:53.175Z",
     "status": "success",
     "errors": []
   },
@@ -91,19 +93,19 @@
   },
   "skyline": {
     "lastModifiedPdf": "2026-09-30T20:37:34.988Z",
-    "lastChecked": "2026-10-05T04:43:12.643Z",
+    "lastChecked": "2026-10-19T04:28:45.465Z",
     "status": "success",
     "errors": []
   },
   "scott": {
     "lastModifiedPdf": "2026-09-30T17:14:11.263Z",
-    "lastChecked": "2026-10-05T04:43:04.716Z",
+    "lastChecked": "2026-10-19T04:28:41.140Z",
     "status": "success",
     "errors": []
   },
   "lincoln": {
-    "lastModifiedPdf": "2026-09-30T17:53:27.328Z",
-    "lastChecked": "2026-10-05T04:42:48.987Z",
+    "lastModifiedPdf": "2026-10-14T17:25:20.710Z",
+    "lastChecked": "2026-10-19T04:30:05.665Z",
     "status": "success",
     "errors": []
   },
@@ -113,25 +115,25 @@
   },
   "hosford": {
     "lastModifiedPdf": "2026-10-02T16:37:11.908Z",
-    "lastChecked": "2026-10-05T04:42:44.593Z",
+    "lastChecked": "2026-10-19T04:29:23.247Z",
     "status": "success",
     "errors": []
   },
   "lent": {
-    "lastModifiedPdf": "2026-09-23T21:20:11.543Z",
-    "lastChecked": "2026-09-28T04:22:13.687Z",
+    "lastModifiedPdf": "2026-10-08T00:50:11.353Z",
+    "lastChecked": "2026-10-19T04:29:43.251Z",
     "status": "success",
     "errors": []
   },
   "gray": {
     "lastModifiedPdf": "2026-09-30T16:38:28.922Z",
-    "lastChecked": "2026-10-05T04:42:35.743Z",
+    "lastChecked": "2026-10-19T04:29:16.298Z",
     "status": "success",
     "errors": []
   },
   "hayhurst": {
-    "lastModifiedPdf": "2026-09-30T14:45:31.241Z",
-    "lastChecked": "2026-10-05T04:42:42.029Z",
+    "lastModifiedPdf": "2026-10-07T15:22:43.122Z",
+    "lastChecked": "2026-10-19T04:29:26.011Z",
     "status": "success",
     "errors": []
   },
@@ -169,13 +171,13 @@
   },
   "woodstock": {
     "lastModifiedPdf": "2026-09-30T13:59:03.136Z",
-    "lastChecked": "2026-10-05T04:43:18.276Z",
+    "lastChecked": "2026-10-19T04:28:52.165Z",
     "status": "success",
     "errors": []
   },
   "woodmere": {
-    "lastModifiedPdf": "2026-09-16T18:28:14.064Z",
-    "lastChecked": "2026-09-28T04:22:32.234Z",
+    "lastModifiedPdf": "2026-10-15T18:18:42.998Z",
+    "lastChecked": "2026-10-19T04:28:51.647Z",
     "status": "success",
     "errors": []
   },
@@ -192,8 +194,8 @@
     "lastChecked": "2026-04-25T03:00:04.556Z"
   },
   "sitton": {
-    "lastModifiedPdf": "2026-09-01T14:56:51.708Z",
-    "lastChecked": "2026-09-18T18:04:30.339Z",
+    "lastModifiedPdf": "2026-10-14T14:52:48.744Z",
+    "lastChecked": "2026-10-19T04:28:44.275Z",
     "status": "success",
     "errors": []
   },
@@ -228,8 +230,8 @@
     "errors": []
   },
   "richmond": {
-    "lastModifiedPdf": "2026-10-01T15:15:34.803Z",
-    "lastChecked": "2026-10-05T04:43:01.106Z",
+    "lastModifiedPdf": "2026-10-07T16:04:59.917Z",
+    "lastChecked": "2026-10-19T04:28:22.893Z",
     "status": "success",
     "errors": []
   },
@@ -238,8 +240,8 @@
     "lastChecked": "2026-04-25T03:10:55.333Z"
   },
   "marysville": {
-    "lastModifiedPdf": "2026-09-02T18:19:09.475Z",
-    "lastChecked": "2026-09-18T18:04:03.380Z",
+    "lastModifiedPdf": "2026-10-07T15:24:55.343Z",
+    "lastChecked": "2026-10-19T04:29:50.343Z",
     "status": "success",
     "errors": []
   },
@@ -260,8 +262,8 @@
     "errors": []
   },
   "lane": {
-    "lastModifiedPdf": "2026-09-23T17:34:24.837Z",
-    "lastChecked": "2026-09-28T04:22:07.004Z",
+    "lastModifiedPdf": "2026-10-07T16:47:06.349Z",
+    "lastChecked": "2026-10-19T04:29:35.442Z",
     "status": "success",
     "errors": []
   },
@@ -282,8 +284,8 @@
     "lastChecked": "2026-04-25T03:26:45.619Z"
   },
   "glencoe": {
-    "lastModifiedPdf": "2026-09-30T13:14:35.000Z",
-    "lastChecked": "2026-10-05T04:42:31.846Z",
+    "lastModifiedPdf": "2026-10-14T15:51:07.303Z",
+    "lastChecked": "2026-10-19T04:29:14.793Z",
     "status": "success",
     "errors": []
   },
@@ -302,8 +304,8 @@
     "errors": []
   },
   "duniway": {
-    "lastModifiedPdf": "2026-09-16T14:47:17.470Z",
-    "lastChecked": "2026-09-28T04:21:59.241Z",
+    "lastModifiedPdf": "2026-10-14T14:51:38.887Z",
+    "lastChecked": "2026-10-19T04:29:08.472Z",
     "status": "success",
     "errors": []
   },
@@ -325,7 +327,7 @@
   },
   "cesar-chavez": {
     "lastModifiedPdf": "2026-09-23T18:35:06.149Z",
-    "lastChecked": "2026-09-28T04:21:59.555Z",
+    "lastChecked": "2026-10-19T04:29:04.203Z",
     "status": "success",
     "errors": []
   },
@@ -352,8 +354,8 @@
     "lastChecked": "2026-04-25T03:41:52.935Z"
   },
   "beach": {
-    "lastModifiedPdf": "2026-10-02T17:00:02.224Z",
-    "lastChecked": "2026-10-05T04:42:31.551Z",
+    "lastModifiedPdf": "2026-10-07T20:18:04.903Z",
+    "lastChecked": "2026-10-19T04:29:03.328Z",
     "status": "success",
     "errors": []
   },

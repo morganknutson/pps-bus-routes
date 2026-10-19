@@ -1,15 +1,5 @@
 {
   "files": {
-    "1wUDS54Yo0cIDGSQazLmwttLCDnp3K9EH": {
-      "filename": "243TAB-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T17:09:28.136Z",
-      "localPath": "243TAB-P_Effective_082626.pdf"
-    },
-    "1vAom-kecs2rzzxLxowtiA9qr66A9D5Fs": {
-      "filename": "285TAB-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T17:08:41.121Z",
-      "localPath": "285TAB-P_Effective_082626.pdf"
-    },
     "1__8KnZDTx57gNB_L3UXWJLgYXasg5RBv": {
       "filename": "288TAB-P_Effective_090226.pdf",
       "modifiedTime": "2026-08-26T23:39:03.017Z",
@@ -19,16 +9,6 @@
       "filename": "238TAB-P_Effective_090926.pdf",
       "modifiedTime": "2026-09-03T13:27:41.361Z",
       "localPath": "238TAB-P_Effective_090926.pdf"
-    },
-    "1gnhSMxzGNwj_FNrwpUYyQitOhpnO8BZ0": {
-      "filename": "238TAB-A_Effective_090926.pdf",
-      "modifiedTime": "2026-09-03T13:26:52.755Z",
-      "localPath": "238TAB-A_Effective_090926.pdf"
-    },
-    "182hKgaZoMjZvG9_R3DHOXlOh-zHNrbd4": {
-      "filename": "288TAB-A_Effective_091626.pdf",
-      "modifiedTime": "2026-09-10T20:37:53.228Z",
-      "localPath": "288TAB-A_Effective_091626.pdf"
     },
     "1Zt7c59Ffbgp0dyC3KwJtQfFLySC3evrI": {
       "filename": "226TAB-P_Effective_091626.pdf",
@@ -40,28 +20,11 @@
       "modifiedTime": "2026-09-09T20:00:41.293Z",
       "localPath": "226TAB-A_Effective_091626.pdf"
     },
-    "1zJC9T-FY0w_g3SWlUnOwi27H3XWP_RQY": {
-      "filename": "285TAB-A_Effective_091126.pdf",
-      "modifiedTime": "2026-09-09T18:22:35.547Z",
-      "localPath": "285TAB-A_Effective_091126.pdf"
-    },
-    "15hFSZJLOGkd4ogkQdbvuSJqyfzBiHAzH": {
-      "filename": "243TAB-A_Effective_092326.pdf",
-      "modifiedTime": "2026-09-16T15:15:55.046Z",
-      "md5Checksum": "b5480b3de09bbdbf9bf59f11f0d008cb",
-      "localPath": "243TAB-A_Effective_092326.pdf"
-    },
     "1Ltqhrl5qhjnFXhiijaoPGpZOk321_Dcd": {
       "filename": "285TAB-P_Effective_093026.pdf",
       "modifiedTime": "2026-09-23T18:40:48.704Z",
       "md5Checksum": "73f84eb69f83f7f729a686b419ba6a8d",
       "localPath": "285TAB-P_Effective_093026.pdf"
-    },
-    "1ZU0SZB6usozBOHsGkY0QgCxEniG0A3f4": {
-      "filename": "285TAB-A_Effective_093026.pdf",
-      "modifiedTime": "2026-09-23T18:40:11.207Z",
-      "md5Checksum": "7f09d17dd8b17f82188206042b8c883d",
-      "localPath": "285TAB-A_Effective_093026.pdf"
     },
     "1Drmq6YZx6ebmo7Nf6-X2C3CfcbOjXcY6": {
       "filename": "243TAB-P_Effective_093026.pdf",
@@ -74,12 +37,6 @@
       "modifiedTime": "2026-09-23T18:38:01.738Z",
       "md5Checksum": "55168b8da1833469f73b15dd767042a6",
       "localPath": "243TAB-A_Effective_093026.pdf"
-    },
-    "1nyW4o9-HQ_HgxLhcqYc3r1qTTmOw9DxC": {
-      "filename": "238TAB-A_Effective_093026.pdf",
-      "modifiedTime": "2026-09-23T18:36:55.380Z",
-      "md5Checksum": "3a33f9adab62048e9d299cc21da19828",
-      "localPath": "238TAB-A_Effective_093026.pdf"
     },
     "145peRb4mr_f3atdm5FTZu0plpJbhUWEN": {
       "filename": "285TAB-A_Effective_100726.pdf",
@@ -98,7 +55,19 @@
       "modifiedTime": "2026-09-30T17:54:45.063Z",
       "md5Checksum": "65b4086a5c2dc2802b9eb2ef32df9cca",
       "localPath": "238TAB-A_Effective_100726.pdf"
+    },
+    "1VP3LQywdtzuMTdfduocwBzyva7nOMzEe": {
+      "filename": "243TAB-A_Effective_102126.pdf",
+      "modifiedTime": "2026-10-14T15:53:53.590Z",
+      "md5Checksum": "3aacebc6340c54207b8847a2b607b335",
+      "localPath": "243TAB-A_Effective_102126.pdf"
+    },
+    "1p6_QqxUIJIcmNXFt36cUgmN7ciET80bd": {
+      "filename": "288TAB-A_Effective_102126.pdf",
+      "modifiedTime": "2026-10-14T14:55:10.809Z",
+      "md5Checksum": "e6281bad3ec6371dee55410dacdad0c0",
+      "localPath": "288TAB-A_Effective_102126.pdf"
     }
   },
-  "lastSync": "2026-10-05T04:42:57.276Z"
+  "lastSync": "2026-10-19T04:29:57.031Z"
 }

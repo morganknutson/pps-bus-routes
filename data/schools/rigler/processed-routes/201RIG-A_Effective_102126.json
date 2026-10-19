@@ -1,0 +1,594 @@
+{
+  "id": "141sLpk7HImARXPO9k82GPLlGSseS_VVg",
+  "name": "201",
+  "direction": "Morning",
+  "filename": "201RIG-A_Effective_102126.pdf",
+  "fileId": "141sLpk7HImARXPO9k82GPLlGSseS_VVg",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "NE 72nd Ave. & NE Killingsworth St. [SE]",
+      "time": "7:25 am",
+      "direction": "SE",
+      "originalLine": "7:25 amNE 72ND AV @ NE KILLINGSWORTH ST [SE]201RIG-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5889046,
+        45.5626776
+      ],
+      "displayName": "NE 72nd Ave. & NE Killingsworth St, Portland, OR 97218, USA",
+      "placeId": "EjtORSA3Mm5kIEF2ZS4gJiBORSBLaWxsaW5nc3dvcnRoIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTgsIFVTQSJmImQKFAoSCcm29_WuppVUEaeTMC9BZXcpEhQKEgnJtvf1rqaVVBGnkzAvQWV3KRoUChIJAT9eEjihlVQRyaUt9tEDsLsaFAoSCbmCIQ64ppVUEU1YsH3WX5Q0IgoNGFAoGxXqau62",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-2",
+      "address": "6204 NE Simpson St. [N]",
+      "time": "7:28 am",
+      "direction": "N",
+      "originalLine": "7:28 am6204 NE SIMPSON ST [N]201RIG-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.59908367453205,
+        45.565115848892056
+      ],
+      "displayName": "6204 NE Simpson St, Portland, OR 97218, USA",
+      "placeId": "ChIJ7Tja6LqmlVQR52r1Trr-Z7I",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE Ainsworth St. & NE 57th Ave. [NE]",
+      "time": "7:30 am",
+      "direction": "NE",
+      "originalLine": "7:30 amNE AINSWORTH ST @ NE 57TH AV [NE]201RIG-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6044145,
+        45.56644379999999
+      ],
+      "displayName": "NE 57th Ave & NE Ainsworth St, Portland, OR 97218, USA",
+      "placeId": "EjZORSA1N3RoIEF2ZSAmIE5FIEFpbnN3b3J0aCBTdCwgUG9ydGxhbmQsIE9SIDk3MjE4LCBVU0EiZiJkChQKEgnhRG6Ju6aVVBHlE8cvUpeGuBIUChIJ4URuibumlVQR5RPHL1KXhrgaFAoSCYsW3a4zoZVUET530DRTV0s0GhQKEgkHFZWg46aVVBGMCCYEDsuY2yIKDTbjKBsVDw3stg",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE Ainsworth St. & NE 46th Ave. [NE]",
+      "time": "7:33 am",
+      "direction": "NE",
+      "originalLine": "7:33 amNE AINSWORTH ST @ NE 46TH AV [NE]201RIG-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6155801,
+        45.5664487
+      ],
+      "displayName": "NE 46th Ave & NE Ainsworth St, Portland, OR 97218, USA",
+      "placeId": "EjZORSA0NnRoIEF2ZSAmIE5FIEFpbnN3b3J0aCBTdCwgUG9ydGxhbmQsIE9SIDk3MjE4LCBVU0EiZiJkChQKEgnxSQuPv6aVVBHCvH5N_OrkmRIUChIJ8UkLj7-mlVQRwrx-Tfzq5JkaFAoSCcHKThLOppVUEfqGLo7HTWtdGhQKEgkHFZWg46aVVBGMCCYEDsuY2yIKDWfjKBsV51jqtg",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-5",
+      "address": "NE Ainsworth St. & NE 42nd Ave. [NE]",
+      "time": "7:34 am",
+      "direction": "NE",
+      "originalLine": "7:34 amNE AINSWORTH ST @ NE 42ND AV [NE]201RIG-A(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6204593,
+        45.5675719
+      ],
+      "displayName": "NE Ainsworth St & NE 42nd Ave, Portland, OR 97211, USA",
+      "placeId": "EjZORSBBaW5zd29ydGggU3QgJiBORSA0Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEglXzw2X6qaVVBFHMN9CQlYUahIUChIJV88Nl-qmlVQRRzDfQkJWFGoaFAoSCQcVlaDjppVUEYwIJgQOy5jbGhQKEgmti4bn0aaVVBHoX32KtKRetSIKDUcPKRsVT5rptg",
+      "neighborhood": "Concordia"
+    },
+    {
+      "id": "stop-6",
+      "address": "4360 NE Portland Hwy [S]",
+      "time": "7:36 am",
+      "direction": "S",
+      "originalLine": "7:36 am4360 NE PORTLAND HWY [S]201RIG-A(6)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.61754096964657,
+        45.5695289200922
+      ],
+      "displayName": "4360 NE Portland Hwy, Portland, OR 97218, USA",
+      "placeId": "ChIJ_XMZF5WmlVQRZ487QvqtNBY",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-7",
+      "address": "4912 NE Portland Hwy [S]",
+      "time": "7:37 am",
+      "direction": "S",
+      "originalLine": "7:37 am4912 NE PORTLAND HWY [S]201RIG-A(7)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6119873,
+        45.56861119999999
+      ],
+      "displayName": "4912 NE Portland Hwy, Portland, OR 97218, USA",
+      "placeId": "ChIJBXtlEL6mlVQRu7EOAYI2nhM",
+      "neighborhood": "Cully"
+    },
+    {
+      "id": "stop-0",
+      "address": "5401 NE Prescott St, Portland, OR 97218, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:RIGLER GT & ST & CAB LOADING ZONE ON 55TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6086616,
+        45.5564011
+      ],
+      "displayName": "5401 NE Prescott St, Portland, OR 97218, USA",
+      "schoolName": "Rigler"
+    }
+  ],
+  "neighborhoods": [
+    "Concordia",
+    "Cully"
+  ],
+  "processedAt": "2026-10-19T04:28:30.214Z",
+  "stats": {
+    "totalStops": 8,
+    "geocodedStops": 8,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.56268,
+      -122.5889
+    ],
+    [
+      45.56272,
+      -122.58964
+    ],
+    [
+      45.56278,
+      -122.59016
+    ],
+    [
+      45.56288,
+      -122.59072
+    ],
+    [
+      45.56297,
+      -122.59112
+    ],
+    [
+      45.56314,
+      -122.59167
+    ],
+    [
+      45.56337,
+      -122.59228
+    ],
+    [
+      45.5638,
+      -122.59323
+    ],
+    [
+      45.56404,
+      -122.59374
+    ],
+    [
+      45.56519,
+      -122.59606
+    ],
+    [
+      45.56526,
+      -122.5962
+    ],
+    [
+      45.5652,
+      -122.59627
+    ],
+    [
+      45.56515,
+      -122.59633
+    ],
+    [
+      45.56513,
+      -122.59644
+    ],
+    [
+      45.56512,
+      -122.59679
+    ],
+    [
+      45.56512,
+      -122.5991
+    ],
+    [
+      45.56511,
+      -122.60362
+    ],
+    [
+      45.56511,
+      -122.60438
+    ],
+    [
+      45.56536,
+      -122.6044
+    ],
+    [
+      45.5659,
+      -122.60441
+    ],
+    [
+      45.56644,
+      -122.60441
+    ],
+    [
+      45.56644,
+      -122.6066
+    ],
+    [
+      45.56644,
+      -122.61217
+    ],
+    [
+      45.56645,
+      -122.6158
+    ],
+    [
+      45.56648,
+      -122.61694
+    ],
+    [
+      45.56655,
+      -122.61726
+    ],
+    [
+      45.56665,
+      -122.61748
+    ],
+    [
+      45.56679,
+      -122.61774
+    ],
+    [
+      45.56689,
+      -122.61789
+    ],
+    [
+      45.5672,
+      -122.61845
+    ],
+    [
+      45.56725,
+      -122.61857
+    ],
+    [
+      45.56742,
+      -122.61904
+    ],
+    [
+      45.56749,
+      -122.61933
+    ],
+    [
+      45.56754,
+      -122.61965
+    ],
+    [
+      45.56755,
+      -122.62022
+    ],
+    [
+      45.56757,
+      -122.62046
+    ],
+    [
+      45.56817,
+      -122.62047
+    ],
+    [
+      45.56838,
+      -122.62046
+    ],
+    [
+      45.56855,
+      -122.62046
+    ],
+    [
+      45.56865,
+      -122.62043
+    ],
+    [
+      45.56876,
+      -122.62042
+    ],
+    [
+      45.56887,
+      -122.62045
+    ],
+    [
+      45.56914,
+      -122.62049
+    ],
+    [
+      45.56931,
+      -122.62054
+    ],
+    [
+      45.56947,
+      -122.62061
+    ],
+    [
+      45.56965,
+      -122.6207
+    ],
+    [
+      45.5699,
+      -122.62087
+    ],
+    [
+      45.57004,
+      -122.62099
+    ],
+    [
+      45.57012,
+      -122.62105
+    ],
+    [
+      45.57024,
+      -122.6211
+    ],
+    [
+      45.57035,
+      -122.62112
+    ],
+    [
+      45.57043,
+      -122.62111
+    ],
+    [
+      45.57047,
+      -122.6211
+    ],
+    [
+      45.57061,
+      -122.62106
+    ],
+    [
+      45.57057,
+      -122.62087
+    ],
+    [
+      45.57034,
+      -122.61973
+    ],
+    [
+      45.57024,
+      -122.61922
+    ],
+    [
+      45.57013,
+      -122.61866
+    ],
+    [
+      45.56999,
+      -122.61795
+    ],
+    [
+      45.56989,
+      -122.61742
+    ],
+    [
+      45.56985,
+      -122.61746
+    ],
+    [
+      45.56979,
+      -122.61751
+    ],
+    [
+      45.56974,
+      -122.61753
+    ],
+    [
+      45.5697,
+      -122.61753
+    ],
+    [
+      45.56961,
+      -122.61753
+    ],
+    [
+      45.56953,
+      -122.61754
+    ],
+    [
+      45.56961,
+      -122.61753
+    ],
+    [
+      45.5697,
+      -122.61753
+    ],
+    [
+      45.56973,
+      -122.61753
+    ],
+    [
+      45.56979,
+      -122.61751
+    ],
+    [
+      45.56985,
+      -122.61746
+    ],
+    [
+      45.56989,
+      -122.61742
+    ],
+    [
+      45.56988,
+      -122.61736
+    ],
+    [
+      45.56957,
+      -122.61551
+    ],
+    [
+      45.56934,
+      -122.61413
+    ],
+    [
+      45.56907,
+      -122.61253
+    ],
+    [
+      45.56897,
+      -122.61195
+    ],
+    [
+      45.56885,
+      -122.61199
+    ],
+    [
+      45.56861,
+      -122.61199
+    ],
+    [
+      45.56885,
+      -122.61199
+    ],
+    [
+      45.56897,
+      -122.61195
+    ],
+    [
+      45.56886,
+      -122.61127
+    ],
+    [
+      45.56853,
+      -122.60926
+    ],
+    [
+      45.56842,
+      -122.60859
+    ],
+    [
+      45.56808,
+      -122.60656
+    ],
+    [
+      45.56757,
+      -122.60354
+    ],
+    [
+      45.5672,
+      -122.60132
+    ],
+    [
+      45.56711,
+      -122.60084
+    ],
+    [
+      45.56696,
+      -122.60084
+    ],
+    [
+      45.56645,
+      -122.60085
+    ],
+    [
+      45.56573,
+      -122.60085
+    ],
+    [
+      45.56512,
+      -122.60084
+    ],
+    [
+      45.56258,
+      -122.60083
+    ],
+    [
+      45.5614,
+      -122.60084
+    ],
+    [
+      45.56122,
+      -122.60087
+    ],
+    [
+      45.56096,
+      -122.60094
+    ],
+    [
+      45.5608,
+      -122.60095
+    ],
+    [
+      45.56076,
+      -122.60095
+    ],
+    [
+      45.56026,
+      -122.60087
+    ],
+    [
+      45.55789,
+      -122.60088
+    ],
+    [
+      45.55607,
+      -122.6009
+    ],
+    [
+      45.55574,
+      -122.60094
+    ],
+    [
+      45.55547,
+      -122.60088
+    ],
+    [
+      45.55548,
+      -122.60176
+    ],
+    [
+      45.5555,
+      -122.60604
+    ],
+    [
+      45.55551,
+      -122.60748
+    ],
+    [
+      45.55552,
+      -122.60875
+    ],
+    [
+      45.55552,
+      -122.60888
+    ],
+    [
+      45.55565,
+      -122.60888
+    ],
+    [
+      45.5557,
+      -122.60885
+    ],
+    [
+      45.55572,
+      -122.60876
+    ],
+    [
+      45.55572,
+      -122.60843
+    ],
+    [
+      45.55599,
+      -122.6084
+    ]
+  ]
+}

@@ -1,10 +1,5 @@
 {
   "files": {
-    "1u_QAtxnBcDf9RxXRPeb2iCLKT8zc5UXQ": {
-      "filename": "243GLE-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-07T20:20:52.041Z",
-      "localPath": "243GLE-P_Effective_082626.pdf"
-    },
     "1UZWoghE3P4aBq-uXk55c2mGYUhlSLHMo": {
       "filename": "240GLE-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-07T20:20:33.801Z",
@@ -25,7 +20,19 @@
       "modifiedTime": "2026-09-30T13:14:35.000Z",
       "md5Checksum": "2b27d754bf22cd166ecb2f04acca4312",
       "localPath": "243GLE-P_Effective_100726.pdf"
+    },
+    "11Wb8GNIX7bSdhjxSY3--scHyoTbS10Tk": {
+      "filename": "243GLE-P_Effective_102126.pdf",
+      "modifiedTime": "2026-10-14T15:51:07.303Z",
+      "md5Checksum": "b39a036dbef49825f85b2a4e8637ddfa",
+      "localPath": "243GLE-P_Effective_102126.pdf"
+    },
+    "1hsw9fqQ4bnj_LsyQ5t8EdO1kXInjB32K": {
+      "filename": "243GLE-A_Effective_102126.pdf",
+      "modifiedTime": "2026-10-14T15:50:32.222Z",
+      "md5Checksum": "08bf474f0ccdb3b7ccf63772a566c0f1",
+      "localPath": "243GLE-A_Effective_102126.pdf"
     }
   },
-  "lastSync": "2026-10-05T04:42:31.344Z"
+  "lastSync": "2026-10-19T04:29:14.792Z"
 }

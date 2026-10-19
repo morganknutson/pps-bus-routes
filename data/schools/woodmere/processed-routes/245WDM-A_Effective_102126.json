@@ -1,0 +1,317 @@
+{
+  "id": "1_i3Vk7MO6ZurobgmPWAw3gWDbQyKaVpE",
+  "name": "245",
+  "direction": "Morning",
+  "filename": "245WDM-A_Effective_102126.pdf",
+  "fileId": "1_i3Vk7MO6ZurobgmPWAw3gWDbQyKaVpE",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE 63rd Ave. & SE Ogden St. [NW]",
+      "time": "7:38 am",
+      "direction": "NW",
+      "originalLine": "7:38 amSE 63RD AV @ SE OGDEN ST [NW]245WDM-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5981339,
+        45.4710653
+      ],
+      "displayName": "SE 63rd Ave & SE Ogden St, Portland, OR 97206, USA",
+      "placeId": "EjJTRSA2M3JkIEF2ZSAmIFNFIE9nZGVuIFN0LCBQb3J0bGFuZCwgT1IgOTcyMDYsIFVTQSJmImQKFAoSCS8ACawBoJVUEWfS4ZUyynOFEhQKEgkvAAmsAaCVVBFn0uGVMspzhRoUChIJPQCfAGuglVQRcGXpwQLmW40aFAoSCZNpXhivCpVUEVfYeH-w98i5IgoNfVUaGxVlAu22",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-2",
+      "address": "7200 SE 60th Ave. [E]",
+      "time": "7:41 am",
+      "direction": "E",
+      "originalLine": "7:41 am7200 SE 60TH AV [E]245WDM-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.60155999999999,
+        45.4707978
+      ],
+      "displayName": "7200 SE 60th Ave, Portland, OR 97206, USA",
+      "placeId": "ChIJwdIixwCglVQRv89p_8phIa8",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE 52nd Ave. & SE Tolman St. [SE]",
+      "time": "7:44 am",
+      "direction": "SE",
+      "originalLine": "7:44 amSE 52ND AV @ SE TOLMAN ST [SE]245WDM-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6087514,
+        45.4770149
+      ],
+      "displayName": "SE Tolman St & SE 52nd Ave, Portland, OR 97206, USA",
+      "placeId": "EjNTRSBUb2xtYW4gU3QgJiBTRSA1Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEglFV_kUCKCVVBFLnBInXjoapBIUChIJRVf5FAiglVQRS5wSJ146GqQaFAoSCQXGXe6nCpVUEc-CAnVTeENpGhQKEgmx4E2OC6CVVBGwr-O06bzTNCIKDeU9GxsVpmPrtg",
+      "neighborhood": "Southeast Portland"
+    },
+    {
+      "id": "stop-4",
+      "address": "6332 SE Duke St. [S]",
+      "time": "7:47 am",
+      "direction": "S",
+      "originalLine": "7:47 am6332 SE DUKE ST [S]245WDM-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5971423011085,
+        45.47565451411707
+      ],
+      "displayName": "6332 SE Duke St, Portland, OR 97206, USA",
+      "placeId": "ChIJVV62QQSglVQR-yT3mzg2_DQ",
+      "neighborhood": "Brentwood-Darlington"
+    },
+    {
+      "id": "stop-0",
+      "address": "7900 SE Duke St, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:WOODMERE GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5824729,
+        45.4745839
+      ],
+      "displayName": "7900 SE Duke St, Portland, OR 97206, USA",
+      "schoolName": "Woodmere"
+    }
+  ],
+  "neighborhoods": [
+    "Brentwood-Darlington",
+    "Southeast Portland"
+  ],
+  "processedAt": "2026-10-19T04:28:51.144Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.47107,
+      -122.59813
+    ],
+    [
+      45.46971,
+      -122.59813
+    ],
+    [
+      45.46864,
+      -122.59812
+    ],
+    [
+      45.46863,
+      -122.59958
+    ],
+    [
+      45.46864,
+      -122.60219
+    ],
+    [
+      45.46934,
+      -122.60219
+    ],
+    [
+      45.47018,
+      -122.6022
+    ],
+    [
+      45.47061,
+      -122.60221
+    ],
+    [
+      45.4706,
+      -122.60192
+    ],
+    [
+      45.47079,
+      -122.60192
+    ],
+    [
+      45.4708,
+      -122.60191
+    ],
+    [
+      45.4708,
+      -122.60157
+    ],
+    [
+      45.4708,
+      -122.6019
+    ],
+    [
+      45.47079,
+      -122.60192
+    ],
+    [
+      45.4706,
+      -122.60192
+    ],
+    [
+      45.47061,
+      -122.60221
+    ],
+    [
+      45.47078,
+      -122.60221
+    ],
+    [
+      45.47182,
+      -122.60222
+    ],
+    [
+      45.47213,
+      -122.60222
+    ],
+    [
+      45.47334,
+      -122.60224
+    ],
+    [
+      45.47542,
+      -122.60226
+    ],
+    [
+      45.47567,
+      -122.60226
+    ],
+    [
+      45.47582,
+      -122.60226
+    ],
+    [
+      45.47583,
+      -122.60254
+    ],
+    [
+      45.47583,
+      -122.60287
+    ],
+    [
+      45.47583,
+      -122.60417
+    ],
+    [
+      45.47582,
+      -122.60627
+    ],
+    [
+      45.47582,
+      -122.60712
+    ],
+    [
+      45.47583,
+      -122.60876
+    ],
+    [
+      45.47628,
+      -122.60875
+    ],
+    [
+      45.47679,
+      -122.60875
+    ],
+    [
+      45.47701,
+      -122.60875
+    ],
+    [
+      45.47679,
+      -122.60875
+    ],
+    [
+      45.47628,
+      -122.60875
+    ],
+    [
+      45.47583,
+      -122.60876
+    ],
+    [
+      45.47583,
+      -122.60689
+    ],
+    [
+      45.47583,
+      -122.60287
+    ],
+    [
+      45.47583,
+      -122.6003
+    ],
+    [
+      45.47585,
+      -122.59813
+    ],
+    [
+      45.47585,
+      -122.59713
+    ],
+    [
+      45.47577,
+      -122.59713
+    ],
+    [
+      45.47567,
+      -122.59714
+    ],
+    [
+      45.47565,
+      -122.59714
+    ],
+    [
+      45.47567,
+      -122.59714
+    ],
+    [
+      45.47577,
+      -122.59713
+    ],
+    [
+      45.47585,
+      -122.59713
+    ],
+    [
+      45.47586,
+      -122.59519
+    ],
+    [
+      45.47588,
+      -122.59227
+    ],
+    [
+      45.47589,
+      -122.59035
+    ],
+    [
+      45.47588,
+      -122.58808
+    ],
+    [
+      45.47588,
+      -122.58302
+    ],
+    [
+      45.47588,
+      -122.58168
+    ],
+    [
+      45.475,
+      -122.58168
+    ],
+    [
+      45.47492,
+      -122.58168
+    ],
+    [
+      45.47491,
+      -122.58245
+    ]
+  ]
+}

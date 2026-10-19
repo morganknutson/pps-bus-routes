@@ -6,21 +6,11 @@
       "md5Checksum": "b7dad10e6a7dc46c5dd03f23cf34a8e2",
       "localPath": "138SKY-P_Effective_082626.pdf"
     },
-    "1WPGNhayCBDD5TRrTxkf1_DDUJfYY7BRO": {
-      "filename": "139SKY-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-09T16:07:24.171Z",
-      "localPath": "139SKY-P_Effective_082626.pdf"
-    },
     "1oQO0t-DcUCN78i0VwdsjBd19pUf33ItH": {
       "filename": "138SKY-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-20T14:04:19.026Z",
       "md5Checksum": "edbf013abb3335e945881e77846f1dab",
       "localPath": "138SKY-A_Effective_082626.pdf"
-    },
-    "1FrmAmN48FQDyAF07_gZqHjjJKaJEv_6I": {
-      "filename": "139SKY-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T16:18:00.735Z",
-      "localPath": "139SKY-A_Effective_082626.pdf"
     },
     "1md0idtv1ENtRu8Ar9X_HrIRNjnt3nmyd": {
       "filename": "136SKY-P_Effective_090226.pdf",
@@ -54,18 +44,6 @@
       "md5Checksum": "d4682f015ad0a5d88494c9fe31d6f2a9",
       "localPath": "137SKY-A_Effective_092326.pdf"
     },
-    "1oGTLIV8dBhD8hN5EqHbYvjPkkMlE26Ax": {
-      "filename": "139SKY-P_Effective_093026.pdf",
-      "modifiedTime": "2026-09-23T20:35:31.323Z",
-      "md5Checksum": "5832d4a3a0dd1529096e506bdb71f22a",
-      "localPath": "139SKY-P_Effective_093026.pdf"
-    },
-    "1Gs3anavxHifIzYTfthetuPZvXzub-ZWd": {
-      "filename": "139SKY-A_Effective_093026.pdf",
-      "modifiedTime": "2026-09-23T20:34:52.607Z",
-      "md5Checksum": "44fe28f83b2e870b62192ff9778fa423",
-      "localPath": "139SKY-A_Effective_093026.pdf"
-    },
     "17bqDQkFmo5eBpyH3g_nHLvh1B8dWGbMZ": {
       "filename": "139SKY-P_Effective_100726.pdf",
       "modifiedTime": "2026-09-30T20:37:34.988Z",
@@ -79,5 +57,5 @@
       "localPath": "139SKY-A_Effective_100726.pdf"
     }
   },
-  "lastSync": "2026-10-05T04:43:12.142Z"
+  "lastSync": "2026-10-19T04:28:45.464Z"
 }
