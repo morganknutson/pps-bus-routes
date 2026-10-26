@@ -1,0 +1,288 @@
+{
+  "id": "1gImg37_3CJA-zjQg9faYJij4NqCE00b2",
+  "name": "239",
+  "direction": "Morning",
+  "filename": "239WDM-A_Effective_102826.pdf",
+  "fileId": "1gImg37_3CJA-zjQg9faYJij4NqCE00b2",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-1",
+      "address": "SE Cora St. & SE 89th Ave. [NE]",
+      "time": "7:38 am",
+      "direction": "NE",
+      "originalLine": "7:38 amSE CORA ST @ SE 89TH AV [NE]239WDM-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5714312,
+        45.4910281
+      ],
+      "displayName": "SE Cora St & SE 89th Ave, Portland, OR 97266, USA",
+      "placeId": "EjFTRSBDb3JhIFN0ICYgU0UgODl0aCBBdmUsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJvUjp8TCglVQRhd8qVAH_DpcSFAoSCb1I6fEwoJVUEYXfKlQB_w6XGhQKEglFQIsOP6CVVBFIbGr71CZHTBoUChIJnbtA2TCglVQRoj6Ekorxy3giCg1JYR0bFXgV8bY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-2",
+      "address": "9030 SE Cooper St. (kelly School) [N]",
+      "time": "7:44 am",
+      "direction": "N",
+      "originalLine": "7:44 am9030 SE COOPER ST (KELLY SCHOOL) [N]239WDM-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.57077803333316,
+        45.47302099106446
+      ],
+      "displayName": "9030 SE Cooper St, Portland, OR 97266, USA",
+      "placeId": "ChIJdzS-o_SflVQRRUixiEUwojU",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-3",
+      "address": "SE Tolman St. & SE 84th Pl. [NE]",
+      "time": "7:47 am",
+      "direction": "NE",
+      "originalLine": "7:47 amSE TOLMAN ST @ SE 84TH PL [NE]239WDM-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5770272,
+        45.4776309
+      ],
+      "displayName": "SE Tolman St & SE 84th Ave, Portland, OR 97266, USA",
+      "placeId": "EjNTRSBUb2xtYW4gU3QgJiBTRSA4NHRoIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjY2LCBVU0EiZiJkChQKEgkvzyuaH6CVVBHyUDGh1qAxwRIUChIJL88rmh-glVQR8lAxodagMcEaFAoSCQXGXe6nCpVUEc-CAnVTeENpGhQKEgm1G3XFN6CVVBH7Hi6cAg-9_yIKDfVVGxsV4Drwtg",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-4",
+      "address": "SE Duke St. & SE 83rd Ave. [NE]",
+      "time": "7:48 am",
+      "direction": "NE",
+      "originalLine": "7:48 amSE DUKE ST @ SE 83RD AV [NE]239WDM-A(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5780517,
+        45.4758538
+      ],
+      "displayName": "SE 83rd Ave & SE Duke St, Portland, OR 97266, USA",
+      "placeId": "EjFTRSA4M3JkIEF2ZSAmIFNFIER1a2UgU3QsIFBvcnRsYW5kLCBPUiA5NzI2NiwgVVNBImYiZAoUChIJ9-4JMh6glVQRbQyJzNniQvwSFAoSCffuCTIeoJVUEW0MiczZ4kL8GhQKEglP7WTQOaCVVBGn8zKU66rmNhoUChIJc6ypMYmflVQRMGNLrONSjPIiCg2KEBsbFdsS8LY",
+      "neighborhood": "Lents"
+    },
+    {
+      "id": "stop-0",
+      "address": "7900 SE Duke St, Portland, OR 97206, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:WOODMERE GT & ST & CAB LOADING ZONE",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5824729,
+        45.4745839
+      ],
+      "displayName": "7900 SE Duke St, Portland, OR 97206, USA",
+      "schoolName": "Woodmere"
+    }
+  ],
+  "neighborhoods": [
+    "Lents"
+  ],
+  "processedAt": "2026-10-26T03:50:53.281Z",
+  "stats": {
+    "totalStops": 5,
+    "geocodedStops": 5,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.49103,
+      -122.57143
+    ],
+    [
+      45.4901,
+      -122.57144
+    ],
+    [
+      45.49007,
+      -122.57051
+    ],
+    [
+      45.49005,
+      -122.56957
+    ],
+    [
+      45.49004,
+      -122.56879
+    ],
+    [
+      45.49003,
+      -122.5686
+    ],
+    [
+      45.48973,
+      -122.56861
+    ],
+    [
+      45.48918,
+      -122.56861
+    ],
+    [
+      45.48825,
+      -122.5686
+    ],
+    [
+      45.48626,
+      -122.5686
+    ],
+    [
+      45.48462,
+      -122.5686
+    ],
+    [
+      45.48357,
+      -122.56862
+    ],
+    [
+      45.48223,
+      -122.56863
+    ],
+    [
+      45.48132,
+      -122.56862
+    ],
+    [
+      45.48049,
+      -122.56864
+    ],
+    [
+      45.48005,
+      -122.56866
+    ],
+    [
+      45.47955,
+      -122.56863
+    ],
+    [
+      45.47876,
+      -122.56864
+    ],
+    [
+      45.47741,
+      -122.56864
+    ],
+    [
+      45.47334,
+      -122.56865
+    ],
+    [
+      45.47339,
+      -122.57073
+    ],
+    [
+      45.4734,
+      -122.57096
+    ],
+    [
+      45.47301,
+      -122.57096
+    ],
+    [
+      45.47302,
+      -122.57078
+    ],
+    [
+      45.47303,
+      -122.57075
+    ],
+    [
+      45.47308,
+      -122.57072
+    ],
+    [
+      45.47393,
+      -122.57073
+    ],
+    [
+      45.47467,
+      -122.57072
+    ],
+    [
+      45.47473,
+      -122.57072
+    ],
+    [
+      45.47476,
+      -122.57072
+    ],
+    [
+      45.47483,
+      -122.57077
+    ],
+    [
+      45.47491,
+      -122.57079
+    ],
+    [
+      45.47564,
+      -122.57075
+    ],
+    [
+      45.47565,
+      -122.57095
+    ],
+    [
+      45.47566,
+      -122.57166
+    ],
+    [
+      45.47569,
+      -122.57264
+    ],
+    [
+      45.47574,
+      -122.57457
+    ],
+    [
+      45.47581,
+      -122.57649
+    ],
+    [
+      45.47583,
+      -122.57706
+    ],
+    [
+      45.47763,
+      -122.57703
+    ],
+    [
+      45.47764,
+      -122.57803
+    ],
+    [
+      45.47585,
+      -122.57805
+    ],
+    [
+      45.47586,
+      -122.57855
+    ],
+    [
+      45.47588,
+      -122.57931
+    ],
+    [
+      45.47588,
+      -122.58168
+    ],
+    [
+      45.475,
+      -122.58168
+    ],
+    [
+      45.47492,
+      -122.58168
+    ],
+    [
+      45.47491,
+      -122.58245
+    ]
+  ]
+}

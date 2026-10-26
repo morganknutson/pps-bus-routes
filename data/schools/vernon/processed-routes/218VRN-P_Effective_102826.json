@@ -1,0 +1,226 @@
+{
+  "id": "1oa6mdyxDRsXhTUuWhOnrRMvX3xbBa7w3",
+  "name": "218",
+  "direction": "Afternoon",
+  "filename": "218VRN-P_Effective_102826.pdf",
+  "fileId": "1oa6mdyxDRsXhTUuWhOnrRMvX3xbBa7w3",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-0",
+      "address": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:VERNON GT & ST & CAB LOADING ZONE ON 20TH",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6438366,
+        45.5623398
+      ],
+      "displayName": "2044 NE Killingsworth St, Portland, OR 97211, USA",
+      "schoolName": "Vernon"
+    },
+    {
+      "id": "stop-1",
+      "address": "5250 NE Martin Luther King Jr Blvd. (blazers)",
+      "time": "3:43 pm",
+      "direction": null,
+      "originalLine": "3:43 pm5250 NE MARTIN LUTHER KING JR BLVD (BLAZERS)218VRN-P(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.66094549262074,
+        45.56181809547803
+      ],
+      "displayName": "5250 NE Martin Luther King Jr Blvd, Portland, OR 97211, USA",
+      "placeId": "ChIJqUS1VxqnlVQR2p-Q26DEOhw",
+      "neighborhood": "King"
+    },
+    {
+      "id": "stop-2",
+      "address": "NE 42nd Ave. & NE Wygant St. [W]",
+      "time": "3:51 pm",
+      "direction": "W",
+      "originalLine": "3:51 pmNE 42ND AV @ NE WYGANT ST [W]218VRN-P(4)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.620413,
+        45.5574918
+      ],
+      "displayName": "NE Wygant St & NE 42nd Ave, Portland, OR 97211, USA",
+      "placeId": "EjNORSBXeWdhbnQgU3QgJiBORSA0Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjExLCBVU0EiZiJkChQKEgmxLkBrxaaVVBHyO0uty0ZeWhIUChIJsS5Aa8WmlVQR8jtLrctGXloaFAoSCfVnTCpToZVUEdnZEF9gdMYCGhQKEgmti4bn0aaVVBHoX32KtKRetSIKDYaFJxsVHpzptg",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 42nd Ave. & NE Campaign St. [W]",
+      "time": "3:52 pm",
+      "direction": "W",
+      "originalLine": "3:52 pmNE 42ND AV @ NE CAMPAIGN ST [W]218VRN-P(5)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6204152,
+        45.5546623
+      ],
+      "displayName": "NE Campaign St & NE 42nd Ave, Portland, OR 97218, USA",
+      "placeId": "EjVORSBDYW1wYWlnbiBTdCAmIE5FIDQybmQgQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTgsIFVTQSJmImQKFAoSCbFiZSPQppVUESBsXdM-1EiXEhQKEgmxYmUj0KaVVBEgbF3TPtRIlxoUChIJV3IUWM6mlVQRD6t_x4mTqZoaFAoSCa2LhufRppVUEehffYq0pF61IgoN_xYnGxUInOm2",
+      "neighborhood": "Northeast Portland"
+    }
+  ],
+  "neighborhoods": [
+    "King",
+    "Northeast Portland"
+  ],
+  "processedAt": "2026-10-26T03:50:43.734Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.56208,
+      -122.64387
+    ],
+    [
+      45.56211,
+      -122.64483
+    ],
+    [
+      45.5627,
+      -122.64483
+    ],
+    [
+      45.56271,
+      -122.64605
+    ],
+    [
+      45.56273,
+      -122.64873
+    ],
+    [
+      45.56274,
+      -122.65311
+    ],
+    [
+      45.56275,
+      -122.65513
+    ],
+    [
+      45.56275,
+      -122.65615
+    ],
+    [
+      45.56254,
+      -122.65615
+    ],
+    [
+      45.56182,
+      -122.65615
+    ],
+    [
+      45.56181,
+      -122.65798
+    ],
+    [
+      45.56181,
+      -122.65964
+    ],
+    [
+      45.56182,
+      -122.66095
+    ],
+    [
+      45.56182,
+      -122.6614
+    ],
+    [
+      45.56221,
+      -122.6614
+    ],
+    [
+      45.56274,
+      -122.66139
+    ],
+    [
+      45.56274,
+      -122.6609
+    ],
+    [
+      45.56274,
+      -122.65883
+    ],
+    [
+      45.56274,
+      -122.65809
+    ],
+    [
+      45.56274,
+      -122.65295
+    ],
+    [
+      45.56274,
+      -122.65066
+    ],
+    [
+      45.5627,
+      -122.6458
+    ],
+    [
+      45.5627,
+      -122.64464
+    ],
+    [
+      45.5627,
+      -122.64264
+    ],
+    [
+      45.5627,
+      -122.63991
+    ],
+    [
+      45.56271,
+      -122.63602
+    ],
+    [
+      45.56271,
+      -122.6328
+    ],
+    [
+      45.56273,
+      -122.63005
+    ],
+    [
+      45.56281,
+      -122.62065
+    ],
+    [
+      45.56281,
+      -122.62042
+    ],
+    [
+      45.56249,
+      -122.62041
+    ],
+    [
+      45.56198,
+      -122.62041
+    ],
+    [
+      45.56093,
+      -122.62041
+    ],
+    [
+      45.55827,
+      -122.62041
+    ],
+    [
+      45.55538,
+      -122.62042
+    ],
+    [
+      45.55466,
+      -122.62042
+    ]
+  ]
+}
