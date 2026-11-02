@@ -180185,5 +180185,583 @@
       }
     ],
     "cachedAt": "2026-10-26T03:50:53.734Z"
+  },
+  "northeast 59th avenue & northeast broadway street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6026583,
+      45.534963
+    ],
+    "displayName": "NE 59th Ave & NE Broadway, Portland, OR 97213, USA",
+    "placeId": "EjJORSA1OXRoIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCZEVtuQjoZVUEdStWTrAhWvzEhQKEgmRFbbkI6GVVBHUrVk6wIVr8xoUChIJh_ausTGhlVQRq-QZ-PrhlIIaFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoNfhUkGxWpUey2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northeast 59th Avenue & Northeast Broadway",
+        "short_name": "NE 59th Ave & NE Broadway",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Rose City Park",
+        "short_name": "Rose City Park",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97213",
+        "short_name": "97213",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-11-02T05:00:25.067Z"
+  },
+  "northeast broadway street & northeast 59th avenue|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6026583,
+      45.534963
+    ],
+    "displayName": "NE 59th Ave & NE Broadway, Portland, OR 97213, USA",
+    "placeId": "EjJORSA1OXRoIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCZEVtuQjoZVUEdStWTrAhWvzEhQKEgmRFbbkI6GVVBHUrVk6wIVr8xoUChIJh_ausTGhlVQRq-QZ-PrhlIIaFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoNfhUkGxWpUey2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northeast 59th Avenue & Northeast Broadway",
+        "short_name": "NE 59th Ave & NE Broadway",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Rose City Park",
+        "short_name": "Rose City Park",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97213",
+        "short_name": "97213",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-11-02T05:00:27.581Z"
+  },
+  "7616 nw skyline blvd. e|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.79427679999999,
+      45.5768585
+    ],
+    "displayName": "7616 NW Skyline Blvd, Portland, OR 97229, USA",
+    "placeId": "ChIJ3bPDgdcHlVQRx_k_EOC71dk",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "7616",
+        "short_name": "7616",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Skyline Boulevard",
+        "short_name": "NW Skyline Blvd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Northwest Portland",
+        "short_name": "Northwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97229",
+        "short_name": "97229",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "1207",
+        "short_name": "1207",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-11-02T05:00:29.412Z"
+  },
+  "southeast tolman street & southeast 52nd avenue|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6087514,
+      45.4770149
+    ],
+    "displayName": "SE Tolman St & SE 52nd Ave, Portland, OR 97206, USA",
+    "placeId": "EjNTRSBUb2xtYW4gU3QgJiBTRSA1Mm5kIEF2ZSwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEglFV_kUCKCVVBFLnBInXjoapBIUChIJRVf5FAiglVQRS5wSJ146GqQaFAoSCQXGXe6nCpVUEc-CAnVTeENpGhQKEgmx4E2OC6CVVBGwr-O06bzTNCIKDeU9GxsVpmPrtg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southeast Tolman Street & Southeast 52nd Avenue",
+        "short_name": "SE Tolman St & SE 52nd Ave",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southeast Portland",
+        "short_name": "Southeast Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97206",
+        "short_name": "97206",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-11-02T05:00:31.036Z"
+  },
+  "southeast tolman street & southeast 57th avenue|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.6047532,
+      45.4774906
+    ],
+    "displayName": "SE 57th Ave & SE Tolman St, Portland, OR 97206, USA",
+    "placeId": "EjNTRSA1N3RoIEF2ZSAmIFNFIFRvbG1hbiBTdCwgUG9ydGxhbmQsIE9SIDk3MjA2LCBVU0EiZiJkChQKEglX7cqYCKCVVBH1jDIr3S0sAxIUChIJV-3KmAiglVQR9YwyK90tLAMaFAoSCe1Kk0NsoJVUEVe52nXHvDgRGhQKEgkFxl3upwqVVBHPggJ1U3hDaSIKDXpQGxsV1P_rtg",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Southeast 57th Avenue & Southeast Tolman Street",
+        "short_name": "SE 57th Ave & SE Tolman St",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "Southeast Portland",
+        "short_name": "Southeast Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97206",
+        "short_name": "97206",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-11-02T05:00:33.737Z"
+  },
+  "7616 nw skyline blvd. w|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.79427679999999,
+      45.5768585
+    ],
+    "displayName": "7616 NW Skyline Blvd, Portland, OR 97229, USA",
+    "placeId": "ChIJ3bPDgdcHlVQRx_k_EOC71dk",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "7616",
+        "short_name": "7616",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Northwest Skyline Boulevard",
+        "short_name": "NW Skyline Blvd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Northwest Portland",
+        "short_name": "Northwest Portland",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97229",
+        "short_name": "97229",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "1207",
+        "short_name": "1207",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-11-02T05:00:33.984Z"
+  },
+  "northeast 63rd avenue & northeast davis street|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.5985882,
+      45.52416179999999
+    ],
+    "displayName": "NE 63rd Ave & NE Davis St, Portland, OR 97213, USA",
+    "placeId": "EjJORSA2M3JkIEF2ZSAmIE5FIERhdmlzIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCUODV4cdoZVUEdposCvbCmN3EhQKEglDg1eHHaGVVBHaaLAr2wpjdxoUChIJqzcrMjShlVQRALju_6mpJz4aFAoSCdm2O4IdoZVUEfTtwUUDgstbIgoNkm8iGxWm8Oy2",
+    "locationType": "GEOMETRIC_CENTER",
+    "addressComponents": [
+      {
+        "long_name": "Northeast 63rd Avenue & Northeast Davis Street",
+        "short_name": "NE 63rd Ave & NE Davis St",
+        "types": [
+          "intersection"
+        ]
+      },
+      {
+        "long_name": "North Tabor",
+        "short_name": "North Tabor",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97213",
+        "short_name": "97213",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "cachedAt": "2026-11-02T05:00:43.597Z"
+  },
+  "4014 sw patton rd. nw|portland|or": {
+    "success": true,
+    "coordinates": [
+      -122.71798515786851,
+      45.49946442120546
+    ],
+    "displayName": "4014 SW Patton Rd, Portland, OR 97221, USA",
+    "placeId": "ChIJF35Cb8wLlVQRVWhQE444Ud0",
+    "locationType": "ROOFTOP",
+    "addressComponents": [
+      {
+        "long_name": "4014",
+        "short_name": "4014",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Southwest Patton Road",
+        "short_name": "SW Patton Rd",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Southwest Hills",
+        "short_name": "Southwest Hills",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Portland",
+        "short_name": "Portland",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Multnomah County",
+        "short_name": "Multnomah County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Oregon",
+        "short_name": "OR",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "97221",
+        "short_name": "97221",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "3143",
+        "short_name": "3143",
+        "types": [
+          "postal_code_suffix"
+        ]
+      }
+    ],
+    "cachedAt": "2026-11-02T05:00:49.103Z"
   }
 }

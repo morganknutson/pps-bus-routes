@@ -9,9 +9,9 @@
     {
       "id": "stop-1",
       "address": "S Kelly Ave. & S Iowa St. [NW]",
-      "time": "7:21 am",
+      "time": "7:22 am",
       "direction": "NW",
-      "originalLine": "7:21 amS KELLY AV @ S IOWA ST [NW]122CAP-A(1)Stop Order #:",
+      "originalLine": "7:22 amS KELLY AV @ S IOWA ST [NW]122CAP-A(1)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.675868,
@@ -24,9 +24,9 @@
     {
       "id": "stop-2",
       "address": "S Virginia Ave. & S Florida St. [NW]",
-      "time": "7:23 am",
+      "time": "7:24 am",
       "direction": "NW",
-      "originalLine": "7:23 amS VIRGINIA AV @ S FLORIDA ST [NW]122CAP-A(2)Stop Order #:",
+      "originalLine": "7:24 amS VIRGINIA AV @ S FLORIDA ST [NW]122CAP-A(2)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6739115,
@@ -39,9 +39,9 @@
     {
       "id": "stop-3",
       "address": "S Virginia Ave. & S Nevada St. [NW]",
-      "time": "7:24 am",
+      "time": "7:25 am",
       "direction": "NW",
-      "originalLine": "7:24 amS VIRGINIA AV @ S NEVADA ST [NW]122CAP-A(3)Stop Order #:",
+      "originalLine": "7:25 amS VIRGINIA AV @ S NEVADA ST [NW]122CAP-A(3)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6739161,
@@ -54,9 +54,9 @@
     {
       "id": "stop-4",
       "address": "S Nevada St. & S Macadam Ave. [SW]",
-      "time": "7:25 am",
+      "time": "7:26 am",
       "direction": "SW",
-      "originalLine": "7:25 amS NEVADA ST @ S MACADAM AV [SW]122CAP-A(4)Stop Order #:",
+      "originalLine": "7:26 amS NEVADA ST @ S MACADAM AV [SW]122CAP-A(4)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6715566,
@@ -69,9 +69,9 @@
     {
       "id": "stop-5",
       "address": "SW 4th Ave. & SW Carson St. [SE]",
-      "time": "7:28 am",
+      "time": "7:29 am",
       "direction": "SE",
-      "originalLine": "7:28 amSW 4TH AV @ SW CARSON ST [SE]122CAP-A(5)Stop Order #:",
+      "originalLine": "7:29 amSW 4TH AV @ SW CARSON ST [SE]122CAP-A(5)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6824792,
@@ -84,9 +84,9 @@
     {
       "id": "stop-6",
       "address": "SW 4th Ave. & SW Hume St. [SE]",
-      "time": "7:29 am",
+      "time": "7:30 am",
       "direction": "SE",
-      "originalLine": "7:29 amSW 4TH AV @ SW HUME ST [SE]122CAP-A(6)Stop Order #:",
+      "originalLine": "7:30 amSW 4TH AV @ SW HUME ST [SE]122CAP-A(6)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6824796,
@@ -99,9 +99,9 @@
     {
       "id": "stop-7",
       "address": "SW 4th Ave. & SW Troy St. [E]",
-      "time": "7:30 am",
+      "time": "7:31 am",
       "direction": "E",
-      "originalLine": "7:30 amSW 4TH AV @ SW TROY ST [E]122CAP-A(7)Stop Order #:",
+      "originalLine": "7:31 amSW 4TH AV @ SW TROY ST [E]122CAP-A(7)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6830241,
@@ -114,9 +114,9 @@
     {
       "id": "stop-8",
       "address": "719 SW Maplecrest Ct. [N]",
-      "time": "7:35 am",
+      "time": "7:36 am",
       "direction": "N",
-      "originalLine": "7:35 am719 SW MAPLECREST CT [N]122CAP-A(8)Stop Order #:",
+      "originalLine": "7:36 am719 SW MAPLECREST CT [N]122CAP-A(8)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.68622724185703,
@@ -129,9 +129,9 @@
     {
       "id": "stop-9",
       "address": "9281 SW Boones Ferry Rd. [SE]",
-      "time": "7:39 am",
+      "time": "7:40 am",
       "direction": "SE",
-      "originalLine": "7:39 am9281 SW BOONES FERRY RD [SE]122CAP-A(9)Stop Order #:",
+      "originalLine": "7:40 am9281 SW BOONES FERRY RD [SE]122CAP-A(9)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6839095717851,
@@ -159,9 +159,9 @@
     {
       "id": "stop-11",
       "address": "S Brugger St. & S Corbett Ln. [NE]",
-      "time": "7:43 am",
+      "time": "7:44 am",
       "direction": "NE",
-      "originalLine": "7:43 amS BRUGGER ST @ S CORBETT LN [NE]122CAP-A(11)Stop Order #:",
+      "originalLine": "7:44 amS BRUGGER ST @ S CORBETT LN [NE]122CAP-A(11)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
         -122.6765833,
@@ -173,17 +173,17 @@
     },
     {
       "id": "stop-12",
-      "address": "SW 2nd Ave. & S Collins St. [NW]",
-      "time": "7:45 am",
-      "direction": "NW",
-      "originalLine": "7:45 amSW 2ND AV @ S COLLINS ST [NW]122CAP-A(12)Stop Order #:",
+      "address": "S Brugger St. & SW View Point Terr. [NE]",
+      "time": "7:44 am",
+      "direction": "NE",
+      "originalLine": "7:44 amS BRUGGER ST @ SW VIEW POINT TERR [NE]122CAP-A(12)Stop Order #:",
       "skipGeocoding": false,
       "coordinates": [
-        -122.6809437,
-        45.4548979
+        -122.6779463,
+        45.4555666
       ],
-      "displayName": "SW 2nd Ave & SW Collins St, Portland, OR 97219, USA",
-      "placeId": "EjNTVyAybmQgQXZlICYgU1cgQ29sbGlucyBTdCwgUG9ydGxhbmQsIE9SIDk3MjE5LCBVU0EiZiJkChQKEgmbWdMxOguVVBHc53PcS-aTvhIUChIJm1nTMToLlVQR3Odz3Evmk74aFAoSCRd5_2AYC5VUEYucw745oQLUGhQKEgnHm8BGOguVVBGq4sU3NccTrSIKDfPdFxsVo1_gtg",
+      "displayName": "SW Vw Pt Ter & SW Brugger St, Portland, OR 97219, USA",
+      "placeId": "EjVTVyBWdyBQdCBUZXIgJiBTVyBCcnVnZ2VyIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTksIFVTQSJmImQKFAoSCanlOvc6C5VUEfIJAfNv-zQgEhQKEgmp5Tr3OguVVBHyCQHzb_s0IBoUChIJW3IxMP0KlVQRAZHl1aKPuWwaFAoSCR3Y1_A6C5VUESqXOHP323cNIgoNEvgXGxW51OC2",
       "neighborhood": "Southwest Portland"
     },
     {
@@ -205,7 +205,7 @@
   "neighborhoods": [
     "Southwest Portland"
   ],
-  "processedAt": "2026-10-26T03:50:03.161Z",
+  "processedAt": "2026-11-02T05:00:38.336Z",
   "stats": {
     "totalStops": 13,
     "geocodedStops": 13,
