@@ -1,7 +1,7 @@
 {
   "bridlemile": {
-    "lastModifiedPdf": "2026-09-10T18:27:16.497Z",
-    "lastChecked": "2026-09-18T18:08:17.440Z",
+    "lastModifiedPdf": "2026-11-05T02:13:44.381Z",
+    "lastChecked": "2026-11-09T05:14:56.767Z",
     "status": "success",
     "errors": []
   },
@@ -22,8 +22,8 @@
     "errors": []
   },
   "ainsworth": {
-    "lastModifiedPdf": "2026-10-28T14:34:18.257Z",
-    "lastChecked": "2026-11-02T05:00:37.981Z",
+    "lastModifiedPdf": "2026-11-05T15:31:32.278Z",
+    "lastChecked": "2026-11-09T05:15:01.531Z",
     "status": "success",
     "errors": []
   },
@@ -34,14 +34,14 @@
     "errors": []
   },
   "west-sylvan": {
-    "lastModifiedPdf": "2026-10-21T19:05:03.727Z",
-    "lastChecked": "2026-10-26T03:50:51.142Z",
+    "lastModifiedPdf": "2026-11-05T02:26:30.935Z",
+    "lastChecked": "2026-11-09T05:15:42.812Z",
     "status": "success",
     "errors": []
   },
   "roseway-heights": {
-    "lastModifiedPdf": "2026-10-28T22:08:55.962Z",
-    "lastChecked": "2026-11-02T05:00:28.306Z",
+    "lastModifiedPdf": "2026-11-04T18:05:11.534Z",
+    "lastChecked": "2026-11-09T05:15:26.471Z",
     "status": "success",
     "errors": []
   },
@@ -52,20 +52,20 @@
     "errors": []
   },
   "ockley-green": {
-    "lastModifiedPdf": "2026-09-30T20:03:41.202Z",
-    "lastChecked": "2026-10-19T04:28:20.217Z",
+    "lastModifiedPdf": "2026-11-04T18:40:06.596Z",
+    "lastChecked": "2026-11-09T05:15:23.022Z",
     "status": "success",
     "errors": []
   },
   "mt-tabor": {
-    "lastModifiedPdf": "2026-10-14T15:53:53.590Z",
-    "lastChecked": "2026-11-02T05:00:22.276Z",
+    "lastModifiedPdf": "2026-11-06T18:37:49.064Z",
+    "lastChecked": "2026-11-09T05:15:29.266Z",
     "status": "success",
     "errors": []
   },
   "dr-martin-luther-king": {
-    "lastModifiedPdf": "2026-09-16T15:14:11.182Z",
-    "lastChecked": "2026-09-28T04:21:58.229Z",
+    "lastModifiedPdf": "2026-11-04T19:23:52.251Z",
+    "lastChecked": "2026-11-09T05:15:07.529Z",
     "status": "success",
     "errors": []
   },
@@ -76,8 +76,8 @@
     "errors": []
   },
   "jackson": {
-    "lastModifiedPdf": "2026-10-28T15:55:28.240Z",
-    "lastChecked": "2026-11-02T05:00:54.025Z",
+    "lastModifiedPdf": "2026-11-04T15:27:27.968Z",
+    "lastChecked": "2026-11-09T05:15:14.939Z",
     "status": "success",
     "errors": []
   },
@@ -92,42 +92,44 @@
     "lastChecked": "2026-06-07T17:28:25.789Z"
   },
   "skyline": {
-    "lastModifiedPdf": "2026-10-30T18:06:39.925Z",
-    "lastChecked": "2026-11-02T05:00:34.959Z",
+    "lastModifiedPdf": "2026-11-04T18:03:44.158Z",
+    "lastChecked": "2026-11-09T05:15:36.518Z",
     "status": "success",
     "errors": []
   },
   "scott": {
     "lastModifiedPdf": "2026-10-21T15:25:47.257Z",
-    "lastChecked": "2026-10-26T03:50:38.180Z",
+    "lastChecked": "2026-11-09T05:15:27.496Z",
     "status": "success",
     "errors": []
   },
   "lincoln": {
-    "lastModifiedPdf": "2026-10-21T16:13:27.530Z",
-    "lastChecked": "2026-11-02T05:00:20.281Z",
+    "lastModifiedPdf": "2026-11-04T17:28:28.220Z",
+    "lastChecked": "2026-11-09T05:15:18.003Z",
     "status": "success",
     "errors": []
   },
   "bridger": {
-    "lastModifiedPdf": "2026-05-11T20:27:28.238Z",
-    "lastChecked": "2026-06-07T17:28:02.647Z"
+    "lastModifiedPdf": "2026-11-04T15:22:30.165Z",
+    "lastChecked": "2026-11-09T05:14:50.798Z",
+    "status": "success",
+    "errors": []
   },
   "hosford": {
     "lastModifiedPdf": "2026-10-21T15:24:21.995Z",
-    "lastChecked": "2026-10-26T03:50:11.481Z",
+    "lastChecked": "2026-11-09T05:15:08.402Z",
     "status": "success",
     "errors": []
   },
   "lent": {
     "lastModifiedPdf": "2026-10-28T21:52:36.085Z",
-    "lastChecked": "2026-11-02T05:00:25.052Z",
+    "lastChecked": "2026-11-09T05:15:15.468Z",
     "status": "success",
     "errors": []
   },
   "gray": {
-    "lastModifiedPdf": "2026-10-28T15:11:01.852Z",
-    "lastChecked": "2026-11-02T05:00:52.920Z",
+    "lastModifiedPdf": "2026-11-04T16:05:53.152Z",
+    "lastChecked": "2026-11-09T05:15:11.928Z",
     "status": "success",
     "errors": []
   },
@@ -139,13 +141,13 @@
   },
   "stephenson": {
     "lastModifiedPdf": "2026-10-21T16:14:57.390Z",
-    "lastChecked": "2026-10-26T03:50:41.588Z",
+    "lastChecked": "2026-11-09T05:15:34.421Z",
     "status": "success",
     "errors": []
   },
   "markham": {
     "lastModifiedPdf": "2026-10-21T13:31:32.534Z",
-    "lastChecked": "2026-10-26T03:50:33.504Z",
+    "lastChecked": "2026-11-09T05:15:16.464Z",
     "status": "success",
     "errors": []
   },
@@ -167,19 +169,19 @@
   },
   "vernon": {
     "lastModifiedPdf": "2026-10-21T21:52:41.903Z",
-    "lastChecked": "2026-10-26T03:50:46.333Z",
+    "lastChecked": "2026-11-09T05:15:35.523Z",
     "status": "success",
     "errors": []
   },
   "woodstock": {
     "lastModifiedPdf": "2026-10-21T17:57:31.943Z",
-    "lastChecked": "2026-10-26T03:50:56.646Z",
+    "lastChecked": "2026-11-09T05:15:38.412Z",
     "status": "success",
     "errors": []
   },
   "woodmere": {
     "lastModifiedPdf": "2026-10-28T21:04:09.135Z",
-    "lastChecked": "2026-11-02T05:00:34.324Z",
+    "lastChecked": "2026-11-09T05:15:37.440Z",
     "status": "success",
     "errors": []
   },
@@ -202,8 +204,8 @@
     "errors": []
   },
   "sellwood": {
-    "lastModifiedPdf": "2026-09-09T22:29:54.394Z",
-    "lastChecked": "2026-09-28T04:22:23.297Z",
+    "lastModifiedPdf": "2026-11-04T16:09:14.823Z",
+    "lastChecked": "2026-11-09T05:15:33.112Z",
     "status": "success",
     "errors": []
   },
@@ -227,7 +229,7 @@
   },
   "rieke": {
     "lastModifiedPdf": "2026-10-21T13:33:09.137Z",
-    "lastChecked": "2026-10-26T03:50:36.359Z",
+    "lastChecked": "2026-11-09T05:15:23.445Z",
     "status": "success",
     "errors": []
   },
@@ -264,8 +266,8 @@
     "errors": []
   },
   "lane": {
-    "lastModifiedPdf": "2026-10-21T13:23:00.973Z",
-    "lastChecked": "2026-11-02T05:00:19.186Z",
+    "lastModifiedPdf": "2026-11-04T15:24:59.054Z",
+    "lastChecked": "2026-11-09T05:15:14.652Z",
     "status": "success",
     "errors": []
   },
@@ -287,7 +289,7 @@
   },
   "glencoe": {
     "lastModifiedPdf": "2026-10-29T13:38:45.570Z",
-    "lastChecked": "2026-11-02T05:00:46.901Z",
+    "lastChecked": "2026-11-09T05:15:05.376Z",
     "status": "success",
     "errors": []
   },
@@ -314,12 +316,14 @@
     "errors": []
   },
   "creston": {
-    "lastModifiedPdf": "2026-04-25T03:35:00.245Z",
-    "lastChecked": "2026-04-25T03:35:01.850Z"
+    "lastModifiedPdf": "2026-11-04T16:59:11.703Z",
+    "lastChecked": "2026-11-09T05:15:04.678Z",
+    "status": "success",
+    "errors": []
   },
   "clark": {
-    "lastModifiedPdf": "2026-09-02T16:20:29.324Z",
-    "lastChecked": "2026-09-18T18:05:29.471Z",
+    "lastModifiedPdf": "2026-11-04T16:29:37.194Z",
+    "lastChecked": "2026-11-09T05:15:02.291Z",
     "status": "success",
     "errors": []
   },

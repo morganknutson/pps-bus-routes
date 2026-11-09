@@ -72,12 +72,6 @@
       "md5Checksum": "7be2b334b83ba45d386d777af1576e31",
       "localPath": "107AIN-P_Effective_102826.pdf"
     },
-    "1h8Y52utg7PPjHt-v1Hj4HFBolis0C8tD": {
-      "filename": "112AIN-P_Effective_102826.pdf",
-      "modifiedTime": "2026-10-21T17:55:07.471Z",
-      "md5Checksum": "24613df89bc4cca83522ef21506ab766",
-      "localPath": "112AIN-P_Effective_102826.pdf"
-    },
     "1Dq9ADybJNq3JmDg5Q2xlWhX1zfknUTG9": {
       "filename": "112AIN-A_Effective_102826.pdf",
       "modifiedTime": "2026-10-21T17:54:15.904Z",
@@ -89,7 +83,37 @@
       "modifiedTime": "2026-10-28T14:34:18.257Z",
       "md5Checksum": "ae38c5d2d22304633f9d167de3f252e8",
       "localPath": "112AIN-P_Effective_110426.pdf"
+    },
+    "14TTrt9NjAaTXeUUe979xreQYOFHSy25B": {
+      "filename": "112AIN-P_Effective_111026.pdf",
+      "modifiedTime": "2026-11-05T15:31:32.278Z",
+      "md5Checksum": "57faa0704a34a2bb00ebf256d509ba4a",
+      "localPath": "112AIN-P_Effective_111026.pdf"
+    },
+    "1_8hCl648bbvU1S5sgbg0SUtmn4bZzbyA": {
+      "filename": "112AIN-A_Effective_111026.pdf",
+      "modifiedTime": "2026-11-05T02:11:47.690Z",
+      "md5Checksum": "76054c4fb9abf7d50d0c9cb35029dd07",
+      "localPath": "112AIN-A_Effective_111026.pdf"
+    },
+    "1iajj-aYF-bp3tuFRwch-svb53dy6XtBT": {
+      "filename": "107AIN-P_Effective_111026.pdf",
+      "modifiedTime": "2026-11-04T22:39:59.135Z",
+      "md5Checksum": "914030ebcd399933144d76c9d59eea3f",
+      "localPath": "107AIN-P_Effective_111026.pdf"
+    },
+    "1gapAUwzOkFWTw05PrhK4E864TPzu2DRX": {
+      "filename": "107AIN-A_Effective_111026.pdf",
+      "modifiedTime": "2026-11-04T22:30:08.659Z",
+      "md5Checksum": "a64ca7b8e8a5881a71b9b5aeaee5eb3d",
+      "localPath": "107AIN-A_Effective_111026.pdf"
+    },
+    "1uKi78iSx1uvdOaVKLpzHY98Qmoody887": {
+      "filename": "103AIN-A_Effective_111026.pdf",
+      "modifiedTime": "2026-11-04T15:19:25.499Z",
+      "md5Checksum": "50005b576cdea1cb932fb30f5617debf",
+      "localPath": "103AIN-A_Effective_111026.pdf"
     }
   },
-  "lastSync": "2026-11-02T05:00:37.980Z"
+  "lastSync": "2026-11-09T05:15:01.531Z"
 }

@@ -1,0 +1,294 @@
+{
+  "id": "1SciU1PZ8N2jZ3PJDTB2dAy5oF69nrhxK",
+  "name": "234",
+  "direction": "Morning",
+  "filename": "234RWH-A_Effective_111026.pdf",
+  "fileId": "1SciU1PZ8N2jZ3PJDTB2dAy5oF69nrhxK",
+  "modifiedTime": null,
+  "stops": [
+    {
+      "id": "stop-2",
+      "address": "NE Broadway St. & NE 59th Ave. [SW]",
+      "time": "8:52 am",
+      "direction": "SW",
+      "originalLine": "8:52 amNE BROADWAY ST @ NE 59TH AV [SW]234RWH-A(1)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6026583,
+        45.534963
+      ],
+      "displayName": "NE 59th Ave & NE Broadway, Portland, OR 97213, USA",
+      "placeId": "EjJORSA1OXRoIEF2ZSAmIE5FIEJyb2Fkd2F5LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCZEVtuQjoZVUEdStWTrAhWvzEhQKEgmRFbbkI6GVVBHUrVk6wIVr8xoUChIJh_ausTGhlVQRq-QZ-PrhlIIaFAoSCdHpSsAVoZVUEdyVQJ86S5v9IgoNfhUkGxWpUey2",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-3",
+      "address": "NE 60th Ave. & NE Wasco St. [NW]",
+      "time": "8:54 am",
+      "direction": "NW",
+      "originalLine": "8:54 amNE 60TH AV @ NE WASCO ST [NW]234RWH-A(2)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.6021902,
+        45.5323009
+      ],
+      "displayName": "NE Wasco St & NE 60th Ave, Portland, OR 97213, USA",
+      "placeId": "EjJORSBXYXNjbyBTdCAmIE5FIDYwdGggQXZlLCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCXuZJ5YhoZVUEQRg8kACjwl6EhQKEgl7mSeWIaGVVBEEYPJAAo8JehoUChIJZ3fOn22hlVQRSQRb6OzykvwaFAoSCT0EGmgxoZVUEeXiW2Q3-gBOIgoNga0jGxXyY-y2",
+      "neighborhood": "Rose City Park"
+    },
+    {
+      "id": "stop-4",
+      "address": "NE 82nd Ave. & NE Schuyler St. [SE]",
+      "time": "8:59 am",
+      "direction": "SE",
+      "originalLine": "8:59 amNE 82ND AV @ NE SCHUYLER ST [SE]234RWH-A(3)Stop Order #:",
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5790148,
+        45.5356797
+      ],
+      "displayName": "NE 82nd Ave & NE Schuyler St, Portland, OR 97213, USA",
+      "placeId": "EjVORSA4Mm5kIEF2ZSAmIE5FIFNjaHV5bGVyIFN0LCBQb3J0bGFuZCwgT1IgOTcyMTMsIFVTQSJmImQKFAoSCaUi0CMVoZVUESq5tsI9HjnjEhQKEgmlItAjFaGVVBEqubbCPR454xoUChIJObpUOFChlVQRBxeZuxWdUeIaFAoSCdGXY4p9oZVUEdqT1kHPfWRmIgoNfTEkGxU87e-2",
+      "neighborhood": "Northeast Portland"
+    },
+    {
+      "id": "stop-0",
+      "address": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "time": null,
+      "direction": null,
+      "originalLine": "Anchor Name:ROSEWAY HEIGHTS GT LOAD ON ALAMEDA",
+      "isSchoolStop": true,
+      "skipGeocoding": false,
+      "coordinates": [
+        -122.5873484,
+        45.5440613
+      ],
+      "displayName": "7334 NE Siskiyou St, Portland, OR 97213, USA",
+      "schoolName": "Roseway Heights"
+    }
+  ],
+  "neighborhoods": [
+    "Northeast Portland",
+    "Rose City Park"
+  ],
+  "processedAt": "2026-11-09T05:15:25.966Z",
+  "stats": {
+    "totalStops": 4,
+    "geocodedStops": 4,
+    "failedStops": 0
+  },
+  "geometry": [
+    [
+      45.53496,
+      -122.60266
+    ],
+    [
+      45.534,
+      -122.60266
+    ],
+    [
+      45.53372,
+      -122.60266
+    ],
+    [
+      45.53371,
+      -122.60217
+    ],
+    [
+      45.53302,
+      -122.60217
+    ],
+    [
+      45.53293,
+      -122.60217
+    ],
+    [
+      45.5323,
+      -122.60219
+    ],
+    [
+      45.53293,
+      -122.60217
+    ],
+    [
+      45.53302,
+      -122.60217
+    ],
+    [
+      45.53371,
+      -122.60217
+    ],
+    [
+      45.5337,
+      -122.6012
+    ],
+    [
+      45.53371,
+      -122.59957
+    ],
+    [
+      45.53369,
+      -122.59769
+    ],
+    [
+      45.53366,
+      -122.59538
+    ],
+    [
+      45.53363,
+      -122.59249
+    ],
+    [
+      45.53361,
+      -122.58939
+    ],
+    [
+      45.5336,
+      -122.58723
+    ],
+    [
+      45.53415,
+      -122.58722
+    ],
+    [
+      45.53492,
+      -122.58721
+    ],
+    [
+      45.53573,
+      -122.58719
+    ],
+    [
+      45.53606,
+      -122.58719
+    ],
+    [
+      45.53682,
+      -122.58717
+    ],
+    [
+      45.53708,
+      -122.58717
+    ],
+    [
+      45.53727,
+      -122.58717
+    ],
+    [
+      45.53727,
+      -122.58691
+    ],
+    [
+      45.53726,
+      -122.58615
+    ],
+    [
+      45.53726,
+      -122.58412
+    ],
+    [
+      45.53725,
+      -122.58002
+    ],
+    [
+      45.53724,
+      -122.57898
+    ],
+    [
+      45.53599,
+      -122.579
+    ],
+    [
+      45.53568,
+      -122.57901
+    ],
+    [
+      45.53599,
+      -122.579
+    ],
+    [
+      45.53651,
+      -122.57899
+    ],
+    [
+      45.53765,
+      -122.57897
+    ],
+    [
+      45.53794,
+      -122.57895
+    ],
+    [
+      45.53829,
+      -122.57894
+    ],
+    [
+      45.53841,
+      -122.57893
+    ],
+    [
+      45.53845,
+      -122.57894
+    ],
+    [
+      45.53873,
+      -122.57894
+    ],
+    [
+      45.53909,
+      -122.57894
+    ],
+    [
+      45.54011,
+      -122.57892
+    ],
+    [
+      45.54108,
+      -122.5789
+    ],
+    [
+      45.54233,
+      -122.57888
+    ],
+    [
+      45.54396,
+      -122.57885
+    ],
+    [
+      45.54453,
+      -122.57884
+    ],
+    [
+      45.54453,
+      -122.58087
+    ],
+    [
+      45.54456,
+      -122.58594
+    ],
+    [
+      45.54457,
+      -122.5866
+    ],
+    [
+      45.5442,
+      -122.58661
+    ],
+    [
+      45.54384,
+      -122.58661
+    ],
+    [
+      45.54381,
+      -122.58666
+    ],
+    [
+      45.5438,
+      -122.58701
+    ],
+    [
+      45.54378,
+      -122.5873
+    ]
+  ]
+}

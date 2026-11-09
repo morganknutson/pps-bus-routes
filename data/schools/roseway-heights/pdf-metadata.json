@@ -1,39 +1,19 @@
 {
   "files": {
-    "1J5ESiEki_cnXgdOjxKCxYGCDE4X47e9E": {
-      "filename": "234RWH-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T15:59:15.912Z",
-      "localPath": "234RWH-P_Effective_082626.pdf"
-    },
     "1jZj0kZ2j-mliQfG34j4hk1_inmTyR_iB": {
       "filename": "233RWH-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-08T15:58:50.732Z",
       "localPath": "233RWH-P_Effective_082626.pdf"
-    },
-    "1frBGe4r9yUOQQpn4INh5sgKBmCRQbcQI": {
-      "filename": "219RWH-P_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T15:58:35.083Z",
-      "localPath": "219RWH-P_Effective_082626.pdf"
     },
     "17-9n85Co0jxbGGf8Mq65w2ieknqxqQVA": {
       "filename": "209RWH-P_Effective_082626.pdf",
       "modifiedTime": "2026-08-08T15:58:20.293Z",
       "localPath": "209RWH-P_Effective_082626.pdf"
     },
-    "1jBD0qa9PxpeqmiBZr2cP5i_wCCYD_SIS": {
-      "filename": "234RWH-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T15:40:12.209Z",
-      "localPath": "234RWH-A_Effective_082626.pdf"
-    },
     "1SUOZIVdxLOKtzXAXMLZmjXHabIgsE4tF": {
       "filename": "233RWH-A_Effective_082626.pdf",
       "modifiedTime": "2026-08-08T15:39:51.145Z",
       "localPath": "233RWH-A_Effective_082626.pdf"
-    },
-    "1kTgyW1HQLGQIXsc2Y3nB8t5rms1Mc-3w": {
-      "filename": "219RWH-A_Effective_082626.pdf",
-      "modifiedTime": "2026-08-08T15:39:34.741Z",
-      "localPath": "219RWH-A_Effective_082626.pdf"
     },
     "1601Sd1DGD8DvKa2w4x5m9SaITUu-OzOq": {
       "filename": "209RWH-A_Effective_090926.pdf",
@@ -75,7 +55,13 @@
       "modifiedTime": "2026-10-28T22:08:21.093Z",
       "md5Checksum": "ca206ee1d1b50ea178c906685d8ec230",
       "localPath": "234RWH-A_Effective_110426.pdf"
+    },
+    "1SciU1PZ8N2jZ3PJDTB2dAy5oF69nrhxK": {
+      "filename": "234RWH-A_Effective_111026.pdf",
+      "modifiedTime": "2026-11-04T18:05:11.534Z",
+      "md5Checksum": "3d73d51bffcac607180f6086fcc3fa66",
+      "localPath": "234RWH-A_Effective_111026.pdf"
     }
   },
-  "lastSync": "2026-11-02T05:00:27.804Z"
+  "lastSync": "2026-11-09T05:15:26.471Z"
 }
